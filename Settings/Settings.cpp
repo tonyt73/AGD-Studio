@@ -16,16 +16,16 @@ namespace Project
 static Settings* instance = nullptr;
 Settings& __fastcall Settings::get()
 {
-	if (instance == nullptr)
-	{
+    if (instance == nullptr)
+    {
         instance = new Settings();
-	}
-	return *instance;
+    }
+    return *instance;
 }
 //---------------------------------------------------------------------------
 __fastcall Settings::Settings()
 {
-	Load(System::File::Combine(System::Path::Application, "Settings"));
+    Load(System::File::Combine(System::Path::Application, "Settings"));
 }
 //---------------------------------------------------------------------------
 __fastcall Settings::~Settings()
@@ -42,10 +42,10 @@ void __fastcall Settings::Set(const String& property, const int& value)
 {
          if (property == ".Welcome.Position.X")     WelcomePosition.X = value;
     else if (property == ".Welcome.Position.Y")     WelcomePosition.Y = value;
-	else if (property == ".MainWindow.Position.X")  WindowPosition.X = value;
-	else if (property == ".MainWindow.Position.Y")  WindowPosition.Y = value;
-	else if (property == ".MainWindow.Size.Width")  WindowSize.Width = value;
-	else if (property == ".MainWindow.Size.Heioght")WindowSize.Height = value;
+    else if (property == ".MainWindow.Position.X")  WindowPosition.X = value;
+    else if (property == ".MainWindow.Position.Y")  WindowPosition.Y = value;
+    else if (property == ".MainWindow.Size.Width")  WindowSize.Width = value;
+    else if (property == ".MainWindow.Size.Heioght")WindowSize.Height = value;
 }
 //---------------------------------------------------------------------------
 void __fastcall Settings::SetActiveStyle(const String& style)
@@ -80,27 +80,27 @@ void __fastcall Settings::SetWindowSize(const TSize& size)
 //---------------------------------------------------------------------------
 void __fastcall Settings::Save()
 {
-	Open(System::File::Combine(System::Path::Application, "Settings"));
-	Push("Application");
+    Open(System::File::Combine(System::Path::Application, "Settings"));
+    Push("Application");
         Write("Style", ActiveStyle);
-	Pop();
-	Push("Welcome");
-    	Push("Position");
-	        Write("X", (int)WelcomePosition.X);
-    	    Write("Y", (int)WelcomePosition.Y);
-    	Pop();
-	Pop();
-	Push("MainWindow");
-    	Push("Position");
-	        Write("X", (int)WindowPosition.X);
-    	    Write("Y", (int)WindowPosition.Y);
-    	Pop();
-    	Push("Size");
-	        Write("Width", (int)WindowSize.Width);
-    	    Write("Height", (int)WindowSize.Height);
-    	Pop();
+    Pop();
+    Push("Welcome");
+        Push("Position");
+            Write("X", (int)WelcomePosition.X);
+            Write("Y", (int)WelcomePosition.Y);
+        Pop();
+    Pop();
+    Push("MainWindow");
+        Push("Position");
+            Write("X", (int)WindowPosition.X);
+            Write("Y", (int)WindowPosition.Y);
+        Pop();
+        Push("Size");
+            Write("Width", (int)WindowSize.Width);
+            Write("Height", (int)WindowSize.Height);
+        Pop();
         Write("WindowState", (int)WindowState);
-	Pop();
+    Pop();
     Close();
 }
 //---------------------------------------------------------------------------

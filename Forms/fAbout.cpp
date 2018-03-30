@@ -8,25 +8,25 @@
 #pragma resource "*.dfm"
 //--------------------------------------------------------------------------
 __fastcall TfrmAbout::TfrmAbout(TComponent* Owner)
-	: TForm(Owner)
+    : TForm(Owner)
 {
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmAbout::FormDeactivate(TObject *Sender)
 {
-	Close();
+    Close();
     delete this;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmAbout::FormCreate(TObject *Sender)
 {
-	lblTitle1->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
-	lblVersion->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
-	lblBuild->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
-	lblCopyright->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
+    lblTitle1->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
+    lblVersion->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
+    lblBuild->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
+    lblCopyright->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
     lblAGDCopyright->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
-	shpFrame->Pen->Color = StyleServices()->GetStyleFontColor(sfTabTextActiveHot);
-	Color = StyleServices()->GetStyleColor(scGenericGradientEnd);
+    shpFrame->Pen->Color = StyleServices()->GetStyleFontColor(sfTabTextActiveHot);
+    Color = StyleServices()->GetStyleColor(scGenericGradientEnd);
     // read application file version and update the labels
     int Major, Minor, Release, Build;
     GetBuildVersion(Major, Minor, Release, Build);

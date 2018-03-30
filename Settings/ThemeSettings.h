@@ -9,7 +9,7 @@
 class ThemeSettings
 {
 public:
-	static void	ReapplyStyle();
+    static void    ReapplyStyle();
 };
 //---------------------------------------------------------------------------
 #endif

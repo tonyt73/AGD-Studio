@@ -27,12 +27,12 @@ TFrame* __fastcall DocumentEditorFactory::Create(Document* document, TComponent*
     auto it = m_Editors.find(document->Folder);
     if (it != m_Editors.end() && dp)
     {
-        // create an instance of the document editor
+        // create an instance of the document editor for the given document type
         auto editor = it->second(document, owner);
         // and attach it to the dock panel
-    	editor->Parent = dp;
-	    editor->Align = alClient;
-    	dp->OnEndDock = editor->OnEndDock;
+        editor->Parent = dp;
+        editor->Align = alClient;
+        dp->OnEndDock = editor->OnEndDock;
         return editor;
     }
     return nullptr;

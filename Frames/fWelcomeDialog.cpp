@@ -10,27 +10,27 @@
 __fastcall TfrmWelcomeDialog::TfrmWelcomeDialog(TComponent* Owner)
 : TFrame(Owner)
 {
-	if (cmbThemes->Items->Count == 0)
-	{
-		auto sl = std::make_unique<TStringList>();
-		for (auto i = 0; i < TStyleManager::StyleNames.Length; i++)
-		{
-			if (TStyleManager::StyleNames[i] != "Windows")
-			{
-				sl->Add(TStyleManager::StyleNames[i]);
-			}
-		}
-		sl->Sort();
+    if (cmbThemes->Items->Count == 0)
+    {
+        auto sl = std::make_unique<TStringList>();
+        for (auto i = 0; i < TStyleManager::StyleNames.Length; i++)
+        {
+            if (TStyleManager::StyleNames[i] != "Windows")
+            {
+                sl->Add(TStyleManager::StyleNames[i]);
+            }
+        }
+        sl->Sort();
         const String style = appSettings.ActiveStyle;
-		for (auto i = 0; i < sl->Count; i++)
-		{
-			cmbThemes->Items->Add(sl->Strings[i]);
-			if (sl->Strings[i] == style)
-			{
-				cmbThemes->ItemIndex = cmbThemes->Items->Count - 1;
-			}
-		}
-	}
+        for (auto i = 0; i < sl->Count; i++)
+        {
+            cmbThemes->Items->Add(sl->Strings[i]);
+            if (sl->Strings[i] == style)
+            {
+                cmbThemes->ItemIndex = cmbThemes->Items->Count - 1;
+            }
+        }
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::lblStartNewProjectClick(TObject *Sender)
@@ -47,8 +47,8 @@ void __fastcall TfrmWelcomeDialog::lblOpenExistingProjectClick(TObject *Sender)
     dlgOpen->InitialDir = System::Path::Projects;
     if (dlgOpen->Execute())
     {
-    	theProjectManager.Open(dlgOpen->FileName);
-	    if (FOnDone) FOnDone(this);
+        theProjectManager.Open(dlgOpen->FileName);
+        if (FOnDone) FOnDone(this);
     }
 }
 //---------------------------------------------------------------------------
@@ -59,91 +59,91 @@ void __fastcall TfrmWelcomeDialog::lblImportAGDSnapshotClick(TObject *Sender)
     {
         // TODO: Implement Import
         auto name = System::File::NameWithExtension(dlgOpen->FileName);
-    	theProjectManager.New(name, "Sinclair ZX Spectrum");
-    	if (FOnDone) FOnDone(this);
+        theProjectManager.New(name, "Sinclair ZX Spectrum");
+        if (FOnDone) FOnDone(this);
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::SelectionPanelOnClick(TObject *Sender)
 {
     // TODO: Implement OpenRecent
-	TSelectionPanelFrame* panel = (TSelectionPanelFrame*)Sender;
-	theProjectManager.Open(panel->Name);
-	if (FOnDone) FOnDone(this);
+    TSelectionPanelFrame* panel = (TSelectionPanelFrame*)Sender;
+    theProjectManager.Open(panel->Name);
+    if (FOnDone) FOnDone(this);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::SelectionPanelOnRemoveClick(TObject *Sender)
 {
-	TSelectionPanelFrame* panel = (TSelectionPanelFrame*)Sender;
-	theProjectManager.RemoveMostRecentlyUsedItem(panel->Name, panel->Path);
-	RefreshMRUList();
+    TSelectionPanelFrame* panel = (TSelectionPanelFrame*)Sender;
+    theProjectManager.RemoveMostRecentlyUsedItem(panel->Name, panel->Path);
+    RefreshMRUList();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::lblStartNewProjectMouseEnter(TObject *Sender)
 {
-	((TLabel*)Sender)->Font->Color = StyleServices()->GetStyleColor(scButtonHot);
+    ((TLabel*)Sender)->Font->Color = StyleServices()->GetStyleColor(scButtonHot);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::lblStartNewProjectMouseLeave(TObject *Sender)
 {
-	((TLabel*)Sender)->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
+    ((TLabel*)Sender)->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::cmbThemesChange(TObject *Sender)
 {
-	TStyleManager::SetStyle(cmbThemes->Text);
-	appSettings.ActiveStyle = cmbThemes->Text;
-	UpdateColors();
+    TStyleManager::SetStyle(cmbThemes->Text);
+    appSettings.ActiveStyle = cmbThemes->Text;
+    UpdateColors();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::lblConfigureClick(TObject *Sender)
 {
-	TPoint pt = lblConfigure->Parent->ClientToScreen(Point(lblConfigure->Left, lblConfigure->Top + lblConfigure->Height));
-	popConfigure->Popup(pt.x, pt.y);
+    TPoint pt = lblConfigure->Parent->ClientToScreen(Point(lblConfigure->Left, lblConfigure->Top + lblConfigure->Height));
+    popConfigure->Popup(pt.x, pt.y);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::lblChangeThemeClick(TObject *Sender)
 {
-	cmbThemes->DroppedDown = true;
+    cmbThemes->DroppedDown = true;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::Initialise()
 {
-	dynamic_cast<TForm*>(Parent)->Caption = "Welcome to AGDX Studio";
-	RefreshMRUList();
-	UpdateColors();
+    dynamic_cast<TForm*>(Parent)->Caption = "Welcome to AGDX Studio";
+    RefreshMRUList();
+    UpdateColors();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::UpdateColors()
 {
-	panMain->Color = StyleServices()->GetStyleColor(scGenericGradientBase);
-	panRecentProjects->Color = StyleServices()->GetStyleColor(scGenericGradientEnd);
-	lblTitle->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
-	lblVersion->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextInactive);
-	lblStartNewProject->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
-	lblOpenExistingProject->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
-	lblImportAGDSnapshot->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
-	lblChangeTheme->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
-	lblConfigure->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
-	for (auto panel : m_MostRecentlyUsedItems) panel->UpdateControl();
+    panMain->Color = StyleServices()->GetStyleColor(scGenericGradientBase);
+    panRecentProjects->Color = StyleServices()->GetStyleColor(scGenericGradientEnd);
+    lblTitle->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
+    lblVersion->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextInactive);
+    lblStartNewProject->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
+    lblOpenExistingProject->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
+    lblImportAGDSnapshot->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
+    lblChangeTheme->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
+    lblConfigure->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
+    for (auto panel : m_MostRecentlyUsedItems) panel->UpdateControl();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::RefreshMRUList()
 {
-	m_MostRecentlyUsedItems.clear();
-	for (auto item : theProjectManager.MostRecentlyUsedList) NewMostRecentlyUsedItem(item.Name, item.Path);
+    m_MostRecentlyUsedItems.clear();
+    for (auto item : theProjectManager.MostRecentlyUsedList) NewMostRecentlyUsedItem(item.Name, item.Path);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::NewMostRecentlyUsedItem(const String& name, const String& path)
 {
-	auto spf = std::shared_ptr<TSelectionPanelFrame>(new TSelectionPanelFrame(this));
-	m_MostRecentlyUsedItems.push_back(spf);
-	spf->Parent = panRecentProjects;
-	spf->Name = name;
-	spf->Path = path;
-	spf->OnSelectedClick = SelectionPanelOnClick;
-	spf->OnRemoveClick = SelectionPanelOnRemoveClick;
-	spf->Top = 1000;
+    auto spf = std::shared_ptr<TSelectionPanelFrame>(new TSelectionPanelFrame(this));
+    m_MostRecentlyUsedItems.push_back(spf);
+    spf->Parent = panRecentProjects;
+    spf->Name = name;
+    spf->Path = path;
+    spf->OnSelectedClick = SelectionPanelOnClick;
+    spf->OnRemoveClick = SelectionPanelOnRemoveClick;
+    spf->Top = 1000;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::btnCreateClick(TObject *Sender)

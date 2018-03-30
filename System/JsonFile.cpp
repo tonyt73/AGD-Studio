@@ -46,90 +46,90 @@ void __fastcall JsonFile::Close()
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::StartObject() const
 {
-	m_JsonWriter->WriteStartObject();
+    m_JsonWriter->WriteStartObject();
 }
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::EndObject() const
 {
-	m_JsonWriter->WriteEndObject();
+    m_JsonWriter->WriteEndObject();
 }
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::Push(const String& section) const
 {
-	m_JsonWriter->WritePropertyName(section);
-	m_JsonWriter->WriteStartObject();
+    m_JsonWriter->WritePropertyName(section);
+    m_JsonWriter->WriteStartObject();
 }
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::Pop() const
 {
-	m_JsonWriter->WriteEndObject();
+    m_JsonWriter->WriteEndObject();
 }
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::ArrayStart(const String& property) const
 {
-	m_JsonWriter->WritePropertyName(property);
-	m_JsonWriter->WriteStartArray();
+    m_JsonWriter->WritePropertyName(property);
+    m_JsonWriter->WriteStartArray();
 }
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::ArrayEnd() const
 {
-	m_JsonWriter->WriteEndArray();
+    m_JsonWriter->WriteEndArray();
 }
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::Write(const String& property, const String& value) const
 {
-	m_JsonWriter->WritePropertyName(property);
-	m_JsonWriter->WriteValue(value);
+    m_JsonWriter->WritePropertyName(property);
+    m_JsonWriter->WriteValue(value);
 }
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::Write(const String& property, const int& value) const
 {
-	m_JsonWriter->WritePropertyName(property);
-	m_JsonWriter->WriteValue(value);
+    m_JsonWriter->WritePropertyName(property);
+    m_JsonWriter->WriteValue(value);
 }
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::Write(const String& property, const double& value) const
 {
-	m_JsonWriter->WritePropertyName(property);
-	m_JsonWriter->WriteValue(value);
+    m_JsonWriter->WritePropertyName(property);
+    m_JsonWriter->WriteValue(value);
 }
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::Write(const String& property, const bool& value) const
 {
-	m_JsonWriter->WritePropertyName(property);
-	m_JsonWriter->WriteValue(value);
+    m_JsonWriter->WritePropertyName(property);
+    m_JsonWriter->WriteValue(value);
 }
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::Set(const String& property, const String& value)
 {
-	if (m_PropertyMap.count(property) != 0)
-	{
-		((*(String*)m_PropertyMap[property])) = value;
-	}
+    if (m_PropertyMap.count(property) != 0)
+    {
+        ((*(String*)m_PropertyMap[property])) = value;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::Set(const String& property, const int& value)
 {
-	if (m_PropertyMap.count(property) != 0)
-	{
-		((*(int*)m_PropertyMap[property])) = value;
-	}
+    if (m_PropertyMap.count(property) != 0)
+    {
+        ((*(int*)m_PropertyMap[property])) = value;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::Set(const String& property, const double& value)
 {
-	if (m_PropertyMap.count(property) != 0)
-	{
-		((*(double*)m_PropertyMap[property])) = value;
-	}
+    if (m_PropertyMap.count(property) != 0)
+    {
+        ((*(double*)m_PropertyMap[property])) = value;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::Set(const String& property, const bool& value)
 {
-	if (m_PropertyMap.count(property) != 0)
-	{
-		((*(bool*)m_PropertyMap[property])) = value;
-	}
+    if (m_PropertyMap.count(property) != 0)
+    {
+        ((*(bool*)m_PropertyMap[property])) = value;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::Load(const String& file)
@@ -141,7 +141,7 @@ void __fastcall JsonFile::Load(const String& file)
         auto sr = make_unique<TStringReader>(json);
         auto jr = make_unique<TJsonTextReader>(sr.get());
         String property;
-		auto depth = 0;
+        auto depth = 0;
         String arrayProperty;
         bool inArray = false;
         while (jr->Read())
@@ -156,21 +156,21 @@ void __fastcall JsonFile::Load(const String& file)
                     }
                     OnStartObject(property);
                     break;
-				case TJsonToken::EndObject:
-					depth--;
-					// remove the last .name
+                case TJsonToken::EndObject:
+                    depth--;
+                    // remove the last .name
                     OnEndObject(property);
-					property = property.Delete(property.LastDelimiter("."), property.Length());
-					break;
-				case TJsonToken::StartArray:
-					property += ".Array";
+                    property = property.Delete(property.LastDelimiter("."), property.Length());
+                    break;
+                case TJsonToken::StartArray:
+                    property += ".Array";
                     inArray = true;
-					break;
-				case TJsonToken::EndArray:
-					property = property.Delete(property.LastDelimiter("."), property.Length());
+                    break;
+                case TJsonToken::EndArray:
+                    property = property.Delete(property.LastDelimiter("."), property.Length());
                     inArray = false;
-					break;
-				case TJsonToken::PropertyName:
+                    break;
+                case TJsonToken::PropertyName:
                     property += "." + jr->Value.AsString();
                     break;
                 case TJsonToken::String:

@@ -16,9 +16,9 @@ __fastcall ProjectManager::ProjectManager()
 : m_TreeView(nullptr)
 , m_Project(nullptr)
 {
-	m_MostRecentlyUsedList.push_back(MostRecentlyUsedItem("Big Sprite Demo", "AGDX Studio\\Big Sprite Demo"));
-	m_MostRecentlyUsedList.push_back(MostRecentlyUsedItem("Sabre Wulf", "AGDX Studio\\Sabre Wulf"));
-	m_MostRecentlyUsedList.push_back(MostRecentlyUsedItem("Space Invaders", "AGDX Studio\\Space Invaders"));
+    m_MostRecentlyUsedList.push_back(MostRecentlyUsedItem("Big Sprite Demo", "AGDX Studio\\Big Sprite Demo"));
+    m_MostRecentlyUsedList.push_back(MostRecentlyUsedItem("Sabre Wulf", "AGDX Studio\\Sabre Wulf"));
+    m_MostRecentlyUsedList.push_back(MostRecentlyUsedItem("Space Invaders", "AGDX Studio\\Space Invaders"));
 }
 //---------------------------------------------------------------------------
 __fastcall ProjectManager::~ProjectManager()
@@ -32,10 +32,10 @@ void __fastcall ProjectManager::Initialise(Elxtree::TElXTree* treeView)
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::RemoveMostRecentlyUsedItem(const String& name, const String& path)
 {
-	m_MostRecentlyUsedList.erase(std::remove_if(
-		m_MostRecentlyUsedList.begin(),
-		m_MostRecentlyUsedList.end(),
-		[&](const MostRecentlyUsedItem& item) { return (item.Name == name && item.Path == path); }), m_MostRecentlyUsedList.end());
+    m_MostRecentlyUsedList.erase(std::remove_if(
+        m_MostRecentlyUsedList.begin(),
+        m_MostRecentlyUsedList.end(),
+        [&](const MostRecentlyUsedItem& item) { return (item.Name == name && item.Path == path); }), m_MostRecentlyUsedList.end());
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* node) const

@@ -25,22 +25,22 @@ __fastcall RSAppSettings::~RSAppSettings()
 //---------------------------------------------------------------------------
 void __fastcall RSAppSettings::Load()
 {
-	auto ini = std::make_unique<TIniFile>(ChangeFileExt(Application->ExeName, ".ini"));
+    auto ini = std::make_unique<TIniFile>(ChangeFileExt(Application->ExeName, ".ini"));
 
-	m_ActiveStyle = ini->ReadString("UI", "Style", "Carbon");
-	m_WindowState = (TWindowState)ini->ReadInteger("UI", "WindowState", (int)wsNormal);
+    m_ActiveStyle = ini->ReadString("UI", "Style", "Carbon");
+    m_WindowState = (TWindowState)ini->ReadInteger("UI", "WindowState", (int)wsNormal);
 
-	if (m_WindowState == wsMinimized)
-	{
-		m_WindowState = wsNormal;
-	}
+    if (m_WindowState == wsMinimized)
+    {
+        m_WindowState = wsNormal;
+    }
 
-	m_WindowPosition.X = ini->ReadInteger("UI", "WindowLeft", 0);
-	m_WindowPosition.Y  = ini->ReadInteger("UI", "WindowTop", 0);
-	m_WindowSize.Width  = ini->ReadInteger("UI", "WindowWidth", Screen->Width);
-	m_WindowSize.Height = ini->ReadInteger("UI", "WindowHeight", Screen->Height);
-	m_WelcomePosition.X = ini->ReadInteger("UI", "WelcomeLeft", 0);
-	m_WelcomePosition.Y = ini->ReadInteger("UI", "WelcomeTop", 0);
+    m_WindowPosition.X = ini->ReadInteger("UI", "WindowLeft", 0);
+    m_WindowPosition.Y  = ini->ReadInteger("UI", "WindowTop", 0);
+    m_WindowSize.Width  = ini->ReadInteger("UI", "WindowWidth", Screen->Width);
+    m_WindowSize.Height = ini->ReadInteger("UI", "WindowHeight", Screen->Height);
+    m_WelcomePosition.X = ini->ReadInteger("UI", "WelcomeLeft", 0);
+    m_WelcomePosition.Y = ini->ReadInteger("UI", "WelcomeTop", 0);
 }
 //---------------------------------------------------------------------------
 void __fastcall RSAppSettings::Save()

@@ -14,12 +14,12 @@
 //---------------------------------------------------------------------------
 class TfrmEditorCode : public TFrame
 {
-__published:	// IDE-managed Components
+__published:    // IDE-managed Components
     //TBCEditor *BCEditor1;
-private:	// User declarations
+private:    // User declarations
     Document*                   m_Document;
-public:		// User declarations
-	                __fastcall  TfrmEditorCode(TComponent* Owner);
+public:        // User declarations
+                    __fastcall  TfrmEditorCode(TComponent* Owner);
     static  TFrame* __fastcall  Create(Document* document, TComponent* owner)
                                 {
                                     auto editor = new TfrmEditorCode(owner);

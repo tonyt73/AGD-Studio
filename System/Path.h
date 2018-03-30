@@ -19,15 +19,15 @@ private:
     static String                       m_Separator;
 
 public:
-							__fastcall  Path();
+                            __fastcall  Path();
 
-	static  void            __fastcall  Init();
+    static  void            __fastcall  Init();
 
-	static  TStringDynArray __fastcall  GetFiles(const String& folder, const String& filter);
-	static  TStringDynArray __fastcall  GetFiles(Location location, const String& filter, const String& subFolder = "");
-	static  TStringDynArray __fastcall  GetFolders(Location location, const String& subFolder = "");
+    static  TStringDynArray __fastcall  GetFiles(const String& folder, const String& filter);
+    static  TStringDynArray __fastcall  GetFiles(Location location, const String& filter, const String& subFolder = "");
+    static  TStringDynArray __fastcall  GetFolders(Location location, const String& subFolder = "");
     static  String          __fastcall  GetFolder(const Location location, const String& subFolder = "");
-	static  bool            __fastcall  Exists(Location location, const String& subFolder = "");
+    static  bool            __fastcall  Exists(Location location, const String& subFolder = "");
     static  void            __fastcall  Delete(Location location, const String& subFolder);
 
                                         // application specific files, configs etc (per installation)

@@ -25,10 +25,10 @@ __fastcall TfrmIDE::TfrmIDE(TComponent* Owner)
 //---------------------------------------------------------------------------
 __fastcall TfrmIDE::~TfrmIDE()
 {
-	if (Application && Application->MainForm)
-	{
-		Application->MainForm->Menu = nullptr;
-	}
+    if (Application && Application->MainForm)
+    {
+        Application->MainForm->Menu = nullptr;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::RegisterDocumentEditors()
@@ -48,97 +48,97 @@ void __fastcall TfrmIDE::RegisterDocumentEditors()
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::OnActivate()
 {
-	if (Application && Application->MainForm)
-	{
-		Application->MainForm->Menu = mnuMain;
-    	Application->MainForm->Caption = "AGDX Studio";
-	}
-	ThemeSettings::ReapplyStyle();
-	Color = StyleServices()->GetStyleColor(scGenericGradientBase);
+    if (Application && Application->MainForm)
+    {
+        Application->MainForm->Menu = mnuMain;
+        Application->MainForm->Caption = "AGDX Studio";
+    }
+    ThemeSettings::ReapplyStyle();
+    Color = StyleServices()->GetStyleColor(scGenericGradientBase);
     tvProject->BackGroundColor = StyleServices()->GetStyleColor(scGenericGradientBase);
     dsIDE->Invalidate();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileExitExecute(TObject *Sender)
 {
-	if (Application && Application->MainForm)
-	{
-		Application->MainForm->Close();
-	}
+    if (Application && Application->MainForm)
+    {
+        Application->MainForm->Close();
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditCopyExecute(TObject *Sender)
 {
-	//
+    //
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditCutExecute(TObject *Sender)
 {
-	//
+    //
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditPasteExecute(TObject *Sender)
 {
-	//
+    //
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileProjectNewExecute(TObject *Sender)
 {
-	static auto docNo = 0;
-	auto dp = new TLMDDockPanel(this);
+    static auto docNo = 0;
+    auto dp = new TLMDDockPanel(this);
     Document* doc = nullptr;
-	switch (docNo % 4)
-	{
-		case 0:
-		{
+    switch (docNo % 4)
+    {
+        case 0:
+        {
             auto name = "new sprite " + IntToStr(docNo++);
             doc = theProjectManager.Add("Image", "Sprite", name);
             dp->Tag = (int)doc;
             doc->DockPanel = dp;
             UpdateProperties(doc);
-			dp->Caption = name;
-			break;
-		}
-		case 1:
-		{
+            dp->Caption = name;
+            break;
+        }
+        case 1:
+        {
             auto name = "new event " + IntToStr(docNo++);
             doc = theProjectManager.Add("Text", "Event", name);
             dp->Tag = (int)doc;
             doc->DockPanel = dp;
             UpdateProperties(doc);
-			dp->Caption = name;
-			break;
-		}
-		case 2:
-		{
+            dp->Caption = name;
+            break;
+        }
+        case 2:
+        {
             auto name = "new tile " + IntToStr(docNo++);
             doc = theProjectManager.Add("Image", "Tile", name);
             dp->Tag = (int)doc;
             doc->DockPanel = dp;
             UpdateProperties(doc);
-			dp->Caption = name;
-			break;
-		}
-		case 3:
-		{
+            dp->Caption = name;
+            break;
+        }
+        case 3:
+        {
             auto name = "new object " + IntToStr(docNo++);
             doc = theProjectManager.Add("Image", "Object", name);
             dp->Tag = (int)doc;
             doc->DockPanel = dp;
             UpdateProperties(doc);
-			dp->Caption = name;
-			break;
-		}
-	}
+            dp->Caption = name;
+            break;
+        }
+    }
     DocumentEditorFactory::Create(doc, dp);
-	dp->ClientKind = dkDocument;
-	dsIDE->DockControl(dp, dsIDE->SpaceZone);
+    dp->ClientKind = dkDocument;
+    dsIDE->DockControl(dp, dsIDE->SpaceZone);
     dp->OnClose = OnDocumentClose;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileProjectOpenExecute(TObject *Sender)
 {
-	//
+    //
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileProjectSaveExecute(TObject *Sender)
@@ -148,16 +148,16 @@ void __fastcall TfrmIDE::actFileProjectSaveExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileProjectCloseExecute(TObject *Sender)
 {
-	if (FOnFormClose)
-	{
-		Application->MainForm->Menu = nullptr;
-		FOnFormClose(this);
-	}
+    if (FOnFormClose)
+    {
+        Application->MainForm->Menu = nullptr;
+        FOnFormClose(this);
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actHelpAboutExecute(TObject *Sender)
 {
-	(new TfrmAbout(this))->Show();
+    (new TfrmAbout(this))->Show();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditUndoExecute(TObject *Sender)
@@ -261,7 +261,7 @@ void __fastcall TfrmIDE::tvProjectDblClick(TObject *Sender)
         if (doc && doc->DockPanel == nullptr)
         {
             auto dp = new TLMDDockPanel(this);
-			if (DocumentEditorFactory::Create(doc, dp))
+            if (DocumentEditorFactory::Create(doc, dp))
             {
                 dp->Caption = doc->Name;
                 dp->Tag = (NativeInt)doc;

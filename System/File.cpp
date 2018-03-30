@@ -22,7 +22,7 @@ String __fastcall File::NameWithoutExtension(const String& file)
 //---------------------------------------------------------------------------
 String __fastcall File::NameWithExtension(const String& file)
 {
-	return System::Ioutils::TPath::GetFileName(file);
+    return System::Ioutils::TPath::GetFileName(file);
 }
 //---------------------------------------------------------------------------
 String __fastcall File::PathOf(const String& file)
@@ -37,7 +37,7 @@ String __fastcall File::ChangeExtension(const String& filename, const String& ex
 //---------------------------------------------------------------------------
 String __fastcall File::Combine(const String& path, const String& filename)
 {
-	return System::Ioutils::TPath::Combine(path, filename);
+    return System::Ioutils::TPath::Combine(path, filename);
 }
 //---------------------------------------------------------------------------
 void __fastcall File::WriteText(const String& file, const String& content)
@@ -49,21 +49,21 @@ void __fastcall File::WriteText(const String& file, const String& content)
 //---------------------------------------------------------------------------
 String __fastcall File::ReadText(const String& file)
 {
-	return System::Ioutils::TFile::ReadAllText(file);
+    return System::Ioutils::TFile::ReadAllText(file);
 }
 //---------------------------------------------------------------------------
 void __fastcall File::Copy(const String& source, const String& destination)
 {
-	auto path = System::Ioutils::TPath::GetDirectoryName(destination);
-	System::Ioutils::TDirectory::CreateDirectory(path);
-	System::Ioutils::TFile::Copy(source, destination);
+    auto path = System::Ioutils::TPath::GetDirectoryName(destination);
+    System::Ioutils::TDirectory::CreateDirectory(path);
+    System::Ioutils::TFile::Copy(source, destination);
 }
 //---------------------------------------------------------------------------
 void __fastcall File::Delete(const String& file)
 {
-	if (System::Ioutils::TFile::Exists(file))
-	{
-		System::Ioutils::TFile::Delete(file);
+    if (System::Ioutils::TFile::Exists(file))
+    {
+        System::Ioutils::TFile::Delete(file);
     }
 }
 //---------------------------------------------------------------------------

@@ -42,8 +42,8 @@ private:
 
     // the map of message subscription handlers
     typedef std::list<std::unique_ptr<Subscription_>> Subscriptions;
-	typedef std::unordered_map<std::type_index, std::unique_ptr<Subscriptions>> SubscriptionsMap;
-	static SubscriptionsMap* handlers;
+    typedef std::unordered_map<std::type_index, std::unique_ptr<Subscriptions>> SubscriptionsMap;
+    static SubscriptionsMap* handlers;
 
 public:
     // subscribe a handler to a templated message type

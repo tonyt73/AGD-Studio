@@ -11,11 +11,11 @@
 //---------------------------------------------------------------------------
 class TfrmEditorMusic : public TFrame
 {
-__published:	// IDE-managed Components
-private:	// User declarations
+__published:    // IDE-managed Components
+private:    // User declarations
     Document*                   m_Document;
-public:		// User declarations
-	                __fastcall  TfrmEditorMusic(TComponent* Owner);
+public:        // User declarations
+                    __fastcall  TfrmEditorMusic(TComponent* Owner);
     static  TFrame* __fastcall  Create(Document* document, TComponent* owner)
                                 {
                                     auto editor = new TfrmEditorMusic(owner);

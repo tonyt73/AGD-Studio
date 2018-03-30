@@ -20,20 +20,20 @@ public: // singleton
     void operator=(ProjectManager const&) = delete;
 
 public:
-	class MostRecentlyUsedItem
-	{
-	public:
-		String  Name;
-		String  Path;
+    class MostRecentlyUsedItem
+    {
+    public:
+        String  Name;
+        String  Path;
 
-		MostRecentlyUsedItem(String name, String path)
-		: Name(name)
-		, Path(path)
-		{
-		}
-	};
-	typedef std::list<MostRecentlyUsedItem> MRUList;
-	typedef const MRUList cMRUList;
+        MostRecentlyUsedItem(String name, String path)
+        : Name(name)
+        , Path(path)
+        {
+        }
+    };
+    typedef std::list<MostRecentlyUsedItem> MRUList;
+    typedef const MRUList cMRUList;
 
 private:
 
@@ -47,7 +47,7 @@ private:
 
     std::map<String, TElXTreeItem*> m_TreeLeafNodes;
 
-	MRUList				            m_MostRecentlyUsedList;
+    MRUList                            m_MostRecentlyUsedList;
     DocumentManager                 m_DocumentManager;
     Elxtree::TElXTree*              m_TreeView;
     std::unique_ptr<GameProject>    m_Project;
@@ -62,7 +62,7 @@ protected:
 
 public:
 
-	            __fastcall  ProjectManager();
+                __fastcall  ProjectManager();
                 __fastcall ~ProjectManager();
     void        __fastcall  Initialise(Elxtree::TElXTree* treeView);
 
@@ -70,9 +70,9 @@ public:
     void        __fastcall  Open(const String& file);
     Document*   __fastcall  Add(const String& type, const String& subType, const String& name);
 
-	void	    __fastcall  RemoveMostRecentlyUsedItem(const String& name, const String& path);
+    void        __fastcall  RemoveMostRecentlyUsedItem(const String& name, const String& path);
 
-	cMRUList	__property	MostRecentlyUsedList = { read = m_MostRecentlyUsedList };
+    cMRUList    __property    MostRecentlyUsedList = { read = m_MostRecentlyUsedList };
 };
 //---------------------------------------------------------------------------
 #define theProjectManager ProjectManager::get()

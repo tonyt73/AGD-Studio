@@ -32,37 +32,37 @@ void __fastcall Path::Init()
 //---------------------------------------------------------------------------
 String __fastcall Path::GetFolder(const Location location, const String& subFolder)
 {
-	auto folder = m_Common;
-	if (location == lpApplication) folder = m_Application;
-	else if (location == lpProjects) folder = m_Projects;
-	folder += subFolder;
-	return folder;
+    auto folder = m_Common;
+    if (location == lpApplication) folder = m_Application;
+    else if (location == lpProjects) folder = m_Projects;
+    folder += subFolder;
+    return folder;
 }
 //---------------------------------------------------------------------------
 TStringDynArray Path::GetFolders(Location location, const String& subFolder)
 {
-	auto folder = GetFolder(location, subFolder);
-	if (System::Ioutils::TDirectory::Exists(folder))
-	{
-		return System::Ioutils::TDirectory::GetDirectories(folder);
-	}
-	TStringDynArray empty;
-	return empty;
+    auto folder = GetFolder(location, subFolder);
+    if (System::Ioutils::TDirectory::Exists(folder))
+    {
+        return System::Ioutils::TDirectory::GetDirectories(folder);
+    }
+    TStringDynArray empty;
+    return empty;
 }
 //---------------------------------------------------------------------------
 TStringDynArray __fastcall Path::GetFiles(const String& folder, const String& filter)
 {
-	if (System::Ioutils::TDirectory::Exists(folder))
-	{
-		return System::Ioutils::TDirectory::GetFiles(folder, filter);
-	}
-	TStringDynArray empty;
-	return empty;
+    if (System::Ioutils::TDirectory::Exists(folder))
+    {
+        return System::Ioutils::TDirectory::GetFiles(folder, filter);
+    }
+    TStringDynArray empty;
+    return empty;
 }
 //---------------------------------------------------------------------------
 TStringDynArray __fastcall Path::GetFiles(Location location, const String& filter, const String& subFolder)
 {
-	auto folder = GetFolder(location, subFolder);
+    auto folder = GetFolder(location, subFolder);
     return GetFiles(folder, filter);
 }
 //---------------------------------------------------------------------------
