@@ -61,6 +61,7 @@ void __fastcall TfrmIDE::OnActivate()
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileExitExecute(TObject *Sender)
 {
+    theProjectManager.Save();
     if (Application && Application->MainForm)
     {
         Application->MainForm->Close();
@@ -84,6 +85,7 @@ void __fastcall TfrmIDE::actEditPasteExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileProjectNewExecute(TObject *Sender)
 {
+    theProjectManager.Save();
     static auto docNo = 0;
     auto dp = new TLMDDockPanel(this);
     Document* doc = nullptr;
@@ -138,16 +140,19 @@ void __fastcall TfrmIDE::actFileProjectNewExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileProjectOpenExecute(TObject *Sender)
 {
-    //
+    theProjectManager.Save();
+
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileProjectSaveExecute(TObject *Sender)
 {
+    theProjectManager.Save();
     //
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileProjectCloseExecute(TObject *Sender)
 {
+    theProjectManager.Save();
     if (FOnFormClose)
     {
         Application->MainForm->Menu = nullptr;
@@ -229,7 +234,6 @@ void __fastcall TfrmIDE::tvProjectItemSelectedChange(TObject *Sender, TElXTreeIt
 {
     if (Item->Tag)
     {
-        // select document
         auto doc = (Document*)((NativeInt)Item->Tag);
         UpdateProperties(doc);
         auto dockPanel = static_cast<TLMDDockPanel*>(doc->DockPanel);
@@ -247,7 +251,7 @@ void __fastcall TfrmIDE::OnDocumentClose(TObject *Sender, TLMDockPanelCloseActio
     auto dockPanel = dynamic_cast<TLMDDockPanel*>(Sender);
     if (dockPanel)
     {
-        action = caFree;
+        action = caFree;    // this will call the editor destructor, which can optional save the document
         Document* doc = (Document*)dockPanel->Tag;
         doc->DockPanel = nullptr;
     }

@@ -82,5 +82,15 @@ void __fastcall Path::Delete(Location location, const String& subFolder)
     }
 }
 //---------------------------------------------------------------------------
+void __fastcall Path::Rename(Location location, const String& fromSubFolder, const String& toSubFolder)
+{
+    if (Exists(location, fromSubFolder))
+    {
+        auto fromFolder = GetFolder(location, fromSubFolder);
+        auto toFolder = GetFolder(location, toSubFolder);
+        System::Ioutils::TDirectory::Move(fromFolder, toFolder);
+    }
+}
+//---------------------------------------------------------------------------
 } // File namespace
 //---------------------------------------------------------------------------

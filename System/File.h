@@ -18,6 +18,7 @@ public:
     static  String  __fastcall  ReadText(const String& file);
     static  void    __fastcall  Copy(const String& source, const String& destination);
     static  void    __fastcall  Delete(const String& file);
+    static  void    __fastcall  Rename(const String& source, const String& destination);
 };
 //---------------------------------------------------------------------------
 } // filesystem namespace

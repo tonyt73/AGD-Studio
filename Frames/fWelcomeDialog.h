@@ -70,18 +70,14 @@ private:    // Member declarations
     std::list<std::shared_ptr<TSelectionPanelFrame>>    m_MostRecentlyUsedItems;
 
 private:    // Events
-    TNotifyEvent        FOnDone;
-
+    TNotifyEvent            FOnDone;
 
 public:        // User declarations
-            __fastcall    TfrmWelcomeDialog(TComponent* Owner);
+            __fastcall      TfrmWelcomeDialog(TComponent* Owner);
 
-    void    __fastcall  Initialise();
+    void    __fastcall      Initialise();
 
-    // TODO: property to set Project Manager
-    //       use prjmgr to new, open, import and load recent projects
-
-    __property    TNotifyEvent OnDone = { read = FOnDone, write = FOnDone };
+    __property TNotifyEvent OnDone = { read = FOnDone, write = FOnDone };
 };
 //---------------------------------------------------------------------------
 #endif

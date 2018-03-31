@@ -9,13 +9,18 @@ __fastcall Document::Document()
 : m_Name("Unnamed")
 , m_Type("No Type")
 , m_SubType("No SubType")
+, m_Extension("json")
 , m_MultiDoc(false)
 , m_Folder("Misc\\Files")
 , m_TreeNode(nullptr)
 , m_DockPanel(nullptr)
 {
     m_Type = "Document";
-    RegisterProperty("Name", "Object", "The name of the asset/document");
+    RegisterProperty("Name", "Details", "The name of the asset/document");
+    RegisterProperty("Path", "Details", "The full path of the document");
+    RegisterProperty("Name", "Details", "The name of the asset/document");
+    RegisterProperty("Classification", "Details", "The classification of the document");
+    m_PropertyMap[".Document.Name"] = &m_Name;
 }
 //---------------------------------------------------------------------------
 void __fastcall Document::RegisterProperty(const String& property, const String& category, const String& info)
@@ -38,21 +43,43 @@ String __fastcall Document::GetPropertyInfo(const String& property) const
     return "Invalid property";
 }
 //---------------------------------------------------------------------------
-void __fastcall Document::Save()
+void __fastcall Document::SetName(const String& name)
 {
-    Push("Document");
-        Write("Name", m_Name);
-    Pop();  // document
+    auto oldFile = File;
+    m_Name = name;
+    // TODO: Rename file to new file name
+    if (System::File::Exists(oldFile))
+    {
+        auto newFile = File;
+        System::File::Rename(oldFile, newFile);
+    }
 }
 //---------------------------------------------------------------------------
-bool __fastcall Document::Load(const String& file)
+String __fastcall Document::GetFile()
 {
+    // Documents/{project name}
+    auto file = System::File::Combine(System::Path::Projects, System::Path::ProjectName);
+    // Documents/{project name}/{document name}
+    file = System::File::Combine(file, m_Name);
+    // Documents/{project name}/{document name}.{extension)
+    file = System::File::ChangeExtension(file, m_Extension);
+    return file;
+}
+//---------------------------------------------------------------------------
+bool __fastcall Document::Load()
+{
+    if (m_File.Trim() == "")
+    {
+        m_File = GetFile();
+    }
     // does it exist?
-    if (!System::File::Exists(file))
-        return false;
-    // yes, load it
-    JsonFile::Load(file);
-    return true;
+    if (System::File::Exists(m_File))
+    {
+        // yes, load it
+        JsonFile::Load(m_File);
+        return true;
+    }
+    return false;
 }
 //---------------------------------------------------------------------------
 

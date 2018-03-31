@@ -42,6 +42,18 @@ void __fastcall TfrmWelcomeDialog::lblStartNewProjectClick(TObject *Sender)
     edtName->SetFocus();
 }
 //---------------------------------------------------------------------------
+void __fastcall TfrmWelcomeDialog::btnCreateClick(TObject *Sender)
+{
+    panButtons->Visible = true;
+    panStartNew->Visible = false;
+    auto button = dynamic_cast<TButton*>(Sender);
+    if (button && button->ModalResult == mrOk)
+    {
+        theProjectManager.New(edtName->Text, cmbMachines->Items->Strings[cmbMachines->ItemIndex]);
+        if (FOnDone) FOnDone(this);
+    }
+}
+//---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::lblOpenExistingProjectClick(TObject *Sender)
 {
     dlgOpen->InitialDir = System::Path::Projects;
@@ -68,6 +80,7 @@ void __fastcall TfrmWelcomeDialog::SelectionPanelOnClick(TObject *Sender)
 {
     // TODO: Implement OpenRecent
     TSelectionPanelFrame* panel = (TSelectionPanelFrame*)Sender;
+    // TODO: supply the right file name
     theProjectManager.Open(panel->Name);
     if (FOnDone) FOnDone(this);
 }
@@ -144,18 +157,6 @@ void __fastcall TfrmWelcomeDialog::NewMostRecentlyUsedItem(const String& name, c
     spf->OnSelectedClick = SelectionPanelOnClick;
     spf->OnRemoveClick = SelectionPanelOnRemoveClick;
     spf->Top = 1000;
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmWelcomeDialog::btnCreateClick(TObject *Sender)
-{
-    panButtons->Visible = true;
-    panStartNew->Visible = false;
-    auto button = dynamic_cast<TButton*>(Sender);
-    if (button && button->ModalResult == mrOk)
-    {
-        theProjectManager.New(edtName->Text, cmbMachines->Items->Strings[cmbMachines->ItemIndex]);
-        if (FOnDone) FOnDone(this);
-    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::edtNameChange(TObject *Sender)

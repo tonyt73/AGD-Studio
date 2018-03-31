@@ -7,23 +7,16 @@
 class TextDocument : public Document
 {
 private:
-    String                          m_Contents;
+   String               m_Contents;
 public:
                         __fastcall  TextDocument();
 
     static  Document*   __fastcall  Create() { return new TextDocument(); };
 
             void        __fastcall  Save();
-};
-//---------------------------------------------------------------------------
-class CodeDocument : public TextDocument
-{
-private:
+            bool        __fastcall  Load();
 
-public:
-                        __fastcall  CodeDocument();
-
-    static  Document*   __fastcall  Create() { return new CodeDocument(); };
+    __property  String              Contents = { read = m_Contents, write = m_Contents };
 };
 //---------------------------------------------------------------------------
 class EventDocument : public TextDocument

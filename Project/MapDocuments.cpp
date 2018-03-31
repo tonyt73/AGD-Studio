@@ -15,19 +15,10 @@ __fastcall TiledScreenDocument::TiledScreenDocument()
     RegisterProperty("Name", "Details", "The name of the screen");
 }
 //---------------------------------------------------------------------------
-//__fastcall TiledScreenDocumentSet::TiledScreenDocumentSet()
-//: DocumentSet()
-//{
-//    m_Type = "Screens";
-//    m_SubType = "Tiled";
-//    m_Folder = "Assets\\Screens";
-//    RegisterProperty("Name", "Details", "The name of the map");
-//    RegisterProperty("Across", "Dimensions", "The width in screens accross of the map");
-//    RegisterProperty("Down", "Dimensions", "The height in Screens down of the map");
-//    RegisterProperty("WindowWidth", "Dimensions", "The width in character blocks of the map window");
-//    RegisterProperty("WindowHeight", "Dimensions", "The height in character blocks of the map window");
-//    RegisterProperty("BackgroundColor", "Visual", "The color of the background when no tile is present");
-//}
+void __fastcall TiledScreenDocument::Save()
+{
+    // TODO: Save the tile screen
+}
 //---------------------------------------------------------------------------
 __fastcall TiledMapDocument::TiledMapDocument()
 : Document()
@@ -41,6 +32,11 @@ __fastcall TiledMapDocument::TiledMapDocument()
     RegisterProperty("WindowWidth", "Dimensions", "The width in character blocks for the map window");
     RegisterProperty("WindowHeight", "Dimensions", "The height in character blocks for the map window");
     RegisterProperty("BackgroundColor", "Visual", "The color of the background when no tile is present");
+}
+//---------------------------------------------------------------------------
+void __fastcall TiledMapDocument::Save()
+{
+    // TODO: Save the tiled map
 }
 //---------------------------------------------------------------------------
 

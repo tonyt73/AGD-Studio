@@ -8,28 +8,29 @@
 //---------------------------------------------------------------------------
 __fastcall TextDocument::TextDocument()
 : Document()
+, m_Contents("")
 {
     m_Type = "Text";
     m_SubType = "Plain";
+    m_Extension = "txt";
     m_Folder = "Assets\\Files";
-    RegisterProperty("Name", "Object", "The name of the document");
+    RegisterProperty("Name", "Details", "The name of the document");
     RegisterProperty("Filename", "File", "The name and path of the file");
 }
 //---------------------------------------------------------------------------
 void __fastcall TextDocument::Save()
 {
-    auto file = System::File::Combine(System::Path::Projects, System::Path::ProjectName);
-    file = System::File::Combine(file, m_Folder);
-    file = System::File::Combine(file, m_Name);
-    // TODO: Save normal text file
+    System::File::WriteText(File, m_Contents);
 }
 //---------------------------------------------------------------------------
-__fastcall CodeDocument::CodeDocument()
-: TextDocument()
+bool __fastcall TextDocument::Load()
 {
-    m_SubType = "Code";
-    m_Folder = "Game\\Code";
-    RegisterProperty("Name", "Object", "The name of the source code file");
+    if (System::File::Exists(File))
+    {
+        m_Contents = System::File::ReadText(File);
+        return true;
+    }
+    return false;
 }
 //---------------------------------------------------------------------------
 __fastcall EventDocument::EventDocument()
@@ -37,7 +38,8 @@ __fastcall EventDocument::EventDocument()
 {
     m_SubType = "Event";
     m_Folder = "Game\\Events";
-    RegisterProperty("Name", "Object", "The name of the event source code file");
+    m_Extension = "evt";
+    RegisterProperty("Name", "Details", "The name of the event source code file");
 }
 //---------------------------------------------------------------------------
 __fastcall SfxDocument::SfxDocument()
@@ -45,6 +47,7 @@ __fastcall SfxDocument::SfxDocument()
 {
     m_SubType = "SoundFx";
     m_Folder = "Assets\\Sounds";
-    RegisterProperty("Name", "Object", "The name of the SoundFx definitions file");
+    m_Extension = "sfx";
+    RegisterProperty("Name", "Details", "The name of the SoundFx definitions file");
 }
 //---------------------------------------------------------------------------

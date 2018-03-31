@@ -30,6 +30,7 @@ public:
     static  String          __fastcall  GetFolder(const Location location, const String& subFolder = "");
     static  bool            __fastcall  Exists(Location location, const String& subFolder = "");
     static  void            __fastcall  Delete(Location location, const String& subFolder);
+    static  void            __fastcall  Rename(Location location, const String& fromSubFolder, const String& toSubFolder);
 
                                         // application specific files, configs etc (per installation)
     static  __property  String          Application = { read = m_Application };

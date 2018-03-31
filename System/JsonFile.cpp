@@ -25,7 +25,7 @@ __fastcall JsonFile::~JsonFile()
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::Open(const String& file)
 {
-    m_File = File::File::ChangeExtension(file, "json");
+    m_File = file;
     m_StringWriter = new TStringWriter();
     m_JsonWriter = new TJsonTextWriter(m_StringWriter);
     m_JsonWriter->Formatting = TJsonFormatting::Indented;
@@ -135,10 +135,9 @@ void __fastcall JsonFile::Set(const String& property, const bool& value)
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::Load(const String& file)
 {
-    auto filename = File::File::ChangeExtension(file, "json");
-    if (File::File::Exists(filename))
+    if (File::File::Exists(file))
     {
-        auto json = File::File::ReadText(filename);
+        auto json = File::File::ReadText(file);
         auto sr = make_unique<TStringReader>(json);
         auto jr = make_unique<TJsonTextReader>(sr.get());
         String property;
@@ -202,11 +201,6 @@ void __fastcall JsonFile::Load(const String& file)
             }
         }
     }
-}
-//---------------------------------------------------------------------------
-void __fastcall JsonFile::Save()
-{
-    // do nothing; should be overridden
 }
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::OnStartObject(const String& object)

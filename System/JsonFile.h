@@ -39,9 +39,8 @@ protected:
     virtual void    __fastcall  Set(const String& property, const int& value);
     virtual void    __fastcall  Set(const String& property, const double& value);
     virtual void    __fastcall  Set(const String& property, const bool& value);
-    // load/save
+    // read/write
             void    __fastcall  Load(const String& file);
-    virtual void    __fastcall  Save();
 
     virtual void    __fastcall  OnStartObject(const String& object);
     virtual void    __fastcall  OnEndObject(const String& object);

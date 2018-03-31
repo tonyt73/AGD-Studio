@@ -14,33 +14,20 @@ private:
     {
         int X;
         int Y;
-        int TileSetId;
-        int TileId;
+        TileDocument* Tile;
     };
     typedef std::vector<TileInfo> TileInfoList;
 
-    TileSetDocument*                m_TileSet;
     TileInfoList                    m_Tiles;
 
 public:
                         __fastcall  TiledScreenDocument();
     static  Document*   __fastcall  Create() { return new TiledScreenDocument(); };
 
+    virtual void        __fastcall  Save();
+
 __published:
 };
-//---------------------------------------------------------------------------
-//class TiledScreenDocumentSet : public DocumentSet
-//{
-//public:
-//
-//private:
-//
-//public:
-//                        __fastcall  TiledScreenDocumentSet();
-//    static  Document*   __fastcall  Create() { return new TiledScreenDocumentSet(); };
-//
-//__published:
-//};
 //---------------------------------------------------------------------------
 class TiledMapDocument : public Document
 {
@@ -61,6 +48,8 @@ private:
 public:
                         __fastcall  TiledMapDocument();
     static  Document*   __fastcall  Create() { return new TiledMapDocument(); };
+
+            void        __fastcall  Save();
 
 __published:
     __property          int         Across          = { read = m_Across         , write = m_Across          };

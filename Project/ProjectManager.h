@@ -9,7 +9,6 @@
 #include <list>
 //---------------------------------------------------------------------------
 #include "Project/DocumentManager.h"
-#include "Project/ProjectDocument.h"
 //---------------------------------------------------------------------------
 using namespace Project;
 class ProjectManager
@@ -48,9 +47,7 @@ private:
     std::map<String, TElXTreeItem*> m_TreeLeafNodes;
 
     MRUList                         m_MostRecentlyUsedList;
-    DocumentManager                 m_DocumentManager;
     Elxtree::TElXTree*              m_TreeView;
-    std::unique_ptr<ProjectDocument>m_Project;
 
     void        __fastcall  SetTreeIcon(const String& parent, TElXTreeItem* node) const;
 
@@ -58,6 +55,7 @@ private:
 protected:
                   friend    DocumentManager;
     void        __fastcall  OnDocumentChange(Document* doc);
+    void        __fastcall  ClearTree(const String& rootName);
     Document*   __fastcall  AddToTreeView(Document* document);
 
 public:
@@ -68,10 +66,11 @@ public:
 
     void        __fastcall  New(const String& name, const String& machine);
     void        __fastcall  Open(const String& file);
+    void        __fastcall  Save();
+
     Document*   __fastcall  Add(const String& type, const String& subType, const String& name);
 
     void        __fastcall  RemoveMostRecentlyUsedItem(const String& name, const String& path);
-
     cMRUList    __property  MostRecentlyUsedList = { read = m_MostRecentlyUsedList };
 };
 //---------------------------------------------------------------------------

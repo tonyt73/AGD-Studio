@@ -20,16 +20,23 @@ private:
 
     // the document factory
     typedef std::map<String, CreateDocumentFn>  TFactoryMap;
-    typedef TFactoryMap::iterator TFactoryMapIt;
+    typedef TFactoryMap::iterator               TFactoryMapIt;
     TFactoryMap                     m_FactoryMap;
 
             void        __fastcall  Register(const String& type, const String& subType, CreateDocumentFn pfnCreate);
+            Document*   __fastcall  Get(const String& type, const String& subType, const String& name);
 
 public:
                         __fastcall  DocumentManager();
+
+            void        __fastcall  Add(Document* document);
             Document*   __fastcall  Add(const String& type, const String& subType, const String& name);
             bool        __fastcall  Remove(const String& type, const String& name);
             void        __fastcall  DocumentFolders(std::vector<String>& folders) const;
+
+            void        __fastcall  Clear();
+            void        __fastcall  Save();
+            void        __fastcall  Load(const String& name);
 };
 //---------------------------------------------------------------------------
 #define theDocumentManager DocumentManager::get()
