@@ -82,11 +82,12 @@ void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* 
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::New(const String& name, const String& machine)
 {
+    System::Path::ProjectName = name;
     if (m_TreeView)
     {
         if (m_Project == nullptr)
         {
-            m_Project = std::make_unique<GameProject>(name, machine);
+            m_Project = std::make_unique<ProjectDocument>(name, machine);
         }
         m_TreeLeafNodes.clear();
         m_TreeView->Items->Clear();
@@ -94,8 +95,10 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
         m_TreeView->Items->Add(NULL, name);
         auto rootNode = m_TreeView->Items->Item[0];
         std::map<String, TElXTreeItem*> childRootNodes;
+        // get the list of document folders we support
         std::vector<String> documentFolders;
         theDocumentManager.DocumentFolders(documentFolders);
+        // now create them as a tree view hierarchy
         for (auto it : documentFolders)
         {
             auto folder = it;
@@ -126,7 +129,7 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::Open(const String& file)
 {
-    m_Project = std::make_unique<GameProject>();
+    m_Project = std::make_unique<ProjectDocument>();
     if (m_Project->Load(file))
     {
         New(m_Project->Name, m_Project->Machine);

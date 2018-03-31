@@ -10,7 +10,7 @@
 namespace System
 {
 //---------------------------------------------------------------------------
-class JsonFile
+class JsonFile : public TPersistent
 {
 private:
     TStringWriter*              m_StringWriter;
@@ -18,7 +18,7 @@ private:
     String                      m_File;
 
 protected:
-    std::map<String, void*>        m_PropertyMap;
+    std::map<String, void*>     m_PropertyMap;
 
 protected:
     void            __fastcall  Open(const String& file);

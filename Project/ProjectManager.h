@@ -8,8 +8,8 @@
 //---------------------------------------------------------------------------
 #include <list>
 //---------------------------------------------------------------------------
-#include "Project/Document.h"
-#include "Project/GameProject.h"
+#include "Project/DocumentManager.h"
+#include "Project/ProjectDocument.h"
 //---------------------------------------------------------------------------
 using namespace Project;
 class ProjectManager
@@ -47,10 +47,10 @@ private:
 
     std::map<String, TElXTreeItem*> m_TreeLeafNodes;
 
-    MRUList                            m_MostRecentlyUsedList;
+    MRUList                         m_MostRecentlyUsedList;
     DocumentManager                 m_DocumentManager;
     Elxtree::TElXTree*              m_TreeView;
-    std::unique_ptr<GameProject>    m_Project;
+    std::unique_ptr<ProjectDocument>m_Project;
 
     void        __fastcall  SetTreeIcon(const String& parent, TElXTreeItem* node) const;
 
@@ -72,7 +72,7 @@ public:
 
     void        __fastcall  RemoveMostRecentlyUsedItem(const String& name, const String& path);
 
-    cMRUList    __property    MostRecentlyUsedList = { read = m_MostRecentlyUsedList };
+    cMRUList    __property  MostRecentlyUsedList = { read = m_MostRecentlyUsedList };
 };
 //---------------------------------------------------------------------------
 #define theProjectManager ProjectManager::get()

@@ -107,9 +107,9 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <BCC_EnableBatchCompilation>true</BCC_EnableBatchCompilation>
-        <BCC_PCHName_Clang>agdx.pch.h</BCC_PCHName_Clang>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <Icon_MainIcon>icon.ico</Icon_MainIcon>
+        <BCC_PCHName_Clang>agdx.pch.h</BCC_PCHName_Clang>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
@@ -148,8 +148,8 @@
         <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;fmx.bpi;lmdrtelcore.bpi</LinkPackageImports>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Build>4</VerInfo_Build>
-        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=1.0.6663.4;InternalName=agdx.exe;LegalCopyright=2018 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Programmed by Tony Thompson</VerInfo_Keys>
+        <VerInfo_Build>5</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=1.0.6663.5;InternalName=agdx.exe;LegalCopyright=2018 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Programmed by Tony Thompson</VerInfo_Keys>
         <VerInfo_Release>6663</VerInfo_Release>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <Icon_MainIcon>icon.ico</Icon_MainIcon>
@@ -263,13 +263,33 @@
             <DependentOn>Project\Document.h</DependentOn>
             <BuildOrder>21</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Project\GameProject.cpp">
-            <DependentOn>Project\GameProject.h</DependentOn>
-            <BuildOrder>19</BuildOrder>
+        <CppCompile Include="Project\DocumentManager.cpp">
+            <DependentOn>Project\DocumentManager.h</DependentOn>
+            <BuildOrder>24</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\DocumentSet.cpp">
+            <DependentOn>Project\DocumentSet.h</DependentOn>
+            <BuildOrder>25</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\ImageDocuments.cpp">
+            <DependentOn>Project\ImageDocuments.h</DependentOn>
+            <BuildOrder>27</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\MapDocuments.cpp">
+            <DependentOn>Project\MapDocuments.h</DependentOn>
+            <BuildOrder>28</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\ProjectDocument.cpp">
+            <DependentOn>Project\ProjectDocument.h</DependentOn>
+            <BuildOrder>23</BuildOrder>
         </CppCompile>
         <CppCompile Include="Project\ProjectManager.cpp">
             <DependentOn>Project\ProjectManager.h</DependentOn>
             <BuildOrder>15</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\TextDocuments.cpp">
+            <DependentOn>Project\TextDocuments.h</DependentOn>
+            <BuildOrder>26</BuildOrder>
         </CppCompile>
         <CppCompile Include="Settings\Settings.cpp">
             <DependentOn>Settings\Settings.h</DependentOn>

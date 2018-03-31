@@ -12,7 +12,8 @@ namespace System
 {
 //---------------------------------------------------------------------------
 __fastcall JsonFile::JsonFile()
-: m_StringWriter(nullptr)
+: TPersistent()
+, m_StringWriter(nullptr)
 , m_JsonWriter(nullptr)
 {
 }

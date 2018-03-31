@@ -7240,8 +7240,8 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       Caption = 'AGDX Studio'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -27
-      Font.Name = 'Corbel'
+      Font.Height = -32
+      Font.Name = 'Comfortaa'
       Font.Style = [fsBold]
       Font.Quality = fqAntialiased
       ParentFont = False
@@ -7625,15 +7625,15 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           65C2D64EB544D1BA24C0D2773635EBD72F8A8FF40000000049454E44AE426082}
       end
       object cmbThemes: TComboBox
-        Left = 144
-        Top = 81
-        Width = 163
-        Height = 21
+        Left = 136
+        Top = 75
+        Width = 217
+        Height = 29
         Style = csDropDownList
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Segoe UI'
+        Font.Height = -13
+        Font.Name = 'Comfortaa'
         Font.Style = []
         ParentFont = False
         TabOrder = 0

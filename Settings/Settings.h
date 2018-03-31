@@ -17,10 +17,10 @@ public:
 
 private:
     TWindowState                m_WindowState;
-    String                       m_ActiveStyle;
-    TPoint                        m_WindowPosition;
+    String                      m_ActiveStyle;
+    TPoint                      m_WindowPosition;
     TSize                       m_WindowSize;
-    TPoint                        m_WelcomePosition;
+    TPoint                      m_WelcomePosition;
 
     void            __fastcall  Set(const String& property, const String& value);
     void            __fastcall  Set(const String& property, const int& value);
@@ -31,14 +31,14 @@ private:
     void            __fastcall  SetWindowState(const TWindowState& state);
     void            __fastcall  SetWindowSize(const TSize& size);
 
-    void              __fastcall  Save();
+    void            __fastcall  Save();
 
 public:
-                    __fastcall    Settings();
+                    __fastcall  Settings();
                     __fastcall ~Settings();
 
     TWindowState    __property  WindowState     = { read = m_WindowState    , write = SetWindowState     };
-    String           __property  ActiveStyle     = { read = m_ActiveStyle    , write = SetActiveStyle     };
+    String           __property ActiveStyle     = { read = m_ActiveStyle    , write = SetActiveStyle     };
     TPoint          __property  WindowPosition  = { read = m_WindowPosition , write = SetWindowPosition  };
     TSize           __property  WindowSize      = { read = m_WindowSize     , write = SetWindowSize      };
     TPoint          __property  WelcomePosition = { read = m_WelcomePosition, write = SetWelcomePosition };

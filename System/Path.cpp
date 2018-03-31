@@ -12,6 +12,7 @@ namespace System
 String Path::m_Application;
 String Path::m_Common;
 String Path::m_Projects;
+String Path::m_ProjectName;
 String Path::m_Separator;
 class Path Path;
 //---------------------------------------------------------------------------

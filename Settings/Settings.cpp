@@ -24,6 +24,7 @@ Settings& __fastcall Settings::get()
 }
 //---------------------------------------------------------------------------
 __fastcall Settings::Settings()
+: JsonFile()
 {
     Load(System::File::Combine(System::Path::Application, "Settings"));
 }

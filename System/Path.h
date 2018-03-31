@@ -16,6 +16,7 @@ private:
     static String                       m_Application;
     static String                       m_Common;
     static String                       m_Projects;
+    static String                       m_ProjectName;
     static String                       m_Separator;
 
 public:
@@ -36,6 +37,8 @@ public:
     static  __property  String          Common = { read = m_Common };
                                         // game projects (shared)
     static  __property  String          Projects = { read = m_Projects };
+                                        // the active project name
+    static  __property  String          ProjectName = { read = m_ProjectName, write = m_ProjectName };
                                         // The OS file system path separator
     static  __property  String          Separator = { read = m_Separator };
 };
