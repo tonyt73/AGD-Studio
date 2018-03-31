@@ -103,25 +103,27 @@ void __fastcall DocumentManager::Clear()
 void __fastcall DocumentManager::Save()
 {
     auto projectDocument = dynamic_cast<ProjectDocument*>(Get("Game","Configuration", System::Path::ProjectName));
-    assert(projectDocument != nullptr);
-    projectDocument->ClearFiles();
-    // save all documents (except the project file) and add the document details to the project file
-    for (const auto& documentType : m_Documents)
+    if (projectDocument)
     {
-        if (documentType.first != "Game")
+        projectDocument->ClearFiles();
+        // save all documents (except the project file) and add the document details to the project file
+        for (const auto& documentType : m_Documents)
         {
-            for (const auto& document : documentType.second)
+            if (documentType.first != "Game")
             {
-                if (document->SubType != "Configuration")
+                for (const auto& document : documentType.second)
                 {
-                    document->Save();
-                    projectDocument->AddFile(System::File::NameWithExtension(document->File), document->Type, document->SubType);
+                    if (document->SubType != "Configuration")
+                    {
+                        document->Save();
+                        projectDocument->AddFile(System::File::NameWithExtension(document->File), document->Type, document->SubType);
+                    }
                 }
             }
         }
+        // now save the project file with all the document details included
+        projectDocument->Save();
     }
-    // now save the project file with all the document details included
-    projectDocument->Save();
 }
 //---------------------------------------------------------------------------
 void __fastcall DocumentManager::Load(const String& name)
