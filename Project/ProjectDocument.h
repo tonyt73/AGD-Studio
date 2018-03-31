@@ -23,7 +23,8 @@ private:
 
                 FileList            m_Files;
 
-            void        __fastcall  SetName(const String& name);
+            String      __fastcall  GetFile() const;
+            void        __fastcall  SetName(String name);
             void        __fastcall  OnChangeString(const OnChange<String>& event);
             void        __fastcall  OnEndObject(const String& object);
 

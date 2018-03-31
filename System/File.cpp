@@ -69,7 +69,7 @@ void __fastcall File::Delete(const String& file)
 //---------------------------------------------------------------------------
 void __fastcall File::Rename(const String& source, const String& destination)
 {
-    if (System::Ioutils::TFile::Exists(source))
+    if (source.LowerCase() != destination.LowerCase() && System::Ioutils::TFile::Exists(source))
     {
         System::Ioutils::TFile::Move(source, destination);
     }

@@ -1,6 +1,7 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
 //---------------------------------------------------------------------------
+#include "ElXTree.hpp"
 #include "Document.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -43,16 +44,21 @@ String __fastcall Document::GetPropertyInfo(const String& property) const
     return "Invalid property";
 }
 //---------------------------------------------------------------------------
-void __fastcall Document::SetName(const String& name)
+void __fastcall Document::SetName(String name)
 {
-    auto oldFile = File;
+    auto oldFile = GetFile();
     m_Name = name;
+    if (m_TreeNode)
+    {
+        ((TElXTreeItem*)m_TreeNode)->Text = name;
+    }
     // TODO: Rename file to new file name
     if (System::File::Exists(oldFile))
     {
-        auto newFile = File;
+        auto newFile = GetFile();
         System::File::Rename(oldFile, newFile);
     }
+    m_File = GetFile();
 }
 //---------------------------------------------------------------------------
 String __fastcall Document::GetFile()

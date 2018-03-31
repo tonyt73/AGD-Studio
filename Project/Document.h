@@ -42,7 +42,7 @@ protected:
             void*                   m_TreeNode;
             void*                   m_DockPanel;
 
-            void        __fastcall  SetName(const String& name);
+            void        __fastcall  SetName(String name);
             String      __fastcall  GetFile();
                                     // update the documents json content
     virtual void        __fastcall  Update() {};//= 0;

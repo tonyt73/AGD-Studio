@@ -141,7 +141,6 @@ void __fastcall TfrmIDE::actFileProjectNewExecute(TObject *Sender)
 void __fastcall TfrmIDE::actFileProjectOpenExecute(TObject *Sender)
 {
     theProjectManager.Save();
-
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileProjectSaveExecute(TObject *Sender)

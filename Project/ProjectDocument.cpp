@@ -2,6 +2,7 @@
 #include "agdx.pch.h"
 #pragma hdrstop
 //---------------------------------------------------------------------------
+#include "ElXTree.hpp"
 #include "Messaging/Messaging.h"
 #include "Project/ProjectDocument.h"
 //---------------------------------------------------------------------------
@@ -53,13 +54,7 @@ void __fastcall ProjectDocument::OnEndObject(const String& object)
 //---------------------------------------------------------------------------
 void __fastcall ProjectDocument::Save()
 {
-    // Documents/{project name}
-    auto file = System::File::Combine(System::Path::Projects, System::Path::ProjectName);
-    // Documents/{project name}/{project name}.agdx
-    file = System::File::Combine(file, System::Path::ProjectName + ".agdx");
-    file = System::File::ChangeExtension(file, m_Extension);
-    m_File = file;
-    Open(file);
+    Open(GetFile());
     Push("Project");
         Write("Version", m_Version);
         Write("Author", m_Author);
@@ -81,12 +76,7 @@ void __fastcall ProjectDocument::Save()
 //---------------------------------------------------------------------------
 bool __fastcall ProjectDocument::Load()
 {
-    // Documents/{project name}
-    auto file = System::File::Combine(System::Path::Projects, System::Path::ProjectName);
-    // Documents/{project name}/{project name}.agdx
-    file = System::File::Combine(file, System::Path::ProjectName);
-    file = System::File::ChangeExtension(file, m_Extension);
-    m_File = file;
+    m_File = GetFile();
     return Document::Load();
 }
 //---------------------------------------------------------------------------
@@ -117,12 +107,31 @@ void __fastcall ProjectDocument::OnChangeString(const OnChange<String>& event)
          }
 }
 //---------------------------------------------------------------------------
-void __fastcall ProjectDocument::SetName(const String& name)
+String __fastcall ProjectDocument::GetFile() const
 {
-    if (name.Trim().LowerCase() != m_Name.Trim().LowerCase())
+    // Documents/{project name}
+    auto file = System::File::Combine(System::Path::Projects, System::Path::ProjectName);
+    // Documents/{project name}/{project name}
+    file = System::File::Combine(file, System::Path::ProjectName);
+    // Documents/{project name}/{project name}.agdx
+    file = System::File::ChangeExtension(file, m_Extension);
+    return file;
+}
+//---------------------------------------------------------------------------
+void __fastcall ProjectDocument::SetName(String name)
+{
+    if (name.Trim().LowerCase() != m_Name.Trim().LowerCase() && !System::Path::Exists(System::Path::lpProjects, name))
     {
-        System::Path::Rename(System::Path::lpProjects, m_Name.Trim(), name.Trim());
-        m_Name = name.Trim();
+        auto fromName = m_Name.Trim();
+        Document::SetName(name);
+        System::Path::Rename(System::Path::lpProjects, fromName, name.Trim());
+        if (m_TreeNode)
+        {
+            auto node = ((TElXTreeItem*)m_TreeNode);
+            // TODO: Use messaging to get the UI to update this
+            // Rename the root node that has the project name
+            node->Parent->Parent->Parent->Text = name;
+        }
     }
 }
 //---------------------------------------------------------------------------

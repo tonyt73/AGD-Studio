@@ -29,6 +29,7 @@ void __fastcall TfrmMain::FormCreate(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmMain::FormCloseQuery(TObject *Sender, bool &CanClose)
 {
+    theProjectManager.Save();
     SaveSettings();
     CanClose = true;
 }

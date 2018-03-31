@@ -38,7 +38,7 @@ __fastcall EventDocument::EventDocument()
 {
     m_SubType = "Event";
     m_Folder = "Game\\Events";
-    m_Extension = "evt";
+    m_Extension = "event";
     RegisterProperty("Name", "Details", "The name of the event source code file");
 }
 //---------------------------------------------------------------------------
