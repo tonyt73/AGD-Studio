@@ -8,6 +8,8 @@
 #include "MapDocuments.h"
 #include "DocumentManager.h"
 #include "ProjectManager.h"
+#include "Messaging/Messaging.h"
+#include "Messaging/Event.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -123,6 +125,8 @@ void __fastcall DocumentManager::Save()
         }
         // now save the project file with all the document details included
         projectDocument->Save();
+        // save other files (eg. text files)
+        ::Messaging::Bus::Publish<Event>(Event("project.save"));
     }
 }
 //---------------------------------------------------------------------------
