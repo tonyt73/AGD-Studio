@@ -25,6 +25,11 @@ String __fastcall File::NameWithExtension(const String& file)
     return System::Ioutils::TPath::GetFileName(file);
 }
 //---------------------------------------------------------------------------
+String __fastcall File::Extension(const String& file)
+{
+    return System::Ioutils::TPath::GetExtension(file);
+}
+//---------------------------------------------------------------------------
 String __fastcall File::PathOf(const String& file)
 {
     return System::Ioutils::TPath::GetDirectoryName(file);

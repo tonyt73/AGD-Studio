@@ -11,6 +11,7 @@ public:
     static  bool    __fastcall  Exists(const String& file);
     static  String  __fastcall  NameWithoutExtension(const String& file);
     static  String  __fastcall  NameWithExtension(const String& file);
+    static  String  __fastcall  Extension(const String& file);
     static  String  __fastcall  PathOf(const String& file);
     static  String  __fastcall  ChangeExtension(const String& filename, const String& extension);
     static  String  __fastcall  Combine(const String& path, const String& filename);
