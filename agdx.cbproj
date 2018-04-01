@@ -70,7 +70,7 @@
         <ProjectType>CppVCLApplication</ProjectType>
         <PackageImports>CloudService;DataSnapFireDAC;emsclient;emsclientfiredac;FireDAC;FireDACCommon;FireDACCommonDriver;FireDACIBDriver;FireDACSqliteDriver;inet;RESTBackendComponents;RESTComponents;soapmidas;soaprtl;soapserver;$(PackageImports)</PackageImports>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
-        <AllPackageLibs>rtl.lib;vcl.lib;vclimg.lib;vclactnband.lib;vclx.lib;lmdrtrtlx.lib;lmdrtl.lib;lmdrtinspector.lib;lmdrtdocking.lib;fmx.lib;lmdrtelcore.lib</AllPackageLibs>
+        <AllPackageLibs>rtl.lib;vcl.lib;vclimg.lib;vclactnband.lib;vclx.lib;lmdrtrtlx.lib;lmdrtl.lib;lmdrtinspector.lib;lmdrtdocking.lib;fmx.lib;lmdrtelcore.lib;lmdrtsyntax.lib;lmdrtprint.lib</AllPackageLibs>
         <_TCHARMapping>wchar_t</_TCHARMapping>
         <Multithreaded>true</Multithreaded>
         <Icon_MainIcon>$(BDS)\bin\cbuilder_PROJECTICON.ico</Icon_MainIcon>
@@ -145,11 +145,11 @@
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppEnableHighDPI>true</AppEnableHighDPI>
-        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;fmx.bpi;lmdrtelcore.bpi</LinkPackageImports>
+        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;fmx.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtprint.bpi</LinkPackageImports>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Build>13</VerInfo_Build>
-        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=1.0.6663.13;InternalName=agdx.exe;LegalCopyright=2018 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Programmed by Tony Thompson</VerInfo_Keys>
+        <VerInfo_Build>14</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=1.0.6663.14;InternalName=agdx.exe;LegalCopyright=2018 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Programmed by Tony Thompson</VerInfo_Keys>
         <VerInfo_Release>6663</VerInfo_Release>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <Icon_MainIcon>icon.ico</Icon_MainIcon>
@@ -310,15 +310,15 @@
             <DependentOn>System\Path.h</DependentOn>
             <BuildOrder>18</BuildOrder>
         </CppCompile>
-        <FormResources Include="Frames\fWelcomeDialog.dfm"/>
-        <FormResources Include="Forms\fMain.dfm"/>
         <FormResources Include="Forms\fAbout.dfm"/>
+        <FormResources Include="Forms\fMain.dfm"/>
         <FormResources Include="Frames\fEditorCode.dfm"/>
-        <FormResources Include="Frames\fSelectionPanel.dfm"/>
-        <FormResources Include="Frames\fIDE.dfm"/>
-        <FormResources Include="Frames\fEditorMusic.dfm"/>
-        <FormResources Include="Frames\fEditorMap.dfm"/>
         <FormResources Include="Frames\fEditorImage.dfm"/>
+        <FormResources Include="Frames\fSelectionPanel.dfm"/>
+        <FormResources Include="Frames\fWelcomeDialog.dfm"/>
+        <FormResources Include="Frames\fEditorMap.dfm"/>
+        <FormResources Include="Frames\fEditorMusic.dfm"/>
+        <FormResources Include="Frames\fIDE.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

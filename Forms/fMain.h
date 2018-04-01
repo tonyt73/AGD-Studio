@@ -7,6 +7,10 @@
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
 #include <Vcl.Menus.hpp>
+#include <System.Actions.hpp>
+#include <Vcl.ActnList.hpp>
+#include <Vcl.ActnMan.hpp>
+#include <Vcl.PlatformDefaultStyleActnCtrls.hpp>
 //- STL ---------------------------------------------------------------------
 #include <memory>
 //- APP ---------------------------------------------------------------------
@@ -34,15 +38,14 @@ private:
         fvNone,
         fvWelcomeDialog,
         fvGameIDE,
-        //fvPluginIDE,
     };
 
-    TFormView                               m_FormView;
-    std::unique_ptr<TfrmWelcomeDialog>        m_WelcomeDialog;
-    std::unique_ptr<TfrmIDE>                m_IDEDialog;
+    TFormView                           m_FormView;
+    std::unique_ptr<TfrmWelcomeDialog>  m_WelcomeDialog;
+    std::unique_ptr<TfrmIDE>            m_IDEDialog;
 
-public:        // User declarations
-    __fastcall TfrmMain(TComponent* Owner);
+public:        // User declaration
+            __fastcall TfrmMain(TComponent* Owner);
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfrmMain *frmMain;
