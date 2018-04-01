@@ -7,6 +7,7 @@
 #include "fEditorMap.h"
 #include "ProjectManager.h"
 #include "DocumentEditorFactory.h"
+#include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "LMDDckSite"
@@ -70,17 +71,17 @@ void __fastcall TfrmIDE::actFileExitExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditCopyExecute(TObject *Sender)
 {
-    //
+    ::Messaging::Bus::Publish<Event>(Event("edit.copy"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditCutExecute(TObject *Sender)
 {
-    //
+    ::Messaging::Bus::Publish<Event>(Event("edit.cut"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditPasteExecute(TObject *Sender)
 {
-    //
+    ::Messaging::Bus::Publish<Event>(Event("edit.paste"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileProjectNewExecute(TObject *Sender)
@@ -141,12 +142,12 @@ void __fastcall TfrmIDE::actFileProjectNewExecute(TObject *Sender)
 void __fastcall TfrmIDE::actFileProjectOpenExecute(TObject *Sender)
 {
     theProjectManager.Save();
+    // TODO: Open dialog
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileProjectSaveExecute(TObject *Sender)
 {
     theProjectManager.Save();
-    //
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileProjectCloseExecute(TObject *Sender)
@@ -166,12 +167,12 @@ void __fastcall TfrmIDE::actHelpAboutExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditUndoExecute(TObject *Sender)
 {
-//
+    ::Messaging::Bus::Publish<Event>(Event("edit.undo"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditRedoExecute(TObject *Sender)
 {
-//
+    ::Messaging::Bus::Publish<Event>(Event("edit.redo"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::UpdateProperties(Document* document)

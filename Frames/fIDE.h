@@ -105,7 +105,6 @@ __published:    // IDE-managed Components
     TLMDDockPanel *dpSearchResults;
     TLMDDockPanel *dpBuild;
     TLMDDockPanel *dpTodo;
-    TStatusBar *StatusBar1;
     TToolButton *ToolButton15;
     TLMDDockPanel *dpProperties;
     TLMDSimplePropInspector *lmdProperties;
