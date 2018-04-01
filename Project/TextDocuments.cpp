@@ -8,7 +8,6 @@
 //---------------------------------------------------------------------------
 __fastcall TextDocument::TextDocument()
 : Document()
-, m_Contents("")
 {
     m_Type = "Text";
     m_SubType = "Plain";
@@ -20,17 +19,11 @@ __fastcall TextDocument::TextDocument()
 //---------------------------------------------------------------------------
 void __fastcall TextDocument::Save()
 {
-    System::File::WriteText(File, m_Contents);
 }
 //---------------------------------------------------------------------------
 bool __fastcall TextDocument::Load()
 {
-    if (System::File::Exists(File))
-    {
-        m_Contents = System::File::ReadText(File);
-        return true;
-    }
-    return false;
+    return true;
 }
 //---------------------------------------------------------------------------
 __fastcall EventDocument::EventDocument()

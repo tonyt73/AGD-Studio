@@ -6,8 +6,6 @@
 //---------------------------------------------------------------------------
 class TextDocument : public Document
 {
-private:
-   String               m_Contents;
 public:
                         __fastcall  TextDocument();
 
@@ -15,8 +13,6 @@ public:
 
             void        __fastcall  Save();
             bool        __fastcall  Load();
-
-    __property  String              Contents = { read = m_Contents, write = m_Contents };
 };
 //---------------------------------------------------------------------------
 class EventDocument : public TextDocument
