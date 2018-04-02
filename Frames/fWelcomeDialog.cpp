@@ -78,10 +78,8 @@ void __fastcall TfrmWelcomeDialog::lblImportAGDSnapshotClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::SelectionPanelOnClick(TObject *Sender)
 {
-    // TODO: Implement OpenRecent
     TSelectionPanelFrame* panel = (TSelectionPanelFrame*)Sender;
-    // TODO: supply the right file name
-    theProjectManager.Open(panel->Name);
+    theProjectManager.Open(panel->Path);
     if (FOnDone) FOnDone(this);
 }
 //---------------------------------------------------------------------------
@@ -144,7 +142,10 @@ void __fastcall TfrmWelcomeDialog::UpdateColors()
 void __fastcall TfrmWelcomeDialog::RefreshMRUList()
 {
     m_MostRecentlyUsedItems.clear();
-    for (auto item : theProjectManager.MostRecentlyUsedList) NewMostRecentlyUsedItem(item.Name, item.Path);
+    for (const auto& item : theProjectManager.GetMostRecentlyUsedList())
+    {
+        NewMostRecentlyUsedItem(item.Name, item.Path);
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::NewMostRecentlyUsedItem(const String& name, const String& path)
@@ -162,7 +163,7 @@ void __fastcall TfrmWelcomeDialog::NewMostRecentlyUsedItem(const String& name, c
 void __fastcall TfrmWelcomeDialog::edtNameChange(TObject *Sender)
 {
     auto isEmpty = edtName->Text.Trim() == "";
-    auto file = "AGDX Studio" + System::Path::Separator + edtName->Text;
+    auto file = ApplicationName + System::Path::Separator + edtName->Text;
     auto projectExists = System::File::Exists(file);
     lblFile->Caption = file;
     lblFile->Visible = !isEmpty;

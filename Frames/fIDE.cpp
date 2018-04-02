@@ -52,21 +52,12 @@ void __fastcall TfrmIDE::OnActivate()
     if (Application && Application->MainForm)
     {
         Application->MainForm->Menu = mnuMain;
-        Application->MainForm->Caption = "AGDX Studio";
+        Application->MainForm->Caption = ApplicationName;
     }
     ThemeSettings::ReapplyStyle();
     Color = StyleServices()->GetStyleColor(scGenericGradientBase);
     tvProject->BackGroundColor = StyleServices()->GetStyleColor(scGenericGradientBase);
     dsIDE->Invalidate();
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actFileExitExecute(TObject *Sender)
-{
-    theProjectManager.Save();
-    if (Application && Application->MainForm)
-    {
-        Application->MainForm->Close();
-    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditCopyExecute(TObject *Sender)
@@ -84,66 +75,61 @@ void __fastcall TfrmIDE::actEditPasteExecute(TObject *Sender)
     ::Messaging::Bus::Publish<Event>(Event("edit.paste"));
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actFileProjectNewExecute(TObject *Sender)
-{
-    theProjectManager.Save();
-    static auto docNo = 0;
-    auto dp = new TLMDDockPanel(this);
-    Document* doc = nullptr;
-    switch (docNo % 4)
-    {
-        case 0:
-        {
-            auto name = "new sprite " + IntToStr(docNo++);
-            doc = theProjectManager.Add("Image", "Sprite", name);
-            dp->Tag = (int)doc;
-            doc->DockPanel = dp;
-            UpdateProperties(doc);
-            dp->Caption = name;
-            break;
-        }
-        case 1:
-        {
-            auto name = "new event " + IntToStr(docNo++);
-            doc = theProjectManager.Add("Text", "Event", name);
-            dp->Tag = (int)doc;
-            doc->DockPanel = dp;
-            UpdateProperties(doc);
-            dp->Caption = name;
-            break;
-        }
-        case 2:
-        {
-            auto name = "new tile " + IntToStr(docNo++);
-            doc = theProjectManager.Add("Image", "Tile", name);
-            dp->Tag = (int)doc;
-            doc->DockPanel = dp;
-            UpdateProperties(doc);
-            dp->Caption = name;
-            break;
-        }
-        case 3:
-        {
-            auto name = "new object " + IntToStr(docNo++);
-            doc = theProjectManager.Add("Image", "Object", name);
-            dp->Tag = (int)doc;
-            doc->DockPanel = dp;
-            UpdateProperties(doc);
-            dp->Caption = name;
-            break;
-        }
-    }
-    DocumentEditorFactory::Create(doc, dp);
-    dp->ClientKind = dkDocument;
-    dsIDE->DockControl(dp, dsIDE->SpaceZone);
-    dp->OnClose = OnDocumentClose;
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actFileProjectOpenExecute(TObject *Sender)
-{
-    theProjectManager.Save();
-    // TODO: Open dialog
-}
+//void __fastcall TfrmIDE::actFileProjectNewExecute(TObject *Sender)
+//{
+//    theProjectManager.Save();
+//    the
+//    static auto docNo = 0;
+//    auto dp = new TLMDDockPanel(this);
+//    Document* doc = nullptr;
+//    switch (docNo % 4)
+//    {
+//        case 0:
+//        {
+//            auto name = "new sprite " + IntToStr(docNo++);
+//            doc = theProjectManager.Add("Image", "Sprite", name);
+//            dp->Tag = (int)doc;
+//            doc->DockPanel = dp;
+//            UpdateProperties(doc);
+//            dp->Caption = name;
+//            break;
+//        }
+//        case 1:
+//        {
+//            auto name = "new event " + IntToStr(docNo++);
+//            doc = theProjectManager.Add("Text", "Event", name);
+//            dp->Tag = (int)doc;
+//            doc->DockPanel = dp;
+//            UpdateProperties(doc);
+//            dp->Caption = name;
+//            break;
+//        }
+//        case 2:
+//        {
+//            auto name = "new tile " + IntToStr(docNo++);
+//            doc = theProjectManager.Add("Image", "Tile", name);
+//            dp->Tag = (int)doc;
+//            doc->DockPanel = dp;
+//            UpdateProperties(doc);
+//            dp->Caption = name;
+//            break;
+//        }
+//        case 3:
+//        {
+//            auto name = "new object " + IntToStr(docNo++);
+//            doc = theProjectManager.Add("Image", "Object", name);
+//            dp->Tag = (int)doc;
+//            doc->DockPanel = dp;
+//            UpdateProperties(doc);
+//            dp->Caption = name;
+//            break;
+//        }
+//    }
+//    DocumentEditorFactory::Create(doc, dp);
+//    dp->ClientKind = dkDocument;
+//    dsIDE->DockControl(dp, dsIDE->SpaceZone);
+//    dp->OnClose = OnDocumentClose;
+//}
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileProjectSaveExecute(TObject *Sender)
 {
@@ -284,6 +270,11 @@ void __fastcall TfrmIDE::tvProjectDblClick(TObject *Sender)
             }
         }
     }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actFileProjectNewExecute(TObject *Sender)
+{
+    // TODO: Show create new asset dialog
 }
 //---------------------------------------------------------------------------
 

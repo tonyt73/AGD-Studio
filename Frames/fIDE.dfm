@@ -9,9 +9,9 @@ object frmIDE: TfrmIDE
   TabOrder = 0
   object dsIDE: TLMDDockSite
     Left = 0
-    Top = 59
+    Top = 32
     Width = 800
-    Height = 541
+    Height = 568
     Manager = DockManager
     Align = alClient
     TabOrder = 0
@@ -23,13 +23,13 @@ object frmIDE: TfrmIDE
       3D2253454C465F53495445223E0D0A09093C7A6F6E65206B696E643D22484F52
       5A223E0D0A0909093C7A6F6E65206B696E643D2256455254222073697A653D22
       35333322206473697A653D22302E3637393834363933383737353531223E0D0A
-      090909093C7A6F6E65206B696E643D2254414253222073697A653D2233343722
-      206473697A653D22302E36363039353233383039353233383122206973737061
+      090909093C7A6F6E65206B696E643D2254414253222073697A653D2233373422
+      206473697A653D22302E36373735333632333138383430353822206973737061
       63653D2231223E0D0A09090909093C7A6F6E65206B696E643D2250414E454C22
       2069643D224C4D44446F636B50616E656C32222076697369626C653D2230222F
       3E0D0A090909093C2F7A6F6E653E0D0A090909093C7A6F6E65206B696E643D22
       5441425322206163746976657461623D2230222073697A653D22313738222064
-      73697A653D22302E333339303437363139303437363139223E0D0A0909090909
+      73697A653D22302E333232343633373638313135393432223E0D0A0909090909
       3C7A6F6E65206B696E643D2250414E454C222069643D2264704275696C642220
       76697369626C653D2231222F3E0D0A09090909093C7A6F6E65206B696E643D22
       50414E454C222069643D2264704D65737361676573222076697369626C653D22
@@ -41,15 +41,15 @@ object frmIDE: TfrmIDE
       54222073697A653D2232353122206473697A653D22302E333230313533303631
       3232343439223E0D0A090909093C7A6F6E65206B696E643D2250414E454C2220
       69643D22647050726F6A656374222076697369626C653D2231222073697A653D
-      2232363122206473697A653D22302E3439373739303836383932343839222F3E
+      2232373522206473697A653D22302E3439373739303836383932343839222F3E
       0D0A090909093C7A6F6E65206B696E643D2250414E454C222069643D22647050
-      726F70657274696573222076697369626C653D2231222073697A653D22323634
+      726F70657274696573222076697369626C653D2231222073697A653D22323737
       22206473697A653D22302E3530323230393133313037353131222F3E0D0A0909
       093C2F7A6F6E653E0D0A09093C2F7A6F6E653E0D0A093C2F736974653E0D0A3C
       2F736974656C6973743E}
     object dpBuild: TLMDDockPanel
       Left = 6
-      Top = 357
+      Top = 384
       Width = 533
       Height = 158
       ParentBackground = False
@@ -58,7 +58,7 @@ object frmIDE: TfrmIDE
     end
     object dpMessages: TLMDDockPanel
       Left = 6
-      Top = 357
+      Top = 384
       Width = 533
       Height = 158
       ParentBackground = False
@@ -69,7 +69,7 @@ object frmIDE: TfrmIDE
       Left = 543
       Top = 6
       Width = 251
-      Height = 261
+      Height = 275
       Buttons = [pbPin, pbMaximize]
       ParentBackground = False
       TabOrder = 6
@@ -78,7 +78,7 @@ object frmIDE: TfrmIDE
         Left = 0
         Top = 21
         Width = 251
-        Height = 240
+        Height = 254
         Align = alClient
         BevelOuter = bvNone
         Padding.Left = 1
@@ -163,7 +163,7 @@ object frmIDE: TfrmIDE
           Left = 1
           Top = 27
           Width = 249
-          Height = 212
+          Height = 226
           Hint = ''
           PlusPosition = vaMiddle
           BorderColorWindow = clWindow
@@ -207,16 +207,16 @@ object frmIDE: TfrmIDE
     end
     object dpProperties: TLMDDockPanel
       Left = 543
-      Top = 271
+      Top = 285
       Width = 251
-      Height = 264
+      Height = 277
       Buttons = [pbPin, pbMaximize]
       ParentBackground = False
       TabOrder = 10
       Caption = 'Properties'
       object Splitter1: TSplitter
         Left = 0
-        Top = 221
+        Top = 234
         Width = 251
         Height = 3
         Cursor = crVSplit
@@ -231,7 +231,7 @@ object frmIDE: TfrmIDE
         Left = 0
         Top = 21
         Width = 251
-        Height = 200
+        Height = 213
         PropKinds = [pkProperties, pkReadOnly]
         SortType = stNone
         ArrangeKind = akByCategory
@@ -254,7 +254,7 @@ object frmIDE: TfrmIDE
       end
       object Panel2: TPanel
         Left = 0
-        Top = 224
+        Top = 237
         Width = 251
         Height = 40
         Align = alBottom
@@ -279,7 +279,7 @@ object frmIDE: TfrmIDE
     end
     object dpSearchResults: TLMDDockPanel
       Left = 6
-      Top = 357
+      Top = 384
       Width = 533
       Height = 158
       ParentBackground = False
@@ -288,7 +288,7 @@ object frmIDE: TfrmIDE
     end
     object dpTodo: TLMDDockPanel
       Left = 6
-      Top = 357
+      Top = 384
       Width = 533
       Height = 158
       ParentBackground = False
@@ -299,25 +299,12 @@ object frmIDE: TfrmIDE
       Left = 6
       Top = 6
       Width = 533
-      Height = 347
+      Height = 374
       PanelVisible = False
       ParentBackground = False
       TabOrder = 4
       Caption = 'dpEditors'
     end
-  end
-  object panNavigationBar: TPanel
-    Left = 0
-    Top = 32
-    Width = 800
-    Height = 27
-    Align = alTop
-    Alignment = taLeftJustify
-    BevelOuter = bvNone
-    Caption = '          Navigator Bar'
-    TabOrder = 1
-    Visible = False
-    ExplicitTop = 29
   end
   object tbrMain: TToolBar
     Left = 0
@@ -330,7 +317,7 @@ object frmIDE: TfrmIDE
     EdgeInner = esNone
     EdgeOuter = esNone
     Images = imgIconsActive
-    TabOrder = 2
+    TabOrder = 1
     Transparent = False
     StyleElements = [seFont, seClient]
     Wrapable = False
@@ -338,25 +325,18 @@ object frmIDE: TfrmIDE
       Left = 0
       Top = 0
       Action = actFileProjectNew
-      ImageIndex = 2
-    end
-    object ToolButton2: TToolButton
-      Left = 32
-      Top = 0
-      Action = actFileProjectOpen
       ParentShowHint = False
       ShowHint = True
     end
     object ToolButton3: TToolButton
-      Left = 64
+      Left = 32
       Top = 0
       Action = actFileProjectSave
-      ImageIndex = 6
       ParentShowHint = False
       ShowHint = True
     end
     object ToolButton1: TToolButton
-      Left = 96
+      Left = 64
       Top = 0
       Width = 8
       Caption = 'ToolButton1'
@@ -364,21 +344,21 @@ object frmIDE: TfrmIDE
       Style = tbsSeparator
     end
     object ToolButton4: TToolButton
-      Left = 104
+      Left = 72
       Top = 0
       Action = actEditUndo
       ParentShowHint = False
       ShowHint = True
     end
     object ToolButton5: TToolButton
-      Left = 136
+      Left = 104
       Top = 0
       Action = actEditRedo
       ParentShowHint = False
       ShowHint = True
     end
     object ToolButton6: TToolButton
-      Left = 168
+      Left = 136
       Top = 0
       Width = 8
       Caption = 'ToolButton6'
@@ -386,28 +366,28 @@ object frmIDE: TfrmIDE
       Style = tbsSeparator
     end
     object ToolButton7: TToolButton
-      Left = 176
+      Left = 144
       Top = 0
       Action = actEditCopy
       ParentShowHint = False
       ShowHint = True
     end
     object ToolButton8: TToolButton
-      Left = 208
+      Left = 176
       Top = 0
       Action = actEditCut
       ParentShowHint = False
       ShowHint = True
     end
     object ToolButton9: TToolButton
-      Left = 240
+      Left = 208
       Top = 0
       Action = actEditPaste
       ParentShowHint = False
       ShowHint = True
     end
     object ToolButton11: TToolButton
-      Left = 272
+      Left = 240
       Top = 0
       Width = 8
       Caption = 'ToolButton11'
@@ -415,58 +395,36 @@ object frmIDE: TfrmIDE
       Style = tbsSeparator
     end
     object ToolButton10: TToolButton
-      Left = 280
+      Left = 248
       Top = 0
       Action = actEditZoomIn
       ParentShowHint = False
       ShowHint = True
     end
     object ToolButton12: TToolButton
-      Left = 312
+      Left = 280
       Top = 0
       Action = actEditZoomOut
       ParentShowHint = False
       ShowHint = True
     end
     object ToolButton13: TToolButton
-      Left = 344
+      Left = 312
       Top = 0
       Action = actEditZoomReset
       ParentShowHint = False
       ShowHint = True
-    end
-    object ToolButton14: TToolButton
-      Left = 376
-      Top = 0
-      Width = 8
-      Caption = 'ToolButton14'
-      ImageIndex = 19
-      Style = tbsSeparator
     end
   end
   object actActions: TActionList
     Images = imgIconsActive
     Left = 92
     Top = 88
-    object actFileProjectNew: TAction
-      Category = 'File'
-      Caption = '&New'
-      Hint = 'Start a new project'
-      ShortCut = 16462
-      OnExecute = actFileProjectNewExecute
-    end
-    object actFileProjectOpen: TAction
-      Category = 'File'
-      Caption = '&Open'
-      Hint = 'Open an existing project'
-      ImageIndex = 12
-      ShortCut = 16463
-      OnExecute = actFileProjectOpenExecute
-    end
     object actFileProjectSave: TAction
       Category = 'File'
       Caption = '&Save'
       Hint = 'Save project'
+      ImageIndex = 6
       ShortCut = 16467
       OnExecute = actFileProjectSaveExecute
     end
@@ -474,14 +432,9 @@ object frmIDE: TfrmIDE
       Category = 'File'
       Caption = '&Close'
       Hint = 'Close project'
+      ImageIndex = 3
       ShortCut = 16499
       OnExecute = actFileProjectCloseExecute
-    end
-    object actFileExit: TAction
-      Category = 'File'
-      Caption = 'E&xit'
-      ShortCut = 32883
-      OnExecute = actFileExitExecute
     end
     object actEditCopy: TAction
       Category = 'Edit'
@@ -504,13 +457,13 @@ object frmIDE: TfrmIDE
       Category = 'Edit'
       Caption = '&Paste'
       Hint = 'Paste'
-      ImageIndex = 7
+      ImageIndex = 10
       ShortCut = 16470
       OnExecute = actEditPasteExecute
     end
     object actHelp: TAction
       Category = 'Help'
-      Caption = 'Retro Studio &Help'
+      Caption = '&Help'
       ShortCut = 112
     end
     object actHelpGettingStarted: TAction
@@ -569,6 +522,14 @@ object frmIDE: TfrmIDE
       Hint = 'Zoom Reset'
       ImageIndex = 18
     end
+    object actFileProjectNew: TAction
+      Category = 'File'
+      Caption = 'New Asset...'
+      Hint = 'Create a new game asset'
+      ImageIndex = 2
+      ShortCut = 16462
+      OnExecute = actFileProjectNewExecute
+    end
   end
   object imgIconsActive: TImageList
     ColorDepth = cd32Bit
@@ -576,7 +537,7 @@ object frmIDE: TfrmIDE
     Left = 20
     Top = 140
     Bitmap = {
-      494C010115001800040110001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010115001800080110001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1381,23 +1342,17 @@ object frmIDE: TfrmIDE
     Top = 88
     object mnuFile: TMenuItem
       Caption = '&File'
-      object mnuFileNew: TMenuItem
+      object NewAsset1: TMenuItem
         Action = actFileProjectNew
       end
-      object mnuFileOpen: TMenuItem
-        Action = actFileProjectOpen
+      object N4: TMenuItem
+        Caption = '-'
       end
       object mnuFileSave: TMenuItem
         Action = actFileProjectSave
       end
       object mnuFileClose: TMenuItem
         Action = actFileProjectClose
-      end
-      object mnuLine1: TMenuItem
-        Caption = '-'
-      end
-      object mnuFileExit: TMenuItem
-        Action = actFileExit
       end
     end
     object mnuEdit: TMenuItem
@@ -1421,14 +1376,8 @@ object frmIDE: TfrmIDE
         Action = actEditPaste
       end
     end
-    object mnuView: TMenuItem
-      Caption = '&View'
-    end
     object mnuBuild: TMenuItem
       Caption = '&Build'
-    end
-    object mnuWindow: TMenuItem
-      Caption = '&Window'
     end
     object Help1: TMenuItem
       Caption = '&Help'
@@ -1464,7 +1413,7 @@ object frmIDE: TfrmIDE
     Left = 92
     Top = 140
     Bitmap = {
-      494C010115003000D40010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010115003000D80010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2273,7 +2222,7 @@ object frmIDE: TfrmIDE
     Left = 24
     Top = 200
     Bitmap = {
-      494C0101050008005C0010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010105000800600010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000080827BFF80817DFF8080
       80FF80817DFF808080FF00000000000000001B415BB23D93CFFF3D91CEFF3D92
@@ -2549,7 +2498,7 @@ object frmIDE: TfrmIDE
     Left = 102
     Top = 200
     Bitmap = {
-      494C010117003000240210001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010117003000280210001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000023000000330000
       0033000000330000003300000033000000330000003300000033000000330000

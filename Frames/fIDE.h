@@ -34,30 +34,21 @@ class TfrmIDE : public TFrame
 __published:    // IDE-managed Components
     TLMDDockSite *dsIDE;
     TActionList *actActions;
-    TAction *actFileProjectNew;
-    TAction *actFileProjectOpen;
     TAction *actFileProjectSave;
     TAction *actFileProjectClose;
-    TAction *actFileExit;
     TAction *actEditCopy;
     TAction *actEditCut;
     TAction *actEditPaste;
     TImageList *imgIconsActive;
     TMainMenu *mnuMain;
     TMenuItem *mnuFile;
-    TMenuItem *mnuFileNew;
-    TMenuItem *mnuFileOpen;
     TMenuItem *mnuFileSave;
     TMenuItem *mnuFileClose;
-    TMenuItem *mnuLine1;
-    TMenuItem *mnuFileExit;
     TMenuItem *mnuEdit;
     TMenuItem *mnuEditCopy;
     TMenuItem *mnuEditCut;
     TMenuItem *mnuEditPaste;
-    TMenuItem *mnuView;
     TMenuItem *mnuBuild;
-    TMenuItem *mnuWindow;
     TMenuItem *Help1;
     TAction *actHelp;
     TAction *actHelpGettingStarted;
@@ -78,9 +69,7 @@ __published:    // IDE-managed Components
     TMenuItem *N3;
     TMenuItem *mnuEditUndo;
     TMenuItem *mnuEditRedo;
-    TPanel *panNavigationBar;
     TToolBar *tbrMain;
-    TToolButton *ToolButton2;
     TToolButton *ToolButton3;
     TToolButton *ToolButton1;
     TToolButton *ToolButton4;
@@ -96,7 +85,6 @@ __published:    // IDE-managed Components
     TAction *actEditZoomReset;
     TToolButton *ToolButton12;
     TToolButton *ToolButton13;
-    TToolButton *ToolButton14;
     TImageList *imgIconsDisabled;
     TLMDDockPanel *LMDDockPanel2;
     TLMDDockManager *DockManager;
@@ -122,12 +110,12 @@ __published:    // IDE-managed Components
     TLabel *lblPropertyInfo;
     TSplitter *Splitter1;
     TElXTree *tvProject;
-    void __fastcall actFileExitExecute(TObject *Sender);
+    TAction *actFileProjectNew;
+    TMenuItem *NewAsset1;
+    TMenuItem *N4;
     void __fastcall actEditCopyExecute(TObject *Sender);
     void __fastcall actEditCutExecute(TObject *Sender);
     void __fastcall actEditPasteExecute(TObject *Sender);
-    void __fastcall actFileProjectNewExecute(TObject *Sender);
-    void __fastcall actFileProjectOpenExecute(TObject *Sender);
     void __fastcall actFileProjectCloseExecute(TObject *Sender);
     void __fastcall actHelpAboutExecute(TObject *Sender);
     void __fastcall actEditUndoExecute(TObject *Sender);
@@ -141,6 +129,7 @@ __published:    // IDE-managed Components
     void __fastcall tvProjectItemSelectedChange(TObject *Sender, TElXTreeItem *Item);
     void __fastcall tvProjectDblClick(TObject *Sender);
     void __fastcall actFileProjectSaveExecute(TObject *Sender);
+    void __fastcall actFileProjectNewExecute(TObject *Sender);
 
 private:    // User declarations
     void __fastcall UpdateProperties(Document* document);

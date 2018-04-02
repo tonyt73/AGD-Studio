@@ -19,7 +19,7 @@ object SelectionPanelFrame: TSelectionPanelFrame
   object panProjectInfo: TPanel
     Left = 0
     Top = 0
-    Width = 440
+    Width = 431
     Height = 54
     Align = alClient
     BevelOuter = bvNone
@@ -31,18 +31,18 @@ object SelectionPanelFrame: TSelectionPanelFrame
     StyleElements = [seFont, seBorder]
     OnClick = lblProjectNameClick
     OnMouseMove = panProjectInfoMouseMove
-    ExplicitWidth = 431
     DesignSize = (
       431
       54)
     object lblProjectPath: TLabel
       Left = 19
       Top = 33
-      Width = 388
+      Width = 406
       Height = 17
       Anchors = [akLeft, akTop, akRight]
       AutoSize = False
       Caption = 'Documents\Retro Studio\Big Sprite Demo'
+      EllipsisPosition = epPathEllipsis
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -52,13 +52,12 @@ object SelectionPanelFrame: TSelectionPanelFrame
       ParentFont = False
       OnClick = lblProjectNameClick
       OnMouseMove = panProjectInfoMouseMove
-      ExplicitWidth = 406
     end
     object lblProjectName: TLabel
       AlignWithMargins = True
       Left = 19
       Top = 4
-      Width = 388
+      Width = 379
       Height = 26
       Anchors = [akLeft, akTop, akRight]
       AutoSize = False
@@ -93,7 +92,9 @@ object SelectionPanelFrame: TSelectionPanelFrame
       Top = 6
       Width = 16
       Height = 16
+      Hint = 'Remove the item from the list'
       AutoSize = True
+      ParentShowHint = False
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
         001008060000001FF3FF610000001974455874536F6674776172650041646F62
@@ -110,6 +111,7 @@ object SelectionPanelFrame: TSelectionPanelFrame
         B00003B9EE0C36798C74606167035670E2D01194D086C50EBA3CD67400CD2CC8
         9A51A218591E6B3A80D2E89AB1CAC30DA004000057550FF07637089B00000000
         49454E44AE426082}
+      ShowHint = True
       OnClick = imgRemoveClick
     end
   end

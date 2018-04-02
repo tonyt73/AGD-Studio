@@ -19,10 +19,6 @@ object frmEditorCode: TfrmEditorCode
     Font.Style = []
     CustomKeyBindings = <>
     OnStatusChanged = evEditorStatusChanged
-    ExplicitLeft = 256
-    ExplicitTop = 240
-    ExplicitWidth = 185
-    ExplicitHeight = 89
     GutterBarsEmpty = False
   end
   object sbStatus: TStatusBar
@@ -55,8 +51,6 @@ object frmEditorCode: TfrmEditorCode
       item
         Width = 50
       end>
-    ExplicitTop = 627
-    ExplicitWidth = 783
   end
   object lmdDocument: TLMDEditDocument
     Lines.Strings = (
@@ -3769,7 +3763,7 @@ object frmEditorCode: TfrmEditorCode
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    Left = 480
-    Top = 162
+    Left = 280
+    Top = 50
   end
 end

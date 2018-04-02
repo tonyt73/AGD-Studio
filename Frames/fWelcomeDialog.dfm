@@ -1,18 +1,20 @@
 object frmWelcomeDialog: TfrmWelcomeDialog
   Left = 0
   Top = 0
-  Width = 793
+  Width = 862
   Height = 432
   TabOrder = 0
   object panMain: TPanel
-    Left = 293
+    Left = 361
     Top = 0
-    Width = 500
+    Width = 501
     Height = 432
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     StyleElements = [seFont, seBorder]
+    ExplicitLeft = 293
+    ExplicitWidth = 500
     object imgStartNewProject: TImage
       Left = 110
       Top = 228
@@ -74,7 +76,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     object imgLogo: TImage
       Left = 0
       Top = 0
-      Width = 500
+      Width = 501
       Height = 121
       Align = alTop
       Center = True
@@ -7232,7 +7234,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     object lblTitle: TLabel
       Left = 0
       Top = 121
-      Width = 500
+      Width = 501
       Height = 56
       Align = alTop
       Alignment = taCenter
@@ -7247,11 +7249,12 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       ParentFont = False
       StyleElements = [seClient, seBorder]
       ExplicitTop = 115
+      ExplicitWidth = 500
     end
     object lblVersion: TLabel
       Left = 0
       Top = 177
-      Width = 500
+      Width = 501
       Height = 23
       Align = alTop
       Alignment = taCenter
@@ -7644,7 +7647,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
   object panRecentProjects: TPanel
     Left = 0
     Top = 0
-    Width = 293
+    Width = 361
     Height = 432
     Align = alLeft
     BevelOuter = bvNone

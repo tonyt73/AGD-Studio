@@ -25,12 +25,14 @@
 #include <vector>
 #include <map>
 // non std stl
-#include "system/make_unique.h"
+//#include "system/make_unique.h"
 //---------------------------------------------------------------------------
 // APP
 #include "Settings.h"
 #include "ThemeSettings.h"
 #pragma hdrstop
+
+const String ApplicationName = "AGDX Studio";
 
 #endif // pch_h
 
