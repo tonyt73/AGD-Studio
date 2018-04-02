@@ -113,6 +113,10 @@ __published:    // IDE-managed Components
     TAction *actFileProjectNew;
     TMenuItem *NewAsset1;
     TMenuItem *N4;
+    TAction *actEditFind;
+    TAction *actEditFindNext;
+    TAction *actEditReplace;
+    TAction *actEditFindPrevious;
     void __fastcall actEditCopyExecute(TObject *Sender);
     void __fastcall actEditCutExecute(TObject *Sender);
     void __fastcall actEditPasteExecute(TObject *Sender);
@@ -130,6 +134,10 @@ __published:    // IDE-managed Components
     void __fastcall tvProjectDblClick(TObject *Sender);
     void __fastcall actFileProjectSaveExecute(TObject *Sender);
     void __fastcall actFileProjectNewExecute(TObject *Sender);
+    void __fastcall actEditFindExecute(TObject *Sender);
+    void __fastcall actEditFindNextExecute(TObject *Sender);
+    void __fastcall actEditReplaceExecute(TObject *Sender);
+    void __fastcall actEditFindPreviousExecute(TObject *Sender);
 
 private:    // User declarations
     void __fastcall UpdateProperties(Document* document);

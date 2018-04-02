@@ -15,8 +15,8 @@ object frmIDE: TfrmIDE
     Manager = DockManager
     Align = alClient
     TabOrder = 0
-    ExplicitTop = 56
-    ExplicitHeight = 544
+    ExplicitTop = 29
+    ExplicitHeight = 571
     Layout = {
       EFBBBF3C3F786D6C2076657273696F6E3D22312E302220656E636F64696E673D
       227574662D38223F3E0D0A3C736974656C6973743E0D0A093C73697465206964
@@ -86,7 +86,7 @@ object frmIDE: TfrmIDE
         Padding.Right = 1
         Padding.Bottom = 1
         TabOrder = 0
-        ExplicitHeight = 242
+        ExplicitHeight = 255
         object tbrProject: TToolBar
           Left = 1
           Top = 1
@@ -201,7 +201,7 @@ object frmIDE: TfrmIDE
           FixedBottomRowNum = 0
           FixedColNum = 1
           GutterWidth = 0
-          ExplicitHeight = 214
+          ExplicitHeight = 227
         end
       end
     end
@@ -250,7 +250,7 @@ object frmIDE: TfrmIDE
         Constraints.MinWidth = 200
         TabOrder = 0
         OnClick = lmdPropertiesClick
-        ExplicitHeight = 201
+        ExplicitHeight = 215
       end
       object Panel2: TPanel
         Left = 0
@@ -264,7 +264,7 @@ object frmIDE: TfrmIDE
         Padding.Right = 3
         Padding.Bottom = 3
         TabOrder = 1
-        ExplicitTop = 225
+        ExplicitTop = 239
         object lblPropertyInfo: TLabel
           Left = 4
           Top = 4
@@ -530,6 +530,32 @@ object frmIDE: TfrmIDE
       ShortCut = 16462
       OnExecute = actFileProjectNewExecute
     end
+    object actEditFind: TAction
+      Category = 'Edit'
+      Caption = 'Find...'
+      Hint = 'Search the active document'
+      ShortCut = 16454
+      OnExecute = actEditFindExecute
+    end
+    object actEditFindNext: TAction
+      Category = 'Edit'
+      Caption = 'Find Next'
+      Hint = 'Search the document for the next match'
+      ShortCut = 114
+      OnExecute = actEditFindNextExecute
+    end
+    object actEditReplace: TAction
+      Category = 'Edit'
+      Caption = 'Replace'
+      ShortCut = 16456
+      OnExecute = actEditReplaceExecute
+    end
+    object actEditFindPrevious: TAction
+      Category = 'Edit'
+      Caption = 'Find Previous'
+      ShortCut = 8306
+      OnExecute = actEditFindPreviousExecute
+    end
   end
   object imgIconsActive: TImageList
     ColorDepth = cd32Bit
@@ -537,7 +563,7 @@ object frmIDE: TfrmIDE
     Left = 20
     Top = 140
     Bitmap = {
-      494C010115001800080110001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101150018000C0110001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1413,7 +1439,7 @@ object frmIDE: TfrmIDE
     Left = 92
     Top = 140
     Bitmap = {
-      494C010115003000D80010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010115003000DC0010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2222,7 +2248,7 @@ object frmIDE: TfrmIDE
     Left = 24
     Top = 200
     Bitmap = {
-      494C010105000800600010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010105000800640010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000080827BFF80817DFF8080
       80FF80817DFF808080FF00000000000000001B415BB23D93CFFF3D91CEFF3D92
@@ -2498,7 +2524,7 @@ object frmIDE: TfrmIDE
     Left = 102
     Top = 200
     Bitmap = {
-      494C010117003000280210001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101170030002C0210001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000023000000330000
       0033000000330000003300000033000000330000003300000033000000330000

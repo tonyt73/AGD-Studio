@@ -13,9 +13,10 @@
 #include <Vcl.StdActns.hpp>
 #include <Vcl.Dialogs.hpp>
 #include <System.Actions.hpp>
-#include "LMDDckSite.hpp"
-#include "LMDSedDocument.hpp"
-#include "LMDSedView.hpp"
+#include <LMDDckSite.hpp>
+#include <LMDSedDocument.hpp>
+#include <LMDSedView.hpp>
+#include <LMDSedFindDialog.hpp>
 #include "Project/Document.h"
 #include "Messaging/Event.h"
 //---------------------------------------------------------------------------
@@ -48,7 +49,6 @@ __published:    // IDE-managed Components
     TAction *actToggleShowSpaces;
     TAction *actToggleAutoIndent;
     TAction *actGoToLine;
-    TAction *actToggleSplit;
     TAction *actFoldTops;
     TAction *actUnfoldTops;
     TAction *actFoldAll;
@@ -84,6 +84,7 @@ __published:    // IDE-managed Components
     TAction *actToggleShowRuler;
     TAction *actFont;
     TFontDialog *FontDialog;
+    TAction *actSearchPrevious;
     void __fastcall actUndoExecute(TObject *Sender);
     void __fastcall actRedoExecute(TObject *Sender);
     void __fastcall actGoToLineExecute(TObject *Sender);
@@ -103,10 +104,12 @@ __published:    // IDE-managed Components
     void __fastcall actUndoUpdate(TObject *Sender);
     void __fastcall evEditorStatusChanged(TLMDCustomEditView *AView, TLMDViewStatusChanges AChanges);
     void __fastcall actSaveFileExecute(TObject *Sender);
+    void __fastcall actSearchPreviousExecute(TObject *Sender);
 
 private:    // User declarations
     Document*                   m_Document;
     TLMDEditView*               m_ActiveEdit;
+    TLMDEditSearchDlgOptions    m_SearchOptions;
 
     std::map<String, TAction*>  m_ActionMap;
 

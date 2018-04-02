@@ -75,6 +75,26 @@ void __fastcall TfrmIDE::actEditPasteExecute(TObject *Sender)
     ::Messaging::Bus::Publish<Event>(Event("edit.paste"));
 }
 //---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actEditFindExecute(TObject *Sender)
+{
+    ::Messaging::Bus::Publish<Event>(Event("edit.find"));
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actEditFindNextExecute(TObject *Sender)
+{
+    ::Messaging::Bus::Publish<Event>(Event("edit.find.next"));
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actEditFindPreviousExecute(TObject *Sender)
+{
+    ::Messaging::Bus::Publish<Event>(Event("edit.find.prev"));
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actEditReplaceExecute(TObject *Sender)
+{
+    ::Messaging::Bus::Publish<Event>(Event("edit.replace"));
+}
+//---------------------------------------------------------------------------
 //void __fastcall TfrmIDE::actFileProjectNewExecute(TObject *Sender)
 //{
 //    theProjectManager.Save();

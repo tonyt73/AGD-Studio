@@ -41,6 +41,12 @@ __fastcall TfrmEditorCode::TfrmEditorCode(TComponent* Owner)
 : TFrame(Owner)
 {
 	::Messaging::Bus::Subscribe<Event>(OnEvent);
+    m_SearchOptions.Searches.set_length(0);
+    m_SearchOptions.Options.Clear();
+    m_SearchOptions.Options << soConfirmReplace;
+    m_SearchOptions.Direction = sdForward;
+    m_SearchOptions.ReplaceAllBounds = rbAllText;
+    m_SearchOptions.Start = ssCursor;
 }
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorCode::~TfrmEditorCode()
@@ -55,6 +61,10 @@ void __fastcall TfrmEditorCode::SetDocument(Document* document)
     m_ActionMap["edit.paste"] = actPaste;
     m_ActionMap["edit.undo"] = actUndo;
     m_ActionMap["edit.redo"] = actRedo;
+    m_ActionMap["edit.find"] = actSearch;
+    m_ActionMap["edit.find.next"] = actSearchNext;
+    m_ActionMap["edit.find.prev"] = actSearchPrevious;
+    m_ActionMap["edit.replace"] = actReplace;
     m_ActionMap["project.save"] = actSaveFile;
 
     m_Document = document;
@@ -92,42 +102,35 @@ void __fastcall TfrmEditorCode::actRedoExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorCode::actGoToLineExecute(TObject *Sender)
 {
-  int Line = -1;
-  int res = LMDEditAskGoToLine(evEditor->Document->LinesCount, Line);
-  if (res==mrOk)
-    evEditor->GotoPhysLine(Line);
+    if (evEditor->Focused())
+    {
+        int Line = -1;
+        if (mrOk == LMDEditAskGoToLine(evEditor->Document->LinesCount, Line))
+        {
+            evEditor->GotoPhysLine(Line);
+        }
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorCode::actSearchExecute(TObject *Sender)
 {
-//  if (LMDEditExecFindDialog("Search text", evEditor, FSearchOptions)==srNotFound)
-//    ShowSearchNotFound();
+    if (evEditor->Focused() && LMDEditExecFindDialog("Search text", evEditor, m_SearchOptions) == srNotFound)
+    {
+        //ShowSearchNotFound();
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorCode::actReplaceExecute(TObject *Sender)
 {
-//  if (evEditor->SelAvail)
-//    FSearchOptions.ReplaceAllBounds = rbSelection;
-//  else
-//    FSearchOptions.ReplaceAllBounds = rbAllText;
-//
-//  TLMDEditSearchResult Res = LMDEditExecReplaceDialog("Replace text", evEditor, FSearchOptions);
-//
-//  if (Res==srNotFound)
-//  {
-//    ShowSearchNotFound();
-//  }
-//  else if ((Res==srFound) &&
-//            (FSearchOptions.WasReplaceAllChosen) &&
-//            (FSearchOptions.LastNumberOfReplacements>0))
-//  {
-//    TMsgDlgButtons btns;
-//    btns << mbOK;
-//
-//    MessageDlg(Format("Ok. Number of replacements: %d",
-//                      ARRAYOFCONST(( FSearchOptions.LastNumberOfReplacements ))),
-//               mtInformation, btns, -1);
-//  }
+    m_SearchOptions.ReplaceAllBounds = evEditor->SelAvail ? rbSelection : rbAllText;
+    auto Res = LMDEditExecReplaceDialog("Replace text", evEditor, m_SearchOptions);
+
+    if ((Res == srFound) && (m_SearchOptions.WasReplaceAllChosen) && (m_SearchOptions.LastNumberOfReplacements > 0))
+    {
+        TMsgDlgButtons btns;
+        btns << mbOK;
+        MessageDlg(Format("Ok. Number of replacements: %d", ARRAYOFCONST(( m_SearchOptions.LastNumberOfReplacements ))), mtInformation, btns, -1);
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorCode::actCopyExecute(TObject *Sender)
@@ -147,17 +150,50 @@ void __fastcall TfrmEditorCode::actCutExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorCode::actSearchNextExecute(TObject *Sender)
 {
-  bool Ok = true;
-
-  switch (evEditor->SearchState)
-  {
-    case stInSearch: Ok = evEditor->SearchNext(); break;
-    case stInReplace: Ok = evEditor->ReplaceNext(); break;
-    default: Beep();
-  }
-
-//  if (!Ok)
-//    ShowSearchNotFound();
+    if (evEditor->SearchLastArgs.Search == "" || m_SearchOptions.Direction != sdForward)
+    {
+        m_SearchOptions.Direction = sdForward;
+        actSearchExecute(Sender);
+    }
+    else
+    {
+        if (m_SearchOptions.Direction != sdForward)
+        {
+            m_SearchOptions.Direction = sdForward;
+            evEditor->SearchLastArgs.Direction = sdForward;
+            evEditor->SearchFirst(evEditor->SearchLastArgs);
+        }
+        switch (evEditor->SearchState)
+        {
+            case stInSearch: evEditor->SearchNext(); break;
+            case stInReplace: evEditor->ReplaceNext(); break;
+            default: Beep();
+        }
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorCode::actSearchPreviousExecute(TObject *Sender)
+{
+    if (evEditor->SearchLastArgs.Search == "")
+    {
+        m_SearchOptions.Direction = sdBackward;
+        actSearchExecute(Sender);
+    }
+    else
+    {
+        if (m_SearchOptions.Direction != sdBackward)
+        {
+            m_SearchOptions.Direction = sdBackward;
+            evEditor->SearchLastArgs.Direction = sdBackward;
+            evEditor->SearchFirst(evEditor->SearchLastArgs);
+        }
+        switch (evEditor->SearchState)
+        {
+            case stInSearch: evEditor->SearchNext(); break;
+            case stInReplace: evEditor->ReplaceNext(); break;
+            default: Beep();
+        }
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorCode::actToggleShowSpacesExecute(TObject *Sender)
@@ -267,8 +303,7 @@ void __fastcall TfrmEditorCode::UpdateStatus()
   actToggleCursorBound->Enabled = true;
 
   actGoToLine->Enabled = evEditor->Document!=NULL;
-  actToggleSplit->Enabled = true;
-
+ 
   actFoldAll->Enabled = evEditor->Document!=NULL;
   actFoldAllInCurrent->Enabled = evEditor->Document!=NULL;
   actFoldCurrentTop->Enabled = evEditor->Document!=NULL;

@@ -3574,10 +3574,6 @@ object frmEditorCode: TfrmEditorCode
       ShortCut = 16455
       OnExecute = actGoToLineExecute
     end
-    object actToggleSplit: TAction
-      Category = 'View'
-      Caption = 'Split'
-    end
     object actFoldTops: TAction
       Category = 'Fold'
       Caption = 'Fold all top folds'
@@ -3622,6 +3618,7 @@ object frmEditorCode: TfrmEditorCode
     object actReplace: TAction
       Category = 'Edit'
       Caption = 'actReplace'
+      ShortCut = 16456
       OnExecute = actReplaceExecute
     end
     object actSaveFile: TAction
@@ -3755,6 +3752,11 @@ object frmEditorCode: TfrmEditorCode
       Category = 'Settings'
       Caption = 'Font...'
       OnExecute = actFontExecute
+    end
+    object actSearchPrevious: TAction
+      Category = 'Edit'
+      Caption = 'Search/replace previous'
+      OnExecute = actSearchPreviousExecute
     end
   end
   object FontDialog: TFontDialog
