@@ -11,6 +11,7 @@ namespace System
 {
 String Path::m_Application;
 String Path::m_Common;
+String Path::m_Documents;
 String Path::m_Projects;
 String Path::m_ProjectName;
 String Path::m_Separator;
@@ -24,10 +25,11 @@ __fastcall Path::Path()
 //---------------------------------------------------------------------------
 void __fastcall Path::Init()
 {
-    const String appName = "AGDX Studio";
+    const String appName = ApplicationName;
     m_Separator = System::Ioutils::TPath::DirectorySeparatorChar;
     m_Application = System::Ioutils::TPath::GetHomePath() + m_Separator + appName + m_Separator;
     m_Common = System::Ioutils::TPath::GetSharedDocumentsPath() + m_Separator + appName + m_Separator + "Common" + m_Separator;
+    m_Documents = System::Ioutils::TPath::GetSharedDocumentsPath() + m_Separator;
     m_Projects = System::Ioutils::TPath::GetSharedDocumentsPath() + m_Separator + appName + m_Separator + "Projects" + m_Separator;
 }
 //---------------------------------------------------------------------------
@@ -35,6 +37,7 @@ String __fastcall Path::GetFolder(const Location location, const String& subFold
 {
     auto folder = m_Common;
     if (location == lpApplication) folder = m_Application;
+    else if (location == lpDocuments) folder = m_Documents;
     else if (location == lpProjects) folder = m_Projects;
     folder += subFolder;
     return folder;
@@ -49,6 +52,17 @@ TStringDynArray Path::GetFolders(Location location, const String& subFolder)
     }
     TStringDynArray empty;
     return empty;
+}
+//---------------------------------------------------------------------------
+String __fastcall Path::GetFolderRelativeTo(const Location location, const String& path)
+{
+    auto relPath = path;
+    auto folder = GetFolder(location);
+    if (path.Pos(folder) == 1)
+    {
+        relPath = path.SubString(folder.Length() + 1, path.Length());
+    }
+    return relPath;
 }
 //---------------------------------------------------------------------------
 TStringDynArray __fastcall Path::GetFiles(const String& folder, const String& filter)
