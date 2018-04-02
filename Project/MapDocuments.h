@@ -21,8 +21,8 @@ private:
     TileInfoList                    m_Tiles;
 
 public:
-                        __fastcall  TiledScreenDocument();
-    static  Document*   __fastcall  Create() { return new TiledScreenDocument(); };
+                        __fastcall  TiledScreenDocument(const String& name);
+    static  Document*   __fastcall  Create(const String& name) { return new TiledScreenDocument(name); };
 
     virtual void        __fastcall  Save();
 
@@ -46,8 +46,8 @@ private:
             TColor                  m_BackgroundColor;
 
 public:
-                        __fastcall  TiledMapDocument();
-    static  Document*   __fastcall  Create() { return new TiledMapDocument(); };
+                        __fastcall  TiledMapDocument(const String& name);
+    static  Document*   __fastcall  Create(const String& name) { return new TiledMapDocument(name); };
 
             void        __fastcall  Save();
 

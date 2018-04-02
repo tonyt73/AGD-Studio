@@ -4,10 +4,10 @@
 //---------------------------------------------------------------------------
 #include <Vcl.Controls.hpp>
 #include <System.Classes.hpp>
-#include <System.JSON.hpp>
 //---------------------------------------------------------------------------
 #include <map>
 #include <vector>
+#include "System/JsonFile.h"
 //---------------------------------------------------------------------------
 // Inheritence map
 // Document -> System::JsonFile -> TPersistent
@@ -52,9 +52,9 @@ protected:
             void        __fastcall  RegisterProperty(const String& property, const String& category, const String& info);
 
 public:
-                        __fastcall  Document();
+                        __fastcall  Document(const String& name);
 
-    static  Document*   __fastcall  Create()      { throw "Don't create this class";    }
+    static  Document*   __fastcall  Create(const String& name)      { throw "Don't create this class";    }
 
 const TPropertyInfoMap& __fastcall  GetPropertyInfo() const;
             String      __fastcall  GetPropertyInfo(const String& property) const;
@@ -75,6 +75,6 @@ __published:
     __property          String      Path        = { read = m_File                           };
 };
 //---------------------------------------------------------------------------
-typedef Document* (__fastcall *CreateDocumentFn)();
+typedef Document* (__fastcall *CreateDocumentFn)(const String& name);
 //---------------------------------------------------------------------------
 #endif

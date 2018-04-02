@@ -7,9 +7,9 @@
 class TextDocument : public Document
 {
 public:
-                        __fastcall  TextDocument();
+                        __fastcall  TextDocument(const String& name);
 
-    static  Document*   __fastcall  Create() { return new TextDocument(); };
+    static  Document*   __fastcall  Create(const String& name) { return new TextDocument(name); };
 
             void        __fastcall  Save();
             bool        __fastcall  Load();
@@ -20,9 +20,9 @@ class EventDocument : public TextDocument
 private:
 
 public:
-                        __fastcall  EventDocument();
+                        __fastcall  EventDocument(const String& name);
 
-    static  Document*   __fastcall  Create() { return new EventDocument(); };
+    static  Document*   __fastcall  Create(const String& name) { return new EventDocument(name); };
 };
 //---------------------------------------------------------------------------
 class SfxDocument : public TextDocument
@@ -30,8 +30,8 @@ class SfxDocument : public TextDocument
 private:
 
 public:
-                        __fastcall  SfxDocument();
-    static  Document*   __fastcall  Create() { return new SfxDocument(); };
+                        __fastcall  SfxDocument(const String& name);
+    static  Document*   __fastcall  Create(const String& name) { return new SfxDocument(name); };
 };
 //---------------------------------------------------------------------------
 #endif

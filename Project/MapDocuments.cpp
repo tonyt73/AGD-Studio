@@ -6,13 +6,14 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall TiledScreenDocument::TiledScreenDocument()
-: Document()
+__fastcall TiledScreenDocument::TiledScreenDocument(const String& name)
+: Document(name)
 {
     m_Type = "Screen";
     m_SubType = "Tiled";
     m_Folder = "Assets\\Screens";
     RegisterProperty("Name", "Details", "The name of the screen");
+    m_File = GetFile();
 }
 //---------------------------------------------------------------------------
 void __fastcall TiledScreenDocument::Save()
@@ -20,8 +21,8 @@ void __fastcall TiledScreenDocument::Save()
     // TODO: Save the tile screen
 }
 //---------------------------------------------------------------------------
-__fastcall TiledMapDocument::TiledMapDocument()
-: Document()
+__fastcall TiledMapDocument::TiledMapDocument(const String& name)
+: Document(name)
 {
     m_Type = "Map";
     m_SubType = "Tiled";
@@ -32,6 +33,7 @@ __fastcall TiledMapDocument::TiledMapDocument()
     RegisterProperty("WindowWidth", "Dimensions", "The width in character blocks for the map window");
     RegisterProperty("WindowHeight", "Dimensions", "The height in character blocks for the map window");
     RegisterProperty("BackgroundColor", "Visual", "The color of the background when no tile is present");
+    m_File = GetFile();
 }
 //---------------------------------------------------------------------------
 void __fastcall TiledMapDocument::Save()

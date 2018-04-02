@@ -31,7 +31,7 @@ private:
 public:
                         __fastcall  ProjectDocument();
                         __fastcall  ProjectDocument(const String& name);
-    static  Document*   __fastcall  Create() { return new ProjectDocument(); };
+    static  Document*   __fastcall  Create(const String& name) { return new ProjectDocument(name); };
 
             void        __fastcall  Save();
             bool        __fastcall  Load();

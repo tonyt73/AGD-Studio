@@ -43,8 +43,7 @@ Document* __fastcall DocumentManager::Add(const String& type, const String& subT
     auto it = m_FactoryMap.find(type+'.'+subType);
     if (it != m_FactoryMap.end())
     {
-        auto document = it->second();
-        document->Name = name;
+        auto document = it->second(name);
         if (document != nullptr)
         {
             auto dit = m_Documents.find(document->Type);
@@ -72,7 +71,7 @@ void __fastcall DocumentManager::DocumentFolders(std::vector<String>& folders) c
 {
     for (auto it : m_FactoryMap)
     {
-        auto doc = std::unique_ptr<Document>(it.second());
+        auto doc = std::unique_ptr<Document>(it.second("unnamed"));
         auto folder = doc->Classification;
         if (std::find(folders.begin(), folders.end(), folder) == folders.end())
         {

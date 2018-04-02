@@ -8,14 +8,13 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall ProjectDocument::ProjectDocument()
-: Document()
+__fastcall ProjectDocument::ProjectDocument(const String& name)
+: Document(name)
 , m_Machine("unknown")
 , m_Version("0.1")
 , m_Description("")
 , m_Author("Anonymous")
 {
-    m_Name = "unnamed";
     m_Extension = "agdx";
     m_Type = "Game";
     m_SubType = "Configuration";
@@ -36,12 +35,6 @@ __fastcall ProjectDocument::ProjectDocument()
     m_PropertyMap[".Files.Array.Object.SubType"] = &m_FileInfo.SubType;
 
     ::Messaging::Bus::Subscribe<OnChange<String>>(OnChangeString);
-}
-//---------------------------------------------------------------------------
-__fastcall ProjectDocument::ProjectDocument(const String& name)
-: ProjectDocument()
-{
-    m_Name = name;
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectDocument::OnEndObject(const String& object)

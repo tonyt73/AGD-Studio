@@ -6,8 +6,8 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall Document::Document()
-: m_Name("Unnamed")
+__fastcall Document::Document(const String& name)
+: m_Name(name)
 , m_Type("No Type")
 , m_SubType("No SubType")
 , m_Extension("json")
@@ -22,6 +22,7 @@ __fastcall Document::Document()
     RegisterProperty("Name", "Details", "The name of the asset/document");
     RegisterProperty("Classification", "Details", "The classification of the document");
     m_PropertyMap[".Document.Name"] = &m_Name;
+    m_File = GetFile();
 }
 //---------------------------------------------------------------------------
 void __fastcall Document::RegisterProperty(const String& property, const String& category, const String& info)

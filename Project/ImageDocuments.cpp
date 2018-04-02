@@ -6,8 +6,8 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall ImageDocument::ImageDocument()
-: Document()
+__fastcall ImageDocument::ImageDocument(const String& name)
+: Document(name)
 , m_MultiFrame(false)
 {
     m_Type = "Image";
@@ -22,6 +22,7 @@ __fastcall ImageDocument::ImageDocument()
     m_PropertyMap[".Image.Height"] = &m_Height;
 
     // TODO: Insert the first frame
+    m_File = GetFile();
 }
 //---------------------------------------------------------------------------
 int __fastcall ImageDocument::CountFrames() const
@@ -64,8 +65,8 @@ bool __fastcall ImageDocument::DeleteFrame(int index)
 
 
 //---------------------------------------------------------------------------
-__fastcall SpriteDocument::SpriteDocument()
-: ImageDocument()
+__fastcall SpriteDocument::SpriteDocument(const String& name)
+: ImageDocument(name)
 {
     m_MultiFrame = true;
     m_SubType = "Sprite";
@@ -73,21 +74,24 @@ __fastcall SpriteDocument::SpriteDocument()
     RegisterProperty("Name", "Details", "The name of the sprite");
 //    RegisterProperty("Width", "Dimensions", "The width in pixels of the sprite");
 //    RegisterProperty("Height", "Dimensions", "The height in pixels of the sprite");
+    m_File = GetFile();
 }
 //---------------------------------------------------------------------------
-__fastcall ObjectDocument::ObjectDocument()
-: ImageDocument()
+__fastcall ObjectDocument::ObjectDocument(const String& name)
+: ImageDocument(name)
 {
     m_SubType = "Object";
     m_Folder = "Assets\\Objects";
     RegisterProperty("Name", "Details", "The name of the object");
 //    RegisterProperty("Width", "Dimensions", "The width in pixels of the object");
 //    RegisterProperty("Height", "Dimensions", "The height in pixels of the object");
+    m_File = GetFile();
 }
 //---------------------------------------------------------------------------
-__fastcall TileDocument::TileDocument()
-: ImageDocument()
+__fastcall TileDocument::TileDocument(const String& name)
+: ImageDocument(name)
 {
+    m_File = GetFile();
     m_SubType = "Tile";
     m_Folder = "Assets\\Tiles";
     RegisterProperty("Name", "Details", "The name of the tile");
