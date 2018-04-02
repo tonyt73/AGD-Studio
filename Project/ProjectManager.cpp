@@ -1,11 +1,14 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
+#pragma hdrstop
 #include "ProjectManager.h"
 #include "fEditorCode.h"
 #include "fEditorImage.h"
 #include "ProjectDocument.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
+//---------------------------------------------------------------------------
+using namespace std;
 //---------------------------------------------------------------------------
 ProjectManager& ProjectManager::get()
 {
@@ -16,9 +19,6 @@ ProjectManager& ProjectManager::get()
 __fastcall ProjectManager::ProjectManager()
 : m_TreeView(nullptr)
 {
-    m_MostRecentlyUsedList.push_back(MostRecentlyUsedItem("Big Sprite Demo", "AGDX Studio\\Big Sprite Demo"));
-    m_MostRecentlyUsedList.push_back(MostRecentlyUsedItem("Sabre Wulf", "AGDX Studio\\Sabre Wulf"));
-    m_MostRecentlyUsedList.push_back(MostRecentlyUsedItem("Space Invaders", "AGDX Studio\\Space Invaders"));
 }
 //---------------------------------------------------------------------------
 __fastcall ProjectManager::~ProjectManager()
@@ -28,14 +28,17 @@ __fastcall ProjectManager::~ProjectManager()
 void __fastcall ProjectManager::Initialise(Elxtree::TElXTree* treeView)
 {
     m_TreeView = treeView;
+    m_MostRecentUsedList = make_unique<MostRecentlyUsedList>();
+}
+//---------------------------------------------------------------------------
+cMRUList __fastcall ProjectManager::GetMostRecentlyUsedList() const
+{
+    return m_MostRecentUsedList->GetList();
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::RemoveMostRecentlyUsedItem(const String& name, const String& path)
 {
-    m_MostRecentlyUsedList.erase(std::remove_if(
-        m_MostRecentlyUsedList.begin(),
-        m_MostRecentlyUsedList.end(),
-        [&](const MostRecentlyUsedItem& item) { return (item.Name == name && item.Path == path); }), m_MostRecentlyUsedList.end());
+    m_MostRecentUsedList->Remove(name, path);
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* node) const
@@ -58,7 +61,6 @@ void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* 
         else if (caption == "music"     ) index = tiFolderMusic;
         else if (caption == "tiles"     ) index = tiFolderImages;
         else if (caption == "tile sets" ) index = tiFolderImages;
-        //else if (caption == "patterns"  ) index = tiFolderPatterns;
         else if (caption == "maps"      ) index = tiFolderMaps;
         else if (caption == "sounds"    ) index = tiFolderSfx;
     }
@@ -73,11 +75,11 @@ void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* 
         else if (caption == "tile sets" ) index = tiAssetTile;
         else if (caption == "maps"      ) index = tiAssetMap;
         else if (caption == "sounds"    ) index = tiAssetSfx;
-        else if (caption == "configuration") index = tiConfiguration;
         else if (caption == "events"    ) index = tiConfiguration;
+        else if (caption == "configuration") index = tiConfiguration;
     }
     node->ImageIndex = index;
-//    node->ExpandedImageIndex = index;
+//    TODO: node->ExpandedImageIndex = index;
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::New(const String& name, const String& machine)
@@ -93,11 +95,28 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
         if (config->Files().size() == 0)
         {
             config->Machine = machine;
+            Add("Text","Event", "Player Control (type 0)");
+            Add("Text","Event", "Sprite type 1");
+            Add("Text","Event", "Sprite type 2");
+            Add("Text","Event", "Sprite type 3");
+            Add("Text","Event", "Sprite type 4");
+            Add("Text","Event", "Sprite type 5");
+            Add("Text","Event", "Sprite type 6");
+            Add("Text","Event", "Sprite type 7");
+            Add("Text","Event", "Game initialisation");
+            Add("Text","Event", "Restart screen");
+            Add("Text","Event", "Initialise sprite");
+            Add("Text","Event", "Main loop 1");
+            Add("Text","Event", "Main loop 2");
+            Add("Text","Event", "Completed game");
+            Add("Text","Event", "Kill player");
         }
         else
         {
             theDocumentManager.Load(name);
         }
+        m_MostRecentUsedList->Remove(name, config->Path);
+        m_MostRecentUsedList->Add(name, config->Path);
     }
 }
 //---------------------------------------------------------------------------
@@ -112,6 +131,8 @@ void __fastcall ProjectManager::Open(const String& file)
     assert(config != nullptr);
     // get the document manager to load all the files from the project file
     theDocumentManager.Load(name);
+    m_MostRecentUsedList->Remove(name, file);
+    m_MostRecentUsedList->Add(name, file);
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::Save()

@@ -9,8 +9,8 @@
 #include <list>
 //---------------------------------------------------------------------------
 #include "Project/DocumentManager.h"
+#include "MostRecentlyUsedList.h"
 //---------------------------------------------------------------------------
-using namespace Project;
 class ProjectManager
 {
 public: // singleton
@@ -18,23 +18,9 @@ public: // singleton
     ProjectManager(ProjectManager const&) = delete;
     void operator=(ProjectManager const&) = delete;
 
-public:
-    class MostRecentlyUsedItem
-    {
-    public:
-        String  Name;
-        String  Path;
-
-        MostRecentlyUsedItem(String name, String path)
-        : Name(name)
-        , Path(path)
-        {
-        }
-    };
-    typedef std::list<MostRecentlyUsedItem> MRUList;
-    typedef const MRUList cMRUList;
-
 private:
+
+    std::unique_ptr<MostRecentlyUsedList>   m_MostRecentUsedList;
 
     enum TreeviewIcons { tiProject,
                          tiFolderClosed, tiFolderOpened,
@@ -45,12 +31,9 @@ private:
                        };
 
     std::map<String, TElXTreeItem*> m_TreeLeafNodes;
-
-    MRUList                         m_MostRecentlyUsedList;
     Elxtree::TElXTree*              m_TreeView;
 
     void        __fastcall  SetTreeIcon(const String& parent, TElXTreeItem* node) const;
-
 
 protected:
                   friend    DocumentManager;
@@ -71,7 +54,7 @@ public:
     Document*   __fastcall  Add(const String& type, const String& subType, const String& name);
 
     void        __fastcall  RemoveMostRecentlyUsedItem(const String& name, const String& path);
-    cMRUList    __property  MostRecentlyUsedList = { read = m_MostRecentlyUsedList };
+    cMRUList    __fastcall  GetMostRecentlyUsedList() const;
 };
 //---------------------------------------------------------------------------
 #define theProjectManager ProjectManager::get()
