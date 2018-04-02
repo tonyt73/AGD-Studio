@@ -31,7 +31,15 @@ void __fastcall TfrmMain::FormCloseQuery(TObject *Sender, bool &CanClose)
 {
     theProjectManager.Save();
     SaveSettings();
-    CanClose = true;
+    if (m_FormView == fvGameIDE)
+    {
+        OnIDEClose(Sender);
+        CanClose = false;
+    }
+    else
+    {
+        CanClose = true;
+    }
 }
 // ---------------------------------------------------------------------------
 void __fastcall TfrmMain::FormDestroy(TObject *Sender)
