@@ -20,7 +20,6 @@ __fastcall JsonFile::JsonFile()
 //---------------------------------------------------------------------------
 __fastcall JsonFile::~JsonFile()
 {
-    Close();
 }
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::Open(const String& file)

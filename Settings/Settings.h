@@ -8,7 +8,7 @@
 namespace Project
 {
 //---------------------------------------------------------------------------
-class Settings : System::JsonFile
+class Settings : public System::JsonFile
 {
 public:
     static Settings& __fastcall get();

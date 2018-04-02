@@ -3,7 +3,6 @@
 #pragma hdrstop
 //---------------------------------------------------------------------------
 #include "Settings.h"
-#include "System/make_unique.h"
 #include "System/File.h"
 #include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
@@ -26,7 +25,7 @@ Settings& __fastcall Settings::get()
 __fastcall Settings::Settings()
 : JsonFile()
 {
-    Load(System::File::Combine(System::Path::Application, "Settings"));
+    Load(System::File::Combine(System::Path::Application, "Settings.json"));
 }
 //---------------------------------------------------------------------------
 __fastcall Settings::~Settings()
@@ -81,7 +80,7 @@ void __fastcall Settings::SetWindowSize(const TSize& size)
 //---------------------------------------------------------------------------
 void __fastcall Settings::Save()
 {
-    Open(System::File::Combine(System::Path::Application, "Settings"));
+    Open(System::File::Combine(System::Path::Application, "Settings.json"));
     Push("Application");
         Write("Style", ActiveStyle);
     Pop();
