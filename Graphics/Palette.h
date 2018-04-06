@@ -2,55 +2,34 @@
 #ifndef PaletteH
 #define PaletteH
 //---------------------------------------------------------------------------
-#include <System.Classes.hpp>
-#include <fmx.graphics.hpp>
-#include <vector>
+#include "System/JsonFile.h"
 //---------------------------------------------------------------------------
-namespace Graphics
-{
+class PaletteDefinitionFile;
 //---------------------------------------------------------------------------
-// Palette definition
-//
-//---------------------------------------------------------------------------
-class TPalette : public TObject
-{
-protected:
-    String                      m_Name;
-    int                         m_Colors;
-
-    std::vector<TAlphaColor>    m_Palette;
-
-    virtual void    __fastcall  Generate() = 0;
-    TAlphaColor     __fastcall  GetColor(int index);
-
-public:
-
-                    __fastcall  TPalette(const String name);
-
-
-    __property String           Name = { read = m_Name, write = m_Name };
-    __property int              Colors = { read = m_Colors };
-    __property TAlphaColor      Color[int index] = { read = GetColor };
-};
-//---------------------------------------------------------------------------
-class TNext8bitPalette : public TPalette
+class Palette
 {
 private:
-    void            __fastcall  Generate();
+    int                         m_TotalColors;
+    int                         m_LogicalColors;
+    int                         m_ColorsPerTable;
+
+    std::vector<unsigned char>  m_Table;
+    std::vector<TColor>         m_Colors;
+
+    TColor      __fastcall      GetColor(int index) const;
+    TColor      __fastcall      GetGreyscale(int index) const;
 
 public:
-                    __fastcall  TNext8bitPalette();
+    friend class PaletteDefinitionFile;
+
+                __fastcall      Palette();
+
+     TColor     __property      Color[int index] = { read = GetColor };
+     TColor     __property      Greyscale[int index] = { read = GetGreyscale };
 };
 //---------------------------------------------------------------------------
-class TNext9bitPalette : public TPalette
+class PaletteDefinition : public System::JsonFile
 {
-private:
-    void            __fastcall  Generate();
-
-public:
-                    __fastcall  TNext9bitPalette();
 };
-//---------------------------------------------------------------------------
-} // graphics namespace
 //---------------------------------------------------------------------------
 #endif
