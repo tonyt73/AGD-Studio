@@ -22,9 +22,6 @@ private:
     TSize                       m_WindowSize;
     TPoint                      m_WelcomePosition;
 
-    void            __fastcall  Set(const String& property, const String& value);
-    void            __fastcall  Set(const String& property, const int& value);
-
     void            __fastcall  SetActiveStyle(const String& style);
     void            __fastcall  SetWelcomePosition(const TPoint& position);
     void            __fastcall  SetWindowPosition(const TPoint& position);

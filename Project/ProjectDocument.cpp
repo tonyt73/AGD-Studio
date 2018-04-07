@@ -26,20 +26,20 @@ __fastcall ProjectDocument::ProjectDocument(const String& name)
     RegisterProperty("Machine", "Details", "The machine target of the game");
 
     // json loading properties
-    m_PropertyMap[".Project.Version"] = &m_Version;
-    m_PropertyMap[".Project.Author"] = &m_Author;
-    m_PropertyMap[".Project.Description"] = &m_Description;
-    m_PropertyMap[".Project.Machine"] = &m_Machine;
-    m_PropertyMap[".Files.Array.Object.Name"] = &m_FileInfo.Name;
-    m_PropertyMap[".Files.Array.Object.Type"] = &m_FileInfo.Type;
-    m_PropertyMap[".Files.Array.Object.SubType"] = &m_FileInfo.SubType;
+    m_PropertyMap[".{}.Project.{}.Version"] = &m_Version;
+    m_PropertyMap[".{}.Project.{}.Author"] = &m_Author;
+    m_PropertyMap[".{}.Project.{}.Description"] = &m_Description;
+    m_PropertyMap[".{}.Project.{}.Machine"] = &m_Machine;
+    m_PropertyMap[".{}.Files.[].{}.Name"] = &m_FileInfo.Name;
+    m_PropertyMap[".{}.Files.[].{}.Type"] = &m_FileInfo.Type;
+    m_PropertyMap[".{}.Files.[].{}.SubType"] = &m_FileInfo.SubType;
 
     ::Messaging::Bus::Subscribe<OnChange<String>>(OnChangeString);
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectDocument::OnEndObject(const String& object)
 {
-    if (object == ".Files.Array.Object")
+    if (object == ".{}.Files.[].{}")
     {
         m_Files.push_back(m_FileInfo);
     }

@@ -9,8 +9,8 @@
 __fastcall MostRecentlyUsedList::MostRecentlyUsedList()
 : JsonFile()
 {
-    m_PropertyMap[".List.Array.Object.Name"] = &m_MRUName;
-    m_PropertyMap[".List.Array.Object.Path"] = &m_MRUPath;
+    m_PropertyMap[".{}.List.[].{}.Name"] = &m_MRUName;
+    m_PropertyMap[".{}.List.[].{}.Path"] = &m_MRUPath;
     Load();
 }
 //---------------------------------------------------------------------------
@@ -32,22 +32,22 @@ void __fastcall MostRecentlyUsedList::Load()
 void __fastcall MostRecentlyUsedList::Save()
 {
     auto file = System::Path::Application + "mru.json";
-    Open(file);
-    ArrayStart("List");
+    Open(file); // {
+    ArrayStart("List"); // [
     for (const auto& mru : m_MostRecentlyUsedList)
     {
-        StartObject();
+        StartObject();  // {
             Write("Name", mru.Name);
             Write("Path", mru.Path);
-        EndObject();
+        EndObject();    // }
     }
-    ArrayEnd(); // List
-    Close();
+    ArrayEnd(); // ] List
+    Close(); // }
 }
 //---------------------------------------------------------------------------
 void __fastcall MostRecentlyUsedList::OnEndObject(const String& object)
 {
-    if (object == ".List.Array.Object")
+    if (object == ".{}.List.[].{}")
     {
         Add(m_MRUName, m_MRUPath);
     }
