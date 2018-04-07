@@ -2,6 +2,7 @@
 #include "agdx.pch.h"
 #pragma hdrstop
 //---------------------------------------------------------------------------
+#include <stack>
 #include "JsonFile.h"
 #include "System/make_unique.h"
 //---------------------------------------------------------------------------
@@ -28,14 +29,14 @@ void __fastcall JsonFile::Open(const String& file)
     m_StringWriter = new TStringWriter();
     m_JsonWriter = new TJsonTextWriter(m_StringWriter);
     m_JsonWriter->Formatting = TJsonFormatting::Indented;
-    m_JsonWriter->WriteStartObject(); // sections
+    m_JsonWriter->WriteStartObject();
 }
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::Close()
 {
     if (m_StringWriter != nullptr && m_JsonWriter != nullptr)
     {
-        m_JsonWriter->WriteEndObject(); // sections
+        m_JsonWriter->WriteEndObject();
         File::File::WriteText(m_File, m_StringWriter->ToString());
         delete m_JsonWriter;
         m_JsonWriter = nullptr;
@@ -76,6 +77,16 @@ void __fastcall JsonFile::ArrayEnd() const
     m_JsonWriter->WriteEndArray();
 }
 //---------------------------------------------------------------------------
+void __fastcall JsonFile::Write(const String& value) const
+{
+    m_JsonWriter->WriteValue(value);
+}
+//---------------------------------------------------------------------------
+void __fastcall JsonFile::Write(const int& value) const
+{
+    m_JsonWriter->WriteValue(value);
+}
+//---------------------------------------------------------------------------
 void __fastcall JsonFile::Write(const String& property, const String& value) const
 {
     m_JsonWriter->WritePropertyName(property);
@@ -102,6 +113,7 @@ void __fastcall JsonFile::Write(const String& property, const bool& value) const
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::Set(const String& property, const String& value)
 {
+    auto size = m_PropertyMap.size();
     if (m_PropertyMap.count(property) != 0)
     {
         ((*(String*)m_PropertyMap[property])) = value;
@@ -139,63 +151,105 @@ void __fastcall JsonFile::Load(const String& file)
         auto json = File::File::ReadText(file);
         auto sr = make_unique<TStringReader>(json);
         auto jr = make_unique<TJsonTextReader>(sr.get());
-        String property;
+        String property;                    // the tree dot.path or property reference eg: my.things.value
         auto depth = 0;
-        String arrayProperty;
-        bool inArray = false;
+        auto inArray = false;
+        // depth values for object, array and property
+        // these help to balance the tree path
+        std::stack<int> objectDepth;    // depth at which an object starts
+        std::stack<int> arrayDepth;     // depth at which an array starts
+        std::stack<int> propertyDepth;  // depth at which a property starts
         while (jr->Read())
         {
             switch (jr->TokenType)
             {
                 case TJsonToken::StartObject:
-                    depth++;
-                    if (inArray)
-                    {
-                        property += ".Object";
-                    }
+                    objectDepth.push(depth++);
                     OnStartObject(property);
+                    property += ".{}";
                     break;
                 case TJsonToken::EndObject:
-                    depth--;
-                    // remove the last .name
+                {
                     OnEndObject(property);
-                    property = property.Delete(property.LastDelimiter("."), property.Length());
+                    auto pops = (depth - objectDepth.top()) + (inArray ? 0 : 1);
+                    objectDepth.pop();
+                    for (auto i = 0; i < pops; i++)
+                    {
+                        property = property.Delete(property.LastDelimiter("."), property.Length());
+                        depth--;
+                    }
                     break;
+                }
                 case TJsonToken::StartArray:
-                    property += ".Array";
+                    property += ".[]";
+                    arrayDepth.push(++depth);
                     inArray = true;
                     break;
                 case TJsonToken::EndArray:
                     property = property.Delete(property.LastDelimiter("."), property.Length());
+                    if (depth == arrayDepth.top())
+                    {
+                        depth--;
+                        // remove the last .name
+                        property = property.Delete(property.LastDelimiter("."), property.Length());
+                    }
                     inArray = false;
+                    arrayDepth.pop();
                     break;
                 case TJsonToken::PropertyName:
+                    propertyDepth.push(++depth);
                     property += "." + jr->Value.AsString();
                     break;
                 case TJsonToken::String:
                 {
                     Set(property, jr->Value.AsString());
-                    // remove the last .name
-                    property = property.Delete(property.LastDelimiter("."), property.Length());
+                    OnEndObject(property);
+                    // are we matched to a property?
+                    if (depth == propertyDepth.top())
+                    {
+                        // yep, so back down
+                        depth--;
+                        propertyDepth.pop();
+                        // remove the last .name
+                        property = property.Delete(property.LastDelimiter("."), property.Length());
+                    }
                     break;
                 }
                 case TJsonToken::Integer:
                     Set(property, jr->Value.AsInteger());
-                    // remove the last .name
-                    property = property.Delete(property.LastDelimiter("."), property.Length());
+                    OnEndObject(property);
+                    if (depth == propertyDepth.top())
+                    {
+                        depth--;
+                        propertyDepth.pop();
+                        // remove the last .name
+                        property = property.Delete(property.LastDelimiter("."), property.Length());
+                    }
                     break;
                 case TJsonToken::Float:
                     {
                         double value = jr->Value.AsExtended();
                         Set(property, value);
-                        // remove the last .name
-                        property = property.Delete(property.LastDelimiter("."), property.Length());
+                        OnEndObject(property);
+                        if (depth == propertyDepth.top())
+                        {
+                            depth--;
+                            propertyDepth.pop();
+                            // remove the last .name
+                            property = property.Delete(property.LastDelimiter("."), property.Length());
+                        }
                     }
                     break;
                 case TJsonToken::Boolean:
                     Set(property, jr->Value.AsBoolean());
-                    // remove the last .name
-                    property = property.Delete(property.LastDelimiter("."), property.Length());
+                    OnEndObject(property);
+                    if (depth == propertyDepth.top())
+                    {
+                        depth--;
+                        propertyDepth.pop();
+                        // remove the last .name
+                        property = property.Delete(property.LastDelimiter("."), property.Length());
+                    }
                     break;
             }
         }
