@@ -42,6 +42,7 @@ void __fastcall GraphicsBuffer::Make(unsigned int width, unsigned int height, co
     {
         case btBitmap:      buffer = std::make_unique<BitmapGraphicsBuffer>(width / (8 / mode.BitsPerPixel), height, mode);   break;
         case btAttribute:   buffer = std::make_unique<AttributeGraphicsBuffer>(width / (8 / mode.BitsPerPixel), height, mode);break;
+        default: assert(0); break;
     }
 }
 //---------------------------------------------------------------------------
@@ -80,7 +81,7 @@ void __fastcall GraphicsBuffer::GetBuffer(int index, UnsignedCharBuffer& buffer)
 __fastcall BitmapGraphicsBuffer::BitmapGraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode)
 : GraphicsBuffer(width, height, mode)
 {
-    assert(bitsPerPixel != 1 && bitsPerPixel != 2 && bitsPerPixel != 4 && bitsPerPixel != 8);
+    assert(mode.BitsPerPixel != 1 && mode.BitsPerPixel != 2 && mode.BitsPerPixel != 4 && mode.BitsPerPixel != 8);
     // allocate the buffer
     // m_Buffers[0] : pixels buffer
     PushBuffer(m_Stride * height);
@@ -97,7 +98,7 @@ void __fastcall BitmapGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y, b
         auto ix = X / m_PixelsPerByte;
         auto pixelOffset = (Y * m_Stride) + ix;
         auto pixelPos = ix % m_PixelsPerByte;
-        unsigned char pixel = m_SetColors[set ? 0 : 1] << g_PixelShfts[m_GraphicsMode.BitsPerPixel][pixelPos];
+        auto pixel = m_SetColors[set ? 0 : 1] << g_PixelShfts[m_GraphicsMode.BitsPerPixel][pixelPos];
         // reset the pixel bits
         m_Buffers[0][pixelOffset] &= ~g_PixelMasks[m_GraphicsMode.BitsPerPixel][pixelPos];
         // set the new color
@@ -130,7 +131,7 @@ void __fastcall BitmapGraphicsBuffer::Render(TBitmap* bitmap, bool inGreyscale) 
     {
         for (auto x = 0; x < m_Width; x += m_PixelsPerByte)
         {
-            int ix = x / m_PixelsPerByte;
+            auto ix = x / m_PixelsPerByte;
             auto pixels = m_Buffers[0][(y * m_Stride) + ix];
             for (auto i = 0; i < m_PixelsPerByte; i++)
             {
@@ -155,8 +156,8 @@ const unsigned char g_FlashMask   = 0x80; // flash bit from attribute byte
 __fastcall AttributeGraphicsBuffer::AttributeGraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode)
 : GraphicsBuffer(width, height, mode)
 {
-    assert(bitsPerPixel != 1);
-    assert(attributeHeight != 1 && attributeHeight == 1);
+    assert(mode.BitsPerPixel != 1);
+    assert(mode.PixelsHighPerAttribute != 1 && mode.PixelsHighPerAttribute != 8);
     // allocate the buffers
     // m_Buffers[0] : pixels buffer
     PushBuffer(m_Stride * height);
@@ -209,11 +210,11 @@ void __fastcall AttributeGraphicsBuffer::Render(TBitmap* bitmap, bool inGreyscal
         {
             auto ix = x >> 3;
             auto attr = m_Buffers[1][((y >> 3) * m_Stride) + ix];
-            int bright =  (attr & g_BrightMask) ? 8 : 0;
-            int ink    = ((attr & g_InkMask   )     ) + bright;
-            int paper  = ((attr & g_PaperMask ) >> 3) + bright;
-            TColor cInk   = inGreyscale ? clWhite : m_GraphicsMode.Palette.Color[ink];
-            TColor cPaper = inGreyscale ? clBlack : m_GraphicsMode.Palette.Color[ink];
+            auto bright =  (attr & g_BrightMask) ? 8 : 0;
+            auto ink    = ((attr & g_InkMask   )     ) + bright;
+            auto paper  = ((attr & g_PaperMask ) >> 3) + bright;
+            auto cInk   = inGreyscale ? clWhite : m_GraphicsMode.Palette.Color[ink];
+            auto cPaper = inGreyscale ? clBlack : m_GraphicsMode.Palette.Color[ink];
             for (auto i = 0; i < m_GraphicsMode.PixelsHighPerAttribute; i++)
             {
                 auto pixels = m_Buffers[0][((y + i) * m_Stride) + ix];

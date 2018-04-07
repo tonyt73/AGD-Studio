@@ -2,6 +2,7 @@
 #include "agdx.pch.h"
 #include "fMain.h"
 #include "ProjectManager.h"
+#include "Graphics/Palette.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -25,6 +26,8 @@ void __fastcall TfrmMain::FormCreate(TObject *Sender)
     // TODO: decide if we can load a project right now or load the welcome dialog
     // create the welcome screen
     ShowWelcomeDialog();
+
+    //std::unique_ptr<PaletteWriter> pw = std::make_unique<PaletteWriter>();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmMain::FormCloseQuery(TObject *Sender, bool &CanClose)
