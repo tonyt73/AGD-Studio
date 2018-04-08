@@ -36,12 +36,14 @@ protected:
     void            __fastcall  Write(const int& value) const;
     void            __fastcall  Write(const String& property, const String& value) const;
     void            __fastcall  Write(const String& property, const int& value) const;
-    void            __fastcall  Write(const String& property, const double& value) const;
+    void            __fastcall  Write(const String& property, const unsigned int& value) const;
+    void            __fastcall  Write(const String& property, const float& value) const;
     void            __fastcall  Write(const String& property, const bool& value) const;
     // read (on load)
     virtual void    __fastcall  Set(const String& property, const String& value);
     virtual void    __fastcall  Set(const String& property, const int& value);
-    virtual void    __fastcall  Set(const String& property, const double& value);
+    virtual void    __fastcall  Set(const String& property, const unsigned int& value);
+    virtual void    __fastcall  Set(const String& property, const float& value);
     virtual void    __fastcall  Set(const String& property, const bool& value);
 
             void    __fastcall  Load(const String& file);

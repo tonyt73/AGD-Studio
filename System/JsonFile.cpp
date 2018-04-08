@@ -99,7 +99,13 @@ void __fastcall JsonFile::Write(const String& property, const int& value) const
     m_JsonWriter->WriteValue(value);
 }
 //---------------------------------------------------------------------------
-void __fastcall JsonFile::Write(const String& property, const double& value) const
+void __fastcall JsonFile::Write(const String& property, const unsigned int& value) const
+{
+    m_JsonWriter->WritePropertyName(property);
+    m_JsonWriter->WriteValue(value);
+}
+//---------------------------------------------------------------------------
+void __fastcall JsonFile::Write(const String& property, const float& value) const
 {
     m_JsonWriter->WritePropertyName(property);
     m_JsonWriter->WriteValue(value);
@@ -128,11 +134,19 @@ void __fastcall JsonFile::Set(const String& property, const int& value)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall JsonFile::Set(const String& property, const double& value)
+void __fastcall JsonFile::Set(const String& property, const unsigned int& value)
 {
     if (m_PropertyMap.count(property) != 0)
     {
-        ((*(double*)m_PropertyMap[property])) = value;
+        ((*(unsigned int*)m_PropertyMap[property])) = value;
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall JsonFile::Set(const String& property, const float& value)
+{
+    if (m_PropertyMap.count(property) != 0)
+    {
+        ((*(float*)m_PropertyMap[property])) = value;
     }
 }
 //---------------------------------------------------------------------------
@@ -228,7 +242,7 @@ void __fastcall JsonFile::Load(const String& file)
                     break;
                 case TJsonToken::Float:
                     {
-                        double value = jr->Value.AsExtended();
+                        float value = jr->Value.AsExtended();
                         Set(property, value);
                         OnEndObject(property);
                         if (depth == propertyDepth.top())
