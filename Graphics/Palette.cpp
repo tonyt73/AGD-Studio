@@ -14,7 +14,6 @@ __fastcall Palette::Palette()
     // json loading properties
     m_PropertyMap[".{}.Palette.Name"] = &m_Name;
     m_PropertyMap[".{}.ColorTable.[]"] = &m_Color;
-    m_PropertyMap[".{}.PaletteTable.[]"] = &m_Index;
 }
 //---------------------------------------------------------------------------
 __fastcall Palette::Palette(const String& name)
@@ -27,10 +26,16 @@ __fastcall Palette::Palette(const Palette& other)
 : Palette()
 {
     m_Name = other.m_Name;
-    m_PaletteTable.clear();
     m_ColorTable.clear();
-    m_PaletteTable.assign(other.m_PaletteTable.begin(), other.m_PaletteTable.end());
     m_ColorTable.assign(other.m_ColorTable.begin(), other.m_ColorTable.end());
+}
+//---------------------------------------------------------------------------
+Palette& __fastcall Palette::operator=(const Palette& other)
+{
+    m_Name = other.m_Name;
+    m_ColorTable.clear();
+    m_ColorTable.assign(other.m_ColorTable.begin(), other.m_ColorTable.end());
+    return *this;
 }
 //---------------------------------------------------------------------------
 TColor __fastcall Palette::GetTableColor(int index) const
@@ -42,18 +47,9 @@ TColor __fastcall Palette::GetTableColor(int index) const
     return clFuchsia;
 }
 //---------------------------------------------------------------------------
-TColor __fastcall Palette::GetPaletteColor(int index) const
+TColor __fastcall Palette::GetGreyscale(int index) const
 {
-    if (0 < index && index < m_PaletteTable.size())
-    {
-        return m_ColorTable[m_PaletteTable[index]];
-    }
-    return clFuchsia;
-}
-//---------------------------------------------------------------------------
-TColor __fastcall Palette::GetPaletteGreyscale(int index) const
-{
-    auto color = GetPaletteColor(index);
+    auto color = GetTableColor(index);
     unsigned char r = (color & 0x000000FF);
     unsigned char g = (color & 0x0000FF00) >>  8;
     unsigned char b = (color & 0x00FF0000) >> 16;
@@ -62,22 +58,9 @@ TColor __fastcall Palette::GetPaletteGreyscale(int index) const
     return color;
 }
 //---------------------------------------------------------------------------
-void __fastcall Palette::RemapColor(int paletteTableIndex, int colorTableIndex)
-{
-    if (0 < paletteTableIndex && paletteTableIndex < m_PaletteTable.size() && 0 < colorTableIndex && colorTableIndex < m_ColorTable.size())
-    {
-        m_PaletteTable[paletteTableIndex] = m_ColorTable[colorTableIndex];
-    }
-}
-//---------------------------------------------------------------------------
 int __fastcall Palette::GetTotalColors() const
 {
     return m_ColorTable.size();
-}
-//---------------------------------------------------------------------------
-int __fastcall Palette::GetLogicalColors() const
-{
-    return m_PaletteTable.size();
 }
 //---------------------------------------------------------------------------
 void __fastcall Palette::OnEndObject(const String& object)
@@ -85,10 +68,6 @@ void __fastcall Palette::OnEndObject(const String& object)
     if (object == ".{}.ColorTable.[]")
     {
         m_ColorTable.push_back((TColor)(StrToInt(m_Color)));
-    }
-    else if (object == ".{}.PaletteTable.[]")
-    {
-        m_PaletteTable.push_back(m_Index);
     }
 }
 //---------------------------------------------------------------------------
@@ -105,12 +84,6 @@ void __fastcall Palette::Save()
 //        Write("$" + IntToHex(color, 6));
 //    }
 //    ArrayEnd(); // ] ColorTable
-//    ArrayStart("PaletteTable"); // [
-//    for (auto index : m_PaletteTable)
-//    {
-//        Write(index);
-//    }
-//    ArrayEnd(); // ] ColorTable
 //    // }
 //    Close();
 }
@@ -122,18 +95,13 @@ void __fastcall Palette::Save()
 //{
 //    Save();
 //    auto file = System::File::Combine(System::Path::Application, "Palettes" + System::Path::Separator + m_Name + ".json");
-//    std::vector<unsigned char>  oldPaletteTable;
 //    std::vector<TColor>         oldColorTable;
-//    oldPaletteTable.assign(m_PaletteTable.begin(), m_PaletteTable.end());
 //    oldColorTable.assign(m_ColorTable.begin(), m_ColorTable.end());
 //    m_ColorTable.clear();
-//    m_PaletteTable.clear();
 //    Load(file);
 //    auto c1 = m_ColorTable.size();
 //    auto c2 = oldColorTable.size();
-//    auto c3 = m_PaletteTable.size();
-//    auto c4 = oldPaletteTable.size();
-//    if (m_ColorTable != oldColorTable || m_PaletteTable != oldPaletteTable)
+//    if (m_ColorTable != oldColorTable)
 //    {
 //        assert(0);
 //    }
