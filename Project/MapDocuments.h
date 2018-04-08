@@ -22,7 +22,7 @@ private:
 
 public:
                         __fastcall  TiledScreenDocument(const String& name);
-    static  Document*   __fastcall  Create(const String& name) { return new TiledScreenDocument(name); };
+    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new TiledScreenDocument(name); };
 
     virtual void        __fastcall  Save();
 
@@ -47,7 +47,7 @@ private:
 
 public:
                         __fastcall  TiledMapDocument(const String& name);
-    static  Document*   __fastcall  Create(const String& name) { return new TiledMapDocument(name); };
+    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new TiledMapDocument(name); };
 
             void        __fastcall  Save();
 

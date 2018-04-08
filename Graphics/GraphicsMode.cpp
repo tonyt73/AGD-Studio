@@ -66,8 +66,13 @@ void __fastcall GraphicsMode::RemapColor(int logicalIndex, int paletteIndex)
 {
     if (0 < logicalIndex && logicalIndex < m_LogicalColors.size() && 0 < paletteIndex && paletteIndex < m_Palette.Colors)
     {
-        m_LogicalColors[logicalIndex] = Palette.Color[paletteIndex];
+        m_LogicalColors[logicalIndex] = m_Palette.Color[paletteIndex];
     }
+}
+//---------------------------------------------------------------------------
+const Palette& __fastcall GraphicsMode::Palette() const
+{
+    return m_Palette;
 }
 //---------------------------------------------------------------------------
 int __fastcall GraphicsMode::GetLogicalColors() const
@@ -79,9 +84,21 @@ TColor __fastcall GraphicsMode::GetLogicalColor(int index) const
 {
     if (0 < index && index < m_LogicalColors.size())
     {
-        return Palette.Color[m_LogicalColors[index]];
+        return m_Palette.Color[m_LogicalColors[index]];
     }
     return clFuchsia;
+}
+//---------------------------------------------------------------------------
+const GraphicsMode::ExportInfo& __fastcall GraphicsMode::GetExportInformation(ImageTypes imageType) const
+{
+    return m_ExportInfo[imageType];
+}
+//---------------------------------------------------------------------------
+void __fastcall GraphicsMode::Load(const String& name)
+{
+    m_LogicalColors.clear();
+    JsonFile::Load(System::File::Combine(System::Path::Application, "GraphicsModes" + System::Path::Separator + name + ".json"));
+    m_Palette.Load(m_PaletteName);
 }
 //---------------------------------------------------------------------------
 void __fastcall GraphicsMode::Save()

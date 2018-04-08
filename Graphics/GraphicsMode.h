@@ -13,13 +13,14 @@ class GraphicsModeDefinitionFile;
 //---------------------------------------------------------------------------
 class GraphicsMode : public System::JsonFile
 {
-private:
-    typedef std::vector<unsigned char> Table;
+public:
     struct ExportInfo
     {
         bool    BitmapDataOnly;
     };
-    std::map<String, ExportInfo> ExportMap;
+
+private:
+    typedef std::vector<unsigned char> Table;
 
 protected:
     String          m_Name;                     // the name of the screen/graphics mode
@@ -40,6 +41,7 @@ protected:
 
     int             __fastcall  GetLogicalColors() const;
     TColor          __fastcall  GetLogicalColor(int index) const;
+  const ExportInfo& __fastcall  GetExportInformation(ImageTypes imageType) const;
     void            __fastcall  OnEndObject(const String& object);
     void            __fastcall  Save();
 
@@ -49,8 +51,10 @@ public:
                     __fastcall  GraphicsMode();
                     __fastcall  GraphicsMode(const GraphicsMode& other);
 
+            void    __fastcall  Load(const String& name);
                                 // Remap a logical color to a new palettle color
     void            __fastcall  RemapColor(int paletteTableIndex, int colorTableIndex);
+    const Palette&  __fastcall  Palette() const;
 
     String          __property  Name = { read = m_Name };
     unsigned int    __property  BitsPerPixel = { read = m_BitsPerPixel };
@@ -62,8 +66,8 @@ public:
     BufferType      __property  TypeOfBuffer = { read = m_BufferType };
     int             __property  LogicalColors = { read = GetLogicalColors };
     TColor          __property  LogicalColor[int index] = { read = GetLogicalColor };
-    const Palette   __property  Palette = { read = m_Palette };
     bool            __property  SupportsLogicalColorRemapping = { read = m_SupportsRemapping };
+    ExportInfo      __property  ExportInformation[ImageTypes imageType] = { read = GetExportInformation };
 };
 //---------------------------------------------------------------------------
 //class GraphicsModeWriter : public GraphicsMode

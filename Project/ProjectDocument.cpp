@@ -8,9 +8,10 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall ProjectDocument::ProjectDocument(const String& name)
+__fastcall ProjectDocument::ProjectDocument(const String& name, const String& machine)
 : Document(name)
-, m_Machine("unknown")
+, m_MachineName(machine)
+, m_MachineConfig(machine)
 , m_Version("0.1")
 , m_Description("")
 , m_Author("Anonymous")
@@ -29,7 +30,7 @@ __fastcall ProjectDocument::ProjectDocument(const String& name)
     m_PropertyMap[".{}.Project.{}.Version"] = &m_Version;
     m_PropertyMap[".{}.Project.{}.Author"] = &m_Author;
     m_PropertyMap[".{}.Project.{}.Description"] = &m_Description;
-    m_PropertyMap[".{}.Project.{}.Machine"] = &m_Machine;
+    m_PropertyMap[".{}.Project.{}.Machine"] = &m_MachineName;
     m_PropertyMap[".{}.Files.[].{}.Name"] = &m_FileInfo.Name;
     m_PropertyMap[".{}.Files.[].{}.Type"] = &m_FileInfo.Type;
     m_PropertyMap[".{}.Files.[].{}.SubType"] = &m_FileInfo.SubType;
@@ -45,6 +46,11 @@ void __fastcall ProjectDocument::OnEndObject(const String& object)
     }
 }
 //---------------------------------------------------------------------------
+const MachineConfig& __fastcall ProjectDocument::Machine() const
+{
+    return m_MachineConfig;
+}
+//---------------------------------------------------------------------------
 void __fastcall ProjectDocument::Save()
 {
     Open(GetFile());
@@ -52,7 +58,7 @@ void __fastcall ProjectDocument::Save()
         Write("Version", m_Version);
         Write("Author", m_Author);
         Write("Description", m_Description);
-        Write("Machine", m_Machine);
+        Write("Machine", m_MachineConfig.Name);
     Pop();  // Project
     ArrayStart("Files");
     for (const auto& fi : m_Files)
@@ -70,7 +76,10 @@ void __fastcall ProjectDocument::Save()
 bool __fastcall ProjectDocument::Load()
 {
     m_File = GetFile();
-    return Document::Load();
+    auto result = Document::Load();
+    // Load the machine
+    m_MachineConfig.Load(m_MachineName);
+    return result;
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectDocument::ClearFiles()

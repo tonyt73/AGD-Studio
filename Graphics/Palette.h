@@ -24,6 +24,8 @@ public:
                 __fastcall      Palette(const Palette& other);
     Palette&    __fastcall      operator=(const Palette& other);
 
+    void        __fastcall      Load(const String& name);
+
     TColor      __property      Greyscale[int index] = { read = GetGreyscale };
     TColor      __property      Color[int index] = { read = GetTableColor };
     int         __property      Colors = { read = GetTotalColors };

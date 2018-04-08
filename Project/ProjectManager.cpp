@@ -90,11 +90,10 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
     {
         ClearTree(name);
         // create a new project file, but load the file if it exists
-        auto config = dynamic_cast<ProjectDocument*>(Add("Game", "Configuration", name));
+        auto config = dynamic_cast<ProjectDocument*>(Add("Game", "Configuration", name + "|" + machine));
         assert(config != nullptr);
         if (config->Files().size() == 0)
         {
-            config->Machine = machine;
             Add("Text","Event", "Player Control (type 0)");
             Add("Text","Event", "Sprite type 1");
             Add("Text","Event", "Sprite type 2");
@@ -193,9 +192,9 @@ Document* __fastcall ProjectManager::AddToTreeView(Document* document)
     return document;
 }
 //---------------------------------------------------------------------------
-Document* __fastcall ProjectManager::Add(const String& type, const String& subType, const String& name)
+Document* __fastcall ProjectManager::Add(const String& type, const String& subType, const String& name, const String& extra)
 {
-    return theDocumentManager.Add(type, subType, name);
+    return theDocumentManager.Add(type, subType, name, extra);
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::OnDocumentChange(Document* doc)

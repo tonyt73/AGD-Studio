@@ -22,7 +22,7 @@ protected:
 
 public:
                         __fastcall  ImageDocument(const String& name);
-    static  Document*   __fastcall  Create(const String& name) { return new ImageDocument(name); };
+    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ImageDocument(name); };
 
     virtual void        __fastcall  Save();
 
@@ -42,7 +42,7 @@ class SpriteDocument : public ImageDocument
 {
 public:
                         __fastcall  SpriteDocument(const String& name);
-    static Document*    __fastcall  Create(const String& name) { return new SpriteDocument(name); };
+    static Document*    __fastcall  Create(const String& name, const String& extra) { return new SpriteDocument(name); };
 };
 //---------------------------------------------------------------------------
 class ObjectDocument : public ImageDocument
@@ -51,7 +51,7 @@ private:
 
 public:
                         __fastcall  ObjectDocument(const String& name);
-    static  Document*   __fastcall  Create(const String& name) { return new ObjectDocument(name); };
+    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ObjectDocument(name); };
 };
 //---------------------------------------------------------------------------
 class TileDocument : public ImageDocument
@@ -60,7 +60,7 @@ private:
 
 public:
                         __fastcall  TileDocument(const String& name);
-    static  Document*   __fastcall  Create(const String& name) { return new TileDocument(name); };
+    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new TileDocument(name); };
 };
 //---------------------------------------------------------------------------
 #endif

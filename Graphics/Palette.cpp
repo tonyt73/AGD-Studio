@@ -71,6 +71,12 @@ void __fastcall Palette::OnEndObject(const String& object)
     }
 }
 //---------------------------------------------------------------------------
+void __fastcall Palette::Load(const String& name)
+{
+    m_ColorTable.clear();
+    JsonFile::Load(System::File::Combine(System::Path::Application, "Palettes" + System::Path::Separator + name + ".json"));
+}
+//---------------------------------------------------------------------------
 void __fastcall Palette::Save()
 {
 //    // {

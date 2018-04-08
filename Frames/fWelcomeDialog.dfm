@@ -13,8 +13,6 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     BevelOuter = bvNone
     TabOrder = 0
     StyleElements = [seFont, seBorder]
-    ExplicitLeft = 293
-    ExplicitWidth = 500
     object imgStartNewProject: TImage
       Left = 110
       Top = 228
@@ -7363,9 +7361,9 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       object lblMachines: TLabel
         Left = 27
         Top = 48
-        Width = 55
+        Width = 40
         Height = 20
-        Caption = 'Machine'
+        Caption = 'Profile'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -15
@@ -7436,13 +7434,13 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         ItemIndex = 4
         ParentFont = False
         TabOrder = 1
-        Text = 'Sinclair ZX Spectrum'
+        Text = 'ZX Spectrum 256x192 16 Colour'
         Items.Strings = (
-          'Acorn Atom'
+          'Acorn Atom 256x192 Monochrome'
           'BBC Model B'
           'Amstrad CPC'
           'Sinclair QL'
-          'Sinclair ZX Spectrum'
+          'ZX Spectrum 256x192 16 Colour'
           'Sinclair ZX Spectrum Next'
           'Timex Sinclair 1500'
           'Memotech 500/512'

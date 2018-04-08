@@ -54,7 +54,7 @@ protected:
 public:
                         __fastcall  Document(const String& name);
 
-    static  Document*   __fastcall  Create(const String& name)      { throw "Don't create this class";    }
+    static  Document*   __fastcall  Create(const String& name, const String& extra)      { throw "Don't create this class";    }
 
 const TPropertyInfoMap& __fastcall  GetPropertyInfo() const;
             String      __fastcall  GetPropertyInfo(const String& property) const;
@@ -75,6 +75,6 @@ __published:
     __property          String      Path        = { read = m_File                           };
 };
 //---------------------------------------------------------------------------
-typedef Document* (__fastcall *CreateDocumentFn)(const String& name);
+typedef Document* (__fastcall *CreateDocumentFn)(const String& name, const String& extra);
 //---------------------------------------------------------------------------
 #endif

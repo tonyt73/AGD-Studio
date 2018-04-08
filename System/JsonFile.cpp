@@ -217,7 +217,7 @@ void __fastcall JsonFile::Load(const String& file)
                 case TJsonToken::String:
                 {
                     Set(property, jr->Value.AsString());
-                    OnEndObject(property);
+                    if (inArray) OnEndObject(property);
                     // are we matched to a property?
                     if (depth == propertyDepth.top())
                     {
@@ -231,7 +231,7 @@ void __fastcall JsonFile::Load(const String& file)
                 }
                 case TJsonToken::Integer:
                     Set(property, jr->Value.AsInteger());
-                    OnEndObject(property);
+                    if (inArray) OnEndObject(property);
                     if (depth == propertyDepth.top())
                     {
                         depth--;
@@ -244,7 +244,7 @@ void __fastcall JsonFile::Load(const String& file)
                     {
                         float value = jr->Value.AsExtended();
                         Set(property, value);
-                        OnEndObject(property);
+                        if (inArray) OnEndObject(property);
                         if (depth == propertyDepth.top())
                         {
                             depth--;
@@ -256,7 +256,7 @@ void __fastcall JsonFile::Load(const String& file)
                     break;
                 case TJsonToken::Boolean:
                     Set(property, jr->Value.AsBoolean());
-                    OnEndObject(property);
+                    if (inArray) OnEndObject(property);
                     if (depth == propertyDepth.top())
                     {
                         depth--;

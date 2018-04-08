@@ -3,7 +3,8 @@
 #include "fMain.h"
 #include "ProjectManager.h"
 //#include "Graphics/Palette.h"
-#include "Graphics/GraphicsMode.h"
+//#include "Graphics/GraphicsMode.h"
+#include "Project/MachineConfig.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -29,8 +30,9 @@ void __fastcall TfrmMain::FormCreate(TObject *Sender)
     ShowWelcomeDialog();
 
     // TODO: Remove: Used to generate initial JSON config files
-    //std::unique_ptr<PaletteWriter> pw = std::make_unique<PaletteWriter>();
-    //std::unique_ptr<GraphicsModeWriter> pw = std::make_unique<GraphicsModeWriter>();
+    //auto pw = std::make_unique<PaletteWriter>();
+    //auto pw = std::make_unique<GraphicsModeWriter>();
+    auto pw = std::make_unique<MachineConfigWriter>();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmMain::FormCloseQuery(TObject *Sender, bool &CanClose)

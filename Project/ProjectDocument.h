@@ -3,6 +3,7 @@
 #define ProjectDocumentH
 //---------------------------------------------------------------------------
 #include "Project/Document.h"
+#include "Project/MachineConfig.h"
 //---------------------------------------------------------------------------
 typedef struct FileInfo
 {
@@ -18,8 +19,10 @@ private:
                 String              m_Version;
                 String              m_Author;
                 String              m_Description;
-                String              m_Machine;
+                String              m_MachineName;  // json loader
+                MachineConfig       m_MachineConfig;
                 FileInfo            m_FileInfo; // used by the json loader
+
 
                 FileList            m_Files;
 
@@ -29,10 +32,10 @@ private:
             void        __fastcall  OnEndObject(const String& object);
 
 public:
-                        __fastcall  ProjectDocument();
-                        __fastcall  ProjectDocument(const String& name);
-    static  Document*   __fastcall  Create(const String& name) { return new ProjectDocument(name); };
+                        __fastcall  ProjectDocument(const String& name, const String& machine);
+    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ProjectDocument(name, extra); };
 
+   const MachineConfig& __fastcall  Machine() const;
             void        __fastcall  Save();
             bool        __fastcall  Load();
 
@@ -43,11 +46,13 @@ public:
 
 __published:
     // Project settings
-    __property  String             Name = { read = m_Name, write = SetName };
-    __property  String          Version = { read = m_Version, write = m_Version };
-    __property  String           Author = { read = m_Author, write = m_Author };
-    __property  String      Description = { read = m_Description, write = m_Description };
-    __property  String          Machine = { read = m_Machine, write = m_Machine };
+    __property  String         Name = { read = m_Name, write = SetName };
+    __property  String      Version = { read = m_Version, write = m_Version };
+    __property  String       Author = { read = m_Author, write = m_Author };
+    __property  String  Description = { read = m_Description, write = m_Description };
+    // TODO:
+    // Keys
+    // Jump Table
 };
 //---------------------------------------------------------------------------
 #endif
