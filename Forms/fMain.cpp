@@ -2,7 +2,8 @@
 #include "agdx.pch.h"
 #include "fMain.h"
 #include "ProjectManager.h"
-#include "Graphics/Palette.h"
+//#include "Graphics/Palette.h"
+#include "Graphics/GraphicsMode.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -27,7 +28,9 @@ void __fastcall TfrmMain::FormCreate(TObject *Sender)
     // create the welcome screen
     ShowWelcomeDialog();
 
+    // TODO: Remove: Used to generate initial JSON config files
     //std::unique_ptr<PaletteWriter> pw = std::make_unique<PaletteWriter>();
+    //std::unique_ptr<GraphicsModeWriter> pw = std::make_unique<GraphicsModeWriter>();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmMain::FormCloseQuery(TObject *Sender, bool &CanClose)

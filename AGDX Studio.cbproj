@@ -148,8 +148,8 @@
         <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;fmx.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtprint.bpi</LinkPackageImports>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Build>27</VerInfo_Build>
-        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=1.0.6663.27;InternalName=agdx.exe;LegalCopyright=2018 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Programmed by Tony Thompson</VerInfo_Keys>
+        <VerInfo_Build>28</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=1.0.6663.28;InternalName=agdx.exe;LegalCopyright=2018 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Programmed by Tony Thompson</VerInfo_Keys>
         <VerInfo_Release>6663</VerInfo_Release>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <Icon_MainIcon>agdx_Icon.ico</Icon_MainIcon>
@@ -292,6 +292,10 @@
             <DependentOn>Project\ImageDocuments.h</DependentOn>
             <BuildOrder>27</BuildOrder>
         </CppCompile>
+        <CppCompile Include="Project\MachineConfiguration.cpp">
+            <DependentOn>Project\MachineConfiguration.h</DependentOn>
+            <BuildOrder>33</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Project\MapDocuments.cpp">
             <DependentOn>Project\MapDocuments.h</DependentOn>
             <BuildOrder>28</BuildOrder>
@@ -404,14 +408,14 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx32\libcgstl.dylib" Class="DependencyModule">
-                    <Platform Name="OSX32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName=".\Win64\Debug\AGDX Studio.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win64">
                         <RemoteName>AGDX_Studio.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx32\libcgstl.dylib" Class="DependencyModule">
+                    <Platform Name="OSX32">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -425,25 +429,25 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32250.dll" Class="DependencyModule">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName=".\Win32\Debug\AGDX_Studio.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>AGDX_Studio.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin64\cc64250.dll" Class="DependencyModule">
-                    <Platform Name="Win64">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName=".\Win64\Release\AGDX_Studio.exe" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win64">
                         <RemoteName>AGDX_Studio.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32250.dll" Class="DependencyModule">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin64\cc64250.dll" Class="DependencyModule">
+                    <Platform Name="Win64">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
