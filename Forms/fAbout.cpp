@@ -20,7 +20,7 @@ void __fastcall TfrmAbout::FormDeactivate(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmAbout::FormCreate(TObject *Sender)
 {
-    lblTitle1->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
+    //lblTitle1->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
     lblVersion->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
     lblBuild->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
     lblCopyright->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);

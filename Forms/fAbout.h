@@ -12,7 +12,6 @@ class TfrmAbout : public TForm
 {
 __published:    // IDE-managed Components
     TImage *imgLogo;
-    TLabel *lblTitle1;
     TLabel *lblVersion;
     TLabel *lblCopyright;
     TLabel *lblBuild;
