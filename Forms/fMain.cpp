@@ -32,7 +32,7 @@ void __fastcall TfrmMain::FormCreate(TObject *Sender)
     // TODO: Remove: Used to generate initial JSON config files
     //auto pw = std::make_unique<PaletteWriter>();
     //auto pw = std::make_unique<GraphicsModeWriter>();
-    auto pw = std::make_unique<MachineConfigWriter>();
+    //auto pw = std::make_unique<MachineConfigWriter>();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmMain::FormCloseQuery(TObject *Sender, bool &CanClose)

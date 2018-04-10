@@ -28,6 +28,7 @@
 #include "ElXTree.hpp"
 //---------------------------------------------------------------------------
 #include "Project/Document.h"
+#include <Vcl.ExtDlgs.hpp>
 //---------------------------------------------------------------------------
 class TfrmIDE : public TFrame
 {
@@ -110,13 +111,17 @@ __published:    // IDE-managed Components
     TLabel *lblPropertyInfo;
     TSplitter *Splitter1;
     TElXTree *tvProject;
-    TAction *actFileProjectNew;
+    TAction *actFileNewAsset;
     TMenuItem *NewAsset1;
     TMenuItem *N4;
     TAction *actEditFind;
     TAction *actEditFindNext;
     TAction *actEditReplace;
     TAction *actEditFindPrevious;
+    TAction *actFileProjectOpen;
+    TMenuItem *OpenProject1;
+    TMenuItem *mnuFileMru;
+    TOpenTextFileDialog *dlgOpen;
     void __fastcall actEditCopyExecute(TObject *Sender);
     void __fastcall actEditCutExecute(TObject *Sender);
     void __fastcall actEditPasteExecute(TObject *Sender);
@@ -133,16 +138,19 @@ __published:    // IDE-managed Components
     void __fastcall tvProjectItemSelectedChange(TObject *Sender, TElXTreeItem *Item);
     void __fastcall tvProjectDblClick(TObject *Sender);
     void __fastcall actFileProjectSaveExecute(TObject *Sender);
-    void __fastcall actFileProjectNewExecute(TObject *Sender);
+    void __fastcall actFileNewAssetExecute(TObject *Sender);
     void __fastcall actEditFindExecute(TObject *Sender);
     void __fastcall actEditFindNextExecute(TObject *Sender);
     void __fastcall actEditReplaceExecute(TObject *Sender);
     void __fastcall actEditFindPreviousExecute(TObject *Sender);
+    void __fastcall actFileProjectOpenExecute(TObject *Sender);
 
 private:    // User declarations
     void __fastcall UpdateProperties(Document* document);
     void __fastcall OnDocumentClose(TObject *Sender, TLMDockPanelCloseAction& action);
     void __fastcall RegisterDocumentEditors();
+    void __fastcall RefreshMruList();
+    void __fastcall mruOnClick(TObject *Sender);
 
 public:        // User declarations
     TNotifyEvent    FOnFormClose;

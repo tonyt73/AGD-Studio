@@ -6,7 +6,7 @@
 #include "Graphics/GraphicsMode.h"
 #include "Graphics/GraphicsTypes.h"
 //---------------------------------------------------------------------------
-class MachineConfig : public JsonFile
+class MachineConfig : public System::JsonFile
 {
 public:
 
@@ -45,10 +45,10 @@ public:
 };
 
 //---------------------------------------------------------------------------
-class MachineConfigWriter : public MachineConfig
-{
-public:
-                        __fastcall MachineConfigWriter();
-};
+//class MachineConfigWriter : public MachineConfig
+//{
+//public:
+//                        __fastcall MachineConfigWriter();
+//};
 //---------------------------------------------------------------------------
 #endif

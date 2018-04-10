@@ -2,6 +2,7 @@
 #ifndef ProjectDocumentH
 #define ProjectDocumentH
 //---------------------------------------------------------------------------
+#include <memory>
 #include "Project/Document.h"
 #include "Project/MachineConfig.h"
 //---------------------------------------------------------------------------
@@ -20,7 +21,7 @@ private:
                 String              m_Author;
                 String              m_Description;
                 String              m_MachineName;  // json loader
-                MachineConfig       m_MachineConfig;
+     std::unique_ptr<MachineConfig> m_MachineConfig;
                 FileInfo            m_FileInfo; // used by the json loader
 
 
@@ -35,7 +36,7 @@ public:
                         __fastcall  ProjectDocument(const String& name, const String& machine);
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ProjectDocument(name, extra); };
 
-   const MachineConfig& __fastcall  Machine() const;
+   const MachineConfig& __fastcall  MachineConfiguration() const;
             void        __fastcall  Save();
             bool        __fastcall  Load();
 
@@ -50,6 +51,7 @@ __published:
     __property  String      Version = { read = m_Version, write = m_Version };
     __property  String       Author = { read = m_Author, write = m_Author };
     __property  String  Description = { read = m_Description, write = m_Description };
+    __property  String      Machine = { read = m_MachineName };
     // TODO:
     // Keys
     // Jump Table

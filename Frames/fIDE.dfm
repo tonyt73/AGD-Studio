@@ -324,7 +324,7 @@ object frmIDE: TfrmIDE
     object ToolButton15: TToolButton
       Left = 0
       Top = 0
-      Action = actFileProjectNew
+      Action = actFileNewAsset
       ParentShowHint = False
       ShowHint = True
     end
@@ -522,13 +522,13 @@ object frmIDE: TfrmIDE
       Hint = 'Zoom Reset'
       ImageIndex = 18
     end
-    object actFileProjectNew: TAction
+    object actFileNewAsset: TAction
       Category = 'File'
       Caption = 'New Asset...'
       Hint = 'Create a new game asset'
       ImageIndex = 2
       ShortCut = 16462
-      OnExecute = actFileProjectNewExecute
+      OnExecute = actFileNewAssetExecute
     end
     object actEditFind: TAction
       Category = 'Edit'
@@ -556,6 +556,14 @@ object frmIDE: TfrmIDE
       ShortCut = 8306
       OnExecute = actEditFindPreviousExecute
     end
+    object actFileProjectOpen: TAction
+      Category = 'File'
+      Caption = 'Open Project...'
+      Hint = 'Open an existing project.'
+      ImageIndex = 12
+      ShortCut = 16463
+      OnExecute = actFileProjectOpenExecute
+    end
   end
   object imgIconsActive: TImageList
     ColorDepth = cd32Bit
@@ -563,7 +571,7 @@ object frmIDE: TfrmIDE
     Left = 20
     Top = 140
     Bitmap = {
-      494C0101150018000C0110001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010115001800100110001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1369,10 +1377,18 @@ object frmIDE: TfrmIDE
     object mnuFile: TMenuItem
       Caption = '&File'
       object NewAsset1: TMenuItem
-        Action = actFileProjectNew
+        Action = actFileNewAsset
       end
       object N4: TMenuItem
         Caption = '-'
+      end
+      object OpenProject1: TMenuItem
+        Action = actFileProjectOpen
+      end
+      object mnuFileMru: TMenuItem
+        Caption = 'Reopen'
+        object TMenuItem
+        end
       end
       object mnuFileSave: TMenuItem
         Action = actFileProjectSave
@@ -1439,7 +1455,7 @@ object frmIDE: TfrmIDE
     Left = 92
     Top = 140
     Bitmap = {
-      494C010115003000DC0010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010115003000E00010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2248,7 +2264,7 @@ object frmIDE: TfrmIDE
     Left = 24
     Top = 200
     Bitmap = {
-      494C010105000800640010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010105000800680010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000080827BFF80817DFF8080
       80FF80817DFF808080FF00000000000000001B415BB23D93CFFF3D91CEFF3D92
@@ -2524,7 +2540,7 @@ object frmIDE: TfrmIDE
     Left = 102
     Top = 200
     Bitmap = {
-      494C0101170030002C0210001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010117003000300210001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000023000000330000
       0033000000330000003300000033000000330000003300000033000000330000
@@ -3322,5 +3338,13 @@ object frmIDE: TfrmIDE
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000}
+  end
+  object dlgOpen: TOpenTextFileDialog
+    DefaultExt = 'agdx'
+    Filter = 'AGDX Project|*.agdx|All Files|*.*'
+    Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
+    Title = 'Open an Existing AGDX Project'
+    Left = 172
+    Top = 148
   end
 end

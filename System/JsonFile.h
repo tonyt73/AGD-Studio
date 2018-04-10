@@ -10,6 +10,8 @@
 namespace System
 {
 //---------------------------------------------------------------------------
+// This class and it's descendants MUST BE instantiated dynamically using 'new'
+//---------------------------------------------------------------------------
 class JsonFile : public TPersistent
 {
 private:

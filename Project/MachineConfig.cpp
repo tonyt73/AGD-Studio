@@ -4,16 +4,10 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall MachineConfig::MachineConfig()
-: JsonFile()
-{
-}
-//---------------------------------------------------------------------------
 __fastcall MachineConfig::MachineConfig(const String& name)
 : JsonFile()
 , m_Name(name)
 {
-    Load(name);
 }
 //---------------------------------------------------------------------------
 const ImageSizing& __fastcall MachineConfig::GetImageSizing(ImageTypes type) const
@@ -176,38 +170,38 @@ void __fastcall MachineConfig::Save()
 //
 //    Save();
 //}
-__fastcall MachineConfigWriter::MachineConfigWriter()
-: MachineConfig()
-{
-    m_Name = "Acorn Atom 256x192 Monochrome";
-    m_GraphicsModeName = "Acorn Atom Monochrome";
-    m_ImageSizing[itObject].Minimum.cx = 16;
-    m_ImageSizing[itObject].Minimum.cy = 16;
-    m_ImageSizing[itObject].Maximum.cx = 16;
-    m_ImageSizing[itObject].Maximum.cy = 16;
-    m_ImageSizing[itObject].Step.cx = 0;
-    m_ImageSizing[itObject].Step.cy = 0;
-    m_ImageSizing[itSprite].Minimum.cx = 16;
-    m_ImageSizing[itSprite].Minimum.cy = 16;
-    m_ImageSizing[itSprite].Maximum.cx = 16;
-    m_ImageSizing[itSprite].Maximum.cy = 16;
-    m_ImageSizing[itSprite].Step.cx = 0;
-    m_ImageSizing[itSprite].Step.cy = 0;
-    m_ImageSizing[itTile].Minimum.cx = 8;
-    m_ImageSizing[itTile].Minimum.cy = 8;
-    m_ImageSizing[itTile].Maximum.cx = 128;
-    m_ImageSizing[itTile].Maximum.cy = 128;
-    m_ImageSizing[itTile].Step.cx = 8;
-    m_ImageSizing[itTile].Step.cy = 8;
-    m_ImageSizing[itCharacterSet].Minimum.cx = 8;
-    m_ImageSizing[itCharacterSet].Minimum.cy = 8;
-    m_ImageSizing[itCharacterSet].Maximum.cx = 8;
-    m_ImageSizing[itCharacterSet].Maximum.cy = 8;
-    m_ImageSizing[itCharacterSet].Step.cx = 0;
-    m_ImageSizing[itCharacterSet].Step.cy = 0;
-    m_CompilerInfo.Path = "Compilers\\Atom-Compile.exe";
-    m_CompilerInfo.Parameters = "%file -tap -sna";
-
-    Save();
-}
+//__fastcall MachineConfigWriter::MachineConfigWriter()
+//: MachineConfig()
+//{
+//    m_Name = "Acorn Atom 256x192 Monochrome";
+//    m_GraphicsModeName = "Acorn Atom Monochrome";
+//    m_ImageSizing[itObject].Minimum.cx = 16;
+//    m_ImageSizing[itObject].Minimum.cy = 16;
+//    m_ImageSizing[itObject].Maximum.cx = 16;
+//    m_ImageSizing[itObject].Maximum.cy = 16;
+//    m_ImageSizing[itObject].Step.cx = 0;
+//    m_ImageSizing[itObject].Step.cy = 0;
+//    m_ImageSizing[itSprite].Minimum.cx = 16;
+//    m_ImageSizing[itSprite].Minimum.cy = 16;
+//    m_ImageSizing[itSprite].Maximum.cx = 16;
+//    m_ImageSizing[itSprite].Maximum.cy = 16;
+//    m_ImageSizing[itSprite].Step.cx = 0;
+//    m_ImageSizing[itSprite].Step.cy = 0;
+//    m_ImageSizing[itTile].Minimum.cx = 8;
+//    m_ImageSizing[itTile].Minimum.cy = 8;
+//    m_ImageSizing[itTile].Maximum.cx = 128;
+//    m_ImageSizing[itTile].Maximum.cy = 128;
+//    m_ImageSizing[itTile].Step.cx = 8;
+//    m_ImageSizing[itTile].Step.cy = 8;
+//    m_ImageSizing[itCharacterSet].Minimum.cx = 8;
+//    m_ImageSizing[itCharacterSet].Minimum.cy = 8;
+//    m_ImageSizing[itCharacterSet].Maximum.cx = 8;
+//    m_ImageSizing[itCharacterSet].Maximum.cy = 8;
+//    m_ImageSizing[itCharacterSet].Step.cx = 0;
+//    m_ImageSizing[itCharacterSet].Step.cy = 0;
+//    m_CompilerInfo.Path = "Compilers\\Atom-Compile.exe";
+//    m_CompilerInfo.Parameters = "%file -tap -sna";
+//
+//    Save();
+//}
 

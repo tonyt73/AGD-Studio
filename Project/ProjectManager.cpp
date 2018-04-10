@@ -90,7 +90,7 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
     {
         ClearTree(name);
         // create a new project file, but load the file if it exists
-        auto config = dynamic_cast<ProjectDocument*>(Add("Game", "Configuration", name + "|" + machine));
+        auto config = dynamic_cast<ProjectDocument*>(Add("Game", "Configuration", name, machine));
         assert(config != nullptr);
         if (config->Files().size() == 0)
         {
@@ -121,6 +121,7 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::Open(const String& file)
 {
+    theDocumentManager.Save();
     auto name = System::File::NameWithoutExtension(file);
     System::Path::ProjectName = name;
     ClearTree(name);

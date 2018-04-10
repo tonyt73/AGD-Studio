@@ -58,6 +58,7 @@ void __fastcall TfrmIDE::OnActivate()
     Color = StyleServices()->GetStyleColor(scGenericGradientBase);
     tvProject->BackGroundColor = StyleServices()->GetStyleColor(scGenericGradientBase);
     dsIDE->Invalidate();
+    RefreshMruList();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditCopyExecute(TObject *Sender)
@@ -292,9 +293,41 @@ void __fastcall TfrmIDE::tvProjectDblClick(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actFileProjectNewExecute(TObject *Sender)
+void __fastcall TfrmIDE::actFileNewAssetExecute(TObject *Sender)
 {
     // TODO: Show create new asset dialog
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actFileProjectOpenExecute(TObject *Sender)
+{
+    dlgOpen->InitialDir = System::Path::Projects;
+    if (dlgOpen->Execute())
+    {
+        theProjectManager.Open(dlgOpen->FileName);
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::RefreshMruList()
+{
+    mnuFileMru->Clear();
+    auto name = "mruItem";
+    auto i = 831263;
+
+    for (const auto& item : theProjectManager.GetMostRecentlyUsedList())
+    {
+        auto mi = NewItem(item.Path, 0, false, true, mruOnClick, 0, name+IntToStr(++i));
+        mi->OnClick = mruOnClick;
+        mnuFileMru->Add(mi);
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::mruOnClick(TObject *Sender)
+{
+    auto mi = dynamic_cast<TMenuItem*>(Sender);
+    if (mi)
+    {
+        theProjectManager.Open(mi->Caption);
+    }
 }
 //---------------------------------------------------------------------------
 

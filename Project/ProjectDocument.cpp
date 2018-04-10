@@ -11,7 +11,7 @@
 __fastcall ProjectDocument::ProjectDocument(const String& name, const String& machine)
 : Document(name)
 , m_MachineName(machine)
-, m_MachineConfig(machine)
+, m_MachineConfig(nullptr)
 , m_Version("0.1")
 , m_Description("")
 , m_Author("Anonymous")
@@ -36,6 +36,8 @@ __fastcall ProjectDocument::ProjectDocument(const String& name, const String& ma
     m_PropertyMap[".{}.Files.[].{}.SubType"] = &m_FileInfo.SubType;
 
     ::Messaging::Bus::Subscribe<OnChange<String>>(OnChangeString);
+
+    m_MachineConfig = std::make_unique<MachineConfig>(machine);
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectDocument::OnEndObject(const String& object)
@@ -46,9 +48,9 @@ void __fastcall ProjectDocument::OnEndObject(const String& object)
     }
 }
 //---------------------------------------------------------------------------
-const MachineConfig& __fastcall ProjectDocument::Machine() const
+const MachineConfig& __fastcall ProjectDocument::MachineConfiguration() const
 {
-    return m_MachineConfig;
+    return *m_MachineConfig;
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectDocument::Save()
@@ -58,7 +60,7 @@ void __fastcall ProjectDocument::Save()
         Write("Version", m_Version);
         Write("Author", m_Author);
         Write("Description", m_Description);
-        Write("Machine", m_MachineConfig.Name);
+        Write("Machine", m_MachineConfig->Name);
     Pop();  // Project
     ArrayStart("Files");
     for (const auto& fi : m_Files)
@@ -78,7 +80,7 @@ bool __fastcall ProjectDocument::Load()
     m_File = GetFile();
     auto result = Document::Load();
     // Load the machine
-    m_MachineConfig.Load(m_MachineName);
+    m_MachineConfig->Load(m_MachineName);
     return result;
 }
 //---------------------------------------------------------------------------

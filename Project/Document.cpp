@@ -7,7 +7,8 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall Document::Document(const String& name)
-: m_Name(name)
+: JsonFile()
+, m_Name(name)
 , m_Type("No Type")
 , m_SubType("No SubType")
 , m_Extension("json")
