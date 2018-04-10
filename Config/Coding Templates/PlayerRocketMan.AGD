@@ -1,0 +1,55 @@
+; AGD template for platform controls in the Cybernoid/Jetpac style.
+; By J. Cauldwell, December 2012.
+
+; Player moving right.
+IF KEY RIGHT
+    IF Y >= RIGHTEDGE
+        SCREENRIGHT
+        LET Y = LEFTEDGE
+        EXIT
+    ENDIF
+    IF CANGORIGHT
+        LET IMAGE = 0          ; change this to your "facing right" image.
+        ANIMATE
+        SPRITERIGHT
+    ENDIF
+ENDIF
+
+; Player moving left.
+IF KEY LEFT
+    IF Y <= LEFTEDGE
+        SCREENLEFT
+        LET Y = RIGHTEDGE
+        EXIT
+    ELSE
+        IF CANGOLEFT
+            LET IMAGE = 0      ; change this to your "facing left" image.
+            ANIMATE
+            SPRITELEFT
+        ENDIF
+    ENDIF
+ENDIF
+
+; Player moving up.
+IF KEY 3
+    IF CANGOUP
+        IF X <= TOPEDGE
+            SCREENUP
+            LET X = BOTTOMEDGE
+        ELSE
+            ANIMATE
+            SPRITEUP
+        ENDIF
+    ENDIF
+ELSE
+; Gravity.
+    IF X >= BOTTOMEDGE
+        SCREENDOWN
+        LET X = TOPEDGE
+    Else
+        IF CANGODOWN
+            ANIMATE
+            SPRITEDOWN
+        ENDIF
+    ENDIF
+ENDIF

@@ -1,0 +1,22 @@
+{
+  "Application": {
+    "Style": "Luna"
+  },
+  "Welcome": {
+    "Position": {
+      "X": 1284,
+      "Y": 453
+    }
+  },
+  "MainWindow": {
+    "Position": {
+      "X": 1239,
+      "Y": 240
+    },
+    "Size": {
+      "Width": 1812,
+      "Height": 977
+    },
+    "WindowState": 0
+  }
+}

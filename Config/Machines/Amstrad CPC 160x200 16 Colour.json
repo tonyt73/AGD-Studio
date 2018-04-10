@@ -1,0 +1,66 @@
+{
+  "Name": "Amstrad CPC 160x200 16 Colour",
+  "GraphicsMode": "Amstrad CPC Mode 0",
+  "ImageSizing": {
+    "Object": {
+      "Minimum": {
+        "Width": 8,
+        "Height": 16
+      },
+      "Maximum": {
+        "Width": 8,
+        "Height": 16
+      },
+      "Step": {
+        "Width": 0,
+        "Height": 0
+      }
+    },
+    "Sprite": {
+      "Minimum": {
+        "Width": 8,
+        "Height": 16
+      },
+      "Maximum": {
+        "Width": 8,
+        "Height": 16
+      },
+      "Step": {
+        "Width": 0,
+        "Height": 0
+      }
+    },
+    "Tile": {
+      "Minimum": {
+        "Width": 4,
+        "Height": 8
+      },
+      "Maximum": {
+        "Width": 80,
+        "Height": 96
+      },
+      "Step": {
+        "Width": 8,
+        "Height": 8
+      }
+    },
+    "CharacterSet": {
+      "Minimum": {
+        "Width": 8,
+        "Height": 8
+      },
+      "Maximum": {
+        "Width": 8,
+        "Height": 8
+      },
+      "Step": {
+        "Width": 0,
+        "Height": 0
+      }
+    }
+  },
+  "CompilerInformation": {
+    "Path": "Compilers\\CPC-Compile.exe",
+    "Parameters": "%file -tap -sna"
+  }
+}

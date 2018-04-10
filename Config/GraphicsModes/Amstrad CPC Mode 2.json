@@ -1,0 +1,30 @@
+{
+  "Name": "Amstrad CPC Mode 1",
+  "Palette": "Amstrad CPC",
+  "BufferType": 0,
+  "Width": 640,
+  "Height": 200,
+  "ScalarX": 1,
+  "ScalarY": 2,
+  "BitsPerPixel": 8,
+  "TranparentColor": 0,
+  "SupportsLogicalColorRemapping" : true,
+  "ExportInformation" : {
+     "Object" : {
+		"BitmapDataOnly" : true
+	 },
+     "Sprite" : {
+		"BitmapDataOnly" : true
+	 },
+     "Tile" : {
+		"BitmapDataOnly" : true
+	 },
+     "CharacterSet" : {
+		"BitmapDataOnly" : true
+	 }
+  },
+  "LogicalColors": [
+    0,
+    26
+  ]
+}

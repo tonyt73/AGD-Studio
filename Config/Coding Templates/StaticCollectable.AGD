@@ -1,0 +1,10 @@
+; AGD template for static collectable sprites.
+; By J. Cauldwell, September 2015.
+
+IF COLLISION 0                          ; check for collision with player.
+
+    REMOVE                              ; collect the sprite.
+
+; now put any code for scoring points, playing sounds, counting objects collected here.
+
+ENDIF

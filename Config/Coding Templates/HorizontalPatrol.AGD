@@ -1,0 +1,38 @@
+; AGD template for horizontally-patrolling nasties.
+; By J. Cauldwell, December 2012.
+
+IF SETTINGA = 0
+; Move left if possible.
+    IF CANGOLEFT
+; You may want to change the IMAGE to face left here.
+        SPRITELEFT
+        SUBTRACT 16 FROM X
+        IF CANGODOWN
+            LET SETTINGA = 1
+        ENDIF
+        ADD 16 TO X
+    ELSE
+        LET SETTINGA = 1
+    ENDIF
+ELSE
+; Move right if possible.
+    IF CANGORIGHT
+; You may want to change the IMAGE to face right here.
+        SPRITERIGHT
+        ADD 16 TO X
+        IF CANGODOWN
+            LET SETTINGA = 0
+        ENDIF
+        SUBTRACT 16 FROM X
+    ELSE
+        LET SETTINGA = 0
+    ENDIF
+ENDIF
+
+ANIMATE
+
+;Kill player if this sprite collides with him/her.
+IF COLLISION 0
+    KILL
+ENDIF
+
