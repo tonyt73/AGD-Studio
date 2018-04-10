@@ -66,13 +66,21 @@ void __fastcall TfrmWelcomeDialog::lblOpenExistingProjectClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::lblImportAGDSnapshotClick(TObject *Sender)
 {
-    dlgOpen->InitialDir = System::Path::Projects;
-    if (dlgOpen->Execute())
+    dlgImport->InitialDir = System::Path::Projects;
+    if (dlgImport->Execute())
     {
-        // TODO: Implement Import
-        auto name = System::File::NameWithExtension(dlgOpen->FileName);
-        theProjectManager.New(name, "Sinclair ZX Spectrum");
-        if (FOnDone) FOnDone(this);
+        // TODO: Check the file is valid
+        if (false)
+        {
+            // TODO: Implement Import
+            auto name = System::File::NameWithExtension(dlgImport->FileName);
+            theProjectManager.New(name, "ZX Spectrum 256x192 16 Colour");
+            if (FOnDone) FOnDone(this);
+        }
+        else
+        {
+            MessageDlg("File is not a valid ZX Spectrum 48K Snapshot", mtError, TMsgDlgButtons() << mbOK, 0);
+        }
     }
 }
 //---------------------------------------------------------------------------
@@ -129,8 +137,6 @@ void __fastcall TfrmWelcomeDialog::UpdateColors()
 {
     panMain->Color = StyleServices()->GetStyleColor(scGenericGradientBase);
     panRecentProjects->Color = StyleServices()->GetStyleColor(scGenericGradientEnd);
-    //lblTitle->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
-    //lblVersion->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextInactive);
     lblStartNewProject->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
     lblOpenExistingProject->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
     lblImportAGDSnapshot->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
@@ -178,5 +184,4 @@ void __fastcall TfrmWelcomeDialog::edtNameKeyDown(TObject *Sender, WORD &Key, TS
     }
 }
 //---------------------------------------------------------------------------
-
 

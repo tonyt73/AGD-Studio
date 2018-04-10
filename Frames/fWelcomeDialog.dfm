@@ -13,8 +13,6 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     BevelOuter = bvNone
     TabOrder = 0
     StyleElements = [seFont, seBorder]
-    ExplicitLeft = 361
-    ExplicitWidth = 501
     object imgStartNewProject: TImage
       Left = 110
       Top = 266
@@ -6250,8 +6248,8 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         A4FF0FD26170FB48BB86440000000049454E44AE426082}
     end
     object imgConfigure: TImage
-      Left = 383
-      Top = 409
+      Left = 4
+      Top = 410
       Width = 16
       Height = 16
       Cursor = crHandPoint
@@ -6287,8 +6285,8 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       Visible = False
     end
     object imgDownArrow: TImage
-      Left = 474
-      Top = 409
+      Left = 88
+      Top = 410
       Width = 16
       Height = 16
       Cursor = crHandPoint
@@ -6307,9 +6305,9 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       Visible = False
     end
     object lblConfigure: TLabel
-      Left = 384
-      Top = 409
-      Width = 109
+      Left = 5
+      Top = 410
+      Width = 99
       Height = 16
       Cursor = crHandPoint
       Alignment = taCenter
@@ -6328,11 +6326,126 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       OnMouseEnter = lblStartNewProjectMouseEnter
       OnMouseLeave = lblStartNewProjectMouseLeave
     end
+    object panStartNew: TPanel
+      Left = 110
+      Top = 291
+      Width = 371
+      Height = 135
+      BevelOuter = bvNone
+      TabOrder = 1
+      DesignSize = (
+        371
+        135)
+      object lblMachines: TLabel
+        Left = 27
+        Top = 48
+        Width = 40
+        Height = 20
+        Caption = 'Profile'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Segoe UI Semilight'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label1: TLabel
+        Left = 27
+        Top = 9
+        Width = 40
+        Height = 20
+        Caption = 'Name'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Segoe UI Semilight'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblFile: TLabel
+        Left = 27
+        Top = 129
+        Width = 326
+        Height = 17
+        Anchors = [akLeft, akTop, akRight]
+        AutoSize = False
+        EllipsisPosition = epPathEllipsis
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Comfortaa'
+        Font.Style = []
+        ParentFont = False
+      end
+      object btnCancel: TButton
+        Left = 262
+        Top = 91
+        Width = 91
+        Height = 32
+        Cancel = True
+        Caption = 'Cancel'
+        TabOrder = 2
+        OnClick = btnCreateClick
+      end
+      object btnCreate: TButton
+        Left = 165
+        Top = 91
+        Width = 91
+        Height = 32
+        Caption = 'Create'
+        Enabled = False
+        ModalResult = 1
+        TabOrder = 3
+        OnClick = btnCreateClick
+      end
+      object cmbMachines: TComboBox
+        Left = 101
+        Top = 45
+        Width = 252
+        Height = 28
+        Style = csDropDownList
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Segoe UI Semilight'
+        Font.Style = []
+        ItemIndex = 4
+        ParentFont = False
+        TabOrder = 1
+        Text = 'ZX Spectrum 256x192 16 Colour'
+        Items.Strings = (
+          'Acorn Atom 256x192 Monochrome'
+          'BBC Model B'
+          'Amstrad CPC'
+          'Sinclair QL'
+          'ZX Spectrum 256x192 16 Colour'
+          'Sinclair ZX Spectrum Next'
+          'Timex Sinclair 1500'
+          'Memotech 500/512'
+          'Enterprise 64/128')
+      end
+      object edtName: TEdit
+        Left = 101
+        Top = 3
+        Width = 252
+        Height = 31
+        Anchors = [akLeft, akTop, akRight]
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Comfortaa'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        OnChange = edtNameChange
+        OnKeyDown = edtNameKeyDown
+      end
+    end
     object panButtons: TPanel
       Left = 110
       Top = 291
       Width = 363
-      Height = 115
+      Height = 135
       BevelOuter = bvNone
       ParentColor = True
       TabOrder = 0
@@ -6505,121 +6618,6 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         OnChange = cmbThemesChange
       end
     end
-    object panStartNew: TPanel
-      Left = 110
-      Top = 291
-      Width = 371
-      Height = 115
-      BevelOuter = bvNone
-      TabOrder = 1
-      DesignSize = (
-        371
-        115)
-      object lblMachines: TLabel
-        Left = 27
-        Top = 48
-        Width = 40
-        Height = 20
-        Caption = 'Profile'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Segoe UI Semilight'
-        Font.Style = []
-        ParentFont = False
-      end
-      object Label1: TLabel
-        Left = 27
-        Top = 9
-        Width = 40
-        Height = 20
-        Caption = 'Name'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Segoe UI Semilight'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lblFile: TLabel
-        Left = 27
-        Top = 129
-        Width = 326
-        Height = 17
-        Anchors = [akLeft, akTop, akRight]
-        AutoSize = False
-        EllipsisPosition = epPathEllipsis
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Comfortaa'
-        Font.Style = []
-        ParentFont = False
-      end
-      object btnCancel: TButton
-        Left = 262
-        Top = 79
-        Width = 91
-        Height = 32
-        Cancel = True
-        Caption = 'Cancel'
-        TabOrder = 2
-        OnClick = btnCreateClick
-      end
-      object btnCreate: TButton
-        Left = 165
-        Top = 79
-        Width = 91
-        Height = 32
-        Caption = 'Create'
-        Enabled = False
-        ModalResult = 1
-        TabOrder = 3
-        OnClick = btnCreateClick
-      end
-      object cmbMachines: TComboBox
-        Left = 101
-        Top = 45
-        Width = 252
-        Height = 28
-        Style = csDropDownList
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Segoe UI Semilight'
-        Font.Style = []
-        ItemIndex = 4
-        ParentFont = False
-        TabOrder = 1
-        Text = 'ZX Spectrum 256x192 16 Colour'
-        Items.Strings = (
-          'Acorn Atom 256x192 Monochrome'
-          'BBC Model B'
-          'Amstrad CPC'
-          'Sinclair QL'
-          'ZX Spectrum 256x192 16 Colour'
-          'Sinclair ZX Spectrum Next'
-          'Timex Sinclair 1500'
-          'Memotech 500/512'
-          'Enterprise 64/128')
-      end
-      object edtName: TEdit
-        Left = 101
-        Top = 3
-        Width = 252
-        Height = 31
-        Anchors = [akLeft, akTop, akRight]
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Comfortaa'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 0
-        OnChange = edtNameChange
-        OnKeyDown = edtNameKeyDown
-      end
-    end
   end
   object panRecentProjects: TPanel
     Left = 0
@@ -6653,5 +6651,13 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     Title = 'Open an Existing AGDX Project'
     Left = 308
     Top = 132
+  end
+  object dlgImport: TOpenTextFileDialog
+    DefaultExt = 'sna'
+    Filter = 'ZX Spectrum 48K Snapshot|*.sna|All Files|*.*'
+    Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
+    Title = 'Import an Existing AGD snapshot'
+    Left = 148
+    Top = 172
   end
 end

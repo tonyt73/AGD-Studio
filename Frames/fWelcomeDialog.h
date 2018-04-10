@@ -12,6 +12,8 @@
 #include <Vcl.ExtDlgs.hpp>
 //---------------------------------------------------------------------------
 #include "fSelectionPanel.h"
+#include <Vcl.Buttons.hpp>
+#include <Vcl.Samples.Spin.hpp>
 //---------------------------------------------------------------------------
 class TfrmWelcomeDialog : public TFrame
 {
@@ -44,6 +46,7 @@ __published:    // IDE-managed Components
     TLabel *Label1;
     TEdit *edtName;
     TLabel *lblFile;
+    TOpenTextFileDialog *dlgImport;
     void __fastcall lblStartNewProjectMouseEnter(TObject *Sender);
     void __fastcall lblStartNewProjectMouseLeave(TObject *Sender);
     void __fastcall cmbThemesChange(TObject *Sender);
