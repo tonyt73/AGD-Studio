@@ -25,6 +25,16 @@ public:
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new EventDocument(name); };
 };
 //---------------------------------------------------------------------------
+class MessageDocument : public TextDocument
+{
+private:
+
+public:
+                        __fastcall  MessageDocument(const String& name);
+
+    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new MessageDocument(name); };
+};
+//---------------------------------------------------------------------------
 class SfxDocument : public TextDocument
 {
 private:

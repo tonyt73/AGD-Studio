@@ -24,6 +24,7 @@ __fastcall DocumentManager::DocumentManager()
     Register("Game", "Configuration", &ProjectDocument::Create);
     Register("Text", "Plain", &TextDocument::Create);
     Register("Text", "Event", &EventDocument::Create);
+    Register("Text", "Message", &MessageDocument::Create);
     Register("Image", "Single", &ImageDocument::Create);
     Register("Image", "Object", &ObjectDocument::Create);
     Register("Image", "Sprite", &SpriteDocument::Create);

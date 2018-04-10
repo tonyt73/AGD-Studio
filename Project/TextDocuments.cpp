@@ -45,6 +45,24 @@ __fastcall EventDocument::EventDocument(const String& name)
     m_File = GetFile();
 }
 //---------------------------------------------------------------------------
+__fastcall MessageDocument::MessageDocument(const String& name)
+: TextDocument(name)
+{
+    m_SubType = "Message";
+    m_Folder = "Game\\Messages";
+    m_Extension = "txt";
+    RegisterProperty("Name", "Details", "The name of the messages text file");
+    auto file = GetFile();
+    if (m_Name != "unnamed" && !System::File::Exists(file))
+    {
+        // create the file and add an AGD header
+        auto date = DateTimeToStr(Now());
+        auto header = ";\r\n; " + System::Path::ProjectName + "\r\n; An AGDX game\r\n; Created: " + date + "\r\n; Simply place a new message per line. Comments ';' are stripped before compilation\r\n;";
+        System::File::WriteText(file, header);
+    }
+    m_File = GetFile();
+}
+//---------------------------------------------------------------------------
 __fastcall SfxDocument::SfxDocument(const String& name)
 : TextDocument(name)
 {

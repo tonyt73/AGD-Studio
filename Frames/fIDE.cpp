@@ -39,6 +39,7 @@ void __fastcall TfrmIDE::RegisterDocumentEditors()
     DocumentEditorFactory::Register("Assets\\Files", &TfrmEditorCode::Create);
     DocumentEditorFactory::Register("Game\\Code", &TfrmEditorCode::Create);
     DocumentEditorFactory::Register("Game\\Events", &TfrmEditorCode::Create);
+    DocumentEditorFactory::Register("Game\\Messages", &TfrmEditorCode::Create);
     DocumentEditorFactory::Register("Assets\\Sounds", &TfrmEditorCode::Create);
     DocumentEditorFactory::Register("Assets\\Images", &TfrmEditorImage::Create);
     DocumentEditorFactory::Register("Assets\\Sprites", &TfrmEditorImage::Create);

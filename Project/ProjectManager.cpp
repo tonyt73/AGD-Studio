@@ -76,6 +76,7 @@ void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* 
         else if (caption == "maps"      ) index = tiAssetMap;
         else if (caption == "sounds"    ) index = tiAssetSfx;
         else if (caption == "events"    ) index = tiConfiguration;
+        else if (caption == "messages"  ) index = tiConfiguration;
         else if (caption == "configuration") index = tiConfiguration;
     }
     node->ImageIndex = index;
@@ -94,21 +95,27 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
         assert(config != nullptr);
         if (config->Files().size() == 0)
         {
-            Add("Text","Event", "Player Control (type 0)");
-            Add("Text","Event", "Sprite type 1");
-            Add("Text","Event", "Sprite type 2");
-            Add("Text","Event", "Sprite type 3");
-            Add("Text","Event", "Sprite type 4");
-            Add("Text","Event", "Sprite type 5");
-            Add("Text","Event", "Sprite type 6");
-            Add("Text","Event", "Sprite type 7");
-            Add("Text","Event", "Game initialisation");
-            Add("Text","Event", "Restart screen");
-            Add("Text","Event", "Initialise sprite");
-            Add("Text","Event", "Main loop 1");
-            Add("Text","Event", "Main loop 2");
-            Add("Text","Event", "Completed game");
-            Add("Text","Event", "Kill player");
+            Add("Text", "Event", "Player Control");
+            Add("Text", "Event", "Sprite type 1");
+            Add("Text", "Event", "Sprite type 2");
+            Add("Text", "Event", "Sprite type 3");
+            Add("Text", "Event", "Sprite type 4");
+            Add("Text", "Event", "Sprite type 5");
+            Add("Text", "Event", "Sprite type 6");
+            Add("Text", "Event", "Sprite type 7");
+            Add("Text", "Event", "Sprite type 8");
+            Add("Text", "Event", "Game initialisation");
+            Add("Text", "Event", "Initialise sprite");
+            Add("Text", "Event", "Kill player");
+            Add("Text", "Event", "Introduction Menu");
+            Add("Text", "Event", "Main loop 1");
+            Add("Text", "Event", "Main loop 2");
+            Add("Text", "Event", "Restart screen");
+            Add("Text", "Event", "Fell too far");
+            Add("Text", "Event", "Lost game");
+            Add("Text", "Event", "Completed game");
+            Add("Text", "Event", "New High Score");
+            Add("Text", "Message", "Messages");
         }
         else
         {
