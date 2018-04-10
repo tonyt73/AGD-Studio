@@ -20,8 +20,6 @@ __published:    // IDE-managed Components
     TLabel *lblStartNewProject;
     TImage *imgStartNewProject;
     TImage *imgLogo;
-    TLabel *lblTitle;
-    TLabel *lblVersion;
     TPanel *panRecentProjects;
     TImage *imgConfigure;
     TLabel *lblConfigure;

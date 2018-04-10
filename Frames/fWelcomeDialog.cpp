@@ -129,8 +129,8 @@ void __fastcall TfrmWelcomeDialog::UpdateColors()
 {
     panMain->Color = StyleServices()->GetStyleColor(scGenericGradientBase);
     panRecentProjects->Color = StyleServices()->GetStyleColor(scGenericGradientEnd);
-    lblTitle->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
-    lblVersion->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextInactive);
+    //lblTitle->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
+    //lblVersion->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextInactive);
     lblStartNewProject->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
     lblOpenExistingProject->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
     lblImportAGDSnapshot->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
@@ -178,4 +178,5 @@ void __fastcall TfrmWelcomeDialog::edtNameKeyDown(TObject *Sender, WORD &Key, TS
     }
 }
 //---------------------------------------------------------------------------
+
 
