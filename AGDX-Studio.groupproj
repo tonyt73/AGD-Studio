@@ -6,9 +6,6 @@
         <Projects Include="AGDX Studio.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Converter\Convert.cbproj">
-            <Dependencies/>
-        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -26,23 +23,14 @@
     <Target Name="AGDX Studio:Make">
         <MSBuild Projects="AGDX Studio.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="Convert">
-        <MSBuild Projects="Converter\Convert.cbproj"/>
-    </Target>
-    <Target Name="Convert:Clean">
-        <MSBuild Projects="Converter\Convert.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="Convert:Make">
-        <MSBuild Projects="Converter\Convert.cbproj" Targets="Make"/>
-    </Target>
     <Target Name="Build">
-        <CallTarget Targets="AGDX Studio;Convert"/>
+        <CallTarget Targets="AGDX Studio"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="AGDX Studio:Clean;Convert:Clean"/>
+        <CallTarget Targets="AGDX Studio:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="AGDX Studio:Make;Convert:Make"/>
+        <CallTarget Targets="AGDX Studio:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
