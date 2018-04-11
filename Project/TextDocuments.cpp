@@ -27,6 +27,17 @@ bool __fastcall TextDocument::Load()
     return true;
 }
 //---------------------------------------------------------------------------
+void __fastcall TextDocument::Add(const String& lines)
+{
+    if (System::File::Exists(m_File))
+    {
+        // yes, load it
+        auto allLines = System::File::ReadText(m_File);
+        allLines += lines;
+        System::File::WriteText(m_File, allLines);
+    }
+}
+//---------------------------------------------------------------------------
 __fastcall EventDocument::EventDocument(const String& name)
 : TextDocument(name)
 {

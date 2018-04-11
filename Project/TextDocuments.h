@@ -10,6 +10,7 @@ public:
                         __fastcall  TextDocument(const String& name);
 
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new TextDocument(name); };
+            void        __fastcall  Add(const String& lines);
 
             void        __fastcall  Save();
             bool        __fastcall  Load();
