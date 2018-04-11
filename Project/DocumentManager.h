@@ -25,6 +25,7 @@ private:
 
             void        __fastcall  Register(const String& type, const String& subType, CreateDocumentFn pfnCreate);
             Document*   __fastcall  Get(const String& type, const String& subType, const String& name);
+            void        __fastcall  OnImportString(const OnImport<String>& event);
 
 public:
                         __fastcall  DocumentManager();

@@ -32,6 +32,8 @@ __fastcall DocumentManager::DocumentManager()
     //Register("Image", "TileSet", &TileSet::Create);
     //Register("Map", "Tiled", &TileMap::Create);
     Register("SoundFx", "List", &SfxDocument::Create);
+
+    ::Messaging::Bus::Subscribe<OnImport<String>>(OnImportString);
 }
 //---------------------------------------------------------------------------
 void __fastcall DocumentManager::Register(const String& type, const String& subType, CreateDocumentFn pfnCreate)
@@ -137,6 +139,29 @@ void __fastcall DocumentManager::Load(const String& name)
     for (const auto& fileInfo : projectDocument->Files())
     {
         Add(fileInfo.Type, fileInfo.SubType, System::File::NameWithoutExtension(fileInfo.Name));
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall DocumentManager::OnImportString(const OnImport<String>& event)
+{
+    if (event.Id.Pos("event.") == 0)
+    {
+        // TODO: Find the event document
+        auto eventName = event.Id.SubString(5, event.Id.Length() - 5);
+        auto document = dynamic_cast<TextDocument*>(Get("Text", "Event", eventName));
+        if (document)
+        {
+            document->Add(event.Value);
+        }
+    }
+    else if (event.Id == "messages")
+    {
+        // TODO: Find the messages document
+        auto document = dynamic_cast<TextDocument*>(Get("Text", "Message", "Messages"));
+        if (document)
+        {
+            document->Add(event.Value);
+        }
     }
 }
 //---------------------------------------------------------------------------
