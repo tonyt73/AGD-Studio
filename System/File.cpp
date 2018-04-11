@@ -57,6 +57,15 @@ String __fastcall File::ReadText(const String& file)
     return System::Ioutils::TFile::ReadAllText(file);
 }
 //---------------------------------------------------------------------------
+void __fastcall File::ReadBytes(const String& file, std::vector<unsigned char>& contents)
+{
+    auto allBytes = System::Ioutils::TFile::ReadAllText(file);
+    for (auto byte : allBytes)
+    {
+        contents.push_back(byte);
+    }
+}
+//---------------------------------------------------------------------------
 void __fastcall File::Copy(const String& source, const String& destination)
 {
     auto path = System::Ioutils::TPath::GetDirectoryName(destination);

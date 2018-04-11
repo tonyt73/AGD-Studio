@@ -2,6 +2,8 @@
 #ifndef FileH
 #define FileH
 //---------------------------------------------------------------------------
+#include <vector>
+//---------------------------------------------------------------------------
 namespace System
 {
 //---------------------------------------------------------------------------
@@ -17,6 +19,7 @@ public:
     static  String  __fastcall  Combine(const String& path, const String& filename);
     static  void    __fastcall  WriteText(const String& file, const String& content);
     static  String  __fastcall  ReadText(const String& file);
+    static  void    __fastcall  ReadBytes(const String& file, std::vector<unsigned char>& contents);
     static  void    __fastcall  Copy(const String& source, const String& destination);
     static  void    __fastcall  Delete(const String& file);
     static  void    __fastcall  Rename(const String& source, const String& destination);
