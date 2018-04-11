@@ -64,8 +64,8 @@ object SelectionPanelFrame: TSelectionPanelFrame
       Caption = 'Big Sprite Demo 2'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -16
-      Font.Name = 'Comfortaa'
+      Font.Height = -20
+      Font.Name = 'Bauhaus Md BT'
       Font.Style = []
       Font.Quality = fqAntialiased
       ParentFont = False

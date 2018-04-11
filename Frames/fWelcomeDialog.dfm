@@ -54,17 +54,16 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     end
     object lblStartNewProject: TLabel
       Left = 110
-      Top = 265
-      Width = 147
-      Height = 20
+      Top = 262
+      Width = 184
+      Height = 22
       Cursor = crHandPoint
       Caption = '      Start a new project'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -15
-      Font.Name = 'Segoe UI Semilight'
+      Font.Height = -19
+      Font.Name = 'Bauhaus Md BT'
       Font.Style = []
-      Font.Quality = fqProof
       ParentFont = False
       StyleElements = [seClient, seBorder]
       OnClick = lblStartNewProjectClick
@@ -6443,7 +6442,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     end
     object panButtons: TPanel
       Left = 110
-      Top = 291
+      Top = 290
       Width = 363
       Height = 135
       BevelOuter = bvNone
@@ -6487,18 +6486,16 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       end
       object lblOpenExistingProject: TLabel
         Left = 0
-        Top = 9
-        Width = 183
-        Height = 20
+        Top = 4
+        Width = 227
+        Height = 22
         Cursor = crHandPoint
         Caption = '      Open an existing project'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Segoe UI Semilight'
-        Font.Pitch = fpFixed
+        Font.Height = -19
+        Font.Name = 'Bauhaus Md BT'
         Font.Style = []
-        Font.Quality = fqProof
         ParentFont = False
         StyleElements = [seClient, seBorder]
         OnClick = lblOpenExistingProjectClick
@@ -6508,16 +6505,15 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       object lblImportAGDSnapshot: TLabel
         Left = 0
         Top = 40
-        Width = 197
-        Height = 20
+        Width = 247
+        Height = 22
         Cursor = crHandPoint
         Caption = '      Import an AGD Snapshot...'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Segoe UI Semilight'
+        Font.Height = -19
+        Font.Name = 'Bauhaus Md BT'
         Font.Style = []
-        Font.Quality = fqProof
         ParentFont = False
         StyleElements = [seClient, seBorder]
         OnClick = lblImportAGDSnapshotClick
@@ -6557,15 +6553,14 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       object lblChangeTheme: TLabel
         Left = 0
         Top = 79
-        Width = 123
-        Height = 20
+        Width = 150
+        Height = 22
         Caption = '      Change Theme'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Segoe UI Semilight'
+        Font.Height = -19
+        Font.Name = 'Bauhaus Md BT'
         Font.Style = []
-        Font.Quality = fqProof
         ParentFont = False
         StyleElements = [seClient, seBorder]
         OnClick = lblChangeThemeClick
@@ -6603,9 +6598,9 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           65C2D64EB544D1BA24C0D2773635EBD72F8A8FF40000000049454E44AE426082}
       end
       object cmbThemes: TComboBox
-        Left = 136
+        Left = 156
         Top = 75
-        Width = 217
+        Width = 205
         Height = 29
         Style = csDropDownList
         Font.Charset = DEFAULT_CHARSET

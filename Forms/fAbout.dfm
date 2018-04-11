@@ -4141,8 +4141,8 @@ object frmAbout: TfrmAbout
     Caption = 'AGD is copyright 2018 Jonathan Cauldwell'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Comfortaa'
+    Font.Height = -13
+    Font.Name = 'Bauhaus Md BT'
     Font.Style = []
     ParentFont = False
   end
