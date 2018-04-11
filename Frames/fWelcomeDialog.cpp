@@ -66,22 +66,7 @@ void __fastcall TfrmWelcomeDialog::lblOpenExistingProjectClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::lblImportAGDSnapshotClick(TObject *Sender)
 {
-    dlgImport->InitialDir = System::Path::Projects;
-    if (dlgImport->Execute())
-    {
-        // TODO: Check the file is valid
-        if (false)
-        {
-            // TODO: Implement Import
-            auto name = System::File::NameWithExtension(dlgImport->FileName);
-            theProjectManager.New(name, "ZX Spectrum 256x192 16 Colour");
-            if (FOnDone) FOnDone(this);
-        }
-        else
-        {
-            MessageDlg("File is not a valid ZX Spectrum 48K Snapshot", mtError, TMsgDlgButtons() << mbOK, 0);
-        }
-    }
+    if (FOnDone) FOnDone(nullptr);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::SelectionPanelOnClick(TObject *Sender)

@@ -16,6 +16,7 @@ __fastcall TfrmMain::TfrmMain(TComponent* Owner)
 , m_FormView(fvNone)
 , m_WelcomeDialog(std::unique_ptr<TfrmWelcomeDialog>(new TfrmWelcomeDialog(this)))
 , m_IDEDialog(std::unique_ptr<TfrmIDE>(new TfrmIDE(this)))
+, m_ImportDialog(nullptr)
 {
     m_WelcomeDialog->OnDone  = OnWelcomeDone;
     m_IDEDialog->OnFormClose = OnIDEClose;
@@ -37,11 +38,16 @@ void __fastcall TfrmMain::FormCreate(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmMain::FormCloseQuery(TObject *Sender, bool &CanClose)
 {
-    theProjectManager.Save();
     SaveSettings();
     if (m_FormView == fvGameIDE)
     {
+        theProjectManager.Save();
         OnIDEClose(Sender);
+        CanClose = false;
+    }
+    else if (m_FormView == fvImportDialog)
+    {
+        OnImportDone(nullptr);
         CanClose = false;
     }
     else
@@ -73,7 +79,36 @@ void __fastcall TfrmMain::OnIDEClose(TObject *Sender)
 void __fastcall TfrmMain::OnWelcomeDone(TObject *Sender)
 {
     // show the IDE
-    ShowIDE();
+    if (Sender)
+    {
+        ShowIDE();
+    }
+    else
+    {
+        if (m_ImportDialog == nullptr)
+        {
+            m_ImportDialog = std::make_unique<TfrmImportDialog>(new TfrmImportDialog(this));
+            m_ImportDialog->OnDone = OnImportDone;
+        }
+        ShowImportDialog();
+    }
+}
+// ---------------------------------------------------------------------------
+void __fastcall TfrmMain::OnImportDone(TObject *Sender)
+{
+    m_ImportDialog->Visible = false;
+    m_ImportDialog->Parent = nullptr;
+    if (Sender)
+    {
+        // show the IDE
+        SaveSettings();
+        ShowIDE();
+    }
+    else
+    {
+        SaveSettings();
+        ShowWelcomeDialog();
+    }
 }
 // ---------------------------------------------------------------------------
 void __fastcall TfrmMain::ShowWelcomeDialog()
@@ -100,8 +135,35 @@ void __fastcall TfrmMain::ShowWelcomeDialog()
     }
 }
 // ---------------------------------------------------------------------------
+void __fastcall TfrmMain::ShowImportDialog()
+{
+    m_IDEDialog->Visible = false;
+    m_IDEDialog->Parent = nullptr;
+    m_WelcomeDialog->Visible = false;
+    m_WelcomeDialog->Parent = this;
+    m_ImportDialog->Parent = this;
+    m_ImportDialog->Visible = true;
+    m_ImportDialog->Initialise();
+    m_FormView  = fvImportDialog;
+    BorderIcons = TBorderIcons() << biMinimize << biSystemMenu;
+    AutoSize = true;
+    BorderStyle = bsSingle;
+    Menu = nullptr;
+    TPoint pt = appSettings.WelcomePosition;
+    Left   += (m_WelcomeDialog->Width - m_ImportDialog->Width) / 2;
+    Top    += (m_WelcomeDialog->Height - m_ImportDialog->Height) / 2;
+    Width  = m_ImportDialog->Width;
+    Height = m_ImportDialog->Height;
+    WindowState = wsNormal;
+    if (Left == 0 && Top == 0)
+    {
+        Position = poScreenCenter;
+    }
+}
+// ---------------------------------------------------------------------------
 void __fastcall TfrmMain::ShowIDE()
 {
+    m_ImportDialog = nullptr;
     appSettings.WelcomePosition = TPoint(Left, Top);
     m_WelcomeDialog->Visible = false;
     m_WelcomeDialog->Parent = nullptr;
@@ -137,6 +199,13 @@ void __fastcall TfrmMain::SaveSettings()
     else if (m_FormView == fvWelcomeDialog)
     {
         TPoint pt(Left, Top);
+        appSettings.WelcomePosition = pt;
+    }
+    else if (m_FormView == fvImportDialog)
+    {
+        TPoint pt(Left, Top);
+        pt.X -= (m_WelcomeDialog->Width - m_ImportDialog->Width) / 2;
+        pt.Y -= (m_WelcomeDialog->Height - m_ImportDialog->Height) / 2;
         appSettings.WelcomePosition = pt;
     }
 }

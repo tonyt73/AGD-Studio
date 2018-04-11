@@ -178,35 +178,42 @@ bool __fastcall Importer::Convert(const String& file)
         return false;
     }
 
-    // get values
-    m_ValueOf.WindowPosition.Y = m_Snapshot->Byte(m_Snapshot->Location.Window+0);
-    m_ValueOf.WindowPosition.X = m_Snapshot->Byte(m_Snapshot->Location.Window+1);
-    m_ValueOf.WindowSize.cy = m_Snapshot->Byte(m_Snapshot->Location.Window+2);
-    m_ValueOf.WindowSize.cx = m_Snapshot->Byte(m_Snapshot->Location.Window+3);
-    m_ValueOf.Rooms = m_Snapshot->Byte(m_Snapshot->Location.NumberOfScreens);
+    if (m_Snapshot->Load(file))
+    {
+        // get values
+        m_ValueOf.WindowPosition.Y = m_Snapshot->Byte(m_Snapshot->Location.Window+0);
+        m_ValueOf.WindowPosition.X = m_Snapshot->Byte(m_Snapshot->Location.Window+1);
+        m_ValueOf.WindowSize.cy = m_Snapshot->Byte(m_Snapshot->Location.Window+2);
+        m_ValueOf.WindowSize.cx = m_Snapshot->Byte(m_Snapshot->Location.Window+3);
+        m_ValueOf.Rooms = m_Snapshot->Byte(m_Snapshot->Location.NumberOfScreens);
 
-    // get addresses
-    m_AddressOf.SpriteFrames = m_Snapshot->Word(m_Snapshot->Location.Pointers + 0) - m_Snapshot->Location.StuffToSkip;
-    m_AddressOf.SpriteData = m_Snapshot->Word(m_Snapshot->Location.Pointers + 2) - m_Snapshot->Location.StuffToSkip;
-    m_AddressOf.BlockImageData = m_Snapshot->Word(m_Snapshot->Location.Pointers + 4) - m_Snapshot->Location.StuffToSkip;
-    m_AddressOf.BlockAttrsData = m_Snapshot->Word(m_Snapshot->Location.Pointers + 6) - m_Snapshot->Location.StuffToSkip;
-    m_AddressOf.BlockPropsData = m_Snapshot->Word(m_Snapshot->Location.Pointers + 8) - m_Snapshot->Location.StuffToSkip;
-    m_AddressOf.ScreenLayouts = m_Snapshot->Word(m_Snapshot->Location.Pointers + 10) - m_Snapshot->Location.StuffToSkip;
-    m_AddressOf.EnemyPositions = m_Snapshot->Word(m_Snapshot->Location.Pointers + 12) - m_Snapshot->Location.StuffToSkip;
-    m_AddressOf.AYSoundFx = m_Snapshot->Word(m_Snapshot->Location.Pointers + 14) - m_Snapshot->Location.StuffToSkip;
-    m_AddressOf.Messages = m_Snapshot->Word(m_Snapshot->Location.Pointers + 16) - m_Snapshot->Location.StuffToSkip;
-    m_AddressOf.Objects = m_Snapshot->Word(m_Snapshot->Location.Pointers + 18) - m_Snapshot->Location.StuffToSkip;
-    m_AddressOf.EventCode = m_Snapshot->Word(m_Snapshot->Location.Pointers + 20) - m_Snapshot->Location.StuffToSkip;
+        // get addresses
+        m_AddressOf.SpriteFrames = m_Snapshot->Word(m_Snapshot->Location.Pointers + 0) - m_Snapshot->Location.StuffToSkip;
+        m_AddressOf.SpriteData = m_Snapshot->Word(m_Snapshot->Location.Pointers + 2) - m_Snapshot->Location.StuffToSkip;
+        m_AddressOf.BlockImageData = m_Snapshot->Word(m_Snapshot->Location.Pointers + 4) - m_Snapshot->Location.StuffToSkip;
+        m_AddressOf.BlockAttrsData = m_Snapshot->Word(m_Snapshot->Location.Pointers + 6) - m_Snapshot->Location.StuffToSkip;
+        m_AddressOf.BlockPropsData = m_Snapshot->Word(m_Snapshot->Location.Pointers + 8) - m_Snapshot->Location.StuffToSkip;
+        m_AddressOf.ScreenLayouts = m_Snapshot->Word(m_Snapshot->Location.Pointers + 10) - m_Snapshot->Location.StuffToSkip;
+        m_AddressOf.EnemyPositions = m_Snapshot->Word(m_Snapshot->Location.Pointers + 12) - m_Snapshot->Location.StuffToSkip;
+        m_AddressOf.AYSoundFx = m_Snapshot->Word(m_Snapshot->Location.Pointers + 14) - m_Snapshot->Location.StuffToSkip;
+        m_AddressOf.Messages = m_Snapshot->Word(m_Snapshot->Location.Pointers + 16) - m_Snapshot->Location.StuffToSkip;
+        m_AddressOf.Objects = m_Snapshot->Word(m_Snapshot->Location.Pointers + 18) - m_Snapshot->Location.StuffToSkip;
+        m_AddressOf.EventCode = m_Snapshot->Word(m_Snapshot->Location.Pointers + 20) - m_Snapshot->Location.StuffToSkip;
 
-    ImportWindow();
-    ImportMessages();
-    ImportEvents();
-    ImportFont();
-    ImportBlocks();
-    ImportSprites();
-    ImportObjects();
-    ImportScreens();
-    ImportMap();
+        ImportWindow();
+        ImportMessages();
+        ImportEvents();
+        ImportFont();
+        ImportBlocks();
+        ImportSprites();
+        ImportObjects();
+        ImportScreens();
+        ImportMap();
+    }
+    else
+    {
+        // TODO: Show errors
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall Importer::ImportWindow() const

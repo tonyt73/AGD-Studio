@@ -6408,20 +6408,12 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         Font.Height = -15
         Font.Name = 'Segoe UI Semilight'
         Font.Style = []
-        ItemIndex = 4
         ParentFont = False
         TabOrder = 1
-        Text = 'ZX Spectrum 256x192 16 Colour'
         Items.Strings = (
           'Acorn Atom 256x192 Monochrome'
-          'BBC Model B'
-          'Amstrad CPC'
-          'Sinclair QL'
-          'ZX Spectrum 256x192 16 Colour'
-          'Sinclair ZX Spectrum Next'
-          'Timex Sinclair 1500'
-          'Memotech 500/512'
-          'Enterprise 64/128')
+          'Amstrad CPC 160x200 16 Colour'
+          'ZX Spectrum 256x192 16 Colour')
       end
       object edtName: TEdit
         Left = 101
@@ -6646,13 +6638,5 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     Title = 'Open an Existing AGDX Project'
     Left = 308
     Top = 132
-  end
-  object dlgImport: TOpenTextFileDialog
-    DefaultExt = 'sna'
-    Filter = 'ZX Spectrum 48K Snapshot|*.sna|All Files|*.*'
-    Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
-    Title = 'Import an Existing AGD snapshot'
-    Left = 148
-    Top = 172
   end
 end
