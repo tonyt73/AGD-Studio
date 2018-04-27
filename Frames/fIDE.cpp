@@ -160,7 +160,7 @@ void __fastcall TfrmIDE::actFileProjectSaveExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileProjectCloseExecute(TObject *Sender)
 {
-    theProjectManager.Save();
+    theProjectManager.Close();
     if (FOnFormClose)
     {
         Application->MainForm->Menu = nullptr;
@@ -327,7 +327,13 @@ void __fastcall TfrmIDE::mruOnClick(TObject *Sender)
     auto mi = dynamic_cast<TMenuItem*>(Sender);
     if (mi)
     {
-        theProjectManager.Open(mi->Caption);
+        auto caption = mi->Caption;
+        auto pos = caption.Pos("&");
+        if (pos >= 0)
+        {
+            caption = caption.SubString(0, pos - 1) + caption.SubString(pos + 1, caption.Length());
+        }
+        theProjectManager.Open(caption);
     }
 }
 //---------------------------------------------------------------------------
