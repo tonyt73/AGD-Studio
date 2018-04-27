@@ -101,6 +101,13 @@ Document* __fastcall DocumentManager::Get(const String& type, const String& subT
 //---------------------------------------------------------------------------
 void __fastcall DocumentManager::Clear()
 {
+    for (auto documentType : m_Documents)
+    {
+        for (auto document : documentType.second)
+        {
+            delete document;
+        }
+    }
     m_Documents.clear();
 }
 //---------------------------------------------------------------------------

@@ -86,7 +86,7 @@ void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* 
 void __fastcall ProjectManager::New(const String& name, const String& machine)
 {
     System::Path::ProjectName = name;
-    theDocumentManager.Clear();
+    Close();
     if (m_TreeView)
     {
         ClearTree(name);
@@ -128,7 +128,7 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::Open(const String& file)
 {
-    theDocumentManager.Save();
+    Close();
     auto name = System::File::NameWithoutExtension(file);
     System::Path::ProjectName = name;
     ClearTree(name);
@@ -145,6 +145,12 @@ void __fastcall ProjectManager::Open(const String& file)
 void __fastcall ProjectManager::Save()
 {
     theDocumentManager.Save();
+}
+//---------------------------------------------------------------------------
+void __fastcall ProjectManager::Close()
+{
+    Save();
+    theDocumentManager.Clear();
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::ClearTree(const String& rootName)

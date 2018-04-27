@@ -2,6 +2,7 @@
 #include "agdx.pch.h"
 //---------------------------------------------------------------------------
 #include "ElXTree.hpp"
+#include "LMDDckSite.hpp"
 #include "Document.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -24,6 +25,16 @@ __fastcall Document::Document(const String& name)
     RegisterProperty("Classification", "Details", "The classification of the document");
     m_PropertyMap[".Document.Name"] = &m_Name;
     m_File = GetFile();
+}
+//---------------------------------------------------------------------------
+__fastcall Document::~Document()
+{
+    auto panel = static_cast<TLMDDockPanel*>(m_DockPanel);
+    if (panel != nullptr)
+    {
+        panel->Free();
+        m_DockPanel = nullptr;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall Document::RegisterProperty(const String& property, const String& category, const String& info)

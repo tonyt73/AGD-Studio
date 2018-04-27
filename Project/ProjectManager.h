@@ -49,6 +49,7 @@ public:
 
     void        __fastcall  New(const String& name, const String& machine);
     void        __fastcall  Open(const String& file);
+    void        __fastcall  Close();
     void        __fastcall  Save();
 
     Document*   __fastcall  Add(const String& type, const String& subType, const String& name, const String& extra = "");

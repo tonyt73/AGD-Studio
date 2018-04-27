@@ -53,6 +53,7 @@ protected:
 
 public:
                         __fastcall  Document(const String& name);
+    virtual             __fastcall ~Document();
 
     static  Document*   __fastcall  Create(const String& name, const String& extra)      { throw "Don't create this class";    }
 

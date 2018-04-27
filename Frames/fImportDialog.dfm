@@ -1652,8 +1652,6 @@ object frmImportDialog: TfrmImportDialog
     ModalResult = 2
     TabOrder = 6
     OnClick = btnCancelClick
-    ExplicitLeft = 520
-    ExplicitTop = 352
   end
   object btnImport: TButton
     Left = 416
@@ -1666,8 +1664,6 @@ object frmImportDialog: TfrmImportDialog
     ModalResult = 1
     TabOrder = 5
     OnClick = btnImportClick
-    ExplicitLeft = 418
-    ExplicitTop = 352
   end
   object edtFile: TEdit
     Left = 272
