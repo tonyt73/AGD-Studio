@@ -162,4 +162,54 @@ void __fastcall TfrmEditorImage::FrameEndDock(TObject *Sender, TObject *Target, 
     StatusBar1->Visible = dp->Site->IsFloatingDoc;
 }
 //---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::actRotateLeftExecute(TObject *Sender)
+{
+    //
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::actRotateRightExecute(TObject *Sender)
+{
+    //
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::actRotateUpExecute(TObject *Sender)
+{
+    //
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::actRotateDownExecute(TObject *Sender)
+{
+    //
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::actFlipVerticalExecute(TObject *Sender)
+{
+    //
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::actFlipHorizontalExecute(TObject *Sender)
+{
+    //
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::actRotateLeft90Execute(TObject *Sender)
+{
+    //
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::actRotateRight90Execute(TObject *Sender)
+{
+    //
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::actMonoOnExecute(TObject *Sender)
+{
+    //
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::actMonoOffExecute(TObject *Sender)
+{
+    //
+}
+//---------------------------------------------------------------------------
 

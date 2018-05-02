@@ -1,142 +1,112 @@
 object frmEditorImage: TfrmEditorImage
   Left = 0
   Top = 0
-  Width = 1048
-  Height = 746
+  Width = 1102
+  Height = 726
   TabOrder = 0
   OnEndDock = FrameEndDock
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1048
+    Width = 1102
     Height = 32
     Align = alTop
     AutoSize = True
     BevelOuter = bvNone
     TabOrder = 0
     Visible = False
-    ExplicitWidth = 1012
+    ExplicitWidth = 1048
   end
   object Panel2: TPanel
     Left = 0
     Top = 32
-    Width = 1048
-    Height = 695
+    Width = 1102
+    Height = 675
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 1012
-    ExplicitHeight = 683
+    ExplicitWidth = 1048
+    ExplicitHeight = 695
     object Panel3: TPanel
       Left = 0
       Top = 0
       Width = 80
-      Height = 629
+      Height = 609
       Align = alLeft
       AutoSize = True
       BevelOuter = bvNone
       Constraints.MaxWidth = 80
       Constraints.MinWidth = 80
       TabOrder = 0
-      ExplicitHeight = 617
+      ExplicitHeight = 629
       object ToolBar3: TToolBar
         Left = 0
-        Top = 204
+        Top = 164
         Width = 80
-        Height = 240
+        Height = 160
         AutoSize = True
         ButtonHeight = 40
         ButtonWidth = 40
         Images = ImageList1
         TabOrder = 0
-        object ToolButton13: TToolButton
-          Left = 0
-          Top = 0
-          Action = Action7
-          AllowAllUp = True
-          Style = tbsCheck
-        end
-        object ToolButton14: TToolButton
-          Left = 40
-          Top = 0
-          Action = Action8
-          AllowAllUp = True
-          Wrap = True
-          Style = tbsCheck
-        end
         object ToolButton15: TToolButton
           Left = 0
-          Top = 40
-          Action = actText
+          Top = 0
+          Action = actRotateLeft
           AllowAllUp = True
-          ImageIndex = 13
         end
         object ToolButton16: TToolButton
           Left = 40
-          Top = 40
-          Action = actDropper
+          Top = 0
+          Action = actRotateRight
           AllowAllUp = True
-          ImageIndex = 14
           Wrap = True
         end
-        object ToolButton18: TToolButton
-          Left = 0
-          Top = 80
-          Action = Action4
-          AllowAllUp = True
-          ImageIndex = 15
-        end
         object ToolButton17: TToolButton
-          Left = 40
-          Top = 80
-          Action = Action3
+          Left = 0
+          Top = 40
+          Action = actRotateDown
           AllowAllUp = True
-          ImageIndex = 12
+        end
+        object ToolButton18: TToolButton
+          Left = 40
+          Top = 40
+          Action = actRotateUp
+          AllowAllUp = True
           Wrap = True
         end
         object ToolButton21: TToolButton
           Left = 0
-          Top = 120
-          Action = Action5
+          Top = 80
+          Action = actFlipHorizontal
           AllowAllUp = True
-          ImageIndex = 17
         end
         object ToolButton22: TToolButton
           Left = 40
-          Top = 120
-          Action = Action6
+          Top = 80
+          Action = actFlipVertical
           AllowAllUp = True
-          ImageIndex = 18
           Wrap = True
         end
         object ToolButton19: TToolButton
           Left = 0
-          Top = 160
-          Action = Action10
+          Top = 120
+          Action = actRotateLeft90
           AllowAllUp = True
-          ImageIndex = 19
         end
         object ToolButton20: TToolButton
           Left = 40
-          Top = 160
-          Action = Action9
+          Top = 120
+          Action = actRotateRight90
           AllowAllUp = True
-          ImageIndex = 20
           Wrap = True
-        end
-        object ToolButton33: TToolButton
-          Left = 0
-          Top = 200
-          AllowAllUp = True
-          Caption = 'ToolButton33'
-          ImageIndex = 22
         end
       end
       object ToolBar4: TToolBar
         Left = 0
         Top = 0
         Width = 80
-        Height = 200
+        Height = 160
         AutoSize = True
         ButtonHeight = 40
         ButtonWidth = 40
@@ -165,10 +135,10 @@ object frmEditorImage: TfrmEditorImage
           Grouped = True
           Style = tbsCheck
         end
-        object ToolButton26: TToolButton
+        object ToolButton31: TToolButton
           Left = 40
           Top = 40
-          Action = actBrush
+          Action = actPaintBucket
           Grouped = True
           Wrap = True
           Style = tbsCheck
@@ -200,27 +170,12 @@ object frmEditorImage: TfrmEditorImage
           Top = 120
           Action = actSprayBrush
           Grouped = True
-          Wrap = True
-          Style = tbsCheck
-        end
-        object ToolButton31: TToolButton
-          Left = 0
-          Top = 160
-          Action = actPaintBucket
-          Grouped = True
-          Style = tbsCheck
-        end
-        object ToolButton32: TToolButton
-          Left = 40
-          Top = 160
-          Action = actStamp
-          Grouped = True
           Style = tbsCheck
         end
       end
       object Panel4: TPanel
         Left = 0
-        Top = 200
+        Top = 160
         Width = 80
         Height = 4
         Align = alTop
@@ -229,79 +184,25 @@ object frmEditorImage: TfrmEditorImage
       end
       object Panel5: TPanel
         Left = 0
-        Top = 444
+        Top = 324
         Width = 80
         Height = 4
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 3
       end
-      object ToolBar5: TToolBar
-        Left = 0
-        Top = 448
-        Width = 80
-        Height = 80
-        AutoSize = True
-        ButtonHeight = 40
-        ButtonWidth = 40
-        Images = ImageList1
-        TabOrder = 4
-        object ToolButton34: TToolButton
-          Left = 0
-          Top = 0
-          Hint = 'Mask Edit Off'
-          Action = Action11
-          Down = True
-          Grouped = True
-          ImageIndex = 28
-          ParentShowHint = False
-          ShowHint = True
-          Style = tbsCheck
-        end
-        object ToolButton35: TToolButton
-          Left = 40
-          Top = 0
-          Hint = 'Mask Edit On'
-          HelpType = htKeyword
-          Action = Action12
-          Grouped = True
-          ImageIndex = 31
-          ParentShowHint = False
-          Wrap = True
-          ShowHint = True
-          Style = tbsCheck
-        end
-        object ToolButton36: TToolButton
-          Left = 0
-          Top = 40
-          Hint = 'Generate Mask'
-          Action = Action13
-          ImageIndex = 29
-          ParentShowHint = False
-          ShowHint = True
-        end
-        object ToolButton37: TToolButton
-          Left = 40
-          Top = 40
-          Hint = 'Invert Mask'
-          Action = Action14
-          ImageIndex = 30
-          ParentShowHint = False
-          ShowHint = True
-        end
-      end
       object Panel6: TPanel
         Left = 0
-        Top = 568
+        Top = 368
         Width = 80
         Height = 4
         Align = alTop
         BevelOuter = bvNone
-        TabOrder = 5
+        TabOrder = 4
       end
       object ToolBar2: TToolBar
         Left = 0
-        Top = 572
+        Top = 372
         Width = 80
         Height = 40
         AutoSize = True
@@ -309,15 +210,13 @@ object frmEditorImage: TfrmEditorImage
         ButtonWidth = 40
         Caption = 'ToolBar2'
         Images = ImageList1
-        TabOrder = 6
+        TabOrder = 5
         object ToolButton38: TToolButton
           Left = 0
           Top = 0
-          Hint = 'Show Attributes'
-          Action = actGridCharacter
+          Action = actMonoOff
           AllowAllUp = True
           Grouped = True
-          ImageIndex = 26
           ParentShowHint = False
           ShowHint = True
           Style = tbsCheck
@@ -325,11 +224,9 @@ object frmEditorImage: TfrmEditorImage
         object ToolButton39: TToolButton
           Left = 40
           Top = 0
-          Hint = 'Hide Attributes'
-          Action = actGridPixel
+          Action = actMonoOn
           AllowAllUp = True
           Grouped = True
-          ImageIndex = 27
           ParentShowHint = False
           ShowHint = True
           Style = tbsCheck
@@ -337,16 +234,16 @@ object frmEditorImage: TfrmEditorImage
       end
       object Panel7: TPanel
         Left = 0
-        Top = 612
+        Top = 412
         Width = 80
         Height = 4
         Align = alTop
         BevelOuter = bvNone
-        TabOrder = 7
+        TabOrder = 6
       end
       object ToolBar1: TToolBar
         Left = 0
-        Top = 528
+        Top = 328
         Width = 80
         Height = 40
         AutoSize = True
@@ -354,7 +251,7 @@ object frmEditorImage: TfrmEditorImage
         ButtonWidth = 40
         Caption = 'ToolBar6'
         Images = ImageList1
-        TabOrder = 8
+        TabOrder = 7
         object ToolButton1: TToolButton
           Left = 0
           Top = 0
@@ -373,21 +270,32 @@ object frmEditorImage: TfrmEditorImage
     end
     object Panel8: TPanel
       Left = 0
-      Top = 629
-      Width = 1048
+      Top = 609
+      Width = 1102
       Height = 66
       Align = alBottom
       BevelOuter = bvNone
       Caption = 'Frames View'
       TabOrder = 1
-      ExplicitTop = 617
-      ExplicitWidth = 1012
+      ExplicitTop = 629
+      ExplicitWidth = 1048
+    end
+    object ScrollBox1: TScrollBox
+      Left = 80
+      Top = 0
+      Width = 1022
+      Height = 609
+      Align = alClient
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      BorderStyle = bsNone
+      TabOrder = 2
     end
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 727
-    Width = 1048
+    Top = 707
+    Width = 1102
     Height = 19
     Panels = <
       item
@@ -395,16 +303,16 @@ object frmEditorImage: TfrmEditorImage
         Width = 200
       end
       item
+        Alignment = taCenter
         Text = '10 x 10'
-        Width = 50
+        Width = 100
       end
       item
-        Text = 'CAPS'
-        Width = 50
+        Width = 200
       end>
     Visible = False
-    ExplicitTop = 715
-    ExplicitWidth = 1012
+    ExplicitTop = 727
+    ExplicitWidth = 1048
   end
   object ActionList1: TActionList
     Images = ImageList1
@@ -413,26 +321,25 @@ object frmEditorImage: TfrmEditorImage
     object actSelectRectangle: TAction
       Caption = 'Rectangle Select'
       ImageIndex = 0
+      ShortCut = 8275
       OnExecute = actSelectRectangleExecute
     end
     object actPencil: TAction
       Caption = 'Pencil'
       ImageIndex = 1
+      ShortCut = 8272
       OnExecute = actPencilExecute
-    end
-    object actBrush: TAction
-      Caption = 'Brush'
-      ImageIndex = 2
-      OnExecute = actBrushExecute
     end
     object actPaintBucket: TAction
       Caption = 'Paint Bucket'
       ImageIndex = 8
+      ShortCut = 8262
       OnExecute = actPaintBucketExecute
     end
     object actSprayBrush: TAction
       Caption = 'Spray Brush'
       ImageIndex = 7
+      ShortCut = 8258
       OnExecute = actSprayBrushExecute
     end
     object actStamp: TAction
@@ -443,106 +350,102 @@ object frmEditorImage: TfrmEditorImage
     object actEraser: TAction
       Caption = 'Eraser'
       ImageIndex = 11
+      ShortCut = 8261
       OnExecute = actEraserExecute
     end
     object actDrawLine: TAction
       Caption = 'Draw Line'
       ImageIndex = 3
+      ShortCut = 8268
       OnExecute = actDrawLineExecute
     end
     object actDrawShape: TAction
       Caption = 'Shapes'
       ImageIndex = 5
+      ShortCut = 8274
       OnExecute = actDrawShapeExecute
     end
     object actGridPixel: TAction
       ImageIndex = 16
+      ShortCut = 24647
       OnExecute = actGridPixelExecute
     end
     object actGridCharacter: TAction
       Caption = 'actGridCharacter'
       ImageIndex = 25
+      ShortCut = 16455
       OnExecute = actGridCharacterExecute
     end
     object actText: TAction
       Caption = 'Action1'
       ImageIndex = 10
+      ShortCut = 8276
       OnExecute = actTextExecute
     end
     object actDropper: TAction
       Caption = 'Action2'
       ImageIndex = 6
+      ShortCut = 8260
       OnExecute = actDropperExecute
     end
-    object Action3: TAction
-      Caption = 'Action3'
-      ImageIndex = 41
-      OnExecute = Action3Execute
+    object actRotateLeft: TAction
+      Caption = 'actRotateLeft'
+      ImageIndex = 13
+      OnExecute = actRotateLeftExecute
     end
-    object Action4: TAction
-      Caption = 'Action4'
-      ImageIndex = 44
-      OnExecute = Action4Execute
+    object actRotateRight: TAction
+      Caption = 'actRotateRight'
+      ImageIndex = 14
+      OnExecute = actRotateRightExecute
     end
-    object Action5: TAction
-      Caption = 'Action5'
-      ImageIndex = 45
-      OnExecute = Action5Execute
+    object actRotateUp: TAction
+      Caption = 'actRotateUp'
+      ImageIndex = 15
+      OnExecute = actRotateUpExecute
     end
-    object Action6: TAction
-      Caption = 'Action6'
-      ImageIndex = 40
-      OnExecute = Action6Execute
+    object actRotateDown: TAction
+      Caption = 'actRotateDown'
+      ImageIndex = 12
+      OnExecute = actRotateDownExecute
     end
-    object Action7: TAction
-      Caption = 'Action7'
-      ImageIndex = 51
-      OnExecute = Action7Execute
+    object actFlipVertical: TAction
+      Caption = 'actFlipVertical'
+      ImageIndex = 18
+      ShortCut = 49238
+      OnExecute = actFlipVerticalExecute
     end
-    object Action8: TAction
-      Caption = 'Action8'
-      ImageIndex = 53
-      OnExecute = Action8Execute
+    object actFlipHorizontal: TAction
+      Caption = 'actFlipHorizontal'
+      ImageIndex = 17
+      ShortCut = 49224
+      OnExecute = actFlipHorizontalExecute
     end
-    object Action9: TAction
-      Caption = 'Action9'
-      ImageIndex = 37
-      OnExecute = Action9Execute
+    object actRotateLeft90: TAction
+      Caption = 'actRotateLeft90'
+      ImageIndex = 19
+      ShortCut = 24652
+      OnExecute = actRotateLeft90Execute
     end
-    object Action10: TAction
-      Caption = 'Action10'
-      ImageIndex = 38
-      OnExecute = Action10Execute
+    object actRotateRight90: TAction
+      Caption = 'actRotateRight90'
+      ImageIndex = 20
+      ShortCut = 24658
+      OnExecute = actRotateRight90Execute
     end
-    object Action11: TAction
-      Caption = 'Action11'
-      ImageIndex = 47
-      OnExecute = Action11Execute
+    object actMonoOn: TAction
+      Caption = 'actMonoOn'
+      GroupIndex = 1
+      ImageIndex = 27
+      ShortCut = 16461
+      OnExecute = actMonoOnExecute
     end
-    object Action12: TAction
-      Caption = 'Action12'
-      ImageIndex = 48
-      OnExecute = Action12Execute
-    end
-    object Action13: TAction
-      Caption = 'Action13'
-      ImageIndex = 49
-      OnExecute = Action13Execute
-    end
-    object Action14: TAction
-      Caption = 'Action14'
-      ImageIndex = 50
-      OnExecute = Action14Execute
-    end
-    object Action15: TAction
-      Caption = 'Action15'
-      ImageIndex = 33
-      OnExecute = Action15Execute
-    end
-    object Action16: TAction
-      Caption = 'Action16'
-      ImageIndex = 34
-      OnExecute = Action16Execute
+    object actMonoOff: TAction
+      Caption = 'actMonoOff'
+      Checked = True
+      GroupIndex = 1
+      ImageIndex = 26
+      ShortCut = 16461
+      OnExecute = actMonoOffExecute
     end
   end
   object ImageList1: TImageList
@@ -553,7 +456,7 @@ object frmEditorImage: TfrmEditorImage
     Left = 220
     Top = 65
     Bitmap = {
-      494C010120006000E40020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010120006000EC0020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000002001000001002000000000000040
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5328,7 +5231,9 @@ object frmEditorImage: TfrmEditorImage
       Action = actPencil
     end
     object Brush1: TMenuItem
-      Action = actBrush
+      Caption = 'Brush'
+      ImageIndex = 2
+      OnClick = actBrushExecute
     end
     object PaintBucket1: TMenuItem
       Action = actPaintBucket
