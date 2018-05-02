@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Attributes>
+	<Token name="default" textColor="#0"/>
+	<Token name="defaultEmbed" backgroundColor="#ECE9D8"/>
+	<Token name="docStart" fontStyle="bold"/>
+	<Token name="docEnd" fontStyle="bold"/>
+	<Token name="docBlockStart" fontStyle="bold"/>
+	<Token name="docBlockEnd" fontStyle="bold"/>
+	<Token name="docInstruction" fontStyle="bold"/>
+	<Token name="docDefault" backgroundColor="#ECE9D8"/>
+	<Token name="comment" textColor="#008000"/>
+	<Token name="commentStart" textColor="#008000"/>
+	<Token name="commentEnd" textColor="#008000"/>
+	<Token name="keyword" fontStyle="bold"/>
+	<Token name="privateSymbol" textColor="Navy"/>
+	<Token name="email" fontStyle="bold"/>
+	<Token name="hairy" textColor="#000080" fontStyle="bold, italic, underline, strikeOut"/>
+	<Token name="number" textColor="Blue"/>
+	<Token name="symbol" textColor="Blue"/>
+	<Token name="string" textColor="Blue"/>
+	<Token name="blockStart" fontStyle="bold"/>
+	<Token name="blockEnd" fontStyle="bold"/>
+	<Token name="badString" textColor="Red"/>
+	<Token name="preprocessor" textColor="#008080"/>
+	<Token name="badPreprocessor" textColor="red"/>
+	<Token name="escaped" textColor="Navy"/>
+	<Token name="quotedVariable" textColor="Navy" fontStyle="bold"/>
+	<Token name="regexStart" textColor="Navy" fontStyle="bold"/>
+	<Token name="regexEnd" textColor="Navy" fontStyle="bold"/><!--html/xml tokens-->
+	<Token name="tagOpen" textColor="Purple"/>
+	<Token name="tagClose" textColor="Purple"/>
+	<Token name="dtdTagStartEnd" textColor="Purple" fontStyle="bold"/>
+	<Token name="url" textColor="Red"/>
+	<Token name="fpi" textColor="Red" fontStyle="bold"/>
+	<Token name="entity" textColor="#FF4500"/>
+	<Token name="attributeName" backgroundColor="Black" textColor="#583485"/>
+	<Token name="attributeValue" textColor="Blue"/>
+	<Token name="badAttributeValue" textColor="Red"/>
+	<Token name="cssRule" textColor="#583485" fontStyle="bold"/>
+	<Token name="cssRelSymbol" fontStyle="bold"/>
+	<Token name="cssUrlHref" fontStyle="underline"/>
+	<Token name="cssUrlAttr"/>
+	<Token name="cssAttrListBG" textColor="Blue"/>
+	<Token name="cdataTagStart" textColor="Purple" fontStyle="bold"/>
+	<Token name="cdataTagEnd" textColor="Purple" fontStyle="bold"/>
+	<Token name="xmlDeclStart" textColor="Purple" fontStyle="bold"/>
+	<Token name="xmlDeclEnd" textColor="Purple" fontStyle="bold"/>
+</Attributes>
