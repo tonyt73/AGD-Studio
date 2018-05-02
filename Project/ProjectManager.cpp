@@ -52,8 +52,9 @@ void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* 
         {
             index = tiFolderFile;
         }
+        else if (caption == "sounds"    ) index = tiFolderSfx;
     }
-    else if (parent.LowerCase() == "assets")
+    else if (parent.LowerCase() == "images")
     {
              if (caption == "sprites"   ) index = tiFolderSprites;
         else if (caption == "images"    ) index = tiFolderImages;
@@ -62,7 +63,6 @@ void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* 
         else if (caption == "tiles"     ) index = tiFolderImages;
         else if (caption == "tile sets" ) index = tiFolderImages;
         else if (caption == "maps"      ) index = tiFolderMaps;
-        else if (caption == "sounds"    ) index = tiFolderSfx;
     }
     else
     {
@@ -95,7 +95,7 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
         assert(config != nullptr);
         if (config->Files().size() == 0)
         {
-            Add("Text", "Event", "Player Control");
+            Add("Text", "Event", "Player control");
             Add("Text", "Event", "Sprite type 1");
             Add("Text", "Event", "Sprite type 2");
             Add("Text", "Event", "Sprite type 3");
@@ -107,15 +107,16 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
             Add("Text", "Event", "Game initialisation");
             Add("Text", "Event", "Initialise sprite");
             Add("Text", "Event", "Kill player");
-            Add("Text", "Event", "Introduction Menu");
+            Add("Text", "Event", "Introduction menu");
             Add("Text", "Event", "Main loop 1");
             Add("Text", "Event", "Main loop 2");
             Add("Text", "Event", "Restart screen");
             Add("Text", "Event", "Fell too far");
             Add("Text", "Event", "Lost game");
             Add("Text", "Event", "Completed game");
-            Add("Text", "Event", "New High Score");
+            Add("Text", "Event", "New high score");
             Add("Text", "Message", "Messages");
+            Add("Text", "SoundFx", "Sound effects");
         }
         else
         {
@@ -209,6 +210,11 @@ Document* __fastcall ProjectManager::AddToTreeView(Document* document)
 Document* __fastcall ProjectManager::Add(const String& type, const String& subType, const String& name, const String& extra)
 {
     return theDocumentManager.Add(type, subType, name, extra);
+}
+//---------------------------------------------------------------------------
+Document* __fastcall ProjectManager::Add(const String& type, const String& subType)
+{
+    return theDocumentManager.Add(type, subType, theDocumentManager.NextName(type, subType));
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::OnDocumentChange(Document* doc)

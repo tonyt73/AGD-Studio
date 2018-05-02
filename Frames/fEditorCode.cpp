@@ -76,6 +76,7 @@ void __fastcall TfrmEditorCode::SetDocument(Document* document)
         auto sc = GetSyntaxScByExt(extension);
         lmdDocument->ActiveSyntaxScheme = sc;
     }
+    Color = StyleServices()->GetStyleColor(scGenericGradientBase);
 }
 //---------------------------------------------------------------------------
 String __fastcall TfrmEditorCode::GetSyntaxScByExt(const String& extension)

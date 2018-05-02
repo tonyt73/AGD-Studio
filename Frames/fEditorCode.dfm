@@ -10,15 +10,26 @@ object frmEditorCode: TfrmEditorCode
     Width = 892
     Height = 712
     Align = alClient
+    BevelEdges = []
+    BevelInner = bvNone
+    BevelOuter = bvNone
     TabOrder = 0
     Document = lmdDocument
+    Color = clBlack
+    SelectedLineBg = 2105376
+    DebugFrameLineBg = clMedGray
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'Courier New'
     Font.Style = []
+    Gutter.BookmarksBarBg = clGrayText
+    Gutter.LinesBarBg = clMaroon
+    Gutter.FoldsBarBg = clGray
     CustomKeyBindings = <>
     OnStatusChanged = evEditorStatusChanged
+    ExplicitLeft = 48
+    ExplicitTop = 3
     GutterBarsEmpty = False
   end
   object sbStatus: TStatusBar
@@ -3433,7 +3444,9 @@ object frmEditorCode: TfrmEditorCode
           #9'<Token name="url" textColor="Red"/>'
           #9'<Token name="fpi" textColor="Red" fontStyle="bold"/>'
           #9'<Token name="entity" textColor="#FF4500"/>'
-          #9'<Token name="attributeName" textColor="#583485"/>'
+          
+            #9'<Token name="attributeName" backgroundColor="Black" textColor="' +
+            '#583485"/>'
           #9'<Token name="attributeValue" textColor="Blue"/>'
           #9'<Token name="badAttributeValue" textColor="Red"/>'
           #9'<Token name="cssRule" textColor="#583485" fontStyle="bold"/>'
@@ -3450,9 +3463,139 @@ object frmEditorCode: TfrmEditorCode
             '>'
           #9'<Token name="xmlDeclEnd" textColor="Purple" fontStyle="bold"/>'
           '</Attributes>')
+      end
+      item
+        Name = 'Dark'
+        Scheme.Strings = (
+          '<?xml version="1.0" encoding="UTF-8"?>'
+          '<Attributes>'
+          
+            #9'<Token name="default" backgroundColor="Black" textColor="Black"' +
+            '/>'
+          #9'<Token name="defaultEmbed" backgroundColor="#ECE9D8"/>'
+          
+            #9'<Token name="docStart" backgroundColor="Black" fontStyle="bold"' +
+            '/>'
+          #9'<Token name="docEnd" backgroundColor="Black" fontStyle="bold"/>'
+          
+            #9'<Token name="docBlockStart" backgroundColor="Black" fontStyle="' +
+            'bold"/>'
+          
+            #9'<Token name="docBlockEnd" backgroundColor="Black" fontStyle="bo' +
+            'ld"/>'
+          
+            #9'<Token name="docInstruction" backgroundColor="Black" fontStyle=' +
+            '"bold"/>'
+          #9'<Token name="docDefault" backgroundColor="Black"/>'
+          
+            #9'<Token name="comment" backgroundColor="Black" textColor="Green"' +
+            '/>'
+          
+            #9'<Token name="commentStart" backgroundColor="Black" textColor="G' +
+            'reen"/>'
+          
+            #9'<Token name="commentEnd" backgroundColor="Black" textColor="Gre' +
+            'en"/>'
+          
+            #9'<Token name="keyword" backgroundColor="Black" textColor="Aqua" ' +
+            'fontStyle="bold"/>'
+          
+            #9'<Token name="privateSymbol" backgroundColor="Black" textColor="' +
+            'Fuchsia"/>'
+          
+            #9'<Token name="email" backgroundColor="Black" textColor="Olive" f' +
+            'ontStyle="bold"/>'
+          
+            #9'<Token name="hairy" backgroundColor="Black" textColor="Navy" fo' +
+            'ntStyle="italic bold underline strikeOut"/>'
+          
+            #9'<Token name="number" backgroundColor="Black" textColor="Yellow"' +
+            '/>'
+          
+            #9'<Token name="symbol" backgroundColor="Black" textColor="Yellow"' +
+            '/>'
+          #9'<Token name="string" backgroundColor="Black" textColor="Blue"/>'
+          
+            #9'<Token name="blockStart" backgroundColor="Black" fontStyle="bol' +
+            'd"/>'
+          
+            #9'<Token name="blockEnd" backgroundColor="Black" fontStyle="bold"' +
+            '/>'
+          
+            #9'<Token name="badString" backgroundColor="Black" textColor="Red"' +
+            '/>'
+          
+            #9'<Token name="preprocessor" backgroundColor="Black" textColor="T' +
+            'eal"/>'
+          
+            #9'<Token name="badPreprocessor" backgroundColor="Maroon" textColo' +
+            'r="Red"/>'
+          
+            #9'<Token name="escaped" backgroundColor="Black" textColor="Navy"/' +
+            '>'
+          
+            #9'<Token name="quotedVariable" backgroundColor="Black" textColor=' +
+            '"Navy" fontStyle="bold"/>'
+          
+            #9'<Token name="regexStart" backgroundColor="Black" textColor="Nav' +
+            'y" fontStyle="bold"/>'
+          
+            #9'<Token name="regexEnd" backgroundColor="Black" textColor="Navy"' +
+            ' fontStyle="bold"/><!--html/xml tokens-->'
+          
+            #9'<Token name="tagOpen" backgroundColor="Black" textColor="Purple' +
+            '"/>'
+          
+            #9'<Token name="tagClose" backgroundColor="Maroon" textColor="Purp' +
+            'le"/>'
+          
+            #9'<Token name="dtdTagStartEnd" backgroundColor="Black" textColor=' +
+            '"Purple" fontStyle="bold"/>'
+          #9'<Token name="url" backgroundColor="Black" textColor="Red"/>'
+          
+            #9'<Token name="fpi" backgroundColor="Black" textColor="Red" fontS' +
+            'tyle="bold"/>'
+          
+            #9'<Token name="entity" backgroundColor="Black" textColor="#FF4500' +
+            '"/>'
+          
+            #9'<Token name="attributeName" backgroundColor="Black" textColor="' +
+            '#583485"/>'
+          
+            #9'<Token name="attributeValue" backgroundColor="Black" textColor=' +
+            '"Blue"/>'
+          
+            #9'<Token name="badAttributeValue" backgroundColor="Black" textCol' +
+            'or="Red"/>'
+          
+            #9'<Token name="cssRule" backgroundColor="Black" textColor="#58348' +
+            '5" fontStyle="bold"/>'
+          
+            #9'<Token name="cssRelSymbol" backgroundColor="Black" fontStyle="b' +
+            'old"/>'
+          
+            #9'<Token name="cssUrlHref" backgroundColor="Black" fontStyle="und' +
+            'erline"/>'
+          #9'<Token name="cssUrlAttr" backgroundColor="Black"/>'
+          
+            #9'<Token name="cssAttrListBG" backgroundColor="Black" textColor="' +
+            'Blue"/>'
+          
+            #9'<Token name="cdataTagStart" backgroundColor="Black" textColor="' +
+            'Purple" fontStyle="bold"/>'
+          
+            #9'<Token name="cdataTagEnd" backgroundColor="Black" textColor="Pu' +
+            'rple" fontStyle="bold"/>'
+          
+            #9'<Token name="xmlDeclStart" backgroundColor="Black" textColor="P' +
+            'urple" fontStyle="bold"/>'
+          
+            #9'<Token name="xmlDeclEnd" backgroundColor="Black" textColor="Pur' +
+            'ple" fontStyle="bold"/>'
+          '</Attributes>')
       end>
     ActiveSyntaxScheme = 'AGD'
-    ActiveColorScheme = 'default'
+    ActiveColorScheme = 'Dark'
     Left = 64
     Top = 48
   end

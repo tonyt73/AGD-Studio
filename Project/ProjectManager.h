@@ -53,6 +53,7 @@ public:
     void        __fastcall  Save();
 
     Document*   __fastcall  Add(const String& type, const String& subType, const String& name, const String& extra = "");
+    Document*   __fastcall  Add(const String& type, const String& subType);
 
     void        __fastcall  RemoveMostRecentlyUsedItem(const String& name, const String& path);
     cMRUList    __fastcall  GetMostRecentlyUsedList() const;

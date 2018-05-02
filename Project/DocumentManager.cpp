@@ -22,16 +22,16 @@ DocumentManager& DocumentManager::get()
 __fastcall DocumentManager::DocumentManager()
 {
     Register("Game", "Configuration", &ProjectDocument::Create);
-    Register("Text", "Plain", &TextDocument::Create);
+    //Register("Text", "Plain", &TextDocument::Create);
     Register("Text", "Event", &EventDocument::Create);
     Register("Text", "Message", &MessageDocument::Create);
-    Register("Image", "Single", &ImageDocument::Create);
+    //Register("Image", "Single", &ImageDocument::Create);
     Register("Image", "Object", &ObjectDocument::Create);
     Register("Image", "Sprite", &SpriteDocument::Create);
     Register("Image", "Tile", &TileDocument::Create);
     //Register("Image", "TileSet", &TileSet::Create);
     //Register("Map", "Tiled", &TileMap::Create);
-    Register("SoundFx", "List", &SfxDocument::Create);
+    Register("Text", "SoundFx", &SfxDocument::Create);
 
     ::Messaging::Bus::Subscribe<OnImport<String>>(OnImportString);
 }
@@ -172,3 +172,27 @@ void __fastcall DocumentManager::OnImportString(const OnImport<String>& event)
     }
 }
 //---------------------------------------------------------------------------
+String __fastcall DocumentManager::NextName(const String& type, const String& subType) const
+{
+    auto i = 1;
+    String name = subType + " " + IntToStr(i);
+    auto it = m_Documents.find(type);
+    if (it != m_Documents.end())
+    {
+        auto exists = false;
+        do
+        {
+            exists = false;
+            name = subType + " " + IntToStr(i);
+            for (const auto& document : it->second)
+            {
+                exists |= (document->SubType == subType && document->Name == name);
+            }
+            i++;
+        }
+        while (exists);
+    }
+    return name;
+}
+//---------------------------------------------------------------------------
+

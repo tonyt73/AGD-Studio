@@ -11,7 +11,7 @@ __fastcall TiledScreenDocument::TiledScreenDocument(const String& name)
 {
     m_Type = "Screen";
     m_SubType = "Tiled";
-    m_Folder = "Assets\\Screens";
+    m_Folder = "Map\\Screens";
     RegisterProperty("Name", "Details", "The name of the screen");
     m_File = GetFile();
 }
@@ -26,7 +26,7 @@ __fastcall TiledMapDocument::TiledMapDocument(const String& name)
 {
     m_Type = "Map";
     m_SubType = "Tiled";
-    m_Folder = "Assets\\Maps";
+    m_Folder = "Map\\Map";
     RegisterProperty("Name", "Details", "The name of the map");
     RegisterProperty("Across", "Dimensions", "The number in screens accross for the map");
     RegisterProperty("Down", "Dimensions", "The number in Screens down for the map");

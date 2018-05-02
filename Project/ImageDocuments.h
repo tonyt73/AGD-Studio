@@ -11,6 +11,7 @@ private:
     typedef std::vector<String>     FramesList;
 
             int         __fastcall  CountFrames() const;
+            void        __fastcall  SetFrames(int frames);
 
 protected:
     // width, height, format, palette
@@ -29,12 +30,12 @@ public:
             bool        __fastcall  AddFrame();
             bool        __fastcall  DeleteFrame(int index);
 
-            bool        __property  MultiFrame  = { read = m_MultiFrame                 };
+            bool        __property  MultiFrame  = { read = m_MultiFrame                   };
 
 __published:
-            int         __property  Width       = { read = m_Width , write = m_Width    };
-            int         __property  Height      = { read = m_Height, write = m_Height   };
-            int         __property  Frames      = { read = CountFrames                  };
+            int         __property  Width       = { read = m_Width    , write = m_Width   };
+            int         __property  Height      = { read = m_Height   , write = m_Height  };
+            int         __property  Frames      = { read = CountFrames, write = SetFrames };
             // TODO: add palette info
 };
 //---------------------------------------------------------------------------

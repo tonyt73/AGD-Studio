@@ -9,10 +9,12 @@
 __fastcall ImageDocument::ImageDocument(const String& name)
 : Document(name)
 , m_MultiFrame(false)
+, m_Width(16)
+, m_Height(16)
 {
     m_Type = "Image";
     m_SubType = "Single";
-    m_Folder = "Assets\\Images";
+    m_Folder = "Images\\Images";
     RegisterProperty("Name", "Details", "The name of the image");
     RegisterProperty("Width", "Dimensions", "The width in pixels of the image");
     RegisterProperty("Height", "Dimensions", "The height in pixels of the image");
@@ -20,14 +22,8 @@ __fastcall ImageDocument::ImageDocument(const String& name)
     // json loading properties
     m_PropertyMap[".Image.Width"] = &m_Width;
     m_PropertyMap[".Image.Height"] = &m_Height;
-
-    // TODO: Insert the first frame
     m_File = GetFile();
-}
-//---------------------------------------------------------------------------
-int __fastcall ImageDocument::CountFrames() const
-{
-    return m_Frames.size();
+    AddFrame();
 }
 //---------------------------------------------------------------------------
 void __fastcall ImageDocument::Save()
@@ -41,11 +37,27 @@ void __fastcall ImageDocument::Save()
     Close();
 }
 //---------------------------------------------------------------------------
+int __fastcall ImageDocument::CountFrames() const
+{
+    return m_Frames.size();
+}
+//---------------------------------------------------------------------------
+void __fastcall ImageDocument::SetFrames(int frames)
+{
+    if (frames > 1 && frames != m_Frames.size())
+    {
+        while (frames != m_Frames.size())
+        {
+            frames > m_Frames.size() ? AddFrame() : DeleteFrame(m_Frames.size() - 1);
+        }
+    }
+}
+//---------------------------------------------------------------------------
 bool __fastcall ImageDocument::AddFrame()
 {
-    if (m_MultiFrame)
+    if (m_Frames.size() == 0 || m_MultiFrame)
     {
-        // TODO: Add a new frame
+        m_Frames.push_back("");
         return true;
     }
     return false;
@@ -53,9 +65,10 @@ bool __fastcall ImageDocument::AddFrame()
 //---------------------------------------------------------------------------
 bool __fastcall ImageDocument::DeleteFrame(int index)
 {
-    if (m_MultiFrame && index)
+    if (m_MultiFrame && 0 < index && index < m_Frames.size())
     {
         // can't only delete new frames; can't delete the first frame
+        m_Frames.erase(m_Frames.begin() + index);
         return true;
     }
     return false;
@@ -70,7 +83,7 @@ __fastcall SpriteDocument::SpriteDocument(const String& name)
 {
     m_MultiFrame = true;
     m_SubType = "Sprite";
-    m_Folder = "Assets\\Sprites";
+    m_Folder = "Images\\Sprites";
     RegisterProperty("Name", "Details", "The name of the sprite");
 //    RegisterProperty("Width", "Dimensions", "The width in pixels of the sprite");
 //    RegisterProperty("Height", "Dimensions", "The height in pixels of the sprite");
@@ -81,7 +94,7 @@ __fastcall ObjectDocument::ObjectDocument(const String& name)
 : ImageDocument(name)
 {
     m_SubType = "Object";
-    m_Folder = "Assets\\Objects";
+    m_Folder = "Images\\Objects";
     RegisterProperty("Name", "Details", "The name of the object");
 //    RegisterProperty("Width", "Dimensions", "The width in pixels of the object");
 //    RegisterProperty("Height", "Dimensions", "The height in pixels of the object");
@@ -93,7 +106,7 @@ __fastcall TileDocument::TileDocument(const String& name)
 {
     m_File = GetFile();
     m_SubType = "Tile";
-    m_Folder = "Assets\\Tiles";
+    m_Folder = "Images\\Tiles";
     RegisterProperty("Name", "Details", "The name of the tile");
 }
 //---------------------------------------------------------------------------

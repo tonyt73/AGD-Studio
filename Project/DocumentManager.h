@@ -32,6 +32,7 @@ public:
 
             void        __fastcall  Add(Document* document);
             Document*   __fastcall  Add(const String& type, const String& subType, const String& name, const String& extra = "");
+            String      __fastcall  NextName(const String& type, const String& subType) const;
             bool        __fastcall  Remove(const String& type, const String& name);
             void        __fastcall  DocumentFolders(std::vector<String>& folders) const;
 
