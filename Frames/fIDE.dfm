@@ -188,6 +188,7 @@ object frmIDE: TfrmIDE
           Images = imgProjectNodes
           ItemIndent = 18
           LineHeight = 18
+          PopupMenu = popProject
           ShowLeafButton = False
           SortSection = -1
           StoragePath = '\Tree'
@@ -439,7 +440,6 @@ object frmIDE: TfrmIDE
     object actEditCopy: TAction
       Category = 'Edit'
       Caption = '&Copy'
-      Enabled = False
       Hint = 'Copy'
       ImageIndex = 7
       ShortCut = 16451
@@ -509,18 +509,21 @@ object frmIDE: TfrmIDE
       Caption = 'Zoom &In'
       Hint = 'Zoom In'
       ImageIndex = 20
+      OnExecute = actEditZoomInExecute
     end
     object actEditZoomOut: TAction
       Category = 'Edit'
       Caption = 'Zoom &Out'
       Hint = 'Zoom Out'
       ImageIndex = 19
+      OnExecute = actEditZoomOutExecute
     end
     object actEditZoomReset: TAction
       Category = 'Edit'
       Caption = 'Zoom &Reset'
       Hint = 'Zoom Reset'
       ImageIndex = 18
+      OnExecute = actEditZoomResetExecute
     end
     object actFileNewAsset: TAction
       Category = 'File'
@@ -564,6 +567,10 @@ object frmIDE: TfrmIDE
       ShortCut = 16463
       OnExecute = actFileProjectOpenExecute
     end
+    object actNewAsset: TAction
+      Caption = 'New Asset'
+      OnExecute = actNewAssetExecute
+    end
   end
   object imgIconsActive: TImageList
     ColorDepth = cd32Bit
@@ -571,7 +578,7 @@ object frmIDE: TfrmIDE
     Left = 20
     Top = 140
     Bitmap = {
-      494C0101150018001C0110001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010115001800200110001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1455,7 +1462,7 @@ object frmIDE: TfrmIDE
     Left = 92
     Top = 140
     Bitmap = {
-      494C010115003000EC0010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010115003000F00010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2264,7 +2271,7 @@ object frmIDE: TfrmIDE
     Left = 24
     Top = 200
     Bitmap = {
-      494C010105000800740010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010105000800780010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000080827BFF80817DFF8080
       80FF80817DFF808080FF00000000000000001B415BB23D93CFFF3D91CEFF3D92
@@ -2540,7 +2547,7 @@ object frmIDE: TfrmIDE
     Left = 102
     Top = 200
     Bitmap = {
-      494C0101170030003C0210001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010117003000400210001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000023000000330000
       0033000000330000003300000033000000330000003300000033000000330000
@@ -3346,5 +3353,13 @@ object frmIDE: TfrmIDE
     Title = 'Open an Existing AGDX Project'
     Left = 172
     Top = 148
+  end
+  object popProject: TPopupMenu
+    OnPopup = popProjectPopup
+    Left = 224
+    Top = 88
+    object mnuNewAsset: TMenuItem
+      Action = actNewAsset
+    end
   end
 end

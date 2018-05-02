@@ -29,6 +29,7 @@
 //---------------------------------------------------------------------------
 #include "Project/Document.h"
 #include <Vcl.ExtDlgs.hpp>
+#include "ElMenus.hpp"
 //---------------------------------------------------------------------------
 class TfrmIDE : public TFrame
 {
@@ -122,6 +123,9 @@ __published:    // IDE-managed Components
     TMenuItem *OpenProject1;
     TMenuItem *mnuFileMru;
     TOpenTextFileDialog *dlgOpen;
+    TPopupMenu *popProject;
+    TMenuItem *mnuNewAsset;
+    TAction *actNewAsset;
     void __fastcall actEditCopyExecute(TObject *Sender);
     void __fastcall actEditCutExecute(TObject *Sender);
     void __fastcall actEditPasteExecute(TObject *Sender);
@@ -144,6 +148,12 @@ __published:    // IDE-managed Components
     void __fastcall actEditReplaceExecute(TObject *Sender);
     void __fastcall actEditFindPreviousExecute(TObject *Sender);
     void __fastcall actFileProjectOpenExecute(TObject *Sender);
+    void __fastcall actNewAssetExecute(TObject *Sender);
+    void __fastcall popProjectPopup(TObject *Sender);
+    void __fastcall actEditZoomInExecute(TObject *Sender);
+    void __fastcall actEditZoomOutExecute(TObject *Sender);
+    void __fastcall actEditZoomResetExecute(TObject *Sender);
+
 
 private:    // User declarations
     void __fastcall UpdateProperties(Document* document);

@@ -36,16 +36,14 @@ void __fastcall TfrmIDE::RegisterDocumentEditors()
 {
     // TODO: Do this another way
     // ie. by document class type to editor?
-    DocumentEditorFactory::Register("Assets\\Files", &TfrmEditorCode::Create);
-    DocumentEditorFactory::Register("Game\\Code", &TfrmEditorCode::Create);
     DocumentEditorFactory::Register("Game\\Events", &TfrmEditorCode::Create);
     DocumentEditorFactory::Register("Game\\Messages", &TfrmEditorCode::Create);
-    DocumentEditorFactory::Register("Assets\\Sounds", &TfrmEditorCode::Create);
-    DocumentEditorFactory::Register("Assets\\Images", &TfrmEditorImage::Create);
-    DocumentEditorFactory::Register("Assets\\Sprites", &TfrmEditorImage::Create);
-    DocumentEditorFactory::Register("Assets\\Objects", &TfrmEditorImage::Create);
-    DocumentEditorFactory::Register("Assets\\Tiles", &TfrmEditorImage::Create);
-    DocumentEditorFactory::Register("Assets\\Maps",  &TfrmEditorMap::Create);
+    DocumentEditorFactory::Register("Game\\Sounds", &TfrmEditorCode::Create);
+    DocumentEditorFactory::Register("Images\\Sprites", &TfrmEditorImage::Create);
+    DocumentEditorFactory::Register("Images\\Objects", &TfrmEditorImage::Create);
+    DocumentEditorFactory::Register("Images\\Tiles", &TfrmEditorImage::Create);
+    DocumentEditorFactory::Register("Map\\Map",  &TfrmEditorMap::Create);
+    DocumentEditorFactory::Register("Map\\Screens",  &TfrmEditorMap::Create);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::OnActivate()
@@ -97,62 +95,6 @@ void __fastcall TfrmIDE::actEditReplaceExecute(TObject *Sender)
     ::Messaging::Bus::Publish<Event>(Event("edit.replace"));
 }
 //---------------------------------------------------------------------------
-//void __fastcall TfrmIDE::actFileProjectNewExecute(TObject *Sender)
-//{
-//    theProjectManager.Save();
-//    the
-//    static auto docNo = 0;
-//    auto dp = new TLMDDockPanel(this);
-//    Document* doc = nullptr;
-//    switch (docNo % 4)
-//    {
-//        case 0:
-//        {
-//            auto name = "new sprite " + IntToStr(docNo++);
-//            doc = theProjectManager.Add("Image", "Sprite", name);
-//            dp->Tag = (int)doc;
-//            doc->DockPanel = dp;
-//            UpdateProperties(doc);
-//            dp->Caption = name;
-//            break;
-//        }
-//        case 1:
-//        {
-//            auto name = "new event " + IntToStr(docNo++);
-//            doc = theProjectManager.Add("Text", "Event", name);
-//            dp->Tag = (int)doc;
-//            doc->DockPanel = dp;
-//            UpdateProperties(doc);
-//            dp->Caption = name;
-//            break;
-//        }
-//        case 2:
-//        {
-//            auto name = "new tile " + IntToStr(docNo++);
-//            doc = theProjectManager.Add("Image", "Tile", name);
-//            dp->Tag = (int)doc;
-//            doc->DockPanel = dp;
-//            UpdateProperties(doc);
-//            dp->Caption = name;
-//            break;
-//        }
-//        case 3:
-//        {
-//            auto name = "new object " + IntToStr(docNo++);
-//            doc = theProjectManager.Add("Image", "Object", name);
-//            dp->Tag = (int)doc;
-//            doc->DockPanel = dp;
-//            UpdateProperties(doc);
-//            dp->Caption = name;
-//            break;
-//        }
-//    }
-//    DocumentEditorFactory::Create(doc, dp);
-//    dp->ClientKind = dkDocument;
-//    dsIDE->DockControl(dp, dsIDE->SpaceZone);
-//    dp->OnClose = OnDocumentClose;
-//}
-//---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileProjectSaveExecute(TObject *Sender)
 {
     theProjectManager.Save();
@@ -181,6 +123,21 @@ void __fastcall TfrmIDE::actEditUndoExecute(TObject *Sender)
 void __fastcall TfrmIDE::actEditRedoExecute(TObject *Sender)
 {
     ::Messaging::Bus::Publish<Event>(Event("edit.redo"));
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actEditZoomInExecute(TObject *Sender)
+{
+    ::Messaging::Bus::Publish<Event>(Event("zoom.in"));
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actEditZoomOutExecute(TObject *Sender)
+{
+    ::Messaging::Bus::Publish<Event>(Event("zoom.out"));
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actEditZoomResetExecute(TObject *Sender)
+{
+    ::Messaging::Bus::Publish<Event>(Event("zoom.reset"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::UpdateProperties(Document* document)
@@ -334,6 +291,24 @@ void __fastcall TfrmIDE::mruOnClick(TObject *Sender)
             caption = caption.SubString(0, pos - 1) + caption.SubString(pos + 1, caption.Length());
         }
         theProjectManager.Open(caption);
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actNewAssetExecute(TObject *Sender)
+{
+    static int docNo = 0;
+    if (tvProject->Selected)
+    {
+        auto type = tvProject->Selected->Text.SubString(1, tvProject->Selected->Text.Length() - 1);
+        theProjectManager.Add("Image", type);
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::popProjectPopup(TObject *Sender)
+{
+    if (tvProject->Selected)
+    {
+        actNewAsset->Enabled = tvProject->Selected->Parent->Text == "Images";
     }
 }
 //---------------------------------------------------------------------------
