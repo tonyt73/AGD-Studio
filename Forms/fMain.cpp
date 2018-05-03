@@ -31,6 +31,7 @@ void __fastcall TfrmMain::FormCreate(TObject *Sender)
     ShowWelcomeDialog();
 
     // TODO: Remove: Used to generate initial JSON config files
+    //auto pw = std::make_unique<PaletteWriter>();
     //auto pw = std::make_unique<GraphicsModeWriter>();
     //auto pw = std::make_unique<MachineConfigWriter>();
 }
