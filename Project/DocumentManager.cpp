@@ -195,4 +195,35 @@ String __fastcall DocumentManager::NextName(const String& type, const String& su
     return name;
 }
 //---------------------------------------------------------------------------
+bool __fastcall DocumentManager::DoesNameExist(const String& name) const
+{
+    for (const auto& docsOfType : m_Documents)
+    {
+        for (const auto& doc : docsOfType.second)
+        {
+            if (name.LowerCase() == doc->Name.LowerCase())
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+//---------------------------------------------------------------------------
+String __fastcall DocumentManager::NextName(const String& name) const
+{
+    if (!DoesNameExist(name))
+    {
+        return name;
+    }
+    auto i = 1;
+    String nextName = "";
+    do
+    {
+        nextName = name + " " + IntToStr(i++);
+    }
+    while (DoesNameExist(nextName));
+    return nextName;
+}
+//---------------------------------------------------------------------------
 

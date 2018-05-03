@@ -59,27 +59,31 @@ String __fastcall Document::GetPropertyInfo(const String& property) const
 //---------------------------------------------------------------------------
 void __fastcall Document::SetName(String name)
 {
-    auto oldFile = GetFile();
-    m_Name = name;
-    if (m_TreeNode)
+    auto oldFile = GetFile(m_Name);
+    auto newFile = GetFile(name);
+    if (System::File::Exists(oldFile) && !System::File::Exists(newFile))
     {
-        ((TElXTreeItem*)m_TreeNode)->Text = name;
-    }
-    // TODO: Rename file to new file name
-    if (System::File::Exists(oldFile))
-    {
+        m_Name = name;
+        if (m_TreeNode)
+        {
+            ((TElXTreeItem*)m_TreeNode)->Text = name;
+        }
         auto newFile = GetFile();
         System::File::Rename(oldFile, newFile);
     }
     m_File = GetFile();
 }
 //---------------------------------------------------------------------------
-String __fastcall Document::GetFile()
+String __fastcall Document::GetFile(String name)
 {
+    if (name == "")
+    {
+        name = m_Name;
+    }
     // Documents/{project name}
     auto file = System::File::Combine(System::Path::Projects, System::Path::ProjectName);
     // Documents/{project name}/{document name}
-    file = System::File::Combine(file, m_Name);
+    file = System::File::Combine(file, name);
     // Documents/{project name}/{document name}.{extension)
     file = System::File::ChangeExtension(file, m_Extension);
     return file;

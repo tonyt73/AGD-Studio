@@ -85,8 +85,6 @@ __fastcall SpriteDocument::SpriteDocument(const String& name)
     m_SubType = "Sprite";
     m_Folder = "Images\\Sprites";
     RegisterProperty("Name", "Details", "The name of the sprite");
-//    RegisterProperty("Width", "Dimensions", "The width in pixels of the sprite");
-//    RegisterProperty("Height", "Dimensions", "The height in pixels of the sprite");
     m_File = GetFile();
 }
 //---------------------------------------------------------------------------
@@ -96,17 +94,25 @@ __fastcall ObjectDocument::ObjectDocument(const String& name)
     m_SubType = "Object";
     m_Folder = "Images\\Objects";
     RegisterProperty("Name", "Details", "The name of the object");
-//    RegisterProperty("Width", "Dimensions", "The width in pixels of the object");
-//    RegisterProperty("Height", "Dimensions", "The height in pixels of the object");
     m_File = GetFile();
 }
 //---------------------------------------------------------------------------
-__fastcall TileDocument::TileDocument(const String& name)
+__fastcall TileDocument::TileDocument(const String& name, const String& extra)
 : ImageDocument(name)
 {
     m_File = GetFile();
     m_SubType = "Tile";
     m_Folder = "Images\\Tiles";
     RegisterProperty("Name", "Details", "The name of the tile");
+    if (extra != "")
+    {
+        // extract the size from the string
+        auto pos = extra.Pos("x");
+        if (pos > 0)
+        {
+            m_Width = StrToInt(extra.SubString(1, pos - 1));
+            m_Height = StrToInt(extra.SubString(pos + 1, extra.Length()));
+        }
+    }
 }
 //---------------------------------------------------------------------------

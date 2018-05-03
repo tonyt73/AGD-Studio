@@ -18,8 +18,8 @@ protected:
             bool                    m_MultiFrame;
             int                     m_Width;
             int                     m_Height;
+            int                     m_NumOfFrames;
             FramesList              m_Frames;
-
 
 public:
                         __fastcall  ImageDocument(const String& name);
@@ -30,12 +30,13 @@ public:
             bool        __fastcall  AddFrame();
             bool        __fastcall  DeleteFrame(int index);
 
-            bool        __property  MultiFrame  = { read = m_MultiFrame                   };
+            bool        __property  MultiFrame  = { read = m_MultiFrame };
+
 
 __published:
-            int         __property  Width       = { read = m_Width    , write = m_Width   };
-            int         __property  Height      = { read = m_Height   , write = m_Height  };
-            int         __property  Frames      = { read = CountFrames, write = SetFrames };
+            int         __property  Width       = { read = m_Width      };
+            int         __property  Height      = { read = m_Height     };
+            int         __property  Frames      = { read = CountFrames  };
             // TODO: add palette info
 };
 //---------------------------------------------------------------------------
@@ -60,8 +61,8 @@ class TileDocument : public ImageDocument
 private:
 
 public:
-                        __fastcall  TileDocument(const String& name);
-    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new TileDocument(name); };
+                        __fastcall  TileDocument(const String& name, const String& extra);
+    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new TileDocument(name, extra); };
 };
 //---------------------------------------------------------------------------
 #endif

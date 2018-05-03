@@ -2,6 +2,7 @@
 #include "agdx.pch.h"
 #include "fAbout.h"
 #include "fIDE.h"
+#include "fNewImage.h"
 #include "fEditorImage.h"
 #include "fEditorCode.h"
 #include "fEditorMap.h"
@@ -254,6 +255,14 @@ void __fastcall TfrmIDE::tvProjectDblClick(TObject *Sender)
 void __fastcall TfrmIDE::actFileNewAssetExecute(TObject *Sender)
 {
     // TODO: Show create new asset dialog
+    auto dialog = std::unique_ptr<TfrmNewImage>(new TfrmNewImage(this));
+    if (dialog->ShowModal() == mrOk)
+    {
+        auto name = dialog->Name;
+        auto width = dialog->Width;
+        auto height = dialog->Height;
+        theProjectManager.Add("Image", dialog->Type, name, IntToStr(width) + "x" + IntToStr(height));
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileProjectOpenExecute(TObject *Sender)

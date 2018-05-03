@@ -43,7 +43,7 @@ protected:
             void*                   m_DockPanel;
 
             void        __fastcall  SetName(String name);
-            String      __fastcall  GetFile();
+            String      __fastcall  GetFile(String name = "");
                                     // update the documents json content
     virtual void        __fastcall  Update() {};//= 0;
                                     // convert json data to document data

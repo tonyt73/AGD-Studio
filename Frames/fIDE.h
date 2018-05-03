@@ -155,6 +155,7 @@ __published:    // IDE-managed Components
     void __fastcall actEditZoomResetExecute(TObject *Sender);
 
 
+
 private:    // User declarations
     void __fastcall UpdateProperties(Document* document);
     void __fastcall OnDocumentClose(TObject *Sender, TLMDockPanelCloseAction& action);
@@ -163,13 +164,13 @@ private:    // User declarations
     void __fastcall mruOnClick(TObject *Sender);
 
 public:        // User declarations
-    TNotifyEvent    FOnFormClose;
-    __fastcall         TfrmIDE(TComponent* Owner);
-    __fastcall        ~TfrmIDE();
+    TNotifyEvent        FOnFormClose;
+            __fastcall  TfrmIDE(TComponent* Owner);
+            __fastcall ~TfrmIDE();
 
-    void __fastcall OnActivate();
+    void    __fastcall  OnActivate();
 
-    __property    TNotifyEvent OnFormClose = { read = FOnFormClose, write = FOnFormClose };
+            __property  TNotifyEvent OnFormClose = { read = FOnFormClose, write = FOnFormClose };
 };
 //---------------------------------------------------------------------------
 #endif

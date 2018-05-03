@@ -209,7 +209,7 @@ Document* __fastcall ProjectManager::AddToTreeView(Document* document)
 //---------------------------------------------------------------------------
 Document* __fastcall ProjectManager::Add(const String& type, const String& subType, const String& name, const String& extra)
 {
-    return theDocumentManager.Add(type, subType, name, extra);
+    return theDocumentManager.Add(type, subType, theDocumentManager.NextName(name), extra);
 }
 //---------------------------------------------------------------------------
 Document* __fastcall ProjectManager::Add(const String& type, const String& subType)

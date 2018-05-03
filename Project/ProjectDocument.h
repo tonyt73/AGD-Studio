@@ -23,8 +23,6 @@ private:
                 String              m_MachineName;  // json loader
      std::unique_ptr<MachineConfig> m_MachineConfig;
                 FileInfo            m_FileInfo; // used by the json loader
-
-
                 FileList            m_Files;
 
             String      __fastcall  GetFile() const;
