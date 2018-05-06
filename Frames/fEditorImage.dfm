@@ -5,7 +5,7 @@ object frmEditorImage: TfrmEditorImage
   Height = 726
   TabOrder = 0
   OnEndDock = FrameEndDock
-  object Panel1: TPanel
+  object panToolOptions: TPanel
     Left = 0
     Top = 0
     Width = 1102
@@ -15,9 +15,8 @@ object frmEditorImage: TfrmEditorImage
     BevelOuter = bvNone
     TabOrder = 0
     Visible = False
-    ExplicitWidth = 1048
   end
-  object Panel2: TPanel
+  object panContainer: TPanel
     Left = 0
     Top = 32
     Width = 1102
@@ -25,9 +24,7 @@ object frmEditorImage: TfrmEditorImage
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 1048
-    ExplicitHeight = 695
-    object Panel3: TPanel
+    object panToolbar: TPanel
       Left = 0
       Top = 0
       Width = 80
@@ -38,10 +35,9 @@ object frmEditorImage: TfrmEditorImage
       Constraints.MaxWidth = 80
       Constraints.MinWidth = 80
       TabOrder = 0
-      ExplicitHeight = 629
       object ToolBar3: TToolBar
         Left = 0
-        Top = 164
+        Top = 204
         Width = 80
         Height = 160
         AutoSize = True
@@ -49,6 +45,7 @@ object frmEditorImage: TfrmEditorImage
         ButtonWidth = 40
         Images = ImageList1
         TabOrder = 0
+        ExplicitTop = 164
         object ToolButton15: TToolButton
           Left = 0
           Top = 0
@@ -106,7 +103,7 @@ object frmEditorImage: TfrmEditorImage
         Left = 0
         Top = 0
         Width = 80
-        Height = 160
+        Height = 200
         AutoSize = True
         ButtonHeight = 40
         ButtonWidth = 40
@@ -135,13 +132,11 @@ object frmEditorImage: TfrmEditorImage
           Grouped = True
           Style = tbsCheck
         end
-        object ToolButton31: TToolButton
+        object ToolButton3: TToolButton
           Left = 40
           Top = 40
-          Action = actPaintBucket
-          Grouped = True
+          Action = actBrush
           Wrap = True
-          Style = tbsCheck
         end
         object ToolButton27: TToolButton
           Left = 0
@@ -170,39 +165,50 @@ object frmEditorImage: TfrmEditorImage
           Top = 120
           Action = actSprayBrush
           Grouped = True
+          Wrap = True
+          Style = tbsCheck
+        end
+        object ToolButton31: TToolButton
+          Left = 0
+          Top = 160
+          Action = actPaintBucket
+          Grouped = True
           Style = tbsCheck
         end
       end
       object Panel4: TPanel
         Left = 0
-        Top = 160
+        Top = 200
         Width = 80
         Height = 4
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 2
+        ExplicitTop = 160
       end
       object Panel5: TPanel
         Left = 0
-        Top = 324
+        Top = 364
         Width = 80
         Height = 4
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 3
+        ExplicitTop = 324
       end
       object Panel6: TPanel
         Left = 0
-        Top = 368
+        Top = 408
         Width = 80
         Height = 4
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 4
+        ExplicitTop = 368
       end
       object ToolBar2: TToolBar
         Left = 0
-        Top = 372
+        Top = 412
         Width = 80
         Height = 40
         AutoSize = True
@@ -211,6 +217,7 @@ object frmEditorImage: TfrmEditorImage
         Caption = 'ToolBar2'
         Images = ImageList1
         TabOrder = 5
+        ExplicitTop = 372
         object ToolButton38: TToolButton
           Left = 0
           Top = 0
@@ -234,16 +241,17 @@ object frmEditorImage: TfrmEditorImage
       end
       object Panel7: TPanel
         Left = 0
-        Top = 412
+        Top = 452
         Width = 80
         Height = 4
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 6
+        ExplicitTop = 412
       end
       object ToolBar1: TToolBar
         Left = 0
-        Top = 328
+        Top = 368
         Width = 80
         Height = 40
         AutoSize = True
@@ -252,6 +260,7 @@ object frmEditorImage: TfrmEditorImage
         Caption = 'ToolBar6'
         Images = ImageList1
         TabOrder = 7
+        ExplicitTop = 328
         object ToolButton1: TToolButton
           Left = 0
           Top = 0
@@ -268,7 +277,7 @@ object frmEditorImage: TfrmEditorImage
         end
       end
     end
-    object Panel8: TPanel
+    object panFrames: TPanel
       Left = 0
       Top = 609
       Width = 1102
@@ -277,10 +286,8 @@ object frmEditorImage: TfrmEditorImage
       BevelOuter = bvNone
       Caption = 'Frames View'
       TabOrder = 1
-      ExplicitTop = 629
-      ExplicitWidth = 1048
     end
-    object ScrollBox1: TScrollBox
+    object sbxView: TScrollBox
       Left = 80
       Top = 0
       Width = 1022
@@ -290,9 +297,20 @@ object frmEditorImage: TfrmEditorImage
       BevelOuter = bvNone
       BorderStyle = bsNone
       TabOrder = 2
+      object imgEditor: TImage
+        Left = 0
+        Top = 0
+        Width = 1022
+        Height = 609
+        Align = alClient
+        ExplicitLeft = 80
+        ExplicitTop = 200
+        ExplicitWidth = 105
+        ExplicitHeight = 105
+      end
     end
   end
-  object StatusBar1: TStatusBar
+  object barStatus: TStatusBar
     Left = 0
     Top = 707
     Width = 1102
@@ -311,8 +329,6 @@ object frmEditorImage: TfrmEditorImage
         Width = 200
       end>
     Visible = False
-    ExplicitTop = 727
-    ExplicitWidth = 1048
   end
   object ActionList1: TActionList
     Images = ImageList1
@@ -447,6 +463,10 @@ object frmEditorImage: TfrmEditorImage
       ShortCut = 16461
       OnExecute = actMonoOffExecute
     end
+    object actBrush: TAction
+      Caption = 'actBrush'
+      ImageIndex = 2
+    end
   end
   object ImageList1: TImageList
     ColorDepth = cd32Bit
@@ -456,7 +476,7 @@ object frmEditorImage: TfrmEditorImage
     Left = 220
     Top = 65
     Bitmap = {
-      494C010120006000EC0020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010120006000F40020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000002001000001002000000000000040
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

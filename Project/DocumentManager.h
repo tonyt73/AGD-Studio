@@ -3,6 +3,7 @@
 #define DocumentManagerH
 //---------------------------------------------------------------------------
 #include "Project/Document.h"
+#include "Project/ProjectDocument.h"
 //---------------------------------------------------------------------------
 class DocumentManager
 {
@@ -24,7 +25,7 @@ private:
     TFactoryMap                     m_FactoryMap;
 
             void        __fastcall  Register(const String& type, const String& subType, CreateDocumentFn pfnCreate);
-            Document*   __fastcall  Get(const String& type, const String& subType, const String& name);
+            Document*   __fastcall  Get(const String& type, const String& subType, const String& name) const;
             void        __fastcall  OnImportString(const OnImport<String>& event);
 
 public:
@@ -37,6 +38,7 @@ public:
             String      __fastcall  NextName(const String& name) const;
             bool        __fastcall  Remove(const String& type, const String& name);
             void        __fastcall  DocumentFolders(std::vector<String>& folders) const;
+       ProjectDocument* __fastcall  ProjectConfig() const;
 
             void        __fastcall  Clear();
             void        __fastcall  Save();

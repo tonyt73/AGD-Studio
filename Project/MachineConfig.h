@@ -17,26 +17,29 @@ public:
     };
 
 protected:
-    String                          m_Name;
-    String                          m_GraphicsModeName;     // json loader
-    GraphicsMode                    m_GraphicsMode;
-    ImageSizing                     m_ImageSizing[itEnd];
-    CompilerInfo                    m_CompilerInfo;
+    String                              m_Name;
+    String                              m_GraphicsModeName;     // json loader
+    std::unique_ptr<Agdx::GraphicsMode> m_GraphicsMode;
+    ImageSizing                         m_ImageSizing[itEnd];   // of each image type
+    CompilerInfo                        m_CompilerInfo;
 
-    const ImageSizing&  __fastcall  GetImageSizing(ImageTypes type) const;
+    const ImageSizing&      __fastcall  GetImageSizing(ImageTypes type) const;
 
-                        __fastcall  MachineConfig();
-    void                __fastcall  Save();
+                            __fastcall  MachineConfig();
+    void                    __fastcall  Save();
 
 public:
-                        __fastcall  MachineConfig(const String& name);
-    const GraphicsMode& __fastcall  GraphicsMode() const;
+                            __fastcall  MachineConfig(const String& name);
+    virtual                 __fastcall ~MachineConfig();
 
-    void                __fastcall  Load(const String& name);
+  const Agdx::GraphicsMode& __fastcall  GraphicsMode() const;
+    static void             __fastcall  GetMachinesList(std::vector<String>& list);
 
-    String              __property  Name = { read = m_Name };
-    const ImageSizing   __property  ImageSizing[ImageTypes type] = { read = GetImageSizing };
-    const CompilerInfo  __property  CompilerInfo = { read = m_CompilerInfo };
+    void                    __fastcall  Load(const String& name);
+
+    String                  __property  Name = { read = m_Name };
+    const ImageSizing       __property  ImageSizing[ImageTypes type] = { read = GetImageSizing };
+    const CompilerInfo      __property  CompilerInfo = { read = m_CompilerInfo };
     // TODO:
     // Key Map
     // Sounds

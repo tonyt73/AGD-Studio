@@ -3,14 +3,16 @@
 #pragma hdrstop
 //---------------------------------------------------------------------------
 #include "ImageDocuments.h"
+#include "DocumentManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall ImageDocument::ImageDocument(const String& name)
 : Document(name)
 , m_MultiFrame(false)
-, m_Width(16)
-, m_Height(16)
+, m_CanDeleteFrames(false)
+, m_Width(0)
+, m_Height(0)
 {
     m_Type = "Image";
     m_SubType = "Single";
@@ -23,7 +25,6 @@ __fastcall ImageDocument::ImageDocument(const String& name)
     m_PropertyMap[".Image.Width"] = &m_Width;
     m_PropertyMap[".Image.Height"] = &m_Height;
     m_File = GetFile();
-    AddFrame();
 }
 //---------------------------------------------------------------------------
 void __fastcall ImageDocument::Save()
@@ -65,7 +66,7 @@ bool __fastcall ImageDocument::AddFrame()
 //---------------------------------------------------------------------------
 bool __fastcall ImageDocument::DeleteFrame(int index)
 {
-    if (m_MultiFrame && 0 < index && index < m_Frames.size())
+    if (m_CanDeleteFrames && m_MultiFrame && 0 < index && index < m_Frames.size())
     {
         // can't only delete new frames; can't delete the first frame
         m_Frames.erase(m_Frames.begin() + index);
@@ -74,27 +75,53 @@ bool __fastcall ImageDocument::DeleteFrame(int index)
     return false;
 }
 //---------------------------------------------------------------------------
+void __fastcall ImageDocument::ExtractSize(const String& extra, const ImageTypes& type)
+{
+    const auto pc = theDocumentManager.ProjectConfig();
+    if (pc)
+    {
+        const auto& mc = pc->MachineConfiguration();
+        m_Width = mc.ImageSizing[type].Minimum.cx;
+        m_Height = mc.ImageSizing[type].Minimum.cy;
+        if (extra != "")
+        {
+            // extract the size from the string
+            auto pos = extra.Pos("x");
+            if (pos > 0)
+            {
+                m_Width = StrToInt(extra.SubString(1, pos - 1));
+                m_Height = StrToInt(extra.SubString(pos + 1, extra.Length()));
+            }
+        }
+    }
+}
+//---------------------------------------------------------------------------
 
 
 
 //---------------------------------------------------------------------------
-__fastcall SpriteDocument::SpriteDocument(const String& name)
+__fastcall SpriteDocument::SpriteDocument(const String& name, const String& extra)
 : ImageDocument(name)
 {
     m_MultiFrame = true;
+    m_CanDeleteFrames = true;
     m_SubType = "Sprite";
     m_Folder = "Images\\Sprites";
     RegisterProperty("Name", "Details", "The name of the sprite");
     m_File = GetFile();
+    ExtractSize(extra, itSprite);
+    AddFrame();
 }
 //---------------------------------------------------------------------------
-__fastcall ObjectDocument::ObjectDocument(const String& name)
+__fastcall ObjectDocument::ObjectDocument(const String& name, const String& extra)
 : ImageDocument(name)
 {
     m_SubType = "Object";
     m_Folder = "Images\\Objects";
     RegisterProperty("Name", "Details", "The name of the object");
     m_File = GetFile();
+    ExtractSize(extra, itObject);
+    AddFrame();
 }
 //---------------------------------------------------------------------------
 __fastcall TileDocument::TileDocument(const String& name, const String& extra)
@@ -104,15 +131,23 @@ __fastcall TileDocument::TileDocument(const String& name, const String& extra)
     m_SubType = "Tile";
     m_Folder = "Images\\Tiles";
     RegisterProperty("Name", "Details", "The name of the tile");
-    if (extra != "")
+    ExtractSize(extra, itTile);
+    AddFrame();
+}
+//---------------------------------------------------------------------------
+__fastcall CharacterSetDocument::CharacterSetDocument(const String& name, const String& extra)
+: ImageDocument(name)
+{
+    // TODO: This needs to be based on the machines graphics mode
+    m_MultiFrame = true;
+    m_File = GetFile();
+    m_SubType = "Character Set";
+    m_Folder = "Images\\Character Set";
+    RegisterProperty("Name", "Details", "The name of the character set");
+    ExtractSize(extra, itCharacterSet);
+    for (auto i = 0; i < 96; i++)
     {
-        // extract the size from the string
-        auto pos = extra.Pos("x");
-        if (pos > 0)
-        {
-            m_Width = StrToInt(extra.SubString(1, pos - 1));
-            m_Height = StrToInt(extra.SubString(pos + 1, extra.Length()));
-        }
+        AddFrame();
     }
 }
 //---------------------------------------------------------------------------

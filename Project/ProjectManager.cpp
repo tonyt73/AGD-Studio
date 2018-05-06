@@ -8,8 +8,6 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-using namespace std;
-//---------------------------------------------------------------------------
 ProjectManager& ProjectManager::get()
 {
     static ProjectManager instance;
@@ -28,7 +26,7 @@ __fastcall ProjectManager::~ProjectManager()
 void __fastcall ProjectManager::Initialise(Elxtree::TElXTree* treeView)
 {
     m_TreeView = treeView;
-    m_MostRecentUsedList = make_unique<MostRecentlyUsedList>();
+    m_MostRecentUsedList = std::make_unique<MostRecentlyUsedList>();
 }
 //---------------------------------------------------------------------------
 cMRUList __fastcall ProjectManager::GetMostRecentlyUsedList() const
@@ -56,27 +54,29 @@ void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* 
     }
     else if (parent.LowerCase() == "images")
     {
-             if (caption == "sprites"   ) index = tiFolderSprites;
-        else if (caption == "images"    ) index = tiFolderImages;
-        else if (caption == "objects"   ) index = tiFolderImages;
-        else if (caption == "music"     ) index = tiFolderMusic;
-        else if (caption == "tiles"     ) index = tiFolderImages;
-        else if (caption == "tile sets" ) index = tiFolderImages;
-        else if (caption == "maps"      ) index = tiFolderMaps;
+             if (caption == "sprites"      ) index = tiFolderSprites;
+        else if (caption == "images"       ) index = tiFolderImages;
+        else if (caption == "objects"      ) index = tiFolderImages;
+        else if (caption == "character set") index = tiFolderImages;
+        else if (caption == "music"        ) index = tiFolderMusic;
+        else if (caption == "tiles"        ) index = tiFolderImages;
+        else if (caption == "tile sets"    ) index = tiFolderImages;
+        else if (caption == "maps"         ) index = tiFolderMaps;
     }
     else
     {
         caption = node->Parent->Text.LowerCase();
-             if (caption == "sprites"   ) index = tiAssetSprite;
-        else if (caption == "images"    ) index = tiAssetImage;
-        else if (caption == "objects"   ) index = tiAssetImage;
-        else if (caption == "music"     ) index = tiAssetMusic;
-        else if (caption == "tiles"     ) index = tiAssetTile;
-        else if (caption == "tile sets" ) index = tiAssetTile;
-        else if (caption == "maps"      ) index = tiAssetMap;
-        else if (caption == "sounds"    ) index = tiAssetSfx;
-        else if (caption == "events"    ) index = tiConfiguration;
-        else if (caption == "messages"  ) index = tiConfiguration;
+             if (caption == "sprites"      ) index = tiAssetSprite;
+        else if (caption == "images"       ) index = tiAssetImage;
+        else if (caption == "objects"      ) index = tiAssetImage;
+        else if (caption == "music"        ) index = tiAssetMusic;
+        else if (caption == "tiles"        ) index = tiAssetTile;
+        else if (caption == "character set") index = tiAssetImage;
+        else if (caption == "tile sets"    ) index = tiAssetTile;
+        else if (caption == "maps"         ) index = tiAssetMap;
+        else if (caption == "sounds"       ) index = tiAssetSfx;
+        else if (caption == "events"       ) index = tiConfiguration;
+        else if (caption == "messages"     ) index = tiConfiguration;
         else if (caption == "configuration") index = tiConfiguration;
     }
     node->ImageIndex = index;
@@ -95,6 +95,7 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
         assert(config != nullptr);
         if (config->Files().size() == 0)
         {
+            // TODO: Put this list in a AGD config file
             Add("Text", "Event", "Player control");
             Add("Text", "Event", "Sprite type 1");
             Add("Text", "Event", "Sprite type 2");

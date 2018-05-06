@@ -43,6 +43,7 @@ void __fastcall TfrmIDE::RegisterDocumentEditors()
     DocumentEditorFactory::Register("Images\\Sprites", &TfrmEditorImage::Create);
     DocumentEditorFactory::Register("Images\\Objects", &TfrmEditorImage::Create);
     DocumentEditorFactory::Register("Images\\Tiles", &TfrmEditorImage::Create);
+    DocumentEditorFactory::Register("Images\\Character Set", &TfrmEditorImage::Create);
     DocumentEditorFactory::Register("Map\\Map",  &TfrmEditorMap::Create);
     DocumentEditorFactory::Register("Map\\Screens",  &TfrmEditorMap::Create);
 }
@@ -254,7 +255,6 @@ void __fastcall TfrmIDE::tvProjectDblClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileNewAssetExecute(TObject *Sender)
 {
-    // TODO: Show create new asset dialog
     auto dialog = std::unique_ptr<TfrmNewImage>(new TfrmNewImage(this));
     if (dialog->ShowModal() == mrOk)
     {
@@ -279,7 +279,6 @@ void __fastcall TfrmIDE::RefreshMruList()
     mnuFileMru->Clear();
     auto name = "mruItem";
     auto i = 831263;
-
     for (const auto& item : theProjectManager.GetMostRecentlyUsedList())
     {
         auto mi = NewItem(item.Path, 0, false, true, mruOnClick, 0, name+IntToStr(++i));
@@ -305,10 +304,11 @@ void __fastcall TfrmIDE::mruOnClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actNewAssetExecute(TObject *Sender)
 {
-    static int docNo = 0;
     if (tvProject->Selected)
     {
-        auto type = tvProject->Selected->Text.SubString(1, tvProject->Selected->Text.Length() - 1);
+        // remove the ending 's' if it exists
+        auto type = tvProject->Selected->Text;
+        type = type[type.Length()] == 's' ? type.SubString(1, type.Length() - 1) : type;
         theProjectManager.Add("Image", type);
     }
 }

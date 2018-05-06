@@ -23,8 +23,8 @@
 class TfrmEditorImage : public TFrame
 {
 __published:    // IDE-managed Components
-    TPanel *Panel1;
-    TPanel *Panel2;
+    TPanel *panToolOptions;
+    TPanel *panContainer;
     TActionList *ActionList1;
     TImageList *ImageList1;
     TAction *actSelectRectangle;
@@ -48,7 +48,7 @@ __published:    // IDE-managed Components
     TMenuItem *Shapes1;
     TAction *actGridPixel;
     TAction *actGridCharacter;
-    TPanel *Panel3;
+    TPanel *panToolbar;
     TToolBar *ToolBar3;
     TToolButton *ToolButton15;
     TToolButton *ToolButton16;
@@ -79,8 +79,8 @@ __published:    // IDE-managed Components
     TToolBar *ToolBar1;
     TToolButton *ToolButton1;
     TToolButton *ToolButton2;
-    TStatusBar *StatusBar1;
-    TPanel *Panel8;
+    TStatusBar *barStatus;
+    TPanel *panFrames;
     TAction *actRotateLeft;
     TAction *actRotateRight;
     TAction *actRotateUp;
@@ -91,7 +91,10 @@ __published:    // IDE-managed Components
     TAction *actRotateRight90;
     TAction *actMonoOn;
     TAction *actMonoOff;
-    TScrollBox *ScrollBox1;
+    TScrollBox *sbxView;
+    TImage *imgEditor;
+    TAction *actBrush;
+    TToolButton *ToolButton3;
     void __fastcall actSelectRectangleExecute(TObject *Sender);
     void __fastcall actZoomExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);

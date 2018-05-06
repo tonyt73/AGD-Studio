@@ -29,6 +29,7 @@ __fastcall DocumentManager::DocumentManager()
     Register("Image", "Object", &ObjectDocument::Create);
     Register("Image", "Sprite", &SpriteDocument::Create);
     Register("Image", "Tile", &TileDocument::Create);
+    Register("Image", "Character Set", &CharacterSetDocument::Create);
     //Register("Image", "TileSet", &TileSet::Create);
     //Register("Map", "Tiled", &TileMap::Create);
     Register("Text", "SoundFx", &SfxDocument::Create);
@@ -83,7 +84,16 @@ void __fastcall DocumentManager::DocumentFolders(std::vector<String>& folders) c
     }
 }
 //---------------------------------------------------------------------------
-Document* __fastcall DocumentManager::Get(const String& type, const String& subType, const String& name)
+ProjectDocument* __fastcall DocumentManager::ProjectConfig() const
+{
+    const auto file = System::Path::ProjectName;
+    auto doc = Get("Game","Configuration", file);
+    if (doc != nullptr)
+        return dynamic_cast<ProjectDocument*>(doc);
+    return nullptr;
+}
+//---------------------------------------------------------------------------
+Document* __fastcall DocumentManager::Get(const String& type, const String& subType, const String& name) const
 {
     auto it = m_Documents.find(type);
     if (it != m_Documents.end())
