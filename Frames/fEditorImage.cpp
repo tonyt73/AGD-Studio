@@ -159,7 +159,7 @@ void __fastcall TfrmEditorImage::FrameEndDock(TObject *Sender, TObject *Target, 
 {
     TLMDDockPanel* dp = dynamic_cast<TLMDDockPanel*>(Sender);
     assert(dp != nullptr);
-    StatusBar1->Visible = dp->Site->IsFloatingDoc;
+    barStatus->Visible = dp->Site->IsFloatingDoc;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::actRotateLeftExecute(TObject *Sender)

@@ -319,9 +319,6 @@ void __fastcall TfrmEditorCode::UpdateStatus()
   actUndo->Enabled = evEditor->CanUndo && (! lmdDocument->ReadOnly);
   actRedo->Enabled = evEditor->CanRedo && (! lmdDocument->ReadOnly);
 
-  /////////////////////////
-
-
   actToggleAutoIndent->Checked = evEditor->ViewSettings.Contains(vsAutoIndent);
 
   actNoWrap->Checked = evEditor->WrapMode==wmNoWrap;
