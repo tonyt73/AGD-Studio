@@ -6,6 +6,7 @@
 #include "GraphicsBuffers.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
+using namespace Agdx;
 //---------------------------------------------------------------------------
 __fastcall Image::Image(unsigned int width, unsigned int height, const GraphicsMode& graphicsMode)
 {

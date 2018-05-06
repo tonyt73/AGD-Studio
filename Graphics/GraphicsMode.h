@@ -7,10 +7,10 @@
 #include "Graphics/Palette.h"
 #include "System/JsonFile.h"
 //---------------------------------------------------------------------------
-class GraphicsModeDefinitionFile;
-//---------------------------------------------------------------------------
 // We only support upto 256 colour screen modes
 //---------------------------------------------------------------------------
+namespace Agdx
+{
 class GraphicsMode : public System::JsonFile
 {
 public:
@@ -23,21 +23,21 @@ private:
     typedef std::vector<unsigned char> Table;
 
 protected:
-    String          m_Name;                     // the name of the screen/graphics mode
-    String          m_PaletteName;              // the name of the palette file to load
-    unsigned int    m_BitsPerPixel;             // the number of bits used to store a pixel
-    unsigned char   m_PixelsHighPerAttribute;   // the number of pixels high an attribute represents
-    unsigned int    m_Width;                    // the default width of the screen for this mode
-    unsigned int    m_Height;                   // the default height of the screen for this mode
-    unsigned int    m_TranparentColor;          // the index into the palette that represents the transparent pixel color
-    float           m_ScalarX;                  // scaling factor for width
-    float           m_ScalarY;                  // scaling factor for height
-    Palette         m_Palette;                  // the palette table for the graphics mode
-    BufferType      m_BufferType;               // the type of graphics buffer we are
-    Table           m_LogicalColors;            // palette table LOGICAL color indexes into the Total Colors table
-    int             m_LogicalIndex;             // json loader
-    bool            m_SupportsRemapping;        // supports remapping of the logical colors to any of the palette colors
-    ExportInfo      m_ExportInfo[itEnd];        // flags for image data export
+    String                      m_Name;                     // the name of the screen/graphics mode
+    String                      m_PaletteName;              // the name of the palette file to load
+    unsigned int                m_BitsPerPixel;             // the number of bits used to store a pixel
+    unsigned char               m_PixelsHighPerAttribute;   // the number of pixels high an attribute represents
+    unsigned int                m_Width;                    // the default width of the screen for this mode
+    unsigned int                m_Height;                   // the default height of the screen for this mode
+    unsigned int                m_TranparentColor;          // the index into the palette that represents the transparent pixel color
+    float                       m_ScalarX;                  // scaling factor for width
+    float                       m_ScalarY;                  // scaling factor for height
+ std::unique_ptr<Agdx::Palette> m_Palette;                  // the palette table for the graphics mode
+    BufferType                  m_BufferType;               // the type of graphics buffer we are
+    Table                       m_LogicalColors;            // palette table LOGICAL color indexes into the Total Colors table
+    int                         m_LogicalIndex;             // json loader
+    bool                        m_SupportsRemapping;        // supports remapping of the logical colors to any of the palette colors
+    ExportInfo                  m_ExportInfo[itEnd];        // flags for image data export
 
     int             __fastcall  GetLogicalColors() const;
     TColor          __fastcall  GetLogicalColor(int index) const;
@@ -46,8 +46,6 @@ protected:
     void            __fastcall  Save();
 
 public:
-    friend          class       GraphicsModeDefinitionFile;
-
                     __fastcall  GraphicsMode();
                     __fastcall  GraphicsMode(const GraphicsMode& other);
 
@@ -76,4 +74,5 @@ public:
 //                __fastcall      GraphicsModeWriter();
 //};
 //---------------------------------------------------------------------------
+}  //Agdx
 #endif

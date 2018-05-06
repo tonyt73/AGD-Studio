@@ -18,6 +18,7 @@ const unsigned char g_PixelShft8[8] = { 7, 6, 5, 4, 3, 2, 1, 0 };
 // Pixel Masks for 1, 2, 4 and 8 pixels per byte
 const unsigned char* g_PixelMasks[9] = { NULL, g_PixelMask1, g_PixelMask2, NULL, g_PixelMask4, NULL, NULL, NULL, g_PixelMask8 };
 const unsigned char* g_PixelShfts[9] = { NULL, g_PixelShft1, g_PixelShft2, NULL, g_PixelShft4, NULL, NULL, NULL, g_PixelShft8 };
+using namespace Agdx;
 //---------------------------------------------------------------------------
 __fastcall GraphicsBuffer::GraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode)
 : m_GraphicsMode(mode)
@@ -35,7 +36,7 @@ __fastcall GraphicsBuffer::~GraphicsBuffer()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall GraphicsBuffer::Make(unsigned int width, unsigned int height, const GraphicsMode& mode, std::unique_ptr<GraphicsBuffer>& buffer)
+void __fastcall GraphicsBuffer::Make(unsigned int width, unsigned int height, const Agdx::GraphicsMode& mode, std::unique_ptr<GraphicsBuffer>& buffer)
 {
     buffer = nullptr;
     switch (mode.TypeOfBuffer)
@@ -48,7 +49,7 @@ void __fastcall GraphicsBuffer::Make(unsigned int width, unsigned int height, co
 //---------------------------------------------------------------------------
 void __fastcall GraphicsBuffer::PushBuffer(unsigned int size)
 {
-    m_Buffers.push_back(UnsignedCharBuffer(size, 0));
+    m_Buffers.push_back(ByteBuffer(size, 0));
 }
 //---------------------------------------------------------------------------
 unsigned int __fastcall GraphicsBuffer::GetNumberOfBuffers() const
@@ -66,7 +67,7 @@ void __fastcall GraphicsBuffer::SetColorIndex(ColorIndex index, int colorIndex)
     m_SetColors[index % 2] = colorIndex;
 }
 //---------------------------------------------------------------------------
-void __fastcall GraphicsBuffer::GetBuffer(int index, UnsignedCharBuffer& buffer) const
+void __fastcall GraphicsBuffer::GetBuffer(int index, ByteBuffer& buffer) const
 {
     if (index < m_Buffers.size())
     {

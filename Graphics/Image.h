@@ -5,13 +5,17 @@
 #include <memory>
 #include "Graphics/GraphicsBuffers.h"
 //---------------------------------------------------------------------------
+namespace Agdx
+{
+//---------------------------------------------------------------------------
 class Image : public System::JsonFile
 {
 private:
         std::unique_ptr<GraphicsBuffer> m_GraphicsBuffer;
 public:
-        virtual     __fastcall  Image(unsigned int width, unsigned int height, const GraphicsMode& graphicsMode);
+        virtual     __fastcall  Image(unsigned int width, unsigned int height, const Agdx::GraphicsMode& graphicsMode);
             void    __fastcall  SetPixel(unsigned int X, unsigned int Y, unsigned char color);
 };
 //---------------------------------------------------------------------------
+}   // agdx
 #endif

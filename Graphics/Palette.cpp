@@ -7,12 +7,14 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
+using namespace Agdx;
+//---------------------------------------------------------------------------
 __fastcall Palette::Palette()
 : JsonFile()
 , m_Name("unknown")
 {
     // json loading properties
-    m_PropertyMap[".{}.Palette.Name"] = &m_Name;
+    m_PropertyMap[".{}.Palette.{}.Name"] = &m_Name;
     m_PropertyMap[".{}.ColorTable.[]"] = &m_Color;
 }
 //---------------------------------------------------------------------------

@@ -10,7 +10,7 @@
 enum BufferType { btBitmap = 0, btAttribute = 1, btCharacterMap = 2, btInvalid = -1 };
 enum ImageTypes { itStart = 0, itObject = 0, itSprite, itTile, itCharacterSet, itEnd };
 // a typical byte buffer
-typedef std::vector<unsigned char>  UnsignedCharBuffer;
+typedef std::vector<unsigned char>  ByteBuffer;
 // Imaging sizing information
 struct ImageSizing
 {
