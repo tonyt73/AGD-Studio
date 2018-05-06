@@ -11,7 +11,6 @@
 #include <typeindex>
 #include <typeinfo>
 #include <type_traits>
-#include <system/make_unique.h>
 //---------------------------------------------------------------------------
 using namespace std;
 namespace Messaging

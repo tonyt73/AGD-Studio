@@ -149,8 +149,8 @@
         <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;fmx.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtprint.bpi;VclSmp.bpi</LinkPackageImports>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Build>45</VerInfo_Build>
-        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=1.0.6663.45;InternalName=agdx.exe;LegalCopyright=2018 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Programmed by Tony Thompson</VerInfo_Keys>
+        <VerInfo_Build>47</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=1.0.6663.47;InternalName=agdx.exe;LegalCopyright=2018 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Programmed by Tony Thompson</VerInfo_Keys>
         <VerInfo_Release>6663</VerInfo_Release>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <Icon_MainIcon>Icon.ico</Icon_MainIcon>
@@ -360,17 +360,17 @@
             <DependentOn>System\Path.h</DependentOn>
             <BuildOrder>18</BuildOrder>
         </CppCompile>
+        <FormResources Include="Forms\fNewImage.dfm"/>
         <FormResources Include="Frames\fEditorCode.dfm"/>
         <FormResources Include="Frames\fEditorImage.dfm"/>
         <FormResources Include="Frames\fEditorMap.dfm"/>
-        <FormResources Include="Frames\fEditorMusic.dfm"/>
         <FormResources Include="Forms\fMain.dfm"/>
         <FormResources Include="Forms\fAbout.dfm"/>
+        <FormResources Include="Frames\fEditorMusic.dfm"/>
         <FormResources Include="Frames\fIDE.dfm"/>
         <FormResources Include="Frames\fImportDialog.dfm"/>
         <FormResources Include="Frames\fSelectionPanel.dfm"/>
         <FormResources Include="Frames\fWelcomeDialog.dfm"/>
-        <FormResources Include="Forms\fNewImage.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -458,7 +458,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName=".\Win64\Release\AGDX_Studio.exe" Configuration="Release" Class="ProjectOutput">
+                <DeployFile LocalName=".\Win64\Release\AGDX Studio.exe" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win64">
                         <RemoteName>AGDX_Studio.exe</RemoteName>
                         <Overwrite>true</Overwrite>

@@ -4,11 +4,9 @@
 //---------------------------------------------------------------------------
 #include <stack>
 #include "JsonFile.h"
-#include "System/make_unique.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-using namespace std;
 namespace System
 {
 //---------------------------------------------------------------------------
@@ -163,8 +161,8 @@ void __fastcall JsonFile::Load(const String& file)
     if (File::File::Exists(file))
     {
         auto json = File::File::ReadText(file);
-        auto sr = make_unique<TStringReader>(json);
-        auto jr = make_unique<TJsonTextReader>(sr.get());
+        auto sr = std::make_unique<TStringReader>(json);
+        auto jr = std::make_unique<TJsonTextReader>(sr.get());
         String property;                    // the tree dot.path or property reference eg: my.things.value
         auto depth = 0;
         auto inArray = false;

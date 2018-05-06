@@ -24,8 +24,6 @@
 #include <list>
 #include <vector>
 #include <map>
-// non std stl
-//#include "system/make_unique.h"
 //---------------------------------------------------------------------------
 // APP
 #include "Settings.h"
