@@ -2,6 +2,7 @@
 #include "agdx.pch.h"
 #include "fWelcomeDialog.h"
 #include "ProjectManager.h"
+#include "MachineConfig.h"
 #include "Settings.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -10,6 +11,7 @@
 __fastcall TfrmWelcomeDialog::TfrmWelcomeDialog(TComponent* Owner)
 : TFrame(Owner)
 {
+    // load the themes
     if (cmbThemes->Items->Count == 0)
     {
         auto sl = std::make_unique<TStringList>();
@@ -29,6 +31,18 @@ __fastcall TfrmWelcomeDialog::TfrmWelcomeDialog(TComponent* Owner)
             {
                 cmbThemes->ItemIndex = cmbThemes->Items->Count - 1;
             }
+        }
+    }
+    // load the machines
+    cmbMachines->Items->Clear();
+    std::vector<String> machines;
+    MachineConfig::GetMachinesList(machines);
+    for (const auto& machine : machines)
+    {
+        cmbMachines->Items->Add(machine);
+        if (machine.Pos("ZX Spectrum") > 0)
+        {
+            cmbMachines->ItemIndex = cmbMachines->Items->Count - 1;
         }
     }
 }
