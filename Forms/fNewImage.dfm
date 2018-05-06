@@ -15,6 +15,7 @@ object frmNewImage: TfrmNewImage
   OldCreateOrder = False
   Position = poMainFormCenter
   ScreenSnap = True
+  OnCreate = FormCreate
   DesignSize = (
     349
     175)
@@ -59,8 +60,6 @@ object frmNewImage: TfrmNewImage
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitLeft = -8
-    ExplicitTop = 150
     DesignSize = (
       349
       37)
@@ -72,9 +71,9 @@ object frmNewImage: TfrmNewImage
       Anchors = [akTop, akRight]
       Caption = 'OK'
       Default = True
+      Enabled = False
       ModalResult = 1
       TabOrder = 0
-      ExplicitLeft = 433
     end
     object btnCancel: TButton
       Left = 268
@@ -86,7 +85,6 @@ object frmNewImage: TfrmNewImage
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 1
-      ExplicitLeft = 520
     end
   end
   object edtName: TEdit
@@ -95,13 +93,13 @@ object frmNewImage: TfrmNewImage
     Width = 269
     Height = 24
     Anchors = [akLeft, akTop, akRight]
-    TabOrder = 6
-    ExplicitWidth = 433
+    TabOrder = 7
+    OnChange = edtNameChange
   end
   object radObject: TRadioButton
     Left = 72
     Top = 64
-    Width = 73
+    Width = 57
     Height = 17
     Caption = 'Object'
     Checked = True
@@ -110,16 +108,16 @@ object frmNewImage: TfrmNewImage
     OnClick = radObjectClick
   end
   object radSprite: TRadioButton
-    Left = 175
+    Left = 148
     Top = 64
-    Width = 73
+    Width = 58
     Height = 17
     Caption = 'Sprite'
     TabOrder = 2
-    OnClick = radObjectClick
+    OnClick = radSpriteClick
   end
   object radTile: TRadioButton
-    Left = 268
+    Left = 212
     Top = 64
     Width = 45
     Height = 17
@@ -136,7 +134,7 @@ object frmNewImage: TfrmNewImage
     Increment = 8
     MaxValue = 128
     MinValue = 8
-    TabOrder = 4
+    TabOrder = 5
     Value = 16
     OnExit = edtWidthExit
   end
@@ -150,9 +148,17 @@ object frmNewImage: TfrmNewImage
     Increment = 8
     MaxValue = 128
     MinValue = 8
-    TabOrder = 5
+    TabOrder = 6
     Value = 16
     OnExit = edtHeightExit
-    ExplicitLeft = 295
+  end
+  object radChrSet: TRadioButton
+    Left = 277
+    Top = 64
+    Width = 64
+    Height = 17
+    Caption = 'Chr Set'
+    TabOrder = 4
+    OnClick = radChrSetClick
   end
 end
