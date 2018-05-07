@@ -8,13 +8,19 @@
 namespace Agdx
 {
 //---------------------------------------------------------------------------
-class Image : public System::JsonFile
+// Image
+// A machine independent bitmap representation
+// We store ordered pixel data based on bitsPerPixel and buffer type (bitmap vs attribute)
+//---------------------------------------------------------------------------
+class Image
 {
 private:
-        std::unique_ptr<GraphicsBuffer> m_GraphicsBuffer;
+    std::unique_ptr<GraphicsBuffer> m_GraphicsBuffer;
 public:
-        virtual     __fastcall  Image(unsigned int width, unsigned int height, const Agdx::GraphicsMode& graphicsMode);
-            void    __fastcall  SetPixel(unsigned int X, unsigned int Y, unsigned char color);
+            __fastcall  Image(unsigned int width, unsigned int height, const Agdx::GraphicsMode& graphicsMode);
+    void    __fastcall  Set(const String& frameData);
+    String  __fastcall  Get() const;
+    void    __fastcall  SetPixel(unsigned int X, unsigned int Y, unsigned char color);
 };
 //---------------------------------------------------------------------------
 }   // agdx

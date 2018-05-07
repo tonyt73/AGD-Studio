@@ -106,7 +106,7 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
             theDocumentManager.Load(name);
         }
         m_MostRecentUsedList->Remove(name, config->Path);
-        m_MostRecentUsedList->Add(name, config->Path);
+        m_MostRecentUsedList->Add(name, config->Path, config->Machine);
     }
 }
 //---------------------------------------------------------------------------
@@ -123,7 +123,7 @@ void __fastcall ProjectManager::Open(const String& file)
     // get the document manager to load all the files from the project file
     theDocumentManager.Load(name);
     m_MostRecentUsedList->Remove(name, file);
-    m_MostRecentUsedList->Add(name, file);
+    m_MostRecentUsedList->Add(name, file, config->Machine);
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::Save()
@@ -198,6 +198,11 @@ Document* __fastcall ProjectManager::Add(const String& type, const String& subTy
 Document* __fastcall ProjectManager::Add(const String& type, const String& subType)
 {
     return theDocumentManager.Add(type, subType, theDocumentManager.NextName(type, subType));
+}
+//---------------------------------------------------------------------------
+bool __fastcall ProjectManager::Remove(const String& type, const String& name)
+{
+    return theDocumentManager.Remove(type, name);
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::OnDocumentChange(Document* doc)

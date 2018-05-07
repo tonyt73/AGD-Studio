@@ -53,8 +53,8 @@ void __fastcall TfrmNewImage::radObjectClick(TObject *Sender)
     edtWidth->Increment = mc.ImageSizing[type].Step.cx;
     edtWidth->Value = mc.ImageSizing[type].Minimum.cx;
 
-    edtHeight->Enabled = mc.ImageSizing[type].Step.cx != 0;
-    lblHeight->Enabled = mc.ImageSizing[type].Step.cx != 0;
+    edtHeight->Enabled = mc.ImageSizing[type].Step.cy != 0;
+    lblHeight->Enabled = mc.ImageSizing[type].Step.cy != 0;
     edtHeight->MaxValue = mc.ImageSizing[type].Maximum.cy;
     edtHeight->MinValue = mc.ImageSizing[type].Minimum.cy;
     edtHeight->Increment = mc.ImageSizing[type].Step.cy;

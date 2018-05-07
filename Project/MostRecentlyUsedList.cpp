@@ -9,8 +9,9 @@
 __fastcall MostRecentlyUsedList::MostRecentlyUsedList()
 : JsonFile()
 {
-    m_PropertyMap[".{}.List.[].{}.Name"] = &m_MRUName;
-    m_PropertyMap[".{}.List.[].{}.Path"] = &m_MRUPath;
+    m_PropertyMap[".{}.List.[].{}.Name"] = &m_Loader.Name;
+    m_PropertyMap[".{}.List.[].{}.Path"] = &m_Loader.Path;
+    m_PropertyMap[".{}.List.[].{}.Machine"] = &m_Loader.Machine;
     Load();
 }
 //---------------------------------------------------------------------------
@@ -39,6 +40,7 @@ void __fastcall MostRecentlyUsedList::Save()
         StartObject();  // {
             Write("Name", mru.Name);
             Write("Path", mru.Path);
+            Write("Machine", mru.Machine);
         EndObject();    // }
     }
     ArrayEnd(); // ] List
@@ -49,18 +51,18 @@ void __fastcall MostRecentlyUsedList::OnEndObject(const String& object)
 {
     if (object == ".{}.List.[].{}")
     {
-        Add(m_MRUName, m_MRUPath);
+        Add(m_Loader.Name, m_Loader.Path, m_Loader.Machine);
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall MostRecentlyUsedList::Add(const String& name, const String& path)
+void __fastcall MostRecentlyUsedList::Add(const String& name, const String& path, const String& machine)
 {
-    if (m_MostRecentlyUsedList.size() > 7)
+    if (m_MostRecentlyUsedList.size() > 5)
     {
         m_MostRecentlyUsedList.pop_front();
     }
     auto relativePath = System::Path::GetFolderRelativeTo(System::Path::lpDocuments, path);
-    m_MostRecentlyUsedList.push_back(MostRecentlyUsedItem(name, relativePath));
+    m_MostRecentlyUsedList.push_back(MostRecentlyUsedItem(name, relativePath, machine));
     Save();
 }
 //---------------------------------------------------------------------------

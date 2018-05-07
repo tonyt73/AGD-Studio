@@ -126,6 +126,8 @@ __published:    // IDE-managed Components
     TPopupMenu *popProject;
     TMenuItem *mnuNewAsset;
     TAction *actNewAsset;
+    TMenuItem *DeleteAsset1;
+    TAction *actDeleteAsset;
     void __fastcall actEditCopyExecute(TObject *Sender);
     void __fastcall actEditCutExecute(TObject *Sender);
     void __fastcall actEditPasteExecute(TObject *Sender);
@@ -153,6 +155,7 @@ __published:    // IDE-managed Components
     void __fastcall actEditZoomInExecute(TObject *Sender);
     void __fastcall actEditZoomOutExecute(TObject *Sender);
     void __fastcall actEditZoomResetExecute(TObject *Sender);
+    void __fastcall actDeleteAssetExecute(TObject *Sender);
 
 
 

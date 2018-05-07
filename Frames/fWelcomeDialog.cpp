@@ -149,17 +149,18 @@ void __fastcall TfrmWelcomeDialog::RefreshMRUList()
     m_MostRecentlyUsedItems.clear();
     for (const auto& item : theProjectManager.GetMostRecentlyUsedList())
     {
-        NewMostRecentlyUsedItem(item.Name, item.Path);
+        NewMostRecentlyUsedItem(item.Name, item.Path, item.Machine);
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmWelcomeDialog::NewMostRecentlyUsedItem(const String& name, const String& path)
+void __fastcall TfrmWelcomeDialog::NewMostRecentlyUsedItem(const String& name, const String& path, const String& machine)
 {
     auto spf = std::shared_ptr<TSelectionPanelFrame>(new TSelectionPanelFrame(this));
     m_MostRecentlyUsedItems.push_back(spf);
     spf->Parent = panRecentProjects;
     spf->Name = name;
     spf->Path = path;
+    spf->Machine = machine;
     spf->OnSelectedClick = SelectionPanelOnClick;
     spf->OnRemoveClick = SelectionPanelOnRemoveClick;
     spf->Top = 1000;

@@ -71,6 +71,24 @@ Document* __fastcall DocumentManager::Add(const String& type, const String& subT
     return nullptr;
 }
 //---------------------------------------------------------------------------
+bool __fastcall DocumentManager::Remove(const String& type, const String& name)
+{
+    auto dit = m_Documents.find(type);
+    if (dit != m_Documents.end())
+    {
+        for (auto it = dit->second.begin(); it != dit->second.end(); it++)
+        {
+            if ((*it)->Name == name)
+            {
+                dit->second.erase(it);
+                return true;
+            }
+        }
+    }
+    // wrong type? or not found
+    return false;
+}
+//---------------------------------------------------------------------------
 void __fastcall DocumentManager::DocumentFolders(std::vector<String>& folders) const
 {
     for (auto it : m_FactoryMap)

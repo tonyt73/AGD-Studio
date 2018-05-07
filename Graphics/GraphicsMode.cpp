@@ -33,8 +33,8 @@ __fastcall GraphicsMode::GraphicsMode()
     m_PropertyMap[".{}.SupportsLogicalColorRemapping"] = &m_SupportsRemapping;
     m_PropertyMap[".{}.BufferType"] = &m_BufferType;
     m_PropertyMap[".{}.LogicalColors.[]"] = &m_LogicalIndex;
-    m_PropertyMap[".{}.PixelBitRemapping.[].{}.Pixel.{}.Mask"] = &m_RemapDataLoader.Mask;
-    m_PropertyMap[".{}.PixelBitRemapping.[].{}.Pixel.{}.Shift"] = &m_RemapDataLoader.Shift;
+    m_PropertyMap[".{}.PixelBitRemapping.[].{}.Remap.[].{}.Mask"] = &m_RemapDataLoader.Mask;
+    m_PropertyMap[".{}.PixelBitRemapping.[].{}.Remap.[].{}.Shift"] = &m_RemapDataLoader.Shift;
     m_PropertyMap[".{}.ExportInformation.{}.Object.{}.BitmapDataOnly"] = &m_ExportInfo[itObject].BitmapDataOnly;
     m_PropertyMap[".{}.ExportInformation.{}.Sprite.{}.BitmapDataOnly"] = &m_ExportInfo[itSprite].BitmapDataOnly;
     m_PropertyMap[".{}.ExportInformation.{}.Tile.{}.BitmapDataOnly"] = &m_ExportInfo[itTile].BitmapDataOnly;
@@ -66,11 +66,11 @@ void __fastcall GraphicsMode::OnEndObject(const String& object)
     {
         m_LogicalColors.push_back(m_LogicalIndex);
     }
-    else if (object == ".{}.PixelBitRemapping.[].{}.Pixel.{}")
+    else if (object == ".{}.PixelBitRemapping.[].{}.Remap.[].{}")
     {
         m_PixelRemappingLoader.Remaps.push_back(m_RemapDataLoader);
     }
-    else if (object == ".{}.PixelBitRemapping.[].{}.Pixel")
+    else if (object == ".{}.PixelBitRemapping.[].{}.Remap")
     {
         m_PixelRemapping.push_back(m_PixelRemappingLoader);
     }
@@ -130,6 +130,23 @@ void __fastcall GraphicsMode::Save()
     if (m_BufferType == btBitmap && BitsPerPixel > 1)
     {
         Write("TranparentColor", m_TranparentColor);
+    }
+    if (m_BufferType == btBitmap && BitsPerPixel > 1 && m_PixelRemapping.size() > 0)
+    {
+        ArrayStart("PixelBitRemapping");
+        for (const auto& pixels : m_PixelRemapping)
+        {
+            ArrayStart("Pixel");
+            for (const auto& remap : pixels.Remaps)
+            {
+                StartObject();
+                    Write("Mask", remap.Mask);
+                    Write("Shift", remap.Shift);
+                EndObject();
+            }
+            ArrayStart("Pixel");
+        }
+        ArrayEnd();
     }
     if (m_BufferType == btAttribute)
     {

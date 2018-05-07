@@ -41,6 +41,12 @@ void __fastcall TSelectionPanelFrame::SetPath(String path)
     lblProjectPath->Caption = path;
 }
 //---------------------------------------------------------------------------
+void __fastcall TSelectionPanelFrame::SetMachine(String machine)
+{
+    m_Machine = machine;
+    lblMachine->Caption = machine;
+}
+//---------------------------------------------------------------------------
 void __fastcall TSelectionPanelFrame::SetSelected(bool state)
 {
     m_Selected = state;

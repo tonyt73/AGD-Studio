@@ -28,8 +28,8 @@ __fastcall GraphicsBuffer::GraphicsBuffer(unsigned int width, unsigned int heigh
 , m_Stride(width / (8 / mode.BitsPerPixel))
 , m_PixelsPerByte(8 / mode.BitsPerPixel)
 {
-    assert(width > 0 && width % 8 == 0);
-    assert(height > 0 && height % 8 == 0);
+    assert(width > 0 && width % 2 == 0);
+    assert(height > 0 && height % 2 == 0);
 }
 //---------------------------------------------------------------------------
 __fastcall GraphicsBuffer::~GraphicsBuffer()
@@ -41,8 +41,8 @@ void __fastcall GraphicsBuffer::Make(unsigned int width, unsigned int height, co
     buffer = nullptr;
     switch (mode.TypeOfBuffer)
     {
-        case btBitmap:      buffer = std::make_unique<BitmapGraphicsBuffer>(width / (8 / mode.BitsPerPixel), height, mode);   break;
-        case btAttribute:   buffer = std::make_unique<AttributeGraphicsBuffer>(width / (8 / mode.BitsPerPixel), height, mode);break;
+        case btBitmap:      buffer = std::make_unique<BitmapGraphicsBuffer>(width, height, mode);   break;
+        case btAttribute:   buffer = std::make_unique<AttributeGraphicsBuffer>(width, height, mode);break;
         default: assert(0); break;
     }
 }

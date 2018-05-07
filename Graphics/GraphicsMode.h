@@ -20,19 +20,24 @@ public:
     };
 
 private:
+    // table of indexes
     typedef std::vector<unsigned char> Table;
 
+    // Data used to remap a bitmap pixel into a mangled pixel for certain graphic modes
+    // i.e. Amstrad CPC Mode 0, 1, 2
     struct RemapData
     {
         unsigned char Mask;
         int           Shift;
     };
 
+    // The list of pixels (dependent on number of pixels byte) and their remapping
     struct PixelRemapping
     {
         std::vector<RemapData>  Remaps;
     };
 
+    // a list for pixel mangling remaps
     typedef std::vector<PixelRemapping> PixelRemappingList;
 
 protected:

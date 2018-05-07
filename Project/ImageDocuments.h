@@ -10,8 +10,10 @@
 // It is only used to manage the image content (aka: frames).
 // It DOES NOT know the format of the image data; as that is specified by the
 // the project machine and graphics mode used.
-// All frames are stored in the machines specific graphic format as hex.
-// Only the graphic mode class knows how to decode/encode this information.
+// All frames are stored in a machine independent graphic format in hex.
+// Basically it is standard bitmap data. Conversion to machine specific graphic
+// mode format is done during the build process.
+// Only the graphic mode class knows how to encode this information.
 //---------------------------------------------------------------------------
 class ImageDocument : public Document
 {

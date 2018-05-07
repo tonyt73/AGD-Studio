@@ -13,6 +13,16 @@ __fastcall Image::Image(unsigned int width, unsigned int height, const GraphicsM
     GraphicsBuffer::Make(width, height, graphicsMode, m_GraphicsBuffer);
 }
 //---------------------------------------------------------------------------
+void __fastcall Image::Set(const String& frameData)
+{
+
+}
+//---------------------------------------------------------------------------
+String __fastcall Image::Get() const
+{
+    return "";
+}
+//---------------------------------------------------------------------------
 void __fastcall Image::SetPixel(unsigned int X, unsigned int Y, unsigned char color)
 {
 }

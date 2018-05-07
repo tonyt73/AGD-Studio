@@ -313,10 +313,24 @@ void __fastcall TfrmIDE::actNewAssetExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::popProjectPopup(TObject *Sender)
+void __fastcall TfrmIDE::actDeleteAssetExecute(TObject *Sender)
 {
     if (tvProject->Selected)
     {
+        if (theProjectManager.Remove("Image", tvProject->Selected->Text))
+        {
+            tvProject->Selected->Delete();
+        }
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::popProjectPopup(TObject *Sender)
+{
+    actDeleteAsset->Enabled = false;
+    actNewAsset->Enabled = false;
+    if (tvProject->Selected && tvProject->Selected->Parent)
+    {
+        actDeleteAsset->Enabled = !tvProject->Selected->HasChildren;
         actNewAsset->Enabled = tvProject->Selected->Parent->Text == "Images";
     }
 }

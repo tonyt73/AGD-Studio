@@ -2,7 +2,7 @@ object SelectionPanelFrame: TSelectionPanelFrame
   Left = 0
   Top = 0
   Width = 451
-  Height = 54
+  Height = 87
   Margins.Left = 0
   Margins.Top = 0
   Margins.Right = 0
@@ -20,7 +20,7 @@ object SelectionPanelFrame: TSelectionPanelFrame
     Left = 0
     Top = 0
     Width = 431
-    Height = 54
+    Height = 87
     Align = alClient
     BevelOuter = bvNone
     Padding.Left = 16
@@ -31,12 +31,13 @@ object SelectionPanelFrame: TSelectionPanelFrame
     StyleElements = [seFont, seBorder]
     OnClick = lblProjectNameClick
     OnMouseMove = panProjectInfoMouseMove
+    ExplicitLeft = -6
     DesignSize = (
       431
-      54)
+      87)
     object lblProjectPath: TLabel
       Left = 19
-      Top = 33
+      Top = 57
       Width = 406
       Height = 17
       Anchors = [akLeft, akTop, akRight]
@@ -73,12 +74,31 @@ object SelectionPanelFrame: TSelectionPanelFrame
       OnMouseMove = panProjectInfoMouseMove
       ExplicitWidth = 606
     end
+    object lblMachine: TLabel
+      Left = 19
+      Top = 36
+      Width = 406
+      Height = 17
+      Anchors = [akLeft, akTop, akRight]
+      AutoSize = False
+      Caption = 'Documents\Retro Studio\Big Sprite Demo'
+      EllipsisPosition = epPathEllipsis
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Comfortaa'
+      Font.Style = [fsBold]
+      Font.Quality = fqAntialiased
+      ParentFont = False
+      OnClick = lblProjectNameClick
+      OnMouseMove = panProjectInfoMouseMove
+    end
   end
   object panRemove: TPanel
     Left = 431
     Top = 0
     Width = 20
-    Height = 54
+    Height = 87
     Align = alRight
     AutoSize = True
     BevelOuter = bvNone
@@ -87,6 +107,7 @@ object SelectionPanelFrame: TSelectionPanelFrame
     StyleElements = [seFont, seBorder]
     OnClick = lblProjectNameClick
     OnMouseMove = panProjectInfoMouseMove
+    ExplicitHeight = 54
     object imgRemove: TImage
       Left = 0
       Top = 6

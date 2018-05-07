@@ -64,7 +64,7 @@ private:    // Function declarations
     void     __fastcall     SelectionPanelOnRemoveClick(TObject *Sender);
     void     __fastcall     UpdateColors();
     void     __fastcall     RefreshMRUList();
-    void     __fastcall     NewMostRecentlyUsedItem(const String& name, const String& path);
+    void     __fastcall     NewMostRecentlyUsedItem(const String& name, const String& path, const String& machine);
 
 private:    // Member declarations
     std::list<std::shared_ptr<TSelectionPanelFrame>>    m_MostRecentlyUsedItems;
