@@ -57,7 +57,7 @@ void __fastcall MostRecentlyUsedList::OnEndObject(const String& object)
 //---------------------------------------------------------------------------
 void __fastcall MostRecentlyUsedList::Add(const String& name, const String& path, const String& machine)
 {
-    if (m_MostRecentlyUsedList.size() > 5)
+    if (m_MostRecentlyUsedList.size() > 4)
     {
         m_MostRecentlyUsedList.pop_front();
     }

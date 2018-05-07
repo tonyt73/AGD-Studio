@@ -32,7 +32,7 @@ public:
                             __fastcall  MachineConfig(const String& name);
     virtual                 __fastcall ~MachineConfig();
 
-  const Agdx::GraphicsMode& __fastcall  GraphicsMode() const;
+  const Agdx::GraphicsMode* __fastcall  GraphicsMode() const;
     static void             __fastcall  GetMachinesList(std::vector<String>& list);
 
     void                    __fastcall  Load(const String& name);

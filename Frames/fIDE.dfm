@@ -568,12 +568,12 @@ object frmIDE: TfrmIDE
       OnExecute = actFileProjectOpenExecute
     end
     object actNewAsset: TAction
-      Caption = 'New Asset'
+      Caption = 'New Image'
       ImageIndex = 2
       OnExecute = actNewAssetExecute
     end
     object actDeleteAsset: TAction
-      Caption = 'Delete Asset'
+      Caption = 'Delete Image'
       ImageIndex = 3
       ShortCut = 46
       OnExecute = actDeleteAssetExecute

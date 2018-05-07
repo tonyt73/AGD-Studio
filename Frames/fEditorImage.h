@@ -16,9 +16,11 @@
 #include <Vcl.Menus.hpp>
 #include <Vcl.ActnPopup.hpp>
 #include <Vcl.PlatformDefaultStyleActnCtrls.hpp>
+#include <Vcl.Imaging.pngimage.hpp>
 #include <Vcl.Buttons.hpp>
 #include "LMDDckSite.hpp"
 #include "Project/ImageDocuments.h"
+#include "Messaging/Event.h"
 //---------------------------------------------------------------------------
 class TfrmEditorImage : public TFrame
 {
@@ -95,7 +97,14 @@ __published:    // IDE-managed Components
     TMenuItem *mnuEraser;
     TButton *btnTool;
     TPanel *panEditorContainer;
+    TPanel *panViewFrame;
     TImage *imgEditor;
+    TAction *actZoomIn;
+    TAction *actZoomOut;
+    TAction *actZoomReset;
+    TScrollBox *ScrollBox1;
+    TImage *Image1;
+    TPanel *Panel1;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actBrushExecute(TObject *Sender);
@@ -119,17 +128,27 @@ __published:    // IDE-managed Components
     void __fastcall actRotateRight90Execute(TObject *Sender);
     void __fastcall actMonoOnExecute(TObject *Sender);
     void __fastcall actMonoOffExecute(TObject *Sender);
+    void __fastcall panEditorContainerClick(TObject *Sender);
+    void __fastcall actZoomInExecute(TObject *Sender);
+    void __fastcall actZoomOutExecute(TObject *Sender);
+    void __fastcall actZoomResetExecute(TObject *Sender);
+    void __fastcall sbxViewResize(TObject *Sender);
 private:    // User declarations
     ImageDocument*              m_Image;
     int                         m_Magnification;
+    std::map<String, TAction*>  m_ActionMap;
+
+    void            __fastcall  SetDocument(Document* document);
+    void            __fastcall  OnEvent(const Event& event);
+    bool            __fastcall  IsActive() const;
 
 public:        // User declarations
                     __fastcall  TfrmEditorImage(TComponent* Owner);
                     __fastcall ~TfrmEditorImage();
-     static  TFrame* __fastcall  Create(Document* document, TComponent* owner)
+     static  TFrame* __fastcall Create(Document* document, TComponent* owner)
                                 {
                                     auto editor = new TfrmEditorImage(owner);
-                                    editor->Image = dynamic_cast<ImageDocument*>(document);
+                                    editor->SetDocument(document);
                                     document->DockPanel = dynamic_cast<TLMDDockPanel*>(owner);
                                     return editor;
                                 }
