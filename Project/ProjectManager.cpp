@@ -5,6 +5,7 @@
 #include "fEditorCode.h"
 #include "fEditorImage.h"
 #include "ProjectDocument.h"
+#include "FileDefinitions.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -80,7 +81,6 @@ void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* 
         else if (caption == "configuration") index = tiConfiguration;
     }
     node->ImageIndex = index;
-//    TODO: node->ExpandedImageIndex = index;
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::New(const String& name, const String& machine)
@@ -95,29 +95,11 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
         assert(config != nullptr);
         if (config->Files().size() == 0)
         {
-            // TODO: Put this list in a AGD config file
-            Add("Text", "Event", "Player control");
-            Add("Text", "Event", "Sprite type 1");
-            Add("Text", "Event", "Sprite type 2");
-            Add("Text", "Event", "Sprite type 3");
-            Add("Text", "Event", "Sprite type 4");
-            Add("Text", "Event", "Sprite type 5");
-            Add("Text", "Event", "Sprite type 6");
-            Add("Text", "Event", "Sprite type 7");
-            Add("Text", "Event", "Sprite type 8");
-            Add("Text", "Event", "Game initialisation");
-            Add("Text", "Event", "Initialise sprite");
-            Add("Text", "Event", "Kill player");
-            Add("Text", "Event", "Introduction menu");
-            Add("Text", "Event", "Main loop 1");
-            Add("Text", "Event", "Main loop 2");
-            Add("Text", "Event", "Restart screen");
-            Add("Text", "Event", "Fell too far");
-            Add("Text", "Event", "Lost game");
-            Add("Text", "Event", "Completed game");
-            Add("Text", "Event", "New high score");
-            Add("Text", "Message", "Messages");
-            Add("Text", "SoundFx", "Sound effects");
+            auto definitions = std::make_unique<FileDefinitions>();
+            for (const auto& definition : definitions->GetDefinitions())
+            {
+                Add("Text", definition.Type, definition.Filename);
+            }
         }
         else
         {
