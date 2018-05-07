@@ -27,11 +27,14 @@ __fastcall GraphicsMode::GraphicsMode()
     m_PropertyMap[".{}.PixelsHighPerAttribute"] = &m_PixelsHighPerAttribute;
     m_PropertyMap[".{}.Width"] = &m_Width;
     m_PropertyMap[".{}.Height"] = &m_Height;
-    m_PropertyMap[".{}.TranparentColor"] = &m_TranparentColor;
     m_PropertyMap[".{}.ScalarX"] = &m_ScalarX;
     m_PropertyMap[".{}.ScalarY"] = &m_ScalarY;
+    m_PropertyMap[".{}.TranparentColor"] = &m_TranparentColor;
+    m_PropertyMap[".{}.SupportsLogicalColorRemapping"] = &m_SupportsRemapping;
     m_PropertyMap[".{}.BufferType"] = &m_BufferType;
     m_PropertyMap[".{}.LogicalColors.[]"] = &m_LogicalIndex;
+    m_PropertyMap[".{}.PixelBitRemapping.[].{}.Pixel.{}.Mask"] = &m_RemapDataLoader.Mask;
+    m_PropertyMap[".{}.PixelBitRemapping.[].{}.Pixel.{}.Shift"] = &m_RemapDataLoader.Shift;
     m_PropertyMap[".{}.ExportInformation.{}.Object.{}.BitmapDataOnly"] = &m_ExportInfo[itObject].BitmapDataOnly;
     m_PropertyMap[".{}.ExportInformation.{}.Sprite.{}.BitmapDataOnly"] = &m_ExportInfo[itSprite].BitmapDataOnly;
     m_PropertyMap[".{}.ExportInformation.{}.Tile.{}.BitmapDataOnly"] = &m_ExportInfo[itTile].BitmapDataOnly;
@@ -62,6 +65,14 @@ void __fastcall GraphicsMode::OnEndObject(const String& object)
     if (object == ".{}.LogicalColors.[]")
     {
         m_LogicalColors.push_back(m_LogicalIndex);
+    }
+    else if (object == ".{}.PixelBitRemapping.[].{}.Pixel.{}")
+    {
+        m_PixelRemappingLoader.Remaps.push_back(m_RemapDataLoader);
+    }
+    else if (object == ".{}.PixelBitRemapping.[].{}.Pixel")
+    {
+        m_PixelRemapping.push_back(m_PixelRemappingLoader);
     }
 }
 //---------------------------------------------------------------------------

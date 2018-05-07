@@ -22,6 +22,19 @@ public:
 private:
     typedef std::vector<unsigned char> Table;
 
+    struct RemapData
+    {
+        unsigned char Mask;
+        int           Shift;
+    };
+
+    struct PixelRemapping
+    {
+        std::vector<RemapData>  Remaps;
+    };
+
+    typedef std::vector<PixelRemapping> PixelRemappingList;
+
 protected:
     String                      m_Name;                     // the name of the screen/graphics mode
     String                      m_PaletteName;              // the name of the palette file to load
@@ -38,6 +51,9 @@ protected:
     int                         m_LogicalIndex;             // json loader
     bool                        m_SupportsRemapping;        // supports remapping of the logical colors to any of the palette colors
     ExportInfo                  m_ExportInfo[itEnd];        // flags for image data export
+    PixelRemappingList          m_PixelRemapping;           // a list of  masks/shifts used to remap pixel bits into contiguous pixel bits for certain graphics modes
+    PixelRemapping              m_PixelRemappingLoader;     // used to load the pixel remapping list
+    RemapData                   m_RemapDataLoader;          // used to load the remap data into the m_PixelRemappingLoader
 
     int             __fastcall  GetLogicalColors() const;
     TColor          __fastcall  GetLogicalColor(int index) const;
