@@ -21,9 +21,11 @@ __fastcall ImageDocument::ImageDocument(const String& name)
     RegisterProperty("Width", "Dimensions", "The width in pixels of the image");
     RegisterProperty("Height", "Dimensions", "The height in pixels of the image");
     RegisterProperty("Frames", "Dimensions", "The number of frames in the image");
+    RegisterProperty("ImagesPerFrame", "Dimensions", "The number of separate AGD images used in a frame");
     // json loading properties
-    m_PropertyMap[".Image.Width"] = &m_Width;
-    m_PropertyMap[".Image.Height"] = &m_Height;
+    m_PropertyMap[".{}.Image.{}.Width"] = &m_Width;
+    m_PropertyMap[".{}.Image.{}.Height"] = &m_Height;
+    m_PropertyMap[".{}.Image.{}.Frames.[].{}.Frame"] = &m_FrameLoader;
     m_File = GetFile();
 }
 //---------------------------------------------------------------------------
@@ -33,14 +35,45 @@ void __fastcall ImageDocument::Save()
     Push("Image");
         Write("Width", m_Width);
         Write("Height", m_Height);
-        // TODO: All the other image details, palette, pixels, etc
+        ArrayStart("Frames");
+        for (const auto& frame : m_Frames)
+        {
+            Write(frame);
+        }
+        ArrayEnd(); // Files
     Pop();  // image
     Close();
+}
+//---------------------------------------------------------------------------
+void __fastcall ImageDocument::OnEndObject(const String& object)
+{
+    if (object == ".{}.Image.{}.Frames.[]")
+    {
+        m_Frames.push_back(m_FrameLoader);
+    }
 }
 //---------------------------------------------------------------------------
 int __fastcall ImageDocument::CountFrames() const
 {
     return m_Frames.size();
+}
+//---------------------------------------------------------------------------
+int __fastcall ImageDocument::CountImagesPerFrame() const
+{
+    const auto pc = theDocumentManager.ProjectConfig();
+    if (pc)
+    {
+        const auto& mc = pc->MachineConfiguration();
+        auto sx = mc.ImageSizing[m_ImageType].Step.cx;
+        auto sy = mc.ImageSizing[m_ImageType].Step.cy;
+        if (sx != 0 && sy != 0)
+        {
+            auto w = Width / sx;
+            auto h = Height / sy;
+            return w * h;
+        }
+    }
+    return 1;
 }
 //---------------------------------------------------------------------------
 void __fastcall ImageDocument::SetFrames(int frames)
@@ -51,6 +84,23 @@ void __fastcall ImageDocument::SetFrames(int frames)
         {
             frames > m_Frames.size() ? AddFrame() : DeleteFrame(m_Frames.size() - 1);
         }
+    }
+}
+//---------------------------------------------------------------------------
+String __fastcall ImageDocument::GetFrame(int frame) const
+{
+    if (0 <= frame && frame < m_Frames.size())
+    {
+        return m_Frames[frame];
+    }
+    return "";
+}
+//---------------------------------------------------------------------------
+void __fastcall ImageDocument::SetFrame(int frame, const String& data)
+{
+    if (0 <= frame && frame < m_Frames.size())
+    {
+        m_Frames[frame] = data;
     }
 }
 //---------------------------------------------------------------------------
@@ -68,21 +118,21 @@ bool __fastcall ImageDocument::DeleteFrame(int index)
 {
     if (m_CanDeleteFrames && m_MultiFrame && 0 < index && index < m_Frames.size())
     {
-        // can't only delete new frames; can't delete the first frame
+        // can only delete new frames; can't delete the first frame
         m_Frames.erase(m_Frames.begin() + index);
         return true;
     }
     return false;
 }
 //---------------------------------------------------------------------------
-void __fastcall ImageDocument::ExtractSize(const String& extra, const ImageTypes& type)
+void __fastcall ImageDocument::ExtractSize(const String& extra)
 {
     const auto pc = theDocumentManager.ProjectConfig();
     if (pc)
     {
         const auto& mc = pc->MachineConfiguration();
-        m_Width = mc.ImageSizing[type].Minimum.cx;
-        m_Height = mc.ImageSizing[type].Minimum.cy;
+        m_Width = mc.ImageSizing[m_ImageType].Minimum.cx;
+        m_Height = mc.ImageSizing[m_ImageType].Minimum.cy;
         if (extra != "")
         {
             // extract the size from the string
@@ -103,48 +153,51 @@ void __fastcall ImageDocument::ExtractSize(const String& extra, const ImageTypes
 __fastcall SpriteDocument::SpriteDocument(const String& name, const String& extra)
 : ImageDocument(name)
 {
+    m_ImageType = itSprite;
     m_MultiFrame = true;
     m_CanDeleteFrames = true;
     m_SubType = "Sprite";
     m_Folder = "Images\\Sprites";
     RegisterProperty("Name", "Details", "The name of the sprite");
     m_File = GetFile();
-    ExtractSize(extra, itSprite);
+    ExtractSize(extra);
     AddFrame();
 }
 //---------------------------------------------------------------------------
 __fastcall ObjectDocument::ObjectDocument(const String& name, const String& extra)
 : ImageDocument(name)
 {
+    m_ImageType = itObject;
     m_SubType = "Object";
     m_Folder = "Images\\Objects";
     RegisterProperty("Name", "Details", "The name of the object");
     m_File = GetFile();
-    ExtractSize(extra, itObject);
+    ExtractSize(extra);
     AddFrame();
 }
 //---------------------------------------------------------------------------
 __fastcall TileDocument::TileDocument(const String& name, const String& extra)
 : ImageDocument(name)
 {
+    m_ImageType = itTile;
     m_File = GetFile();
     m_SubType = "Tile";
     m_Folder = "Images\\Tiles";
     RegisterProperty("Name", "Details", "The name of the tile");
-    ExtractSize(extra, itTile);
+    ExtractSize(extra);
     AddFrame();
 }
 //---------------------------------------------------------------------------
 __fastcall CharacterSetDocument::CharacterSetDocument(const String& name, const String& extra)
 : ImageDocument(name)
 {
-    // TODO: This needs to be based on the machines graphics mode
+    m_ImageType = itCharacterSet;
     m_MultiFrame = true;
     m_File = GetFile();
     m_SubType = "Character Set";
     m_Folder = "Images\\Character Set";
     RegisterProperty("Name", "Details", "The name of the character set");
-    ExtractSize(extra, itCharacterSet);
+    ExtractSize(extra);
     for (auto i = 0; i < 96; i++)
     {
         AddFrame();

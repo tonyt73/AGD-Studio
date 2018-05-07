@@ -5,25 +5,37 @@
 #include "Project/Document.h"
 #include "Graphics/GraphicsTypes.h"
 //---------------------------------------------------------------------------
+// ImageDocument
+// This class encapulates what is an image document.
+// It is only used to manage the image content (aka: frames).
+// It DOES NOT know the format of the image data; as that is specified by the
+// the project machine and graphics mode used.
+// All frames are stored in the machines specific graphic format as hex.
+// Only the graphic mode class knows how to decode/encode this information.
+//---------------------------------------------------------------------------
 class ImageDocument : public Document
 {
 private:
-    // TODO: Change to machine independent image format
     typedef std::vector<String>     FramesList;
 
+            void        __fastcall  OnEndObject(const String& object);
             int         __fastcall  CountFrames() const;
+            int         __fastcall  CountImagesPerFrame() const;
             void        __fastcall  SetFrames(int frames);
+            String      __fastcall  GetFrame(int frame) const;
+            void        __fastcall  SetFrame(int frame, const String& data);
 
 protected:
-    // width, height, format, palette
-            bool                    m_MultiFrame;
-            bool                    m_CanDeleteFrames;
-            int                     m_Width;
-            int                     m_Height;
-            int                     m_NumOfFrames;
-            FramesList              m_Frames;
+            bool                    m_MultiFrame;       // flag: supports multiple frames
+            bool                    m_CanDeleteFrames;  // flag: supports deleting frames
+            int                     m_Width;            // width of a frame
+            int                     m_Height;           // height of a frame
+            int                     m_NumOfFrames;      // the number of frames
+            ImageTypes              m_ImageType;        // the type of graphic image we are
+            FramesList              m_Frames;           // the list of frames
+            String                  m_FrameLoader;      // used to load frames into the above frames list
 
-            void        __fastcall  ExtractSize(const String& extra, const ImageTypes& type);
+            void        __fastcall  ExtractSize(const String& extra);
 
 public:
                         __fastcall  ImageDocument(const String& name);
@@ -34,14 +46,14 @@ public:
             bool        __fastcall  AddFrame();
             bool        __fastcall  DeleteFrame(int index);
 
-            bool        __property  MultiFrame  = { read = m_MultiFrame };
-
+            bool        __property  MultiFrame      = { read = m_MultiFrame                 };
+            String      __property  Frame           = { read = GetFrame, write = SetFrame   };
 
 __published:
-            int         __property  Width       = { read = m_Width      };
-            int         __property  Height      = { read = m_Height     };
-            int         __property  Frames      = { read = CountFrames  };
-            // TODO: add palette info
+            int         __property  Width           = { read = m_Width                      };
+            int         __property  Height          = { read = m_Height                     };
+            int         __property  Frames          = { read = CountFrames                  };
+            int         __property  ImagesPerFrame  = { read = CountImagesPerFrame          };
 };
 //---------------------------------------------------------------------------
 class SpriteDocument : public ImageDocument
@@ -53,8 +65,6 @@ public:
 //---------------------------------------------------------------------------
 class ObjectDocument : public ImageDocument
 {
-private:
-
 public:
                         __fastcall  ObjectDocument(const String& name, const String& extra);
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ObjectDocument(name, extra); };
@@ -62,8 +72,6 @@ public:
 //---------------------------------------------------------------------------
 class TileDocument : public ImageDocument
 {
-private:
-
 public:
                         __fastcall  TileDocument(const String& name, const String& extra);
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new TileDocument(name, extra); };
@@ -71,8 +79,6 @@ public:
 //---------------------------------------------------------------------------
 class CharacterSetDocument : public ImageDocument
 {
-private:
-
 public:
                         __fastcall  CharacterSetDocument(const String& name, const String& extra);
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new CharacterSetDocument(name, extra); };
