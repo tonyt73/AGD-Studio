@@ -3,13 +3,13 @@
 #define fEditorImageH
 //---------------------------------------------------------------------------
 #include <System.Classes.hpp>
+#include <System.Actions.hpp>
+#include <System.ImageList.hpp>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
 #include <Vcl.ComCtrls.hpp>
 #include <Vcl.ToolWin.hpp>
-#include <System.Actions.hpp>
-#include <System.ImageList.hpp>
 #include <Vcl.ActnList.hpp>
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.ImgList.hpp>
@@ -18,67 +18,64 @@
 #include <Vcl.PlatformDefaultStyleActnCtrls.hpp>
 #include <Vcl.Buttons.hpp>
 #include "LMDDckSite.hpp"
-#include "Project/Document.h"
+#include "Project/ImageDocuments.h"
 //---------------------------------------------------------------------------
 class TfrmEditorImage : public TFrame
 {
 __published:    // IDE-managed Components
     TPanel *panToolOptions;
     TPanel *panContainer;
-    TActionList *ActionList1;
-    TImageList *ImageList1;
-    TAction *actSelectRectangle;
+    TActionList *tbrActions;
+    TImageList *tbrImages;
+    TAction *actSelect;
     TAction *actPencil;
-    TAction *actPaintBucket;
+    TAction *actFill;
     TAction *actSprayBrush;
-    TAction *actStamp;
     TAction *actEraser;
-    TAction *actDrawLine;
-    TAction *actDrawShape;
-    TPopupActionBar *PopupActionBar1;
-    TMenuItem *Brush2;
-    TMenuItem *DrawLine2;
-    TMenuItem *Shapes2;
-    TMenuItem *Brush1;
-    TMenuItem *PaintBucket1;
-    TMenuItem *SprayBrush1;
-    TMenuItem *Stamp1;
-    TMenuItem *Eraser1;
-    TMenuItem *DrawLine1;
-    TMenuItem *Shapes1;
+    TAction *actLine;
+    TAction *actShape;
+    TPopupActionBar *popTools;
+    TMenuItem *mnuSelect;
+    TMenuItem *mnuText;
+    TMenuItem *mnuBrush;
+    TMenuItem *mnuLine;
+    TMenuItem *mnuShapes;
+    TMenuItem *mnuDropper;
+    TMenuItem *mnuSprayBrush;
+    TMenuItem *mnuFill;
     TAction *actGridPixel;
     TAction *actGridCharacter;
     TPanel *panToolbar;
-    TToolBar *ToolBar3;
-    TToolButton *ToolButton15;
-    TToolButton *ToolButton16;
-    TToolButton *ToolButton17;
-    TToolButton *ToolButton18;
-    TToolButton *ToolButton19;
-    TToolButton *ToolButton20;
-    TToolButton *ToolButton21;
-    TToolButton *ToolButton22;
-    TToolBar *ToolBar4;
-    TToolButton *ToolButton23;
-    TToolButton *ToolButton24;
-    TToolButton *ToolButton25;
-    TToolButton *ToolButton27;
-    TToolButton *ToolButton28;
-    TToolButton *ToolButton29;
-    TToolButton *ToolButton30;
-    TToolButton *ToolButton31;
+    TToolBar *tbrShiftRotates;
+    TToolButton *btnRotateLeft;
+    TToolButton *btnRotateRight;
+    TToolButton *btnRotateDown;
+    TToolButton *btnRotateUp;
+    TToolButton *btnRotateLeft90;
+    TToolButton *btnRotateRight90;
+    TToolButton *btnFlipHorizontal;
+    TToolButton *btnFlipVertical;
+    TToolBar *tbrTools;
+    TToolButton *btnSelect;
+    TToolButton *btnText;
+    TToolButton *btnPencil;
+    TToolButton *btnLine;
+    TToolButton *btnShape;
+    TToolButton *btnDropper;
+    TToolButton *btnSprayBrush;
+    TToolButton *btnFill;
     TAction *actText;
     TAction *actDropper;
-    TPanel *Panel4;
-    TPanel *Panel5;
-    TPanel *Panel6;
-    TToolBar *ToolBar2;
-    TToolButton *ToolButton38;
-    TToolButton *ToolButton39;
-    TPanel *Panel7;
-    TToolBar *ToolBar1;
-    TToolButton *ToolButton1;
-    TToolButton *ToolButton2;
+    TPanel *panSplitter1;
+    TPanel *panSplitter2;
+    TPanel *panSplitter3;
+    TToolBar *tbrMono;
+    TToolButton *btnMonoOff;
+    TToolButton *btnMonoOn;
+    TPanel *panSplitter4;
+    TToolBar *tbrGrids;
+    TToolButton *btnGridMajor;
+    TToolButton *btnGridMinor;
     TStatusBar *barStatus;
     TPanel *panFrames;
     TAction *actRotateLeft;
@@ -92,37 +89,25 @@ __published:    // IDE-managed Components
     TAction *actMonoOn;
     TAction *actMonoOff;
     TScrollBox *sbxView;
-    TImage *imgEditor;
     TAction *actBrush;
-    TToolButton *ToolButton3;
-    void __fastcall actSelectRectangleExecute(TObject *Sender);
-    void __fastcall actZoomExecute(TObject *Sender);
+    TToolButton *btnBrush;
+    TToolButton *btnEraser;
+    TMenuItem *mnuEraser;
+    TButton *btnTool;
+    TPanel *panEditorContainer;
+    TImage *imgEditor;
+    void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actBrushExecute(TObject *Sender);
-    void __fastcall actPaintBucketExecute(TObject *Sender);
+    void __fastcall actFillExecute(TObject *Sender);
     void __fastcall actSprayBrushExecute(TObject *Sender);
-    void __fastcall actStampExecute(TObject *Sender);
     void __fastcall actEraserExecute(TObject *Sender);
-    void __fastcall actDrawLineExecute(TObject *Sender);
-    void __fastcall actDrawShapeExecute(TObject *Sender);
+    void __fastcall actLineExecute(TObject *Sender);
+    void __fastcall actShapeExecute(TObject *Sender);
     void __fastcall actGridPixelExecute(TObject *Sender);
     void __fastcall actGridCharacterExecute(TObject *Sender);
     void __fastcall actTextExecute(TObject *Sender);
     void __fastcall actDropperExecute(TObject *Sender);
-    void __fastcall Action3Execute(TObject *Sender);
-    void __fastcall Action4Execute(TObject *Sender);
-    void __fastcall Action5Execute(TObject *Sender);
-    void __fastcall Action6Execute(TObject *Sender);
-    void __fastcall Action7Execute(TObject *Sender);
-    void __fastcall Action8Execute(TObject *Sender);
-    void __fastcall Action9Execute(TObject *Sender);
-    void __fastcall Action10Execute(TObject *Sender);
-    void __fastcall Action11Execute(TObject *Sender);
-    void __fastcall Action12Execute(TObject *Sender);
-    void __fastcall Action13Execute(TObject *Sender);
-    void __fastcall Action14Execute(TObject *Sender);
-    void __fastcall Action15Execute(TObject *Sender);
-    void __fastcall Action16Execute(TObject *Sender);
     void __fastcall FrameEndDock(TObject *Sender, TObject *Target, int X, int Y);
     void __fastcall actRotateLeftExecute(TObject *Sender);
     void __fastcall actRotateRightExecute(TObject *Sender);
@@ -135,19 +120,21 @@ __published:    // IDE-managed Components
     void __fastcall actMonoOnExecute(TObject *Sender);
     void __fastcall actMonoOffExecute(TObject *Sender);
 private:    // User declarations
-    Document*                   m_Document;
+    ImageDocument*              m_Image;
+    int                         m_Magnification;
+
 public:        // User declarations
                     __fastcall  TfrmEditorImage(TComponent* Owner);
-                    __fastcall  ~TfrmEditorImage();
-    static  TFrame* __fastcall  Create(Document* document, TComponent* owner)
+                    __fastcall ~TfrmEditorImage();
+     static  TFrame* __fastcall  Create(Document* document, TComponent* owner)
                                 {
                                     auto editor = new TfrmEditorImage(owner);
-                                    editor->Document = document;
+                                    editor->Image = dynamic_cast<ImageDocument*>(document);
                                     document->DockPanel = dynamic_cast<TLMDDockPanel*>(owner);
                                     return editor;
                                 }
 
-    __property  Document*       Document = { read = m_Document, write = m_Document };
+    __property  ImageDocument*  Image = { read = m_Image, write = m_Image };
 };
 //---------------------------------------------------------------------------
 #endif

@@ -9,33 +9,46 @@ object frmEditorImage: TfrmEditorImage
     Left = 0
     Top = 0
     Width = 1102
-    Height = 32
+    Height = 40
     Align = alTop
     AutoSize = True
     BevelOuter = bvNone
     TabOrder = 0
-    Visible = False
+    object btnTool: TButton
+      Left = 0
+      Top = 0
+      Width = 57
+      Height = 40
+      DropDownMenu = popTools
+      ImageIndex = 1
+      Images = tbrImages
+      Style = bsSplitButton
+      TabOrder = 0
+    end
   end
   object panContainer: TPanel
     Left = 0
-    Top = 32
+    Top = 40
     Width = 1102
-    Height = 675
+    Height = 667
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitTop = 32
+    ExplicitHeight = 675
     object panToolbar: TPanel
       Left = 0
       Top = 0
       Width = 80
-      Height = 609
+      Height = 601
       Align = alLeft
       AutoSize = True
       BevelOuter = bvNone
       Constraints.MaxWidth = 80
       Constraints.MinWidth = 80
       TabOrder = 0
-      object ToolBar3: TToolBar
+      ExplicitHeight = 609
+      object tbrShiftRotates: TToolBar
         Left = 0
         Top = 204
         Width = 80
@@ -43,55 +56,54 @@ object frmEditorImage: TfrmEditorImage
         AutoSize = True
         ButtonHeight = 40
         ButtonWidth = 40
-        Images = ImageList1
+        Images = tbrImages
         TabOrder = 0
-        ExplicitTop = 164
-        object ToolButton15: TToolButton
+        object btnRotateLeft: TToolButton
           Left = 0
           Top = 0
           Action = actRotateLeft
           AllowAllUp = True
         end
-        object ToolButton16: TToolButton
+        object btnRotateRight: TToolButton
           Left = 40
           Top = 0
           Action = actRotateRight
           AllowAllUp = True
           Wrap = True
         end
-        object ToolButton17: TToolButton
+        object btnRotateDown: TToolButton
           Left = 0
           Top = 40
           Action = actRotateDown
           AllowAllUp = True
         end
-        object ToolButton18: TToolButton
+        object btnRotateUp: TToolButton
           Left = 40
           Top = 40
           Action = actRotateUp
           AllowAllUp = True
           Wrap = True
         end
-        object ToolButton21: TToolButton
+        object btnFlipHorizontal: TToolButton
           Left = 0
           Top = 80
           Action = actFlipHorizontal
           AllowAllUp = True
         end
-        object ToolButton22: TToolButton
+        object btnFlipVertical: TToolButton
           Left = 40
           Top = 80
           Action = actFlipVertical
           AllowAllUp = True
           Wrap = True
         end
-        object ToolButton19: TToolButton
+        object btnRotateLeft90: TToolButton
           Left = 0
           Top = 120
           Action = actRotateLeft90
           AllowAllUp = True
         end
-        object ToolButton20: TToolButton
+        object btnRotateRight90: TToolButton
           Left = 40
           Top = 120
           Action = actRotateRight90
@@ -99,7 +111,7 @@ object frmEditorImage: TfrmEditorImage
           Wrap = True
         end
       end
-      object ToolBar4: TToolBar
+      object tbrTools: TToolBar
         Left = 0
         Top = 0
         Width = 80
@@ -107,17 +119,16 @@ object frmEditorImage: TfrmEditorImage
         AutoSize = True
         ButtonHeight = 40
         ButtonWidth = 40
-        Images = ImageList1
+        Images = tbrImages
         TabOrder = 1
-        object ToolButton23: TToolButton
+        object btnSelect: TToolButton
           Left = 0
           Top = 0
-          Action = actSelectRectangle
-          Down = True
+          Action = actSelect
           Grouped = True
           Style = tbsCheck
         end
-        object ToolButton24: TToolButton
+        object btnText: TToolButton
           Left = 40
           Top = 0
           Action = actText
@@ -125,42 +136,44 @@ object frmEditorImage: TfrmEditorImage
           Wrap = True
           Style = tbsCheck
         end
-        object ToolButton25: TToolButton
+        object btnPencil: TToolButton
           Left = 0
           Top = 40
           Action = actPencil
           Grouped = True
           Style = tbsCheck
         end
-        object ToolButton3: TToolButton
+        object btnBrush: TToolButton
           Left = 40
           Top = 40
           Action = actBrush
+          Grouped = True
           Wrap = True
+          Style = tbsCheck
         end
-        object ToolButton27: TToolButton
+        object btnLine: TToolButton
           Left = 0
           Top = 80
-          Action = actDrawLine
+          Action = actLine
           Grouped = True
           Style = tbsCheck
         end
-        object ToolButton28: TToolButton
+        object btnShape: TToolButton
           Left = 40
           Top = 80
-          Action = actDrawShape
+          Action = actShape
           Grouped = True
           Wrap = True
           Style = tbsCheck
         end
-        object ToolButton29: TToolButton
+        object btnDropper: TToolButton
           Left = 0
           Top = 120
           Action = actDropper
           Grouped = True
           Style = tbsCheck
         end
-        object ToolButton30: TToolButton
+        object btnSprayBrush: TToolButton
           Left = 40
           Top = 120
           Action = actSprayBrush
@@ -168,15 +181,22 @@ object frmEditorImage: TfrmEditorImage
           Wrap = True
           Style = tbsCheck
         end
-        object ToolButton31: TToolButton
+        object btnFill: TToolButton
           Left = 0
           Top = 160
-          Action = actPaintBucket
+          Action = actFill
+          Grouped = True
+          Style = tbsCheck
+        end
+        object btnEraser: TToolButton
+          Left = 40
+          Top = 160
+          Action = actEraser
           Grouped = True
           Style = tbsCheck
         end
       end
-      object Panel4: TPanel
+      object panSplitter1: TPanel
         Left = 0
         Top = 200
         Width = 80
@@ -184,9 +204,8 @@ object frmEditorImage: TfrmEditorImage
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 2
-        ExplicitTop = 160
       end
-      object Panel5: TPanel
+      object panSplitter2: TPanel
         Left = 0
         Top = 364
         Width = 80
@@ -194,9 +213,8 @@ object frmEditorImage: TfrmEditorImage
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 3
-        ExplicitTop = 324
       end
-      object Panel6: TPanel
+      object panSplitter3: TPanel
         Left = 0
         Top = 408
         Width = 80
@@ -204,9 +222,8 @@ object frmEditorImage: TfrmEditorImage
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 4
-        ExplicitTop = 368
       end
-      object ToolBar2: TToolBar
+      object tbrMono: TToolBar
         Left = 0
         Top = 412
         Width = 80
@@ -214,11 +231,10 @@ object frmEditorImage: TfrmEditorImage
         AutoSize = True
         ButtonHeight = 40
         ButtonWidth = 40
-        Caption = 'ToolBar2'
-        Images = ImageList1
+        Caption = 'tbrMono'
+        Images = tbrImages
         TabOrder = 5
-        ExplicitTop = 372
-        object ToolButton38: TToolButton
+        object btnMonoOff: TToolButton
           Left = 0
           Top = 0
           Action = actMonoOff
@@ -228,7 +244,7 @@ object frmEditorImage: TfrmEditorImage
           ShowHint = True
           Style = tbsCheck
         end
-        object ToolButton39: TToolButton
+        object btnMonoOn: TToolButton
           Left = 40
           Top = 0
           Action = actMonoOn
@@ -239,7 +255,7 @@ object frmEditorImage: TfrmEditorImage
           Style = tbsCheck
         end
       end
-      object Panel7: TPanel
+      object panSplitter4: TPanel
         Left = 0
         Top = 452
         Width = 80
@@ -247,9 +263,8 @@ object frmEditorImage: TfrmEditorImage
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 6
-        ExplicitTop = 412
       end
-      object ToolBar1: TToolBar
+      object tbrGrids: TToolBar
         Left = 0
         Top = 368
         Width = 80
@@ -258,17 +273,16 @@ object frmEditorImage: TfrmEditorImage
         ButtonHeight = 40
         ButtonWidth = 40
         Caption = 'ToolBar6'
-        Images = ImageList1
+        Images = tbrImages
         TabOrder = 7
-        ExplicitTop = 328
-        object ToolButton1: TToolButton
+        object btnGridMajor: TToolButton
           Left = 0
           Top = 0
           Action = actGridCharacter
           AllowAllUp = True
           Style = tbsCheck
         end
-        object ToolButton2: TToolButton
+        object btnGridMinor: TToolButton
           Left = 40
           Top = 0
           Action = actGridPixel
@@ -279,34 +293,51 @@ object frmEditorImage: TfrmEditorImage
     end
     object panFrames: TPanel
       Left = 0
-      Top = 609
+      Top = 601
       Width = 1102
       Height = 66
       Align = alBottom
       BevelOuter = bvNone
       Caption = 'Frames View'
       TabOrder = 1
+      ExplicitTop = 609
     end
     object sbxView: TScrollBox
       Left = 80
       Top = 0
       Width = 1022
-      Height = 609
+      Height = 601
       Align = alClient
       BevelInner = bvNone
       BevelOuter = bvNone
       BorderStyle = bsNone
       TabOrder = 2
-      object imgEditor: TImage
+      ExplicitHeight = 609
+      object panEditorContainer: TPanel
         Left = 0
         Top = 0
         Width = 1022
-        Height = 609
+        Height = 601
         Align = alClient
-        ExplicitLeft = 80
-        ExplicitTop = 200
-        ExplicitWidth = 105
-        ExplicitHeight = 105
+        BevelOuter = bvNone
+        Color = clGray
+        Padding.Left = 128
+        Padding.Top = 128
+        Padding.Right = 128
+        Padding.Bottom = 128
+        ParentBackground = False
+        TabOrder = 0
+        object imgEditor: TImage
+          Left = 128
+          Top = 128
+          Width = 766
+          Height = 345
+          Align = alClient
+          ExplicitLeft = 96
+          ExplicitTop = 120
+          ExplicitWidth = 105
+          ExplicitHeight = 105
+        end
       end
     end
   end
@@ -330,79 +361,92 @@ object frmEditorImage: TfrmEditorImage
       end>
     Visible = False
   end
-  object ActionList1: TActionList
-    Images = ImageList1
-    Left = 200
-    Top = 129
-    object actSelectRectangle: TAction
-      Caption = 'Rectangle Select'
+  object tbrActions: TActionList
+    Images = tbrImages
+    Left = 296
+    Top = 65
+    object actSelect: TAction
+      AutoCheck = True
+      Caption = 'Select'
       ImageIndex = 0
       ShortCut = 8275
-      OnExecute = actSelectRectangleExecute
+      OnExecute = actSelectExecute
+    end
+    object actText: TAction
+      AutoCheck = True
+      Caption = 'Text'
+      ImageIndex = 10
+      ShortCut = 8276
+      OnExecute = actTextExecute
     end
     object actPencil: TAction
+      AutoCheck = True
       Caption = 'Pencil'
+      Checked = True
       ImageIndex = 1
       ShortCut = 8272
       OnExecute = actPencilExecute
     end
-    object actPaintBucket: TAction
-      Caption = 'Paint Bucket'
-      ImageIndex = 8
-      ShortCut = 8262
-      OnExecute = actPaintBucketExecute
+    object actBrush: TAction
+      AutoCheck = True
+      Caption = 'Brush'
+      ImageIndex = 2
+      ShortCut = 8258
+      OnExecute = actBrushExecute
+    end
+    object actLine: TAction
+      AutoCheck = True
+      Caption = 'Line'
+      ImageIndex = 3
+      ShortCut = 8268
+      OnExecute = actLineExecute
+    end
+    object actShape: TAction
+      AutoCheck = True
+      Caption = 'Shapes'
+      ImageIndex = 5
+      ShortCut = 8274
+      OnExecute = actShapeExecute
+    end
+    object actDropper: TAction
+      AutoCheck = True
+      Caption = 'Dropper'
+      ImageIndex = 6
+      ShortCut = 8260
+      OnExecute = actDropperExecute
     end
     object actSprayBrush: TAction
+      AutoCheck = True
       Caption = 'Spray Brush'
       ImageIndex = 7
       ShortCut = 8258
       OnExecute = actSprayBrushExecute
     end
-    object actStamp: TAction
-      Caption = 'Stamp'
-      ImageIndex = 9
-      OnExecute = actStampExecute
+    object actFill: TAction
+      AutoCheck = True
+      Caption = 'Fill'
+      ImageIndex = 8
+      ShortCut = 8262
+      OnExecute = actFillExecute
     end
     object actEraser: TAction
+      AutoCheck = True
       Caption = 'Eraser'
       ImageIndex = 11
       ShortCut = 8261
       OnExecute = actEraserExecute
     end
-    object actDrawLine: TAction
-      Caption = 'Draw Line'
-      ImageIndex = 3
-      ShortCut = 8268
-      OnExecute = actDrawLineExecute
-    end
-    object actDrawShape: TAction
-      Caption = 'Shapes'
-      ImageIndex = 5
-      ShortCut = 8274
-      OnExecute = actDrawShapeExecute
-    end
     object actGridPixel: TAction
+      AutoCheck = True
       ImageIndex = 16
       ShortCut = 24647
       OnExecute = actGridPixelExecute
     end
     object actGridCharacter: TAction
-      Caption = 'actGridCharacter'
+      AutoCheck = True
       ImageIndex = 25
       ShortCut = 16455
       OnExecute = actGridCharacterExecute
-    end
-    object actText: TAction
-      Caption = 'Action1'
-      ImageIndex = 10
-      ShortCut = 8276
-      OnExecute = actTextExecute
-    end
-    object actDropper: TAction
-      Caption = 'Action2'
-      ImageIndex = 6
-      ShortCut = 8260
-      OnExecute = actDropperExecute
     end
     object actRotateLeft: TAction
       Caption = 'actRotateLeft'
@@ -463,12 +507,8 @@ object frmEditorImage: TfrmEditorImage
       ShortCut = 16461
       OnExecute = actMonoOffExecute
     end
-    object actBrush: TAction
-      Caption = 'actBrush'
-      ImageIndex = 2
-    end
   end
-  object ImageList1: TImageList
+  object tbrImages: TImageList
     ColorDepth = cd32Bit
     DrawingStyle = dsTransparent
     Height = 32
@@ -476,7 +516,7 @@ object frmEditorImage: TfrmEditorImage
     Left = 220
     Top = 65
     Bitmap = {
-      494C010120006000F40020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010120006000F80020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000002001000001002000000000000040
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5235,43 +5275,49 @@ object frmEditorImage: TfrmEditorImage
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000}
   end
-  object PopupActionBar1: TPopupActionBar
-    Images = ImageList1
-    Left = 332
-    Top = 241
-    object Brush2: TMenuItem
-      Action = actSelectRectangle
+  object popTools: TPopupActionBar
+    Images = tbrImages
+    Left = 364
+    Top = 65
+    object mnuSelect: TMenuItem
+      Action = actSelect
+      AutoCheck = True
     end
-    object DrawLine2: TMenuItem
-      Caption = 'Zoom'
-      ImageIndex = 1
-      OnClick = actZoomExecute
+    object mnuText: TMenuItem
+      Action = actText
+      AutoCheck = True
     end
-    object Shapes2: TMenuItem
-      Action = actPencil
-    end
-    object Brush1: TMenuItem
+    object mnuBrush: TMenuItem
       Caption = 'Brush'
       ImageIndex = 2
+      ShortCut = 8258
       OnClick = actBrushExecute
     end
-    object PaintBucket1: TMenuItem
-      Action = actPaintBucket
+    object mnuLine: TMenuItem
+      Action = actLine
+      AutoCheck = True
     end
-    object SprayBrush1: TMenuItem
+    object mnuShapes: TMenuItem
+      Action = actShape
+      AutoCheck = True
+      ShortCut = 24659
+    end
+    object mnuDropper: TMenuItem
+      Action = actDropper
+      AutoCheck = True
+    end
+    object mnuSprayBrush: TMenuItem
       Action = actSprayBrush
+      AutoCheck = True
+      ShortCut = 24642
     end
-    object Stamp1: TMenuItem
-      Action = actStamp
+    object mnuFill: TMenuItem
+      Action = actFill
+      AutoCheck = True
     end
-    object Eraser1: TMenuItem
+    object mnuEraser: TMenuItem
       Action = actEraser
-    end
-    object DrawLine1: TMenuItem
-      Action = actDrawLine
-    end
-    object Shapes1: TMenuItem
-      Action = actDrawShape
+      AutoCheck = True
     end
   end
 end

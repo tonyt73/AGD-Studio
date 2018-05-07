@@ -8,6 +8,7 @@
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorImage::TfrmEditorImage(TComponent* Owner)
 : TFrame(Owner)
+, m_Magnification(8)
 {
 }
 //---------------------------------------------------------------------------
@@ -15,54 +16,54 @@ __fastcall TfrmEditorImage::~TfrmEditorImage()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actSelectRectangleExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actSelectExecute(TObject *Sender)
 {
-    //btnTool->ImageIndex = actSelectRectangle->ImageIndex;
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actZoomExecute(TObject *Sender)
-{
-    //btnTool->ImageIndex = actZoom->ImageIndex;
+    btnTool->ImageIndex = actSelect->ImageIndex;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::actPencilExecute(TObject *Sender)
 {
-    //btnTool->ImageIndex = actPencil->ImageIndex;
+    btnTool->ImageIndex = actPencil->ImageIndex;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::actBrushExecute(TObject *Sender)
 {
-    //btnTool->ImageIndex = actBrush->ImageIndex;
+    btnTool->ImageIndex = actBrush->ImageIndex;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actPaintBucketExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actFillExecute(TObject *Sender)
 {
-    //btnTool->ImageIndex = actPaintBucket->ImageIndex;
+    btnTool->ImageIndex = actFill->ImageIndex;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::actSprayBrushExecute(TObject *Sender)
 {
-    //btnTool->ImageIndex = actSprayBrush->ImageIndex;
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actStampExecute(TObject *Sender)
-{
-    //btnTool->ImageIndex = actStamp->ImageIndex;
+    btnTool->ImageIndex = actSprayBrush->ImageIndex;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::actEraserExecute(TObject *Sender)
 {
-    //btnTool->ImageIndex = actEraser->ImageIndex;
+    btnTool->ImageIndex = actEraser->ImageIndex;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actDrawLineExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actLineExecute(TObject *Sender)
 {
-    //btnTool->ImageIndex = actDrawLine->ImageIndex;
+    btnTool->ImageIndex = actLine->ImageIndex;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actDrawShapeExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actShapeExecute(TObject *Sender)
 {
-    //btnTool->ImageIndex = actDrawShape->ImageIndex;
+    btnTool->ImageIndex = actShape->ImageIndex;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::actTextExecute(TObject *Sender)
+{
+    btnTool->ImageIndex = actText->ImageIndex;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::actDropperExecute(TObject *Sender)
+{
+    btnTool->ImageIndex = actDropper->ImageIndex;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::actGridPixelExecute(TObject *Sender)
@@ -71,86 +72,6 @@ void __fastcall TfrmEditorImage::actGridPixelExecute(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::actGridCharacterExecute(TObject *Sender)
-{
-    //
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actTextExecute(TObject *Sender)
-{
-    //
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actDropperExecute(TObject *Sender)
-{
-    //
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::Action3Execute(TObject *Sender)
-{
-    //
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::Action4Execute(TObject *Sender)
-{
-    //
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::Action5Execute(TObject *Sender)
-{
-    //
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::Action6Execute(TObject *Sender)
-{
-    //
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::Action7Execute(TObject *Sender)
-{
-    //
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::Action8Execute(TObject *Sender)
-{
-    //
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::Action9Execute(TObject *Sender)
-{
-    //
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::Action10Execute(TObject *Sender)
-{
-    //
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::Action11Execute(TObject *Sender)
-{
-    //
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::Action12Execute(TObject *Sender)
-{
-    //
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::Action13Execute(TObject *Sender)
-{
-    //
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::Action14Execute(TObject *Sender)
-{
-    //
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::Action15Execute(TObject *Sender)
-{
-    //
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::Action16Execute(TObject *Sender)
 {
     //
 }
