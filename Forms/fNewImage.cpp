@@ -13,7 +13,7 @@ __fastcall TfrmNewImage::TfrmNewImage(TComponent* Owner)
 //---------------------------------------------------------------------------
 void __fastcall TfrmNewImage::FormCreate(TObject *Sender)
 {
-    radObjectClick(NULL);
+    radObjectClick(radObject);
 }
 //---------------------------------------------------------------------------
 String __fastcall TfrmNewImage::GetName() const
@@ -44,57 +44,36 @@ String __fastcall TfrmNewImage::GetType() const
 //---------------------------------------------------------------------------
 void __fastcall TfrmNewImage::radObjectClick(TObject *Sender)
 {
-    edtWidth->Value = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itObject].Minimum.cx;
-    edtHeight->Value = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itObject].Minimum.cy;
-    edtWidth->Enabled = false;
-    edtHeight->Enabled = false;
-    lblWidth->Enabled = false;
-    lblHeight->Enabled = false;
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmNewImage::radSpriteClick(TObject *Sender)
-{
-    edtWidth->Value = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itSprite].Minimum.cx;
-    edtHeight->Value = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itSprite].Minimum.cy;
-    edtWidth->Enabled = false;
-    edtHeight->Enabled = false;
-    lblWidth->Enabled = false;
-    lblHeight->Enabled = false;
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmNewImage::radTileClick(TObject *Sender)
-{
-    edtWidth->Value = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum.cx;
-    edtHeight->Value = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum.cy;
-    edtWidth->Enabled = true;
-    edtHeight->Enabled = true;
-    lblWidth->Enabled = true;
-    lblHeight->Enabled = true;
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmNewImage::radChrSetClick(TObject *Sender)
-{
-    edtWidth->Value = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itCharacterSet].Minimum.cx;
-    edtHeight->Value = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itCharacterSet].Minimum.cy;
-    edtWidth->Enabled = false;
-    edtHeight->Enabled = false;
-    lblWidth->Enabled = false;
-    lblHeight->Enabled = false;
+    auto type = (ImageTypes)((TControl*)Sender)->Tag;
+    const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
+    edtWidth->Enabled = mc.ImageSizing[type].Step.cx != 0;
+    lblWidth->Enabled = mc.ImageSizing[type].Step.cx != 0;
+    edtWidth->MinValue = mc.ImageSizing[type].Minimum.cx;
+    edtWidth->MaxValue = mc.ImageSizing[type].Maximum.cx;
+    edtWidth->Increment = mc.ImageSizing[type].Step.cx;
+    edtWidth->Value = mc.ImageSizing[type].Minimum.cx;
+
+    edtHeight->Enabled = mc.ImageSizing[type].Step.cx != 0;
+    lblHeight->Enabled = mc.ImageSizing[type].Step.cx != 0;
+    edtHeight->MaxValue = mc.ImageSizing[type].Maximum.cy;
+    edtHeight->MinValue = mc.ImageSizing[type].Minimum.cy;
+    edtHeight->Increment = mc.ImageSizing[type].Step.cy;
+    edtHeight->Value = mc.ImageSizing[type].Minimum.cy;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmNewImage::edtWidthExit(TObject *Sender)
 {
-    if (edtWidth->Value % 8 != 0)
+    if (edtWidth->Value % edtWidth->Increment != 0)
     {
-        edtWidth->Value = ((int)(edtWidth->Value / 8)) * 8;
+        edtWidth->Value = ((int)((edtWidth->Value + edtWidth->Increment / 2) / edtWidth->Increment)) * edtWidth->Increment;
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmNewImage::edtHeightExit(TObject *Sender)
 {
-    if (edtHeight->Value % 8 != 0)
+    if (edtHeight->Value % edtHeight->Increment != 0)
     {
-        edtHeight->Value = ((int)(edtHeight->Value / 8)) * 8;
+        edtHeight->Value = ((int)((edtHeight->Value + edtHeight->Increment / 2) / edtHeight->Increment)) * edtHeight->Increment;
     }
 }
 //---------------------------------------------------------------------------

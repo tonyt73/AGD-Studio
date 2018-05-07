@@ -26,11 +26,8 @@ __published:	// IDE-managed Components
     TSpinEdit *edtHeight;
     TRadioButton *radChrSet;
     void __fastcall radObjectClick(TObject *Sender);
-    void __fastcall radTileClick(TObject *Sender);
     void __fastcall edtWidthExit(TObject *Sender);
     void __fastcall edtHeightExit(TObject *Sender);
-    void __fastcall radSpriteClick(TObject *Sender);
-    void __fastcall radChrSetClick(TObject *Sender);
     void __fastcall FormCreate(TObject *Sender);
     void __fastcall edtNameChange(TObject *Sender);
 private:	// User declarations
