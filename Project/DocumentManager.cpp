@@ -80,6 +80,7 @@ bool __fastcall DocumentManager::Remove(const String& type, const String& name)
         {
             if ((*it)->Name == name)
             {
+                delete (*it);
                 dit->second.erase(it);
                 return true;
             }
