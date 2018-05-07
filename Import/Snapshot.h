@@ -56,12 +56,10 @@ public:
                     __fastcall  ZXSpectrum48KSnapshot();
 };
 //---------------------------------------------------------------------------
-class AmstradCPCSnapshot : public Snapshot
+class ZXSpectrum128KSnapshot : public Snapshot
 {
 public:
-                    __fastcall  AmstradCPCSnapshot();
+                    __fastcall  ZXSpectrum128KSnapshot();
 };
-//---------------------------------------------------------------------------
-// TODO: Amstrad CPC snapshot
 //---------------------------------------------------------------------------
 #endif
