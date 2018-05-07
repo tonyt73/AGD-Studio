@@ -46,11 +46,11 @@
     },
     "CharacterSet": {
       "Minimum": {
-        "Width": 8,
+        "Width": 4,
         "Height": 8
       },
       "Maximum": {
-        "Width": 8,
+        "Width": 4,
         "Height": 8
       },
       "Step": {

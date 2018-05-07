@@ -1,21 +1,21 @@
 {
   "Application": {
-    "Style": "Luna"
+    "Style": "Onyx Blue"
   },
   "Welcome": {
     "Position": {
-      "X": 1284,
-      "Y": 453
+      "X": 1282,
+      "Y": 466
     }
   },
   "MainWindow": {
     "Position": {
-      "X": 1239,
-      "Y": 240
+      "X": 0,
+      "Y": 0
     },
     "Size": {
-      "Width": 1812,
-      "Height": 977
+      "Width": 1720,
+      "Height": 1400
     },
     "WindowState": 0
   }

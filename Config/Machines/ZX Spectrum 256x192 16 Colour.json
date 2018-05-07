@@ -8,12 +8,12 @@
         "Height": 16
       },
       "Maximum": {
-        "Width": 16,
-        "Height": 16
+        "Width": 128,
+        "Height": 128
       },
       "Step": {
-        "Width": 0,
-        "Height": 0
+        "Width": 16,
+        "Height": 16
       }
     },
     "Sprite": {
@@ -22,12 +22,12 @@
         "Height": 16
       },
       "Maximum": {
-        "Width": 16,
-        "Height": 16
+        "Width": 128,
+        "Height": 128
       },
       "Step": {
-        "Width": 0,
-        "Height": 0
+        "Width": 16,
+        "Height": 16
       }
     },
     "Tile": {
