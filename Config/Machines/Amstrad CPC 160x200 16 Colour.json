@@ -8,12 +8,12 @@
         "Height": 16
       },
       "Maximum": {
-        "Width": 8,
-        "Height": 16
+        "Width": 40,
+        "Height": 96
       },
       "Step": {
-        "Width": 0,
-        "Height": 0
+        "Width": 8,
+        "Height": 16
       }
     },
     "Sprite": {
@@ -22,12 +22,12 @@
         "Height": 16
       },
       "Maximum": {
-        "Width": 8,
-        "Height": 16
+        "Width": 40,
+        "Height": 96
       },
       "Step": {
-        "Width": 0,
-        "Height": 0
+        "Width": 8,
+        "Height": 16
       }
     },
     "Tile": {
@@ -36,11 +36,11 @@
         "Height": 8
       },
       "Maximum": {
-        "Width": 80,
+        "Width": 40,
         "Height": 96
       },
       "Step": {
-        "Width": 8,
+        "Width": 4,
         "Height": 8
       }
     },

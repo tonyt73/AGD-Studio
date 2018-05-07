@@ -10,42 +10,46 @@
   "TranparentColor": 0,
   "SupportsLogicalColorRemapping" : true,
   "PixelBitRemapping" : [
-     "Pixel" : [
-		{
-			"Mask" : "0x80",
-			"Shift" : 7,
-		},
-		{
-			"Mask" : "0x20",
-			"Shift" : 3,
-		},
-		{
-			"Mask" : "0x08",
-			"Shift" : 2,
-		},
-		{
-			"Mask" : "0x02",
-			"Shift" : -2,
-		}	
-	 ],
-     "Pixel" : [
-		{
-			"Mask" : "0x40",
-			"Shift" : 6,
-		},
-		{
-			"Mask" : "0x10",
-			"Shift" : 2,
-		},
-		{
-			"Mask" : "0x04",
-			"Shift" : 1,
-		},
-		{
-			"Mask" : "0x01",
-			"Shift" : -3,
-		}	
-	 ]
+     {
+		"Remap" : [
+			{
+				"Mask" : 1,
+				"Shift" : -7
+			},
+			{
+				"Mask" : 2,
+				"Shift" : -2
+			},
+			{
+				"Mask" : 4,
+				"Shift" : -3
+			},
+			{
+				"Mask" : 8,
+				"Shift" : 2
+			}
+		]
+	 },
+     {
+		"Remap" : [
+			{
+				"Mask" : 1,
+				"Shift" : -6
+			},
+			{
+				"Mask" : 2,
+				"Shift" : -1
+			},
+			{
+				"Mask" : 4,
+				"Shift" : -2
+			},
+			{
+				"Mask" : 8,
+				"Shift" : 3
+			}
+		]
+	 }
   ],
   "ExportInformation" : {
      "Object" : {
