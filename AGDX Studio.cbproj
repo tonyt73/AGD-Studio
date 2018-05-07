@@ -309,6 +309,10 @@
             <DependentOn>Project\DocumentManager.h</DependentOn>
             <BuildOrder>24</BuildOrder>
         </CppCompile>
+        <CppCompile Include="Project\FileDefinitions.cpp">
+            <DependentOn>Project\FileDefinitions.h</DependentOn>
+            <BuildOrder>38</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Project\ImageDocuments.cpp">
             <DependentOn>Project\ImageDocuments.h</DependentOn>
             <BuildOrder>27</BuildOrder>

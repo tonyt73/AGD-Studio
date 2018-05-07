@@ -174,7 +174,7 @@ bool __fastcall Importer::Convert(const String& file)
     }
     else
     {
-        // TODO: CPC?
+        // Unsupported snapsnot
         return false;
     }
 

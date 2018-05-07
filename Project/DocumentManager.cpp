@@ -163,7 +163,6 @@ void __fastcall DocumentManager::OnImportString(const OnImport<String>& event)
 {
     if (event.Id.Pos("event.") == 0)
     {
-        // TODO: Find the event document
         auto eventName = event.Id.SubString(5, event.Id.Length() - 5);
         auto document = dynamic_cast<TextDocument*>(Get("Text", "Event", eventName));
         if (document)
@@ -173,7 +172,6 @@ void __fastcall DocumentManager::OnImportString(const OnImport<String>& event)
     }
     else if (event.Id == "messages")
     {
-        // TODO: Find the messages document
         auto document = dynamic_cast<TextDocument*>(Get("Text", "Message", "Messages"));
         if (document)
         {

@@ -40,11 +40,6 @@ public:
     String                  __property  Name = { read = m_Name };
     const ImageSizing       __property  ImageSizing[ImageTypes type] = { read = GetImageSizing };
     const CompilerInfo      __property  CompilerInfo = { read = m_CompilerInfo };
-    // TODO:
-    // Key Map
-    // Sounds
-    // Jump Table
-    // New Project Options
 };
 
 //---------------------------------------------------------------------------

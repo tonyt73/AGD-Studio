@@ -50,9 +50,7 @@ __published:
     __property  String       Author = { read = m_Author, write = m_Author };
     __property  String  Description = { read = m_Description, write = m_Description };
     __property  String      Machine = { read = m_MachineName };
-    // TODO:
-    // Keys
-    // Jump Table
+    // TODO: Keys, Jump Table
 };
 //---------------------------------------------------------------------------
 #endif
