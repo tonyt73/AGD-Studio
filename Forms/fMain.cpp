@@ -11,7 +11,7 @@
 // ---------------------------------------------------------------------------
 TfrmMain *frmMain;
 //---------------------------------------------------------------------------
-__fastcall TfrmMain::TfrmMain(TComponent* Owner) 
+__fastcall TfrmMain::TfrmMain(TComponent* Owner)
 : TForm(Owner)
 , m_FormView(fvNone)
 , m_WelcomeDialog(std::unique_ptr<TfrmWelcomeDialog>(new TfrmWelcomeDialog(this)))
@@ -28,12 +28,34 @@ void __fastcall TfrmMain::FormCreate(TObject *Sender)
     theProjectManager.Initialise(m_IDEDialog->tvProject);
     // TODO: decide if we can load a project right now or load the welcome dialog
     // create the welcome screen
-    ShowWelcomeDialog();
+    if (!appSettings.WelcomeSkipOnStartup)
+    {
+        ShowWelcomeDialog();
+    }
+    else
+    {
+        ShowIDE();
+        if (appSettings.LoadLastProject && appSettings.LastProject.Trim() != "")
+        {
+            theProjectManager.Open(appSettings.LastProject);
+        }
+    }
 
     // TODO: Remove: Used to generate initial JSON config files
     //auto pw = std::make_unique<PaletteWriter>();
     //auto pw = std::make_unique<GraphicsModeWriter>();
     //auto pw = std::make_unique<MachineConfigWriter>();
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmMain::FormActivate(TObject *Sender)
+{
+    static bool atStartup = true;
+    if (atStartup && appSettings.WelcomeSkipOnStartup)
+    {
+        // We skipped the Welcome dialog; so finish off the main form setup
+        m_IDEDialog->OnActivate();
+    }
+    atStartup = false;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmMain::FormCloseQuery(TObject *Sender, bool &CanClose)
@@ -43,7 +65,7 @@ void __fastcall TfrmMain::FormCloseQuery(TObject *Sender, bool &CanClose)
     {
         theProjectManager.Close();
         OnIDEClose(Sender);
-        CanClose = false;
+        CanClose = appSettings.WelcomeSkipOnClose;
     }
     else if (m_FormView == fvImportDialog)
     {
@@ -72,8 +94,11 @@ void __fastcall TfrmMain::AppMessage(tagMSG &Msg, bool &Handled)
 // ---------------------------------------------------------------------------
 void __fastcall TfrmMain::OnIDEClose(TObject *Sender)
 {
-    // show the welcome screen
-    ShowWelcomeDialog();
+    if (!appSettings.WelcomeSkipOnClose)
+    {
+        // show the welcome screen
+        ShowWelcomeDialog();
+    }
 }
 // ---------------------------------------------------------------------------
 void __fastcall TfrmMain::OnWelcomeDone(TObject *Sender)

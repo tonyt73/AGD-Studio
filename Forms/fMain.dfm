@@ -4412,6 +4412,7 @@ object frmMain: TfrmMain
     FFFF0000FFFF0000000000000000000000000000000000000000000000000000
     0000000000000000FFFF0000FFFF0000FFFF0000FFFF0000}
   OldCreateOrder = False
+  OnActivate = FormActivate
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy

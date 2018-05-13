@@ -86,7 +86,6 @@ object frmIDE: TfrmIDE
         Padding.Right = 1
         Padding.Bottom = 1
         TabOrder = 0
-        ExplicitHeight = 255
         object tbrProject: TToolBar
           Left = 1
           Top = 1
@@ -202,7 +201,6 @@ object frmIDE: TfrmIDE
           FixedBottomRowNum = 0
           FixedColNum = 1
           GutterWidth = 0
-          ExplicitHeight = 227
         end
       end
     end
@@ -269,12 +267,10 @@ object frmIDE: TfrmIDE
         object lblPropertyInfo: TLabel
           Left = 4
           Top = 4
-          Width = 243
-          Height = 32
+          Width = 99
+          Height = 13
           Align = alClient
           Caption = 'Property information'
-          ExplicitWidth = 99
-          ExplicitHeight = 13
         end
       end
     end
@@ -307,114 +303,150 @@ object frmIDE: TfrmIDE
       Caption = 'dpEditors'
     end
   end
-  object tbrMain: TToolBar
+  object Panel3: TPanel
     Left = 0
     Top = 0
     Width = 800
-    AutoSize = True
-    ButtonHeight = 32
-    ButtonWidth = 32
-    DisabledImages = imgIconsDisabled
-    EdgeInner = esNone
-    EdgeOuter = esNone
-    Images = imgIconsActive
+    Height = 32
+    Align = alTop
+    BevelOuter = bvNone
     TabOrder = 1
-    Transparent = False
-    StyleElements = [seFont, seClient]
-    Wrapable = False
-    object ToolButton15: TToolButton
+    ExplicitLeft = 344
+    ExplicitWidth = 185
+    object tbrMain: TToolBar
       Left = 0
       Top = 0
-      Action = actFileNewAsset
-      ParentShowHint = False
-      ShowHint = True
+      Width = 344
+      Height = 29
+      Align = alLeft
+      AutoSize = True
+      ButtonHeight = 32
+      ButtonWidth = 32
+      DisabledImages = imgIconsDisabled
+      EdgeInner = esNone
+      EdgeOuter = esNone
+      Images = imgIconsActive
+      TabOrder = 0
+      Transparent = False
+      StyleElements = [seFont, seClient]
+      Wrapable = False
+      ExplicitHeight = 800
+      object ToolButton15: TToolButton
+        Left = 0
+        Top = 0
+        Action = actFileNewAsset
+        ParentShowHint = False
+        ShowHint = True
+      end
+      object ToolButton3: TToolButton
+        Left = 32
+        Top = 0
+        Action = actFileProjectSave
+        ParentShowHint = False
+        ShowHint = True
+      end
+      object ToolButton1: TToolButton
+        Left = 64
+        Top = 0
+        Width = 8
+        Caption = 'ToolButton1'
+        ImageIndex = 7
+        Style = tbsSeparator
+      end
+      object ToolButton4: TToolButton
+        Left = 72
+        Top = 0
+        Action = actEditUndo
+        ParentShowHint = False
+        ShowHint = True
+      end
+      object ToolButton5: TToolButton
+        Left = 104
+        Top = 0
+        Action = actEditRedo
+        ParentShowHint = False
+        ShowHint = True
+      end
+      object ToolButton6: TToolButton
+        Left = 136
+        Top = 0
+        Width = 8
+        Caption = 'ToolButton6'
+        ImageIndex = 1
+        Style = tbsSeparator
+      end
+      object ToolButton7: TToolButton
+        Left = 144
+        Top = 0
+        Action = actEditCopy
+        ParentShowHint = False
+        ShowHint = True
+      end
+      object ToolButton8: TToolButton
+        Left = 176
+        Top = 0
+        Action = actEditCut
+        ParentShowHint = False
+        ShowHint = True
+      end
+      object ToolButton9: TToolButton
+        Left = 208
+        Top = 0
+        Action = actEditPaste
+        ParentShowHint = False
+        ShowHint = True
+      end
+      object ToolButton11: TToolButton
+        Left = 240
+        Top = 0
+        Width = 8
+        Caption = 'ToolButton11'
+        ImageIndex = 9
+        Style = tbsSeparator
+      end
+      object ToolButton10: TToolButton
+        Left = 248
+        Top = 0
+        Action = actEditZoomIn
+        ParentShowHint = False
+        ShowHint = True
+      end
+      object ToolButton12: TToolButton
+        Left = 280
+        Top = 0
+        Action = actEditZoomOut
+        ParentShowHint = False
+        ShowHint = True
+      end
+      object ToolButton13: TToolButton
+        Left = 312
+        Top = 0
+        Action = actEditZoomReset
+        ParentShowHint = False
+        ShowHint = True
+      end
     end
-    object ToolButton3: TToolButton
-      Left = 32
+    object tbrSettings: TToolBar
+      Left = 768
       Top = 0
-      Action = actFileProjectSave
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton1: TToolButton
-      Left = 64
-      Top = 0
-      Width = 8
-      Caption = 'ToolButton1'
-      ImageIndex = 7
-      Style = tbsSeparator
-    end
-    object ToolButton4: TToolButton
-      Left = 72
-      Top = 0
-      Action = actEditUndo
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton5: TToolButton
-      Left = 104
-      Top = 0
-      Action = actEditRedo
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton6: TToolButton
-      Left = 136
-      Top = 0
-      Width = 8
-      Caption = 'ToolButton6'
-      ImageIndex = 1
-      Style = tbsSeparator
-    end
-    object ToolButton7: TToolButton
-      Left = 144
-      Top = 0
-      Action = actEditCopy
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton8: TToolButton
-      Left = 176
-      Top = 0
-      Action = actEditCut
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton9: TToolButton
-      Left = 208
-      Top = 0
-      Action = actEditPaste
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton11: TToolButton
-      Left = 240
-      Top = 0
-      Width = 8
-      Caption = 'ToolButton11'
-      ImageIndex = 9
-      Style = tbsSeparator
-    end
-    object ToolButton10: TToolButton
-      Left = 248
-      Top = 0
-      Action = actEditZoomIn
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton12: TToolButton
-      Left = 280
-      Top = 0
-      Action = actEditZoomOut
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton13: TToolButton
-      Left = 312
-      Top = 0
-      Action = actEditZoomReset
-      ParentShowHint = False
-      ShowHint = True
+      Width = 32
+      Height = 29
+      Align = alRight
+      AutoSize = True
+      ButtonHeight = 32
+      ButtonWidth = 32
+      Images = imgIconsActive
+      TabOrder = 1
+      ExplicitLeft = 0
+      ExplicitHeight = 800
+      object btnSettings: TToolButton
+        Left = 0
+        Top = 0
+        Hint = 'Application Settings'
+        Action = actSettings
+        ParentShowHint = False
+        ShowHint = True
+      end
     end
   end
   object actActions: TActionList
@@ -574,9 +606,16 @@ object frmIDE: TfrmIDE
     end
     object actDeleteAsset: TAction
       Caption = 'Delete Image'
-      ImageIndex = 3
+      ImageIndex = 9
       ShortCut = 46
       OnExecute = actDeleteAssetExecute
+    end
+    object actSettings: TAction
+      Caption = 'Settings...'
+      Hint = 'Show the application settings dialog'
+      ImageIndex = 4
+      ShortCut = 24698
+      OnExecute = actSettingsExecute
     end
   end
   object imgIconsActive: TImageList
@@ -585,7 +624,7 @@ object frmIDE: TfrmIDE
     Left = 20
     Top = 140
     Bitmap = {
-      494C0101150018003C0110001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010115001800480110001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1469,7 +1508,7 @@ object frmIDE: TfrmIDE
     Left = 92
     Top = 140
     Bitmap = {
-      494C0101150030000C0110001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010115003000180110001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2278,7 +2317,7 @@ object frmIDE: TfrmIDE
     Left = 24
     Top = 200
     Bitmap = {
-      494C010105000800940010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010105000800A00010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000080827BFF80817DFF8080
       80FF80817DFF808080FF00000000000000001B415BB23D93CFFF3D91CEFF3D92
@@ -2554,7 +2593,7 @@ object frmIDE: TfrmIDE
     Left = 102
     Top = 200
     Bitmap = {
-      494C0101170030005C0210001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010117003000680210001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000023000000330000
       0033000000330000003300000033000000330000003300000033000000330000

@@ -128,6 +128,10 @@ __published:    // IDE-managed Components
     TAction *actNewAsset;
     TMenuItem *DeleteAsset1;
     TAction *actDeleteAsset;
+    TPanel *Panel3;
+    TToolBar *tbrSettings;
+    TToolButton *btnSettings;
+    TAction *actSettings;
     void __fastcall actEditCopyExecute(TObject *Sender);
     void __fastcall actEditCutExecute(TObject *Sender);
     void __fastcall actEditPasteExecute(TObject *Sender);
@@ -156,6 +160,7 @@ __published:    // IDE-managed Components
     void __fastcall actEditZoomOutExecute(TObject *Sender);
     void __fastcall actEditZoomResetExecute(TObject *Sender);
     void __fastcall actDeleteAssetExecute(TObject *Sender);
+    void __fastcall actSettingsExecute(TObject *Sender);
 
 
 

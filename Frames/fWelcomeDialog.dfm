@@ -14,7 +14,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     TabOrder = 0
     StyleElements = [seFont, seBorder]
     object imgStartNewProject: TImage
-      Left = 110
+      Left = 104
       Top = 266
       Width = 16
       Height = 16
@@ -53,7 +53,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         01CB28148A27C5BFF72AE17FFDDA6E3B583A4E520000000049454E44AE426082}
     end
     object lblStartNewProject: TLabel
-      Left = 110
+      Left = 104
       Top = 262
       Width = 184
       Height = 22
@@ -6246,101 +6246,22 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         23A861E3D692ED76D8F1C713A0411B71D57189633A0870566A91ABB64D943436
         A4FF0FD26170FB48BB86440000000049454E44AE426082}
     end
-    object imgConfigure: TImage
-      Left = 4
-      Top = 410
-      Width = 16
-      Height = 16
-      Cursor = crHandPoint
-      AutoSize = True
-      Picture.Data = {
-        0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
-        001008060000001FF3FF610000001974455874536F6674776172650041646F62
-        6520496D616765526561647971C9653C000002DC4944415478DA75535D485361
-        187ECE9C88A4B1621BCAD2B59928F9172AEA2464126A374576651616D64D88F8
-        3B356B3F4E317FB328EAAA5192E65584DDA4C21A154E45698AD6866D73E59AE8
-        8491620EDD4EDF996EB8C8F7E63BEF799FF37CEFF3BECFA17048F43C78489300
-        4551A8AFADA6FE87F1D5FD496777EF30393C8DB2BA6226BFDFD94DDF282BC38B
-        FE7EDC6994F9701D5D3DEB84F013C15C0A2220E0E1C4C4840B1E8F070B0B5F9D
-        04C4E571B938291663C962C19AD3C980E9A4A4D3544848088C46D33B427A3140
-        A050A947C56271417656960F2C14C6626BEB0F1CBF1CE0F379883C1A099BCD06
-        1E9787C9A929582C9631B54A517850429C5CA99E263770040201363736E1D7EF
-        8F88C808D8ED76D2E182ABB54599495E998366704FA1A2AF5D2D85EDC732BC5E
-        2FBE198DA0C9C962B1201209111E7E04C2D818BC1A18409B5A450566A052B7D1
-        BBBBBBA4552E7273CF62E3F7060CB3062C2D59DF4C4E4CBCCCCEC9B92E12892E
-        A7A59EF149191FFF8CD55527D86C3694F2BB142557B6D0E5E5E570BBDD585D5B
-        058B6241AFD7636C74246F74E4FD5461D1F9AC82C2A28F1289045EDA0B3E8F8F
-        B0B03068341A9039EC11ECECEC903645484B4DF3C9D14FE8E170389E935BDA49
-        77CDD1D1D1372539125F6D766E1656AB15A1A1A17B04E45D0653A86F689A2E2D
-        2D0523C7E572617E7E1E0C31034C4E4E0687C3F1B53D3838889EAE8ECCFD19CC
-        0486582B6BF0E6E7E5532762044C0514195EC0716498642558FE698756A775F5
-        F5761F0B32524353F37A7C7CFC71A9540A93C984B8B83830A6F2EE6F81318FD9
-        6C46424202743A1D161717DF7675B41707082A2AAB3EA4A7A74B998FE6E6E65C
-        64FF9CA8A8285C2929C1EBA121ACACAC309EA05352522886D06030681F3FEA3B
-        1764A4DB15951AD293F7D9D327D524675756D54C2BE472A85B5B41C03ECDD5B5
-        F55AF7F6F61782B945D2EF414622718A91C5388C496AEA64B45F02D1ECC7316B
-        DAF463FE25F837320E3CCF1CF63BFF05C6B555F08ACDCA4C0000000049454E44
-        AE426082}
-      Visible = False
-    end
-    object imgDownArrow: TImage
-      Left = 88
-      Top = 410
-      Width = 16
-      Height = 16
-      Cursor = crHandPoint
-      AutoSize = True
-      Picture.Data = {
-        0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
-        001008060000001FF3FF610000001974455874536F6674776172650041646F62
-        6520496D616765526561647971C9653C000000BA4944415478DA63FCFFFF3F03
-        258071D4004C03B2B3B38FFFF9F3C7E2EFDFBF0C303946464606666666061616
-        961353A74EB5C46B404646C6FFE29252062E2E1E0690212000D2FCEDDB1786DE
-        9E6E8619336630E23500689B717252D299E8D838862FDFBE83C578B83819962E
-        5EC43077DE3C13A0FAB3840C0051C6C9C9C967BCBC7DC062DBB66E61983B77AE
-        09907916433D0E03C086A4A7A79F0131AE5CB9127BF4E8D12520362906800D81
-        D2D781F81B5106501C8D23D00000C90A73E156DBBC610000000049454E44AE42
-        6082}
-      Visible = False
-    end
-    object lblConfigure: TLabel
-      Left = 5
-      Top = 410
-      Width = 99
-      Height = 16
-      Cursor = crHandPoint
-      Alignment = taCenter
-      AutoSize = False
-      Caption = 'Configure'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Segoe UI Semilight'
-      Font.Style = []
-      Font.Quality = fqProof
-      ParentFont = False
-      Visible = False
-      StyleElements = [seClient, seBorder]
-      OnClick = lblConfigureClick
-      OnMouseEnter = lblStartNewProjectMouseEnter
-      OnMouseLeave = lblStartNewProjectMouseLeave
-    end
     object panStartNew: TPanel
-      Left = 110
+      Left = 104
       Top = 291
-      Width = 371
+      Width = 379
       Height = 135
       BevelOuter = bvNone
       TabOrder = 1
       DesignSize = (
-        371
+        379
         135)
       object lblMachines: TLabel
         Left = 27
         Top = 48
-        Width = 40
+        Width = 55
         Height = 20
-        Caption = 'Profile'
+        Caption = 'Machine'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -15
@@ -6364,7 +6285,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       object lblFile: TLabel
         Left = 27
         Top = 129
-        Width = 326
+        Width = 334
         Height = 17
         Anchors = [akLeft, akTop, akRight]
         AutoSize = False
@@ -6375,9 +6296,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         Font.Name = 'Comfortaa'
         Font.Style = []
         ParentFont = False
+        ExplicitWidth = 326
       end
       object btnCancel: TButton
-        Left = 262
+        Left = 270
         Top = 91
         Width = 91
         Height = 32
@@ -6387,7 +6309,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         OnClick = btnCreateClick
       end
       object btnCreate: TButton
-        Left = 165
+        Left = 173
         Top = 91
         Width = 91
         Height = 32
@@ -6400,7 +6322,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       object cmbMachines: TComboBox
         Left = 101
         Top = 45
-        Width = 252
+        Width = 260
         Height = 28
         Style = csDropDownList
         Font.Charset = DEFAULT_CHARSET
@@ -6418,7 +6340,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       object edtName: TEdit
         Left = 101
         Top = 3
-        Width = 252
+        Width = 260
         Height = 31
         Anchors = [akLeft, akTop, akRight]
         Font.Charset = DEFAULT_CHARSET
@@ -6430,12 +6352,13 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         TabOrder = 0
         OnChange = edtNameChange
         OnKeyDown = edtNameKeyDown
+        ExplicitWidth = 252
       end
     end
     object panButtons: TPanel
-      Left = 110
+      Left = 104
       Top = 290
-      Width = 363
+      Width = 379
       Height = 135
       BevelOuter = bvNone
       ParentColor = True
@@ -6592,7 +6515,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       object cmbThemes: TComboBox
         Left = 156
         Top = 75
-        Width = 205
+        Width = 221
         Height = 29
         Style = csDropDownList
         Font.Charset = DEFAULT_CHARSET
@@ -6618,6 +6541,14 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     TabOrder = 1
     StyleElements = [seFont, seBorder]
   end
+  object dlgOpen: TOpenTextFileDialog
+    DefaultExt = 'agdx'
+    Filter = 'AGDX Project|*.agdx|All Files|*.*'
+    Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
+    Title = 'Open an Existing AGDX Project'
+    Left = 308
+    Top = 132
+  end
   object popConfigure: TPopupMenu
     AutoHotkeys = maManual
     AutoLineReduction = maManual
@@ -6630,13 +6561,5 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     object CheckforUpdates1: TMenuItem
       Caption = 'Check for Updates'
     end
-  end
-  object dlgOpen: TOpenTextFileDialog
-    DefaultExt = 'agdx'
-    Filter = 'AGDX Project|*.agdx|All Files|*.*'
-    Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
-    Title = 'Open an Existing AGDX Project'
-    Left = 308
-    Top = 132
   end
 end

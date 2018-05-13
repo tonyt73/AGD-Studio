@@ -176,6 +176,7 @@ void __fastcall DocumentManager::Load(const String& name)
     {
         Add(fileInfo.Type, fileInfo.SubType, System::File::NameWithoutExtension(fileInfo.Name));
     }
+    appSettings.LastProject = name;
 }
 //---------------------------------------------------------------------------
 void __fastcall DocumentManager::OnImportString(const OnImport<String>& event)

@@ -40,7 +40,7 @@ void __fastcall TfrmEditorImage::SetDocument(Document* document)
     m_ActionMap["zoom.reset"] = actZoomReset;
 
     m_Image = dynamic_cast<ImageDocument*>(document);
-    //Color = StyleServices()->GetStyleColor(scGenericGradientBase);
+    panEditorContainer->Color = StyleServices()->GetStyleColor(scGenericGradientBase);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::FrameEndDock(TObject *Sender, TObject *Target, int X, int Y)

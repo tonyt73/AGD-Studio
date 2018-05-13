@@ -3,6 +3,7 @@
 #include "fAbout.h"
 #include "fIDE.h"
 #include "fNewImage.h"
+#include "fSettings.h"
 #include "fEditorImage.h"
 #include "fEditorCode.h"
 #include "fEditorMap.h"
@@ -332,6 +333,14 @@ void __fastcall TfrmIDE::popProjectPopup(TObject *Sender)
     {
         actDeleteAsset->Enabled = !tvProject->Selected->HasChildren;
         actNewAsset->Enabled = tvProject->Selected->Parent->Text == "Images";
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actSettingsExecute(TObject *Sender)
+{
+    auto dialog = std::make_unique<TfrmSettings>(this);
+    if (dialog->ShowModal())
+    {
     }
 }
 //---------------------------------------------------------------------------

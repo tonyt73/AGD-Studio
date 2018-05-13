@@ -46,7 +46,6 @@ object frmEditorImage: TfrmEditorImage
       Constraints.MinWidth = 80
       TabOrder = 0
       OnClick = panEditorContainerClick
-      ExplicitHeight = 601
       object tbrShiftRotates: TToolBar
         Left = 0
         Top = 204
@@ -301,10 +300,6 @@ object frmEditorImage: TfrmEditorImage
       Align = alClient
       Caption = 'Panel1'
       TabOrder = 1
-      ExplicitLeft = 456
-      ExplicitTop = 312
-      ExplicitWidth = 185
-      ExplicitHeight = 41
       object panFrames: TPanel
         Left = 1
         Top = 585
@@ -314,9 +309,6 @@ object frmEditorImage: TfrmEditorImage
         BevelOuter = bvNone
         Caption = 'Frames View'
         TabOrder = 0
-        ExplicitLeft = 0
-        ExplicitTop = 586
-        ExplicitWidth = 1102
         object ScrollBox1: TScrollBox
           Left = 0
           Top = 0
@@ -336,7 +328,6 @@ object frmEditorImage: TfrmEditorImage
           Padding.Bottom = 4
           ParentDoubleBuffered = False
           TabOrder = 0
-          ExplicitWidth = 1102
           object Image1: TImage
             Left = 0
             Top = 0
@@ -6528,10 +6519,6 @@ object frmEditorImage: TfrmEditorImage
         BorderStyle = bsNone
         TabOrder = 1
         OnResize = sbxViewResize
-        ExplicitLeft = 80
-        ExplicitTop = 0
-        ExplicitWidth = 1022
-        ExplicitHeight = 667
         object panEditorContainer: TPanel
           Left = 0
           Top = 0
@@ -6550,8 +6537,6 @@ object frmEditorImage: TfrmEditorImage
           TabOrder = 0
           StyleElements = []
           OnClick = panEditorContainerClick
-          ExplicitWidth = 1022
-          ExplicitHeight = 667
           object panViewFrame: TPanel
             Left = 128
             Top = 128
@@ -6569,8 +6554,6 @@ object frmEditorImage: TfrmEditorImage
             ParentDoubleBuffered = False
             TabOrder = 0
             StyleElements = []
-            ExplicitWidth = 766
-            ExplicitHeight = 411
             object imgEditor: TImage
               Left = 1
               Top = 1
@@ -10813,7 +10796,7 @@ object frmEditorImage: TfrmEditorImage
     Left = 220
     Top = 65
     Bitmap = {
-      494C010120006000FC0020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010120006000000120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000002001000001002000000000000040
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

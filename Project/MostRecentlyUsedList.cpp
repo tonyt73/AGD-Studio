@@ -25,7 +25,6 @@ void __fastcall MostRecentlyUsedList::Load()
     auto file = System::File::Combine(System::Path::Application, "Mru.json");
     if (System::File::Exists(file))
     {
-        // yes, load it
         System::JsonFile::Load(file);
     }
 }
@@ -59,10 +58,10 @@ void __fastcall MostRecentlyUsedList::Add(const String& name, const String& path
 {
     if (m_MostRecentlyUsedList.size() > 4)
     {
-        m_MostRecentlyUsedList.pop_front();
+        m_MostRecentlyUsedList.pop_back();
     }
     auto relativePath = System::Path::GetFolderRelativeTo(System::Path::lpDocuments, path);
-    m_MostRecentlyUsedList.push_back(MostRecentlyUsedItem(name, relativePath, machine));
+    m_MostRecentlyUsedList.push_front(MostRecentlyUsedItem(name, relativePath, machine));
     Save();
 }
 //---------------------------------------------------------------------------

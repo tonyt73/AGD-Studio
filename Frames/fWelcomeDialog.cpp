@@ -54,6 +54,14 @@ void __fastcall TfrmWelcomeDialog::lblStartNewProjectClick(TObject *Sender)
     panButtons->Visible = false;
     edtName->Text = "";
     edtName->SetFocus();
+    for (int i = 0; i < cmbMachines->Items->Count; i++)
+    {
+        if (cmbMachines->Items->Strings[i] == appSettings.DefaultMachine)
+        {
+            cmbMachines->ItemIndex = i;
+            break;
+        }
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::btnCreateClick(TObject *Sender)
@@ -114,12 +122,6 @@ void __fastcall TfrmWelcomeDialog::cmbThemesChange(TObject *Sender)
     UpdateColors();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmWelcomeDialog::lblConfigureClick(TObject *Sender)
-{
-    TPoint pt = lblConfigure->Parent->ClientToScreen(Point(lblConfigure->Left, lblConfigure->Top + lblConfigure->Height));
-    popConfigure->Popup(pt.x, pt.y);
-}
-//---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::lblChangeThemeClick(TObject *Sender)
 {
     cmbThemes->DroppedDown = true;
@@ -127,7 +129,7 @@ void __fastcall TfrmWelcomeDialog::lblChangeThemeClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::Initialise()
 {
-    dynamic_cast<TForm*>(Parent)->Caption = "Welcome to AGDX Studio";
+    dynamic_cast<TForm*>(Parent)->Caption = "Welcome to AGDx Studio";
     RefreshMRUList();
     UpdateColors();
 }
@@ -140,7 +142,6 @@ void __fastcall TfrmWelcomeDialog::UpdateColors()
     lblOpenExistingProject->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
     lblImportAGDSnapshot->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
     lblChangeTheme->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
-    lblConfigure->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
     for (auto panel : m_MostRecentlyUsedItems) panel->UpdateControl();
 }
 //---------------------------------------------------------------------------
