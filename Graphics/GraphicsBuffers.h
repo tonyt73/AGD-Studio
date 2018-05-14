@@ -35,6 +35,10 @@ protected:
     unsigned int        __fastcall  GetNumberOfBuffers() const;
     unsigned char       __fastcall  GetColorIndex(ColorIndex index) const;
     void                __fastcall  SetColorIndex(ColorIndex index, int colorIndex);
+    unsigned char       __fastcall  GetPen() const;
+    void                __fastcall  SetPen(int colorIndex);
+    unsigned char       __fastcall  GetBrush() const;
+    void                __fastcall  SetBrush(int colorIndex);
 
 public:
     virtual             __fastcall ~GraphicsBuffer();
@@ -50,11 +54,17 @@ public:
                                     // Render the graphics buffer to the bitmap
     virtual void        __fastcall  Render(TBitmap* bitmap, bool inGreyscale) const = 0;
 
+    // Properties
+                                    // Dimensions
     unsigned int        __property  Width  = { read = m_Width  };
     unsigned int        __property  Height = { read = m_Height };
+                                    // Color
+    unsigned char       __property  Color[ColorIndex index] = { read = GetColorIndex, write = SetColorIndex };
+    unsigned char       __property  Pen = { read = GetPen, write = SetPen };
+    unsigned char       __property  Brush = { read = GetBrush, write = SetBrush };
+                                    // Buffer info (used by image tools)
     BufferType          __property  BufferType = { read = m_BufferType };
     unsigned int        __property  NumberOfBuffers = { read = GetNumberOfBuffers };
-    unsigned char       __property  Color[ColorIndex index] = { read = GetColorIndex, write = SetColorIndex };
 };
 //---------------------------------------------------------------------------
 // A paletted bitmap buffer has pixels defined as a color value stored in a byte.

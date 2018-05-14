@@ -67,6 +67,26 @@ void __fastcall GraphicsBuffer::SetColorIndex(ColorIndex index, int colorIndex)
     m_SetColors[index % 2] = colorIndex;
 }
 //---------------------------------------------------------------------------
+unsigned char __fastcall GraphicsBuffer::GetPen() const
+{
+    return GetColorIndex(ciPrimary);
+}
+//---------------------------------------------------------------------------
+void __fastcall GraphicsBuffer::SetPen(int colorIndex)
+{
+    SetColorIndex(ciPrimary, colorIndex);
+}
+//---------------------------------------------------------------------------
+unsigned char __fastcall GraphicsBuffer::GetBrush() const
+{
+    return GetColorIndex(ciSecondary);
+}
+//---------------------------------------------------------------------------
+void __fastcall GraphicsBuffer::SetBrush(int colorIndex)
+{
+    SetColorIndex(ciSecondary, colorIndex);
+}
+//---------------------------------------------------------------------------
 void __fastcall GraphicsBuffer::GetBuffer(int index, ByteBuffer& buffer) const
 {
     if (index < m_Buffers.size())
@@ -135,8 +155,9 @@ void __fastcall BitmapGraphicsBuffer::Render(TBitmap* bitmap, bool inGreyscale) 
             auto pixels = m_Buffers[0][(y * m_Stride) + ix];
             for (auto i = 0; i < m_PixelsPerByte; i++)
             {
-                auto color = (pixels & g_PixelMasks[m_GraphicsMode.BitsPerPixel][i]) >> g_PixelShfts[m_GraphicsMode.BitsPerPixel][i];
-                bitmap->Canvas->Pixels[x+i][y] = inGreyscale ? m_GraphicsMode.Palette().Greyscale[color] : m_GraphicsMode.Palette().Color[color];
+                auto logicalColor = (pixels & g_PixelMasks[m_GraphicsMode.BitsPerPixel][i]) >> g_PixelShfts[m_GraphicsMode.BitsPerPixel][i];
+                auto physicalColor = m_GraphicsMode.FromLogicalColor[logicalColor];
+                bitmap->Canvas->Pixels[x+i][y] = inGreyscale ? m_GraphicsMode.Palette().Greyscale[physicalColor] : m_GraphicsMode.Palette().Color[physicalColor];
             }
         }
     }
@@ -211,10 +232,10 @@ void __fastcall AttributeGraphicsBuffer::Render(TBitmap* bitmap, bool inGreyscal
             auto ix = x >> 3;
             auto attr = m_Buffers[1][((y >> 3) * m_Stride) + ix];
             auto bright =  (attr & g_BrightMask) ? 8 : 0;
-            auto ink    = ((attr & g_InkMask   )     ) + bright;
-            auto paper  = ((attr & g_PaperMask ) >> 3) + bright;
+            auto ink    = ((attr & g_InkMask   )                ) + bright;
+            auto paper  = ((attr & g_PaperMask ) >> g_PaperShift) + bright;
             auto cInk   = inGreyscale ? clWhite : m_GraphicsMode.Palette().Color[ink];
-            auto cPaper = inGreyscale ? clBlack : m_GraphicsMode.Palette().Color[ink];
+            auto cPaper = inGreyscale ? clBlack : m_GraphicsMode.Palette().Color[paper];
             for (auto i = 0; i < m_GraphicsMode.PixelsHighPerAttribute; i++)
             {
                 auto pixels = m_Buffers[0][((y + i) * m_Stride) + ix];
