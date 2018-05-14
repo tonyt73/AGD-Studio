@@ -107,20 +107,19 @@ void __fastcall BitmapGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y, b
     }
 }
 //---------------------------------------------------------------------------
-unsigned char __fastcall BitmapGraphicsBuffer::GetColor(unsigned int X, unsigned int Y) const
+void __fastcall BitmapGraphicsBuffer::GetColor(unsigned int X, unsigned int Y, ColorIndex colorIndex)
 {
-    unsigned char color;
     if (0 < X && X < m_Width && 0 < Y && Y < m_Height)
     {
         auto ix = X / m_PixelsPerByte;
         auto pixelOffset = (Y * m_Stride) + ix;
         auto pixelPos = ix % m_PixelsPerByte;
         // get the color index at the position in the byte
-        color = m_Buffers[0][pixelOffset] & ~g_PixelMasks[m_GraphicsMode.BitsPerPixel][pixelPos];
+        auto color = m_Buffers[0][pixelOffset] & ~g_PixelMasks[m_GraphicsMode.BitsPerPixel][pixelPos];
         // shift down into a color index
         color >>= g_PixelShfts[m_GraphicsMode.BitsPerPixel][pixelPos];
+        m_SetColors[colorIndex] = color;
     }
-    return color;
 }
 //---------------------------------------------------------------------------
 void __fastcall BitmapGraphicsBuffer::Render(TBitmap* bitmap, bool inGreyscale) const
@@ -153,6 +152,7 @@ const unsigned char g_InkMask     = 0x07; // ink bits from attribute byte
 const unsigned char g_PaperMask   = 0x38; // paper bits from attribute byte
 const unsigned char g_BrightMask  = 0x40; // bright bit from attribute byte
 const unsigned char g_FlashMask   = 0x80; // flash bit from attribute byte
+const unsigned char g_PaperShift  = 3;
 //---------------------------------------------------------------------------
 __fastcall AttributeGraphicsBuffer::AttributeGraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode)
 : GraphicsBuffer(width, height, mode)
@@ -187,17 +187,16 @@ void __fastcall AttributeGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y
     }
 }
 //---------------------------------------------------------------------------
-unsigned char __fastcall AttributeGraphicsBuffer::GetColor(unsigned int X, unsigned int Y) const
+void __fastcall AttributeGraphicsBuffer::GetColor(unsigned int X, unsigned int Y, ColorIndex colorIndex)
 {
-    unsigned char color;
     if (0 < X && X < m_Width && 0 < Y && Y < m_Height)
     {
         auto ix = X / m_PixelsPerByte;
         auto iy = Y / m_GraphicsMode.PixelsHighPerAttribute;
         auto attrOffset = (iy * m_Stride) + ix;
-        color = m_Buffers[1][attrOffset];
+        auto color = m_Buffers[1][attrOffset];
+        m_SetColors[colorIndex] = (colorIndex == ciPrimary ? (color & g_InkMask) : ((color & g_PaperMask) >> g_PaperShift)) + (color & g_BrightMask ? 8 : 0);
     }
-    return color;
 }
 //---------------------------------------------------------------------------
 void __fastcall AttributeGraphicsBuffer::Render(TBitmap* bitmap, bool inGreyscale) const

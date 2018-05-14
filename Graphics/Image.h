@@ -16,11 +16,12 @@ class Image
 {
 private:
     std::unique_ptr<GraphicsBuffer> m_GraphicsBuffer;
+
 public:
-            __fastcall  Image(unsigned int width, unsigned int height, const Agdx::GraphicsMode& graphicsMode);
-    void    __fastcall  Set(const String& frameData);
-    String  __fastcall  Get() const;
-    void    __fastcall  SetPixel(unsigned int X, unsigned int Y, unsigned char color);
+                    __fastcall  Image(unsigned int width, unsigned int height, const Agdx::GraphicsMode& graphicsMode);
+    void            __fastcall  Set(const String& frameData);
+    String          __fastcall  Get() const;
+    GraphicsBuffer& __fastcall  Canvas() const;
 };
 //---------------------------------------------------------------------------
 }   // agdx

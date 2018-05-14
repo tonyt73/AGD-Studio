@@ -23,7 +23,8 @@ String __fastcall Image::Get() const
     return "";
 }
 //---------------------------------------------------------------------------
-void __fastcall Image::SetPixel(unsigned int X, unsigned int Y, unsigned char color)
+GraphicsBuffer& __fastcall Image::Canvas() const
 {
+    return *(m_GraphicsBuffer.get());
 }
 //---------------------------------------------------------------------------

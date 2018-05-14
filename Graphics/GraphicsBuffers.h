@@ -5,8 +5,6 @@
 #include "Graphics/GraphicsTypes.h"
 #include "Graphics/GraphicsMode.h"
 //---------------------------------------------------------------------------
-enum ColorIndex { ciPrimary, ciSecondary };
-//---------------------------------------------------------------------------
 namespace Agdx
 {
 //---------------------------------------------------------------------------
@@ -46,7 +44,7 @@ public:
                                     // sets the pixel to the specified palette color index
     virtual void        __fastcall  SetPixel(unsigned int X, unsigned int Y, bool set) = 0;
                                     // retrieves the pixel color at the position specified
-  virtual unsigned char __fastcall  GetColor(unsigned int X, unsigned int Y) const = 0;
+    virtual void        __fastcall  GetColor(unsigned int X, unsigned int Y, ColorIndex colorIndex = ciPrimary) = 0;
                                     // Retrieves the specified buffer index from the graphics buffer
     void                __fastcall  GetBuffer(int index, ByteBuffer& buffer) const;
                                     // Render the graphics buffer to the bitmap
@@ -69,7 +67,7 @@ public:
                         __fastcall ~BitmapGraphicsBuffer();
 
     void                __fastcall  SetPixel(unsigned int X, unsigned int Y, bool set);
-    unsigned char       __fastcall  GetColor(unsigned int X, unsigned int Y) const;
+    void                __fastcall  GetColor(unsigned int X, unsigned int Y, ColorIndex colorIndex = ciPrimary);
     void                __fastcall  Render(TBitmap* bitmap, bool inGreyscale) const;
 };
 //---------------------------------------------------------------------------
@@ -89,7 +87,7 @@ public:
                         __fastcall ~AttributeGraphicsBuffer();
 
     void                __fastcall  SetPixel(unsigned int X, unsigned int Y, bool set);
-    unsigned char       __fastcall  GetColor(unsigned int X, unsigned int Y) const;
+    void                __fastcall  GetColor(unsigned int X, unsigned int Y, ColorIndex colorIndex = ciPrimary);
     void                __fastcall  Render(TBitmap* bitmap, bool inGreyscale) const;
 };
 //---------------------------------------------------------------------------
