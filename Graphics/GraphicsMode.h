@@ -62,6 +62,7 @@ protected:
 
     int             __fastcall  GetLogicalColors() const;
     TColor          __fastcall  GetLogicalColor(int index) const;
+    int             __fastcall  GetColorFromLogicalIndex(int index) const;
   const ExportInfo& __fastcall  GetExportInformation(ImageTypes imageType) const;
     void            __fastcall  OnEndObject(const String& object);
     void            __fastcall  Save();
@@ -83,6 +84,7 @@ public:
     float           __property  ScalarX = { read = m_ScalarX };
     float           __property  ScalarY = { read = m_ScalarY };
     BufferType      __property  TypeOfBuffer = { read = m_BufferType };
+    int             __property  FromLogicalColor[int index] = { read = GetColorFromLogicalIndex };
     int             __property  LogicalColors = { read = GetLogicalColors };
     TColor          __property  LogicalColor[int index] = { read = GetLogicalColor };
     bool            __property  SupportsLogicalColorRemapping = { read = m_SupportsRemapping };

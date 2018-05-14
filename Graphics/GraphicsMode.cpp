@@ -103,6 +103,15 @@ TColor __fastcall GraphicsMode::GetLogicalColor(int index) const
     return clFuchsia;
 }
 //---------------------------------------------------------------------------
+int __fastcall GraphicsMode::GetColorFromLogicalIndex(int index) const
+{
+    if (0 < index && index < m_LogicalColors.size())
+    {
+        return m_LogicalColors[index];
+    }
+    return 0;
+}
+//---------------------------------------------------------------------------
 const GraphicsMode::ExportInfo& __fastcall GraphicsMode::GetExportInformation(ImageTypes imageType) const
 {
     return m_ExportInfo[imageType];
