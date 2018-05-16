@@ -51,6 +51,7 @@ void __fastcall TfrmEditorImage::SetDocument(Document* document)
     {
         auto image = std::make_unique<Agdx::Image>(m_Image->Width, m_Image->Height, gm);
         image->Canvas().Set(m_Image->Frame[i]);
+        image->Canvas().Color[ciPrimary] = 12;
         image->Canvas().SetPixel(0,0);
         image->Canvas().SetPixel(1,1);
         image->Canvas().SetPixel(2,2);
@@ -335,12 +336,12 @@ void __fastcall TfrmEditorImage::DrawGrids()
     {
         Canvas->Pen->Color = (TColor)0x0048BAF7;
         //for (int x = xs; x <= xe; x += (8 / gm.BitsPerPixel))
-        for (auto x = xs; x <= xe; x += 8)
+        for (auto x = xs; x <= xe; x += (8 / gm.ScalarX))
         {
             Canvas->MoveTo(x * fScalarX * m_Magnification, ys);
             Canvas->LineTo(x * fScalarX * m_Magnification, ye);
         }
-        for (auto y = ys; y <= ye; y += 8)
+        for (auto y = ys; y <= ye; y += (8 / gm.ScalarY))
         {
             Canvas->MoveTo(xs    , y * fScalarY * m_Magnification);
             Canvas->LineTo(xe + 1, y * fScalarY * m_Magnification);
