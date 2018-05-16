@@ -78,7 +78,7 @@ void __fastcall GraphicsMode::OnEndObject(const String& object)
 //---------------------------------------------------------------------------
 void __fastcall GraphicsMode::RemapColor(int logicalIndex, int paletteIndex)
 {
-    if (0 < logicalIndex && logicalIndex < m_LogicalColors.size() && 0 < paletteIndex && paletteIndex < m_Palette->Colors)
+    if (0 <= logicalIndex && logicalIndex < m_LogicalColors.size() && 0 <= paletteIndex && paletteIndex < m_Palette->Colors)
     {
         m_LogicalColors[logicalIndex] = m_Palette->Color[paletteIndex];
     }
@@ -96,7 +96,7 @@ int __fastcall GraphicsMode::GetLogicalColors() const
 //---------------------------------------------------------------------------
 TColor __fastcall GraphicsMode::GetLogicalColor(int index) const
 {
-    if (0 < index && index < m_LogicalColors.size())
+    if (0 <= index && index < m_LogicalColors.size())
     {
         return m_Palette->Color[m_LogicalColors[index]];
     }
@@ -105,7 +105,7 @@ TColor __fastcall GraphicsMode::GetLogicalColor(int index) const
 //---------------------------------------------------------------------------
 int __fastcall GraphicsMode::GetColorFromLogicalIndex(int index) const
 {
-    if (0 < index && index < m_LogicalColors.size())
+    if (0 <= index && index < m_LogicalColors.size())
     {
         return m_LogicalColors[index];
     }

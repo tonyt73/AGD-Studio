@@ -158,6 +158,8 @@ __fastcall BitmapGraphicsBuffer::BitmapGraphicsBuffer(unsigned int width, unsign
     // allocate the buffer
     // m_Buffers[0] : pixels buffer
     PushBuffer(m_Stride * height);
+    m_SetColors[0] = 1;
+    m_SetColors[1] = 0;
 }
 //---------------------------------------------------------------------------
 __fastcall BitmapGraphicsBuffer::~BitmapGraphicsBuffer()
@@ -170,7 +172,7 @@ void __fastcall BitmapGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y, b
     {
         auto ix = X / m_PixelsPerByte;
         auto pixelOffset = (Y * m_Stride) + ix;
-        auto pixelPos = ix % m_PixelsPerByte;
+        auto pixelPos = X % m_PixelsPerByte;
         auto pixel = m_SetColors[set ? 0 : 1] << g_PixelShfts[m_GraphicsMode.BitsPerPixel][pixelPos];
         // reset the pixel bits
         m_Buffers[0][pixelOffset] &= ~g_PixelMasks[m_GraphicsMode.BitsPerPixel][pixelPos];
@@ -186,7 +188,7 @@ void __fastcall BitmapGraphicsBuffer::GetColor(unsigned int X, unsigned int Y, C
     {
         auto ix = X / m_PixelsPerByte;
         auto pixelOffset = (Y * m_Stride) + ix;
-        auto pixelPos = ix % m_PixelsPerByte;
+        auto pixelPos = X % m_PixelsPerByte;
         // get the color index at the position in the byte
         auto color = m_Buffers[0][pixelOffset] & ~g_PixelMasks[m_GraphicsMode.BitsPerPixel][pixelPos];
         // shift down into a color index
@@ -219,10 +221,12 @@ void __fastcall BitmapGraphicsBuffer::Set(const String& data)
     if (data.Length() / 2 == SizeOfBuffer[0])
     {
         // convert hex to byte
-        for (int i = 0; i < SizeOfBuffer[0]; i++)
+        for (auto i = 0; i < SizeOfBuffer[0]; i++)
         {
-            m_Buffers[0][i] = StrToInt("0x" + data.SubString(1 + i * 2, 2));
+            auto byte = (unsigned char)StrToInt("0x" + data.SubString(1 + i * 2, 2));
+            m_Buffers[0][i] = byte;
         }
+        Render();
     }
 }
 //---------------------------------------------------------------------------
@@ -340,7 +344,7 @@ void __fastcall AttributeGraphicsBuffer::Set(const String& data)
         auto attrOffset = (SizeOfBuffer[0] * 2) + 1;
         for (auto i = 0; i < SizeOfBuffer[1]; i++)
         {
-            m_Buffers[1][i] = StrToInt("0x" + data.SubString(attrOffset + (i * 2), 2));
+            m_Buffers[1][i] = (unsigned char)StrToInt("0x" + data.SubString(attrOffset + (i * 2), 2));
         }
     }
     Render();
