@@ -42,7 +42,7 @@ Palette& __fastcall Palette::operator=(const Palette& other)
 //---------------------------------------------------------------------------
 TColor __fastcall Palette::GetTableColor(int index) const
 {
-    if (0 < index && index < m_ColorTable.size())
+    if (0 <= index && index < m_ColorTable.size())
     {
         return m_ColorTable[index];
     }
