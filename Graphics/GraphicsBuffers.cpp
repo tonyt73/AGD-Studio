@@ -154,7 +154,7 @@ void __fastcall GraphicsBuffer::End()
 __fastcall BitmapGraphicsBuffer::BitmapGraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode)
 : GraphicsBuffer(width, height, mode)
 {
-    assert(mode.BitsPerPixel == 1 || mode.BitsPerPixel == 2 || mode.BitsPerPixel == 4 == mode.BitsPerPixel == 8);
+    assert(mode.BitsPerPixel == 1 || mode.BitsPerPixel == 2 || mode.BitsPerPixel == 4 || mode.BitsPerPixel == 8);
     // allocate the buffer
     // m_Buffers[0] : pixels buffer
     PushBuffer(m_Stride * height);
@@ -166,7 +166,7 @@ __fastcall BitmapGraphicsBuffer::~BitmapGraphicsBuffer()
 //---------------------------------------------------------------------------
 void __fastcall BitmapGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y, bool set)
 {
-    if (0 <= X && X < m_Width && 0 <= Y && Y < m_Height)
+    if (X < m_Width && Y < m_Height)
     {
         auto ix = X / m_PixelsPerByte;
         auto pixelOffset = (Y * m_Stride) + ix;
@@ -182,7 +182,7 @@ void __fastcall BitmapGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y, b
 //---------------------------------------------------------------------------
 void __fastcall BitmapGraphicsBuffer::GetColor(unsigned int X, unsigned int Y, ColorIndex colorIndex)
 {
-    if (0 <= X && X < m_Width && 0 <= Y && Y < m_Height)
+    if (X < m_Width && Y < m_Height)
     {
         auto ix = X / m_PixelsPerByte;
         auto pixelOffset = (Y * m_Stride) + ix;
@@ -258,7 +258,7 @@ __fastcall AttributeGraphicsBuffer::~AttributeGraphicsBuffer()
 //---------------------------------------------------------------------------
 void __fastcall AttributeGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y, bool set)
 {
-    if (0 <= X && X < m_Width && 0 <= Y && Y < m_Height)
+    if (X < m_Width && Y < m_Height)
     {
         auto ix = X / m_PixelsPerByte;
         auto pixelOffset = (Y * m_Stride) + ix;
@@ -284,7 +284,7 @@ void __fastcall AttributeGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y
 //---------------------------------------------------------------------------
 void __fastcall AttributeGraphicsBuffer::GetColor(unsigned int X, unsigned int Y, ColorIndex colorIndex)
 {
-    if (0 <= X && X < m_Width && 0 <= Y && Y < m_Height)
+    if (X < m_Width && Y < m_Height)
     {
         auto ix = X >> 8;
         auto iy = Y / m_GraphicsMode.PixelsHighPerAttribute;
