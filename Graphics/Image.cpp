@@ -10,21 +10,11 @@ using namespace Agdx;
 //---------------------------------------------------------------------------
 __fastcall Image::Image(unsigned int width, unsigned int height, const GraphicsMode& graphicsMode)
 {
-    GraphicsBuffer::Make(width, height, graphicsMode, m_GraphicsBuffer);
-}
-//---------------------------------------------------------------------------
-void __fastcall Image::Set(const String& frameData)
-{
-
-}
-//---------------------------------------------------------------------------
-String __fastcall Image::Get() const
-{
-    return "";
+    GraphicsBuffer::Make(width, height, graphicsMode, m_Canvas);
 }
 //---------------------------------------------------------------------------
 GraphicsBuffer& __fastcall Image::Canvas() const
 {
-    return *(m_GraphicsBuffer.get());
+    return *(m_Canvas.get());
 }
 //---------------------------------------------------------------------------

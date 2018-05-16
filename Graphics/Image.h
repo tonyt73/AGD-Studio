@@ -15,12 +15,10 @@ namespace Agdx
 class Image
 {
 private:
-    std::unique_ptr<GraphicsBuffer> m_GraphicsBuffer;
+    std::unique_ptr<GraphicsBuffer> m_Canvas;
 
 public:
                     __fastcall  Image(unsigned int width, unsigned int height, const Agdx::GraphicsMode& graphicsMode);
-    void            __fastcall  Set(const String& frameData);
-    String          __fastcall  Get() const;
     GraphicsBuffer& __fastcall  Canvas() const;
 };
 //---------------------------------------------------------------------------
