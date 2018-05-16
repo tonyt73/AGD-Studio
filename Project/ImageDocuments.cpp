@@ -13,6 +13,7 @@ __fastcall ImageDocument::ImageDocument(const String& name)
 , m_CanDeleteFrames(false)
 , m_Width(0)
 , m_Height(0)
+, m_FramesLoaded(0)
 {
     m_Type = "Image";
     m_SubType = "Single";
@@ -25,7 +26,7 @@ __fastcall ImageDocument::ImageDocument(const String& name)
     // json loading properties
     m_PropertyMap[".{}.Image.{}.Width"] = &m_Width;
     m_PropertyMap[".{}.Image.{}.Height"] = &m_Height;
-    m_PropertyMap[".{}.Image.{}.Frames.[].{}.Frame"] = &m_FrameLoader;
+    m_PropertyMap[".{}.Image.{}.Frames.[]"] = &m_FrameLoader;
     m_File = GetFile();
 }
 //---------------------------------------------------------------------------
@@ -49,7 +50,15 @@ void __fastcall ImageDocument::OnEndObject(const String& object)
 {
     if (object == ".{}.Image.{}.Frames.[]")
     {
-        m_Frames.push_back(m_FrameLoader);
+        if (m_FramesLoaded < m_Frames.size())
+        {
+            m_Frames[m_FramesLoaded] = m_FrameLoader;
+        }
+        else
+        {
+            m_Frames.push_back(m_FrameLoader);
+        }
+        m_FramesLoaded++;
     }
 }
 //---------------------------------------------------------------------------

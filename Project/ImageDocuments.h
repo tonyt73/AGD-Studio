@@ -36,6 +36,7 @@ protected:
             ImageTypes              m_ImageType;        // the type of graphic image we are
             FramesList              m_Frames;           // the list of frames
             String                  m_FrameLoader;      // used to load frames into the above frames list
+            int                     m_FramesLoaded;     // a count of frames loaded
 
             void        __fastcall  ExtractSize(const String& extra);
 
@@ -49,7 +50,7 @@ public:
             bool        __fastcall  DeleteFrame(int index);
 
             bool        __property  MultiFrame      = { read = m_MultiFrame                 };
-            String      __property  Frame           = { read = GetFrame, write = SetFrame   };
+            String      __property  Frame[int index]= { read = GetFrame, write = SetFrame   };
 
 __published:
             int         __property  Width           = { read = m_Width                      };
