@@ -21,6 +21,7 @@
 #include "LMDDckSite.hpp"
 #include "Project/ImageDocuments.h"
 #include "Messaging/Event.h"
+#include "Graphics/Image.h"
 //---------------------------------------------------------------------------
 class TfrmEditorImage : public TFrame
 {
@@ -76,8 +77,8 @@ __published:    // IDE-managed Components
     TToolButton *btnMonoOn;
     TPanel *panSplitter4;
     TToolBar *tbrGrids;
-    TToolButton *btnGridMajor;
-    TToolButton *btnGridMinor;
+    TToolButton *btnGridCharacter;
+    TToolButton *btnGridPixel;
     TStatusBar *barStatus;
     TPanel *panFrames;
     TAction *actRotateLeft;
@@ -134,13 +135,19 @@ __published:    // IDE-managed Components
     void __fastcall actZoomResetExecute(TObject *Sender);
     void __fastcall sbxViewResize(TObject *Sender);
 private:    // User declarations
-    ImageDocument*              m_Image;
-    int                         m_Magnification;
+    typedef std::vector<std::unique_ptr<Agdx::Image>> ImageList;
+
+    ImageDocument*              m_Image;            // the image document we are editing
+    ImageList                   m_Frames;           // the image documents frames as bitmap images
     std::map<String, TAction*>  m_ActionMap;
+    int                         m_Magnification;
+    int                         m_SelectedFrame;    // the frame we are editing
 
     void            __fastcall  SetDocument(Document* document);
     void            __fastcall  OnEvent(const Event& event);
     bool            __fastcall  IsActive() const;
+    void            __fastcall  DrawGrids();
+    void            __fastcall  RefreshView();
 
 public:        // User declarations
                     __fastcall  TfrmEditorImage(TComponent* Owner);

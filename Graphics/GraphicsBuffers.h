@@ -20,7 +20,7 @@ private:
 protected:
     typedef std::vector<ByteBuffer> Buffers;
 
-    Agdx::GraphicsMode              m_GraphicsMode;     // the graphic mode definition
+    const Agdx::GraphicsMode&       m_GraphicsMode;     // the graphic mode definition
     unsigned int                    m_Width;            // the width of the buffer in pixels
     unsigned int                    m_Height;           // the height of the buffer in pixels
     unsigned int                    m_Stride;           // the stride of the buffer in bytes
@@ -29,16 +29,22 @@ protected:
     Buffers                         m_Buffers;          // the list of buffers
     BufferType                      m_BufferType;       // the type of graphics buffer this is
     unsigned char                   m_SetColors[2];     // the primary[0] and secondary[1] colors used to set/unset pixels
+ std::unique_ptr<Graphics::TBitmap> m_Bitmap;           // the Windows bitmap we render to
+    bool                            m_RenderInGreyscale;// flag: Indicates we render in greyscale
+    bool                            m_Drawing;          // flag: Indicates we are drawing pixels; don't render immediately
 
                         __fastcall  GraphicsBuffer(unsigned int width, unsigned int height, const Agdx::GraphicsMode& mode);
     void                __fastcall  PushBuffer(unsigned int size);
     unsigned int        __fastcall  GetNumberOfBuffers() const;
+    unsigned int        __fastcall  GetSizeOfBuffer(int index) const;
     unsigned char       __fastcall  GetColorIndex(ColorIndex index) const;
     void                __fastcall  SetColorIndex(ColorIndex index, int colorIndex);
     unsigned char       __fastcall  GetPen() const;
     void                __fastcall  SetPen(int colorIndex);
     unsigned char       __fastcall  GetBrush() const;
     void                __fastcall  SetBrush(int colorIndex);
+    void                __fastcall  SetRenderInGreyscale(bool value);
+    virtual void        __fastcall  Render() const = 0;
 
 public:
     virtual             __fastcall ~GraphicsBuffer();
@@ -46,13 +52,21 @@ public:
                                     // Make a suitable buffer for the buffer type
     static void         __fastcall  Make(unsigned int width, unsigned int height, const Agdx::GraphicsMode& mode, std::unique_ptr<GraphicsBuffer>& buffer);
                                     // sets the pixel to the specified palette color index
-    virtual void        __fastcall  SetPixel(unsigned int X, unsigned int Y, bool set) = 0;
+    virtual void        __fastcall  SetPixel(unsigned int X, unsigned int Y, bool set = true) = 0;
                                     // retrieves the pixel color at the position specified
     virtual void        __fastcall  GetColor(unsigned int X, unsigned int Y, ColorIndex colorIndex = ciPrimary) = 0;
                                     // Retrieves the specified buffer index from the graphics buffer
     void                __fastcall  GetBuffer(int index, ByteBuffer& buffer) const;
-                                    // Render the graphics buffer to the bitmap
-    virtual void        __fastcall  Render(TBitmap* bitmap, bool inGreyscale) const = 0;
+                                    // Get the hex data of the image
+    String              __fastcall  Get() const;
+                                    // The the bitmap data from the hex data
+    virtual void        __fastcall  Set(const String& data) = 0;
+                                    // Copy the image onto the bitmap
+    void                __fastcall  Draw(TBitmap* bitmap) const;
+                                    // Begin drawing operations on the canvas
+    void                __fastcall  Begin();
+                                    // End drawing operations on the canvas
+    void                __fastcall  End();
 
     // Properties
                                     // Dimensions
@@ -65,6 +79,8 @@ public:
                                     // Buffer info (used by image tools)
     BufferType          __property  BufferType = { read = m_BufferType };
     unsigned int        __property  NumberOfBuffers = { read = GetNumberOfBuffers };
+    unsigned int        __property  SizeOfBuffer[int index] = { read = GetSizeOfBuffer };
+    bool                __property  RenderInGreyscale = { read = m_RenderInGreyscale, write = SetRenderInGreyscale };
 };
 //---------------------------------------------------------------------------
 // A paletted bitmap buffer has pixels defined as a color value stored in a byte.
@@ -78,7 +94,8 @@ public:
 
     void                __fastcall  SetPixel(unsigned int X, unsigned int Y, bool set);
     void                __fastcall  GetColor(unsigned int X, unsigned int Y, ColorIndex colorIndex = ciPrimary);
-    void                __fastcall  Render(TBitmap* bitmap, bool inGreyscale) const;
+    void                __fastcall  Render() const;
+    void                __fastcall  Set(const String& data);
 };
 //---------------------------------------------------------------------------
 // ZX Spectrum style attribute graphics buffer
@@ -98,7 +115,8 @@ public:
 
     void                __fastcall  SetPixel(unsigned int X, unsigned int Y, bool set);
     void                __fastcall  GetColor(unsigned int X, unsigned int Y, ColorIndex colorIndex = ciPrimary);
-    void                __fastcall  Render(TBitmap* bitmap, bool inGreyscale) const;
+    void                __fastcall  Render() const;
+    void                __fastcall  Set(const String& data);
 };
 //---------------------------------------------------------------------------
 // TODO: To be implemented if MSX support is added
@@ -111,7 +129,7 @@ public:
 //public:
 //                        __fastcall  CharacterMapGraphicsBuffer(unsigned int width, unsigned int height, const Agdx::GraphicsMode& mode);
 //
-//    void                __fastcall  Render(TBitmap* bitmap, bool inGreyscale) const;
+//    void                __fastcall  Render() const;
 //    void                __fastcall  GetBuffer(BufferType type, ByteBuffer& buffer) const;
 //};
 //---------------------------------------------------------------------------

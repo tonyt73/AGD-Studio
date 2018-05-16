@@ -276,14 +276,14 @@ object frmEditorImage: TfrmEditorImage
         Caption = 'ToolBar6'
         Images = tbrImages
         TabOrder = 7
-        object btnGridMajor: TToolButton
+        object btnGridCharacter: TToolButton
           Left = 0
           Top = 0
           Action = actGridCharacter
           AllowAllUp = True
           Style = tbsCheck
         end
-        object btnGridMinor: TToolButton
+        object btnGridPixel: TToolButton
           Left = 40
           Top = 0
           Action = actGridPixel
@@ -298,7 +298,6 @@ object frmEditorImage: TfrmEditorImage
       Width = 1022
       Height = 667
       Align = alClient
-      Caption = 'Panel1'
       TabOrder = 1
       object panFrames: TPanel
         Left = 1
@@ -6517,6 +6516,8 @@ object frmEditorImage: TfrmEditorImage
         BevelInner = bvNone
         BevelOuter = bvNone
         BorderStyle = bsNone
+        DoubleBuffered = True
+        ParentDoubleBuffered = False
         TabOrder = 1
         OnResize = sbxViewResize
         object panEditorContainer: TPanel
@@ -10796,7 +10797,7 @@ object frmEditorImage: TfrmEditorImage
     Left = 220
     Top = 65
     Bitmap = {
-      494C010120006000000120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101200060000C0120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000002001000001002000000000000040
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
