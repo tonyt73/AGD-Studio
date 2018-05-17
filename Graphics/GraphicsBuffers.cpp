@@ -81,7 +81,10 @@ unsigned char __fastcall GraphicsBuffer::GetColorIndex(ColorIndex index) const
 //---------------------------------------------------------------------------
 void __fastcall GraphicsBuffer::SetColorIndex(ColorIndex index, int colorIndex)
 {
-    m_SetColors[index % 2] = colorIndex;
+    if (0 <= colorIndex && colorIndex < m_GraphicsMode.LogicalColors)
+    {
+        m_SetColors[index % 2] = colorIndex;
+    }
 }
 //---------------------------------------------------------------------------
 unsigned char __fastcall GraphicsBuffer::GetPen() const
@@ -278,7 +281,7 @@ void __fastcall AttributeGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y
         // set attribute
         auto attribute = m_SetColors[0] | (m_SetColors[1] << g_PaperShift);
         attribute |= ((m_SetColors[0] & g_BrightMask) || (m_SetColors[1] & g_BrightMask) ? g_BrightMask : 0);
-        ix = X >> 8;
+        ix = X >> 3;
         auto iy = Y / m_GraphicsMode.PixelsHighPerAttribute;
         auto attrOffset = (iy * m_Stride) + ix;
         m_Buffers[1][attrOffset] = attribute;
@@ -290,7 +293,7 @@ void __fastcall AttributeGraphicsBuffer::GetColor(unsigned int X, unsigned int Y
 {
     if (X < m_Width && Y < m_Height)
     {
-        auto ix = X >> 8;
+        auto ix = X >> 3;
         auto iy = Y / m_GraphicsMode.PixelsHighPerAttribute;
         auto attrOffset = (iy * m_Stride) + ix;
         auto color = m_Buffers[1][attrOffset];
