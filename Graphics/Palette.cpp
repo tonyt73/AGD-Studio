@@ -14,8 +14,8 @@ __fastcall Palette::Palette()
 , m_Name("unknown")
 {
     // json loading properties
-    m_PropertyMap[".{}.Palette.{}.Name"] = &m_Name;
-    m_PropertyMap[".{}.ColorTable.[]"] = &m_Color;
+    m_PropertyMap["Palette.Name"] = &m_Name;
+    m_PropertyMap["ColorTable[]"] = &m_Color;
 }
 //---------------------------------------------------------------------------
 __fastcall Palette::Palette(const String& name)
@@ -67,7 +67,7 @@ int __fastcall Palette::GetTotalColors() const
 //---------------------------------------------------------------------------
 void __fastcall Palette::OnEndObject(const String& object)
 {
-    if (object == ".{}.ColorTable.[]")
+    if (object == "ColorTable[]")
     {
         m_ColorTable.push_back((TColor)(StrToInt(m_Color)));
     }

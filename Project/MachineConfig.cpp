@@ -9,34 +9,34 @@ __fastcall MachineConfig::MachineConfig(const String& name)
 : JsonFile()
 , m_Name(name)
 {
-    m_PropertyMap[".{}.Name"] = &m_Name;
-    m_PropertyMap[".{}.GraphicsMode"] = &m_GraphicsModeName;
-    m_PropertyMap[".{}.ImageSizing.{}.Object.{}.Minimum.{}.Width"] = &m_ImageSizing[itObject].Minimum.cx;
-    m_PropertyMap[".{}.ImageSizing.{}.Object.{}.Minimum.{}.Height"] = &m_ImageSizing[itObject].Minimum.cy;
-    m_PropertyMap[".{}.ImageSizing.{}.Object.{}.Maximum.{}.Width"] = &m_ImageSizing[itObject].Maximum.cx;
-    m_PropertyMap[".{}.ImageSizing.{}.Object.{}.Maximum.{}.Height"] = &m_ImageSizing[itObject].Maximum.cy;
-    m_PropertyMap[".{}.ImageSizing.{}.Object.{}.Step.{}.Width"] = &m_ImageSizing[itObject].Step.cx;
-    m_PropertyMap[".{}.ImageSizing.{}.Object.{}.Step.{}.Height"] = &m_ImageSizing[itObject].Step.cy;
-    m_PropertyMap[".{}.ImageSizing.{}.Sprite.{}.Minimum.{}.Width"] = &m_ImageSizing[itSprite].Minimum.cx;
-    m_PropertyMap[".{}.ImageSizing.{}.Sprite.{}.Minimum.{}.Height"] = &m_ImageSizing[itSprite].Minimum.cy;
-    m_PropertyMap[".{}.ImageSizing.{}.Sprite.{}.Maximum.{}.Width"] = &m_ImageSizing[itSprite].Maximum.cx;
-    m_PropertyMap[".{}.ImageSizing.{}.Sprite.{}.Maximum.{}.Height"] = &m_ImageSizing[itSprite].Maximum.cy;
-    m_PropertyMap[".{}.ImageSizing.{}.Sprite.{}.Step.{}.Width"] = &m_ImageSizing[itSprite].Step.cx;
-    m_PropertyMap[".{}.ImageSizing.{}.Sprite.{}.Step.{}.Height"] = &m_ImageSizing[itSprite].Step.cy;
-    m_PropertyMap[".{}.ImageSizing.{}.Tile.{}.Minimum.{}.Width"] = &m_ImageSizing[itTile].Minimum.cx;
-    m_PropertyMap[".{}.ImageSizing.{}.Tile.{}.Minimum.{}.Height"] = &m_ImageSizing[itTile].Minimum.cy;
-    m_PropertyMap[".{}.ImageSizing.{}.Tile.{}.Maximum.{}.Width"] = &m_ImageSizing[itTile].Maximum.cx;
-    m_PropertyMap[".{}.ImageSizing.{}.Tile.{}.Maximum.{}.Height"] = &m_ImageSizing[itTile].Maximum.cy;
-    m_PropertyMap[".{}.ImageSizing.{}.Tile.{}.Step.{}.Width"] = &m_ImageSizing[itTile].Step.cx;
-    m_PropertyMap[".{}.ImageSizing.{}.Tile.{}.Step.{}.Height"] = &m_ImageSizing[itTile].Step.cy;
-    m_PropertyMap[".{}.ImageSizing.{}.CharacterSet.{}.Minimum.{}.Width"] = &m_ImageSizing[itCharacterSet].Minimum.cx;
-    m_PropertyMap[".{}.ImageSizing.{}.CharacterSet.{}.Minimum.{}.Height"] = &m_ImageSizing[itCharacterSet].Minimum.cy;
-    m_PropertyMap[".{}.ImageSizing.{}.CharacterSet.{}.Maximum.{}.Width"] = &m_ImageSizing[itCharacterSet].Maximum.cx;
-    m_PropertyMap[".{}.ImageSizing.{}.CharacterSet.{}.Maximum.{}.Height"] = &m_ImageSizing[itCharacterSet].Maximum.cy;
-    m_PropertyMap[".{}.ImageSizing.{}.CharacterSet.{}.Step.{}.Width"] = &m_ImageSizing[itCharacterSet].Step.cx;
-    m_PropertyMap[".{}.ImageSizing.{}.CharacterSet.{}.Step.{}.Height"] = &m_ImageSizing[itCharacterSet].Step.cy;
-    m_PropertyMap[".{}.CompilerInformation.{}.Path"] = &m_CompilerInfo.Path;
-    m_PropertyMap[".{}.CompilerInformation.{}.Parameters"] = &m_CompilerInfo.Parameters;
+    m_PropertyMap["Name"] = &m_Name;
+    m_PropertyMap["GraphicsMode"] = &m_GraphicsModeName;
+    m_PropertyMap["ImageSizing.Object.Minimum.Width"] = &m_ImageSizing[itObject].Minimum.cx;
+    m_PropertyMap["ImageSizing.Object.Minimum.Height"] = &m_ImageSizing[itObject].Minimum.cy;
+    m_PropertyMap["ImageSizing.Object.Maximum.Width"] = &m_ImageSizing[itObject].Maximum.cx;
+    m_PropertyMap["ImageSizing.Object.Maximum.Height"] = &m_ImageSizing[itObject].Maximum.cy;
+    m_PropertyMap["ImageSizing.Object.Step.width"] = &m_ImageSizing[itObject].Step.cx;
+    m_PropertyMap["ImageSizing.Object.Step.Height"] = &m_ImageSizing[itObject].Step.cy;
+    m_PropertyMap["ImageSizing.Sprite.Minimum.Width"] = &m_ImageSizing[itSprite].Minimum.cx;
+    m_PropertyMap["ImageSizing.Sprite.Minimum.Height"] = &m_ImageSizing[itSprite].Minimum.cy;
+    m_PropertyMap["ImageSizing.Sprite.Maximum.Width"] = &m_ImageSizing[itSprite].Maximum.cx;
+    m_PropertyMap["ImageSizing.Sprite.Maximum.Height"] = &m_ImageSizing[itSprite].Maximum.cy;
+    m_PropertyMap["ImageSizing.Sprite.Step.Width"] = &m_ImageSizing[itSprite].Step.cx;
+    m_PropertyMap["ImageSizing.Sprite.Step.Height"] = &m_ImageSizing[itSprite].Step.cy;
+    m_PropertyMap["ImageSizing.Tile.Minimum.Width"] = &m_ImageSizing[itTile].Minimum.cx;
+    m_PropertyMap["ImageSizing.Tile.Minimum.Height"] = &m_ImageSizing[itTile].Minimum.cy;
+    m_PropertyMap["ImageSizing.Tile.Maximum.Width"] = &m_ImageSizing[itTile].Maximum.cx;
+    m_PropertyMap["ImageSizing.Tile.Maximum.Height"] = &m_ImageSizing[itTile].Maximum.cy;
+    m_PropertyMap["ImageSizing.Tile.Step.Width"] = &m_ImageSizing[itTile].Step.cx;
+    m_PropertyMap["ImageSizing.Tile.Step.Height"] = &m_ImageSizing[itTile].Step.cy;
+    m_PropertyMap["ImageSizing.CharacterSet.Minimum.Width"] = &m_ImageSizing[itCharacterSet].Minimum.cx;
+    m_PropertyMap["ImageSizing.CharacterSet.Minimum.Height"] = &m_ImageSizing[itCharacterSet].Minimum.cy;
+    m_PropertyMap["ImageSizing.CharacterSet.Maximum.Width"] = &m_ImageSizing[itCharacterSet].Maximum.cx;
+    m_PropertyMap["ImageSizing.CharacterSet.Maximum.Height"] = &m_ImageSizing[itCharacterSet].Maximum.cy;
+    m_PropertyMap["ImageSizing.CharacterSet.Step.Width"] = &m_ImageSizing[itCharacterSet].Step.cx;
+    m_PropertyMap["ImageSizing.CharacterSet.Step.Height"] = &m_ImageSizing[itCharacterSet].Step.cy;
+    m_PropertyMap["CompilerInformation.Path"] = &m_CompilerInfo.Path;
+    m_PropertyMap["CompilerInformation.Parameters"] = &m_CompilerInfo.Parameters;
 
     m_GraphicsMode = std::make_unique<Agdx::GraphicsMode>();
 }

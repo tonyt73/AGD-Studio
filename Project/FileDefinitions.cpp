@@ -6,9 +6,9 @@
 //---------------------------------------------------------------------------
 __fastcall FileDefinitions::FileDefinitions()
 {
-    m_PropertyMap[".{}.Files.[].{}.Filename"] = &m_DefinitionLoader.Filename;
-    m_PropertyMap[".{}.Files.[].{}.Section"] = &m_DefinitionLoader.Section;
-    m_PropertyMap[".{}.Files.[].{}.Type"] = &m_DefinitionLoader.Type;
+    m_PropertyMap["Files[].Filename"] = &m_DefinitionLoader.Filename;
+    m_PropertyMap["Files[].Section"] = &m_DefinitionLoader.Section;
+    m_PropertyMap["Files[].Type"] = &m_DefinitionLoader.Type;
     Load();
 }
 //---------------------------------------------------------------------------
@@ -24,7 +24,7 @@ void __fastcall FileDefinitions::Load()
 //---------------------------------------------------------------------------
 void __fastcall FileDefinitions::OnEndObject(const String& object)
 {
-    if (object == ".{}.Files.[].{}")
+    if (object == "Files[]")
     {
         m_Definitions.push_back(m_DefinitionLoader);
     }

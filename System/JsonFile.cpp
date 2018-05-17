@@ -156,6 +156,30 @@ void __fastcall JsonFile::Set(const String& property, const bool& value)
     }
 }
 //---------------------------------------------------------------------------
+String __fastcall JsonFile::ProcessPath(const String& path) const
+{
+    String newPath = "";
+    auto skip = false;
+    for (auto i = 1; i <= path.Length(); i++)
+    {
+        if (path[i] == '[')
+        {
+            skip = true;
+            newPath += path[i];
+        }
+        else if (skip && path[i] == ']')
+        {
+            skip = false;
+            newPath += path[i];
+        }
+        else if (!skip)
+        {
+            newPath += path[i];
+        }
+    }
+    return newPath;
+}
+//---------------------------------------------------------------------------
 void __fastcall JsonFile::Load(const String& file)
 {
     if (File::File::Exists(file))
@@ -163,105 +187,41 @@ void __fastcall JsonFile::Load(const String& file)
         auto json = File::File::ReadText(file);
         auto sr = std::make_unique<TStringReader>(json);
         auto jr = std::make_unique<TJsonTextReader>(sr.get());
-        String property;                    // the tree dot.path or property reference eg: my.things.value
-        auto depth = 0;
         auto inArray = false;
-        // depth values for object, array and property
-        // these help to balance the tree path
-        std::stack<int> objectDepth;    // depth at which an object starts
-        std::stack<int> arrayDepth;     // depth at which an array starts
-        std::stack<int> propertyDepth;  // depth at which a property starts
         while (jr->Read())
         {
+            auto path = ProcessPath(jr->Path);
             switch (jr->TokenType)
             {
                 case TJsonToken::StartObject:
-                    objectDepth.push(depth++);
-                    OnStartObject(property);
-                    property += ".{}";
+                    OnStartObject(path);
                     break;
                 case TJsonToken::EndObject:
-                {
-                    OnEndObject(property);
-                    auto pops = (depth - objectDepth.top()) + (inArray ? 0 : 1);
-                    objectDepth.pop();
-                    for (auto i = 0; i < pops; i++)
-                    {
-                        property = property.Delete(property.LastDelimiter("."), property.Length());
-                        depth--;
-                    }
+                    OnEndObject(path);
                     break;
-                }
                 case TJsonToken::StartArray:
-                    property += ".[]";
-                    arrayDepth.push(++depth);
                     inArray = true;
                     break;
                 case TJsonToken::EndArray:
-                    property = property.Delete(property.LastDelimiter("."), property.Length());
-                    if (depth == arrayDepth.top())
-                    {
-                        depth--;
-                        // remove the last .name
-                        property = property.Delete(property.LastDelimiter("."), property.Length());
-                    }
                     inArray = false;
-                    arrayDepth.pop();
                     break;
                 case TJsonToken::PropertyName:
-                    propertyDepth.push(++depth);
-                    property += "." + jr->Value.AsString();
                     break;
                 case TJsonToken::String:
-                {
-                    Set(property, jr->Value.AsString());
-                    if (inArray) OnEndObject(property);
-                    // are we matched to a property?
-                    if (depth == propertyDepth.top())
-                    {
-                        // yep, so back down
-                        depth--;
-                        propertyDepth.pop();
-                        // remove the last .name
-                        property = property.Delete(property.LastDelimiter("."), property.Length());
-                    }
+                    Set(path, jr->Value.AsString());
+                    if (inArray) OnEndObject(path);
                     break;
-                }
                 case TJsonToken::Integer:
-                    Set(property, jr->Value.AsInteger());
-                    if (inArray) OnEndObject(property);
-                    if (depth == propertyDepth.top())
-                    {
-                        depth--;
-                        propertyDepth.pop();
-                        // remove the last .name
-                        property = property.Delete(property.LastDelimiter("."), property.Length());
-                    }
+                    Set(path, jr->Value.AsInteger());
+                    if (inArray) OnEndObject(path);
                     break;
                 case TJsonToken::Float:
-                    {
-                        float value = jr->Value.AsExtended();
-                        Set(property, value);
-                        if (inArray) OnEndObject(property);
-                        if (depth == propertyDepth.top())
-                        {
-                            depth--;
-                            propertyDepth.pop();
-                            // remove the last .name
-                            property = property.Delete(property.LastDelimiter("."), property.Length());
-                        }
-                    }
+                    Set(path, (float)jr->Value.AsExtended());
+                    if (inArray) OnEndObject(path);
                     break;
                 case TJsonToken::Boolean:
-                    Set(property, jr->Value.AsBoolean());
-                    if (inArray) OnEndObject(property);
-                    if (depth == propertyDepth.top())
-                    {
-                        depth--;
-                        propertyDepth.pop();
-                        // remove the last .name
-                        property = property.Delete(property.LastDelimiter("."), property.Length());
-                    }
+                    Set(path, jr->Value.AsBoolean());
+                    if (inArray) OnEndObject(path);
                     break;
             }
         }

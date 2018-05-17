@@ -21,24 +21,24 @@ __fastcall GraphicsMode::GraphicsMode()
 , m_Palette(nullptr)
 , m_BufferType(btInvalid)
 {
-    m_PropertyMap[".{}.Name"] = &m_Name;
-    m_PropertyMap[".{}.Palette"] = &m_PaletteName;
-    m_PropertyMap[".{}.BitsPerPixel"] = &m_BitsPerPixel;
-    m_PropertyMap[".{}.PixelsHighPerAttribute"] = &m_PixelsHighPerAttribute;
-    m_PropertyMap[".{}.Width"] = &m_Width;
-    m_PropertyMap[".{}.Height"] = &m_Height;
-    m_PropertyMap[".{}.ScalarX"] = &m_ScalarX;
-    m_PropertyMap[".{}.ScalarY"] = &m_ScalarY;
-    m_PropertyMap[".{}.TranparentColor"] = &m_TranparentColor;
-    m_PropertyMap[".{}.SupportsLogicalColorRemapping"] = &m_SupportsRemapping;
-    m_PropertyMap[".{}.BufferType"] = &m_BufferType;
-    m_PropertyMap[".{}.LogicalColors.[]"] = &m_LogicalIndex;
-    m_PropertyMap[".{}.PixelBitRemapping.[].{}.Remap.[].{}.Mask"] = &m_RemapDataLoader.Mask;
-    m_PropertyMap[".{}.PixelBitRemapping.[].{}.Remap.[].{}.Shift"] = &m_RemapDataLoader.Shift;
-    m_PropertyMap[".{}.ExportInformation.{}.Object.{}.BitmapDataOnly"] = &m_ExportInfo[itObject].BitmapDataOnly;
-    m_PropertyMap[".{}.ExportInformation.{}.Sprite.{}.BitmapDataOnly"] = &m_ExportInfo[itSprite].BitmapDataOnly;
-    m_PropertyMap[".{}.ExportInformation.{}.Tile.{}.BitmapDataOnly"] = &m_ExportInfo[itTile].BitmapDataOnly;
-    m_PropertyMap[".{}.ExportInformation.{}.CharacterSet.{}.BitmapDataOnly"] = &m_ExportInfo[itCharacterSet].BitmapDataOnly;
+    m_PropertyMap["Name"] = &m_Name;
+    m_PropertyMap["Palette"] = &m_PaletteName;
+    m_PropertyMap["BitsPerPixel"] = &m_BitsPerPixel;
+    m_PropertyMap["PixelsHighPerAttribute"] = &m_PixelsHighPerAttribute;
+    m_PropertyMap["Width"] = &m_Width;
+    m_PropertyMap["Height"] = &m_Height;
+    m_PropertyMap["ScalarX"] = &m_ScalarX;
+    m_PropertyMap["ScalarY"] = &m_ScalarY;
+    m_PropertyMap["TranparentColor"] = &m_TranparentColor;
+    m_PropertyMap["SupportsLogicalColorRemapping"] = &m_SupportsRemapping;
+    m_PropertyMap["BufferType"] = &m_BufferType;
+    m_PropertyMap["LogicalColors[]"] = &m_LogicalIndex;
+    m_PropertyMap["PixelBitRemapping[].Remap[].Mask"] = &m_RemapDataLoader.Mask;
+    m_PropertyMap["PixelBitRemapping[].Remap[].Shift"] = &m_RemapDataLoader.Shift;
+    m_PropertyMap["ExportInformation.Object.BitmapDataOnly"] = &m_ExportInfo[itObject].BitmapDataOnly;
+    m_PropertyMap["ExportInformation.Sprite.BitmapDataOnly"] = &m_ExportInfo[itSprite].BitmapDataOnly;
+    m_PropertyMap["ExportInformation.Tile.BitmapDataOnly"] = &m_ExportInfo[itTile].BitmapDataOnly;
+    m_PropertyMap["ExportInformation.CharacterSet.BitmapDataOnly"] = &m_ExportInfo[itCharacterSet].BitmapDataOnly;
 
     m_Palette = std::make_unique<Agdx::Palette>();
 }
@@ -62,15 +62,15 @@ __fastcall GraphicsMode::GraphicsMode(const GraphicsMode& other)
 //---------------------------------------------------------------------------
 void __fastcall GraphicsMode::OnEndObject(const String& object)
 {
-    if (object == ".{}.LogicalColors.[]")
+    if (object == "LogicalColors[]")
     {
         m_LogicalColors.push_back(m_LogicalIndex);
     }
-    else if (object == ".{}.PixelBitRemapping.[].{}.Remap.[].{}")
+    else if (object == "PixelBitRemapping[].Remap[]")
     {
         m_PixelRemappingLoader.Remaps.push_back(m_RemapDataLoader);
     }
-    else if (object == ".{}.PixelBitRemapping.[].{}.Remap")
+    else if (object == "PixelBitRemapping[]")
     {
         m_PixelRemapping.push_back(m_PixelRemappingLoader);
     }

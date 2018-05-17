@@ -24,9 +24,9 @@ __fastcall ImageDocument::ImageDocument(const String& name)
     RegisterProperty("Frames", "Dimensions", "The number of frames in the image");
     RegisterProperty("ImagesPerFrame", "Dimensions", "The number of separate AGD images used in a frame");
     // json loading properties
-    m_PropertyMap[".{}.Image.{}.Width"] = &m_Width;
-    m_PropertyMap[".{}.Image.{}.Height"] = &m_Height;
-    m_PropertyMap[".{}.Image.{}.Frames.[]"] = &m_FrameLoader;
+    m_PropertyMap["Image.Width"] = &m_Width;
+    m_PropertyMap["Image.Height"] = &m_Height;
+    m_PropertyMap["Image.Frames[]"] = &m_FrameLoader;
     m_File = GetFile();
 }
 //---------------------------------------------------------------------------
@@ -48,7 +48,7 @@ void __fastcall ImageDocument::Save()
 //---------------------------------------------------------------------------
 void __fastcall ImageDocument::OnEndObject(const String& object)
 {
-    if (object == ".{}.Image.{}.Frames.[]")
+    if (object == "Image.Frames[]")
     {
         if (m_FramesLoaded < m_Frames.size())
         {

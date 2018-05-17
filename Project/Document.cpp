@@ -23,7 +23,7 @@ __fastcall Document::Document(const String& name)
     RegisterProperty("Path", "Details", "The full path of the document");
     RegisterProperty("Name", "Details", "The name of the asset/document");
     RegisterProperty("Classification", "Details", "The classification of the document");
-    m_PropertyMap[".{}.Document.{}.Name"] = &m_Name;
+    m_PropertyMap["Document.Name"] = &m_Name;
     m_File = GetFile();
 }
 //---------------------------------------------------------------------------

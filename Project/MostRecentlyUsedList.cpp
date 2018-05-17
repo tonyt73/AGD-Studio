@@ -9,9 +9,9 @@
 __fastcall MostRecentlyUsedList::MostRecentlyUsedList()
 : JsonFile()
 {
-    m_PropertyMap[".{}.List.[].{}.Name"] = &m_Loader.Name;
-    m_PropertyMap[".{}.List.[].{}.Path"] = &m_Loader.Path;
-    m_PropertyMap[".{}.List.[].{}.Machine"] = &m_Loader.Machine;
+    m_PropertyMap["List[].Name"] = &m_Loader.Name;
+    m_PropertyMap["List[].Path"] = &m_Loader.Path;
+    m_PropertyMap["List[].Machine"] = &m_Loader.Machine;
     Load();
 }
 //---------------------------------------------------------------------------
@@ -48,7 +48,7 @@ void __fastcall MostRecentlyUsedList::Save()
 //---------------------------------------------------------------------------
 void __fastcall MostRecentlyUsedList::OnEndObject(const String& object)
 {
-    if (object == ".{}.List.[].{}")
+    if (object == "List[]")
     {
         Add(m_Loader.Name, m_Loader.Path, m_Loader.Machine);
     }
