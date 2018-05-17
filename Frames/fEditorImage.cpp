@@ -50,11 +50,12 @@ void __fastcall TfrmEditorImage::SetDocument(Document* document)
     for (int i = 0; i < m_Image->Frames; i++)
     {
         auto image = std::make_unique<Agdx::Image>(m_Image->Width, m_Image->Height, gm);
-        image->Canvas().Set(m_Image->Frame[i]);
+        //image->Canvas().Set(m_Image->Frame[i]);
         image->Canvas().Color[ciPrimary] = 12;
-        image->Canvas().SetPixel(0,0);
-        image->Canvas().SetPixel(1,1);
-        image->Canvas().SetPixel(2,2);
+        for (auto i = 0; i < 16; i++)
+        {
+            image->Canvas().SetPixel(i,i);
+        }
         m_Image->Frame[i] = image->Canvas().Get();
         m_Frames.push_back(std::move(image));
     }
@@ -281,8 +282,8 @@ void __fastcall TfrmEditorImage::sbxViewResize(TObject *Sender)
     {
 
         const auto& gm = theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode();
-        auto vw = (int)(m_Image->Width  * gm->ScalarX * m_Magnification);
-        auto vh = (int)(m_Image->Height * gm->ScalarY * m_Magnification);
+        auto vw = (int)(m_Image->Width  * gm->ScalarX * m_Magnification) + 2;
+        auto vh = (int)(m_Image->Height * gm->ScalarY * m_Magnification) + 2;
         if (vw + 256 > sbxView->Width || vh + 256 > sbxView->Height)
         {
             // no auto alignment
