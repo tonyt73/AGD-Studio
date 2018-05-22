@@ -115,7 +115,6 @@ __published:    // IDE-managed Components
     void __fastcall actLineExecute(TObject *Sender);
     void __fastcall actShapeExecute(TObject *Sender);
     void __fastcall actGridPixelExecute(TObject *Sender);
-    void __fastcall actGridCharacterExecute(TObject *Sender);
     void __fastcall actTextExecute(TObject *Sender);
     void __fastcall actDropperExecute(TObject *Sender);
     void __fastcall FrameEndDock(TObject *Sender, TObject *Target, int X, int Y);
@@ -134,13 +133,15 @@ __published:    // IDE-managed Components
     void __fastcall actZoomOutExecute(TObject *Sender);
     void __fastcall actZoomResetExecute(TObject *Sender);
     void __fastcall sbxViewResize(TObject *Sender);
+    void __fastcall sbxViewMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta,
+          TPoint &MousePos, bool &Handled);
 private:    // User declarations
     typedef std::vector<std::unique_ptr<Agdx::Image>> ImageList;
 
     ImageDocument*              m_Image;            // the image document we are editing
     ImageList                   m_Frames;           // the image documents frames as bitmap images
     std::map<String, TAction*>  m_ActionMap;
-    int                         m_Magnification;
+    float                       m_Magnification;
     int                         m_SelectedFrame;    // the frame we are editing
 
     void            __fastcall  SetDocument(Document* document);

@@ -10,7 +10,7 @@
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorImage::TfrmEditorImage(TComponent* Owner)
 : TFrame(Owner)
-, m_Magnification(8)
+, m_Magnification(8.f)
 , m_SelectedFrame(0)
 , m_Image(nullptr)
 {
@@ -167,14 +167,6 @@ void __fastcall TfrmEditorImage::actGridPixelExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actGridCharacterExecute(TObject *Sender)
-{
-    if (IsActive())
-    {
-        RefreshView();
-    }
-}
-//---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::actRotateLeftExecute(TObject *Sender)
 {
     if (IsActive())
@@ -258,7 +250,7 @@ void __fastcall TfrmEditorImage::actZoomInExecute(TObject *Sender)
 {
     sbxView->HorzScrollBar->Position = 0;
     sbxView->VertScrollBar->Position = 0;
-    m_Magnification = std::min(64, m_Magnification + 2);
+    m_Magnification = std::min(64.f, m_Magnification + 2.f);
     sbxViewResize(NULL);
 }
 //---------------------------------------------------------------------------
@@ -266,13 +258,13 @@ void __fastcall TfrmEditorImage::actZoomOutExecute(TObject *Sender)
 {
     sbxView->HorzScrollBar->Position = 0;
     sbxView->VertScrollBar->Position = 0;
-    m_Magnification = std::max(8, m_Magnification - 2);
+    m_Magnification = std::max(8.f, m_Magnification - 2.f);
     sbxViewResize(NULL);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::actZoomResetExecute(TObject *Sender)
 {
-    m_Magnification = 8;
+    m_Magnification = 8.f;
     sbxViewResize(NULL);
 }
 //---------------------------------------------------------------------------
@@ -336,7 +328,6 @@ void __fastcall TfrmEditorImage::DrawGrids()
     if (true == btnGridCharacter->Down)
     {
         Canvas->Pen->Color = (TColor)0x0048BAF7;
-        //for (int x = xs; x <= xe; x += (8 / gm.BitsPerPixel))
         for (auto x = xs; x <= xe; x += (8 / gm.ScalarX))
         {
             Canvas->MoveTo(x * fScalarX * m_Magnification, ys);
@@ -359,6 +350,23 @@ void __fastcall TfrmEditorImage::RefreshView()
         m_Frames[m_SelectedFrame]->Canvas().Draw(imgEditor->Picture->Bitmap);
         DrawGrids();
         imgEditor->Invalidate();
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::sbxViewMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled)
+{
+    if (Shift.Contains(ssCtrl))
+    {
+        Handled = true;
+        float delta = WheelDelta / (Shift.Contains(ssShift) ? 50.f : 200.f);
+        m_Magnification = std::max(8.0f, std::min(64.f, m_Magnification + delta));
+        sbxViewResize(NULL);
+    }
+    else
+    {
+        Handled = true;
+        float delta = -WheelDelta / (Shift.Contains(ssShift) ? 5.f : 20.f);
+        sbxView->VertScrollBar->Position += delta;
     }
 }
 //---------------------------------------------------------------------------
