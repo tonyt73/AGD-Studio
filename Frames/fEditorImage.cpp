@@ -55,18 +55,22 @@ void __fastcall TfrmEditorImage::SetDocument(Document* document)
     {
         auto image = std::make_unique<Agdx::Image>(m_Image->Width, m_Image->Height, gm);
         //image->Canvas().Set(m_Image->Frame[i]);
-        image->Canvas().Color[ciPrimary] = 12;
-        for (auto j = 0; j < 16; j++)
-        {
-            auto x = i % 2 ? j : (8 - j);
-            auto y = j;
-            image->Canvas().SetPixel(x, y);
-        }
+//        image->Canvas().Color[ciPrimary] = 12;
+//        for (auto j = 0; j < 16; j++)
+//        {
+//            auto x = i % 2 ? j : (8 - j);
+//            auto y = j;
+//            image->Canvas().SetPixel(x, y);
+//        }
         m_Image->Frame[i] = image->Canvas().Get();
-        fFrameView->Add(image->Canvas());
+        fFrameView->Add(image->Canvas(), m_Image->Hint[i]);
         m_Frames.push_back(std::move(image));
     }
     imgEditor->Picture->Bitmap->PixelFormat = pf32bit;
+    if (m_Image->CanModifyFrames)
+    {
+        fFrameView->PopupMenu = popFrames;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::FrameEndDock(TObject *Sender, TObject *Target, int X, int Y)
@@ -385,6 +389,21 @@ void __fastcall TfrmEditorImage::OnFrameSelected(TObject *Sender)
         m_SelectedFrame = frame->Tag;
         RefreshView();
     }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::popAddFrameClick(TObject *Sender)
+{
+    //
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::popInsertFrameClick(TObject *Sender)
+{
+    //
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::popRemoveFrameClick(TObject *Sender)
+{
+    //
 }
 //---------------------------------------------------------------------------
 

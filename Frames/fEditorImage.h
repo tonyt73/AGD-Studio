@@ -106,6 +106,10 @@ __published:    // IDE-managed Components
     TPanel *Panel1;
     TPanel *panFrameView;
     TMultiImageViewFrame *fFrameView;
+    TPopupMenu *popFrames;
+    TMenuItem *popAddFrame;
+    TMenuItem *popInsertFrame;
+    TMenuItem *popRemoveFrame;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actBrushExecute(TObject *Sender);
@@ -134,6 +138,9 @@ __published:    // IDE-managed Components
     void __fastcall actZoomResetExecute(TObject *Sender);
     void __fastcall sbxViewResize(TObject *Sender);
     void __fastcall sbxViewMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled);
+    void __fastcall popAddFrameClick(TObject *Sender);
+    void __fastcall popInsertFrameClick(TObject *Sender);
+    void __fastcall popRemoveFrameClick(TObject *Sender);
 private:    // User declarations
     typedef std::vector<std::unique_ptr<Agdx::Image>> ImageList;
 

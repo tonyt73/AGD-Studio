@@ -38,11 +38,12 @@ void __fastcall TMultiImageViewFrame::Clear()
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TMultiImageViewFrame::Add(const Agdx::GraphicsBuffer& image)
+void __fastcall TMultiImageViewFrame::Add(const Agdx::GraphicsBuffer& image, const String& hint)
 {
     static int i = 8236;
     auto control = new TSelectionImageFrame(this, image);
     control->Name = "SelectionImageFrame" + IntToStr(++i);
+    control->Hint = hint;
     control->Update();
     panImages->InsertControl(control);
     control->Scale = m_Scale;
@@ -51,6 +52,7 @@ void __fastcall TMultiImageViewFrame::Add(const Agdx::GraphicsBuffer& image)
     control->Left = (panImages->ControlCount - 1) * control->Width;
     control->Tag = (panImages->ControlCount - 1);
     control->OnSelectedClick = OnFrameClicked;
+    control->ShowHint = hint != "";
     panImages->Width = panImages->ControlCount * control->Width;
     panImages->Height = control->Height;
     panImages->Left = 0;

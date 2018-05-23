@@ -1,4 +1,4 @@
-//---------------------------------------------------------------------------
+﻿//---------------------------------------------------------------------------
 #include "agdx.pch.h"
 #pragma hdrstop
 //---------------------------------------------------------------------------
@@ -10,7 +10,7 @@
 __fastcall ImageDocument::ImageDocument(const String& name)
 : Document(name)
 , m_MultiFrame(false)
-, m_CanDeleteFrames(false)
+, m_CanModifyFrames(false)
 , m_Width(0)
 , m_Height(0)
 , m_FramesLoaded(0)
@@ -113,11 +113,21 @@ void __fastcall ImageDocument::SetFrame(int frame, const String& data)
     }
 }
 //---------------------------------------------------------------------------
-bool __fastcall ImageDocument::AddFrame()
+String __fastcall ImageDocument::GetHint(int frame) const
 {
-    if (m_Frames.size() == 0 || m_MultiFrame)
+    if (0 <= frame && frame < m_Hints.size())
+    {
+        return m_Hints[frame];
+    }
+    return "";
+}
+//---------------------------------------------------------------------------
+bool __fastcall ImageDocument::AddFrame(const String& hint)
+{
+    if (m_Frames.size() == 0 || (m_MultiFrame && m_CanModifyFrames))
     {
         m_Frames.push_back("");
+        m_Hints.push_back(hint);
         return true;
     }
     return false;
@@ -125,7 +135,7 @@ bool __fastcall ImageDocument::AddFrame()
 //---------------------------------------------------------------------------
 bool __fastcall ImageDocument::DeleteFrame(int index)
 {
-    if (m_CanDeleteFrames && m_MultiFrame && 0 < index && index < m_Frames.size())
+    if (m_Frames.size() > 1 && m_CanModifyFrames && 0 < index && index < m_Frames.size())
     {
         // can only delete new frames; can't delete the first frame
         m_Frames.erase(m_Frames.begin() + index);
@@ -164,7 +174,7 @@ __fastcall SpriteDocument::SpriteDocument(const String& name, const String& extr
 {
     m_ImageType = itSprite;
     m_MultiFrame = true;
-    m_CanDeleteFrames = true;
+    m_CanModifyFrames = true;
     m_SubType = "Sprite";
     m_Folder = "Images\\Sprites";
     RegisterProperty("Name", "Details", "The name of the sprite");
@@ -207,9 +217,17 @@ __fastcall CharacterSetDocument::CharacterSetDocument(const String& name, const 
     m_Folder = "Images\\Character Set";
     RegisterProperty("Name", "Details", "The name of the character set");
     ExtractSize(extra);
+    m_CanModifyFrames = true;   // yes to get the default frames in
     for (auto i = 0; i < 96; i++)
     {
-        AddFrame();
+        switch (i)
+        {
+            case  0: AddFrame("Space"); break;
+            case 95: AddFrame("©"); break;
+            case 92: AddFrame("Vert.Line"); break;
+            default: AddFrame(UnicodeString().StringOfChar(32 + i, 1)); break;
+        }
     }
+    m_CanModifyFrames = false;  // no for the editor
 }
 //---------------------------------------------------------------------------

@@ -5,6 +5,11 @@ object SelectionImageFrame: TSelectionImageFrame
   Height = 113
   Color = clBtnFace
   Ctl3D = True
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -32
+  Font.Name = 'Consolas'
+  Font.Style = []
   Padding.Left = 4
   Padding.Top = 4
   Padding.Right = 4
@@ -12,7 +17,10 @@ object SelectionImageFrame: TSelectionImageFrame
   ParentBackground = False
   ParentColor = False
   ParentCtl3D = False
+  ParentFont = False
   TabOrder = 0
+  OnMouseEnter = imgBitmapMouseEnter
+  OnMouseLeave = imgBitmapMouseLeave
   object imgBitmap: TImage
     Left = 4
     Top = 4
@@ -21,5 +29,7 @@ object SelectionImageFrame: TSelectionImageFrame
     Align = alClient
     Stretch = True
     OnClick = imgBitmapClick
+    OnMouseEnter = imgBitmapMouseEnter
+    OnMouseLeave = imgBitmapMouseLeave
   end
 end

@@ -18,6 +18,7 @@ __fastcall TSelectionImageFrame::TSelectionImageFrame(TComponent* Owner, const A
 void __fastcall TSelectionImageFrame::Update()
 {
     m_Image.Assign(imgBitmap->Picture->Bitmap);
+    imgBitmap->Hint = Hint;
 }
 //---------------------------------------------------------------------------
 void __fastcall TSelectionImageFrame::SetSelected(bool state)
@@ -50,5 +51,31 @@ void __fastcall TSelectionImageFrame::imgBitmapClick(TObject *Sender)
 {
     Selected = true;
     if (FOnClick != nullptr) FOnClick(this);
+}
+//---------------------------------------------------------------------------
+void __fastcall TSelectionImageFrame::imgBitmapMouseEnter(TObject *Sender)
+{
+    for (int index = 0; index < Application->ComponentCount; ++index)
+    {
+        THintWindow *HintWindow = dynamic_cast<THintWindow *>(Application->Components[index]);
+        if (HintWindow)
+        {
+            HintWindow->Canvas->Font->Name = Font->Name;
+            HintWindow->Canvas->Font->Size = Font->Size;
+        }
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TSelectionImageFrame::imgBitmapMouseLeave(TObject *Sender)
+{
+    for (int index = 0; index < Application->ComponentCount; ++index)
+    {
+        THintWindow *HintWindow = dynamic_cast<THintWindow *>(Application->Components[index]);
+        if (HintWindow)
+        {
+            HintWindow->Canvas->Font->Name = "Tahoma";
+            HintWindow->Canvas->Font->Size = 8;
+        }
+    }
 }
 //---------------------------------------------------------------------------

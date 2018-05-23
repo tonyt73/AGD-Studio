@@ -5386,4 +5386,20 @@ object frmEditorImage: TfrmEditorImage
       Action = actEraser
     end
   end
+  object popFrames: TPopupMenu
+    Left = 432
+    Top = 64
+    object popAddFrame: TMenuItem
+      Caption = 'Add Frame to End'
+      OnClick = popAddFrameClick
+    end
+    object popInsertFrame: TMenuItem
+      Caption = 'Insert Frame before Selection'
+      OnClick = popInsertFrameClick
+    end
+    object popRemoveFrame: TMenuItem
+      Caption = 'Remove Selected Frame'
+      OnClick = popRemoveFrameClick
+    end
+  end
 end

@@ -26,17 +26,20 @@ private:
             void        __fastcall  SetFrames(int frames);
             String      __fastcall  GetFrame(int frame) const;
             void        __fastcall  SetFrame(int frame, const String& data);
+            String      __fastcall  GetHint(int frame) const;
 
 protected:
             bool                    m_MultiFrame;       // flag: supports multiple frames
-            bool                    m_CanDeleteFrames;  // flag: supports deleting frames
+            bool                    m_CanModifyFrames;  // flag: supports adding/deleting frames
             int                     m_Width;            // width of a frame
             int                     m_Height;           // height of a frame
             int                     m_NumOfFrames;      // the number of frames
             ImageTypes              m_ImageType;        // the type of graphic image we are
             FramesList              m_Frames;           // the list of frames
+            FramesList              m_Hints;            // the list of frames
             String                  m_FrameLoader;      // used to load frames into the above frames list
             int                     m_FramesLoaded;     // a count of frames loaded
+            String                  m_Hint;             // a hint string
 
             void        __fastcall  ExtractSize(const String& extra);
 
@@ -46,11 +49,13 @@ public:
 
     virtual void        __fastcall  Save();
 
-            bool        __fastcall  AddFrame();
+            bool        __fastcall  AddFrame(const String& hint = "");
             bool        __fastcall  DeleteFrame(int index);
 
             bool        __property  MultiFrame      = { read = m_MultiFrame                 };
+            bool        __property  CanModifyFrames = { read = m_CanModifyFrames            };
             String      __property  Frame[int index]= { read = GetFrame, write = SetFrame   };
+            String      __property  Hint[int index] = { read = GetHint                      };
 
 __published:
             int         __property  Width           = { read = m_Width                      };

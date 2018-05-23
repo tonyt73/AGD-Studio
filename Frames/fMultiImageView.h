@@ -26,7 +26,7 @@ public:		// User declarations
             __fastcall  TMultiImageViewFrame(TComponent* Owner);
 
     void    __fastcall  Clear();
-    void    __fastcall  Add(const  Agdx::GraphicsBuffer& image);
+    void    __fastcall  Add(const  Agdx::GraphicsBuffer& image, const String& hint);
 
     int     __property  Scale = { read = m_Scale, write = SetScale };
             __property  TNotifyEvent OnSelectedClick = { read = FOnClick, write = FOnClick };
