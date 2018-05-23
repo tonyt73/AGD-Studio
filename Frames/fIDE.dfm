@@ -15,8 +15,6 @@ object frmIDE: TfrmIDE
     Manager = DockManager
     Align = alClient
     TabOrder = 0
-    ExplicitTop = 29
-    ExplicitHeight = 571
     Layout = {
       EFBBBF3C3F786D6C2076657273696F6E3D22312E302220656E636F64696E673D
       227574662D38223F3E0D0A3C736974656C6973743E0D0A093C73697465206964
@@ -249,7 +247,6 @@ object frmIDE: TfrmIDE
         Constraints.MinWidth = 200
         TabOrder = 0
         OnClick = lmdPropertiesClick
-        ExplicitHeight = 215
       end
       object Panel2: TPanel
         Left = 0
@@ -263,14 +260,15 @@ object frmIDE: TfrmIDE
         Padding.Right = 3
         Padding.Bottom = 3
         TabOrder = 1
-        ExplicitTop = 239
         object lblPropertyInfo: TLabel
           Left = 4
           Top = 4
-          Width = 99
-          Height = 13
+          Width = 243
+          Height = 32
           Align = alClient
           Caption = 'Property information'
+          ExplicitWidth = 99
+          ExplicitHeight = 13
         end
       end
     end
@@ -311,13 +309,10 @@ object frmIDE: TfrmIDE
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitLeft = 344
-    ExplicitWidth = 185
     object tbrMain: TToolBar
       Left = 0
       Top = 0
       Width = 344
-      Height = 29
       Align = alLeft
       AutoSize = True
       ButtonHeight = 32
@@ -330,7 +325,6 @@ object frmIDE: TfrmIDE
       Transparent = False
       StyleElements = [seFont, seClient]
       Wrapable = False
-      ExplicitHeight = 800
       object ToolButton15: TToolButton
         Left = 0
         Top = 0
@@ -430,15 +424,12 @@ object frmIDE: TfrmIDE
       Left = 768
       Top = 0
       Width = 32
-      Height = 29
       Align = alRight
       AutoSize = True
       ButtonHeight = 32
       ButtonWidth = 32
       Images = imgIconsActive
       TabOrder = 1
-      ExplicitLeft = 0
-      ExplicitHeight = 800
       object btnSettings: TToolButton
         Left = 0
         Top = 0
@@ -624,7 +615,7 @@ object frmIDE: TfrmIDE
     Left = 20
     Top = 140
     Bitmap = {
-      494C010115001800480110001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101150018004C0110001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1508,7 +1499,7 @@ object frmIDE: TfrmIDE
     Left = 92
     Top = 140
     Bitmap = {
-      494C010115003000180110001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101150030001C0110001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2317,7 +2308,7 @@ object frmIDE: TfrmIDE
     Left = 24
     Top = 200
     Bitmap = {
-      494C010105000800A00010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010105000800A40010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000080827BFF80817DFF8080
       80FF80817DFF808080FF00000000000000001B415BB23D93CFFF3D91CEFF3D92
@@ -2593,7 +2584,7 @@ object frmIDE: TfrmIDE
     Left = 102
     Top = 200
     Bitmap = {
-      494C010117003000680210001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101170030006C0210001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000023000000330000
       0033000000330000003300000033000000330000003300000033000000330000

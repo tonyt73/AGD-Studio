@@ -139,6 +139,11 @@ void __fastcall GraphicsBuffer::Draw(TBitmap* bitmap) const
     StretchBlt(bitmap->Canvas->Handle, 0, 0, bitmap->Width, bitmap->Height, m_Bitmap->Canvas->Handle, 0, 0, Width, Height, SRCCOPY);
 }
 //---------------------------------------------------------------------------
+void __fastcall GraphicsBuffer::Assign(TBitmap* bitmap) const
+{
+    bitmap->Assign(m_Bitmap.get());
+}
+//---------------------------------------------------------------------------
 void __fastcall GraphicsBuffer::Begin()
 {
     m_Drawing = true;

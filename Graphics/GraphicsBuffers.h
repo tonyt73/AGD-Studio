@@ -63,6 +63,8 @@ public:
     virtual void        __fastcall  Set(const String& data) = 0;
                                     // Copy the image onto the bitmap
     void                __fastcall  Draw(TBitmap* bitmap) const;
+                                    // Copy the image bitmap onto the destination bitmap
+    void                __fastcall  Assign(TBitmap* bitmap) const;
                                     // Begin drawing operations on the canvas
     void                __fastcall  Begin();
                                     // End drawing operations on the canvas

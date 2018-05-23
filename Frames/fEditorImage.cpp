@@ -3,9 +3,11 @@
 #include "fEditorImage.h"
 #include "DocumentManager.h"
 #include "Messaging/Messaging.h"
+#include "Frames/fSelectionImage.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "LMDDckSite"
+#pragma link "fMultiImageView"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorImage::TfrmEditorImage(TComponent* Owner)
@@ -46,17 +48,22 @@ void __fastcall TfrmEditorImage::SetDocument(Document* document)
 
     // convert the documents images into frames
     m_Frames.clear();
+    fFrameView->Clear();
+    fFrameView->OnSelectedClick = OnFrameSelected;
     const auto& gm = *(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode());
     for (int i = 0; i < m_Image->Frames; i++)
     {
         auto image = std::make_unique<Agdx::Image>(m_Image->Width, m_Image->Height, gm);
         //image->Canvas().Set(m_Image->Frame[i]);
         image->Canvas().Color[ciPrimary] = 12;
-        for (auto i = 0; i < 16; i++)
+        for (auto j = 0; j < 16; j++)
         {
-            image->Canvas().SetPixel(i,i);
+            auto x = i % 2 ? j : (8 - j);
+            auto y = j;
+            image->Canvas().SetPixel(x, y);
         }
         m_Image->Frame[i] = image->Canvas().Get();
+        fFrameView->Add(image->Canvas());
         m_Frames.push_back(std::move(image));
     }
     imgEditor->Picture->Bitmap->PixelFormat = pf32bit;
@@ -367,6 +374,16 @@ void __fastcall TfrmEditorImage::sbxViewMouseWheel(TObject *Sender, TShiftState 
         Handled = true;
         float delta = -WheelDelta / (Shift.Contains(ssShift) ? 5.f : 20.f);
         sbxView->VertScrollBar->Position += delta;
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::OnFrameSelected(TObject *Sender)
+{
+    auto frame = dynamic_cast<TSelectionImageFrame*>(Sender);
+    if (frame != nullptr)
+    {
+        m_SelectedFrame = frame->Tag;
+        RefreshView();
     }
 }
 //---------------------------------------------------------------------------

@@ -22,6 +22,7 @@
 #include "Project/ImageDocuments.h"
 #include "Messaging/Event.h"
 #include "Graphics/Image.h"
+#include "fMultiImageView.h"
 //---------------------------------------------------------------------------
 class TfrmEditorImage : public TFrame
 {
@@ -80,7 +81,6 @@ __published:    // IDE-managed Components
     TToolButton *btnGridCharacter;
     TToolButton *btnGridPixel;
     TStatusBar *barStatus;
-    TPanel *panFrames;
     TAction *actRotateLeft;
     TAction *actRotateRight;
     TAction *actRotateUp;
@@ -103,9 +103,9 @@ __published:    // IDE-managed Components
     TAction *actZoomIn;
     TAction *actZoomOut;
     TAction *actZoomReset;
-    TScrollBox *ScrollBox1;
-    TImage *Image1;
     TPanel *Panel1;
+    TPanel *panFrameView;
+    TMultiImageViewFrame *fFrameView;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actBrushExecute(TObject *Sender);
@@ -133,8 +133,7 @@ __published:    // IDE-managed Components
     void __fastcall actZoomOutExecute(TObject *Sender);
     void __fastcall actZoomResetExecute(TObject *Sender);
     void __fastcall sbxViewResize(TObject *Sender);
-    void __fastcall sbxViewMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta,
-          TPoint &MousePos, bool &Handled);
+    void __fastcall sbxViewMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled);
 private:    // User declarations
     typedef std::vector<std::unique_ptr<Agdx::Image>> ImageList;
 
@@ -149,6 +148,7 @@ private:    // User declarations
     bool            __fastcall  IsActive() const;
     void            __fastcall  DrawGrids();
     void            __fastcall  RefreshView();
+    void            __fastcall  OnFrameSelected(TObject *Sender);
 
 public:        // User declarations
                     __fastcall  TfrmEditorImage(TComponent* Owner);

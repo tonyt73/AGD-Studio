@@ -299,48 +299,11 @@ object frmEditorImage: TfrmEditorImage
       Height = 667
       Align = alClient
       TabOrder = 1
-      object panFrames: TPanel
-        Left = 1
-        Top = 585
-        Width = 1020
-        Height = 81
-        Align = alBottom
-        BevelOuter = bvNone
-        Caption = 'Frames View'
-        TabOrder = 0
-        object ScrollBox1: TScrollBox
-          Left = 0
-          Top = 0
-          Width = 1020
-          Height = 81
-          HorzScrollBar.Smooth = True
-          HorzScrollBar.Tracking = True
-          VertScrollBar.Visible = False
-          Align = alClient
-          BevelInner = bvNone
-          BevelOuter = bvNone
-          BorderStyle = bsNone
-          DoubleBuffered = True
-          Padding.Left = 4
-          Padding.Top = 4
-          Padding.Right = 4
-          Padding.Bottom = 4
-          ParentDoubleBuffered = False
-          TabOrder = 0
-          object Image1: TImage
-            Left = 0
-            Top = 0
-            Width = 2000
-            Height = 64
-            Stretch = True
-          end
-        end
-      end
       object sbxView: TScrollBox
         Left = 1
         Top = 1
         Width = 1020
-        Height = 584
+        Height = 565
         HorzScrollBar.Smooth = True
         HorzScrollBar.Tracking = True
         VertScrollBar.Smooth = True
@@ -351,14 +314,15 @@ object frmEditorImage: TfrmEditorImage
         BorderStyle = bsNone
         DoubleBuffered = False
         ParentDoubleBuffered = False
-        TabOrder = 1
+        TabOrder = 0
         OnMouseWheel = sbxViewMouseWheel
         OnResize = sbxViewResize
+        ExplicitHeight = 584
         object panEditorContainer: TPanel
           Left = 0
           Top = 0
           Width = 1020
-          Height = 584
+          Height = 565
           Align = alClient
           BevelOuter = bvNone
           Color = clGray
@@ -372,11 +336,12 @@ object frmEditorImage: TfrmEditorImage
           TabOrder = 0
           StyleElements = []
           OnClick = panEditorContainerClick
+          ExplicitHeight = 584
           object panViewFrame: TPanel
             Left = 128
             Top = 128
             Width = 764
-            Height = 328
+            Height = 309
             Align = alClient
             BevelOuter = bvNone
             Color = clWhite
@@ -389,11 +354,12 @@ object frmEditorImage: TfrmEditorImage
             ParentDoubleBuffered = False
             TabOrder = 0
             StyleElements = []
+            ExplicitHeight = 328
             object imgEditor: TImage
               Left = 1
               Top = 1
               Width = 762
-              Height = 326
+              Height = 307
               Align = alClient
               Stretch = True
               OnClick = panEditorContainerClick
@@ -403,6 +369,39 @@ object frmEditorImage: TfrmEditorImage
               ExplicitHeight = 345
             end
           end
+        end
+      end
+      object panFrameView: TPanel
+        Left = 1
+        Top = 566
+        Width = 1020
+        Height = 100
+        Align = alBottom
+        AutoSize = True
+        BevelOuter = bvNone
+        DoubleBuffered = False
+        ParentDoubleBuffered = False
+        TabOrder = 1
+        ExplicitTop = 625
+        inline fFrameView: TMultiImageViewFrame
+          Left = 5
+          Top = 0
+          Width = 1020
+          Height = 100
+          HorzScrollBar.ParentColor = False
+          HorzScrollBar.Smooth = True
+          HorzScrollBar.Style = ssHotTrack
+          HorzScrollBar.Tracking = True
+          VertScrollBar.Tracking = True
+          VertScrollBar.Visible = False
+          AutoScroll = True
+          DoubleBuffered = True
+          Ctl3D = False
+          ParentCtl3D = False
+          ParentDoubleBuffered = False
+          TabOrder = 0
+          ExplicitLeft = 5
+          ExplicitWidth = 1020
         end
       end
     end

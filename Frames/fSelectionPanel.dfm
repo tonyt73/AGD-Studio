@@ -31,7 +31,6 @@ object SelectionPanelFrame: TSelectionPanelFrame
     StyleElements = [seFont, seBorder]
     OnClick = lblProjectNameClick
     OnMouseMove = panProjectInfoMouseMove
-    ExplicitLeft = -6
     DesignSize = (
       431
       87)
@@ -107,7 +106,6 @@ object SelectionPanelFrame: TSelectionPanelFrame
     StyleElements = [seFont, seBorder]
     OnClick = lblProjectNameClick
     OnMouseMove = panProjectInfoMouseMove
-    ExplicitHeight = 54
     object imgRemove: TImage
       Left = 0
       Top = 6
