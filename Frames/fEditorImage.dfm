@@ -57,12 +57,14 @@ object frmEditorImage: TfrmEditorImage
         Images = tbrImages
         TabOrder = 0
         object btnRotateLeft: TToolButton
+          Tag = 100
           Left = 0
           Top = 0
           Action = actRotateLeft
           AllowAllUp = True
         end
         object btnRotateRight: TToolButton
+          Tag = 101
           Left = 40
           Top = 0
           Action = actRotateRight
@@ -70,12 +72,14 @@ object frmEditorImage: TfrmEditorImage
           Wrap = True
         end
         object btnRotateDown: TToolButton
+          Tag = 102
           Left = 0
           Top = 40
           Action = actRotateDown
           AllowAllUp = True
         end
         object btnRotateUp: TToolButton
+          Tag = 103
           Left = 40
           Top = 40
           Action = actRotateUp
@@ -83,12 +87,14 @@ object frmEditorImage: TfrmEditorImage
           Wrap = True
         end
         object btnFlipHorizontal: TToolButton
+          Tag = 104
           Left = 0
           Top = 80
           Action = actFlipHorizontal
           AllowAllUp = True
         end
         object btnFlipVertical: TToolButton
+          Tag = 105
           Left = 40
           Top = 80
           Action = actFlipVertical
@@ -96,12 +102,14 @@ object frmEditorImage: TfrmEditorImage
           Wrap = True
         end
         object btnRotateLeft90: TToolButton
+          Tag = 106
           Left = 0
           Top = 120
           Action = actRotateLeft90
           AllowAllUp = True
         end
         object btnRotateRight90: TToolButton
+          Tag = 107
           Left = 40
           Top = 120
           Action = actRotateRight90
@@ -127,6 +135,7 @@ object frmEditorImage: TfrmEditorImage
           Style = tbsCheck
         end
         object btnText: TToolButton
+          Tag = 1
           Left = 40
           Top = 0
           Action = actText
@@ -135,6 +144,7 @@ object frmEditorImage: TfrmEditorImage
           Style = tbsCheck
         end
         object btnPencil: TToolButton
+          Tag = 2
           Left = 0
           Top = 40
           Action = actPencil
@@ -142,6 +152,7 @@ object frmEditorImage: TfrmEditorImage
           Style = tbsCheck
         end
         object btnBrush: TToolButton
+          Tag = 3
           Left = 40
           Top = 40
           Action = actBrush
@@ -150,6 +161,7 @@ object frmEditorImage: TfrmEditorImage
           Style = tbsCheck
         end
         object btnLine: TToolButton
+          Tag = 4
           Left = 0
           Top = 80
           Action = actLine
@@ -157,6 +169,7 @@ object frmEditorImage: TfrmEditorImage
           Style = tbsCheck
         end
         object btnShape: TToolButton
+          Tag = 5
           Left = 40
           Top = 80
           Action = actShape
@@ -165,6 +178,7 @@ object frmEditorImage: TfrmEditorImage
           Style = tbsCheck
         end
         object btnDropper: TToolButton
+          Tag = 6
           Left = 0
           Top = 120
           Action = actDropper
@@ -172,6 +186,7 @@ object frmEditorImage: TfrmEditorImage
           Style = tbsCheck
         end
         object btnSprayBrush: TToolButton
+          Tag = 7
           Left = 40
           Top = 120
           Action = actSprayBrush
@@ -180,6 +195,7 @@ object frmEditorImage: TfrmEditorImage
           Style = tbsCheck
         end
         object btnFill: TToolButton
+          Tag = 8
           Left = 0
           Top = 160
           Action = actFill
@@ -187,6 +203,7 @@ object frmEditorImage: TfrmEditorImage
           Style = tbsCheck
         end
         object btnEraser: TToolButton
+          Tag = 9
           Left = 40
           Top = 160
           Action = actEraser
@@ -331,12 +348,13 @@ object frmEditorImage: TfrmEditorImage
       Width = 1022
       Height = 667
       Align = alClient
+      BevelOuter = bvNone
       TabOrder = 1
       object sbxView: TScrollBox
-        Left = 1
-        Top = 1
-        Width = 1020
-        Height = 565
+        Left = 0
+        Top = 0
+        Width = 1022
+        Height = 567
         HorzScrollBar.Smooth = True
         HorzScrollBar.Tracking = True
         VertScrollBar.Smooth = True
@@ -350,12 +368,15 @@ object frmEditorImage: TfrmEditorImage
         TabOrder = 0
         OnMouseWheel = sbxViewMouseWheel
         OnResize = sbxViewResize
+        ExplicitLeft = 1
+        ExplicitTop = 1
+        ExplicitWidth = 1020
         ExplicitHeight = 549
         object panEditorContainer: TPanel
           Left = 0
           Top = 0
-          Width = 1020
-          Height = 565
+          Width = 1022
+          Height = 567
           Align = alClient
           BevelOuter = bvNone
           Color = clGray
@@ -369,12 +390,13 @@ object frmEditorImage: TfrmEditorImage
           TabOrder = 0
           StyleElements = []
           OnClick = panEditorContainerClick
+          ExplicitWidth = 1020
           ExplicitHeight = 549
           object panViewFrame: TPanel
             Left = 128
             Top = 128
-            Width = 764
-            Height = 309
+            Width = 766
+            Height = 311
             Align = alClient
             BevelOuter = bvNone
             Color = clWhite
@@ -387,15 +409,19 @@ object frmEditorImage: TfrmEditorImage
             ParentDoubleBuffered = False
             TabOrder = 0
             StyleElements = []
+            ExplicitWidth = 764
             ExplicitHeight = 293
             object imgEditor: TImage
               Left = 1
               Top = 1
-              Width = 762
-              Height = 307
+              Width = 764
+              Height = 309
               Align = alClient
               Stretch = True
               OnClick = panEditorContainerClick
+              OnMouseDown = imgEditorMouseDown
+              OnMouseMove = imgEditorMouseMove
+              OnMouseUp = imgEditorMouseUp
               ExplicitLeft = 128
               ExplicitTop = 120
               ExplicitWidth = 766
@@ -405,9 +431,9 @@ object frmEditorImage: TfrmEditorImage
         end
       end
       object panFrameView: TPanel
-        Left = 1
-        Top = 566
-        Width = 1020
+        Left = 0
+        Top = 567
+        Width = 1022
         Height = 100
         Align = alBottom
         AutoSize = True
@@ -415,11 +441,13 @@ object frmEditorImage: TfrmEditorImage
         DoubleBuffered = False
         ParentDoubleBuffered = False
         TabOrder = 1
+        ExplicitLeft = 1
         ExplicitTop = 550
+        ExplicitWidth = 1020
         inline fFrameView: TMultiImageViewFrame
           Left = 0
           Top = 0
-          Width = 1020
+          Width = 1022
           Height = 100
           HorzScrollBar.ParentColor = False
           HorzScrollBar.Smooth = True
@@ -481,6 +509,7 @@ object frmEditorImage: TfrmEditorImage
     end
     object actPencil: TAction
       Caption = 'Pencil'
+      Checked = True
       GroupIndex = 1
       ImageIndex = 1
       ShortCut = 8272
@@ -600,7 +629,6 @@ object frmEditorImage: TfrmEditorImage
     end
     object actMonoOff: TAction
       Caption = 'actMonoOff'
-      Checked = True
       GroupIndex = 1
       ImageIndex = 26
       ShortCut = 16461
@@ -635,6 +663,16 @@ object frmEditorImage: TfrmEditorImage
     object actToggleAnimation: TAction
       ShortCut = 16416
       OnExecute = actToggleAnimationExecute
+    end
+    object actUndo: TAction
+      Caption = 'Undo'
+      ShortCut = 16474
+      OnExecute = actUndoExecute
+    end
+    object actRedo: TAction
+      Caption = 'Redo'
+      ShortCut = 24666
+      OnExecute = actRedoExecute
     end
   end
   object tbrImages: TImageList

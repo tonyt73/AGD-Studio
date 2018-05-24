@@ -23,6 +23,8 @@ protected:
     const Agdx::GraphicsMode&       m_GraphicsMode;     // the graphic mode definition
     unsigned int                    m_Width;            // the width of the buffer in pixels
     unsigned int                    m_Height;           // the height of the buffer in pixels
+    float                           m_ScalarX;          // the width scalar
+    float                           m_ScalarY;          // the height scalar
     unsigned int                    m_Stride;           // the stride of the buffer in bytes
     unsigned int                    m_PixelsPerByte;    // the number of pixel per bytes (inv of bits / pixels)
     unsigned int                    m_NumberOfBuffers;  // the number of data buffers using by this buffer type
@@ -74,6 +76,8 @@ public:
                                     // Dimensions
     unsigned int        __property  Width  = { read = m_Width  };
     unsigned int        __property  Height = { read = m_Height };
+    unsigned int        __property  ScalarX = { read = m_ScalarX };
+    unsigned int        __property  ScalarY = { read = m_ScalarY };
                                     // Color
     unsigned char       __property  Color[ColorIndex index] = { read = GetColorIndex, write = SetColorIndex };
     unsigned char       __property  Pen = { read = GetPen, write = SetPen };

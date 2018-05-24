@@ -25,6 +25,8 @@ __fastcall GraphicsBuffer::GraphicsBuffer(unsigned int width, unsigned int heigh
 , m_BufferType(mode.TypeOfBuffer)
 , m_Width(width)
 , m_Height(height)
+, m_ScalarX(mode.ScalarX)
+, m_ScalarY(mode.ScalarY)
 , m_Stride(width / (8 / mode.BitsPerPixel))
 , m_PixelsPerByte(8 / mode.BitsPerPixel)
 , m_RenderInGreyscale(false)
@@ -52,6 +54,7 @@ void __fastcall GraphicsBuffer::Make(unsigned int width, unsigned int height, co
         case btAttribute:   buffer = std::make_unique<AttributeGraphicsBuffer>(width, height, mode);break;
         default: assert(0); break;
     }
+
 }
 //---------------------------------------------------------------------------
 void __fastcall GraphicsBuffer::PushBuffer(unsigned int size)

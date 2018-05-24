@@ -11,6 +11,8 @@ __fastcall TSelectionImageFrame::TSelectionImageFrame(TComponent* Owner, const A
 , m_Image(image)
 , m_Selected(false)
 , m_Scale(4)
+, m_ScalarX(image.ScalarX)
+, m_ScalarY(image.ScalarY)
 , FOnClick(nullptr)
 {
 }
@@ -42,8 +44,8 @@ void __fastcall TSelectionImageFrame::SetSelected(bool state)
 void __fastcall TSelectionImageFrame::SetScale(int scale)
 {
     m_Scale = scale;
-    Width  = (scale * imgBitmap->Picture->Bitmap->Width ) + Padding->Left + Padding->Right;
-    Height = (scale * imgBitmap->Picture->Bitmap->Height) + Padding->Top  + Padding->Bottom;
+    Width  = (m_ScalarX * scale * imgBitmap->Picture->Bitmap->Width ) + Padding->Left + Padding->Right;
+    Height = (m_ScalarY * scale * imgBitmap->Picture->Bitmap->Height) + Padding->Top  + Padding->Bottom;
     Color = m_Selected ? StyleServices()->GetStyleColor(scButtonHot) : StyleServices()->GetStyleColor(scPanel);
 }
 //---------------------------------------------------------------------------

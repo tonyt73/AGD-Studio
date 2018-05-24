@@ -4,6 +4,7 @@
 #include "DocumentManager.h"
 #include "Messaging/Messaging.h"
 #include "Frames/fSelectionImage.h"
+#include "Frames/ImageEditor/PencilTool.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "LMDDckSite"
@@ -14,7 +15,7 @@ __fastcall TfrmEditorImage::TfrmEditorImage(TComponent* Owner)
 : TFrame(Owner)
 , m_Magnification(8.f)
 , m_SelectedFrame(0)
-, m_Image(nullptr)
+, m_ImageDocument(nullptr)
 {
     ::Messaging::Bus::Subscribe<Event>(OnEvent);
 }
@@ -26,7 +27,7 @@ __fastcall TfrmEditorImage::~TfrmEditorImage()
 //---------------------------------------------------------------------------
 bool __fastcall TfrmEditorImage::IsActive() const
 {
-    return static_cast<TLMDDockPanel*>(m_Image->DockPanel)->Active;
+    return static_cast<TLMDDockPanel*>(m_ImageDocument->DockPanel)->Active;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::OnEvent(const Event& event)
@@ -42,18 +43,45 @@ void __fastcall TfrmEditorImage::SetDocument(Document* document)
     m_ActionMap["zoom.in"] = actZoomIn;
     m_ActionMap["zoom.out"] = actZoomOut;
     m_ActionMap["zoom.reset"] = actZoomReset;
+    m_ActionMap["edit.undo"] = actUndo;
+    m_ActionMap["edit.redo"] = actRedo;
 
-    m_Image = dynamic_cast<ImageDocument*>(document);
+//    m_ToolMap[btnSelect.Tag] = std::make_unique<SelectTool>();
+//    m_ToolMap[btnText.Tag] = std::make_unique<TextTool>();
+    m_ToolMap[btnPencil->Tag] = std::make_unique<PencilTool>();
+//    m_ToolMap[btnBrush.Tag] = std::make_unique<BrushTool>();
+//    m_ToolMap[btnLine.Tag] = std::make_unique<LineTool>();
+//    m_ToolMap[btnShape.Tag] = std::make_unique<ShapeTool>();
+//    m_ToolMap[btnDropper.Tag] = std::make_unique<DropperTool>();
+//    m_ToolMap[btnSprayBrush.Tag] = std::make_unique<SprayBrushTool>();
+//    m_ToolMap[btnFill.Tag] = std::make_unique<FillTool>();
+//    m_ToolMap[btnEraser.Tag] = std::make_unique<EraserTool>();
+
+//    m_ToolMap[btnRotateLeft.Tag] = std::make_unique<RotateLeftTool>();
+//    m_ToolMap[btnRotateRight.Tag] = std::make_unique<RotateRightTool>();
+//    m_ToolMap[btnRotateDown.Tag] = std::make_unique<RotateDownTool>();
+//    m_ToolMap[btnRotateUp.Tag] = std::make_unique<RotateUpTool>();
+//    m_ToolMap[btnFlipHorizontal.Tag] = std::make_unique<FlipHorizontalTool>();
+//    m_ToolMap[btnFlipvertical.Tag] = std::make_unique<FlipverticalTool>();
+//    m_ToolMap[btnRotateLeft90.Tag] = std::make_unique<RotateLeft90Tool>();
+//    m_ToolMap[btnRotateRight90.Tag] = std::make_unique<RotateRight90Tool>();
+
+    m_ImageDocument = dynamic_cast<ImageDocument*>(document);
     panEditorContainer->Color = StyleServices()->GetStyleColor(scGenericGradientBase);
 
     // convert the documents images into frames
     fFrameView->OnSelectedClick = OnFrameSelected;
     RefreshFramesView();
     imgEditor->Picture->Bitmap->PixelFormat = pf32bit;
-    if (m_Image->CanModifyFrames)
+    if (m_ImageDocument->CanModifyFrames)
     {
         fFrameView->PopupMenu = popFrames;
     }
+
+    // default tool: pencil
+    actPencil->Checked = true;
+    btnTool->ImageIndex = actPencil->ImageIndex;
+    m_PaintTool = btnPencil->Tag;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::FrameEndDock(TObject *Sender, TObject *Target, int X, int Y)
@@ -78,6 +106,7 @@ void __fastcall TfrmEditorImage::actPencilExecute(TObject *Sender)
     {
         actPencil->Checked = true;
         btnTool->ImageIndex = actPencil->ImageIndex;
+        m_PaintTool = btnPencil->Tag;
     }
 }
 //---------------------------------------------------------------------------
@@ -221,7 +250,7 @@ void __fastcall TfrmEditorImage::actMonoOnExecute(TObject *Sender)
 {
     if (IsActive())
     {
-        for (int i = 0; i < m_Image->Frames; i++)
+        for (int i = 0; i < m_ImageDocument->Frames; i++)
         {
             m_Frames[i]->Canvas().RenderInGreyscale = true;
         }
@@ -233,7 +262,7 @@ void __fastcall TfrmEditorImage::actMonoOffExecute(TObject *Sender)
 {
     if (IsActive())
     {
-        for (int i = 0; i < m_Image->Frames; i++)
+        for (int i = 0; i < m_ImageDocument->Frames; i++)
         {
             m_Frames[i]->Canvas().RenderInGreyscale = false;
         }
@@ -274,8 +303,8 @@ void __fastcall TfrmEditorImage::sbxViewResize(TObject *Sender)
     {
 
         const auto& gm = theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode();
-        auto vw = (int)(m_Image->Width  * gm->ScalarX * m_Magnification) + 2;
-        auto vh = (int)(m_Image->Height * gm->ScalarY * m_Magnification) + 2;
+        auto vw = (int)(m_ImageDocument->Width  * gm->ScalarX * m_Magnification) + 2;
+        auto vh = (int)(m_ImageDocument->Height * gm->ScalarY * m_Magnification) + 2;
         if (vw + 256 > sbxView->Width || vh + 256 > sbxView->Height)
         {
             // no auto alignment
@@ -308,9 +337,9 @@ void __fastcall TfrmEditorImage::DrawGrids()
     auto Canvas = imgEditor->Picture->Bitmap->Canvas;
 
     auto xs = 0;
-    auto xe = m_Image->Width * fScalarX * m_Magnification;
+    auto xe = m_ImageDocument->Width * fScalarX * m_Magnification;
     auto ys = 0;
-    auto ye = m_Image->Height * fScalarY * m_Magnification;
+    auto ye = m_ImageDocument->Height * fScalarY * m_Magnification;
     if (true == btnGridPixel->Down && 4 <= m_Magnification)
     {
         Canvas->Pen->Color = (TColor)0x00004080;
@@ -344,12 +373,16 @@ void __fastcall TfrmEditorImage::DrawGrids()
 void __fastcall TfrmEditorImage::RefreshView()
 {
     fFrameView->Select(m_SelectedFrame);
-    if (m_Image != nullptr)
+    if (m_ImageDocument != nullptr)
     {
+        // match the internal bitmap to the image components size (this stops the grids from showing a fat lines)
         imgEditor->Picture->Bitmap->Width = imgEditor->Width;
         imgEditor->Picture->Bitmap->Height = imgEditor->Height;
+        // take the image canvas that we are editing and show it on the image editor view
         m_Frames[m_SelectedFrame]->Canvas().Draw(imgEditor->Picture->Bitmap);
+        //draw grids over it
         DrawGrids();
+        // show it
         imgEditor->Invalidate();
     }
 }
@@ -359,19 +392,15 @@ void __fastcall TfrmEditorImage::RefreshFramesView()
     m_Frames.clear();
     fFrameView->Clear();
     const auto& gm = *(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode());
-    for (int i = 0; i < m_Image->Frames; i++)
+    for (int i = 0; i < m_ImageDocument->Frames; i++)
     {
-        auto image = std::make_unique<Agdx::Image>(m_Image->Width, m_Image->Height, gm);
-        image->Canvas().Set(m_Image->Frame[i]);
-        image->Canvas().Color[ciPrimary] = 12;
-        for (auto j = 0; j < 16; j++)
-        {
-            auto x = i % 2 ? j : (8 - j);
-            auto y = j;
-            image->Canvas().SetPixel(x, y);
-        }
-        m_Image->Frame[i] = image->Canvas().Get();
-        fFrameView->Add(image->Canvas(), m_Image->Hint[i]);
+        // make an image canvas
+        auto image = std::make_unique<Agdx::Image>(m_ImageDocument->Width, m_ImageDocument->Height, gm);
+        // set the graphic of the canvas from the image documents frame
+        image->Canvas().Set(m_ImageDocument->Frame[i]);
+        // add the new canvas to the frame view; along with a hint (character set only)
+        fFrameView->Add(image->Canvas(), m_ImageDocument->Hint[i]);
+        // save the image canvas in the list of editable frames
         m_Frames.push_back(std::move(image));
     }
     RefreshView();
@@ -406,19 +435,19 @@ void __fastcall TfrmEditorImage::OnFrameSelected(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::popAddFrameClick(TObject *Sender)
 {
-    m_Image->AddFrame();
+    m_ImageDocument->AddFrame();
     RefreshFramesView();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::popInsertFrameClick(TObject *Sender)
 {
-    m_Image->AddFrame(m_SelectedFrame);
+    m_ImageDocument->AddFrame(m_SelectedFrame);
     RefreshFramesView();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::popRemoveFrameClick(TObject *Sender)
 {
-    m_Image->DeleteFrame(m_SelectedFrame);
+    m_ImageDocument->DeleteFrame(m_SelectedFrame);
     m_SelectedFrame = 0;
     RefreshFramesView();
 }
@@ -453,8 +482,62 @@ void __fastcall TfrmEditorImage::actToggleAnimationExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::tmrAnimateTimer(TObject *Sender)
 {
-    m_SelectedFrame = (m_SelectedFrame + 1) % m_Image->Frames;
+    m_SelectedFrame = (m_SelectedFrame + 1) % m_ImageDocument->Frames;
     RefreshView();
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::actUndoExecute(TObject *Sender)
+{
+    //
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::actRedoExecute(TObject *Sender)
+{
+    //
+}
+//---------------------------------------------------------------------------
+TPoint __fastcall TfrmEditorImage::ToImagePt(int X, int Y)
+{
+    auto x = (X / (float)imgEditor->Width) * m_ImageDocument->Width;
+    auto y = (Y / (float)imgEditor->Height) * m_ImageDocument->Height;
+    return TPoint(x, y);
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::imgEditorMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
+{
+    if (btnAnimateStop->Down)
+    {
+        if (m_ToolMap.count(m_PaintTool) == 1)
+        {
+            m_ToolMap[m_PaintTool].get()->Begin(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y), Shift);
+            RefreshView();
+        }
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::imgEditorMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
+{
+    if (btnAnimateStop->Down)
+    {
+        if (m_ToolMap.count(m_PaintTool) == 1)
+        {
+            m_ToolMap[m_PaintTool]->Move(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y), Shift);
+            RefreshView();
+        }
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::imgEditorMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
+{
+    if (btnAnimateStop->Down)
+    {
+        if (m_ToolMap.count(m_PaintTool) == 1)
+        {
+            m_ToolMap[m_PaintTool]->End(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y));
+            m_ImageDocument->Frame[m_SelectedFrame] = m_Frames[m_SelectedFrame]->Canvas().Get();
+            RefreshView();
+        }
+    }
 }
 //---------------------------------------------------------------------------
 

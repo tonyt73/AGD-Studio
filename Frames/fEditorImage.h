@@ -23,6 +23,7 @@
 #include "Messaging/Event.h"
 #include "Graphics/Image.h"
 #include "fMultiImageView.h"
+#include "PaintTool.h"
 //---------------------------------------------------------------------------
 class TfrmEditorImage : public TFrame
 {
@@ -117,6 +118,8 @@ __published:    // IDE-managed Components
     TAction *actAnimateStop;
     TAction *actToggleAnimation;
     TTimer *tmrAnimate;
+    TAction *actUndo;
+    TAction *actRedo;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actBrushExecute(TObject *Sender);
@@ -152,14 +155,22 @@ __published:    // IDE-managed Components
     void __fastcall actAnimateStopExecute(TObject *Sender);
     void __fastcall actToggleAnimationExecute(TObject *Sender);
     void __fastcall tmrAnimateTimer(TObject *Sender);
+    void __fastcall actUndoExecute(TObject *Sender);
+    void __fastcall actRedoExecute(TObject *Sender);
+    void __fastcall imgEditorMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
+    void __fastcall imgEditorMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
+    void __fastcall imgEditorMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
 private:    // User declarations
     typedef std::vector<std::unique_ptr<Agdx::Image>> ImageList;
+    typedef std::map<int, std::unique_ptr<PaintTool>> ToolMap;
 
-    ImageDocument*              m_Image;            // the image document we are editing
+    ImageDocument*              m_ImageDocument;    // the image document we are editing
     ImageList                   m_Frames;           // the image documents frames as bitmap images
-    std::map<String, TAction*>  m_ActionMap;
-    float                       m_Magnification;
+    std::map<String, TAction*>  m_ActionMap;        // a map of actions; used by generic messaging to handle zoom in/out/reset, undo/redo
+    float                       m_Magnification;    // the magnification of the main view
     int                         m_SelectedFrame;    // the frame we are editing
+    ToolMap                     m_ToolMap;          // a map to all the paint tools
+    int                         m_PaintTool;        // the selected paint tool
 
     void            __fastcall  SetDocument(Document* document);
     void            __fastcall  OnEvent(const Event& event);
@@ -168,6 +179,7 @@ private:    // User declarations
     void            __fastcall  RefreshView();
     void            __fastcall  RefreshFramesView();
     void            __fastcall  OnFrameSelected(TObject *Sender);
+    TPoint          __fastcall  ToImagePt(int X, int Y);
 
 public:        // User declarations
                     __fastcall  TfrmEditorImage(TComponent* Owner);
@@ -180,7 +192,7 @@ public:        // User declarations
                                     return editor;
                                 }
 
-    __property  ImageDocument*  Image = { read = m_Image, write = m_Image };
+    __property  ImageDocument*  Image = { read = m_ImageDocument, write = m_ImageDocument };
 };
 //---------------------------------------------------------------------------
 #endif

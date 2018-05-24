@@ -20,6 +20,8 @@ private:	// User declarations
     const Agdx::GraphicsBuffer& m_Image;
     bool                m_Selected;
     int                 m_Scale;
+    float               m_ScalarX;
+    float               m_ScalarY;
     TNotifyEvent        FOnClick;
 
     void    __fastcall  SetSelected(bool state);
