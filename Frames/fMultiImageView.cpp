@@ -79,7 +79,7 @@ void __fastcall TMultiImageViewFrame::FrameMouseWheel(TObject *Sender, TShiftSta
     {
         Handled = true;
         auto adjust = WheelDelta != 0 ? (WheelDelta / (WheelDelta > 0 ? WheelDelta : -WheelDelta)) : 0;
-        Scale = std::max(2, std::min(16 , m_Scale + adjust));
+        Scale = std::max(1, std::min(16 , m_Scale + adjust));
         panImages->Width = panImages->ControlCount * panImages->Controls[0]->Width;
         panImages->Height = panImages->Controls[0]->Height;
         Height = panImages->Height + 20;

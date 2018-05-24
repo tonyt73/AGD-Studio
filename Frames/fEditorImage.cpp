@@ -305,12 +305,12 @@ void __fastcall TfrmEditorImage::sbxViewResize(TObject *Sender)
         const auto& gm = theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode();
         auto vw = (int)(m_ImageDocument->Width  * gm->ScalarX * m_Magnification) + 2;
         auto vh = (int)(m_ImageDocument->Height * gm->ScalarY * m_Magnification) + 2;
-        if (vw + 256 > sbxView->Width || vh + 256 > sbxView->Height)
+        if (vw + 16 > sbxView->Width || vh + 16 > sbxView->Height)
         {
             // no auto alignment
             panEditorContainer->Align = alNone;
-            panEditorContainer->Width = std::max(vw + 256, sbxView->Width);
-            panEditorContainer->Height = std::max(vh + 256, sbxView->Height);
+            panEditorContainer->Width = std::max(vw + 16, sbxView->Width);
+            panEditorContainer->Height = std::max(vh + 16, sbxView->Height);
             panEditorContainer->Left = 0;
             panEditorContainer->Top = 0;
         }
@@ -383,7 +383,7 @@ void __fastcall TfrmEditorImage::RefreshView()
         //draw grids over it
         DrawGrids();
         // show it
-        imgEditor->Invalidate();
+        imgEditor->Refresh();
     }
 }
 //---------------------------------------------------------------------------
@@ -412,7 +412,7 @@ void __fastcall TfrmEditorImage::sbxViewMouseWheel(TObject *Sender, TShiftState 
     {
         Handled = true;
         float delta = WheelDelta / (Shift.Contains(ssShift) ? 50.f : 200.f);
-        m_Magnification = std::max(8.0f, std::min(64.f, m_Magnification + delta));
+        m_Magnification = std::max(2.0f, std::min(64.f, m_Magnification + delta));
         sbxViewResize(NULL);
     }
     else
