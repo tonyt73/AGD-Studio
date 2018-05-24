@@ -60,6 +60,7 @@ String __fastcall PaintTool::End(Agdx::GraphicsBuffer& canvas, const TPoint& pt)
         Apply(canvas, pt);
     }
     m_IsDrawing = false;
+    return canvas.Get();
 }
 //---------------------------------------------------------------------------
 
