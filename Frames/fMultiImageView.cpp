@@ -60,6 +60,19 @@ void __fastcall TMultiImageViewFrame::Add(const Agdx::GraphicsBuffer& image, con
     Height = panImages->Height + 20;
 }
 //---------------------------------------------------------------------------
+void __fastcall TMultiImageViewFrame::Select(int index)
+{
+    for (auto i = 0; i < panImages->ControlCount; i++)
+    {
+        auto control = panImages->Controls[i];
+        if (control->ClassNameIs("TSelectionImageFrame") && control->Tag == index)
+        {
+            static_cast<TSelectionImageFrame*>(control)->Selected = true;
+            return;
+        }
+    }
+}
+//---------------------------------------------------------------------------
 void __fastcall TMultiImageViewFrame::FrameMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled)
 {
     if (Shift.Contains(ssCtrl))

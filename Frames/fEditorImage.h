@@ -110,6 +110,13 @@ __published:    // IDE-managed Components
     TMenuItem *popAddFrame;
     TMenuItem *popInsertFrame;
     TMenuItem *popRemoveFrame;
+    TToolBar *tbrAnimate;
+    TToolButton *btnAnimatePlay;
+    TToolButton *btnAnimateStop;
+    TAction *actAnimatePlay;
+    TAction *actAnimateStop;
+    TAction *actToggleAnimation;
+    TTimer *tmrAnimate;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actBrushExecute(TObject *Sender);
@@ -141,6 +148,10 @@ __published:    // IDE-managed Components
     void __fastcall popAddFrameClick(TObject *Sender);
     void __fastcall popInsertFrameClick(TObject *Sender);
     void __fastcall popRemoveFrameClick(TObject *Sender);
+    void __fastcall actAnimatePlayExecute(TObject *Sender);
+    void __fastcall actAnimateStopExecute(TObject *Sender);
+    void __fastcall actToggleAnimationExecute(TObject *Sender);
+    void __fastcall tmrAnimateTimer(TObject *Sender);
 private:    // User declarations
     typedef std::vector<std::unique_ptr<Agdx::Image>> ImageList;
 
@@ -155,6 +166,7 @@ private:    // User declarations
     bool            __fastcall  IsActive() const;
     void            __fastcall  DrawGrids();
     void            __fastcall  RefreshView();
+    void            __fastcall  RefreshFramesView();
     void            __fastcall  OnFrameSelected(TObject *Sender);
 
 public:        // User declarations

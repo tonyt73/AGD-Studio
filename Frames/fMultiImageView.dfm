@@ -1,7 +1,7 @@
 object MultiImageViewFrame: TMultiImageViewFrame
   Left = 0
   Top = 0
-  Width = 457
+  Width = 451
   Height = 100
   HorzScrollBar.ParentColor = False
   HorzScrollBar.Smooth = True
@@ -28,6 +28,7 @@ object MultiImageViewFrame: TMultiImageViewFrame
     TabOrder = 0
   end
   object Timer1: TTimer
+    Interval = 500
     OnTimer = Timer1Timer
     Left = 216
     Top = 40

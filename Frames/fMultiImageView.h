@@ -27,6 +27,7 @@ public:		// User declarations
 
     void    __fastcall  Clear();
     void    __fastcall  Add(const  Agdx::GraphicsBuffer& image, const String& hint);
+    void    __fastcall  Select(int index);
 
     int     __property  Scale = { read = m_Scale, write = SetScale };
             __property  TNotifyEvent OnSelectedClick = { read = FOnClick, write = FOnClick };

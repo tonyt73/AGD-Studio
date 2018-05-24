@@ -47,25 +47,8 @@ void __fastcall TfrmEditorImage::SetDocument(Document* document)
     panEditorContainer->Color = StyleServices()->GetStyleColor(scGenericGradientBase);
 
     // convert the documents images into frames
-    m_Frames.clear();
-    fFrameView->Clear();
     fFrameView->OnSelectedClick = OnFrameSelected;
-    const auto& gm = *(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode());
-    for (int i = 0; i < m_Image->Frames; i++)
-    {
-        auto image = std::make_unique<Agdx::Image>(m_Image->Width, m_Image->Height, gm);
-        //image->Canvas().Set(m_Image->Frame[i]);
-//        image->Canvas().Color[ciPrimary] = 12;
-//        for (auto j = 0; j < 16; j++)
-//        {
-//            auto x = i % 2 ? j : (8 - j);
-//            auto y = j;
-//            image->Canvas().SetPixel(x, y);
-//        }
-        m_Image->Frame[i] = image->Canvas().Get();
-        fFrameView->Add(image->Canvas(), m_Image->Hint[i]);
-        m_Frames.push_back(std::move(image));
-    }
+    RefreshFramesView();
     imgEditor->Picture->Bitmap->PixelFormat = pf32bit;
     if (m_Image->CanModifyFrames)
     {
@@ -238,7 +221,10 @@ void __fastcall TfrmEditorImage::actMonoOnExecute(TObject *Sender)
 {
     if (IsActive())
     {
-        m_Frames[m_SelectedFrame]->Canvas().RenderInGreyscale = true;
+        for (int i = 0; i < m_Image->Frames; i++)
+        {
+            m_Frames[i]->Canvas().RenderInGreyscale = true;
+        }
         RefreshView();
     }
 }
@@ -247,7 +233,10 @@ void __fastcall TfrmEditorImage::actMonoOffExecute(TObject *Sender)
 {
     if (IsActive())
     {
-        m_Frames[m_SelectedFrame]->Canvas().RenderInGreyscale = false;
+        for (int i = 0; i < m_Image->Frames; i++)
+        {
+            m_Frames[i]->Canvas().RenderInGreyscale = false;
+        }
         RefreshView();
     }
 }
@@ -354,6 +343,7 @@ void __fastcall TfrmEditorImage::DrawGrids()
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::RefreshView()
 {
+    fFrameView->Select(m_SelectedFrame);
     if (m_Image != nullptr)
     {
         imgEditor->Picture->Bitmap->Width = imgEditor->Width;
@@ -362,6 +352,29 @@ void __fastcall TfrmEditorImage::RefreshView()
         DrawGrids();
         imgEditor->Invalidate();
     }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::RefreshFramesView()
+{
+    m_Frames.clear();
+    fFrameView->Clear();
+    const auto& gm = *(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode());
+    for (int i = 0; i < m_Image->Frames; i++)
+    {
+        auto image = std::make_unique<Agdx::Image>(m_Image->Width, m_Image->Height, gm);
+        image->Canvas().Set(m_Image->Frame[i]);
+        image->Canvas().Color[ciPrimary] = 12;
+        for (auto j = 0; j < 16; j++)
+        {
+            auto x = i % 2 ? j : (8 - j);
+            auto y = j;
+            image->Canvas().SetPixel(x, y);
+        }
+        m_Image->Frame[i] = image->Canvas().Get();
+        fFrameView->Add(image->Canvas(), m_Image->Hint[i]);
+        m_Frames.push_back(std::move(image));
+    }
+    RefreshView();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::sbxViewMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled)
@@ -393,17 +406,55 @@ void __fastcall TfrmEditorImage::OnFrameSelected(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::popAddFrameClick(TObject *Sender)
 {
-    //
+    m_Image->AddFrame();
+    RefreshFramesView();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::popInsertFrameClick(TObject *Sender)
 {
-    //
+    m_Image->AddFrame(m_SelectedFrame);
+    RefreshFramesView();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::popRemoveFrameClick(TObject *Sender)
 {
-    //
+    m_Image->DeleteFrame(m_SelectedFrame);
+    m_SelectedFrame = 0;
+    RefreshFramesView();
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::actAnimatePlayExecute(TObject *Sender)
+{
+    btnAnimatePlay->Down = true;
+    tmrAnimate->Enabled = true;
+    tbrTools->Enabled = false;
+    tbrShiftRotates->Enabled = false;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::actAnimateStopExecute(TObject *Sender)
+{
+    btnAnimateStop->Down = true;
+    tmrAnimate->Enabled = false;
+    tbrTools->Enabled = true;
+    tbrShiftRotates->Enabled = true;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::actToggleAnimationExecute(TObject *Sender)
+{
+    if (btnAnimatePlay->Down)
+    {
+        actAnimateStopExecute(Sender);
+    }
+    else
+    {
+        actAnimatePlayExecute(Sender);
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::tmrAnimateTimer(TObject *Sender)
+{
+    m_SelectedFrame = (m_SelectedFrame + 1) % m_Image->Frames;
+    RefreshView();
 }
 //---------------------------------------------------------------------------
 

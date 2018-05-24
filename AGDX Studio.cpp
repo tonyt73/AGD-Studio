@@ -14,12 +14,12 @@ USEFORM("Frames\fEditorMap.cpp", frmEditorMap); /* TFrame: File Type */
 USEFORM("Forms\fAbout.cpp", frmAbout);
 USEFORM("Forms\fMain.cpp", frmMain);
 USEFORM("Frames\fEditorMusic.cpp", frmEditorMusic); /* TFrame: File Type */
+USEFORM("Frames\fWelcomeDialog.cpp", frmWelcomeDialog); /* TFrame: File Type */
 USEFORM("Frames\fIDE.cpp", frmIDE); /* TFrame: File Type */
 USEFORM("Frames\fImportDialog.cpp", frmImportDialog); /* TFrame: File Type */
-USEFORM("Frames\fSelectionPanel.cpp", SelectionPanelFrame); /* TFrame: File Type */
-USEFORM("Frames\fWelcomeDialog.cpp", frmWelcomeDialog); /* TFrame: File Type */
-USEFORM("Frames\fSelectionImage.cpp", SelectionImageFrame); /* TFrame: File Type */
 USEFORM("Frames\fMultiImageView.cpp", MultiImageViewFrame); /* TFrame: File Type */
+USEFORM("Frames\fSelectionImage.cpp", SelectionImageFrame); /* TFrame: File Type */
+USEFORM("Frames\fSelectionPanel.cpp", SelectionPanelFrame); /* TFrame: File Type */
 //---------------------------------------------------------------------------
 int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {

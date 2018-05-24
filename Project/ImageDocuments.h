@@ -49,7 +49,7 @@ public:
 
     virtual void        __fastcall  Save();
 
-            bool        __fastcall  AddFrame(const String& hint = "");
+            bool        __fastcall  AddFrame(int index = -1, const String& hint = "");
             bool        __fastcall  DeleteFrame(int index);
 
             bool        __property  MultiFrame      = { read = m_MultiFrame                 };

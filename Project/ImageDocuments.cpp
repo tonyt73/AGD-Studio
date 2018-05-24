@@ -122,12 +122,20 @@ String __fastcall ImageDocument::GetHint(int frame) const
     return "";
 }
 //---------------------------------------------------------------------------
-bool __fastcall ImageDocument::AddFrame(const String& hint)
+bool __fastcall ImageDocument::AddFrame(int index, const String& hint)
 {
     if (m_Frames.size() == 0 || (m_MultiFrame && m_CanModifyFrames))
     {
-        m_Frames.push_back("");
-        m_Hints.push_back(hint);
+        if (0 > index || index > m_Frames.size())
+        {
+            m_Frames.push_back("");
+            m_Hints.push_back(hint);
+        }
+        else
+        {
+            m_Frames.insert(m_Frames.begin() + index, "");
+            m_Hints.insert(m_Hints.begin() + index, hint);
+        }
         return true;
     }
     return false;
@@ -135,7 +143,7 @@ bool __fastcall ImageDocument::AddFrame(const String& hint)
 //---------------------------------------------------------------------------
 bool __fastcall ImageDocument::DeleteFrame(int index)
 {
-    if (m_Frames.size() > 1 && m_CanModifyFrames && 0 < index && index < m_Frames.size())
+    if (m_Frames.size() > 1 && m_CanModifyFrames && 0 <= index && index < m_Frames.size())
     {
         // can only delete new frames; can't delete the first frame
         m_Frames.erase(m_Frames.begin() + index);
@@ -222,10 +230,10 @@ __fastcall CharacterSetDocument::CharacterSetDocument(const String& name, const 
     {
         switch (i)
         {
-            case  0: AddFrame("Space"); break;
-            case 95: AddFrame("©"); break;
-            case 92: AddFrame("Vert.Line"); break;
-            default: AddFrame(UnicodeString().StringOfChar(32 + i, 1)); break;
+            case  0: AddFrame(-1, "Space"); break;
+            case 95: AddFrame(-1, "©"); break;
+            case 92: AddFrame(-1, "Vert.Line"); break;
+            default: AddFrame(-1, UnicodeString().StringOfChar(32 + i, 1)); break;
         }
     }
     m_CanModifyFrames = false;  // no for the editor
