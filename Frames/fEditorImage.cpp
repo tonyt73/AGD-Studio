@@ -509,7 +509,7 @@ void __fastcall TfrmEditorImage::imgEditorMouseDown(TObject *Sender, TMouseButto
     {
         if (m_ToolMap.count(m_PaintTool) == 1)
         {
-            m_ToolMap[m_PaintTool].get()->Begin(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y), Shift);
+            auto undo = m_ToolMap[m_PaintTool].get()->Begin(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y), Shift);
             RefreshView();
         }
     }
@@ -533,7 +533,7 @@ void __fastcall TfrmEditorImage::imgEditorMouseUp(TObject *Sender, TMouseButton 
     {
         if (m_ToolMap.count(m_PaintTool) == 1)
         {
-            m_ToolMap[m_PaintTool]->End(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y));
+            auto redo = m_ToolMap[m_PaintTool]->End(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y));
             m_ImageDocument->Frame[m_SelectedFrame] = m_Frames[m_SelectedFrame]->Canvas().Get();
             RefreshView();
         }
