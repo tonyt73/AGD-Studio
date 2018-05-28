@@ -152,8 +152,8 @@
         <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;fmx.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtprint.bpi;VclSmp.bpi;lmdrtcore.bpi</LinkPackageImports>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Build>66</VerInfo_Build>
-        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=1.0.6663.66;InternalName=agdx.exe;LegalCopyright=2018 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Programmed by Tony Thompson</VerInfo_Keys>
+        <VerInfo_Build>70</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=1.0.6663.70;InternalName=agdx.exe;LegalCopyright=2018 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Programmed by Tony Thompson</VerInfo_Keys>
         <VerInfo_Release>6663</VerInfo_Release>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <Icon_MainIcon>Icon.ico</Icon_MainIcon>
@@ -288,13 +288,32 @@
             <DependentOn>Frames\fWelcomeDialog.h</DependentOn>
             <BuildOrder>11</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Frames\ImageEditor\PaintTool.cpp">
-            <DependentOn>Frames\ImageEditor\PaintTool.h</DependentOn>
+        <CppCompile Include="Frames\ImageEditor\CanvasLineTool.cpp">
+            <DependentOn>Frames\ImageEditor\CanvasLineTool.h</DependentOn>
+            <BuildOrder>44</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\ImageEditor\CanvasPencilTool.cpp">
+            <DependentOn>Frames\ImageEditor\CanvasPencilTool.h</DependentOn>
+            <BuildOrder>43</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\ImageEditor\CanvasShapeTool.cpp">
+            <DependentOn>Frames\ImageEditor\CanvasShapeTool.h</DependentOn>
+            <BuildOrder>45</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\ImageEditor\CanvasTool.cpp">
+            <DependentOn>Frames\ImageEditor\CanvasTool.h</DependentOn>
             <BuildOrder>42</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Frames\ImageEditor\PencilTool.cpp">
-            <DependentOn>Frames\ImageEditor\PencilTool.h</DependentOn>
-            <BuildOrder>43</BuildOrder>
+        <CppCompile Include="Frames\ImageEditor\fToolbar.cpp">
+            <DependentOn>Frames\ImageEditor\fToolbar.h</DependentOn>
+            <BuildOrder>48</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\ImageEditor\fToolbarShape.cpp">
+            <Form>frmToolbarShape</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\ImageEditor\fToolbarShape.h</DependentOn>
+            <BuildOrder>46</BuildOrder>
         </CppCompile>
         <CppCompile Include="Graphics\GraphicsBuffers.cpp">
             <DependentOn>Graphics\GraphicsBuffers.h</DependentOn>
@@ -382,6 +401,10 @@
             <DependentOn>System\File.h</DependentOn>
             <BuildOrder>17</BuildOrder>
         </CppCompile>
+        <CppCompile Include="System\Generic.cpp">
+            <DependentOn>System\Generic.h</DependentOn>
+            <BuildOrder>47</BuildOrder>
+        </CppCompile>
         <CppCompile Include="System\Guard.cpp">
             <DependentOn>System\Guard.h</DependentOn>
             <BuildOrder>19</BuildOrder>
@@ -394,20 +417,21 @@
             <DependentOn>System\Path.h</DependentOn>
             <BuildOrder>18</BuildOrder>
         </CppCompile>
-        <FormResources Include="Forms\fNewImage.dfm"/>
         <FormResources Include="Forms\fSettings.dfm"/>
         <FormResources Include="Frames\fEditorCode.dfm"/>
         <FormResources Include="Frames\fEditorImage.dfm"/>
         <FormResources Include="Frames\fEditorMap.dfm"/>
+        <FormResources Include="Frames\fEditorMusic.dfm"/>
+        <FormResources Include="Forms\fNewImage.dfm"/>
         <FormResources Include="Forms\fAbout.dfm"/>
         <FormResources Include="Forms\fMain.dfm"/>
-        <FormResources Include="Frames\fEditorMusic.dfm"/>
-        <FormResources Include="Frames\fWelcomeDialog.dfm"/>
         <FormResources Include="Frames\fIDE.dfm"/>
         <FormResources Include="Frames\fImportDialog.dfm"/>
         <FormResources Include="Frames\fMultiImageView.dfm"/>
         <FormResources Include="Frames\fSelectionImage.dfm"/>
         <FormResources Include="Frames\fSelectionPanel.dfm"/>
+        <FormResources Include="Frames\fWelcomeDialog.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fToolbarShape.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

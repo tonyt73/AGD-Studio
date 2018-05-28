@@ -1,17 +1,15 @@
 //---------------------------------------------------------------------------
-#ifndef PencilToolH
-#define PencilToolH
+#ifndef fToolbarH
+#define fToolbarH
 //---------------------------------------------------------------------------
-#include "Frames/ImageEditor/PaintTool.h"
+#include "System/Generic.h"
 //---------------------------------------------------------------------------
-class PencilTool : public PaintTool
+class TfrmToolbar : public TFrame
 {
-private:
-    virtual void    __fastcall  Apply(Agdx::GraphicsBuffer& canvas, const TPoint& pt);
-
 public:
-                    __fastcall  PencilTool();
-                    __fastcall ~PencilTool();
+                    __fastcall  TfrmToolbar(TComponent* Owner);
+
+    virtual Generic __fastcall  Parameters() const = 0;
 };
 //---------------------------------------------------------------------------
 #endif

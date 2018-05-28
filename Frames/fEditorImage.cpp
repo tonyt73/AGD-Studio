@@ -4,11 +4,14 @@
 #include "DocumentManager.h"
 #include "Messaging/Messaging.h"
 #include "Frames/fSelectionImage.h"
-#include "Frames/ImageEditor/PencilTool.h"
+#include "Frames/ImageEditor/CanvasPencilTool.h"
+#include "Frames/ImageEditor/CanvasLineTool.h"
+#include "Frames/ImageEditor/CanvasShapeTool.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "LMDDckSite"
 #pragma link "fMultiImageView"
+#pragma link "fToolbarShape"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorImage::TfrmEditorImage(TComponent* Owner)
@@ -46,25 +49,25 @@ void __fastcall TfrmEditorImage::SetDocument(Document* document)
     m_ActionMap["edit.undo"] = actUndo;
     m_ActionMap["edit.redo"] = actRedo;
 
-//    m_ToolMap[btnSelect.Tag] = std::make_unique<SelectTool>();
-//    m_ToolMap[btnText.Tag] = std::make_unique<TextTool>();
-    m_ToolMap[btnPencil->Tag] = std::make_unique<PencilTool>();
-//    m_ToolMap[btnBrush.Tag] = std::make_unique<BrushTool>();
-//    m_ToolMap[btnLine.Tag] = std::make_unique<LineTool>();
-//    m_ToolMap[btnShape.Tag] = std::make_unique<ShapeTool>();
-//    m_ToolMap[btnDropper.Tag] = std::make_unique<DropperTool>();
-//    m_ToolMap[btnSprayBrush.Tag] = std::make_unique<SprayBrushTool>();
-//    m_ToolMap[btnFill.Tag] = std::make_unique<FillTool>();
-//    m_ToolMap[btnEraser.Tag] = std::make_unique<EraserTool>();
+//    m_CanvasToolMap[btnSelect->Tag] = std::make_unique<ImageSelectTool>();
+//    m_CanvasToolMap[btnText->Tag] = std::make_unique<CanvasTextTool>();
+    m_CanvasToolMap[btnPencil->Tag] = std::make_unique<CanvasPencilTool>();
+//    m_CanvasToolMap[btnBrush->Tag] = std::make_unique<CanvasBrushTool>();
+    m_CanvasToolMap[btnLine->Tag] = std::make_unique<CanvasLineTool>();
+    m_CanvasToolMap[btnShape->Tag] = std::make_unique<CanvasShapeTool>();
+//    m_CanvasToolMap[btnDropper->Tag] = std::make_unique<CanvasDropperTool>();
+//    m_CanvasToolMap[btnSprayBrush->Tag] = std::make_unique<CanvasSprayBrushTool>();
+//    m_CanvasToolMap[btnFill->Tag] = std::make_unique<CanvasFillTool>();
+//    m_CanvasToolMap[btnEraser->Tag] = std::make_unique<CanvasEraserTool>();
 
-//    m_ToolMap[btnRotateLeft.Tag] = std::make_unique<RotateLeftTool>();
-//    m_ToolMap[btnRotateRight.Tag] = std::make_unique<RotateRightTool>();
-//    m_ToolMap[btnRotateDown.Tag] = std::make_unique<RotateDownTool>();
-//    m_ToolMap[btnRotateUp.Tag] = std::make_unique<RotateUpTool>();
-//    m_ToolMap[btnFlipHorizontal.Tag] = std::make_unique<FlipHorizontalTool>();
-//    m_ToolMap[btnFlipvertical.Tag] = std::make_unique<FlipverticalTool>();
-//    m_ToolMap[btnRotateLeft90.Tag] = std::make_unique<RotateLeft90Tool>();
-//    m_ToolMap[btnRotateRight90.Tag] = std::make_unique<RotateRight90Tool>();
+//    m_CanvasToolMap[btnRotateLeft->Tag] = std::make_unique<CanvasRotateLeftTool>();
+//    m_CanvasToolMap[btnRotateRight->Tag] = std::make_unique<CanvasRotateRightTool>();
+//    m_CanvasToolMap[btnRotateDown->Tag] = std::make_unique<CanvasRotateDownTool>();
+//    m_CanvasToolMap[btnRotateUp->Tag] = std::make_unique<CanvasRotateUpTool>();
+//    m_CanvasToolMap[btnFlipHorizontal->Tag] = std::make_unique<CanvasFlipHorizontalTool>();
+//    m_CanvasToolMap[btnFlipvertical->Tag] = std::make_unique<CanvasFlipverticalTool>();
+//    m_CanvasToolMap[btnRotateLeft90->Tag] = std::make_unique<CanvasRotateLeft90Tool>();
+//    m_CanvasToolMap[btnRotateRight90->Tag] = std::make_unique<CanvasRotateRight90Tool>();
 
     m_ImageDocument = dynamic_cast<ImageDocument*>(document);
     panEditorContainer->Color = StyleServices()->GetStyleColor(scGenericGradientBase);
@@ -81,7 +84,7 @@ void __fastcall TfrmEditorImage::SetDocument(Document* document)
     // default tool: pencil
     actPencil->Checked = true;
     btnTool->ImageIndex = actPencil->ImageIndex;
-    m_PaintTool = btnPencil->Tag;
+    m_CanvasTool = btnPencil->Tag;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::FrameEndDock(TObject *Sender, TObject *Target, int X, int Y)
@@ -97,6 +100,7 @@ void __fastcall TfrmEditorImage::actSelectExecute(TObject *Sender)
     {
         actSelect->Checked = true;
         btnTool->ImageIndex = actSelect->ImageIndex;
+        m_CanvasTool = btnSelect->Tag;
     }
 }
 //---------------------------------------------------------------------------
@@ -106,7 +110,7 @@ void __fastcall TfrmEditorImage::actPencilExecute(TObject *Sender)
     {
         actPencil->Checked = true;
         btnTool->ImageIndex = actPencil->ImageIndex;
-        m_PaintTool = btnPencil->Tag;
+        m_CanvasTool = btnPencil->Tag;
     }
 }
 //---------------------------------------------------------------------------
@@ -116,6 +120,7 @@ void __fastcall TfrmEditorImage::actBrushExecute(TObject *Sender)
     {
         actBrush->Checked = true;
         btnTool->ImageIndex = actBrush->ImageIndex;
+        m_CanvasTool = btnBrush->Tag;
     }
 }
 //---------------------------------------------------------------------------
@@ -125,6 +130,7 @@ void __fastcall TfrmEditorImage::actFillExecute(TObject *Sender)
     {
         actFill->Checked = true;
         btnTool->ImageIndex = actFill->ImageIndex;
+        m_CanvasTool = btnFill->Tag;
     }
 }
 //---------------------------------------------------------------------------
@@ -134,6 +140,7 @@ void __fastcall TfrmEditorImage::actSprayBrushExecute(TObject *Sender)
     {
         actSprayBrush->Checked = true;
         btnTool->ImageIndex = actSprayBrush->ImageIndex;
+        m_CanvasTool = btnSprayBrush->Tag;
     }
 }
 //---------------------------------------------------------------------------
@@ -143,6 +150,7 @@ void __fastcall TfrmEditorImage::actEraserExecute(TObject *Sender)
     {
         actEraser->Checked = true;
         btnTool->ImageIndex = actEraser->ImageIndex;
+        m_CanvasTool = btnEraser->Tag;
     }
 }
 //---------------------------------------------------------------------------
@@ -152,6 +160,7 @@ void __fastcall TfrmEditorImage::actLineExecute(TObject *Sender)
     {
         actLine->Checked = true;
         btnTool->ImageIndex = actLine->ImageIndex;
+        m_CanvasTool = btnLine->Tag;
     }
 }
 //---------------------------------------------------------------------------
@@ -161,6 +170,7 @@ void __fastcall TfrmEditorImage::actShapeExecute(TObject *Sender)
     {
         actShape->Checked = true;
         btnTool->ImageIndex = actShape->ImageIndex;
+        m_CanvasTool = btnShape->Tag;
     }
 }
 //---------------------------------------------------------------------------
@@ -170,6 +180,7 @@ void __fastcall TfrmEditorImage::actTextExecute(TObject *Sender)
     {
         actText->Checked = true;
         btnTool->ImageIndex = actText->ImageIndex;
+        m_CanvasTool = btnText->Tag;
     }
 }
 //---------------------------------------------------------------------------
@@ -179,6 +190,7 @@ void __fastcall TfrmEditorImage::actDropperExecute(TObject *Sender)
     {
         actDropper->Checked = true;
         btnTool->ImageIndex = actDropper->ImageIndex;
+        m_CanvasTool = btnDropper->Tag;
     }
 }
 //---------------------------------------------------------------------------
@@ -507,9 +519,11 @@ void __fastcall TfrmEditorImage::imgEditorMouseDown(TObject *Sender, TMouseButto
 {
     if (btnAnimateStop->Down)
     {
-        if (m_ToolMap.count(m_PaintTool) == 1)
+        SetCaptureControl(imgEditor);
+        if (m_CanvasToolMap.count(m_CanvasTool) == 1)
         {
-            auto undo = m_ToolMap[m_PaintTool].get()->Begin(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y), Shift);
+            m_CanvasToolMap[m_CanvasTool].get()->Parameters(toolbarShape->Parameters());
+            auto undo = m_CanvasToolMap[m_CanvasTool].get()->Begin(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y), Shift);
             RefreshView();
         }
     }
@@ -519,9 +533,9 @@ void __fastcall TfrmEditorImage::imgEditorMouseMove(TObject *Sender, TShiftState
 {
     if (btnAnimateStop->Down)
     {
-        if (m_ToolMap.count(m_PaintTool) == 1)
+        if (m_CanvasToolMap.count(m_CanvasTool) == 1)
         {
-            m_ToolMap[m_PaintTool]->Move(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y), Shift);
+            m_CanvasToolMap[m_CanvasTool]->Move(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y), Shift);
             RefreshView();
         }
     }
@@ -531,9 +545,10 @@ void __fastcall TfrmEditorImage::imgEditorMouseUp(TObject *Sender, TMouseButton 
 {
     if (btnAnimateStop->Down)
     {
-        if (m_ToolMap.count(m_PaintTool) == 1)
+        SetCaptureControl(nullptr);
+        if (m_CanvasToolMap.count(m_CanvasTool) == 1)
         {
-            auto redo = m_ToolMap[m_PaintTool]->End(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y));
+            auto redo = m_CanvasToolMap[m_CanvasTool]->End(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y));
             m_ImageDocument->Frame[m_SelectedFrame] = m_Frames[m_SelectedFrame]->Canvas().Get();
             RefreshView();
         }

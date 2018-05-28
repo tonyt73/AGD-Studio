@@ -5,6 +5,9 @@
 #include <System.Classes.hpp>
 #include <System.Actions.hpp>
 #include <System.ImageList.hpp>
+#include <Vcl.ActnCtrls.hpp>
+#include <Vcl.ActnMan.hpp>
+#include <Vcl.ActnPopup.hpp>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
@@ -14,7 +17,6 @@
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.ImgList.hpp>
 #include <Vcl.Menus.hpp>
-#include <Vcl.ActnPopup.hpp>
 #include <Vcl.PlatformDefaultStyleActnCtrls.hpp>
 #include <Vcl.Imaging.pngimage.hpp>
 #include <Vcl.Buttons.hpp>
@@ -22,8 +24,9 @@
 #include "Project/ImageDocuments.h"
 #include "Messaging/Event.h"
 #include "Graphics/Image.h"
+#include "CanvasTool.h"
 #include "fMultiImageView.h"
-#include "PaintTool.h"
+#include "fToolbarShape.h"
 //---------------------------------------------------------------------------
 class TfrmEditorImage : public TFrame
 {
@@ -120,6 +123,9 @@ __published:    // IDE-managed Components
     TTimer *tmrAnimate;
     TAction *actUndo;
     TAction *actRedo;
+    TPanel *Panel2;
+    TActionToolBar *ActionToolBar1;
+    TfrmToolbarShape *toolbarShape;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actBrushExecute(TObject *Sender);
@@ -162,15 +168,15 @@ __published:    // IDE-managed Components
     void __fastcall imgEditorMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
 private:    // User declarations
     typedef std::vector<std::unique_ptr<Agdx::Image>> ImageList;
-    typedef std::map<int, std::unique_ptr<PaintTool>> ToolMap;
+    typedef std::map<int, std::unique_ptr<CanvasTool>> CanvasToolMap;
 
     ImageDocument*              m_ImageDocument;    // the image document we are editing
     ImageList                   m_Frames;           // the image documents frames as bitmap images
     std::map<String, TAction*>  m_ActionMap;        // a map of actions; used by generic messaging to handle zoom in/out/reset, undo/redo
     float                       m_Magnification;    // the magnification of the main view
     int                         m_SelectedFrame;    // the frame we are editing
-    ToolMap                     m_ToolMap;          // a map to all the paint tools
-    int                         m_PaintTool;        // the selected paint tool
+    CanvasToolMap               m_CanvasToolMap;    // a map to all the canvas paint tools
+    int                         m_CanvasTool;        // the selected canvas paint tool
 
     void            __fastcall  SetDocument(Document* document);
     void            __fastcall  OnEvent(const Event& event);

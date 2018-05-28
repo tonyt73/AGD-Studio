@@ -1,28 +1,28 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
 //---------------------------------------------------------------------------
-#include "PencilTool.h"
+#include "CanvasPencilTool.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall PencilTool::PencilTool()
+__fastcall CanvasPencilTool::CanvasPencilTool()
 {
     m_Flags = usesUndo | modifiesImage;
 }
 //---------------------------------------------------------------------------
-__fastcall PencilTool::~PencilTool()
+__fastcall CanvasPencilTool::~CanvasPencilTool()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall PencilTool::Apply(Agdx::GraphicsBuffer& canvas, const TPoint& pt)
+void __fastcall CanvasPencilTool::Apply(Agdx::GraphicsBuffer& canvas, const TPoint& pt)
 {
     if (IsLeftDown())
     {
-        canvas.SetPixel(pt.X, pt.Y, true);
+        DrawLine(canvas, TRect(m_Last.X, m_Last.Y, pt.X, pt.Y), true);
     }
     else if (IsRightDown())
     {
-        canvas.SetPixel(pt.X, pt.Y, false);
+        DrawLine(canvas, TRect(m_Last.X, m_Last.Y, pt.X, pt.Y), false);
     }
 }
 //---------------------------------------------------------------------------
