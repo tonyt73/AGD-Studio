@@ -1,19 +1,21 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
 //---------------------------------------------------------------------------
-#include "fColors.h"
+#include "fPaletteBitmap.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-#pragma link "fPaletteAttribute"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
-__fastcall TfrmColors::TfrmColors(TComponent* Owner)
-: TForm(Owner)
+__fastcall TfrmPaletteBitmap::TfrmPaletteBitmap(TComponent* Owner)
+: TFrame(Owner)
+, m_Pen(1)
+, m_Brush(0)
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmColors::FormCloseQuery(TObject *Sender, bool &CanClose)
+void __fastcall TfrmPaletteBitmap::Set(Agdx::GraphicsBuffer& canvas)
 {
-    CanClose = false;
+    canvas.Color[0] = m_Pen;
+    canvas.Color[1] = m_Brush;
 }
 //---------------------------------------------------------------------------

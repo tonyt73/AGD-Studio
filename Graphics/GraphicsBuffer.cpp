@@ -80,37 +80,21 @@ unsigned int __fastcall GraphicsBuffer::GetSizeOfBuffer(int index) const
     return size;
 }
 //---------------------------------------------------------------------------
-unsigned char __fastcall GraphicsBuffer::GetColorIndex(ColorIndex index) const
+unsigned char __fastcall GraphicsBuffer::GetColorIndex(unsigned char index) const
 {
-    return m_SetColors[index % 2];
-}
-//---------------------------------------------------------------------------
-void __fastcall GraphicsBuffer::SetColorIndex(ColorIndex index, int colorIndex)
-{
-    if (0 <= colorIndex && colorIndex < m_GraphicsMode.LogicalColors)
+    if (0 <= index && index < m_SetColors.size())
     {
-        m_SetColors[index % 2] = colorIndex;
+        return m_SetColors[index];
     }
+    return 0;
 }
 //---------------------------------------------------------------------------
-unsigned char __fastcall GraphicsBuffer::GetPen() const
+void __fastcall GraphicsBuffer::SetColorIndex(unsigned char index, int logicalIndex)
 {
-    return GetColorIndex(ciPrimary);
-}
-//---------------------------------------------------------------------------
-void __fastcall GraphicsBuffer::SetPen(int colorIndex)
-{
-    SetColorIndex(ciPrimary, colorIndex);
-}
-//---------------------------------------------------------------------------
-unsigned char __fastcall GraphicsBuffer::GetBrush() const
-{
-    return GetColorIndex(ciSecondary);
-}
-//---------------------------------------------------------------------------
-void __fastcall GraphicsBuffer::SetBrush(int colorIndex)
-{
-    SetColorIndex(ciSecondary, colorIndex);
+    if (0 <= index && index < m_SetColors.size() && 0 <= logicalIndex && logicalIndex < m_GraphicsMode.LogicalColors)
+    {
+        m_SetColors[index] = logicalIndex;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall GraphicsBuffer::SetRenderInGreyscale(bool value)

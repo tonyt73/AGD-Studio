@@ -2,7 +2,7 @@ object frmEditorImage: TfrmEditorImage
   Left = 0
   Top = 0
   Width = 1102
-  Height = 726
+  Height = 683
   TabOrder = 0
   OnEndDock = FrameEndDock
   object panToolOptions: TPanel
@@ -61,7 +61,7 @@ object frmEditorImage: TfrmEditorImage
         end
         inherited lstSmall: TImageList
           Bitmap = {
-            494C0101050008003C0010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+            494C010105000800400010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
             0000000000003600000028000000400000002000000001002000000000000020
             000000000000000000000000000000000000C19457FFC19457FFC19457FFC194
             57FFC19457FFC19457FFC19457FFC19457FFC19457FFC19457FFC19457FFC194
@@ -334,7 +334,7 @@ object frmEditorImage: TfrmEditorImage
         end
         inherited lstLargeShapes: TImageList
           Bitmap = {
-            494C010105002000540020001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+            494C010105002000580020001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
             0000000000003600000028000000800000003000000001002000000000000060
             0000000000000000000000000000000000000000000000000000000000000000
             000000000000000000000000000000000000C19457FFC19457FFC19457FFC194
@@ -1135,7 +1135,7 @@ object frmEditorImage: TfrmEditorImage
         end
         inherited imgFills: TImageList
           Bitmap = {
-            494C010103001800480010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+            494C0101030018004C0010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
             0000000000003600000028000000400000001000000001002000000000000010
             0000000000000000000000000000000000000000000000000000000000000000
             000000000000000000FF000000FF000000FF000000FF000000E5000000F50000
@@ -1276,7 +1276,7 @@ object frmEditorImage: TfrmEditorImage
         end
         inherited imgLargeFill: TImageList
           Bitmap = {
-            494C010103001800480018001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+            494C0101030018004C0018001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
             0000000000003600000028000000600000001800000001002000000000000024
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000000000000000
@@ -1583,446 +1583,9 @@ object frmEditorImage: TfrmEditorImage
       end
     end
   end
-  object panContainer: TPanel
-    Left = 0
-    Top = 42
-    Width = 1102
-    Height = 665
-    Align = alClient
-    BevelOuter = bvNone
-    TabOrder = 1
-    object panToolbar: TPanel
-      Left = 0
-      Top = 0
-      Width = 80
-      Height = 665
-      Align = alLeft
-      AutoSize = True
-      BevelOuter = bvNone
-      Constraints.MaxWidth = 80
-      Constraints.MinWidth = 80
-      TabOrder = 0
-      OnClick = panEditorContainerClick
-      object tbrShiftRotates: TToolBar
-        Left = 0
-        Top = 204
-        Width = 80
-        Height = 160
-        AutoSize = True
-        ButtonHeight = 40
-        ButtonWidth = 40
-        Images = tbrImages
-        TabOrder = 0
-        object btnRotateLeft: TToolButton
-          Tag = 100
-          Left = 0
-          Top = 0
-          Action = actRotateLeft
-          AllowAllUp = True
-        end
-        object btnRotateRight: TToolButton
-          Tag = 101
-          Left = 40
-          Top = 0
-          Action = actRotateRight
-          AllowAllUp = True
-          Wrap = True
-        end
-        object btnRotateDown: TToolButton
-          Tag = 102
-          Left = 0
-          Top = 40
-          Action = actRotateDown
-          AllowAllUp = True
-        end
-        object btnRotateUp: TToolButton
-          Tag = 103
-          Left = 40
-          Top = 40
-          Action = actRotateUp
-          AllowAllUp = True
-          Wrap = True
-        end
-        object btnFlipHorizontal: TToolButton
-          Tag = 104
-          Left = 0
-          Top = 80
-          Action = actFlipHorizontal
-          AllowAllUp = True
-        end
-        object btnFlipVertical: TToolButton
-          Tag = 105
-          Left = 40
-          Top = 80
-          Action = actFlipVertical
-          AllowAllUp = True
-          Wrap = True
-        end
-        object btnRotateLeft90: TToolButton
-          Tag = 106
-          Left = 0
-          Top = 120
-          Action = actRotateLeft90
-          AllowAllUp = True
-        end
-        object btnRotateRight90: TToolButton
-          Tag = 107
-          Left = 40
-          Top = 120
-          Action = actRotateRight90
-          AllowAllUp = True
-          Wrap = True
-        end
-      end
-      object tbrTools: TToolBar
-        Left = 0
-        Top = 0
-        Width = 80
-        Height = 200
-        AutoSize = True
-        ButtonHeight = 40
-        ButtonWidth = 40
-        Images = tbrImages
-        TabOrder = 1
-        object btnSelect: TToolButton
-          Left = 0
-          Top = 0
-          Action = actSelect
-          Grouped = True
-          Style = tbsCheck
-        end
-        object btnText: TToolButton
-          Tag = 1
-          Left = 40
-          Top = 0
-          Action = actText
-          Grouped = True
-          Wrap = True
-          Style = tbsCheck
-        end
-        object btnPencil: TToolButton
-          Tag = 2
-          Left = 0
-          Top = 40
-          Action = actPencil
-          Grouped = True
-          Style = tbsCheck
-        end
-        object btnBrush: TToolButton
-          Tag = 3
-          Left = 40
-          Top = 40
-          Action = actBrush
-          Grouped = True
-          Wrap = True
-          Style = tbsCheck
-        end
-        object btnLine: TToolButton
-          Tag = 4
-          Left = 0
-          Top = 80
-          Action = actLine
-          Grouped = True
-          Style = tbsCheck
-        end
-        object btnShape: TToolButton
-          Tag = 5
-          Left = 40
-          Top = 80
-          Action = actShape
-          Grouped = True
-          Wrap = True
-          Style = tbsCheck
-        end
-        object btnDropper: TToolButton
-          Tag = 6
-          Left = 0
-          Top = 120
-          Action = actDropper
-          Grouped = True
-          Style = tbsCheck
-        end
-        object btnSprayBrush: TToolButton
-          Tag = 7
-          Left = 40
-          Top = 120
-          Action = actSprayBrush
-          Grouped = True
-          Wrap = True
-          Style = tbsCheck
-        end
-        object btnFill: TToolButton
-          Tag = 8
-          Left = 0
-          Top = 160
-          Action = actFill
-          Grouped = True
-          Style = tbsCheck
-        end
-        object btnEraser: TToolButton
-          Tag = 9
-          Left = 40
-          Top = 160
-          Action = actEraser
-          Grouped = True
-          Style = tbsCheck
-        end
-      end
-      object panSplitter1: TPanel
-        Left = 0
-        Top = 200
-        Width = 80
-        Height = 4
-        Align = alTop
-        BevelOuter = bvNone
-        TabOrder = 2
-        OnClick = panEditorContainerClick
-      end
-      object panSplitter2: TPanel
-        Left = 0
-        Top = 364
-        Width = 80
-        Height = 4
-        Align = alTop
-        BevelOuter = bvNone
-        TabOrder = 3
-        OnClick = panEditorContainerClick
-      end
-      object panSplitter3: TPanel
-        Left = 0
-        Top = 408
-        Width = 80
-        Height = 4
-        Align = alTop
-        BevelOuter = bvNone
-        TabOrder = 4
-        OnClick = panEditorContainerClick
-      end
-      object tbrMono: TToolBar
-        Left = 0
-        Top = 412
-        Width = 80
-        Height = 40
-        AutoSize = True
-        ButtonHeight = 40
-        ButtonWidth = 40
-        Caption = 'tbrMono'
-        Images = tbrImages
-        TabOrder = 5
-        object btnMonoOff: TToolButton
-          Left = 0
-          Top = 0
-          Action = actMonoOff
-          AllowAllUp = True
-          Grouped = True
-          ParentShowHint = False
-          ShowHint = True
-          Style = tbsCheck
-        end
-        object btnMonoOn: TToolButton
-          Left = 40
-          Top = 0
-          Action = actMonoOn
-          AllowAllUp = True
-          Grouped = True
-          ParentShowHint = False
-          ShowHint = True
-          Style = tbsCheck
-        end
-      end
-      object panSplitter4: TPanel
-        Left = 0
-        Top = 452
-        Width = 80
-        Height = 4
-        Align = alTop
-        BevelOuter = bvNone
-        TabOrder = 6
-      end
-      object tbrGrids: TToolBar
-        Left = 0
-        Top = 368
-        Width = 80
-        Height = 40
-        AutoSize = True
-        ButtonHeight = 40
-        ButtonWidth = 40
-        Caption = 'ToolBar6'
-        Images = tbrImages
-        TabOrder = 7
-        object btnGridCharacter: TToolButton
-          Left = 0
-          Top = 0
-          Action = actGridCharacter
-          AllowAllUp = True
-          Style = tbsCheck
-        end
-        object btnGridPixel: TToolButton
-          Left = 40
-          Top = 0
-          Action = actGridPixel
-          AllowAllUp = True
-          Style = tbsCheck
-        end
-      end
-      object tbrAnimate: TToolBar
-        Left = 0
-        Top = 456
-        Width = 80
-        Height = 40
-        AutoSize = True
-        ButtonHeight = 40
-        ButtonWidth = 40
-        Caption = 'tbrMono'
-        Images = tbrImages
-        TabOrder = 8
-        object btnAnimatePlay: TToolButton
-          Left = 0
-          Top = 0
-          Action = actAnimatePlay
-          AllowAllUp = True
-          Grouped = True
-          ParentShowHint = False
-          ShowHint = True
-          Style = tbsCheck
-        end
-        object btnAnimateStop: TToolButton
-          Left = 40
-          Top = 0
-          Action = actAnimateStop
-          AllowAllUp = True
-          Down = True
-          Grouped = True
-          ParentShowHint = False
-          ShowHint = True
-          Style = tbsCheck
-        end
-      end
-    end
-    object Panel1: TPanel
-      Left = 80
-      Top = 0
-      Width = 1022
-      Height = 665
-      Align = alClient
-      BevelOuter = bvNone
-      TabOrder = 1
-      object sbxView: TScrollBox
-        Left = 0
-        Top = 0
-        Width = 1022
-        Height = 565
-        HorzScrollBar.Smooth = True
-        HorzScrollBar.Tracking = True
-        VertScrollBar.Smooth = True
-        VertScrollBar.Tracking = True
-        Align = alClient
-        BevelInner = bvNone
-        BevelOuter = bvNone
-        BorderStyle = bsNone
-        DoubleBuffered = False
-        ParentDoubleBuffered = False
-        TabOrder = 0
-        OnMouseWheel = sbxViewMouseWheel
-        OnResize = sbxViewResize
-        ExplicitWidth = 837
-        object panEditorContainer: TPanel
-          Left = 0
-          Top = 0
-          Width = 1022
-          Height = 565
-          Align = alClient
-          BevelOuter = bvNone
-          DoubleBuffered = False
-          Padding.Left = 128
-          Padding.Top = 128
-          Padding.Right = 128
-          Padding.Bottom = 128
-          ParentColor = True
-          ParentDoubleBuffered = False
-          ShowCaption = False
-          TabOrder = 0
-          StyleElements = [seClient, seBorder]
-          OnClick = panEditorContainerClick
-          ExplicitWidth = 837
-          object panViewFrame: TPanel
-            Left = 128
-            Top = 128
-            Width = 766
-            Height = 309
-            Align = alClient
-            BevelOuter = bvNone
-            Color = clWhite
-            DoubleBuffered = True
-            Padding.Left = 1
-            Padding.Top = 1
-            Padding.Right = 1
-            Padding.Bottom = 1
-            ParentBackground = False
-            ParentDoubleBuffered = False
-            TabOrder = 0
-            StyleElements = []
-            ExplicitWidth = 581
-            object imgEditor: TImage
-              Left = 1
-              Top = 1
-              Width = 764
-              Height = 307
-              Align = alClient
-              Stretch = True
-              OnClick = panEditorContainerClick
-              OnMouseDown = imgEditorMouseDown
-              OnMouseMove = imgEditorMouseMove
-              OnMouseUp = imgEditorMouseUp
-              ExplicitLeft = 128
-              ExplicitTop = 120
-              ExplicitWidth = 766
-              ExplicitHeight = 345
-            end
-          end
-        end
-      end
-      object panFrameView: TPanel
-        Left = 0
-        Top = 565
-        Width = 1022
-        Height = 100
-        Align = alBottom
-        AutoSize = True
-        BevelOuter = bvNone
-        DoubleBuffered = False
-        ParentDoubleBuffered = False
-        TabOrder = 1
-        inline fFrameView: TMultiImageViewFrame
-          Left = 0
-          Top = 0
-          Width = 1022
-          Height = 100
-          HorzScrollBar.ParentColor = False
-          HorzScrollBar.Smooth = True
-          HorzScrollBar.Style = ssHotTrack
-          HorzScrollBar.Tracking = True
-          VertScrollBar.Tracking = True
-          VertScrollBar.Visible = False
-          Align = alTop
-          AutoScroll = True
-          DoubleBuffered = True
-          Ctl3D = False
-          ParentCtl3D = False
-          ParentDoubleBuffered = False
-          TabOrder = 0
-          ExplicitWidth = 1022
-          inherited Timer1: TTimer
-            Interval = 1000
-            OnTimer = fFrameViewTimer1Timer
-          end
-        end
-      end
-    end
-  end
   object barStatus: TStatusBar
     Left = 0
-    Top = 707
+    Top = 664
     Width = 1102
     Height = 19
     Panels = <
@@ -2039,6 +1602,557 @@ object frmEditorImage: TfrmEditorImage
         Width = 200
       end>
     Visible = False
+    ExplicitTop = 707
+  end
+  object panToolbar: TPanel
+    Left = 0
+    Top = 42
+    Width = 80
+    Height = 622
+    Align = alLeft
+    AutoSize = True
+    BevelOuter = bvNone
+    Constraints.MaxWidth = 80
+    Constraints.MinWidth = 80
+    Locked = True
+    TabOrder = 2
+    OnClick = panEditorContainerClick
+    ExplicitTop = 21
+    ExplicitHeight = 382
+    object Label1: TLabel
+      Left = 0
+      Top = 0
+      Width = 80
+      Height = 24
+      Align = alTop
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'TOOLS'
+      Constraints.MaxHeight = 24
+      Constraints.MinHeight = 24
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Layout = tlCenter
+    end
+    object tbrShiftRotates: TToolBar
+      Left = 0
+      Top = 228
+      Width = 80
+      Height = 160
+      AutoSize = True
+      ButtonHeight = 40
+      ButtonWidth = 40
+      Images = tbrImages
+      TabOrder = 0
+      ExplicitLeft = 48
+      ExplicitTop = 204
+      object btnRotateLeft: TToolButton
+        Tag = 100
+        Left = 0
+        Top = 0
+        Action = actRotateLeft
+        AllowAllUp = True
+      end
+      object btnRotateRight: TToolButton
+        Tag = 101
+        Left = 40
+        Top = 0
+        Action = actRotateRight
+        AllowAllUp = True
+        Wrap = True
+      end
+      object btnRotateDown: TToolButton
+        Tag = 102
+        Left = 0
+        Top = 40
+        Action = actRotateDown
+        AllowAllUp = True
+      end
+      object btnRotateUp: TToolButton
+        Tag = 103
+        Left = 40
+        Top = 40
+        Action = actRotateUp
+        AllowAllUp = True
+        Wrap = True
+      end
+      object btnFlipHorizontal: TToolButton
+        Tag = 104
+        Left = 0
+        Top = 80
+        Action = actFlipHorizontal
+        AllowAllUp = True
+      end
+      object btnFlipVertical: TToolButton
+        Tag = 105
+        Left = 40
+        Top = 80
+        Action = actFlipVertical
+        AllowAllUp = True
+        Wrap = True
+      end
+      object btnRotateLeft90: TToolButton
+        Tag = 106
+        Left = 0
+        Top = 120
+        Action = actRotateLeft90
+        AllowAllUp = True
+      end
+      object btnRotateRight90: TToolButton
+        Tag = 107
+        Left = 40
+        Top = 120
+        Action = actRotateRight90
+        AllowAllUp = True
+        Wrap = True
+      end
+    end
+    object tbrTools: TToolBar
+      Left = 0
+      Top = 24
+      Width = 80
+      Height = 200
+      AutoSize = True
+      ButtonHeight = 40
+      ButtonWidth = 40
+      Images = tbrImages
+      TabOrder = 1
+      ExplicitLeft = 48
+      ExplicitTop = 0
+      object btnSelect: TToolButton
+        Left = 0
+        Top = 0
+        Action = actSelect
+        Grouped = True
+        Style = tbsCheck
+      end
+      object btnText: TToolButton
+        Tag = 1
+        Left = 40
+        Top = 0
+        Action = actText
+        Grouped = True
+        Wrap = True
+        Style = tbsCheck
+      end
+      object btnPencil: TToolButton
+        Tag = 2
+        Left = 0
+        Top = 40
+        Action = actPencil
+        Grouped = True
+        Style = tbsCheck
+      end
+      object btnBrush: TToolButton
+        Tag = 3
+        Left = 40
+        Top = 40
+        Action = actBrush
+        Grouped = True
+        Wrap = True
+        Style = tbsCheck
+      end
+      object btnLine: TToolButton
+        Tag = 4
+        Left = 0
+        Top = 80
+        Action = actLine
+        Grouped = True
+        Style = tbsCheck
+      end
+      object btnShape: TToolButton
+        Tag = 5
+        Left = 40
+        Top = 80
+        Action = actShape
+        Grouped = True
+        Wrap = True
+        Style = tbsCheck
+      end
+      object btnDropper: TToolButton
+        Tag = 6
+        Left = 0
+        Top = 120
+        Action = actDropper
+        Grouped = True
+        Style = tbsCheck
+      end
+      object btnSprayBrush: TToolButton
+        Tag = 7
+        Left = 40
+        Top = 120
+        Action = actSprayBrush
+        Grouped = True
+        Wrap = True
+        Style = tbsCheck
+      end
+      object btnFill: TToolButton
+        Tag = 8
+        Left = 0
+        Top = 160
+        Action = actFill
+        Grouped = True
+        Style = tbsCheck
+      end
+      object btnEraser: TToolButton
+        Tag = 9
+        Left = 40
+        Top = 160
+        Action = actEraser
+        Grouped = True
+        Style = tbsCheck
+      end
+    end
+    object panSplitter1: TPanel
+      Left = 0
+      Top = 224
+      Width = 80
+      Height = 4
+      Align = alTop
+      BevelOuter = bvNone
+      TabOrder = 2
+      OnClick = panEditorContainerClick
+      ExplicitLeft = 48
+      ExplicitTop = 200
+    end
+    object panSplitter2: TPanel
+      Left = 0
+      Top = 388
+      Width = 80
+      Height = 4
+      Align = alTop
+      BevelOuter = bvNone
+      TabOrder = 3
+      OnClick = panEditorContainerClick
+      ExplicitLeft = 48
+      ExplicitTop = 364
+    end
+    object panSplitter3: TPanel
+      Left = 0
+      Top = 432
+      Width = 80
+      Height = 4
+      Align = alTop
+      BevelOuter = bvNone
+      TabOrder = 4
+      OnClick = panEditorContainerClick
+      ExplicitLeft = 48
+      ExplicitTop = 408
+    end
+    object tbrMono: TToolBar
+      Left = 0
+      Top = 436
+      Width = 80
+      Height = 40
+      AutoSize = True
+      ButtonHeight = 40
+      ButtonWidth = 40
+      Caption = 'tbrMono'
+      Images = tbrImages
+      TabOrder = 5
+      ExplicitLeft = 48
+      ExplicitTop = 412
+      object btnMonoOff: TToolButton
+        Left = 0
+        Top = 0
+        Action = actMonoOff
+        AllowAllUp = True
+        Down = True
+        Grouped = True
+        ParentShowHint = False
+        ShowHint = True
+        Style = tbsCheck
+      end
+      object btnMonoOn: TToolButton
+        Left = 40
+        Top = 0
+        Action = actMonoOn
+        AllowAllUp = True
+        Grouped = True
+        ParentShowHint = False
+        ShowHint = True
+        Style = tbsCheck
+      end
+    end
+    object panSplitter4: TPanel
+      Left = 0
+      Top = 476
+      Width = 80
+      Height = 4
+      Align = alTop
+      BevelOuter = bvNone
+      TabOrder = 6
+      ExplicitLeft = 48
+      ExplicitTop = 452
+    end
+    object tbrGrids: TToolBar
+      Left = 0
+      Top = 392
+      Width = 80
+      Height = 40
+      AutoSize = True
+      ButtonHeight = 40
+      ButtonWidth = 40
+      Caption = 'ToolBar6'
+      Images = tbrImages
+      TabOrder = 7
+      ExplicitLeft = 48
+      ExplicitTop = 368
+      object btnGridCharacter: TToolButton
+        Left = 0
+        Top = 0
+        Action = actGridCharacter
+        AllowAllUp = True
+        Style = tbsCheck
+      end
+      object btnGridPixel: TToolButton
+        Left = 40
+        Top = 0
+        Action = actGridPixel
+        AllowAllUp = True
+        Style = tbsCheck
+      end
+    end
+    object tbrAnimate: TToolBar
+      Left = 0
+      Top = 480
+      Width = 80
+      Height = 40
+      AutoSize = True
+      ButtonHeight = 40
+      ButtonWidth = 40
+      Caption = 'tbrMono'
+      Images = tbrImages
+      TabOrder = 8
+      ExplicitLeft = 48
+      ExplicitTop = 456
+      object btnAnimatePlay: TToolButton
+        Left = 0
+        Top = 0
+        Action = actAnimatePlay
+        AllowAllUp = True
+        Grouped = True
+        ParentShowHint = False
+        ShowHint = True
+        Style = tbsCheck
+      end
+      object btnAnimateStop: TToolButton
+        Left = 40
+        Top = 0
+        Action = actAnimateStop
+        AllowAllUp = True
+        Down = True
+        Grouped = True
+        ParentShowHint = False
+        ShowHint = True
+        Style = tbsCheck
+      end
+    end
+  end
+  object panContainer: TPanel
+    Left = 80
+    Top = 42
+    Width = 846
+    Height = 622
+    Align = alClient
+    BevelOuter = bvNone
+    TabOrder = 3
+    ExplicitLeft = 0
+    ExplicitTop = 0
+    ExplicitWidth = 799
+    ExplicitHeight = 403
+    object sbxView: TScrollBox
+      Left = 0
+      Top = 0
+      Width = 846
+      Height = 522
+      HorzScrollBar.Smooth = True
+      HorzScrollBar.Tracking = True
+      VertScrollBar.Smooth = True
+      VertScrollBar.Tracking = True
+      Align = alClient
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      BorderStyle = bsNone
+      DoubleBuffered = False
+      ParentDoubleBuffered = False
+      TabOrder = 0
+      OnMouseWheel = sbxViewMouseWheel
+      OnResize = sbxViewResize
+      ExplicitWidth = 799
+      ExplicitHeight = 303
+      object panEditorContainer: TPanel
+        Left = 0
+        Top = 0
+        Width = 846
+        Height = 522
+        Align = alClient
+        BevelOuter = bvNone
+        DoubleBuffered = False
+        Padding.Left = 128
+        Padding.Top = 128
+        Padding.Right = 128
+        Padding.Bottom = 128
+        ParentColor = True
+        ParentDoubleBuffered = False
+        ShowCaption = False
+        TabOrder = 0
+        StyleElements = [seClient, seBorder]
+        OnClick = panEditorContainerClick
+        ExplicitWidth = 799
+        ExplicitHeight = 303
+        object panViewFrame: TPanel
+          Left = 128
+          Top = 128
+          Width = 590
+          Height = 266
+          Align = alClient
+          BevelOuter = bvNone
+          Color = clWhite
+          DoubleBuffered = True
+          Padding.Left = 1
+          Padding.Top = 1
+          Padding.Right = 1
+          Padding.Bottom = 1
+          ParentBackground = False
+          ParentDoubleBuffered = False
+          TabOrder = 0
+          StyleElements = []
+          ExplicitWidth = 543
+          ExplicitHeight = 47
+          object imgEditor: TImage
+            Left = 1
+            Top = 1
+            Width = 588
+            Height = 264
+            Align = alClient
+            Stretch = True
+            OnClick = panEditorContainerClick
+            OnMouseDown = imgEditorMouseDown
+            OnMouseMove = imgEditorMouseMove
+            OnMouseUp = imgEditorMouseUp
+            ExplicitLeft = 0
+            ExplicitTop = 0
+          end
+        end
+      end
+    end
+    object panFrameView: TPanel
+      Left = 0
+      Top = 522
+      Width = 846
+      Height = 100
+      Align = alBottom
+      AutoSize = True
+      BevelOuter = bvNone
+      DoubleBuffered = False
+      ParentDoubleBuffered = False
+      TabOrder = 1
+      ExplicitTop = 303
+      ExplicitWidth = 799
+      inline fFrameView: TMultiImageViewFrame
+        Left = 0
+        Top = 0
+        Width = 846
+        Height = 100
+        HorzScrollBar.ParentColor = False
+        HorzScrollBar.Smooth = True
+        HorzScrollBar.Style = ssHotTrack
+        HorzScrollBar.Tracking = True
+        VertScrollBar.Tracking = True
+        VertScrollBar.Visible = False
+        Align = alTop
+        AutoScroll = True
+        DoubleBuffered = True
+        Ctl3D = False
+        ParentCtl3D = False
+        ParentDoubleBuffered = False
+        TabOrder = 0
+        ExplicitWidth = 1102
+      end
+    end
+  end
+  object Panel1: TPanel
+    Left = 926
+    Top = 42
+    Width = 176
+    Height = 622
+    Align = alRight
+    BevelOuter = bvNone
+    Caption = 'Panel1'
+    ShowCaption = False
+    TabOrder = 4
+    object Label2: TLabel
+      Left = 0
+      Top = 0
+      Width = 176
+      Height = 24
+      Align = alTop
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'COLORS'
+      Constraints.MaxHeight = 24
+      Constraints.MinHeight = 24
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Layout = tlCenter
+      ExplicitLeft = -16
+      ExplicitWidth = 206
+    end
+    object Panel3: TPanel
+      Left = 0
+      Top = 24
+      Width = 176
+      Height = 598
+      Align = alClient
+      BevelOuter = bvNone
+      Caption = 'Panel3'
+      ShowCaption = False
+      TabOrder = 0
+      ExplicitWidth = 206
+      inline palAttribute: TfrmPaletteAttribute
+        Left = 0
+        Top = 0
+        Width = 176
+        Height = 336
+        Align = alTop
+        Constraints.MaxHeight = 336
+        Constraints.MaxWidth = 176
+        Constraints.MinHeight = 336
+        Constraints.MinWidth = 176
+        Padding.Left = 8
+        Padding.Top = 8
+        Padding.Right = 8
+        Padding.Bottom = 8
+        TabOrder = 0
+      end
+      inline palBitmap: TfrmPaletteBitmap
+        Left = 0
+        Top = 336
+        Width = 176
+        Height = 105
+        Align = alTop
+        Constraints.MaxWidth = 176
+        Constraints.MinHeight = 105
+        Constraints.MinWidth = 176
+        Padding.Left = 8
+        Padding.Top = 8
+        Padding.Right = 8
+        Padding.Bottom = 8
+        TabOrder = 1
+        Visible = False
+        ExplicitLeft = 8
+        ExplicitTop = 8
+      end
+    end
   end
   object tbrActions: TActionList
     Images = tbrImages
@@ -2249,7 +2363,7 @@ object frmEditorImage: TfrmEditorImage
     Left = 220
     Top = 65
     Bitmap = {
-      494C010122006000540120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010122006000580120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000002001000001002000000000000040
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000030000

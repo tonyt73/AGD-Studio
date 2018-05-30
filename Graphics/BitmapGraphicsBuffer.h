@@ -17,7 +17,7 @@ public:
                         __fastcall ~BitmapGraphicsBuffer();
 
     void                __fastcall  SetPixel(unsigned int X, unsigned int Y, bool set);
-    void                __fastcall  GetColor(unsigned int X, unsigned int Y, ColorIndex colorIndex = ciPrimary);
+    void                __fastcall  GetColor(unsigned int X, unsigned int Y, unsigned char colorIndex = 0);
     void                __fastcall  Render() const;
     void                __fastcall  Set(const String& data);
 };

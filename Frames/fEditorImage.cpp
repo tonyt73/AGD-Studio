@@ -13,6 +13,8 @@
 #pragma link "fMultiImageView"
 #pragma link "fToolbarShape"
 #pragma link "fToolbar"
+#pragma link "fPaletteAttribute"
+#pragma link "fPaletteBitmap"
 #pragma resource "*.dfm"
 bool canLog = false;
 //---------------------------------------------------------------------------
@@ -20,10 +22,8 @@ __fastcall TfrmEditorImage::TfrmEditorImage(TComponent* Owner)
 : TFrame(Owner)
 , m_Magnification(8.f)
 , m_SelectedFrame(0)
-, m_WndProcHooked(false)
 , m_ImageDocument(nullptr)
 , m_Toolbar(nullptr)
-, m_Colors(nullptr)
 , m_GraphicsMode(*(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()))
 {
     ::Messaging::Bus::Subscribe<Event>(OnEvent);
@@ -92,17 +92,8 @@ void __fastcall TfrmEditorImage::SetDocument(Document* document)
     btnTool->ImageIndex = actPencil->ImageIndex;
     m_CanvasTool = btnPencil->Tag;
 
-    // color picker
-    m_Colors = std::make_unique<TfrmColors>(this);
-    static int count = 173852;
-    m_Colors->Name = "frmColors" + IntToStr(++count);
-    auto pt = ClientToScreen(TPoint(Left + Width, Top + 32));
-    m_Colors->Left = pt.X;
-    m_Colors->Top = pt.Y;
-    m_Colors->Show();
-
-    //OnEnter = FrameEnter;
-    //OnExit = FrameExit;
+    palAttribute->Visible = m_GraphicsMode.TypeOfBuffer == btAttribute;
+    palBitmap->Visible = m_GraphicsMode.TypeOfBuffer == btBitmap;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::FrameEndDock(TObject *Sender, TObject *Target, int X, int Y)
@@ -555,6 +546,18 @@ TPoint __fastcall TfrmEditorImage::ToImagePt(int X, int Y)
     return TPoint(x, y);
 }
 //---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::SetCanvasColors()
+{
+    if (palAttribute->Visible)
+    {
+        palAttribute->Set(m_Frames[m_SelectedFrame]->Canvas());
+    }
+    else
+    {
+        palBitmap->Set(m_Frames[m_SelectedFrame]->Canvas());
+    }
+}
+//---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::imgEditorMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
 {
     if (btnAnimateStop->Down)
@@ -563,6 +566,7 @@ void __fastcall TfrmEditorImage::imgEditorMouseDown(TObject *Sender, TMouseButto
         if (m_CanvasToolMap.count(m_CanvasTool) == 1)
         {
             m_CanvasToolMap[m_CanvasTool].get()->Parameters(toolbarShape->Parameters());
+            SetCanvasColors();
             auto undo = m_CanvasToolMap[m_CanvasTool].get()->Begin(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y), Shift);
             RefreshView();
         }
@@ -593,31 +597,6 @@ void __fastcall TfrmEditorImage::imgEditorMouseUp(TObject *Sender, TMouseButton 
             RefreshView();
         }
     }
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::FrameEnter(TObject *Sender)
-{
-    m_Colors->Visible = true;
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::FrameExit(TObject *Sender)
-{
-    m_Colors->Visible = false;
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::fFrameViewTimer1Timer(TObject *Sender)
-{
-//    for (auto msg : m_Messages)
-//    {
-//        Memo1->Lines->Add("0x" + IntToHex(msg, 4));
-//    }
-//    m_Messages.clear();
-
-//    auto dp = static_cast<TLMDDockPanel*>(m_ImageDocument->DockPanel);
-//    Memo1->Lines->Add(dp->Active ? "Active" : "Not active");
-//    Memo1->Lines->Add(dp->Site->IsFloatingSite ? "IsFloatingSite" : "NOT IsFloatingSite");
-//    Memo1->Lines->Add(dp->Site->IsFloatingDoc ? "IsFloatingDoc" : "NOT IsFloatingDoc");
-//    Memo1->Lines->Add(dp->Site->FloatingForm ? "FloatingForm present" : "NO FloatingForm");
 }
 //---------------------------------------------------------------------------
 

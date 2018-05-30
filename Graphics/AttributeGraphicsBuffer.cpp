@@ -15,6 +15,8 @@ const unsigned char g_PaperMask   = 0x38; // paper bits from attribute byte
 const unsigned char g_BrightMask  = 0x40; // bright bit from attribute byte
 const unsigned char g_FlashMask   = 0x80; // flash bit from attribute byte
 const unsigned char g_PaperShift  =    3; // bits to shift paper color
+const unsigned char g_BrightShift =    6; // bits to shift paper color
+const unsigned char g_FlashShift  =    7; // bits to shift paper color
 //---------------------------------------------------------------------------
 __fastcall AttributeGraphicsBuffer::AttributeGraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode)
 : GraphicsBuffer(width, height, mode)
@@ -26,8 +28,11 @@ __fastcall AttributeGraphicsBuffer::AttributeGraphicsBuffer(unsigned int width, 
     PushBuffer(m_Stride * height);
     // m_Buffers[1] : attributes buffer
     PushBuffer(m_Stride * (height / m_GraphicsMode.PixelsHighPerAttribute));
-    m_SetColors[0] = 15;
-    m_SetColors[1] = 1;
+    // color attributes
+    m_SetColors.push_back(7);  // ink
+    m_SetColors.push_back(0);  // paper
+    m_SetColors.push_back(0);  // bright
+    m_SetColors.push_back(0);  // flash
 }
 //---------------------------------------------------------------------------
 __fastcall AttributeGraphicsBuffer::~AttributeGraphicsBuffer()
@@ -50,17 +55,24 @@ void __fastcall AttributeGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y
         }
         m_Buffers[0][pixelOffset] = pixel;
         // set attribute
-        auto attribute = m_SetColors[0] | (m_SetColors[1] << g_PaperShift);
-        attribute |= ((m_SetColors[0] & g_BrightMask) || (m_SetColors[1] & g_BrightMask) ? g_BrightMask : 0);
         ix = X >> 3;
         auto iy = Y / m_GraphicsMode.PixelsHighPerAttribute;
         auto attrOffset = (iy * m_Stride) + ix;
+        // get existing attribute
+        auto attribute = m_Buffers[1][attrOffset];
+        // get new attribute (merge old with new)
+        auto ink    = g_Transparent == m_SetColors[0] ?  (attribute & g_InkMask   )          : m_SetColors[0];
+        auto paper  = g_Transparent == m_SetColors[1] ? ((attribute & g_PaperMask ) >> 3   ) : m_SetColors[1];
+        auto bright = g_Transparent == m_SetColors[2] ? ((attribute & g_BrightMask) ? 1 : 0) : m_SetColors[2];
+        auto flash  = g_Transparent == m_SetColors[3] ? ((attribute & g_FlashMask ) ? 1 : 0) : m_SetColors[3];
+        // set the attribute
+        attribute = ink | (paper << g_PaperShift) | (bright << g_BrightShift) | (flash << g_FlashShift);
         m_Buffers[1][attrOffset] = attribute;
         Render();
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall AttributeGraphicsBuffer::GetColor(unsigned int X, unsigned int Y, ColorIndex colorIndex)
+void __fastcall AttributeGraphicsBuffer::GetColor(unsigned int X, unsigned int Y, unsigned char colorIndex)
 {
     if (X < m_Width && Y < m_Height)
     {
@@ -68,7 +80,7 @@ void __fastcall AttributeGraphicsBuffer::GetColor(unsigned int X, unsigned int Y
         auto iy = Y / m_GraphicsMode.PixelsHighPerAttribute;
         auto attrOffset = (iy * m_Stride) + ix;
         auto color = m_Buffers[1][attrOffset];
-        m_SetColors[colorIndex] = (colorIndex == ciPrimary ? (color & g_InkMask) : ((color & g_PaperMask) >> g_PaperShift)) + (color & g_BrightMask ? 8 : 0);
+        m_SetColors[colorIndex] = (colorIndex == 0 ? (color & g_InkMask) : ((color & g_PaperMask) >> g_PaperShift)) + (color & g_BrightMask ? 8 : 0);
     }
 }
 //---------------------------------------------------------------------------
@@ -122,22 +134,6 @@ void __fastcall AttributeGraphicsBuffer::Set(const String& data)
         }
     }
     Render();
-}
-//---------------------------------------------------------------------------
-void __fastcall AttributeGraphicsBuffer::SetInk(unsigned char iInk)
-{
-}
-//---------------------------------------------------------------------------
-void __fastcall AttributeGraphicsBuffer::SetPaper(unsigned char iPaper)
-{
-}
-//---------------------------------------------------------------------------
-void __fastcall AttributeGraphicsBuffer::SetFlash(unsigned char iFlash)
-{
-}
-//---------------------------------------------------------------------------
-void __fastcall AttributeGraphicsBuffer::SetBright(unsigned char iBright)
-{
 }
 //---------------------------------------------------------------------------
 

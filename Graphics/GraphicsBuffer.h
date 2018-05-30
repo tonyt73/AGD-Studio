@@ -34,7 +34,7 @@ protected:
     unsigned int                    m_NumberOfBuffers;  // the number of data buffers using by this buffer type
     Buffers                         m_Buffers;          // the list of buffers
     BufferType                      m_BufferType;       // the type of graphics buffer this is
-    unsigned char                   m_SetColors[2];     // the primary[0] and secondary[1] colors used to set/unset pixels
+    std::vector<unsigned char>      m_SetColors;        // the list of color choices and their logical color index (i.e. pen/brush or ink/paper/flash/bright)
  std::unique_ptr<Graphics::TBitmap> m_Bitmap;           // the Windows bitmap we render to
     bool                            m_RenderInGreyscale;// flag: Indicates we render in greyscale
     bool                            m_Drawing;          // flag: Indicates we are drawing pixels; don't render immediately
@@ -43,12 +43,8 @@ protected:
     void                __fastcall  PushBuffer(unsigned int size);
     unsigned int        __fastcall  GetNumberOfBuffers() const;
     unsigned int        __fastcall  GetSizeOfBuffer(int index) const;
-    unsigned char       __fastcall  GetColorIndex(ColorIndex index) const;
-    void                __fastcall  SetColorIndex(ColorIndex index, int colorIndex);
-    unsigned char       __fastcall  GetPen() const;
-    void                __fastcall  SetPen(int colorIndex);
-    unsigned char       __fastcall  GetBrush() const;
-    void                __fastcall  SetBrush(int colorIndex);
+  virtual unsigned char __fastcall  GetColorIndex(unsigned char index) const;
+  virtual void          __fastcall  SetColorIndex(unsigned char index, int logicalIndex);
     void                __fastcall  SetRenderInGreyscale(bool value);
     virtual void        __fastcall  Render() const = 0;
 
@@ -60,7 +56,7 @@ public:
                                     // sets the pixel to the specified palette color index
     virtual void        __fastcall  SetPixel(unsigned int X, unsigned int Y, bool set = true) = 0;
                                     // retrieves the pixel color at the position specified
-    virtual void        __fastcall  GetColor(unsigned int X, unsigned int Y, ColorIndex colorIndex = ciPrimary) = 0;
+    virtual void        __fastcall  GetColor(unsigned int X, unsigned int Y, unsigned char colorIndex = 0) = 0;
                                     // Retrieves the specified buffer index from the graphics buffer
     void                __fastcall  GetBuffer(int index, ByteBuffer& buffer) const;
                                     // Get the hex data of the image
@@ -83,9 +79,7 @@ public:
     unsigned int        __property  ScalarX = { read = m_ScalarX };
     unsigned int        __property  ScalarY = { read = m_ScalarY };
                                     // Color
-    unsigned char       __property  Color[ColorIndex index] = { read = GetColorIndex, write = SetColorIndex };
-    unsigned char       __property  Pen = { read = GetPen, write = SetPen };
-    unsigned char       __property  Brush = { read = GetBrush, write = SetBrush };
+    unsigned char       __property  Color[unsigned char index] = { read = GetColorIndex, write = SetColorIndex };
                                     // Buffer info (used by image tools)
     BufferType          __property  BufferType = { read = m_BufferType };
     unsigned int        __property  NumberOfBuffers = { read = GetNumberOfBuffers };

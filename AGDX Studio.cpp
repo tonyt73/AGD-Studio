@@ -14,16 +14,16 @@ USEFORM("Frames\fEditorMusic.cpp", frmEditorMusic); /* TFrame: File Type */
 USEFORM("Frames\fEditorMap.cpp", frmEditorMap); /* TFrame: File Type */
 USEFORM("Forms\fNewImage.cpp", frmNewImage);
 USEFORM("Forms\fMain.cpp", frmMain);
-USEFORM("Forms\fColors.cpp", frmColors);
 USEFORM("Forms\fAbout.cpp", frmAbout);
-USEFORM("Frames\fImportDialog.cpp", frmImportDialog); /* TFrame: File Type */
-USEFORM("Frames\ImageEditor\fToolbar.cpp", frmToolbar); /* TFrame: File Type */
 USEFORM("Frames\ImageEditor\fPaletteAttribute.cpp", frmPaletteAttribute); /* TFrame: File Type */
 USEFORM("Frames\ImageEditor\fToolbarShape.cpp", frmToolbarShape); /* TFrame: File Type */
-USEFORM("Frames\fSelectionPanel.cpp", SelectionPanelFrame); /* TFrame: File Type */
+USEFORM("Frames\ImageEditor\fToolbar.cpp", frmToolbar); /* TFrame: File Type */
 USEFORM("Frames\fSelectionImage.cpp", SelectionImageFrame); /* TFrame: File Type */
 USEFORM("Frames\fMultiImageView.cpp", MultiImageViewFrame); /* TFrame: File Type */
+USEFORM("Frames\fImportDialog.cpp", frmImportDialog); /* TFrame: File Type */
 USEFORM("Frames\fWelcomeDialog.cpp", frmWelcomeDialog); /* TFrame: File Type */
+USEFORM("Frames\fSelectionPanel.cpp", SelectionPanelFrame); /* TFrame: File Type */
+USEFORM("Frames\ImageEditor\fPaletteBitmap.cpp", frmPaletteBitmap); /* TFrame: File Type */
 //---------------------------------------------------------------------------
 int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {

@@ -200,12 +200,6 @@
             <DependentOn>Forms\fAbout.h</DependentOn>
             <BuildOrder>3</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Forms\fColors.cpp">
-            <Form>frmColors</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>Forms\fColors.h</DependentOn>
-            <BuildOrder>52</BuildOrder>
-        </CppCompile>
         <CppCompile Include="Forms\fMain.cpp">
             <Form>frmMain</Form>
             <FormType>dfm</FormType>
@@ -316,6 +310,13 @@
             <DesignClass>TFrame</DesignClass>
             <DependentOn>Frames\ImageEditor\fPaletteAttribute.h</DependentOn>
             <BuildOrder>49</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\ImageEditor\fPaletteBitmap.cpp">
+            <Form>frmPaletteBitmap</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\ImageEditor\fPaletteBitmap.h</DependentOn>
+            <BuildOrder>53</BuildOrder>
         </CppCompile>
         <CppCompile Include="Frames\ImageEditor\fToolbar.cpp">
             <Form>frmToolbar</Form>
@@ -449,16 +450,16 @@
         <FormResources Include="Frames\fEditorMap.dfm"/>
         <FormResources Include="Forms\fNewImage.dfm"/>
         <FormResources Include="Forms\fMain.dfm"/>
-        <FormResources Include="Forms\fColors.dfm"/>
         <FormResources Include="Forms\fAbout.dfm"/>
-        <FormResources Include="Frames\fImportDialog.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fToolbar.dfm"/>
         <FormResources Include="Frames\ImageEditor\fPaletteAttribute.dfm"/>
         <FormResources Include="Frames\ImageEditor\fToolbarShape.dfm"/>
-        <FormResources Include="Frames\fSelectionPanel.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fToolbar.dfm"/>
         <FormResources Include="Frames\fSelectionImage.dfm"/>
         <FormResources Include="Frames\fMultiImageView.dfm"/>
+        <FormResources Include="Frames\fImportDialog.dfm"/>
         <FormResources Include="Frames\fWelcomeDialog.dfm"/>
+        <FormResources Include="Frames\fSelectionPanel.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fPaletteBitmap.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

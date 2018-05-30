@@ -14,8 +14,8 @@ __fastcall BitmapGraphicsBuffer::BitmapGraphicsBuffer(unsigned int width, unsign
     // allocate the buffer
     // m_Buffers[0] : pixels buffer
     PushBuffer(m_Stride * height);
-    m_SetColors[0] = 1;
-    m_SetColors[1] = 0;
+    m_SetColors.push_back(1);
+    m_SetColors.push_back(0);
 }
 //---------------------------------------------------------------------------
 __fastcall BitmapGraphicsBuffer::~BitmapGraphicsBuffer()
@@ -38,7 +38,7 @@ void __fastcall BitmapGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y, b
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall BitmapGraphicsBuffer::GetColor(unsigned int X, unsigned int Y, ColorIndex colorIndex)
+void __fastcall BitmapGraphicsBuffer::GetColor(unsigned int X, unsigned int Y, unsigned char colorIndex)
 {
     if (X < m_Width && Y < m_Height)
     {

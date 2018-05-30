@@ -29,13 +29,13 @@
 #include "fMultiImageView.h"
 #include "fToolbarShape.h"
 #include "fToolbar.h"
-#include "Forms/fColors.h"
+#include "fPaletteAttribute.h"
+#include "fPaletteBitmap.h"
 //---------------------------------------------------------------------------
 class TfrmEditorImage : public TFrame
 {
 __published:    // IDE-managed Components
     TPanel *panToolOptions;
-    TPanel *panContainer;
     TActionList *tbrActions;
     TImageList *tbrImages;
     TAction *actSelect;
@@ -56,37 +56,8 @@ __published:    // IDE-managed Components
     TMenuItem *mnuFill;
     TAction *actGridPixel;
     TAction *actGridCharacter;
-    TPanel *panToolbar;
-    TToolBar *tbrShiftRotates;
-    TToolButton *btnRotateLeft;
-    TToolButton *btnRotateRight;
-    TToolButton *btnRotateDown;
-    TToolButton *btnRotateUp;
-    TToolButton *btnRotateLeft90;
-    TToolButton *btnRotateRight90;
-    TToolButton *btnFlipHorizontal;
-    TToolButton *btnFlipVertical;
-    TToolBar *tbrTools;
-    TToolButton *btnSelect;
-    TToolButton *btnText;
-    TToolButton *btnPencil;
-    TToolButton *btnLine;
-    TToolButton *btnShape;
-    TToolButton *btnDropper;
-    TToolButton *btnSprayBrush;
-    TToolButton *btnFill;
     TAction *actText;
     TAction *actDropper;
-    TPanel *panSplitter1;
-    TPanel *panSplitter2;
-    TPanel *panSplitter3;
-    TToolBar *tbrMono;
-    TToolButton *btnMonoOff;
-    TToolButton *btnMonoOn;
-    TPanel *panSplitter4;
-    TToolBar *tbrGrids;
-    TToolButton *btnGridCharacter;
-    TToolButton *btnGridPixel;
     TStatusBar *barStatus;
     TAction *actRotateLeft;
     TAction *actRotateRight;
@@ -100,8 +71,6 @@ __published:    // IDE-managed Components
     TAction *actMonoOff;
     TScrollBox *sbxView;
     TAction *actBrush;
-    TToolButton *btnBrush;
-    TToolButton *btnEraser;
     TMenuItem *mnuEraser;
     TButton *btnTool;
     TPanel *panEditorContainer;
@@ -110,16 +79,12 @@ __published:    // IDE-managed Components
     TAction *actZoomIn;
     TAction *actZoomOut;
     TAction *actZoomReset;
-    TPanel *Panel1;
+    TPanel *panContainer;
     TPanel *panFrameView;
-    TMultiImageViewFrame *fFrameView;
     TPopupMenu *popFrames;
     TMenuItem *popAddFrame;
     TMenuItem *popInsertFrame;
     TMenuItem *popRemoveFrame;
-    TToolBar *tbrAnimate;
-    TToolButton *btnAnimatePlay;
-    TToolButton *btnAnimateStop;
     TAction *actAnimatePlay;
     TAction *actAnimateStop;
     TAction *actToggleAnimation;
@@ -129,6 +94,47 @@ __published:    // IDE-managed Components
     TPanel *Panel2;
     TfrmToolbarShape *toolbarShape;
     TMenuItem *mnuPencil;
+    TPanel *panToolbar;
+    TToolBar *tbrShiftRotates;
+    TToolButton *btnRotateLeft;
+    TToolButton *btnRotateRight;
+    TToolButton *btnRotateDown;
+    TToolButton *btnRotateUp;
+    TToolButton *btnFlipHorizontal;
+    TToolButton *btnFlipVertical;
+    TToolButton *btnRotateLeft90;
+    TToolButton *btnRotateRight90;
+    TToolBar *tbrTools;
+    TToolButton *btnSelect;
+    TToolButton *btnText;
+    TToolButton *btnPencil;
+    TToolButton *btnBrush;
+    TToolButton *btnLine;
+    TToolButton *btnShape;
+    TToolButton *btnDropper;
+    TToolButton *btnSprayBrush;
+    TToolButton *btnFill;
+    TToolButton *btnEraser;
+    TPanel *panSplitter1;
+    TPanel *panSplitter2;
+    TPanel *panSplitter3;
+    TToolBar *tbrMono;
+    TToolButton *btnMonoOff;
+    TToolButton *btnMonoOn;
+    TPanel *panSplitter4;
+    TToolBar *tbrGrids;
+    TToolButton *btnGridCharacter;
+    TToolButton *btnGridPixel;
+    TToolBar *tbrAnimate;
+    TToolButton *btnAnimatePlay;
+    TToolButton *btnAnimateStop;
+    TPanel *Panel1;
+    TLabel *Label1;
+    TLabel *Label2;
+    TPanel *Panel3;
+    TfrmPaletteAttribute *palAttribute;
+    TfrmPaletteBitmap *palBitmap;
+    TMultiImageViewFrame *fFrameView;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actBrushExecute(TObject *Sender);
@@ -169,7 +175,6 @@ __published:    // IDE-managed Components
     void __fastcall imgEditorMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
     void __fastcall imgEditorMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
     void __fastcall imgEditorMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
-    void __fastcall fFrameViewTimer1Timer(TObject *Sender);
 private:    // User declarations
     typedef std::vector<std::unique_ptr<Agdx::Image>> ImageList;
     typedef std::map<int, std::unique_ptr<CanvasTool>> CanvasToolMap;
@@ -186,10 +191,7 @@ private:    // User declarations
     CanvasToolMap               m_CanvasToolMap;    // a map to all the canvas paint tools
     int                         m_CanvasTool;       // the selected canvas paint tool
     TfrmToolbar*                m_Toolbar;          // the current tools toolbar
-    std::unique_ptr<TfrmColors> m_Colors;           // colour picker window
     const Agdx::GraphicsMode&   m_GraphicsMode;     // the graphics mode used by the project
-    bool                        m_WndProcHooked;
-    wndProcPtr                  m_OldWndProc;
 
     void            __fastcall  SetDocument(Document* document);
     void            __fastcall  OnEvent(const Event& event);
@@ -199,9 +201,8 @@ private:    // User declarations
     void            __fastcall  RefreshFramesView();
     void            __fastcall  OnFrameSelected(TObject *Sender);
     TPoint          __fastcall  ToImagePt(int X, int Y);
+    void            __fastcall  SetCanvasColors();
     void            __fastcall  ChangeToolbar(TfrmToolbar* toolbar);
-    void            __fastcall  FrameEnter(TObject *Sender);
-    void            __fastcall  FrameExit(TObject *Sender);
 
 public:        // User declarations
                     __fastcall  TfrmEditorImage(TComponent* Owner);

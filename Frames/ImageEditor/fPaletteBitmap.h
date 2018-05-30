@@ -1,21 +1,27 @@
 //---------------------------------------------------------------------------
-#ifndef fColorsH
-#define fColorsH
+#ifndef fPaletteBitmapH
+#define fPaletteBitmapH
 //---------------------------------------------------------------------------
 #include <System.Classes.hpp>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
-#include "fPaletteAttribute.h"
+#include <Vcl.ExtCtrls.hpp>
+#include "Graphics/GraphicsBuffer.h"
 //---------------------------------------------------------------------------
-class TfrmColors : public TForm
+class TfrmPaletteBitmap : public TFrame
 {
 __published:	// IDE-managed Components
-    TfrmPaletteAttribute *frmAttribute;
-    void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
+    TPanel *Panel1;
+    TPanel *Panel2;
+    TImage *Image1;
+    TButton *Button1;
 private:	// User declarations
+    int                 m_Pen;
+    int                 m_Brush;
 public:		// User declarations
-    __fastcall TfrmColors(TComponent* Owner);
+            __fastcall  TfrmPaletteBitmap(TComponent* Owner);
+    void    __fastcall  Set(Agdx::GraphicsBuffer& canvas);
 };
 //---------------------------------------------------------------------------
 #endif

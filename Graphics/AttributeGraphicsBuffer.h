@@ -19,29 +19,14 @@ namespace Agdx
 class AttributeGraphicsBuffer : public GraphicsBuffer
 {
 private:
-    unsigned char       m_iInk;
-    unsigned char       m_iPaper;
-    unsigned char       m_iBright;
-    unsigned char       m_iFlash;
-
-                void    __fastcall  SetInk   (unsigned char iInk);
-                void    __fastcall  SetPaper (unsigned char iPaper);
-                void    __fastcall  SetFlash (unsigned char iFlash);
-                void    __fastcall  SetBright(unsigned char iBright);
-
 public:
                         __fastcall  AttributeGraphicsBuffer(unsigned int width, unsigned int height, const Agdx::GraphicsMode& mode);
                         __fastcall ~AttributeGraphicsBuffer();
 
-    void                __fastcall  SetPixel(unsigned int X, unsigned int Y, bool set);
-    void                __fastcall  GetColor(unsigned int X, unsigned int Y, ColorIndex colorIndex = ciPrimary);
-    void                __fastcall  Render() const;
-    void                __fastcall  Set(const String& data);
-
-    __property  unsigned char       Ink     = { read = m_iInk           , write = SetInk    };
-    __property  unsigned char       Paper   = { read = m_iPaper         , write = SetPaper  };
-    __property  unsigned char       Bright  = { read = m_iBright        , write = SetBright };
-    __property  unsigned char       Flash   = { read = m_iFlash         , write = SetFlash  };
+                void    __fastcall  SetPixel(unsigned int X, unsigned int Y, bool set);
+                void    __fastcall  GetColor(unsigned int X, unsigned int Y, unsigned char colorIndex = 0);
+                void    __fastcall  Render() const;
+                void    __fastcall  Set(const String& data);
 };
 //---------------------------------------------------------------------------
 }   // agdx
