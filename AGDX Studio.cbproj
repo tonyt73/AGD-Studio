@@ -76,8 +76,8 @@
         <Icon_MainIcon>$(BDS)\bin\cbuilder_PROJECTICON.ico</Icon_MainIcon>
         <UWP_CppLogo44>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_44.png</UWP_CppLogo44>
         <UWP_CppLogo150>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_150.png</UWP_CppLogo150>
-        <IncludePath>Frames\ImageEditor\;Import\;Graphics\;Factories\;Messaging\;System\;File\;Project\;Settings\;Frames\;Forms\;..\;..\Frames\;Arcade Game Designer Studio\Forms\;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>Frames\ImageEditor\;Import\;Graphics\;Factories\;Messaging\;System\;File\;Project\;Settings\;Frames\;Forms\;..\;..\Frames\;Arcade Game Designer Studio\Forms\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>Frames\IDE\;Frames\ImportDialog\;Frames\WelcomeDialog\;Frames\MapEditor\;Frames\MusicEditor\;Frames\CodeEditor\;Frames\ImageEditor\;Import\;Graphics\;Factories\;Messaging\;System\;File\;Project\;Settings\;Frames\;Forms\;..\;..\Frames\;Arcade Game Designer Studio\Forms\;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>Frames\IDE\;Frames\ImportDialog\;Frames\WelcomeDialog\;Frames\MapEditor\;Frames\MusicEditor\;Frames\CodeEditor\;Frames\ImageEditor\;Import\;Graphics\;Factories\;Messaging\;System\;File\;Project\;Settings\;Frames\;Forms\;..\;..\Frames\;Arcade Game Designer Studio\Forms\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <SanitizedProjectName>AGDX_Studio</SanitizedProjectName>
         <BCC_PCHInject>agdx.pch.h</BCC_PCHInject>
         <Custom_Styles>Amakrits|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Amakrits.vsf;&quot;Amethyst Kamri|VCLSTYLE|$(BDSCOMMONDIR)\Styles\AmethystKamri.vsf&quot;;&quot;Aqua Graphite|VCLSTYLE|$(BDSCOMMONDIR)\Styles\AquaGraphite.vsf&quot;;&quot;Aqua Light Slate|VCLSTYLE|$(BDSCOMMONDIR)\Styles\AquaLightSlate.vsf&quot;;Auric|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Auric.vsf;Carbon|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Carbon.vsf;&quot;Charcoal Dark Slate|VCLSTYLE|$(BDSCOMMONDIR)\Styles\CharcoalDarkSlate.vsf&quot;;&quot;Cobalt XEMedia|VCLSTYLE|$(BDSCOMMONDIR)\Styles\CobaltXEMedia.vsf&quot;;&quot;Cyan Dusk|VCLSTYLE|$(BDSCOMMONDIR)\Styles\CyanDusk.vsf&quot;;&quot;Cyan Night|VCLSTYLE|$(BDSCOMMONDIR)\Styles\CyanNight.vsf&quot;;&quot;Emerald Light Slate|VCLSTYLE|$(BDSCOMMONDIR)\Styles\EmeraldLightSlate.vsf&quot;;Glossy|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Glossy.vsf;Glow|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Glow.vsf;&quot;Golden Graphite|VCLSTYLE|$(BDSCOMMONDIR)\Styles\GoldenGraphite.vsf&quot;;&quot;Iceberg Classico|VCLSTYLE|$(BDSCOMMONDIR)\Styles\IcebergClassico.vsf&quot;;&quot;Lavender Classico|VCLSTYLE|$(BDSCOMMONDIR)\Styles\LavenderClassico.vsf&quot;;Light|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Light.vsf;Luna|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Luna.vsf;&quot;Metropolis UI Black|VCLSTYLE|$(BDSCOMMONDIR)\Styles\MetropolisUIBlack.vsf&quot;;&quot;Metropolis UI Blue|VCLSTYLE|$(BDSCOMMONDIR)\Styles\MetropolisUIBlue.vsf&quot;;&quot;Metropolis UI Dark|VCLSTYLE|$(BDSCOMMONDIR)\Styles\MetropolisUIDark.vsf&quot;;&quot;Metropolis UI Green|VCLSTYLE|$(BDSCOMMONDIR)\Styles\MetropolisUIGreen.vsf&quot;;Obsidian|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Obsidian.vsf;&quot;Onyx Blue|VCLSTYLE|$(BDSCOMMONDIR)\Styles\OnyxBlue.vsf&quot;;&quot;Ruby Graphite|VCLSTYLE|$(BDSCOMMONDIR)\Styles\RubyGraphite.vsf&quot;;&quot;Sapphire Kamri|VCLSTYLE|$(BDSCOMMONDIR)\Styles\SapphireKamri.vsf&quot;;Silver|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Silver.vsf;Sky|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Sky.vsf;&quot;Slate Classico|VCLSTYLE|$(BDSCOMMONDIR)\Styles\SlateClassico.vsf&quot;;&quot;Smokey Quartz Kamri|VCLSTYLE|$(BDSCOMMONDIR)\Styles\SmokeyQuartzKamri.vsf&quot;;&quot;Tablet Light|VCLSTYLE|$(BDSCOMMONDIR)\Styles\TabletLight.vsf&quot;;TabletDark|VCLSTYLE|$(BDSCOMMONDIR)\Styles\TabletDark.vsf;&quot;Turquoise Gray|VCLSTYLE|$(BDSCOMMONDIR)\Styles\TurquoiseGray.vsf&quot;;Windows10|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Windows10.vsf;&quot;Windows10 Blue|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Windows10Blue.vsf&quot;;&quot;Windows10 Dark|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Windows10Dark.vsf&quot;;&quot;Windows10 Green|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Windows10Green.vsf&quot;;&quot;Windows10 Purple|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Windows10Purple.vsf&quot;;&quot;Windows10 SlateGray|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Windows10SlateGray.vsf&quot;</Custom_Styles>
@@ -218,75 +218,19 @@
             <DependentOn>Forms\fSettings.h</DependentOn>
             <BuildOrder>39</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Frames\fEditorCode.cpp">
+        <CppCompile Include="Frames\CodeEditor\fEditorCode.cpp">
             <Form>frmEditorCode</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\fEditorCode.h</DependentOn>
+            <DependentOn>Frames\CodeEditor\fEditorCode.h</DependentOn>
             <BuildOrder>5</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Frames\fEditorImage.cpp">
-            <Form>frmEditorImage</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\fEditorImage.h</DependentOn>
-            <BuildOrder>6</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\fEditorMap.cpp">
-            <Form>frmEditorMap</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\fEditorMap.h</DependentOn>
-            <BuildOrder>7</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\fEditorMusic.cpp">
-            <Form>frmEditorMusic</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\fEditorMusic.h</DependentOn>
-            <BuildOrder>8</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\fIDE.cpp">
+        <CppCompile Include="Frames\IDE\fIDE.cpp">
             <Form>frmIDE</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\fIDE.h</DependentOn>
+            <DependentOn>Frames\IDE\fIDE.h</DependentOn>
             <BuildOrder>9</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\fImportDialog.cpp">
-            <Form>frmImportDialog</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\fImportDialog.h</DependentOn>
-            <BuildOrder>36</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\fMultiImageView.cpp">
-            <Form>MultiImageViewFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\fMultiImageView.h</DependentOn>
-            <BuildOrder>41</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\fSelectionImage.cpp">
-            <Form>SelectionImageFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\fSelectionImage.h</DependentOn>
-            <BuildOrder>40</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\fSelectionPanel.cpp">
-            <Form>SelectionPanelFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\fSelectionPanel.h</DependentOn>
-            <BuildOrder>10</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\fWelcomeDialog.cpp">
-            <Form>frmWelcomeDialog</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\fWelcomeDialog.h</DependentOn>
-            <BuildOrder>11</BuildOrder>
         </CppCompile>
         <CppCompile Include="Frames\ImageEditor\CanvasLineTool.cpp">
             <DependentOn>Frames\ImageEditor\CanvasLineTool.h</DependentOn>
@@ -304,6 +248,20 @@
             <DependentOn>Frames\ImageEditor\CanvasTool.h</DependentOn>
             <BuildOrder>42</BuildOrder>
         </CppCompile>
+        <CppCompile Include="Frames\ImageEditor\fEditorImage.cpp">
+            <Form>frmEditorImage</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\ImageEditor\fEditorImage.h</DependentOn>
+            <BuildOrder>6</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\ImageEditor\fMultiImageView.cpp">
+            <Form>MultiImageViewFrame</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\ImageEditor\fMultiImageView.h</DependentOn>
+            <BuildOrder>41</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Frames\ImageEditor\fPaletteAttribute.cpp">
             <Form>frmPaletteAttribute</Form>
             <FormType>dfm</FormType>
@@ -318,6 +276,13 @@
             <DependentOn>Frames\ImageEditor\fPaletteBitmap.h</DependentOn>
             <BuildOrder>53</BuildOrder>
         </CppCompile>
+        <CppCompile Include="Frames\ImageEditor\fSelectionImage.cpp">
+            <Form>SelectionImageFrame</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\ImageEditor\fSelectionImage.h</DependentOn>
+            <BuildOrder>40</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Frames\ImageEditor\fToolbar.cpp">
             <Form>frmToolbar</Form>
             <FormType>dfm</FormType>
@@ -331,6 +296,41 @@
             <DesignClass>TFrame</DesignClass>
             <DependentOn>Frames\ImageEditor\fToolbarShape.h</DependentOn>
             <BuildOrder>46</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\ImportDialog\fImportDialog.cpp">
+            <Form>frmImportDialog</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\ImportDialog\fImportDialog.h</DependentOn>
+            <BuildOrder>36</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\MapEditor\fEditorMap.cpp">
+            <Form>frmEditorMap</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\MapEditor\fEditorMap.h</DependentOn>
+            <BuildOrder>7</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\MusicEditor\fEditorMusic.cpp">
+            <Form>frmEditorMusic</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\MusicEditor\fEditorMusic.h</DependentOn>
+            <BuildOrder>8</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\WelcomeDialog\fSelectionPanel.cpp">
+            <Form>SelectionPanelFrame</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\WelcomeDialog\fSelectionPanel.h</DependentOn>
+            <BuildOrder>10</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\WelcomeDialog\fWelcomeDialog.cpp">
+            <Form>frmWelcomeDialog</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\WelcomeDialog\fWelcomeDialog.h</DependentOn>
+            <BuildOrder>11</BuildOrder>
         </CppCompile>
         <CppCompile Include="Graphics\AttributeGraphicsBuffer.cpp">
             <DependentOn>Graphics\AttributeGraphicsBuffer.h</DependentOn>
@@ -442,24 +442,24 @@
             <DependentOn>System\Path.h</DependentOn>
             <BuildOrder>18</BuildOrder>
         </CppCompile>
-        <FormResources Include="Frames\fEditorImage.dfm"/>
-        <FormResources Include="Frames\fEditorCode.dfm"/>
+        <FormResources Include="Frames\MapEditor\fEditorMap.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fEditorImage.dfm"/>
+        <FormResources Include="Frames\CodeEditor\fEditorCode.dfm"/>
+        <FormResources Include="Frames\ImportDialog\fImportDialog.dfm"/>
+        <FormResources Include="Frames\IDE\fIDE.dfm"/>
+        <FormResources Include="Frames\MusicEditor\fEditorMusic.dfm"/>
         <FormResources Include="Forms\fSettings.dfm"/>
-        <FormResources Include="Frames\fIDE.dfm"/>
-        <FormResources Include="Frames\fEditorMusic.dfm"/>
-        <FormResources Include="Frames\fEditorMap.dfm"/>
         <FormResources Include="Forms\fNewImage.dfm"/>
         <FormResources Include="Forms\fMain.dfm"/>
         <FormResources Include="Forms\fAbout.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fPaletteBitmap.dfm"/>
         <FormResources Include="Frames\ImageEditor\fPaletteAttribute.dfm"/>
         <FormResources Include="Frames\ImageEditor\fToolbarShape.dfm"/>
         <FormResources Include="Frames\ImageEditor\fToolbar.dfm"/>
-        <FormResources Include="Frames\fSelectionImage.dfm"/>
-        <FormResources Include="Frames\fMultiImageView.dfm"/>
-        <FormResources Include="Frames\fImportDialog.dfm"/>
-        <FormResources Include="Frames\fWelcomeDialog.dfm"/>
-        <FormResources Include="Frames\fSelectionPanel.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fPaletteBitmap.dfm"/>
+        <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fSelectionImage.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fMultiImageView.dfm"/>
+        <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
