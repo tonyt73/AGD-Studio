@@ -3,7 +3,7 @@
 #define ImageH
 //---------------------------------------------------------------------------
 #include <memory>
-#include "Graphics/GraphicsBuffers.h"
+#include "Graphics/GraphicsBuffer.h"
 //---------------------------------------------------------------------------
 namespace Agdx
 {

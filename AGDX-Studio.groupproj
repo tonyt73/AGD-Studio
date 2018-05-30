@@ -6,6 +6,9 @@
         <Projects Include="AGDX Studio.cbproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="E:\LMD2018\demos\bcpp\lmddocking\Docking Demo\pDockingDemo.cbproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -23,14 +26,23 @@
     <Target Name="AGDX Studio:Make">
         <MSBuild Projects="AGDX Studio.cbproj" Targets="Make"/>
     </Target>
+    <Target Name="pDockingDemo">
+        <MSBuild Projects="E:\LMD2018\demos\bcpp\lmddocking\Docking Demo\pDockingDemo.cbproj"/>
+    </Target>
+    <Target Name="pDockingDemo:Clean">
+        <MSBuild Projects="E:\LMD2018\demos\bcpp\lmddocking\Docking Demo\pDockingDemo.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="pDockingDemo:Make">
+        <MSBuild Projects="E:\LMD2018\demos\bcpp\lmddocking\Docking Demo\pDockingDemo.cbproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="AGDX Studio"/>
+        <CallTarget Targets="AGDX Studio;pDockingDemo"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="AGDX Studio:Clean"/>
+        <CallTarget Targets="AGDX Studio:Clean;pDockingDemo:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="AGDX Studio:Make"/>
+        <CallTarget Targets="AGDX Studio:Make;pDockingDemo:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

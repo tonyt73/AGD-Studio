@@ -1,0 +1,36 @@
+object frmColors: TfrmColors
+  Left = 0
+  Top = 0
+  AutoSize = True
+  BorderIcons = []
+  BorderStyle = bsToolWindow
+  Caption = 'Colors'
+  ClientHeight = 136
+  ClientWidth = 264
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  PopupMode = pmAuto
+  Position = poDefault
+  ScreenSnap = True
+  OnCloseQuery = FormCloseQuery
+  PixelsPerInch = 96
+  TextHeight = 13
+  inline frmAttribute: TfrmPaletteAttribute
+    Left = 0
+    Top = 0
+    Width = 264
+    Height = 136
+    AutoSize = True
+    Padding.Left = 8
+    Padding.Top = 8
+    Padding.Right = 8
+    Padding.Bottom = 8
+    TabOrder = 0
+  end
+end

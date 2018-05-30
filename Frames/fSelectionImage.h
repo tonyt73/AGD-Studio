@@ -7,7 +7,7 @@
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
 #include <Vcl.ExtCtrls.hpp>
-#include "Graphics/GraphicsBuffers.h"
+#include "Graphics/GraphicsBuffer.h"
 //---------------------------------------------------------------------------
 class TSelectionImageFrame : public TFrame
 {

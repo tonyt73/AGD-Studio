@@ -3,7 +3,7 @@
 #pragma hdrstop
 //---------------------------------------------------------------------------
 #include "Image.h"
-#include "GraphicsBuffers.h"
+#include "GraphicsBuffer.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 using namespace Agdx;

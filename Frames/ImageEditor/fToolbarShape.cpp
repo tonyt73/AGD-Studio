@@ -4,6 +4,7 @@
 #include "fToolbarShape.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
+#pragma link "fToolbar"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 __fastcall TfrmToolbarShape::TfrmToolbarShape(TComponent* Owner)

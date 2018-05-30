@@ -152,8 +152,8 @@
         <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;fmx.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtprint.bpi;VclSmp.bpi;lmdrtcore.bpi</LinkPackageImports>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Build>70</VerInfo_Build>
-        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=1.0.6663.70;InternalName=agdx.exe;LegalCopyright=2018 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Programmed by Tony Thompson</VerInfo_Keys>
+        <VerInfo_Build>71</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=1.0.6663.71;InternalName=agdx.exe;LegalCopyright=2018 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Programmed by Tony Thompson</VerInfo_Keys>
         <VerInfo_Release>6663</VerInfo_Release>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <Icon_MainIcon>Icon.ico</Icon_MainIcon>
@@ -199,6 +199,12 @@
             <FormType>dfm</FormType>
             <DependentOn>Forms\fAbout.h</DependentOn>
             <BuildOrder>3</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Forms\fColors.cpp">
+            <Form>frmColors</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>Forms\fColors.h</DependentOn>
+            <BuildOrder>52</BuildOrder>
         </CppCompile>
         <CppCompile Include="Forms\fMain.cpp">
             <Form>frmMain</Form>
@@ -304,9 +310,19 @@
             <DependentOn>Frames\ImageEditor\CanvasTool.h</DependentOn>
             <BuildOrder>42</BuildOrder>
         </CppCompile>
+        <CppCompile Include="Frames\ImageEditor\fPaletteAttribute.cpp">
+            <Form>frmPaletteAttribute</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\ImageEditor\fPaletteAttribute.h</DependentOn>
+            <BuildOrder>49</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Frames\ImageEditor\fToolbar.cpp">
+            <Form>frmToolbar</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
             <DependentOn>Frames\ImageEditor\fToolbar.h</DependentOn>
-            <BuildOrder>48</BuildOrder>
+            <BuildOrder>49</BuildOrder>
         </CppCompile>
         <CppCompile Include="Frames\ImageEditor\fToolbarShape.cpp">
             <Form>frmToolbarShape</Form>
@@ -315,8 +331,16 @@
             <DependentOn>Frames\ImageEditor\fToolbarShape.h</DependentOn>
             <BuildOrder>46</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Graphics\GraphicsBuffers.cpp">
-            <DependentOn>Graphics\GraphicsBuffers.h</DependentOn>
+        <CppCompile Include="Graphics\AttributeGraphicsBuffer.cpp">
+            <DependentOn>Graphics\AttributeGraphicsBuffer.h</DependentOn>
+            <BuildOrder>50</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Graphics\BitmapGraphicsBuffer.cpp">
+            <DependentOn>Graphics\BitmapGraphicsBuffer.h</DependentOn>
+            <BuildOrder>51</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Graphics\GraphicsBuffer.cpp">
+            <DependentOn>Graphics\GraphicsBuffer.h</DependentOn>
             <BuildOrder>33</BuildOrder>
         </CppCompile>
         <CppCompile Include="Graphics\GraphicsMode.cpp">
@@ -417,21 +441,24 @@
             <DependentOn>System\Path.h</DependentOn>
             <BuildOrder>18</BuildOrder>
         </CppCompile>
-        <FormResources Include="Forms\fSettings.dfm"/>
-        <FormResources Include="Frames\fEditorCode.dfm"/>
         <FormResources Include="Frames\fEditorImage.dfm"/>
-        <FormResources Include="Frames\fEditorMap.dfm"/>
-        <FormResources Include="Frames\fEditorMusic.dfm"/>
-        <FormResources Include="Forms\fNewImage.dfm"/>
-        <FormResources Include="Forms\fAbout.dfm"/>
-        <FormResources Include="Forms\fMain.dfm"/>
+        <FormResources Include="Frames\fEditorCode.dfm"/>
+        <FormResources Include="Forms\fSettings.dfm"/>
         <FormResources Include="Frames\fIDE.dfm"/>
+        <FormResources Include="Frames\fEditorMusic.dfm"/>
+        <FormResources Include="Frames\fEditorMap.dfm"/>
+        <FormResources Include="Forms\fNewImage.dfm"/>
+        <FormResources Include="Forms\fMain.dfm"/>
+        <FormResources Include="Forms\fColors.dfm"/>
+        <FormResources Include="Forms\fAbout.dfm"/>
         <FormResources Include="Frames\fImportDialog.dfm"/>
-        <FormResources Include="Frames\fMultiImageView.dfm"/>
-        <FormResources Include="Frames\fSelectionImage.dfm"/>
-        <FormResources Include="Frames\fSelectionPanel.dfm"/>
-        <FormResources Include="Frames\fWelcomeDialog.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fToolbar.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fPaletteAttribute.dfm"/>
         <FormResources Include="Frames\ImageEditor\fToolbarShape.dfm"/>
+        <FormResources Include="Frames\fSelectionPanel.dfm"/>
+        <FormResources Include="Frames\fSelectionImage.dfm"/>
+        <FormResources Include="Frames\fMultiImageView.dfm"/>
+        <FormResources Include="Frames\fWelcomeDialog.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

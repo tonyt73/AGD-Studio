@@ -9,7 +9,7 @@
 #include <System.ImageList.hpp>
 #include <Vcl.ImgList.hpp>
 #include <Vcl.Menus.hpp>
-#include "Frames/ImageEditor/fToolbar.h"
+#include "fToolbar.h"
 //---------------------------------------------------------------------------
 class TfrmToolbarShape : public TfrmToolbar
 {

@@ -25,8 +25,6 @@ object frmEditorImage: TfrmEditorImage
       Images = tbrImages
       Style = bsSplitButton
       TabOrder = 0
-      ExplicitTop = 2
-      ExplicitHeight = 40
     end
     object Panel2: TPanel
       Left = 57
@@ -37,44 +35,33 @@ object frmEditorImage: TfrmEditorImage
       BevelOuter = bvNone
       ShowCaption = False
       TabOrder = 1
-      ExplicitLeft = 104
-      ExplicitWidth = 185
-      ExplicitHeight = 41
-      object ActionToolBar1: TActionToolBar
+      inline toolbarShape: TfrmToolbarShape
         Left = 0
         Top = 0
-        Width = 1045
-        Height = 29
-        Caption = 'ActionToolBar1'
-        Color = clMenuBar
-        ColorMap.DisabledFontColor = 7171437
-        ColorMap.HighlightColor = clWhite
-        ColorMap.BtnSelectedFont = clBlack
-        ColorMap.UnusedColor = clWhite
+        Width = 193
+        Height = 42
+        Align = alLeft
+        AutoSize = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
+        Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        Spacing = 0
-        ExplicitLeft = 80
-        ExplicitTop = 24
-        ExplicitWidth = 150
-      end
-      inline toolbarShape: TfrmToolbarShape
-        Left = 8
-        Top = 0
-        Width = 995
-        Height = 42
-        TabOrder = 1
-        ExplicitLeft = 8
+        TabOrder = 0
+        Visible = False
+        ExplicitHeight = 42
+        inherited btnShape: TButton
+          Height = 42
+          ExplicitHeight = 42
+        end
         inherited btnFillMode: TButton
-          ExplicitLeft = 129
+          Height = 42
+          ExplicitHeight = 42
         end
         inherited lstSmall: TImageList
           Bitmap = {
-            494C010105000800180010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+            494C0101050008003C0010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
             0000000000003600000028000000400000002000000001002000000000000020
             000000000000000000000000000000000000C19457FFC19457FFC19457FFC194
             57FFC19457FFC19457FFC19457FFC19457FFC19457FFC19457FFC19457FFC194
@@ -347,7 +334,7 @@ object frmEditorImage: TfrmEditorImage
         end
         inherited lstLargeShapes: TImageList
           Bitmap = {
-            494C010105002000300020001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+            494C010105002000540020001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
             0000000000003600000028000000800000003000000001002000000000000060
             0000000000000000000000000000000000000000000000000000000000000000
             000000000000000000000000000000000000C19457FFC19457FFC19457FFC194
@@ -1148,7 +1135,7 @@ object frmEditorImage: TfrmEditorImage
         end
         inherited imgFills: TImageList
           Bitmap = {
-            494C010103001800240010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+            494C010103001800480010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
             0000000000003600000028000000400000001000000001002000000000000010
             0000000000000000000000000000000000000000000000000000000000000000
             000000000000000000FF000000FF000000FF000000FF000000E5000000F50000
@@ -1289,7 +1276,7 @@ object frmEditorImage: TfrmEditorImage
         end
         inherited imgLargeFill: TImageList
           Bitmap = {
-            494C010103001800240018001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+            494C010103001800480018001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
             0000000000003600000028000000600000001800000001002000000000000024
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000000000000000
@@ -1604,8 +1591,6 @@ object frmEditorImage: TfrmEditorImage
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 40
-    ExplicitHeight = 667
     object panToolbar: TPanel
       Left = 0
       Top = 0
@@ -1618,7 +1603,6 @@ object frmEditorImage: TfrmEditorImage
       Constraints.MinWidth = 80
       TabOrder = 0
       OnClick = panEditorContainerClick
-      ExplicitHeight = 667
       object tbrShiftRotates: TToolBar
         Left = 0
         Top = 204
@@ -1923,7 +1907,6 @@ object frmEditorImage: TfrmEditorImage
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitHeight = 667
       object sbxView: TScrollBox
         Left = 0
         Top = 0
@@ -1942,7 +1925,7 @@ object frmEditorImage: TfrmEditorImage
         TabOrder = 0
         OnMouseWheel = sbxViewMouseWheel
         OnResize = sbxViewResize
-        ExplicitHeight = 567
+        ExplicitWidth = 837
         object panEditorContainer: TPanel
           Left = 0
           Top = 0
@@ -1961,7 +1944,7 @@ object frmEditorImage: TfrmEditorImage
           TabOrder = 0
           StyleElements = [seClient, seBorder]
           OnClick = panEditorContainerClick
-          ExplicitHeight = 567
+          ExplicitWidth = 837
           object panViewFrame: TPanel
             Left = 128
             Top = 128
@@ -1979,7 +1962,7 @@ object frmEditorImage: TfrmEditorImage
             ParentDoubleBuffered = False
             TabOrder = 0
             StyleElements = []
-            ExplicitHeight = 311
+            ExplicitWidth = 581
             object imgEditor: TImage
               Left = 1
               Top = 1
@@ -2010,7 +1993,6 @@ object frmEditorImage: TfrmEditorImage
         DoubleBuffered = False
         ParentDoubleBuffered = False
         TabOrder = 1
-        ExplicitTop = 567
         inline fFrameView: TMultiImageViewFrame
           Left = 0
           Top = 0
@@ -2030,6 +2012,10 @@ object frmEditorImage: TfrmEditorImage
           ParentDoubleBuffered = False
           TabOrder = 0
           ExplicitWidth = 1022
+          inherited Timer1: TTimer
+            Interval = 1000
+            OnTimer = fFrameViewTimer1Timer
+          end
         end
       end
     end
@@ -2060,6 +2046,7 @@ object frmEditorImage: TfrmEditorImage
     Top = 65
     object actSelect: TAction
       Caption = 'Select'
+      Enabled = False
       GroupIndex = 1
       ImageIndex = 0
       ShortCut = 8275
@@ -2067,6 +2054,7 @@ object frmEditorImage: TfrmEditorImage
     end
     object actText: TAction
       Caption = 'Text'
+      Enabled = False
       GroupIndex = 1
       ImageIndex = 10
       ShortCut = 8276
@@ -2082,6 +2070,7 @@ object frmEditorImage: TfrmEditorImage
     end
     object actBrush: TAction
       Caption = 'Brush'
+      Enabled = False
       GroupIndex = 1
       ImageIndex = 2
       ShortCut = 8258
@@ -2103,6 +2092,7 @@ object frmEditorImage: TfrmEditorImage
     end
     object actDropper: TAction
       Caption = 'Dropper'
+      Enabled = False
       GroupIndex = 1
       ImageIndex = 6
       ShortCut = 8260
@@ -2110,6 +2100,7 @@ object frmEditorImage: TfrmEditorImage
     end
     object actSprayBrush: TAction
       Caption = 'Spray Brush'
+      Enabled = False
       GroupIndex = 1
       ImageIndex = 7
       ShortCut = 24642
@@ -2117,6 +2108,7 @@ object frmEditorImage: TfrmEditorImage
     end
     object actFill: TAction
       Caption = 'Fill'
+      Enabled = False
       GroupIndex = 1
       ImageIndex = 8
       ShortCut = 8262
@@ -2124,6 +2116,7 @@ object frmEditorImage: TfrmEditorImage
     end
     object actEraser: TAction
       Caption = 'Eraser'
+      Enabled = False
       GroupIndex = 1
       ImageIndex = 11
       ShortCut = 8261
@@ -2143,44 +2136,52 @@ object frmEditorImage: TfrmEditorImage
     end
     object actRotateLeft: TAction
       Caption = 'actRotateLeft'
+      Enabled = False
       ImageIndex = 13
       OnExecute = actRotateLeftExecute
     end
     object actRotateRight: TAction
       Caption = 'actRotateRight'
+      Enabled = False
       ImageIndex = 14
       OnExecute = actRotateRightExecute
     end
     object actRotateUp: TAction
       Caption = 'actRotateUp'
+      Enabled = False
       ImageIndex = 15
       OnExecute = actRotateUpExecute
     end
     object actRotateDown: TAction
       Caption = 'actRotateDown'
+      Enabled = False
       ImageIndex = 12
       OnExecute = actRotateDownExecute
     end
     object actFlipVertical: TAction
       Caption = 'actFlipVertical'
+      Enabled = False
       ImageIndex = 18
       ShortCut = 49238
       OnExecute = actFlipVerticalExecute
     end
     object actFlipHorizontal: TAction
       Caption = 'actFlipHorizontal'
+      Enabled = False
       ImageIndex = 17
       ShortCut = 49224
       OnExecute = actFlipHorizontalExecute
     end
     object actRotateLeft90: TAction
       Caption = 'actRotateLeft90'
+      Enabled = False
       ImageIndex = 19
       ShortCut = 24652
       OnExecute = actRotateLeft90Execute
     end
     object actRotateRight90: TAction
       Caption = 'actRotateRight90'
+      Enabled = False
       ImageIndex = 20
       ShortCut = 24658
       OnExecute = actRotateRight90Execute
@@ -2248,7 +2249,7 @@ object frmEditorImage: TfrmEditorImage
     Left = 220
     Top = 65
     Bitmap = {
-      494C010122006000340120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010122006000540120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000002001000001002000000000000040
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000030000
@@ -7017,11 +7018,11 @@ object frmEditorImage: TfrmEditorImage
     object mnuText: TMenuItem
       Action = actText
     end
+    object mnuPencil: TMenuItem
+      Action = actPencil
+    end
     object mnuBrush: TMenuItem
-      Caption = 'Brush'
-      ImageIndex = 2
-      ShortCut = 8258
-      OnClick = actBrushExecute
+      Action = actBrush
     end
     object mnuLine: TMenuItem
       Action = actLine

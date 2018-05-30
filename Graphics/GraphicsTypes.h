@@ -19,4 +19,5 @@ struct ImageSizing
     TSize   Maximum;
     TSize   Step;
 };
+//---------------------------------------------------------------------------
 #endif // GraphicsTypesH

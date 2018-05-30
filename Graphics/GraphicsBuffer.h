@@ -1,9 +1,13 @@
 //---------------------------------------------------------------------------
-#ifndef GraphicsBuffersH
-#define GraphicsBuffersH
+#ifndef GraphicsBufferH
+#define GraphicsBufferH
 //---------------------------------------------------------------------------
 #include "Graphics/GraphicsTypes.h"
 #include "Graphics/GraphicsMode.h"
+//---------------------------------------------------------------------------
+// Pixel Masks for 1, 2, 4 and 8 pixels per byte
+extern const unsigned char* g_PixelMasks[];
+extern const unsigned char* g_PixelShfts[];
 //---------------------------------------------------------------------------
 namespace Agdx
 {
@@ -87,42 +91,6 @@ public:
     unsigned int        __property  NumberOfBuffers = { read = GetNumberOfBuffers };
     unsigned int        __property  SizeOfBuffer[int index] = { read = GetSizeOfBuffer };
     bool                __property  RenderInGreyscale = { read = m_RenderInGreyscale, write = SetRenderInGreyscale };
-};
-//---------------------------------------------------------------------------
-// A paletted bitmap buffer has pixels defined as a color value stored in a byte.
-// This buffer supports 1 bit (monochrome) to 2, 4 or 8 bits per colour.
-//---------------------------------------------------------------------------
-class BitmapGraphicsBuffer : public GraphicsBuffer
-{
-public:
-                        __fastcall  BitmapGraphicsBuffer(unsigned int width, unsigned int height, const Agdx::GraphicsMode& mode);
-                        __fastcall ~BitmapGraphicsBuffer();
-
-    void                __fastcall  SetPixel(unsigned int X, unsigned int Y, bool set);
-    void                __fastcall  GetColor(unsigned int X, unsigned int Y, ColorIndex colorIndex = ciPrimary);
-    void                __fastcall  Render() const;
-    void                __fastcall  Set(const String& data);
-};
-//---------------------------------------------------------------------------
-// ZX Spectrum style attribute graphics buffer
-// Used by ZX Spectrum, Timex, Sam Coupe, Enterprise 64
-// Attributes are:
-// bit 7        - flash
-// bit 6        - bright
-// bits 5,4,3   - paper
-// bits 2,1,0   - ink
-// attributes can be 8x8 or 8x1
-//---------------------------------------------------------------------------
-class AttributeGraphicsBuffer : public GraphicsBuffer
-{
-public:
-                        __fastcall  AttributeGraphicsBuffer(unsigned int width, unsigned int height, const Agdx::GraphicsMode& mode);
-                        __fastcall ~AttributeGraphicsBuffer();
-
-    void                __fastcall  SetPixel(unsigned int X, unsigned int Y, bool set);
-    void                __fastcall  GetColor(unsigned int X, unsigned int Y, ColorIndex colorIndex = ciPrimary);
-    void                __fastcall  Render() const;
-    void                __fastcall  Set(const String& data);
 };
 //---------------------------------------------------------------------------
 // TODO: To be implemented if MSX support is added

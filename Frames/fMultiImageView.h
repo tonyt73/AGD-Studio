@@ -6,7 +6,7 @@
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
-#include "Graphics/GraphicsBuffers.h"
+#include "Graphics/GraphicsBuffer.h"
 #include <Vcl.ExtCtrls.hpp>
 //---------------------------------------------------------------------------
 class TMultiImageViewFrame : public TFrame

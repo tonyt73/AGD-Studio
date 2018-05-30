@@ -12,13 +12,19 @@
 #pragma link "LMDDckSite"
 #pragma link "fMultiImageView"
 #pragma link "fToolbarShape"
+#pragma link "fToolbar"
 #pragma resource "*.dfm"
+bool canLog = false;
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorImage::TfrmEditorImage(TComponent* Owner)
 : TFrame(Owner)
 , m_Magnification(8.f)
 , m_SelectedFrame(0)
+, m_WndProcHooked(false)
 , m_ImageDocument(nullptr)
+, m_Toolbar(nullptr)
+, m_Colors(nullptr)
+, m_GraphicsMode(*(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()))
 {
     ::Messaging::Bus::Subscribe<Event>(OnEvent);
 }
@@ -85,6 +91,18 @@ void __fastcall TfrmEditorImage::SetDocument(Document* document)
     actPencil->Checked = true;
     btnTool->ImageIndex = actPencil->ImageIndex;
     m_CanvasTool = btnPencil->Tag;
+
+    // color picker
+    m_Colors = std::make_unique<TfrmColors>(this);
+    static int count = 173852;
+    m_Colors->Name = "frmColors" + IntToStr(++count);
+    auto pt = ClientToScreen(TPoint(Left + Width, Top + 32));
+    m_Colors->Left = pt.X;
+    m_Colors->Top = pt.Y;
+    m_Colors->Show();
+
+    //OnEnter = FrameEnter;
+    //OnExit = FrameExit;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::FrameEndDock(TObject *Sender, TObject *Target, int X, int Y)
@@ -94,10 +112,24 @@ void __fastcall TfrmEditorImage::FrameEndDock(TObject *Sender, TObject *Target, 
     barStatus->Visible = dp->Site->IsFloatingDoc;
 }
 //---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::ChangeToolbar(TfrmToolbar* toolbar)
+{
+    if (m_Toolbar != nullptr)
+    {
+        m_Toolbar->Visible = false;
+    }
+    m_Toolbar = toolbar;
+    if (m_Toolbar != nullptr)
+    {
+        m_Toolbar->Visible = true;
+    }
+}
+//---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::actSelectExecute(TObject *Sender)
 {
     if (IsActive())
     {
+        ChangeToolbar(nullptr);
         actSelect->Checked = true;
         btnTool->ImageIndex = actSelect->ImageIndex;
         m_CanvasTool = btnSelect->Tag;
@@ -108,6 +140,7 @@ void __fastcall TfrmEditorImage::actPencilExecute(TObject *Sender)
 {
     if (IsActive())
     {
+        ChangeToolbar(nullptr);
         actPencil->Checked = true;
         btnTool->ImageIndex = actPencil->ImageIndex;
         m_CanvasTool = btnPencil->Tag;
@@ -118,6 +151,7 @@ void __fastcall TfrmEditorImage::actBrushExecute(TObject *Sender)
 {
     if (IsActive())
     {
+        ChangeToolbar(nullptr);
         actBrush->Checked = true;
         btnTool->ImageIndex = actBrush->ImageIndex;
         m_CanvasTool = btnBrush->Tag;
@@ -128,6 +162,7 @@ void __fastcall TfrmEditorImage::actFillExecute(TObject *Sender)
 {
     if (IsActive())
     {
+        ChangeToolbar(nullptr);
         actFill->Checked = true;
         btnTool->ImageIndex = actFill->ImageIndex;
         m_CanvasTool = btnFill->Tag;
@@ -138,6 +173,7 @@ void __fastcall TfrmEditorImage::actSprayBrushExecute(TObject *Sender)
 {
     if (IsActive())
     {
+        ChangeToolbar(nullptr);
         actSprayBrush->Checked = true;
         btnTool->ImageIndex = actSprayBrush->ImageIndex;
         m_CanvasTool = btnSprayBrush->Tag;
@@ -148,6 +184,7 @@ void __fastcall TfrmEditorImage::actEraserExecute(TObject *Sender)
 {
     if (IsActive())
     {
+        ChangeToolbar(nullptr);
         actEraser->Checked = true;
         btnTool->ImageIndex = actEraser->ImageIndex;
         m_CanvasTool = btnEraser->Tag;
@@ -158,6 +195,7 @@ void __fastcall TfrmEditorImage::actLineExecute(TObject *Sender)
 {
     if (IsActive())
     {
+        ChangeToolbar(nullptr);
         actLine->Checked = true;
         btnTool->ImageIndex = actLine->ImageIndex;
         m_CanvasTool = btnLine->Tag;
@@ -168,6 +206,7 @@ void __fastcall TfrmEditorImage::actShapeExecute(TObject *Sender)
 {
     if (IsActive())
     {
+        ChangeToolbar(toolbarShape);
         actShape->Checked = true;
         btnTool->ImageIndex = actShape->ImageIndex;
         m_CanvasTool = btnShape->Tag;
@@ -178,6 +217,7 @@ void __fastcall TfrmEditorImage::actTextExecute(TObject *Sender)
 {
     if (IsActive())
     {
+        ChangeToolbar(nullptr);
         actText->Checked = true;
         btnTool->ImageIndex = actText->ImageIndex;
         m_CanvasTool = btnText->Tag;
@@ -188,6 +228,7 @@ void __fastcall TfrmEditorImage::actDropperExecute(TObject *Sender)
 {
     if (IsActive())
     {
+        ChangeToolbar(nullptr);
         actDropper->Checked = true;
         btnTool->ImageIndex = actDropper->ImageIndex;
         m_CanvasTool = btnDropper->Tag;
@@ -313,10 +354,9 @@ void __fastcall TfrmEditorImage::sbxViewResize(TObject *Sender)
 {
     if (theDocumentManager.ProjectConfig())
     {
-
-        const auto& gm = theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode();
-        auto vw = (int)(m_ImageDocument->Width  * gm->ScalarX * m_Magnification) + 2;
-        auto vh = (int)(m_ImageDocument->Height * gm->ScalarY * m_Magnification) + 2;
+        const auto& gm = m_GraphicsMode;
+        auto vw = (int)(m_ImageDocument->Width  * gm.ScalarX * m_Magnification) + 2;
+        auto vh = (int)(m_ImageDocument->Height * gm.ScalarY * m_Magnification) + 2;
         if (vw + 16 > sbxView->Width || vh + 16 > sbxView->Height)
         {
             // no auto alignment
@@ -343,7 +383,7 @@ void __fastcall TfrmEditorImage::sbxViewResize(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::DrawGrids()
 {
-    const auto& gm = *(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode());
+    const auto& gm = m_GraphicsMode;
     auto fScalarX = gm.ScalarX;
     auto fScalarY = gm.ScalarY;
     auto Canvas = imgEditor->Picture->Bitmap->Canvas;
@@ -403,7 +443,7 @@ void __fastcall TfrmEditorImage::RefreshFramesView()
 {
     m_Frames.clear();
     fFrameView->Clear();
-    const auto& gm = *(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode());
+    const auto& gm = m_GraphicsMode;
     for (int i = 0; i < m_ImageDocument->Frames; i++)
     {
         // make an image canvas
@@ -553,6 +593,31 @@ void __fastcall TfrmEditorImage::imgEditorMouseUp(TObject *Sender, TMouseButton 
             RefreshView();
         }
     }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::FrameEnter(TObject *Sender)
+{
+    m_Colors->Visible = true;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::FrameExit(TObject *Sender)
+{
+    m_Colors->Visible = false;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::fFrameViewTimer1Timer(TObject *Sender)
+{
+//    for (auto msg : m_Messages)
+//    {
+//        Memo1->Lines->Add("0x" + IntToHex(msg, 4));
+//    }
+//    m_Messages.clear();
+
+//    auto dp = static_cast<TLMDDockPanel*>(m_ImageDocument->DockPanel);
+//    Memo1->Lines->Add(dp->Active ? "Active" : "Not active");
+//    Memo1->Lines->Add(dp->Site->IsFloatingSite ? "IsFloatingSite" : "NOT IsFloatingSite");
+//    Memo1->Lines->Add(dp->Site->IsFloatingDoc ? "IsFloatingDoc" : "NOT IsFloatingDoc");
+//    Memo1->Lines->Add(dp->Site->FloatingForm ? "FloatingForm present" : "NO FloatingForm");
 }
 //---------------------------------------------------------------------------
 

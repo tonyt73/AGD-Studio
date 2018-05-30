@@ -1,12 +1,12 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
 //---------------------------------------------------------------------------
-#include "fToolbar.h"
+#include "fPaletteAttribute.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
-__fastcall TfrmToolbar::TfrmToolbar(TComponent* Owner)
+__fastcall TfrmPaletteAttribute::TfrmPaletteAttribute(TComponent* Owner)
 : TFrame(Owner)
 {
 }

@@ -1,20 +1,21 @@
 //---------------------------------------------------------------------------
-#ifndef fToolbarH
-#define fToolbarH
+#ifndef fColorsH
+#define fColorsH
 //---------------------------------------------------------------------------
 #include <System.Classes.hpp>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
-#include "System/Generic.h"
+#include "fPaletteAttribute.h"
 //---------------------------------------------------------------------------
-class TfrmToolbar : public TFrame
+class TfrmColors : public TForm
 {
 __published:	// IDE-managed Components
+    TfrmPaletteAttribute *frmAttribute;
+    void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
 private:	// User declarations
 public:		// User declarations
-    __fastcall TfrmToolbar(TComponent* Owner);
-    virtual Generic __fastcall GetParameters() const = 0;
+    __fastcall TfrmColors(TComponent* Owner);
 };
 //---------------------------------------------------------------------------
 #endif

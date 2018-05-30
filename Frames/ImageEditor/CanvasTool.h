@@ -2,7 +2,7 @@
 #ifndef CanvasToolH
 #define CanvasToolH
 //---------------------------------------------------------------------------
-#include "Graphics/GraphicsBuffers.h"
+#include "Graphics/GraphicsBuffer.h"
 #include "System/Generic.h"
 //---------------------------------------------------------------------------
 // A base class for image editor painting tools
