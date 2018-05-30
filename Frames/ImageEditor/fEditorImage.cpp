@@ -3,7 +3,7 @@
 #include "fEditorImage.h"
 #include "DocumentManager.h"
 #include "Messaging/Messaging.h"
-#include "Frames/fSelectionImage.h"
+#include "Frames/ImageEditor/fSelectionImage.h"
 #include "Frames/ImageEditor/CanvasPencilTool.h"
 #include "Frames/ImageEditor/CanvasLineTool.h"
 #include "Frames/ImageEditor/CanvasShapeTool.h"
@@ -16,7 +16,6 @@
 #pragma link "fPaletteAttribute"
 #pragma link "fPaletteBitmap"
 #pragma resource "*.dfm"
-bool canLog = false;
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorImage::TfrmEditorImage(TComponent* Owner)
 : TFrame(Owner)
