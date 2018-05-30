@@ -1,14 +1,40 @@
 {
-  "Name": "Amstrad CPC Mode 2",
-  "Palette": "Amstrad CPC",
+  "Name": "BBC Micro Mode 0",
+  "Palette": "BBC Micro",
   "BufferType": 0,
   "Width": 640,
-  "Height": 200,
+  "Height": 256,
   "ScalarX": 1.0,
   "ScalarY": 2.0,
-  "BitsPerPixel": 8,
+  "BitsPerPixel": 1,
   "TranparentColor": 0,
   "SupportsLogicalColorRemapping" : true,
+  "PixelBitRemapping" : [
+     {
+		"Remap" : [
+			{
+				"Mask" : 1,
+				"Shift" : -7
+			},
+			{
+				"Mask" : 2,
+				"Shift" : -2
+			}
+		]
+	 },
+     {
+		"Remap" : [
+			{
+				"Mask" : 1,
+				"Shift" : -6
+			},
+			{
+				"Mask" : 2,
+				"Shift" : -1
+			}
+		]
+	 }
+  ],
   "ExportInformation" : {
      "Object" : {
 		"BitmapDataOnly" : true
@@ -25,6 +51,6 @@
   },
   "LogicalColors": [
     0,
-    26
+    1
   ]
 }

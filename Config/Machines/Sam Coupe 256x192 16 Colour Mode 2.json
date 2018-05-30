@@ -1,0 +1,66 @@
+{
+  "Name": "Sam Coupe 256x192 16 Colour Mode 2",
+  "GraphicsMode": "Sam Coupe Mode 2",
+  "ImageSizing": {
+    "Object": {
+      "Minimum": {
+        "Width": 16,
+        "Height": 16
+      },
+      "Maximum": {
+        "Width": 128,
+        "Height": 128
+      },
+      "Step": {
+        "Width": 16,
+        "Height": 16
+      }
+    },
+    "Sprite": {
+      "Minimum": {
+        "Width": 16,
+        "Height": 16
+      },
+      "Maximum": {
+        "Width": 128,
+        "Height": 128
+      },
+      "Step": {
+        "Width": 16,
+        "Height": 16
+      }
+    },
+    "Tile": {
+      "Minimum": {
+        "Width": 8,
+        "Height": 8
+      },
+      "Maximum": {
+        "Width": 128,
+        "Height": 128
+      },
+      "Step": {
+        "Width": 8,
+        "Height": 8
+      }
+    },
+    "CharacterSet": {
+      "Minimum": {
+        "Width": 8,
+        "Height": 8
+      },
+      "Maximum": {
+        "Width": 8,
+        "Height": 8
+      },
+      "Step": {
+        "Width": 0,
+        "Height": 0
+      }
+    }
+  },
+  "CompilerInformation": {
+    "Path": "Compilers\\ZX-Compile.exe",
+    "Parameters": "%file -tap -sna"
+  }
+}

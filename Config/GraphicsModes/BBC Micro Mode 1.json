@@ -1,12 +1,12 @@
 {
-  "Name": "Amstrad CPC Mode 2",
-  "Palette": "Amstrad CPC",
+  "Name": "BBC Micro Mode 1",
+  "Palette": "BBC Micro",
   "BufferType": 0,
-  "Width": 640,
-  "Height": 200,
+  "Width": 320,
+  "Height": 256,
   "ScalarX": 1.0,
-  "ScalarY": 2.0,
-  "BitsPerPixel": 8,
+  "ScalarY": 1.0,
+  "BitsPerPixel": 2,
   "TranparentColor": 0,
   "SupportsLogicalColorRemapping" : true,
   "ExportInformation" : {
@@ -25,6 +25,8 @@
   },
   "LogicalColors": [
     0,
-    26
+    1,
+    3,
+    7
   ]
 }

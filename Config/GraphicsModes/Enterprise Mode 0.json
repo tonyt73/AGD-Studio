@@ -1,0 +1,58 @@
+{
+  "Name": "Enterprise Mode 0",
+  "Palette": "Enterprise",
+  "BufferType": 0,
+  "Width": 160,
+  "Height": 256,
+  "ScalarX": 2.0,
+  "ScalarY": 1.0,
+  "BitsPerPixel": 2,
+  "TranparentColor": 0,
+  "SupportsLogicalColorRemapping" : true,
+  "PixelBitRemapping" : [
+     {
+		"Remap" : [
+			{
+				"Mask" : 1,
+				"Shift" : -7
+			},
+			{
+				"Mask" : 2,
+				"Shift" : -2
+			}
+		]
+	 },
+     {
+		"Remap" : [
+			{
+				"Mask" : 1,
+				"Shift" : -6
+			},
+			{
+				"Mask" : 2,
+				"Shift" : -1
+			}
+		]
+	 }
+  ],
+  "ExportInformation" : {
+     "Object" : {
+		"BitmapDataOnly" : true
+	 },
+     "Sprite" : {
+		"BitmapDataOnly" : true
+	 },
+     "Tile" : {
+		"BitmapDataOnly" : true
+	 },
+     "CharacterSet" : {
+		"BitmapDataOnly" : true
+	 }
+  },
+  "LogicalColors": [
+    0,
+    1,
+	3,
+	7
+  ]
+}

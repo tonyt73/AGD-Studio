@@ -1,0 +1,11 @@
+{
+  "Palette": {
+    "Name": "Acorn Atom 4 Colour"
+  },
+  "ColorTable": [
+    "$00FF00",
+    "$00FFFF",
+    "$FF0000",
+    "$0000FF"
+  ]
+}
