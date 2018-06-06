@@ -31,12 +31,12 @@ void __fastcall TfrmULAplusBitmap::Init()
     panSystemColorPicker->Visible = m_GraphicsMode.SupportsLogicalColorRemapping;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmULAplusBitmap::DrawSelectionBox(int xs, int ys, int xe, int ye) const
+void __fastcall TfrmULAplusBitmap::DrawSelectionBox(TBitmap* bitmap, int xs, int ys, int xe, int ye) const
 {
-    m_PalettePicker->Canvas->Brush->Color = clBlack;
-    m_PalettePicker->Canvas->FrameRect(TRect(xs, ys, xe, ye));
-    m_PalettePicker->Canvas->Brush->Color = clWhite;
-    m_PalettePicker->Canvas->FrameRect(TRect(xs + 1, ys + 1, xe - 1, ye - 1));
+    bitmap->Canvas->Brush->Color = clBlack;
+    bitmap->Canvas->FrameRect(TRect(xs, ys, xe, ye));
+    bitmap->Canvas->Brush->Color = clWhite;
+    bitmap->Canvas->FrameRect(TRect(xs + 1, ys + 1, xe - 1, ye - 1));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmULAplusBitmap::DrawPhysicalColors() const
@@ -53,13 +53,13 @@ void __fastcall TfrmULAplusBitmap::DrawPhysicalColors() const
         auto hh = lblSystemColor->Height + ((rows + 1) * p_box);
         panSystemColorPicker->Height = hh;
         m_PhysicalPicker->Width = imgSystemColors->Width;
-        m_PhysicalPicker->Height = hh + 1;
+        m_PhysicalPicker->Height = hh;
         imgSystemColors->Picture->Bitmap->PixelFormat = pf32bit;
         imgSystemColors->Picture->Bitmap->Width = m_PhysicalPicker->Width;
         imgSystemColors->Picture->Bitmap->Height = m_PhysicalPicker->Height;
     }
     // clear the bitmap
-    m_PhysicalPicker->Canvas->Brush->Color = TColor(0xFF000000);
+    m_PhysicalPicker->Canvas->Brush->Color = TColor(0xFF000000);;
     m_PhysicalPicker->Canvas->FillRect(TRect(0, 0, m_PhysicalPicker->Width, m_PhysicalPicker->Height));
     // draw the physical colours
     for (auto i = 0; i < totalColors; i++)
@@ -74,9 +74,9 @@ void __fastcall TfrmULAplusBitmap::DrawPhysicalColors() const
         {
             auto xs = x;
             auto ys = y;
-            auto xe = x + p_box;
-            auto ye = y + p_box;
-            DrawSelectionBox(xs, ys, xe, ye);
+            auto xe = xs + p_box;
+            auto ye = ys + p_box;
+            DrawSelectionBox(m_PhysicalPicker.get(), xs, ys, xe, ye);
         }
     }
     BitBlt(imgSystemColors->Picture->Bitmap->Canvas->Handle, 0, 0, m_PhysicalPicker->Width, m_PhysicalPicker->Height, m_PhysicalPicker->Canvas->Handle, 0, 0, SRCCOPY);
@@ -103,7 +103,7 @@ void __fastcall TfrmULAplusBitmap::DrawPalettesColors() const
         imgLogicalColors->Picture->Bitmap->PixelFormat = pf32bit;
     }
     // clear the bitmap
-    m_PalettePicker->Canvas->Brush->Color = TColor(0x00000000);
+    m_PalettePicker->Canvas->Brush->Color = clBlack;
     m_PalettePicker->Canvas->FillRect(TRect(0, 0, m_PalettePicker->Width, m_PalettePicker->Height));
     // draw the physical colours
     for (auto pi = 0; pi < 4; pi++)
@@ -111,8 +111,8 @@ void __fastcall TfrmULAplusBitmap::DrawPalettesColors() const
         for (auto ci = 0; ci < 8; ci++)
         {
             // draw ink
-            auto ink = (pi * 16) + ci;
-            auto paper = (pi * 16) + 8 + ci;
+            auto ink = GetInk(pi, ci);
+            auto paper = GetPaper(pi, ci);
             auto x = 2 + (ci * bx);
             auto y = 2 + (pi * ((by + 2) * 2));
             auto xs = x;
@@ -152,7 +152,7 @@ void __fastcall TfrmULAplusBitmap::DrawPalettesColors() const
                 if (ci == m_Cursor)
                 {
                     // draw a double height cursor for selecting ink(L) or paper(R)
-                    DrawSelectionBox(xs, ys, xe, ye + by);
+                    DrawSelectionBox(m_PalettePicker.get(), xs, ys, xe, ye + by);
                 }
             }
         }
@@ -162,7 +162,7 @@ void __fastcall TfrmULAplusBitmap::DrawPalettesColors() const
     auto ys = (m_Index * ((by + 2) * 2));
     auto xe = m_PalettePicker->Width;
     auto ye = ys + (by * 2) + 4;
-    DrawSelectionBox(xs, ys, xe, ye);
+    DrawSelectionBox(m_PalettePicker.get(), xs, ys, xe, ye);
     BitBlt(imgLogicalColors->Picture->Bitmap->Canvas->Handle, 0, 0, m_PalettePicker->Width, m_PalettePicker->Height, m_PalettePicker->Canvas->Handle, 0, 0, SRCCOPY);
     imgLogicalColors->Refresh();
 }
@@ -172,10 +172,10 @@ void __fastcall TfrmULAplusBitmap::Update()
 {
     DrawPhysicalColors();
     DrawPalettesColors();
-    panColorL->Color = m_GraphicsMode.LogicalColor[(m_Index * 16) + m_Ink];
-    panColorR->Color = m_GraphicsMode.LogicalColor[(m_Index * 16) + 8 + m_Paper];
-    panColorL->Font->Color = m_Palette.FontColorOf[m_GraphicsMode.FromLogicalColor[(m_Index * 16) + m_Ink]];
-    panColorR->Font->Color = m_Palette.FontColorOf[m_GraphicsMode.FromLogicalColor[(m_Index * 16) + 8 + m_Paper]];
+    panColorL->Color = m_GraphicsMode.LogicalColor[GetInk()];
+    panColorR->Color = m_GraphicsMode.LogicalColor[GetPaper()];
+    panColorL->Font->Color = m_Palette.FontColorOf[m_GraphicsMode.FromLogicalColor[GetInk()]];
+    panColorR->Font->Color = m_Palette.FontColorOf[m_GraphicsMode.FromLogicalColor[GetPaper()]];
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmULAplusBitmap::Set(Agdx::GraphicsBuffer& canvas)
@@ -188,11 +188,11 @@ void __fastcall TfrmULAplusBitmap::Set(Agdx::GraphicsBuffer& canvas)
 void __fastcall TfrmULAplusBitmap::imgLogicalColorsMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
 {
     m_Index = m_CursorIndex;
-    if (Button == mbLeft)
+    if (Button == mbLeft || Button == mbMiddle)
     {
         m_Ink = m_Cursor;
     }
-    else if (Button == mbRight)
+    if (Button == mbRight || Button == mbMiddle)
     {
         m_Paper = m_Cursor;
     }
@@ -227,15 +227,15 @@ void __fastcall TfrmULAplusBitmap::imgLogicalColorsMouseLeave(TObject *Sender)
 void __fastcall TfrmULAplusBitmap::imgSystemColorsMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
 {
     // remap a logical colour to a new physical colour
-//    if (Button == mbLeft)
-//    {
-//        m_GraphicsMode.RemapColor(m_Pen, m_CursorPhysical);
-//    }
-//    else if (Button == mbRight)
-//    {
-//        m_GraphicsMode.RemapColor(m_Brush, m_CursorPhysical);
-//    }
-//    Update();
+    if (Button == mbLeft)
+    {
+        m_GraphicsMode.RemapColor(GetInk(), m_CursorPhysical);
+    }
+    else if (Button == mbRight)
+    {
+        m_GraphicsMode.RemapColor(GetPaper(), m_CursorPhysical);
+    }
+    Update();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmULAplusBitmap::imgSystemColorsMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
@@ -268,6 +268,24 @@ void __fastcall TfrmULAplusBitmap::btnPaletteRestoreClick(TObject *Sender)
 {
     m_GraphicsMode.RestoreDefaultPalette();
     Update();
+}
+//---------------------------------------------------------------------------
+int __fastcall TfrmULAplusBitmap::GetInk(int index, int ink) const
+{
+    if (ink == -1)
+        ink = m_Ink;
+    if (index == -1)
+        index = m_Index;
+    return (index * 16) + ink;
+}
+//---------------------------------------------------------------------------
+int __fastcall TfrmULAplusBitmap::GetPaper(int index, int paper) const
+{
+    if (paper == -1)
+        paper = m_Paper;
+    if (index == -1)
+        index = m_Index;
+    return (index * 16) + 8 + paper;
 }
 //---------------------------------------------------------------------------
 

@@ -11,7 +11,7 @@
 //---------------------------------------------------------------------------
 using namespace Agdx;
 //---------------------------------------------------------------------------
-const unsigned char g_Transparent =    8; // attribute is transparent
+//const unsigned char g_Transparent =    8; // attribute is transparent
 const unsigned char g_InkMask     = 0x07; // ink bits from attribute byte
 const unsigned char g_PaperMask   = 0x38; // paper bits from attribute byte
 const unsigned char g_PaletteMask = 0xC0; // palette bits from attribute byte
@@ -59,14 +59,11 @@ void __fastcall ULAPlusGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y, 
         ix = X >> 3;
         auto iy = Y / m_GraphicsMode.PixelsHighPerAttribute;
         auto attrOffset = (iy * m_Stride) + ix;
-        // get existing attribute
-        auto attribute = m_Buffers[1][attrOffset];
-        // get new attribute (merge old with new)
-        auto ink    = g_Transparent == m_SetColors[0] ?  (attribute & g_InkMask   )          : m_SetColors[0];
-        auto paper  = g_Transparent == m_SetColors[1] ? ((attribute & g_PaperMask ) >> 3   ) : m_SetColors[1];
-        auto palette= g_Transparent == m_SetColors[2] ? ((attribute & g_PaletteMask) >> 6  ) : m_SetColors[2];
+        auto ink     = m_SetColors[0];
+        auto paper   = m_SetColors[1];
+        auto palette = m_SetColors[2];
         // set the attribute
-        attribute = ink | (paper << g_PaperShift) | (palette << g_PaletteShift);
+        auto attribute = ink | (paper << g_PaperShift) | (palette << g_PaletteShift);
         m_Buffers[1][attrOffset] = attribute;
         Render();
     }
@@ -101,8 +98,8 @@ void __fastcall ULAPlusGraphicsBuffer::Render() const
             auto ink    =  attr & g_InkMask;
             auto paper  = (attr & g_PaperMask  ) >> g_PaperShift;
             auto palette= (attr & g_PaletteMask) >> g_PaletteShift;
-            ink = (palette * 16) + ink;
-            paper = (palette * 16) + 8 + paper;
+            ink = m_GraphicsMode.FromLogicalColor[(palette * 16) + ink];
+            paper = m_GraphicsMode.FromLogicalColor[(palette * 16) + 8 + paper];
             auto cInk   = m_RenderInGreyscale ? clWhite : m_GraphicsMode.Palette().Color[ink];
             auto cPaper = m_RenderInGreyscale ? clBlack : m_GraphicsMode.Palette().Color[paper];
             for (auto i = 0; i < m_GraphicsMode.PixelsHighPerAttribute; i++)

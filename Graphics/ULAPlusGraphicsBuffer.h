@@ -18,6 +18,8 @@ namespace Agdx
 // palette:
 //  4 x 16 color palettes
 //  each palette is 8 ink and 8 paper colours from 256 colours
+// The 4x16(64) palette entries are stored as 8bit RGB colours;
+// basically indexes into the 24bit RGB CLUT
 //---------------------------------------------------------------------------
 class ULAPlusGraphicsBuffer : public GraphicsBuffer
 {
