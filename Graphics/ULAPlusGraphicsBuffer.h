@@ -1,8 +1,9 @@
 //---------------------------------------------------------------------------
-#ifndef AttributeGraphicsBufferH
-#define AttributeGraphicsBufferH
+#ifndef ULAPlusGraphicsBufferH
+#define ULAPlusGraphicsBufferH
 //---------------------------------------------------------------------------
 #include "Graphics/GraphicsBuffer.h"
+#include "Messaging/Event.h"
 //---------------------------------------------------------------------------
 namespace Agdx
 {
@@ -21,6 +22,7 @@ namespace Agdx
 class ULAPlusGraphicsBuffer : public GraphicsBuffer
 {
 private:
+    void                __fastcall  OnEvent(const Event& event);
 public:
                         __fastcall  ULAPlusGraphicsBuffer(unsigned int width, unsigned int height, const Agdx::GraphicsMode& mode);
                         __fastcall ~ULAPlusGraphicsBuffer();
