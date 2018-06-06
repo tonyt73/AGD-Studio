@@ -3,6 +3,7 @@
 #define BitmapGraphicsBufferH
 //---------------------------------------------------------------------------
 #include "Graphics/GraphicsBuffer.h"
+#include "Messaging/Event.h"
 //---------------------------------------------------------------------------
 namespace Agdx
 {
@@ -12,6 +13,8 @@ namespace Agdx
 //---------------------------------------------------------------------------
 class BitmapGraphicsBuffer : public GraphicsBuffer
 {
+private:
+    void                __fastcall  OnEvent(const Event& event);
 public:
                         __fastcall  BitmapGraphicsBuffer(unsigned int width, unsigned int height, const Agdx::GraphicsMode& mode);
                         __fastcall ~BitmapGraphicsBuffer();

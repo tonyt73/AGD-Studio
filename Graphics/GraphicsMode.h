@@ -53,6 +53,7 @@ protected:
  std::unique_ptr<Agdx::Palette> m_Palette;                  // the palette table for the graphics mode
     BufferType                  m_BufferType;               // the type of graphics buffer we are
     Table                       m_LogicalColors;            // palette table LOGICAL color indexes into the Total Colors table
+    Table                       m_DefaultLogicalColors;     // default palette table LOGICAL color indexes into the Total Colors table
     int                         m_LogicalIndex;             // json loader
     bool                        m_SupportsRemapping;        // supports remapping of the logical colors to any of the palette colors
     ExportInfo                  m_ExportInfo[itEnd];        // flags for image data export
@@ -72,8 +73,9 @@ public:
                     __fastcall  GraphicsMode(const GraphicsMode& other);
 
             void    __fastcall  Load(const String& name);
-                                // Remap a logical color to a new palettle color
+                                // Remap a logical color to a new palette color
     void            __fastcall  RemapColor(int paletteTableIndex, int colorTableIndex);
+    void            __fastcall  RestoreDefaultPalette();
     const Palette&  __fastcall  Palette() const;
 
     String          __property  Name = { read = m_Name };

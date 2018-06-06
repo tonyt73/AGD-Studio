@@ -4,6 +4,8 @@
 //---------------------------------------------------------------------------
 #include "GraphicsMode.h"
 #include "GraphicsBuffer.h"
+#include "Messaging/Messaging.h"
+#include "Messaging/Event.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 using namespace Agdx;
@@ -58,6 +60,8 @@ __fastcall GraphicsMode::GraphicsMode(const GraphicsMode& other)
     *m_Palette = *other.m_Palette;
     m_LogicalColors.clear();
     m_LogicalColors.assign(other.m_LogicalColors.begin(), other.m_LogicalColors.end());
+    m_DefaultLogicalColors.clear();
+    m_DefaultLogicalColors.assign(other.m_DefaultLogicalColors.begin(), other.m_DefaultLogicalColors.end());
 }
 //---------------------------------------------------------------------------
 void __fastcall GraphicsMode::OnEndObject(const String& object)
@@ -80,8 +84,15 @@ void __fastcall GraphicsMode::RemapColor(int logicalIndex, int paletteIndex)
 {
     if (0 <= logicalIndex && logicalIndex < m_LogicalColors.size() && 0 <= paletteIndex && paletteIndex < m_Palette->Colors)
     {
-        m_LogicalColors[logicalIndex] = m_Palette->Color[paletteIndex];
+        m_LogicalColors[logicalIndex] = paletteIndex;
+        ::Messaging::Bus::Publish<Event>(Event("palette.remapped"));
     }
+}
+//---------------------------------------------------------------------------
+void __fastcall GraphicsMode::RestoreDefaultPalette()
+{
+    m_LogicalColors = m_DefaultLogicalColors;
+    ::Messaging::Bus::Publish<Event>(Event("palette.remapped"));
 }
 //---------------------------------------------------------------------------
 const Palette& __fastcall GraphicsMode::Palette() const
@@ -122,6 +133,8 @@ void __fastcall GraphicsMode::Load(const String& name)
     m_LogicalColors.clear();
     JsonFile::Load(System::File::Combine(System::Path::Application, "GraphicsModes" + System::Path::Separator + name + ".json"));
     m_Palette->Load(m_PaletteName);
+    m_DefaultLogicalColors.clear();
+    m_DefaultLogicalColors = m_LogicalColors;
 }
 //---------------------------------------------------------------------------
 void __fastcall GraphicsMode::Save()

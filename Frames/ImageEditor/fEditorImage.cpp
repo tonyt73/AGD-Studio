@@ -44,6 +44,10 @@ void __fastcall TfrmEditorImage::OnEvent(const Event& event)
     {
         m_ActionMap[event.Id]->Execute();
     }
+    else if (event.Id == "palette.remapped")
+    {
+        RefreshView(true);
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::SetDocument(Document* document)
@@ -93,6 +97,10 @@ void __fastcall TfrmEditorImage::SetDocument(Document* document)
 
     palAttribute->Visible = m_GraphicsMode.TypeOfBuffer == btAttribute;
     palBitmap->Visible = m_GraphicsMode.TypeOfBuffer == btBitmap;
+    if (palBitmap->Visible)
+    {
+        palBitmap->Init();
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::FrameEndDock(TObject *Sender, TObject *Target, int X, int Y)
@@ -412,7 +420,7 @@ void __fastcall TfrmEditorImage::DrawGrids()
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::RefreshView()
+void __fastcall TfrmEditorImage::RefreshView(bool redraw)
 {
     fFrameView->Select(m_SelectedFrame);
     if (m_ImageDocument != nullptr)
@@ -420,6 +428,11 @@ void __fastcall TfrmEditorImage::RefreshView()
         // match the internal bitmap to the image components size (this stops the grids from showing a fat lines)
         imgEditor->Picture->Bitmap->Width = imgEditor->Width;
         imgEditor->Picture->Bitmap->Height = imgEditor->Height;
+        if (redraw)
+        {
+            // force a redraw
+            m_Frames[m_SelectedFrame]->Canvas().End();
+        }
         // take the image canvas that we are editing and show it on the image editor view
         m_Frames[m_SelectedFrame]->Canvas().Draw(imgEditor->Picture->Bitmap);
         //draw grids over it

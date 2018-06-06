@@ -2,6 +2,8 @@
 #include "agdx.pch.h"
 //---------------------------------------------------------------------------
 #include "BitmapGraphicsBuffer.h"
+#include "Messaging/Messaging.h"
+#include "Messaging/Event.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -16,10 +18,12 @@ __fastcall BitmapGraphicsBuffer::BitmapGraphicsBuffer(unsigned int width, unsign
     PushBuffer(m_Stride * height);
     m_SetColors.push_back(1);
     m_SetColors.push_back(0);
+    ::Messaging::Bus::Subscribe<Event>(OnEvent);
 }
 //---------------------------------------------------------------------------
 __fastcall BitmapGraphicsBuffer::~BitmapGraphicsBuffer()
 {
+    ::Messaging::Bus::Unsubscribe<Event>(OnEvent);
 }
 //---------------------------------------------------------------------------
 void __fastcall BitmapGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y, bool set)
@@ -82,6 +86,14 @@ void __fastcall BitmapGraphicsBuffer::Set(const String& data)
             auto byte = (unsigned char)StrToInt("0x" + data.SubString(1 + i * 2, 2));
             m_Buffers[0][i] = byte;
         }
+        Render();
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall BitmapGraphicsBuffer::OnEvent(const Event& event)
+{
+    if (event.Id == "palette.remapped")
+    {
         Render();
     }
 }

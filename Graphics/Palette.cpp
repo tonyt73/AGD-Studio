@@ -65,6 +65,21 @@ int __fastcall Palette::GetTotalColors() const
     return m_ColorTable.size();
 }
 //---------------------------------------------------------------------------
+TColor __fastcall Palette::GetFontColorOf(int index) const
+{
+    return (LuminanceOf(GetTableColor(index)) < 128) ? clWhite : clBlack;
+}
+//---------------------------------------------------------------------------
+DWORD __fastcall Palette::LuminanceOf(TColor Color)
+{
+    // get the luminance of the color
+    DWORD dwRed       = (Color & 0x000000FF) >>  0;
+    DWORD dwGreen     = (Color & 0x0000FF00) >>  8;
+    DWORD dwBlue      = (Color & 0x00FF0000) >> 16;
+    DWORD dwLuminance = (0.299f * (double)dwRed + 0.587f * (double)dwGreen + 0.114f * (double)dwBlue);
+    return dwLuminance;
+}
+//---------------------------------------------------------------------------
 void __fastcall Palette::OnEndObject(const String& object)
 {
     if (object == "ColorTable[]")

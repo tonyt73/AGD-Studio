@@ -63,7 +63,7 @@ void __fastcall MachineConfig::Load(const String& name)
     m_GraphicsMode->Load(m_GraphicsModeName);
 }
 //---------------------------------------------------------------------------
-const Agdx::GraphicsMode* __fastcall MachineConfig::GraphicsMode() const
+Agdx::GraphicsMode* __fastcall MachineConfig::GraphicsMode() const
 {
     return m_GraphicsMode.get();
 }

@@ -132,9 +132,9 @@ __published:    // IDE-managed Components
     TLabel *Label1;
     TLabel *Label2;
     TPanel *Panel3;
+    TMultiImageViewFrame *fFrameView;
     TfrmPaletteAttribute *palAttribute;
     TfrmPaletteBitmap *palBitmap;
-    TMultiImageViewFrame *fFrameView;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actBrushExecute(TObject *Sender);
@@ -197,7 +197,7 @@ private:    // User declarations
     void            __fastcall  OnEvent(const Event& event);
     bool            __fastcall  IsActive() const;
     void            __fastcall  DrawGrids();
-    void            __fastcall  RefreshView();
+    void            __fastcall  RefreshView(bool redraw = false);
     void            __fastcall  RefreshFramesView();
     void            __fastcall  OnFrameSelected(TObject *Sender);
     TPoint          __fastcall  ToImagePt(int X, int Y);

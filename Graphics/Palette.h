@@ -18,6 +18,8 @@ protected:
     TColor      __fastcall      GetGreyscale(int index) const;
     int         __fastcall      GetTotalColors() const;
 
+    TColor      __fastcall      GetFontColorOf(int index) const;
+
     void        __fastcall      OnEndObject(const String& object);
     void        __fastcall      Save();
 
@@ -29,9 +31,12 @@ public:
 
     void        __fastcall      Load(const String& name);
 
+   static DWORD __fastcall      LuminanceOf(TColor Color);
+
     TColor      __property      Greyscale[int index] = { read = GetGreyscale };
     TColor      __property      Color[int index] = { read = GetTableColor };
     int         __property      Colors = { read = GetTotalColors };
+    TColor      __property      FontColorOf[int index] = { read = GetFontColorOf };
 };
 //---------------------------------------------------------------------------
 //class PaletteWriter : public Palette
