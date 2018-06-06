@@ -27,6 +27,7 @@ __fastcall TfrmPaletteBitmap::TfrmPaletteBitmap(TComponent* Owner)
 void __fastcall TfrmPaletteBitmap::Init()
 {
     Update();
+    panSystemColorPicker->Visible = m_GraphicsMode.SupportsLogicalColorRemapping;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmPaletteBitmap::DrawPhysicalColors() const
