@@ -157,7 +157,7 @@ void __fastcall TfrmPaletteBitmap::DrawLogicalColors() const
         else if (m_Brush == i)
         {
             // draw R
-            auto size = imgLogicalColors->Picture->Bitmap->Canvas->TextExtent("L");
+            auto size = imgLogicalColors->Picture->Bitmap->Canvas->TextExtent("R");
             auto tx = x + ((c_box - size.cx) >> 1);
             auto ty = y + ((c_box - size.cy) >> 1);
             m_LogicalPicker->Canvas->Font->Color = m_Palette.FontColorOf[m_GraphicsMode.FromLogicalColor[i]];

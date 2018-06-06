@@ -297,6 +297,13 @@
             <DependentOn>Frames\ImageEditor\fToolbarShape.h</DependentOn>
             <BuildOrder>46</BuildOrder>
         </CppCompile>
+        <CppCompile Include="Frames\ImageEditor\fULAplusBitmap.cpp">
+            <Form>frmULAplusBitmap</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\ImageEditor\fULAplusBitmap.h</DependentOn>
+            <BuildOrder>54</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Frames\ImportDialog\fImportDialog.cpp">
             <Form>frmImportDialog</Form>
             <FormType>dfm</FormType>
@@ -463,6 +470,7 @@
         <FormResources Include="Frames\ImageEditor\fToolbarShape.dfm"/>
         <FormResources Include="Frames\ImageEditor\fToolbar.dfm"/>
         <FormResources Include="Frames\ImageEditor\fSelectionImage.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fULAplusBitmap.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

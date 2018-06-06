@@ -31,6 +31,7 @@
 #include "fToolbar.h"
 #include "fPaletteAttribute.h"
 #include "fPaletteBitmap.h"
+#include "fULAplusBitmap.h"
 //---------------------------------------------------------------------------
 class TfrmEditorImage : public TFrame
 {
@@ -135,6 +136,7 @@ __published:    // IDE-managed Components
     TMultiImageViewFrame *fFrameView;
     TfrmPaletteAttribute *palAttribute;
     TfrmPaletteBitmap *palBitmap;
+    TfrmULAplusBitmap *palULAPlus;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actBrushExecute(TObject *Sender);

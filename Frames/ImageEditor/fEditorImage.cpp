@@ -15,6 +15,7 @@
 #pragma link "fToolbar"
 #pragma link "fPaletteAttribute"
 #pragma link "fPaletteBitmap"
+#pragma link "fULAplusBitmap"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorImage::TfrmEditorImage(TComponent* Owner)
@@ -97,9 +98,14 @@ void __fastcall TfrmEditorImage::SetDocument(Document* document)
 
     palAttribute->Visible = m_GraphicsMode.TypeOfBuffer == btAttribute;
     palBitmap->Visible = m_GraphicsMode.TypeOfBuffer == btBitmap;
+    palULAPlus->Visible = m_GraphicsMode.TypeOfBuffer == btULAplus;
     if (palBitmap->Visible)
     {
         palBitmap->Init();
+    }
+    if (palULAPlus->Visible)
+    {
+        palULAPlus->Init();
     }
 }
 //---------------------------------------------------------------------------
@@ -564,9 +570,13 @@ void __fastcall TfrmEditorImage::SetCanvasColors()
     {
         palAttribute->Set(m_Frames[m_SelectedFrame]->Canvas());
     }
-    else
+    else if (palBitmap->Visible)
     {
         palBitmap->Set(m_Frames[m_SelectedFrame]->Canvas());
+    }
+    if (palULAPlus->Visible)
+    {
+        palULAPlus->Set(m_Frames[m_SelectedFrame]->Canvas());
     }
 }
 //---------------------------------------------------------------------------
