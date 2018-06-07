@@ -133,6 +133,9 @@ void __fastcall GraphicsMode::Load(const String& name)
     m_LogicalColors.clear();
     JsonFile::Load(System::File::Combine(System::Path::Application, "GraphicsModes" + System::Path::Separator + name + ".json"));
     m_Palette->Load(m_PaletteName);
+    auto path = System::File::Combine("Saved Palettes", Name);
+    path = System::Path::Create(System::Path::lpCommon, path);
+    SaveLogicalCLUT(path, "Default");
     LoadLogicalCLUT();
     m_DefaultLogicalColors.clear();
     m_DefaultLogicalColors = m_LogicalColors;
@@ -191,14 +194,19 @@ void __fastcall GraphicsMode::SaveLogicalCLUT(String path, String name)
     {
         if (name == "")
         {
-            name = "Logical.CLUT.json";
+            name = "Logical.clut.json";
         }
         if (path == "")
         {
             path = System::Path::Project;
         }
+        if (name.Pos(".clut.json") == 0)
+        {
+            name += ".clut.json";
+        }
         auto file = System::File::Combine(path, name);
         Open(file);
+        Write("Palette", m_PaletteName);
         ArrayStart("LogicalColors"); // [
         for (auto index : m_LogicalColors)
         {
@@ -224,10 +232,21 @@ void __fastcall GraphicsMode::LoadLogicalCLUT(String path, String name)
         auto file = System::File::Combine(path, name);
         if (System::File::Exists(file))
         {
+            auto oldLogicalCount = m_LogicalColors.size();
+            auto oldLogicalColors = m_LogicalColors;
+            auto oldPaletteName = m_PaletteName;
             m_LogicalColors.clear();
             JsonFile::Load(file);
+            if (oldPaletteName != m_PaletteName || oldLogicalCount != m_LogicalColors.size())
+            {
+                // CLUT mismatch; can't use this CLUT for the palette.
+                m_LogicalColors = oldLogicalColors;
+                m_PaletteName = oldPaletteName;
+            }
+            // re-define the default CLUT
             m_DefaultLogicalColors.clear();
             m_DefaultLogicalColors = m_LogicalColors;
+            ::Messaging::Bus::Publish<Event>(Event("palette.remapped"));
         }
     }
 }
