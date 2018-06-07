@@ -29,6 +29,9 @@ void __fastcall TfrmULAplusBitmap::Init()
 {
     Update();
     panSystemColorPicker->Visible = m_GraphicsMode.SupportsLogicalColorRemapping;
+    btnPaletteLoad->Enabled = m_GraphicsMode.SupportsLogicalColorRemapping;
+    btnPaletteSave->Enabled = m_GraphicsMode.SupportsLogicalColorRemapping;
+    btnPaletteRestore->Enabled = m_GraphicsMode.SupportsLogicalColorRemapping;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmULAplusBitmap::DrawSelectionBox(TBitmap* bitmap, int xs, int ys, int xe, int ye) const
@@ -264,12 +267,6 @@ void __fastcall TfrmULAplusBitmap::imgSystemColorsMouseLeave(TObject *Sender)
     DrawPhysicalColors();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmULAplusBitmap::btnPaletteRestoreClick(TObject *Sender)
-{
-    m_GraphicsMode.RestoreDefaultPalette();
-    Update();
-}
-//---------------------------------------------------------------------------
 int __fastcall TfrmULAplusBitmap::GetInk(int index, int ink) const
 {
     if (ink == -1)
@@ -286,6 +283,56 @@ int __fastcall TfrmULAplusBitmap::GetPaper(int index, int paper) const
     if (index == -1)
         index = m_Index;
     return (index * 16) + 8 + paper;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmULAplusBitmap::btnPaletteSaveClick(TObject *Sender)
+{
+    auto path = System::File::Combine("Saved Palettes", m_GraphicsMode.Name);
+    path = System::Path::Create(System::Path::lpCommon, path);
+    dlgSave->InitialDir = path;
+    if (dlgSave->Execute())
+    {
+        m_GraphicsMode.SaveLogicalCLUT(path, System::File::NameWithoutExtension(dlgSave->FileName));
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmULAplusBitmap::btnPaletteLoadClick(TObject *Sender)
+{
+    auto path = System::File::Combine("Saved Palettes", m_GraphicsMode.Name);
+    path = System::Path::Create(System::Path::lpCommon, path);
+    dlgOpen->InitialDir = path;
+    if (dlgOpen->Execute())
+    {
+        auto ext = System::File::Extension(dlgOpen->FileName);
+        if (ext != ".tap")
+        {
+            m_GraphicsMode.LoadLogicalCLUT(path, System::File::NameWithExtension(dlgOpen->FileName));
+        }
+        else
+        {
+            // convert the tap
+            auto tap = std::vector<unsigned char>();
+            System::File::ReadBytes(dlgOpen->FileName, tap);
+            if (tap.size() > 64)
+            {
+                tap.pop_back();
+                tap.pop_back();
+                auto clut = std::vector<unsigned char>();
+                for (auto i = 63; i >= 0; i--)
+                {
+                    m_GraphicsMode.RemapColor(i, tap.back());
+                    tap.pop_back();
+                }
+            }
+        }
+        Update();
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmULAplusBitmap::btnPaletteRestoreClick(TObject *Sender)
+{
+    m_GraphicsMode.RestoreDefaultPalette();
+    Update();
 }
 //---------------------------------------------------------------------------
 

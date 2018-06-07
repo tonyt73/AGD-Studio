@@ -28,6 +28,9 @@ void __fastcall TfrmPaletteBitmap::Init()
 {
     Update();
     panSystemColorPicker->Visible = m_GraphicsMode.SupportsLogicalColorRemapping;
+    btnPaletteLoad->Enabled = m_GraphicsMode.SupportsLogicalColorRemapping;
+    btnPaletteSave->Enabled = m_GraphicsMode.SupportsLogicalColorRemapping;
+    btnPaletteRestore->Enabled = m_GraphicsMode.SupportsLogicalColorRemapping;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmPaletteBitmap::DrawPhysicalColors() const
@@ -267,17 +270,40 @@ void __fastcall TfrmPaletteBitmap::imgSystemColorsMouseLeave(TObject *Sender)
     DrawPhysicalColors();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmPaletteBitmap::btnPaletteRestoreClick(TObject *Sender)
-{
-    m_GraphicsMode.RestoreDefaultPalette();
-    Update();
-}
-//---------------------------------------------------------------------------
 void __fastcall TfrmPaletteBitmap::btnSwapClick(TObject *Sender)
 {
     auto op = m_Pen;
     m_Pen = m_Brush;
     m_Brush = op;
+    Update();
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmPaletteBitmap::btnPaletteLoadClick(TObject *Sender)
+{
+    auto path = System::File::Combine("Saved Palettes", m_GraphicsMode.Name);
+    path = System::Path::Create(System::Path::lpCommon, path);
+    dlgOpen->InitialDir = path;
+    if (dlgOpen->Execute())
+    {
+        m_GraphicsMode.LoadLogicalCLUT(path, System::File::NameWithExtension(dlgOpen->FileName));
+        Update();
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmPaletteBitmap::btnPaletteSaveClick(TObject *Sender)
+{
+    auto path = System::File::Combine("Saved Palettes", m_GraphicsMode.Name);
+    path = System::Path::Create(System::Path::lpCommon, path);
+    dlgSave->InitialDir = path;
+    if (dlgSave->Execute())
+    {
+        m_GraphicsMode.SaveLogicalCLUT(path, System::File::NameWithoutExtension(dlgSave->FileName));
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmPaletteBitmap::btnPaletteRestoreClick(TObject *Sender)
+{
+    m_GraphicsMode.RestoreDefaultPalette();
     Update();
 }
 //---------------------------------------------------------------------------

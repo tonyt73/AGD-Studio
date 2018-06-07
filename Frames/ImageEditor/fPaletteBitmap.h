@@ -11,6 +11,7 @@
 #include <Vcl.ImgList.hpp>
 #include "Graphics/GraphicsBuffer.h"
 #include "Graphics/GraphicsMode.h"
+#include <Vcl.Dialogs.hpp>
 //---------------------------------------------------------------------------
 class TfrmPaletteBitmap : public TFrame
 {
@@ -30,6 +31,8 @@ __published:	// IDE-managed Components
     TButton *btnPaletteSave;
     TButton *btnPaletteRestore;
     TImageList *ImageList2;
+    TOpenDialog *dlgOpen;
+    TSaveDialog *dlgSave;
     void __fastcall imgLogicalColorsMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
     void __fastcall imgLogicalColorsMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
     void __fastcall imgSystemColorsMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
@@ -38,6 +41,8 @@ __published:	// IDE-managed Components
     void __fastcall imgSystemColorsMouseLeave(TObject *Sender);
     void __fastcall btnPaletteRestoreClick(TObject *Sender);
     void __fastcall btnSwapClick(TObject *Sender);
+    void __fastcall btnPaletteLoadClick(TObject *Sender);
+    void __fastcall btnPaletteSaveClick(TObject *Sender);
 private:	// User declarations
     int                         m_Pen;              // logical pen color
     int                         m_Brush;            // logical brush color

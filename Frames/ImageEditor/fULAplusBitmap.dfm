@@ -152,7 +152,7 @@ object frmULAplusBitmap: TfrmULAplusBitmap
     Top = 62
     Width = 48
     Height = 48
-    Hint = 'Load Palette...'
+    Hint = 'Load Palette CLUT...'
     Enabled = False
     ImageAlignment = iaCenter
     ImageIndex = 1
@@ -160,13 +160,14 @@ object frmULAplusBitmap: TfrmULAplusBitmap
     ParentShowHint = False
     ShowHint = True
     TabOrder = 3
+    OnClick = btnPaletteLoadClick
   end
   object btnPaletteSave: TButton
     Left = 68
     Top = 62
     Width = 48
     Height = 48
-    Hint = 'Save Palette...'
+    Hint = 'Save Palette CLUT...'
     Enabled = False
     ImageAlignment = iaCenter
     ImageIndex = 0
@@ -174,6 +175,7 @@ object frmULAplusBitmap: TfrmULAplusBitmap
     ParentShowHint = False
     ShowHint = True
     TabOrder = 4
+    OnClick = btnPaletteSaveClick
   end
   object btnPaletteRestore: TButton
     Left = 124
@@ -876,5 +878,23 @@ object frmULAplusBitmap: TfrmULAplusBitmap
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000}
+  end
+  object dlgSave: TSaveDialog
+    DefaultExt = '*.clut.json'
+    Filter = 'Colour LUT|*.clut.json'
+    Options = [ofHideReadOnly, ofNoChangeDir, ofPathMustExist, ofEnableSizing]
+    OptionsEx = [ofExNoPlacesBar]
+    Title = 'Save a Palette CLUT'
+    Left = 72
+    Top = 240
+  end
+  object dlgOpen: TOpenDialog
+    DefaultExt = '*.clut.json'
+    Filter = 'Colour LUT|*.clut.json|ZX Spectrum ULA+ Tape|*.tap'
+    Options = [ofHideReadOnly, ofNoChangeDir, ofExtensionDifferent, ofPathMustExist, ofFileMustExist, ofEnableSizing]
+    OptionsEx = [ofExNoPlacesBar]
+    Title = 'Load a Palette CLUT'
+    Left = 16
+    Top = 240
   end
 end

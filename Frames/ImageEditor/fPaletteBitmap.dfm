@@ -171,6 +171,7 @@ object frmPaletteBitmap: TfrmPaletteBitmap
     ParentShowHint = False
     ShowHint = True
     TabOrder = 4
+    OnClick = btnPaletteLoadClick
   end
   object btnPaletteSave: TButton
     Left = 64
@@ -185,6 +186,7 @@ object frmPaletteBitmap: TfrmPaletteBitmap
     ParentShowHint = False
     ShowHint = True
     TabOrder = 5
+    OnClick = btnPaletteSaveClick
   end
   object btnPaletteRestore: TButton
     Left = 120
@@ -208,7 +210,7 @@ object frmPaletteBitmap: TfrmPaletteBitmap
     Left = 40
     Top = 208
     Bitmap = {
-      494C0101030008002C0020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010103000800300020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000002000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -749,7 +751,7 @@ object frmPaletteBitmap: TfrmPaletteBitmap
     Left = 72
     Top = 136
     Bitmap = {
-      494C010101000800140010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010101000800180010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000000000330000002F0000000000000000000000000000
@@ -887,5 +889,23 @@ object frmPaletteBitmap: TfrmPaletteBitmap
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000}
+  end
+  object dlgOpen: TOpenDialog
+    DefaultExt = '*.clut.json'
+    Filter = 'Colour LUT|*.clut.json'
+    Options = [ofHideReadOnly, ofNoChangeDir, ofExtensionDifferent, ofPathMustExist, ofFileMustExist, ofEnableSizing]
+    OptionsEx = [ofExNoPlacesBar]
+    Title = 'Load a Palette CLUT'
+    Left = 16
+    Top = 240
+  end
+  object dlgSave: TSaveDialog
+    DefaultExt = '*.clut.json'
+    Filter = 'Colour LUT|*.clut.json'
+    Options = [ofHideReadOnly, ofNoChangeDir, ofPathMustExist, ofEnableSizing]
+    OptionsEx = [ofExNoPlacesBar]
+    Title = 'Save a Palette CLUT'
+    Left = 72
+    Top = 240
   end
 end

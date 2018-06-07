@@ -11,6 +11,7 @@
 #include <Vcl.ImgList.hpp>
 #include "Graphics/GraphicsBuffer.h"
 #include "Graphics/GraphicsMode.h"
+#include <Vcl.Dialogs.hpp>
 //---------------------------------------------------------------------------
 class TfrmULAplusBitmap : public TFrame
 {
@@ -29,6 +30,8 @@ __published:	// IDE-managed Components
     TButton *btnPaletteSave;
     TButton *btnPaletteRestore;
     TImageList *ImageList2;
+    TSaveDialog *dlgSave;
+    TOpenDialog *dlgOpen;
     void __fastcall imgLogicalColorsMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
     void __fastcall imgLogicalColorsMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
     void __fastcall imgSystemColorsMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
@@ -36,6 +39,8 @@ __published:	// IDE-managed Components
     void __fastcall imgLogicalColorsMouseLeave(TObject *Sender);
     void __fastcall imgSystemColorsMouseLeave(TObject *Sender);
     void __fastcall btnPaletteRestoreClick(TObject *Sender);
+    void __fastcall btnPaletteSaveClick(TObject *Sender);
+    void __fastcall btnPaletteLoadClick(TObject *Sender);
 private:	// User declarations
     int                         m_Ink;              // logical ink color
     int                         m_Paper;            // logical paper color
