@@ -86,6 +86,16 @@ TStringDynArray __fastcall Path::GetFiles(Location location, const String& filte
     return GetFiles(folder, filter);
 }
 //---------------------------------------------------------------------------
+String __fastcall Path::Create(Location location, const String& subFolder)
+{
+    auto folder = GetFolder(location, subFolder);
+    if (!Exists(location, subFolder))
+    {
+        System::Ioutils::TDirectory::CreateDirectory(folder);
+    }
+    return folder;
+}
+//---------------------------------------------------------------------------
 bool __fastcall Path::Exists(Location location, const String& subFolder)
 {
     auto folder = GetFolder(location, subFolder);
