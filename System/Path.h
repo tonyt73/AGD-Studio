@@ -30,6 +30,7 @@ public:
     static  TStringDynArray __fastcall  GetFolders(Location location, const String& subFolder = "");
     static  String          __fastcall  GetFolder(const Location location, const String& subFolder = "");
     static  String          __fastcall  GetFolderRelativeTo(const Location location, const String& path);
+    static  String          __fastcall  GetActiveProjectFolder();
     static  bool            __fastcall  Exists(Location location, const String& subFolder = "");
     static  void            __fastcall  Delete(Location location, const String& subFolder);
     static  void            __fastcall  Rename(Location location, const String& fromSubFolder, const String& toSubFolder);
@@ -40,8 +41,10 @@ public:
     static  __property  String          Common = { read = m_Common };
                                         // OS documents folder. The base for all projects
     static  __property  String          Documents = { read = m_Documents };
-                                        // game projects (shared)
+                                        // game projects folder (shared)
     static  __property  String          Projects = { read = m_Projects };
+                                        // active project folder
+    static  __property  String          Project = { read = GetActiveProjectFolder };
                                         // the active project name
     static  __property  String          ProjectName = { read = m_ProjectName, write = m_ProjectName };
                                         // The OS file system path separator

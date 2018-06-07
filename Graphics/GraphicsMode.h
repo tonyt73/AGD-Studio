@@ -73,6 +73,8 @@ public:
                     __fastcall  GraphicsMode(const GraphicsMode& other);
 
             void    __fastcall  Load(const String& name);
+            void    __fastcall  SaveLogicalCLUT(String path = "", String name = "");
+            void    __fastcall  LoadLogicalCLUT(String path = "", String name = "");
                                 // Remap a logical color to a new palette color
     void            __fastcall  RemapColor(int paletteTableIndex, int colorTableIndex);
     void            __fastcall  RestoreDefaultPalette();
@@ -86,7 +88,7 @@ public:
     float           __property  ScalarX = { read = m_ScalarX };
     float           __property  ScalarY = { read = m_ScalarY };
     BufferType      __property  TypeOfBuffer = { read = m_BufferType };
-    int             __property  FromLogicalColor[int index] = { read = GetColorFromLogicalIndex };
+    int             __property  FromLogicalColor[int index] = { read = GetColorFromLogicalIndex };          // get a palette table index from a logical index
     int             __property  LogicalColors = { read = GetLogicalColors };
     TColor          __property  LogicalColor[int index] = { read = GetLogicalColor };
     bool            __property  SupportsLogicalColorRemapping = { read = m_SupportsRemapping };

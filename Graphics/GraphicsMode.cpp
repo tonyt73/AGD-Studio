@@ -133,6 +133,7 @@ void __fastcall GraphicsMode::Load(const String& name)
     m_LogicalColors.clear();
     JsonFile::Load(System::File::Combine(System::Path::Application, "GraphicsModes" + System::Path::Separator + name + ".json"));
     m_Palette->Load(m_PaletteName);
+    LoadLogicalCLUT();
     m_DefaultLogicalColors.clear();
     m_DefaultLogicalColors = m_LogicalColors;
 }
@@ -182,6 +183,53 @@ void __fastcall GraphicsMode::Save()
     ArrayEnd(); // ] LogicalColors
     // }
     Close();
+}
+//---------------------------------------------------------------------------
+void __fastcall GraphicsMode::SaveLogicalCLUT(String path, String name)
+{
+    if (m_SupportsRemapping)
+    {
+        if (name == "")
+        {
+            name = "Logical.CLUT.json";
+        }
+        if (path == "")
+        {
+            path = System::Path::Project;
+        }
+        auto file = System::File::Combine(path, name);
+        Open(file);
+        ArrayStart("LogicalColors"); // [
+        for (auto index : m_LogicalColors)
+        {
+            Write(index);
+        }
+        ArrayEnd(); // ] LogicalColors
+        Close();
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall GraphicsMode::LoadLogicalCLUT(String path, String name)
+{
+    if (m_SupportsRemapping)
+    {
+        if (name == "")
+        {
+            name = "Logical.CLUT.json";
+        }
+        if (path == "")
+        {
+            path = System::Path::Project;
+        }
+        auto file = System::File::Combine(path, name);
+        if (System::File::Exists(file))
+        {
+            m_LogicalColors.clear();
+            JsonFile::Load(file);
+            m_DefaultLogicalColors.clear();
+            m_DefaultLogicalColors = m_LogicalColors;
+        }
+    }
 }
 //---------------------------------------------------------------------------
 

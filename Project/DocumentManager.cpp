@@ -161,6 +161,8 @@ void __fastcall DocumentManager::Save()
                 }
             }
         }
+        // if supported; load any changed palette mappings
+        projectDocument->MachineConfiguration().GraphicsMode()->SaveLogicalCLUT();
         // now save the project file with all the document details included
         projectDocument->Save();
         // save other files (eg. text files)
