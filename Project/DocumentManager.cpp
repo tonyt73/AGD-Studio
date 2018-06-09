@@ -33,6 +33,7 @@ __fastcall DocumentManager::DocumentManager()
     //Register("Image", "TileSet", &TileSet::Create);
     //Register("Map", "Tiled", &TileMap::Create);
     Register("Text", "SoundFx", &SfxDocument::Create);
+    Register("Text", "AGD", &AGDDocument::Create);
 
     ::Messaging::Bus::Subscribe<OnImport<String>>(OnImportString);
 }

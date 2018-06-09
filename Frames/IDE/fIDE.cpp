@@ -41,6 +41,7 @@ void __fastcall TfrmIDE::RegisterDocumentEditors()
     DocumentEditorFactory::Register("Game\\Events", &TfrmEditorCode::Create);
     DocumentEditorFactory::Register("Game\\Messages", &TfrmEditorCode::Create);
     DocumentEditorFactory::Register("Game\\Sounds", &TfrmEditorCode::Create);
+    DocumentEditorFactory::Register("Game\\Output", &TfrmEditorCode::Create);
     DocumentEditorFactory::Register("Images\\Sprites", &TfrmEditorImage::Create);
     DocumentEditorFactory::Register("Images\\Objects", &TfrmEditorImage::Create);
     DocumentEditorFactory::Register("Images\\Tiles", &TfrmEditorImage::Create);

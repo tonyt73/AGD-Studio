@@ -45,4 +45,13 @@ public:
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new SfxDocument(name); };
 };
 //---------------------------------------------------------------------------
+class AGDDocument : public TextDocument
+{
+private:
+
+public:
+                        __fastcall  AGDDocument(const String& name);
+    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new AGDDocument(name); };
+};
+//---------------------------------------------------------------------------
 #endif
