@@ -208,6 +208,7 @@ private:    // User declarations
     bool                        m_GridPixel;
     bool                        m_GridBlock;
     BlockTypeTool               m_BlockTypeTool;
+    String                      m_LastModeString;   //
 
     void            __fastcall  SetDocument(Document* document);
     void            __fastcall  OnEvent(const Event& event);

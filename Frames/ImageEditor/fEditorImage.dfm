@@ -1590,18 +1590,25 @@ object frmEditorImage: TfrmEditorImage
     Height = 19
     Panels = <
       item
-        Text = 'Ready.'
+        Text = 'Mode - Tool'
         Width = 200
       end
       item
         Alignment = taCenter
-        Text = '10 x 10'
-        Width = 100
+        Text = 'Size: pixel (block)'
+        Width = 150
       end
       item
-        Width = 200
+        Alignment = taCenter
+        BiDiMode = bdLeftToRight
+        ParentBiDiMode = False
+        Text = 'Cursor'
+        Width = 150
+      end
+      item
+        Text = 'Graphics Mode'
+        Width = 300
       end>
-    Visible = False
   end
   object panToolbar: TPanel
     Left = 0

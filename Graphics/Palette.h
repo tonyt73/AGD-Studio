@@ -33,6 +33,7 @@ public:
 
    static DWORD __fastcall      LuminanceOf(TColor Color);
 
+    String      __property      Name = { read = m_Name };
     TColor      __property      Greyscale[int index] = { read = GetGreyscale };
     TColor      __property      Color[int index] = { read = GetTableColor };
     int         __property      Colors = { read = GetTotalColors };

@@ -25,6 +25,7 @@ __fastcall TfrmEditorImage::TfrmEditorImage(TComponent* Owner)
 , m_SelectedFrame(0)
 , m_ImageDocument(nullptr)
 , m_Toolbar(nullptr)
+, m_LastModeString("Pixel Paint Mode - Pencil")
 , m_GraphicsMode(*(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()))
 {
     ::Messaging::Bus::Subscribe<Event>(OnEvent);
@@ -112,13 +113,19 @@ void __fastcall TfrmEditorImage::SetDocument(Document* document)
     }
     btnModePaint->Down = true;
     btnModeBlock->Enabled = m_ImageDocument->Type == itTile;
+    barStatus->Panels->Items[0]->Text = "Pixel Paint Mode - Pencil";
+    barStatus->Panels->Items[1]->Text = "P=" + IntToStr(m_ImageDocument->Width) + "x" + IntToStr(m_ImageDocument->Height) +
+                                      ", C=" + IntToStr((int)(m_ImageDocument->Width / (8 / m_GraphicsMode.ScalarX))) + "x" +
+                                               IntToStr((int)(m_ImageDocument->Height / (8 / m_GraphicsMode.ScalarY)));
+    barStatus->Panels->Items[2]->Text = "0, 0";
+    barStatus->Panels->Items[3]->Text = "Graphics Mode: " + m_GraphicsMode.Name + ", Palette: " + m_GraphicsMode.Palette().Name;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::FrameEndDock(TObject *Sender, TObject *Target, int X, int Y)
 {
     TLMDDockPanel* dp = dynamic_cast<TLMDDockPanel*>(Sender);
     assert(dp != nullptr);
-    barStatus->Visible = dp->Site->IsFloatingDoc;
+    //barStatus->Visible = dp->Site->IsFloatingDoc;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::ChangeToolbar(TfrmToolbar* toolbar)
@@ -142,6 +149,7 @@ void __fastcall TfrmEditorImage::actSelectExecute(TObject *Sender)
         actSelect->Checked = true;
         btnTool->ImageIndex = actSelect->ImageIndex;
         m_CanvasTool = btnSelect->Tag;
+        barStatus->Panels->Items[0]->Text = "Pixel Paint Mode - Select";
     }
 }
 //---------------------------------------------------------------------------
@@ -153,6 +161,7 @@ void __fastcall TfrmEditorImage::actPencilExecute(TObject *Sender)
         actPencil->Checked = true;
         btnTool->ImageIndex = actPencil->ImageIndex;
         m_CanvasTool = btnPencil->Tag;
+        barStatus->Panels->Items[0]->Text = "Pixel Paint Mode - Pencil";
     }
 }
 //---------------------------------------------------------------------------
@@ -164,6 +173,7 @@ void __fastcall TfrmEditorImage::actBrushExecute(TObject *Sender)
         actBrush->Checked = true;
         btnTool->ImageIndex = actBrush->ImageIndex;
         m_CanvasTool = btnBrush->Tag;
+        barStatus->Panels->Items[0]->Text = "Pixel Paint Mode - Brush";
     }
 }
 //---------------------------------------------------------------------------
@@ -175,6 +185,7 @@ void __fastcall TfrmEditorImage::actFillExecute(TObject *Sender)
         actFill->Checked = true;
         btnTool->ImageIndex = actFill->ImageIndex;
         m_CanvasTool = btnFill->Tag;
+        barStatus->Panels->Items[0]->Text = "Pixel Paint Mode - Fill";
     }
 }
 //---------------------------------------------------------------------------
@@ -186,6 +197,7 @@ void __fastcall TfrmEditorImage::actSprayBrushExecute(TObject *Sender)
         actSprayBrush->Checked = true;
         btnTool->ImageIndex = actSprayBrush->ImageIndex;
         m_CanvasTool = btnSprayBrush->Tag;
+        barStatus->Panels->Items[0]->Text = "Pixel Paint Mode - Spray Brush";
     }
 }
 //---------------------------------------------------------------------------
@@ -197,6 +209,7 @@ void __fastcall TfrmEditorImage::actEraserExecute(TObject *Sender)
         actEraser->Checked = true;
         btnTool->ImageIndex = actEraser->ImageIndex;
         m_CanvasTool = btnEraser->Tag;
+        barStatus->Panels->Items[0]->Text = "Pixel Paint Mode - Eraser";
     }
 }
 //---------------------------------------------------------------------------
@@ -208,6 +221,7 @@ void __fastcall TfrmEditorImage::actLineExecute(TObject *Sender)
         actLine->Checked = true;
         btnTool->ImageIndex = actLine->ImageIndex;
         m_CanvasTool = btnLine->Tag;
+        barStatus->Panels->Items[0]->Text = "Pixel Paint Mode - Line";
     }
 }
 //---------------------------------------------------------------------------
@@ -219,6 +233,7 @@ void __fastcall TfrmEditorImage::actShapeExecute(TObject *Sender)
         actShape->Checked = true;
         btnTool->ImageIndex = actShape->ImageIndex;
         m_CanvasTool = btnShape->Tag;
+        barStatus->Panels->Items[0]->Text = "Pixel Paint Mode - Shape";
     }
 }
 //---------------------------------------------------------------------------
@@ -230,6 +245,7 @@ void __fastcall TfrmEditorImage::actTextExecute(TObject *Sender)
         actText->Checked = true;
         btnTool->ImageIndex = actText->ImageIndex;
         m_CanvasTool = btnText->Tag;
+        barStatus->Panels->Items[0]->Text = "Pixel Paint Mode - Text";
     }
 }
 //---------------------------------------------------------------------------
@@ -241,6 +257,7 @@ void __fastcall TfrmEditorImage::actDropperExecute(TObject *Sender)
         actDropper->Checked = true;
         btnTool->ImageIndex = actDropper->ImageIndex;
         m_CanvasTool = btnDropper->Tag;
+        barStatus->Panels->Items[0]->Text = "Pixel Paint Mode - Dropper";
     }
 }
 //---------------------------------------------------------------------------
@@ -623,6 +640,11 @@ void __fastcall TfrmEditorImage::imgEditorMouseDown(TObject *Sender, TMouseButto
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::imgEditorMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
 {
+    auto w = 8 / m_GraphicsMode.ScalarX;
+    auto h = 8 / m_GraphicsMode.ScalarY;
+    auto pt = ToImagePt(X,Y);
+    barStatus->Panels->Items[2]->Text = "P=" + IntToStr((int)pt.X) + ", " + IntToStr((int)pt.Y) +
+                                       ",C=" + IntToStr((int)(pt.X/w)) + ", " + IntToStr((int)(pt.Y/h));
     if (btnAnimateStop->Down)
     {
         if (btnModePaint->Down)
@@ -630,14 +652,14 @@ void __fastcall TfrmEditorImage::imgEditorMouseMove(TObject *Sender, TShiftState
             // pixel paint mode
             if (m_CanvasToolMap.count(m_CanvasTool) == 1)
             {
-                m_CanvasToolMap[m_CanvasTool]->Move(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y), Shift);
+                m_CanvasToolMap[m_CanvasTool]->Move(m_Frames[m_SelectedFrame]->Canvas(), pt, Shift);
                 RefreshView();
             }
         }
         else
         {
             // block type paint
-            m_BlockTypeTool.Move(ToImagePt(X,Y), Shift);
+            m_BlockTypeTool.Move(pt, Shift);
             RefreshView();
         }
     }
@@ -685,10 +707,13 @@ void __fastcall TfrmEditorImage::actModePaintExecute(TObject *Sender)
     actMonoOffExecute(NULL);
     btnModePaint->Down = true;
     RefreshView(true);
+    barStatus->Panels->Items[0]->Text = m_LastModeString;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::actModeBlockExecute(TObject *Sender)
 {
+    m_LastModeString = barStatus->Panels->Items[3]->Text;
+    barStatus->Panels->Items[0]->Text = "Block Type Mode - Set";
     actPencil->Enabled = false;
     actLine->Enabled = false;
     actShape->Enabled = false;
