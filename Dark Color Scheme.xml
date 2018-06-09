@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Attributes>
-	<Token name="default" backgroundColor="Black" textColor="Black"/>
+	<Token name="default" backgroundColor="Black" textColor="White"/>
 	<Token name="defaultEmbed" backgroundColor="#ECE9D8"/>
 	<Token name="docStart" backgroundColor="Black" fontStyle="bold"/>
 	<Token name="docEnd" backgroundColor="Black" fontStyle="bold"/>
