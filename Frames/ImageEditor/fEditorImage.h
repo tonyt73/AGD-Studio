@@ -32,13 +32,14 @@
 #include "fPaletteAttribute.h"
 #include "fPaletteBitmap.h"
 #include "fULAplusBitmap.h"
+#include "fBlockTypes.h"
 //---------------------------------------------------------------------------
 class TfrmEditorImage : public TFrame
 {
 __published:    // IDE-managed Components
     TPanel *panToolOptions;
     TActionList *tbrActions;
-    TImageList *tbrImages;
+    TImageList *tbrImagesEnabled;
     TAction *actSelect;
     TAction *actPencil;
     TAction *actFill;
@@ -137,6 +138,13 @@ __published:    // IDE-managed Components
     TfrmPaletteAttribute *palAttribute;
     TfrmPaletteBitmap *palBitmap;
     TfrmULAplusBitmap *palULAPlus;
+    TToolBar *tbrBlockType;
+    TToolButton *btnModePaint;
+    TToolButton *btnModeBlock;
+    TAction *actModePaint;
+    TAction *actModeBlock;
+    TfrmBlockTypes *palBlocks;
+    TImageList *tbrImagesDisabled;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actBrushExecute(TObject *Sender);
@@ -177,6 +185,8 @@ __published:    // IDE-managed Components
     void __fastcall imgEditorMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
     void __fastcall imgEditorMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
     void __fastcall imgEditorMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
+    void __fastcall actModePaintExecute(TObject *Sender);
+    void __fastcall actModeBlockExecute(TObject *Sender);
 private:    // User declarations
     typedef std::vector<std::unique_ptr<Agdx::Image>> ImageList;
     typedef std::map<int, std::unique_ptr<CanvasTool>> CanvasToolMap;
@@ -194,6 +204,8 @@ private:    // User declarations
     int                         m_CanvasTool;       // the selected canvas paint tool
     TfrmToolbar*                m_Toolbar;          // the current tools toolbar
     const Agdx::GraphicsMode&   m_GraphicsMode;     // the graphics mode used by the project
+    bool                        m_GridPixel;
+    bool                        m_GridBlock;
 
     void            __fastcall  SetDocument(Document* document);
     void            __fastcall  OnEvent(const Event& event);

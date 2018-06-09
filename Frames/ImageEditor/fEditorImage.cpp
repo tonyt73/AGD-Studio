@@ -16,6 +16,7 @@
 #pragma link "fPaletteAttribute"
 #pragma link "fPaletteBitmap"
 #pragma link "fULAplusBitmap"
+#pragma link "fBlockTypes"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorImage::TfrmEditorImage(TComponent* Owner)
@@ -99,6 +100,7 @@ void __fastcall TfrmEditorImage::SetDocument(Document* document)
     palAttribute->Visible = m_GraphicsMode.TypeOfBuffer == btAttribute;
     palBitmap->Visible = m_GraphicsMode.TypeOfBuffer == btBitmap;
     palULAPlus->Visible = m_GraphicsMode.TypeOfBuffer == btULAplus;
+    palBlocks->Visible = false;
     if (palBitmap->Visible)
     {
         palBitmap->Init();
@@ -107,6 +109,8 @@ void __fastcall TfrmEditorImage::SetDocument(Document* document)
     {
         palULAPlus->Init();
     }
+    btnModePaint->Down = true;
+    btnModeBlock->Enabled = m_ImageDocument->Type == itTile;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::FrameEndDock(TObject *Sender, TObject *Target, int X, int Y)
@@ -439,9 +443,16 @@ void __fastcall TfrmEditorImage::RefreshView(bool redraw)
             // force a redraw
             m_Frames[m_SelectedFrame]->Canvas().End();
         }
-        // take the image canvas that we are editing and show it on the image editor view
-        m_Frames[m_SelectedFrame]->Canvas().Draw(imgEditor->Picture->Bitmap);
-        //draw grids over it
+        if (btnModePaint->Down)
+        {
+            // take the image canvas that we are editing and show it on the image editor view
+            m_Frames[m_SelectedFrame]->Canvas().Draw(imgEditor->Picture->Bitmap);
+        }
+        else
+        {
+            //
+        }
+        // draw grids over it
         DrawGrids();
         // show it
         imgEditor->Refresh();
@@ -518,6 +529,7 @@ void __fastcall TfrmEditorImage::actAnimatePlayExecute(TObject *Sender)
     btnAnimatePlay->Down = true;
     tmrAnimate->Enabled = true;
     tbrTools->Enabled = false;
+    tbrBlockType->Enabled = false;
     tbrShiftRotates->Enabled = false;
 }
 //---------------------------------------------------------------------------
@@ -526,6 +538,7 @@ void __fastcall TfrmEditorImage::actAnimateStopExecute(TObject *Sender)
     btnAnimateStop->Down = true;
     tmrAnimate->Enabled = false;
     tbrTools->Enabled = true;
+    tbrBlockType->Enabled = true;
     tbrShiftRotates->Enabled = true;
 }
 //---------------------------------------------------------------------------
@@ -585,12 +598,20 @@ void __fastcall TfrmEditorImage::imgEditorMouseDown(TObject *Sender, TMouseButto
     if (btnAnimateStop->Down)
     {
         SetCaptureControl(imgEditor);
-        if (m_CanvasToolMap.count(m_CanvasTool) == 1)
+        if (btnModePaint->Down)
         {
-            m_CanvasToolMap[m_CanvasTool].get()->Parameters(toolbarShape->Parameters());
-            SetCanvasColors();
-            auto undo = m_CanvasToolMap[m_CanvasTool].get()->Begin(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y), Shift);
-            RefreshView();
+            // pixel paint mode
+            if (m_CanvasToolMap.count(m_CanvasTool) == 1)
+            {
+                m_CanvasToolMap[m_CanvasTool].get()->Parameters(toolbarShape->Parameters());
+                SetCanvasColors();
+                auto undo = m_CanvasToolMap[m_CanvasTool].get()->Begin(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y), Shift);
+                RefreshView();
+            }
+        }
+        else
+        {
+            // block type paint
         }
     }
 }
@@ -599,10 +620,18 @@ void __fastcall TfrmEditorImage::imgEditorMouseMove(TObject *Sender, TShiftState
 {
     if (btnAnimateStop->Down)
     {
-        if (m_CanvasToolMap.count(m_CanvasTool) == 1)
+        if (btnModePaint->Down)
         {
-            m_CanvasToolMap[m_CanvasTool]->Move(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y), Shift);
-            RefreshView();
+            // pixel paint mode
+            if (m_CanvasToolMap.count(m_CanvasTool) == 1)
+            {
+                m_CanvasToolMap[m_CanvasTool]->Move(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y), Shift);
+                RefreshView();
+            }
+        }
+        else
+        {
+            // block type paint
         }
     }
 }
@@ -612,13 +641,55 @@ void __fastcall TfrmEditorImage::imgEditorMouseUp(TObject *Sender, TMouseButton 
     if (btnAnimateStop->Down)
     {
         SetCaptureControl(nullptr);
-        if (m_CanvasToolMap.count(m_CanvasTool) == 1)
+        if (btnModePaint->Down)
         {
-            auto redo = m_CanvasToolMap[m_CanvasTool]->End(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y));
-            m_ImageDocument->Frame[m_SelectedFrame] = m_Frames[m_SelectedFrame]->Canvas().Get();
-            RefreshView();
+            // pixel paint mode
+            if (m_CanvasToolMap.count(m_CanvasTool) == 1)
+            {
+                auto redo = m_CanvasToolMap[m_CanvasTool]->End(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y));
+                m_ImageDocument->Frame[m_SelectedFrame] = m_Frames[m_SelectedFrame]->Canvas().Get();
+                RefreshView();
+            }
+        }
+        else
+        {
+            // block type paint
         }
     }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::actModePaintExecute(TObject *Sender)
+{
+    actPencil->Enabled = true;
+    actLine->Enabled = true;
+    actShape->Enabled = true;
+    palAttribute->Visible = m_GraphicsMode.TypeOfBuffer == btAttribute;
+    palBitmap->Visible = m_GraphicsMode.TypeOfBuffer == btBitmap;
+    palULAPlus->Visible = m_GraphicsMode.TypeOfBuffer == btULAplus;
+    palBlocks->Visible = false;
+    actGridPixel->Enabled = true;
+    actGridCharacter->Enabled = true;
+    actGridPixel->Checked = m_GridPixel;
+    actGridCharacter->Checked = m_GridBlock;
+    RefreshView();
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::actModeBlockExecute(TObject *Sender)
+{
+    actPencil->Enabled = false;
+    actLine->Enabled = false;
+    actShape->Enabled = false;
+    palAttribute->Visible = false;
+    palBitmap->Visible = false;
+    palULAPlus->Visible = false;
+    palBlocks->Visible = true;
+    m_GridPixel = actGridPixel->Checked;
+    m_GridBlock = actGridCharacter->Checked;
+    actGridPixel->Checked = false;
+    actGridCharacter->Checked = true;
+    actGridPixel->Enabled = false;
+    actGridCharacter->Enabled = false;
+    RefreshView();
 }
 //---------------------------------------------------------------------------
 
