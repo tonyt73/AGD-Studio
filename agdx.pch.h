@@ -3,8 +3,6 @@
 //---------------------------------------------------------------------------
 // VCL
 #include <vcl.h>
-#include <Vcl.ActnPopup.hpp>
-#include <Vcl.PlatformDefaultStyleActnCtrls.hpp>
 
 // System
 #include <System.Classes.hpp>
