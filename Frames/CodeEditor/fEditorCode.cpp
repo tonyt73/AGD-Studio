@@ -12,7 +12,7 @@
 #pragma link "LMDSedView"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
-const int SCHEMES_EXTS_COUNT = 25;
+const int SCHEMES_EXTS_COUNT = 28;
 const String SCHEMES_EXTS[SCHEMES_EXTS_COUNT] =
 {
     "cpp", "hpp", "cxx", "h",
@@ -22,7 +22,7 @@ const String SCHEMES_EXTS[SCHEMES_EXTS_COUNT] =
     "dfm", "pas", "css",
     "txt", "log",
     "sql",
-    "event"
+    "event", "agd", "sfx"
 };
 const String SCHEMES_SYN[SCHEMES_EXTS_COUNT] =
 {
@@ -34,7 +34,7 @@ const String SCHEMES_SYN[SCHEMES_EXTS_COUNT] =
     "DFM", "Pascal", "CSS",
     "Text", "Text",
     "SQL",
-    "AGD"
+    "AGD", "AGD", "AGD"
 };
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorCode::TfrmEditorCode(TComponent* Owner)

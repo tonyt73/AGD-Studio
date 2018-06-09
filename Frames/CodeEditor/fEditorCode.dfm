@@ -3468,7 +3468,7 @@ object frmEditorCode: TfrmEditorCode
           '<?xml version="1.0" encoding="UTF-8"?>'
           '<Attributes>'
           
-            #9'<Token name="default" backgroundColor="Black" textColor="Black"' +
+            #9'<Token name="default" backgroundColor="Black" textColor="White"' +
             '/>'
           #9'<Token name="defaultEmbed" backgroundColor="#ECE9D8"/>'
           
