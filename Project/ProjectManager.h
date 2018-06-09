@@ -9,6 +9,7 @@
 #include <list>
 //---------------------------------------------------------------------------
 #include "Project/DocumentManager.h"
+#include "Project/GameSourceBuilder.h"
 #include "MostRecentlyUsedList.h"
 //---------------------------------------------------------------------------
 class ProjectManager
@@ -32,6 +33,7 @@ private:
 
     std::map<String, TElXTreeItem*> m_TreeLeafNodes;
     Elxtree::TElXTree*              m_TreeView;
+    GameSourceBuilder               m_GameSourceBuilder;
 
     void        __fastcall  SetTreeIcon(const String& parent, TElXTreeItem* node) const;
 

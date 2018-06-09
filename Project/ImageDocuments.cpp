@@ -27,6 +27,8 @@ __fastcall ImageDocument::ImageDocument(const String& name)
     m_PropertyMap["Image.Width"] = &m_Width;
     m_PropertyMap["Image.Height"] = &m_Height;
     m_PropertyMap["Image.Frames[]"] = &m_FrameLoader;
+    m_PropertyMap["Image.Layers[].Name"] = &m_LayerName;
+    m_PropertyMap["Image.Layers[].Data"] = &m_LayerData;
     m_File = GetFile();
 }
 //---------------------------------------------------------------------------
@@ -41,7 +43,19 @@ void __fastcall ImageDocument::Save()
         {
             Write(frame);
         }
-        ArrayEnd(); // Files
+        ArrayEnd(); // Frames
+        if (m_Layers.size() > 0)
+        {
+            ArrayStart("Layers");
+            for (const auto& layer : m_Layers)
+            {
+                StartObject();
+                    Write("Name", layer.first);
+                    Write("Data", layer.second);
+                EndObject();
+            }
+            ArrayEnd(); // Layers
+        }
     Pop();  // image
     Close();
 }
@@ -59,6 +73,10 @@ void __fastcall ImageDocument::OnEndObject(const String& object)
             m_Frames.push_back(m_FrameLoader);
         }
         m_FramesLoaded++;
+    }
+    else if (object == "Image.Layers[]")
+    {
+        m_Layers[m_LayerName] = m_LayerData;
     }
 }
 //---------------------------------------------------------------------------
@@ -152,6 +170,19 @@ bool __fastcall ImageDocument::DeleteFrame(int index)
     return false;
 }
 //---------------------------------------------------------------------------
+int __fastcall ImageDocument::GetLayerCount() const
+{
+    return m_Layers.size();
+}
+//---------------------------------------------------------------------------
+void __fastcall ImageDocument::AddLayer(const String& name, const String& value)
+{
+    if (m_Layers.count(name) == 0)
+    {
+        m_Layers[name] = value;
+    }
+}
+//---------------------------------------------------------------------------
 void __fastcall ImageDocument::ExtractSize(const String& extra)
 {
     const auto pc = theDocumentManager.ProjectConfig();
@@ -171,6 +202,29 @@ void __fastcall ImageDocument::ExtractSize(const String& extra)
             }
         }
     }
+}
+//---------------------------------------------------------------------------
+String __fastcall ImageDocument::GetLayer(const String& name)
+{
+    String value;
+    if (m_Layers.count(name) == 1)
+    {
+        value = m_Layers[name];
+    }
+    return value;
+}
+//---------------------------------------------------------------------------
+String __fastcall ImageDocument::SetLayer(const String& name, const String& value)
+{
+    if (m_Layers.count(name) == 1)
+    {
+        m_Layers[name] = value;
+    }
+}
+//---------------------------------------------------------------------------
+bool __fastcall ImageDocument::LayerExists(const String& name) const
+{
+    return m_Layers.count(name) == 1;
 }
 //---------------------------------------------------------------------------
 
@@ -213,6 +267,7 @@ __fastcall TileDocument::TileDocument(const String& name, const String& extra)
     RegisterProperty("Name", "Details", "The name of the tile");
     ExtractSize(extra);
     AddFrame();
+    AddLayer("blocktype","");
 }
 //---------------------------------------------------------------------------
 __fastcall CharacterSetDocument::CharacterSetDocument(const String& name, const String& extra)
