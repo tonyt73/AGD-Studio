@@ -45,7 +45,6 @@ public:
             void    __fastcall  Move(Agdx::GraphicsBuffer& canvas, const TPoint& pt, const TShiftState& buttons);
                                 // return redo string
             String  __fastcall  End(Agdx::GraphicsBuffer& canvas, const TPoint& pt);
-
 };
 //---------------------------------------------------------------------------
 #endif

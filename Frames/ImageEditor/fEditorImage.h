@@ -33,6 +33,7 @@
 #include "fPaletteBitmap.h"
 #include "fULAplusBitmap.h"
 #include "fBlockTypes.h"
+#include "BlockTypeTool.h"
 //---------------------------------------------------------------------------
 class TfrmEditorImage : public TFrame
 {
@@ -206,6 +207,7 @@ private:    // User declarations
     const Agdx::GraphicsMode&   m_GraphicsMode;     // the graphics mode used by the project
     bool                        m_GridPixel;
     bool                        m_GridBlock;
+    BlockTypeTool               m_BlockTypeTool;
 
     void            __fastcall  SetDocument(Document* document);
     void            __fastcall  OnEvent(const Event& event);

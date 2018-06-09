@@ -29,6 +29,4 @@ public:		// User declarations
     char    __property  BlockType = { read = m_BlockType };
 };
 //---------------------------------------------------------------------------
-extern PACKAGE TfrmBlockTypes *frmBlockTypes;
-//---------------------------------------------------------------------------
 #endif

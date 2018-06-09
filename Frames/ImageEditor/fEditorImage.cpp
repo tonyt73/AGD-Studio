@@ -82,6 +82,7 @@ void __fastcall TfrmEditorImage::SetDocument(Document* document)
 
     m_ImageDocument = dynamic_cast<ImageDocument*>(document);
     panEditorContainer->Color = StyleServices()->GetStyleColor(scGenericGradientBase);
+    m_BlockTypeTool.Document = m_ImageDocument;
 
     // convert the documents images into frames
     fFrameView->OnSelectedClick = OnFrameSelected;
@@ -450,7 +451,8 @@ void __fastcall TfrmEditorImage::RefreshView(bool redraw)
         }
         else
         {
-            //
+            // get the block tool to draw its results
+            m_BlockTypeTool.Draw(imgEditor->Picture->Bitmap);
         }
         // draw grids over it
         DrawGrids();
@@ -612,6 +614,9 @@ void __fastcall TfrmEditorImage::imgEditorMouseDown(TObject *Sender, TMouseButto
         else
         {
             // block type paint
+            m_BlockTypeTool.BlockType = palBlocks->BlockType;
+            m_BlockTypeTool.Begin(m_Frames[m_SelectedFrame]->Canvas());
+            m_BlockTypeTool.Move(ToImagePt(X,Y), Shift);
         }
     }
 }
@@ -632,6 +637,8 @@ void __fastcall TfrmEditorImage::imgEditorMouseMove(TObject *Sender, TShiftState
         else
         {
             // block type paint
+            m_BlockTypeTool.Move(ToImagePt(X,Y), Shift);
+            RefreshView();
         }
     }
 }
@@ -654,6 +661,8 @@ void __fastcall TfrmEditorImage::imgEditorMouseUp(TObject *Sender, TMouseButton 
         else
         {
             // block type paint
+            m_BlockTypeTool.End();
+            RefreshView();
         }
     }
 }
@@ -671,7 +680,11 @@ void __fastcall TfrmEditorImage::actModePaintExecute(TObject *Sender)
     actGridCharacter->Enabled = true;
     actGridPixel->Checked = m_GridPixel;
     actGridCharacter->Checked = m_GridBlock;
-    RefreshView();
+    actMonoOff->Enabled = true;
+    actMonoOff->Checked = true;
+    actMonoOffExecute(NULL);
+    btnModePaint->Down = true;
+    RefreshView(true);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::actModeBlockExecute(TObject *Sender)
@@ -689,7 +702,12 @@ void __fastcall TfrmEditorImage::actModeBlockExecute(TObject *Sender)
     actGridCharacter->Checked = true;
     actGridPixel->Enabled = false;
     actGridCharacter->Enabled = false;
-    RefreshView();
+    actMonoOn->Checked = true;
+    actMonoOff->Enabled = false;
+    actMonoOnExecute(NULL);
+    btnModeBlock->Down = true;
+    m_BlockTypeTool.Begin(m_Frames[m_SelectedFrame]->Canvas());
+    RefreshView(true);
 }
 //---------------------------------------------------------------------------
 
