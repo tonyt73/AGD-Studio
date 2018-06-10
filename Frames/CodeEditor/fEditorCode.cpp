@@ -32,7 +32,7 @@ const String SCHEMES_SYN[SCHEMES_EXTS_COUNT] =
     "HTML", "HTML",
     "XML", "PHP", "ASP_VB", "Lua", "Rexx",
     "DFM", "Pascal", "CSS",
-    "Text", "Text",
+    "AGD", "AGD",
     "SQL",
     "AGD", "AGD", "AGD"
 };
