@@ -16,7 +16,7 @@ __fastcall TfrmImportDialog::TfrmImportDialog(TComponent* Owner)
 //---------------------------------------------------------------------------
 void __fastcall TfrmImportDialog::Initialise()
 {
-    dynamic_cast<TForm*>(Parent)->Caption = "Import an AGD Snapshot File";
+    dynamic_cast<TForm*>(Parent)->Caption = "Import an AGD Project File";
     UpdateColors();
     // TODO: Load the machine names into the combo box
 }

@@ -1752,10 +1752,11 @@ object frmImportDialog: TfrmImportDialog
     TabOrder = 4
   end
   object dlgImport: TOpenTextFileDialog
-    DefaultExt = 'sna'
-    Filter = 'ZX Spectrum 48K Snapshot|*.sna|All Files|*.*'
+    DefaultExt = 'agd'
+    Filter = 'ZX Spectrum 48K Snapshot|*.sna|AGD file|*.agd|All Files|*.*'
+    FilterIndex = 2
     Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
-    Title = 'Import an Existing AGD snapshot'
+    Title = 'Import an Existing AGD project'
     Left = 140
     Top = 4
   end
