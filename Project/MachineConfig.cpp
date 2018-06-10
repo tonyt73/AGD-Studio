@@ -15,7 +15,7 @@ __fastcall MachineConfig::MachineConfig(const String& name)
     m_PropertyMap["ImageSizing.Object.Minimum.Height"] = &m_ImageSizing[itObject].Minimum.cy;
     m_PropertyMap["ImageSizing.Object.Maximum.Width"] = &m_ImageSizing[itObject].Maximum.cx;
     m_PropertyMap["ImageSizing.Object.Maximum.Height"] = &m_ImageSizing[itObject].Maximum.cy;
-    m_PropertyMap["ImageSizing.Object.Step.width"] = &m_ImageSizing[itObject].Step.cx;
+    m_PropertyMap["ImageSizing.Object.Step.Width"] = &m_ImageSizing[itObject].Step.cx;
     m_PropertyMap["ImageSizing.Object.Step.Height"] = &m_ImageSizing[itObject].Step.cy;
     m_PropertyMap["ImageSizing.Sprite.Minimum.Width"] = &m_ImageSizing[itSprite].Minimum.cx;
     m_PropertyMap["ImageSizing.Sprite.Minimum.Height"] = &m_ImageSizing[itSprite].Minimum.cy;
