@@ -61,7 +61,7 @@ object frmEditorImage: TfrmEditorImage
         end
         inherited lstSmall: TImageList
           Bitmap = {
-            494C010105000800580010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+            494C0101050008005C0010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
             0000000000003600000028000000400000002000000001002000000000000020
             000000000000000000000000000000000000C19457FFC19457FFC19457FFC194
             57FFC19457FFC19457FFC19457FFC19457FFC19457FFC19457FFC19457FFC194
@@ -334,7 +334,7 @@ object frmEditorImage: TfrmEditorImage
         end
         inherited lstLargeShapes: TImageList
           Bitmap = {
-            494C010105002000700020001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+            494C010105002000740020001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
             0000000000003600000028000000800000003000000001002000000000000060
             0000000000000000000000000000000000000000000000000000000000000000
             000000000000000000000000000000000000C19457FFC19457FFC19457FFC194
@@ -1135,7 +1135,7 @@ object frmEditorImage: TfrmEditorImage
         end
         inherited imgFills: TImageList
           Bitmap = {
-            494C010103001800640010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+            494C010103001800680010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
             0000000000003600000028000000400000001000000001002000000000000010
             0000000000000000000000000000000000000000000000000000000000000000
             000000000000000000FF000000FF000000FF000000FF000000E5000000F50000
@@ -1276,7 +1276,7 @@ object frmEditorImage: TfrmEditorImage
         end
         inherited imgLargeFill: TImageList
           Bitmap = {
-            494C010103001800640018001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+            494C010103001800680018001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
             0000000000003600000028000000600000001800000001002000000000000024
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000000000000000
@@ -1644,12 +1644,13 @@ object frmEditorImage: TfrmEditorImage
     end
     object tbrShiftRotates: TToolBar
       Left = 0
-      Top = 228
+      Top = 188
       Width = 80
       Height = 160
       AutoSize = True
       ButtonHeight = 40
       ButtonWidth = 40
+      DisabledImages = tbrImagesDisabled
       Images = tbrImagesEnabled
       TabOrder = 0
       object btnRotateLeft: TToolButton
@@ -1717,7 +1718,7 @@ object frmEditorImage: TfrmEditorImage
       Left = 0
       Top = 24
       Width = 80
-      Height = 200
+      Height = 160
       AutoSize = True
       ButtonHeight = 40
       ButtonWidth = 40
@@ -1774,73 +1775,59 @@ object frmEditorImage: TfrmEditorImage
         Wrap = True
         Style = tbsCheck
       end
-      object btnDropper: TToolButton
-        Tag = 6
-        Left = 0
-        Top = 120
-        Action = actDropper
-        Grouped = True
-        Style = tbsCheck
-      end
       object btnSprayBrush: TToolButton
         Tag = 7
-        Left = 40
+        Left = 0
         Top = 120
         Action = actSprayBrush
         Grouped = True
-        Wrap = True
         Style = tbsCheck
       end
       object btnFill: TToolButton
         Tag = 8
-        Left = 0
-        Top = 160
-        Action = actFill
-        Grouped = True
-        Style = tbsCheck
-      end
-      object btnEraser: TToolButton
-        Tag = 9
         Left = 40
-        Top = 160
-        Action = actEraser
+        Top = 120
+        Action = actFill
         Grouped = True
         Style = tbsCheck
       end
     end
     object panSplitter1: TPanel
       Left = 0
-      Top = 224
+      Top = 184
       Width = 80
       Height = 4
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 2
       OnClick = panEditorContainerClick
+      ExplicitTop = 224
     end
     object panSplitter2: TPanel
       Left = 0
-      Top = 428
+      Top = 388
       Width = 80
       Height = 4
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 3
       OnClick = panEditorContainerClick
+      ExplicitTop = 428
     end
     object panSplitter3: TPanel
       Left = 0
-      Top = 472
+      Top = 432
       Width = 80
       Height = 4
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 4
       OnClick = panEditorContainerClick
+      ExplicitTop = 472
     end
     object tbrMono: TToolBar
       Left = 0
-      Top = 476
+      Top = 436
       Width = 80
       Height = 40
       AutoSize = True
@@ -1874,16 +1861,17 @@ object frmEditorImage: TfrmEditorImage
     end
     object panSplitter4: TPanel
       Left = 0
-      Top = 516
+      Top = 476
       Width = 80
       Height = 4
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 6
+      ExplicitTop = 516
     end
     object tbrGrids: TToolBar
       Left = 0
-      Top = 432
+      Top = 392
       Width = 80
       Height = 40
       AutoSize = True
@@ -1914,7 +1902,7 @@ object frmEditorImage: TfrmEditorImage
     end
     object tbrAnimate: TToolBar
       Left = 0
-      Top = 520
+      Top = 480
       Width = 80
       Height = 40
       AutoSize = True
@@ -1948,7 +1936,7 @@ object frmEditorImage: TfrmEditorImage
     end
     object tbrBlockType: TToolBar
       Left = 0
-      Top = 388
+      Top = 348
       Width = 80
       Height = 40
       AutoSize = True
@@ -2167,7 +2155,7 @@ object frmEditorImage: TfrmEditorImage
         ExplicitTop = 1142
         inherited ImageList1: TImageList
           Bitmap = {
-            494C0101030008002C0020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+            494C010103000800300020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
             0000000000003600000028000000800000002000000001002000000000000040
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000000000000000
@@ -2704,7 +2692,7 @@ object frmEditorImage: TfrmEditorImage
         end
         inherited ImageList2: TImageList
           Bitmap = {
-            494C010101000800200010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+            494C010101000800240010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
             0000000000003600000028000000400000001000000001002000000000000010
             0000000000000000000000000000000000000000000000000000000000000000
             00000000000000000000000000330000002F0000000000000000000000000000
@@ -2865,7 +2853,7 @@ object frmEditorImage: TfrmEditorImage
         ExplicitTop = 642
         inherited ImageList1: TImageList
           Bitmap = {
-            494C0101030008003C0020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+            494C010103000800400020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
             0000000000003600000028000000800000002000000001002000000000000040
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000000000000000
@@ -3402,7 +3390,7 @@ object frmEditorImage: TfrmEditorImage
         end
         inherited ImageList2: TImageList
           Bitmap = {
-            494C010101000800240010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+            494C010101000800280010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
             0000000000003600000028000000400000001000000001002000000000000010
             0000000000000000000000000000000000000000000000000000000000000000
             00000000000000000000000000330000002F0000000000000000000000000000
@@ -3611,7 +3599,6 @@ object frmEditorImage: TfrmEditorImage
       GroupIndex = 1
       ImageIndex = 6
       ShortCut = 8260
-      OnExecute = actDropperExecute
     end
     object actSprayBrush: TAction
       Caption = 'Spray Brush'
@@ -3635,7 +3622,6 @@ object frmEditorImage: TfrmEditorImage
       GroupIndex = 1
       ImageIndex = 11
       ShortCut = 8261
-      OnExecute = actEraserExecute
     end
     object actGridPixel: TAction
       AutoCheck = True
@@ -3784,7 +3770,7 @@ object frmEditorImage: TfrmEditorImage
     Left = 220
     Top = 65
     Bitmap = {
-      494C010124006000AC0120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010124006000B00120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004001000001002000000000000080
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -9137,7 +9123,7 @@ object frmEditorImage: TfrmEditorImage
     Left = 220
     Top = 121
     Bitmap = {
-      494C010124006000BC0120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010124006000C00120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004001000001002000000000000080
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

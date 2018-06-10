@@ -114,10 +114,8 @@ __published:    // IDE-managed Components
     TToolButton *btnBrush;
     TToolButton *btnLine;
     TToolButton *btnShape;
-    TToolButton *btnDropper;
     TToolButton *btnSprayBrush;
     TToolButton *btnFill;
-    TToolButton *btnEraser;
     TPanel *panSplitter1;
     TPanel *panSplitter2;
     TPanel *panSplitter3;
@@ -151,12 +149,10 @@ __published:    // IDE-managed Components
     void __fastcall actBrushExecute(TObject *Sender);
     void __fastcall actFillExecute(TObject *Sender);
     void __fastcall actSprayBrushExecute(TObject *Sender);
-    void __fastcall actEraserExecute(TObject *Sender);
     void __fastcall actLineExecute(TObject *Sender);
     void __fastcall actShapeExecute(TObject *Sender);
     void __fastcall actGridPixelExecute(TObject *Sender);
     void __fastcall actTextExecute(TObject *Sender);
-    void __fastcall actDropperExecute(TObject *Sender);
     void __fastcall FrameEndDock(TObject *Sender, TObject *Target, int X, int Y);
     void __fastcall actRotateLeftExecute(TObject *Sender);
     void __fastcall actRotateRightExecute(TObject *Sender);

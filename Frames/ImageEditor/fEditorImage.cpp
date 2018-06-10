@@ -201,18 +201,6 @@ void __fastcall TfrmEditorImage::actSprayBrushExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actEraserExecute(TObject *Sender)
-{
-    if (IsActive())
-    {
-        ChangeToolbar(nullptr);
-        actEraser->Checked = true;
-        btnTool->ImageIndex = actEraser->ImageIndex;
-        m_CanvasTool = btnEraser->Tag;
-        barStatus->Panels->Items[0]->Text = "Pixel Paint Mode - Eraser";
-    }
-}
-//---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::actLineExecute(TObject *Sender)
 {
     if (IsActive())
@@ -246,18 +234,6 @@ void __fastcall TfrmEditorImage::actTextExecute(TObject *Sender)
         btnTool->ImageIndex = actText->ImageIndex;
         m_CanvasTool = btnText->Tag;
         barStatus->Panels->Items[0]->Text = "Pixel Paint Mode - Text";
-    }
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actDropperExecute(TObject *Sender)
-{
-    if (IsActive())
-    {
-        ChangeToolbar(nullptr);
-        actDropper->Checked = true;
-        btnTool->ImageIndex = actDropper->ImageIndex;
-        m_CanvasTool = btnDropper->Tag;
-        barStatus->Panels->Items[0]->Text = "Pixel Paint Mode - Dropper";
     }
 }
 //---------------------------------------------------------------------------
