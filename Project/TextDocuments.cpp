@@ -3,6 +3,7 @@
 #pragma hdrstop
 //---------------------------------------------------------------------------
 #include "TextDocuments.h"
+#include "Messaging.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -71,7 +72,16 @@ __fastcall MessageDocument::MessageDocument(const String& name)
         auto header = ";\r\n; " + System::Path::ProjectName + "\r\n; An AGDX game\r\n; Created: " + date + "\r\n; Simply place a new message per line. Comments ';' are stripped before compilation\r\n;";
         System::File::WriteText(file, header);
     }
-    m_File = GetFile();
+    m_File = file;
+    if (System::File::NameWithExtension(file).LowerCase() == "messages.txt")
+    {
+        ::Messaging::Bus::Subscribe<OnImportMessage>(OnImport);
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall MessageDocument::OnImport(const OnImportMessage& message)
+{
+    System::File::AppendText(m_File, "\r\n" + message.Id);
 }
 //---------------------------------------------------------------------------
 __fastcall SfxDocument::SfxDocument(const String& name)

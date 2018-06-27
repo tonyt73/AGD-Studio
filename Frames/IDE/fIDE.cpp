@@ -62,6 +62,17 @@ void __fastcall TfrmIDE::OnActivate()
     tvProject->BackGroundColor = StyleServices()->GetStyleColor(scGenericGradientBase);
     dsIDE->Invalidate();
     RefreshMruList();
+
+    ::Messaging::Bus::Subscribe<ErrorMessage>(OnMessageString);
+    ::Messaging::Bus::Subscribe<WarningMessage>(OnMessageString);
+    ::Messaging::Bus::Subscribe<InformationMessage>(OnMessageString);
+    ::Messaging::Bus::Subscribe<DebugMessage>(OnMessageString);
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::OnMessageString(const OnMessage& message)
+{
+    const String Types[4] = { "Info  : ", "Warn : ", "Error: ", "Debug: " };
+    memMessages->Lines->Add(Types[message.Type] + message.Message);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditCopyExecute(TObject *Sender)
@@ -149,7 +160,14 @@ void __fastcall TfrmIDE::UpdateProperties(Document* document)
     const auto properties = document->GetPropertyInfo();
     for (auto it : properties)
     {
-        lmdProperties->RegisterPropCategory(it.second.category, it.first);
+        try
+        {
+            lmdProperties->RegisterPropCategory(it.second.category, it.first);
+        }
+        catch(...)
+        {
+            // ignore exception; since we've already registered this property category and there is no method to test for property registration
+        }
     }
     lmdProperties->Objects->SetOne(document);
     lmdProperties->ExpandAllCategories();

@@ -59,4 +59,73 @@ public:
     __property  TSize   Size     = { read = m_Size     };
 };
 //---------------------------------------------------------------------------
+class OnImportMessage : public Event
+{
+public:
+    __fastcall  OnImportMessage(const String& message)
+    : Event(message)
+    {
+    }
+};
+//---------------------------------------------------------------------------
+enum ErrorType { etInformation, etWarning, etError, etDebug };
+class OnMessage : public Event
+{
+private:
+    ErrorType   m_ErrorType;
+public:
+    __fastcall OnMessage(const String& message, ErrorType type)
+    : Event(message)
+    , m_ErrorType(type)
+    {
+    }
+
+    __property  String      Message = { read = m_Id };
+    __property  ErrorType   Type    = { read = m_ErrorType };
+};
+//---------------------------------------------------------------------------
+class ErrorMessage : public OnMessage
+{
+private:
+
+public:
+    __fastcall ErrorMessage(const String& message)
+    : OnMessage(message, etError)
+    {
+    }
+};
+//---------------------------------------------------------------------------
+class WarningMessage : public OnMessage
+{
+private:
+
+public:
+    __fastcall WarningMessage(const String& message)
+    : OnMessage(message, etWarning)
+    {
+    }
+};
+//---------------------------------------------------------------------------
+class InformationMessage : public OnMessage
+{
+private:
+
+public:
+    __fastcall InformationMessage(const String& message)
+    : OnMessage(message, etInformation)
+    {
+    }
+};
+//---------------------------------------------------------------------------
+class DebugMessage : public OnMessage
+{
+private:
+
+public:
+    __fastcall DebugMessage(const String& message)
+    : OnMessage(message, etDebug)
+    {
+    }
+};
+//---------------------------------------------------------------------------
 #endif

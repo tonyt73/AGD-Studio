@@ -18,6 +18,7 @@ public:
     static  String  __fastcall  ChangeExtension(const String& filename, const String& extension);
     static  String  __fastcall  Combine(const String& path, const String& filename);
     static  void    __fastcall  WriteText(const String& file, const String& content);
+    static  void    __fastcall  AppendText(const String& file, const String& content);
     static  String  __fastcall  ReadText(const String& file);
     static  void    __fastcall  ReadBytes(const String& file, std::vector<unsigned char>& contents);
     static  void    __fastcall  Copy(const String& source, const String& destination);

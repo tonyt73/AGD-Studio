@@ -52,6 +52,12 @@ void __fastcall File::WriteText(const String& file, const String& content)
     System::Ioutils::TFile::WriteAllText(file, content);
 }
 //---------------------------------------------------------------------------
+void __fastcall File::AppendText(const String& file, const String& content)
+{
+    auto text = ReadText(file);
+    WriteText(file, text + content);
+}
+//---------------------------------------------------------------------------
 String __fastcall File::ReadText(const String& file)
 {
     return System::Ioutils::TFile::ReadAllText(file);

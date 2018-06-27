@@ -20,6 +20,8 @@ __fastcall TfrmMain::TfrmMain(TComponent* Owner)
 {
     m_WelcomeDialog->OnDone  = OnWelcomeDone;
     m_IDEDialog->OnFormClose = OnIDEClose;
+    m_ImportDialog = std::make_unique<TfrmImportDialog>(new TfrmImportDialog(this));
+    m_ImportDialog->OnDone = OnImportDone;
 }
 // ---------------------------------------------------------------------------
 void __fastcall TfrmMain::FormCreate(TObject *Sender)
@@ -110,11 +112,6 @@ void __fastcall TfrmMain::OnWelcomeDone(TObject *Sender)
     }
     else
     {
-        if (m_ImportDialog == nullptr)
-        {
-            m_ImportDialog = std::make_unique<TfrmImportDialog>(new TfrmImportDialog(this));
-            m_ImportDialog->OnDone = OnImportDone;
-        }
         ShowImportDialog();
     }
 }
@@ -165,7 +162,7 @@ void __fastcall TfrmMain::ShowImportDialog()
     m_IDEDialog->Visible = false;
     m_IDEDialog->Parent = nullptr;
     m_WelcomeDialog->Visible = false;
-    m_WelcomeDialog->Parent = this;
+    m_WelcomeDialog->Parent = nullptr;
     m_ImportDialog->Parent = this;
     m_ImportDialog->Visible = true;
     m_ImportDialog->Initialise();
@@ -188,10 +185,11 @@ void __fastcall TfrmMain::ShowImportDialog()
 // ---------------------------------------------------------------------------
 void __fastcall TfrmMain::ShowIDE()
 {
-    m_ImportDialog = nullptr;
     appSettings.WelcomePosition = TPoint(Left, Top);
     m_WelcomeDialog->Visible = false;
     m_WelcomeDialog->Parent = nullptr;
+    m_ImportDialog->Parent = nullptr;
+    m_ImportDialog->Visible = false;
     m_IDEDialog->Parent = this;
     m_IDEDialog->Visible = true;
     m_IDEDialog->OnActivate();

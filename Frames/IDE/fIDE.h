@@ -132,6 +132,7 @@ __published:    // IDE-managed Components
     TToolBar *tbrSettings;
     TToolButton *btnSettings;
     TAction *actSettings;
+    TMemo *memMessages;
     void __fastcall actEditCopyExecute(TObject *Sender);
     void __fastcall actEditCutExecute(TObject *Sender);
     void __fastcall actEditPasteExecute(TObject *Sender);
@@ -162,15 +163,13 @@ __published:    // IDE-managed Components
     void __fastcall actDeleteAssetExecute(TObject *Sender);
     void __fastcall actSettingsExecute(TObject *Sender);
 
-
-
-
 private:    // User declarations
     void __fastcall UpdateProperties(Document* document);
     void __fastcall OnDocumentClose(TObject *Sender, TLMDockPanelCloseAction& action);
     void __fastcall RegisterDocumentEditors();
     void __fastcall RefreshMruList();
     void __fastcall mruOnClick(TObject *Sender);
+    void __fastcall OnMessageString(const OnMessage& message);
 
 public:        // User declarations
     TNotifyEvent        FOnFormClose;

@@ -58,7 +58,7 @@ public:
             bool        __fastcall  AddFrame(int index = -1, const String& hint = "");
             bool        __fastcall  DeleteFrame(int index);
             String      __fastcall  GetLayer(const String& name);
-            String      __fastcall  SetLayer(const String& name, const String& value);
+            void        __fastcall  SetLayer(const String& name, const String& value);
             bool        __fastcall  LayerExists(const String& name) const;
 
             bool        __property  MultiFrame      = { read = m_MultiFrame                 };

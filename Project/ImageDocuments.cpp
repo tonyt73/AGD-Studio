@@ -214,7 +214,7 @@ String __fastcall ImageDocument::GetLayer(const String& name)
     return value;
 }
 //---------------------------------------------------------------------------
-String __fastcall ImageDocument::SetLayer(const String& name, const String& value)
+void __fastcall ImageDocument::SetLayer(const String& name, const String& value)
 {
     if (m_Layers.count(name) == 1)
     {

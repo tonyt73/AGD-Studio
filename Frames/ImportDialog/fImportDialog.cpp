@@ -52,9 +52,20 @@ void __fastcall TfrmImportDialog::btnOpenClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmImportDialog::btnImportClick(TObject *Sender)
 {
-    auto name = System::File::NameWithExtension(dlgImport->FileName);
-    theProjectManager.New(name, "ZX Spectrum 256x192 16 Colour");
-    if (FOnDone) FOnDone(this);
+    auto file = dlgImport->FileName;
+    auto name = System::File::NameWithoutExtension(file);
+    if (!System::Path::Exists(System::Path::lpProjects, name))
+    {
+        if (FOnDone) FOnDone(this);
+        theProjectManager.New(name, "ZX Spectrum 256x192 16 Colour");
+        theProjectManager.Import(file);
+    }
+    else
+    {
+        // TODO: Better dialog box
+        ShowMessage("Project already exists!");
+        if (FOnDone) FOnDone(nullptr);
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmImportDialog::btnCancelClick(TObject *Sender)
