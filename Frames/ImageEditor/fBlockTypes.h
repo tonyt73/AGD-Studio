@@ -20,13 +20,20 @@ __published:	// IDE-managed Components
     TSpeedButton *btnFodder;
     TSpeedButton *btnDeadly;
     TSpeedButton *btnCustom;
+    TShape *Shape1;
+    TShape *Shape2;
+    TShape *Shape3;
+    TShape *Shape4;
+    TShape *Shape5;
+    TShape *Shape6;
     void __fastcall btnPlatformClick(TObject *Sender);
 private:	// User declarations
     char        m_BlockType;
+    void    __fastcall  SetBlockType(char type);
 public:		// User declarations
             __fastcall  TfrmBlockTypes(TComponent* Owner);
 
-    char    __property  BlockType = { read = m_BlockType };
+    char    __property  BlockType = { read = m_BlockType, write = SetBlockType };
 };
 //---------------------------------------------------------------------------
 #endif

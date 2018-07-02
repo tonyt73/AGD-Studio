@@ -48,15 +48,16 @@ String __fastcall BlockTypeTool::Begin(Agdx::GraphicsBuffer& canvas)
     return m_Blocks;
 }
 //---------------------------------------------------------------------------
-void __fastcall BlockTypeTool::Move(const TPoint& pt, const TShiftState& buttons)
+char __fastcall BlockTypeTool::Move(const TPoint& pt, const TShiftState& buttons)
 {
+    auto bpt = PtToBlock(pt);
+    auto offset = bpt.Y * m_BlocksAcross + bpt.X;
     if (buttons.Contains(ssLeft) || buttons.Contains(ssRight))
     {
-        auto bpt = PtToBlock(pt);
-        auto offset = bpt.Y * m_BlocksAcross + bpt.X;
         m_Blocks[offset+1] = buttons.Contains(ssLeft) ? '0' + m_BlockType : '0';
         Apply();
     }
+    return m_Blocks[offset+1];
 }
 //---------------------------------------------------------------------------
 String __fastcall BlockTypeTool::End()

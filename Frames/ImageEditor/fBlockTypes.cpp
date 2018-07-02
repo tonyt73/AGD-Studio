@@ -24,3 +24,14 @@ void __fastcall TfrmBlockTypes::btnPlatformClick(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
+void __fastcall TfrmBlockTypes::SetBlockType(char type)
+{
+    btnPlatform->Down = type == '1';
+    btnWall->Down = type == '2';
+    btnLadder->Down = type == '3';
+    btnFodder->Down = type == '4';
+    btnDeadly->Down = type == '5';
+    btnCustom->Down = type == '6';
+}
+//---------------------------------------------------------------------------
+

@@ -635,7 +635,7 @@ void __fastcall TfrmEditorImage::imgEditorMouseMove(TObject *Sender, TShiftState
         else
         {
             // block type paint
-            m_BlockTypeTool.Move(pt, Shift);
+            palBlocks->BlockType = m_BlockTypeTool.Move(pt, Shift);
             RefreshView();
         }
     }

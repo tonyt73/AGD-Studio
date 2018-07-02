@@ -27,7 +27,7 @@ public:
                         // return undo string
     String  __fastcall  Begin(Agdx::GraphicsBuffer& canvas);
                         // get the tool to do its thing
-    void    __fastcall  Move(const TPoint& pt, const TShiftState& buttons);
+    char    __fastcall  Move(const TPoint& pt, const TShiftState& buttons);
                         // return redo string
     String  __fastcall  End();
     void    __fastcall  Draw(TBitmap* bitmap) const;

@@ -6,64 +6,110 @@ object frmBlockTypes: TfrmBlockTypes
   TabOrder = 0
   object btnPlatform: TSpeedButton
     Tag = 1
-    Left = 8
+    Left = 40
     Top = 64
-    Width = 160
+    Width = 128
     Height = 32
+    AllowAllUp = True
     GroupIndex = 1
-    Down = True
     Caption = 'Platform'
     OnClick = btnPlatformClick
   end
   object btnWall: TSpeedButton
     Tag = 2
-    Left = 8
+    Left = 40
     Top = 104
-    Width = 160
+    Width = 128
     Height = 32
+    AllowAllUp = True
     GroupIndex = 1
     Caption = 'Wall'
     OnClick = btnPlatformClick
   end
   object btnLadder: TSpeedButton
     Tag = 3
-    Left = 8
+    Left = 40
     Top = 144
-    Width = 160
+    Width = 128
     Height = 32
+    AllowAllUp = True
     GroupIndex = 1
     Caption = 'Ladder'
     OnClick = btnPlatformClick
   end
   object btnFodder: TSpeedButton
     Tag = 4
-    Left = 8
+    Left = 40
     Top = 184
-    Width = 160
+    Width = 128
     Height = 32
+    AllowAllUp = True
     GroupIndex = 1
     Caption = 'Fodder'
     OnClick = btnPlatformClick
   end
   object btnDeadly: TSpeedButton
     Tag = 5
-    Left = 8
-    Top = 224
-    Width = 160
+    Left = 40
+    Top = 226
+    Width = 133
     Height = 32
+    AllowAllUp = True
     GroupIndex = 1
     Caption = 'Deadly'
     OnClick = btnPlatformClick
   end
   object btnCustom: TSpeedButton
     Tag = 6
-    Left = 8
+    Left = 40
     Top = 264
-    Width = 160
+    Width = 128
     Height = 32
+    AllowAllUp = True
     GroupIndex = 1
     Caption = 'Custom'
     OnClick = btnPlatformClick
+  end
+  object Shape1: TShape
+    Left = 8
+    Top = 65
+    Width = 31
+    Height = 30
+    Brush.Color = clBlue
+  end
+  object Shape2: TShape
+    Left = 8
+    Top = 105
+    Width = 31
+    Height = 30
+    Brush.Color = 27391
+  end
+  object Shape3: TShape
+    Left = 8
+    Top = 145
+    Width = 31
+    Height = 30
+    Brush.Color = clLime
+  end
+  object Shape4: TShape
+    Left = 8
+    Top = 185
+    Width = 31
+    Height = 30
+    Brush.Color = 14418175
+  end
+  object Shape5: TShape
+    Left = 8
+    Top = 228
+    Width = 31
+    Height = 30
+    Brush.Color = clRed
+  end
+  object Shape6: TShape
+    Left = 8
+    Top = 265
+    Width = 31
+    Height = 30
   end
   object panBlock: TPanel
     Left = 8
