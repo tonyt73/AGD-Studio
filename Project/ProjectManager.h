@@ -53,7 +53,6 @@ public:
     void        __fastcall  Open(const String& file);
     void        __fastcall  Close();
     void        __fastcall  Save();
-    void        __fastcall  Import(const String& file);
 
     Document*   __fastcall  Add(const String& type, const String& subType, const String& name, const String& extra = "");
     Document*   __fastcall  Add(const String& type, const String& subType);

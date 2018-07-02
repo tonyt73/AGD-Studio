@@ -86,11 +86,6 @@ void __fastcall TfrmWelcomeDialog::lblOpenExistingProjectClick(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmWelcomeDialog::lblImportAGDSnapshotClick(TObject *Sender)
-{
-    if (FOnDone) FOnDone(nullptr);
-}
-//---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::SelectionPanelOnClick(TObject *Sender)
 {
     TSelectionPanelFrame* panel = (TSelectionPanelFrame*)Sender;
@@ -140,7 +135,6 @@ void __fastcall TfrmWelcomeDialog::UpdateColors()
     panRecentProjects->Color = StyleServices()->GetStyleColor(scGenericGradientEnd);
     lblStartNewProject->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
     lblOpenExistingProject->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
-    lblImportAGDSnapshot->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
     lblChangeTheme->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
     for (auto panel : m_MostRecentlyUsedItems) panel->UpdateControl();
 }

@@ -81,7 +81,14 @@ __fastcall MessageDocument::MessageDocument(const String& name)
 //---------------------------------------------------------------------------
 void __fastcall MessageDocument::OnImport(const OnImportMessage& message)
 {
-    System::File::AppendText(m_File, "\r\n" + message.Id);
+    if (System::File::Exists(m_File))
+    {
+        System::File::AppendText(m_File, "\r\n" + message.Id);
+    }
+    else
+    {
+        int a = 0;
+    }
 }
 //---------------------------------------------------------------------------
 __fastcall SfxDocument::SfxDocument(const String& name)

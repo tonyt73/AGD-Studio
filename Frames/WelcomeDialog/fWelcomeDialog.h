@@ -26,8 +26,6 @@ __published:    // IDE-managed Components
     TOpenTextFileDialog *dlgOpen;
     TPanel *panButtons;
     TLabel *lblOpenExistingProject;
-    TLabel *lblImportAGDSnapshot;
-    TImage *imgImportTommyGunProject;
     TImage *imgOpenExistingProject;
     TComboBox *cmbThemes;
     TLabel *lblChangeTheme;
@@ -48,7 +46,6 @@ __published:    // IDE-managed Components
     void __fastcall cmbThemesChange(TObject *Sender);
     void __fastcall lblStartNewProjectClick(TObject *Sender);
     void __fastcall lblOpenExistingProjectClick(TObject *Sender);
-    void __fastcall lblImportAGDSnapshotClick(TObject *Sender);
     void __fastcall lblChangeThemeClick(TObject *Sender);
     void __fastcall btnCreateClick(TObject *Sender);
     void __fastcall edtNameChange(TObject *Sender);

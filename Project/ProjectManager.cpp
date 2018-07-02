@@ -6,7 +6,6 @@
 #include "fEditorImage.h"
 #include "ProjectDocument.h"
 #include "FileDefinitions.h"
-#include "Importer.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -132,12 +131,6 @@ void __fastcall ProjectManager::Open(const String& file)
 void __fastcall ProjectManager::Save()
 {
     theDocumentManager.Save();
-}
-//---------------------------------------------------------------------------
-void __fastcall ProjectManager::Import(const String& file)
-{
-    Importer importer;
-    importer.Convert(file);
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::Close()

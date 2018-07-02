@@ -20,17 +20,27 @@ __fastcall ProjectDocument::ProjectDocument(const String& name, const String& ma
     m_Type = "Game";
     m_SubType = "Configuration";
     m_Folder = "Game\\Configuration";
+    m_Window.X = 0;
+    m_Window.Y = 0;
+    m_Window.Width = 32;
+    m_Window.Height = 24;
+
     RegisterProperty("Name", "Details", "The name of your game");
     RegisterProperty("Author", "Details", "Your name");
     RegisterProperty("Version", "Details", "The version of your game");
     RegisterProperty("Description", "Details", "A description of your game");
     RegisterProperty("Machine", "Details", "The machine target of the game");
+    RegisterProperty("Window", "Details", "The dimensions of the Game Window");
 
     // json loading properties
     m_PropertyMap["Project.Version"] = &m_Version;
     m_PropertyMap["Project.Author"] = &m_Author;
     m_PropertyMap["Project.Description"] = &m_Description;
     m_PropertyMap["Project.Machine"] = &m_MachineName;
+    m_PropertyMap["Project.Window.X"] = &m_Window.X;
+    m_PropertyMap["Project.Window.Y"] = &m_Window.Y;
+    m_PropertyMap["Project.Window.Width"] = &m_Window.Width;
+    m_PropertyMap["Project.Window.Height"] = &m_Window.Height;
     m_PropertyMap["Files[].Name"] = &m_FileInfo.Name;
     m_PropertyMap["Files[].Type"] = &m_FileInfo.Type;
     m_PropertyMap["Files[].SubType"] = &m_FileInfo.SubType;
@@ -61,6 +71,12 @@ void __fastcall ProjectDocument::Save()
         Write("Author", m_Author);
         Write("Description", m_Description);
         Write("Machine", m_MachineConfig->Name);
+        Push("Window");
+            Write("X", m_Window.X);
+            Write("Y", m_Window.Y);
+            Write("Width", m_Window.Width);
+            Write("Height", m_Window.Height);
+        Pop(); // Window
     Pop();  // Project
     ArrayStart("Files");
     for (const auto& fi : m_Files)

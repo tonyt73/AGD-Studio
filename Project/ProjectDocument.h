@@ -13,6 +13,13 @@ typedef struct FileInfo
     String          SubType;
 } _fi;
 typedef std::vector<FileInfo> FileList;
+typedef struct WindowInfo
+{
+    unsigned int X;
+    unsigned int Y;
+    unsigned int Width;
+    unsigned int Height;
+} _wi;
 //---------------------------------------------------------------------------
 class ProjectDocument : public Document
 {
@@ -24,6 +31,7 @@ private:
      std::unique_ptr<MachineConfig> m_MachineConfig;
                 FileInfo            m_FileInfo;     // used by the json loader
                 FileList            m_Files;
+                WindowInfo          m_Window;
 
             String      __fastcall  GetFile() const;
             void        __fastcall  SetName(String name);
@@ -50,6 +58,7 @@ __published:
     __property  String       Author = { read = m_Author     , write = m_Author      };
     __property  String  Description = { read = m_Description, write = m_Description };
     __property  String      Machine = { read = m_MachineName                        };
+    __property  WindowInfo   Window = { read = m_Window     , write = m_Window      };
     // TODO: Keys, Jump Table
 };
 //---------------------------------------------------------------------------

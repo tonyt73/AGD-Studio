@@ -15,7 +15,6 @@
 #include <memory>
 //- APP ---------------------------------------------------------------------
 #include "fWelcomeDialog.h"
-#include "fImportDialog.h"
 #include "fIDE.h"
 //---------------------------------------------------------------------------
 class TfrmMain : public TForm
@@ -29,9 +28,7 @@ private:    // User declarations
     void __fastcall AppMessage(tagMSG &Msg, bool &Handled);
     void __fastcall OnIDEClose(TObject *Sender);
     void __fastcall OnWelcomeDone(TObject *Sender);
-    void __fastcall OnImportDone(TObject *Sender);
     void __fastcall ShowWelcomeDialog();
-    void __fastcall ShowImportDialog();
     void __fastcall ShowIDE();
     void __fastcall SaveSettings();
 
@@ -47,7 +44,6 @@ private:
 
     TFormView                           m_FormView;
     std::unique_ptr<TfrmWelcomeDialog>  m_WelcomeDialog;
-    std::unique_ptr<TfrmImportDialog>   m_ImportDialog;
     std::unique_ptr<TfrmIDE>            m_IDEDialog;
 
 public:        // User declaration
