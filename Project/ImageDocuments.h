@@ -66,7 +66,7 @@ public:
             String      __property  Frame[int index]= { read = GetFrame, write = SetFrame   };
             String      __property  Hint[int index] = { read = GetHint                      };
             int         __property  Layers          = { read = GetLayerCount                };
-            ImageTypes  __property  Type            = { read = m_ImageType                  };
+            ImageTypes  __property  ImageType       = { read = m_ImageType                  };
 
 __published:
             int         __property  Width           = { read = m_Width                      };

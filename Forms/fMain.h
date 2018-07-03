@@ -38,7 +38,6 @@ private:
     {
         fvNone,
         fvWelcomeDialog,
-        fvImportDialog,
         fvGameIDE,
     };
 

@@ -23,21 +23,21 @@ __fastcall TiledMapDocument::TiledMapDocument(const String& name)
     RegisterProperty("RoomsDown", "Dimensions", "The number in rooms down for the map");
     RegisterProperty("RoomWidth", "Dimensions", "The width in character blocks for a map room");
     RegisterProperty("RoomHeight", "Dimensions", "The height in character blocks for a map room");
-    RegisterProperty("StartLocationX", "Start", "The x position of the start room into the map");
-    RegisterProperty("StartLocationY", "Start", "The y position of the start room into the map");
+    RegisterProperty("StartLocationX", "Start Room", "The x position of the start room into the map");
+    RegisterProperty("StartLocationY", "Start Room", "The y position of the start room into the map");
     RegisterProperty("BackgroundColor", "Visual", "The color of the background when no tile is present");
     // json loading properties
-    m_PropertyMap["Map.Across"] = &m_Across;
-    m_PropertyMap["Map.Down"] = &m_Down;
-    m_PropertyMap["Map.Width"] = &m_Width;
-    m_PropertyMap["Map.Height"] = &m_Height;
+    m_PropertyMap["Map.RoomsAcross"] = &m_Across;
+    m_PropertyMap["Map.RoomsDown"] = &m_Down;
+    m_PropertyMap["Map.RoomWidth"] = &m_Width;
+    m_PropertyMap["Map.RoomHeight"] = &m_Height;
     m_PropertyMap["Map.StartLocationX"] = &StartLocationX;
     m_PropertyMap["Map.StartLocationY"] = &StartLocationY;
-    m_PropertyMap["Map.Entities[].x"] = &m_EntityLoader.x;
-    m_PropertyMap["Map.Entities[].y"] = &m_EntityLoader.y;
-    m_PropertyMap["Map.Entities[].name"] = &m_EntityLoader.name;
-    m_PropertyMap["Map.Entities[].type"] = &m_EntityLoader.type;
-    m_PropertyMap["Map.Entities[].subtype"] = &m_EntityLoader.subType;
+    m_PropertyMap["Map.Entities[].X"] = &m_EntityLoader.x;
+    m_PropertyMap["Map.Entities[].Y"] = &m_EntityLoader.y;
+    m_PropertyMap["Map.Entities[].Name"] = &m_EntityLoader.name;
+    m_PropertyMap["Map.Entities[].Type"] = &m_EntityLoader.type;
+    m_PropertyMap["Map.Entities[].SubType"] = &m_EntityLoader.subType;
     m_File = GetFile();
 }
 //---------------------------------------------------------------------------
@@ -54,13 +54,13 @@ void __fastcall TiledMapDocument::Save()
         ArrayStart("Entities");
         for (const auto& entity : m_Entities)
         {
-            Push("Entity");
-                Write("x", entity.x);
-                Write("y", entity.y);
-                Write("name", entity.doc->Name);
-                Write("type", entity.doc->Type);
-                Write("subtype", entity.doc->SubType);
-            Pop();
+            StartObject();
+                Write("X", entity.x);
+                Write("Y", entity.y);
+                Write("Name", entity.doc ? entity.doc->Name : entity.name);
+                Write("Type", entity.doc ? entity.doc->Type : entity.type);
+                Write("SubType", entity.doc ? entity.doc->SubType : entity.subType);
+            EndObject();
         }
         ArrayEnd(); // entities
     Pop();  // map
