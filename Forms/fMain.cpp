@@ -25,21 +25,31 @@ void __fastcall TfrmMain::FormCreate(TObject *Sender)
 {
     Application->OnMessage = AppMessage;
     theProjectManager.Initialise(m_IDEDialog->tvProject);
-    // TODO: decide if we can load a project right now or load the welcome dialog
-    // create the welcome screen
-    if (!appSettings.WelcomeSkipOnStartup)
+    // check command line parameters
+    if (!System::File::Exists(ParamStr(1)))
     {
-        ShowWelcomeDialog();
+        // create the welcome screen
+        if (!appSettings.WelcomeSkipOnStartup)
+        {
+            ShowWelcomeDialog();
+        }
+        else
+        {
+            Caption = ApplicationName;
+            ShowIDE();
+            if (appSettings.LoadLastProject && appSettings.LastProject.Trim() != "")
+            {
+                theProjectManager.Open(appSettings.LastProject);
+            }
+        }
     }
     else
     {
+        Caption = ApplicationName;
         ShowIDE();
-        if (appSettings.LoadLastProject && appSettings.LastProject.Trim() != "")
-        {
-            theProjectManager.Open(appSettings.LastProject);
-        }
+        auto project = System::File::NameWithExtension(ParamStr(1));
+        theProjectManager.Open(project);
     }
-
     // TODO: Remove: Used to generate initial JSON config files
     //auto pw = std::make_unique<PaletteWriter>();
     //auto pw = std::make_unique<GraphicsModeWriter>();

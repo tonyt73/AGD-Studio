@@ -46,8 +46,7 @@ void __fastcall TfrmIDE::RegisterDocumentEditors()
     DocumentEditorFactory::Register("Images\\Objects", &TfrmEditorImage::Create);
     DocumentEditorFactory::Register("Images\\Tiles", &TfrmEditorImage::Create);
     DocumentEditorFactory::Register("Images\\Character Set", &TfrmEditorImage::Create);
-    DocumentEditorFactory::Register("Map\\Map",  &TfrmEditorMap::Create);
-    DocumentEditorFactory::Register("Map\\Screens",  &TfrmEditorMap::Create);
+    DocumentEditorFactory::Register("Game\\Map",  &TfrmEditorMap::Create);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::OnActivate()

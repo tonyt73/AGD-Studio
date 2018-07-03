@@ -124,7 +124,7 @@ void __fastcall TfrmWelcomeDialog::lblChangeThemeClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::Initialise()
 {
-    dynamic_cast<TForm*>(Parent)->Caption = "Welcome to AGDx Studio";
+    dynamic_cast<TForm*>(Parent)->Caption = "Welcome to " + ApplicationName;
     RefreshMRUList();
     UpdateColors();
 }

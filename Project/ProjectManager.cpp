@@ -62,7 +62,7 @@ void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* 
         else if (caption == "music"        ) index = tiFolderMusic;
         else if (caption == "tiles"        ) index = tiFolderImages;
         else if (caption == "tile sets"    ) index = tiFolderImages;
-        else if (caption == "maps"         ) index = tiFolderMaps;
+        else if (caption == "map"          ) index = tiFolderMaps;
     }
     else
     {
@@ -74,7 +74,7 @@ void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* 
         else if (caption == "tiles"        ) index = tiAssetTile;
         else if (caption == "character set") index = tiAssetImage;
         else if (caption == "tile sets"    ) index = tiAssetTile;
-        else if (caption == "maps"         ) index = tiAssetMap;
+        else if (caption == "map"          ) index = tiAssetMap;
         else if (caption == "sounds"       ) index = tiAssetSfx;
         else if (caption == "events"       ) index = tiConfiguration;
         else if (caption == "messages"     ) index = tiConfiguration;
@@ -97,11 +97,14 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
         config->Author = appSettings.Developer;
         if (config->Files().size() == 0)
         {
+            // create the event files
             auto definitions = std::make_unique<FileDefinitions>();
             for (const auto& definition : definitions->GetDefinitions())
             {
                 Add("Text", definition.Type, definition.Filename);
             }
+            // create a map
+            Add("Map", "Tiled", "Tile Map");
         }
         else
         {

@@ -31,7 +31,7 @@ __fastcall DocumentManager::DocumentManager()
     Register("Image", "Tile", &TileDocument::Create);
     Register("Image", "Character Set", &CharacterSetDocument::Create);
     //Register("Image", "TileSet", &TileSet::Create);
-    //Register("Map", "Tiled", &TileMap::Create);
+    Register("Map", "Tiled", &TiledMapDocument::Create);
     Register("Text", "SoundFx", &SfxDocument::Create);
     Register("Text", "AGD", &AGDDocument::Create);
 
