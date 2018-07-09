@@ -42,6 +42,12 @@ protected:
             void*                   m_TreeNode;
             void*                   m_DockPanel;
 
+            // document reference id
+            unsigned int            m_RefId;
+            // next ref id is the next largest id available (updated on load)
+static      unsigned int            s_NextRefId;
+            bool                    m_SaveRefId;
+
             void        __fastcall  SetName(String name);
             String      __fastcall  GetFile(String name = "");
                                     // update the documents json content
@@ -77,5 +83,6 @@ __published:
 };
 //---------------------------------------------------------------------------
 typedef Document* (__fastcall *CreateDocumentFn)(const String& name, const String& extra);
+typedef std::vector<Document*> DocumentList;
 //---------------------------------------------------------------------------
 #endif

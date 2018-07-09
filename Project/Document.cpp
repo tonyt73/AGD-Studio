@@ -7,6 +7,8 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
+unsigned int Document::s_NextRefId = 0;
+//---------------------------------------------------------------------------
 __fastcall Document::Document(const String& name)
 : JsonFile()
 , m_Name(name)
@@ -17,6 +19,8 @@ __fastcall Document::Document(const String& name)
 , m_Folder("Misc\\Files")
 , m_TreeNode(nullptr)
 , m_DockPanel(nullptr)
+, m_RefId(0)
+, m_SaveRefId(false)
 {
     m_Type = "Document";
     RegisterProperty("Name", "Details", "The name of the asset/document");
@@ -100,6 +104,11 @@ bool __fastcall Document::Load()
     {
         // yes, load it
         JsonFile::Load(m_File);
+        s_NextRefId = std::max(s_NextRefId, m_RefId);
+        if (m_SaveRefId && m_RefId == 0)
+        {
+            m_RefId = ++s_NextRefId;
+        }
         return true;
     }
     return false;
