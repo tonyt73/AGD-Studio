@@ -84,9 +84,14 @@ public:
 //---------------------------------------------------------------------------
 class ObjectDocument : public ImageDocument
 {
+private:
+            unsigned char           m_Room;
 public:
                         __fastcall  ObjectDocument(const String& name, const String& extra);
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ObjectDocument(name, extra); };
+
+__published:
+          unsigned char __property  Room            = { read = m_Room                       };
 };
 //---------------------------------------------------------------------------
 class TileDocument : public ImageDocument

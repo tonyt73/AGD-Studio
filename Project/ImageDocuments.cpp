@@ -18,6 +18,7 @@ __fastcall ImageDocument::ImageDocument(const String& name)
     m_Type = "Image";
     m_SubType = "Single";
     m_Folder = "Images\\Images";
+    m_SaveRefId = true;
     RegisterProperty("Name", "Details", "The name of the image");
     RegisterProperty("Width", "Dimensions", "The width in pixels of the image");
     RegisterProperty("Height", "Dimensions", "The height in pixels of the image");
@@ -35,6 +36,7 @@ __fastcall ImageDocument::ImageDocument(const String& name)
 void __fastcall ImageDocument::Save()
 {
     Open(m_File);
+    Write("RefId", m_RefId);
     Push("Image");
         Write("Width", m_Width);
         Write("Height", m_Height);
@@ -247,11 +249,13 @@ __fastcall SpriteDocument::SpriteDocument(const String& name, const String& extr
 //---------------------------------------------------------------------------
 __fastcall ObjectDocument::ObjectDocument(const String& name, const String& extra)
 : ImageDocument(name)
+, m_Room(255)
 {
     m_ImageType = itObject;
     m_SubType = "Object";
     m_Folder = "Images\\Objects";
     RegisterProperty("Name", "Details", "The name of the object");
+    RegisterProperty("Room", "Details", "The index of the room the Object is in");
     m_File = GetFile();
     ExtractSize(extra);
     AddFrame();
