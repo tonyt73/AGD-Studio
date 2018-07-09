@@ -30,7 +30,6 @@ public:
 class MessageDocument : public TextDocument
 {
 private:
-            void        __fastcall  OnImport(const OnImportMessage& message);
 
 public:
                         __fastcall  MessageDocument(const String& name);

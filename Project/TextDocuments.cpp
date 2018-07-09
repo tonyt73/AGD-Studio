@@ -73,22 +73,6 @@ __fastcall MessageDocument::MessageDocument(const String& name)
         System::File::WriteText(file, header);
     }
     m_File = file;
-    if (System::File::NameWithExtension(file).LowerCase() == "messages.txt")
-    {
-        ::Messaging::Bus::Subscribe<OnImportMessage>(OnImport);
-    }
-}
-//---------------------------------------------------------------------------
-void __fastcall MessageDocument::OnImport(const OnImportMessage& message)
-{
-    if (System::File::Exists(m_File))
-    {
-        System::File::AppendText(m_File, "\r\n" + message.Id);
-    }
-    else
-    {
-        int a = 0;
-    }
 }
 //---------------------------------------------------------------------------
 __fastcall SfxDocument::SfxDocument(const String& name)
