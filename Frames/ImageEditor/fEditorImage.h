@@ -34,6 +34,7 @@
 #include "fULAplusBitmap.h"
 #include "fBlockTypes.h"
 #include "BlockTypeTool.h"
+#include "WndProcHandlers.h"
 //---------------------------------------------------------------------------
 class TfrmEditorImage : public TFrame
 {
@@ -188,8 +189,7 @@ private:    // User declarations
     typedef std::vector<std::unique_ptr<Agdx::Image>> ImageList;
     typedef std::map<int, std::unique_ptr<CanvasTool>> CanvasToolMap;
 
-    typedef void (__closure *wndProcPtr)(Messages::TMessage& Message);
-
+    WinControlEraseHandler      m_EraseHandlerView;
     std::vector<int>            m_Messages;
 
     ImageDocument*              m_ImageDocument;    // the image document we are editing

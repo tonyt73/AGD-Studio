@@ -55,6 +55,7 @@ void __fastcall TfrmEditorImage::OnEvent(const Event& event)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::SetDocument(Document* document)
 {
+    m_EraseHandlerView = std::make_unique<TWinControlHandler>(panViewFrame);
     m_ActionMap["zoom.in"] = actZoomIn;
     m_ActionMap["zoom.out"] = actZoomOut;
     m_ActionMap["zoom.reset"] = actZoomReset;
