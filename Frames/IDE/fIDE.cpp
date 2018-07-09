@@ -362,4 +362,9 @@ void __fastcall TfrmIDE::actSettingsExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actEditorHelpExecute(TObject *Sender)
+{
+    ::Messaging::Bus::Publish<Event>(Event("editor.help"));
+}
+//---------------------------------------------------------------------------
 

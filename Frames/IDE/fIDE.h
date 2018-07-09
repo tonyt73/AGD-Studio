@@ -133,6 +133,9 @@ __published:    // IDE-managed Components
     TToolButton *btnSettings;
     TAction *actSettings;
     TMemo *memMessages;
+    TToolButton *btnEditorHelp;
+    TToolButton *ToolButton14;
+    TAction *actEditorHelp;
     void __fastcall actEditCopyExecute(TObject *Sender);
     void __fastcall actEditCutExecute(TObject *Sender);
     void __fastcall actEditPasteExecute(TObject *Sender);
@@ -162,6 +165,7 @@ __published:    // IDE-managed Components
     void __fastcall actEditZoomResetExecute(TObject *Sender);
     void __fastcall actDeleteAssetExecute(TObject *Sender);
     void __fastcall actSettingsExecute(TObject *Sender);
+    void __fastcall actEditorHelpExecute(TObject *Sender);
 
 private:    // User declarations
     void __fastcall UpdateProperties(Document* document);
