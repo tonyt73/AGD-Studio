@@ -34,8 +34,6 @@ __fastcall DocumentManager::DocumentManager()
     Register("Map", "Tiled", &TiledMapDocument::Create);
     Register("Text", "SoundFx", &SfxDocument::Create);
     Register("Text", "AGD", &AGDDocument::Create);
-
-    ::Messaging::Bus::Subscribe<OnImport<String>>(OnImportString);
 }
 //---------------------------------------------------------------------------
 void __fastcall DocumentManager::Register(const String& type, const String& subType, CreateDocumentFn pfnCreate)
@@ -182,27 +180,6 @@ void __fastcall DocumentManager::Load(const String& name)
     appSettings.LastProject = name;
 }
 //---------------------------------------------------------------------------
-void __fastcall DocumentManager::OnImportString(const OnImport<String>& event)
-{
-    if (event.Id.Pos("event.") == 0)
-    {
-        auto eventName = event.Id.SubString(5, event.Id.Length() - 5);
-        auto document = dynamic_cast<TextDocument*>(Get("Text", "Event", eventName));
-        if (document)
-        {
-            document->Add(event.Value);
-        }
-    }
-    else if (event.Id == "messages")
-    {
-        auto document = dynamic_cast<TextDocument*>(Get("Text", "Message", "Messages"));
-        if (document)
-        {
-            document->Add(event.Value);
-        }
-    }
-}
-//---------------------------------------------------------------------------
 String __fastcall DocumentManager::NextName(const String& type, const String& subType) const
 {
     auto i = 1;
@@ -255,6 +232,15 @@ String __fastcall DocumentManager::NextName(const String& name) const
     }
     while (DoesNameExist(nextName));
     return nextName;
+}
+//---------------------------------------------------------------------------
+void __fastcall DocumentManager::GetAllOfType(const String& type, DocumentList& list) const
+{
+    auto dit = m_Documents.find(type);
+    if (dit != m_Documents.end())
+    {
+        list = dit->second;
+    }
 }
 //---------------------------------------------------------------------------
 

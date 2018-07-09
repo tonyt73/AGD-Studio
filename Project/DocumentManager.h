@@ -14,7 +14,7 @@ public: // singleton
 
 private:
     // list of documents grouped by type
-    typedef std::map<String, std::vector<Document*>> DocumentMap;
+    typedef std::map<String, DocumentList> DocumentMap;
     typedef DocumentMap::iterator  DocumentMapIt;
 
     DocumentMap                     m_Documents;
@@ -26,7 +26,6 @@ private:
 
             void        __fastcall  Register(const String& type, const String& subType, CreateDocumentFn pfnCreate);
             Document*   __fastcall  Get(const String& type, const String& subType, const String& name) const;
-            void        __fastcall  OnImportString(const OnImport<String>& event);
 
 public:
                         __fastcall  DocumentManager();
@@ -39,6 +38,8 @@ public:
             bool        __fastcall  Remove(const String& type, const String& name);
             void        __fastcall  DocumentFolders(std::vector<String>& folders) const;
        ProjectDocument* __fastcall  ProjectConfig() const;
+
+            void        __fastcall  GetAllOfType(const String& type, DocumentList& list) const;
 
             void        __fastcall  Clear();
             void        __fastcall  Save();
