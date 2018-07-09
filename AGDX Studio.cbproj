@@ -152,8 +152,8 @@
         <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;fmx.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtprint.bpi;VclSmp.bpi;lmdrtcore.bpi</LinkPackageImports>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Build>76</VerInfo_Build>
-        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=1.0.6663.76;InternalName=agdx.exe;LegalCopyright=2018 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Programmed by Tony Thompson</VerInfo_Keys>
+        <VerInfo_Build>78</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=1.0.6663.78;InternalName=agdx.exe;LegalCopyright=2018 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Programmed by Tony Thompson</VerInfo_Keys>
         <VerInfo_Release>6663</VerInfo_Release>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <Icon_MainIcon>Icon.ico</Icon_MainIcon>
@@ -320,12 +320,30 @@
             <DependentOn>Frames\ImageEditor\fULAplusBitmap.h</DependentOn>
             <BuildOrder>54</BuildOrder>
         </CppCompile>
+        <CppCompile Include="Frames\MapEditor\AssetSelection.cpp">
+            <Form>frmAssetSelection</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\MapEditor\AssetSelection.h</DependentOn>
+            <BuildOrder>58</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Frames\MapEditor\fEditorMap.cpp">
             <Form>frmEditorMap</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
             <DependentOn>Frames\MapEditor\fEditorMap.h</DependentOn>
             <BuildOrder>7</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\MapEditor\LabelledImage.cpp">
+            <Form>frmLabelledImage</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\MapEditor\LabelledImage.h</DependentOn>
+            <BuildOrder>59</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\MapEditor\TileEditor.cpp">
+            <DependentOn>Frames\MapEditor\TileEditor.h</DependentOn>
+            <BuildOrder>57</BuildOrder>
         </CppCompile>
         <CppCompile Include="Frames\MusicEditor\fEditorMusic.cpp">
             <Form>frmEditorMusic</Form>
@@ -347,6 +365,10 @@
             <DesignClass>TFrame</DesignClass>
             <DependentOn>Frames\WelcomeDialog\fWelcomeDialog.h</DependentOn>
             <BuildOrder>11</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\WndProcHandlers.cpp">
+            <DependentOn>Frames\WndProcHandlers.h</DependentOn>
+            <BuildOrder>61</BuildOrder>
         </CppCompile>
         <CppCompile Include="Graphics\AttributeGraphicsBuffer.cpp">
             <DependentOn>Graphics\AttributeGraphicsBuffer.h</DependentOn>
@@ -457,25 +479,27 @@
             <DependentOn>System\Path.h</DependentOn>
             <BuildOrder>18</BuildOrder>
         </CppCompile>
+        <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
         <FormResources Include="Frames\IDE\fIDE.dfm"/>
         <FormResources Include="Frames\CodeEditor\fEditorCode.dfm"/>
         <FormResources Include="Forms\fAbout.dfm"/>
         <FormResources Include="Forms\fSettings.dfm"/>
         <FormResources Include="Forms\fNewImage.dfm"/>
         <FormResources Include="Forms\fMain.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fULAplusBitmap.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fToolbarShape.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fToolbar.dfm"/>
         <FormResources Include="Frames\MapEditor\fEditorMap.dfm"/>
-        <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
+        <FormResources Include="Frames\MapEditor\AssetSelection.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fULAplusBitmap.dfm"/>
+        <FormResources Include="Frames\MapEditor\LabelledImage.dfm"/>
         <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
         <FormResources Include="Frames\MusicEditor\fEditorMusic.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fToolbarShape.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fMultiImageView.dfm"/>
         <FormResources Include="Frames\ImageEditor\fEditorImage.dfm"/>
         <FormResources Include="Frames\ImageEditor\fBlockTypes.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fMultiImageView.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fPaletteAttribute.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fToolbar.dfm"/>
         <FormResources Include="Frames\ImageEditor\fSelectionImage.dfm"/>
         <FormResources Include="Frames\ImageEditor\fPaletteBitmap.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fPaletteAttribute.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -562,14 +586,14 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName=".\Win64\Release\AGDX Studio.exe" Configuration="Release" Class="ProjectOutput">
-                    <Platform Name="Win64">
+                <DeployFile LocalName=".\Win32\Debug\AGDX Studio.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
                         <RemoteName>AGDX_Studio.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName=".\Win32\Debug\AGDX Studio.exe" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
+                <DeployFile LocalName=".\Win64\Release\AGDX Studio.exe" Configuration="Release" Class="ProjectOutput">
+                    <Platform Name="Win64">
                         <RemoteName>AGDX_Studio.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>

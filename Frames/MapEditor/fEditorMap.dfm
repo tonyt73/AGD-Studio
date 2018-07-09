@@ -1,8 +1,10 @@
 object frmEditorMap: TfrmEditorMap
   Left = 0
   Top = 0
-  Width = 896
+  Width = 1436
   Height = 707
+  DoubleBuffered = False
+  ParentDoubleBuffered = False
   TabOrder = 0
   object panToolbar: TPanel
     Left = 0
@@ -16,8 +18,6 @@ object frmEditorMap: TfrmEditorMap
     Constraints.MinWidth = 80
     Locked = True
     TabOrder = 0
-    ExplicitTop = -50
-    ExplicitHeight = 757
     object Label1: TLabel
       Left = 0
       Top = 0
@@ -60,7 +60,6 @@ object frmEditorMap: TfrmEditorMap
         Left = 40
         Top = 0
         Action = actPencil
-        Enabled = False
         Grouped = True
         Wrap = True
         Style = tbsCheck
@@ -70,7 +69,6 @@ object frmEditorMap: TfrmEditorMap
         Left = 0
         Top = 40
         Action = actLine
-        Enabled = False
         Grouped = True
         Style = tbsCheck
       end
@@ -79,7 +77,6 @@ object frmEditorMap: TfrmEditorMap
         Left = 40
         Top = 40
         Action = actShape
-        Enabled = False
         Grouped = True
         Style = tbsCheck
       end
@@ -92,7 +89,6 @@ object frmEditorMap: TfrmEditorMap
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitTop = 184
     end
     object panSplitter3: TPanel
       Left = 0
@@ -102,7 +98,6 @@ object frmEditorMap: TfrmEditorMap
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 2
-      ExplicitTop = 432
     end
     object panSplitter4: TPanel
       Left = 0
@@ -112,7 +107,6 @@ object frmEditorMap: TfrmEditorMap
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 3
-      ExplicitTop = 476
     end
     object tbrGrids: TToolBar
       Left = 0
@@ -126,22 +120,21 @@ object frmEditorMap: TfrmEditorMap
       DisabledImages = tbrImagesDisabled
       Images = tbrImagesEnabled
       TabOrder = 4
-      ExplicitTop = 392
-      object btnGridCharacter: TToolButton
+      object btnGridRoom: TToolButton
         Left = 0
         Top = 0
         Hint = 'Screen/Room Grid Toggle'
-        Action = actGridCharacter
+        Action = actGridRoom
         AllowAllUp = True
         ParentShowHint = False
         ShowHint = True
         Style = tbsCheck
       end
-      object btnGridPixel: TToolButton
+      object btnGridTile: TToolButton
         Left = 40
         Top = 0
         Hint = 'Tile/Block Grid Toggle'
-        Action = actGridPixel
+        Action = actGridTile
         AllowAllUp = True
         ParentShowHint = False
         ShowHint = True
@@ -152,54 +145,296 @@ object frmEditorMap: TfrmEditorMap
   object panEditorContainer: TPanel
     Left = 80
     Top = 0
-    Width = 816
+    Width = 1356
     Height = 707
     Align = alClient
     BevelOuter = bvNone
     DoubleBuffered = False
-    Padding.Left = 128
-    Padding.Top = 128
-    Padding.Right = 128
-    Padding.Bottom = 128
     ParentColor = True
     ParentDoubleBuffered = False
     ShowCaption = False
     TabOrder = 1
     StyleElements = [seClient, seBorder]
-    ExplicitLeft = 8
-    ExplicitTop = 8
-    ExplicitWidth = 846
-    ExplicitHeight = 657
-    object panViewFrame: TPanel
-      Left = 128
-      Top = 128
-      Width = 560
-      Height = 451
-      Align = alClient
+    object Splitter1: TSplitter
+      Left = 933
+      Top = 0
+      Height = 707
+      Align = alRight
+      AutoSnap = False
+      ResizeStyle = rsUpdate
+      ExplicitLeft = 929
+    end
+    object Panel1: TPanel
+      Left = 936
+      Top = 0
+      Width = 420
+      Height = 707
+      Align = alRight
       BevelOuter = bvNone
-      Color = clWhite
-      DoubleBuffered = True
-      Padding.Left = 1
-      Padding.Top = 1
-      Padding.Right = 1
-      Padding.Bottom = 1
-      ParentBackground = False
+      Caption = 'Panel1'
+      Constraints.MinWidth = 256
+      UseDockManager = False
+      DoubleBuffered = False
       ParentDoubleBuffered = False
+      ShowCaption = False
       TabOrder = 0
-      StyleElements = []
-      ExplicitWidth = 590
-      ExplicitHeight = 401
-      object imgEditor: TImage
-        Left = 1
-        Top = 1
-        Width = 558
-        Height = 449
+      object Splitter2: TSplitter
+        Left = 0
+        Top = 361
+        Width = 420
+        Height = 3
+        Cursor = crVSplit
+        Align = alTop
+        AutoSnap = False
+        ResizeStyle = rsUpdate
+        ExplicitTop = 241
+        ExplicitWidth = 466
+      end
+      object panScratchPadContainer: TPanel
+        Left = 0
+        Top = 0
+        Width = 420
+        Height = 361
+        Align = alTop
+        BevelEdges = []
+        BevelOuter = bvNone
+        Caption = 'panScratchPadContainer'
+        Constraints.MinHeight = 300
+        DoubleBuffered = False
+        ParentDoubleBuffered = False
+        ShowCaption = False
+        TabOrder = 0
+        object Panel6: TPanel
+          Left = 0
+          Top = 0
+          Width = 420
+          Height = 24
+          Align = alTop
+          BevelOuter = bvNone
+          Caption = 'SCRATCH PAD'
+          DoubleBuffered = True
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentDoubleBuffered = False
+          ParentFont = False
+          TabOrder = 0
+        end
+        object panScratchPadView: TPanel
+          Left = 0
+          Top = 24
+          Width = 420
+          Height = 337
+          Align = alClient
+          BevelOuter = bvNone
+          ShowCaption = False
+          TabOrder = 1
+          object imgScratchPad: TImage
+            Left = 0
+            Top = 0
+            Width = 420
+            Height = 337
+            Align = alClient
+            OnMouseDown = imgScratchPadMouseDown
+            OnMouseMove = imgScratchPadMouseMove
+            OnMouseUp = imgScratchPadMouseUp
+            ExplicitLeft = 3
+            ExplicitTop = 24
+            ExplicitWidth = 418
+            ExplicitHeight = 335
+          end
+        end
+      end
+      object Panel5: TPanel
+        Left = 0
+        Top = 364
+        Width = 420
+        Height = 343
         Align = alClient
-        Stretch = True
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 588
-        ExplicitHeight = 264
+        BevelEdges = []
+        BevelOuter = bvNone
+        Caption = 'Panel5'
+        Constraints.MinHeight = 300
+        ShowCaption = False
+        TabOrder = 1
+        object PageControl1: TPageControl
+          Left = 0
+          Top = 0
+          Width = 420
+          Height = 343
+          ActivePage = tabTiles
+          Align = alClient
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          MultiLine = True
+          ParentFont = False
+          TabHeight = 24
+          TabOrder = 0
+          TabWidth = 80
+          object tabTiles: TTabSheet
+            Caption = 'TILES'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+            inline assetsTiles: TfrmAssetSelection
+              Left = 0
+              Top = 0
+              Width = 412
+              Height = 309
+              Align = alClient
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 0
+              ExplicitWidth = 412
+              ExplicitHeight = 309
+              inherited ScrollBox1: TScrollBox
+                Width = 412
+                Height = 309
+                ExplicitWidth = 412
+                ExplicitHeight = 309
+                inherited panList: TFlowPanel
+                  Width = 412
+                  Height = 309
+                  ExplicitWidth = 412
+                  ExplicitHeight = 309
+                end
+              end
+            end
+          end
+          object tabSprites: TTabSheet
+            Caption = 'SPRITES'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ImageIndex = 1
+            ParentFont = False
+            inline assetsSprites: TfrmAssetSelection
+              Left = 0
+              Top = 0
+              Width = 412
+              Height = 309
+              Align = alClient
+              TabOrder = 0
+              ExplicitWidth = 412
+              ExplicitHeight = 309
+              inherited ScrollBox1: TScrollBox
+                Width = 412
+                Height = 309
+                ExplicitWidth = 412
+                ExplicitHeight = 309
+                inherited panList: TFlowPanel
+                  Width = 412
+                  Height = 309
+                  ExplicitWidth = 412
+                  ExplicitHeight = 309
+                end
+              end
+            end
+          end
+          object tabObjects: TTabSheet
+            Caption = 'OBJECTS'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ImageIndex = 2
+            ParentFont = False
+            inline assetsObjects: TfrmAssetSelection
+              Left = 0
+              Top = 0
+              Width = 412
+              Height = 309
+              Align = alClient
+              TabOrder = 0
+              ExplicitWidth = 412
+              ExplicitHeight = 309
+              inherited ScrollBox1: TScrollBox
+                Width = 412
+                Height = 309
+                ExplicitWidth = 412
+                ExplicitHeight = 309
+                inherited panList: TFlowPanel
+                  Width = 412
+                  Height = 309
+                  ExplicitWidth = 412
+                  ExplicitHeight = 309
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+    object panWorkspaceContainer: TPanel
+      Left = 0
+      Top = 0
+      Width = 933
+      Height = 707
+      Align = alClient
+      BevelEdges = []
+      BevelOuter = bvNone
+      Caption = 'Panel1'
+      Constraints.MinWidth = 300
+      UseDockManager = False
+      DoubleBuffered = False
+      ParentDoubleBuffered = False
+      ShowCaption = False
+      TabOrder = 1
+      object Panel4: TPanel
+        Left = 0
+        Top = 0
+        Width = 933
+        Height = 24
+        Align = alTop
+        BevelOuter = bvNone
+        Caption = 'WORKSPACE'
+        DoubleBuffered = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentDoubleBuffered = False
+        ParentFont = False
+        TabOrder = 0
+      end
+      object panWorkspaceView: TPanel
+        Left = 0
+        Top = 24
+        Width = 933
+        Height = 683
+        Align = alClient
+        BevelOuter = bvNone
+        ShowCaption = False
+        TabOrder = 1
+        OnResize = panWorkspaceViewResize
+        object imgWorkspace: TImage
+          Left = 0
+          Top = 0
+          Width = 933
+          Height = 683
+          Align = alClient
+          OnMouseDown = imgWorkspaceMouseDown
+          OnMouseMove = imgWorkspaceMouseMove
+          OnMouseUp = imgWorkspaceMouseUp
+          ExplicitLeft = 1
+          ExplicitTop = 6
+        end
       end
     end
   end
@@ -211,7 +446,7 @@ object frmEditorMap: TfrmEditorMap
     Left = 220
     Top = 65
     Bitmap = {
-      494C010124006000BC0120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010124006000CC0120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004001000001002000000000000080
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5506,7 +5741,7 @@ object frmEditorMap: TfrmEditorMap
     Left = 220
     Top = 121
     Bitmap = {
-      494C010124006000CC0120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010124006000DC0120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004001000001002000000000000080
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -10799,7 +11034,6 @@ object frmEditorMap: TfrmEditorMap
     Top = 65
     object actSelect: TAction
       Caption = 'Select'
-      Enabled = False
       GroupIndex = 1
       ImageIndex = 0
       ShortCut = 8275
@@ -10808,6 +11042,7 @@ object frmEditorMap: TfrmEditorMap
     object actPencil: TAction
       Tag = 1
       Caption = 'Pencil'
+      Checked = True
       GroupIndex = 1
       ImageIndex = 1
       ShortCut = 8272
@@ -10829,21 +11064,22 @@ object frmEditorMap: TfrmEditorMap
       ShortCut = 24659
       OnExecute = actShapeExecute
     end
-    object actGridPixel: TAction
+    object actGridTile: TAction
       AutoCheck = True
-      Caption = 'actGridPixel'
-      Hint = 'Pixel Grid Toggle'
+      Caption = 'actGridTile'
+      Hint = 'Tile Grid Toggle'
       ImageIndex = 16
-      ShortCut = 24647
-      OnExecute = actGridPixelExecute
-    end
-    object actGridCharacter: TAction
-      AutoCheck = True
-      Caption = 'actGridCharacter'
-      Hint = 'Character Grid Toggle'
-      ImageIndex = 25
       ShortCut = 16455
-      OnExecute = actGridCharacterExecute
+      OnExecute = actGridTileExecute
+    end
+    object actGridRoom: TAction
+      AutoCheck = True
+      Caption = 'actRoomCharacter'
+      Checked = True
+      Hint = 'Room Grid Toggle'
+      ImageIndex = 25
+      ShortCut = 24647
+      OnExecute = actGridRoomExecute
     end
     object actZoomIn: TAction
       Caption = 'Zoom In'
@@ -10867,5 +11103,13 @@ object frmEditorMap: TfrmEditorMap
       ShortCut = 24666
       OnExecute = actRedoExecute
     end
+  end
+  object popWorkspace: TPopupMenu
+    Left = 280
+    Top = 208
+  end
+  object popScratchPad: TPopupMenu
+    Left = 1096
+    Top = 72
   end
 end
