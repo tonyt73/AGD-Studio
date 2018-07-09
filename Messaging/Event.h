@@ -27,47 +27,6 @@ public:
     __property  T Value = { read = m_Value };
 };
 //---------------------------------------------------------------------------
-template <class T>
-class OnImport : public Event
-{
-private:
-    T m_Value;
-public:
-    __fastcall OnImport(const String& id, const T& value)
-    : Event(id)
-    , m_Value(value)
-    {
-    }
-
-    __property  T Value = { read = m_Value };
-};
-//---------------------------------------------------------------------------
-class OnImportWindow : public Event
-{
-private:
-     TPoint m_Location;
-     TSize  m_Size;
-public:
-    __fastcall OnImportWindow(const TPoint& location, const TSize& size)
-    : Event("Window")
-    , m_Location(location)
-    , m_Size(size)
-    {
-    }
-
-    __property  TPoint  Location = { read = m_Location };
-    __property  TSize   Size     = { read = m_Size     };
-};
-//---------------------------------------------------------------------------
-class OnImportMessage : public Event
-{
-public:
-    __fastcall  OnImportMessage(const String& message)
-    : Event(message)
-    {
-    }
-};
-//---------------------------------------------------------------------------
 enum ErrorType { etInformation, etWarning, etError, etDebug };
 class OnMessage : public Event
 {
@@ -126,6 +85,24 @@ public:
     : OnMessage(message, etDebug)
     {
     }
+};
+//---------------------------------------------------------------------------
+class OnMapResized : public Event
+{
+private:
+    unsigned int m_Width;
+    unsigned int m_Height;
+
+public:
+    __fastcall OnMapResized(unsigned int width, unsigned int height)
+    : Event("MapResized")
+    , m_Width(width)
+    , m_Height(height)
+    {
+    }
+
+    __property  unsigned int Width = { read = m_Width, write = m_Width };
+    __property  unsigned int Height = { read = m_Height, write = m_Height };
 };
 //---------------------------------------------------------------------------
 #endif

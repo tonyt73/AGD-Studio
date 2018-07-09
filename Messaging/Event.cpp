@@ -10,6 +10,3 @@ template class OnChange<float>;
 template class OnChange<String>;
 template class OnChange<bool>;
 //---------------------------------------------------------------------------
-template class OnImport<String>;
-//template class OnImport<Image>;
-//---------------------------------------------------------------------------
