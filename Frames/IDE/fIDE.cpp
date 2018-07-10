@@ -161,6 +161,7 @@ void __fastcall TfrmIDE::UpdateProperties(Document* document)
     {
         try
         {
+            lmdProperties->UnregisterPropCategory(it.second.category, it.first);
             lmdProperties->RegisterPropCategory(it.second.category, it.first);
         }
         catch(...)
