@@ -20,23 +20,19 @@
 #include "AssetSelection.h"
 #include "MapDocuments.h"
 #include "WndProcHandlers.h"
+#include "LMDButtonPanel.hpp"
+#include "LMDControl.hpp"
+#include "LMDCustomBevelPanel.hpp"
+#include "LMDCustomControl.hpp"
+#include "LMDCustomPanel.hpp"
+#include "LMDCustomPanelFill.hpp"
+#include "LMDCustomParentPanel.hpp"
+#include "LMDCustomToolBar.hpp"
+#include "LMDToolBar.hpp"
 //---------------------------------------------------------------------------
 class TfrmEditorMap : public TFrame
 {
 __published:    // IDE-managed Components
-    TPanel *panToolbar;
-    TLabel *Label1;
-    TToolBar *tbrTools;
-    TToolButton *btnSelect;
-    TToolButton *btnPencil;
-    TToolButton *btnLine;
-    TToolButton *btnShape;
-    TPanel *panSplitter1;
-    TPanel *panSplitter3;
-    TPanel *panSplitter4;
-    TToolBar *tbrGrids;
-    TToolButton *btnGridRoom;
-    TToolButton *btnGridTile;
     TImageList *tbrImagesEnabled;
     TImageList *tbrImagesDisabled;
     TActionList *tbrActions;
@@ -51,28 +47,34 @@ __published:    // IDE-managed Components
     TAction *actZoomReset;
     TAction *actUndo;
     TAction *actRedo;
-    TPanel *panEditorContainer;
-    TPanel *Panel1;
-    TPanel *panWorkspaceContainer;
-    TSplitter *Splitter1;
-    TPanel *Panel4;
     TPopupMenu *popWorkspace;
     TPopupMenu *popScratchPad;
-    TPanel *panScratchPadContainer;
-    TPanel *Panel5;
-    TSplitter *Splitter2;
-    TPanel *Panel6;
-    TPageControl *PageControl1;
-    TTabSheet *tabTiles;
-    TTabSheet *tabSprites;
-    TTabSheet *tabObjects;
+    TLMDDockSite *dpTileMap;
+    TLMDDockPanel *dpScratchPad;
+    TLMDDockPanel *dpWorkspace;
+    TLMDDockPanel *LMDDockPanel4;
+    TLMDDockPanel *dpAssets;
     TPanel *panScratchPadView;
     TImage *imgScratchPad;
+    TPageControl *pgcAssets;
+    TTabSheet *tabTiles;
+    TfrmAssetSelection *assetsTiles;
+    TTabSheet *tabSprites;
+    TfrmAssetSelection *assetsSprites;
+    TTabSheet *tabObjects;
+    TfrmAssetSelection *assetsObjects;
     TPanel *panWorkspaceView;
     TImage *imgWorkspace;
-    TfrmAssetSelection *assetsTiles;
-    TfrmAssetSelection *assetsSprites;
-    TfrmAssetSelection *assetsObjects;
+    TPanel *Panel1;
+    TLabel *Label1;
+    TToolBar *tbrGrids;
+    TToolButton *btnGridRoom;
+    TToolButton *btnGridTile;
+    TToolBar *tbrTools;
+    TToolButton *btnSelect;
+    TToolButton *btnPencil;
+    TToolButton *btnLine;
+    TToolButton *btnShape;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actLineExecute(TObject *Sender);
@@ -94,6 +96,16 @@ __published:    // IDE-managed Components
           int Y);
     void __fastcall imgWorkspaceMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift,
           int X, int Y);
+    void __fastcall dpToolsCloseQuery(TObject *Sender, bool &CanClose);
+    void __fastcall panScratchPadViewResize(TObject *Sender);
+    void __fastcall pgcAssetsResize(TObject *Sender);
+    void __fastcall imgWorkspaceMouseActivate(TObject *Sender, TMouseButton Button,
+          TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate);
+
+
+
+
+
 private:    // User declarations
     TiledMapDocument*           m_Document;
     std::unique_ptr<TileEditor> m_Workspace;
@@ -106,6 +118,7 @@ private:    // User declarations
             bool    __fastcall  IsActive() const;
             void    __fastcall  OnEvent(const Event& event);
             void    __fastcall  OnMapResize(const OnMapResized& message);
+            void    __fastcall  ShowKeysHelp();
 
 
 public:        // User declarations

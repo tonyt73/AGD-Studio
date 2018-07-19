@@ -30,6 +30,7 @@
 #include "Project/Document.h"
 #include <Vcl.ExtDlgs.hpp>
 #include "ElMenus.hpp"
+#include <Vcl.WinXPanels.hpp>
 //---------------------------------------------------------------------------
 class TfrmIDE : public TFrame
 {
@@ -136,6 +137,10 @@ __published:    // IDE-managed Components
     TToolButton *btnEditorHelp;
     TToolButton *ToolButton14;
     TAction *actEditorHelp;
+    TLMDDockPanel *dpEditorKeys;
+    TMemo *mbKeys;
+    TAction *actNewAssetCustom;
+    TMenuItem *btnNewImageCustom;
     void __fastcall actEditCopyExecute(TObject *Sender);
     void __fastcall actEditCutExecute(TObject *Sender);
     void __fastcall actEditPasteExecute(TObject *Sender);

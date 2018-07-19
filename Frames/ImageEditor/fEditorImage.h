@@ -185,6 +185,9 @@ __published:    // IDE-managed Components
     void __fastcall imgEditorMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
     void __fastcall actModePaintExecute(TObject *Sender);
     void __fastcall actModeBlockExecute(TObject *Sender);
+    void __fastcall imgEditorMouseActivate(TObject *Sender, TMouseButton Button,
+          TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate);
+
 private:    // User declarations
     typedef std::vector<std::unique_ptr<Agdx::Image>> ImageList;
     typedef std::map<int, std::unique_ptr<CanvasTool>> CanvasToolMap;
@@ -216,6 +219,7 @@ private:    // User declarations
     TPoint          __fastcall  ToImagePt(int X, int Y);
     void            __fastcall  SetCanvasColors();
     void            __fastcall  ChangeToolbar(TfrmToolbar* toolbar);
+    void            __fastcall  ShowKeysHelp();
 
 public:        // User declarations
                     __fastcall  TfrmEditorImage(TComponent* Owner);

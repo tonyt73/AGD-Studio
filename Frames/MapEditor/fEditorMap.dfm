@@ -2,440 +2,380 @@ object frmEditorMap: TfrmEditorMap
   Left = 0
   Top = 0
   Width = 1436
-  Height = 707
+  Height = 607
   DoubleBuffered = False
   ParentDoubleBuffered = False
   TabOrder = 0
-  object panToolbar: TPanel
+  object dpTileMap: TLMDDockSite
     Left = 0
     Top = 0
-    Width = 80
-    Height = 707
-    Align = alLeft
-    AutoSize = True
-    BevelOuter = bvNone
-    Constraints.MaxWidth = 80
-    Constraints.MinWidth = 80
-    Locked = True
+    Width = 1436
+    Height = 607
+    Align = alClient
     TabOrder = 0
-    object Label1: TLabel
-      Left = 0
-      Top = 0
-      Width = 80
-      Height = 24
-      Align = alTop
-      Alignment = taCenter
-      AutoSize = False
-      Caption = 'TOOLS'
-      Constraints.MaxHeight = 24
-      Constraints.MinHeight = 24
+    Layout = {
+      EFBBBF3C3F786D6C2076657273696F6E3D22312E302220656E636F64696E673D
+      227574662D38223F3E0D0A3C736974656C6973743E0D0A093C73697465206964
+      3D2253454C465F53495445223E0D0A09093C7A6F6E65206B696E643D22484F52
+      5A223E0D0A0909093C7A6F6E65206B696E643D22544142532220616374697665
+      7461623D2230222073697A653D223130353422206473697A653D22302E373433
+      3330303432333133313137312220697373706163653D2231223E0D0A09090909
+      3C7A6F6E65206B696E643D2250414E454C222069643D226470576F726B737061
+      6365222076697369626C653D2231222F3E0D0A0909093C2F7A6F6E653E0D0A09
+      09093C7A6F6E65206B696E643D2250414E454C222069643D224C4D44446F636B
+      50616E656C34222076697369626C653D2230222073697A653D22323033222064
+      73697A653D22302E313434333831323233333238353932222F3E0D0A0909093C
+      7A6F6E65206B696E643D2256455254222073697A653D2233363422206473697A
+      653D22302E323536363939353736383638383239223E0D0A090909093C7A6F6E
+      65206B696E643D2250414E454C222069643D2264705363726174636850616422
+      2076697369626C653D2231222073697A653D2232373922206473697A653D2230
+      2E3437343237323933303634383737222F3E0D0A090909093C7A6F6E65206B69
+      6E643D2250414E454C222069643D226470417373657473222076697369626C65
+      3D2231222073697A653D2233313022206473697A653D22302E35323537323730
+      36393335313233222F3E0D0A0909093C2F7A6F6E653E0D0A09093C2F7A6F6E65
+      3E0D0A093C2F736974653E0D0A3C2F736974656C6973743E}
+    object dpAssets: TLMDDockPanel
+      Tag = 100
+      Left = 1066
+      Top = 291
+      Width = 364
+      Height = 310
+      Buttons = [pbPin, pbMaximize]
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
+      Font.Color = 3355443
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
+      ParentBackground = False
       ParentFont = False
-      Layout = tlCenter
-    end
-    object tbrTools: TToolBar
-      Left = 0
-      Top = 24
-      Width = 80
-      Height = 80
-      AutoSize = True
-      ButtonHeight = 40
-      ButtonWidth = 40
-      DisabledImages = tbrImagesDisabled
-      Images = tbrImagesEnabled
-      TabOrder = 0
-      object btnSelect: TToolButton
+      TabOrder = 7
+      Caption = 'ASSETS'
+      OnCloseQuery = dpToolsCloseQuery
+      object pgcAssets: TPageControl
         Left = 0
-        Top = 0
-        Action = actSelect
-        Grouped = True
-        Style = tbsCheck
-      end
-      object btnPencil: TToolButton
-        Tag = 2
-        Left = 40
-        Top = 0
-        Action = actPencil
-        Grouped = True
-        Wrap = True
-        Style = tbsCheck
-      end
-      object btnLine: TToolButton
-        Tag = 4
-        Left = 0
-        Top = 40
-        Action = actLine
-        Grouped = True
-        Style = tbsCheck
-      end
-      object btnShape: TToolButton
-        Tag = 5
-        Left = 40
-        Top = 40
-        Action = actShape
-        Grouped = True
-        Style = tbsCheck
-      end
-    end
-    object panSplitter1: TPanel
-      Left = 0
-      Top = 104
-      Width = 80
-      Height = 4
-      Align = alTop
-      BevelOuter = bvNone
-      TabOrder = 1
-    end
-    object panSplitter3: TPanel
-      Left = 0
-      Top = 148
-      Width = 80
-      Height = 4
-      Align = alTop
-      BevelOuter = bvNone
-      TabOrder = 2
-    end
-    object panSplitter4: TPanel
-      Left = 0
-      Top = 152
-      Width = 80
-      Height = 4
-      Align = alTop
-      BevelOuter = bvNone
-      TabOrder = 3
-    end
-    object tbrGrids: TToolBar
-      Left = 0
-      Top = 108
-      Width = 80
-      Height = 40
-      AutoSize = True
-      ButtonHeight = 40
-      ButtonWidth = 40
-      Caption = 'ToolBar6'
-      DisabledImages = tbrImagesDisabled
-      Images = tbrImagesEnabled
-      TabOrder = 4
-      object btnGridRoom: TToolButton
-        Left = 0
-        Top = 0
-        Hint = 'Screen/Room Grid Toggle'
-        Action = actGridRoom
-        AllowAllUp = True
-        ParentShowHint = False
-        ShowHint = True
-        Style = tbsCheck
-      end
-      object btnGridTile: TToolButton
-        Left = 40
-        Top = 0
-        Hint = 'Tile/Block Grid Toggle'
-        Action = actGridTile
-        AllowAllUp = True
-        ParentShowHint = False
-        ShowHint = True
-        Style = tbsCheck
-      end
-    end
-  end
-  object panEditorContainer: TPanel
-    Left = 80
-    Top = 0
-    Width = 1356
-    Height = 707
-    Align = alClient
-    BevelOuter = bvNone
-    DoubleBuffered = False
-    ParentColor = True
-    ParentDoubleBuffered = False
-    ShowCaption = False
-    TabOrder = 1
-    StyleElements = [seClient, seBorder]
-    object Splitter1: TSplitter
-      Left = 933
-      Top = 0
-      Height = 707
-      Align = alRight
-      AutoSnap = False
-      ResizeStyle = rsUpdate
-      ExplicitLeft = 929
-    end
-    object Panel1: TPanel
-      Left = 936
-      Top = 0
-      Width = 420
-      Height = 707
-      Align = alRight
-      BevelOuter = bvNone
-      Caption = 'Panel1'
-      Constraints.MinWidth = 256
-      UseDockManager = False
-      DoubleBuffered = False
-      ParentDoubleBuffered = False
-      ShowCaption = False
-      TabOrder = 0
-      object Splitter2: TSplitter
-        Left = 0
-        Top = 361
-        Width = 420
-        Height = 3
-        Cursor = crVSplit
-        Align = alTop
-        AutoSnap = False
-        ResizeStyle = rsUpdate
-        ExplicitTop = 241
-        ExplicitWidth = 466
-      end
-      object panScratchPadContainer: TPanel
-        Left = 0
-        Top = 0
-        Width = 420
-        Height = 361
-        Align = alTop
-        BevelEdges = []
-        BevelOuter = bvNone
-        Caption = 'panScratchPadContainer'
-        Constraints.MinHeight = 300
-        DoubleBuffered = False
-        ParentDoubleBuffered = False
-        ShowCaption = False
-        TabOrder = 0
-        object Panel6: TPanel
-          Left = 0
-          Top = 0
-          Width = 420
-          Height = 24
-          Align = alTop
-          BevelOuter = bvNone
-          Caption = 'SCRATCH PAD'
-          DoubleBuffered = True
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          ParentDoubleBuffered = False
-          ParentFont = False
-          TabOrder = 0
-        end
-        object panScratchPadView: TPanel
-          Left = 0
-          Top = 24
-          Width = 420
-          Height = 337
-          Align = alClient
-          BevelOuter = bvNone
-          ShowCaption = False
-          TabOrder = 1
-          object imgScratchPad: TImage
-            Left = 0
-            Top = 0
-            Width = 420
-            Height = 337
-            Align = alClient
-            OnMouseDown = imgScratchPadMouseDown
-            OnMouseMove = imgScratchPadMouseMove
-            OnMouseUp = imgScratchPadMouseUp
-            ExplicitLeft = 3
-            ExplicitTop = 24
-            ExplicitWidth = 418
-            ExplicitHeight = 335
-          end
-        end
-      end
-      object Panel5: TPanel
-        Left = 0
-        Top = 364
-        Width = 420
-        Height = 343
+        Top = 21
+        Width = 364
+        Height = 289
+        ActivePage = tabTiles
         Align = alClient
-        BevelEdges = []
-        BevelOuter = bvNone
-        Caption = 'Panel5'
-        Constraints.MinHeight = 300
-        ShowCaption = False
-        TabOrder = 1
-        object PageControl1: TPageControl
-          Left = 0
-          Top = 0
-          Width = 420
-          Height = 343
-          ActivePage = tabTiles
-          Align = alClient
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          MultiLine = True
-          ParentFont = False
-          TabHeight = 24
-          TabOrder = 0
-          TabWidth = 80
-          object tabTiles: TTabSheet
-            Caption = 'TILES'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentFont = False
-            inline assetsTiles: TfrmAssetSelection
-              Left = 0
-              Top = 0
-              Width = 412
-              Height = 309
-              Align = alClient
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Tahoma'
-              Font.Style = []
-              ParentFont = False
-              TabOrder = 0
-              ExplicitWidth = 412
-              ExplicitHeight = 309
-              inherited ScrollBox1: TScrollBox
-                Width = 412
-                Height = 309
-                ExplicitWidth = 412
-                ExplicitHeight = 309
-                inherited panList: TFlowPanel
-                  Width = 412
-                  Height = 309
-                  ExplicitWidth = 412
-                  ExplicitHeight = 309
-                end
-              end
-            end
-          end
-          object tabSprites: TTabSheet
-            Caption = 'SPRITES'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ImageIndex = 1
-            ParentFont = False
-            inline assetsSprites: TfrmAssetSelection
-              Left = 0
-              Top = 0
-              Width = 412
-              Height = 309
-              Align = alClient
-              TabOrder = 0
-              ExplicitWidth = 412
-              ExplicitHeight = 309
-              inherited ScrollBox1: TScrollBox
-                Width = 412
-                Height = 309
-                ExplicitWidth = 412
-                ExplicitHeight = 309
-                inherited panList: TFlowPanel
-                  Width = 412
-                  Height = 309
-                  ExplicitWidth = 412
-                  ExplicitHeight = 309
-                end
-              end
-            end
-          end
-          object tabObjects: TTabSheet
-            Caption = 'OBJECTS'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ImageIndex = 2
-            ParentFont = False
-            inline assetsObjects: TfrmAssetSelection
-              Left = 0
-              Top = 0
-              Width = 412
-              Height = 309
-              Align = alClient
-              TabOrder = 0
-              ExplicitWidth = 412
-              ExplicitHeight = 309
-              inherited ScrollBox1: TScrollBox
-                Width = 412
-                Height = 309
-                ExplicitWidth = 412
-                ExplicitHeight = 309
-                inherited panList: TFlowPanel
-                  Width = 412
-                  Height = 309
-                  ExplicitWidth = 412
-                  ExplicitHeight = 309
-                end
-              end
-            end
-          end
-        end
-      end
-    end
-    object panWorkspaceContainer: TPanel
-      Left = 0
-      Top = 0
-      Width = 933
-      Height = 707
-      Align = alClient
-      BevelEdges = []
-      BevelOuter = bvNone
-      Caption = 'Panel1'
-      Constraints.MinWidth = 300
-      UseDockManager = False
-      DoubleBuffered = False
-      ParentDoubleBuffered = False
-      ShowCaption = False
-      TabOrder = 1
-      object Panel4: TPanel
-        Left = 0
-        Top = 0
-        Width = 933
-        Height = 24
-        Align = alTop
-        BevelOuter = bvNone
-        Caption = 'WORKSPACE'
-        DoubleBuffered = True
+        Constraints.MinHeight = 256
+        Constraints.MinWidth = 256
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
-        ParentDoubleBuffered = False
+        MultiLine = True
         ParentFont = False
+        TabHeight = 24
         TabOrder = 0
+        TabWidth = 80
+        OnResize = pgcAssetsResize
+        object tabTiles: TTabSheet
+          Caption = 'TILES'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          inline assetsTiles: TfrmAssetSelection
+            Left = 0
+            Top = 0
+            Width = 356
+            Height = 255
+            Align = alClient
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 0
+            ExplicitWidth = 356
+            ExplicitHeight = 255
+            inherited ScrollBox1: TScrollBox
+              Width = 356
+              Height = 255
+              ExplicitWidth = 356
+              ExplicitHeight = 255
+              inherited panList: TFlowPanel
+                Width = 339
+                Height = 309
+                ExplicitWidth = 339
+                ExplicitHeight = 309
+              end
+            end
+          end
+        end
+        object tabSprites: TTabSheet
+          Caption = 'SPRITES'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ImageIndex = 1
+          ParentFont = False
+          inline assetsSprites: TfrmAssetSelection
+            Left = 0
+            Top = 0
+            Width = 356
+            Height = 255
+            Align = alClient
+            TabOrder = 0
+            ExplicitWidth = 356
+            ExplicitHeight = 255
+            inherited ScrollBox1: TScrollBox
+              Width = 356
+              Height = 255
+              ExplicitWidth = 356
+              ExplicitHeight = 255
+              inherited panList: TFlowPanel
+                Width = 339
+                Height = 309
+                ExplicitWidth = 339
+                ExplicitHeight = 309
+              end
+            end
+          end
+        end
+        object tabObjects: TTabSheet
+          Caption = 'OBJECTS'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ImageIndex = 2
+          ParentFont = False
+          inline assetsObjects: TfrmAssetSelection
+            Left = 0
+            Top = 0
+            Width = 356
+            Height = 255
+            Align = alClient
+            TabOrder = 0
+            ExplicitWidth = 356
+            ExplicitHeight = 255
+            inherited ScrollBox1: TScrollBox
+              Width = 356
+              Height = 255
+              ExplicitWidth = 356
+              ExplicitHeight = 255
+              inherited panList: TFlowPanel
+                Width = 339
+                Height = 309
+                ExplicitWidth = 339
+                ExplicitHeight = 309
+              end
+            end
+          end
+        end
       end
-      object panWorkspaceView: TPanel
+    end
+    object dpScratchPad: TLMDDockPanel
+      Tag = 100
+      Left = 1066
+      Top = 6
+      Width = 364
+      Height = 279
+      Buttons = [pbPin, pbMaximize]
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 3355443
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 4
+      Caption = 'SCRATCH PAD'
+      OnCloseQuery = dpToolsCloseQuery
+      object panScratchPadView: TPanel
         Left = 0
-        Top = 24
-        Width = 933
-        Height = 683
+        Top = 21
+        Width = 364
+        Height = 258
+        Align = alClient
+        BevelOuter = bvNone
+        Constraints.MinHeight = 256
+        Constraints.MinWidth = 256
+        ShowCaption = False
+        TabOrder = 0
+        OnResize = panScratchPadViewResize
+        object imgScratchPad: TImage
+          Left = 0
+          Top = 0
+          Width = 364
+          Height = 258
+          Align = alClient
+          OnMouseDown = imgScratchPadMouseDown
+          OnMouseMove = imgScratchPadMouseMove
+          OnMouseUp = imgScratchPadMouseUp
+          ExplicitLeft = 3
+          ExplicitTop = 24
+          ExplicitWidth = 418
+          ExplicitHeight = 335
+        end
+      end
+    end
+    object dpWorkspace: TLMDDockPanel
+      Tag = 100
+      Left = 6
+      Top = 27
+      Width = 1054
+      Height = 574
+      ClientKind = dkDocument
+      Buttons = [pbMaximize]
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 3355443
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 5
+      Caption = 'WORKSPACE'
+      OnCloseQuery = dpToolsCloseQuery
+      object panWorkspaceView: TPanel
+        Left = 81
+        Top = 0
+        Width = 973
+        Height = 574
         Align = alClient
         BevelOuter = bvNone
         ShowCaption = False
-        TabOrder = 1
+        TabOrder = 0
         OnResize = panWorkspaceViewResize
         object imgWorkspace: TImage
           Left = 0
           Top = 0
-          Width = 933
-          Height = 683
+          Width = 973
+          Height = 574
           Align = alClient
+          OnMouseActivate = imgWorkspaceMouseActivate
           OnMouseDown = imgWorkspaceMouseDown
           OnMouseMove = imgWorkspaceMouseMove
           OnMouseUp = imgWorkspaceMouseUp
           ExplicitLeft = 1
           ExplicitTop = 6
+          ExplicitWidth = 933
+          ExplicitHeight = 683
         end
       end
+      object Panel1: TPanel
+        Left = 0
+        Top = 0
+        Width = 81
+        Height = 574
+        Align = alLeft
+        BevelOuter = bvNone
+        Constraints.MaxWidth = 81
+        Constraints.MinWidth = 81
+        TabOrder = 1
+        object Label1: TLabel
+          Left = 0
+          Top = 0
+          Width = 81
+          Height = 20
+          Align = alTop
+          Alignment = taCenter
+          AutoSize = False
+          Caption = 'TOOLS'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Layout = tlCenter
+        end
+        object tbrGrids: TToolBar
+          Left = 0
+          Top = 100
+          Width = 81
+          Height = 40
+          AutoSize = True
+          ButtonHeight = 40
+          ButtonWidth = 40
+          Caption = 'ToolBar6'
+          DisabledImages = tbrImagesDisabled
+          Images = tbrImagesEnabled
+          TabOrder = 0
+          object btnGridRoom: TToolButton
+            Left = 0
+            Top = 0
+            Action = actGridRoom
+            AllowAllUp = True
+            ParentShowHint = False
+            ShowHint = True
+            Style = tbsCheck
+          end
+          object btnGridTile: TToolButton
+            Left = 40
+            Top = 0
+            Action = actGridTile
+            AllowAllUp = True
+            ParentShowHint = False
+            ShowHint = True
+            Style = tbsCheck
+          end
+        end
+        object tbrTools: TToolBar
+          Left = 0
+          Top = 20
+          Width = 81
+          Height = 80
+          AutoSize = True
+          ButtonHeight = 40
+          ButtonWidth = 40
+          DisabledImages = tbrImagesDisabled
+          Images = tbrImagesEnabled
+          TabOrder = 1
+          object btnSelect: TToolButton
+            Left = 0
+            Top = 0
+            Action = actSelect
+            Grouped = True
+            Style = tbsCheck
+          end
+          object btnPencil: TToolButton
+            Tag = 2
+            Left = 40
+            Top = 0
+            Action = actPencil
+            Grouped = True
+            Wrap = True
+            Style = tbsCheck
+          end
+          object btnLine: TToolButton
+            Tag = 4
+            Left = 0
+            Top = 40
+            Action = actLine
+            Grouped = True
+            Style = tbsCheck
+          end
+          object btnShape: TToolButton
+            Tag = 5
+            Left = 40
+            Top = 40
+            Action = actShape
+            Grouped = True
+            Style = tbsCheck
+          end
+        end
+      end
+    end
+    object LMDDockPanel4: TLMDDockPanel
+      Left = 0
+      Top = 0
+      Width = 203
+      Height = 0
+      PanelVisible = False
+      ParentBackground = False
+      TabOrder = 6
+      Caption = 'LMDDockPanel4'
     end
   end
   object tbrImagesEnabled: TImageList
@@ -446,7 +386,7 @@ object frmEditorMap: TfrmEditorMap
     Left = 220
     Top = 65
     Bitmap = {
-      494C010124006000CC0120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010124006000DC0120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004001000001002000000000000080
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5741,7 +5681,7 @@ object frmEditorMap: TfrmEditorMap
     Left = 220
     Top = 121
     Bitmap = {
-      494C010124006000DC0120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010124006000EC0120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004001000001002000000000000080
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

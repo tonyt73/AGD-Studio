@@ -62,6 +62,7 @@ Document* __fastcall DocumentManager::Add(const String& type, const String& subT
                 documents.push_back(document);
                 m_Documents.emplace(std::make_pair(document->Type, documents));
             }
+            ::Messaging::Bus::Publish<Event>(Event("document.added"));
         }
         document->Load();
         theProjectManager.AddToTreeView(document);
@@ -81,6 +82,7 @@ bool __fastcall DocumentManager::Remove(const String& type, const String& name)
             {
                 delete (*it);
                 dit->second.erase(it);
+                ::Messaging::Bus::Publish<Event>(Event("document.removed"));
                 return true;
             }
         }

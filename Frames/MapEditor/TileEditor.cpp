@@ -27,6 +27,7 @@ __fastcall TileEditor::TileEditor(TImage* view, const TSize& size, bool usesGrid
     m_Content->Width  = (m_Border * 2) + cw;   // 16 x 16 rooms
     m_Content->Height = (m_Border * 2) + ch;
 
+    Clear();
 //    for (auto y = 0; y < ch; y += 8)
 //    {
 //        for (auto x = 0; x < cw; x += 8)
@@ -35,8 +36,6 @@ __fastcall TileEditor::TileEditor(TImage* view, const TSize& size, bool usesGrid
 //            m_Content->Canvas->FillRect(TRect(m_Border + x, m_Border + y, m_Border + x + 8, m_Border + y + 8));
 //        }
 //    }
-
-    Clear();
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::Clear()

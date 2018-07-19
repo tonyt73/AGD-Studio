@@ -8,6 +8,15 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "AssetSelection"
+#pragma link "LMDButtonPanel"
+#pragma link "LMDControl"
+#pragma link "LMDCustomBevelPanel"
+#pragma link "LMDCustomControl"
+#pragma link "LMDCustomPanel"
+#pragma link "LMDCustomPanelFill"
+#pragma link "LMDCustomParentPanel"
+#pragma link "LMDCustomToolBar"
+#pragma link "LMDToolBar"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorMap::TfrmEditorMap(TComponent* Owner)
@@ -38,11 +47,10 @@ void __fastcall TfrmEditorMap::Initialise()
     // fix up the image flicker
     m_EraseHandlers.push_back(std::make_unique<TWinControlHandler>(panWorkspaceView));
     m_EraseHandlers.push_back(std::make_unique<TWinControlHandler>(panScratchPadView));
-    m_EraseHandlers.push_back(std::make_unique<TWinControlHandler>(Panel4, true));
-    m_EraseHandlers.push_back(std::make_unique<TWinControlHandler>(Panel6, true));
     //
     RefreshAssets();
     Refresh();
+    ShowKeysHelp();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actSelectExecute(TObject *Sender)
@@ -182,11 +190,20 @@ void __fastcall TfrmEditorMap::OnEvent(const Event& event)
     if (IsActive() && m_ActionMap.count(event.Id) == 1)
     {
         m_ActionMap[event.Id]->Execute();
+        ShowKeysHelp();
     }
     else if (event.Id == "palette.remapped")
     {
         m_Workspace->Refresh();
         m_ScratchPad->Refresh();
+    }
+    else if (event.Id == "editor.show")
+    {
+        dpTileMap->Manager = static_cast<TLMDDockPanel*>(Document->DockPanel)->Site->Manager;
+    }
+    else if (event.Id == "image.modified" || event.Id == "document.added" || event.Id == "document.removed")
+    {
+        RefreshAssets();
     }
 }
 //---------------------------------------------------------------------------
@@ -197,7 +214,57 @@ void __fastcall TfrmEditorMap::OnMapResize(const OnMapResized& message)
 void __fastcall TfrmEditorMap::panWorkspaceViewResize(TObject *Sender)
 {
     m_Workspace->Refresh();
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::panScratchPadViewResize(TObject *Sender)
+{
+    const auto minWidth = 400;
+    if (dpScratchPad->Width < minWidth)
+    {
+        auto dz = dpScratchPad->Zone;
+        while (dz->Parent)
+        {
+            dz->Width = minWidth;
+            dz = dz->Parent;
+        }
+    }
     m_ScratchPad->Refresh();
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::pgcAssetsResize(TObject *Sender)
+{
+    const auto minWidth = 400;
+    if (dpAssets->Width < minWidth)
+    {
+        auto dz = dpAssets->Zone;
+        while (dz->Parent)
+        {
+            dz->Width = minWidth;
+            dz = dz->Parent;
+        }
+    }
+
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::dpToolsCloseQuery(TObject *Sender, bool &CanClose)
+{
+    CanClose = false;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::ShowKeysHelp()
+{
+    const String help =
+        "Left Mouse Button         : Place current asset\r\n"
+        "                            Tiles - Hold button and drag mouse to place multiple\r\n"
+        "Right Mouse Button        : Remove tile\r\n"
+        "                            Tiles - Hold button and drag mouse to remove multiple\r\n"
+        "Shift + Left Mouse Button : Pan the window";
+    ::Messaging::Bus::Publish<HelpKeysMessage>(HelpKeysMessage(help));
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::imgWorkspaceMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate)
+{
+    ShowKeysHelp();
 }
 //---------------------------------------------------------------------------
 

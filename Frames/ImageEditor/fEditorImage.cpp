@@ -46,6 +46,7 @@ void __fastcall TfrmEditorImage::OnEvent(const Event& event)
     if (IsActive() && m_ActionMap.count(event.Id) == 1)
     {
         m_ActionMap[event.Id]->Execute();
+        ShowKeysHelp();
     }
     else if (event.Id == "palette.remapped")
     {
@@ -120,6 +121,7 @@ void __fastcall TfrmEditorImage::SetDocument(Document* document)
                                                IntToStr((int)(m_ImageDocument->Height / (8 / m_GraphicsMode.ScalarY)));
     barStatus->Panels->Items[2]->Text = "0, 0";
     barStatus->Panels->Items[3]->Text = "Graphics Mode: " + m_GraphicsMode.Name + ", Palette: " + m_GraphicsMode.Palette().Name;
+    ShowKeysHelp();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::FrameEndDock(TObject *Sender, TObject *Target, int X, int Y)
@@ -655,6 +657,7 @@ void __fastcall TfrmEditorImage::imgEditorMouseUp(TObject *Sender, TMouseButton 
                 auto redo = m_CanvasToolMap[m_CanvasTool]->End(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y));
                 m_ImageDocument->Frame[m_SelectedFrame] = m_Frames[m_SelectedFrame]->Canvas().Get();
                 RefreshView();
+                ::Messaging::Bus::Publish<Event>(Event("image.modified"));
             }
         }
         else
@@ -710,6 +713,23 @@ void __fastcall TfrmEditorImage::actModeBlockExecute(TObject *Sender)
     btnModeBlock->Down = true;
     m_BlockTypeTool.Begin(m_Frames[m_SelectedFrame]->Canvas());
     RefreshView(true);
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::ShowKeysHelp()
+{
+    const String help =
+        "Left Mouse Button         : Use current tool\r\n"
+        "                            Hold button and drag mouse to expand, release button to finalise\r\n"
+        "Right Mouse Button        : Unset\r\n"
+        "Ctrl + Mouse Wheel        : Zoom the window in/out"
+        "                            Hold Shift for faster zoom";
+        //"Shift + Left Mouse Button : Pan the window\r\n"
+    ::Messaging::Bus::Publish<HelpKeysMessage>(HelpKeysMessage(help));
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorImage::imgEditorMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate)
+{
+    ShowKeysHelp();
 }
 //---------------------------------------------------------------------------
 

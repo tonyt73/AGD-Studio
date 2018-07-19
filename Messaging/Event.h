@@ -27,7 +27,7 @@ public:
     __property  T Value = { read = m_Value };
 };
 //---------------------------------------------------------------------------
-enum ErrorType { etInformation, etWarning, etError, etDebug };
+enum ErrorType { etInformation, etWarning, etError, etDebug, etHelpKeys };
 class OnMessage : public Event
 {
 private:
@@ -83,6 +83,17 @@ private:
 public:
     __fastcall DebugMessage(const String& message)
     : OnMessage(message, etDebug)
+    {
+    }
+};
+//---------------------------------------------------------------------------
+class HelpKeysMessage : public OnMessage
+{
+private:
+
+public:
+    __fastcall HelpKeysMessage(const String& message)
+    : OnMessage(message, etHelpKeys)
     {
     }
 };

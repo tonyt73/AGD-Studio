@@ -62,6 +62,7 @@ void __fastcall TfrmIDE::OnActivate()
     dsIDE->Invalidate();
     RefreshMruList();
 
+    ::Messaging::Bus::Subscribe<HelpKeysMessage>(OnMessageString);
     ::Messaging::Bus::Subscribe<ErrorMessage>(OnMessageString);
     ::Messaging::Bus::Subscribe<WarningMessage>(OnMessageString);
     ::Messaging::Bus::Subscribe<InformationMessage>(OnMessageString);
@@ -70,8 +71,16 @@ void __fastcall TfrmIDE::OnActivate()
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::OnMessageString(const OnMessage& message)
 {
-    const String Types[4] = { "Info  : ", "Warn : ", "Error: ", "Debug: " };
-    memMessages->Lines->Add(Types[message.Type] + message.Message);
+    if (message.Type < etHelpKeys)
+    {
+        const String Types[4] = { "Info  : ", "Warn : ", "Error: ", "Debug: " };
+        memMessages->Lines->Add(Types[message.Type] + message.Message);
+    }
+    else if (message.Type == etHelpKeys)
+    {
+        mbKeys->Lines->Clear();
+        mbKeys->Lines->Add(message.Message);
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditCopyExecute(TObject *Sender)
@@ -264,6 +273,7 @@ void __fastcall TfrmIDE::tvProjectDblClick(TObject *Sender)
                 dp->Activate();
                 dp->Show();
                 dp->SetFocus();
+                ::Messaging::Bus::Publish<Event>(Event("editor.show"));
             }
             else
             {
@@ -341,7 +351,7 @@ void __fastcall TfrmIDE::actDeleteAssetExecute(TObject *Sender)
         {
             tvProject->Selected->Delete();
         }
-    }
+     }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::popProjectPopup(TObject *Sender)
@@ -350,17 +360,15 @@ void __fastcall TfrmIDE::popProjectPopup(TObject *Sender)
     actNewAsset->Enabled = false;
     if (tvProject->Selected && tvProject->Selected->Parent)
     {
-        actDeleteAsset->Enabled = !tvProject->Selected->HasChildren;
+        actDeleteAsset->Enabled = !tvProject->Selected->HasChildren && tvProject->Selected->Parent->Parent->Text == "Images";
         actNewAsset->Enabled = tvProject->Selected->Parent->Text == "Images";
+        btnNewImageCustom->Enabled = tvProject->Selected->Parent->Text == "Images" || tvProject->Selected->Text == "Images";
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actSettingsExecute(TObject *Sender)
 {
-    auto dialog = std::make_unique<TfrmSettings>(this);
-    if (dialog->ShowModal())
-    {
-    }
+    std::make_unique<TfrmSettings>(this)->ShowModal();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditorHelpExecute(TObject *Sender)
