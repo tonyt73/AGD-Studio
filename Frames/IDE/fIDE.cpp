@@ -376,4 +376,29 @@ void __fastcall TfrmIDE::actEditorHelpExecute(TObject *Sender)
     ::Messaging::Bus::Publish<Event>(Event("editor.help"));
 }
 //---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actViewBuildResultsExecute(TObject *Sender)
+{
+    dpBuild->PanelVisible = actViewBuildResults->Checked;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actViewSearchResultsExecute(TObject *Sender)
+{
+    dpSearchResults->PanelVisible = actViewSearchResults->Checked;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actViewTodoExecute(TObject *Sender)
+{
+    dpTodo->PanelVisible = actViewTodo->Checked;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actViewEditorKeysExecute(TObject *Sender)
+{
+    dpEditorKeys->PanelVisible = actViewEditorKeys->Checked;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actViewMessagesExecute(TObject *Sender)
+{
+    dpMessages->PanelVisible = actViewMessages->Checked;
+}
+//---------------------------------------------------------------------------
 

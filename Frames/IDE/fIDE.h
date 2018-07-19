@@ -141,6 +141,17 @@ __published:    // IDE-managed Components
     TMemo *mbKeys;
     TAction *actNewAssetCustom;
     TMenuItem *btnNewImageCustom;
+    TAction *actViewBuildResults;
+    TAction *actViewMessages;
+    TAction *actViewSearchResults;
+    TAction *actViewTodo;
+    TAction *actViewEditorKeys;
+    TMenuItem *mnuView;
+    TMenuItem *BuildResults1;
+    TMenuItem *SearchResults1;
+    TMenuItem *Messages1;
+    TMenuItem *odo1;
+    TMenuItem *EditorKeys1;
     void __fastcall actEditCopyExecute(TObject *Sender);
     void __fastcall actEditCutExecute(TObject *Sender);
     void __fastcall actEditPasteExecute(TObject *Sender);
@@ -171,6 +182,11 @@ __published:    // IDE-managed Components
     void __fastcall actDeleteAssetExecute(TObject *Sender);
     void __fastcall actSettingsExecute(TObject *Sender);
     void __fastcall actEditorHelpExecute(TObject *Sender);
+    void __fastcall actViewBuildResultsExecute(TObject *Sender);
+    void __fastcall actViewSearchResultsExecute(TObject *Sender);
+    void __fastcall actViewTodoExecute(TObject *Sender);
+    void __fastcall actViewEditorKeysExecute(TObject *Sender);
+    void __fastcall actViewMessagesExecute(TObject *Sender);
 
 private:    // User declarations
     void __fastcall UpdateProperties(Document* document);
