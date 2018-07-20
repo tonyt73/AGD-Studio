@@ -73,7 +73,7 @@ void __fastcall TfrmIDE::OnMessageString(const OnMessage& message)
 {
     if (message.Type < etHelpKeys)
     {
-        const String Types[4] = { "Info  : ", "Warn : ", "Error: ", "Debug: " };
+        const String Types[4] = { "Info : ", "Warn : ", "Error: ", "Debug: " };
         memMessages->Lines->Add(Types[message.Type] + message.Message);
     }
     else if (message.Type == etHelpKeys)

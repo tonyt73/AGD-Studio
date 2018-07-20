@@ -63,9 +63,8 @@ const MachineConfig& __fastcall ProjectDocument::MachineConfiguration() const
     return *m_MachineConfig;
 }
 //---------------------------------------------------------------------------
-void __fastcall ProjectDocument::Save()
+void __fastcall ProjectDocument::DoSave()
 {
-    Open(GetFile());
     Push("Project");
         Write("Version", m_Version);
         Write("Author", m_Author);
@@ -88,7 +87,6 @@ void __fastcall ProjectDocument::Save()
         EndObject();
     }
     ArrayEnd(); // Files
-    Close();
 }
 //---------------------------------------------------------------------------
 bool __fastcall ProjectDocument::Load()
@@ -143,8 +141,10 @@ void __fastcall ProjectDocument::SetName(String name)
     if (name.Trim().LowerCase() != m_Name.Trim().LowerCase() && !System::Path::Exists(System::Path::lpProjects, name))
     {
         auto fromName = m_Name.Trim();
-        Document::SetName(name);
-        System::Path::Rename(System::Path::lpProjects, fromName, name.Trim());
+        auto toName = name.Trim();
+        Document::SetName(toName );
+        System::Path::ProjectName = toName ;
+        System::Path::Rename(System::Path::lpProjects, fromName, toName);
         if (m_TreeNode)
         {
             auto node = ((TElXTreeItem*)m_TreeNode);

@@ -90,21 +90,13 @@ __published:    // IDE-managed Components
     void __fastcall imgScratchPadMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
     void __fastcall imgScratchPadMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
     void __fastcall panWorkspaceViewResize(TObject *Sender);
-    void __fastcall imgWorkspaceMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift,
-          int X, int Y);
-    void __fastcall imgWorkspaceMouseMove(TObject *Sender, TShiftState Shift, int X,
-          int Y);
-    void __fastcall imgWorkspaceMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift,
-          int X, int Y);
+    void __fastcall imgWorkspaceMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
+    void __fastcall imgWorkspaceMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
+    void __fastcall imgWorkspaceMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
     void __fastcall dpToolsCloseQuery(TObject *Sender, bool &CanClose);
     void __fastcall panScratchPadViewResize(TObject *Sender);
     void __fastcall pgcAssetsResize(TObject *Sender);
-    void __fastcall imgWorkspaceMouseActivate(TObject *Sender, TMouseButton Button,
-          TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate);
-
-
-
-
+    void __fastcall imgWorkspaceMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate);
 
 private:    // User declarations
     TiledMapDocument*           m_Document;
@@ -119,7 +111,6 @@ private:    // User declarations
             void    __fastcall  OnEvent(const Event& event);
             void    __fastcall  OnMapResize(const OnMapResized& message);
             void    __fastcall  ShowKeysHelp();
-
 
 public:        // User declarations
                     __fastcall  TfrmEditorMap(TComponent* Owner);

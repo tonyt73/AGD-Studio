@@ -4,6 +4,7 @@
 //---------------------------------------------------------------------------
 #include <memory>
 #include "Graphics/GraphicsBuffer.h"
+#include "Project/ImageDocuments.h"
 //---------------------------------------------------------------------------
 namespace Agdx
 {
@@ -16,11 +17,17 @@ class Image
 {
 private:
     std::unique_ptr<GraphicsBuffer> m_Canvas;
+    ImageDocument const * const     m_Image;
 
 public:
                     __fastcall  Image(unsigned int width, unsigned int height, const Agdx::GraphicsMode& graphicsMode);
+                    __fastcall  Image(ImageDocument const * const image, const Agdx::GraphicsMode& graphicsMode);
+
+    void            __fastcall  ChangeFrame(int frame);
     GraphicsBuffer& __fastcall  Canvas() const;
 };
+typedef std::vector<std::unique_ptr<Image>> ImageList;
+typedef std::map<unsigned int, std::unique_ptr<Image>> ImageMap;
 //---------------------------------------------------------------------------
 }   // agdx
 #endif

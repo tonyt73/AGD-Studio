@@ -3,10 +3,60 @@
 #pragma hdrstop
 //---------------------------------------------------------------------------
 #include "MapDocuments.h"
+#include "Project/DocumentManager.h"
+#include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall TiledMapDocument::TiledMapDocument(const String& name)
+__fastcall Entity::Entity()
+: m_Pt(0,0)
+, m_Document(nullptr)
+, m_Dirty(true)
+{
+}
+//---------------------------------------------------------------------------
+void __fastcall Entity::SetPoint(const TPoint& pt)
+{
+    m_Pt = pt;
+    m_Dirty = true;
+}
+//---------------------------------------------------------------------------
+void __fastcall Entity::Clear()
+{
+    m_Pt.x = 0;
+    m_Pt.y = 0;
+    m_Document = nullptr;
+    m_Dirty = true;
+}
+//---------------------------------------------------------------------------
+void __fastcall Entity::Clean()
+{
+    m_Dirty = false;
+}
+//---------------------------------------------------------------------------
+const ImageDocument* __fastcall Entity::GetDocument() const
+{
+    return m_Document;
+}
+//---------------------------------------------------------------------------
+unsigned int __fastcall Entity::GetId() const
+{
+    if (m_Document != nullptr)
+    {
+        return m_Document->Id;
+    }
+    return InvalidDocumentId;
+}
+//---------------------------------------------------------------------------
+void __fastcall Entity::SetId(unsigned int id)
+{
+    m_Document = dynamic_cast<ImageDocument*>(theDocumentManager.Get(id));
+}
+//---------------------------------------------------------------------------
+
+
+//---------------------------------------------------------------------------
+_fastcall TiledMapDocument::TiledMapDocument(const String& name)
 : Document(name)
 , m_Across(11)
 , m_Down(5)
@@ -33,17 +83,25 @@ __fastcall TiledMapDocument::TiledMapDocument(const String& name)
     m_PropertyMap["Map.RoomHeight"] = &m_Height;
     m_PropertyMap["Map.StartLocationX"] = &StartLocationX;
     m_PropertyMap["Map.StartLocationY"] = &StartLocationY;
-    m_PropertyMap["Map.Entities[].X"] = &m_EntityLoader.x;
-    m_PropertyMap["Map.Entities[].Y"] = &m_EntityLoader.y;
-    m_PropertyMap["Map.Entities[].Name"] = &m_EntityLoader.name;
-    m_PropertyMap["Map.Entities[].Type"] = &m_EntityLoader.type;
-    m_PropertyMap["Map.Entities[].SubType"] = &m_EntityLoader.subType;
+    m_PropertyMap["Map.Workspace[].X"] = &m_EntityLoader.m_Pt.x;
+    m_PropertyMap["Map.Workspace[].Y"] = &m_EntityLoader.m_Pt.y;
+    m_PropertyMap["Map.Workspace[].RefId"] = &m_EntityLoader.m_LoadId;
+    m_PropertyMap["Map.ScratchPad[].X"] = &m_EntityLoader.m_Pt.x;
+    m_PropertyMap["Map.ScratchPad[].Y"] = &m_EntityLoader.m_Pt.y;
+    m_PropertyMap["Map.ScratchPad[].RefId"] = &m_EntityLoader.m_LoadId;
     m_File = GetFile();
+
+    // message subscriptions
+    ::Messaging::Bus::Subscribe<OnDocumentChange<String>>(OnDocumentChanged);
 }
 //---------------------------------------------------------------------------
-void __fastcall TiledMapDocument::Save()
+__fastcall TiledMapDocument::~TiledMapDocument()
 {
-    Open(m_File);
+    ::Messaging::Bus::Unsubscribe<OnDocumentChange<String>>(OnDocumentChanged);
+}
+//---------------------------------------------------------------------------
+void __fastcall TiledMapDocument::DoSave()
+{
     Push("Map");
         Write("RoomsAcross", m_Across);
         Write("RoomsDown", m_Down);
@@ -51,29 +109,113 @@ void __fastcall TiledMapDocument::Save()
         Write("RoomHeight", m_Height);
         Write("StartLocationX", m_StartLocationX);
         Write("StartLocationY", m_StartLocationY);
-        ArrayStart("Entities");
-        for (const auto& entity : m_Entities)
+        ArrayStart("Workspace");
+        for (const auto& entity : m_Workspace)
         {
             StartObject();
-                Write("X", entity.x);
-                Write("Y", entity.y);
-                Write("Name", entity.doc ? entity.doc->Name : entity.name);
-                Write("Type", entity.doc ? entity.doc->Type : entity.type);
-                Write("SubType", entity.doc ? entity.doc->SubType : entity.subType);
+                Write("X", (int)entity.m_Pt.x);
+                Write("Y", (int)entity.m_Pt.y);
+                Write("RefId", entity.Id);
             EndObject();
         }
-        ArrayEnd(); // entities
+        ArrayEnd(); // workspace
+        ArrayStart("ScratchPad");
+        for (const auto& entity : m_ScratchPad)
+        {
+            StartObject();
+                Write("X", (int)entity.m_Pt.x);
+                Write("Y", (int)entity.m_Pt.y);
+                Write("RefId", entity.Id);
+            EndObject();
+        }
+        ArrayEnd(); // scratchpad
     Pop();  // map
-    Close();
 }
 //---------------------------------------------------------------------------
 void __fastcall TiledMapDocument::OnEndObject(const String& object)
 {
-    if (object == "Map.Entities[]")
+    if (object == "Map.Workspace[]")
     {
-        // TODO: Find document
-        //       Clear the strings name, type, subtype
-        m_Entities.push_back(m_EntityLoader);
+        if (m_EntityLoader.m_LoadId != InvalidDocumentId)
+        {
+            m_EntityLoader.Id = m_EntityLoader.m_LoadId;
+            if (m_EntityLoader.Image != nullptr)
+            {
+                m_Workspace.push_back(m_EntityLoader);
+            }
+            m_EntityLoader.Clear();
+        }
+        else
+        {
+            ::Messaging::Bus::Publish<ErrorMessage>(ErrorMessage("Encountered an invalid map entity while loading workspace JSON object"));
+        }
+    }
+    else if (object == "Map.ScratchPad[]")
+    {
+        if (m_EntityLoader.m_LoadId != InvalidDocumentId)
+        {
+            m_EntityLoader.Id = m_EntityLoader.m_LoadId;
+            if (m_EntityLoader.Image != nullptr)
+            {
+                m_ScratchPad.push_back(m_EntityLoader);
+            }
+            m_EntityLoader.Clear();
+        }
+        else
+        {
+            ::Messaging::Bus::Publish<ErrorMessage>(ErrorMessage("Encountered an invalid map entity while loading scratch pad JSON object"));
+        }
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TiledMapDocument::Get(MapEntities type, EntityList& entities) const
+{
+    entities.clear();
+    if (type == meWorkspace)
+    {
+        std::copy(m_Workspace.begin(), m_Workspace.end(), entities.begin());
+    }
+    else if (type == meScratchPad)
+    {
+        std::copy(m_ScratchPad.begin(), m_ScratchPad.end(), entities.begin());
+    }
+    else
+    {
+        assert(0);
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TiledMapDocument::Set(MapEntities type, const EntityList& entities)
+{
+    if (type == meWorkspace)
+    {
+        m_Workspace.clear();
+        std::copy(entities.begin(), entities.end(), m_Workspace.begin());
+    }
+    else if (type == meScratchPad)
+    {
+        m_ScratchPad.clear();
+        std::copy(entities.begin(), entities.end(), m_ScratchPad.begin());
+    }
+    else
+    {
+        assert(0);
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TiledMapDocument::OnDocumentChanged(const OnDocumentChange<String>& message)
+{
+    if (message.document->Type != "Image")
+    {
+        return;
+    }
+    if (message.Id == "document.renamed")
+    {
+        // TODO: find all the references and change them
+    }
+    else if (message.Id == "document.removed")
+    {
+        // TODO: find all the references and delete them
     }
 }
 //---------------------------------------------------------------------------

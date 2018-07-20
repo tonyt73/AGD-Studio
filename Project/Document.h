@@ -19,6 +19,8 @@
 // works out nicely as technically a JsonFile file is persistent; it's just
 // we aren't using Delphi's persistence.
 //---------------------------------------------------------------------------
+const unsigned int InvalidDocumentId = 0;
+//---------------------------------------------------------------------------
 class Document : public System::JsonFile
 {
 public:
@@ -43,10 +45,10 @@ protected:
             void*                   m_DockPanel;
 
             // document reference id
-            unsigned int            m_RefId;
+            unsigned int            m_RefId;        // used by editor to find documents quickly
             // next ref id is the next largest id available (updated on load)
-static      unsigned int            s_NextRefId;
-            bool                    m_SaveRefId;
+static      unsigned int            s_NextRefId;    // next unused ref id. Reset on load
+            bool                    m_SaveRefId;    // flag:
 
             void        __fastcall  SetName(String name);
             String      __fastcall  GetFile(String name = "");
@@ -56,6 +58,7 @@ static      unsigned int            s_NextRefId;
     virtual void        __fastcall  OnLoad() {};//= 0;
 
             void        __fastcall  RegisterProperty(const String& property, const String& category, const String& info);
+    virtual void        __fastcall  DoSave() = 0;
 
 public:
                         __fastcall  Document(const String& name);
@@ -66,9 +69,10 @@ public:
 const TPropertyInfoMap& __fastcall  GetPropertyInfo() const;
             String      __fastcall  GetPropertyInfo(const String& property) const;
 
-    virtual void        __fastcall  Save() = 0;
+            void        __fastcall  Save();
     virtual bool        __fastcall  Load();
 
+    __property         unsigned int Id          = { read = m_RefId                          };
     __property          String      File        = { read = GetFile                          };
     __property          String      Type        = { read = m_Type                           };
     __property          String      SubType     = { read = m_SubType                        };

@@ -40,14 +40,24 @@ void __fastcall TfrmEditorMap::Initialise()
     m_ActionMap["edit.undo"] = actUndo;
     m_ActionMap["edit.redo"] = actRedo;
 
+    // create the tile editors
+    // TODO: change the size to ???
     m_Workspace = std::make_unique<TileEditor>(imgWorkspace, TSize(512,512), true, true, 128);
     m_ScratchPad = std::make_unique<TileEditor>(imgScratchPad, TSize(128,128), true, false, 0);
     m_Workspace->Mode = TileEditor::temPencil;
     m_ScratchPad->Mode = TileEditor::temPencil;
+    // and set their tile sets
+    EntityList entities;
+    m_Document->Get(meWorkspace, entities);
+    m_Workspace->SetEntities(entities);
+    m_Document->Get(meScratchPad, entities);
+    m_ScratchPad->SetEntities(entities);
+
     // fix up the image flicker
     m_EraseHandlers.push_back(std::make_unique<TWinControlHandler>(panWorkspaceView));
     m_EraseHandlers.push_back(std::make_unique<TWinControlHandler>(panScratchPadView));
-    //
+
+    // refresh the views
     RefreshAssets();
     Refresh();
     ShowKeysHelp();
@@ -136,6 +146,10 @@ void __fastcall TfrmEditorMap::imgWorkspaceMouseMove(TObject *Sender, TShiftStat
 void __fastcall TfrmEditorMap::imgWorkspaceMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
 {
     m_Workspace->OnMouseUp(Button,Shift, X, Y);
+    // copy the workspace to the map document
+    EntityList entities;
+    m_Workspace->GetEntities(entities);
+    m_Document->Set(meWorkspace, entities);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::imgScratchPadMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
@@ -151,6 +165,10 @@ void __fastcall TfrmEditorMap::imgScratchPadMouseMove(TObject *Sender, TShiftSta
 void __fastcall TfrmEditorMap::imgScratchPadMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
 {
     m_ScratchPad->OnMouseUp(Button,Shift, X, Y);
+    // copy the scratch pad to the map document
+    EntityList entities;
+    m_ScratchPad->GetEntities(entities);
+    m_Document->Set(meScratchPad, entities);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::RefreshAssets()

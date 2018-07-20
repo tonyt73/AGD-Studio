@@ -33,10 +33,8 @@ __fastcall ImageDocument::ImageDocument(const String& name)
     m_File = GetFile();
 }
 //---------------------------------------------------------------------------
-void __fastcall ImageDocument::Save()
+void __fastcall ImageDocument::DoSave()
 {
-    Open(m_File);
-    Write("RefId", m_RefId);
     Push("Image");
         Write("Width", m_Width);
         Write("Height", m_Height);
@@ -59,7 +57,6 @@ void __fastcall ImageDocument::Save()
             ArrayEnd(); // Layers
         }
     Pop();  // image
-    Close();
 }
 //---------------------------------------------------------------------------
 void __fastcall ImageDocument::OnEndObject(const String& object)
@@ -277,6 +274,7 @@ __fastcall TileDocument::TileDocument(const String& name, const String& extra)
 __fastcall CharacterSetDocument::CharacterSetDocument(const String& name, const String& extra)
 : ImageDocument(name)
 {
+    m_SaveRefId = false;
     m_ImageType = itCharacterSet;
     m_MultiFrame = true;
     m_File = GetFile();

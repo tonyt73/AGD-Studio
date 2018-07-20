@@ -19,7 +19,7 @@ __fastcall TextDocument::TextDocument(const String& name)
     m_File = GetFile();
 }
 //---------------------------------------------------------------------------
-void __fastcall TextDocument::Save()
+void __fastcall TextDocument::DoSave()
 {
 }
 //---------------------------------------------------------------------------

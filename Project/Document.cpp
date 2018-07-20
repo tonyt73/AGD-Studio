@@ -3,7 +3,8 @@
 //---------------------------------------------------------------------------
 #include "ElXTree.hpp"
 #include "LMDDckSite.hpp"
-#include "Document.h"
+#include "Project/Document.h"
+#include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -19,7 +20,7 @@ __fastcall Document::Document(const String& name)
 , m_Folder("Misc\\Files")
 , m_TreeNode(nullptr)
 , m_DockPanel(nullptr)
-, m_RefId(0)
+, m_RefId(InvalidDocumentId)
 , m_SaveRefId(false)
 {
     m_Type = "Document";
@@ -27,7 +28,8 @@ __fastcall Document::Document(const String& name)
     RegisterProperty("Path", "Details", "The full path of the document");
     RegisterProperty("Name", "Details", "The name of the asset/document");
     RegisterProperty("Classification", "Details", "The classification of the document");
-    m_PropertyMap["Document.Name"] = &m_Name;
+    //m_PropertyMap["Document.Name"] = &m_Name;
+    m_PropertyMap["Document.RefId"] = &m_RefId;
     m_File = GetFile();
 }
 //---------------------------------------------------------------------------
@@ -63,6 +65,7 @@ String __fastcall Document::GetPropertyInfo(const String& property) const
 //---------------------------------------------------------------------------
 void __fastcall Document::SetName(String name)
 {
+    auto oldName = m_Name;
     auto oldFile = GetFile(m_Name);
     auto newFile = GetFile(name);
     if (System::File::Exists(oldFile) && !System::File::Exists(newFile))
@@ -74,6 +77,11 @@ void __fastcall Document::SetName(String name)
         }
         auto newFile = GetFile();
         System::File::Rename(oldFile, newFile);
+        ::Messaging::Bus::Publish<OnDocumentChange<String>>(OnDocumentChange<String>("document.renamed", this, oldName));
+    }
+    else
+    {
+        ::Messaging::Bus::Publish<ErrorMessage>(ErrorMessage("Failed to rename document from [" + oldFile + "] to [" + newFile + "]"));
     }
     m_File = GetFile();
 }
@@ -93,8 +101,23 @@ String __fastcall Document::GetFile(String name)
     return file;
 }
 //---------------------------------------------------------------------------
+void __fastcall Document::Save()
+{
+    m_File = GetFile();
+    Open(m_File);
+    if (m_SaveRefId)
+    {
+        Push("Document");
+            Write("RefId", m_RefId);
+        Pop();  // document
+    }
+    DoSave();
+    Close();
+}
+//---------------------------------------------------------------------------
 bool __fastcall Document::Load()
 {
+    m_RefId = InvalidDocumentId;
     if (m_File.Trim() == "")
     {
         m_File = GetFile();
@@ -104,11 +127,6 @@ bool __fastcall Document::Load()
     {
         // yes, load it
         JsonFile::Load(m_File);
-        s_NextRefId = std::max(s_NextRefId, m_RefId);
-        if (m_SaveRefId && m_RefId == 0)
-        {
-            m_RefId = ++s_NextRefId;
-        }
         return true;
     }
     return false;

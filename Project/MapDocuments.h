@@ -4,22 +4,45 @@
 //---------------------------------------------------------------------------
 #include "Project/Document.h"
 #include "Project/ImageDocuments.h"
+#include "Messaging/Event.h"
+//---------------------------------------------------------------------------
+class TiledMapDocument;
+class Entity
+{
+protected:
+    TPoint          m_Pt;
+    unsigned int    m_Id;
+    unsigned int    m_LoadId;
+    ImageDocument*  m_Document;
+    bool            m_Dirty;
+
+    friend class TiledMapDocument;
+
+    void                __fastcall  SetPoint(const TPoint& pt);
+   const ImageDocument* __fastcall  GetDocument() const;
+    unsigned int        __fastcall  GetId() const;
+    void                __fastcall  SetId(unsigned int id);
+
+public:
+                        __fastcall  Entity();
+
+    void                __fastcall  Clear();
+    void                __fastcall  Clean();
+
+    __property  unsigned int                Id    = { read = GetId, write = SetId   };
+    __property  ImageDocument const * const Image = { read = GetDocument            };
+    __property  TPoint                      Pt    = { read = m_Pt, write = SetPoint };
+    __property  bool                        Dirty = { read = m_Dirty                };
+};
+typedef std::vector<Entity>     EntityList;
+//---------------------------------------------------------------------------
+enum MapEntities { meWorkspace, meScratchPad };
 //---------------------------------------------------------------------------
 class TiledMapDocument : public Document
 {
-private:
-    struct Entity
-    {
-        unsigned int    x;
-        unsigned int    y;
-        Document*       doc;
-        String          name;
-        String          type;
-        String          subType;
-    } _entity;
-    typedef std::vector<Entity>     EntityList;
-
-    EntityList                      m_Entities;
+protected:
+    EntityList                      m_Workspace;
+    EntityList                      m_ScratchPad;
 
             int                     m_Across;
             int                     m_Down;
@@ -31,12 +54,16 @@ private:
             Entity                  m_EntityLoader;
 
             void        __fastcall  OnEndObject(const String& object);
+            void        __fastcall  OnDocumentChanged(const OnDocumentChange<String>& message);
+            void        __fastcall  DoSave();
 
 public:
                         __fastcall  TiledMapDocument(const String& name);
+                        __fastcall ~TiledMapDocument();
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new TiledMapDocument(name); };
 
-            void        __fastcall  Save();
+            void        __fastcall  Get(MapEntities type, EntityList& entities) const;
+            void        __fastcall  Set(MapEntities type, const EntityList& entities);
 
 __published:
     __property          int         RoomsAcross     = { read = m_Across         , write = m_Across          };

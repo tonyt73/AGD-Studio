@@ -25,7 +25,6 @@ private:
     TFactoryMap                     m_FactoryMap;
 
             void        __fastcall  Register(const String& type, const String& subType, CreateDocumentFn pfnCreate);
-            Document*   __fastcall  Get(const String& type, const String& subType, const String& name) const;
 
 public:
                         __fastcall  DocumentManager();
@@ -37,6 +36,8 @@ public:
             String      __fastcall  NextName(const String& name) const;
             bool        __fastcall  Remove(const String& type, const String& name);
             void        __fastcall  DocumentFolders(std::vector<String>& folders) const;
+            Document*   __fastcall  Get(const String& type, const String& subType, const String& name) const;
+            Document*   __fastcall  Get(unsigned int id) const;
        ProjectDocument* __fastcall  ProjectConfig() const;
 
             void        __fastcall  GetAllOfType(const String& type, DocumentList& list) const;

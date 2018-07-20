@@ -80,9 +80,9 @@ bool __fastcall DocumentManager::Remove(const String& type, const String& name)
         {
             if ((*it)->Name == name)
             {
+                ::Messaging::Bus::Publish<OnDocumentChange<String>>(OnDocumentChange<String>("document.removed", (*it), name));
                 delete (*it);
                 dit->second.erase(it);
-                ::Messaging::Bus::Publish<Event>(Event("document.removed"));
                 return true;
             }
         }
@@ -123,6 +123,22 @@ Document* __fastcall DocumentManager::Get(const String& type, const String& subT
             if (document->SubType == subType && document->Name == name)
             {
                 return document;
+            }
+        }
+    }
+    return nullptr;
+}
+//---------------------------------------------------------------------------
+Document* __fastcall DocumentManager::Get(unsigned int id) const
+{
+    if (id != InvalidDocumentId)
+    {
+        for (const auto& docTypes : m_Documents)
+        {
+            for (const auto& doc : docTypes.second)
+            {
+                if (doc->Id == id)
+                    return doc;
             }
         }
     }

@@ -165,9 +165,60 @@ void __fastcall TileEditor::Refresh()
     auto ch = (int)(vh / m_Scale);
     auto cx = m_Position.X;
     auto cy = m_Position.Y;
+    // draw the entities
     StretchBlt(m_View->Picture->Bitmap->Canvas->Handle, 0, 0, vw, vh, m_Content->Canvas->Handle, cx, cy, cw, ch, SRCCOPY);
     DrawGrids();
     m_View->Refresh();
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::RefreshImages()
+{
+    m_ImageMap.clear();
+    for (const auto& entity : m_Entities)
+    {
+        if (m_ImageMap.count(entity.Id) == 0)
+        {
+            // add the image to the map
+            m_ImageMap[entity.Id] = std::make_unique<Agdx::Image>(entity.Image, m_GraphicsMode);
+        }
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::SetEntities(const EntityList& entities)
+{
+    m_Entities.clear();
+    std::copy(entities.begin(), entities.end(), m_Entities.begin());
+    // render all the images
+    RefreshImages();
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::GetEntities(EntityList& entities)
+{
+    entities.clear();
+    std::copy(m_Entities.begin(), m_Entities.end(), entities.begin());
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::Get(const TRect& rect, EntityList& entities) const
+{
+    // get all entities that start within the rect
+    std::copy_if(m_Entities.begin(), m_Entities.end(), entities.begin(), [rect](const Entity e)
+    {
+        return rect.Contains(e.Pt);
+    });
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::Add(EntityList& entities)
+{
+    m_Entities.insert(m_Entities.end(), entities.begin(), entities.end());
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::Remove(const TRect& rect)
+{
+    // remove all entities with a start pt inside the rect
+    m_Entities.erase(std::remove_if(m_Entities.begin(), m_Entities.end(), [rect](const Entity& e)
+    {
+        return rect.Contains(e.Pt);
+    }), m_Entities.end());
 }
 //---------------------------------------------------------------------------
 

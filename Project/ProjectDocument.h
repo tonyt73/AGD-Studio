@@ -37,19 +37,18 @@ private:
             void        __fastcall  SetName(String name);
             void        __fastcall  OnChangeString(const OnChange<String>& event);
             void        __fastcall  OnEndObject(const String& object);
+            void        __fastcall  DoSave();
 
 public:
                         __fastcall  ProjectDocument(const String& name, const String& machine);
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ProjectDocument(name, extra); };
 
    const MachineConfig& __fastcall  MachineConfiguration() const;
-            void        __fastcall  Save();
             bool        __fastcall  Load();
 
             void        __fastcall  ClearFiles();
             void        __fastcall  AddFile(const String& file, const String& type, const String& subType);
     const FileList&     __fastcall  Files() const;
-
 
 __published:
     // Project settings

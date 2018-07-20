@@ -185,18 +185,16 @@ __published:    // IDE-managed Components
     void __fastcall imgEditorMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
     void __fastcall actModePaintExecute(TObject *Sender);
     void __fastcall actModeBlockExecute(TObject *Sender);
-    void __fastcall imgEditorMouseActivate(TObject *Sender, TMouseButton Button,
-          TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate);
+    void __fastcall imgEditorMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate);
 
 private:    // User declarations
-    typedef std::vector<std::unique_ptr<Agdx::Image>> ImageList;
     typedef std::map<int, std::unique_ptr<CanvasTool>> CanvasToolMap;
 
     WinControlEraseHandler      m_EraseHandlerView;
     std::vector<int>            m_Messages;
 
     ImageDocument*              m_ImageDocument;    // the image document we are editing
-    ImageList                   m_Frames;           // the image documents frames as bitmap images
+    Agdx::ImageList             m_Frames;           // the image documents frames as bitmap images
     std::map<String, TAction*>  m_ActionMap;        // a map of actions; used by generic messaging to handle zoom in/out/reset, undo/redo
     float                       m_Magnification;    // the magnification of the main view
     int                         m_SelectedFrame;    // the frame we are editing

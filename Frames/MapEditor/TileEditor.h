@@ -2,6 +2,8 @@
 #ifndef TileEditorH
 #define TileEditorH
 //---------------------------------------------------------------------------
+#include "Project/MapDocuments.h"
+#include "Graphics/Image.h"
 #include "Graphics/GraphicsMode.h"
 //---------------------------------------------------------------------------
 class TileEditor
@@ -11,18 +13,11 @@ public:
 private:
     enum MouseModes { mmTool, mmMove };
 
-    struct TAssetInfo
-    {
-        unsigned int x;
-        unsigned int y;
-        unsigned int id;
-    } _ai;
-    typedef std::vector<TAssetInfo> AssetList;
-
     std::unique_ptr<TBitmap>        m_Content;      // 1:1 content
     TImage* const                   m_View;
-    AssetList                       m_Assets;
-    AssetList                       m_ToolAssets;
+    EntityList                      m_Entities;
+    EntityList                      m_ToolEntities;
+    Agdx::ImageMap                  m_ImageMap;
     TEMode                          m_Mode;
     bool                            m_Dirty;
     const Agdx::GraphicsMode&       m_GraphicsMode; // the graphics mode used by the project
@@ -48,8 +43,13 @@ private:
     void                __fastcall  SetGridRoom(bool value);
     void                __fastcall  SetSize(TSize size);
     void                __fastcall  UpdateMap();
+    void                __fastcall  RefreshImages();
 
     __property  bool                IsDirty = { read = m_Dirty, write = m_Dirty };
+
+    void                __fastcall  Get(const TRect& rect, EntityList& entities) const;
+    void                __fastcall  Add(EntityList& entities);
+    void                __fastcall  Remove(const TRect& rect);
 
 public:
 
@@ -60,6 +60,9 @@ public:
     void                __fastcall  OnMouseUp(TMouseButton Button, TShiftState Shift, int X, int Y);
 
     void                __fastcall  Refresh();
+
+    void                __fastcall  SetEntities(const EntityList& entities);
+    void                __fastcall  GetEntities(EntityList& entities);
 
     __property  TEMode              Mode = { read = m_Mode, write = m_Mode };
     __property  TSize               Size = { write = SetSize };

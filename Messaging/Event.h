@@ -2,6 +2,8 @@
 #ifndef EventH
 #define EventH
 //---------------------------------------------------------------------------
+#include "Project/Document.h"
+//---------------------------------------------------------------------------
 class Event
 {
 private:
@@ -16,15 +18,36 @@ template <class T>
 class OnChange : public Event
 {
 private:
+    T m_NewValue;
+    T m_OldValue;
+public:
+    __fastcall OnChange(const String& id, const T& newValue, const T& oldValue = T())
+    : Event(id)
+    , m_NewValue(newValue)
+    , m_OldValue(oldValue)
+    {
+    }
+
+    __property  T Value = { read = m_NewValue };
+    __property  T OldValue = { read = m_OldValue };
+};
+//---------------------------------------------------------------------------
+template <class T>
+class OnDocumentChange : public Event
+{
+private:
+    const Document* m_Document;
     T m_Value;
 public:
-    __fastcall OnChange(const String& id, const T& value)
+    __fastcall OnDocumentChange(const String& id, const Document* document, const T& value = T())
     : Event(id)
+    , m_Document(document)
     , m_Value(value)
     {
     }
 
     __property  T Value = { read = m_Value };
+    __property  Document document = { read = m_Document };
 };
 //---------------------------------------------------------------------------
 enum ErrorType { etInformation, etWarning, etError, etDebug, etHelpKeys };

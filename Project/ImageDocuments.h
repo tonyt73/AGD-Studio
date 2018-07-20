@@ -48,12 +48,11 @@ protected:
 
             int         __fastcall  GetLayerCount() const;
             void        __fastcall  AddLayer(const String& name, const String& value);
+    virtual void        __fastcall  DoSave();
 
 public:
                         __fastcall  ImageDocument(const String& name);
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ImageDocument(name); };
-
-    virtual void        __fastcall  Save();
 
             bool        __fastcall  AddFrame(int index = -1, const String& hint = "");
             bool        __fastcall  DeleteFrame(int index);
