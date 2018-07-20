@@ -4,6 +4,7 @@ An integrated development environment for AGD
 Editors for:
 * Images (Sprites, Objects, Tiles/Blocks)
 * Map
+* Messages
 * Events (Code)
   * Syntax highlighting editor
   * Code folding
