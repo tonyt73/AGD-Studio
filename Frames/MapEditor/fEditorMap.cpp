@@ -47,11 +47,8 @@ void __fastcall TfrmEditorMap::Initialise()
     m_Workspace->Mode = TileEditor::temPencil;
     m_ScratchPad->Mode = TileEditor::temPencil;
     // and set their tile sets
-    EntityList entities;
-    m_Document->Get(meWorkspace, entities);
-    m_Workspace->SetEntities(entities);
-    m_Document->Get(meScratchPad, entities);
-    m_ScratchPad->SetEntities(entities);
+    m_Workspace->SetEntities(m_Document->Get(meWorkspace));
+    m_ScratchPad->SetEntities(m_Document->Get(meScratchPad));
 
     // fix up the image flicker
     m_EraseHandlers.push_back(std::make_unique<TWinControlHandler>(panWorkspaceView));
@@ -147,9 +144,7 @@ void __fastcall TfrmEditorMap::imgWorkspaceMouseUp(TObject *Sender, TMouseButton
 {
     m_Workspace->OnMouseUp(Button,Shift, X, Y);
     // copy the workspace to the map document
-    EntityList entities;
-    m_Workspace->GetEntities(entities);
-    m_Document->Set(meWorkspace, entities);
+    m_Document->Set(meWorkspace, m_Workspace->GetEntities());
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::imgScratchPadMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
@@ -166,9 +161,7 @@ void __fastcall TfrmEditorMap::imgScratchPadMouseUp(TObject *Sender, TMouseButto
 {
     m_ScratchPad->OnMouseUp(Button,Shift, X, Y);
     // copy the scratch pad to the map document
-    EntityList entities;
-    m_ScratchPad->GetEntities(entities);
-    m_Document->Set(meScratchPad, entities);
+    m_Document->Set(meScratchPad, m_ScratchPad->GetEntities());
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::RefreshAssets()

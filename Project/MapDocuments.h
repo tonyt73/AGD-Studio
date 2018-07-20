@@ -62,7 +62,7 @@ public:
                         __fastcall ~TiledMapDocument();
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new TiledMapDocument(name); };
 
-            void        __fastcall  Get(MapEntities type, EntityList& entities) const;
+    const   EntityList& __fastcall  Get(MapEntities type) const;
             void        __fastcall  Set(MapEntities type, const EntityList& entities);
 
 __published:

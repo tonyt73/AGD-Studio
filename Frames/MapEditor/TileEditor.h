@@ -44,6 +44,7 @@ private:
     void                __fastcall  SetSize(TSize size);
     void                __fastcall  UpdateMap();
     void                __fastcall  RefreshImages();
+    void                __fastcall  DrawMap();
 
     __property  bool                IsDirty = { read = m_Dirty, write = m_Dirty };
 
@@ -62,7 +63,7 @@ public:
     void                __fastcall  Refresh();
 
     void                __fastcall  SetEntities(const EntityList& entities);
-    void                __fastcall  GetEntities(EntityList& entities);
+    const EntityList&   __fastcall  GetEntities() const  ;
 
     __property  TEMode              Mode = { read = m_Mode, write = m_Mode };
     __property  TSize               Size = { write = SetSize };

@@ -168,21 +168,17 @@ void __fastcall TiledMapDocument::OnEndObject(const String& object)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TiledMapDocument::Get(MapEntities type, EntityList& entities) const
+const EntityList& __fastcall TiledMapDocument::Get(MapEntities type) const
 {
-    entities.clear();
     if (type == meWorkspace)
     {
-        std::copy(m_Workspace.begin(), m_Workspace.end(), entities.begin());
+        return m_Workspace;
     }
     else if (type == meScratchPad)
     {
-        std::copy(m_ScratchPad.begin(), m_ScratchPad.end(), entities.begin());
+        return m_ScratchPad;
     }
-    else
-    {
-        assert(0);
-    }
+    assert(0);
 }
 //---------------------------------------------------------------------------
 void __fastcall TiledMapDocument::Set(MapEntities type, const EntityList& entities)
@@ -190,12 +186,12 @@ void __fastcall TiledMapDocument::Set(MapEntities type, const EntityList& entiti
     if (type == meWorkspace)
     {
         m_Workspace.clear();
-        std::copy(entities.begin(), entities.end(), m_Workspace.begin());
+        m_Workspace = entities;
     }
     else if (type == meScratchPad)
     {
         m_ScratchPad.clear();
-        std::copy(entities.begin(), entities.end(), m_ScratchPad.begin());
+        m_ScratchPad = entities;
     }
     else
     {

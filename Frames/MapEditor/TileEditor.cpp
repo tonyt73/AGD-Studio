@@ -166,9 +166,28 @@ void __fastcall TileEditor::Refresh()
     auto cx = m_Position.X;
     auto cy = m_Position.Y;
     // draw the entities
+    DrawMap();
+    // show the map
     StretchBlt(m_View->Picture->Bitmap->Canvas->Handle, 0, 0, vw, vh, m_Content->Canvas->Handle, cx, cy, cw, ch, SRCCOPY);
     DrawGrids();
     m_View->Refresh();
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::DrawMap()
+{
+    for (auto& entity : m_Entities)
+    {
+        if (entity.Dirty)
+        {
+            TPoint pt(entity.Pt);
+            pt.x *= 8;
+            pt.y *= 8;
+            pt.x += m_Border;
+            pt.y += m_Border;
+            m_ImageMap[entity.Id]->Draw(pt, m_Content.get());
+            entity.Clean();
+        }
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::RefreshImages()
@@ -186,16 +205,14 @@ void __fastcall TileEditor::RefreshImages()
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::SetEntities(const EntityList& entities)
 {
-    m_Entities.clear();
-    std::copy(entities.begin(), entities.end(), m_Entities.begin());
+    m_Entities = entities;
     // render all the images
     RefreshImages();
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::GetEntities(EntityList& entities)
+const EntityList& __fastcall TileEditor::GetEntities() const
 {
-    entities.clear();
-    std::copy(m_Entities.begin(), m_Entities.end(), entities.begin());
+    return m_Entities;
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::Get(const TRect& rect, EntityList& entities) const

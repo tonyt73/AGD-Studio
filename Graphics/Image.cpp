@@ -19,6 +19,11 @@ __fastcall Image::Image(ImageDocument const * const image, const Agdx::GraphicsM
 {
     GraphicsBuffer::Make(image->Width, image->Height, graphicsMode, m_Canvas);
     Canvas().Set(image->Frame[0]);
+    m_Bitmap = std::make_unique<TBitmap>();
+    m_Bitmap->Width = image->Width;
+    m_Bitmap->Height = image->Height;
+    m_Bitmap->PixelFormat = pf32bit;
+    m_Canvas->Draw(m_Bitmap.get());
 }
 //---------------------------------------------------------------------------
 GraphicsBuffer& __fastcall Image::Canvas() const
@@ -29,5 +34,10 @@ GraphicsBuffer& __fastcall Image::Canvas() const
 void __fastcall Image::ChangeFrame(int frame)
 {
     Canvas().Set(m_Image->Frame[0]);
+}
+//---------------------------------------------------------------------------
+void __fastcall Image::Draw(const TPoint& pt, TBitmap* canvas) const
+{
+    BitBlt(canvas->Canvas->Handle, pt.x, pt.y, m_Image->Width, m_Image->Height, m_Bitmap->Canvas->Handle, 0, 0, SRCCOPY);
 }
 //---------------------------------------------------------------------------
