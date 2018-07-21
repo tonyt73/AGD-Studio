@@ -32,10 +32,7 @@ object frmLabelledImage: TfrmLabelledImage
       Center = True
       Stretch = True
       OnClick = imgImageClick
-      ExplicitLeft = 12
-      ExplicitTop = 32
-      ExplicitWidth = 32
-      ExplicitHeight = 64
+      ExplicitTop = 34
     end
     object lblCaption: TLabel
       Left = 4

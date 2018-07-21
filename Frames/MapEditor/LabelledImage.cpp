@@ -49,8 +49,15 @@ void __fastcall TfrmLabelledImage::SetShowCaption(bool state)
 //---------------------------------------------------------------------------
 void __fastcall TfrmLabelledImage::SetImage(ImageDocument* document)
 {
+    const String BlockTypes[] = { "Empty", "Platform", "Wall", "Ladder", "Fodder", "Deadly", "Custom" };
     m_Document = document;
     lblCaption->Caption = m_Document->Name;
+    if (document->ImageType == itTile)
+    {
+        auto bt = StrToInt(document->GetLayer("blocktype")[1]);
+        imgImage->Hint = BlockTypes[bt];
+        imgImage->ShowHint = true;
+    }
     Update();
 }
 //---------------------------------------------------------------------------
