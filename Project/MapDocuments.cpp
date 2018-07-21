@@ -22,6 +22,30 @@ void __fastcall Entity::SetPoint(const TPoint& pt)
     m_Dirty = true;
 }
 //---------------------------------------------------------------------------
+TPoint __fastcall Entity::GetPoint() const
+{
+    if (m_Selected)
+    {
+        return m_Pt + m_DragPt;
+    }
+    return m_Pt;
+}
+//---------------------------------------------------------------------------
+void __fastcall Entity::SetDragPoint(const TPoint& pt)
+{
+    m_DragPt = pt;
+    m_Dirty = true;
+}
+//---------------------------------------------------------------------------
+TPoint __fastcall Entity::GetDragPoint() const
+{
+    if (m_Selected)
+    {
+        return m_DragPt;
+    }
+    return TPoint();
+}
+//---------------------------------------------------------------------------
 void __fastcall Entity::Clear()
 {
     m_Pt.x = 0;

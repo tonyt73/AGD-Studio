@@ -261,4 +261,20 @@ void __fastcall DocumentManager::GetAllOfType(const String& type, DocumentList& 
     }
 }
 //---------------------------------------------------------------------------
+bool __fastcall DocumentManager::IsFirstOfType(const Document* document) const
+{
+    auto dit = m_Documents.find(document->Type);
+    if (dit != m_Documents.end())
+    {
+        for (const auto& doc : dit->second)
+        {
+            if (document->Type == doc->Type && document->SubType == doc->SubType)
+            {
+                return doc == document;
+            }
+        }
+    }
+    return false;
+}
+//---------------------------------------------------------------------------
 

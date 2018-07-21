@@ -10,16 +10,20 @@ class TiledMapDocument;
 class Entity
 {
 protected:
-    TPoint          m_Pt;
-    unsigned int    m_Id;
+    TPoint          m_Pt;           // position of the entity
+    TPoint          m_DragPt;       // the offset of the entity been dragged
+    unsigned int    m_Id;           // the document id
     unsigned int    m_LoadId;
-    ImageDocument*  m_Document;
-    bool            m_Dirty;
-    bool            m_Selected;
+    ImageDocument*  m_Document;     // the document
+    bool            m_Dirty;        // flag: entity needs to be rendered
+    bool            m_Selected;     // flag: entity is selected
 
     friend class TiledMapDocument;
 
     void                __fastcall  SetPoint(const TPoint& pt);
+    TPoint              __fastcall  GetPoint() const;
+    void                __fastcall  SetDragPoint(const TPoint& pt);
+    TPoint              __fastcall  GetDragPoint() const;
    const ImageDocument* __fastcall  GetDocument() const;
     unsigned int        __fastcall  GetId() const;
     void                __fastcall  SetId(unsigned int id);
@@ -32,11 +36,12 @@ public:
     void                __fastcall  Clear();
     void                __fastcall  Clean();
 
-    __property  unsigned int                Id       = { read = GetId, write = SetId            };
-    __property  ImageDocument const * const Image    = { read = GetDocument                     };
-    __property  TPoint                      Pt       = { read = m_Pt, write = SetPoint          };
-    __property  bool                        Dirty    = { read = m_Dirty, write = SetDirty       };
-    __property  bool                        Selected = { read = m_Selected, write = SetSelected };
+    __property  unsigned int                Id       = { read = GetId, write = SetId                };
+    __property  ImageDocument const * const Image    = { read = GetDocument                         };
+    __property  TPoint                      Pt       = { read = GetPoint, write = SetPoint          };
+    __property  TPoint                      DragPt   = { read = GetDragPoint, write = SetDragPoint  };
+    __property  bool                        Dirty    = { read = m_Dirty, write = SetDirty           };
+    __property  bool                        Selected = { read = m_Selected, write = SetSelected     };
 };
 typedef std::vector<Entity>     EntityList;
 //---------------------------------------------------------------------------

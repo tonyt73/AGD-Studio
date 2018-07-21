@@ -41,6 +41,7 @@ public:
        ProjectDocument* __fastcall  ProjectConfig() const;
 
             void        __fastcall  GetAllOfType(const String& type, DocumentList& list) const;
+            bool        __fastcall  IsFirstOfType(const Document* document) const;
 
             void        __fastcall  Clear();
             void        __fastcall  Save();

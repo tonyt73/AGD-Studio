@@ -226,6 +226,11 @@ bool __fastcall ImageDocument::LayerExists(const String& name) const
     return m_Layers.count(name) == 1;
 }
 //---------------------------------------------------------------------------
+bool __fastcall ImageDocument::IsFirstOfType() const
+{
+    return theDocumentManager.IsFirstOfType(this);
+}
+//---------------------------------------------------------------------------
 
 
 

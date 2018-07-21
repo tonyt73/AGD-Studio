@@ -59,6 +59,7 @@ public:
             String      __fastcall  GetLayer(const String& name);
             void        __fastcall  SetLayer(const String& name, const String& value);
             bool        __fastcall  LayerExists(const String& name) const;
+            bool        __fastcall  IsFirstOfType() const;
 
             bool        __property  MultiFrame      = { read = m_MultiFrame                 };
             bool        __property  CanModifyFrames = { read = m_CanModifyFrames            };

@@ -44,8 +44,8 @@ void __fastcall TfrmEditorMap::Initialise()
     // TODO: change the size to ???
     m_Workspace = std::make_unique<TileEditor>(imgWorkspace, TSize(512,512), true, true, 128);
     m_ScratchPad = std::make_unique<TileEditor>(imgScratchPad, TSize(128,128), true, false, 0);
-    m_Workspace->Mode = TileEditor::temPencil;
-    m_ScratchPad->Mode = TileEditor::temPencil;
+    m_Workspace->Mode = TileEditor::temSelect;
+    m_ScratchPad->Mode = TileEditor::temSelect;
     // and set their tile sets
     m_Workspace->SetEntities(m_Document->Get(meWorkspace));
     m_ScratchPad->SetEntities(m_Document->Get(meScratchPad));
@@ -171,11 +171,18 @@ void __fastcall TfrmEditorMap::RefreshAssets()
     assetsObjects->Clear();
     DocumentList images;
     theDocumentManager.GetAllOfType("Image", images);
+    bool firstTile = true;
     for (auto image : images)
     {
         if (image->SubType == "Tile")
         {
-            assetsTiles->Add(dynamic_cast<ImageDocument*>(image));
+            auto img = dynamic_cast<ImageDocument*>(image);
+            assetsTiles->Add(img);
+            if (firstTile)
+            {
+                m_Workspace->Tile0Id = img->Id;
+                firstTile = false;
+            }
         }
         else if (image->SubType == "Sprite")
         {
@@ -254,7 +261,6 @@ void __fastcall TfrmEditorMap::pgcAssetsResize(TObject *Sender)
             dz = dz->Parent;
         }
     }
-
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::dpToolsCloseQuery(TObject *Sender, bool &CanClose)
