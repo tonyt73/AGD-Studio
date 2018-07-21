@@ -19,6 +19,7 @@ private:
     std::unique_ptr<GraphicsBuffer> m_Canvas;
     ImageDocument const * const     m_Image;
     std::unique_ptr<TBitmap>        m_Bitmap;
+    static std::unique_ptr<TBitmap> m_Selection;
 
 public:
                     __fastcall  Image(unsigned int width, unsigned int height, const Agdx::GraphicsMode& graphicsMode);
@@ -26,7 +27,7 @@ public:
 
     void            __fastcall  ChangeFrame(int frame);
     GraphicsBuffer& __fastcall  Canvas() const;
-    void            __fastcall  Draw(const TPoint& pt, TBitmap* canvas) const;
+    void            __fastcall  Draw(const TPoint& pt, TBitmap* canvas, bool selected = false) const;
 };
 typedef std::vector<std::unique_ptr<Image>> ImageList;
 typedef std::map<unsigned int, std::unique_ptr<Image>> ImageMap;

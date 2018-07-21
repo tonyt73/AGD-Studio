@@ -15,6 +15,7 @@ protected:
     unsigned int    m_LoadId;
     ImageDocument*  m_Document;
     bool            m_Dirty;
+    bool            m_Selected;
 
     friend class TiledMapDocument;
 
@@ -22,6 +23,8 @@ protected:
    const ImageDocument* __fastcall  GetDocument() const;
     unsigned int        __fastcall  GetId() const;
     void                __fastcall  SetId(unsigned int id);
+    void                __fastcall  SetSelected(bool state);
+    void                __fastcall  SetDirty(bool state);
 
 public:
                         __fastcall  Entity();
@@ -29,10 +32,11 @@ public:
     void                __fastcall  Clear();
     void                __fastcall  Clean();
 
-    __property  unsigned int                Id    = { read = GetId, write = SetId   };
-    __property  ImageDocument const * const Image = { read = GetDocument            };
-    __property  TPoint                      Pt    = { read = m_Pt, write = SetPoint };
-    __property  bool                        Dirty = { read = m_Dirty                };
+    __property  unsigned int                Id       = { read = GetId, write = SetId            };
+    __property  ImageDocument const * const Image    = { read = GetDocument                     };
+    __property  TPoint                      Pt       = { read = m_Pt, write = SetPoint          };
+    __property  bool                        Dirty    = { read = m_Dirty, write = SetDirty       };
+    __property  bool                        Selected = { read = m_Selected, write = SetSelected };
 };
 typedef std::vector<Entity>     EntityList;
 //---------------------------------------------------------------------------

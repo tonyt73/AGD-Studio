@@ -11,7 +11,7 @@ class TileEditor
 public:
     enum TEMode { temSelect, temPencil, temLine, temShape };
 private:
-    enum MouseModes { mmTool, mmMove };
+    enum MouseModes { mmTool, mmMove, mmGroupSelect };
 
     std::unique_ptr<TBitmap>        m_Content;      // 1:1 content
     TImage* const                   m_View;
@@ -26,17 +26,23 @@ private:
     bool                            m_UsesGridRoom; // flag: uses a room grid
     bool                            m_ShowGridTile; // flag: show tile grid
     bool                            m_ShowGridRoom; // flag: show room grid
+    bool                            m_MousePanning;
+    bool                            m_MouseButtonDown;
     TPoint                          m_Position;     // offset into the view to render the workspace
     TSize                           m_Size;         // the number of tiles across and down of the area
     TSize                           m_TileSize;     // the size in pixels of a tile
     MouseModes                      m_MouseMode;
+    MouseModes                      m_PrevMouseMode;
     TPoint                          m_LastMouse;
+    TPoint                          m_GroupSelectS; // start group select pt
+    TPoint                          m_GroupSelectE; // end group select pt
     int                             m_Border;       // the size of a border around the tiles
 
     void                __fastcall  Clear();
     void                __fastcall  ValidatePosition();
-    void                __fastcall  DrawGrids();
-
+    void                __fastcall  DrawGrids() const;
+    void                __fastcall  DrawGroupSelect() const;
+    TPoint              __fastcall  GetCursorPt(int X, int Y) const;
     bool                __fastcall  GetGridTile();
     bool                __fastcall  GetGridRoom();
     void                __fastcall  SetGridTile(bool value);
@@ -45,6 +51,7 @@ private:
     void                __fastcall  UpdateMap();
     void                __fastcall  RefreshImages();
     void                __fastcall  DrawMap();
+    void                __fastcall  UnselectAll();
 
     __property  bool                IsDirty = { read = m_Dirty, write = m_Dirty };
 

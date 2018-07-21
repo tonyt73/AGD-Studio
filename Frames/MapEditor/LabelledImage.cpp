@@ -58,7 +58,7 @@ void __fastcall TfrmLabelledImage::Update()
 {
     auto w = m_Document->Width;
     auto h = m_Document->Height;
-    auto image = std::make_unique<Agdx::Image>(m_Document->Width, m_Document->Height, m_GraphicsMode);
+    auto image = std::make_unique<Agdx::Image>(m_Document, m_GraphicsMode);
     auto sx = image->Canvas().ScalarX;
     auto sy = image->Canvas().ScalarY;
 
@@ -75,7 +75,6 @@ void __fastcall TfrmLabelledImage::Update()
     }
 
     // Draw the image
-    image->Canvas().Set(m_Document->Frame[0]);
     image->Canvas().Assign(imgImage->Picture->Bitmap);
     image->Canvas().Draw(imgImage->Picture->Bitmap);
 

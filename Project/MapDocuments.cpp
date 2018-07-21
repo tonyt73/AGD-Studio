@@ -12,6 +12,7 @@ __fastcall Entity::Entity()
 : m_Pt(0,0)
 , m_Document(nullptr)
 , m_Dirty(true)
+, m_Selected(false)
 {
 }
 //---------------------------------------------------------------------------
@@ -51,6 +52,17 @@ unsigned int __fastcall Entity::GetId() const
 void __fastcall Entity::SetId(unsigned int id)
 {
     m_Document = dynamic_cast<ImageDocument*>(theDocumentManager.Get(id));
+}
+//---------------------------------------------------------------------------
+void __fastcall Entity::SetSelected(bool state)
+{
+    m_Dirty |= m_Selected != state;
+    m_Selected = state;
+}
+//---------------------------------------------------------------------------
+void __fastcall Entity::SetDirty(bool state)
+{
+    m_Dirty = true;
 }
 //---------------------------------------------------------------------------
 
