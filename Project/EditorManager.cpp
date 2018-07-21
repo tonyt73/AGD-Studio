@@ -21,7 +21,7 @@ void __fastcall EditorManager::SetActive(TFrame* editor)
     m_ActiveEditor = editor;
 }
 //---------------------------------------------------------------------------
-bool __fastcall EditorManager::IsEditorActive(TFrame* editor) const
+bool __fastcall EditorManager::IsActive(const TFrame* editor) const
 {
     return m_ActiveEditor == editor;
 }

@@ -1,7 +1,8 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
 #include "fEditorImage.h"
-#include "DocumentManager.h"
+#include "Project/DocumentManager.h"
+#include "Project/EditorManager.h"
 #include "Messaging/Messaging.h"
 #include "Frames/ImageEditor/fSelectionImage.h"
 #include "Frames/ImageEditor/CanvasPencilTool.h"
@@ -38,7 +39,8 @@ __fastcall TfrmEditorImage::~TfrmEditorImage()
 //---------------------------------------------------------------------------
 bool __fastcall TfrmEditorImage::IsActive() const
 {
-    return static_cast<TLMDDockPanel*>(m_ImageDocument->DockPanel)->Active;
+    //return static_cast<TLMDDockPanel*>(m_ImageDocument->DockPanel)->Active;
+    return theEditorManager.IsActive(this);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::OnEvent(const Event& event)
@@ -593,6 +595,7 @@ void __fastcall TfrmEditorImage::SetCanvasColors()
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::imgEditorMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
 {
+    theEditorManager.SetActive(this);
     if (btnAnimateStop->Down)
     {
         SetCaptureControl(imgEditor);
@@ -729,6 +732,7 @@ void __fastcall TfrmEditorImage::ShowKeysHelp()
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::imgEditorMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate)
 {
+    theEditorManager.SetActive(this);
     ShowKeysHelp();
 }
 //---------------------------------------------------------------------------

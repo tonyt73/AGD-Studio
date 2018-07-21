@@ -28,6 +28,7 @@ object frmEditorCode: TfrmEditorCode
     Gutter.FoldsBarBg = clGray
     CustomKeyBindings = <>
     OnStatusChanged = evEditorStatusChanged
+    OnEnter = evEditorEnter
     GutterBarsEmpty = False
   end
   object sbStatus: TStatusBar

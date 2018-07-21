@@ -97,6 +97,7 @@ __published:    // IDE-managed Components
     void __fastcall panScratchPadViewResize(TObject *Sender);
     void __fastcall pgcAssetsResize(TObject *Sender);
     void __fastcall imgWorkspaceMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate);
+    void __fastcall imgWorkspaceMouseEnter(TObject *Sender);
 
 private:    // User declarations
     TiledMapDocument*           m_Document;

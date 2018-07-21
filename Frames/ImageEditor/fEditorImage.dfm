@@ -2,7 +2,7 @@ object frmEditorImage: TfrmEditorImage
   Left = 0
   Top = 0
   Width = 1102
-  Height = 818
+  Height = 890
   TabOrder = 0
   OnEndDock = FrameEndDock
   OnMouseActivate = imgEditorMouseActivate
@@ -63,7 +63,7 @@ object frmEditorImage: TfrmEditorImage
         end
         inherited lstSmall: TImageList
           Bitmap = {
-            494C010105000800780010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+            494C010105000800840010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
             0000000000003600000028000000400000002000000001002000000000000020
             000000000000000000000000000000000000C19457FFC19457FFC19457FFC194
             57FFC19457FFC19457FFC19457FFC19457FFC19457FFC19457FFC19457FFC194
@@ -336,7 +336,7 @@ object frmEditorImage: TfrmEditorImage
         end
         inherited lstLargeShapes: TImageList
           Bitmap = {
-            494C010105002000900020001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+            494C0101050020009C0020001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
             0000000000003600000028000000800000003000000001002000000000000060
             0000000000000000000000000000000000000000000000000000000000000000
             000000000000000000000000000000000000C19457FFC19457FFC19457FFC194
@@ -1137,7 +1137,7 @@ object frmEditorImage: TfrmEditorImage
         end
         inherited imgFills: TImageList
           Bitmap = {
-            494C010103001800840010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+            494C010103001800900010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
             0000000000003600000028000000400000001000000001002000000000000010
             0000000000000000000000000000000000000000000000000000000000000000
             000000000000000000FF000000FF000000FF000000FF000000E5000000F50000
@@ -1278,7 +1278,7 @@ object frmEditorImage: TfrmEditorImage
         end
         inherited imgLargeFill: TImageList
           Bitmap = {
-            494C010103001800840018001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+            494C010103001800900018001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
             0000000000003600000028000000600000001800000001002000000000000024
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000000000000000
@@ -1587,7 +1587,7 @@ object frmEditorImage: TfrmEditorImage
   end
   object barStatus: TStatusBar
     Left = 0
-    Top = 799
+    Top = 871
     Width = 1102
     Height = 19
     Panels = <
@@ -1611,12 +1611,13 @@ object frmEditorImage: TfrmEditorImage
         Text = 'Graphics Mode'
         Width = 300
       end>
+    ExplicitTop = 799
   end
   object panToolbar: TPanel
     Left = 0
     Top = 42
     Width = 80
-    Height = 757
+    Height = 829
     Align = alLeft
     AutoSize = True
     BevelOuter = bvNone
@@ -1626,6 +1627,7 @@ object frmEditorImage: TfrmEditorImage
     TabOrder = 2
     OnClick = panEditorContainerClick
     OnMouseActivate = imgEditorMouseActivate
+    ExplicitHeight = 757
     object Label1: TLabel
       Left = 0
       Top = 0
@@ -1969,15 +1971,16 @@ object frmEditorImage: TfrmEditorImage
     Left = 80
     Top = 42
     Width = 846
-    Height = 757
+    Height = 829
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 3
+    ExplicitHeight = 757
     object sbxView: TScrollBox
       Left = 0
       Top = 0
       Width = 846
-      Height = 657
+      Height = 729
       HorzScrollBar.Smooth = True
       HorzScrollBar.Tracking = True
       VertScrollBar.Smooth = True
@@ -1991,11 +1994,12 @@ object frmEditorImage: TfrmEditorImage
       TabOrder = 0
       OnMouseWheel = sbxViewMouseWheel
       OnResize = sbxViewResize
+      ExplicitHeight = 657
       object panEditorContainer: TPanel
         Left = 0
         Top = 0
         Width = 846
-        Height = 657
+        Height = 729
         Align = alClient
         BevelOuter = bvNone
         DoubleBuffered = False
@@ -2010,11 +2014,12 @@ object frmEditorImage: TfrmEditorImage
         StyleElements = [seClient, seBorder]
         OnClick = panEditorContainerClick
         OnMouseActivate = imgEditorMouseActivate
+        ExplicitHeight = 657
         object panViewFrame: TPanel
           Left = 128
           Top = 128
           Width = 590
-          Height = 401
+          Height = 473
           Align = alClient
           BevelOuter = bvNone
           Color = clWhite
@@ -2027,11 +2032,12 @@ object frmEditorImage: TfrmEditorImage
           ParentDoubleBuffered = False
           TabOrder = 0
           StyleElements = []
+          ExplicitHeight = 401
           object imgEditor: TImage
             Left = 1
             Top = 1
             Width = 588
-            Height = 399
+            Height = 471
             Align = alClient
             Stretch = True
             OnClick = panEditorContainerClick
@@ -2048,7 +2054,7 @@ object frmEditorImage: TfrmEditorImage
     end
     object panFrameView: TPanel
       Left = 0
-      Top = 657
+      Top = 729
       Width = 846
       Height = 100
       Align = alBottom
@@ -2057,6 +2063,7 @@ object frmEditorImage: TfrmEditorImage
       DoubleBuffered = False
       ParentDoubleBuffered = False
       TabOrder = 1
+      ExplicitTop = 657
       inline fFrameView: TMultiImageViewFrame
         Left = 0
         Top = 0
@@ -2083,13 +2090,14 @@ object frmEditorImage: TfrmEditorImage
     Left = 926
     Top = 42
     Width = 176
-    Height = 757
+    Height = 829
     Align = alRight
     BevelOuter = bvNone
     Caption = 'Panel1'
     ShowCaption = False
     TabOrder = 4
     OnMouseActivate = imgEditorMouseActivate
+    ExplicitHeight = 757
     object Label2: TLabel
       Left = 0
       Top = 0
@@ -2115,12 +2123,13 @@ object frmEditorImage: TfrmEditorImage
       Left = 0
       Top = 24
       Width = 176
-      Height = 733
+      Height = 805
       Align = alClient
       BevelOuter = bvNone
       Caption = 'Panel3'
       ShowCaption = False
       TabOrder = 0
+      ExplicitHeight = 733
       inline palAttribute: TfrmPaletteAttribute
         Left = 0
         Top = 0
@@ -2136,6 +2145,7 @@ object frmEditorImage: TfrmEditorImage
         Padding.Right = 8
         Padding.Bottom = 8
         TabOrder = 0
+        OnMouseActivate = imgEditorMouseActivate
       end
       inline palBitmap: TfrmPaletteBitmap
         Left = 0
@@ -2154,10 +2164,11 @@ object frmEditorImage: TfrmEditorImage
         Padding.Bottom = 8
         ParentDoubleBuffered = False
         TabOrder = 1
+        OnMouseActivate = imgEditorMouseActivate
         ExplicitTop = 1142
         inherited ImageList1: TImageList
           Bitmap = {
-            494C0101030008004C0020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+            494C010103000800580020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
             0000000000003600000028000000800000002000000001002000000000000040
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000000000000000
@@ -2694,7 +2705,7 @@ object frmEditorImage: TfrmEditorImage
         end
         inherited ImageList2: TImageList
           Bitmap = {
-            494C010101000800400010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+            494C0101010008004C0010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
             0000000000003600000028000000400000001000000001002000000000000010
             0000000000000000000000000000000000000000000000000000000000000000
             00000000000000000000000000330000002F0000000000000000000000000000
@@ -2852,10 +2863,11 @@ object frmEditorImage: TfrmEditorImage
         ParentDoubleBuffered = False
         TabOrder = 2
         Visible = False
+        OnMouseActivate = imgEditorMouseActivate
         ExplicitTop = 642
         inherited ImageList1: TImageList
           Bitmap = {
-            494C0101030008005C0020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+            494C010103000800680020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
             0000000000003600000028000000800000002000000001002000000000000040
             0000000000000000000000000000000000000000000000000000000000000000
             0000000000000000000000000000000000000000000000000000000000000000
@@ -3392,7 +3404,7 @@ object frmEditorImage: TfrmEditorImage
         end
         inherited ImageList2: TImageList
           Bitmap = {
-            494C010101000800440010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+            494C010101000800500010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
             0000000000003600000028000000400000001000000001002000000000000010
             0000000000000000000000000000000000000000000000000000000000000000
             00000000000000000000000000330000002F0000000000000000000000000000
@@ -3539,6 +3551,7 @@ object frmEditorImage: TfrmEditorImage
         Height = 306
         Align = alTop
         TabOrder = 3
+        OnMouseActivate = imgEditorMouseActivate
         ExplicitTop = 336
       end
     end
@@ -3772,7 +3785,7 @@ object frmEditorImage: TfrmEditorImage
     Left = 220
     Top = 65
     Bitmap = {
-      494C010124006000CC0120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010124006000D80120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004001000001002000000000000080
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -9125,7 +9138,7 @@ object frmEditorImage: TfrmEditorImage
     Left = 220
     Top = 121
     Bitmap = {
-      494C010124006000DC0120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010124006000E80120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004001000001002000000000000080
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

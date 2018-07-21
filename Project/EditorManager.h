@@ -16,7 +16,7 @@ public:
             __fastcall  EditorManager();
 
     void    __fastcall  SetActive(TFrame* editor);
-    bool    __fastcall  IsEditorActive(TFrame* editor) const;
+    bool    __fastcall  IsActive(const TFrame* editor) const;
 };
 //---------------------------------------------------------------------------
 #define theEditorManager EditorManager::get()

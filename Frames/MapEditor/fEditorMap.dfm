@@ -70,6 +70,7 @@ object frmEditorMap: TfrmEditorMap
         TabHeight = 24
         TabOrder = 0
         TabWidth = 80
+        OnMouseEnter = imgWorkspaceMouseEnter
         OnResize = pgcAssetsResize
         object tabTiles: TTabSheet
           Caption = 'TILES'
@@ -214,6 +215,7 @@ object frmEditorMap: TfrmEditorMap
           Height = 288
           Align = alClient
           OnMouseDown = imgScratchPadMouseDown
+          OnMouseEnter = imgWorkspaceMouseEnter
           OnMouseMove = imgScratchPadMouseMove
           OnMouseUp = imgScratchPadMouseUp
           ExplicitLeft = 3
@@ -259,6 +261,7 @@ object frmEditorMap: TfrmEditorMap
           Align = alClient
           OnMouseActivate = imgWorkspaceMouseActivate
           OnMouseDown = imgWorkspaceMouseDown
+          OnMouseEnter = imgWorkspaceMouseEnter
           OnMouseMove = imgWorkspaceMouseMove
           OnMouseUp = imgWorkspaceMouseUp
           ExplicitLeft = 1
@@ -277,6 +280,7 @@ object frmEditorMap: TfrmEditorMap
         Constraints.MaxWidth = 81
         Constraints.MinWidth = 81
         TabOrder = 1
+        OnMouseEnter = imgWorkspaceMouseEnter
         object Label1: TLabel
           Left = 0
           Top = 0
@@ -390,7 +394,7 @@ object frmEditorMap: TfrmEditorMap
     Left = 220
     Top = 65
     Bitmap = {
-      494C010124006000E40120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010124006000E80120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004001000001002000000000000080
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5685,7 +5689,7 @@ object frmEditorMap: TfrmEditorMap
     Left = 220
     Top = 121
     Bitmap = {
-      494C010124006000F40120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010124006000F80120002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004001000001002000000000000080
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

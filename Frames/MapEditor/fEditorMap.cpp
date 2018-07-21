@@ -2,9 +2,10 @@
 #include "agdx.pch.h"
 #pragma hdrstop
 #include "fEditorMap.h"
-#include "DocumentManager.h"
-#include "Messaging.h"
-#include "Event.h"
+#include "Project/DocumentManager.h"
+#include "Project/EditorManager.h"
+#include "Messaging/Messaging.h"
+#include "Messaging/Event.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "AssetSelection"
@@ -200,7 +201,8 @@ void __fastcall TfrmEditorMap::RefreshAssets()
 //---------------------------------------------------------------------------
 bool __fastcall TfrmEditorMap::IsActive() const
 {
-    return static_cast<TLMDDockPanel*>(m_Document->DockPanel)->Active;
+    //return static_cast<TLMDDockPanel*>(m_Document->DockPanel)->Active;
+    return theEditorManager.IsActive(this);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::OnEvent(const Event& event)
@@ -281,7 +283,13 @@ void __fastcall TfrmEditorMap::ShowKeysHelp()
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::imgWorkspaceMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate)
 {
+    theEditorManager.SetActive(this);
     ShowKeysHelp();
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::imgWorkspaceMouseEnter(TObject *Sender)
+{
+    theEditorManager.SetActive(this);
 }
 //---------------------------------------------------------------------------
 

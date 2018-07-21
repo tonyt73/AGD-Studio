@@ -421,6 +421,10 @@
             <DependentOn>Project\DocumentManager.h</DependentOn>
             <BuildOrder>24</BuildOrder>
         </CppCompile>
+        <CppCompile Include="Project\EditorManager.cpp">
+            <DependentOn>Project\EditorManager.h</DependentOn>
+            <BuildOrder>60</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Project\FileDefinitions.cpp">
             <DependentOn>Project\FileDefinitions.h</DependentOn>
             <BuildOrder>38</BuildOrder>
@@ -591,14 +595,14 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName=".\Win64\Release\AGDX Studio.exe" Configuration="Release" Class="ProjectOutput">
-                    <Platform Name="Win64">
+                <DeployFile LocalName=".\Win32\Debug\AGDX Studio.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
                         <RemoteName>AGDX_Studio.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName=".\Win32\Debug\AGDX Studio.exe" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
+                <DeployFile LocalName=".\Win64\Release\AGDX Studio.exe" Configuration="Release" Class="ProjectOutput">
+                    <Platform Name="Win64">
                         <RemoteName>AGDX_Studio.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>

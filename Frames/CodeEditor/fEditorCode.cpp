@@ -5,6 +5,7 @@
 #include <LMDSedKeyBindingsDialog.hpp>
 #include "fEditorCode.h"
 #include "fMain.h"
+#include "Project/EditorManager.h"
 #include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -437,6 +438,11 @@ void __fastcall TfrmEditorCode::OnEvent(const Event& event)
 void __fastcall TfrmEditorCode::actSaveFileExecute(TObject *Sender)
 {
     lmdDocument->SaveToFile(m_Document->Path, lmdDocument->CodePage, lmdDocument->CodePageUsePreamble);
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorCode::evEditorEnter(TObject *Sender)
+{
+    theEditorManager.SetActive(this);
 }
 //---------------------------------------------------------------------------
 

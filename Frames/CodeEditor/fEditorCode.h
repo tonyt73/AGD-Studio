@@ -105,6 +105,7 @@ __published:    // IDE-managed Components
     void __fastcall evEditorStatusChanged(TLMDCustomEditView *AView, TLMDViewStatusChanges AChanges);
     void __fastcall actSaveFileExecute(TObject *Sender);
     void __fastcall actSearchPreviousExecute(TObject *Sender);
+    void __fastcall evEditorEnter(TObject *Sender);
 
 private:    // User declarations
     Document*                   m_Document;
