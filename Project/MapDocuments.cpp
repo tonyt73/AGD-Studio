@@ -16,6 +16,29 @@ __fastcall Entity::Entity()
 {
 }
 //---------------------------------------------------------------------------
+__fastcall Entity::Entity(const Entity& other)
+: m_Pt(other.m_Pt)
+, m_Id(other.m_Id)
+, m_Document(other.m_Document)
+, m_Dirty(true)
+, m_Selected(other.m_Selected)
+{
+}
+//---------------------------------------------------------------------------
+__fastcall Entity::~Entity()
+{
+}
+//---------------------------------------------------------------------------
+Entity& __fastcall Entity::operator=(const Entity& other)
+{
+    m_Pt = other.m_Pt;
+    m_Id = other.m_Id;
+    m_Document = other.m_Document;
+    m_Dirty = true;
+    m_Selected = other.m_Selected;
+    return *this;
+}
+//---------------------------------------------------------------------------
 void __fastcall Entity::SetPoint(const TPoint& pt)
 {
     m_Pt = pt;

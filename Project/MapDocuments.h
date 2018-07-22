@@ -32,6 +32,10 @@ protected:
 
 public:
                         __fastcall  Entity();
+                        __fastcall  Entity(const Entity& other);
+                        __fastcall ~Entity();
+
+    Entity&             __fastcall  operator=(const Entity& other);
 
     void                __fastcall  Clear();
     void                __fastcall  Clean();
