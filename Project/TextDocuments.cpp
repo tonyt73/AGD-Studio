@@ -23,6 +23,10 @@ void __fastcall TextDocument::DoSave()
 {
 }
 //---------------------------------------------------------------------------
+void __fastcall TextDocument::Save()
+{
+}
+//---------------------------------------------------------------------------
 bool __fastcall TextDocument::Load()
 {
     return true;

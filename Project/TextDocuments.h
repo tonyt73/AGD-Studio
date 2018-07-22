@@ -16,6 +16,7 @@ public:
             void        __fastcall  Add(const String& lines);
 
             bool        __fastcall  Load();
+            void        __fastcall  Save();
 };
 //---------------------------------------------------------------------------
 class EventDocument : public TextDocument

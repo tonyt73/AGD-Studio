@@ -69,7 +69,7 @@ public:
 const TPropertyInfoMap& __fastcall  GetPropertyInfo() const;
             String      __fastcall  GetPropertyInfo(const String& property) const;
 
-            void        __fastcall  Save();
+    virtual void        __fastcall  Save();
     virtual bool        __fastcall  Load();
 
     __property         unsigned int Id          = { read = m_RefId                          };
