@@ -29,6 +29,10 @@ Themes:
   * http://files.lmd.de/downloads/lmd2018vcl/setupvcl18td25.zip
   * Unzip and run the Setup application
   * Click Next to all questions to Install all defaults
+* Install the Application Configuration files
+  * Open up the location you cloned this repo to
+  * Move the Config folder to: %user%\AppData\Roaming\AGDX Studio
+    * Hint: Copy the above uri and paste into Windows Explorer
 * Launch the Rad-Studio IDE
   * Open up the location you cloned this repo to
   * Open the AGDX Studio.cproj file
