@@ -626,7 +626,7 @@ void __fastcall TfrmEditorImage::imgEditorMouseMove(TObject *Sender, TShiftState
     auto h = 8 / m_GraphicsMode.ScalarY;
     auto pt = ToImagePt(X,Y);
     barStatus->Panels->Items[2]->Text = "P=" + IntToStr((int)pt.X) + ", " + IntToStr((int)pt.Y) +
-                                       ",C=" + IntToStr((int)(pt.X/w)) + ", " + IntToStr((int)(pt.Y/h));
+                                        ",C=" + IntToStr((int)(pt.X/w)) + ", " + IntToStr((int)(pt.Y/h));
     if (btnAnimateStop->Down)
     {
         if (btnModePaint->Down)
