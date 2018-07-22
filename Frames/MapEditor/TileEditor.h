@@ -60,7 +60,6 @@ private:
     void                __fastcall  DrawMap();
     void                __fastcall  DrawGrids() const;
     void                __fastcall  DrawGroupSelect() const;
-    void                __fastcall  UnselectAll();
 
     __property  bool                IsDirty = { read = m_Dirty, write = m_Dirty };
 
@@ -82,6 +81,7 @@ public:
     void                __fastcall  Add(const EntityList& entities);
     EntityList          __fastcall  GetSelection() const;
     void                __fastcall  DeleteSelection();
+    void                __fastcall  UnselectAll();
 
     __property  TEMode              Mode = { read = m_Mode, write = m_Mode };
     __property  TSize               Size = { write = SetSize };

@@ -63,24 +63,28 @@ void __fastcall TfrmEditorMap::Initialise()
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actSelectExecute(TObject *Sender)
 {
+    btnSelect->Down = true;
     m_Workspace->Mode = TileEditor::temSelect;
     m_ScratchPad->Mode = TileEditor::temSelect;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actPencilExecute(TObject *Sender)
 {
+    btnPencil->Down = true;
     m_Workspace->Mode = TileEditor::temPencil;
     m_ScratchPad->Mode = TileEditor::temPencil;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actLineExecute(TObject *Sender)
 {
+    btnLine->Down = true;
     m_Workspace->Mode = TileEditor::temLine;
     m_ScratchPad->Mode = TileEditor::temLine;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actShapeExecute(TObject *Sender)
 {
+    btnShape->Down = true;
     m_Workspace->Mode = TileEditor::temShape;
     m_ScratchPad->Mode = TileEditor::temShape;
 }
@@ -320,11 +324,15 @@ void __fastcall TfrmEditorMap::actDuplicateExecute(TObject *Sender)
 {
     if (dpWorkspace == m_ActivePanel)
     {
-        m_Workspace->Add(m_Workspace->GetSelection());
+        auto list = m_Workspace->GetSelection();
+        m_Workspace->UnselectAll();
+        m_Workspace->Add(list);
     }
     else if (dpScratchPad == m_ActivePanel)
     {
-        m_ScratchPad->Add(m_ScratchPad->GetSelection());
+        auto list = m_ScratchPad->GetSelection();
+        m_ScratchPad->UnselectAll();
+        m_ScratchPad->Add(list);
     }
 }
 //---------------------------------------------------------------------------
@@ -353,6 +361,18 @@ void __fastcall TfrmEditorMap::mnuSPToggleToolbarClick(TObject *Sender)
 void __fastcall TfrmEditorMap::actSPToggleGridExecute(TObject *Sender)
 {
     m_ScratchPad->GridTile = actSPToggleGrid->Checked;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::pgcAssetsChange(TObject *Sender)
+{
+    auto state = pgcAssets->ActivePage == tabTiles;
+    if (!state && (btnLine->Down || btnShape->Down))
+    {
+        btnPencil->Down = true;
+        actPencilExecute(Sender);
+    }
+    actLine->Enabled = state;
+    actShape->Enabled = state;
 }
 //---------------------------------------------------------------------------
 

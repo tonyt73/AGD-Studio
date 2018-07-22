@@ -144,6 +144,7 @@ __published:    // IDE-managed Components
     void __fastcall mnuWSToggleToolbarClick(TObject *Sender);
     void __fastcall mnuSPToggleToolbarClick(TObject *Sender);
     void __fastcall actSPToggleGridExecute(TObject *Sender);
+    void __fastcall pgcAssetsChange(TObject *Sender);
 
 private:    // User declarations
     TiledMapDocument*           m_Document;
