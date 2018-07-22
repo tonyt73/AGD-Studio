@@ -31,9 +31,9 @@ Themes:
   * Click Next to all questions to Install all defaults
 * Install the Application Configuration files
   * Open up the location you cloned this repo to
-  * Move the Config folder to: ```%user%\AppData\Roaming```
+  * Move the ```Config``` folder to ```%user%\AppData\Roaming```
     * Hint: Copy the above uri and paste into Windows Explorer
-  * Rename the Config folder to: AGDX Studio
+  * Rename the ```Config``` folder to ```AGDX Studio```
 * Launch the Rad-Studio IDE
   * Open up the location you cloned this repo to
   * Open the AGDX Studio.cproj file
