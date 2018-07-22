@@ -1,0 +1,66 @@
+{
+  "Name": "Sega Master System 256x192 16 Colour",
+  "GraphicsMode": "Sega Master System Mode 4",
+  "ImageSizing": {
+    "Object": {
+      "Minimum": {
+        "Width": 8,
+        "Height": 8
+      },
+      "Maximum": {
+        "Width": 64,
+        "Height": 64
+      },
+      "Step": {
+        "Width": 8,
+        "Height": 6
+      }
+    },
+    "Sprite": {
+      "Minimum": {
+        "Width": 8,
+        "Height": 8
+      },
+      "Maximum": {
+        "Width": 64,
+        "Height": 64
+      },
+      "Step": {
+        "Width": 8,
+        "Height": 8
+      }
+    },
+    "Tile": {
+      "Minimum": {
+        "Width": 8,
+        "Height": 8
+      },
+      "Maximum": {
+        "Width": 64,
+        "Height": 64
+      },
+      "Step": {
+        "Width": 8,
+        "Height": 8
+      }
+    },
+    "CharacterSet": {
+      "Minimum": {
+        "Width": 8,
+        "Height": 8
+      },
+      "Maximum": {
+        "Width": 8,
+        "Height": 8
+      },
+      "Step": {
+        "Width": 0,
+        "Height": 0
+      }
+    }
+  },
+  "CompilerInformation": {
+    "Path": "Compilers\\SegaMS-Compile.exe",
+    "Parameters": "%file -tap -sna"
+  }
+}

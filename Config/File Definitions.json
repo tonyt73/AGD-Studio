@@ -1,6 +1,11 @@
 {
 	Files : [
 		{
+			Filename: "Game.agd",
+			Section: "AGD",
+			Type : "AGD"
+		},
+		{
 			Filename: "Messages",
 			Section: "DEFINEMESSAGES",
 			Type : "Message"
