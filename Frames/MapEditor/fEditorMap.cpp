@@ -1,6 +1,5 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
-#pragma hdrstop
 #include "fEditorMap.h"
 #include "Project/DocumentManager.h"
 #include "Project/EditorManager.h"
@@ -22,6 +21,7 @@
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorMap::TfrmEditorMap(TComponent* Owner)
 : TFrame(Owner)
+, m_ActivePanel(nullptr)
 {
     ::Messaging::Bus::Subscribe<Event>(OnEvent);
     ::Messaging::Bus::Subscribe<OnMapResized>(OnMapResize);
@@ -88,13 +88,11 @@ void __fastcall TfrmEditorMap::actShapeExecute(TObject *Sender)
 void __fastcall TfrmEditorMap::actGridTileExecute(TObject *Sender)
 {
     m_Workspace->GridTile = actGridTile->Checked;
-    m_ScratchPad->GridTile = actGridTile->Checked;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actGridRoomExecute(TObject *Sender)
 {
     m_Workspace->GridRoom = actGridRoom->Checked;
-    m_ScratchPad->GridRoom = actGridRoom->Checked;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actZoomInExecute(TObject *Sender)
@@ -290,6 +288,71 @@ void __fastcall TfrmEditorMap::imgWorkspaceMouseActivate(TObject *Sender, TMouse
 void __fastcall TfrmEditorMap::imgWorkspaceMouseEnter(TObject *Sender)
 {
     theEditorManager.SetActive(this);
+    auto wc = dynamic_cast<TControl*>(Sender);
+    if (wc && wc->Parent && wc->Parent->Parent)
+    {
+        auto dp = dynamic_cast<TLMDDockPanel*>(wc->Parent->Parent);
+        auto cn = wc->Parent->Parent->ClassName();
+        if (dp)
+        {
+            m_ActivePanel = dp;
+        }
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::actCopyToScratchPadExecute(TObject *Sender)
+{
+    m_ScratchPad->Add(m_Workspace->GetSelection());
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::actMoveToScratchPadExecute(TObject *Sender)
+{
+    m_ScratchPad->Add(m_Workspace->GetSelection());
+    m_Workspace->DeleteSelection();
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::actCopyToWorkspaceExecute(TObject *Sender)
+{
+    m_Workspace->Add(m_ScratchPad->GetSelection());
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::actDuplicateExecute(TObject *Sender)
+{
+    if (dpWorkspace == m_ActivePanel)
+    {
+        m_Workspace->Add(m_Workspace->GetSelection());
+    }
+    else if (dpScratchPad == m_ActivePanel)
+    {
+        m_ScratchPad->Add(m_ScratchPad->GetSelection());
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::actDeleteExecute(TObject *Sender)
+{
+    if (dpWorkspace == m_ActivePanel)
+    {
+        m_Workspace->DeleteSelection();
+    }
+    else if (dpScratchPad == m_ActivePanel)
+    {
+        m_ScratchPad->DeleteSelection();
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::mnuWSToggleToolbarClick(TObject *Sender)
+{
+    tbrWorkspace->Visible = mnuWSToggleToolbar->Checked;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::mnuSPToggleToolbarClick(TObject *Sender)
+{
+    tbrScratchPad->Visible = mnuSPToggleToolbar->Checked;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::actSPToggleGridExecute(TObject *Sender)
+{
+    m_ScratchPad->GridTile = actSPToggleGrid->Checked;
 }
 //---------------------------------------------------------------------------
 

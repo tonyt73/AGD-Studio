@@ -7,7 +7,7 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall TileEditor::TileEditor(TImage* view, const TSize& size, bool usesGridTile, bool usesGridRoom, int border)
+__fastcall TileEditor::TileEditor(TImage* const view, const TSize& size, bool usesGridTile, bool usesGridRoom, int border)
 : m_View(view)
 , m_Size(size)
 , m_UsesGridTile(usesGridTile)
@@ -466,18 +466,52 @@ void __fastcall TileEditor::Get(const TRect& rect, EntityList& entities) const
     });
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::Add(EntityList& entities)
+EntityList __fastcall TileEditor::GetSelection() const
 {
-    m_Entities.insert(m_Entities.end(), entities.begin(), entities.end());
+    EntityList selection;
+    std::copy_if(m_Entities.begin(), m_Entities.end(), back_inserter(selection), [](const Entity& e){ return e.Selected; });
+    // reposition the entities to 0,0
+    // find the minimum position
+    int minX = 1410065408;
+    int minY = 1410065408;
+    for (auto& e : selection)
+    {
+        minX = Min(minX, e.Pt.x);
+        minY = Min(minY, e.Pt.y);
+    }
+    // re-adjust all entities
+    for (auto& e : selection)
+    {
+        e.Pt = TPoint(e.Pt.x - minX, e.Pt.y - minY);
+    }
+    return selection;
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::Remove(const TRect& rect)
+void __fastcall TileEditor::DeleteSelection()
 {
-    // remove all entities with a start pt inside the rect
-    m_Entities.erase(std::remove_if(m_Entities.begin(), m_Entities.end(), [rect](const Entity& e)
+    for (auto it = m_Entities.begin(); it != m_Entities.end();)
     {
-        return rect.Contains(e.Pt);
-    }), m_Entities.end());
+        if ((*it).Selected)
+        {
+            it = m_Entities.erase(it);
+        }
+        else
+        {
+            ++it;
+        }
+    }
+    RefreshImages();
+    UpdateMap();
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::Add(const EntityList& entities)
+{
+    m_SelectionCount = entities.size();
+    m_PrevMouseMode = mmGroupSelect;
+    m_MouseMode = mmTool;
+    m_Entities.insert(m_Entities.end(), entities.begin(), entities.end());
+    RefreshImages();
+    UpdateMap();
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::UnselectAll()

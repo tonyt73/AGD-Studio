@@ -6,20 +6,16 @@
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
-#include "LMDDckSite.hpp"
-#include "Project/Document.h"
 #include <System.Actions.hpp>
 #include <System.ImageList.hpp>
+#include <Vcl.Imaging.pngimage.hpp>
 #include <Vcl.ActnList.hpp>
 #include <Vcl.ComCtrls.hpp>
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.ImgList.hpp>
 #include <Vcl.ToolWin.hpp>
 #include <Vcl.Menus.hpp>
-#include "TileEditor.h"
-#include "AssetSelection.h"
-#include "MapDocuments.h"
-#include "WndProcHandlers.h"
+#include "LMDDckSite.hpp"
 #include "LMDButtonPanel.hpp"
 #include "LMDControl.hpp"
 #include "LMDCustomBevelPanel.hpp"
@@ -29,6 +25,11 @@
 #include "LMDCustomParentPanel.hpp"
 #include "LMDCustomToolBar.hpp"
 #include "LMDToolBar.hpp"
+#include "TileEditor.h"
+#include "AssetSelection.h"
+#include "MapDocuments.h"
+#include "WndProcHandlers.h"
+#include "Project/Document.h"
 //---------------------------------------------------------------------------
 class TfrmEditorMap : public TFrame
 {
@@ -75,6 +76,43 @@ __published:    // IDE-managed Components
     TToolButton *btnPencil;
     TToolButton *btnLine;
     TToolButton *btnShape;
+    TMenuItem *mnuWSCopytoScratchPad;
+    TMenuItem *mnuWSMoveToScratchPad;
+    TMenuItem *mnuSPCopytoWorkspace;
+    TMenuItem *mnuSPDuplicate;
+    TMenuItem *mnuWSDuplicate;
+    TMenuItem *Delete1;
+    TMenuItem *Delete2;
+    TMenuItem *N1;
+    TMenuItem *N2;
+    TActionList *actSmallActions;
+    TImageList *imgSmallIcons;
+    TAction *actDelete;
+    TAction *actDuplicate;
+    TAction *actCopyToScratchPad;
+    TAction *actMoveToScratchPad;
+    TAction *actCopyToWorkspace;
+    TToolBar *tbrScratchPad;
+    TToolButton *ToolButton1;
+    TToolButton *ToolButton2;
+    TToolButton *ToolButton3;
+    TToolButton *ToolButton4;
+    TToolButton *ToolButton5;
+    TToolBar *tbrWorkspace;
+    TToolButton *ToolButton6;
+    TToolButton *ToolButton7;
+    TToolButton *ToolButton8;
+    TToolButton *ToolButton9;
+    TToolButton *ToolButton10;
+    TToolButton *ToolButton11;
+    TMenuItem *N3;
+    TMenuItem *mnuWSToggleToolbar;
+    TMenuItem *N4;
+    TMenuItem *mnuSPToggleToolbar;
+    TToolButton *ToolButton12;
+    TToolButton *ToolButton13;
+    TMenuItem *mnuSPToggleGrid;
+    TAction *actSPToggleGrid;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actLineExecute(TObject *Sender);
@@ -98,6 +136,14 @@ __published:    // IDE-managed Components
     void __fastcall pgcAssetsResize(TObject *Sender);
     void __fastcall imgWorkspaceMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate);
     void __fastcall imgWorkspaceMouseEnter(TObject *Sender);
+    void __fastcall actCopyToScratchPadExecute(TObject *Sender);
+    void __fastcall actMoveToScratchPadExecute(TObject *Sender);
+    void __fastcall actCopyToWorkspaceExecute(TObject *Sender);
+    void __fastcall actDuplicateExecute(TObject *Sender);
+    void __fastcall actDeleteExecute(TObject *Sender);
+    void __fastcall mnuWSToggleToolbarClick(TObject *Sender);
+    void __fastcall mnuSPToggleToolbarClick(TObject *Sender);
+    void __fastcall actSPToggleGridExecute(TObject *Sender);
 
 private:    // User declarations
     TiledMapDocument*           m_Document;
@@ -105,6 +151,7 @@ private:    // User declarations
     std::unique_ptr<TileEditor> m_ScratchPad;
     std::map<String, TAction*>  m_ActionMap;        // a map of actions; used by generic messaging to handle zoom in/out/reset, undo/redo
     std::list<WinControlEraseHandler> m_EraseHandlers;
+    TLMDDockPanel*              m_ActivePanel;
 
             void    __fastcall  Initialise();
             void    __fastcall  RefreshAssets();

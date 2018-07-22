@@ -65,8 +65,6 @@ private:
     __property  bool                IsDirty = { read = m_Dirty, write = m_Dirty };
 
     void                __fastcall  Get(const TRect& rect, EntityList& entities) const;
-    void                __fastcall  Add(EntityList& entities);
-    void                __fastcall  Remove(const TRect& rect);
 
 public:
 
@@ -80,7 +78,10 @@ public:
     void                __fastcall  Refresh();
 
     void                __fastcall  SetEntities(const EntityList& entities);
-    const EntityList&   __fastcall  GetEntities() const  ;
+    const EntityList&   __fastcall  GetEntities() const;
+    void                __fastcall  Add(const EntityList& entities);
+    EntityList          __fastcall  GetSelection() const;
+    void                __fastcall  DeleteSelection();
 
     __property  TEMode              Mode = { read = m_Mode, write = m_Mode };
     __property  TSize               Size = { write = SetSize };
