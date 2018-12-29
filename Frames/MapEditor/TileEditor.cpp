@@ -283,6 +283,11 @@ void __fastcall TileEditor::SetTile0Id(unsigned int id)
     Clear();
 }
 //---------------------------------------------------------------------------
+void __fastcall TileEditor::SetSelectedEntity(unsigned int id)
+{
+	m_SelectedEntity = id;
+}
+//---------------------------------------------------------------------------
 void __fastcall TileEditor::UpdateMap()
 {
     // update the content

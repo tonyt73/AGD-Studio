@@ -10,33 +10,38 @@ static int g_NextAssetId = 0;
 //---------------------------------------------------------------------------
 __fastcall TfrmAssetSelection::TfrmAssetSelection(TComponent* Owner)
 : TFrame(Owner)
+, FOnImageClick(nullptr)
 {
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmAssetSelection::Clear()
 {
-    for (auto c = panList->ControlCount - 1; c >= 0 ; c--)
-    {
-        auto cc = dynamic_cast<TfrmLabelledImage*>(panList->Controls[c]);
-        if (cc)
-        {
-            delete cc;
-        }
-    }
+	for (auto c = panList->ControlCount - 1; c >= 0 ; c--)
+	{
+		auto cc = dynamic_cast<TfrmLabelledImage*>(panList->Controls[c]);
+		if (cc)
+		{
+			delete cc;
+		}
+	}
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmAssetSelection::Add(ImageDocument* image)
 {
-    auto control = new TfrmLabelledImage(this);
-    control->Name = "LabelledImage" + IntToStr(++g_NextAssetId);
-    control->Parent = panList;
-    control->Image = image;
-    control->OnSelectedClick = OnImageClick;
+	auto control = new TfrmLabelledImage(this);
+	control->Name = "LabelledImage" + IntToStr(++g_NextAssetId);
+	control->Parent = panList;
+	control->Image = image;
+	control->OnSelectedClick = OnImageClick;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmAssetSelection::OnImageClick(TObject* Sender)
 {
-    int a = 0;
+	auto image = dynamic_cast<TfrmLabelledImage*>(Sender);
+	if (image != nullptr && FOnImageClick != nullptr)
+	{
+		FOnImageClick(image->Image);
+	}
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmAssetSelection::ScrollBox1MouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled)

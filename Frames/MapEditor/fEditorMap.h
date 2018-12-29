@@ -93,26 +93,28 @@ __published:    // IDE-managed Components
     TAction *actMoveToScratchPad;
     TAction *actCopyToWorkspace;
     TToolBar *tbrScratchPad;
-    TToolButton *ToolButton1;
+    TToolButton *btnScratchCopyFrom;
     TToolButton *ToolButton2;
-    TToolButton *ToolButton3;
+    TToolButton *btnScratchDuplicate;
     TToolButton *ToolButton4;
-    TToolButton *ToolButton5;
+    TToolButton *btnScratchDelete;
     TToolBar *tbrWorkspace;
-    TToolButton *ToolButton6;
-    TToolButton *ToolButton7;
+    TToolButton *btnScratchCopyTo;
+    TToolButton *btnScratchMoveTo;
     TToolButton *ToolButton8;
-    TToolButton *ToolButton9;
+    TToolButton *btnViewDuplicate;
     TToolButton *ToolButton10;
-    TToolButton *ToolButton11;
+    TToolButton *btnViewDelete;
     TMenuItem *N3;
     TMenuItem *mnuWSToggleToolbar;
     TMenuItem *N4;
     TMenuItem *mnuSPToggleToolbar;
     TToolButton *ToolButton12;
-    TToolButton *ToolButton13;
+    TToolButton *btnScratchGridTile;
     TMenuItem *mnuSPToggleGrid;
-    TAction *actSPToggleGrid;
+	TAction *actSPToggleTileGrid;
+	TAction *actSPToggleRoomGrid;
+    TToolButton *btnScratchGridRoom;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actLineExecute(TObject *Sender);
@@ -143,8 +145,9 @@ __published:    // IDE-managed Components
     void __fastcall actDeleteExecute(TObject *Sender);
     void __fastcall mnuWSToggleToolbarClick(TObject *Sender);
     void __fastcall mnuSPToggleToolbarClick(TObject *Sender);
-    void __fastcall actSPToggleGridExecute(TObject *Sender);
+    void __fastcall actSPToggleTileGridExecute(TObject *Sender);
     void __fastcall pgcAssetsChange(TObject *Sender);
+	void __fastcall actSPToggleRoomGridExecute(TObject *Sender);
 
 private:    // User declarations
     TiledMapDocument*           m_Document;
@@ -159,7 +162,8 @@ private:    // User declarations
             bool    __fastcall  IsActive() const;
             void    __fastcall  OnEvent(const Event& event);
             void    __fastcall  OnMapResize(const OnMapResized& message);
-            void    __fastcall  ShowKeysHelp();
+			void 	__fastcall 	OnEntityClick(ImageDocument* document);
+			void    __fastcall  ShowKeysHelp();
 
 public:        // User declarations
                     __fastcall  TfrmEditorMap(TComponent* Owner);

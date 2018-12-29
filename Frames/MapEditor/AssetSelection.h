@@ -21,12 +21,18 @@ __published:	// IDE-managed Components
     void __fastcall ScrollBox1Resize(TObject *Sender);
     void __fastcall mnuToggleLabelsClick(TObject *Sender);
 private:	// User declarations
-    void    __fastcall  OnImageClick(TObject* Sender);
-public:		// User declarations
-            __fastcall  TfrmAssetSelection(TComponent* Owner);
+	void    __fastcall  OnImageClick(TObject* Sender);
 
-    void    __fastcall  Clear();
-    void    __fastcall  Add(ImageDocument* image);
+	typedef void __fastcall (__closure *TNotifyImageOnSelectionEvent)(ImageDocument* document);
+	TNotifyImageOnSelectionEvent    FOnImageClick;
+
+public:		// User declarations
+			__fastcall  TfrmAssetSelection(TComponent* Owner);
+
+	void    __fastcall  Clear();
+	void    __fastcall  Add(ImageDocument* image);
+
+	__property  TNotifyImageOnSelectionEvent    OnImageSelection = { read = FOnImageClick, write = FOnImageClick };
 };
 //---------------------------------------------------------------------------
 #endif
