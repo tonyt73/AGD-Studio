@@ -429,7 +429,7 @@ void __fastcall TfrmEditorCode::evEditorStatusChanged(TLMDCustomEditView *AView,
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorCode::OnEvent(const Event& event)
 {
-    if (evEditor->Focused() && m_ActionMap.count(event.Id) == 1)
+    if (evEditor != nullptr && evEditor->Focused() && m_ActionMap.count(event.Id) == 1)
     {
         m_ActionMap[event.Id]->Execute();
     }
