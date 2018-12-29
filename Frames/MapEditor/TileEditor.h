@@ -23,7 +23,7 @@ private:
 	TEMode                          m_Mode;         	// tool mode (pencil, line etc)
 	bool                            m_Dirty;            // flag: tool is dirty - map needs updating
 	const Agdx::GraphicsMode&       m_GraphicsMode; 	// the graphics mode used by the project
-	int                             m_Scale;        	// the scale factor of the content view on to the overlays view
+	float                           m_Scale;        	// the scale factor of the content view on to the overlays view
 	bool                            m_UsesGridTile; 	// flag: uses a tile grid
 	bool                            m_UsesGridRoom; 	// flag: uses a room grid
 	bool                            m_ShowGridTile; 	// flag: show tile grid
@@ -34,6 +34,7 @@ private:
 	TPoint                          m_Position;     	// offset into the view to render the workspace
 	TSize                           m_Size;         	// the number of tiles across and down of the area
 	TSize                           m_TileSize;     	// the size in pixels of a tile
+    TSize                           m_Rooms;            // the number of rooms across and down
 	MouseModes                      m_MouseMode;        //
 	MouseModes                      m_PrevMouseMode;    //
 	TPoint                          m_LastMouse;        //
@@ -44,18 +45,26 @@ private:
 	int                             m_SelectionCount;   // the number of entities selected
 	unsigned int                    m_Tile0Id;      	// tile 0 id
 	unsigned int                    m_SelectedEntity;	// selected entity id
+    bool                            m_ReadOnly;         // read only - no changes allowed - room selection only
+    TSize                           m_SelectedRoom;     // the X,Y of the room we are editing/selecting
 
+    void                __fastcall  CreateViewBitmap();
     void                __fastcall  OnEvent(const Event& event);
+    void                __fastcall  OnRoomSelected(const RoomSelected& event);
     void                __fastcall  Clear();
+    void                __fastcall  ClearSelection();
+    void                __fastcall  SelectRoom();
     void                __fastcall  ValidatePosition();
     TPoint              __fastcall  GetCursorPt(int X, int Y) const;
     bool                __fastcall  GetGridTile();
     bool                __fastcall  GetGridRoom();
     void                __fastcall  SetGridTile(bool value);
     void                __fastcall  SetGridRoom(bool value);
-    void                __fastcall  SetSize(TSize size);
+    void                __fastcall  SetRooms(TSize rooms);
 	void                __fastcall  SetTile0Id(unsigned int id);
 	void                __fastcall  SetSelectedEntity(unsigned int id);
+	void                __fastcall  SetSelectedRoom(TSize room);
+	void                __fastcall  SetReadOnly(bool state);
     void                __fastcall  UpdateMap();
     void                __fastcall  RefreshImages();
     void                __fastcall  DrawEntities(int filters);
@@ -69,7 +78,7 @@ private:
 
 public:
 
-                        __fastcall  TileEditor(TImage* const view, const TSize& size, bool usesGridTile, bool usesGridRoom, int border);
+                        __fastcall  TileEditor(TImage* const view, const TSize& rooms, bool usesGridTile, bool usesGridRoom, int border, bool readOnly = false);
                         __fastcall ~TileEditor();
 
     void                __fastcall  OnMouseDown(TMouseButton Button, TShiftState Shift, int X, int Y);
@@ -86,12 +95,14 @@ public:
     void                __fastcall  UnselectAll();
 
     __property  TEMode              Mode = { read = m_Mode, write = m_Mode };
-    __property  TSize               Size = { write = SetSize };
-    __property  unsigned int        Scale = { read = m_Scale, write = m_Scale };
+    __property  TSize               Rooms = { write = SetRooms };
+    __property  float               Scale = { read = m_Scale, write = m_Scale };
     __property  bool                GridTile = { read = m_ShowGridTile, write = SetGridTile };
     __property  bool                GridRoom = { read = m_ShowGridRoom, write = SetGridRoom };
     __property  unsigned int        Tile0Id = { read = m_Tile0Id, write = SetTile0Id };
 	__property  unsigned int        SelectedEntity = { read = m_SelectedEntity, write = SetSelectedEntity };
+    __property  TSize               SelectedRoom = { read = m_SelectedRoom, write = SetSelectedRoom };
+    __property  bool                ReadOnly = { read = m_ReadOnly, write = SetReadOnly };
 };
 //---------------------------------------------------------------------------
 #endif

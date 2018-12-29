@@ -43,14 +43,19 @@ void __fastcall TfrmEditorMap::Initialise()
 
     // create the tile editors
     // TODO: change the size to ???
-    m_Workspace = std::make_unique<TileEditor>(imgWorkspace, TSize(512,512), true, true, 128);
-    m_ScratchPad = std::make_unique<TileEditor>(imgScratchPad, TSize(128,128), true, true, 0);
+    m_Workspace = std::make_unique<TileEditor>(imgWorkspace, TSize(16,16), true, true, 128);
+    m_ScratchPad = std::make_unique<TileEditor>(imgScratchPad, TSize(8,8), true, true, 4);
+    m_RoomSelector = std::make_unique<TileEditor>(imgRoomSelector, TSize(16,16), false, true, 8, true);
     m_Workspace->Mode = TileEditor::temSelect;
 	m_ScratchPad->Mode = TileEditor::temSelect;
+	m_RoomSelector->Mode = TileEditor::temSelect;
 	m_ScratchPad->GridRoom = false;
+	m_RoomSelector->GridRoom = true;
+    m_RoomSelector->Scale = 0.5f;
     // and set their tile sets
     m_Workspace->SetEntities(m_Document->Get(meWorkspace));
     m_ScratchPad->SetEntities(m_Document->Get(meScratchPad));
+    m_RoomSelector->SetEntities(m_Document->Get(meWorkspace));
 
     // fix up the image flicker
     m_EraseHandlers.push_back(std::make_unique<TWinControlHandler>(panWorkspaceView));
@@ -156,6 +161,21 @@ void __fastcall TfrmEditorMap::imgWorkspaceMouseUp(TObject *Sender, TMouseButton
     m_Document->Set(meWorkspace, m_Workspace->GetEntities());
 }
 //---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::imgRoomSelectorMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
+{
+    m_RoomSelector->OnMouseDown(Button, Shift, X, Y);
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::imgRoomSelectorMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
+{
+    m_RoomSelector->OnMouseMove(Shift, X, Y);
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::imgRoomSelectorMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
+{
+    m_RoomSelector->OnMouseUp(Button, Shift, X, Y);
+}
+//---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::imgScratchPadMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
 {
     m_ScratchPad->OnMouseDown(Button,Shift, X, Y);
@@ -224,6 +244,10 @@ void __fastcall TfrmEditorMap::OnEvent(const Event& event)
     {
         m_Workspace->Refresh();
         m_ScratchPad->Refresh();
+        if (imgRoomSelector->Visible)
+        {
+            m_RoomSelector->Refresh();
+        }
     }
     else if (event.Id == "editor.show")
     {
@@ -242,6 +266,7 @@ void __fastcall TfrmEditorMap::OnMapResize(const OnMapResized& message)
 void __fastcall TfrmEditorMap::panWorkspaceViewResize(TObject *Sender)
 {
     m_Workspace->Refresh();
+    m_RoomSelector->Refresh();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::panScratchPadViewResize(TObject *Sender)
@@ -395,6 +420,17 @@ void __fastcall TfrmEditorMap::OnEntityClick(ImageDocument* document)
 {
 	m_Workspace->SelectedEntity = document->Id;
 	m_ScratchPad->SelectedEntity = document->Id;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::actToggleEditModeExecute(TObject *Sender)
+{
+    imgRoomSelector->Visible = actToggleEditMode->Checked;
+    splRoomSelector->Visible = actToggleEditMode->Checked;
+    splRoomSelector->Top = imgRoomSelector->Top - 8;
+    m_Workspace->ReadOnly = actToggleEditMode->Checked;
+    m_Workspace->Rooms = actToggleEditMode->Checked ? TSize(1, 1) : TSize(16, 16);
+    m_Workspace->SetEntities(m_Document->Get(actToggleEditMode->Checked ? meRoom : meWorkspace));
+    m_RoomSelector->Refresh();
 }
 //---------------------------------------------------------------------------
 

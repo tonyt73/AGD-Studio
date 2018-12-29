@@ -227,7 +227,7 @@ void __fastcall TiledMapDocument::OnEndObject(const String& object)
     }
 }
 //---------------------------------------------------------------------------
-const EntityList& __fastcall TiledMapDocument::Get(MapEntities type) const
+const EntityList& __fastcall TiledMapDocument::Get(MapEntities type, int room) const
 {
     if (type == meWorkspace)
     {
@@ -237,10 +237,15 @@ const EntityList& __fastcall TiledMapDocument::Get(MapEntities type) const
     {
         return m_ScratchPad;
     }
+    else if (type == meRoom)
+    {
+        // TODO: Place the room entities into the list
+        return m_Room;
+    }
     assert(0);
 }
 //---------------------------------------------------------------------------
-void __fastcall TiledMapDocument::Set(MapEntities type, const EntityList& entities)
+void __fastcall TiledMapDocument::Set(MapEntities type, const EntityList& entities, int room)
 {
     if (type == meWorkspace)
     {
@@ -251,6 +256,12 @@ void __fastcall TiledMapDocument::Set(MapEntities type, const EntityList& entiti
     {
         m_ScratchPad.clear();
         m_ScratchPad = entities;
+    }
+    else if (type == meRoom)
+    {
+        m_Room.clear();
+        m_Room = entities;
+        // TODO: place the new entities into the room
     }
     else
     {

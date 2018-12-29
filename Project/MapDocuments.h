@@ -14,7 +14,7 @@ protected:
     TPoint          m_DragPt;       // the offset of the entity been dragged
     unsigned int    m_Id;           // the document id
     unsigned int    m_LoadId;
-    ImageDocument*  m_Document;     // the document
+    ImageDocument*  m_Document;     // the image document we represent
     bool            m_Dirty;        // flag: entity needs to be rendered
     bool            m_Selected;     // flag: entity is selected
 
@@ -49,13 +49,14 @@ public:
 };
 typedef std::vector<Entity>     EntityList;
 //---------------------------------------------------------------------------
-enum MapEntities { meWorkspace, meScratchPad };
+enum MapEntities { meWorkspace, meScratchPad, meRoom };
 //---------------------------------------------------------------------------
 class TiledMapDocument : public Document
 {
 protected:
     EntityList                      m_Workspace;
     EntityList                      m_ScratchPad;
+    EntityList                      m_Room;
 
             int                     m_Across;
             int                     m_Down;
@@ -69,14 +70,15 @@ protected:
             void        __fastcall  OnEndObject(const String& object);
             void        __fastcall  OnDocumentChanged(const OnDocumentChange<String>& message);
             void        __fastcall  DoSave();
+            void        __fastcall  GetRoom(int room);
 
 public:
                         __fastcall  TiledMapDocument(const String& name);
                         __fastcall ~TiledMapDocument();
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new TiledMapDocument(name); };
 
-    const   EntityList& __fastcall  Get(MapEntities type) const;
-            void        __fastcall  Set(MapEntities type, const EntityList& entities);
+    const   EntityList& __fastcall  Get(MapEntities type, int room = 0) const;
+            void        __fastcall  Set(MapEntities type, const EntityList& entities, int room = 0);
 
 __published:
     __property          int         RoomsAcross     = { read = m_Across         , write = m_Across          };

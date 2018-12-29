@@ -7,9 +7,9 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall TileEditor::TileEditor(TImage* const view, const TSize& size, bool usesGridTile, bool usesGridRoom, int border)
+__fastcall TileEditor::TileEditor(TImage* const view, const TSize& rooms, bool usesGridTile, bool usesGridRoom, int border, bool readOnly)
 : m_View(view)
-, m_Size(size)
+, m_Rooms(rooms)
 , m_UsesGridTile(usesGridTile)
 , m_UsesGridRoom(usesGridRoom)
 , m_ShowGridTile(false)
@@ -24,23 +24,35 @@ __fastcall TileEditor::TileEditor(TImage* const view, const TSize& size, bool us
 , m_Tile0Window(nullptr)
 , m_TileSize(theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum)
 , m_GraphicsMode(*(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()))
+, m_ReadOnly(readOnly)
 {
-    const auto& wi = theDocumentManager.ProjectConfig()->Window;
-    m_Content = std::make_unique<TBitmap>();
-    m_Content->PixelFormat = pf32bit;
-    auto cw = wi.Width  * m_TileSize.cx * 16;   // 16 rooms across
-    auto ch = wi.Height * m_TileSize.cy * 16;   // 16 rooms down
-    m_Content->Width  = (m_Border * 2) + cw;    // 16 x 16 rooms
-    m_Content->Height = (m_Border * 2) + ch;
+    m_SelectedRoom.cx = 0;
+    m_SelectedRoom.cy = 0;
 
+    CreateViewBitmap();
     Clear();
 
     ::Messaging::Bus::Subscribe<Event>(OnEvent);
+    ::Messaging::Bus::Subscribe<RoomSelected>(OnRoomSelected);
 }
 //---------------------------------------------------------------------------
 __fastcall TileEditor::~TileEditor()
 {
     ::Messaging::Bus::Unsubscribe<Event>(OnEvent);
+    ::Messaging::Bus::Unsubscribe<RoomSelected>(OnRoomSelected);
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::CreateViewBitmap()
+{
+    const auto& wi = theDocumentManager.ProjectConfig()->Window;
+    m_Size.cx = wi.Width;
+    m_Size.cy = wi.Height;
+    m_Content = std::make_unique<TBitmap>();
+    m_Content->PixelFormat = pf32bit;
+    auto cw = wi.Width  * m_TileSize.cx * m_Rooms.cx;
+    auto ch = wi.Height * m_TileSize.cy * m_Rooms.cy;
+    m_Content->Width  = max(Screen->Width , (int)((m_Border * 2) + cw));
+    m_Content->Height = max(Screen->Height, (int)((m_Border * 2) + ch));
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::OnEvent(const Event& event)
@@ -48,6 +60,15 @@ void __fastcall TileEditor::OnEvent(const Event& event)
     if (event.Id == "image.modified" || event.Id == "document.added" || event.Id == "document.removed")
     {
         UpdateMap();
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::OnRoomSelected(const RoomSelected& event)
+{
+    if (event.Id == "room.selected" && m_SelectedRoom != event.Room && !m_ReadOnly)
+    {
+        // TODO: Get the rooms entities
+
     }
 }
 //---------------------------------------------------------------------------
@@ -73,10 +94,19 @@ void __fastcall TileEditor::Clear()
     }
 }
 //---------------------------------------------------------------------------
+void __fastcall TileEditor::ClearSelection()
+{
+    for (auto& e : m_Entities)
+    {
+        e.Selected = false;
+    }
+    m_SelectionCount += 0;
+}
+//---------------------------------------------------------------------------
 void __fastcall TileEditor::ValidatePosition()
 {
-    m_Position.X = Max(0, Min(m_Content->Width  - (m_View->Width  / m_Scale), m_Position.X));
-    m_Position.Y = Max(0, Min(m_Content->Height - (m_View->Height / m_Scale), m_Position.Y));
+    m_Position.X = Max(0, Min(m_Content->Width  - (int)(m_View->Width  / m_Scale), m_Position.X));
+    m_Position.Y = Max(0, Min(m_Content->Height - (int)(m_View->Height / m_Scale), m_Position.Y));
 }
 //---------------------------------------------------------------------------
 TPoint __fastcall TileEditor::GetCursorPt(int X, int Y) const
@@ -88,7 +118,16 @@ TPoint __fastcall TileEditor::GetCursorPt(int X, int Y) const
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::OnMouseDown(TMouseButton Button, TShiftState Shift, int X, int Y)
 {
-    if (m_SelectionCount > 0 && Button == mbLeft && !Shift.Contains(ssCtrl) && !Shift.Contains(ssShift))
+    if (m_ReadOnly && !Shift.Contains(ssCtrl) && !Shift.Contains(ssShift) && Button == mbLeft)
+    {
+        // work out the room number
+        const auto& wi = theDocumentManager.ProjectConfig()->Window;
+        X = (X - m_Border) / (m_TileSize.cx * wi.Width  * m_Scale);
+        Y = (Y - m_Border) / (m_TileSize.cy * wi.Height * m_Scale);
+        m_SelectedRoom = TSize(X, Y);
+        SelectRoom();
+    }
+    else if (m_SelectionCount > 0 && Button == mbLeft && !Shift.Contains(ssCtrl) && !Shift.Contains(ssShift))
     {
         m_SelectionMove = true;
         m_LastMouse.X = X;
@@ -143,7 +182,7 @@ void __fastcall TileEditor::OnMouseMove(TShiftState Shift, int X, int Y)
         }
         UpdateMap();
     }
-    else
+    else if (!m_ReadOnly)
     {
         switch (m_MouseMode)
         {
@@ -231,7 +270,7 @@ void __fastcall TileEditor::OnMouseUp(TMouseButton Button, TShiftState Shift, in
     {
         m_MousePanning = false;
     }
-    else
+    else if (!m_ReadOnly)
     {
         m_PrevMouseMode = m_MouseMode;
         m_MouseMode = mmTool;
@@ -252,10 +291,17 @@ void __fastcall TileEditor::SetGridRoom(bool value)
     Refresh();
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::SetSize(TSize size)
+void __fastcall TileEditor::SetRooms(TSize rooms)
 {
-    m_Size = size;
-    Refresh();
+    //if (m_Rooms != rooms)
+    {
+        m_Rooms = rooms;
+        m_SelectedRoom.cx = 0;
+        m_SelectedRoom.cy = 0;
+        CreateViewBitmap();
+        Clear();
+        UpdateMap();
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::SetTile0Id(unsigned int id)
@@ -306,9 +352,9 @@ void __fastcall TileEditor::DrawGrids() const
     auto bx = m_Border * m_Scale;
 
     auto xs =  (m_Border - m_Position.X) * m_Scale;
-    auto xe = xs + ((m_Content->Width  - (m_Border * 2)) * m_Scale);
+    auto xe = xs + (((m_Rooms.cx * m_Size.cx * m_TileSize.cx) - (m_Border * 2)) * m_Scale);
     auto ys =  (m_Border - m_Position.Y) * m_Scale;
-    auto ye = ys + ((m_Content->Height - (m_Border * 2)) * m_Scale);
+    auto ye = ys + (((m_Rooms.cy * m_Size.cy * m_TileSize.cy) - (m_Border * 2)) * m_Scale);
     if (m_UsesGridTile && m_ShowGridTile)
     {
         auto sx = m_TileSize.cx * m_Scale * scalarX;
@@ -451,10 +497,12 @@ void __fastcall TileEditor::RefreshImages()
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::SetEntities(const EntityList& entities)
 {
+    m_Entities.clear();
     m_Entities = entities;
     for (auto& e : m_Entities) e.Dirty = true;
     // render all the images
     RefreshImages();
+    UpdateMap();
 }
 //---------------------------------------------------------------------------
 const EntityList& __fastcall TileEditor::GetEntities() const
@@ -523,6 +571,47 @@ void __fastcall TileEditor::UnselectAll()
 {
     m_SelectionCount = 0;
     for (auto& e : m_Entities) e.Selected = false;
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::SetSelectedRoom(TSize room)
+{
+    if (0 <= room.cx && room.cx < m_Rooms.cx && 0 <= room.cy && room.cy < m_Rooms.cy)
+    {
+        m_SelectedRoom = room;
+        SelectRoom();
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::SetReadOnly(bool state)
+{
+    m_ReadOnly = state;
+    if (m_ReadOnly)
+    {
+        m_UsesGridRoom = true;
+        m_ShowGridRoom = true;
+        SelectRoom();
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::SelectRoom()
+{
+    ClearSelection();
+    const auto& wi = theDocumentManager.ProjectConfig()->Window;
+    auto minx = m_SelectedRoom.cx * m_TileSize.cx * wi.Width;
+    auto miny = m_SelectedRoom.cy * m_TileSize.cy * wi.Height;
+    auto maxx = minx + (m_TileSize.cx * wi.Width);
+    auto maxy = miny + (m_TileSize.cy * wi.Height);
+
+    for (auto& e : m_Entities)
+    {
+        auto pt = e.Pt;
+        if (minx <=  pt.x && pt.x < maxx && miny <= pt.y && pt.y < maxy)
+        {
+            e.Selected = true;
+        }
+    }
+    Messaging::Bus::Publish<RoomSelected>(RoomSelected(m_SelectedRoom));
+    UpdateMap();
 }
 //---------------------------------------------------------------------------
 

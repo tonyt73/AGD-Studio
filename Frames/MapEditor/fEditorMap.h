@@ -115,6 +115,11 @@ __published:    // IDE-managed Components
 	TAction *actSPToggleTileGrid;
 	TAction *actSPToggleRoomGrid;
     TToolButton *btnScratchGridRoom;
+    TToolButton *ToolButton1;
+    TToolButton *btnEditMode;
+    TAction *actToggleEditMode;
+    TSplitter *splRoomSelector;
+    TImage *imgRoomSelector;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actLineExecute(TObject *Sender);
@@ -148,11 +153,20 @@ __published:    // IDE-managed Components
     void __fastcall actSPToggleTileGridExecute(TObject *Sender);
     void __fastcall pgcAssetsChange(TObject *Sender);
 	void __fastcall actSPToggleRoomGridExecute(TObject *Sender);
+    void __fastcall actToggleEditModeExecute(TObject *Sender);
+    void __fastcall imgRoomSelectorMouseDown(TObject *Sender, TMouseButton Button,
+          TShiftState Shift, int X, int Y);
+    void __fastcall imgRoomSelectorMouseMove(TObject *Sender, TShiftState Shift,
+          int X, int Y);
+    void __fastcall imgRoomSelectorMouseUp(TObject *Sender, TMouseButton Button,
+          TShiftState Shift, int X, int Y);
+
 
 private:    // User declarations
     TiledMapDocument*           m_Document;
     std::unique_ptr<TileEditor> m_Workspace;
     std::unique_ptr<TileEditor> m_ScratchPad;
+    std::unique_ptr<TileEditor> m_RoomSelector;
     std::map<String, TAction*>  m_ActionMap;        // a map of actions; used by generic messaging to handle zoom in/out/reset, undo/redo
     std::list<WinControlEraseHandler> m_EraseHandlers;
     TLMDDockPanel*              m_ActivePanel;
