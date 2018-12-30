@@ -281,13 +281,13 @@ object frmEditorMap: TfrmEditorMap
           object btnScratchGridRoom: TToolButton
             Left = 96
             Top = 0
-            Action = actSPToggleRoomGrid
+            Action = actSPGridRoom
             Style = tbsCheck
           end
           object btnScratchGridTile: TToolButton
             Left = 120
             Top = 0
-            Action = actSPToggleTileGrid
+            Action = actSPGridTile
             ParentShowHint = False
             ShowHint = True
             Style = tbsCheck
@@ -427,6 +427,24 @@ object frmEditorMap: TfrmEditorMap
             ParentShowHint = False
             ShowHint = True
           end
+          object ToolButton3: TToolButton
+            Left = 144
+            Top = 0
+            Width = 8
+            Caption = 'ToolButton3'
+            ImageIndex = 3
+            Style = tbsSeparator
+          end
+          object ToolButton5: TToolButton
+            Left = 152
+            Top = 0
+            Action = actWSGridRoom
+          end
+          object ToolButton6: TToolButton
+            Left = 176
+            Top = 0
+            Action = actWSGridTile
+          end
         end
       end
       object Panel1: TPanel
@@ -513,24 +531,6 @@ object frmEditorMap: TfrmEditorMap
           DisabledImages = tbrImagesDisabled
           Images = tbrImagesEnabled
           TabOrder = 0
-          object btnGridRoom: TToolButton
-            Left = 0
-            Top = 0
-            Action = actGridRoom
-            AllowAllUp = True
-            ParentShowHint = False
-            ShowHint = True
-            Style = tbsCheck
-          end
-          object btnGridTile: TToolButton
-            Left = 40
-            Top = 0
-            Action = actGridTile
-            AllowAllUp = True
-            ParentShowHint = False
-            ShowHint = True
-            Style = tbsCheck
-          end
         end
       end
     end
@@ -553,7 +553,7 @@ object frmEditorMap: TfrmEditorMap
     Left = 124
     Top = 65
     Bitmap = {
-      494C010106006000140220002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010106006000180220002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004000000001002000000000000080
       0000000000000000000000000000000000000000000000000006000000110000
       00110000000B00000011000000110000000B00000011000000110000000B0000
@@ -1624,7 +1624,7 @@ object frmEditorMap: TfrmEditorMap
     Left = 220
     Top = 65
     Bitmap = {
-      494C010106006000240220002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010106006000280220002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004000000001002000000000000080
       0000000000000000000000000000000000000000000000000006000000110000
       00110000000B00000011000000110000000B00000011000000110000000B0000
@@ -2723,23 +2723,6 @@ object frmEditorMap: TfrmEditorMap
       ShortCut = 32820
       OnExecute = actShapeExecute
     end
-    object actGridTile: TAction
-      AutoCheck = True
-      Caption = 'actGridTile'
-      Hint = 'Tile Grid Toggle'
-      ImageIndex = 4
-      ShortCut = 16455
-      OnExecute = actGridTileExecute
-    end
-    object actGridRoom: TAction
-      AutoCheck = True
-      Caption = 'actRoomCharacter'
-      Checked = True
-      Hint = 'Room Grid Toggle'
-      ImageIndex = 5
-      ShortCut = 24647
-      OnExecute = actGridRoomExecute
-    end
     object actZoomIn: TAction
       Caption = 'Zoom In'
       OnExecute = actZoomInExecute
@@ -2831,7 +2814,7 @@ object frmEditorMap: TfrmEditorMap
       OnClick = mnuSPToggleToolbarClick
     end
     object mnuSPToggleGrid: TMenuItem
-      Action = actSPToggleTileGrid
+      Action = actSPGridTile
       AutoCheck = True
     end
   end
@@ -2874,19 +2857,19 @@ object frmEditorMap: TfrmEditorMap
       ShortCut = 16421
       OnExecute = actCopyToWorkspaceExecute
     end
-    object actSPToggleTileGrid: TAction
+    object actSPGridTile: TAction
       AutoCheck = True
       Caption = 'Toggle Tile Grid'
       Hint = 'Toggle the tile grid'
       ImageIndex = 5
-      OnExecute = actSPToggleTileGridExecute
+      OnExecute = actSPGridTileExecute
     end
-    object actSPToggleRoomGrid: TAction
+    object actSPGridRoom: TAction
       AutoCheck = True
-      Caption = 'Toggle room grid'
+      Caption = 'Toggle Room Grid'
       Hint = 'Toggle the room grid'
       ImageIndex = 6
-      OnExecute = actSPToggleRoomGridExecute
+      OnExecute = actSPGridRoomExecute
     end
     object actToggleEditMode: TAction
       AutoCheck = True
@@ -2895,6 +2878,21 @@ object frmEditorMap: TfrmEditorMap
       ImageIndex = 7
       OnExecute = actToggleEditModeExecute
     end
+    object actWSGridRoom: TAction
+      AutoCheck = True
+      Caption = 'Toggle Room Grid'
+      Checked = True
+      Hint = 'Toggle the room grid'
+      ImageIndex = 6
+      OnExecute = actWSGridRoomExecute
+    end
+    object actWSGridTile: TAction
+      AutoCheck = True
+      Caption = 'Toggle Tile Grid'
+      Hint = 'Toggle the tile grid'
+      ImageIndex = 5
+      OnExecute = actWSGridTileExecute
+    end
   end
   object imgSmallIcons: TImageList
     ColorDepth = cd32Bit
@@ -2902,7 +2900,7 @@ object frmEditorMap: TfrmEditorMap
     Left = 343
     Top = 67
     Bitmap = {
-      494C01010800D000700010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010800D000740010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

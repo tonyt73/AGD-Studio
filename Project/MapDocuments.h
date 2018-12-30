@@ -49,14 +49,14 @@ public:
 };
 typedef std::vector<Entity>     EntityList;
 //---------------------------------------------------------------------------
-enum MapEntities { meWorkspace, meScratchPad, meRoom };
+enum MapEntities { meMap, meRoom, meScratchPad };
 //---------------------------------------------------------------------------
 class TiledMapDocument : public Document
 {
 protected:
-    EntityList                      m_Workspace;
-    EntityList                      m_ScratchPad;
+    EntityList                      m_Map;
     EntityList                      m_Room;
+    EntityList                      m_ScratchPad;
 
             int                     m_Across;
             int                     m_Down;
@@ -66,6 +66,7 @@ protected:
             int                     m_StartLocationY;
             TColor                  m_BackgroundColor;
             Entity                  m_EntityLoader;
+            TSize                   m_ActiveRoom;
 
             void        __fastcall  OnEndObject(const String& object);
             void        __fastcall  OnDocumentChanged(const OnDocumentChange<String>& message);
@@ -77,8 +78,8 @@ public:
                         __fastcall ~TiledMapDocument();
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new TiledMapDocument(name); };
 
-    const   EntityList& __fastcall  Get(MapEntities type, int room = 0) const;
-            void        __fastcall  Set(MapEntities type, const EntityList& entities, int room = 0);
+    const   EntityList& __fastcall  Get(MapEntities type, TSize room = TSize(0,0));
+            void        __fastcall  Set(MapEntities type, const EntityList& entities);
 
 __published:
     __property          int         RoomsAcross     = { read = m_Across         , write = m_Across          };

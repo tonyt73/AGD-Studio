@@ -15,7 +15,7 @@ __fastcall TileEditor::TileEditor(TImage* const view, const TSize& rooms, bool u
 , m_ShowGridTile(false)
 , m_ShowGridRoom(usesGridRoom)
 , m_Border(border)
-, m_Scale(2)
+, m_ScaleFactor(2)
 , m_MouseMode(mmTool)
 , m_MousePanning(false)
 , m_SelectionMove(false)
@@ -26,33 +26,32 @@ __fastcall TileEditor::TileEditor(TImage* const view, const TSize& rooms, bool u
 , m_GraphicsMode(*(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()))
 , m_ReadOnly(readOnly)
 {
-    m_SelectedRoom.cx = 0;
-    m_SelectedRoom.cy = 0;
+    Scale = m_ScaleFactor;
 
     CreateViewBitmap();
     Clear();
 
     ::Messaging::Bus::Subscribe<Event>(OnEvent);
-    ::Messaging::Bus::Subscribe<RoomSelected>(OnRoomSelected);
 }
 //---------------------------------------------------------------------------
 __fastcall TileEditor::~TileEditor()
 {
     ::Messaging::Bus::Unsubscribe<Event>(OnEvent);
-    ::Messaging::Bus::Unsubscribe<RoomSelected>(OnRoomSelected);
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::CreateViewBitmap()
 {
     const auto& wi = theDocumentManager.ProjectConfig()->Window;
-    m_Size.cx = wi.Width;
-    m_Size.cy = wi.Height;
+    m_WindowSize.cx = wi.Width;
+    m_WindowSize.cy = wi.Height;
     m_Content = std::make_unique<TBitmap>();
     m_Content->PixelFormat = pf32bit;
-    auto cw = wi.Width  * m_TileSize.cx * m_Rooms.cx;
-    auto ch = wi.Height * m_TileSize.cy * m_Rooms.cy;
-    m_Content->Width  = max(Screen->Width , (int)((m_Border * 2) + cw));
-    m_Content->Height = max(Screen->Height, (int)((m_Border * 2) + ch));
+    m_ContentSize.cx = wi.Width  * m_TileSize.cx * m_Rooms.cx + (m_BorderScaled.x * 2);
+    m_ContentSize.cy = wi.Height * m_TileSize.cy * m_Rooms.cy + (m_BorderScaled.y * 2);
+    m_Content->Width  = Screen->Width;
+    m_Content->Height = Screen->Height;
+    PatBlt(m_Content->Canvas->Handle, 0, 0, m_Content->Width, m_Content->Height, BLACKNESS);
+    m_ForceMapDraw = true;
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::OnEvent(const Event& event)
@@ -63,34 +62,22 @@ void __fastcall TileEditor::OnEvent(const Event& event)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::OnRoomSelected(const RoomSelected& event)
-{
-    if (event.Id == "room.selected" && m_SelectedRoom != event.Room && !m_ReadOnly)
-    {
-        // TODO: Get the rooms entities
-
-    }
-}
-//---------------------------------------------------------------------------
 void __fastcall TileEditor::Clear()
 {
+    PatBlt(m_Content->Canvas->Handle, m_BorderScaled.x, m_BorderScaled.y, m_Content->Width, m_Content->Height, BLACKNESS);
     if (m_Tile0Window)
     {
         // clear the map using tile 0's
         const auto& wi = theDocumentManager.ProjectConfig()->Window;
         auto cw = wi.Width  * m_TileSize.cx;
         auto ch = wi.Height * m_TileSize.cy;
-        for (auto y = 0; y < 16; y++)
+        for (auto y = m_BorderScaled.y; y < m_ContentSize.cy - (m_BorderScaled.y * 2); y += m_Tile0Window->Height)
         {
-            for (auto x = 0; x < 16; x++)
+            for (auto x = m_BorderScaled.x; x < m_ContentSize.cx - (m_BorderScaled.x * 2); x += m_Tile0Window->Width)
             {
-                BitBlt(m_Content->Canvas->Handle, x * cw, y * ch, m_Tile0Window->Width, m_Tile0Window->Height, m_Tile0Window->Canvas->Handle, 0, 0, SRCCOPY);
+                BitBlt(m_Content->Canvas->Handle, x, y, m_Tile0Window->Width, m_Tile0Window->Height, m_Tile0Window->Canvas->Handle, 0, 0, SRCCOPY);
             }
         }
-    }
-    else
-    {
-        PatBlt(m_Content->Canvas->Handle, 0, 0, m_Content->Width, m_Content->Height, BLACKNESS);
     }
 }
 //---------------------------------------------------------------------------
@@ -105,15 +92,22 @@ void __fastcall TileEditor::ClearSelection()
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::ValidatePosition()
 {
-    m_Position.X = Max(0, Min(m_Content->Width  - (int)(m_View->Width  / m_Scale), m_Position.X));
-    m_Position.Y = Max(0, Min(m_Content->Height - (int)(m_View->Height / m_Scale), m_Position.Y));
+    m_PositionMS.X = max(0, (int)min(m_ContentSize.cx - (int)(m_View->Width  / m_Scale.x), m_PositionMS.X));
+    m_PositionMS.Y = max(0, (int)min(m_ContentSize.cy - (int)(m_View->Height / m_Scale.y), m_PositionMS.Y));
 }
 //---------------------------------------------------------------------------
-TPoint __fastcall TileEditor::GetCursorPt(int X, int Y) const
+TPoint __fastcall TileEditor::MapToView(const TPoint& pt) const
 {
-    auto x = (X / m_Scale) - m_Border + m_Position.X;
-    auto y = (Y / m_Scale) - m_Border + m_Position.Y;
-    return TPoint(x,y);
+    auto x = m_Border + ((pt.x - m_PositionMS.X) * m_Scale.x);
+    auto y = m_Border + ((pt.y - m_PositionMS.Y) * m_Scale.y);
+    return TPoint(x, y);
+}
+//---------------------------------------------------------------------------
+TPoint __fastcall TileEditor::ViewToMap(int X, int Y) const
+{
+    auto pt = TPoint(X / m_Scale.x, Y / m_Scale.y);
+    auto bt = TPoint(m_BorderScaled.x, m_BorderScaled.y);
+    return (m_PositionMS + (pt - bt));
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::OnMouseDown(TMouseButton Button, TShiftState Shift, int X, int Y)
@@ -122,10 +116,9 @@ void __fastcall TileEditor::OnMouseDown(TMouseButton Button, TShiftState Shift, 
     {
         // work out the room number
         const auto& wi = theDocumentManager.ProjectConfig()->Window;
-        X = (X - m_Border) / (m_TileSize.cx * wi.Width  * m_Scale);
-        Y = (Y - m_Border) / (m_TileSize.cy * wi.Height * m_Scale);
-        m_SelectedRoom = TSize(X, Y);
-        SelectRoom();
+        X = ((m_PositionMS.X * m_Scale.x) + X) / (m_TileSize.cx * wi.Width  * m_Scale.x);
+        Y = ((m_PositionMS.Y * m_Scale.y) + Y) / (m_TileSize.cy * wi.Height * m_Scale.y);
+        SelectRoom(TSize(X, Y));
     }
     else if (m_SelectionCount > 0 && Button == mbLeft && !Shift.Contains(ssCtrl) && !Shift.Contains(ssShift))
     {
@@ -150,37 +143,51 @@ void __fastcall TileEditor::OnMouseDown(TMouseButton Button, TShiftState Shift, 
         // start group selecting the entities
         m_SelectionCount = 0;
         m_MouseMode = mmGroupSelect;
-        m_GroupSelectS = GetCursorPt(X, Y);
-        m_GroupSelectE = m_GroupSelectS;
-        m_GroupSelectS.X = m_GroupSelectS.X - (m_GroupSelectS.X % m_TileSize.cx);
-        m_GroupSelectS.Y = m_GroupSelectS.Y - (m_GroupSelectS.Y % m_TileSize.cy);
-        m_GroupSelectE.X = m_GroupSelectE.X - (m_GroupSelectE.X % m_TileSize.cx) + m_TileSize.cx;
-        m_GroupSelectE.Y = m_GroupSelectE.Y - (m_GroupSelectE.Y % m_TileSize.cy) + m_TileSize.cy;
+        m_GroupSelectSrtMS = ViewToMap(X, Y);
+        m_GroupSelectEndMS = m_GroupSelectSrtMS;
+        m_GroupSelectSrtMS.X = Snap(m_GroupSelectSrtMS.X, m_TileSize.cx);
+        m_GroupSelectSrtMS.Y = Snap(m_GroupSelectSrtMS.Y, m_TileSize.cy);
+        m_GroupSelectEndMS.X = Snap(m_GroupSelectEndMS.X, m_TileSize.cx);
+        m_GroupSelectEndMS.Y = Snap(m_GroupSelectEndMS.Y, m_TileSize.cy);
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::OnMouseMove(TShiftState Shift, int X, int Y)
 {
+    auto dPt = TPoint((X - m_LastMouse.X) / m_Scale.x, (Y - m_LastMouse.Y) / m_Scale.y);
     if (m_MousePanning)
     {
-        m_Position.X -= (X - m_LastMouse.X) / m_Scale;
-        m_Position.Y -= (Y - m_LastMouse.Y) / m_Scale;
+        m_PositionMS -= dPt;
         m_LastMouse.X = X;
         m_LastMouse.Y = Y;
         Refresh();
     }
     else if (m_SelectionMove)
     {
-        auto dx = (X - m_LastMouse.X) / m_Scale;
-        auto dy = (Y - m_LastMouse.Y) / m_Scale;
+        auto outOfBounds = false;
         for (auto& e : m_Entities)
         {
             if (e.Selected)
             {
-                e.DragPt = TPoint(dx, dy);
+                auto pt = e.Pt - e.DragPt + dPt;
+                if (pt.x < 0 || pt.y < 0 || (pt.x + m_TileSize.cx) >= (m_ContentSize.cx - (m_BorderScaled.x * 2)) || (pt.y + m_TileSize.cy) >= (m_ContentSize.cy - (m_BorderScaled.y * 2)))
+                {
+                    outOfBounds = true;
+                    break;
+                }
             }
         }
-        UpdateMap();
+        if (!outOfBounds)
+        {
+            for (auto& e : m_Entities)
+            {
+                if (e.Selected)
+                {
+                    e.DragPt = dPt;
+                }
+            }
+            UpdateMap();
+        }
     }
     else if (!m_ReadOnly)
     {
@@ -191,7 +198,7 @@ void __fastcall TileEditor::OnMouseMove(TShiftState Shift, int X, int Y)
                 {
                     UnselectAll();
                     // find an object that intersects the mouse
-                    auto pt = GetCursorPt(X, Y);
+                    auto pt = ViewToMap(X, Y);
                     // select sprites or objects first
                     for (auto& e : m_Entities)
                     {
@@ -224,13 +231,13 @@ void __fastcall TileEditor::OnMouseMove(TShiftState Shift, int X, int Y)
                 break;
             case mmGroupSelect:
                 {
-                    m_GroupSelectE = GetCursorPt(X, Y);
-                    m_GroupSelectE.X = m_GroupSelectE.X - (m_GroupSelectE.X % m_TileSize.cx) + m_TileSize.cx;
-                    m_GroupSelectE.Y = m_GroupSelectE.Y - (m_GroupSelectE.Y % m_TileSize.cy) + m_TileSize.cy;
-                    auto minX = Min((int)m_GroupSelectS.X, (int)m_GroupSelectE.X);
-                    auto maxX = Max((int)m_GroupSelectS.X, (int)m_GroupSelectE.X);
-                    auto minY = Min((int)m_GroupSelectS.Y, (int)m_GroupSelectE.Y);
-                    auto maxY = Max((int)m_GroupSelectS.Y, (int)m_GroupSelectE.Y);
+                    m_GroupSelectEndMS = ViewToMap(X, Y);
+                    m_GroupSelectEndMS.X = Snap(m_GroupSelectEndMS.X, m_TileSize.cx) + m_TileSize.cx;
+                    m_GroupSelectEndMS.Y = Snap(m_GroupSelectEndMS.Y, m_TileSize.cy) + m_TileSize.cy;
+                    auto minX = min(m_GroupSelectSrtMS.X, m_GroupSelectEndMS.X);
+                    auto maxX = max(m_GroupSelectSrtMS.X, m_GroupSelectEndMS.X);
+                    auto minY = min(m_GroupSelectSrtMS.Y, m_GroupSelectEndMS.Y);
+                    auto maxY = max(m_GroupSelectSrtMS.Y, m_GroupSelectEndMS.Y);
                     if (minX != maxX && minY != maxY)
                     {
                         for (auto& e : m_Entities)
@@ -259,8 +266,8 @@ void __fastcall TileEditor::OnMouseUp(TMouseButton Button, TShiftState Shift, in
             if (e.Selected)
             {
                 // TODO: Some machines with hardware sprites might not have a grid limitation
-                //       Show add this to the machine config and only apply if needed
-                e.Pt = TPoint(((int)(e.Pt.X / m_TileSize.cx)) * m_TileSize.cx, ((int)(e.Pt.Y / m_TileSize.cy)) * m_TileSize.cy);
+                //       Should add this to the machine config and only apply if needed
+                e.Pt = TPoint(Snap(e.Pt.X, m_TileSize.cx), Snap(e.Pt.Y, m_TileSize.cy));
                 e.DragPt = TPoint();
             }
         }
@@ -272,6 +279,10 @@ void __fastcall TileEditor::OnMouseUp(TMouseButton Button, TShiftState Shift, in
     }
     else if (!m_ReadOnly)
     {
+        if (Button == mbLeft && Shift.Contains(ssCtrl) && m_SelectionCount == 0)
+        {
+            UnselectAll();
+        }
         m_PrevMouseMode = m_MouseMode;
         m_MouseMode = mmTool;
         Refresh();
@@ -293,15 +304,11 @@ void __fastcall TileEditor::SetGridRoom(bool value)
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::SetRooms(TSize rooms)
 {
-    //if (m_Rooms != rooms)
-    {
-        m_Rooms = rooms;
-        m_SelectedRoom.cx = 0;
-        m_SelectedRoom.cy = 0;
-        CreateViewBitmap();
-        Clear();
-        UpdateMap();
-    }
+    m_Entities.clear();
+    m_Rooms = rooms;
+    CreateViewBitmap();
+    Clear();
+    UpdateMap();
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::SetTile0Id(unsigned int id)
@@ -334,6 +341,27 @@ void __fastcall TileEditor::SetSelectedEntity(unsigned int id)
 	m_SelectedEntity = id;
 }
 //---------------------------------------------------------------------------
+void __fastcall TileEditor::SetScale(float scale)
+{
+    const auto& gm = m_GraphicsMode;
+    m_ScaleFactor = scale;
+    m_Scale.x = scale * gm.ScalarX;
+    m_Scale.y = scale * gm.ScalarY;
+    m_BorderScaled.x = m_Border / m_Scale.x;
+    m_BorderScaled.y = m_Border / m_Scale.y;
+    CreateViewBitmap();
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::SetReadOnly(bool state)
+{
+    m_ReadOnly = state;
+    if (m_ReadOnly)
+    {
+        m_UsesGridRoom = true;
+        m_ShowGridRoom = true;
+    }
+}
+//---------------------------------------------------------------------------
 void __fastcall TileEditor::UpdateMap()
 {
     // update the content
@@ -343,28 +371,24 @@ void __fastcall TileEditor::UpdateMap()
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::DrawGrids() const
 {
-    const auto& gm = m_GraphicsMode;
     const auto& wi = theDocumentManager.ProjectConfig()->Window;
-    int scalarX = gm.ScalarX;
-    int scalarY = gm.ScalarY;
     auto Canvas = m_View->Picture->Bitmap->Canvas;
     Canvas->Pen->Style = psSolid;
-    auto bx = m_Border * m_Scale;
 
-    auto xs =  (m_Border - m_Position.X) * m_Scale;
-    auto xe = xs + (((m_Rooms.cx * m_Size.cx * m_TileSize.cx) - (m_Border * 2)) * m_Scale);
-    auto ys =  (m_Border - m_Position.Y) * m_Scale;
-    auto ye = ys + (((m_Rooms.cy * m_Size.cy * m_TileSize.cy) - (m_Border * 2)) * m_Scale);
+    auto xs =  m_Border - (m_PositionMS.X * m_Scale.x);
+    auto xe = xs + ((m_ContentSize.cx - (m_BorderScaled.x * 2)) * m_Scale.x);
+    auto ys =  m_Border - (m_PositionMS.Y * m_Scale.y);
+    auto ye = ys + ((m_ContentSize.cy - (m_BorderScaled.y * 2)) * m_Scale.y);
     if (m_UsesGridTile && m_ShowGridTile)
     {
-        auto sx = m_TileSize.cx * m_Scale * scalarX;
+        auto sx = m_TileSize.cx * m_Scale.x;
         Canvas->Pen->Color = (TColor)0x00004080;
         for (auto x = xs; x <= xe; x += sx)
         {
             Canvas->MoveTo(x, ys);
             Canvas->LineTo(x, ye);
         }
-        auto sy = m_TileSize.cy * m_Scale * scalarY;
+        auto sy = m_TileSize.cy * m_Scale.y;
         for (auto y = ys; y <= ye; y += sy)
         {
             Canvas->MoveTo(xs, y);
@@ -374,8 +398,8 @@ void __fastcall TileEditor::DrawGrids() const
     if (m_UsesGridRoom && m_ShowGridRoom)
     {
         Canvas->Pen->Color = (TColor)0x0048BAF7;
-        auto rx = wi.Width  * m_TileSize.cx * scalarX * m_Scale;
-        auto ry = wi.Height * m_TileSize.cy * scalarY * m_Scale;
+        auto rx = wi.Width  * m_TileSize.cx * m_Scale.x;
+        auto ry = wi.Height * m_TileSize.cy * m_Scale.y;
         for (auto x = xs; x <= xe; x += rx)
         {
             Canvas->MoveTo(x, ys);
@@ -393,17 +417,17 @@ void __fastcall TileEditor::DrawGroupSelect() const
 {
     if (m_MouseMode == mmGroupSelect)
     {
-        auto xs =  (m_Border - m_Position.X) * m_Scale;
-        auto ys =  (m_Border - m_Position.Y) * m_Scale;
         auto Canvas = m_View->Picture->Bitmap->Canvas;
         Canvas->Pen->Style = psDot;
         Canvas->Pen->Color = clWhite;
         Canvas->Brush->Color = clBlack;
-        Canvas->MoveTo(xs + m_GroupSelectS.X * m_Scale, ys + m_GroupSelectS.Y * m_Scale);
-        Canvas->LineTo(xs + m_GroupSelectE.X * m_Scale, ys + m_GroupSelectS.Y * m_Scale);
-        Canvas->LineTo(xs + m_GroupSelectE.X * m_Scale, ys + m_GroupSelectE.Y * m_Scale);
-        Canvas->LineTo(xs + m_GroupSelectS.X * m_Scale, ys + m_GroupSelectE.Y * m_Scale);
-        Canvas->LineTo(xs + m_GroupSelectS.X * m_Scale, ys + m_GroupSelectS.Y * m_Scale);
+        auto gs = MapToView(m_GroupSelectSrtMS);
+        auto ge = MapToView(m_GroupSelectEndMS);
+        Canvas->MoveTo(gs.x, gs.y);
+        Canvas->LineTo(ge.x, gs.y);
+        Canvas->LineTo(ge.x, ge.y);
+        Canvas->LineTo(gs.x, ge.y);
+        Canvas->LineTo(gs.x, gs.y);
     }
 }
 //---------------------------------------------------------------------------
@@ -417,10 +441,8 @@ void __fastcall TileEditor::DrawEntities(int filters)
              draw &= (((filters & edfFirstTile) == edfFirstTile) && (entity.Image->ImageType == itTile && entity.Image->IsFirstOfType())) || (((filters & edfFirstTile) == 0) && !(entity.Image->ImageType == itTile && entity.Image->IsFirstOfType()));
         if (draw)
         {
-            TPoint pt(entity.Pt);
-            pt.x += m_Border;
-            pt.y += m_Border;
-            m_ImageMap[entity.Id]->Draw(pt, m_Content.get(), entity.Selected);
+            auto pt = TPoint(m_BorderScaled.x, m_BorderScaled.y);
+            m_ImageMap[entity.Id]->Draw(entity.Pt + pt, m_Content.get(), entity.Selected);
             entity.Clean();
         }
     }
@@ -467,15 +489,16 @@ void __fastcall TileEditor::Refresh()
         Clear();
     }
 
-    auto vw = m_View->Width;
-    auto vh = m_View->Height;
-    auto cw = (int)(vw / m_Scale);
-    auto ch = (int)(vh / m_Scale);
-    auto cx = m_Position.X;
-    auto cy = m_Position.Y;
     // draw the entities
     DrawMap();
     // show the map
+    auto vw = ((int)(m_View->Width  / m_Scale.x)) * m_Scale.x;
+    auto vh = ((int)(m_View->Height / m_Scale.y)) * m_Scale.x;
+    auto cx = m_PositionMS.X;
+    auto cy = m_PositionMS.Y;
+    auto cw = (int)(vw / m_Scale.x);
+    auto ch = (int)(vh / m_Scale.y);
+    //PatBlt(m_View->Picture->Bitmap->Canvas->Handle, 0, 0, vw, vh, BLACKNESS);
     StretchBlt(m_View->Picture->Bitmap->Canvas->Handle, 0, 0, vw, vh, m_Content->Canvas->Handle, cx, cy, cw, ch, SRCCOPY);
     DrawGrids();
     DrawGroupSelect();
@@ -502,7 +525,6 @@ void __fastcall TileEditor::SetEntities(const EntityList& entities)
     for (auto& e : m_Entities) e.Dirty = true;
     // render all the images
     RefreshImages();
-    UpdateMap();
 }
 //---------------------------------------------------------------------------
 const EntityList& __fastcall TileEditor::GetEntities() const
@@ -573,32 +595,12 @@ void __fastcall TileEditor::UnselectAll()
     for (auto& e : m_Entities) e.Selected = false;
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::SetSelectedRoom(TSize room)
-{
-    if (0 <= room.cx && room.cx < m_Rooms.cx && 0 <= room.cy && room.cy < m_Rooms.cy)
-    {
-        m_SelectedRoom = room;
-        SelectRoom();
-    }
-}
-//---------------------------------------------------------------------------
-void __fastcall TileEditor::SetReadOnly(bool state)
-{
-    m_ReadOnly = state;
-    if (m_ReadOnly)
-    {
-        m_UsesGridRoom = true;
-        m_ShowGridRoom = true;
-        SelectRoom();
-    }
-}
-//---------------------------------------------------------------------------
-void __fastcall TileEditor::SelectRoom()
+void __fastcall TileEditor::SelectRoom(TSize room)
 {
     ClearSelection();
     const auto& wi = theDocumentManager.ProjectConfig()->Window;
-    auto minx = m_SelectedRoom.cx * m_TileSize.cx * wi.Width;
-    auto miny = m_SelectedRoom.cy * m_TileSize.cy * wi.Height;
+    auto minx = room.cx * m_TileSize.cx * wi.Width;
+    auto miny = room.cy * m_TileSize.cy * wi.Height;
     auto maxx = minx + (m_TileSize.cx * wi.Width);
     auto maxy = miny + (m_TileSize.cy * wi.Height);
 
@@ -610,8 +612,13 @@ void __fastcall TileEditor::SelectRoom()
             e.Selected = true;
         }
     }
-    Messaging::Bus::Publish<RoomSelected>(RoomSelected(m_SelectedRoom));
+    Messaging::Bus::Publish<RoomSelected>(RoomSelected(room));
     UpdateMap();
+}
+//---------------------------------------------------------------------------
+int __fastcall TileEditor::Snap(int value, int range)
+{
+    return (value / range) * m_TileSize.cx;
 }
 //---------------------------------------------------------------------------
 

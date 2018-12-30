@@ -50,73 +50,63 @@ public:
     __property  Document document = { read = m_Document };
 };
 //---------------------------------------------------------------------------
-enum ErrorType { etInformation, etWarning, etError, etDebug, etHelpKeys };
-class OnMessage : public Event
+enum MessageType { etInformation, etWarning, etError, etDebug, etHelpKeys };
+class MessageEvent : public Event
 {
-private:
-    ErrorType   m_ErrorType;
+protected:
+    MessageType m_MessageType;
 public:
-    __fastcall OnMessage(const String& message, ErrorType type)
+    __fastcall MessageEvent(const String& message, MessageType type)
     : Event(message)
-    , m_ErrorType(type)
+    , m_MessageType(type)
     {
     }
 
     __property  String      Message = { read = m_Id };
-    __property  ErrorType   Type    = { read = m_ErrorType };
+    __property  MessageType Type    = { read = m_MessageType };
 };
 //---------------------------------------------------------------------------
-class ErrorMessage : public OnMessage
+class ErrorMessageEvent : public MessageEvent
 {
-private:
-
 public:
-    __fastcall ErrorMessage(const String& message)
-    : OnMessage(message, etError)
+    __fastcall ErrorMessageEvent(const String& message)
+    : MessageEvent(message, etError)
     {
     }
 };
 //---------------------------------------------------------------------------
-class WarningMessage : public OnMessage
+class WarningMessageEvent : public MessageEvent
 {
-private:
-
 public:
-    __fastcall WarningMessage(const String& message)
-    : OnMessage(message, etWarning)
+    __fastcall WarningMessageEvent(const String& message)
+    : MessageEvent(message, etWarning)
     {
     }
 };
 //---------------------------------------------------------------------------
-class InformationMessage : public OnMessage
+class InformationMessageEvent : public MessageEvent
 {
-private:
-
 public:
-    __fastcall InformationMessage(const String& message)
-    : OnMessage(message, etInformation)
+    __fastcall InformationMessageEvent(const String& message)
+    : MessageEvent(message, etInformation)
     {
     }
 };
 //---------------------------------------------------------------------------
-class DebugMessage : public OnMessage
+class DebugMessageEvent : public MessageEvent
 {
-private:
-
 public:
-    __fastcall DebugMessage(const String& message)
-    : OnMessage(message, etDebug)
+    __fastcall DebugMessageEvent(const String& message)
+    : MessageEvent(message, etDebug)
     {
     }
 };
 //---------------------------------------------------------------------------
-class HelpKeysMessage : public OnMessage
+class HelpKeysMessageEvent : public MessageEvent
 {
-private:
-
 public:
-    __fastcall HelpKeysMessage(const String& message)
-    : OnMessage(message, etHelpKeys)
+    __fastcall HelpKeysMessageEvent(const String& message)
+    : MessageEvent(message, etHelpKeys)
     {
     }
 };

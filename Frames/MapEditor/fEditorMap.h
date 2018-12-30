@@ -27,9 +27,10 @@
 #include "LMDToolBar.hpp"
 #include "TileEditor.h"
 #include "AssetSelection.h"
-#include "MapDocuments.h"
-#include "WndProcHandlers.h"
 #include "Project/Document.h"
+#include "Project/MapDocuments.h"
+#include "Frames/WndProcHandlers.h"
+#include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 class TfrmEditorMap : public TFrame
 {
@@ -41,8 +42,6 @@ __published:    // IDE-managed Components
     TAction *actPencil;
     TAction *actLine;
     TAction *actShape;
-    TAction *actGridTile;
-    TAction *actGridRoom;
     TAction *actZoomIn;
     TAction *actZoomOut;
     TAction *actZoomReset;
@@ -69,8 +68,6 @@ __published:    // IDE-managed Components
     TPanel *Panel1;
     TLabel *Label1;
     TToolBar *tbrGrids;
-    TToolButton *btnGridRoom;
-    TToolButton *btnGridTile;
     TToolBar *tbrTools;
     TToolButton *btnSelect;
     TToolButton *btnPencil;
@@ -112,20 +109,23 @@ __published:    // IDE-managed Components
     TToolButton *ToolButton12;
     TToolButton *btnScratchGridTile;
     TMenuItem *mnuSPToggleGrid;
-	TAction *actSPToggleTileGrid;
-	TAction *actSPToggleRoomGrid;
+    TAction *actSPGridTile;
+    TAction *actSPGridRoom;
     TToolButton *btnScratchGridRoom;
     TToolButton *ToolButton1;
     TToolButton *btnEditMode;
     TAction *actToggleEditMode;
     TSplitter *splRoomSelector;
     TImage *imgRoomSelector;
+    TToolButton *ToolButton3;
+    TToolButton *ToolButton5;
+    TToolButton *ToolButton6;
+    TAction *actWSGridRoom;
+    TAction *actWSGridTile;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actLineExecute(TObject *Sender);
     void __fastcall actShapeExecute(TObject *Sender);
-    void __fastcall actGridTileExecute(TObject *Sender);
-    void __fastcall actGridRoomExecute(TObject *Sender);
     void __fastcall actZoomInExecute(TObject *Sender);
     void __fastcall actZoomOutExecute(TObject *Sender);
     void __fastcall actZoomResetExecute(TObject *Sender);
@@ -150,17 +150,15 @@ __published:    // IDE-managed Components
     void __fastcall actDeleteExecute(TObject *Sender);
     void __fastcall mnuWSToggleToolbarClick(TObject *Sender);
     void __fastcall mnuSPToggleToolbarClick(TObject *Sender);
-    void __fastcall actSPToggleTileGridExecute(TObject *Sender);
+    void __fastcall actSPGridTileExecute(TObject *Sender);
     void __fastcall pgcAssetsChange(TObject *Sender);
-	void __fastcall actSPToggleRoomGridExecute(TObject *Sender);
+	void __fastcall actSPGridRoomExecute(TObject *Sender);
     void __fastcall actToggleEditModeExecute(TObject *Sender);
-    void __fastcall imgRoomSelectorMouseDown(TObject *Sender, TMouseButton Button,
-          TShiftState Shift, int X, int Y);
-    void __fastcall imgRoomSelectorMouseMove(TObject *Sender, TShiftState Shift,
-          int X, int Y);
-    void __fastcall imgRoomSelectorMouseUp(TObject *Sender, TMouseButton Button,
-          TShiftState Shift, int X, int Y);
-
+    void __fastcall imgRoomSelectorMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
+    void __fastcall imgRoomSelectorMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
+    void __fastcall imgRoomSelectorMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
+    void __fastcall actWSGridRoomExecute(TObject *Sender);
+    void __fastcall actWSGridTileExecute(TObject *Sender);
 
 private:    // User declarations
     TiledMapDocument*           m_Document;
@@ -175,6 +173,7 @@ private:    // User declarations
             void    __fastcall  RefreshAssets();
             bool    __fastcall  IsActive() const;
             void    __fastcall  OnEvent(const Event& event);
+            void    __fastcall  OnRoomSelected(const RoomSelected& event);
             void    __fastcall  OnMapResize(const OnMapResized& message);
 			void 	__fastcall 	OnEntityClick(ImageDocument* document);
 			void    __fastcall  ShowKeysHelp();

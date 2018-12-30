@@ -145,6 +145,9 @@ _fastcall TiledMapDocument::TiledMapDocument(const String& name)
     m_PropertyMap["Map.Workspace[].X"] = &m_EntityLoader.m_Pt.x;
     m_PropertyMap["Map.Workspace[].Y"] = &m_EntityLoader.m_Pt.y;
     m_PropertyMap["Map.Workspace[].RefId"] = &m_EntityLoader.m_LoadId;
+    m_PropertyMap["Map.Map[].X"] = &m_EntityLoader.m_Pt.x;
+    m_PropertyMap["Map.Map[].Y"] = &m_EntityLoader.m_Pt.y;
+    m_PropertyMap["Map.Map[].RefId"] = &m_EntityLoader.m_LoadId;
     m_PropertyMap["Map.ScratchPad[].X"] = &m_EntityLoader.m_Pt.x;
     m_PropertyMap["Map.ScratchPad[].Y"] = &m_EntityLoader.m_Pt.y;
     m_PropertyMap["Map.ScratchPad[].RefId"] = &m_EntityLoader.m_LoadId;
@@ -168,8 +171,8 @@ void __fastcall TiledMapDocument::DoSave()
         Write("RoomHeight", m_Height);
         Write("StartLocationX", m_StartLocationX);
         Write("StartLocationY", m_StartLocationY);
-        ArrayStart("Workspace");
-        for (const auto& entity : m_Workspace)
+        ArrayStart("Map");
+        for (const auto& entity : m_Map)
         {
             StartObject();
                 Write("X", (int)entity.m_Pt.x);
@@ -193,20 +196,20 @@ void __fastcall TiledMapDocument::DoSave()
 //---------------------------------------------------------------------------
 void __fastcall TiledMapDocument::OnEndObject(const String& object)
 {
-    if (object == "Map.Workspace[]")
+    if (object == "Map.Workspace[]" || object == "Map.Map[]")
     {
         if (m_EntityLoader.m_LoadId != InvalidDocumentId)
         {
             m_EntityLoader.Id = m_EntityLoader.m_LoadId;
             if (m_EntityLoader.Image != nullptr)
             {
-                m_Workspace.push_back(m_EntityLoader);
+                m_Map.push_back(m_EntityLoader);
             }
             m_EntityLoader.Clear();
         }
         else
         {
-            ::Messaging::Bus::Publish<ErrorMessage>(ErrorMessage("Encountered an invalid map entity while loading workspace JSON object"));
+            ::Messaging::Bus::Publish<MessageEvent>(ErrorMessageEvent("Encountered an invalid map entity while loading workspace JSON object"));
         }
     }
     else if (object == "Map.ScratchPad[]")
@@ -222,16 +225,16 @@ void __fastcall TiledMapDocument::OnEndObject(const String& object)
         }
         else
         {
-            ::Messaging::Bus::Publish<ErrorMessage>(ErrorMessage("Encountered an invalid map entity while loading scratch pad JSON object"));
+            ::Messaging::Bus::Publish<MessageEvent>(ErrorMessageEvent("Encountered an invalid map entity while loading scratch pad JSON object"));
         }
     }
 }
 //---------------------------------------------------------------------------
-const EntityList& __fastcall TiledMapDocument::Get(MapEntities type, int room) const
+const EntityList& __fastcall TiledMapDocument::Get(MapEntities type, TSize room)
 {
-    if (type == meWorkspace)
+    if (type == meMap)
     {
-        return m_Workspace;
+        return m_Map;
     }
     else if (type == meScratchPad)
     {
@@ -239,18 +242,38 @@ const EntityList& __fastcall TiledMapDocument::Get(MapEntities type, int room) c
     }
     else if (type == meRoom)
     {
-        // TODO: Place the room entities into the list
+        m_ActiveRoom = room;
+        m_Room.clear();
+        // Place the room entities into the room list
+        const auto& wi = theDocumentManager.ProjectConfig()->Window;
+        auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum;
+        auto minx = room.cx * tileSize.cx * wi.Width;
+        auto miny = room.cy * tileSize.cy * wi.Height;
+        auto maxx = minx + (tileSize.cx * wi.Width);
+        auto maxy = miny + (tileSize.cy * wi.Height);
+
+        for (auto& e : m_Map)
+        {
+            auto pt = e.Pt;
+            if (minx <=  pt.x && pt.x < maxx && miny <= pt.y && pt.y < maxy)
+            {
+                auto ne = e;
+                // re-position entity to relative to 0,0
+                ne.Pt = TPoint(e.Pt.x - minx, e.Pt.y - miny);
+                m_Room.push_back(ne);
+            }
+        }
         return m_Room;
     }
     assert(0);
 }
 //---------------------------------------------------------------------------
-void __fastcall TiledMapDocument::Set(MapEntities type, const EntityList& entities, int room)
+void __fastcall TiledMapDocument::Set(MapEntities type, const EntityList& entities)
 {
-    if (type == meWorkspace)
+    if (type == meMap)
     {
-        m_Workspace.clear();
-        m_Workspace = entities;
+        m_Map.clear();
+        m_Map = entities;
     }
     else if (type == meScratchPad)
     {
@@ -259,9 +282,27 @@ void __fastcall TiledMapDocument::Set(MapEntities type, const EntityList& entiti
     }
     else if (type == meRoom)
     {
-        m_Room.clear();
         m_Room = entities;
-        // TODO: place the new entities into the room
+        // place the new entities into the room
+        const auto& wi = theDocumentManager.ProjectConfig()->Window;
+        auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum;
+        auto minx = m_ActiveRoom.cx * tileSize.cx * wi.Width;
+        auto miny = m_ActiveRoom.cy * tileSize.cy * wi.Height;
+        auto maxx = minx + (tileSize.cx * wi.Width);
+        auto maxy = miny + (tileSize.cy * wi.Height);
+
+        // remove the old room items
+        m_Map.erase(std::remove_if(m_Map.begin(),m_Map.end(),
+            [&](const Entity& entity) { return (minx <=  entity.Pt.x && entity.Pt.x < maxx && miny <= entity.Pt.y && entity.Pt.y < maxy); }), m_Map.end());
+
+        // add the new room items adjusted for room location
+        for (const auto& e : m_Room)
+        {
+            auto ne = e;
+            ne.Pt = TPoint(e.Pt.x + minx, e.Pt.y + miny);
+            m_Map.push_back(ne);
+        }
+        Messaging::Bus::Publish<Event>(Event("map.updated"));
     }
     else
     {

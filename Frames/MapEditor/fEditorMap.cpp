@@ -25,10 +25,12 @@ __fastcall TfrmEditorMap::TfrmEditorMap(TComponent* Owner)
 {
     ::Messaging::Bus::Subscribe<Event>(OnEvent);
     ::Messaging::Bus::Subscribe<OnMapResized>(OnMapResize);
+    ::Messaging::Bus::Subscribe<RoomSelected>(OnRoomSelected);
 }
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorMap::~TfrmEditorMap()
 {
+    ::Messaging::Bus::Unsubscribe<RoomSelected>(OnRoomSelected);
     ::Messaging::Bus::Unsubscribe<OnMapResized>(OnMapResize);
     ::Messaging::Bus::Unsubscribe<Event>(OnEvent);
 }
@@ -43,8 +45,8 @@ void __fastcall TfrmEditorMap::Initialise()
 
     // create the tile editors
     // TODO: change the size to ???
-    m_Workspace = std::make_unique<TileEditor>(imgWorkspace, TSize(16,16), true, true, 128);
-    m_ScratchPad = std::make_unique<TileEditor>(imgScratchPad, TSize(8,8), true, true, 4);
+    m_Workspace = std::make_unique<TileEditor>(imgWorkspace, TSize(16,16), true, true, 144, false);
+    m_ScratchPad = std::make_unique<TileEditor>(imgScratchPad, TSize(8,8), true, true, 8, false);
     m_RoomSelector = std::make_unique<TileEditor>(imgRoomSelector, TSize(16,16), false, true, 8, true);
     m_Workspace->Mode = TileEditor::temSelect;
 	m_ScratchPad->Mode = TileEditor::temSelect;
@@ -53,9 +55,9 @@ void __fastcall TfrmEditorMap::Initialise()
 	m_RoomSelector->GridRoom = true;
     m_RoomSelector->Scale = 0.5f;
     // and set their tile sets
-    m_Workspace->SetEntities(m_Document->Get(meWorkspace));
+    m_Workspace->SetEntities(m_Document->Get(meMap));
     m_ScratchPad->SetEntities(m_Document->Get(meScratchPad));
-    m_RoomSelector->SetEntities(m_Document->Get(meWorkspace));
+    m_RoomSelector->SetEntities(m_Document->Get(meMap));
 
     // fix up the image flicker
     m_EraseHandlers.push_back(std::make_unique<TWinControlHandler>(panWorkspaceView));
@@ -98,16 +100,6 @@ void __fastcall TfrmEditorMap::actShapeExecute(TObject *Sender)
     btnShape->Down = true;
     m_Workspace->Mode = TileEditor::temShape;
     m_ScratchPad->Mode = TileEditor::temShape;
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actGridTileExecute(TObject *Sender)
-{
-    m_Workspace->GridTile = actGridTile->Checked;
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actGridRoomExecute(TObject *Sender)
-{
-    m_Workspace->GridRoom = actGridRoom->Checked;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actZoomInExecute(TObject *Sender)
@@ -158,7 +150,7 @@ void __fastcall TfrmEditorMap::imgWorkspaceMouseUp(TObject *Sender, TMouseButton
 {
     m_Workspace->OnMouseUp(Button,Shift, X, Y);
     // copy the workspace to the map document
-    m_Document->Set(meWorkspace, m_Workspace->GetEntities());
+    m_Document->Set(actToggleEditMode->Checked ? meRoom : meMap, m_Workspace->GetEntities());
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::imgRoomSelectorMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
@@ -229,7 +221,6 @@ void __fastcall TfrmEditorMap::RefreshAssets()
 //---------------------------------------------------------------------------
 bool __fastcall TfrmEditorMap::IsActive() const
 {
-    //return static_cast<TLMDDockPanel*>(m_Document->DockPanel)->Active;
     return theEditorManager.IsActive(this);
 }
 //---------------------------------------------------------------------------
@@ -256,6 +247,20 @@ void __fastcall TfrmEditorMap::OnEvent(const Event& event)
     else if (event.Id == "image.modified" || event.Id == "document.added" || event.Id == "document.removed")
     {
         RefreshAssets();
+    }
+    else if (event.Id == "map.updated")
+    {
+        m_RoomSelector->SetEntities(m_Document->Get(meMap));
+        m_RoomSelector->UpdateMap();
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::OnRoomSelected(const RoomSelected& event)
+{
+    if (event.Id == "room.selected")
+    {
+        m_Workspace->SetEntities(m_Document->Get(meRoom, event.Room));
+        m_Workspace->UpdateMap();
     }
 }
 //---------------------------------------------------------------------------
@@ -307,16 +312,18 @@ void __fastcall TfrmEditorMap::ShowKeysHelp()
 {
 	const String help =
 		"Select Tool\r\n"
-		"Mouse over         	   : Highlight and item\r\n"
-		"                            Can be moved, duplicated or deleted\r\n\r\n"
+		"Mouse over            : Highlight an item\r\n"
+		"                        Can be moved, duplicated or deleted\r\n"
+        "Ctrl + Left MB + Move : Select group of items\r\n"
+        "Ctrl + Left MB Click  : Clear selection\r\n\r\n"
 		"Pencil, Line, Shape Tools\r\n"
-		"Left Mouse Button         : Place current asset\r\n"
-        "                            Tiles - Hold button and drag mouse to place multiple\r\n"
-        "Right Mouse Button        : Remove tile\r\n"
-		"                            Tiles - Hold button and drag mouse to remove multiple\r\n"
-        "\r\n"
-        "Shift + Left Mouse Button : Pan the window by moving the mouse\r\n";
-    ::Messaging::Bus::Publish<HelpKeysMessage>(HelpKeysMessage(help));
+		"Left MB               : Place current asset\r\n"
+        "                        Tiles - Hold button and drag mouse to place multiple\r\n"
+        "Middle MB             : Remove tile\r\n"
+		"                        Tiles - Hold button and drag mouse to remove multiple\r\n\r\n"
+        "General\r\n"
+        "Shift + Left MB       : Pan the window by moving the mouse\r\n";
+    ::Messaging::Bus::Publish<MessageEvent>(HelpKeysMessageEvent(help));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::imgWorkspaceMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate)
@@ -394,14 +401,14 @@ void __fastcall TfrmEditorMap::mnuSPToggleToolbarClick(TObject *Sender)
 	tbrScratchPad->Visible = mnuSPToggleToolbar->Checked;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actSPToggleTileGridExecute(TObject *Sender)
+void __fastcall TfrmEditorMap::actSPGridTileExecute(TObject *Sender)
 {
-	m_ScratchPad->GridTile = actSPToggleTileGrid->Checked;
+	m_ScratchPad->GridTile = actSPGridTile->Checked;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actSPToggleRoomGridExecute(TObject *Sender)
+void __fastcall TfrmEditorMap::actSPGridRoomExecute(TObject *Sender)
 {
-	m_ScratchPad->GridRoom = actSPToggleRoomGrid->Checked;
+	m_ScratchPad->GridRoom = actSPGridRoom->Checked;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::pgcAssetsChange(TObject *Sender)
@@ -427,10 +434,19 @@ void __fastcall TfrmEditorMap::actToggleEditModeExecute(TObject *Sender)
     imgRoomSelector->Visible = actToggleEditMode->Checked;
     splRoomSelector->Visible = actToggleEditMode->Checked;
     splRoomSelector->Top = imgRoomSelector->Top - 8;
-    m_Workspace->ReadOnly = actToggleEditMode->Checked;
     m_Workspace->Rooms = actToggleEditMode->Checked ? TSize(1, 1) : TSize(16, 16);
-    m_Workspace->SetEntities(m_Document->Get(actToggleEditMode->Checked ? meRoom : meWorkspace));
+    m_Workspace->SetEntities(m_Document->Get(actToggleEditMode->Checked ? meRoom : meMap));
     m_RoomSelector->Refresh();
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::actWSGridRoomExecute(TObject *Sender)
+{
+	m_Workspace->GridRoom = actWSGridRoom->Checked;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::actWSGridTileExecute(TObject *Sender)
+{
+	m_Workspace->GridTile = actWSGridTile->Checked;
 }
 //---------------------------------------------------------------------------
 

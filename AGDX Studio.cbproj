@@ -153,8 +153,8 @@
         <VerInfo_Build>5</VerInfo_Build>
         <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.5;InternalName=agdx.exe;LegalCopyright=2018 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Programmed by Tony Thompson</VerInfo_Keys>
         <VerInfo_Release>0</VerInfo_Release>
-        <VerInfo_AutoGenVersion>true</VerInfo_AutoGenVersion>
         <AppDPIAwarenessMode>PerMonitor</AppDPIAwarenessMode>
+        <AppEnableHighDPI>true</AppEnableHighDPI>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>

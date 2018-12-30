@@ -727,7 +727,7 @@ void __fastcall TfrmEditorImage::ShowKeysHelp()
         "Ctrl + Mouse Wheel        : Zoom the window in/out"
         "                            Hold Shift for faster zoom";
         //"Shift + Left Mouse Button : Pan the window\r\n"
-    ::Messaging::Bus::Publish<HelpKeysMessage>(HelpKeysMessage(help));
+    ::Messaging::Bus::Publish<MessageEvent>(HelpKeysMessageEvent(help));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::imgEditorMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate)

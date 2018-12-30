@@ -81,7 +81,7 @@ void __fastcall Document::SetName(String name)
     }
     else
     {
-        ::Messaging::Bus::Publish<ErrorMessage>(ErrorMessage("Failed to rename document from [" + oldFile + "] to [" + newFile + "]"));
+        ::Messaging::Bus::Publish<MessageEvent>(ErrorMessageEvent("Failed to rename document from [" + oldFile + "] to [" + newFile + "]"));
     }
     m_File = GetFile();
 }

@@ -24,6 +24,7 @@ __fastcall TfrmIDE::TfrmIDE(TComponent* Owner)
 : TFrame(Owner)
 {
     RegisterDocumentEditors();
+    ::Messaging::Bus::Subscribe<MessageEvent>(OnMessageEvent);
 }
 //---------------------------------------------------------------------------
 __fastcall TfrmIDE::~TfrmIDE()
@@ -61,15 +62,9 @@ void __fastcall TfrmIDE::OnActivate()
     tvProject->BackGroundColor = StyleServices()->GetStyleColor(scGenericGradientBase);
     dsIDE->Invalidate();
     RefreshMruList();
-
-    ::Messaging::Bus::Subscribe<HelpKeysMessage>(OnMessageString);
-    ::Messaging::Bus::Subscribe<ErrorMessage>(OnMessageString);
-    ::Messaging::Bus::Subscribe<WarningMessage>(OnMessageString);
-    ::Messaging::Bus::Subscribe<InformationMessage>(OnMessageString);
-    ::Messaging::Bus::Subscribe<DebugMessage>(OnMessageString);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::OnMessageString(const OnMessage& message)
+void __fastcall TfrmIDE::OnMessageEvent(const MessageEvent& message)
 {
     if (message.Type < etHelpKeys)
     {

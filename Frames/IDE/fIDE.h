@@ -194,7 +194,7 @@ private:    // User declarations
     void __fastcall RegisterDocumentEditors();
     void __fastcall RefreshMruList();
     void __fastcall mruOnClick(TObject *Sender);
-    void __fastcall OnMessageString(const OnMessage& message);
+    void __fastcall OnMessageEvent(const MessageEvent& message);
 
 public:        // User declarations
     TNotifyEvent        FOnFormClose;
