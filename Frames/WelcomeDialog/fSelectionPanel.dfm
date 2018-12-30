@@ -147,10 +147,4 @@ object SelectionPanelFrame: TSelectionPanelFrame
       OnClick = imgRemoveClick
     end
   end
-  object Timer1: TTimer
-    Enabled = False
-    Interval = 10
-    Left = 208
-    Top = 32
-  end
 end

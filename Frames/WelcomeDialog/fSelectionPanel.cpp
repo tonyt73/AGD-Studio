@@ -86,8 +86,6 @@ void __fastcall TSelectionPanelFrame::SetHighlighted(bool state)
 void __fastcall TSelectionPanelFrame::SetLoading(bool state)
 {
     ProgressBar1->Visible = state;
-    //Timer1->Enabled = state;
-    Update();
 }
 //---------------------------------------------------------------------------
 void __fastcall TSelectionPanelFrame::UpdateControl()
