@@ -10,6 +10,7 @@
 //---------------------------------------------------------------------------
 __fastcall TfrmWelcomeDialog::TfrmWelcomeDialog(TComponent* Owner)
 : TFrame(Owner)
+, m_LoadingPanel(nullptr)
 {
     // load the themes
     if (cmbThemes->Items->Count == 0)
@@ -44,6 +45,21 @@ __fastcall TfrmWelcomeDialog::TfrmWelcomeDialog(TComponent* Owner)
         {
             cmbMachines->ItemIndex = cmbMachines->Items->Count - 1;
         }
+    }
+
+    Messaging::Bus::Subscribe<Event>(OnEvent);
+}
+//---------------------------------------------------------------------------
+__fastcall TfrmWelcomeDialog::~TfrmWelcomeDialog()
+{
+    Messaging::Bus::Unsubscribe<Event>(OnEvent);
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmWelcomeDialog::OnEvent(const Event& event)
+{
+    if (event.Id == "project.loading.tick" && m_LoadingPanel)
+    {
+        m_LoadingPanel->Tick();
     }
 }
 //---------------------------------------------------------------------------
@@ -88,8 +104,11 @@ void __fastcall TfrmWelcomeDialog::lblOpenExistingProjectClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::SelectionPanelOnClick(TObject *Sender)
 {
-    TSelectionPanelFrame* panel = (TSelectionPanelFrame*)Sender;
-    theProjectManager.Open(panel->Path);
+    m_LoadingPanel = (TSelectionPanelFrame*)Sender;
+    m_LoadingPanel->Loading = true;
+    theProjectManager.Open(m_LoadingPanel->Path);
+    m_LoadingPanel->Loading = false;
+    m_LoadingPanel = nullptr;
     if (FOnDone) FOnDone(this);
 }
 //---------------------------------------------------------------------------

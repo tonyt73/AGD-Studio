@@ -10,10 +10,11 @@
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Dialogs.hpp>
 #include <Vcl.ExtDlgs.hpp>
-//---------------------------------------------------------------------------
-#include "fSelectionPanel.h"
 #include <Vcl.Buttons.hpp>
 #include <Vcl.Samples.Spin.hpp>
+//---------------------------------------------------------------------------
+#include "fSelectionPanel.h"
+#include "Messaging.h"
 //---------------------------------------------------------------------------
 class TfrmWelcomeDialog : public TFrame
 {
@@ -58,15 +59,18 @@ private:    // Function declarations
     void     __fastcall     UpdateColors();
     void     __fastcall     RefreshMRUList();
     void     __fastcall     NewMostRecentlyUsedItem(const String& name, const String& path, const String& machine);
+    void     __fastcall     OnEvent(const Event& event);
 
 private:    // Member declarations
     std::list<std::shared_ptr<TSelectionPanelFrame>>    m_MostRecentlyUsedItems;
+    TSelectionPanelFrame*                               m_LoadingPanel;
 
 private:    // Events
     TNotifyEvent            FOnDone;
 
 public:        // User declarations
             __fastcall      TfrmWelcomeDialog(TComponent* Owner);
+            __fastcall     ~TfrmWelcomeDialog();
 
     void    __fastcall      Initialise();
 

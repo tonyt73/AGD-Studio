@@ -83,12 +83,24 @@ void __fastcall TSelectionPanelFrame::SetHighlighted(bool state)
     }
 }
 //---------------------------------------------------------------------------
+void __fastcall TSelectionPanelFrame::SetLoading(bool state)
+{
+    ProgressBar1->Visible = state;
+    //Timer1->Enabled = state;
+    Update();
+}
+//---------------------------------------------------------------------------
 void __fastcall TSelectionPanelFrame::UpdateControl()
 {
     TColor color = StyleServices()->GetStyleColor(m_Selected ? scButtonFocused : (m_Highlighted ? scButtonHot : scGenericGradientEnd));
     panProjectInfo->Color = color;
     panRemove->Color = color;
     panRemove->Visible = m_Highlighted;
+}
+//---------------------------------------------------------------------------
+void __fastcall TSelectionPanelFrame::Tick()
+{
+    ProgressBar1->StepIt();
 }
 //---------------------------------------------------------------------------
 void __fastcall TSelectionPanelFrame::lblProjectNameClick(TObject *Sender)

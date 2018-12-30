@@ -193,6 +193,7 @@ void __fastcall DocumentManager::Load(const String& name)
     assert(projectDocument != nullptr);
     for (const auto& fileInfo : projectDocument->Files())
     {
+        ::Messaging::Bus::Publish<Event>(Event("project.loading.tick"));
         Add(fileInfo.Type, fileInfo.SubType, System::File::NameWithoutExtension(fileInfo.Name));
     }
     appSettings.LastProject = name;

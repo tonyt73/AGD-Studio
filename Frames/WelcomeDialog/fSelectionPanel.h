@@ -8,6 +8,7 @@
 #include <Vcl.Forms.hpp>
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Imaging.pngimage.hpp>
+#include <Vcl.ComCtrls.hpp>
 //---------------------------------------------------------------------------
 class TSelectionPanelFrame : public TFrame
 {
@@ -18,6 +19,8 @@ __published:// IDE-managed Components
     TLabel *lblProjectPath;
     TImage *imgRemove;
     TLabel *lblMachine;
+    TProgressBar *ProgressBar1;
+    TTimer *Timer1;
     void __fastcall panProjectInfoMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
     void __fastcall lblProjectNameClick(TObject *Sender);
     void __fastcall imgRemoveClick(TObject *Sender);
@@ -34,6 +37,7 @@ private:    // User declarations
     void    __fastcall  SetMachine(String machine);
     void    __fastcall  SetSelected(bool state);
     void    __fastcall  SetHighlighted(bool state);
+    void    __fastcall  SetLoading(bool state);
 
             // Events
     TNotifyEvent        FOnClick;
@@ -44,12 +48,14 @@ public:        // User declarations
             __fastcall ~TSelectionPanelFrame();
 
     void     __fastcall UpdateControl();
+    void     __fastcall Tick();
 
     String  __property  Name = { read = m_Name, write = SetName };
     String  __property  Path = { read = m_Path, write = SetPath };
     String  __property  Machine = { read = m_Machine, write = SetMachine };
     bool    __property  Selected = { read = m_Selected, write = SetSelected };
     bool    __property  Highlighted = { read = m_Highlighted, write = SetHighlighted };
+    bool    __property  Loading = { write = SetLoading };
 
             // click events
             __property  TNotifyEvent OnSelectedClick = { read = FOnClick, write = FOnClick };

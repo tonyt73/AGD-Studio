@@ -36,7 +36,7 @@ object SelectionPanelFrame: TSelectionPanelFrame
       87)
     object lblProjectPath: TLabel
       Left = 19
-      Top = 57
+      Top = 45
       Width = 406
       Height = 17
       Anchors = [akLeft, akTop, akRight]
@@ -75,7 +75,7 @@ object SelectionPanelFrame: TSelectionPanelFrame
     end
     object lblMachine: TLabel
       Left = 19
-      Top = 36
+      Top = 29
       Width = 406
       Height = 17
       Anchors = [akLeft, akTop, akRight]
@@ -91,6 +91,19 @@ object SelectionPanelFrame: TSelectionPanelFrame
       ParentFont = False
       OnClick = lblProjectNameClick
       OnMouseMove = panProjectInfoMouseMove
+    end
+    object ProgressBar1: TProgressBar
+      Left = 19
+      Top = 68
+      Width = 406
+      Height = 14
+      Anchors = [akLeft, akTop, akRight]
+      Position = 100
+      Style = pbstMarquee
+      BarColor = clRed
+      TabOrder = 0
+      Visible = False
+      StyleElements = []
     end
   end
   object panRemove: TPanel
@@ -133,5 +146,11 @@ object SelectionPanelFrame: TSelectionPanelFrame
       ShowHint = True
       OnClick = imgRemoveClick
     end
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 10
+    Left = 208
+    Top = 32
   end
 end
