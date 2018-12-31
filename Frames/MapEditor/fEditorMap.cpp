@@ -51,6 +51,7 @@ void __fastcall TfrmEditorMap::Initialise()
     m_Workspace->Mode = TileEditor::temSelect;
 	m_ScratchPad->Mode = TileEditor::temSelect;
 	m_RoomSelector->Mode = TileEditor::temSelect;
+    m_ScratchPad->GridTile = true;
 	m_ScratchPad->GridRoom = false;
 	m_RoomSelector->GridRoom = true;
     m_RoomSelector->Scale = 0.5f;
@@ -58,6 +59,8 @@ void __fastcall TfrmEditorMap::Initialise()
     m_Workspace->SetEntities(m_Document->Get(meMap));
     m_ScratchPad->SetEntities(m_Document->Get(meScratchPad));
     m_RoomSelector->SetEntities(m_Document->Get(meMap));
+    // On Entity Select handler
+    m_Workspace->OnEntitySelected = OnWorkspaceEntitySelected;
 
     // fix up the image flicker
     m_EraseHandlers.push_back(std::make_unique<TWinControlHandler>(panWorkspaceView));
@@ -427,6 +430,22 @@ void __fastcall TfrmEditorMap::OnEntityClick(ImageDocument* document)
 {
 	m_Workspace->SelectedEntity = document->Id;
 	m_ScratchPad->SelectedEntity = document->Id;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::OnWorkspaceEntitySelected(const Entity& entity)
+{
+    switch (entity.Image->ImageType)
+    {
+        case itObject:
+            pgcAssets->ActivePage = tabObjects;
+            break;
+        case itSprite:
+            pgcAssets->ActivePage = tabSprites;
+            break;
+        case itTile:
+            pgcAssets->ActivePage = tabTiles;
+            break;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actToggleEditModeExecute(TObject *Sender)

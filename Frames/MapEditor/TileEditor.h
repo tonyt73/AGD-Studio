@@ -28,6 +28,7 @@ private:
 	TImage* const                   m_View;             // the UI image we render to
 	EntityList                      m_Entities;         // all the map entities
 	EntityList                      m_ToolEntities;     // the entities for the current tool
+    Entity                          m_SingleSelect;     // a single selected entity
 	Agdx::ImageMap                  m_ImageMap;         // a rendering of each tile, object, sprite
 	TEMode                          m_Mode;         	// tool mode (pencil, line etc)
 	bool                            m_Dirty;            // flag: tool is dirty - map needs updating
@@ -81,10 +82,12 @@ private:
     void                __fastcall  DrawGrids() const;
     void                __fastcall  DrawGroupSelect() const;
     int                 __fastcall  Snap(int value, int range);
+    void                __fastcall  Get(const TRect& rect, EntityList& entities) const;
 
     __property  bool                IsDirty = { read = m_Dirty, write = m_Dirty };
 
-    void                __fastcall  Get(const TRect& rect, EntityList& entities) const;
+	typedef void __fastcall (__closure *TNotifyOnEntityClick)(const Entity& entity);
+    TNotifyOnEntityClick            FOnEntitySelected;
 
 public:
 
@@ -113,6 +116,9 @@ public:
     __property  unsigned int        Tile0Id = { read = m_Tile0Id, write = SetTile0Id };
 	__property  unsigned int        SelectedEntity = { read = m_SelectedEntity, write = SetSelectedEntity };
     __property  bool                ReadOnly = { read = m_ReadOnly, write = SetReadOnly };
+
+    __property TNotifyOnEntityClick OnEntitySelected = { read = FOnEntitySelected, write = FOnEntitySelected };
+
 };
 //---------------------------------------------------------------------------
 #endif

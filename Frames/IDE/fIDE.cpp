@@ -24,11 +24,11 @@ __fastcall TfrmIDE::TfrmIDE(TComponent* Owner)
 : TFrame(Owner)
 {
     RegisterDocumentEditors();
-    ::Messaging::Bus::Subscribe<MessageEvent>(OnMessageEvent);
 }
 //---------------------------------------------------------------------------
 __fastcall TfrmIDE::~TfrmIDE()
 {
+    ::Messaging::Bus::Unsubscribe<MessageEvent>(OnMessageEvent);
     if (Application && Application->MainForm)
     {
         Application->MainForm->Menu = nullptr;
@@ -50,18 +50,30 @@ void __fastcall TfrmIDE::RegisterDocumentEditors()
     DocumentEditorFactory::Register("Game\\Map",  &TfrmEditorMap::Create);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::OnActivate()
+void __fastcall TfrmIDE::OnActivate(TWinControl* parent)
 {
-    if (Application && Application->MainForm)
+    if (parent != nullptr)
     {
-        Application->MainForm->Menu = mnuMain;
-        Application->MainForm->Caption = ApplicationName;
+        Parent = parent;
+        Visible = true;
+        ::Messaging::Bus::Subscribe<MessageEvent>(OnMessageEvent);
+        if (Application && Application->MainForm)
+        {
+            Application->MainForm->Menu = mnuMain;
+            Application->MainForm->Caption = ApplicationName;
+        }
+        ThemeSettings::ReapplyStyle();
+        Color = StyleServices()->GetStyleColor(scGenericGradientBase);
+        tvProject->BackGroundColor = StyleServices()->GetStyleColor(scGenericGradientBase);
+        dsIDE->Invalidate();
+        RefreshMruList();
     }
-    ThemeSettings::ReapplyStyle();
-    Color = StyleServices()->GetStyleColor(scGenericGradientBase);
-    tvProject->BackGroundColor = StyleServices()->GetStyleColor(scGenericGradientBase);
-    dsIDE->Invalidate();
-    RefreshMruList();
+    else
+    {
+        ::Messaging::Bus::Unsubscribe<MessageEvent>(OnMessageEvent);
+        Visible = false;
+        Parent = nullptr;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::OnMessageEvent(const MessageEvent& message)

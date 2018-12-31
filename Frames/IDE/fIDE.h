@@ -201,7 +201,7 @@ public:        // User declarations
             __fastcall  TfrmIDE(TComponent* Owner);
             __fastcall ~TfrmIDE();
 
-    void    __fastcall  OnActivate();
+    void    __fastcall  OnActivate(TWinControl* parent);
 
             __property  TNotifyEvent OnFormClose = { read = FOnFormClose, write = FOnFormClose };
 };

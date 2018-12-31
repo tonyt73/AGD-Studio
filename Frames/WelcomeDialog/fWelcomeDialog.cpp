@@ -46,8 +46,6 @@ __fastcall TfrmWelcomeDialog::TfrmWelcomeDialog(TComponent* Owner)
             cmbMachines->ItemIndex = cmbMachines->Items->Count - 1;
         }
     }
-
-    Messaging::Bus::Subscribe<Event>(OnEvent);
 }
 //---------------------------------------------------------------------------
 __fastcall TfrmWelcomeDialog::~TfrmWelcomeDialog()
@@ -141,13 +139,6 @@ void __fastcall TfrmWelcomeDialog::lblChangeThemeClick(TObject *Sender)
     cmbThemes->DroppedDown = true;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmWelcomeDialog::Initialise()
-{
-    dynamic_cast<TForm*>(Parent)->Caption = "Welcome to " + ApplicationName;
-    RefreshMRUList();
-    UpdateColors();
-}
-//---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::UpdateColors()
 {
     panMain->Color = StyleServices()->GetStyleColor(scGenericGradientBase);
@@ -195,6 +186,25 @@ void __fastcall TfrmWelcomeDialog::edtNameKeyDown(TObject *Sender, WORD &Key, TS
     if (Key == vkReturn && btnCreate->Enabled)
     {
         btnCreateClick(btnCreate);
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmWelcomeDialog::OnActivate(TWinControl* parent)
+{
+    if (parent != nullptr)
+    {
+        Parent = parent;
+        Visible = true;
+        dynamic_cast<TForm*>(Parent)->Caption = "Welcome to " + ApplicationName;
+        RefreshMRUList();
+        UpdateColors();
+        Messaging::Bus::Subscribe<Event>(OnEvent);
+    }
+    else
+    {
+        Visible = false;
+        Parent = nullptr;
+        Messaging::Bus::Unsubscribe<Event>(OnEvent);
     }
 }
 //---------------------------------------------------------------------------

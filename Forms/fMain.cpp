@@ -62,7 +62,7 @@ void __fastcall TfrmMain::FormActivate(TObject *Sender)
     if (atStartup && appSettings.WelcomeSkipOnStartup)
     {
         // We skipped the Welcome dialog; so finish off the main form setup
-        m_IDEDialog->OnActivate();
+        m_IDEDialog->OnActivate(this);
     }
     atStartup = false;
 }
@@ -116,11 +116,8 @@ void __fastcall TfrmMain::OnWelcomeDone(TObject *Sender)
 // ---------------------------------------------------------------------------
 void __fastcall TfrmMain::ShowWelcomeDialog()
 {
-    m_IDEDialog->Visible = false;
-    m_IDEDialog->Parent = nullptr;
-    m_WelcomeDialog->Parent = this;
-    m_WelcomeDialog->Visible = true;
-    m_WelcomeDialog->Initialise();
+    m_IDEDialog->OnActivate(nullptr);
+    m_WelcomeDialog->OnActivate(this);
     m_FormView  = fvWelcomeDialog;
     BorderIcons = TBorderIcons() << biMinimize << biSystemMenu;
     AutoSize = true;
@@ -141,11 +138,8 @@ void __fastcall TfrmMain::ShowWelcomeDialog()
 void __fastcall TfrmMain::ShowIDE()
 {
     appSettings.WelcomePosition = TPoint(Left, Top);
-    m_WelcomeDialog->Visible = false;
-    m_WelcomeDialog->Parent = nullptr;
-    m_IDEDialog->Parent = this;
-    m_IDEDialog->Visible = true;
-    m_IDEDialog->OnActivate();
+    m_WelcomeDialog->OnActivate(nullptr);
+    m_IDEDialog->OnActivate(this);
     m_FormView = fvNone;
     AutoSize = false;
     BorderIcons = TBorderIcons() << biMaximize << biMinimize << biSystemMenu;

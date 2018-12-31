@@ -122,6 +122,11 @@ void __fastcall TileEditor::OnMouseDown(TMouseButton Button, TShiftState Shift, 
     }
     else if (m_SelectionCount > 0 && Button == mbLeft && !Shift.Contains(ssCtrl) && !Shift.Contains(ssShift))
     {
+        if (m_SelectionCount == 1 && FOnEntitySelected != nullptr)
+        {
+            SelectedEntity = m_SingleSelect.Id;
+            FOnEntitySelected(m_SingleSelect);
+        }
         m_SelectionMove = true;
         m_LastMouse.X = X;
         m_LastMouse.Y = Y;
@@ -208,6 +213,10 @@ void __fastcall TileEditor::OnMouseMove(TShiftState Shift, int X, int Y)
                             auto ey = e.Pt.y;
                             e.Selected = (ex <= pt.X && pt.X <= ex + e.Image->Width && ey <= pt.Y && pt.Y <= ey + e.Image->Height);
                             m_SelectionCount += e.Selected ? 1 : 0;
+                            if (e.Selected)
+                            {
+                                m_SingleSelect = e;
+                            }
                         }
                     }
                     if (!m_SelectionCount)
@@ -221,8 +230,11 @@ void __fastcall TileEditor::OnMouseMove(TShiftState Shift, int X, int Y)
                                 auto ey = e.Pt.y;
                                 e.Selected = (ex <= pt.X && pt.X < ex + e.Image->Width && ey <= pt.Y && pt.Y < ey + e.Image->Height);
                                 m_SelectionCount += e.Selected ? 1 : 0;
-                                if (m_SelectionCount)
+                                if (e.Selected)
+                                {
+                                    m_SingleSelect = e;
                                     break;
+                                }
                             }
                         }
                     }

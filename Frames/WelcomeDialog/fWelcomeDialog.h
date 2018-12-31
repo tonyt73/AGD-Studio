@@ -52,7 +52,6 @@ __published:    // IDE-managed Components
     void __fastcall edtNameChange(TObject *Sender);
     void __fastcall edtNameKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
 
-
 private:    // Function declarations
     void     __fastcall     SelectionPanelOnClick(TObject *Sender);
     void     __fastcall     SelectionPanelOnRemoveClick(TObject *Sender);
@@ -72,7 +71,7 @@ public:        // User declarations
             __fastcall      TfrmWelcomeDialog(TComponent* Owner);
             __fastcall     ~TfrmWelcomeDialog();
 
-    void    __fastcall      Initialise();
+    void    __fastcall      OnActivate(TWinControl* parent);
 
     __property TNotifyEvent OnDone = { read = FOnDone, write = FOnDone };
 };
