@@ -46,6 +46,7 @@ private:
 	TSize                           m_WindowSize;       // the number of tiles across and down of the window area
 	TSize                           m_TileSize;     	// the size in pixels of a tile
     TSize                           m_Rooms;            // the number of rooms across and down
+    TSize                           m_SelectedRoom;     // the currently selected room
 	MouseModes                      m_MouseMode;        //
 	MouseModes                      m_PrevMouseMode;    //
 	TPoint                          m_LastMouse;        //
@@ -58,11 +59,13 @@ private:
 	unsigned int                    m_Tile0Id;      	// tile 0 id
 	unsigned int                    m_SelectedEntity;	// selected entity id
     bool                            m_ReadOnly;         // read only - no changes allowed - room selection only
+    bool                            m_ShowSelectedRoom; // show the selected room highlighted
+    bool                            m_ShowStartRoom;    // show the start room highlighted
+    TPoint                          m_StartRoom;        // the location of the start room
 
     void                __fastcall  CreateViewBitmap();
     void                __fastcall  OnEvent(const Event& event);
     void                __fastcall  Clear();
-    void                __fastcall  ClearSelection();
     void                __fastcall  SelectRoom(TSize room);
     void                __fastcall  ValidatePosition();
     TPoint              __fastcall  MapToView(const TPoint& pt) const;
@@ -75,12 +78,17 @@ private:
 	void                __fastcall  SetTile0Id(unsigned int id);
 	void                __fastcall  SetSelectedEntity(unsigned int id);
 	void                __fastcall  SetReadOnly(bool state);
+    void                __fastcall  SetShowSelectedRoom(bool state);
+    void                __fastcall  SetShowStartRoom(bool state);
+    void                __fastcall  SetStartRoom(TPoint location);
     void                __fastcall  SetScale(float scale);
     void                __fastcall  RefreshImages();
     void                __fastcall  DrawEntities(int filters);
     void                __fastcall  DrawMap();
     void                __fastcall  DrawGrids() const;
     void                __fastcall  DrawGroupSelect() const;
+    void                __fastcall  DrawSelectedRoom() const;
+    void                __fastcall  DrawStartRoom() const;
     int                 __fastcall  Snap(int value, int range);
     void                __fastcall  Get(const TRect& rect, EntityList& entities) const;
 
@@ -116,6 +124,10 @@ public:
     __property  unsigned int        Tile0Id = { read = m_Tile0Id, write = SetTile0Id };
 	__property  unsigned int        SelectedEntity = { read = m_SelectedEntity, write = SetSelectedEntity };
     __property  bool                ReadOnly = { read = m_ReadOnly, write = SetReadOnly };
+    __property  TSize               SelectedRoom = { read = m_SelectedRoom };
+    __property  TPoint              StartRoom = { read = m_StartRoom, write = SetStartRoom };
+    __property  bool                ShowSelectedRoom = { read = m_ShowSelectedRoom, write = SetShowSelectedRoom };
+    __property  bool                ShowStartRoom = { read = m_ShowStartRoom, write = SetShowStartRoom };
 
     __property TNotifyOnEntityClick OnEntitySelected = { read = FOnEntitySelected, write = FOnEntitySelected };
 

@@ -29,6 +29,7 @@ __fastcall TfrmIDE::TfrmIDE(TComponent* Owner)
 __fastcall TfrmIDE::~TfrmIDE()
 {
     ::Messaging::Bus::Unsubscribe<MessageEvent>(OnMessageEvent);
+    ::Messaging::Bus::Unsubscribe<Event>(OnEvent);
     if (Application && Application->MainForm)
     {
         Application->MainForm->Menu = nullptr;
@@ -57,6 +58,7 @@ void __fastcall TfrmIDE::OnActivate(TWinControl* parent)
         Parent = parent;
         Visible = true;
         ::Messaging::Bus::Subscribe<MessageEvent>(OnMessageEvent);
+        ::Messaging::Bus::Subscribe<Event>(OnEvent);
         if (Application && Application->MainForm)
         {
             Application->MainForm->Menu = mnuMain;
@@ -71,6 +73,7 @@ void __fastcall TfrmIDE::OnActivate(TWinControl* parent)
     else
     {
         ::Messaging::Bus::Unsubscribe<MessageEvent>(OnMessageEvent);
+        ::Messaging::Bus::Unsubscribe<Event>(OnEvent);
         Visible = false;
         Parent = nullptr;
     }
@@ -87,6 +90,15 @@ void __fastcall TfrmIDE::OnMessageEvent(const MessageEvent& message)
     {
         mbKeys->Lines->Clear();
         mbKeys->Lines->Add(message.Message);
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::OnEvent(const Event& event)
+{
+    if (event.Id == "update.properties")
+    {
+        auto doc = (Document*)((NativeInt)tvProject->Selected->Tag);
+        UpdateProperties(doc);
     }
 }
 //---------------------------------------------------------------------------

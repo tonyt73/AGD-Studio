@@ -128,6 +128,7 @@ public:
     __property  unsigned int Width = { read = m_Width, write = m_Width };
     __property  unsigned int Height = { read = m_Height, write = m_Height };
 };
+//---------------------------------------------------------------------------
 class RoomSelected : public Event
 {
 private:
@@ -140,6 +141,20 @@ public:
     }
 
     __property  TSize Room = { read = m_Room };
+};
+//---------------------------------------------------------------------------
+class StartRoomSet : public Event
+{
+private:
+    TPoint  m_Room;
+public:
+    __fastcall StartRoomSet(TPoint room)
+    : Event("start.room.set")
+    , m_Room(room)
+    {
+    }
+
+    __property  TPoint Room = { read = m_Room };
 };
 //---------------------------------------------------------------------------
 #endif

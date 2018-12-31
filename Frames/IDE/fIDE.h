@@ -195,6 +195,7 @@ private:    // User declarations
     void __fastcall RefreshMruList();
     void __fastcall mruOnClick(TObject *Sender);
     void __fastcall OnMessageEvent(const MessageEvent& message);
+    void __fastcall OnEvent(const Event& event);
 
 public:        // User declarations
     TNotifyEvent        FOnFormClose;

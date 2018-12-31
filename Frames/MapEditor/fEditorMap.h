@@ -107,21 +107,21 @@ __published:    // IDE-managed Components
     TMenuItem *N4;
     TMenuItem *mnuSPToggleToolbar;
     TToolButton *ToolButton12;
-    TToolButton *btnScratchGridTile;
+    TToolButton *btnSPGridTile;
     TMenuItem *mnuSPToggleGrid;
-    TAction *actSPGridTile;
-    TAction *actSPGridRoom;
-    TToolButton *btnScratchGridRoom;
     TToolButton *ToolButton1;
     TToolButton *btnEditMode;
     TAction *actToggleEditMode;
     TSplitter *splRoomSelector;
     TImage *imgRoomSelector;
     TToolButton *ToolButton3;
+    TToolButton *btnWSGridRoom;
+    TToolButton *btnWSGridTile;
+    TAction *actGridTile;
+    TAction *actGridRoom;
     TToolButton *ToolButton5;
-    TToolButton *ToolButton6;
-    TAction *actWSGridRoom;
-    TAction *actWSGridTile;
+    TToolButton *btnShowStart;
+    TAction *actToggleShowStart;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actLineExecute(TObject *Sender);
@@ -150,15 +150,17 @@ __published:    // IDE-managed Components
     void __fastcall actDeleteExecute(TObject *Sender);
     void __fastcall mnuWSToggleToolbarClick(TObject *Sender);
     void __fastcall mnuSPToggleToolbarClick(TObject *Sender);
-    void __fastcall actSPGridTileExecute(TObject *Sender);
     void __fastcall pgcAssetsChange(TObject *Sender);
-	void __fastcall actSPGridRoomExecute(TObject *Sender);
     void __fastcall actToggleEditModeExecute(TObject *Sender);
     void __fastcall imgRoomSelectorMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
     void __fastcall imgRoomSelectorMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
     void __fastcall imgRoomSelectorMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
-    void __fastcall actWSGridRoomExecute(TObject *Sender);
-    void __fastcall actWSGridTileExecute(TObject *Sender);
+    void __fastcall btnWSGridRoomClick(TObject *Sender);
+    void __fastcall btnWSGridTileClick(TObject *Sender);
+    void __fastcall btnSPGridTileClick(TObject *Sender);
+    void __fastcall actGridTileExecute(TObject *Sender);
+    void __fastcall actGridRoomExecute(TObject *Sender);
+    void __fastcall actToggleShowStartExecute(TObject *Sender);
 
 private:    // User declarations
     TiledMapDocument*           m_Document;
@@ -174,6 +176,7 @@ private:    // User declarations
             bool    __fastcall  IsActive() const;
             void    __fastcall  OnEvent(const Event& event);
             void    __fastcall  OnRoomSelected(const RoomSelected& event);
+            void    __fastcall  OnStartRoomSet(const StartRoomSet& event);
             void    __fastcall  OnMapResize(const OnMapResized& message);
 			void 	__fastcall 	OnEntityClick(ImageDocument* document);
             void    __fastcall  OnWorkspaceEntitySelected(const Entity& entity);

@@ -70,6 +70,7 @@ protected:
 
             void        __fastcall  OnEndObject(const String& object);
             void        __fastcall  OnDocumentChanged(const OnDocumentChange<String>& message);
+            void        __fastcall  OnStartRoomSet(const StartRoomSet& event);
             void        __fastcall  DoSave();
             void        __fastcall  GetRoom(int room);
 

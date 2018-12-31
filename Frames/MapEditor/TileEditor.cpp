@@ -81,15 +81,6 @@ void __fastcall TileEditor::Clear()
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::ClearSelection()
-{
-    for (auto& e : m_Entities)
-    {
-        e.Selected = false;
-    }
-    m_SelectionCount += 0;
-}
-//---------------------------------------------------------------------------
 void __fastcall TileEditor::ValidatePosition()
 {
     m_PositionMS.X = max(0, (int)min(m_ContentSize.cx - (int)(m_View->Width  / m_Scale.x), m_PositionMS.X));
@@ -116,9 +107,17 @@ void __fastcall TileEditor::OnMouseDown(TMouseButton Button, TShiftState Shift, 
     {
         // work out the room number
         const auto& wi = theDocumentManager.ProjectConfig()->Window;
-        X = ((m_PositionMS.X * m_Scale.x) + X) / (m_TileSize.cx * wi.Width  * m_Scale.x);
-        Y = ((m_PositionMS.Y * m_Scale.y) + Y) / (m_TileSize.cy * wi.Height * m_Scale.y);
-        SelectRoom(TSize(X, Y));
+        auto pt = ViewToMap(X, Y);
+        pt.x /= m_TileSize.cx * wi.Width;
+        pt.y /= m_TileSize.cy * wi.Height;
+        if (Shift.Contains(ssAlt))
+        {
+            StartRoom = pt;
+        }
+        else
+        {
+            SelectRoom(TSize(pt.x, pt.y));
+        }
     }
     else if (m_SelectionCount > 0 && Button == mbLeft && !Shift.Contains(ssCtrl) && !Shift.Contains(ssShift))
     {
@@ -154,6 +153,15 @@ void __fastcall TileEditor::OnMouseDown(TMouseButton Button, TShiftState Shift, 
         m_GroupSelectSrtMS.Y = Snap(m_GroupSelectSrtMS.Y, m_TileSize.cy);
         m_GroupSelectEndMS.X = Snap(m_GroupSelectEndMS.X, m_TileSize.cx);
         m_GroupSelectEndMS.Y = Snap(m_GroupSelectEndMS.Y, m_TileSize.cy);
+    }
+    else if (Button == mbLeft && ShowStartRoom && !ShowSelectedRoom && Shift.Contains(ssAlt))
+    {
+        // work out the room number
+        const auto& wi = theDocumentManager.ProjectConfig()->Window;
+        auto pt = ViewToMap(X, Y);
+        pt.x /= m_TileSize.cx * wi.Width;
+        pt.y /= m_TileSize.cy * wi.Height;
+        StartRoom = pt;
     }
 }
 //---------------------------------------------------------------------------
@@ -237,6 +245,10 @@ void __fastcall TileEditor::OnMouseMove(TShiftState Shift, int X, int Y)
                                 }
                             }
                         }
+                    }
+                    if (Shift.Contains(ssMiddle))
+                    {
+                        DeleteSelection();
                     }
                     Refresh();
                 }
@@ -374,6 +386,28 @@ void __fastcall TileEditor::SetReadOnly(bool state)
     }
 }
 //---------------------------------------------------------------------------
+void __fastcall TileEditor::SetShowSelectedRoom(bool state)
+{
+    m_ShowSelectedRoom = state;
+    UpdateMap();
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::SetShowStartRoom(bool state)
+{
+    m_ShowStartRoom = state;
+    UpdateMap();
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::SetStartRoom(TPoint location)
+{
+    if ((location.x != m_StartRoom.x || location.y != m_StartRoom.y) && 0 <= location.x && location.y < m_Rooms.cx && 0 <= location.y && location.y < m_Rooms.cy)
+    {
+        m_StartRoom = location;
+        UpdateMap();
+        Messaging::Bus::Publish<StartRoomSet>(StartRoomSet(m_StartRoom));
+    }
+}
+//---------------------------------------------------------------------------
 void __fastcall TileEditor::UpdateMap()
 {
     // update the content
@@ -487,6 +521,48 @@ void __fastcall TileEditor::DrawMap()
     m_ForceMapDraw = false;
 }
 //---------------------------------------------------------------------------
+void __fastcall TileEditor::DrawSelectedRoom() const
+{
+    if (m_ShowSelectedRoom)
+    {
+        auto shade = std::make_unique<TBitmap>();
+        shade->PixelFormat = pf32bit;
+        shade->Width = 1;
+        shade->Height = 1;
+        ((TColor*)shade->ScanLine[0])[0] = (TColor)0x7F00FF00;
+        BLENDFUNCTION bfn;
+        bfn.BlendOp = AC_SRC_OVER;
+        bfn.BlendFlags = 0;
+        bfn.SourceConstantAlpha = 128;
+        bfn.AlphaFormat = 0;
+        auto ww = m_TileSize.cx * m_WindowSize.cx;
+        auto wh = m_TileSize.cy * m_WindowSize.cy;
+        auto pt = MapToView(TPoint(m_SelectedRoom.cx * ww, m_SelectedRoom.cy * wh));
+        AlphaBlend(m_View->Picture->Bitmap->Canvas->Handle, pt.x, pt.y, ww * m_Scale.x + 1, wh * m_Scale.y + 1, shade->Canvas->Handle, 0, 0, 1, 1, bfn);
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::DrawStartRoom() const
+{
+    if (m_ShowStartRoom)
+    {
+        auto shade = std::make_unique<TBitmap>();
+        shade->PixelFormat = pf32bit;
+        shade->Width = 1;
+        shade->Height = 1;
+        ((TColor*)shade->ScanLine[0])[0] = (TColor)0x7FFFFF00;
+        BLENDFUNCTION bfn;
+        bfn.BlendOp = AC_SRC_OVER;
+        bfn.BlendFlags = 0;
+        bfn.SourceConstantAlpha = 128;
+        bfn.AlphaFormat = 0;
+        auto ww = m_TileSize.cx * m_WindowSize.cx;
+        auto wh = m_TileSize.cy * m_WindowSize.cy;
+        auto pt = MapToView(TPoint(m_StartRoom.x * ww, m_StartRoom.y * wh));
+        AlphaBlend(m_View->Picture->Bitmap->Canvas->Handle, pt.x, pt.y, ww * m_Scale.x + 1, wh * m_Scale.y + 1, shade->Canvas->Handle, 0, 0, 1, 1, bfn);
+    }
+}
+//---------------------------------------------------------------------------
 void __fastcall TileEditor::Refresh()
 {
     ValidatePosition();
@@ -510,10 +586,11 @@ void __fastcall TileEditor::Refresh()
     auto cy = m_PositionMS.Y;
     auto cw = (int)(vw / m_Scale.x);
     auto ch = (int)(vh / m_Scale.y);
-    //PatBlt(m_View->Picture->Bitmap->Canvas->Handle, 0, 0, vw, vh, BLACKNESS);
     StretchBlt(m_View->Picture->Bitmap->Canvas->Handle, 0, 0, vw, vh, m_Content->Canvas->Handle, cx, cy, cw, ch, SRCCOPY);
     DrawGrids();
     DrawGroupSelect();
+    DrawSelectedRoom();
+    DrawStartRoom();
     m_View->Refresh();
 }
 //---------------------------------------------------------------------------
@@ -557,6 +634,7 @@ EntityList __fastcall TileEditor::GetSelection() const
 {
     EntityList selection;
     std::copy_if(m_Entities.begin(), m_Entities.end(), back_inserter(selection), [](const Entity& e){ return e.Selected; });
+#if 0   // Re-Position to Zero
     // reposition the entities to 0,0
     // find the minimum position
     int minX = 1410065408;
@@ -571,6 +649,12 @@ EntityList __fastcall TileEditor::GetSelection() const
     {
         e.Pt = TPoint(e.Pt.x - minX, e.Pt.y - minY);
     }
+#else   // Add +1, +1 tile size to each entity
+    for (auto& e : selection)
+    {
+        e.Pt += TPoint(m_TileSize.cx, m_TileSize.cy);
+    }
+#endif
     return selection;
 }
 //---------------------------------------------------------------------------
@@ -587,6 +671,7 @@ void __fastcall TileEditor::DeleteSelection()
             ++it;
         }
     }
+    m_SelectionCount = 0;
     RefreshImages();
     UpdateMap();
 }
@@ -609,21 +694,22 @@ void __fastcall TileEditor::UnselectAll()
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::SelectRoom(TSize room)
 {
-    ClearSelection();
-    const auto& wi = theDocumentManager.ProjectConfig()->Window;
-    auto minx = room.cx * m_TileSize.cx * wi.Width;
-    auto miny = room.cy * m_TileSize.cy * wi.Height;
-    auto maxx = minx + (m_TileSize.cx * wi.Width);
-    auto maxy = miny + (m_TileSize.cy * wi.Height);
-
-    for (auto& e : m_Entities)
-    {
-        auto pt = e.Pt;
-        if (minx <=  pt.x && pt.x < maxx && miny <= pt.y && pt.y < maxy)
-        {
-            e.Selected = true;
-        }
-    }
+    m_SelectedRoom = room;
+    UnselectAll();
+//    const auto& wi = theDocumentManager.ProjectConfig()->Window;
+//    auto minx = room.cx * m_TileSize.cx * wi.Width;
+//    auto miny = room.cy * m_TileSize.cy * wi.Height;
+//    auto maxx = minx + (m_TileSize.cx * wi.Width);
+//    auto maxy = miny + (m_TileSize.cy * wi.Height);
+//
+//    for (auto& e : m_Entities)
+//    {
+//        auto pt = e.Pt;
+//        if (minx <=  pt.x && pt.x < maxx && miny <= pt.y && pt.y < maxy)
+//        {
+//            e.Selected = true;
+//        }
+//    }
     Messaging::Bus::Publish<RoomSelected>(RoomSelected(room));
     UpdateMap();
 }

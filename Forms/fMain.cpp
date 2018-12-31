@@ -2,8 +2,6 @@
 #include "agdx.pch.h"
 #include "fMain.h"
 #include "ProjectManager.h"
-//#include "Graphics/Palette.h"
-//#include "Graphics/GraphicsMode.h"
 #include "Project/MachineConfig.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

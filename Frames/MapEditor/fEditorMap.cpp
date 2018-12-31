@@ -26,10 +26,12 @@ __fastcall TfrmEditorMap::TfrmEditorMap(TComponent* Owner)
     ::Messaging::Bus::Subscribe<Event>(OnEvent);
     ::Messaging::Bus::Subscribe<OnMapResized>(OnMapResize);
     ::Messaging::Bus::Subscribe<RoomSelected>(OnRoomSelected);
+    ::Messaging::Bus::Subscribe<StartRoomSet>(OnStartRoomSet);
 }
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorMap::~TfrmEditorMap()
 {
+    ::Messaging::Bus::Unsubscribe<StartRoomSet>(OnStartRoomSet);
     ::Messaging::Bus::Unsubscribe<RoomSelected>(OnRoomSelected);
     ::Messaging::Bus::Unsubscribe<OnMapResized>(OnMapResize);
     ::Messaging::Bus::Unsubscribe<Event>(OnEvent);
@@ -46,7 +48,7 @@ void __fastcall TfrmEditorMap::Initialise()
     // create the tile editors
     // TODO: change the size to ???
     m_Workspace = std::make_unique<TileEditor>(imgWorkspace, TSize(16,16), true, true, 144, false);
-    m_ScratchPad = std::make_unique<TileEditor>(imgScratchPad, TSize(8,8), true, true, 8, false);
+    m_ScratchPad = std::make_unique<TileEditor>(imgScratchPad, TSize(8,8), true, false, 8, false);
     m_RoomSelector = std::make_unique<TileEditor>(imgRoomSelector, TSize(16,16), false, true, 8, true);
     m_Workspace->Mode = TileEditor::temSelect;
 	m_ScratchPad->Mode = TileEditor::temSelect;
@@ -54,6 +56,9 @@ void __fastcall TfrmEditorMap::Initialise()
     m_ScratchPad->GridTile = true;
 	m_ScratchPad->GridRoom = false;
 	m_RoomSelector->GridRoom = true;
+	m_RoomSelector->ShowStartRoom = true;
+	m_RoomSelector->ShowSelectedRoom = true;
+    m_RoomSelector->StartRoom = TPoint(m_Document->StartLocationX, m_Document->StartLocationY);
     m_RoomSelector->Scale = 0.5f;
     // and set their tile sets
     m_Workspace->SetEntities(m_Document->Get(meMap));
@@ -267,6 +272,15 @@ void __fastcall TfrmEditorMap::OnRoomSelected(const RoomSelected& event)
     }
 }
 //---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::OnStartRoomSet(const StartRoomSet& event)
+{
+    if (event.Id == "start.room.set")
+    {
+        m_Workspace->StartRoom = event.Room;
+        m_RoomSelector->StartRoom = event.Room;
+    }
+}
+//---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::OnMapResize(const OnMapResized& message)
 {
 }
@@ -314,18 +328,21 @@ void __fastcall TfrmEditorMap::dpToolsCloseQuery(TObject *Sender, bool &CanClose
 void __fastcall TfrmEditorMap::ShowKeysHelp()
 {
 	const String help =
-		"Select Tool\r\n"
+		"Select Tool (Alt+1)\r\n"
 		"Mouse over            : Highlight an item\r\n"
 		"                        Can be moved, duplicated or deleted\r\n"
         "Ctrl + Left MB + Move : Select group of items\r\n"
         "Ctrl + Left MB Click  : Clear selection\r\n\r\n"
-		"Pencil, Line, Shape Tools\r\n"
+		"Pencil (Alt+2), Line (Alt+3), Rectangle (Alt+4) Tools\r\n"
 		"Left MB               : Place current asset\r\n"
         "                        Tiles - Hold button and drag mouse to place multiple\r\n"
         "Middle MB             : Remove tile\r\n"
 		"                        Tiles - Hold button and drag mouse to remove multiple\r\n\r\n"
         "General\r\n"
-        "Shift + Left MB       : Pan the window by moving the mouse\r\n";
+        "Shift + Left MB       : Pan the window by moving the mouse\r\n"
+        "Ctrl + Del            : Delete selection\r\n"
+        "Ctrl + R              : Toggle room grid\r\n"
+        "Ctrl + T              : Toggle tile grid\r\n";
     ::Messaging::Bus::Publish<MessageEvent>(HelpKeysMessageEvent(help));
 }
 //---------------------------------------------------------------------------
@@ -404,16 +421,6 @@ void __fastcall TfrmEditorMap::mnuSPToggleToolbarClick(TObject *Sender)
 	tbrScratchPad->Visible = mnuSPToggleToolbar->Checked;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actSPGridTileExecute(TObject *Sender)
-{
-	m_ScratchPad->GridTile = actSPGridTile->Checked;
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actSPGridRoomExecute(TObject *Sender)
-{
-	m_ScratchPad->GridRoom = actSPGridRoom->Checked;
-}
-//---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::pgcAssetsChange(TObject *Sender)
 {
 	auto state = pgcAssets->ActivePage == tabTiles;
@@ -453,22 +460,58 @@ void __fastcall TfrmEditorMap::OnWorkspaceEntitySelected(const Entity& entity)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actToggleEditModeExecute(TObject *Sender)
 {
+    actToggleShowStart->Enabled = !actToggleEditMode->Checked;
     imgRoomSelector->Visible = actToggleEditMode->Checked;
     splRoomSelector->Visible = actToggleEditMode->Checked;
     splRoomSelector->Top = imgRoomSelector->Top - 8;
     m_Workspace->Rooms = actToggleEditMode->Checked ? TSize(1, 1) : TSize(16, 16);
-    m_Workspace->SetEntities(m_Document->Get(actToggleEditMode->Checked ? meRoom : meMap));
+    m_Workspace->SetEntities(m_Document->Get(actToggleEditMode->Checked ? meRoom : meMap, m_RoomSelector->SelectedRoom));
+    m_Workspace->ShowStartRoom = !actToggleEditMode->Checked && actToggleShowStart->Checked;
+    m_Workspace->UpdateMap();
     m_RoomSelector->Refresh();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actWSGridRoomExecute(TObject *Sender)
+void __fastcall TfrmEditorMap::btnWSGridRoomClick(TObject *Sender)
 {
-	m_Workspace->GridRoom = actWSGridRoom->Checked;
+    btnWSGridRoom->Down = !btnWSGridRoom->Down;
+    m_Workspace->GridRoom = btnWSGridRoom->Down;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actWSGridTileExecute(TObject *Sender)
+void __fastcall TfrmEditorMap::btnWSGridTileClick(TObject *Sender)
 {
-	m_Workspace->GridTile = actWSGridTile->Checked;
+    btnWSGridTile->Down = !btnWSGridTile->Down;
+    m_Workspace->GridTile = btnWSGridTile->Down;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::btnSPGridTileClick(TObject *Sender)
+{
+    btnSPGridTile->Down = !btnSPGridTile->Down;
+    m_ScratchPad->GridTile = btnSPGridTile->Down;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::actGridTileExecute(TObject *Sender)
+{
+    if (dpWorkspace == m_ActivePanel)
+    {
+        btnWSGridTileClick(Sender);
+    }
+    else
+    {
+        btnSPGridTileClick(Sender);
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::actGridRoomExecute(TObject *Sender)
+{
+    if (dpWorkspace == m_ActivePanel)
+    {
+        btnWSGridRoomClick(Sender);
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::actToggleShowStartExecute(TObject *Sender)
+{
+    m_Workspace->ShowStartRoom = actToggleShowStart->Checked;
 }
 //---------------------------------------------------------------------------
 

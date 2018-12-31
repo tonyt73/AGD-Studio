@@ -155,10 +155,12 @@ _fastcall TiledMapDocument::TiledMapDocument(const String& name)
 
     // message subscriptions
     ::Messaging::Bus::Subscribe<OnDocumentChange<String>>(OnDocumentChanged);
+    ::Messaging::Bus::Subscribe<StartRoomSet>(OnStartRoomSet);
 }
 //---------------------------------------------------------------------------
 __fastcall TiledMapDocument::~TiledMapDocument()
 {
+    ::Messaging::Bus::Unsubscribe<StartRoomSet>(OnStartRoomSet);
     ::Messaging::Bus::Unsubscribe<OnDocumentChange<String>>(OnDocumentChanged);
 }
 //---------------------------------------------------------------------------
@@ -324,6 +326,13 @@ void __fastcall TiledMapDocument::OnDocumentChanged(const OnDocumentChange<Strin
     {
         // TODO: find all the references and delete them
     }
+}
+//---------------------------------------------------------------------------
+void __fastcall TiledMapDocument::OnStartRoomSet(const StartRoomSet& event)
+{
+    StartLocationX = event.Room.x;
+    StartLocationY = event.Room.y;
+    Messaging::Bus::Publish<Event>(Event("update.properties"));
 }
 //---------------------------------------------------------------------------
 
