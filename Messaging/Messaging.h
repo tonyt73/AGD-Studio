@@ -74,6 +74,11 @@ public:
             {
                 subscriptions->erase(subscription);
             }
+            if (subscriptions->size() == 0)
+            {
+                // remove the subscriptions from the handlers list
+                m_Handlers->erase(typeid(T));
+            }
         }
     }
 
