@@ -217,9 +217,9 @@ void __fastcall TfrmEditorMap::RefreshAssets()
             assetsObjects->Add(dynamic_cast<ImageDocument*>(image));
         }
     }
-    assetsTiles->ScrollBox1Resize(nullptr);
-    assetsSprites->ScrollBox1Resize(nullptr);
-    assetsObjects->ScrollBox1Resize(nullptr);
+    assetsTiles->sbxListResize(nullptr);
+    assetsSprites->sbxListResize(nullptr);
+    assetsObjects->sbxListResize(nullptr);
 }
 //---------------------------------------------------------------------------
 bool __fastcall TfrmEditorMap::IsActive() const
@@ -438,12 +438,15 @@ void __fastcall TfrmEditorMap::OnWorkspaceEntitySelected(const Entity& entity)
     {
         case itObject:
             pgcAssets->ActivePage = tabObjects;
+            assetsObjects->Select(entity.Image);
             break;
         case itSprite:
             pgcAssets->ActivePage = tabSprites;
+            assetsSprites->Select(entity.Image);
             break;
         case itTile:
             pgcAssets->ActivePage = tabTiles;
+            assetsTiles->Select(entity.Image);
             break;
     }
 }

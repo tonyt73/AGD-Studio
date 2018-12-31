@@ -13,12 +13,12 @@
 class TfrmAssetSelection : public TFrame
 {
 __published:	// IDE-managed Components
-    TScrollBox *ScrollBox1;
+    TScrollBox *sbxList;
     TFlowPanel *panList;
     TPopupMenu *popMenu;
     TMenuItem *mnuToggleLabels;
-    void __fastcall ScrollBox1MouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled);
-    void __fastcall ScrollBox1Resize(TObject *Sender);
+    void __fastcall sbxListMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled);
+    void __fastcall sbxListResize(TObject *Sender);
     void __fastcall mnuToggleLabelsClick(TObject *Sender);
 private:	// User declarations
 	void    __fastcall  OnImageClick(TObject* Sender);
@@ -31,6 +31,7 @@ public:		// User declarations
 
 	void    __fastcall  Clear();
 	void    __fastcall  Add(ImageDocument* image);
+    void    __fastcall  Select(ImageDocument const * const image);
 
 	__property  TNotifyImageOnSelectionEvent    OnImageSelection = { read = FOnImageClick, write = FOnImageClick };
 };

@@ -4,7 +4,7 @@ object frmAssetSelection: TfrmAssetSelection
   Width = 452
   Height = 634
   TabOrder = 0
-  object ScrollBox1: TScrollBox
+  object sbxList: TScrollBox
     Left = 0
     Top = 0
     Width = 452
@@ -17,8 +17,8 @@ object frmAssetSelection: TfrmAssetSelection
     DoubleBuffered = True
     ParentDoubleBuffered = False
     TabOrder = 0
-    OnMouseWheel = ScrollBox1MouseWheel
-    OnResize = ScrollBox1Resize
+    OnMouseWheel = sbxListMouseWheel
+    OnResize = sbxListResize
     object panList: TFlowPanel
       Left = 0
       Top = 0

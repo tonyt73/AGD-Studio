@@ -35,6 +35,22 @@ void __fastcall TfrmAssetSelection::Add(ImageDocument* image)
 	control->OnSelectedClick = OnImageClick;
 }
 //---------------------------------------------------------------------------
+void __fastcall TfrmAssetSelection::Select(ImageDocument const * const image)
+{
+    for (auto i = 0; i < panList->ControlCount; i++)
+    {
+        auto control = dynamic_cast<TfrmLabelledImage*>(panList->Controls[i]);
+        if (control != nullptr && control->Image->Id == image->Id)
+        {
+            control->Selected = true;
+            control->Refresh();
+            sbxList->VertScrollBar->Position = control->Top;
+            sbxList->Update();
+            break;
+        }
+    }
+}
+//---------------------------------------------------------------------------
 void __fastcall TfrmAssetSelection::OnImageClick(TObject* Sender)
 {
 	auto image = dynamic_cast<TfrmLabelledImage*>(Sender);
@@ -44,19 +60,19 @@ void __fastcall TfrmAssetSelection::OnImageClick(TObject* Sender)
 	}
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAssetSelection::ScrollBox1MouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled)
+void __fastcall TfrmAssetSelection::sbxListMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled)
 {
     int a = 0;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAssetSelection::ScrollBox1Resize(TObject *Sender)
+void __fastcall TfrmAssetSelection::sbxListResize(TObject *Sender)
 {
     auto my = 0;
     for (auto c = 0; c < panList->ControlCount; c++)
     {
         my = std::max(my, panList->Controls[c]->Top + panList->Controls[c]->Height);
     }
-    panList->Height = my;
+    panList->Height = std::max(my, sbxList->Height);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmAssetSelection::mnuToggleLabelsClick(TObject *Sender)
@@ -69,6 +85,6 @@ void __fastcall TfrmAssetSelection::mnuToggleLabelsClick(TObject *Sender)
             label->ShowCaption = mnuToggleLabels->Checked;
         }
     }
-    ScrollBox1Resize(nullptr);
+    sbxListResize(nullptr);
 }
 //---------------------------------------------------------------------------

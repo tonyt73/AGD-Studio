@@ -97,7 +97,7 @@ object frmEditorMap: TfrmEditorMap
             TabOrder = 0
             ExplicitWidth = 356
             ExplicitHeight = 287
-            inherited ScrollBox1: TScrollBox
+            inherited sbxList: TScrollBox
               Width = 356
               Height = 287
               ExplicitWidth = 356
@@ -133,7 +133,7 @@ object frmEditorMap: TfrmEditorMap
             TabOrder = 0
             ExplicitWidth = 356
             ExplicitHeight = 287
-            inherited ScrollBox1: TScrollBox
+            inherited sbxList: TScrollBox
               Width = 356
               Height = 287
               ExplicitWidth = 356
@@ -165,7 +165,7 @@ object frmEditorMap: TfrmEditorMap
             TabOrder = 0
             ExplicitWidth = 356
             ExplicitHeight = 287
-            inherited ScrollBox1: TScrollBox
+            inherited sbxList: TScrollBox
               Width = 356
               Height = 287
               ExplicitWidth = 356
