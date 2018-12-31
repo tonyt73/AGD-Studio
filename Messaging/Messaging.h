@@ -72,6 +72,7 @@ public:
             const auto& subscription = find(subscriptions->begin(), subscriptions->end(), handler);
             if (subscription != subscriptions->end())
             {
+                // remove the subscription of the function handler from the subscriptions list
                 subscriptions->erase(subscription);
             }
             if (subscriptions->size() == 0)
