@@ -157,4 +157,13 @@ public:
     __property  TPoint Room = { read = m_Room };
 };
 //---------------------------------------------------------------------------
+class UpdateProperties : public Event
+{
+public:
+    __fastcall UpdateProperties()
+    : Event("update.properties")
+    {
+    }
+};
+//---------------------------------------------------------------------------
 #endif

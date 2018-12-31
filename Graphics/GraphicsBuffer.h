@@ -61,7 +61,7 @@ public:
     void                __fastcall  GetBuffer(int index, ByteBuffer& buffer) const;
                                     // Get the hex data of the image
     String              __fastcall  Get() const;
-                                    // The the bitmap data from the hex data
+                                    // Set the bitmap data from the hex data
     virtual void        __fastcall  Set(const String& data) = 0;
                                     // Copy the image onto the bitmap
     void                __fastcall  Draw(TBitmap* bitmap) const;

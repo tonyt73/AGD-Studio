@@ -69,11 +69,15 @@ public:
         std::unique_ptr<Subscriptions>& subscriptions = (*m_Handlers)[typeid(T)];
         if (subscriptions != nullptr)
         {
-            const auto& subscription = find(subscriptions->begin(), subscriptions->end(), handler);
-            if (subscription != subscriptions->end())
+            for (;;)
             {
-                // remove the subscription of the function handler from the subscriptions list
-                subscriptions->erase(subscription);
+                const auto& subscription = find(subscriptions->begin(), subscriptions->end(), handler);
+                if (subscription != subscriptions->end())
+                {
+                    // remove the subscription of the function handler from the subscriptions list
+                    subscriptions->erase(subscription);
+                }
+                else break;
             }
             if (subscriptions->size() == 0)
             {

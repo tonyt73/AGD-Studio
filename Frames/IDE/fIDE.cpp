@@ -29,7 +29,7 @@ __fastcall TfrmIDE::TfrmIDE(TComponent* Owner)
 __fastcall TfrmIDE::~TfrmIDE()
 {
     ::Messaging::Bus::Unsubscribe<MessageEvent>(OnMessageEvent);
-    ::Messaging::Bus::Unsubscribe<Event>(OnEvent);
+    ::Messaging::Bus::Unsubscribe<UpdateProperties>(OnUpdateProperties);
     if (Application && Application->MainForm)
     {
         Application->MainForm->Menu = nullptr;
@@ -58,7 +58,7 @@ void __fastcall TfrmIDE::OnActivate(TWinControl* parent)
         Parent = parent;
         Visible = true;
         ::Messaging::Bus::Subscribe<MessageEvent>(OnMessageEvent);
-        ::Messaging::Bus::Subscribe<Event>(OnEvent);
+        ::Messaging::Bus::Subscribe<UpdateProperties>(OnUpdateProperties);
         if (Application && Application->MainForm)
         {
             Application->MainForm->Menu = mnuMain;
@@ -73,7 +73,7 @@ void __fastcall TfrmIDE::OnActivate(TWinControl* parent)
     else
     {
         ::Messaging::Bus::Unsubscribe<MessageEvent>(OnMessageEvent);
-        ::Messaging::Bus::Unsubscribe<Event>(OnEvent);
+        ::Messaging::Bus::Unsubscribe<UpdateProperties>(OnUpdateProperties);
         Visible = false;
         Parent = nullptr;
     }
@@ -93,12 +93,12 @@ void __fastcall TfrmIDE::OnMessageEvent(const MessageEvent& message)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::OnEvent(const Event& event)
+void __fastcall TfrmIDE::OnUpdateProperties(const UpdateProperties& event)
 {
     if (event.Id == "update.properties")
     {
         auto doc = (Document*)((NativeInt)tvProject->Selected->Tag);
-        UpdateProperties(doc);
+        UpdateDocumentProperties(doc);
     }
 }
 //---------------------------------------------------------------------------
@@ -182,7 +182,7 @@ void __fastcall TfrmIDE::actEditZoomResetExecute(TObject *Sender)
     ::Messaging::Bus::Publish<Event>(Event("zoom.reset"));
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::UpdateProperties(Document* document)
+void __fastcall TfrmIDE::UpdateDocumentProperties(Document* document)
 {
     const auto properties = document->GetPropertyInfo();
     for (auto it : properties)
@@ -250,7 +250,7 @@ void __fastcall TfrmIDE::tvProjectItemSelectedChange(TObject *Sender, TElXTreeIt
     if (Item->Tag)
     {
         auto doc = (Document*)((NativeInt)Item->Tag);
-        UpdateProperties(doc);
+        UpdateDocumentProperties(doc);
         auto dockPanel = static_cast<TLMDDockPanel*>(doc->DockPanel);
         if (dockPanel)
         {
@@ -285,7 +285,7 @@ void __fastcall TfrmIDE::tvProjectDblClick(TObject *Sender)
                 dp->Caption = doc->Name;
                 dp->Tag = (NativeInt)doc;
                 doc->DockPanel = dp;
-                UpdateProperties(doc);
+                UpdateDocumentProperties(doc);
                 dp->ClientKind = dkDocument;
                 dsIDE->DockControl(dp, dsIDE->SpaceZone);
                 dp->OnClose = OnDocumentClose;

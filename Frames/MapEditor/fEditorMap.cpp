@@ -48,13 +48,16 @@ void __fastcall TfrmEditorMap::Initialise()
     // create the tile editors
     // TODO: change the size to ???
     m_Workspace = std::make_unique<TileEditor>(imgWorkspace, TSize(16,16), true, true, 144, false);
-    m_ScratchPad = std::make_unique<TileEditor>(imgScratchPad, TSize(8,8), true, false, 8, false);
-    m_RoomSelector = std::make_unique<TileEditor>(imgRoomSelector, TSize(16,16), false, true, 8, true);
     m_Workspace->Mode = TileEditor::temSelect;
+    m_Workspace->StartRoom = TPoint(m_Document->StartLocationX, m_Document->StartLocationY);
+
+    m_ScratchPad = std::make_unique<TileEditor>(imgScratchPad, TSize(8,8), true, false, 8, false);
 	m_ScratchPad->Mode = TileEditor::temSelect;
-	m_RoomSelector->Mode = TileEditor::temSelect;
     m_ScratchPad->GridTile = true;
 	m_ScratchPad->GridRoom = false;
+
+    m_RoomSelector = std::make_unique<TileEditor>(imgRoomSelector, TSize(16,16), false, true, 8, true);
+	m_RoomSelector->Mode = TileEditor::temSelect;
 	m_RoomSelector->GridRoom = true;
 	m_RoomSelector->ShowStartRoom = true;
 	m_RoomSelector->ShowSelectedRoom = true;

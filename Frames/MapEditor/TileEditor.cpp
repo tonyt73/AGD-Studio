@@ -113,6 +113,7 @@ void __fastcall TileEditor::OnMouseDown(TMouseButton Button, TShiftState Shift, 
         if (Shift.Contains(ssAlt))
         {
             StartRoom = pt;
+            Messaging::Bus::Publish<StartRoomSet>(StartRoomSet(m_StartRoom));
         }
         else
         {
@@ -162,6 +163,7 @@ void __fastcall TileEditor::OnMouseDown(TMouseButton Button, TShiftState Shift, 
         pt.x /= m_TileSize.cx * wi.Width;
         pt.y /= m_TileSize.cy * wi.Height;
         StartRoom = pt;
+        Messaging::Bus::Publish<StartRoomSet>(StartRoomSet(m_StartRoom));
     }
 }
 //---------------------------------------------------------------------------
@@ -404,7 +406,6 @@ void __fastcall TileEditor::SetStartRoom(TPoint location)
     {
         m_StartRoom = location;
         UpdateMap();
-        Messaging::Bus::Publish<StartRoomSet>(StartRoomSet(m_StartRoom));
     }
 }
 //---------------------------------------------------------------------------

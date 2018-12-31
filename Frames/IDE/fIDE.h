@@ -17,20 +17,20 @@
 #include <Vcl.Buttons.hpp>
 #include <Vcl.ThemedActnCtrls.hpp>
 #include <Vcl.Grids.hpp>
-#include <Vcl.Grids.hpp>
 #include <Vcl.Dialogs.hpp>
+#include <Vcl.ExtDlgs.hpp>
+#include <Vcl.WinXPanels.hpp>
 #include "LMDInsPropInsp.hpp"
 #include "LMDInsPropPage.hpp"
 #include "LMDDckSite.hpp"
 #include "LMDPNGImageList.hpp"
+#include "ElMenus.hpp"
 #include "ElTreeInplaceEditors.hpp"
 #include "ElXPThemedControl.hpp"
 #include "ElXTree.hpp"
 //---------------------------------------------------------------------------
 #include "Project/Document.h"
-#include <Vcl.ExtDlgs.hpp>
-#include "ElMenus.hpp"
-#include <Vcl.WinXPanels.hpp>
+#include "Messaging/Event.h"
 //---------------------------------------------------------------------------
 class TfrmIDE : public TFrame
 {
@@ -189,13 +189,13 @@ __published:    // IDE-managed Components
     void __fastcall actViewMessagesExecute(TObject *Sender);
 
 private:    // User declarations
-    void __fastcall UpdateProperties(Document* document);
+    void __fastcall UpdateDocumentProperties(Document* document);
     void __fastcall OnDocumentClose(TObject *Sender, TLMDockPanelCloseAction& action);
     void __fastcall RegisterDocumentEditors();
     void __fastcall RefreshMruList();
     void __fastcall mruOnClick(TObject *Sender);
     void __fastcall OnMessageEvent(const MessageEvent& message);
-    void __fastcall OnEvent(const Event& event);
+    void __fastcall OnUpdateProperties(const UpdateProperties& event);
 
 public:        // User declarations
     TNotifyEvent        FOnFormClose;

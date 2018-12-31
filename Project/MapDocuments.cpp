@@ -332,7 +332,7 @@ void __fastcall TiledMapDocument::OnStartRoomSet(const StartRoomSet& event)
 {
     StartLocationX = event.Room.x;
     StartLocationY = event.Room.y;
-    Messaging::Bus::Publish<Event>(Event("update.properties"));
+    Messaging::Bus::Publish<UpdateProperties>(UpdateProperties());
 }
 //---------------------------------------------------------------------------
 

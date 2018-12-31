@@ -62,7 +62,8 @@ void __fastcall TfrmAssetSelection::OnImageClick(TObject* Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmAssetSelection::sbxListMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled)
 {
-    int a = 0;
+    Handled = true;
+    sbxList->VertScrollBar->Position -= WheelDelta;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmAssetSelection::sbxListResize(TObject *Sender)
