@@ -116,7 +116,7 @@ void __fastcall TfrmEditorImage::SetDocument(Document* document)
         palULAPlus->Init();
     }
     btnModePaint->Down = true;
-    btnModeBlock->Enabled = m_ImageDocument->Type == itTile;
+    btnModeBlock->Enabled = m_ImageDocument->ImageType == itTile;
     barStatus->Panels->Items[0]->Text = "Pixel Paint Mode - Pencil";
     barStatus->Panels->Items[1]->Text = "P=" + IntToStr(m_ImageDocument->Width) + "x" + IntToStr(m_ImageDocument->Height) +
                                       ", C=" + IntToStr((int)(m_ImageDocument->Width / (8 / m_GraphicsMode.ScalarX))) + "x" +
