@@ -39,6 +39,11 @@ Entity& __fastcall Entity::operator=(const Entity& other)
     return *this;
 }
 //---------------------------------------------------------------------------
+bool __fastcall Entity::operator==(const Entity& other)
+{
+    return (m_Pt == other.m_Pt && m_Id == other.m_Id && m_Document == other.m_Document);
+}
+//---------------------------------------------------------------------------
 void __fastcall Entity::SetPoint(const TPoint& pt)
 {
     m_Pt = pt;

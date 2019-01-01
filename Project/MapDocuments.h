@@ -36,6 +36,7 @@ public:
                         __fastcall ~Entity();
 
     Entity&             __fastcall  operator=(const Entity& other);
+    bool                __fastcall  operator==(const Entity& other);
 
     void                __fastcall  Clear();
     void                __fastcall  Clean();
