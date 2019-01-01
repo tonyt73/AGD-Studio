@@ -13,7 +13,7 @@
 //---------------------------------------------------------------------------
 class TfrmPaletteAttribute : public TFrame
 {
-__published:	// IDE-managed Components
+__published:    // IDE-managed Components
     TLabel *lblPalettePaper;
     TSpeedButton *spdInkBlack;
     TSpeedButton *spdInkBlue;
@@ -52,12 +52,12 @@ __published:	// IDE-managed Components
     void __fastcall spdPaperBlackClick(TObject *Sender);
     void __fastcall spdBrightOffClick(TObject *Sender);
     void __fastcall spdFlashOffClick(TObject *Sender);
-private:	// User declarations
+private:    // User declarations
     int                 m_Ink;
     int                 m_Paper;
     int                 m_Bright;
     int                 m_Flash;
-public:		// User declarations
+public:     // User declarations
             __fastcall  TfrmPaletteAttribute(TComponent* Owner);
 
     void    __fastcall  Set(Agdx::GraphicsBuffer& canvas);

@@ -12,7 +12,7 @@
 //---------------------------------------------------------------------------
 class TfrmAssetSelection : public TFrame
 {
-__published:	// IDE-managed Components
+__published:    // IDE-managed Components
     TScrollBox *sbxList;
     TFlowPanel *panList;
     TPopupMenu *popMenu;
@@ -20,20 +20,20 @@ __published:	// IDE-managed Components
     void __fastcall sbxListMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled);
     void __fastcall sbxListResize(TObject *Sender);
     void __fastcall mnuToggleLabelsClick(TObject *Sender);
-private:	// User declarations
-	void    __fastcall  OnImageClick(TObject* Sender);
+private:    // User declarations
+    void    __fastcall  OnImageClick(TObject* Sender);
 
-	typedef void __fastcall (__closure *TNotifyImageOnSelectionEvent)(ImageDocument* document);
-	TNotifyImageOnSelectionEvent    FOnImageClick;
+    typedef void __fastcall (__closure *TNotifyImageOnSelectionEvent)(ImageDocument* document);
+    TNotifyImageOnSelectionEvent    FOnImageClick;
 
-public:		// User declarations
-			__fastcall  TfrmAssetSelection(TComponent* Owner);
+public:        // User declarations
+            __fastcall  TfrmAssetSelection(TComponent* Owner);
 
-	void    __fastcall  Clear();
-	void    __fastcall  Add(ImageDocument* image);
+    void    __fastcall  Clear();
+    void    __fastcall  Add(ImageDocument* image);
     void    __fastcall  Select(ImageDocument const * const image);
 
-	__property  TNotifyImageOnSelectionEvent    OnImageSelection = { read = FOnImageClick, write = FOnImageClick };
+    __property  TNotifyImageOnSelectionEvent    OnImageSelection = { read = FOnImageClick, write = FOnImageClick };
 };
 //---------------------------------------------------------------------------
 #endif

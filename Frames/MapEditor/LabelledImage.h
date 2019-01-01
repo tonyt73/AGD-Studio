@@ -12,12 +12,12 @@
 //---------------------------------------------------------------------------
 class TfrmLabelledImage : public TFrame
 {
-__published:	// IDE-managed Components
+__published:    // IDE-managed Components
     TPanel *panImage;
     TImage *imgImage;
     TLabel *lblCaption;
     void __fastcall imgImageClick(TObject *Sender);
-private:	// User declarations
+private:    // User declarations
     TNotifyEvent            FOnClick;
     ImageDocument*          m_Document;
 const Agdx::GraphicsMode&   m_GraphicsMode;     // the graphics mode used by the project
@@ -27,7 +27,7 @@ const Agdx::GraphicsMode&   m_GraphicsMode;     // the graphics mode used by the
     void        __fastcall  SetImage(ImageDocument* document);
     void        __fastcall  Update();
 
-public:		// User declarations
+public:        // User declarations
                 __fastcall TfrmLabelledImage(TComponent* Owner);
 
     bool        __property  Selected = { write = SetSelected };

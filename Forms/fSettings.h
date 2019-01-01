@@ -26,7 +26,7 @@
 //---------------------------------------------------------------------------
 class TfrmSettings : public TForm
 {
-__published:	// IDE-managed Components
+__published:    // IDE-managed Components
     TButton *btnOk;
     TButton *btnCancel;
     TPanel *Panel1;
@@ -52,8 +52,8 @@ __published:	// IDE-managed Components
     void __fastcall btnProfileClick(TObject *Sender);
     void __fastcall btnOkClick(TObject *Sender);
     void __fastcall cmbThemesChange(TObject *Sender);
-private:	// User declarations
-public:		// User declarations
+private:    // User declarations
+public:     // User declarations
     __fastcall TfrmSettings(TComponent* Owner);
 };
 //---------------------------------------------------------------------------

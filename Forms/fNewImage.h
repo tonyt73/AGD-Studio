@@ -11,7 +11,7 @@
 //---------------------------------------------------------------------------
 class TfrmNewImage : public TForm
 {
-__published:	// IDE-managed Components
+__published:    // IDE-managed Components
     TButton *btnOk;
     TButton *btnCancel;
     TPanel *Panel1;
@@ -30,12 +30,12 @@ __published:	// IDE-managed Components
     void __fastcall edtHeightExit(TObject *Sender);
     void __fastcall FormCreate(TObject *Sender);
     void __fastcall edtNameChange(TObject *Sender);
-private:	// User declarations
+private:    // User declarations
     String  __fastcall  GetName() const;
     int     __fastcall  GetWidth() const;
     int     __fastcall  GetHeight() const;
     String  __fastcall  GetType() const;
-public:		// User declarations
+public:    // User declarations
     __fastcall TfrmNewImage(TComponent* Owner);
 
     String  __property  Name = { read = GetName };

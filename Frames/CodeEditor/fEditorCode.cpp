@@ -41,7 +41,7 @@ const String SCHEMES_SYN[SCHEMES_EXTS_COUNT] =
 __fastcall TfrmEditorCode::TfrmEditorCode(TComponent* Owner)
 : TFrame(Owner)
 {
-	::Messaging::Bus::Subscribe<Event>(OnEvent);
+    ::Messaging::Bus::Subscribe<Event>(OnEvent);
     m_SearchOptions.Searches.set_length(0);
     m_SearchOptions.Options.Clear();
     m_SearchOptions.Options << soConfirmReplace;
@@ -52,7 +52,7 @@ __fastcall TfrmEditorCode::TfrmEditorCode(TComponent* Owner)
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorCode::~TfrmEditorCode()
 {
-	::Messaging::Bus::Unsubscribe<Event>(OnEvent);
+    ::Messaging::Bus::Unsubscribe<Event>(OnEvent);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorCode::SetDocument(Document* document)
@@ -218,9 +218,9 @@ void __fastcall TfrmEditorCode::actToggleShowSpacesExecute(TObject *Sender)
 void __fastcall TfrmEditorCode::actNoWrapExecute(TObject *Sender)
 {
   if (Sender==actNoWrap)
-	evEditor->WrapMode = wmNoWrap;
+    evEditor->WrapMode = wmNoWrap;
   else if (Sender==actWrapToRuler)
-	evEditor->WrapMode = wmWrapToRuler;
+    evEditor->WrapMode = wmWrapToRuler;
   else if (Sender==actWrapToWindow)
     evEditor->WrapMode = wmWrapToWindow;
   else
@@ -245,17 +245,17 @@ void __fastcall TfrmEditorCode::actKeybindingsExecute(TObject *Sender)
 void __fastcall TfrmEditorCode::actToggleCursorBoundExecute(TObject *Sender)
 {
   if (evEditor->ViewSettings.Contains(vsCursorBoundToChars))
-	evEditor->ViewSettings = evEditor->ViewSettings >> vsCursorBoundToChars;
+    evEditor->ViewSettings = evEditor->ViewSettings >> vsCursorBoundToChars;
   else
-	evEditor->ViewSettings = evEditor->ViewSettings << vsCursorBoundToChars;
+    evEditor->ViewSettings = evEditor->ViewSettings << vsCursorBoundToChars;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorCode::actToggleShowRulerExecute(TObject *Sender)
 {
   if (evEditor->ViewSettings.Contains(vsShowWrapRuler))
-	evEditor->ViewSettings = evEditor->ViewSettings >> vsShowWrapRuler;
+    evEditor->ViewSettings = evEditor->ViewSettings >> vsShowWrapRuler;
   else
-	evEditor->ViewSettings = evEditor->ViewSettings << vsShowWrapRuler;
+    evEditor->ViewSettings = evEditor->ViewSettings << vsShowWrapRuler;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorCode::actFontExecute(TObject *Sender)
@@ -348,39 +348,39 @@ void __fastcall TfrmEditorCode::UpdateStatus()
 
   if (evEditor->Document != NULL)
   {
-	AllBreaks = evEditor->Document->Breakpoints;
-	AllBooks = evEditor->Document->Bookmarks;
-	AllBreaksCount = AllBreaks->Count;
-	AllBooksCount = AllBooks->Count;
+    AllBreaks = evEditor->Document->Breakpoints;
+    AllBooks = evEditor->Document->Bookmarks;
+    AllBreaksCount = AllBreaks->Count;
+    AllBooksCount = AllBooks->Count;
   }
   else
   {
-	AllBreaks = NULL;
-	AllBooks = NULL;
-	AllBreaksCount = 0;
-	AllBooksCount = 0;
+    AllBreaks = NULL;
+    AllBooks = NULL;
+    AllBreaksCount = 0;
+    AllBooksCount = 0;
   };
 
   if ( (evEditor->Document != NULL) && (evEditor->Document->InsideCompoundEdit) )
-	return;
+    return;
 
   Ph = evEditor->ScrollToPhysical(evEditor->CursorPos.y);
   PhScr = evEditor->PhysicalToScroll(Ph);
 
   if (evEditor->Document!=NULL)
   {
-	LinesCount = evEditor->Document->LinesCount;
-	CharsCount = evEditor->Document->CharsCount;
-	Breaks = evEditor->Document->Breakpoints->GetMarksByLines(Ph, 1);
-	Books =  evEditor->Document->Bookmarks->GetMarksByLines(Ph, 1);
+    LinesCount = evEditor->Document->LinesCount;
+    CharsCount = evEditor->Document->CharsCount;
+    Breaks = evEditor->Document->Breakpoints->GetMarksByLines(Ph, 1);
+    Books =  evEditor->Document->Bookmarks->GetMarksByLines(Ph, 1);
   }
   else
   {
-	LinesCount = 1;
-	CharsCount = 0;
+    LinesCount = 1;
+    CharsCount = 0;
 
-	Breaks.set_length(0);
-	Books.set_length(0);
+    Breaks.set_length(0);
+    Books.set_length(0);
   };
 
   int Line1 = 0, Col1 = 0;
@@ -391,9 +391,9 @@ void __fastcall TfrmEditorCode::UpdateStatus()
   sbStatus->Panels->Items[1]->Text = Format("Sel: (%d: %d)(%d: %d)", ARRAYOFCONST(( Line + 1, Col + 1, Line1 + 1, Col1 + 1  )) );
 
   if ( evEditor->ViewSettings.Contains(vsOverwrite) )
-	sbStatus->Panels->Items[2]->Text = "Overwrite";
+    sbStatus->Panels->Items[2]->Text = "Overwrite";
   else
-	sbStatus->Panels->Items[2]->Text = "Insert";
+    sbStatus->Panels->Items[2]->Text = "Insert";
 
 
   sbStatus->Panels->Items[3]->Text = Format("View: lines=[%d]", ARRAYOFCONST((LinesCount)) );

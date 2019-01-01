@@ -13,7 +13,7 @@
 //---------------------------------------------------------------------------
 class TfrmToolbarShape : public TfrmToolbar
 {
-__published:	// IDE-managed Components
+__published:    // IDE-managed Components
     TButton *btnShape;
     TImageList *lstSmall;
     TPopupMenu *popShape;
@@ -40,8 +40,8 @@ __published:	// IDE-managed Components
     void __fastcall mnuTriangleClick(TObject *Sender);
     void __fastcall mnuRightTriangleClick(TObject *Sender);
     void __fastcall btnShapeClick(TObject *Sender);
-private:	// User declarations
-public:		// User declarations
+private:    // User declarations
+public:     // User declarations
             __fastcall  TfrmToolbarShape(TComponent* Owner);
 
     Generic __fastcall  Parameters() const;

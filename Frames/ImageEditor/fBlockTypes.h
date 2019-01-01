@@ -11,7 +11,7 @@
 //---------------------------------------------------------------------------
 class TfrmBlockTypes : public TFrame
 {
-__published:	// IDE-managed Components
+__published:    // IDE-managed Components
     TPanel *panBlock;
     TPanel *panEmpty;
     TSpeedButton *btnPlatform;
@@ -27,10 +27,10 @@ __published:	// IDE-managed Components
     TShape *Shape5;
     TShape *Shape6;
     void __fastcall btnPlatformClick(TObject *Sender);
-private:	// User declarations
+private:    // User declarations
     char        m_BlockType;
     void    __fastcall  SetBlockType(char type);
-public:		// User declarations
+public:        // User declarations
             __fastcall  TfrmBlockTypes(TComponent* Owner);
 
     char    __property  BlockType = { read = m_BlockType, write = SetBlockType };

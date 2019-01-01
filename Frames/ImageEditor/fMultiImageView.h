@@ -11,18 +11,18 @@
 //---------------------------------------------------------------------------
 class TMultiImageViewFrame : public TFrame
 {
-__published:	// IDE-managed Components
+__published:    // IDE-managed Components
     TPanel *panImages;
     TTimer *Timer1;
     void __fastcall FrameMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled);
     void __fastcall Timer1Timer(TObject *Sender);
-private:	// User declarations
+private:    // User declarations
     int                 m_Scale;
     TNotifyEvent        FOnClick;
 
     void    __fastcall  SetScale(int scale);
     void    __fastcall  OnFrameClicked(TObject *Sender);
-public:		// User declarations
+public:     // User declarations
             __fastcall  TMultiImageViewFrame(TComponent* Owner);
 
     void    __fastcall  Clear();

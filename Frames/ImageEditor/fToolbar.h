@@ -10,9 +10,9 @@
 //---------------------------------------------------------------------------
 class TfrmToolbar : public TFrame
 {
-__published:	// IDE-managed Components
-private:	// User declarations
-public:		// User declarations
+__published:// IDE-managed Components
+private:    // User declarations
+public:     // User declarations
     __fastcall TfrmToolbar(TComponent* Owner);
     virtual Generic __fastcall GetParameters() const = 0;
 };

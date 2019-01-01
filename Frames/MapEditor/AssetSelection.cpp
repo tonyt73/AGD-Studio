@@ -16,23 +16,23 @@ __fastcall TfrmAssetSelection::TfrmAssetSelection(TComponent* Owner)
 //---------------------------------------------------------------------------
 void __fastcall TfrmAssetSelection::Clear()
 {
-	for (auto c = panList->ControlCount - 1; c >= 0 ; c--)
-	{
-		auto cc = dynamic_cast<TfrmLabelledImage*>(panList->Controls[c]);
-		if (cc)
-		{
-			delete cc;
-		}
-	}
+    for (auto c = panList->ControlCount - 1; c >= 0 ; c--)
+    {
+        auto cc = dynamic_cast<TfrmLabelledImage*>(panList->Controls[c]);
+        if (cc)
+        {
+            delete cc;
+        }
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmAssetSelection::Add(ImageDocument* image)
 {
-	auto control = new TfrmLabelledImage(this);
-	control->Name = "LabelledImage" + IntToStr(++g_NextAssetId);
-	control->Parent = panList;
-	control->Image = image;
-	control->OnSelectedClick = OnImageClick;
+    auto control = new TfrmLabelledImage(this);
+    control->Name = "LabelledImage" + IntToStr(++g_NextAssetId);
+    control->Parent = panList;
+    control->Image = image;
+    control->OnSelectedClick = OnImageClick;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmAssetSelection::Select(ImageDocument const * const image)
@@ -53,11 +53,11 @@ void __fastcall TfrmAssetSelection::Select(ImageDocument const * const image)
 //---------------------------------------------------------------------------
 void __fastcall TfrmAssetSelection::OnImageClick(TObject* Sender)
 {
-	auto image = dynamic_cast<TfrmLabelledImage*>(Sender);
-	if (image != nullptr && FOnImageClick != nullptr)
-	{
-		FOnImageClick(image->Image);
-	}
+    auto image = dynamic_cast<TfrmLabelledImage*>(Sender);
+    if (image != nullptr && FOnImageClick != nullptr)
+    {
+        FOnImageClick(image->Image);
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmAssetSelection::sbxListMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled)

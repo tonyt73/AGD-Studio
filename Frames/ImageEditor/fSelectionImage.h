@@ -16,7 +16,7 @@ __published:// IDE-managed Components
     void __fastcall imgBitmapClick(TObject *Sender);
     void __fastcall imgBitmapMouseEnter(TObject *Sender);
     void __fastcall imgBitmapMouseLeave(TObject *Sender);
-private:	// User declarations
+private:    // User declarations
     const Agdx::GraphicsBuffer& m_Image;
     bool                m_Selected;
     int                 m_Scale;
@@ -26,7 +26,7 @@ private:	// User declarations
 
     void    __fastcall  SetSelected(bool state);
     void    __fastcall  SetScale(int scale);
-public:		// User declarations
+public:     // User declarations
             __fastcall  TSelectionImageFrame(TComponent* Owner, const Agdx::GraphicsBuffer& image);
 
     void    __fastcall  Update();

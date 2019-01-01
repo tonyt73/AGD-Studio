@@ -210,10 +210,10 @@ public:        // User declarations
 class TAGDDockPanel : public TLMDDockPanel
 {
 protected:
-	virtual void __fastcall WndProc(Winapi::Messages::TMessage &Message);
+   virtual void __fastcall WndProc(Winapi::Messages::TMessage &Message);
 
 public:
-            __fastcall  TAGDDockPanel(TComponent* AOwner);
+                __fastcall  TAGDDockPanel(TComponent* AOwner);
 };
 //---------------------------------------------------------------------------
 #endif

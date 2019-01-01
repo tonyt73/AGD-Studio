@@ -54,15 +54,15 @@ void __fastcall TfrmEditorMap::Initialise()
     m_Workspace->StartRoom = TPoint(m_Document->StartLocationX, m_Document->StartLocationY);
 
     m_ScratchPad = std::make_unique<TileEditor>(imgScratchPad, TSize(8,8), true, false, 8, false);
-	m_ScratchPad->Mode = TileEditor::temSelect;
+    m_ScratchPad->Mode = TileEditor::temSelect;
     m_ScratchPad->GridTile = true;
-	m_ScratchPad->GridRoom = false;
+    m_ScratchPad->GridRoom = false;
 
     m_RoomSelector = std::make_unique<TileEditor>(imgRoomSelector, TSize(16,16), false, true, 8, true);
-	m_RoomSelector->Mode = TileEditor::temSelect;
-	m_RoomSelector->GridRoom = true;
-	m_RoomSelector->ShowStartRoom = true;
-	m_RoomSelector->ShowSelectedRoom = true;
+    m_RoomSelector->Mode = TileEditor::temSelect;
+    m_RoomSelector->GridRoom = true;
+    m_RoomSelector->ShowStartRoom = true;
+    m_RoomSelector->ShowSelectedRoom = true;
     m_RoomSelector->StartRoom = TPoint(m_Document->StartLocationX, m_Document->StartLocationY);
     m_RoomSelector->Scale = 0.5f;
     // and set their tile sets
@@ -79,12 +79,12 @@ void __fastcall TfrmEditorMap::Initialise()
     // refresh the views
     RefreshAssets();
     Refresh();
-	ShowKeysHelp();
+    ShowKeysHelp();
 
-	// handle asset onclick
-	assetsTiles->OnImageSelection = OnEntityClick;
-	assetsSprites->OnImageSelection = OnEntityClick;
-	assetsObjects->OnImageSelection = OnEntityClick;
+    // handle asset onclick
+    assetsTiles->OnImageSelection = OnEntityClick;
+    assetsSprites->OnImageSelection = OnEntityClick;
+    assetsObjects->OnImageSelection = OnEntityClick;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actSelectExecute(TObject *Sender)
@@ -200,10 +200,10 @@ void __fastcall TfrmEditorMap::imgScratchPadMouseUp(TObject *Sender, TMouseButto
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::RefreshAssets()
 {
-	assetsTiles->Clear();
-	assetsSprites->Clear();
-	assetsObjects->Clear();
-	DocumentList images;
+    assetsTiles->Clear();
+    assetsSprites->Clear();
+    assetsObjects->Clear();
+    DocumentList images;
     theDocumentManager.GetAllOfType("Image", images);
     bool firstTile = true;
     for (auto image : images)
@@ -345,17 +345,17 @@ void __fastcall TfrmEditorMap::dpToolsCloseQuery(TObject *Sender, bool &CanClose
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::ShowKeysHelp()
 {
-	const String help =
-		"Select Tool (Alt+1)\r\n"
-		"Mouse over            : Highlight an item\r\n"
-		"                        Can be moved, duplicated or deleted\r\n"
+    const String help =
+        "Select Tool (Alt+1)\r\n"
+        "Mouse over            : Highlight an item\r\n"
+        "                        Can be moved, duplicated or deleted\r\n"
         "Ctrl + Left MB + Move : Select group of items\r\n"
         "Ctrl + Left MB Click  : Clear selection\r\n\r\n"
-		"Pencil (Alt+2), Line (Alt+3), Rectangle (Alt+4) Tools\r\n"
-		"Left MB               : Place current asset\r\n"
+        "Pencil (Alt+2), Line (Alt+3), Rectangle (Alt+4) Tools\r\n"
+        "Left MB               : Place current asset\r\n"
         "                        Tiles - Hold button and drag mouse to place multiple\r\n"
         "Middle MB             : Remove tile\r\n"
-		"                        Tiles - Hold button and drag mouse to remove multiple\r\n\r\n"
+        "                        Tiles - Hold button and drag mouse to remove multiple\r\n\r\n"
         "General\r\n"
         "Shift + Left MB       : Pan the window by moving the mouse\r\n"
         "Ctrl + Del            : Delete selection\r\n"
@@ -406,55 +406,55 @@ void __fastcall TfrmEditorMap::actDuplicateExecute(TObject *Sender)
     if (dpWorkspace == m_ActivePanel)
     {
         auto list = m_Workspace->GetSelection();
-		m_Workspace->UnselectAll();
-		m_Workspace->Add(list);
-	}
-	else if (dpScratchPad == m_ActivePanel)
-	{
-		auto list = m_ScratchPad->GetSelection();
-		m_ScratchPad->UnselectAll();
-		m_ScratchPad->Add(list);
-	}
+        m_Workspace->UnselectAll();
+        m_Workspace->Add(list);
+    }
+    else if (dpScratchPad == m_ActivePanel)
+    {
+        auto list = m_ScratchPad->GetSelection();
+        m_ScratchPad->UnselectAll();
+        m_ScratchPad->Add(list);
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actDeleteExecute(TObject *Sender)
 {
-	if (dpWorkspace == m_ActivePanel)
-	{
-		m_Workspace->DeleteSelection();
-	}
-	else if (dpScratchPad == m_ActivePanel)
-	{
-		m_ScratchPad->DeleteSelection();
-	}
+    if (dpWorkspace == m_ActivePanel)
+    {
+        m_Workspace->DeleteSelection();
+    }
+    else if (dpScratchPad == m_ActivePanel)
+    {
+        m_ScratchPad->DeleteSelection();
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::mnuWSToggleToolbarClick(TObject *Sender)
 {
-	tbrWorkspace->Visible = mnuWSToggleToolbar->Checked;
+    tbrWorkspace->Visible = mnuWSToggleToolbar->Checked;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::mnuSPToggleToolbarClick(TObject *Sender)
 {
-	tbrScratchPad->Visible = mnuSPToggleToolbar->Checked;
+    tbrScratchPad->Visible = mnuSPToggleToolbar->Checked;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::pgcAssetsChange(TObject *Sender)
 {
-	auto state = pgcAssets->ActivePage == tabTiles;
-	if (!state && (btnLine->Down || btnShape->Down))
-	{
-		btnPencil->Down = true;
-		actPencilExecute(Sender);
-	}
-	actLine->Enabled = state;
-	actShape->Enabled = state;
+    auto state = pgcAssets->ActivePage == tabTiles;
+    if (!state && (btnLine->Down || btnShape->Down))
+    {
+        btnPencil->Down = true;
+        actPencilExecute(Sender);
+    }
+    actLine->Enabled = state;
+    actShape->Enabled = state;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::OnEntityClick(ImageDocument* document)
 {
-	m_Workspace->SelectedEntity = document->Id;
-	m_ScratchPad->SelectedEntity = document->Id;
+    m_Workspace->SelectedEntity = document->Id;
+    m_ScratchPad->SelectedEntity = document->Id;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::OnWorkspaceEntitySelected(const Entity& entity)

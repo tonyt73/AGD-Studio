@@ -15,7 +15,7 @@
 //---------------------------------------------------------------------------
 class TfrmPaletteBitmap : public TFrame
 {
-__published:	// IDE-managed Components
+__published:// IDE-managed Components
     TPanel *panColorL;
     TPanel *panColorR;
     TButton *btnSwap;
@@ -43,7 +43,7 @@ __published:	// IDE-managed Components
     void __fastcall btnSwapClick(TObject *Sender);
     void __fastcall btnPaletteLoadClick(TObject *Sender);
     void __fastcall btnPaletteSaveClick(TObject *Sender);
-private:	// User declarations
+private:    // User declarations
     int                         m_Pen;              // logical pen color
     int                         m_Brush;            // logical brush color
     int                         m_CursorLogical;    // mouse cursor on the logical colour picker
@@ -56,7 +56,7 @@ private:	// User declarations
     void    __fastcall  DrawPhysicalColors() const;
     void    __fastcall  DrawLogicalColors() const;
     void    __fastcall  Update();
-public:		// User declarations
+public:     // User declarations
             __fastcall  TfrmPaletteBitmap(TComponent* Owner);
     void    __fastcall  Init();
     void    __fastcall  Set(Agdx::GraphicsBuffer& canvas);

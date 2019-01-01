@@ -15,7 +15,7 @@
 //---------------------------------------------------------------------------
 class TfrmULAplusBitmap : public TFrame
 {
-__published:	// IDE-managed Components
+__published:    // IDE-managed Components
     TPanel *panColorL;
     TPanel *panColorR;
     TPanel *Panel3;
@@ -41,7 +41,7 @@ __published:	// IDE-managed Components
     void __fastcall btnPaletteRestoreClick(TObject *Sender);
     void __fastcall btnPaletteSaveClick(TObject *Sender);
     void __fastcall btnPaletteLoadClick(TObject *Sender);
-private:	// User declarations
+private:    // User declarations
     int                         m_Ink;              // logical ink color
     int                         m_Paper;            // logical paper color
     int                         m_Index;            // logical palette index
@@ -60,7 +60,7 @@ private:	// User declarations
 
     int     __fastcall  GetInk(int index = -1, int ink = -1) const;
     int     __fastcall  GetPaper(int index = -1, int paper = -1) const;
-public:		// User declarations
+public:        // User declarations
             __fastcall  TfrmULAplusBitmap(TComponent* Owner);
     void    __fastcall  Init();
     void    __fastcall  Set(Agdx::GraphicsBuffer& canvas);

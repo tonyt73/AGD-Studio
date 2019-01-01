@@ -16,6 +16,6 @@ public:
     virtual __fastcall ~TWinControlHandler();
 };
 //---------------------------------------------------------------------------
-typedef std::unique_ptr<TWinControlHandler> WinControlEraseHandler;
+typedef std::unique_ptr<TWinControlHandler> EraseHandler;
 //---------------------------------------------------------------------------
 #endif //WndProcHandlersH

@@ -168,7 +168,7 @@ private:    // User declarations
     std::unique_ptr<TileEditor> m_ScratchPad;
     std::unique_ptr<TileEditor> m_RoomSelector;
     std::map<String, TAction*>  m_ActionMap;        // a map of actions; used by generic messaging to handle zoom in/out/reset, undo/redo
-    std::list<WinControlEraseHandler> m_EraseHandlers;
+    std::list<EraseHandler>     m_EraseHandlers;
     TLMDDockPanel*              m_ActivePanel;
 
             void    __fastcall  Initialise();
@@ -179,9 +179,9 @@ private:    // User declarations
             void    __fastcall  OnStartRoomSet(const StartRoomSet& event);
             void    __fastcall  OnDocumentChanged(const DocumentChange<String>& message);
             void    __fastcall  OnMapResize(const OnMapResized& message);
-			void 	__fastcall 	OnEntityClick(ImageDocument* document);
+            void     __fastcall OnEntityClick(ImageDocument* document);
             void    __fastcall  OnWorkspaceEntitySelected(const Entity& entity);
-			void    __fastcall  ShowKeysHelp();
+            void    __fastcall  ShowKeysHelp();
 
 public:        // User declarations
                     __fastcall  TfrmEditorMap(TComponent* Owner);

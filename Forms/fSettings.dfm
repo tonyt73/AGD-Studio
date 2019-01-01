@@ -331,6 +331,10 @@ object frmSettings: TfrmSettings
       Font.Name = 'Bauhaus Md BT'
       Font.Style = []
       ParentFont = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         455
         218)
@@ -388,6 +392,10 @@ object frmSettings: TfrmSettings
     object tabInterface: TTabSheet
       Caption = 'Interface'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         455
         218)
@@ -461,6 +469,10 @@ object frmSettings: TfrmSettings
     object tabMachines: TTabSheet
       Caption = 'Machines'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
   end
   object Panel1: TPanel

@@ -355,7 +355,7 @@ void __fastcall TileEditor::SetTile0Id(unsigned int id)
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::SetSelectedEntity(unsigned int id)
 {
-	m_SelectedEntity = id;
+    m_SelectedEntity = id;
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::SetScale(float scale)
