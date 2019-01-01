@@ -4,6 +4,7 @@
 //---------------------------------------------------------------------------
 #include <System.StrUtils.hpp>
 #include <System.SysUtils.hpp>
+#include <typeinfo>
 #include "Generic.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

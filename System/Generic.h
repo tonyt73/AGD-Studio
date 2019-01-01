@@ -27,6 +27,14 @@ public:
 	bool    __fastcall  Get(const String& name, int& value);
 	bool    __fastcall  Get(const String& name, float& value);
 
+    template <class T>
+	T       __fastcall  Get(const String& name)
+                        {
+                            T value;
+                            Get(name, value);
+                            return value;
+                        }
+
     String  __fastcall  Get() const;
 };
 //---------------------------------------------------------------------------
