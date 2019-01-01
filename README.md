@@ -1,5 +1,5 @@
 # AGDX-Studio
-An integrated development environment for Jonathan Caudwell's Arcade Game Designer (AGD)
+An integrated development environment for Jonathan Cauldwell's Arcade Game Designer (AGD)
 
 Editors for:
 * Images (Sprites, Objects, Tiles/Blocks)
