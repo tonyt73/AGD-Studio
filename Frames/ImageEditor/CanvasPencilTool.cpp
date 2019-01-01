@@ -7,7 +7,7 @@
 //---------------------------------------------------------------------------
 __fastcall CanvasPencilTool::CanvasPencilTool()
 {
-    m_Flags = usesUndo | modifiesImage;
+    Flags = usesUndo | modifies;
 }
 //---------------------------------------------------------------------------
 __fastcall CanvasPencilTool::~CanvasPencilTool()
@@ -18,11 +18,11 @@ void __fastcall CanvasPencilTool::Apply(Agdx::GraphicsBuffer& canvas, const TPoi
 {
     if (IsLeftDown())
     {
-        DrawLine(canvas, TRect(m_Last.X, m_Last.Y, pt.X, pt.Y), true);
+        DrawLine(canvas, TRect(LastPt.X, LastPt.Y, pt.X, pt.Y), true);
     }
     else if (IsRightDown())
     {
-        DrawLine(canvas, TRect(m_Last.X, m_Last.Y, pt.X, pt.Y), false);
+        DrawLine(canvas, TRect(LastPt.X, LastPt.Y, pt.X, pt.Y), false);
     }
 }
 //---------------------------------------------------------------------------

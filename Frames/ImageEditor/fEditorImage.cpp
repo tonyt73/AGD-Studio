@@ -604,7 +604,7 @@ void __fastcall TfrmEditorImage::imgEditorMouseDown(TObject *Sender, TMouseButto
             // pixel paint mode
             if (m_CanvasToolMap.count(m_CanvasTool) == 1)
             {
-                m_CanvasToolMap[m_CanvasTool].get()->Parameters(toolbarShape->Parameters());
+                m_CanvasToolMap[m_CanvasTool].get()->Parameters = toolbarShape->Parameters();
                 SetCanvasColors();
                 auto undo = m_CanvasToolMap[m_CanvasTool].get()->Begin(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y), Shift);
                 RefreshView();

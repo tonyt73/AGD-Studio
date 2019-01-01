@@ -7,7 +7,7 @@
 //---------------------------------------------------------------------------
 __fastcall CanvasLineTool::CanvasLineTool()
 {
-    m_Flags = usesUndo | modifiesImage | resetImageOnMove;
+    Flags = usesUndo | modifies | resetOnMove;
 }
 //---------------------------------------------------------------------------
 __fastcall CanvasLineTool::~CanvasLineTool()
@@ -18,11 +18,11 @@ void __fastcall CanvasLineTool::Apply(Agdx::GraphicsBuffer& canvas, const TPoint
 {
     if (IsLeftDown())
     {
-        DrawLine(canvas, TRect(m_Start.X, m_Start.Y, pt.X, pt.Y), true);
+        DrawLine(canvas, TRect(StartPt.X, StartPt.Y, pt.X, pt.Y), true);
     }
     else if (IsRightDown())
     {
-        DrawLine(canvas, TRect(m_Start.X, m_Start.Y, pt.X, pt.Y), false);
+        DrawLine(canvas, TRect(StartPt.X, StartPt.Y, pt.X, pt.Y), false);
     }
 }
 //---------------------------------------------------------------------------

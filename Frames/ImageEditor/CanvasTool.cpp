@@ -13,32 +13,9 @@ __fastcall CanvasTool::~CanvasTool()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall CanvasTool::Parameters(const Generic& parameters)
-{
-    m_Parameters = parameters;
-}
-//---------------------------------------------------------------------------
-bool __fastcall CanvasTool::IsLeftDown() const
-{
-    return m_MouseState.Contains(ssLeft);
-}
-//---------------------------------------------------------------------------
-bool __fastcall CanvasTool::IsRightDown() const
-{
-    return m_MouseState.Contains(ssRight);
-}
-//---------------------------------------------------------------------------
-bool __fastcall CanvasTool::IsMiddleDown() const
-{
-    return m_MouseState.Contains(ssMiddle);
-}
-//---------------------------------------------------------------------------
 String __fastcall CanvasTool::Begin(Agdx::GraphicsBuffer& canvas, const TPoint& pt, const TShiftState& buttons)
 {
-    m_IsDrawing = true;
-    m_Start = pt;
-    m_Last = pt;
-    m_MouseState = buttons;
+    Tool::Begin(pt, buttons);
     Apply(canvas, pt);
     m_Image = canvas.Get();
     return m_Image;
@@ -46,8 +23,8 @@ String __fastcall CanvasTool::Begin(Agdx::GraphicsBuffer& canvas, const TPoint& 
 //---------------------------------------------------------------------------
 void __fastcall CanvasTool::Move(Agdx::GraphicsBuffer& canvas, const TPoint& pt, const TShiftState& buttons)
 {
-    if (!m_IsDrawing) return;
-    if (m_Flags & resetImageOnMove)
+    if (!IsDrawing) return;
+    if (Flags & resetOnMove)
     {
         // restore the canvas
         canvas.Set(m_Image);
@@ -55,16 +32,16 @@ void __fastcall CanvasTool::Move(Agdx::GraphicsBuffer& canvas, const TPoint& pt,
     canvas.Begin();
     Apply(canvas, pt);
     canvas.End();
-    m_Last = pt;
+    Tool::Move(pt, buttons);
 }
 //---------------------------------------------------------------------------
 String __fastcall CanvasTool::End(Agdx::GraphicsBuffer& canvas, const TPoint& pt)
 {
-    if (pt != m_Last)
+    if (pt != LastPt)
     {
         Apply(canvas, pt);
     }
-    m_IsDrawing = false;
+    Tool::End(pt);
     return canvas.Get();
 }
 //---------------------------------------------------------------------------
@@ -152,7 +129,4 @@ void __fastcall CanvasTool::DrawHLine(Agdx::GraphicsBuffer& canvas, int xs, int 
     }
 }
 //---------------------------------------------------------------------------
-
-
-
 
