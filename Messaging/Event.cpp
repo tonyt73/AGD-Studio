@@ -9,5 +9,5 @@ template class OnChange<int>;
 template class OnChange<float>;
 template class OnChange<String>;
 template class OnChange<bool>;
-template class OnDocumentChange<String>;
+template class DocumentChange<String>;
 //---------------------------------------------------------------------------

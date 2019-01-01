@@ -27,10 +27,12 @@ __fastcall TfrmEditorMap::TfrmEditorMap(TComponent* Owner)
     ::Messaging::Bus::Subscribe<OnMapResized>(OnMapResize);
     ::Messaging::Bus::Subscribe<RoomSelected>(OnRoomSelected);
     ::Messaging::Bus::Subscribe<StartRoomSet>(OnStartRoomSet);
+    ::Messaging::Bus::Subscribe<DocumentChange<String>>(OnDocumentChanged);
 }
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorMap::~TfrmEditorMap()
 {
+    ::Messaging::Bus::Unsubscribe<DocumentChange<String>>(OnDocumentChanged);
     ::Messaging::Bus::Unsubscribe<StartRoomSet>(OnStartRoomSet);
     ::Messaging::Bus::Unsubscribe<RoomSelected>(OnRoomSelected);
     ::Messaging::Bus::Unsubscribe<OnMapResized>(OnMapResize);
@@ -255,10 +257,6 @@ void __fastcall TfrmEditorMap::OnEvent(const Event& event)
     {
         dpTileMap->Manager = static_cast<TLMDDockPanel*>(Document->DockPanel)->Site->Manager;
     }
-    else if (event.Id == "image.modified" || event.Id == "document.added" || event.Id == "document.removed")
-    {
-        RefreshAssets();
-    }
     else if (event.Id == "map.updated")
     {
         m_RoomSelector->SetEntities(m_Document->Get(meMap));
@@ -281,6 +279,23 @@ void __fastcall TfrmEditorMap::OnStartRoomSet(const StartRoomSet& event)
     {
         m_Workspace->StartRoom = event.Room;
         m_RoomSelector->StartRoom = event.Room;
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::OnDocumentChanged(const DocumentChange<String>& message)
+{
+    if (message.Id == "document.removing")
+    {
+        m_Workspace->SetEntities(m_Document->Get(actToggleEditMode->Checked ? meRoom : meMap, m_RoomSelector->SelectedRoom));
+        m_ScratchPad->SetEntities(m_Document->Get(meScratchPad));
+        m_RoomSelector->SetEntities(m_Document->Get(meMap));
+        m_Workspace->UpdateMap();
+        m_ScratchPad->UpdateMap();
+        m_RoomSelector->UpdateMap();
+    }
+    else if (message.Id == "document.removed")
+    {
+        RefreshAssets();
     }
 }
 //---------------------------------------------------------------------------

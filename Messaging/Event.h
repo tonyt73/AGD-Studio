@@ -33,13 +33,13 @@ public:
 };
 //---------------------------------------------------------------------------
 template <class T>
-class OnDocumentChange : public Event
+class DocumentChange : public Event
 {
 private:
     const Document* m_Document;
     T m_Value;
 public:
-    __fastcall OnDocumentChange(const String& id, const Document* document, const T& value = T())
+    __fastcall DocumentChange(const String& id, const Document* document, const T& value = T())
     : Event(id)
     , m_Document(document)
     , m_Value(value)

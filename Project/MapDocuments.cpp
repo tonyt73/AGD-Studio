@@ -154,14 +154,14 @@ _fastcall TiledMapDocument::TiledMapDocument(const String& name)
     m_File = GetFile();
 
     // message subscriptions
-    ::Messaging::Bus::Subscribe<OnDocumentChange<String>>(OnDocumentChanged);
+    ::Messaging::Bus::Subscribe<DocumentChange<String>>(OnDocumentChanged);
     ::Messaging::Bus::Subscribe<StartRoomSet>(OnStartRoomSet);
 }
 //---------------------------------------------------------------------------
 __fastcall TiledMapDocument::~TiledMapDocument()
 {
     ::Messaging::Bus::Unsubscribe<StartRoomSet>(OnStartRoomSet);
-    ::Messaging::Bus::Unsubscribe<OnDocumentChange<String>>(OnDocumentChanged);
+    ::Messaging::Bus::Unsubscribe<DocumentChange<String>>(OnDocumentChanged);
 }
 //---------------------------------------------------------------------------
 void __fastcall TiledMapDocument::DoSave()
@@ -268,6 +268,8 @@ const EntityList& __fastcall TiledMapDocument::Get(MapEntities type, TSize room)
         return m_Room;
     }
     assert(0);
+    m_Room.clear();
+    return m_Room;
 }
 //---------------------------------------------------------------------------
 void __fastcall TiledMapDocument::Set(MapEntities type, const EntityList& entities)
@@ -312,19 +314,24 @@ void __fastcall TiledMapDocument::Set(MapEntities type, const EntityList& entiti
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TiledMapDocument::OnDocumentChanged(const OnDocumentChange<String>& message)
+void __fastcall TiledMapDocument::OnDocumentChanged(const DocumentChange<String>& message)
 {
-    if (message.document->Type != "Image")
+    if (message.document != nullptr && message.document->Type != "Image")
     {
         return;
     }
-    if (message.Id == "document.renamed")
+    if (message.Id == "document.renamed" && message.document != nullptr)
     {
         // TODO: find all the references and change them
     }
-    else if (message.Id == "document.removed")
+    else if (message.Id == "document.removing" && message.document != nullptr)
     {
-        // TODO: find all the references and delete them
+        m_Map.erase(std::remove_if(m_Map.begin(),m_Map.end(),
+            [&](const Entity& entity) { return entity.Id == message.document->Id; }), m_Map.end());
+        m_ScratchPad.erase(std::remove_if(m_ScratchPad.begin(),m_ScratchPad.end(),
+            [&](const Entity& entity) { return entity.Id == message.document->Id; }), m_ScratchPad.end());
+        m_Room.erase(std::remove_if(m_Room.begin(),m_Room.end(),
+            [&](const Entity& entity) { return entity.Id == message.document->Id; }), m_Room.end());
     }
 }
 //---------------------------------------------------------------------------

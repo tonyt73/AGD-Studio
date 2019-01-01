@@ -64,7 +64,6 @@ private:
     TPoint                          m_StartRoom;        // the location of the start room
 
     void                __fastcall  CreateViewBitmap();
-    void                __fastcall  OnEvent(const Event& event);
     void                __fastcall  Clear();
     void                __fastcall  SelectRoom(TSize room);
     void                __fastcall  ValidatePosition();

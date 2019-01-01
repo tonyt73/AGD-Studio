@@ -77,7 +77,7 @@ void __fastcall Document::SetName(String name)
         }
         auto newFile = GetFile();
         System::File::Rename(oldFile, newFile);
-        ::Messaging::Bus::Publish<OnDocumentChange<String>>(OnDocumentChange<String>("document.renamed", this, oldName));
+        ::Messaging::Bus::Publish<DocumentChange<String>>(DocumentChange<String>("document.renamed", this, oldName));
     }
     else
     {

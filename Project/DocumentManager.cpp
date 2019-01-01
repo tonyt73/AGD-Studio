@@ -80,9 +80,10 @@ bool __fastcall DocumentManager::Remove(const String& type, const String& name)
         {
             if ((*it)->Name == name)
             {
-                ::Messaging::Bus::Publish<OnDocumentChange<String>>(OnDocumentChange<String>("document.removed", (*it), name));
+                ::Messaging::Bus::Publish<DocumentChange<String>>(DocumentChange<String>("document.removing", (*it), name));
                 delete (*it);
                 dit->second.erase(it);
+                ::Messaging::Bus::Publish<DocumentChange<String>>(DocumentChange<String>("document.removed", nullptr, name));
                 return true;
             }
         }

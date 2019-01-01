@@ -14,6 +14,8 @@ __fastcall TileEditor::TileEditor(TImage* const view, const TSize& rooms, bool u
 , m_UsesGridRoom(usesGridRoom)
 , m_ShowGridTile(false)
 , m_ShowGridRoom(usesGridRoom)
+, m_ShowSelectedRoom(false)
+, m_ShowStartRoom(false)
 , m_Border(border)
 , m_ScaleFactor(2)
 , m_MouseMode(mmTool)
@@ -30,13 +32,10 @@ __fastcall TileEditor::TileEditor(TImage* const view, const TSize& rooms, bool u
 
     CreateViewBitmap();
     Clear();
-
-    ::Messaging::Bus::Subscribe<Event>(OnEvent);
 }
 //---------------------------------------------------------------------------
 __fastcall TileEditor::~TileEditor()
 {
-    ::Messaging::Bus::Unsubscribe<Event>(OnEvent);
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::CreateViewBitmap()
@@ -52,14 +51,6 @@ void __fastcall TileEditor::CreateViewBitmap()
     m_Content->Height = Screen->Height;
     PatBlt(m_Content->Canvas->Handle, 0, 0, m_Content->Width, m_Content->Height, BLACKNESS);
     m_ForceMapDraw = true;
-}
-//---------------------------------------------------------------------------
-void __fastcall TileEditor::OnEvent(const Event& event)
-{
-    if (event.Id == "image.modified" || event.Id == "document.added" || event.Id == "document.removed")
-    {
-        UpdateMap();
-    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::Clear()

@@ -69,15 +69,11 @@ public:
         std::unique_ptr<Subscriptions>& subscriptions = (*m_Handlers)[typeid(T)];
         if (subscriptions != nullptr)
         {
-            for (;;)
+            const auto& subscription = find(subscriptions->begin(), subscriptions->end(), handler);
+            if (subscription != subscriptions->end())
             {
-                const auto& subscription = find(subscriptions->begin(), subscriptions->end(), handler);
-                if (subscription != subscriptions->end())
-                {
-                    // remove the subscription of the function handler from the subscriptions list
-                    subscriptions->erase(subscription);
-                }
-                else break;
+                // remove the subscription of the function handler from the subscriptions list
+                subscriptions->erase(subscription);
             }
             if (subscriptions->size() == 0)
             {
@@ -91,7 +87,7 @@ public:
     template <class T>
     static void Publish(const T& message)
     {
-        const std::unique_ptr<Subscriptions>& subscriptions = (*m_Handlers)[typeid(T)];
+        auto& subscriptions = (*m_Handlers)[typeid(T)];
         if (subscriptions != nullptr)
         {
             for (const auto& subscription : *subscriptions)
