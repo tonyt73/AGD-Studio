@@ -37,7 +37,7 @@ inherited frmToolbarShape: TfrmToolbarShape
     Left = 472
     Top = 65528
     Bitmap = {
-      494C0101050008002C0010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010105000800300010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       000000000000000000000000000000000000C19457FFC19457FFC19457FFC194
       57FFC19457FFC19457FFC19457FFC19457FFC19457FFC19457FFC19457FFC194
@@ -311,6 +311,7 @@ inherited frmToolbarShape: TfrmToolbarShape
   object popShape: TPopupMenu
     Left = 552
     object mnuRectangle: TMenuItem
+      AutoCheck = True
       Caption = 'Rectangle'
       Checked = True
       ImageIndex = 0
@@ -318,24 +319,28 @@ inherited frmToolbarShape: TfrmToolbarShape
       OnClick = mnuRectangleClick
     end
     object mnuEllispse: TMenuItem
-      Caption = 'Ellispse'
+      AutoCheck = True
+      Caption = 'Ellipse'
       ImageIndex = 1
       RadioItem = True
       OnClick = mnuEllispseClick
     end
     object mnuDiamond: TMenuItem
+      AutoCheck = True
       Caption = 'Diamond'
       ImageIndex = 2
       RadioItem = True
       OnClick = mnuDiamondClick
     end
     object mnuTriangle: TMenuItem
+      AutoCheck = True
       Caption = 'Triangle'
       ImageIndex = 3
       RadioItem = True
       OnClick = mnuTriangleClick
     end
     object mnuRightTriangle: TMenuItem
+      AutoCheck = True
       Caption = 'Right Triangle'
       ImageIndex = 4
       RadioItem = True
@@ -345,6 +350,7 @@ inherited frmToolbarShape: TfrmToolbarShape
   object popFill: TPopupMenu
     Left = 376
     object mnuDrawShapeOutline: TMenuItem
+      AutoCheck = True
       Caption = 'Draw Shape Outline'
       Checked = True
       ImageIndex = 0
@@ -352,12 +358,14 @@ inherited frmToolbarShape: TfrmToolbarShape
       OnClick = mnuDrawShapeOutlineClick
     end
     object mnuDrawFilledShape: TMenuItem
+      AutoCheck = True
       Caption = 'Draw Filled Shape'
       ImageIndex = 1
       RadioItem = True
       OnClick = mnuDrawFilledShapeClick
     end
     object mnuDrawFilledShapewithOutline: TMenuItem
+      AutoCheck = True
       Caption = 'Draw Filled Shape with Outline'
       ImageIndex = 2
       RadioItem = True
@@ -372,7 +380,7 @@ inherited frmToolbarShape: TfrmToolbarShape
     Left = 640
     Top = 65534
     Bitmap = {
-      494C010105002000440020001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010105002000480020001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000003000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000C19457FFC19457FFC19457FFC194
@@ -1177,7 +1185,7 @@ inherited frmToolbarShape: TfrmToolbarShape
     Masked = False
     Left = 288
     Bitmap = {
-      494C010103001800380010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101030018003C0010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000FF000000FF000000FF000000FF000000E5000000F50000
@@ -1323,7 +1331,7 @@ inherited frmToolbarShape: TfrmToolbarShape
     Width = 24
     Left = 704
     Bitmap = {
-      494C010103001800380018001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101030018003C0018001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000001800000001002000000000000024
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

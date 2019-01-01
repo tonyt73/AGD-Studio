@@ -25,19 +25,16 @@ void __fastcall TfrmToolbarShape::btnFillModeClick(TObject *Sender)
 void __fastcall TfrmToolbarShape::mnuDrawShapeOutlineClick(TObject *Sender)
 {
     btnFillMode->ImageIndex = 0;
-    mnuDrawShapeOutline->Checked = true;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmToolbarShape::mnuDrawFilledShapeClick(TObject *Sender)
 {
     btnFillMode->ImageIndex = 1;
-    mnuDrawFilledShape->Checked = true;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmToolbarShape::mnuDrawFilledShapewithOutlineClick(TObject *Sender)
 {
     btnFillMode->ImageIndex = 2;
-    mnuDrawFilledShapewithOutline->Checked = true;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmToolbarShape::btnShapeClick(TObject *Sender)
