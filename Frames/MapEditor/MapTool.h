@@ -8,10 +8,14 @@
 //---------------------------------------------------------------------------
 class MapTool : public Tool
 {
+private:
+    TSize                       m_TileSize;     // the size in pixels of a tile
+
 protected:
                                 // draw functions
-            void    __fastcall  DrawLine(EntityList& list, const TRect& Rect, LinePositions* ptList);
-            void    __fastcall  DrawHLine(EntityList& list, int xs, int xe, int y);
+            void    __fastcall  Set(EntityList& list, const Entity& entity);
+            void    __fastcall  DrawLine(EntityList& list, const Entity& entity, const TRect& Rect, LinePositions* ptList = nullptr);
+            void    __fastcall  DrawRect(EntityList& list, const Entity& entity, const TRect& Rect);
 
 public:
                     __fastcall  MapTool();

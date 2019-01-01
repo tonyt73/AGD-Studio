@@ -1,11 +1,13 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
 //---------------------------------------------------------------------------
-#include "MapTool.h"
+#include "Frames/MapEditor/MapTool.h"
+#include "Project/DocumentManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall MapTool::MapTool()
+: m_TileSize(theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum)
 {
 }
 //---------------------------------------------------------------------------
@@ -13,7 +15,24 @@ __fastcall MapTool::~MapTool()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall MapTool::DrawLine(EntityList& list, const TRect& Rect, LinePositions* ptList)
+void __fastcall MapTool::Set(EntityList& list, const Entity& entity)
+{
+    if (Flags & allowOnlyOne)
+    {
+        list.clear();
+        list.push_back(entity);
+    }
+    else
+    {
+        auto exists = std::find(list.begin(), list.end(), entity);
+        if (exists == list.end())
+        {
+            list.push_back(entity);
+        }
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall MapTool::DrawLine(EntityList& list, const Entity& entity, const TRect& Rect, LinePositions* ptList)
 {
     auto dx = 1;
     auto dy = 1;
@@ -81,11 +100,16 @@ void __fastcall MapTool::DrawLine(EntityList& list, const TRect& Rect, LinePosit
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall MapTool::DrawHLine(EntityList& list, int xs, int xe, int y)
+void __fastcall MapTool::DrawRect(EntityList& list, const Entity& entity, const TRect& Rect)
 {
-    for (auto x = std::min(xs, xe); x <= std::max(xs, xe); x++)
+    for (auto y = Rect.Top; y <= Rect.Bottom; y += m_TileSize.cy)
     {
-        //canvas.SetPixel(x, y, set);
+        for (auto x = Rect.Left; x <= Rect.Right; x += m_TileSize.cx)
+        {
+            auto ne = entity;
+            ne.Pt = TPoint(x, y);
+            Set(list, ne);
+        }
     }
 }
 //---------------------------------------------------------------------------
