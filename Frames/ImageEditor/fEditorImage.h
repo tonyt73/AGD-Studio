@@ -190,7 +190,7 @@ __published:    // IDE-managed Components
 private:    // User declarations
     typedef std::map<int, std::unique_ptr<CanvasTool>> CanvasToolMap;
 
-    WinControlEraseHandler      m_EraseHandlerView;
+    EraseHandler                m_EraseHandlerView;
     std::vector<int>            m_Messages;
 
     ImageDocument*              m_ImageDocument;    // the image document we are editing
