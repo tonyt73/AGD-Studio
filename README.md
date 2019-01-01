@@ -2,12 +2,17 @@
 An integrated development environment for Jonathan Cauldwell's Arcade Game Designer (AGD)
 
 Editors for:
-* Images (Sprites, Objects, Tiles/Blocks)
-* Map
-* Messages
+* Images 
+  * Sprites
+  * Objects
+  * Tiles/Blocks)
 * Events (Code)
   * Syntax highlighting editor
   * Code folding
+* Map
+* Messages
+* Window size and position
+* Keys
 
 Automated build system:
 * Produces AGD compiler output on the fly
