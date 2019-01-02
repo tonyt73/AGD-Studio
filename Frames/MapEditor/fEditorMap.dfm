@@ -606,7 +606,7 @@ object frmEditorMap: TfrmEditorMap
     Left = 124
     Top = 65
     Bitmap = {
-      494C010108006000580220002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101080060005C0220002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000008000000060000000010020000000000000C0
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2205,7 +2205,7 @@ object frmEditorMap: TfrmEditorMap
     Left = 220
     Top = 65
     Bitmap = {
-      494C0101070060005C0220002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010107006000600220002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004000000001002000000000000080
       0000000000000000000000000000000000000000000000000006000000110000
       00110000000B00000011000000110000000B00000011000000110000000B0000
@@ -3278,16 +3278,15 @@ object frmEditorMap: TfrmEditorMap
       GroupIndex = 1
       Hint = 'Select'
       ImageIndex = 0
-      ShortCut = 32817
+      ShortCut = 49
       OnExecute = actSelectExecute
     end
     object actPencil: TAction
-      Tag = 1
       Caption = 'Pencil'
       GroupIndex = 1
       Hint = 'Free Draw Tiles'
       ImageIndex = 1
-      ShortCut = 32818
+      ShortCut = 50
       OnExecute = actPencilExecute
     end
     object actLine: TAction
@@ -3297,7 +3296,7 @@ object frmEditorMap: TfrmEditorMap
       GroupIndex = 1
       Hint = 'Line of Tiles'
       ImageIndex = 2
-      ShortCut = 32819
+      ShortCut = 51
       OnExecute = actLineExecute
     end
     object actShape: TAction
@@ -3306,7 +3305,7 @@ object frmEditorMap: TfrmEditorMap
       GroupIndex = 1
       Hint = 'Rectangle of Tiles'
       ImageIndex = 3
-      ShortCut = 32820
+      ShortCut = 52
       OnExecute = actShapeExecute
     end
     object actZoomIn: TAction
@@ -3475,6 +3474,19 @@ object frmEditorMap: TfrmEditorMap
       ShortCut = 16421
       OnExecute = actCopyToWorkspaceExecute
     end
+    object actEntityNext: TAction
+      SecondaryShortCuts.Strings = (
+        ']')
+      ShortCut = 190
+      OnExecute = actEntityNextExecute
+    end
+    object actEntityPrev: TAction
+      Caption = 'actEntityPrev'
+      SecondaryShortCuts.Strings = (
+        '[')
+      ShortCut = 188
+      OnExecute = actEntityPrevExecute
+    end
   end
   object imgSmallIcons: TImageList
     ColorDepth = cd32Bit
@@ -3482,7 +3494,7 @@ object frmEditorMap: TfrmEditorMap
     Left = 343
     Top = 91
     Bitmap = {
-      494C01010900D000C00010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010900D000C40010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000023000000330000
       0033000000330000003300000033000000330000003300000033000000330000

@@ -22,6 +22,7 @@ __published:    // IDE-managed Components
     void __fastcall mnuToggleLabelsClick(TObject *Sender);
 private:    // User declarations
     void    __fastcall  OnImageClick(TObject* Sender);
+    int     __fastcall  FindSelected();
 
     typedef void __fastcall (__closure *TNotifyImageOnSelectionEvent)(ImageDocument* document);
     TNotifyImageOnSelectionEvent    FOnImageClick;
@@ -32,6 +33,8 @@ public:        // User declarations
     void    __fastcall  Clear();
     void    __fastcall  Add(ImageDocument* image);
     void    __fastcall  Select(ImageDocument const * const image);
+    void    __fastcall  Next();
+    void    __fastcall  Prev();
 
     __property  TNotifyImageOnSelectionEvent    OnImageSelection = { read = FOnImageClick, write = FOnImageClick };
 };

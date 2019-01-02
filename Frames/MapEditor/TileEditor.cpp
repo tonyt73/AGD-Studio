@@ -522,8 +522,17 @@ void __fastcall TileEditor::SetSelectedEntity(unsigned int id)
     auto document = dynamic_cast<ImageDocument*>(theDocumentManager.Get(id));
     if (document != nullptr)
     {
+        if (m_Mode != temSelect)
+        {
+            for (auto& e : m_ToolEntities)
+            {
+                e.Id = document->Id;
+                e.Dirty = true;
+            }
+            UpdateMap();
+        }
         m_SingleSelect.Id = document->Id;
-        m_SingleSelect.Dirty = false;
+        m_SingleSelect.Dirty = true;
         m_SingleSelect.Selected = false;
         m_SelectedEntity = id;
     }
@@ -662,6 +671,10 @@ void __fastcall TileEditor::DrawEntities(int filters)
             entity.Clean();
         }
     }
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::DrawToolEntities()
+{
     if (!ReadOnly)
     {
         for (auto& entity : m_ToolEntities)
@@ -678,28 +691,16 @@ void __fastcall TileEditor::DrawEntities(int filters)
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::DrawMap()
 {
-    if (!m_ForceMapDraw)
-    {
-        // draw all dirty tile 0's (unselected)
-        DrawEntities(edfDirty + edfFirstTile);
-        // draw all other dirty non tile 0's  (unselected)
-        DrawEntities(edfDirty);
-        // draw all dirty tile 0's (selected)
-        DrawEntities(edfDirty + edfSelected + edfFirstTile);
-        // draw all other dirty non tile 0's  (selected)
-        DrawEntities(edfDirty + edfSelected);
-    }
-    else
-    {
-        // draw the tile 0's (unselected)
-        DrawEntities(edfForce + edfFirstTile);
-        // draw all non tile 0's (unselected)
-        DrawEntities(edfForce);
-        // draw the selected tile 0's (selected)
-        DrawEntities(edfForce + edfSelected + edfFirstTile);
-        // draw all the selected non tile 0's (selected)
-        DrawEntities(edfForce + edfSelected);
-    }
+    auto filter = m_ForceMapDraw ? edfForce : edfDirty;
+    // draw all dirty tile 0's (unselected)
+    DrawEntities(filter + edfFirstTile);
+    // draw all other dirty non tile 0's  (unselected)
+    DrawEntities(filter);
+    // draw all dirty tile 0's (selected)
+    DrawEntities(filter + edfSelected + edfFirstTile);
+    // draw all other dirty non tile 0's  (selected)
+    DrawEntities(filter + edfSelected);
+    DrawToolEntities();
     m_ForceMapDraw = false;
 }
 //---------------------------------------------------------------------------

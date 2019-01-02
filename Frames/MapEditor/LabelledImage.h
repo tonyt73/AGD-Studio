@@ -21,6 +21,7 @@ private:    // User declarations
     TNotifyEvent            FOnClick;
     ImageDocument*          m_Document;
 const Agdx::GraphicsMode&   m_GraphicsMode;     // the graphics mode used by the project
+    bool                    m_Selected;
 
     void        __fastcall  SetSelected(bool state);
     void        __fastcall  SetShowCaption(bool state);
@@ -30,7 +31,7 @@ const Agdx::GraphicsMode&   m_GraphicsMode;     // the graphics mode used by the
 public:        // User declarations
                 __fastcall TfrmLabelledImage(TComponent* Owner);
 
-    bool        __property  Selected = { write = SetSelected };
+    bool        __property  Selected = { read = m_Selected, write = SetSelected };
 __property  ImageDocument*  Image = { read = m_Document, write = SetImage };
     bool        __property  ShowCaption = { write = SetShowCaption };
 

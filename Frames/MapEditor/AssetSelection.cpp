@@ -89,3 +89,49 @@ void __fastcall TfrmAssetSelection::mnuToggleLabelsClick(TObject *Sender)
     sbxListResize(nullptr);
 }
 //---------------------------------------------------------------------------
+int __fastcall TfrmAssetSelection::FindSelected()
+{
+    for (auto c = 0; c < panList->ControlCount; c++)
+    {
+        auto label = dynamic_cast<TfrmLabelledImage*>(panList->Controls[c]);
+        if (label && label->Selected)
+        {
+            return c;
+        }
+    }
+    return -1;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmAssetSelection::Next()
+{
+    auto ci = FindSelected();
+    if (ci != -1)
+    {
+        ci = (ci + 1) % panList->ControlCount;
+        auto label = dynamic_cast<TfrmLabelledImage*>(panList->Controls[ci]);
+        if (label)
+        {
+            label->Selected = true;
+            Select(label->Image);
+            OnImageClick(label);
+        }
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmAssetSelection::Prev()
+{
+    auto ci = FindSelected();
+    if (ci != -1)
+    {
+        ci = (panList->ControlCount + (ci - 1)) % panList->ControlCount;
+        auto label = dynamic_cast<TfrmLabelledImage*>(panList->Controls[ci]);
+        if (label)
+        {
+            label->Selected = true;
+            Select(label->Image);
+            OnImageClick(label);
+        }
+    }
+}
+//---------------------------------------------------------------------------
+

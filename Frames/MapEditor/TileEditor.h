@@ -87,6 +87,7 @@ private:
     void                __fastcall  SetScale(float scale);
     void                __fastcall  SetMode(TEMode mode);
     void                __fastcall  DrawEntities(int filters);
+    void                __fastcall  DrawToolEntities();
     void                __fastcall  DrawMap();
     void                __fastcall  DrawGrids() const;
     void                __fastcall  DrawGroupSelect() const;

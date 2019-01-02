@@ -123,6 +123,8 @@ __published:    // IDE-managed Components
     TAction *actToggleSingleRoomMode;
     TPanel *panGrids;
     TPanel *panModes;
+    TAction *actEntityNext;
+    TAction *actEntityPrev;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actLineExecute(TObject *Sender);
@@ -162,6 +164,8 @@ __published:    // IDE-managed Components
     void __fastcall actGridRoomExecute(TObject *Sender);
     void __fastcall actToggleSingleRoomModeExecute(TObject *Sender);
     void __fastcall actStartRoomToolExecute(TObject *Sender);
+    void __fastcall actEntityNextExecute(TObject *Sender);
+    void __fastcall actEntityPrevExecute(TObject *Sender);
 
 private:    // User declarations
     TiledMapDocument*           m_Document;

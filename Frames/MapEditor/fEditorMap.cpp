@@ -97,12 +97,14 @@ void __fastcall TfrmEditorMap::actSelectExecute(TObject *Sender)
 void __fastcall TfrmEditorMap::actPencilExecute(TObject *Sender)
 {
     btnPencil->Down = true;
+    m_Workspace->UnselectAll();
     m_Workspace->Mode = TileEditor::temPencil;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actLineExecute(TObject *Sender)
 {
     btnLine->Down = true;
+    m_Workspace->UnselectAll();
     m_Workspace->Mode = TileEditor::temLine;
 }
 //---------------------------------------------------------------------------
@@ -347,19 +349,16 @@ void __fastcall TfrmEditorMap::dpToolsCloseQuery(TObject *Sender, bool &CanClose
 void __fastcall TfrmEditorMap::ShowKeysHelp()
 {
     const String help =
-        "Select Tool (Alt+1)\r\n"
+        "Select Tool (1)\r\n"
         "Mouse over            : Highlight an item\r\n"
         "                        Can be moved, duplicated or deleted\r\n"
         "Ctrl + Left MB + Move : Select group of items\r\n"
         "Ctrl + Left MB Click  : Clear selection\r\n\r\n"
-        "Pencil (Alt+2), Line (Alt+3), Rectangle (Alt+4) Tools\r\n"
-        "Left MB               : Place current asset\r\n"
-        "                        Tiles - Hold button and drag mouse to place multiple\r\n"
-        "Middle MB             : Remove tile\r\n"
-        "                        Tiles - Hold button and drag mouse to remove multiple\r\n\r\n"
-        "Paint Tools (Alt+2, Alt+3, Alt+4)\r\n"
+        "Paint Tools (Pencil: 2, Line: 3, Rectangle: 4)\r\n"
         "Left MB click         : Add an image\r\n"
         "Left MB and drag      : Add multiple images defined by tool\r\n\r\n"
+        "Middle MB click       : Removes any tile under the cursor\r\n"
+        "Middle MB and drag    : Remove multiple tiles of the selected type\r\n\r\n"
         "General\r\n"
         "Shift + Left MB       : Pan the window by moving the mouse\r\n"
         "Ctrl + Del            : Delete selection\r\n"
@@ -462,7 +461,6 @@ void __fastcall TfrmEditorMap::pgcAssetsChange(TObject *Sender)
 void __fastcall TfrmEditorMap::OnEntityClick(ImageDocument* document)
 {
     m_Workspace->SelectedEntity = document->Id;
-    m_ScratchPad->SelectedEntity = document->Id;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::OnWorkspaceEntitySelected(const Entity& entity)
@@ -538,6 +536,38 @@ void __fastcall TfrmEditorMap::actToggleSingleRoomModeExecute(TObject *Sender)
 void __fastcall TfrmEditorMap::actStartRoomToolExecute(TObject *Sender)
 {
     m_Workspace->ShowStartRoom = actStartRoomTool->Checked;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::actEntityNextExecute(TObject *Sender)
+{
+    if (pgcAssets->ActivePage == tabTiles)
+    {
+        assetsTiles->Next();
+    }
+    else if (pgcAssets->ActivePage == tabSprites)
+    {
+        assetsSprites->Next();
+    }
+    else
+    {
+        assetsObjects->Next();
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::actEntityPrevExecute(TObject *Sender)
+{
+    if (pgcAssets->ActivePage == tabTiles)
+    {
+        assetsTiles->Prev();
+    }
+    else if (pgcAssets->ActivePage == tabSprites)
+    {
+        assetsSprites->Prev();
+    }
+    else
+    {
+        assetsObjects->Prev();
+    }
 }
 //---------------------------------------------------------------------------
 

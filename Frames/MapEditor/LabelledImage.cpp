@@ -24,6 +24,7 @@ void __fastcall TfrmLabelledImage::imgImageClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmLabelledImage::SetSelected(bool state)
 {
+    m_Selected = state;
     panImage->Color = StyleServices()->GetStyleColor(state ? scButtonFocused : scGenericBackground);
     if (state)
     {
