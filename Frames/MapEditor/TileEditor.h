@@ -5,6 +5,7 @@
 #include "Project/MapDocuments.h"
 #include "Graphics/Image.h"
 #include "Graphics/GraphicsMode.h"
+#include "Frames/MapEditor/MapPencilTool.h"
 #include "Frames/MapEditor/MapRectTool.h"
 //---------------------------------------------------------------------------
 class TileEditor
@@ -63,6 +64,7 @@ private:
     bool                            m_ShowSelectedRoom; // show the selected room highlighted
     bool                            m_ShowStartRoom;    // show the start room highlighted
     TPoint                          m_StartRoom;        // the location of the start room
+    MapPencilTool                   m_MapPencilTool;    //
     MapRectTool                     m_MapRectTool;      //
 
     void                __fastcall  CreateViewBitmap();

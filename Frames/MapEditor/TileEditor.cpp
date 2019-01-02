@@ -155,6 +155,13 @@ void __fastcall TileEditor::OnMouseDownSelectMode(TMouseButton Button, TShiftSta
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::OnMouseDownPencilMode(TMouseButton Button, TShiftState Shift, int X, int Y)
 {
+    if (m_SelectedEntity != - 1 && Shift.Contains(ssLeft))
+    {
+        m_MapPencilTool.Width  = m_ContentSize.cx - (m_BorderScaled.x * 2);
+        m_MapPencilTool.Height = m_ContentSize.cy - (m_BorderScaled.y * 2);
+        m_MapPencilTool.Begin(m_ToolEntities, m_SingleSelect, ViewToMap(X, Y), Shift);
+        UpdateMap();
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::OnMouseDownLineMode(TMouseButton Button, TShiftState Shift, int X, int Y)
@@ -310,6 +317,21 @@ void __fastcall TileEditor::OnMouseMoveSelectMode(TShiftState Shift, int X, int 
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::OnMouseMovePencilMode(TShiftState Shift, int X, int Y)
 {
+    if (!ReadOnly && m_SelectedEntity != - 1 && !Shift.Contains(ssLeft))
+    {
+        m_ToolEntities.clear();
+        m_SingleSelect.Pt = ViewToMap(X, Y);
+        auto x = Snap(std::max(0L, std::min(m_SingleSelect.Pt.x, m_ContentSize.cx - (int)(m_BorderScaled.x * 2) - m_TileSize.cx)), m_TileSize.cx);
+        auto y = Snap(std::max(0L, std::min(m_SingleSelect.Pt.y, m_ContentSize.cy - (int)(m_BorderScaled.y * 2) - m_TileSize.cy)), m_TileSize.cy);
+        m_SingleSelect.Pt = TPoint(x, y);
+        m_ToolEntities.push_back(m_SingleSelect);
+        UpdateMap();
+    }
+    else if (m_SelectedEntity != - 1 && Shift.Contains(ssLeft))
+    {
+        m_MapPencilTool.Move(m_ToolEntities, m_SingleSelect, ViewToMap(X, Y), Shift);
+        UpdateMap();
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::OnMouseMoveLineMode(TShiftState Shift, int X, int Y)
@@ -397,6 +419,13 @@ void __fastcall TileEditor::OnMouseUpSelectMode(TMouseButton Button, TShiftState
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::OnMouseUpPencilMode(TMouseButton Button, TShiftState Shift, int X, int Y)
 {
+    if (m_SelectedEntity != - 1)
+    {
+        m_MapPencilTool.End(m_ToolEntities, m_SingleSelect, ViewToMap(X, Y));
+        m_Entities.insert(m_Entities.end(), m_ToolEntities.begin(), m_ToolEntities.end());
+    }
+    m_ToolEntities.clear();
+    UpdateMap();
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::OnMouseUpLineMode(TMouseButton Button, TShiftState Shift, int X, int Y)

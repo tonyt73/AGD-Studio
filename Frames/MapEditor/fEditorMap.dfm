@@ -2740,7 +2740,6 @@ object frmEditorMap: TfrmEditorMap
     object actPencil: TAction
       Tag = 1
       Caption = 'Pencil'
-      Enabled = False
       GroupIndex = 1
       Hint = 'Free Draw Tiles'
       ImageIndex = 1

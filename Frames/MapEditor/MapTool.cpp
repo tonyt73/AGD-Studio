@@ -23,7 +23,7 @@ int __fastcall MapTool::Snap(int value, int range) const
 void __fastcall MapTool::SnapToTileGrid(TPoint& pt) const
 {
     pt.x = Snap(pt.x, m_TileSize.cx);
-    pt.y = Snap(pt.x, m_TileSize.cy);
+    pt.y = Snap(pt.y, m_TileSize.cy);
 }
 //---------------------------------------------------------------------------
 void __fastcall MapTool::SnapToTileGrid(TRect& rect) const
@@ -48,7 +48,9 @@ void __fastcall MapTool::Set(EntityList& list, const Entity& entity)
             auto it = std::find(list.begin(), list.end(), entity);
             if (it == list.end())
             {
-                list.push_back(entity);
+                auto e = entity;
+                e.Selected = false;
+                list.push_back(e);
             }
         }
     }
