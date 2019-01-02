@@ -10,6 +10,8 @@ __fastcall Tool::Tool()
 , m_StartPt(TPoint(0,0))
 , m_LastPt(TPoint(-1,-1))
 , m_IsDrawing(false)
+, m_Width(0)
+, m_Height(0)
 {
 }
 //---------------------------------------------------------------------------
@@ -30,6 +32,11 @@ bool __fastcall Tool::IsRightDown() const
 bool __fastcall Tool::IsMiddleDown() const
 {
     return m_MouseState.Contains(ssMiddle);
+}
+//---------------------------------------------------------------------------
+bool __fastcall Tool::IsPointValid(const TPoint& pt) const
+{
+    return (0 <= pt.x && pt.x < Width && 0 <= pt.y && pt.y < Height);
 }
 //---------------------------------------------------------------------------
 void __fastcall Tool::Begin(const TPoint& pt, const TShiftState& buttons)

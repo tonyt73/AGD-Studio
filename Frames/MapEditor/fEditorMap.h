@@ -170,6 +170,7 @@ private:    // User declarations
     std::map<String, TAction*>  m_ActionMap;        // a map of actions; used by generic messaging to handle zoom in/out/reset, undo/redo
     std::list<EraseHandler>     m_EraseHandlers;
     TLMDDockPanel*              m_ActivePanel;
+    Agdx::ImageMap              m_ImageMap;         // a rendering of each tile, object, sprite
 
             void    __fastcall  Initialise();
             void    __fastcall  RefreshAssets();

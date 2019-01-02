@@ -283,6 +283,7 @@ void __fastcall TiledMapDocument::Set(MapEntities type, const EntityList& entiti
     {
         m_Map.clear();
         m_Map = entities;
+        Messaging::Bus::Publish<Event>(Event("map.updated"));
     }
     else if (type == meScratchPad)
     {

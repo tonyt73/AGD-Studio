@@ -17,7 +17,7 @@ private:
 
 public:
                     __fastcall  CanvasShapeTool();
-                    __fastcall ~CanvasShapeTool();
+    virtual         __fastcall ~CanvasShapeTool();
 };
 //---------------------------------------------------------------------------
 #endif

@@ -348,6 +348,18 @@
             <DependentOn>Frames\MapEditor\LabelledImage.h</DependentOn>
             <BuildOrder>59</BuildOrder>
         </CppCompile>
+        <CppCompile Include="Frames\MapEditor\MapPencilTool.cpp">
+            <DependentOn>Frames\MapEditor\MapPencilTool.h</DependentOn>
+            <BuildOrder>64</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\MapEditor\MapRectTool.cpp">
+            <DependentOn>Frames\MapEditor\MapRectTool.h</DependentOn>
+            <BuildOrder>63</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\MapEditor\MapTool.cpp">
+            <DependentOn>Frames\MapEditor\MapTool.h</DependentOn>
+            <BuildOrder>61</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Frames\MapEditor\TileEditor.cpp">
             <DependentOn>Frames\MapEditor\TileEditor.h</DependentOn>
             <BuildOrder>57</BuildOrder>
@@ -358,6 +370,10 @@
             <DesignClass>TFrame</DesignClass>
             <DependentOn>Frames\MusicEditor\fEditorMusic.h</DependentOn>
             <BuildOrder>8</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Tool.cpp">
+            <DependentOn>Frames\Tool.h</DependentOn>
+            <BuildOrder>62</BuildOrder>
         </CppCompile>
         <CppCompile Include="Frames\WelcomeDialog\fSelectionPanel.cpp">
             <Form>SelectionPanelFrame</Form>
@@ -491,26 +507,26 @@
             <BuildOrder>18</BuildOrder>
         </CppCompile>
         <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
+        <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
         <FormResources Include="Frames\IDE\fIDE.dfm"/>
-        <FormResources Include="Frames\CodeEditor\fEditorCode.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fBlockTypes.dfm"/>
         <FormResources Include="Forms\fAbout.dfm"/>
+        <FormResources Include="Frames\CodeEditor\fEditorCode.dfm"/>
         <FormResources Include="Forms\fSettings.dfm"/>
         <FormResources Include="Forms\fNewImage.dfm"/>
         <FormResources Include="Forms\fMain.dfm"/>
+        <FormResources Include="Frames\MapEditor\LabelledImage.dfm"/>
         <FormResources Include="Frames\MapEditor\fEditorMap.dfm"/>
         <FormResources Include="Frames\MapEditor\AssetSelection.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fULAplusBitmap.dfm"/>
-        <FormResources Include="Frames\MapEditor\LabelledImage.dfm"/>
-        <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
         <FormResources Include="Frames\MusicEditor\fEditorMusic.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fToolbarShape.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fPaletteBitmap.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fPaletteAttribute.dfm"/>
         <FormResources Include="Frames\ImageEditor\fMultiImageView.dfm"/>
         <FormResources Include="Frames\ImageEditor\fEditorImage.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fBlockTypes.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fPaletteAttribute.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fULAplusBitmap.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fToolbarShape.dfm"/>
         <FormResources Include="Frames\ImageEditor\fToolbar.dfm"/>
         <FormResources Include="Frames\ImageEditor\fSelectionImage.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fPaletteBitmap.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -543,221 +559,13 @@
                 </Excluded_Packages>
             </CPlusPlusBuilder.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtrtlx250.bpl" Configuration="Release" Class="DependencyPackage">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\rtl250.ja" Configuration="Release" Class="DependencyPackageResource">
-                    <Platform Name="Win32">
-                        <RemoteName>rtl250.ja</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\vclimg250.de" Configuration="Release" Class="DependencyPackageResource">
-                    <Platform Name="Win32">
-                        <RemoteName>vclimg250.de</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32c260.dll" Class="DependencyModule">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtprint250.bpl" Configuration="Release" Class="DependencyPackage">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\vclactnband250.fr" Configuration="Release" Class="DependencyPackageResource">
-                    <Platform Name="Win32">
-                        <RemoteName>vclactnband250.fr</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32260.dll" Class="DependencyModule">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtdocking250.bpl" Configuration="Release" Class="DependencyPackage">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\fmx250.bpl" Configuration="Release" Class="DependencyPackage">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\vclwinx250.bpl" Configuration="Release" Class="DependencyPackage">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\vcl250.bpl" Configuration="Release" Class="DependencyPackage">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\vclimg250.ja" Configuration="Release" Class="DependencyPackageResource">
-                    <Platform Name="Win32">
-                        <RemoteName>vclimg250.ja</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\fmx250.fr" Configuration="Release" Class="DependencyPackageResource">
-                    <Platform Name="Win32">
-                        <RemoteName>fmx250.fr</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile Condition="'$(UsingDelphiRTL)'=='true'" LocalName="$(BDS)\bin\borlndmm.dll" Class="DependencyModule">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName=".\Win64\Debug\AGDX Studio.exe" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win64">
-                        <RemoteName>AGDX_Studio.exe</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx32\libcgstl.dylib" Class="DependencyModule">
-                    <Platform Name="OSX32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\vcl250.ja" Configuration="Release" Class="DependencyPackageResource">
-                    <Platform Name="Win32">
-                        <RemoteName>vcl250.ja</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtelcore250.bpl" Configuration="Release" Class="DependencyPackage">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName=".\Win32\Release\AGDX Studio.exe" Configuration="Release" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>AGDX_Studio.exe</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtl250.bpl" Configuration="Release" Class="DependencyPackage">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32250.dll" Class="DependencyModule">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\vclactnband250.ja" Configuration="Release" Class="DependencyPackageResource">
-                    <Platform Name="Win32">
-                        <RemoteName>vclactnband250.ja</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin64\cc64250.dll" Class="DependencyModule">
-                    <Platform Name="Win64">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx64\libcgcrtl.dylib" Class="DependencyModule">
                     <Platform Name="OSX64">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtinspector250.bpl" Configuration="Release" Class="DependencyPackage">
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32c260.dll" Class="DependencyModule">
                     <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtcore250.bpl" Configuration="Release" Class="DependencyPackage">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\vclx250.ja" Configuration="Release" Class="DependencyPackageResource">
-                    <Platform Name="Win32">
-                        <RemoteName>vclx250.ja</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\VclSmp250.bpl" Configuration="Release" Class="DependencyPackage">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\vcl250.de" Configuration="Release" Class="DependencyPackageResource">
-                    <Platform Name="Win32">
-                        <RemoteName>vcl250.de</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin64\cc64260mt.dll" Class="DependencyModule">
-                    <Platform Name="Win64">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32250mt.dll" Class="DependencyModule">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\rtl250.de" Configuration="Release" Class="DependencyPackageResource">
-                    <Platform Name="Win32">
-                        <RemoteName>rtl250.de</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\rtl250.fr" Configuration="Release" Class="DependencyPackageResource">
-                    <Platform Name="Win32">
-                        <RemoteName>rtl250.fr</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\vclactnband250.bpl" Configuration="Release" Class="DependencyPackage">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\VclSmp250.de" Configuration="Release" Class="DependencyPackageResource">
-                    <Platform Name="Win32">
-                        <RemoteName>VclSmp250.de</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\vclactnband250.de" Configuration="Release" Class="DependencyPackageResource">
-                    <Platform Name="Win32">
-                        <RemoteName>vclactnband250.de</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName=".\Win32\Debug\AGDX Studio.exe" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>AGDX_Studio.exe</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\rtl250.bpl" Configuration="Release" Class="DependencyPackage">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\VclSmp250.ja" Configuration="Release" Class="DependencyPackageResource">
-                    <Platform Name="Win32">
-                        <RemoteName>VclSmp250.ja</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\fmx250.ja" Configuration="Release" Class="DependencyPackageResource">
-                    <Platform Name="Win32">
-                        <RemoteName>fmx250.ja</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -781,19 +589,29 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtsyntax250.bpl" Configuration="Release" Class="DependencyPackage">
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32260.dll" Class="DependencyModule">
                     <Platform Name="Win32">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtlog250.bpl" Configuration="Release" Class="DependencyPackage">
+                <DeployFile LocalName=".\Win64\Debug\AGDX Studio.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win64">
+                        <RemoteName>AGDX_Studio.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx32\libcgstl.dylib" Class="DependencyModule">
+                    <Platform Name="OSX32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(UsingDelphiRTL)'=='true'" LocalName="$(BDS)\bin\borlndmm.dll" Class="DependencyModule">
                     <Platform Name="Win32">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\VclSmp250.fr" Configuration="Release" Class="DependencyPackageResource">
-                    <Platform Name="Win32">
-                        <RemoteName>VclSmp250.fr</RemoteName>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin64\cc64260mt.dll" Class="DependencyModule">
+                    <Platform Name="Win64">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -802,18 +620,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\vclimg250.bpl" Configuration="Release" Class="DependencyPackage">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\vcl250.fr" Configuration="Release" Class="DependencyPackageResource">
-                    <Platform Name="Win32">
-                        <RemoteName>vcl250.fr</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32260mt.dll" Class="DependencyModule">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32250mt.dll" Class="DependencyModule">
                     <Platform Name="Win32">
                         <Overwrite>true</Overwrite>
                     </Platform>
@@ -823,26 +635,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\fmx250.de" Configuration="Release" Class="DependencyPackageResource">
+                <DeployFile LocalName=".\Win32\Release\AGDX Studio.exe" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteName>fmx250.de</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\vclimg250.fr" Configuration="Release" Class="DependencyPackageResource">
-                    <Platform Name="Win32">
-                        <RemoteName>vclimg250.fr</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\vclx250.bpl" Configuration="Release" Class="DependencyPackage">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\vclx250.de" Configuration="Release" Class="DependencyPackageResource">
-                    <Platform Name="Win32">
-                        <RemoteName>vclx250.de</RemoteName>
+                        <RemoteName>AGDX_Studio.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -851,20 +646,36 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\vclx250.fr" Configuration="Release" Class="DependencyPackageResource">
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32c260mt.dll" Class="DependencyModule">
                     <Platform Name="Win32">
-                        <RemoteName>vclx250.fr</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32c260mt.dll" Class="DependencyModule">
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32250.dll" Class="DependencyModule">
                     <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName=".\Win32\Debug\AGDX Studio.tds" Configuration="Debug" Class="DebugSymbols">
+                    <Platform Name="Win32">
+                        <RemoteName>AGDX_Studio.tds</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName=".\Win64\Release\AGDX Studio.exe" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win64">
                         <RemoteName>AGDX_Studio.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName=".\Win32\Debug\AGDX Studio.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>AGDX_Studio.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin64\cc64250.dll" Class="DependencyModule">
+                    <Platform Name="Win64">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

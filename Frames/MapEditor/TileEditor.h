@@ -5,6 +5,7 @@
 #include "Project/MapDocuments.h"
 #include "Graphics/Image.h"
 #include "Graphics/GraphicsMode.h"
+#include "Frames/MapEditor/MapRectTool.h"
 //---------------------------------------------------------------------------
 class TileEditor
 {
@@ -29,10 +30,10 @@ private:
     EntityList                      m_Entities;         // all the map entities
     EntityList                      m_ToolEntities;     // the entities for the current tool
     Entity                          m_SingleSelect;     // a single selected entity
-    Agdx::ImageMap                  m_ImageMap;         // a rendering of each tile, object, sprite
     TEMode                          m_Mode;             // tool mode (pencil, line etc)
     bool                            m_Dirty;            // flag: tool is dirty - map needs updating
     const Agdx::GraphicsMode&       m_GraphicsMode;     // the graphics mode used by the project
+    Agdx::ImageMap&                 m_ImageMap;         // a map of all images as bitmaps
     float                           m_ScaleFactor;      // the scale factor of the content view on to the overlays view
     TFPoint                         m_Scale;            // the applied scale factor for both x and y axes
     bool                            m_UsesGridTile;     // flag: uses a tile grid
@@ -42,7 +43,7 @@ private:
     bool                            m_MousePanning;     // flag: panning the window with the mouse
     bool                            m_SelectionMove;    // flag: moving the entity selections
     bool                            m_ForceMapDraw;     // flag: force a full redraw of the map
-    TPoint                          m_PositionMS;       // offset into the map to render to the workspace (Coords in Map Space)
+    TPoint                          m_MapOffsetMS;      // offset into the map to render to the workspace (Coords in Map Space)
     TSize                           m_WindowSize;       // the number of tiles across and down of the window area
     TSize                           m_TileSize;         // the size in pixels of a tile
     TSize                           m_Rooms;            // the number of rooms across and down
@@ -62,6 +63,7 @@ private:
     bool                            m_ShowSelectedRoom; // show the selected room highlighted
     bool                            m_ShowStartRoom;    // show the start room highlighted
     TPoint                          m_StartRoom;        // the location of the start room
+    MapRectTool                     m_MapRectTool;      //
 
     void                __fastcall  CreateViewBitmap();
     void                __fastcall  Clear();
@@ -81,7 +83,7 @@ private:
     void                __fastcall  SetShowStartRoom(bool state);
     void                __fastcall  SetStartRoom(TPoint location);
     void                __fastcall  SetScale(float scale);
-    void                __fastcall  RefreshImages();
+    void                __fastcall  SetMode(TEMode mode);
     void                __fastcall  DrawEntities(int filters);
     void                __fastcall  DrawMap();
     void                __fastcall  DrawGrids() const;
@@ -91,6 +93,19 @@ private:
     int                 __fastcall  Snap(int value, int range);
     void                __fastcall  Get(const TRect& rect, EntityList& entities) const;
 
+    void                __fastcall  OnMouseDownSelectMode(TMouseButton Button, TShiftState Shift, int X, int Y);
+    void                __fastcall  OnMouseDownPencilMode(TMouseButton Button, TShiftState Shift, int X, int Y);
+    void                __fastcall  OnMouseDownLineMode(TMouseButton Button, TShiftState Shift, int X, int Y);
+    void                __fastcall  OnMouseDownShapeMode(TMouseButton Button, TShiftState Shift, int X, int Y);
+    void                __fastcall  OnMouseMoveSelectMode(TShiftState Shift, int X, int Y);
+    void                __fastcall  OnMouseMovePencilMode(TShiftState Shift, int X, int Y);
+    void                __fastcall  OnMouseMoveLineMode(TShiftState Shift, int X, int Y);
+    void                __fastcall  OnMouseMoveShapeMode(TShiftState Shift, int X, int Y);
+    void                __fastcall  OnMouseUpSelectMode(TMouseButton Button, TShiftState Shift, int X, int Y);
+    void                __fastcall  OnMouseUpPencilMode(TMouseButton Button, TShiftState Shift, int X, int Y);
+    void                __fastcall  OnMouseUpLineMode(TMouseButton Button, TShiftState Shift, int X, int Y);
+    void                __fastcall  OnMouseUpShapeMode(TMouseButton Button, TShiftState Shift, int X, int Y);
+
     __property  bool                IsDirty = { read = m_Dirty, write = m_Dirty };
 
     typedef void __fastcall (__closure *TNotifyOnEntityClick)(const Entity& entity);
@@ -98,7 +113,7 @@ private:
 
 public:
 
-                        __fastcall  TileEditor(TImage* const view, const TSize& rooms, bool usesGridTile, bool usesGridRoom, int border, bool readOnly = false);
+                        __fastcall  TileEditor(TImage* const view, Agdx::ImageMap& imageMap, const TSize& rooms, bool usesGridTile, bool usesGridRoom, int border, bool readOnly = false);
                         __fastcall ~TileEditor();
 
     void                __fastcall  OnMouseDown(TMouseButton Button, TShiftState Shift, int X, int Y);
@@ -111,11 +126,11 @@ public:
     void                __fastcall  SetEntities(const EntityList& entities);
     const EntityList&   __fastcall  GetEntities() const;
     void                __fastcall  Add(const EntityList& entities);
-    EntityList          __fastcall  GetSelection() const;
+    EntityList          __fastcall  GetSelection(bool resetToOrigin = false) const;
     void                __fastcall  DeleteSelection();
     void                __fastcall  UnselectAll();
 
-    __property  TEMode              Mode = { read = m_Mode, write = m_Mode };
+    __property  TEMode              Mode = { read = m_Mode, write = SetMode };
     __property  TSize               Rooms = { write = SetRooms };
     __property  float               Scale = { read = m_ScaleFactor, write = SetScale };
     __property  bool                GridTile = { read = m_ShowGridTile, write = SetGridTile };

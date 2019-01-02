@@ -22,12 +22,16 @@ private:
     TShiftState                 m_MouseState;   // the mouse/key states when the operation started
     bool                        m_IsDrawing;    // flag: We are drawing
     Generic                     m_Parameters;   // the parameters specific for each tool
+    int                         m_Width;        // the width of the content we are changing
+    int                         m_Height;       // the height of the content we are changing
 
 protected:
                                 // mouse button helpers
             bool    __fastcall  IsLeftDown() const;
             bool    __fastcall  IsRightDown() const;
             bool    __fastcall  IsMiddleDown() const;
+
+            bool    __fastcall  IsPointValid(const TPoint& pt) const;
 
             void    __fastcall  Begin(const TPoint& pt, const TShiftState& buttons);
             void    __fastcall  Move(const TPoint& pt, const TShiftState& buttons);
@@ -43,6 +47,8 @@ public:
     virtual         __fastcall ~Tool();
 
             Generic __property  Parameters = { read = m_Parameters, write = m_Parameters };
+            int     __property  Width = { read = m_Width, write = m_Width };
+            int     __property  Height = { read = m_Height, write = m_Height };
 };
 //---------------------------------------------------------------------------
 #endif

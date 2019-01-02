@@ -49,16 +49,17 @@ void __fastcall TfrmEditorMap::Initialise()
 
     // create the tile editors
     // TODO: change the size to ???
-    m_Workspace = std::make_unique<TileEditor>(imgWorkspace, TSize(16,16), true, true, 144, false);
+    m_Workspace = std::make_unique<TileEditor>(imgWorkspace, m_ImageMap, TSize(16,16), true, true, 144, false);
     m_Workspace->Mode = TileEditor::temSelect;
     m_Workspace->StartRoom = TPoint(m_Document->StartLocationX, m_Document->StartLocationY);
 
-    m_ScratchPad = std::make_unique<TileEditor>(imgScratchPad, TSize(8,8), true, false, 8, false);
+    m_ScratchPad = std::make_unique<TileEditor>(imgScratchPad, m_ImageMap, TSize(8,8), true, false, 8, false);
     m_ScratchPad->Mode = TileEditor::temSelect;
     m_ScratchPad->GridTile = true;
     m_ScratchPad->GridRoom = false;
+    m_ScratchPad->Mode = TileEditor::temSelect;
 
-    m_RoomSelector = std::make_unique<TileEditor>(imgRoomSelector, TSize(16,16), false, true, 8, true);
+    m_RoomSelector = std::make_unique<TileEditor>(imgRoomSelector, m_ImageMap, TSize(16,16), false, true, 8, true);
     m_RoomSelector->Mode = TileEditor::temSelect;
     m_RoomSelector->GridRoom = true;
     m_RoomSelector->ShowStartRoom = true;
@@ -91,28 +92,25 @@ void __fastcall TfrmEditorMap::actSelectExecute(TObject *Sender)
 {
     btnSelect->Down = true;
     m_Workspace->Mode = TileEditor::temSelect;
-    m_ScratchPad->Mode = TileEditor::temSelect;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actPencilExecute(TObject *Sender)
 {
     btnPencil->Down = true;
     m_Workspace->Mode = TileEditor::temPencil;
-    m_ScratchPad->Mode = TileEditor::temPencil;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actLineExecute(TObject *Sender)
 {
     btnLine->Down = true;
     m_Workspace->Mode = TileEditor::temLine;
-    m_ScratchPad->Mode = TileEditor::temLine;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actShapeExecute(TObject *Sender)
 {
     btnShape->Down = true;
+    m_Workspace->UnselectAll();
     m_Workspace->Mode = TileEditor::temShape;
-    m_ScratchPad->Mode = TileEditor::temShape;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actZoomInExecute(TObject *Sender)
@@ -203,14 +201,16 @@ void __fastcall TfrmEditorMap::RefreshAssets()
     assetsTiles->Clear();
     assetsSprites->Clear();
     assetsObjects->Clear();
+    m_ImageMap.clear();
     DocumentList images;
     theDocumentManager.GetAllOfType("Image", images);
+    const auto& gm = *(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode());
     bool firstTile = true;
     for (auto image : images)
     {
+        auto img = dynamic_cast<ImageDocument*>(image);
         if (image->SubType == "Tile")
         {
-            auto img = dynamic_cast<ImageDocument*>(image);
             assetsTiles->Add(img);
             if (firstTile)
             {
@@ -220,12 +220,13 @@ void __fastcall TfrmEditorMap::RefreshAssets()
         }
         else if (image->SubType == "Sprite")
         {
-            assetsSprites->Add(dynamic_cast<ImageDocument*>(image));
+            assetsSprites->Add(img);
         }
         else if (image->SubType == "Object")
         {
-            assetsObjects->Add(dynamic_cast<ImageDocument*>(image));
+            assetsObjects->Add(img);
         }
+        m_ImageMap[image->Id] = std::make_unique<Agdx::Image>(img, gm);
     }
     assetsTiles->sbxListResize(nullptr);
     assetsSprites->sbxListResize(nullptr);
@@ -387,12 +388,12 @@ void __fastcall TfrmEditorMap::imgWorkspaceMouseEnter(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actCopyToScratchPadExecute(TObject *Sender)
 {
-    m_ScratchPad->Add(m_Workspace->GetSelection());
+    m_ScratchPad->Add(m_Workspace->GetSelection(true));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actMoveToScratchPadExecute(TObject *Sender)
 {
-    m_ScratchPad->Add(m_Workspace->GetSelection());
+    m_ScratchPad->Add(m_Workspace->GetSelection(true));
     m_Workspace->DeleteSelection();
 }
 //---------------------------------------------------------------------------
@@ -422,10 +423,12 @@ void __fastcall TfrmEditorMap::actDeleteExecute(TObject *Sender)
     if (dpWorkspace == m_ActivePanel)
     {
         m_Workspace->DeleteSelection();
+        m_Document->Set(actToggleEditMode->Checked ? meRoom : meMap, m_Workspace->GetEntities());
     }
     else if (dpScratchPad == m_ActivePanel)
     {
         m_ScratchPad->DeleteSelection();
+        m_Document->Set(meScratchPad, m_ScratchPad->GetEntities());
     }
 }
 //---------------------------------------------------------------------------
@@ -441,7 +444,7 @@ void __fastcall TfrmEditorMap::mnuSPToggleToolbarClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::pgcAssetsChange(TObject *Sender)
 {
-    auto state = pgcAssets->ActivePage == tabTiles;
+    auto state = true;//pgcAssets->ActivePage == tabTiles;
     if (!state && (btnLine->Down || btnShape->Down))
     {
         btnPencil->Down = true;

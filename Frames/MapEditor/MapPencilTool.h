@@ -1,18 +1,16 @@
 //---------------------------------------------------------------------------
-#ifndef CanvasLineToolH
-#define CanvasLineToolH
+#ifndef MapPencilToolH
+#define MapPencilToolH
 //---------------------------------------------------------------------------
-#include "Frames/ImageEditor/CanvasTool.h"
+#include "Frames/MapEditor/MapTool.h"
 //---------------------------------------------------------------------------
-class CanvasLineTool : public CanvasTool
+class MapPencilTool : public MapTool
 {
 private:
-    virtual void    __fastcall  Apply(Agdx::GraphicsBuffer& canvas, const TPoint& pt);
-
+            void    __fastcall  Apply(EntityList& list, Entity entity, TPoint pt);
 public:
-                    __fastcall  CanvasLineTool();
-    virtual         __fastcall ~CanvasLineTool();
+                    __fastcall  MapPencilTool();
+    virtual         __fastcall ~MapPencilTool();
 };
 //---------------------------------------------------------------------------
 #endif
-

@@ -11,7 +11,7 @@ private:
 
 public:
                     __fastcall  CanvasPencilTool();
-                    __fastcall ~CanvasPencilTool();
+    virtual         __fastcall ~CanvasPencilTool();
 };
 //---------------------------------------------------------------------------
 #endif

@@ -13,8 +13,96 @@ __fastcall CanvasTool::~CanvasTool()
 {
 }
 //---------------------------------------------------------------------------
+void __fastcall CanvasTool::DrawLine(Agdx::GraphicsBuffer& canvas, const TRect& Rect, bool set, LinePositions* list)
+{
+    auto dx = 1;
+    auto dy = 1;
+    auto px = Rect.Left;
+    auto py = Rect.Top;
+
+    auto yDiff = Rect.Bottom - Rect.Top;
+    if (yDiff < 0)
+    {
+        yDiff = -yDiff;
+        dy = -1;
+    }
+
+    auto xDiff = Rect.Right - Rect.Left;
+    if (xDiff < 0)
+    {
+        xDiff = -xDiff;
+        dx = -1;
+    }
+
+    auto error = 0;
+    if (xDiff > yDiff)
+    {
+        // inc x by 1, y by dy
+        for (auto i = 0; i <= xDiff; ++i)
+        {
+            auto pt = TPoint(px, py);
+            if (IsPointValid(pt))
+            {
+                if (list != nullptr)
+                {
+                    list->push_back(pt);
+                }
+                canvas.SetPixel(px, py, set);
+            }
+            px += dx;
+            error += yDiff;
+            if (error >= xDiff)
+            {
+                error -= xDiff;
+                py += dy;
+            }
+        }
+    }
+    else
+    {
+        // inc y by 1, x by dx
+        for (auto i = 0; i <= yDiff; ++i)
+        {
+            auto pt = TPoint(px, py);
+            if (IsPointValid(pt))
+            {
+                if (list != nullptr)
+                {
+                    list->push_back(pt);
+                }
+                canvas.SetPixel(px, py, set);
+            }
+            py += dy;
+            error += xDiff;
+            if (error >= yDiff)
+            {
+                error -= yDiff;
+                px += dx;
+            }
+        }
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall CanvasTool::DrawVLine(Agdx::GraphicsBuffer& canvas, int x, int ys, int ye, bool set)
+{
+    for (auto y = std::min(ys, ye); y <= std::max(ys, ye); y++)
+    {
+        canvas.SetPixel(x, y, set);
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall CanvasTool::DrawHLine(Agdx::GraphicsBuffer& canvas, int xs, int xe, int y, bool set)
+{
+    for (auto x = std::min(xs, xe); x <= std::max(xs, xe); x++)
+    {
+        canvas.SetPixel(x, y, set);
+    }
+}
+//---------------------------------------------------------------------------
 String __fastcall CanvasTool::Begin(Agdx::GraphicsBuffer& canvas, const TPoint& pt, const TShiftState& buttons)
 {
+    Width = canvas.Width;
+    Height = canvas.Height;
     Tool::Begin(pt, buttons);
     Apply(canvas, pt);
     m_Image = canvas.Get();
@@ -43,90 +131,6 @@ String __fastcall CanvasTool::End(Agdx::GraphicsBuffer& canvas, const TPoint& pt
     }
     Tool::End(pt);
     return canvas.Get();
-}
-//---------------------------------------------------------------------------
-void __fastcall CanvasTool::DrawLine(Agdx::GraphicsBuffer& canvas, const TRect& Rect, bool set, LinePositions* list)
-{
-    auto dx = 1;
-    auto dy = 1;
-    auto px = Rect.Left;
-    auto py = Rect.Top;
-
-    auto yDiff = Rect.Bottom - Rect.Top;
-    if (yDiff < 0)
-    {
-        yDiff = -yDiff;
-        dy = -1;
-    }
-
-    auto xDiff = Rect.Right - Rect.Left;
-    if (xDiff < 0)
-    {
-        xDiff = -xDiff;
-        dx = -1;
-    }
-
-    auto error = 0;
-    if (xDiff > yDiff)
-    {
-        // inc x by 1, y by dy
-        for (auto i = 0; i <= xDiff; ++i)
-        {
-            if (list != nullptr)
-            {
-                list->push_back(TPoint(px,py));
-            }
-            if (0 <= px && px < canvas.Width && 0 <= py && py < canvas.Height)
-            {
-                canvas.SetPixel(px, py, set);
-            }
-            px += dx;
-            error += yDiff;
-            if (error >= xDiff)
-            {
-                error -= xDiff;
-                py += dy;
-            }
-        }
-    }
-    else
-    {
-        // inc y by 1, x by dx
-        for (auto i = 0; i <= yDiff; ++i)
-        {
-            if (list != nullptr)
-            {
-                list->push_back(TPoint(px,py));
-            }
-            if (0 <= px && px < canvas.Width && 0 <= py && py < canvas.Height)
-            {
-                canvas.SetPixel(px, py, set);
-            }
-            py += dy;
-            error += xDiff;
-            if (error >= yDiff)
-            {
-                error -= yDiff;
-                px += dx;
-            }
-        }
-    }
-}
-//---------------------------------------------------------------------------
-void __fastcall CanvasTool::DrawVLine(Agdx::GraphicsBuffer& canvas, int x, int ys, int ye, bool set)
-{
-    for (auto y = std::min(ys, ye); y <= std::max(ys, ye); y++)
-    {
-        canvas.SetPixel(x, y, set);
-    }
-}
-//---------------------------------------------------------------------------
-void __fastcall CanvasTool::DrawHLine(Agdx::GraphicsBuffer& canvas, int xs, int xe, int y, bool set)
-{
-    for (auto x = std::min(xs, xe); x <= std::max(xs, xe); x++)
-    {
-        canvas.SetPixel(x, y, set);
-    }
 }
 //---------------------------------------------------------------------------
 
