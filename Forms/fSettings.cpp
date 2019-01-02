@@ -29,6 +29,8 @@ void __fastcall TfrmSettings::FormCreate(TObject *Sender)
     chkWelcomeSkipOnStartup->Checked = appSettings.WelcomeSkipOnStartup;
     chkWelcomeSkipOnClose->Checked = appSettings.WelcomeSkipOnClose;
     chkLoadLastProject->Checked = appSettings.LoadLastProject;
+    chkWelcomeSkipOnStartupClick(nullptr);
+    chkLoadLastProjectClick(nullptr);
     //panButtons->Color = StyleServices()->GetStyleColor(scGenericGradientBase);
     // load the themes
     cmbThemes->Items->Clear();
@@ -84,5 +86,30 @@ void __fastcall TfrmSettings::cmbThemesChange(TObject *Sender)
     appSettings.ActiveStyle = cmbThemes->Text;
 }
 //---------------------------------------------------------------------------
-
+void __fastcall TfrmSettings::chkLoadLastProjectClick(TObject *Sender)
+{
+    if (chkLoadLastProject->Checked)
+    {
+        chkWelcomeSkipOnStartup->Checked = true;
+        chkWelcomeSkipOnStartup->Enabled = false;
+    }
+    else
+    {
+        chkWelcomeSkipOnStartup->Enabled = true;
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmSettings::chkWelcomeSkipOnStartupClick(TObject *Sender)
+{
+    if (chkWelcomeSkipOnStartup->Checked)
+    {
+        chkLoadLastProject->Enabled = true;
+    }
+    else
+    {
+        chkLoadLastProject->Checked = false;
+        chkLoadLastProject->Enabled = false;
+    }
+}
+//---------------------------------------------------------------------------
 

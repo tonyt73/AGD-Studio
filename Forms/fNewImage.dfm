@@ -64,7 +64,7 @@ object frmNewImage: TfrmNewImage
       349
       37)
     object btnOk: TButton
-      Left = 181
+      Left = 182
       Top = 6
       Width = 75
       Height = 25
@@ -76,7 +76,7 @@ object frmNewImage: TfrmNewImage
       TabOrder = 0
     end
     object btnCancel: TButton
-      Left = 268
+      Left = 266
       Top = 6
       Width = 75
       Height = 25
@@ -119,9 +119,9 @@ object frmNewImage: TfrmNewImage
   end
   object radTile: TRadioButton
     Tag = 2
-    Left = 212
+    Left = 217
     Top = 64
-    Width = 45
+    Width = 40
     Height = 17
     Caption = 'Tile'
     TabOrder = 3
@@ -143,11 +143,11 @@ object frmNewImage: TfrmNewImage
   end
   object radChrSet: TRadioButton
     Tag = 3
-    Left = 277
+    Left = 274
     Top = 64
-    Width = 64
+    Width = 67
     Height = 17
-    Caption = 'Chr Set'
+    Caption = 'Char Set'
     TabOrder = 4
     OnClick = radObjectClick
   end

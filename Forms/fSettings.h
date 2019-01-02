@@ -48,10 +48,13 @@ __published:    // IDE-managed Components
     TCheckBox *chkWelcomeSkipOnClose;
     TLabel *Label3;
     TCheckBox *chkLoadLastProject;
+    TImageList *ImageList1;
     void __fastcall FormCreate(TObject *Sender);
     void __fastcall btnProfileClick(TObject *Sender);
     void __fastcall btnOkClick(TObject *Sender);
     void __fastcall cmbThemesChange(TObject *Sender);
+    void __fastcall chkLoadLastProjectClick(TObject *Sender);
+    void __fastcall chkWelcomeSkipOnStartupClick(TObject *Sender);
 private:    // User declarations
 public:     // User declarations
     __fastcall TfrmSettings(TComponent* Owner);

@@ -3,8 +3,8 @@ object frmAbout: TfrmAbout
   Top = 0
   BorderIcons = []
   BorderStyle = bsNone
-  ClientHeight = 295
-  ClientWidth = 414
+  ClientHeight = 284
+  ClientWidth = 402
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,22 +17,23 @@ object frmAbout: TfrmAbout
   OnCreate = FormCreate
   OnDeactivate = FormDeactivate
   DesignSize = (
-    414
-    295)
+    402
+    284)
   PixelsPerInch = 96
   TextHeight = 13
   object shpFrame: TShape
     Left = 0
     Top = 0
-    Width = 414
-    Height = 295
+    Width = 402
+    Height = 284
     Align = alClient
     Brush.Style = bsClear
+    ExplicitWidth = 414
     ExplicitHeight = 299
   end
   object imgLogo: TImage
-    Left = 8
-    Top = 8
+    Left = 1
+    Top = 1
     Width = 400
     Height = 200
     AutoSize = True
@@ -4077,9 +4078,9 @@ object frmAbout: TfrmAbout
       454E44AE426082}
   end
   object lblVersion: TLabel
-    Left = 8
+    Left = 0
     Top = 163
-    Width = 398
+    Width = 402
     Height = 16
     Alignment = taCenter
     Anchors = [akLeft, akTop, akRight]
@@ -4088,20 +4089,21 @@ object frmAbout: TfrmAbout
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
     Font.Height = -11
-    Font.Name = 'Segoe UI'
+    Font.Name = 'Courier New'
     Font.Style = [fsBold]
     Font.Quality = fqProof
     ParentFont = False
     StyleElements = [seClient, seBorder]
   end
   object lblCopyright: TLabel
-    Left = 24
-    Top = 268
-    Width = 170
+    Left = 0
+    Top = 261
+    Width = 402
     Height = 12
     Alignment = taCenter
-    Anchors = [akLeft, akBottom]
-    Caption = #169' 2018 Tony Thompson. All rights reserved.'
+    Anchors = [akLeft, akRight, akBottom]
+    AutoSize = False
+    Caption = #169' 2019 Tony Thompson. All rights reserved.'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
     Font.Height = -9
@@ -4109,16 +4111,15 @@ object frmAbout: TfrmAbout
     Font.Style = []
     Font.Quality = fqProof
     ParentFont = False
-    StyleElements = [seClient, seBorder]
-    ExplicitTop = 180
   end
   object lblBuild: TLabel
-    Left = 24
-    Top = 250
-    Width = 177
+    Left = 0
+    Top = 243
+    Width = 402
     Height = 12
     Alignment = taCenter
-    Anchors = [akLeft, akBottom]
+    Anchors = [akLeft, akRight, akBottom]
+    AutoSize = False
     Caption = 'Build #RS-100.231, built on Feburary 19, 2017'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
@@ -4127,22 +4128,20 @@ object frmAbout: TfrmAbout
     Font.Style = []
     Font.Quality = fqProof
     ParentFont = False
-    StyleElements = [seClient, seBorder]
-    ExplicitTop = 262
   end
   object lblAGDCopyright: TLabel
-    Left = 8
+    Left = 0
     Top = 214
-    Width = 398
-    Height = 26
+    Width = 402
+    Height = 19
     Alignment = taCenter
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
-    Caption = 'AGD is copyright 2018 Jonathan Cauldwell'
+    Caption = 'AGD is copyright Jonathan Cauldwell'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'Bauhaus Md BT'
+    Font.Height = -12
+    Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
   end
