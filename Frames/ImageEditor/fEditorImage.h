@@ -118,12 +118,12 @@ __published:    // IDE-managed Components
     TToolButton *btnSprayBrush;
     TToolButton *btnFill;
     TPanel *panSplitter1;
-    TPanel *panSplitter2;
-    TPanel *panSplitter3;
+    TPanel *panGrids;
+    TPanel *panColour;
     TToolBar *tbrMono;
     TToolButton *btnMonoOff;
     TToolButton *btnMonoOn;
-    TPanel *panSplitter4;
+    TPanel *panAnimation;
     TToolBar *tbrGrids;
     TToolButton *btnGridCharacter;
     TToolButton *btnGridPixel;
@@ -131,7 +131,7 @@ __published:    // IDE-managed Components
     TToolButton *btnAnimatePlay;
     TToolButton *btnAnimateStop;
     TPanel *Panel1;
-    TLabel *Label1;
+    TLabel *lblTools;
     TLabel *Label2;
     TPanel *Panel3;
     TMultiImageViewFrame *fFrameView;
@@ -145,6 +145,7 @@ __published:    // IDE-managed Components
     TAction *actModeBlock;
     TfrmBlockTypes *palBlocks;
     TImageList *tbrImagesDisabled;
+    TPanel *panModes;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actBrushExecute(TObject *Sender);

@@ -65,8 +65,8 @@ __published:    // IDE-managed Components
     TfrmAssetSelection *assetsObjects;
     TPanel *panWorkspaceView;
     TImage *imgWorkspace;
-    TPanel *Panel1;
-    TLabel *Label1;
+    TPanel *panToolbars;
+    TLabel *lblTools;
     TToolBar *tbrGrids;
     TToolBar *tbrTools;
     TToolButton *btnSelect;
@@ -91,9 +91,9 @@ __published:    // IDE-managed Components
     TAction *actCopyToWorkspace;
     TToolBar *tbrScratchPad;
     TToolButton *btnScratchCopyFrom;
-    TToolButton *ToolButton2;
+    TToolButton *btnSep2;
     TToolButton *btnScratchDuplicate;
-    TToolButton *ToolButton4;
+    TToolButton *btnSep3;
     TToolButton *btnScratchDelete;
     TToolBar *tbrWorkspace;
     TToolButton *btnScratchCopyTo;
@@ -106,22 +106,23 @@ __published:    // IDE-managed Components
     TMenuItem *mnuWSToggleToolbar;
     TMenuItem *N4;
     TMenuItem *mnuSPToggleToolbar;
-    TToolButton *ToolButton12;
+    TToolButton *btnSep1;
     TToolButton *btnSPGridTile;
     TMenuItem *mnuSPToggleGrid;
-    TToolButton *ToolButton1;
-    TToolButton *btnEditMode;
-    TAction *actToggleEditMode;
     TSplitter *splRoomSelector;
     TImage *imgRoomSelector;
-    TToolButton *ToolButton3;
-    TToolButton *btnWSGridRoom;
-    TToolButton *btnWSGridTile;
+    TPanel *panSplitter4;
     TAction *actGridTile;
     TAction *actGridRoom;
-    TToolButton *ToolButton5;
+    TToolButton *btnWSGridTile;
+    TToolButton *btnWSGridRoom;
+    TToolBar *tbrModes;
     TToolButton *btnShowStart;
-    TAction *actToggleShowStart;
+    TAction *actStartRoomTool;
+    TToolButton *btnToggleSingleRoomEditMode;
+    TAction *actToggleSingleRoomMode;
+    TPanel *panGrids;
+    TPanel *panModes;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actLineExecute(TObject *Sender);
@@ -151,7 +152,6 @@ __published:    // IDE-managed Components
     void __fastcall mnuWSToggleToolbarClick(TObject *Sender);
     void __fastcall mnuSPToggleToolbarClick(TObject *Sender);
     void __fastcall pgcAssetsChange(TObject *Sender);
-    void __fastcall actToggleEditModeExecute(TObject *Sender);
     void __fastcall imgRoomSelectorMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
     void __fastcall imgRoomSelectorMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
     void __fastcall imgRoomSelectorMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
@@ -160,7 +160,8 @@ __published:    // IDE-managed Components
     void __fastcall btnSPGridTileClick(TObject *Sender);
     void __fastcall actGridTileExecute(TObject *Sender);
     void __fastcall actGridRoomExecute(TObject *Sender);
-    void __fastcall actToggleShowStartExecute(TObject *Sender);
+    void __fastcall actToggleSingleRoomModeExecute(TObject *Sender);
+    void __fastcall actStartRoomToolExecute(TObject *Sender);
 
 private:    // User declarations
     TiledMapDocument*           m_Document;

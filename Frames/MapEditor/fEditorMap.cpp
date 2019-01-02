@@ -161,7 +161,7 @@ void __fastcall TfrmEditorMap::imgWorkspaceMouseUp(TObject *Sender, TMouseButton
 {
     m_Workspace->OnMouseUp(Button,Shift, X, Y);
     // copy the workspace to the map document
-    m_Document->Set(actToggleEditMode->Checked ? meRoom : meMap, m_Workspace->GetEntities());
+    m_Document->Set(actToggleSingleRoomMode->Checked ? meRoom : meMap, m_Workspace->GetEntities());
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::imgRoomSelectorMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
@@ -287,7 +287,7 @@ void __fastcall TfrmEditorMap::OnDocumentChanged(const DocumentChange<String>& m
 {
     if (message.Id == "document.removing")
     {
-        m_Workspace->SetEntities(m_Document->Get(actToggleEditMode->Checked ? meRoom : meMap, m_RoomSelector->SelectedRoom));
+        m_Workspace->SetEntities(m_Document->Get(actToggleSingleRoomMode->Checked ? meRoom : meMap, m_RoomSelector->SelectedRoom));
         m_ScratchPad->SetEntities(m_Document->Get(meScratchPad));
         m_RoomSelector->SetEntities(m_Document->Get(meMap));
         m_Workspace->UpdateMap();
@@ -357,11 +357,16 @@ void __fastcall TfrmEditorMap::ShowKeysHelp()
         "                        Tiles - Hold button and drag mouse to place multiple\r\n"
         "Middle MB             : Remove tile\r\n"
         "                        Tiles - Hold button and drag mouse to remove multiple\r\n\r\n"
+        "Paint Tools (Alt+2, Alt+3, Alt+4)\r\n"
+        "Left MB click         : Add an image\r\n"
+        "Left MB and drag      : Add multiple images defined by tool\r\n\r\n"
         "General\r\n"
         "Shift + Left MB       : Pan the window by moving the mouse\r\n"
         "Ctrl + Del            : Delete selection\r\n"
-        "Ctrl + R              : Toggle room grid\r\n"
-        "Ctrl + T              : Toggle tile grid\r\n";
+        "Ctrl + G              : Toggle room grid\r\n"
+        "Ctrl + Shift + G      : Toggle tile grid\r\n"
+        "Alt + E               : Toggle screen edit mode (multiple/single)\r\n"
+        "Alt + R               : Toggle start room edit mode\r\n";
     ::Messaging::Bus::Publish<MessageEvent>(HelpKeysMessageEvent(help));
 }
 //---------------------------------------------------------------------------
@@ -423,7 +428,7 @@ void __fastcall TfrmEditorMap::actDeleteExecute(TObject *Sender)
     if (dpWorkspace == m_ActivePanel)
     {
         m_Workspace->DeleteSelection();
-        m_Document->Set(actToggleEditMode->Checked ? meRoom : meMap, m_Workspace->GetEntities());
+        m_Document->Set(actToggleSingleRoomMode->Checked ? meRoom : meMap, m_Workspace->GetEntities());
     }
     else if (dpScratchPad == m_ActivePanel)
     {
@@ -479,28 +484,13 @@ void __fastcall TfrmEditorMap::OnWorkspaceEntitySelected(const Entity& entity)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actToggleEditModeExecute(TObject *Sender)
-{
-    actToggleShowStart->Enabled = !actToggleEditMode->Checked;
-    imgRoomSelector->Visible = actToggleEditMode->Checked;
-    splRoomSelector->Visible = actToggleEditMode->Checked;
-    splRoomSelector->Top = imgRoomSelector->Top - 8;
-    m_Workspace->Rooms = actToggleEditMode->Checked ? TSize(1, 1) : TSize(16, 16);
-    m_Workspace->SetEntities(m_Document->Get(actToggleEditMode->Checked ? meRoom : meMap, m_RoomSelector->SelectedRoom));
-    m_Workspace->ShowStartRoom = !actToggleEditMode->Checked && actToggleShowStart->Checked;
-    m_Workspace->UpdateMap();
-    m_RoomSelector->Refresh();
-}
-//---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::btnWSGridRoomClick(TObject *Sender)
 {
-    btnWSGridRoom->Down = !btnWSGridRoom->Down;
     m_Workspace->GridRoom = btnWSGridRoom->Down;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::btnWSGridTileClick(TObject *Sender)
 {
-    btnWSGridTile->Down = !btnWSGridTile->Down;
     m_Workspace->GridTile = btnWSGridTile->Down;
 }
 //---------------------------------------------------------------------------
@@ -514,6 +504,7 @@ void __fastcall TfrmEditorMap::actGridTileExecute(TObject *Sender)
 {
     if (dpWorkspace == m_ActivePanel)
     {
+        btnWSGridTile->Down = !btnWSGridTile->Down;
         btnWSGridTileClick(Sender);
     }
     else
@@ -526,13 +517,27 @@ void __fastcall TfrmEditorMap::actGridRoomExecute(TObject *Sender)
 {
     if (dpWorkspace == m_ActivePanel)
     {
+        btnWSGridRoom->Down = !btnWSGridRoom->Down;
         btnWSGridRoomClick(Sender);
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actToggleShowStartExecute(TObject *Sender)
+void __fastcall TfrmEditorMap::actToggleSingleRoomModeExecute(TObject *Sender)
 {
-    m_Workspace->ShowStartRoom = actToggleShowStart->Checked;
+    actStartRoomTool->Enabled = !actToggleSingleRoomMode->Checked;
+    imgRoomSelector->Visible = actToggleSingleRoomMode->Checked;
+    splRoomSelector->Visible = actToggleSingleRoomMode->Checked;
+    splRoomSelector->Top = imgRoomSelector->Top - 8;
+    m_Workspace->Rooms = actToggleSingleRoomMode->Checked ? TSize(1, 1) : TSize(16, 16);
+    m_Workspace->SetEntities(m_Document->Get(actToggleSingleRoomMode->Checked ? meRoom : meMap, m_RoomSelector->SelectedRoom));
+    m_Workspace->ShowStartRoom = !actToggleSingleRoomMode->Checked && actStartRoomTool->Checked;
+    m_Workspace->UpdateMap();
+    m_RoomSelector->Refresh();
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::actStartRoomToolExecute(TObject *Sender)
+{
+    m_Workspace->ShowStartRoom = actStartRoomTool->Checked;
 }
 //---------------------------------------------------------------------------
 
