@@ -60,8 +60,8 @@ void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* 
         else if (caption == "objects"      ) index = tiFolderImages;
         else if (caption == "character set") index = tiFolderImages;
         else if (caption == "music"        ) index = tiFolderMusic;
-        else if (caption == "tiles"        ) index = tiFolderImages;
-        else if (caption == "tile sets"    ) index = tiFolderImages;
+        else if (caption == "tiles"        ) index = tiFolderTileSets;
+        else if (caption == "tile sets"    ) index = tiFolderTileSets;
         else if (caption == "map"          ) index = tiFolderMaps;
     }
     else
@@ -72,7 +72,7 @@ void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* 
         else if (caption == "objects"      ) index = tiAssetImage;
         else if (caption == "music"        ) index = tiAssetMusic;
         else if (caption == "tiles"        ) index = tiAssetTile;
-        else if (caption == "character set") index = tiAssetImage;
+        else if (caption == "character set") index = tiFileC;
         else if (caption == "tile sets"    ) index = tiAssetTile;
         else if (caption == "map"          ) index = tiAssetMap;
         else if (caption == "sounds"       ) index = tiAssetSfx;
