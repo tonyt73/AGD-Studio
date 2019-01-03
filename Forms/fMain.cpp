@@ -1,8 +1,9 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
-#include "fMain.h"
-#include "ProjectManager.h"
+#include "Forms/fMain.h"
+#include "Project/ProjectManager.h"
 #include "Project/MachineConfig.h"
+#include "Settings/Settings.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -82,7 +83,12 @@ void __fastcall TfrmMain::FormCloseQuery(TObject *Sender, bool &CanClose)
 // ---------------------------------------------------------------------------
 void __fastcall TfrmMain::FormDestroy(TObject *Sender)
 {
+    m_WelcomeDialog->OnActivate(nullptr);
+    m_IDEDialog->OnActivate(nullptr);
     m_FormView = fvNone;
+
+    m_WelcomeDialog = nullptr;
+    m_IDEDialog = nullptr;
 }
 // ---------------------------------------------------------------------------
 void __fastcall TfrmMain::AppMessage(tagMSG &Msg, bool &Handled)
