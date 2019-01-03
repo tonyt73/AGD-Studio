@@ -21,11 +21,10 @@ private:
         float y;
     };
 
-    enum MouseModes { mmTool, mmMove, mmGroupSelect };
+    enum MouseModes { mmTool, mmGroupSelect };
     enum EntityDrawFilters { edfDirty = 1, edfSelected = 2, edfFirstTile = 4, edfForce = 8 };
 
     std::unique_ptr<TBitmap>        m_Content;          // 1:1 content
-    std::unique_ptr<TBitmap>        m_Tile0Window;      // a bitmap containing a full screen of tile 0's (usually the blank tile)
     TSize                           m_ContentSize;      // the size of the content window that we need (content bitmap is always larger for blt reasons)
     TImage* const                   m_View;             // the UI image we render to
     EntityList                      m_Entities;         // all the map entities
@@ -95,6 +94,7 @@ private:
     void                __fastcall  DrawStartRoom() const;
     int                 __fastcall  Snap(int value, int range);
     void                __fastcall  Get(const TRect& rect, EntityList& entities) const;
+    void                __fastcall  ReplaceEntities();
 
     void                __fastcall  OnMouseDownSelectMode(TMouseButton Button, TShiftState Shift, int X, int Y);
     void                __fastcall  OnMouseDownPencilMode(TMouseButton Button, TShiftState Shift, int X, int Y);

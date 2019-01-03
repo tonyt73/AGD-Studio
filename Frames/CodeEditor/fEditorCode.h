@@ -18,6 +18,7 @@
 #include <LMDSedView.hpp>
 #include <LMDSedFindDialog.hpp>
 #include "Project/Document.h"
+#include "Messaging/Messaging.h"
 #include "Messaging/Event.h"
 //---------------------------------------------------------------------------
 class TfrmEditorCode : public TFrame
@@ -108,6 +109,7 @@ __published:    // IDE-managed Components
     void __fastcall evEditorEnter(TObject *Sender);
 
 private:    // User declarations
+    ::Messaging::Registrar      m_Registrar;
     Document*                   m_Document;
     TLMDEditView*               m_ActiveEdit;
     TLMDEditSearchDlgOptions    m_SearchOptions;

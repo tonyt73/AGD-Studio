@@ -7,8 +7,8 @@
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
 #include <Vcl.ExtCtrls.hpp>
-#include "ImageDocuments.h"
 #include <Vcl.Menus.hpp>
+#include "Project/ImageDocuments.h"
 //---------------------------------------------------------------------------
 class TfrmAssetSelection : public TFrame
 {
@@ -31,8 +31,9 @@ public:        // User declarations
             __fastcall  TfrmAssetSelection(TComponent* Owner);
 
     void    __fastcall  Clear();
-    void    __fastcall  Add(ImageDocument* image);
-    void    __fastcall  Select(ImageDocument const * const image);
+    void    __fastcall  Add(ImageDocument* image, bool enabled = true);
+    void    __fastcall  Select(const ImageDocument* image);
+    void    __fastcall  UpdateDocument(const ImageDocument* image);
     void    __fastcall  Next();
     void    __fastcall  Prev();
 

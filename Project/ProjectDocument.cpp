@@ -45,9 +45,14 @@ __fastcall ProjectDocument::ProjectDocument(const String& name, const String& ma
     m_PropertyMap["Files[].Type"] = &m_FileInfo.Type;
     m_PropertyMap["Files[].SubType"] = &m_FileInfo.SubType;
 
-    ::Messaging::Bus::Subscribe<OnChange<String>>(OnChangeString);
+    m_Registrar.Subscribe<OnChange<String>>(OnChangeString);
 
     m_MachineConfig = std::make_unique<MachineConfig>(machine);
+}
+//---------------------------------------------------------------------------
+__fastcall ProjectDocument::~ProjectDocument()
+{
+    m_Registrar.Unsubscribe();
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectDocument::OnEndObject(const String& object)

@@ -8,6 +8,7 @@
 #include <map>
 #include <vector>
 #include "System/JsonFile.h"
+#include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 // Inheritence map
 // Document -> System::JsonFile -> TPersistent
@@ -33,6 +34,7 @@ public:
     TPropertyInfoMap::iterator              TPropertyInfoMapIt;
 
 protected:
+            ::Messaging::Registrar  m_Registrar;
             String                  m_Name;
             String                  m_Type;
             String                  m_SubType;
@@ -71,6 +73,7 @@ const TPropertyInfoMap& __fastcall  GetPropertyInfo() const;
 
     virtual void        __fastcall  Save();
     virtual bool        __fastcall  Load();
+            void        __fastcall  AssignId();
 
     __property         unsigned int Id          = { read = m_RefId                          };
     __property          String      File        = { read = GetFile                          };

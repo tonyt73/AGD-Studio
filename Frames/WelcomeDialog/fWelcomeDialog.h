@@ -14,7 +14,8 @@
 #include <Vcl.Samples.Spin.hpp>
 //---------------------------------------------------------------------------
 #include "fSelectionPanel.h"
-#include "Messaging.h"
+#include "Messaging/Event.h"
+#include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 class TfrmWelcomeDialog : public TFrame
 {
@@ -63,6 +64,7 @@ private:    // Function declarations
 private:    // Member declarations
     std::list<std::shared_ptr<TSelectionPanelFrame>>    m_MostRecentlyUsedItems;
     TSelectionPanelFrame*                               m_LoadingPanel;
+    ::Messaging::Registrar                              m_Registrar;
 
 private:    // Events
     TNotifyEvent            FOnDone;

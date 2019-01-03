@@ -18,12 +18,12 @@ __fastcall BitmapGraphicsBuffer::BitmapGraphicsBuffer(unsigned int width, unsign
     PushBuffer(m_Stride * height);
     m_SetColors.push_back(1);
     m_SetColors.push_back(0);
-    ::Messaging::Bus::Subscribe<Event>(OnEvent);
+    m_Registrar.Subscribe<Event>(OnEvent);
 }
 //---------------------------------------------------------------------------
 __fastcall BitmapGraphicsBuffer::~BitmapGraphicsBuffer()
 {
-    ::Messaging::Bus::Unsubscribe<Event>(OnEvent);
+    m_Registrar.Unsubscribe();
 }
 //---------------------------------------------------------------------------
 void __fastcall BitmapGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y, bool set)

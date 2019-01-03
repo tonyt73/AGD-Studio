@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
-#include "AssetSelection.h"
-#include "LabelledImage.h"
+#include "Frames/MapEditor/AssetSelection.h"
+#include "Frames/MapEditor/LabelledImage.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -26,16 +26,17 @@ void __fastcall TfrmAssetSelection::Clear()
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAssetSelection::Add(ImageDocument* image)
+void __fastcall TfrmAssetSelection::Add(ImageDocument* image, bool enabled)
 {
     auto control = new TfrmLabelledImage(this);
     control->Name = "LabelledImage" + IntToStr(++g_NextAssetId);
     control->Parent = panList;
     control->Image = image;
+    control->Enabled = enabled;
     control->OnSelectedClick = OnImageClick;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAssetSelection::Select(ImageDocument const * const image)
+void __fastcall TfrmAssetSelection::Select(const ImageDocument* image)
 {
     for (auto i = 0; i < panList->ControlCount; i++)
     {
@@ -46,6 +47,19 @@ void __fastcall TfrmAssetSelection::Select(ImageDocument const * const image)
             control->Refresh();
             sbxList->VertScrollBar->Position = control->Top;
             sbxList->Update();
+            break;
+        }
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmAssetSelection::UpdateDocument(const ImageDocument* image)
+{
+    for (auto i = 0; i < panList->ControlCount; i++)
+    {
+        auto control = dynamic_cast<TfrmLabelledImage*>(panList->Controls[i]);
+        if (control != nullptr && control->Image->Id == image->Id)
+        {
+            control->Update();
             break;
         }
     }
@@ -108,6 +122,7 @@ void __fastcall TfrmAssetSelection::Next()
     if (ci != -1)
     {
         ci = (ci + 1) % panList->ControlCount;
+        if (ci == 0) ci = 1;
         auto label = dynamic_cast<TfrmLabelledImage*>(panList->Controls[ci]);
         if (label)
         {
@@ -124,6 +139,7 @@ void __fastcall TfrmAssetSelection::Prev()
     if (ci != -1)
     {
         ci = (panList->ControlCount + (ci - 1)) % panList->ControlCount;
+        if (ci == 0) ci = panList->ControlCount - 1;
         auto label = dynamic_cast<TfrmLabelledImage*>(panList->Controls[ci]);
         if (label)
         {

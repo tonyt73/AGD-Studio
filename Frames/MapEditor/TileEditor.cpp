@@ -25,7 +25,7 @@ __fastcall TileEditor::TileEditor(TImage* const view, Agdx::ImageMap& imageMap, 
 , m_ForceMapDraw(false)
 , m_SelectionCount(0)
 , m_SelectedEntity(-1)
-, m_Tile0Window(nullptr)
+, m_Tile0Id(-1)
 , m_TileSize(theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum)
 , m_GraphicsMode(*(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()))
 , m_ReadOnly(readOnly)
@@ -58,17 +58,22 @@ void __fastcall TileEditor::CreateViewBitmap()
 void __fastcall TileEditor::Clear()
 {
     PatBlt(m_Content->Canvas->Handle, m_BorderScaled.x, m_BorderScaled.y, m_Content->Width, m_Content->Height, BLACKNESS);
-    if (m_Tile0Window)
+    if (m_Tile0Id != -1 && m_ImageMap[m_Tile0Id])
     {
         // clear the map using tile 0's
         const auto& wi = theDocumentManager.ProjectConfig()->Window;
         auto cw = wi.Width  * m_TileSize.cx;
         auto ch = wi.Height * m_TileSize.cy;
-        for (auto y = m_BorderScaled.y; y < m_ContentSize.cy - (m_BorderScaled.y * 2); y += m_Tile0Window->Height)
+        auto tile0 = std::make_unique<Graphics::TBitmap>();
+        tile0->PixelFormat = pf32bit;
+        tile0->Width = m_ImageMap[m_Tile0Id]->Canvas().Width;
+        tile0->Height = m_ImageMap[m_Tile0Id]->Canvas().Height;
+        m_ImageMap[m_Tile0Id]->Canvas().Assign(tile0.get());
+        for (auto y = m_BorderScaled.y; y < m_ContentSize.cy - (m_BorderScaled.y * 2); y += tile0->Height)
         {
-            for (auto x = m_BorderScaled.x; x < m_ContentSize.cx - (m_BorderScaled.x * 2); x += m_Tile0Window->Width)
+            for (auto x = m_BorderScaled.x; x < m_ContentSize.cx - (m_BorderScaled.x * 2); x += tile0->Width)
             {
-                BitBlt(m_Content->Canvas->Handle, x, y, m_Tile0Window->Width, m_Tile0Window->Height, m_Tile0Window->Canvas->Handle, 0, 0, SRCCOPY);
+                BitBlt(m_Content->Canvas->Handle, x, y, tile0->Width, tile0->Height, tile0->Canvas->Handle, 0, 0, SRCCOPY);
             }
         }
     }
@@ -106,7 +111,7 @@ void __fastcall TileEditor::OnMouseDownSelectMode(TMouseButton Button, TShiftSta
         if (Shift.Contains(ssAlt))
         {
             StartRoom = pt;
-            Messaging::Bus::Publish<StartRoomSet>(StartRoomSet(m_StartRoom));
+            ::Messaging::Bus::Publish<StartRoomSet>(StartRoomSet(m_StartRoom));
         }
         else
         {
@@ -149,7 +154,7 @@ void __fastcall TileEditor::OnMouseDownSelectMode(TMouseButton Button, TShiftSta
         pt.x /= m_TileSize.cx * wi.Width;
         pt.y /= m_TileSize.cy * wi.Height;
         StartRoom = pt;
-        Messaging::Bus::Publish<StartRoomSet>(StartRoomSet(m_StartRoom));
+        ::Messaging::Bus::Publish<StartRoomSet>(StartRoomSet(m_StartRoom));
     }
 }
 //---------------------------------------------------------------------------
@@ -422,7 +427,7 @@ void __fastcall TileEditor::OnMouseUpPencilMode(TMouseButton Button, TShiftState
     if (m_SelectedEntity != - 1)
     {
         m_MapPencilTool.End(m_ToolEntities, m_SingleSelect, ViewToMap(X, Y));
-        m_Entities.insert(m_Entities.end(), m_ToolEntities.begin(), m_ToolEntities.end());
+        ReplaceEntities();
     }
     m_ToolEntities.clear();
     UpdateMap();
@@ -430,6 +435,13 @@ void __fastcall TileEditor::OnMouseUpPencilMode(TMouseButton Button, TShiftState
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::OnMouseUpLineMode(TMouseButton Button, TShiftState Shift, int X, int Y)
 {
+    if (m_SelectedEntity != - 1)
+    {
+        m_MapPencilTool.End(m_ToolEntities, m_SingleSelect, ViewToMap(X, Y));
+        ReplaceEntities();
+    }
+    m_ToolEntities.clear();
+    UpdateMap();
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::OnMouseUpShapeMode(TMouseButton Button, TShiftState Shift, int X, int Y)
@@ -437,7 +449,7 @@ void __fastcall TileEditor::OnMouseUpShapeMode(TMouseButton Button, TShiftState 
     if (m_SelectedEntity != - 1)
     {
         m_MapRectTool.End(m_ToolEntities, m_SingleSelect, ViewToMap(X, Y));
-        m_Entities.insert(m_Entities.end(), m_ToolEntities.begin(), m_ToolEntities.end());
+        ReplaceEntities();
     }
     m_ToolEntities.clear();
     UpdateMap();
@@ -493,26 +505,7 @@ void __fastcall TileEditor::SetRooms(TSize rooms)
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::SetTile0Id(unsigned int id)
 {
-    const auto& wi = theDocumentManager.ProjectConfig()->Window;
-    m_Tile0Window = std::make_unique<TBitmap>();
-    m_Tile0Window->PixelFormat = pf32bit;
-    m_Tile0Window->Width = wi.Width * m_TileSize.cx;
-    m_Tile0Window->Height = wi.Height * m_TileSize.cy;
-    TPoint pt;
-    auto tile0 = dynamic_cast<ImageDocument*>(theDocumentManager.Get(id));
-    if (tile0)
-    {
-        auto image0 = std::make_unique<Agdx::Image>(tile0, m_GraphicsMode);
-        for (auto y = 0; y < wi.Height; y++)
-        {
-            for (auto x = 0; x < wi.Width; x++)
-            {
-                pt.X = x * m_TileSize.cx;
-                pt.Y = y * m_TileSize.cy;
-                image0->Draw(pt, m_Tile0Window.get());
-            }
-        }
-    }
+    m_Tile0Id = id;
     Clear();
 }
 //---------------------------------------------------------------------------
@@ -862,13 +855,25 @@ void __fastcall TileEditor::SelectRoom(TSize room)
 {
     m_SelectedRoom = room;
     UnselectAll();
-    Messaging::Bus::Publish<RoomSelected>(RoomSelected(room));
+    ::Messaging::Bus::Publish<RoomSelected>(RoomSelected(room));
     UpdateMap();
 }
 //---------------------------------------------------------------------------
 int __fastcall TileEditor::Snap(int value, int range)
 {
     return ((int)(value / range)) * range;
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::ReplaceEntities()
+{
+    for (auto& e : m_ToolEntities)
+    {
+        // remove the existing entity at the location
+        m_Entities.erase(std::remove_if(m_Entities.begin(),m_Entities.end(),
+            [&](const Entity& entity) { return entity.Pt.x == e.Pt.x && entity.Pt.y == e.Pt.y; }), m_Entities.end());
+        // add the new entity at the location
+        m_Entities.push_back(e);
+    }
 }
 //---------------------------------------------------------------------------
 

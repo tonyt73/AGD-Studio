@@ -23,20 +23,16 @@ __fastcall TfrmEditorMap::TfrmEditorMap(TComponent* Owner)
 : TFrame(Owner)
 , m_ActivePanel(nullptr)
 {
-    ::Messaging::Bus::Subscribe<Event>(OnEvent);
-    ::Messaging::Bus::Subscribe<OnMapResized>(OnMapResize);
-    ::Messaging::Bus::Subscribe<RoomSelected>(OnRoomSelected);
-    ::Messaging::Bus::Subscribe<StartRoomSet>(OnStartRoomSet);
-    ::Messaging::Bus::Subscribe<DocumentChange<String>>(OnDocumentChanged);
+    m_Registrar.Subscribe<Event>(OnEvent);
+    m_Registrar.Subscribe<OnMapResized>(OnMapResize);
+    m_Registrar.Subscribe<RoomSelected>(OnRoomSelected);
+    m_Registrar.Subscribe<StartRoomSet>(OnStartRoomSet);
+    m_Registrar.Subscribe<DocumentChange<String>>(OnDocumentChanged);
 }
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorMap::~TfrmEditorMap()
 {
-    ::Messaging::Bus::Unsubscribe<DocumentChange<String>>(OnDocumentChanged);
-    ::Messaging::Bus::Unsubscribe<StartRoomSet>(OnStartRoomSet);
-    ::Messaging::Bus::Unsubscribe<RoomSelected>(OnRoomSelected);
-    ::Messaging::Bus::Unsubscribe<OnMapResized>(OnMapResize);
-    ::Messaging::Bus::Unsubscribe<Event>(OnEvent);
+    m_Registrar.Unsubscribe();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::Initialise()
@@ -213,7 +209,7 @@ void __fastcall TfrmEditorMap::RefreshAssets()
         auto img = dynamic_cast<ImageDocument*>(image);
         if (image->SubType == "Tile")
         {
-            assetsTiles->Add(img);
+            assetsTiles->Add(img, !firstTile);
             if (firstTile)
             {
                 m_Workspace->Tile0Id = img->Id;
@@ -299,6 +295,18 @@ void __fastcall TfrmEditorMap::OnDocumentChanged(const DocumentChange<String>& m
     else if (message.Id == "document.removed")
     {
         RefreshAssets();
+    }
+    else if ("document.changed")
+    {
+        const auto& gm = *(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode());
+        auto image = dynamic_cast<const ImageDocument*>(message.document);
+        m_ImageMap[message.document->Id] = std::make_unique<Agdx::Image>(image, gm);
+        m_Workspace->UpdateMap();
+        m_ScratchPad->UpdateMap();
+        m_RoomSelector->UpdateMap();
+        assetsTiles->UpdateDocument(image);
+        assetsSprites->UpdateDocument(image);
+        assetsObjects->UpdateDocument(image);
     }
 }
 //---------------------------------------------------------------------------
@@ -428,6 +436,7 @@ void __fastcall TfrmEditorMap::actDeleteExecute(TObject *Sender)
     {
         m_Workspace->DeleteSelection();
         m_Document->Set(actToggleSingleRoomMode->Checked ? meRoom : meMap, m_Workspace->GetEntities());
+        //TODO:m_Workspace->SetEntities(m_Document->Get(actToggleSingleRoomMode->Checked ? meRoom : meMap, m_RoomSelector->SelectedRoom));
     }
     else if (dpScratchPad == m_ActivePanel)
     {
@@ -523,14 +532,13 @@ void __fastcall TfrmEditorMap::actGridRoomExecute(TObject *Sender)
 void __fastcall TfrmEditorMap::actToggleSingleRoomModeExecute(TObject *Sender)
 {
     actStartRoomTool->Enabled = !actToggleSingleRoomMode->Checked;
-    imgRoomSelector->Visible = actToggleSingleRoomMode->Checked;
-    splRoomSelector->Visible = actToggleSingleRoomMode->Checked;
-    splRoomSelector->Top = imgRoomSelector->Top - 8;
+    dpRoomSelector->PanelVisible = actToggleSingleRoomMode->Checked;
+    dpRoomSelector->Zone->Height = std::max(dpRoomSelector->Zone->Height, 256);
     m_Workspace->Rooms = actToggleSingleRoomMode->Checked ? TSize(1, 1) : TSize(16, 16);
     m_Workspace->SetEntities(m_Document->Get(actToggleSingleRoomMode->Checked ? meRoom : meMap, m_RoomSelector->SelectedRoom));
     m_Workspace->ShowStartRoom = !actToggleSingleRoomMode->Checked && actStartRoomTool->Checked;
     m_Workspace->UpdateMap();
-    m_RoomSelector->Refresh();
+    m_RoomSelector->UpdateMap();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actStartRoomToolExecute(TObject *Sender)

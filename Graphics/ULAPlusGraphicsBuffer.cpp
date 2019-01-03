@@ -32,12 +32,12 @@ __fastcall ULAPlusGraphicsBuffer::ULAPlusGraphicsBuffer(unsigned int width, unsi
     m_SetColors.push_back(0);   // ink
     m_SetColors.push_back(7);   // paper
     m_SetColors.push_back(0);   // palette index
-    ::Messaging::Bus::Subscribe<Event>(OnEvent);
+    m_Registrar.Subscribe<Event>(OnEvent);
 }
 //---------------------------------------------------------------------------
 __fastcall ULAPlusGraphicsBuffer::~ULAPlusGraphicsBuffer()
 {
-    ::Messaging::Bus::Unsubscribe<Event>(OnEvent);
+    m_Registrar.Unsubscribe();
 }
 //---------------------------------------------------------------------------
 void __fastcall ULAPlusGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y, bool set)

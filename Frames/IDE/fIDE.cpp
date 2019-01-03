@@ -10,6 +10,7 @@
 #include "ProjectManager.h"
 #include "DocumentEditorFactory.h"
 #include "Messaging/Messaging.h"
+#include "Settings/ThemeSettings.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "LMDDckSite"
@@ -28,8 +29,8 @@ __fastcall TfrmIDE::TfrmIDE(TComponent* Owner)
 //---------------------------------------------------------------------------
 __fastcall TfrmIDE::~TfrmIDE()
 {
-    ::Messaging::Bus::Unsubscribe<MessageEvent>(OnMessageEvent);
-    ::Messaging::Bus::Unsubscribe<UpdateProperties>(OnUpdateProperties);
+    m_Registrar.Unsubscribe();
+
     if (Application && Application->MainForm)
     {
         Application->MainForm->Menu = nullptr;
@@ -57,8 +58,8 @@ void __fastcall TfrmIDE::OnActivate(TWinControl* parent)
     {
         Parent = parent;
         Visible = true;
-        ::Messaging::Bus::Subscribe<MessageEvent>(OnMessageEvent);
-        ::Messaging::Bus::Subscribe<UpdateProperties>(OnUpdateProperties);
+        m_Registrar.Subscribe<MessageEvent>(OnMessageEvent);
+        m_Registrar.Subscribe<UpdateProperties>(OnUpdateProperties);
         if (Application && Application->MainForm)
         {
             Application->MainForm->Menu = mnuMain;
@@ -72,8 +73,7 @@ void __fastcall TfrmIDE::OnActivate(TWinControl* parent)
     }
     else
     {
-        ::Messaging::Bus::Unsubscribe<MessageEvent>(OnMessageEvent);
-        ::Messaging::Bus::Unsubscribe<UpdateProperties>(OnUpdateProperties);
+        m_Registrar.Unsubscribe();
         Visible = false;
         Parent = nullptr;
     }

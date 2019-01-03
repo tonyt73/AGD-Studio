@@ -4,6 +4,7 @@
 #include "ElXTree.hpp"
 #include "LMDDckSite.hpp"
 #include "Project/Document.h"
+#include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -42,7 +43,7 @@ __fastcall Document::~Document()
         m_DockPanel = nullptr;
     }
 }
-//---------------------------------------------------------------------------
+//----------------------------------------------------------------------------
 void __fastcall Document::RegisterProperty(const String& property, const String& category, const String& info)
 {
     m_PropertyInfo[property] = { category, info };
@@ -61,6 +62,14 @@ String __fastcall Document::GetPropertyInfo(const String& property) const
         return info->second.info;
     }
     return "Invalid property";
+}
+//---------------------------------------------------------------------------
+void __fastcall Document::AssignId()
+{
+    if (m_SaveRefId && m_RefId == InvalidDocumentId)
+    {
+        m_RefId = ++s_NextRefId;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall Document::SetName(String name)
@@ -127,6 +136,8 @@ bool __fastcall Document::Load()
     {
         // yes, load it
         JsonFile::Load(m_File);
+        // make sure the next ref id
+        s_NextRefId = max(s_NextRefId, m_RefId);
         return true;
     }
     return false;

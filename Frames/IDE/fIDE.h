@@ -30,6 +30,7 @@
 #include "ElXTree.hpp"
 //---------------------------------------------------------------------------
 #include "Project/Document.h"
+#include "Messaging/Messaging.h"
 #include "Messaging/Event.h"
 //---------------------------------------------------------------------------
 class TfrmIDE : public TFrame
@@ -189,6 +190,8 @@ __published:    // IDE-managed Components
     void __fastcall actViewMessagesExecute(TObject *Sender);
 
 private:    // User declarations
+    ::Messaging::Registrar m_Registrar;
+
     void __fastcall UpdateDocumentProperties(Document* document);
     void __fastcall OnDocumentClose(TObject *Sender, TLMDockPanelCloseAction& action);
     void __fastcall RegisterDocumentEditors();

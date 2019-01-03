@@ -26,7 +26,6 @@ const Agdx::GraphicsMode&   m_GraphicsMode;     // the graphics mode used by the
     void        __fastcall  SetSelected(bool state);
     void        __fastcall  SetShowCaption(bool state);
     void        __fastcall  SetImage(ImageDocument* document);
-    void        __fastcall  Update();
 
 public:        // User declarations
                 __fastcall TfrmLabelledImage(TComponent* Owner);
@@ -34,6 +33,7 @@ public:        // User declarations
     bool        __property  Selected = { read = m_Selected, write = SetSelected };
 __property  ImageDocument*  Image = { read = m_Document, write = SetImage };
     bool        __property  ShowCaption = { write = SetShowCaption };
+    void        __fastcall  Update();
 
             // click events
    __property  TNotifyEvent OnSelectedClick = { read = FOnClick, write = FOnClick };

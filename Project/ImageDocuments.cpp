@@ -176,7 +176,7 @@ int __fastcall ImageDocument::GetLayerCount() const
 //---------------------------------------------------------------------------
 void __fastcall ImageDocument::AddLayer(const String& name, const String& value)
 {
-    if (m_Layers.count(name) == 0)
+    if (!LayerExists(name))
     {
         m_Layers[name] = value;
     }
@@ -206,7 +206,7 @@ void __fastcall ImageDocument::ExtractSize(const String& extra)
 String __fastcall ImageDocument::GetLayer(const String& name)
 {
     String value;
-    if (m_Layers.count(name) == 1)
+    if (LayerExists(name))
     {
         value = m_Layers[name];
     }
@@ -215,7 +215,7 @@ String __fastcall ImageDocument::GetLayer(const String& name)
 //---------------------------------------------------------------------------
 void __fastcall ImageDocument::SetLayer(const String& name, const String& value)
 {
-    if (m_Layers.count(name) == 1)
+    if (LayerExists(name))
     {
         m_Layers[name] = value;
     }
@@ -273,7 +273,7 @@ __fastcall TileDocument::TileDocument(const String& name, const String& extra)
     RegisterProperty("Name", "Details", "The name of the tile");
     ExtractSize(extra);
     AddFrame();
-    AddLayer("blocktype","");
+    AddLayer("blocktype","0");
 }
 //---------------------------------------------------------------------------
 __fastcall CharacterSetDocument::CharacterSetDocument(const String& name, const String& extra)

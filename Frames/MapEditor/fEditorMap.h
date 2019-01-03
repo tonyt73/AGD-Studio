@@ -52,7 +52,6 @@ __published:    // IDE-managed Components
     TLMDDockSite *dpTileMap;
     TLMDDockPanel *dpScratchPad;
     TLMDDockPanel *dpWorkspace;
-    TLMDDockPanel *LMDDockPanel4;
     TLMDDockPanel *dpAssets;
     TPanel *panScratchPadView;
     TImage *imgScratchPad;
@@ -109,8 +108,6 @@ __published:    // IDE-managed Components
     TToolButton *btnSep1;
     TToolButton *btnSPGridTile;
     TMenuItem *mnuSPToggleGrid;
-    TSplitter *splRoomSelector;
-    TImage *imgRoomSelector;
     TPanel *panSplitter4;
     TAction *actGridTile;
     TAction *actGridRoom;
@@ -125,6 +122,8 @@ __published:    // IDE-managed Components
     TPanel *panModes;
     TAction *actEntityNext;
     TAction *actEntityPrev;
+    TLMDDockPanel *dpRoomSelector;
+    TImage *imgRoomSelector;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actLineExecute(TObject *Sender);
@@ -168,6 +167,7 @@ __published:    // IDE-managed Components
     void __fastcall actEntityPrevExecute(TObject *Sender);
 
 private:    // User declarations
+    ::Messaging::Registrar      m_Registrar;
     TiledMapDocument*           m_Document;
     std::unique_ptr<TileEditor> m_Workspace;
     std::unique_ptr<TileEditor> m_ScratchPad;

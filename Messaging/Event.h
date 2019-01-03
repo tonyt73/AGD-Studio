@@ -47,7 +47,7 @@ public:
     }
 
     __property  T Value = { read = m_Value };
-    __property  Document document = { read = m_Document };
+    __property  const Document* document = { read = m_Document };
 };
 //---------------------------------------------------------------------------
 enum MessageType { etInformation, etWarning, etError, etDebug, etHelpKeys };

@@ -159,14 +159,13 @@ _fastcall TiledMapDocument::TiledMapDocument(const String& name)
     m_File = GetFile();
 
     // message subscriptions
-    ::Messaging::Bus::Subscribe<DocumentChange<String>>(OnDocumentChanged);
-    ::Messaging::Bus::Subscribe<StartRoomSet>(OnStartRoomSet);
+    m_Registrar.Subscribe<DocumentChange<String>>(OnDocumentChanged);
+    m_Registrar.Subscribe<StartRoomSet>(OnStartRoomSet);
 }
 //---------------------------------------------------------------------------
 __fastcall TiledMapDocument::~TiledMapDocument()
 {
-    ::Messaging::Bus::Unsubscribe<StartRoomSet>(OnStartRoomSet);
-    ::Messaging::Bus::Unsubscribe<DocumentChange<String>>(OnDocumentChanged);
+    m_Registrar.Unsubscribe();
 }
 //---------------------------------------------------------------------------
 void __fastcall TiledMapDocument::DoSave()
@@ -283,7 +282,7 @@ void __fastcall TiledMapDocument::Set(MapEntities type, const EntityList& entiti
     {
         m_Map.clear();
         m_Map = entities;
-        Messaging::Bus::Publish<Event>(Event("map.updated"));
+        ::Messaging::Bus::Publish<Event>(Event("map.updated"));
     }
     else if (type == meScratchPad)
     {
@@ -312,7 +311,7 @@ void __fastcall TiledMapDocument::Set(MapEntities type, const EntityList& entiti
             ne.Pt = TPoint(e.Pt.x + minx, e.Pt.y + miny);
             m_Map.push_back(ne);
         }
-        Messaging::Bus::Publish<Event>(Event("map.updated"));
+        ::Messaging::Bus::Publish<Event>(Event("map.updated"));
     }
     else
     {
@@ -345,7 +344,7 @@ void __fastcall TiledMapDocument::OnStartRoomSet(const StartRoomSet& event)
 {
     StartLocationX = event.Room.x;
     StartLocationY = event.Room.y;
-    Messaging::Bus::Publish<UpdateProperties>(UpdateProperties());
+    ::Messaging::Bus::Publish<UpdateProperties>(UpdateProperties());
 }
 //---------------------------------------------------------------------------
 

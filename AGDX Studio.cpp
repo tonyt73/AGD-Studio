@@ -1,9 +1,12 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
 #pragma hdrstop
+#include "Settings/Settings.h"
+#include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 #include <Vcl.Styles.hpp>
 #include <Vcl.Themes.hpp>
+#include <assert.h>
 //---------------------------------------------------------------------------
 //USEFORM("Forms\fNewImage.cpp", frmNewImage);
 USEFORM("Frames\WelcomeDialog\fWelcomeDialog.cpp", frmWelcomeDialog); /* TFrame: File Type */

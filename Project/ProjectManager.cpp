@@ -1,11 +1,12 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
 #pragma hdrstop
-#include "ProjectManager.h"
-#include "fEditorCode.h"
-#include "fEditorImage.h"
-#include "ProjectDocument.h"
-#include "FileDefinitions.h"
+#include "Project/ProjectManager.h"
+#include "Frames/CodeEditor/fEditorCode.h"
+#include "Frames/ImageEditor/fEditorImage.h"
+#include "Project/ProjectDocument.h"
+#include "Project/FileDefinitions.h"
+#include "Settings/Settings.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------

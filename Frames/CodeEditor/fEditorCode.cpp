@@ -41,7 +41,8 @@ const String SCHEMES_SYN[SCHEMES_EXTS_COUNT] =
 __fastcall TfrmEditorCode::TfrmEditorCode(TComponent* Owner)
 : TFrame(Owner)
 {
-    ::Messaging::Bus::Subscribe<Event>(OnEvent);
+    m_Registrar.Subscribe<Event>(OnEvent);
+
     m_SearchOptions.Searches.set_length(0);
     m_SearchOptions.Options.Clear();
     m_SearchOptions.Options << soConfirmReplace;
@@ -52,7 +53,7 @@ __fastcall TfrmEditorCode::TfrmEditorCode(TComponent* Owner)
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorCode::~TfrmEditorCode()
 {
-    ::Messaging::Bus::Unsubscribe<Event>(OnEvent);
+    m_Registrar.Unsubscribe();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorCode::SetDocument(Document* document)

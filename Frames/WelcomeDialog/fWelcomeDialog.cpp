@@ -4,6 +4,7 @@
 #include "ProjectManager.h"
 #include "MachineConfig.h"
 #include "Settings.h"
+#include "Messaging.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -50,7 +51,7 @@ __fastcall TfrmWelcomeDialog::TfrmWelcomeDialog(TComponent* Owner)
 //---------------------------------------------------------------------------
 __fastcall TfrmWelcomeDialog::~TfrmWelcomeDialog()
 {
-    Messaging::Bus::Unsubscribe<Event>(OnEvent);
+    m_Registrar.Unsubscribe();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::OnEvent(const Event& event)
@@ -198,13 +199,13 @@ void __fastcall TfrmWelcomeDialog::OnActivate(TWinControl* parent)
         dynamic_cast<TForm*>(Parent)->Caption = "Welcome to " + ApplicationName;
         RefreshMRUList();
         UpdateColors();
-        Messaging::Bus::Subscribe<Event>(OnEvent);
+        m_Registrar.Subscribe<Event>(OnEvent);
     }
     else
     {
         Visible = false;
         Parent = nullptr;
-        Messaging::Bus::Unsubscribe<Event>(OnEvent);
+        m_Registrar.Unsubscribe();
     }
 }
 //---------------------------------------------------------------------------

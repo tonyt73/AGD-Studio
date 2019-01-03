@@ -3,6 +3,8 @@
 #define ProjectDocumentH
 //---------------------------------------------------------------------------
 #include <memory>
+#include "Messaging/Event.h"
+#include "Messaging/Messaging.h"
 #include "Project/Document.h"
 #include "Project/MachineConfig.h"
 //---------------------------------------------------------------------------
@@ -24,6 +26,7 @@ typedef struct WindowInfo
 class ProjectDocument : public Document
 {
 private:
+    ::Messaging::Registrar          m_Registrar;
                 String              m_Version;
                 String              m_Author;
                 String              m_Description;
@@ -41,6 +44,7 @@ private:
 
 public:
                         __fastcall  ProjectDocument(const String& name, const String& machine);
+                        __fastcall ~ProjectDocument();
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ProjectDocument(name, extra); };
 
    const MachineConfig& __fastcall  MachineConfiguration() const;

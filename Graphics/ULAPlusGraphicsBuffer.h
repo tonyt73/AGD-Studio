@@ -3,6 +3,7 @@
 #define ULAPlusGraphicsBufferH
 //---------------------------------------------------------------------------
 #include "Graphics/GraphicsBuffer.h"
+#include "Messaging/Messaging.h"
 #include "Messaging/Event.h"
 //---------------------------------------------------------------------------
 namespace Agdx
@@ -24,6 +25,7 @@ namespace Agdx
 class ULAPlusGraphicsBuffer : public GraphicsBuffer
 {
 private:
+    ::Messaging::Registrar          m_Registrar;
     void                __fastcall  OnEvent(const Event& event);
 public:
                         __fastcall  ULAPlusGraphicsBuffer(unsigned int width, unsigned int height, const Agdx::GraphicsMode& mode);

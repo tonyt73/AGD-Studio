@@ -17,30 +17,33 @@ object frmEditorMap: TfrmEditorMap
     Layout = {
       EFBBBF3C3F786D6C2076657273696F6E3D22312E302220656E636F64696E673D
       227574662D38223F3E0D0A3C736974656C6973743E0D0A093C73697465206964
-      3D2253454C465F53495445223E0D0A09093C7A6F6E65206B696E643D22484F52
-      5A223E0D0A0909093C7A6F6E65206B696E643D22544142532220616374697665
-      7461623D2230222073697A653D2236303822206473697A653D22302E36323535
-      31343430333239323138312220697373706163653D2231223E0D0A090909093C
-      7A6F6E65206B696E643D2250414E454C222069643D226470576F726B73706163
-      65222076697369626C653D2231222F3E0D0A0909093C2F7A6F6E653E0D0A0909
-      093C7A6F6E65206B696E643D2250414E454C222069643D224C4D44446F636B50
-      616E656C34222076697369626C653D2230222073697A653D2232303322206473
-      697A653D22302E313434333831323233333238353932222F3E0D0A0909093C7A
-      6F6E65206B696E643D2256455254222073697A653D2233363422206473697A65
-      3D22302E333734343835353936373037383139223E0D0A090909093C7A6F6E65
-      206B696E643D2250414E454C222069643D226470536372617463685061642220
-      76697369626C653D2231222073697A653D2233303922206473697A653D22302E
-      3437343237323933303634383737222F3E0D0A090909093C7A6F6E65206B696E
-      643D2250414E454C222069643D226470417373657473222076697369626C653D
-      2231222073697A653D2233343222206473697A653D22302E3532353732373036
-      393335313233222F3E0D0A0909093C2F7A6F6E653E0D0A09093C2F7A6F6E653E
-      0D0A093C2F736974653E0D0A3C2F736974656C6973743E}
+      3D2253454C465F53495445223E0D0A09093C7A6F6E65206B696E643D22564552
+      54223E0D0A0909093C7A6F6E65206B696E643D22484F525A222073697A653D22
+      33373422206473697A653D22302E353734353030373638303439313535223E0D
+      0A090909093C7A6F6E65206B696E643D22544142532220616374697665746162
+      3D2230222073697A653D2236303822206473697A653D22302E36323535313434
+      30333239323138312220697373706163653D2231223E0D0A09090909093C7A6F
+      6E65206B696E643D2250414E454C222069643D226470576F726B737061636522
+      2076697369626C653D2231222F3E0D0A090909093C2F7A6F6E653E0D0A090909
+      093C7A6F6E65206B696E643D2256455254222073697A653D2233363422206473
+      697A653D22302E333734343835353936373037383139223E0D0A09090909093C
+      7A6F6E65206B696E643D2250414E454C222069643D2264705363726174636850
+      6164222076697369626C653D2231222073697A653D2231373522206473697A65
+      3D22302E3437343237323933303634383737222F3E0D0A09090909093C7A6F6E
+      65206B696E643D2250414E454C222069643D2264704173736574732220766973
+      69626C653D2231222073697A653D2231393322206473697A653D22302E353235
+      3732373036393335313233222F3E0D0A090909093C2F7A6F6E653E0D0A090909
+      3C2F7A6F6E653E0D0A0909093C7A6F6E65206B696E643D2250414E454C222069
+      643D226470526F6F6D53656C6563746F72222076697369626C653D2231222073
+      697A653D2232373722206473697A653D22302E34323534393932333139353038
+      3435222F3E0D0A09093C2F7A6F6E653E0D0A093C2F736974653E0D0A3C2F7369
+      74656C6973743E}
     object dpAssets: TLMDDockPanel
       Tag = 100
       Left = 620
-      Top = 321
+      Top = 187
       Width = 364
-      Height = 342
+      Height = 193
       Buttons = [pbPin, pbMaximize]
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 3355443
@@ -49,17 +52,17 @@ object frmEditorMap: TfrmEditorMap
       Font.Style = [fsBold]
       ParentBackground = False
       ParentFont = False
-      TabOrder = 7
+      TabOrder = 6
       Caption = 'ASSETS'
       OnCloseQuery = dpToolsCloseQuery
       object pgcAssets: TPageControl
         Left = 0
         Top = 21
         Width = 364
-        Height = 321
+        Height = 172
         ActivePage = tabTiles
         Align = alClient
-        Constraints.MinHeight = 256
+        Constraints.MinHeight = 172
         Constraints.MinWidth = 256
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -86,7 +89,7 @@ object frmEditorMap: TfrmEditorMap
             Left = 0
             Top = 0
             Width = 356
-            Height = 287
+            Height = 138
             Align = alClient
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -96,12 +99,12 @@ object frmEditorMap: TfrmEditorMap
             ParentFont = False
             TabOrder = 0
             ExplicitWidth = 356
-            ExplicitHeight = 287
+            ExplicitHeight = 138
             inherited sbxList: TScrollBox
               Width = 356
-              Height = 287
+              Height = 138
               ExplicitWidth = 356
-              ExplicitHeight = 287
+              ExplicitHeight = 138
               inherited panList: TFlowPanel
                 Width = 339
                 Height = 309
@@ -128,16 +131,16 @@ object frmEditorMap: TfrmEditorMap
             Left = 0
             Top = 0
             Width = 356
-            Height = 287
+            Height = 138
             Align = alClient
             TabOrder = 0
             ExplicitWidth = 356
-            ExplicitHeight = 287
+            ExplicitHeight = 138
             inherited sbxList: TScrollBox
               Width = 356
-              Height = 287
+              Height = 138
               ExplicitWidth = 356
-              ExplicitHeight = 287
+              ExplicitHeight = 138
               inherited panList: TFlowPanel
                 Width = 339
                 Height = 309
@@ -160,16 +163,16 @@ object frmEditorMap: TfrmEditorMap
             Left = 0
             Top = 0
             Width = 356
-            Height = 287
+            Height = 138
             Align = alClient
             TabOrder = 0
             ExplicitWidth = 356
-            ExplicitHeight = 287
+            ExplicitHeight = 138
             inherited sbxList: TScrollBox
               Width = 356
-              Height = 287
+              Height = 138
               ExplicitWidth = 356
-              ExplicitHeight = 287
+              ExplicitHeight = 138
               inherited panList: TFlowPanel
                 Width = 339
                 Height = 309
@@ -181,12 +184,41 @@ object frmEditorMap: TfrmEditorMap
         end
       end
     end
+    object dpRoomSelector: TLMDDockPanel
+      Left = 6
+      Top = 386
+      Width = 978
+      Height = 277
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 3355443
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 7
+      Caption = 'ROOM SELECTION'
+      object imgRoomSelector: TImage
+        Left = 0
+        Top = 21
+        Width = 978
+        Height = 256
+        Align = alClient
+        OnMouseDown = imgRoomSelectorMouseDown
+        OnMouseEnter = imgWorkspaceMouseEnter
+        OnMouseMove = imgRoomSelectorMouseMove
+        OnMouseUp = imgRoomSelectorMouseUp
+        ExplicitTop = 327
+        ExplicitWidth = 527
+        ExplicitHeight = 312
+      end
+    end
     object dpScratchPad: TLMDDockPanel
       Tag = 100
       Left = 620
       Top = 6
       Width = 364
-      Height = 309
+      Height = 175
       Buttons = [pbPin, pbMaximize]
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 3355443
@@ -202,10 +234,10 @@ object frmEditorMap: TfrmEditorMap
         Left = 0
         Top = 21
         Width = 364
-        Height = 288
+        Height = 154
         Align = alClient
         BevelOuter = bvNone
-        Constraints.MinHeight = 256
+        Constraints.MinHeight = 154
         Constraints.MinWidth = 256
         ShowCaption = False
         TabOrder = 0
@@ -214,7 +246,7 @@ object frmEditorMap: TfrmEditorMap
           Left = 0
           Top = 25
           Width = 364
-          Height = 263
+          Height = 129
           Align = alClient
           PopupMenu = popScratchPad
           OnMouseDown = imgScratchPadMouseDown
@@ -222,6 +254,7 @@ object frmEditorMap: TfrmEditorMap
           OnMouseMove = imgScratchPadMouseMove
           OnMouseUp = imgScratchPadMouseUp
           ExplicitTop = 31
+          ExplicitHeight = 263
         end
         object tbrScratchPad: TToolBar
           Left = 0
@@ -298,7 +331,7 @@ object frmEditorMap: TfrmEditorMap
       Left = 6
       Top = 27
       Width = 608
-      Height = 636
+      Height = 353
       ClientKind = dkDocument
       Buttons = [pbMaximize]
       Font.Charset = DEFAULT_CHARSET
@@ -315,7 +348,7 @@ object frmEditorMap: TfrmEditorMap
         Left = 81
         Top = 0
         Width = 527
-        Height = 636
+        Height = 353
         Align = alClient
         BevelOuter = bvNone
         ShowCaption = False
@@ -325,7 +358,7 @@ object frmEditorMap: TfrmEditorMap
           Left = 0
           Top = 25
           Width = 527
-          Height = 296
+          Height = 328
           Align = alClient
           PopupMenu = popWorkspace
           OnMouseActivate = imgWorkspaceMouseActivate
@@ -334,30 +367,6 @@ object frmEditorMap: TfrmEditorMap
           OnMouseMove = imgWorkspaceMouseMove
           OnMouseUp = imgWorkspaceMouseUp
           ExplicitHeight = 312
-        end
-        object splRoomSelector: TSplitter
-          Left = 0
-          Top = 321
-          Width = 527
-          Height = 3
-          Cursor = crVSplit
-          Align = alBottom
-          Visible = False
-          ExplicitTop = 337
-          ExplicitWidth = 299
-        end
-        object imgRoomSelector: TImage
-          Left = 0
-          Top = 324
-          Width = 527
-          Height = 312
-          Align = alBottom
-          Visible = False
-          OnMouseDown = imgRoomSelectorMouseDown
-          OnMouseEnter = imgWorkspaceMouseEnter
-          OnMouseMove = imgRoomSelectorMouseMove
-          OnMouseUp = imgRoomSelectorMouseUp
-          ExplicitTop = 327
         end
         object tbrWorkspace: TToolBar
           Left = 0
@@ -418,7 +427,7 @@ object frmEditorMap: TfrmEditorMap
         Left = 0
         Top = 0
         Width = 81
-        Height = 636
+        Height = 353
         Align = alLeft
         BevelOuter = bvNone
         Constraints.MaxWidth = 81
@@ -587,16 +596,6 @@ object frmEditorMap: TfrmEditorMap
         end
       end
     end
-    object LMDDockPanel4: TLMDDockPanel
-      Left = 0
-      Top = 0
-      Width = 203
-      Height = 0
-      PanelVisible = False
-      ParentBackground = False
-      TabOrder = 6
-      Caption = 'LMDDockPanel4'
-    end
   end
   object tbrImagesEnabled: TImageList
     ColorDepth = cd32Bit
@@ -606,7 +605,7 @@ object frmEditorMap: TfrmEditorMap
     Left = 124
     Top = 65
     Bitmap = {
-      494C0101080060005C0220002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101080060000C0020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000008000000060000000010020000000000000C0
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2205,7 +2204,7 @@ object frmEditorMap: TfrmEditorMap
     Left = 220
     Top = 65
     Bitmap = {
-      494C010107006000600220002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C0101070060000C0020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004000000001002000000000000080
       0000000000000000000000000000000000000000000000000006000000110000
       00110000000B00000011000000110000000B00000011000000110000000B0000
@@ -3494,7 +3493,7 @@ object frmEditorMap: TfrmEditorMap
     Left = 343
     Top = 91
     Bitmap = {
-      494C01010900D000C40010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010900D0000C0010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000023000000330000
       0033000000330000003300000033000000330000003300000033000000330000
