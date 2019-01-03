@@ -23,9 +23,6 @@
 #include <vector>
 #include <map>
 //---------------------------------------------------------------------------
-// APP
-#include "Settings.h"
-#include "ThemeSettings.h"
 #pragma hdrstop
 
 const String ApplicationName = "AGDX Studio";
