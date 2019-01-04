@@ -9,17 +9,17 @@ unsigned int ::Messaging::Bus::s_NextId = 0;
 ::Messaging::Bus::SubscriptionsMap* ::Messaging::Bus::s_Handlers = nullptr;
 //auto ::Messaging::Bus::m_Handlers = new ::Messaging::Bus::SubscriptionsMap();
 //---------------------------------------------------------------------------
-__fastcall Messaging::Registrar::Registrar()
+__fastcall ::Messaging::Registrar::Registrar()
 {
 }
 //---------------------------------------------------------------------------
-__fastcall Messaging::Registrar::~Registrar()
+__fastcall ::Messaging::Registrar::~Registrar()
 {
     Unsubscribe();
 }
 //---------------------------------------------------------------------------
 // unsubscribe a handler from a message type
-void Messaging::Bus::Unsubscribe(unsigned int subscriptionId)
+void ::Messaging::Bus::Unsubscribe(unsigned int subscriptionId)
 {
     if (s_Handlers == nullptr)
         return;
@@ -43,7 +43,7 @@ void Messaging::Bus::Unsubscribe(unsigned int subscriptionId)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall Messaging::Registrar::Unsubscribe()
+void __fastcall ::Messaging::Registrar::Unsubscribe()
 {
     for (auto id : m_SubscriptionIds)
     {
