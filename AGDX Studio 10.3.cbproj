@@ -7,7 +7,7 @@
         <MainSource>AGDX Studio.cpp</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win64</Platform>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
@@ -543,18 +543,18 @@
         <FormResources Include="Forms\fSettings.dfm"/>
         <FormResources Include="Forms\fNewImage.dfm"/>
         <FormResources Include="Forms\fMain.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fEditorImage.dfm"/>
         <FormResources Include="Frames\MapEditor\LabelledImage.dfm"/>
         <FormResources Include="Frames\MapEditor\fEditorMap.dfm"/>
-        <FormResources Include="Frames\MapEditor\AssetSelection.dfm"/>
         <FormResources Include="Frames\MusicEditor\fEditorMusic.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fSelectionImage.dfm"/>
         <FormResources Include="Frames\ImageEditor\fPaletteBitmap.dfm"/>
         <FormResources Include="Frames\ImageEditor\fPaletteAttribute.dfm"/>
         <FormResources Include="Frames\ImageEditor\fMultiImageView.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fEditorImage.dfm"/>
+        <FormResources Include="Frames\MapEditor\AssetSelection.dfm"/>
         <FormResources Include="Frames\ImageEditor\fULAplusBitmap.dfm"/>
         <FormResources Include="Frames\ImageEditor\fToolbarShape.dfm"/>
         <FormResources Include="Frames\ImageEditor\fToolbar.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fSelectionImage.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
