@@ -207,12 +207,14 @@ void __fastcall TfrmEditorMap::RefreshAssets()
     for (auto image : images)
     {
         auto img = dynamic_cast<ImageDocument*>(image);
+        m_ImageMap[image->Id] = std::make_unique<Agdx::Image>(img, gm);
         if (image->SubType == "Tile")
         {
             assetsTiles->Add(img, !firstTile);
             if (firstTile)
             {
                 m_Workspace->Tile0Id = img->Id;
+                m_RoomSelector->Tile0Id = img->Id;
                 firstTile = false;
             }
         }
@@ -224,11 +226,12 @@ void __fastcall TfrmEditorMap::RefreshAssets()
         {
             assetsObjects->Add(img);
         }
-        m_ImageMap[image->Id] = std::make_unique<Agdx::Image>(img, gm);
     }
     assetsTiles->sbxListResize(nullptr);
     assetsSprites->sbxListResize(nullptr);
     assetsObjects->sbxListResize(nullptr);
+    m_Workspace->UpdateMap();
+    m_RoomSelector->UpdateMap();
 }
 //---------------------------------------------------------------------------
 bool __fastcall TfrmEditorMap::IsActive() const
@@ -301,6 +304,11 @@ void __fastcall TfrmEditorMap::OnDocumentChanged(const DocumentChange<String>& m
         const auto& gm = *(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode());
         auto image = dynamic_cast<const ImageDocument*>(message.document);
         m_ImageMap[message.document->Id] = std::make_unique<Agdx::Image>(image, gm);
+        if (message.document->Id == m_Workspace->Tile0Id)
+        {
+                m_Workspace->Tile0Id = image->Id;
+                m_RoomSelector->Tile0Id = image->Id;
+        }
         m_Workspace->UpdateMap();
         m_ScratchPad->UpdateMap();
         m_RoomSelector->UpdateMap();

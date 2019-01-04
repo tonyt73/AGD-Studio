@@ -16,34 +16,33 @@ object frmEditorMap: TfrmEditorMap
     TabOrder = 0
     Layout = {
       EFBBBF3C3F786D6C2076657273696F6E3D22312E302220656E636F64696E673D
-      227574662D38223F3E0D0A3C736974656C6973743E0D0A093C73697465206470
-      693D223936222069643D2253454C465F53495445223E0D0A09093C7A6F6E6520
-      6B696E643D2256455254223E0D0A0909093C7A6F6E65206B696E643D22484F52
-      5A222073697A653D2233373422206473697A653D22302E353734353030373638
-      303439313535223E0D0A090909093C7A6F6E65206B696E643D22544142532220
-      6163746976657461623D2230222073697A653D2236303822206473697A653D22
-      302E3632353531343430333239323138312220697373706163653D2231223E0D
-      0A09090909093C7A6F6E65206B696E643D2250414E454C222069643D22647057
-      6F726B7370616365222076697369626C653D2231222F3E0D0A090909093C2F7A
-      6F6E653E0D0A090909093C7A6F6E65206B696E643D2256455254222073697A65
-      3D2233363422206473697A653D22302E33373434383535393637303738313922
-      3E0D0A09090909093C7A6F6E65206B696E643D2250414E454C222069643D2264
-      7053637261746368506164222076697369626C653D2231222073697A653D2231
-      373522206473697A653D22302E3437343237323933303634383737222F3E0D0A
-      09090909093C7A6F6E65206B696E643D2250414E454C222069643D2264704173
-      73657473222076697369626C653D2231222073697A653D223139332220647369
-      7A653D22302E3532353732373036393335313233222F3E0D0A090909093C2F7A
-      6F6E653E0D0A0909093C2F7A6F6E653E0D0A0909093C7A6F6E65206B696E643D
-      2250414E454C222069643D226470526F6F6D53656C6563746F72222076697369
-      626C653D2231222073697A653D2232373722206473697A653D22302E34323534
-      3939323331393530383435222F3E0D0A09093C2F7A6F6E653E0D0A093C2F7369
-      74653E0D0A3C2F736974656C6973743E}
+      227574662D38223F3E0D0A3C736974656C6973743E0D0A093C73697465206964
+      3D2253454C465F53495445223E0D0A09093C7A6F6E65206B696E643D22564552
+      54223E0D0A0909093C7A6F6E65206B696E643D22484F525A222073697A653D22
+      36353722206473697A653D2231223E0D0A090909093C7A6F6E65206B696E643D
+      225441425322206163746976657461623D2230222073697A653D223630382220
+      6473697A653D22302E3632353531343430333239323138312220697373706163
+      653D2231223E0D0A09090909093C7A6F6E65206B696E643D2250414E454C2220
+      69643D226470576F726B7370616365222076697369626C653D2231222F3E0D0A
+      090909093C2F7A6F6E653E0D0A090909093C7A6F6E65206B696E643D22564552
+      54222073697A653D2233363422206473697A653D22302E333734343835353936
+      373037383139223E0D0A09090909093C7A6F6E65206B696E643D2250414E454C
+      222069643D22647053637261746368506164222076697369626C653D22312220
+      73697A653D2233303922206473697A653D22302E343734323732393330363438
+      3737222F3E0D0A09090909093C7A6F6E65206B696E643D2250414E454C222069
+      643D226470417373657473222076697369626C653D2231222073697A653D2233
+      343222206473697A653D22302E3532353732373036393335313233222F3E0D0A
+      090909093C2F7A6F6E653E0D0A0909093C2F7A6F6E653E0D0A0909093C7A6F6E
+      65206B696E643D2250414E454C222069643D226470526F6F6D53656C6563746F
+      72222076697369626C653D2230222073697A653D2232373722206473697A653D
+      22302E343235343939323331393530383435222F3E0D0A09093C2F7A6F6E653E
+      0D0A093C2F736974653E0D0A3C2F736974656C6973743E}
     object dpAssets: TLMDDockPanel
       Tag = 100
       Left = 620
-      Top = 187
+      Top = 321
       Width = 364
-      Height = 193
+      Height = 342
       Buttons = [pbPin, pbMaximize]
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 3355443
@@ -59,7 +58,7 @@ object frmEditorMap: TfrmEditorMap
         Left = 0
         Top = 21
         Width = 364
-        Height = 172
+        Height = 321
         ActivePage = tabTiles
         Align = alClient
         Constraints.MinHeight = 172
@@ -89,7 +88,7 @@ object frmEditorMap: TfrmEditorMap
             Left = 0
             Top = 0
             Width = 356
-            Height = 138
+            Height = 287
             Align = alClient
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -99,12 +98,12 @@ object frmEditorMap: TfrmEditorMap
             ParentFont = False
             TabOrder = 0
             ExplicitWidth = 356
-            ExplicitHeight = 138
+            ExplicitHeight = 287
             inherited sbxList: TScrollBox
               Width = 356
-              Height = 138
+              Height = 287
               ExplicitWidth = 356
-              ExplicitHeight = 138
+              ExplicitHeight = 287
               inherited panList: TFlowPanel
                 Width = 339
                 Height = 309
@@ -131,16 +130,16 @@ object frmEditorMap: TfrmEditorMap
             Left = 0
             Top = 0
             Width = 356
-            Height = 138
+            Height = 287
             Align = alClient
             TabOrder = 0
             ExplicitWidth = 356
-            ExplicitHeight = 138
+            ExplicitHeight = 287
             inherited sbxList: TScrollBox
               Width = 356
-              Height = 138
+              Height = 287
               ExplicitWidth = 356
-              ExplicitHeight = 138
+              ExplicitHeight = 287
               inherited panList: TFlowPanel
                 Width = 339
                 Height = 309
@@ -163,16 +162,16 @@ object frmEditorMap: TfrmEditorMap
             Left = 0
             Top = 0
             Width = 356
-            Height = 138
+            Height = 287
             Align = alClient
             TabOrder = 0
             ExplicitWidth = 356
-            ExplicitHeight = 138
+            ExplicitHeight = 287
             inherited sbxList: TScrollBox
               Width = 356
-              Height = 138
+              Height = 287
               ExplicitWidth = 356
-              ExplicitHeight = 138
+              ExplicitHeight = 287
               inherited panList: TFlowPanel
                 Width = 339
                 Height = 309
@@ -189,6 +188,7 @@ object frmEditorMap: TfrmEditorMap
       Top = 386
       Width = 978
       Height = 277
+      PanelVisible = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 3355443
       Font.Height = -11
@@ -218,7 +218,7 @@ object frmEditorMap: TfrmEditorMap
       Left = 620
       Top = 6
       Width = 364
-      Height = 175
+      Height = 309
       Buttons = [pbPin, pbMaximize]
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 3355443
@@ -234,7 +234,7 @@ object frmEditorMap: TfrmEditorMap
         Left = 0
         Top = 21
         Width = 364
-        Height = 154
+        Height = 288
         Align = alClient
         BevelOuter = bvNone
         Constraints.MinHeight = 154
@@ -246,7 +246,7 @@ object frmEditorMap: TfrmEditorMap
           Left = 0
           Top = 25
           Width = 364
-          Height = 129
+          Height = 263
           Align = alClient
           PopupMenu = popScratchPad
           OnMouseDown = imgScratchPadMouseDown
@@ -254,7 +254,6 @@ object frmEditorMap: TfrmEditorMap
           OnMouseMove = imgScratchPadMouseMove
           OnMouseUp = imgScratchPadMouseUp
           ExplicitTop = 31
-          ExplicitHeight = 263
         end
         object tbrScratchPad: TToolBar
           Left = 0
@@ -329,9 +328,9 @@ object frmEditorMap: TfrmEditorMap
     object dpWorkspace: TLMDDockPanel
       Tag = 100
       Left = 6
-      Top = 28
+      Top = 27
       Width = 608
-      Height = 352
+      Height = 636
       ClientKind = dkDocument
       Buttons = [pbMaximize]
       Font.Charset = DEFAULT_CHARSET
@@ -348,18 +347,17 @@ object frmEditorMap: TfrmEditorMap
         Left = 81
         Top = 0
         Width = 527
-        Height = 352
+        Height = 636
         Align = alClient
         BevelOuter = bvNone
         ShowCaption = False
         TabOrder = 0
         OnResize = panWorkspaceViewResize
-        ExplicitHeight = 353
         object imgWorkspace: TImage
           Left = 0
           Top = 25
           Width = 527
-          Height = 328
+          Height = 611
           Align = alClient
           PopupMenu = popWorkspace
           OnMouseActivate = imgWorkspaceMouseActivate
@@ -428,14 +426,13 @@ object frmEditorMap: TfrmEditorMap
         Left = 0
         Top = 0
         Width = 81
-        Height = 352
+        Height = 636
         Align = alLeft
         BevelOuter = bvNone
         Constraints.MaxWidth = 81
         Constraints.MinWidth = 81
         TabOrder = 1
         OnMouseEnter = imgWorkspaceMouseEnter
-        ExplicitHeight = 353
         object lblTools: TLabel
           Left = 0
           Top = 0
@@ -607,7 +604,7 @@ object frmEditorMap: TfrmEditorMap
     Left = 124
     Top = 65
     Bitmap = {
-      494C010108006000040020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010108006000080020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000008000000060000000010020000000000000C0
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2206,7 +2203,7 @@ object frmEditorMap: TfrmEditorMap
     Left = 220
     Top = 65
     Bitmap = {
-      494C010107006000040020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010107006000080020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004000000001002000000000000080
       0000000000000000000000000000000000000000000000000006000000110000
       00110000000B00000011000000110000000B00000011000000110000000B0000
@@ -3495,7 +3492,7 @@ object frmEditorMap: TfrmEditorMap
     Left = 343
     Top = 91
     Bitmap = {
-      494C01010900D000040010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010900D000080010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000023000000330000
       0033000000330000003300000033000000330000003300000033000000330000

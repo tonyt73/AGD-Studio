@@ -25,6 +25,7 @@ private:
     enum EntityDrawFilters { edfDirty = 1, edfSelected = 2, edfFirstTile = 4, edfForce = 8 };
 
     std::unique_ptr<TBitmap>        m_Content;          // 1:1 content
+    std::unique_ptr<TBitmap>        m_Tile0Content;     // 1:1 content with all tile0's used to clear the m_Conent quickly
     TSize                           m_ContentSize;      // the size of the content window that we need (content bitmap is always larger for blt reasons)
     TImage* const                   m_View;             // the UI image we render to
     EntityList                      m_Entities;         // all the map entities
@@ -72,6 +73,7 @@ private:
     void                __fastcall  ValidatePosition();
     TPoint              __fastcall  MapToView(const TPoint& pt) const;
     TPoint              __fastcall  ViewToMap(int X, int Y) const;
+    void                __fastcall  ResetToOrigin(EntityList& list, const TPoint& originPt) const;
     bool                __fastcall  GetGridTile();
     bool                __fastcall  GetGridRoom();
     void                __fastcall  SetGridTile(bool value);
@@ -95,6 +97,7 @@ private:
     int                 __fastcall  Snap(int value, int range);
     void                __fastcall  Get(const TRect& rect, EntityList& entities) const;
     void                __fastcall  ReplaceEntities();
+    void                __fastcall  UpdateTile0Content();
 
     void                __fastcall  OnMouseDownSelectMode(TMouseButton Button, TShiftState Shift, int X, int Y);
     void                __fastcall  OnMouseDownPencilMode(TMouseButton Button, TShiftState Shift, int X, int Y);
