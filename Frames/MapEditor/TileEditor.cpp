@@ -809,7 +809,11 @@ void __fastcall TileEditor::SetEntities(const EntityList& entities)
 {
     m_Entities.clear();
     m_Entities = entities;
-    for (auto& e : m_Entities) e.Dirty = true;
+    for (auto& e : m_Entities)
+    {
+        e.Selected = false;
+        e.Dirty = true;
+    }
 }
 //---------------------------------------------------------------------------
 const EntityList& __fastcall TileEditor::GetEntities() const
