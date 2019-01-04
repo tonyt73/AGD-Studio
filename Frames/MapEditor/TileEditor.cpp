@@ -4,6 +4,7 @@
 #include "TileEditor.h"
 #include "Project/DocumentManager.h"
 #include "Messaging/Messaging.h"
+#include "Frames/MouseState.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -115,66 +116,80 @@ TPoint __fastcall TileEditor::ViewToMap(int X, int Y) const
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::OnMouseDownSelectMode(TMouseButton Button, TShiftState Shift, int X, int Y)
 {
-    if (m_ReadOnly && !Shift.Contains(ssCtrl) && !Shift.Contains(ssShift) && Button == mbLeft)
+    MouseState ms(Button, Shift);
+    if (ms.Left)
     {
-        // work out the room number
-        const auto& wi = theDocumentManager.ProjectConfig()->Window;
-        auto pt = ViewToMap(X, Y);
-        pt.x /= m_TileSize.cx * wi.Width;
-        pt.y /= m_TileSize.cy * wi.Height;
-        if (Shift.Contains(ssAlt))
+        if (ms.NoModifiers)
         {
+            if (m_ReadOnly)
+            {
+                // Change current room selection
+                // work out the room number
+                const auto& wi = theDocumentManager.ProjectConfig()->Window;
+                auto pt = ViewToMap(X, Y);
+                pt.x /= m_TileSize.cx * wi.Width;
+                pt.y /= m_TileSize.cy * wi.Height;
+                if (Shift.Contains(ssAlt))
+                {
+                    // change the start room when Alt is pressed
+                    StartRoom = pt;
+                    ::Messaging::Bus::Publish<StartRoomSet>(StartRoomSet(m_StartRoom));
+                }
+                else
+                {
+                    // else change the current edited room
+                    SelectRoom(TSize(pt.x, pt.y));
+                }
+            }
+            else if (m_SelectionCount > 0)
+            {
+                Entity entity;
+                if (!GetEntityUnderMouse(X, Y, entity, itTile))
+                {
+                    // clear selection with a click on empty space
+                    UnselectAll();
+                    m_MouseMode = mmTool;
+                }
+                // selecting a single item; ready to move the selection
+                if (m_SelectionCount == 1 && FOnEntitySelected != nullptr)
+                {
+                    // if a single entity is selected then inform the UI
+                    SelectedEntity = m_SingleSelect.Id;
+                    FOnEntitySelected(m_SingleSelect);
+                }
+                m_SelectionMove = m_SelectionCount > 0;
+                m_LastMouse.X = X;
+                m_LastMouse.Y = Y;
+            }
+        }
+        else if (m_MouseMode == mmTool && m_Mode == temSelect && ms.Ctrl)
+        {
+            // start group selecting the entities
+            m_MouseMode = mmGroupSelect;
+            m_GroupSelectSrtMS = ViewToMap(X, Y);
+            m_GroupSelectEndMS = m_GroupSelectSrtMS;
+            m_GroupSelectSrtMS.X = Snap(m_GroupSelectSrtMS.X, m_TileSize.cx);
+            m_GroupSelectSrtMS.Y = Snap(m_GroupSelectSrtMS.Y, m_TileSize.cy);
+            m_GroupSelectEndMS.X = Snap(m_GroupSelectEndMS.X, m_TileSize.cx);
+            m_GroupSelectEndMS.Y = Snap(m_GroupSelectEndMS.Y, m_TileSize.cy);
+        }
+        else if (ShowStartRoom && !ShowSelectedRoom && ms.Alt)
+        {
+            // change the selected room on the map
+            const auto& wi = theDocumentManager.ProjectConfig()->Window;
+            auto pt = ViewToMap(X, Y);
+            pt.x /= m_TileSize.cx * wi.Width;
+            pt.y /= m_TileSize.cy * wi.Height;
             StartRoom = pt;
             ::Messaging::Bus::Publish<StartRoomSet>(StartRoomSet(m_StartRoom));
         }
-        else
-        {
-            SelectRoom(TSize(pt.x, pt.y));
-        }
-    }
-    else if (m_SelectionCount > 0 && Button == mbLeft && !Shift.Contains(ssCtrl) && !Shift.Contains(ssShift))
-    {
-        if (m_SelectionCount == 1 && FOnEntitySelected != nullptr)
-        {
-            SelectedEntity = m_SingleSelect.Id;
-            FOnEntitySelected(m_SingleSelect);
-        }
-        m_SelectionMove = true;
-        m_LastMouse.X = X;
-        m_LastMouse.Y = Y;
-    }
-    else if (!m_MousePanning && Button == mbLeft && m_PrevMouseMode == mmGroupSelect && !Shift.Contains(ssCtrl) && !Shift.Contains(ssShift))
-    {
-        UnselectAll();
-        m_MouseMode = mmTool;
-    }
-    if (m_MouseMode == mmTool && m_Mode == temSelect && Shift.Contains(ssCtrl) && Button == mbLeft)
-    {
-        // start group selecting the entities
-        m_SelectionCount = 0;
-        m_MouseMode = mmGroupSelect;
-        m_GroupSelectSrtMS = ViewToMap(X, Y);
-        m_GroupSelectEndMS = m_GroupSelectSrtMS;
-        m_GroupSelectSrtMS.X = Snap(m_GroupSelectSrtMS.X, m_TileSize.cx);
-        m_GroupSelectSrtMS.Y = Snap(m_GroupSelectSrtMS.Y, m_TileSize.cy);
-        m_GroupSelectEndMS.X = Snap(m_GroupSelectEndMS.X, m_TileSize.cx);
-        m_GroupSelectEndMS.Y = Snap(m_GroupSelectEndMS.Y, m_TileSize.cy);
-    }
-    else if (Button == mbLeft && ShowStartRoom && !ShowSelectedRoom && Shift.Contains(ssAlt))
-    {
-        // work out the room number
-        const auto& wi = theDocumentManager.ProjectConfig()->Window;
-        auto pt = ViewToMap(X, Y);
-        pt.x /= m_TileSize.cx * wi.Width;
-        pt.y /= m_TileSize.cy * wi.Height;
-        StartRoom = pt;
-        ::Messaging::Bus::Publish<StartRoomSet>(StartRoomSet(m_StartRoom));
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::OnMouseDownPencilMode(TMouseButton Button, TShiftState Shift, int X, int Y)
 {
-    if (m_SelectedEntity != - 1 && Shift.Contains(ssLeft))
+    MouseState ms(Button, Shift);
+    if (m_SelectedEntity != - 1 && ms.Left)
     {
         m_MapPencilTool.Width  = m_ContentSize.cx;
         m_MapPencilTool.Height = m_ContentSize.cy;
@@ -189,7 +204,8 @@ void __fastcall TileEditor::OnMouseDownLineMode(TMouseButton Button, TShiftState
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::OnMouseDownShapeMode(TMouseButton Button, TShiftState Shift, int X, int Y)
 {
-    if (m_SelectedEntity != - 1 && Shift.Contains(ssLeft))
+    MouseState ms(Button, Shift);
+    if (m_SelectedEntity != - 1 && ms.Left)
     {
         m_MapRectTool.Width  = m_ContentSize.cx;
         m_MapRectTool.Height = m_ContentSize.cy;
@@ -200,7 +216,8 @@ void __fastcall TileEditor::OnMouseDownShapeMode(TMouseButton Button, TShiftStat
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::OnMouseDown(TMouseButton Button, TShiftState Shift, int X, int Y)
 {
-    if (Shift.Contains(ssShift) && Button == mbLeft)
+    MouseState ms(Button, Shift);
+    if (ms.Left && ms.Shift)
     {
         m_MousePanning = true;
         Screen->Cursor =  crSizeAll;
@@ -229,9 +246,12 @@ void __fastcall TileEditor::OnMouseDown(TMouseButton Button, TShiftState Shift, 
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::OnMouseMoveSelectMode(TShiftState Shift, int X, int Y)
 {
+    MouseState ms(Shift);
     auto dPt = TPoint((X - m_LastMouse.X) / m_Scale.x, (Y - m_LastMouse.Y) / m_Scale.y);
     if (m_SelectionMove)
     {
+        // we are moving the selected enitities
+        // would any of the selected entities move out of bounds?
         auto outOfBounds = false;
         for (auto& e : m_Entities)
         {
@@ -240,6 +260,8 @@ void __fastcall TileEditor::OnMouseMoveSelectMode(TShiftState Shift, int X, int 
                 auto pt = e.Pt - e.DragPt + dPt;
                 if (pt.x < 0 || pt.y < 0 || (pt.x + m_TileSize.cx) >= m_ContentSize.cx || (pt.y + m_TileSize.cy) >= m_ContentSize.cy)
                 {
+                    // yes, then we leave where they are
+                    // TODO: Snap the selection to the bounds
                     outOfBounds = true;
                     break;
                 }
@@ -247,6 +269,7 @@ void __fastcall TileEditor::OnMouseMoveSelectMode(TShiftState Shift, int X, int 
         }
         if (!outOfBounds)
         {
+            // move the selected enitities
             for (auto& e : m_Entities)
             {
                 if (e.Selected)
@@ -259,57 +282,45 @@ void __fastcall TileEditor::OnMouseMoveSelectMode(TShiftState Shift, int X, int 
     }
     else if (!m_ReadOnly)
     {
+        // workspace/scratch pad mode
         switch (m_MouseMode)
         {
             case mmTool:
-                if (m_Mode == temSelect && m_PrevMouseMode != mmGroupSelect)
+                if (m_Mode == temSelect && !ms.Left && ms.NoModifiers && m_SelectionCount <= 1)
                 {
-                    UnselectAll();
-                    // find an object that intersects the mouse
-                    auto pt = ViewToMap(X, Y);
-                    // select sprites or objects first
-                    for (auto& e : m_Entities)
+                    bool refresh = false;
+                    if (m_SelectionCount <= 1)
                     {
-                        if (e.Image->ImageType != itTile)
+                        // highlight any entity under the cursor
+                        if (m_SelectionCount)
                         {
-                            auto ex = e.Pt.x;
-                            auto ey = e.Pt.y;
-                            e.Selected = (ex <= pt.X && pt.X <= ex + e.Image->Width && ey <= pt.Y && pt.Y <= ey + e.Image->Height);
-                            m_SelectionCount += e.Selected ? 1 : 0;
-                            if (e.Selected)
-                            {
-                                m_SingleSelect = e;
-                            }
+                            UnselectAll();
+                            refresh = true;
+                        }
+                        // find an object that intersects the mouse
+                        Entity entity;
+                        if (GetEntityUnderMouse(X, Y, entity, itSprite, true) || GetEntityUnderMouse(X, Y, entity, itObject, true) || GetEntityUnderMouse(X, Y, entity, itTile, true))
+                        {
+                            m_SingleSelect = entity;
+                            m_SelectionCount = 1;
+                            m_SelectedEntity = entity.Id;
+                            refresh = true;
                         }
                     }
-                    if (!m_SelectionCount)
-                    {
-                        // if nothing selected, select a tile/block
-                        for (auto& e : m_Entities)
-                        {
-                            if (e.Image->ImageType == itTile)
-                            {
-                                auto ex = e.Pt.x;
-                                auto ey = e.Pt.y;
-                                e.Selected = (ex <= pt.X && pt.X < ex + e.Image->Width && ey <= pt.Y && pt.Y < ey + e.Image->Height);
-                                m_SelectionCount += e.Selected ? 1 : 0;
-                                if (e.Selected)
-                                {
-                                    m_SingleSelect = e;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    if (Shift.Contains(ssMiddle))
+                    if (ms.Middle)
                     {
                         DeleteSelection();
+                        refresh = true;
                     }
-                    Refresh();
+                    if (refresh)
+                    {
+                        Refresh();
+                    }
                 }
                 break;
             case mmGroupSelect:
                 {
+                    // dragging the selection rect
                     m_GroupSelectEndMS = ViewToMap(X, Y);
                     m_GroupSelectEndMS.X = Snap(m_GroupSelectEndMS.X, m_TileSize.cx) + m_TileSize.cx;
                     m_GroupSelectEndMS.Y = Snap(m_GroupSelectEndMS.Y, m_TileSize.cy) + m_TileSize.cy;
@@ -323,8 +334,11 @@ void __fastcall TileEditor::OnMouseMoveSelectMode(TShiftState Shift, int X, int 
                         {
                             auto ex = e.Pt.x;
                             auto ey = e.Pt.y;
-                            e.Selected = (minX <= ex && ex + e.Image->Width <= maxX && minY <= ey && ey + e.Image->Height <= maxY);
-                            m_SelectionCount += e.Selected ? 1 : 0;
+                            if (!e.Selected && (minX <= ex && ex + e.Image->Width <= maxX && minY <= ey && ey + e.Image->Height <= maxY))
+                            {
+                                e.Selected = true;
+                                m_SelectionCount += 1;
+                            }
                         }
                     }
                     Refresh();
@@ -336,7 +350,8 @@ void __fastcall TileEditor::OnMouseMoveSelectMode(TShiftState Shift, int X, int 
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::OnMouseMovePencilMode(TShiftState Shift, int X, int Y)
 {
-    if (!ReadOnly && m_SelectedEntity != - 1 && !Shift.Contains(ssLeft))
+    MouseState ms(Shift);
+    if (!ReadOnly && m_SelectedEntity != - 1 && !ms.Left)
     {
         m_ToolEntities.clear();
         m_SingleSelect.Pt = ViewToMap(X, Y);
@@ -346,7 +361,7 @@ void __fastcall TileEditor::OnMouseMovePencilMode(TShiftState Shift, int X, int 
         m_ToolEntities.push_back(m_SingleSelect);
         UpdateMap();
     }
-    else if (m_SelectedEntity != - 1 && Shift.Contains(ssLeft))
+    else if (m_SelectedEntity != - 1 && ms.Left)
     {
         m_MapPencilTool.Move(m_ToolEntities, m_SingleSelect, ViewToMap(X, Y), Shift);
         UpdateMap();
@@ -359,7 +374,8 @@ void __fastcall TileEditor::OnMouseMoveLineMode(TShiftState Shift, int X, int Y)
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::OnMouseMoveShapeMode(TShiftState Shift, int X, int Y)
 {
-    if (!ReadOnly && m_SelectedEntity != - 1 && !Shift.Contains(ssLeft))
+    MouseState ms(Shift);
+    if (!ReadOnly && m_SelectedEntity != - 1 && !ms.Left)
     {
         m_ToolEntities.clear();
         m_SingleSelect.Pt = ViewToMap(X, Y);
@@ -369,7 +385,7 @@ void __fastcall TileEditor::OnMouseMoveShapeMode(TShiftState Shift, int X, int Y
         m_ToolEntities.push_back(m_SingleSelect);
         UpdateMap();
     }
-    else if (m_SelectedEntity != - 1 && Shift.Contains(ssLeft))
+    else if (m_SelectedEntity != - 1 && ms.Left)
     {
         m_MapRectTool.Move(m_ToolEntities, m_SingleSelect, ViewToMap(X, Y), Shift);
         UpdateMap();
@@ -378,6 +394,7 @@ void __fastcall TileEditor::OnMouseMoveShapeMode(TShiftState Shift, int X, int Y
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::OnMouseMove(TShiftState Shift, int X, int Y)
 {
+    MouseState ms(Shift);
     auto dPt = TPoint((X - m_LastMouse.X) / m_Scale.x, (Y - m_LastMouse.Y) / m_Scale.y);
     if (m_MousePanning)
     {
@@ -408,9 +425,17 @@ void __fastcall TileEditor::OnMouseMove(TShiftState Shift, int X, int Y)
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::OnMouseUpSelectMode(TMouseButton Button, TShiftState Shift, int X, int Y)
 {
+    MouseState ms(Button, Shift);
+    if (!m_ReadOnly)
+    {
+        m_PrevMouseMode = m_MouseMode;
+        m_MouseMode = mmTool;
+        m_ForceMapDraw = true;
+    }
     if (m_SelectionMove)
     {
         m_SelectionMove = false;
+        m_SelectionCount = 0;
         // snap the selected items to the grid
         for (auto& e : m_Entities)
         {
@@ -420,20 +445,12 @@ void __fastcall TileEditor::OnMouseUpSelectMode(TMouseButton Button, TShiftState
                 //       Should add this to the machine config and only apply if needed
                 e.Pt = TPoint(Snap(e.Pt.X, m_TileSize.cx), Snap(e.Pt.Y, m_TileSize.cy));
                 e.DragPt = TPoint();
+                m_SelectionCount++;
             }
         }
-        UpdateMap();
+        m_ForceMapDraw = true;
     }
-    else if (!m_ReadOnly)
-    {
-        if (Button == mbLeft && Shift.Contains(ssCtrl) && m_SelectionCount == 0)
-        {
-            UnselectAll();
-        }
-        m_PrevMouseMode = m_MouseMode;
-        m_MouseMode = mmTool;
-        Refresh();
-    }
+    Refresh();
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::OnMouseUpPencilMode(TMouseButton Button, TShiftState Shift, int X, int Y)
@@ -673,8 +690,10 @@ void __fastcall TileEditor::DrawEntities(int filters)
              draw &= (((filters & edfFirstTile) == edfFirstTile) && (entity.Image->ImageType == itTile && entity.Image->IsFirstOfType())) || (((filters & edfFirstTile) == 0) && !(entity.Image->ImageType == itTile && entity.Image->IsFirstOfType()));
         if (draw)
         {
-            auto pt = TPoint(m_BorderScaled.x, m_BorderScaled.y);
-            m_ImageMap[entity.Id]->Draw(entity.Pt + pt, m_Content.get(), entity.Selected);
+            auto pt = TPoint(m_BorderScaled.x, m_BorderScaled.y) + entity.Pt;
+            pt.x = Snap(pt.x, m_TileSize.cx);
+            pt.y = Snap(pt.y, m_TileSize.cx);
+            m_ImageMap[entity.Id]->Draw(pt, m_Content.get(), entity.Selected);
             entity.Clean();
         }
     }
@@ -866,6 +885,7 @@ void __fastcall TileEditor::Add(const EntityList& entities)
 void __fastcall TileEditor::UnselectAll()
 {
     m_SelectionCount = 0;
+    SelectedEntity = -1;
     for (auto& e : m_Entities)
     {
         e.Selected = false;
@@ -897,6 +917,26 @@ void __fastcall TileEditor::ReplaceEntities()
         // add the new entity at the location
         m_Entities.push_back(e);
     }
+}
+//---------------------------------------------------------------------------
+bool __fastcall TileEditor::GetEntityUnderMouse(int X, int Y, Entity& entity, ImageTypes imageType, bool selectIt)
+{
+    auto pt = ViewToMap(X, Y);
+    for (auto& e : m_Entities)
+    {
+        if (e.Image->ImageType == imageType)
+        {
+            auto ex = e.Pt.x;
+            auto ey = e.Pt.y;
+            if (ex <= pt.X && pt.X <= ex + e.Image->Width && ey <= pt.Y && pt.Y <= ey + e.Image->Height)
+            {
+                e.Selected |= selectIt;
+                entity = e;
+                return true;
+            }
+        }
+    }
+    return false;
 }
 //---------------------------------------------------------------------------
 

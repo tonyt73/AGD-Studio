@@ -98,6 +98,7 @@ private:
     void                __fastcall  Get(const TRect& rect, EntityList& entities) const;
     void                __fastcall  ReplaceEntities();
     void                __fastcall  UpdateTile0Content();
+    bool                __fastcall  GetEntityUnderMouse(int X, int Y, Entity& entity, ImageTypes imageType, bool selectIt = false);
 
     void                __fastcall  OnMouseDownSelectMode(TMouseButton Button, TShiftState Shift, int X, int Y);
     void                __fastcall  OnMouseDownPencilMode(TMouseButton Button, TShiftState Shift, int X, int Y);
