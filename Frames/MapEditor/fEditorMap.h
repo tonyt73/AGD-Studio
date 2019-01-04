@@ -29,8 +29,8 @@
 #include "AssetSelection.h"
 #include "Project/Document.h"
 #include "Project/MapDocuments.h"
-#include "Frames/WndProcHandlers.h"
 #include "Messaging/Messaging.h"
+#include "Frames/WndProcHandlers.h"
 //---------------------------------------------------------------------------
 class TfrmEditorMap : public TFrame
 {

@@ -11,11 +11,11 @@ class DocumentEditorFactory
 private:
     typedef std::map<String, CreateDocumentEditorFn> EditorMap;
     typedef std::map<String, CreateDocumentEditorFn>::iterator EditorMapIt;
-    static EditorMap   m_Editors;
+    EditorMap           m_Editors;
 
 public:
-    static  void    __fastcall  Register(const String& documentFolder, CreateDocumentEditorFn pfnCreate);
-    static  TFrame* __fastcall  Create(Document* document, TComponent* owner);
+    void    __fastcall  Register(const String& documentFolder, CreateDocumentEditorFn pfnCreate);
+    TFrame* __fastcall  Create(Document* document, TComponent* owner);
 };
 //---------------------------------------------------------------------------
 #endif

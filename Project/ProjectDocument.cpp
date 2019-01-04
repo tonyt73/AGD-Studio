@@ -5,6 +5,7 @@
 #include "ElXTree.hpp"
 #include "Messaging/Messaging.h"
 #include "Project/ProjectDocument.h"
+#include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------

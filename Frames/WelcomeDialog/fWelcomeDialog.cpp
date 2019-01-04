@@ -1,10 +1,11 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
-#include "fWelcomeDialog.h"
-#include "ProjectManager.h"
-#include "MachineConfig.h"
-#include "Settings.h"
-#include "Messaging.h"
+#include "Frames/WelcomeDialog/fWelcomeDialog.h"
+#include "Project/ProjectManager.h"
+#include "Project/MachineConfig.h"
+#include "Settings/Settings.h"
+#include "Messaging/Event.h"
+#include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"

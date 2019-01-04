@@ -7,8 +7,6 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-DocumentEditorFactory::EditorMap DocumentEditorFactory::m_Editors;
-//---------------------------------------------------------------------------
 void __fastcall DocumentEditorFactory::Register(const String& documentFolder, CreateDocumentEditorFn pfnCreate)
 {
     if (m_Editors.count(documentFolder) == 0)

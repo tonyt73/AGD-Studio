@@ -4,8 +4,6 @@
 #include "Graphics/GraphicsTypes.h"
 #include "Graphics/GraphicsMode.h"
 #include "ULAPlusGraphicsBuffer.h"
-#include "Messaging/Messaging.h"
-#include "Messaging/Event.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -32,6 +30,7 @@ __fastcall ULAPlusGraphicsBuffer::ULAPlusGraphicsBuffer(unsigned int width, unsi
     m_SetColors.push_back(0);   // ink
     m_SetColors.push_back(7);   // paper
     m_SetColors.push_back(0);   // palette index
+
     m_Registrar.Subscribe<Event>(OnEvent);
 }
 //---------------------------------------------------------------------------

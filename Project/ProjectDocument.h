@@ -4,7 +4,6 @@
 //---------------------------------------------------------------------------
 #include <memory>
 #include "Messaging/Event.h"
-#include "Messaging/Messaging.h"
 #include "Project/Document.h"
 #include "Project/MachineConfig.h"
 //---------------------------------------------------------------------------
@@ -26,7 +25,6 @@ typedef struct WindowInfo
 class ProjectDocument : public Document
 {
 private:
-    ::Messaging::Registrar          m_Registrar;
                 String              m_Version;
                 String              m_Author;
                 String              m_Description;

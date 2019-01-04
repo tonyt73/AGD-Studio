@@ -18,8 +18,8 @@
 #include <LMDSedView.hpp>
 #include <LMDSedFindDialog.hpp>
 #include "Project/Document.h"
-#include "Messaging/Messaging.h"
 #include "Messaging/Event.h"
+#include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 class TfrmEditorCode : public TFrame
 {

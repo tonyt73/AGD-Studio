@@ -42,7 +42,7 @@ private:
     private:
         std::function<void (const T&)>  m_Handler;
     public:
-        Subscription(std::function<void (const T&)> handler, unsigned int subscriptionId)
+        Subscription(const std::function<void (const T&)>& handler, unsigned int subscriptionId)
         : Subscription_(subscriptionId)
         , m_Handler(handler)
         {
@@ -69,7 +69,7 @@ private:
 protected:
     // subscribe a handler to a templated message type
     template <class T>
-    static unsigned int Subscribe(std::function<void (const T&)> handler)
+    static unsigned int Subscribe(const std::function<void (const T&)>& handler)
     {
         if (s_Handlers == nullptr)
         {

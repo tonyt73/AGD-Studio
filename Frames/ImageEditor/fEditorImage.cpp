@@ -3,7 +3,6 @@
 #include "fEditorImage.h"
 #include "Project/DocumentManager.h"
 #include "Project/EditorManager.h"
-#include "Messaging/Messaging.h"
 #include "Frames/ImageEditor/fSelectionImage.h"
 #include "Frames/ImageEditor/CanvasPencilTool.h"
 #include "Frames/ImageEditor/CanvasLineTool.h"
@@ -18,6 +17,13 @@
 #pragma link "fPaletteBitmap"
 #pragma link "fULAplusBitmap"
 #pragma link "fBlockTypes"
+#pragma link "fBlockTypes"
+#pragma link "fMultiImageView"
+#pragma link "fPaletteAttribute"
+#pragma link "fPaletteBitmap"
+#pragma link "fToolbar"
+#pragma link "fToolbarShape"
+#pragma link "fULAplusBitmap"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorImage::TfrmEditorImage(TComponent* Owner)

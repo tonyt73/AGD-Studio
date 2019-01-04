@@ -22,20 +22,20 @@
 #include <Vcl.Buttons.hpp>
 #include "LMDDckSite.hpp"
 #include "Project/ImageDocuments.h"
-#include "Messaging/Messaging.h"
 #include "Messaging/Event.h"
+#include "Messaging/Messaging.h"
 #include "Graphics/Image.h"
 #include "Graphics/GraphicsMode.h"
-#include "CanvasTool.h"
+#include "Frames/ImageEditor/CanvasTool.h"
+#include "Frames/ImageEditor/BlockTypeTool.h"
+#include "Frames/WndProcHandlers.h"
+#include "fBlockTypes.h"
 #include "fMultiImageView.h"
-#include "fToolbarShape.h"
-#include "fToolbar.h"
 #include "fPaletteAttribute.h"
 #include "fPaletteBitmap.h"
+#include "fToolbar.h"
+#include "fToolbarShape.h"
 #include "fULAplusBitmap.h"
-#include "fBlockTypes.h"
-#include "BlockTypeTool.h"
-#include "WndProcHandlers.h"
 //---------------------------------------------------------------------------
 class TfrmEditorImage : public TFrame
 {

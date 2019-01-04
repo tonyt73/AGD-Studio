@@ -3,8 +3,8 @@
 #define ULAPlusGraphicsBufferH
 //---------------------------------------------------------------------------
 #include "Graphics/GraphicsBuffer.h"
-#include "Messaging/Messaging.h"
 #include "Messaging/Event.h"
+#include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 namespace Agdx
 {

@@ -1,14 +1,13 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
-#include "fAbout.h"
-#include "fIDE.h"
-#include "fNewImage.h"
-#include "fSettings.h"
-#include "fEditorImage.h"
-#include "fEditorCode.h"
-#include "fEditorMap.h"
-#include "ProjectManager.h"
-#include "DocumentEditorFactory.h"
+#include "Forms/fAbout.h"
+#include "Forms/fNewImage.h"
+#include "Forms/fSettings.h"
+#include "Frames/IDE/fIDE.h"
+#include "Frames/ImageEditor/fEditorImage.h"
+#include "Frames/CodeEditor/fEditorCode.h"
+#include "Frames/MapEditor/fEditorMap.h"
+#include "Project/ProjectManager.h"
 #include "Messaging/Messaging.h"
 #include "Settings/ThemeSettings.h"
 //---------------------------------------------------------------------------
@@ -41,15 +40,15 @@ void __fastcall TfrmIDE::RegisterDocumentEditors()
 {
     // TODO: Do this another way
     // ie. by document class type to editor?
-    DocumentEditorFactory::Register("Game\\Events", &TfrmEditorCode::Create);
-    DocumentEditorFactory::Register("Game\\Messages", &TfrmEditorCode::Create);
-    DocumentEditorFactory::Register("Game\\Sounds", &TfrmEditorCode::Create);
-    DocumentEditorFactory::Register("Game\\Output", &TfrmEditorCode::Create);
-    DocumentEditorFactory::Register("Images\\Sprites", &TfrmEditorImage::Create);
-    DocumentEditorFactory::Register("Images\\Objects", &TfrmEditorImage::Create);
-    DocumentEditorFactory::Register("Images\\Tiles", &TfrmEditorImage::Create);
-    DocumentEditorFactory::Register("Images\\Character Set", &TfrmEditorImage::Create);
-    DocumentEditorFactory::Register("Game\\Map",  &TfrmEditorMap::Create);
+    m_DocumentEditorFactory.Register("Game\\Events", &TfrmEditorCode::Create);
+    m_DocumentEditorFactory.Register("Game\\Messages", &TfrmEditorCode::Create);
+    m_DocumentEditorFactory.Register("Game\\Sounds", &TfrmEditorCode::Create);
+    m_DocumentEditorFactory.Register("Game\\Output", &TfrmEditorCode::Create);
+    m_DocumentEditorFactory.Register("Images\\Sprites", &TfrmEditorImage::Create);
+    m_DocumentEditorFactory.Register("Images\\Objects", &TfrmEditorImage::Create);
+    m_DocumentEditorFactory.Register("Images\\Tiles", &TfrmEditorImage::Create);
+    m_DocumentEditorFactory.Register("Images\\Character Set", &TfrmEditorImage::Create);
+    m_DocumentEditorFactory.Register("Game\\Map",  &TfrmEditorMap::Create);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::OnActivate(TWinControl* parent)
@@ -280,7 +279,7 @@ void __fastcall TfrmIDE::tvProjectDblClick(TObject *Sender)
         if (doc && doc->DockPanel == nullptr)
         {
             auto dp = new TLMDDockPanel(this);
-            if (DocumentEditorFactory::Create(doc, dp))
+            if (m_DocumentEditorFactory.Create(doc, dp))
             {
                 dp->Caption = doc->Name;
                 dp->Tag = (NativeInt)doc;
