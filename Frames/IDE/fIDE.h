@@ -80,9 +80,9 @@ __published:    // IDE-managed Components
     TToolButton *ToolButton4;
     TToolButton *ToolButton5;
     TToolButton *ToolButton6;
-    TToolButton *ToolButton7;
-    TToolButton *ToolButton8;
-    TToolButton *ToolButton9;
+    TToolButton *btnEditCopy;
+    TToolButton *btnEditCut;
+    TToolButton *btnEditPaste;
     TToolButton *ToolButton10;
     TToolButton *ToolButton11;
     TAction *actEditZoomIn;

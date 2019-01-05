@@ -42,6 +42,9 @@ void __fastcall TfrmEditorMap::Initialise()
     m_ActionMap["zoom.reset"] = actZoomReset;
     m_ActionMap["edit.undo"] = actUndo;
     m_ActionMap["edit.redo"] = actRedo;
+    m_ActionMap["edit.copy"] = actCopy;
+    m_ActionMap["edit.cut"] = actCut;
+    m_ActionMap["edit.paste"] = actPaste;
 
     // create the tile editors
     // TODO: change the size to ???
@@ -373,8 +376,10 @@ void __fastcall TfrmEditorMap::ShowKeysHelp()
         "Left MB click         : Clear selection\r\n\r\n"
         "Paint Tools (Pencil: 2, Line: 3, Rectangle: 4)\r\n"
         "Left MB click         : Add an image\r\n"
-        "Left MB and drag      : Add multiple images defined by tool\r\n\r\n"
+        "Left MB and drag      : Add multiple images defined by tool\r\n"
         "Middle MB click       : Removes any tile under the cursor\r\n"
+        ", (<)                 : Change to previous image of active type\r\n"
+        ". (>)                 : Change to next image of active type\r\n\r\n"
         "General\r\n"
         "Shift + Left MB       : Pan the window by moving the mouse\r\n"
         "Ctrl + Del            : Delete selection\r\n"
@@ -397,11 +402,16 @@ void __fastcall TfrmEditorMap::imgWorkspaceMouseEnter(TObject *Sender)
     auto wc = dynamic_cast<TControl*>(Sender);
     if (wc && wc->Parent && wc->Parent->Parent)
     {
-        auto dp = dynamic_cast<TLMDDockPanel*>(wc->Parent->Parent);
-        auto cn = wc->Parent->Parent->ClassName();
-        if (dp)
+        m_ActivePanel = nullptr;
+        while (!m_ActivePanel && wc->Parent)
         {
-            m_ActivePanel = dp;
+            auto dp = dynamic_cast<TLMDDockPanel*>(wc->Parent);
+            auto cn = wc->Parent->ClassName();
+            if (dp)
+            {
+                m_ActivePanel = dp;
+            }
+            wc = wc->Parent;
         }
     }
 }
@@ -597,6 +607,42 @@ void __fastcall TfrmEditorMap::sbxWorkspaceMouseWheel(TObject *Sender, TShiftSta
         actZoomOutExecute(nullptr);
     }
     Handled = true;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::actCopyExecute(TObject *Sender)
+{
+    if (dpWorkspace == m_ActivePanel)
+    {
+        m_Workspace->Copy();
+    }
+    else if (dpScratchPad == m_ActivePanel)
+    {
+        m_ScratchPad->Copy();
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::actCutExecute(TObject *Sender)
+{
+    if (dpWorkspace == m_ActivePanel)
+    {
+        m_Workspace->Cut();
+    }
+    else if (dpScratchPad == m_ActivePanel)
+    {
+        m_ScratchPad->Cut();
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::actPasteExecute(TObject *Sender)
+{
+    if (dpWorkspace == m_ActivePanel)
+    {
+        m_Workspace->Paste();
+    }
+    else if (dpScratchPad == m_ActivePanel)
+    {
+        m_ScratchPad->Paste();
+    }
 }
 //---------------------------------------------------------------------------
 

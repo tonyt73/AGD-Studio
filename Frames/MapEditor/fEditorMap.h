@@ -125,6 +125,9 @@ __published:    // IDE-managed Components
     TLMDDockPanel *dpRoomSelector;
     TImage *imgRoomSelector;
     TScrollBox *sbxWorkspace;
+    TAction *actCopy;
+    TAction *actCut;
+    TAction *actPaste;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actLineExecute(TObject *Sender);
@@ -167,6 +170,9 @@ __published:    // IDE-managed Components
     void __fastcall actEntityNextExecute(TObject *Sender);
     void __fastcall actEntityPrevExecute(TObject *Sender);
     void __fastcall sbxWorkspaceMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled);
+    void __fastcall actCopyExecute(TObject *Sender);
+    void __fastcall actCutExecute(TObject *Sender);
+    void __fastcall actPasteExecute(TObject *Sender);
 
 private:    // User declarations
     ::Messaging::Registrar      m_Registrar;

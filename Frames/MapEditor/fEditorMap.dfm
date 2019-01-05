@@ -3368,6 +3368,18 @@ object frmEditorMap: TfrmEditorMap
       ShortCut = 32850
       OnExecute = actToggleSingleRoomModeExecute
     end
+    object actCopy: TAction
+      Caption = 'Copy'
+      OnExecute = actCopyExecute
+    end
+    object actCut: TAction
+      Caption = 'Cut'
+      OnExecute = actCutExecute
+    end
+    object actPaste: TAction
+      Caption = 'Paste'
+      OnExecute = actPasteExecute
+    end
   end
   object popWorkspace: TPopupMenu
     Left = 120

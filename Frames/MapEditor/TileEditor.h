@@ -29,7 +29,8 @@ private:
     TSize                           m_ContentSize;      // the size of the content window that we need (content bitmap is always larger for blt reasons)
     TImage* const                   m_View;             // the UI image we render to
     EntityList                      m_Entities;         // all the map entities
-    EntityList                      m_ToolEntities;     // the entities for the current tool
+    EntityList                      m_ToolEntities;     // the entities for the current tool (select etc)
+    EntityList                      m_ClipboardEntities;// the entities for the clipboard (copy, cut, paste)
     Entity                          m_SingleSelect;     // a single selected entity
     TEMode                          m_Mode;             // tool mode (pencil, line etc)
     bool                            m_Dirty;            // flag: tool is dirty - map needs updating
@@ -136,6 +137,9 @@ public:
     EntityList          __fastcall  GetSelection(bool resetToOrigin = false) const;
     void                __fastcall  DeleteSelection();
     void                __fastcall  UnselectAll();
+    void                __fastcall  Copy();
+    void                __fastcall  Cut();
+    void                __fastcall  Paste();
 
     __property  TEMode              Mode = { read = m_Mode, write = SetMode };
     __property  TSize               Rooms = { write = SetRooms };

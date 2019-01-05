@@ -943,4 +943,32 @@ bool __fastcall TileEditor::GetEntityUnderMouse(int X, int Y, Entity& entity, Im
     return false;
 }
 //---------------------------------------------------------------------------
+void __fastcall TileEditor::Copy()
+{
+    if (m_Mode == temSelect)
+    {
+        m_ClipboardEntities.clear();
+        m_ClipboardEntities = GetSelection();
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::Cut()
+{
+    if (m_Mode == temSelect)
+    {
+        m_ClipboardEntities.clear();
+        m_ClipboardEntities = GetSelection();
+        DeleteSelection();
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::Paste()
+{
+    if (m_Mode == temSelect)
+    {
+        UnselectAll();
+        Add(m_ClipboardEntities);
+    }
+}
+//---------------------------------------------------------------------------
 
