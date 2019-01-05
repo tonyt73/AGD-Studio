@@ -586,4 +586,17 @@ void __fastcall TfrmEditorMap::actEntityPrevExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::sbxWorkspaceMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled)
+{
+    if (WheelDelta < 0)
+    {
+        actZoomInExecute(nullptr);
+    }
+    else
+    {
+        actZoomOutExecute(nullptr);
+    }
+    Handled = true;
+}
+//---------------------------------------------------------------------------
 

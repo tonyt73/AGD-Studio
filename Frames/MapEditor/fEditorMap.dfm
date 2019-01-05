@@ -16,27 +16,27 @@ object frmEditorMap: TfrmEditorMap
     TabOrder = 0
     Layout = {
       EFBBBF3C3F786D6C2076657273696F6E3D22312E302220656E636F64696E673D
-      227574662D38223F3E0D0A3C736974656C6973743E0D0A093C73697465206964
-      3D2253454C465F53495445223E0D0A09093C7A6F6E65206B696E643D22564552
-      54223E0D0A0909093C7A6F6E65206B696E643D22484F525A222073697A653D22
-      36353722206473697A653D2231223E0D0A090909093C7A6F6E65206B696E643D
-      225441425322206163746976657461623D2230222073697A653D223630382220
-      6473697A653D22302E3632353531343430333239323138312220697373706163
-      653D2231223E0D0A09090909093C7A6F6E65206B696E643D2250414E454C2220
-      69643D226470576F726B7370616365222076697369626C653D2231222F3E0D0A
-      090909093C2F7A6F6E653E0D0A090909093C7A6F6E65206B696E643D22564552
-      54222073697A653D2233363422206473697A653D22302E333734343835353936
-      373037383139223E0D0A09090909093C7A6F6E65206B696E643D2250414E454C
-      222069643D22647053637261746368506164222076697369626C653D22312220
-      73697A653D2233303922206473697A653D22302E343734323732393330363438
-      3737222F3E0D0A09090909093C7A6F6E65206B696E643D2250414E454C222069
-      643D226470417373657473222076697369626C653D2231222073697A653D2233
-      343222206473697A653D22302E3532353732373036393335313233222F3E0D0A
-      090909093C2F7A6F6E653E0D0A0909093C2F7A6F6E653E0D0A0909093C7A6F6E
-      65206B696E643D2250414E454C222069643D226470526F6F6D53656C6563746F
-      72222076697369626C653D2230222073697A653D2232373722206473697A653D
-      22302E343235343939323331393530383435222F3E0D0A09093C2F7A6F6E653E
-      0D0A093C2F736974653E0D0A3C2F736974656C6973743E}
+      227574662D38223F3E0D0A3C736974656C6973743E0D0A093C73697465206470
+      693D223936222069643D2253454C465F53495445223E0D0A09093C7A6F6E6520
+      6B696E643D2256455254223E0D0A0909093C7A6F6E65206B696E643D22484F52
+      5A222073697A653D2236353722206473697A653D2231223E0D0A090909093C7A
+      6F6E65206B696E643D225441425322206163746976657461623D223022207369
+      7A653D2236303822206473697A653D22302E3632353531343430333239323138
+      312220697373706163653D2231223E0D0A09090909093C7A6F6E65206B696E64
+      3D2250414E454C222069643D226470576F726B7370616365222076697369626C
+      653D2231222F3E0D0A090909093C2F7A6F6E653E0D0A090909093C7A6F6E6520
+      6B696E643D2256455254222073697A653D2233363422206473697A653D22302E
+      333734343835353936373037383139223E0D0A09090909093C7A6F6E65206B69
+      6E643D2250414E454C222069643D226470536372617463685061642220766973
+      69626C653D2231222073697A653D2233303922206473697A653D22302E343734
+      3237323933303634383737222F3E0D0A09090909093C7A6F6E65206B696E643D
+      2250414E454C222069643D226470417373657473222076697369626C653D2231
+      222073697A653D2233343222206473697A653D22302E35323537323730363933
+      35313233222F3E0D0A090909093C2F7A6F6E653E0D0A0909093C2F7A6F6E653E
+      0D0A0909093C7A6F6E65206B696E643D2250414E454C222069643D226470526F
+      6F6D53656C6563746F72222076697369626C653D2230222073697A653D223237
+      3722206473697A653D22302E343235343939323331393530383435222F3E0D0A
+      09093C2F7A6F6E653E0D0A093C2F736974653E0D0A3C2F736974656C6973743E}
     object dpAssets: TLMDDockPanel
       Tag = 100
       Left = 620
@@ -328,9 +328,9 @@ object frmEditorMap: TfrmEditorMap
     object dpWorkspace: TLMDDockPanel
       Tag = 100
       Left = 6
-      Top = 27
+      Top = 28
       Width = 608
-      Height = 636
+      Height = 635
       ClientKind = dkDocument
       Buttons = [pbMaximize]
       Font.Charset = DEFAULT_CHARSET
@@ -343,95 +343,16 @@ object frmEditorMap: TfrmEditorMap
       TabOrder = 5
       Caption = 'WORKSPACE'
       OnCloseQuery = dpToolsCloseQuery
-      object panWorkspaceView: TPanel
-        Left = 81
-        Top = 0
-        Width = 527
-        Height = 636
-        Align = alClient
-        BevelOuter = bvNone
-        ShowCaption = False
-        TabOrder = 0
-        OnResize = panWorkspaceViewResize
-        object imgWorkspace: TImage
-          Left = 0
-          Top = 25
-          Width = 527
-          Height = 611
-          Align = alClient
-          PopupMenu = popWorkspace
-          OnMouseActivate = imgWorkspaceMouseActivate
-          OnMouseDown = imgWorkspaceMouseDown
-          OnMouseEnter = imgWorkspaceMouseEnter
-          OnMouseMove = imgWorkspaceMouseMove
-          OnMouseUp = imgWorkspaceMouseUp
-          ExplicitHeight = 312
-        end
-        object tbrWorkspace: TToolBar
-          Left = 0
-          Top = 0
-          Width = 527
-          Height = 25
-          ButtonHeight = 24
-          ButtonWidth = 24
-          Images = imgSmallIcons
-          TabOrder = 0
-          object btnScratchCopyTo: TToolButton
-            Left = 0
-            Top = 0
-            Action = actCopyToScratchPad
-            ParentShowHint = False
-            ShowHint = True
-          end
-          object btnScratchMoveTo: TToolButton
-            Left = 24
-            Top = 0
-            Action = actMoveToScratchPad
-            ParentShowHint = False
-            ShowHint = True
-          end
-          object ToolButton8: TToolButton
-            Left = 48
-            Top = 0
-            Width = 8
-            Caption = 'ToolButton8'
-            ImageIndex = 2
-            Style = tbsSeparator
-          end
-          object btnViewDuplicate: TToolButton
-            Left = 56
-            Top = 0
-            Action = actDuplicate
-            ParentShowHint = False
-            ShowHint = True
-          end
-          object ToolButton10: TToolButton
-            Left = 80
-            Top = 0
-            Width = 8
-            Caption = 'ToolButton10'
-            ImageIndex = 3
-            Style = tbsSeparator
-          end
-          object btnViewDelete: TToolButton
-            Left = 88
-            Top = 0
-            Action = actDelete
-            ParentShowHint = False
-            ShowHint = True
-          end
-        end
-      end
       object panToolbars: TPanel
         Left = 0
         Top = 0
         Width = 81
-        Height = 636
+        Height = 635
         Align = alLeft
         BevelOuter = bvNone
         Constraints.MaxWidth = 81
         Constraints.MinWidth = 81
-        TabOrder = 1
+        TabOrder = 0
         OnMouseEnter = imgWorkspaceMouseEnter
         object lblTools: TLabel
           Left = 0
@@ -594,6 +515,96 @@ object frmEditorMap: TfrmEditorMap
           TabOrder = 5
         end
       end
+      object sbxWorkspace: TScrollBox
+        Left = 81
+        Top = 0
+        Width = 527
+        Height = 635
+        Align = alClient
+        BorderStyle = bsNone
+        TabOrder = 1
+        OnMouseWheel = sbxWorkspaceMouseWheel
+        object panWorkspaceView: TPanel
+          Left = 0
+          Top = 0
+          Width = 527
+          Height = 635
+          Align = alClient
+          BevelOuter = bvNone
+          ShowCaption = False
+          TabOrder = 0
+          OnResize = panWorkspaceViewResize
+          object imgWorkspace: TImage
+            Left = 0
+            Top = 25
+            Width = 527
+            Height = 610
+            Align = alClient
+            PopupMenu = popWorkspace
+            OnMouseActivate = imgWorkspaceMouseActivate
+            OnMouseDown = imgWorkspaceMouseDown
+            OnMouseEnter = imgWorkspaceMouseEnter
+            OnMouseMove = imgWorkspaceMouseMove
+            OnMouseUp = imgWorkspaceMouseUp
+            ExplicitLeft = 12
+            ExplicitTop = 31
+          end
+          object tbrWorkspace: TToolBar
+            Left = 0
+            Top = 0
+            Width = 527
+            Height = 25
+            ButtonHeight = 24
+            ButtonWidth = 24
+            Images = imgSmallIcons
+            TabOrder = 0
+            object btnScratchCopyTo: TToolButton
+              Left = 0
+              Top = 0
+              Action = actCopyToScratchPad
+              ParentShowHint = False
+              ShowHint = True
+            end
+            object btnScratchMoveTo: TToolButton
+              Left = 24
+              Top = 0
+              Action = actMoveToScratchPad
+              ParentShowHint = False
+              ShowHint = True
+            end
+            object ToolButton8: TToolButton
+              Left = 48
+              Top = 0
+              Width = 8
+              Caption = 'ToolButton8'
+              ImageIndex = 2
+              Style = tbsSeparator
+            end
+            object btnViewDuplicate: TToolButton
+              Left = 56
+              Top = 0
+              Action = actDuplicate
+              ParentShowHint = False
+              ShowHint = True
+            end
+            object ToolButton10: TToolButton
+              Left = 80
+              Top = 0
+              Width = 8
+              Caption = 'ToolButton10'
+              ImageIndex = 3
+              Style = tbsSeparator
+            end
+            object btnViewDelete: TToolButton
+              Left = 88
+              Top = 0
+              Action = actDelete
+              ParentShowHint = False
+              ShowHint = True
+            end
+          end
+        end
+      end
     end
   end
   object tbrImagesEnabled: TImageList
@@ -604,7 +615,7 @@ object frmEditorMap: TfrmEditorMap
     Left = 124
     Top = 65
     Bitmap = {
-      494C0101080060000C0020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010108006000040020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000008000000060000000010020000000000000C0
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2203,7 +2214,7 @@ object frmEditorMap: TfrmEditorMap
     Left = 220
     Top = 65
     Bitmap = {
-      494C0101070060000C0020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010107006000040020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004000000001002000000000000080
       0000000000000000000000000000000000000000000000000006000000110000
       00110000000B00000011000000110000000B00000011000000110000000B0000
@@ -3492,7 +3503,7 @@ object frmEditorMap: TfrmEditorMap
     Left = 343
     Top = 91
     Bitmap = {
-      494C01010900D0000C0010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010900D000040010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000023000000330000
       0033000000330000003300000033000000330000003300000033000000330000
