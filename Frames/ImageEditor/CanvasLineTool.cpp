@@ -16,11 +16,11 @@ __fastcall CanvasLineTool::~CanvasLineTool()
 //---------------------------------------------------------------------------
 void __fastcall CanvasLineTool::Apply(Agdx::GraphicsBuffer& canvas, const TPoint& pt)
 {
-    if (IsLeftDown())
+    if (MS.Left)
     {
         DrawLine(canvas, TRect(StartPt.X, StartPt.Y, pt.X, pt.Y), true);
     }
-    else if (IsRightDown())
+    else if (MS.Right)
     {
         DrawLine(canvas, TRect(StartPt.X, StartPt.Y, pt.X, pt.Y), false);
     }

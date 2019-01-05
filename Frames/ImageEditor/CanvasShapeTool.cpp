@@ -201,15 +201,15 @@ void __fastcall CanvasShapeTool::Apply(Agdx::GraphicsBuffer& canvas, const TPoin
 {
     auto shape = Parameters.Get<int>("Shape");
     auto fill = Parameters.Get<int>("Fill");
-    if (IsLeftDown() || IsRightDown())
+    if (MS.Left || MS.Right)
     {
         switch (shape)
         {
-            case 0: DrawRectangle(canvas, pt, IsLeftDown(), fill); break;
-            case 1: DrawEllipse(canvas, pt, IsLeftDown(), fill); break;
-            case 2: DrawDiamond(canvas, pt, IsLeftDown(), fill); break;
-            case 3: DrawTriangle(canvas, pt, IsLeftDown(), fill); break;
-            case 4: DrawRightTriangle(canvas, pt, IsLeftDown(), fill); break;
+            case 0: DrawRectangle(canvas, pt, MS.Left, fill); break;
+            case 1: DrawEllipse(canvas, pt, MS.Left, fill); break;
+            case 2: DrawDiamond(canvas, pt, MS.Left, fill); break;
+            case 3: DrawTriangle(canvas, pt, MS.Left, fill); break;
+            case 4: DrawRightTriangle(canvas, pt, MS.Left, fill); break;
         }
     }
 }

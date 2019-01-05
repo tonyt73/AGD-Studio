@@ -5,6 +5,10 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
+__fastcall MouseState::MouseState()
+{
+}
+//---------------------------------------------------------------------------
 __fastcall MouseState::MouseState(TMouseButton button, const TShiftState& shiftState)
 : MouseState(shiftState)
 {

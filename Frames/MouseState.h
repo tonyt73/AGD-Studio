@@ -16,6 +16,7 @@ private:
     bool        m_Middle;
     bool        m_Right;
 public:
+            __fastcall  MouseState();
             __fastcall  MouseState(TMouseButton button, const TShiftState& shiftState);
             __fastcall  MouseState(const TShiftState& shiftState);
 
