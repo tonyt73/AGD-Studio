@@ -374,12 +374,13 @@ void __fastcall TfrmEditorMap::ShowKeysHelp()
         "Ctrl + Left MB + Move : Select group of items\r\n"
         "                        Can select multiple group while Ctrl is held down\r\n"
         "Left MB click         : Clear selection\r\n\r\n"
+        "Ctrl+D                : Duplicate the selected images\r\n\r\n"
         "Paint Tools (Pencil: 2, Line: 3, Rectangle: 4)\r\n"
         "Left MB click         : Add an image\r\n"
         "Left MB and drag      : Add multiple images defined by tool\r\n"
         "Middle MB click       : Removes any tile under the cursor\r\n"
         ", (<)                 : Change to previous image of active type\r\n"
-        ". (>)                 : Change to next image of active type\r\n\r\n"
+        ". (>)                 : Change to next image of active type\r\n\"
         "General\r\n"
         "Shift + Left MB       : Pan the window by moving the mouse\r\n"
         "Ctrl + Del            : Delete selection\r\n"
@@ -454,7 +455,6 @@ void __fastcall TfrmEditorMap::actDeleteExecute(TObject *Sender)
     {
         m_Workspace->DeleteSelection();
         m_Document->Set(actToggleSingleRoomMode->Checked ? meRoom : meMap, m_Workspace->GetEntities());
-        //TODO:m_Workspace->SetEntities(m_Document->Get(actToggleSingleRoomMode->Checked ? meRoom : meMap, m_RoomSelector->SelectedRoom));
     }
     else if (dpScratchPad == m_ActivePanel)
     {
@@ -475,7 +475,7 @@ void __fastcall TfrmEditorMap::mnuSPToggleToolbarClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::pgcAssetsChange(TObject *Sender)
 {
-    auto state = true;//pgcAssets->ActivePage == tabTiles;
+    auto state = pgcAssets->ActivePage == tabTiles;
     if (!state && (btnLine->Down || btnShape->Down))
     {
         btnPencil->Down = true;
