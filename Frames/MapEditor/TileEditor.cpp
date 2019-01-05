@@ -144,7 +144,7 @@ void __fastcall TileEditor::OnMouseDownSelectMode(TMouseButton Button, TShiftSta
             else if (m_SelectionCount > 0)
             {
                 Entity entity;
-                if (!GetEntityUnderMouse(X, Y, entity, itTile))
+                if (!GetEntityUnderMouse(X, Y, entity, itSprite) && !GetEntityUnderMouse(X, Y, entity, itObject) && !GetEntityUnderMouse(X, Y, entity, itTile))
                 {
                     // clear selection with a click on empty space
                     UnselectAll();
@@ -294,7 +294,7 @@ void __fastcall TileEditor::OnMouseMoveSelectMode(TShiftState Shift, int X, int 
                         // highlight any entity under the cursor
                         if (m_SelectionCount)
                         {
-                            UnselectAll();
+                            UnselectAll(false);
                             refresh = true;
                         }
                         // find an object that intersects the mouse
@@ -340,8 +340,8 @@ void __fastcall TileEditor::OnMouseMoveSelectMode(TShiftState Shift, int X, int 
                                 m_SelectionCount += 1;
                             }
                         }
+                        Refresh();
                     }
-                    Refresh();
                 }
                 break;
         }
@@ -886,7 +886,7 @@ void __fastcall TileEditor::Add(const EntityList& entities)
     UpdateMap();
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::UnselectAll()
+void __fastcall TileEditor::UnselectAll(bool update)
 {
     m_SelectionCount = 0;
     SelectedEntity = -1;
@@ -895,13 +895,16 @@ void __fastcall TileEditor::UnselectAll()
         e.Selected = false;
         e.Dirty = true;
     }
-    Refresh();
+    if (update)
+    {
+        Refresh();
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::SelectRoom(TSize room)
 {
     m_SelectedRoom = room;
-    UnselectAll();
+    UnselectAll(false);
     ::Messaging::Bus::Publish<RoomSelected>(RoomSelected(room));
     UpdateMap();
 }
@@ -966,7 +969,7 @@ void __fastcall TileEditor::Paste()
 {
     if (m_Mode == temSelect)
     {
-        UnselectAll();
+        UnselectAll(false);
         Add(m_ClipboardEntities);
     }
 }

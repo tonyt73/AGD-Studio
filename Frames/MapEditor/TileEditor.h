@@ -136,7 +136,7 @@ public:
     void                __fastcall  Add(const EntityList& entities);
     EntityList          __fastcall  GetSelection(bool resetToOrigin = false) const;
     void                __fastcall  DeleteSelection();
-    void                __fastcall  UnselectAll();
+    void                __fastcall  UnselectAll(bool update = true);
     void                __fastcall  Copy();
     void                __fastcall  Cut();
     void                __fastcall  Paste();
