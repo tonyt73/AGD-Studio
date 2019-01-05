@@ -578,7 +578,7 @@ void __fastcall TfrmEditorImage::actRedoExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 TPoint __fastcall TfrmEditorImage::ToImagePt(int X, int Y)
 {
-    auto x = (X / (float)imgEditor->Width) * m_ImageDocument->Width;
+    auto x = (X / (float)imgEditor->Width ) * m_ImageDocument->Width;
     auto y = (Y / (float)imgEditor->Height) * m_ImageDocument->Height;
     return TPoint(x, y);
 }

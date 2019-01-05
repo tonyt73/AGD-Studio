@@ -380,7 +380,7 @@ void __fastcall TfrmEditorMap::ShowKeysHelp()
         "Left MB and drag      : Add multiple images defined by tool\r\n"
         "Middle MB click       : Removes any tile under the cursor\r\n"
         ", (<)                 : Change to previous image of active type\r\n"
-        ". (>)                 : Change to next image of active type\r\n\"
+        ". (>)                 : Change to next image of active type\r\n"
         "General\r\n"
         "Shift + Left MB       : Pan the window by moving the mouse\r\n"
         "Ctrl + Del            : Delete selection\r\n"
