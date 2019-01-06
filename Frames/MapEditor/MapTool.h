@@ -12,7 +12,6 @@ private:
     TSize                       m_TileSize;     // the size in pixels of a tile
 
 protected:
-    String                      m_Name;
                                 // draw functions
             int     __fastcall  Snap(int value, int range) const;
             void    __fastcall  SnapToTileGrid(TPoint& pt) const;
@@ -23,7 +22,7 @@ protected:
     __property  TSize           TileSize = { read = m_TileSize };
 
 public:
-                    __fastcall  MapTool(String name);
+                    __fastcall  MapTool();
     virtual         __fastcall ~MapTool();
 
                                 // return undo string

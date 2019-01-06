@@ -3283,7 +3283,6 @@ object frmEditorMap: TfrmEditorMap
     Top = 145
     object actSelect: TAction
       Caption = 'Select'
-      Checked = True
       GroupIndex = 1
       Hint = 'Select'
       ImageIndex = 0
@@ -3301,7 +3300,6 @@ object frmEditorMap: TfrmEditorMap
     object actLine: TAction
       Tag = 1
       Caption = 'Line'
-      Enabled = False
       GroupIndex = 1
       Hint = 'Line of Tiles'
       ImageIndex = 2

@@ -6,7 +6,7 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall MapRectTool::MapRectTool()
-: MapTool("Rect")
+: MapTool()
 {
     Flags = resetOnMove | modifies;
 }
@@ -17,19 +17,29 @@ __fastcall MapRectTool::~MapRectTool()
 //---------------------------------------------------------------------------
 void __fastcall MapRectTool::Apply(EntityList& list, Entity entity, TPoint pt)
 {
-    DrawRect(list, entity, TRect(std::min(StartPt.x, LastPt.x), std::min(StartPt.y, LastPt.y), std::max(StartPt.x, LastPt.x), std::max(StartPt.y, LastPt.y)));
+    DrawRect(list, entity, TRect(StartPt.x, StartPt.y, LastPt.x, LastPt.y));
 }
 //---------------------------------------------------------------------------
 void __fastcall MapRectTool::DrawRect(EntityList& list, Entity entity, TRect Rect)
 {
     list.clear();
     SnapToTileGrid(Rect);
-    for (auto y = Rect.Top; y < Rect.Bottom; y += TileSize.cy)
+    if (MS.Ctrl)
     {
-        for (auto x = Rect.Left; x < Rect.Right; x += TileSize.cx)
+        auto size = max(abs(Rect.Width()), abs(Rect.Height()));
+        (Rect.Left < Rect.Right ) ? (Rect.Right  = Rect.Left + size) : (Rect.Right  = Rect.Left - size);
+        (Rect.Top  < Rect.Bottom) ? (Rect.Bottom = Rect.Top  + size) : (Rect.Bottom = Rect.Top  - size);
+    }
+
+    auto dx = TileSize.cx * (Rect.Width( ) >= 0 ? 1 : -1);
+    auto dy = TileSize.cy * (Rect.Height() >= 0 ? 1 : -1);
+
+    for (auto iy = 0; iy <= abs(Rect.Height() / TileSize.cy); iy += 1)
+    {
+        for (auto ix = 0; ix <= abs(Rect.Width() / TileSize.cx); ix += 1)
         {
             auto ne = entity;
-            ne.Pt = TPoint(x, y);
+            ne.Pt = TPoint(Rect.Left + (ix * dx), Rect.Top + (iy * dy));
             Set(list, ne);
         }
     }
