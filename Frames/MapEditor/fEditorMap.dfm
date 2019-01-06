@@ -412,11 +412,11 @@ object frmEditorMap: TfrmEditorMap
             ShowHint = True
             Style = tbsCheck
           end
-          object btnShape: TToolButton
+          object btnRect: TToolButton
             Tag = 5
             Left = 40
             Top = 40
-            Action = actShape
+            Action = actRect
             Grouped = True
             ParentShowHint = False
             ShowHint = True
@@ -3308,14 +3308,14 @@ object frmEditorMap: TfrmEditorMap
       ShortCut = 51
       OnExecute = actLineExecute
     end
-    object actShape: TAction
+    object actRect: TAction
       Tag = 1
-      Caption = 'Shapes'
+      Caption = 'Rectangle'
       GroupIndex = 1
       Hint = 'Rectangle of Tiles'
       ImageIndex = 3
       ShortCut = 52
-      OnExecute = actShapeExecute
+      OnExecute = actRectExecute
     end
     object actZoomIn: TAction
       Caption = 'Zoom In'

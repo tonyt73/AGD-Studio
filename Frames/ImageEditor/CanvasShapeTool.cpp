@@ -6,6 +6,7 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall CanvasShapeTool::CanvasShapeTool()
+: CanvasTool()
 {
     Flags = usesUndo | modifies | resetOnMove;
 }

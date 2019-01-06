@@ -6,8 +6,10 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall MapTool::MapTool()
-: m_TileSize(theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum)
+__fastcall MapTool::MapTool(String name)
+: Tool()
+, m_TileSize(theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum)
+, m_Name(name)
 {
 }
 //---------------------------------------------------------------------------

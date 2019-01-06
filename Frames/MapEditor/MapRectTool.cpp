@@ -6,6 +6,7 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall MapRectTool::MapRectTool()
+: MapTool("Rect")
 {
     Flags = resetOnMove | modifies;
 }

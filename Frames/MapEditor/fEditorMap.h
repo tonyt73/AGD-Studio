@@ -25,12 +25,12 @@
 #include "LMDCustomParentPanel.hpp"
 #include "LMDCustomToolBar.hpp"
 #include "LMDToolBar.hpp"
-#include "TileEditor.h"
-#include "AssetSelection.h"
+#include "Frames/MapEditor/TileEditor.h"
 #include "Project/Document.h"
 #include "Project/MapDocuments.h"
 #include "Messaging/Messaging.h"
 #include "Frames/WndProcHandlers.h"
+#include "AssetSelection.h"
 //---------------------------------------------------------------------------
 class TfrmEditorMap : public TFrame
 {
@@ -41,7 +41,7 @@ __published:    // IDE-managed Components
     TAction *actSelect;
     TAction *actPencil;
     TAction *actLine;
-    TAction *actShape;
+    TAction *actRect;
     TAction *actZoomIn;
     TAction *actZoomOut;
     TAction *actZoomReset;
@@ -71,7 +71,7 @@ __published:    // IDE-managed Components
     TToolButton *btnSelect;
     TToolButton *btnPencil;
     TToolButton *btnLine;
-    TToolButton *btnShape;
+    TToolButton *btnRect;
     TMenuItem *mnuWSCopytoScratchPad;
     TMenuItem *mnuWSMoveToScratchPad;
     TMenuItem *mnuSPCopytoWorkspace;
@@ -131,7 +131,7 @@ __published:    // IDE-managed Components
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actLineExecute(TObject *Sender);
-    void __fastcall actShapeExecute(TObject *Sender);
+    void __fastcall actRectExecute(TObject *Sender);
     void __fastcall actZoomInExecute(TObject *Sender);
     void __fastcall actZoomOutExecute(TObject *Sender);
     void __fastcall actZoomResetExecute(TObject *Sender);
@@ -175,15 +175,16 @@ __published:    // IDE-managed Components
     void __fastcall actPasteExecute(TObject *Sender);
 
 private:    // User declarations
-    ::Messaging::Registrar      m_Registrar;
-    TiledMapDocument*           m_Document;
-    std::unique_ptr<TileEditor> m_Workspace;
-    std::unique_ptr<TileEditor> m_ScratchPad;
-    std::unique_ptr<TileEditor> m_RoomSelector;
+    ::Messaging::Registrar      m_Registrar;        // the messaging registrar
+    TiledMapDocument*           m_Document;         // the map document we are editiing
+    std::unique_ptr<TileEditor> m_Workspace;        // the main workspace editor
+    std::unique_ptr<TileEditor> m_ScratchPad;       // the scratch pad editor
+    std::unique_ptr<TileEditor> m_RoomSelector;     // the room selection editor
     std::map<String, TAction*>  m_ActionMap;        // a map of actions; used by generic messaging to handle zoom in/out/reset, undo/redo
-    std::list<EraseHandler>     m_EraseHandlers;
-    TLMDDockPanel*              m_ActivePanel;
-    Agdx::ImageMap              m_ImageMap;         // a rendering of each tile, object, sprite
+    std::list<EraseHandler>     m_EraseHandlers;    // stops flicking
+    TLMDDockPanel*              m_ActivePanel;      // the active dock panel
+    Agdx::ImageMap              m_ImageMap;         // a rendering of each tile, object, sprite that is shared with all the editors
+    int                         m_LastSelectedId;   // last selected document id
 
             void    __fastcall  Initialise();
             void    __fastcall  RefreshAssets();

@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
-#include "fEditorMap.h"
+#include "Frames/MapEditor/fEditorMap.h"
 #include "Project/DocumentManager.h"
 #include "Project/EditorManager.h"
 #include "Messaging/Messaging.h"
@@ -22,6 +22,7 @@
 __fastcall TfrmEditorMap::TfrmEditorMap(TComponent* Owner)
 : TFrame(Owner)
 , m_ActivePanel(nullptr)
+, m_LastSelectedId(-1)
 {
     m_Registrar.Subscribe<Event>(OnEvent);
     m_Registrar.Subscribe<OnMapResized>(OnMapResize);
@@ -91,6 +92,7 @@ void __fastcall TfrmEditorMap::actSelectExecute(TObject *Sender)
 {
     btnSelect->Down = true;
     m_Workspace->Mode = TileEditor::temSelect;
+    m_Workspace->SelectedEntity = m_LastSelectedId;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actPencilExecute(TObject *Sender)
@@ -98,6 +100,7 @@ void __fastcall TfrmEditorMap::actPencilExecute(TObject *Sender)
     btnPencil->Down = true;
     m_Workspace->UnselectAll();
     m_Workspace->Mode = TileEditor::temPencil;
+    m_Workspace->SelectedEntity = m_LastSelectedId;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actLineExecute(TObject *Sender)
@@ -105,13 +108,15 @@ void __fastcall TfrmEditorMap::actLineExecute(TObject *Sender)
     btnLine->Down = true;
     m_Workspace->UnselectAll();
     m_Workspace->Mode = TileEditor::temLine;
+    m_Workspace->SelectedEntity = m_LastSelectedId;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actShapeExecute(TObject *Sender)
+void __fastcall TfrmEditorMap::actRectExecute(TObject *Sender)
 {
-    btnShape->Down = true;
+    btnRect->Down = true;
     m_Workspace->UnselectAll();
-    m_Workspace->Mode = TileEditor::temShape;
+    m_Workspace->Mode = TileEditor::temRect;
+    m_Workspace->SelectedEntity = m_LastSelectedId;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actZoomInExecute(TObject *Sender)
@@ -476,17 +481,18 @@ void __fastcall TfrmEditorMap::mnuSPToggleToolbarClick(TObject *Sender)
 void __fastcall TfrmEditorMap::pgcAssetsChange(TObject *Sender)
 {
     auto state = pgcAssets->ActivePage == tabTiles;
-    if (!state && (btnLine->Down || btnShape->Down))
+    if (!state && (btnLine->Down || btnRect->Down))
     {
         btnPencil->Down = true;
         actPencilExecute(Sender);
     }
     actLine->Enabled = state;
-    actShape->Enabled = state;
+    actRect->Enabled = state;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::OnEntityClick(ImageDocument* document)
 {
+    m_LastSelectedId = document->Id;
     m_Workspace->SelectedEntity = document->Id;
 }
 //---------------------------------------------------------------------------

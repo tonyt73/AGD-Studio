@@ -6,12 +6,13 @@
 #include "Graphics/Image.h"
 #include "Graphics/GraphicsMode.h"
 #include "Frames/MapEditor/MapPencilTool.h"
+#include "Frames/MapEditor/MapLineTool.h"
 #include "Frames/MapEditor/MapRectTool.h"
 //---------------------------------------------------------------------------
 class TileEditor
 {
 public:
-    enum TEMode { temSelect, temPencil, temLine, temShape };
+    enum TEMode { temSelect, temPencil, temLine, temRect };
 private:
     struct TFPoint
     {
@@ -50,23 +51,25 @@ private:
     TSize                           m_TileSize;         // the size in pixels of a tile
     TSize                           m_Rooms;            // the number of rooms across and down
     TSize                           m_SelectedRoom;     // the currently selected room
-    MouseModes                      m_MouseMode;        //
-    MouseModes                      m_PrevMouseMode;    //
-    TPoint                          m_LastMouse;        //
-    TPoint                          m_MoveMouse;        //
+    MouseModes                      m_MouseMode;        // the current state of mouse use (tool use or group select)
+    MouseModes                      m_PrevMouseMode;    // tbe previous state of mouse use
+    TPoint                          m_LastMouse;        // the last position of the mouse
+    TPoint                          m_MoveMouse;        // the current position of the mouse
     TPoint                          m_GroupSelectSrtMS; // start group select pt (Coords in Map Space)
     TPoint                          m_GroupSelectEndMS; // end group select pt (Coords in Map Space)
-    TFPoint                         m_BorderScaled;     //
+    TFPoint                         m_BorderScaled;     // the view border scaled to map space
     int                             m_Border;           // the size of a border around the tiles
     int                             m_SelectionCount;   // the number of entities selected
     unsigned int                    m_Tile0Id;          // tile 0 id
-    unsigned int                    m_SelectedEntity;    // selected entity id
+    unsigned int                    m_SelectedEntity;   // selected entity id
     bool                            m_ReadOnly;         // read only - no changes allowed - room selection only
     bool                            m_ShowSelectedRoom; // show the selected room highlighted
     bool                            m_ShowStartRoom;    // show the start room highlighted
     TPoint                          m_StartRoom;        // the location of the start room
-    MapPencilTool                   m_MapPencilTool;    //
-    MapRectTool                     m_MapRectTool;      //
+    MapPencilTool                   m_MapPencilTool;    // pencil tool - plot single entites
+    MapRectTool                     m_MapRectTool;      // rect tool - draw tiles (only) in a rectangle
+    MapLineTool                     m_MapLineTool;      // line tool - draw tiles (only) in a line
+    MapTool*                        m_ActiveMapTool;    // the active tool (from 1 of 3 above)
 
     void                __fastcall  CreateViewBitmap();
     void                __fastcall  Clear();
@@ -102,17 +105,11 @@ private:
     bool                __fastcall  GetEntityUnderMouse(int X, int Y, Entity& entity, ImageTypes imageType, bool selectIt = false);
 
     void                __fastcall  OnMouseDownSelectMode(TMouseButton Button, TShiftState Shift, int X, int Y);
-    void                __fastcall  OnMouseDownPencilMode(TMouseButton Button, TShiftState Shift, int X, int Y);
-    void                __fastcall  OnMouseDownLineMode(TMouseButton Button, TShiftState Shift, int X, int Y);
-    void                __fastcall  OnMouseDownShapeMode(TMouseButton Button, TShiftState Shift, int X, int Y);
+    void                __fastcall  OnMouseDownMapToolMode(TMouseButton Button, TShiftState Shift, int X, int Y);
     void                __fastcall  OnMouseMoveSelectMode(TShiftState Shift, int X, int Y);
-    void                __fastcall  OnMouseMovePencilMode(TShiftState Shift, int X, int Y);
-    void                __fastcall  OnMouseMoveLineMode(TShiftState Shift, int X, int Y);
-    void                __fastcall  OnMouseMoveShapeMode(TShiftState Shift, int X, int Y);
+    void                __fastcall  OnMouseMoveMapToolMode(TShiftState Shift, int X, int Y);
     void                __fastcall  OnMouseUpSelectMode(TMouseButton Button, TShiftState Shift, int X, int Y);
-    void                __fastcall  OnMouseUpPencilMode(TMouseButton Button, TShiftState Shift, int X, int Y);
-    void                __fastcall  OnMouseUpLineMode(TMouseButton Button, TShiftState Shift, int X, int Y);
-    void                __fastcall  OnMouseUpShapeMode(TMouseButton Button, TShiftState Shift, int X, int Y);
+    void                __fastcall  OnMouseUpMapToolMode(TMouseButton Button, TShiftState Shift, int X, int Y);
 
     __property  bool                IsDirty = { read = m_Dirty, write = m_Dirty };
 

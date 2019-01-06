@@ -7,7 +7,7 @@
 class MapPencilTool : public MapTool
 {
 private:
-            void    __fastcall  Apply(EntityList& list, Entity entity, TPoint pt);
+            void    __fastcall  Apply(EntityList& list, Entity entity, TPoint pt) final;
 public:
                     __fastcall  MapPencilTool();
     virtual         __fastcall ~MapPencilTool();

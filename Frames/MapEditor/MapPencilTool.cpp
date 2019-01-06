@@ -6,6 +6,7 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall MapPencilTool::MapPencilTool()
+: MapTool("Pencil")
 {
     Flags = modifies;
 }

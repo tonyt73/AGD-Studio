@@ -30,6 +30,7 @@ __fastcall TileEditor::TileEditor(TImage* const view, Agdx::ImageMap& imageMap, 
 , m_TileSize(theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum)
 , m_GraphicsMode(*(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()))
 , m_ReadOnly(readOnly)
+, m_ActiveMapTool(nullptr)
 {
     Scale = m_ScaleFactor;
 
@@ -186,30 +187,14 @@ void __fastcall TileEditor::OnMouseDownSelectMode(TMouseButton Button, TShiftSta
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::OnMouseDownPencilMode(TMouseButton Button, TShiftState Shift, int X, int Y)
+void __fastcall TileEditor::OnMouseDownMapToolMode(TMouseButton Button, TShiftState Shift, int X, int Y)
 {
     MouseState ms(Button, Shift);
-    if (m_SelectedEntity != - 1 && ms.Left)
+    if (m_SelectedEntity != - 1 && ms.Left && m_ActiveMapTool)
     {
-        m_MapPencilTool.Width  = m_ContentSize.cx;
-        m_MapPencilTool.Height = m_ContentSize.cy;
-        m_MapPencilTool.Begin(m_ToolEntities, m_SingleSelect, ViewToMap(X, Y), Shift);
-        UpdateMap();
-    }
-}
-//---------------------------------------------------------------------------
-void __fastcall TileEditor::OnMouseDownLineMode(TMouseButton Button, TShiftState Shift, int X, int Y)
-{
-}
-//---------------------------------------------------------------------------
-void __fastcall TileEditor::OnMouseDownShapeMode(TMouseButton Button, TShiftState Shift, int X, int Y)
-{
-    MouseState ms(Button, Shift);
-    if (m_SelectedEntity != - 1 && ms.Left)
-    {
-        m_MapRectTool.Width  = m_ContentSize.cx;
-        m_MapRectTool.Height = m_ContentSize.cy;
-        m_MapRectTool.Begin(m_ToolEntities, m_SingleSelect, ViewToMap(X, Y), Shift);
+        m_ActiveMapTool->Width  = m_ContentSize.cx;
+        m_ActiveMapTool->Height = m_ContentSize.cy;
+        m_ActiveMapTool->Begin(m_ToolEntities, m_SingleSelect, ViewToMap(X, Y), Shift);
         UpdateMap();
     }
 }
@@ -232,13 +217,9 @@ void __fastcall TileEditor::OnMouseDown(TMouseButton Button, TShiftState Shift, 
                 OnMouseDownSelectMode(Button, Shift, X, Y);
                 break;
             case temPencil:
-                OnMouseDownPencilMode(Button, Shift, X, Y);
-                break;
             case temLine:
-                OnMouseDownLineMode(Button, Shift, X, Y);
-                break;
-            case temShape:
-                OnMouseDownShapeMode(Button, Shift, X, Y);
+            case temRect:
+                OnMouseDownMapToolMode(Button, Shift, X, Y);
                 break;
         }
     }
@@ -348,11 +329,12 @@ void __fastcall TileEditor::OnMouseMoveSelectMode(TShiftState Shift, int X, int 
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::OnMouseMovePencilMode(TShiftState Shift, int X, int Y)
+void __fastcall TileEditor::OnMouseMoveMapToolMode(TShiftState Shift, int X, int Y)
 {
     MouseState ms(Shift);
     if (!ReadOnly && m_SelectedEntity != - 1 && !ms.Left)
     {
+        // draw a single entity as a cursor
         m_ToolEntities.clear();
         m_SingleSelect.Pt = ViewToMap(X, Y);
         auto x = Snap(std::max(0L, std::min(m_SingleSelect.Pt.x, m_ContentSize.cx - m_TileSize.cx)), m_TileSize.cx);
@@ -361,33 +343,10 @@ void __fastcall TileEditor::OnMouseMovePencilMode(TShiftState Shift, int X, int 
         m_ToolEntities.push_back(m_SingleSelect);
         UpdateMap();
     }
-    else if (m_SelectedEntity != - 1 && ms.Left)
+    else if (m_SelectedEntity != - 1 && ms.Left && m_ActiveMapTool)
     {
-        m_MapPencilTool.Move(m_ToolEntities, m_SingleSelect, ViewToMap(X, Y), Shift);
-        UpdateMap();
-    }
-}
-//---------------------------------------------------------------------------
-void __fastcall TileEditor::OnMouseMoveLineMode(TShiftState Shift, int X, int Y)
-{
-}
-//---------------------------------------------------------------------------
-void __fastcall TileEditor::OnMouseMoveShapeMode(TShiftState Shift, int X, int Y)
-{
-    MouseState ms(Shift);
-    if (!ReadOnly && m_SelectedEntity != - 1 && !ms.Left)
-    {
-        m_ToolEntities.clear();
-        m_SingleSelect.Pt = ViewToMap(X, Y);
-        auto x = Snap(std::max(0L, std::min(m_SingleSelect.Pt.x, m_ContentSize.cx - m_TileSize.cx)), m_TileSize.cx);
-        auto y = Snap(std::max(0L, std::min(m_SingleSelect.Pt.y, m_ContentSize.cy - m_TileSize.cy)), m_TileSize.cy);
-        m_SingleSelect.Pt = TPoint(x, y);
-        m_ToolEntities.push_back(m_SingleSelect);
-        UpdateMap();
-    }
-    else if (m_SelectedEntity != - 1 && ms.Left)
-    {
-        m_MapRectTool.Move(m_ToolEntities, m_SingleSelect, ViewToMap(X, Y), Shift);
+        // draw the tool entity
+        m_ActiveMapTool->Move(m_ToolEntities, m_SingleSelect, ViewToMap(X, Y), Shift);
         UpdateMap();
     }
 }
@@ -411,13 +370,9 @@ void __fastcall TileEditor::OnMouseMove(TShiftState Shift, int X, int Y)
                 OnMouseMoveSelectMode(Shift, X, Y);
                 break;
             case temPencil:
-                OnMouseMovePencilMode(Shift, X, Y);
-                break;
             case temLine:
-                OnMouseMoveLineMode(Shift, X, Y);
-                break;
-            case temShape:
-                OnMouseMoveShapeMode(Shift, X, Y);
+            case temRect:
+                OnMouseMoveMapToolMode(Shift, X, Y);
                 break;
         }
     }
@@ -453,33 +408,11 @@ void __fastcall TileEditor::OnMouseUpSelectMode(TMouseButton Button, TShiftState
     Refresh();
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::OnMouseUpPencilMode(TMouseButton Button, TShiftState Shift, int X, int Y)
+void __fastcall TileEditor::OnMouseUpMapToolMode(TMouseButton Button, TShiftState Shift, int X, int Y)
 {
-    if (m_SelectedEntity != - 1)
+    if (m_SelectedEntity != - 1 && m_ActiveMapTool)
     {
-        m_MapPencilTool.End(m_ToolEntities, m_SingleSelect, ViewToMap(X, Y));
-        ReplaceEntities();
-    }
-    m_ToolEntities.clear();
-    UpdateMap();
-}
-//---------------------------------------------------------------------------
-void __fastcall TileEditor::OnMouseUpLineMode(TMouseButton Button, TShiftState Shift, int X, int Y)
-{
-    if (m_SelectedEntity != - 1)
-    {
-        m_MapPencilTool.End(m_ToolEntities, m_SingleSelect, ViewToMap(X, Y));
-        ReplaceEntities();
-    }
-    m_ToolEntities.clear();
-    UpdateMap();
-}
-//---------------------------------------------------------------------------
-void __fastcall TileEditor::OnMouseUpShapeMode(TMouseButton Button, TShiftState Shift, int X, int Y)
-{
-    if (m_SelectedEntity != - 1)
-    {
-        m_MapRectTool.End(m_ToolEntities, m_SingleSelect, ViewToMap(X, Y));
+        m_ActiveMapTool->End(m_ToolEntities, m_SingleSelect, ViewToMap(X, Y));
         ReplaceEntities();
     }
     m_ToolEntities.clear();
@@ -500,13 +433,9 @@ void __fastcall TileEditor::OnMouseUp(TMouseButton Button, TShiftState Shift, in
                 OnMouseUpSelectMode(Button, Shift, X, Y);
                 break;
             case temPencil:
-                OnMouseUpPencilMode(Button, Shift, X, Y);
-                break;
             case temLine:
-                OnMouseUpLineMode(Button, Shift, X, Y);
-                break;
-            case temShape:
-                OnMouseUpShapeMode(Button, Shift, X, Y);
+            case temRect:
+                OnMouseUpMapToolMode(Button, Shift, X, Y);
                 break;
         }
     }
@@ -577,6 +506,13 @@ void __fastcall TileEditor::SetMode(TEMode mode)
 {
     m_Mode = mode;
     m_ToolEntities.clear();
+    m_ActiveMapTool = nullptr;
+    if (m_Mode == temPencil)
+        m_ActiveMapTool = &m_MapPencilTool;
+    else if (m_Mode == temLine)
+        m_ActiveMapTool = &m_MapLineTool;
+    else if (m_Mode == temRect)
+        m_ActiveMapTool = &m_MapRectTool;
     UpdateMap();
 }
 //---------------------------------------------------------------------------

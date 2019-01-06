@@ -6,6 +6,7 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall MapLineTool::MapLineTool()
+: MapTool("Line")
 {
     Flags = resetOnMove | modifies;
 }
