@@ -39,6 +39,9 @@ Themes:
   * Move the ```Config``` folder to ```%AppData%```
     * Hint: Copy the above uri and paste into Windows Explorer
   * Rename the ```Config``` folder to ```AGDX Studio```
+* Install the test project files
+  * Open up the location you cloned this repo to
+  * Move the contents of the ```Public Documents``` folder to ```C:\Users\Public\Documents\```
 * Launch the Rad-Studio IDE
   * Open up the location you cloned this repo to
   * Open the AGDX Studio.cproj file
