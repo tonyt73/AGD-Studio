@@ -2,7 +2,8 @@
 #include "agdx.pch.h"
 #pragma hdrstop
 //---------------------------------------------------------------------------
-#include "MostRecentlyUsedList.h"
+#include "Project/MostRecentlyUsedList.h"
+#include "System/Guard.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -25,12 +26,14 @@ void __fastcall MostRecentlyUsedList::Load()
     auto file = System::File::Combine(System::Path::Application, "Mru.json");
     if (System::File::Exists(file))
     {
+        GUARD(m_Loading);
         System::JsonFile::Load(file);
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall MostRecentlyUsedList::Save()
 {
+    if (m_Loading) return;
     auto file = System::Path::Application + "Mru.json";
     Open(file); // {
     ArrayStart("List"); // [
@@ -50,18 +53,21 @@ void __fastcall MostRecentlyUsedList::OnEndObject(const String& object)
 {
     if (object == "List[]")
     {
-        Add(m_Loader.Name, m_Loader.Path, m_Loader.Machine);
+        Add(m_Loader.Name, m_Loader.Path, m_Loader.Machine, false);
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall MostRecentlyUsedList::Add(const String& name, const String& path, const String& machine)
+void __fastcall MostRecentlyUsedList::Add(const String& name, const String& path, const String& machine, bool addToFront)
 {
     if (m_MostRecentlyUsedList.size() > 4)
     {
         m_MostRecentlyUsedList.pop_back();
     }
     auto relativePath = System::Path::GetFolderRelativeTo(System::Path::lpDocuments, path);
-    m_MostRecentlyUsedList.push_front(MostRecentlyUsedItem(name, relativePath, machine));
+    if (addToFront)
+        m_MostRecentlyUsedList.push_front(MostRecentlyUsedItem(name, relativePath, machine));
+    else
+        m_MostRecentlyUsedList.push_back(MostRecentlyUsedItem(name, relativePath, machine));
     Save();
 }
 //---------------------------------------------------------------------------

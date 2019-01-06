@@ -7,9 +7,9 @@
 class MostRecentlyUsedItem
 {
 public:
-    String  Name;
-    String  Path;
-    String  Machine;
+    String      Name;
+    String      Path;
+    String      Machine;
 
     MostRecentlyUsedItem()
     {
@@ -30,6 +30,7 @@ class MostRecentlyUsedList : public System::JsonFile
 private:
     MRUList                 m_MostRecentlyUsedList;
     MostRecentlyUsedItem    m_Loader;
+    bool                    m_Loading;
 
     void        __fastcall  Save();
     void        __fastcall  Load();
@@ -39,7 +40,7 @@ public:
                 __fastcall  MostRecentlyUsedList();
                 __fastcall ~MostRecentlyUsedList();
 
-    void        __fastcall  Add(const String& name, const String& path, const String& machine);
+    void        __fastcall  Add(const String& name, const String& path, const String& machine, bool addToFront = true);
     void        __fastcall  Remove(const String& name, const String& path);
     cMRUList    __fastcall  GetList() const;
 };

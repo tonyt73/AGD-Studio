@@ -10,7 +10,7 @@
 //---------------------------------------------------------------------------
 #include "Project/DocumentManager.h"
 #include "Project/GameSourceBuilder.h"
-#include "MostRecentlyUsedList.h"
+#include "Project/MostRecentlyUsedList.h"
 //---------------------------------------------------------------------------
 class ProjectManager
 {
