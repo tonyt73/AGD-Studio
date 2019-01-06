@@ -15,10 +15,10 @@ __fastcall MapPencilTool::~MapPencilTool()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall MapPencilTool::Apply(EntityList& list, Entity entity, TPoint pt)
+void __fastcall MapPencilTool::Apply(EntityList& list, Entity entity)
 {
-    SnapToTileGrid(pt);
-    entity.Pt = pt;
+    SnapToTileGrid(LastPt);
+    entity.Pt = LastPt;
     Set(list, entity);
 }
 //---------------------------------------------------------------------------

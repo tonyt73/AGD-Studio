@@ -15,9 +15,8 @@ __fastcall MapLineTool::~MapLineTool()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall MapLineTool::Apply(EntityList& list, Entity entity, TPoint pt)
+void __fastcall MapLineTool::Apply(EntityList& list, Entity entity)
 {
-    list.clear();
     auto rect = TRect(StartPt.x, StartPt.y, LastPt.x, LastPt.y);
     SnapToTileGrid(rect);
     // change from tile space to unit space

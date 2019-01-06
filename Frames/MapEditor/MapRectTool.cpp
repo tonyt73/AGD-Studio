@@ -15,14 +15,13 @@ __fastcall MapRectTool::~MapRectTool()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall MapRectTool::Apply(EntityList& list, Entity entity, TPoint pt)
+void __fastcall MapRectTool::Apply(EntityList& list, Entity entity)
 {
     DrawRect(list, entity, TRect(StartPt.x, StartPt.y, LastPt.x, LastPt.y));
 }
 //---------------------------------------------------------------------------
 void __fastcall MapRectTool::DrawRect(EntityList& list, Entity entity, TRect Rect)
 {
-    list.clear();
     SnapToTileGrid(Rect);
     if (MS.Ctrl)
     {

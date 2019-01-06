@@ -60,26 +60,28 @@ void __fastcall MapTool::Set(EntityList& list, const Entity& entity)
 String __fastcall MapTool::Begin(EntityList& list, Entity entity, const TPoint& pt, const TShiftState& buttons)
 {
     Tool::Begin(pt, buttons);
-    Apply(list, entity, pt);
+    Apply(list, entity);
     return String();
 }
 //---------------------------------------------------------------------------
 void __fastcall MapTool::Move(EntityList& list, Entity entity, const TPoint& pt, const TShiftState& buttons)
 {
+    Tool::Move(pt, buttons);
+    if (Flags & resetOnMove)
+        list.clear();
     if (entity.Image->SubType != "Tile")
         return;
-    Tool::Move(pt, buttons);
     if (!IsDrawing) return;
-    Apply(list, entity, pt);
+    Apply(list, entity);
 }
 //---------------------------------------------------------------------------
 String __fastcall MapTool::End(EntityList& list, Entity entity, const TPoint& pt)
 {
+    Tool::End(pt);
     if (pt != LastPt)
     {
-        Apply(list, entity, pt);
+        Apply(list, entity);
     }
-    Tool::End(pt);
     return String();
 }
 //---------------------------------------------------------------------------

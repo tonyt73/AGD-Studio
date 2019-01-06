@@ -16,7 +16,7 @@ protected:
             int     __fastcall  Snap(int value, int range) const;
             void    __fastcall  SnapToTileGrid(TPoint& pt) const;
             void    __fastcall  SnapToTileGrid(TRect& rect) const;
-    virtual void    __fastcall  Apply(EntityList& list, Entity entity, TPoint pt) = 0;
+    virtual void    __fastcall  Apply(EntityList& list, Entity entity) = 0;
             void    __fastcall  Set(EntityList& list, const Entity& entity);
 
     __property  TSize           TileSize = { read = m_TileSize };
