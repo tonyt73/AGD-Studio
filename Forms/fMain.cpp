@@ -25,6 +25,8 @@ void __fastcall TfrmMain::FormCreate(TObject *Sender)
     Application->OnMessage = AppMessage;
     theProjectManager.Initialise(m_IDEDialog->tvProject);
     // check command line parameters
+    auto p0 = ParamStr(0);
+    auto p1 = ParamStr(1);
     if (!System::File::Exists(ParamStr(1)))
     {
         // create the welcome screen
@@ -46,8 +48,9 @@ void __fastcall TfrmMain::FormCreate(TObject *Sender)
     {
         Caption = ApplicationName;
         ShowIDE();
+        auto path = TDirectory::GetCurrentDirectory();
         auto project = System::File::NameWithExtension(ParamStr(1));
-        theProjectManager.Open(project);
+        theProjectManager.Open(System::File::Combine(path, project));
     }
     // TODO: Remove: Used to generate initial JSON config files
     //auto pw = std::make_unique<PaletteWriter>();

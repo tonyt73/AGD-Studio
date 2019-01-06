@@ -7,6 +7,7 @@
 #include "Project/ProjectDocument.h"
 #include "Project/FileDefinitions.h"
 #include "Settings/Settings.h"
+#include "Messaging/Event.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -118,6 +119,7 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::Open(const String& file)
 {
+    ::Messaging::Bus::Publish<MessageEvent>(MessageEvent(file, etInformation));
     Close();
     auto name = System::File::NameWithoutExtension(file);
     System::Path::ProjectName = name;

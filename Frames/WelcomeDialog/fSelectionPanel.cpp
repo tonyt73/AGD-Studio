@@ -1,6 +1,7 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
 #include "fSelectionPanel.h"
+#include "System/File.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -38,7 +39,7 @@ void __fastcall TSelectionPanelFrame::SetName(String name)
 void __fastcall TSelectionPanelFrame::SetPath(String path)
 {
     m_Path = path;
-    lblProjectPath->Caption = path;
+    lblProjectPath->Caption = System::File::PathOf(path);
 }
 //---------------------------------------------------------------------------
 void __fastcall TSelectionPanelFrame::SetMachine(String machine)
