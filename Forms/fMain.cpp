@@ -25,8 +25,6 @@ void __fastcall TfrmMain::FormCreate(TObject *Sender)
     Application->OnMessage = AppMessage;
     theProjectManager.Initialise(m_IDEDialog->tvProject);
     // check command line parameters
-    auto p0 = ParamStr(0);
-    auto p1 = ParamStr(1);
     if (!System::File::Exists(ParamStr(1)))
     {
         // create the welcome screen
