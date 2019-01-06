@@ -1,0 +1,31 @@
+; Created by AGDv import
+;EVENT SPRITETYPE3
+IF C = 0
+    IF SETTINGA = 0
+        IF CANGOLEFT
+            SPRITELEFT
+            SUBTRACT 16 FROM X
+            IF CANGODOWN
+                LET SETTINGA = 1
+            ENDIF
+            ADD 16 TO X
+        ELSE
+            LET SETTINGA = 1
+        ENDIF
+    ELSE
+        IF CANGORIGHT
+            SPRITERIGHT
+            ADD 16 TO X
+            IF CANGODOWN
+                LET SETTINGA = 0
+            ENDIF
+            SUBTRACT 16 FROM X
+        ELSE
+            LET SETTINGA = 0
+        ENDIF
+    ENDIF
+ENDIF
+ANIMATE
+IF COLLISION 0
+    KILL
+ENDIF

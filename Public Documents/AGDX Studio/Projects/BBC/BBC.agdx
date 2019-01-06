@@ -1,0 +1,146 @@
+{
+    "Project": {
+        "Version": "0.1",
+        "Author": "Tony Thompson",
+        "Description": "",
+        "Machine": "BBC Micro 320x256 4 Colour",
+        "Window": {
+            "X": 0,
+            "Y": 0,
+            "Width": 32,
+            "Height": 24
+        }
+    },
+    "Files": [
+        {
+            "Name": "Tile 1.json",
+            "Type": "Image",
+            "SubType": "Tile"
+        },
+        {
+            "Name": "Tile 2.json",
+            "Type": "Image",
+            "SubType": "Tile"
+        },
+        {
+            "Name": "Tile Map.json",
+            "Type": "Map",
+            "SubType": "Tiled"
+        },
+        {
+            "Name": "Game.agd",
+            "Type": "Text",
+            "SubType": "AGD"
+        },
+        {
+            "Name": "Messages.txt",
+            "Type": "Text",
+            "SubType": "Message"
+        },
+        {
+            "Name": "Sound effects.sfx",
+            "Type": "Text",
+            "SubType": "SoundFx"
+        },
+        {
+            "Name": "Player control.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Sprite type 1.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Sprite type 2.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Sprite type 3.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Sprite type 4.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Sprite type 5.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Sprite type 6.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Sprite type 7.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Sprite type 8.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Game initialisation.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Initialise sprite.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Kill player.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Introduction menu.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Main loop 1.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Main loop 2.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Restart screen.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Fell too far.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Lost game.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Completed game.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "New high score.event",
+            "Type": "Text",
+            "SubType": "Event"
+        }
+    ]
+}

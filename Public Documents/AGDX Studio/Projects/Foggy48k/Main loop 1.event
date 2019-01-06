@@ -1,0 +1,50 @@
+; Created by AGDv import
+;EVENT MAINLOOP1
+ADD 1 TO A
+IF A > 2
+    LET A = 0
+ENDIF
+IF H = 1
+    IF GOT 12
+        LET E = Y
+        LET F = X
+        LET Y = 40
+        LET X = 88
+        PUT X Y 12
+        LET Y = E
+        LET X = F
+        ADD 1 TO H
+    ENDIF
+ENDIF
+IF I = 1
+    IF GOT 13
+        LET E = Y
+        LET F = X
+        LET Y = 8
+        LET X = 24
+        PUT X Y 13
+        LET Y = E
+        LET X = F
+        ADD 1 TO I
+    ENDIF
+ENDIF
+IF SCREEN 27
+    IF G = 0
+        COLOUR 69
+        LET LINE 2
+        LET COLUMN 3
+        MESSAGE 11
+        COLOUR 70
+        LET LINE 18
+        LET COLUMN 12
+        MESSAGE 20
+        ADD 1 TO G
+        DELAY 25
+    ENDIF
+ENDIF
+IF SCREEN 27
+    WAITKEY
+    ENDGAME
+ENDIF
+; warning - ENDIF without IF?
+ENDIF

@@ -1,0 +1,200 @@
+; Created by AGDv import
+;EVENT SPRITETYPE2
+IF A 0
+    ANIMATE
+ENDIF
+IF COLLISION 0
+    IF KEY FIRE3
+        INV 9
+        SILENCE
+        LET E = Y
+        LET F = X
+        IF SCREEN 0
+            IF OPT 0
+                LET LINE 8
+                LET COLUMN 28
+                PUTBLOCK 0
+                PUTBLOCK 0
+                LET LINE 9
+                LET COLUMN 28
+                PUTBLOCK 0
+                PUTBLOCK 0
+                BEEP 80
+                REMOVE
+            ENDIF
+        ENDIF
+        IF SCREEN 11
+            IF OPT 5
+                LET LINE 2
+                LET COLUMN 20
+                PUTBLOCK 0
+                PUTBLOCK 0
+                LET LINE 3
+                LET COLUMN 20
+                PUTBLOCK 0
+                PUTBLOCK 0
+                BEEP 60
+                REMOVE
+            ENDIF
+        ENDIF
+        IF SCREEN 4
+            IF OPT 6
+                COLOUR 71
+                LET LINE 2
+                LET COLUMN 11
+                PUTBLOCK 21
+                PUTBLOCK 22
+                LET LINE 3
+                LET COLUMN 11
+                PUTBLOCK 21
+                PUTBLOCK 22
+                BEEP 60
+                REMOVE
+                LET Y = 136
+                LET X = 24
+                PUT X Y 6
+            ENDIF
+        ENDIF
+        IF SCREEN 9
+            IF OPT 8
+                LET LINE 4
+                LET COLUMN 2
+                PUTBLOCK 0
+                PUTBLOCK 0
+                LET LINE 5
+                LET COLUMN 2
+                PUTBLOCK 0
+                PUTBLOCK 0
+                BEEP 45
+                REMOVE
+                LET Y = 136
+                LET X = 24
+                PUT X Y 8
+            ENDIF
+        ENDIF
+        IF SCREEN 20
+            IF OPT 15
+                LET LINE 4
+                LET COLUMN 8
+                PUTBLOCK 60
+                LET LINE 5
+                LET COLUMN 8
+                PUTBLOCK 61
+                BEEP 80
+                REMOVE
+                LET Y = 8
+                LET X = 216
+                PUT X Y 15
+            ENDIF
+        ENDIF
+        IF SCREEN 13
+            IF OPT 7
+                LET LINE 17
+                LET COLUMN 14
+                PUTBLOCK 0
+                PUTBLOCK 0
+                BEEP 45
+                REMOVE
+                LET Y = 48
+                LET X = 216
+                PUT X Y 7
+            ENDIF
+        ENDIF
+        IF SCREEN 14
+            IF OPT 11
+                LET LINE 15
+                LET COLUMN 7
+                PUTBLOCK 56
+                BEEP 80
+                REMOVE
+                LET Y = 136
+                LET X = 24
+                PUT X Y 11
+            ENDIF
+        ENDIF
+        IF SCREEN 5
+            IF OPT 10
+                LET E = Y
+                LET F = X
+                LET Y = 72
+                LET X = 176
+                PUT X Y 10
+                BEEP 60
+                REMOVE
+                LET X = F
+                LET Y = E
+                DELAY 75
+                ADD 24 TO X
+                PUT X Y 14
+                LET X = F
+                BEEP 70
+            ENDIF
+        ENDIF
+        IF SCREEN 14
+            IF OPT 14
+                LET LINE = 9
+                LET COLUMN = 11
+                PUTBLOCK 55
+                PUTBLOCK 72
+                PUTBLOCK 73
+                BEEP 60
+                REMOVE
+                LET Y = 136
+                LET X = 24
+                PUT X Y 14
+            ENDIF
+        ENDIF
+        IF SCREEN 16
+            IF OPT 9
+                LET Y = 72
+                LET X = 120
+                PUT X Y 9
+                BEEP 60
+                REMOVE
+                DELAY 50
+                BEEP 80
+                LET Y = 128
+                LET X = 168
+                PUT X Y 2
+            ENDIF
+        ENDIF
+        IF SCREEN 15
+            IF OPT 17
+                LET LINE 15
+                LET COLUMN 20
+                PUTBLOCK 52
+                PUTBLOCK 52
+                BEEP 60
+                REMOVE
+                LET Y = 136
+                LET X = 24
+                PUT X Y 17
+            ENDIF
+        ENDIF
+        IF SCREEN 23
+            IF OPT 18
+                LET LINE 5
+                LET COLUMN 24
+                PUTBLOCK 0
+                BEEP 45
+                DELAY 50
+                LET LINE 6
+                LET COLUMN 24
+                PUTBLOCK 0
+                BEEP 45
+                REMOVE
+            ENDIF
+        ENDIF
+        IF SCREEN 10
+            IF OPT 16
+                LET LINE 4
+                LET COLUMN 17
+                PUTBLOCK 0
+                BEEP 45
+                REMOVE
+            ENDIF
+        ENDIF
+        LET Y = E
+        LET X = F
+    ENDIF
+ENDIF

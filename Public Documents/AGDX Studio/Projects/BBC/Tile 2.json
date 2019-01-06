@@ -1,0 +1,18 @@
+{
+    "Document": {
+        "RefId": 2
+    },
+    "Image": {
+        "Width": 8,
+        "Height": 8,
+        "Frames": [
+            "51555155515500005545554555455545"
+        ],
+        "Layers": [
+            {
+                "Name": "blocktype",
+                "Data": "2"
+            }
+        ]
+    }
+}
