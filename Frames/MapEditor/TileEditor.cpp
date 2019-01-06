@@ -560,9 +560,9 @@ void __fastcall TileEditor::DrawGrids() const
     auto Canvas = m_View->Picture->Bitmap->Canvas;
     Canvas->Pen->Style = psSolid;
 
-    auto xs =  m_Border - (m_MapOffsetMS.X * m_Scale.x);
+    auto xs =  (m_BorderScaled.x - m_MapOffsetMS.X) * m_Scale.x;
     auto xe = xs + (m_ContentSize.cx * m_Scale.x);
-    auto ys =  m_Border - (m_MapOffsetMS.Y * m_Scale.y);
+    auto ys =  (m_BorderScaled.y - m_MapOffsetMS.Y) * m_Scale.y;
     auto ye = ys + (m_ContentSize.cy * m_Scale.y);
     if (m_UsesGridTile && m_ShowGridTile)
     {
@@ -626,9 +626,10 @@ void __fastcall TileEditor::DrawEntities(int filters)
              draw &= (((filters & edfFirstTile) == edfFirstTile) && (entity.Image->ImageType == itTile && entity.Image->IsFirstOfType())) || (((filters & edfFirstTile) == 0) && !(entity.Image->ImageType == itTile && entity.Image->IsFirstOfType()));
         if (draw)
         {
-            auto pt = TPoint(m_BorderScaled.x, m_BorderScaled.y) + entity.Pt;
+            auto pt = entity.Pt;
             pt.x = Snap(pt.x, m_TileSize.cx);
             pt.y = Snap(pt.y, m_TileSize.cx);
+            pt += m_BorderScaled;
             m_ImageMap[entity.Id]->Draw(pt, m_Content.get(), entity.Selected);
             entity.Clean();
         }
@@ -641,11 +642,7 @@ void __fastcall TileEditor::DrawToolEntities()
     {
         for (auto& entity : m_ToolEntities)
         {
-            auto pt = TPoint(m_BorderScaled.x, m_BorderScaled.y);
-            auto x = Snap(std::max(0L, std::min(pt.x, m_ContentSize.cx - m_TileSize.cx)), m_TileSize.cx);
-            auto y = Snap(std::max(0L, std::min(pt.y, m_ContentSize.cy - m_TileSize.cy)), m_TileSize.cy);
-            m_SingleSelect.Pt = TPoint(x, y);
-            m_ImageMap[entity.Id]->Draw(entity.Pt + pt, m_Content.get(), false);
+            m_ImageMap[entity.Id]->Draw(entity.Pt + m_BorderScaled, m_Content.get(), false);
             entity.Clean();
         }
     }

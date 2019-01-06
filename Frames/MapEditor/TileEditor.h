@@ -57,7 +57,7 @@ private:
     TPoint                          m_MoveMouse;        // the current position of the mouse
     TPoint                          m_GroupSelectSrtMS; // start group select pt (Coords in Map Space)
     TPoint                          m_GroupSelectEndMS; // end group select pt (Coords in Map Space)
-    TFPoint                         m_BorderScaled;     // the view border scaled to map space
+    TPoint                          m_BorderScaled;     // the view border scaled to map space
     int                             m_Border;           // the size of a border around the tiles
     int                             m_SelectionCount;   // the number of entities selected
     unsigned int                    m_Tile0Id;          // tile 0 id
