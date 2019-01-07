@@ -272,6 +272,10 @@ void __fastcall TfrmEditorMap::OnEvent(const Event& event)
         m_RoomSelector->SetEntities(m_Document->Get(meMap));
         m_RoomSelector->UpdateMap();
     }
+    else if (event.Id == "document.added")
+    {
+        RefreshAssets();
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::OnRoomSelected(const RoomSelected& event)
