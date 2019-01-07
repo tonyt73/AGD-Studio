@@ -204,6 +204,9 @@ void __fastcall TfrmEditorMap::imgScratchPadMouseUp(TObject *Sender, TMouseButto
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::RefreshAssets()
 {
+    assetsTiles->Visible = false;
+    assetsSprites->Visible = false;
+    assetsObjects->Visible = false;
     assetsTiles->Clear();
     assetsSprites->Clear();
     assetsObjects->Clear();
@@ -235,6 +238,9 @@ void __fastcall TfrmEditorMap::RefreshAssets()
             assetsObjects->Add(img);
         }
     }
+    assetsTiles->Visible = true;
+    assetsSprites->Visible = true;
+    assetsObjects->Visible = true;
     assetsTiles->sbxListResize(nullptr);
     assetsSprites->sbxListResize(nullptr);
     assetsObjects->sbxListResize(nullptr);

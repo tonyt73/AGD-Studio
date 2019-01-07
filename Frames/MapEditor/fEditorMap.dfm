@@ -546,8 +546,7 @@ object frmEditorMap: TfrmEditorMap
             OnMouseEnter = imgWorkspaceMouseEnter
             OnMouseMove = imgWorkspaceMouseMove
             OnMouseUp = imgWorkspaceMouseUp
-            ExplicitLeft = 12
-            ExplicitTop = 31
+            ExplicitTop = 26
           end
           object tbrWorkspace: TToolBar
             Left = 0
