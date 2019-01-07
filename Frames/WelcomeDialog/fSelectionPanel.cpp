@@ -1,7 +1,9 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
+#include <Vcl.Imaging.pngimage.hpp>
 #include "fSelectionPanel.h"
 #include "System/File.h"
+#include "Project/MachineConfig.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -46,6 +48,21 @@ void __fastcall TSelectionPanelFrame::SetMachine(String machine)
 {
     m_Machine = machine;
     lblMachine->Caption = machine;
+
+    auto mc = std::make_unique<MachineConfig>(machine);
+    mc->Load(machine);
+    if (mc->Image != "")
+    {
+        auto file = System::File::Combine(System::Path::Application, mc->Image);
+        if (System::File::Exists(file))
+        {
+            auto image = std::make_unique<TPngImage>();
+            image->LoadFromFile(file);
+            imgMachine->Picture->Assign(image.get());
+            imgMachine->Visible = true;
+        }
+    }
+
 }
 //---------------------------------------------------------------------------
 void __fastcall TSelectionPanelFrame::SetSelected(bool state)
@@ -95,6 +112,10 @@ void __fastcall TSelectionPanelFrame::UpdateControl()
     panProjectInfo->Color = color;
     panRemove->Color = color;
     panRemove->Visible = m_Highlighted;
+    if (imgMachine->Visible)
+    {
+        imgMachine->Left = Width - 138;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TSelectionPanelFrame::Tick()
