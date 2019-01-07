@@ -25,14 +25,14 @@ typedef struct WindowInfo
 class ProjectDocument : public Document
 {
 private:
-                String              m_Version;
-                String              m_Author;
-                String              m_Description;
+                String              m_Version;      // version of the project
+                String              m_Author;       // the game author
+                String              m_Description;  // a description of their game
                 String              m_MachineName;  // json loader
-     std::unique_ptr<MachineConfig> m_MachineConfig;
+     std::unique_ptr<MachineConfig> m_MachineConfig;// the machine this project uses
                 FileInfo            m_FileInfo;     // used by the json loader
-                FileList            m_Files;
-                WindowInfo          m_Window;
+                FileList            m_Files;        // a list of files the project uses
+                WindowInfo          m_Window;       // the window size of the game
 
             String      __fastcall  GetFile() const;
             void        __fastcall  SetName(String name);
