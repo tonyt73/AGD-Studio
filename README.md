@@ -34,6 +34,10 @@ Themes:
   * http://files.lmd.de/downloads/lmd2018vcl/setupvcl18td25.zip
   * Unzip and run the Setup application
   * Click Next to all questions to Install all defaults
+* Install Rad Studio Get It UI styles
+  * Launch GitIt from the Tools menu
+  * Select the Styles radio button on the left
+  * Install all VCL styles
 * Install the Application Configuration files
   * Open up the location you cloned this repo to
   * Move the ```Config``` folder to ```%AppData%```
