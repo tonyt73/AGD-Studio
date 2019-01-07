@@ -19,7 +19,7 @@ __fastcall TSelectionPanelFrame::TSelectionPanelFrame(TComponent* Owner)
     panRemove->Color = StyleServices()->GetStyleColor(scGenericGradientEnd);
     lblProjectName->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
     lblProjectPath->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
-    panRemove->Visible = false;
+    imgRemove->Visible = false;
 }
 //---------------------------------------------------------------------------
 __fastcall TSelectionPanelFrame::~TSelectionPanelFrame()
@@ -42,6 +42,15 @@ void __fastcall TSelectionPanelFrame::SetPath(String path)
 {
     m_Path = path;
     lblProjectPath->Caption = System::File::PathOf(path);
+
+    auto file = System::File::Combine(System::File::Combine(System::Path::Projects, m_Name), m_Name + ".png");
+    if (System::File::Exists(file))
+    {
+        auto image = std::make_unique<TPngImage>();
+        image->LoadFromFile(file);
+        imgLogo->Picture->Assign(image.get());
+        imgLogo->Visible = true;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TSelectionPanelFrame::SetMachine(String machine)
@@ -49,20 +58,22 @@ void __fastcall TSelectionPanelFrame::SetMachine(String machine)
     m_Machine = machine;
     lblMachine->Caption = machine;
 
-    auto mc = std::make_unique<MachineConfig>(machine);
-    mc->Load(machine);
-    if (mc->Image != "")
+    if (!imgLogo->Visible)
     {
-        auto file = System::File::Combine(System::Path::Application, mc->Image);
-        if (System::File::Exists(file))
+        auto mc = std::make_unique<MachineConfig>(machine);
+        mc->Load(machine);
+        if (mc->Image.Trim() != "")
         {
-            auto image = std::make_unique<TPngImage>();
-            image->LoadFromFile(file);
-            imgMachine->Picture->Assign(image.get());
-            imgMachine->Visible = true;
+            auto file = System::File::Combine(System::Path::Application, mc->Image);
+            if (System::File::Exists(file))
+            {
+                auto image = std::make_unique<TPngImage>();
+                image->LoadFromFile(file);
+                imgLogo->Picture->Assign(image.get());
+                imgLogo->Visible = true;
+            }
         }
     }
-
 }
 //---------------------------------------------------------------------------
 void __fastcall TSelectionPanelFrame::SetSelected(bool state)
@@ -103,7 +114,7 @@ void __fastcall TSelectionPanelFrame::SetHighlighted(bool state)
 //---------------------------------------------------------------------------
 void __fastcall TSelectionPanelFrame::SetLoading(bool state)
 {
-    ProgressBar1->Visible = state;
+    prgLoading->Visible = state;
 }
 //---------------------------------------------------------------------------
 void __fastcall TSelectionPanelFrame::UpdateControl()
@@ -111,16 +122,12 @@ void __fastcall TSelectionPanelFrame::UpdateControl()
     TColor color = StyleServices()->GetStyleColor(m_Selected ? scButtonFocused : (m_Highlighted ? scButtonHot : scGenericGradientEnd));
     panProjectInfo->Color = color;
     panRemove->Color = color;
-    panRemove->Visible = m_Highlighted;
-    if (imgMachine->Visible)
-    {
-        imgMachine->Left = Width - 138;
-    }
+    imgRemove->Visible = m_Highlighted;
 }
 //---------------------------------------------------------------------------
 void __fastcall TSelectionPanelFrame::Tick()
 {
-    ProgressBar1->StepIt();
+    prgLoading->StepIt();
 }
 //---------------------------------------------------------------------------
 void __fastcall TSelectionPanelFrame::lblProjectNameClick(TObject *Sender)

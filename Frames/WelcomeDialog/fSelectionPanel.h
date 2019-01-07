@@ -19,8 +19,8 @@ __published:// IDE-managed Components
     TLabel *lblProjectPath;
     TImage *imgRemove;
     TLabel *lblMachine;
-    TProgressBar *ProgressBar1;
-    TImage *imgMachine;
+    TProgressBar *prgLoading;
+    TImage *imgLogo;
     void __fastcall panProjectInfoMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
     void __fastcall lblProjectNameClick(TObject *Sender);
     void __fastcall imgRemoveClick(TObject *Sender);

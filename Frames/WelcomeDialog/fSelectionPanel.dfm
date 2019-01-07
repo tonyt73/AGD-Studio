@@ -37,7 +37,7 @@ object SelectionPanelFrame: TSelectionPanelFrame
     object lblProjectPath: TLabel
       Left = 19
       Top = 45
-      Width = 437
+      Width = 311
       Height = 17
       Anchors = [akLeft, akTop, akRight]
       AutoSize = False
@@ -52,7 +52,6 @@ object SelectionPanelFrame: TSelectionPanelFrame
       ParentFont = False
       OnClick = lblProjectNameClick
       OnMouseMove = panProjectInfoMouseMove
-      ExplicitWidth = 406
     end
     object lblProjectName: TLabel
       AlignWithMargins = True
@@ -77,7 +76,7 @@ object SelectionPanelFrame: TSelectionPanelFrame
     object lblMachine: TLabel
       Left = 19
       Top = 29
-      Width = 437
+      Width = 311
       Height = 17
       Anchors = [akLeft, akTop, akRight]
       AutoSize = False
@@ -92,9 +91,8 @@ object SelectionPanelFrame: TSelectionPanelFrame
       ParentFont = False
       OnClick = lblProjectNameClick
       OnMouseMove = panProjectInfoMouseMove
-      ExplicitWidth = 406
     end
-    object imgMachine: TImage
+    object imgLogo: TImage
       Left = 336
       Top = 6
       Width = 120
@@ -103,7 +101,7 @@ object SelectionPanelFrame: TSelectionPanelFrame
       Transparent = True
       Visible = False
     end
-    object ProgressBar1: TProgressBar
+    object prgLoading: TProgressBar
       Left = 19
       Top = 68
       Width = 437
@@ -123,7 +121,6 @@ object SelectionPanelFrame: TSelectionPanelFrame
     Width = 20
     Height = 87
     Align = alRight
-    AutoSize = True
     BevelOuter = bvNone
     Padding.Right = 4
     TabOrder = 1
