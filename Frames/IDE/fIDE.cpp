@@ -183,21 +183,28 @@ void __fastcall TfrmIDE::actEditZoomResetExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::UpdateDocumentProperties(Document* document)
 {
-    const auto properties = document->GetPropertyInfo();
-    for (auto it : properties)
+    if (document != nullptr)
     {
-        try
+        const auto properties = document->GetPropertyInfo();
+        for (auto it : properties)
         {
-            lmdProperties->UnregisterPropCategory(it.second.category, it.first);
-            lmdProperties->RegisterPropCategory(it.second.category, it.first);
+            try
+            {
+                lmdProperties->UnregisterPropCategory(it.second.category, it.first);
+                lmdProperties->RegisterPropCategory(it.second.category, it.first);
+            }
+            catch(...)
+            {
+                // ignore exception; since we've already registered this property category and there is no method to test for property registration
+            }
         }
-        catch(...)
-        {
-            // ignore exception; since we've already registered this property category and there is no method to test for property registration
-        }
+        lmdProperties->Objects->SetOne(document);
+        lmdProperties->ExpandAllCategories();
     }
-    lmdProperties->Objects->SetOne(document);
-    lmdProperties->ExpandAllCategories();
+    else
+    {
+        lmdProperties->Objects->SetOne(nullptr);
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::tbnProjectExpandAllClick(TObject *Sender)
@@ -365,9 +372,13 @@ void __fastcall TfrmIDE::actDeleteAssetExecute(TObject *Sender)
 {
     if (tvProject->Selected)
     {
-        if (theProjectManager.Remove("Image", tvProject->Selected->Text))
+        auto selected = tvProject->Selected;
+        tvProject->Selected = tvProject->Selected->Parent;
+        tvProject->Refresh();
+        UpdateDocumentProperties(nullptr);
+        if (theProjectManager.Remove("Image", selected->Text))
         {
-            tvProject->Selected->Delete();
+            selected->Delete();
         }
      }
 }
