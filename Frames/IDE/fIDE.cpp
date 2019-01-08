@@ -430,4 +430,9 @@ void __fastcall TfrmIDE::actViewMessagesExecute(TObject *Sender)
     dpMessages->PanelVisible = actViewMessages->Checked;
 }
 //---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actGameRunExecute(TObject *Sender)
+{
+	//
+}
+//---------------------------------------------------------------------------
 

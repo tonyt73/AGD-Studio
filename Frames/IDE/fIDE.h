@@ -53,7 +53,7 @@ __published:    // IDE-managed Components
     TMenuItem *mnuEditCopy;
     TMenuItem *mnuEditCut;
     TMenuItem *mnuEditPaste;
-    TMenuItem *mnuBuild;
+	TMenuItem *mnuGame;
     TMenuItem *Help1;
     TAction *actHelp;
     TAction *actHelpGettingStarted;
@@ -154,6 +154,12 @@ __published:    // IDE-managed Components
     TMenuItem *Messages1;
     TMenuItem *odo1;
     TMenuItem *EditorKeys1;
+	TToolButton *ToolButton2;
+	TToolButton *btnBuildRun;
+	TAction *actGameRun;
+	TMenuItem *Run1;
+	TElXTree *tvBuild;
+	TImageList *imgBuildNodes;
     void __fastcall actEditCopyExecute(TObject *Sender);
     void __fastcall actEditCutExecute(TObject *Sender);
     void __fastcall actEditPasteExecute(TObject *Sender);
@@ -189,6 +195,7 @@ __published:    // IDE-managed Components
     void __fastcall actViewTodoExecute(TObject *Sender);
     void __fastcall actViewEditorKeysExecute(TObject *Sender);
     void __fastcall actViewMessagesExecute(TObject *Sender);
+	void __fastcall actGameRunExecute(TObject *Sender);
 
 private:    // User declarations
     ::Messaging::Registrar  m_Registrar;
