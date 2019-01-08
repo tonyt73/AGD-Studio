@@ -31,7 +31,7 @@ Themes:
   * Register if you need to (its free)
   * Install the 32 bit and 64 bit Windows compilers (OSX, iOS & Android are optional)
 * Download the trial version of LMD Innovative components
-  * http://files.lmd.de/downloads/lmd2018vcl/setupvcl18td25.zip
+  * http://files.lmd.de/downloads/lmd2019vcl/setupvcl19td26.zip
   * Unzip and run the Setup application
   * Click Next to all questions to Install all defaults
 * Install Rad Studio Get It UI styles
