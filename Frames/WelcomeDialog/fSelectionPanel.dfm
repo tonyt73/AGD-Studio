@@ -1,7 +1,7 @@
 object SelectionPanelFrame: TSelectionPanelFrame
   Left = 0
   Top = 0
-  Width = 482
+  Width = 451
   Height = 87
   Margins.Left = 0
   Margins.Top = 0
@@ -19,7 +19,7 @@ object SelectionPanelFrame: TSelectionPanelFrame
   object panProjectInfo: TPanel
     Left = 0
     Top = 0
-    Width = 462
+    Width = 431
     Height = 87
     Align = alClient
     BevelOuter = bvNone
@@ -32,12 +32,12 @@ object SelectionPanelFrame: TSelectionPanelFrame
     OnClick = lblProjectNameClick
     OnMouseMove = panProjectInfoMouseMove
     DesignSize = (
-      462
+      431
       87)
     object lblProjectPath: TLabel
       Left = 19
       Top = 45
-      Width = 311
+      Width = 280
       Height = 17
       Anchors = [akLeft, akTop, akRight]
       AutoSize = False
@@ -52,12 +52,13 @@ object SelectionPanelFrame: TSelectionPanelFrame
       ParentFont = False
       OnClick = lblProjectNameClick
       OnMouseMove = panProjectInfoMouseMove
+      ExplicitWidth = 311
     end
     object lblProjectName: TLabel
       AlignWithMargins = True
       Left = 19
       Top = 4
-      Width = 410
+      Width = 379
       Height = 26
       Anchors = [akLeft, akTop, akRight]
       AutoSize = False
@@ -76,7 +77,7 @@ object SelectionPanelFrame: TSelectionPanelFrame
     object lblMachine: TLabel
       Left = 19
       Top = 29
-      Width = 311
+      Width = 280
       Height = 17
       Anchors = [akLeft, akTop, akRight]
       AutoSize = False
@@ -91,20 +92,24 @@ object SelectionPanelFrame: TSelectionPanelFrame
       ParentFont = False
       OnClick = lblProjectNameClick
       OnMouseMove = panProjectInfoMouseMove
+      ExplicitWidth = 311
     end
     object imgLogo: TImage
-      Left = 336
+      Left = 305
       Top = 6
       Width = 120
       Height = 56
       Anchors = [akTop, akRight, akBottom]
       Transparent = True
       Visible = False
+      OnClick = lblProjectNameClick
+      OnMouseMove = panProjectInfoMouseMove
+      ExplicitLeft = 336
     end
     object prgLoading: TProgressBar
       Left = 19
       Top = 68
-      Width = 437
+      Width = 406
       Height = 14
       Anchors = [akLeft, akTop, akRight]
       Position = 100
@@ -116,7 +121,7 @@ object SelectionPanelFrame: TSelectionPanelFrame
     end
   end
   object panRemove: TPanel
-    Left = 462
+    Left = 431
     Top = 0
     Width = 20
     Height = 87
