@@ -93,7 +93,7 @@ object frmNewImage: TfrmNewImage
     Width = 269
     Height = 24
     Anchors = [akLeft, akTop, akRight]
-    TabOrder = 5
+    TabOrder = 6
     OnChange = edtNameChange
   end
   object radObject: TRadioButton
@@ -127,6 +127,20 @@ object frmNewImage: TfrmNewImage
     TabOrder = 3
     OnClick = radObjectClick
   end
+  object edtHeight: TSpinEdit
+    Left = 268
+    Top = 93
+    Width = 73
+    Height = 26
+    Anchors = [akTop, akRight]
+    Enabled = False
+    Increment = 8
+    MaxValue = 128
+    MinValue = 8
+    TabOrder = 5
+    Value = 16
+    OnExit = edtHeightExit
+  end
   object radChrSet: TRadioButton
     Tag = 3
     Left = 274
@@ -137,33 +151,18 @@ object frmNewImage: TfrmNewImage
     TabOrder = 4
     OnClick = radObjectClick
   end
-  object edtWidth: TLMDSpinEdit
+  object edtWidth: TSpinEdit
     Left = 72
-    Top = 92
-    Width = 76
-    Height = 25
-    Hint = ''
-    Bevel.Mode = bmWindows
-    Caret.BlinkRate = 530
-    TabOrder = 6
-    OnExit = edtWidthExit
-    AutoSelect = True
-    CustomButtons = <>
-    Value = 0
-  end
-  object edtHeight: TLMDSpinEdit
-    Left = 265
-    Top = 92
-    Width = 76
-    Height = 25
-    Hint = ''
-    Bevel.Mode = bmWindows
-    Caret.BlinkRate = 530
-    Flat = True
+    Top = 93
+    Width = 73
+    Height = 26
+    Anchors = [akTop, akRight]
+    Enabled = False
+    Increment = 8
+    MaxValue = 128
+    MinValue = 8
     TabOrder = 7
-    OnExit = edtHeightExit
-    AutoSelect = True
-    CustomButtons = <>
-    Value = 0
+    Value = 16
+    OnExit = edtWidthExit
   end
 end

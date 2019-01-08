@@ -11,6 +11,7 @@
 #include <Vcl.Dialogs.hpp>
 #include <Vcl.ExtDlgs.hpp>
 #include <Vcl.Buttons.hpp>
+#include <Vcl.Samples.Spin.hpp>
 //---------------------------------------------------------------------------
 #include "fSelectionPanel.h"
 #include "Messaging/Event.h"
