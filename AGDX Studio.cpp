@@ -37,7 +37,8 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
     {
          Application->Initialize();
          Application->MainFormOnTaskBar = true;
-         TStyleManager::TrySetStyle(appSettings.ActiveStyle.Trim() != "" ? appSettings.ActiveStyle : "Onyx Blue");
+         TStyleManager::TrySetStyle("Onyx Blue");
+		TStyleManager::TrySetStyle(appSettings.ActiveStyle.Trim() != "" ? appSettings.ActiveStyle : "Onyx Blue");
          Application->CreateForm(__classid(TfrmMain), &frmMain);
          Application->Run();
     }
