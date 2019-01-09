@@ -1,6 +1,23 @@
 {
   "Name": "Amstrad CPC 160x200 16 Colour",
+  "Image" : "Images/Amstrad CPC.png",
   "GraphicsMode": "Amstrad CPC Mode 0",
+  "Tools": {
+	"Compiler" : {
+		"Path": "Compilers/Amstrad CPC/Compile.exe",
+		"Parameters": "%file"
+	}
+	"Assembler" : {
+		"Path" : "",
+		"Parameters" : "",
+		"Prepend" : "",
+		"Append" : ""
+	}
+	"Emulator" : {
+		"Path" : "",
+		"Parameters" : "",
+	}
+  }, 
   "ImageSizing": {
     "Object": {
       "Minimum": {
@@ -58,9 +75,5 @@
         "Height": 0
       }
     }
-  },
-  "CompilerInformation": {
-    "Path": "Compilers\\CPC-Compile.exe",
-    "Parameters": "%file -tap -sna"
   }
 }

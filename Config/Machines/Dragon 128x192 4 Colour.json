@@ -1,6 +1,23 @@
 {
   "Name": "Dragon 128x192 4 Colour",
   "GraphicsMode": "Dragon PMODE3",
+  "Image" : "Images/Dragon.png",
+  "Tools": {
+	"Compiler" : {
+		"Path": "Compilers\\Dragon\Compile.exe",
+		"Parameters": "%file"
+	}
+	"Assembler" : {
+		"Path" : "",
+		"Parameters" : "",
+		"Prepend" : "",
+		"Append" : ""
+	}
+	"Emulator" : {
+		"Path" : "",
+		"Parameters" : "",
+	}
+  }, 
   "ImageSizing": {
     "Object": {
       "Minimum": {
@@ -58,9 +75,5 @@
         "Height": 0
       }
     }
-  },
-  "CompilerInformation": {
-    "Path": "Compilers\\Dragon-Compile.exe",
-    "Parameters": "%file -tap -sna"
   }
 }

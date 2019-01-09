@@ -1,6 +1,23 @@
 {
   "Name": "BBC Micro 320x256 4 Colour",
   "GraphicsMode": "BBC Micro Mode 1",
+  "Image" : "Images/BBC.png",
+  "Tools": {
+	"Compiler" : {
+		"Path": "Compilers/BBC/Compile.exe",
+		"Parameters": "%file"
+	}
+	"Assembler" : {
+		"Path" : "",
+		"Parameters" : "",
+		"Prepend" : "",
+		"Append" : ""
+	}
+	"Emulator" : {
+		"Path" : "",
+		"Parameters" : "",
+	}
+  }, 
   "ImageSizing": {
     "Object": {
       "Minimum": {
@@ -58,9 +75,5 @@
         "Height": 0
       }
     }
-  },
-  "CompilerInformation": {
-    "Path": "Compilers\\BBC-Compile.exe",
-    "Parameters": "%file -tap -sna"
   }
 }

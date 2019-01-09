@@ -1,23 +1,6 @@
 {
-  "Name": "Acorn Atom 256x192 Monochrome",
-  "Image" : "Images/Acorn Atom.png",
-  "GraphicsMode": "Acorn Atom Monochrome",
-  "Tools": {
-	"Compiler" : {
-		"Path": "Compilers/Acorn Atom/Compile.exe",
-		"Parameters": "%file"
-	}
-	"Assembler" : {
-		"Path" : "",
-		"Parameters" : "",
-		"Prepend" : "",
-		"Append" : ""
-	}
-	"Emulator" : {
-		"Path" : "",
-		"Parameters" : "",
-	}
-  }, 
+  "Name": "Sinclair QL 256x256 8 Colour",
+  "GraphicsMode": "Sinclair QL Mode 8",
   "ImageSizing": {
     "Object": {
       "Minimum": {
@@ -25,12 +8,12 @@
         "Height": 16
       },
       "Maximum": {
-        "Width": 16,
-        "Height": 16
+        "Width": 128,
+        "Height": 96
       },
       "Step": {
-        "Width": 0,
-        "Height": 0
+        "Width": 8,
+        "Height": 16
       }
     },
     "Sprite": {
@@ -39,12 +22,12 @@
         "Height": 16
       },
       "Maximum": {
-        "Width": 16,
-        "Height": 16
+        "Width": 128,
+        "Height": 96
       },
       "Step": {
-        "Width": 0,
-        "Height": 0
+        "Width": 8,
+        "Height": 16
       }
     },
     "Tile": {
@@ -54,7 +37,7 @@
       },
       "Maximum": {
         "Width": 128,
-        "Height": 128
+        "Height": 96
       },
       "Step": {
         "Width": 8,
@@ -75,5 +58,9 @@
         "Height": 0
       }
     }
+  },
+  "CompilerInformation": {
+    "Path": "",
+    "Parameters": ""
   }
 }

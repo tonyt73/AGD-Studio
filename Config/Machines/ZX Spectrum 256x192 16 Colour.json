@@ -1,6 +1,23 @@
 {
   "Name": "ZX Spectrum 256x192 16 Colour",
+  "Image" : "Images/ZX Spectrum.png",
   "GraphicsMode": "ZX Spectrum Colour",
+  "Tools": {
+	"Compiler" : {
+		"Path": "Compilers/ZX Spectrum/Compile.exe",
+		"Parameters": "%file"
+	}
+	"Assembler" : {
+		"Path" : "Compilers/ZX Spectrum/Pasmo.exe",
+		"Parameters" : "%file% -sna",
+		"Prepend" : "",
+		"Append" : "org 30000"
+	}
+	"Emulator" : {
+		"Path" : "Compilers/ZX Spectrum/ZX Spin 0.7.exe",
+		"Parameters" : "%file%.sna",
+	}
+  }, 
   "ImageSizing": {
     "Object": {
       "Minimum": {
@@ -58,9 +75,5 @@
         "Height": 0
       }
     }
-  },
-  "CompilerInformation": {
-    "Path": "Compilers\\ZX-Compile.exe",
-    "Parameters": "%file -tap -sna"
   }
 }

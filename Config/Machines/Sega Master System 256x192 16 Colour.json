@@ -60,7 +60,7 @@
     }
   },
   "CompilerInformation": {
-    "Path": "Compilers\\SegaMS-Compile.exe",
-    "Parameters": "%file -tap -sna"
+    "Path": "",
+    "Parameters": ""
   }
 }

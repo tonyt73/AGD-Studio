@@ -1,6 +1,23 @@
 {
   "Name": "Acorn Atom 128x192 4 Colour",
+  "Image" : "Images/Acorn Atom.png",
   "GraphicsMode": "Acorn Atom 4 Colour",
+  "Tools": {
+	"Compiler" : {
+		"Path": "Compilers/Acorn Atom/Compile.exe",
+		"Parameters": "%file"
+	}
+	"Assembler" : {
+		"Path" : "",
+		"Parameters" : "",
+		"Prepend" : "",
+		"Append" : ""
+	}
+	"Emulator" : {
+		"Path" : "",
+		"Parameters" : "",
+	}
+  }, 
   "ImageSizing": {
     "Object": {
       "Minimum": {
@@ -58,9 +75,5 @@
         "Height": 0
       }
     }
-  },
-  "CompilerInformation": {
-    "Path": "Compilers\\Atom-Compile.exe",
-    "Parameters": "%file -tap -sna"
   }
 }

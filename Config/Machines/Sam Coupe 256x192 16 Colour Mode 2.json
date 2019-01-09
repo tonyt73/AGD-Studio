@@ -1,6 +1,7 @@
 {
   "Name": "Sam Coupe 256x192 16 Colour Mode 2",
   "GraphicsMode": "Sam Coupe Mode 2",
+  "Image" : "Images/Sam Coupe.png",
   "ImageSizing": {
     "Object": {
       "Minimum": {
@@ -60,7 +61,7 @@
     }
   },
   "CompilerInformation": {
-    "Path": "Compilers\\ZX-Compile.exe",
-    "Parameters": "%file -tap -sna"
+    "Path": "",
+    "Parameters": ""
   }
 }
