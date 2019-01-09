@@ -1,6 +1,22 @@
 {
   "Name": "Sinclair QL 256x256 8 Colour",
   "GraphicsMode": "Sinclair QL Mode 8",
+  "Tools": {
+	"Compiler" : {
+		"Path": "Compilers/Sinclair QL/Compile.exe",
+		"Parameters": "%file"
+	}
+	"Assembler" : {
+		"Path" : "",
+		"Parameters" : "",
+		"Prepend" : "",
+		"Append" : ""
+	}
+	"Emulator" : {
+		"Path" : "",
+		"Parameters" : "",
+	}
+  }, 
   "ImageSizing": {
     "Object": {
       "Minimum": {
@@ -58,9 +74,5 @@
         "Height": 0
       }
     }
-  },
-  "CompilerInformation": {
-    "Path": "",
-    "Parameters": ""
   }
 }

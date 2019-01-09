@@ -2,6 +2,22 @@
   "Name": "Sam Coupe 256x192 16 Colour Mode 2",
   "GraphicsMode": "Sam Coupe Mode 2",
   "Image" : "Images/Sam Coupe.png",
+  "Tools": {
+	"Compiler" : {
+		"Path": "Compilers/Sam Coupe/Compile.exe",
+		"Parameters": "%file"
+	}
+	"Assembler" : {
+		"Path" : "",
+		"Parameters" : "",
+		"Prepend" : "",
+		"Append" : ""
+	}
+	"Emulator" : {
+		"Path" : "",
+		"Parameters" : "",
+	}
+  }, 
   "ImageSizing": {
     "Object": {
       "Minimum": {
@@ -59,9 +75,5 @@
         "Height": 0
       }
     }
-  },
-  "CompilerInformation": {
-    "Path": "",
-    "Parameters": ""
   }
 }

@@ -1,6 +1,22 @@
 {
   "Name": "ZX Spectrum 256x192 ULA+",
   "GraphicsMode": "ZX Spectrum ULA+",
+  "Tools": {
+	"Compiler" : {
+		"Path": "Compilers/ZX Spectrum/Compile.exe",
+		"Parameters": "%file"
+	}
+	"Assembler" : {
+		"Path" : "",
+		"Parameters" : "",
+		"Prepend" : "",
+		"Append" : ""
+	}
+	"Emulator" : {
+		"Path" : "",
+		"Parameters" : "",
+	}
+  }, 
   "ImageSizing": {
     "Object": {
       "Minimum": {
@@ -58,9 +74,5 @@
         "Height": 0
       }
     }
-  },
-  "CompilerInformation": {
-    "Path": "Compilers\\ZX-Compile.exe",
-    "Parameters": "%file -tap -sna"
   }
 }

@@ -1,6 +1,22 @@
 {
   "Name": "Sega Master System 256x192 16 Colour",
   "GraphicsMode": "Sega Master System Mode 4",
+  "Tools": {
+	"Compiler" : {
+		"Path": "Compilers/Sega Master System/Compile.exe",
+		"Parameters": "%file"
+	}
+	"Assembler" : {
+		"Path" : "",
+		"Parameters" : "",
+		"Prepend" : "",
+		"Append" : ""
+	}
+	"Emulator" : {
+		"Path" : "",
+		"Parameters" : "",
+	}
+  }, 
   "ImageSizing": {
     "Object": {
       "Minimum": {
@@ -58,9 +74,5 @@
         "Height": 0
       }
     }
-  },
-  "CompilerInformation": {
-    "Path": "",
-    "Parameters": ""
   }
 }
