@@ -12,11 +12,22 @@ public:
 
     struct ToolInfo
     {
+        ToolInfo() {}
+        ToolInfo(const String& path, const String& params)
+        : Path(path)
+        , Parameters(params)
+        {}
         String  Path;
         String  Parameters;
     };
     struct ToolInfoExt : public ToolInfo
     {
+        ToolInfoExt() {}
+        ToolInfoExt(const String& path, const String& params, const String& prepend, const String& append)
+        : ToolInfo(path, params)
+        , Prepend(prepend)
+        , Append(append)
+        {}
         String  Prepend;
         String  Append;
     };

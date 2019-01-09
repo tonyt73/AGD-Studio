@@ -40,6 +40,10 @@ private:
             void        __fastcall  OnEndObject(const String& object);
             void        __fastcall  DoSave();
 
+protected:
+friend class TfrmSettings;
+         MachineConfig& __fastcall  WritableMachineConfiguration() const;
+
 public:
                         __fastcall  ProjectDocument(const String& name, const String& machine);
                         __fastcall ~ProjectDocument();

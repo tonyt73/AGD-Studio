@@ -1,8 +1,11 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
 #include "fSettings.h"
-#include "Settings.h"
+#include "Project/DocumentManager.h"
+#include "Settings/Settings.h"
 #include "MachineConfig.h"
+#include "System/File.h"
+#include "System/Path.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "LMDControl"
@@ -64,6 +67,10 @@ void __fastcall TfrmSettings::FormCreate(TObject *Sender)
             cmbMachines->ItemIndex = cmbMachines->Items->Count - 1;
         }
     }
+    pgcSettings->ActivePage = tabProfile;
+    pgcBuild->ActivePage = tabCompiler;
+    // set the build options
+    GetBuildOptions();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmSettings::btnProfileClick(TObject *Sender)
@@ -78,6 +85,7 @@ void __fastcall TfrmSettings::btnOkClick(TObject *Sender)
     appSettings.LoadLastProject = chkLoadLastProject->Checked;
     appSettings.Developer = edtDeveloper->Text;
     appSettings.DefaultMachine = cmbMachines->Items->Strings[cmbMachines->ItemIndex];
+    SaveMachineConfig();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmSettings::cmbThemesChange(TObject *Sender)
@@ -110,6 +118,69 @@ void __fastcall TfrmSettings::chkWelcomeSkipOnStartupClick(TObject *Sender)
         chkLoadLastProject->Checked = false;
         chkLoadLastProject->Enabled = false;
     }
+}
+//---------------------------------------------------------------------------
+String __fastcall TfrmSettings::FindExecutable(const String& title, const String& path) const
+{
+    auto folder = path;
+    if (folder == "" || !System::Path::Exists(folder))
+    {
+        folder = System::File::Combine(System::Path::Application, "Compilers");
+    }
+
+    dlgOpen->DefaultFolder = folder;
+    dlgOpen->Title = "Locate AGD Compiler";
+    if (dlgOpen->Execute())
+    {
+        auto file = dlgOpen->FileName;
+        auto relFilePath = System::Path::GetFolderRelativeTo(System::Path::lpApplication, file);
+        if (relFilePath != file)
+        {
+            return relFilePath;
+        }
+        return file;
+    }
+    else
+    {
+        return path;
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmSettings::btnCompilerFindClick(TObject *Sender)
+{
+    edtCompilerExe->Text = FindExecutable("Locate AGD Compiler", edtCompilerExe->Text);
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmSettings::btnAssemblerFindClick(TObject *Sender)
+{
+    edtAssemblerExe->Text = FindExecutable("Locate Assembler", edtAssemblerExe->Text);
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmSettings::btnEmulatorFindClick(TObject *Sender)
+{
+    edtEmulatorExe->Text = FindExecutable("Locate Emulator", edtEmulatorExe->Text);
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmSettings::GetBuildOptions()
+{
+    const auto& cfg = theDocumentManager.ProjectConfig()->MachineConfiguration();
+    edtBuildMachine->Text = cfg.Name;
+    edtCompilerExe->Text = cfg.Compiler.Path;
+    edtCompilerParams->Text = cfg.Compiler.Parameters;
+    edtAssemblerExe->Text = cfg.Assembler.Path;
+    edtAssemblerParams->Text = cfg.Assembler.Parameters;
+    edtAssemblerPrepend->Text = cfg.Assembler.Prepend;
+    edtAssemblerAppend->Text = cfg.Assembler.Append;
+    edtEmulatorExe->Text = cfg.Emulator.Path;
+    edtEmulatorParams->Text = cfg.Emulator.Parameters;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmSettings::SaveMachineConfig()
+{
+    auto& cfg = theDocumentManager.ProjectConfig()->WritableMachineConfiguration();
+    cfg.Compiler = MachineConfig::ToolInfo(edtCompilerExe->Text, edtCompilerParams->Text);
+    cfg.Assembler = MachineConfig::ToolInfoExt(edtAssemblerExe->Text, edtAssemblerParams->Text, edtAssemblerPrepend->Text, edtAssemblerAppend->Text);
+    cfg.Emulator = MachineConfig::ToolInfo(edtEmulatorExe->Text, edtEmulatorParams->Text);
 }
 //---------------------------------------------------------------------------
 

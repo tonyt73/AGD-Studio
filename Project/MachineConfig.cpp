@@ -40,8 +40,8 @@ __fastcall MachineConfig::MachineConfig(const String& name)
     m_PropertyMap["Tools.Compiler.Parameters"] = &m_Compiler.Parameters;
     m_PropertyMap["Tools.Assembler.Path"] = &m_Assembler.Path;
     m_PropertyMap["Tools.Assembler.Parameters"] = &m_Assembler.Parameters;
-    m_PropertyMap["Tools.Assembler.Prepend"] = &m_Assembler.Path;
-    m_PropertyMap["Tools.Assembler.Append"] = &m_Assembler.Parameters;
+    m_PropertyMap["Tools.Assembler.Prepend"] = &m_Assembler.Prepend;
+    m_PropertyMap["Tools.Assembler.Append"] = &m_Assembler.Append;
     m_PropertyMap["Tools.Emulator.Path"] = &m_Emulator.Path;
     m_PropertyMap["Tools.Emulator.Parameters"] = &m_Emulator.Parameters;
 

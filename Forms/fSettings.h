@@ -23,6 +23,7 @@
 #include <Vcl.ImgList.hpp>
 #include <Vcl.Buttons.hpp>
 #include <Vcl.ComCtrls.hpp>
+#include <Vcl.Dialogs.hpp>
 //---------------------------------------------------------------------------
 class TfrmSettings : public TForm
 {
@@ -49,15 +50,50 @@ __published:    // IDE-managed Components
     TLabel *Label3;
     TCheckBox *chkLoadLastProject;
     TImageList *ImageList1;
+    TTabSheet *TabSheet1;
+    TLabel *Label6;
+    TPageControl *pgcBuild;
+    TTabSheet *tabAssembler;
+    TTabSheet *tabEmulator;
+    TImageList *ImageList2;
+    TLabel *Label7;
+    TLabel *Label8;
+    TLabel *Label9;
+    TLabel *Label10;
+    TEdit *edtAssemblerExe;
+    TEdit *edtAssemblerParams;
+    TEdit *edtAssemblerPrepend;
+    TButton *btnAssemblerFind;
+    TEdit *edtAssemblerAppend;
+    TLabel *Label11;
+    TLabel *Label12;
+    TEdit *edtEmulatorExe;
+    TEdit *edtEmulatorParams;
+    TButton *btnEmulatorFind;
+    TTabSheet *tabCompiler;
+    TLabel *Label13;
+    TLabel *Label14;
+    TEdit *edtCompilerExe;
+    TEdit *edtCompilerParams;
+    TButton *btnCompilerFind;
+    TFileOpenDialog *dlgOpen;
+    TEdit *edtBuildMachine;
     void __fastcall FormCreate(TObject *Sender);
     void __fastcall btnProfileClick(TObject *Sender);
     void __fastcall btnOkClick(TObject *Sender);
     void __fastcall cmbThemesChange(TObject *Sender);
     void __fastcall chkLoadLastProjectClick(TObject *Sender);
     void __fastcall chkWelcomeSkipOnStartupClick(TObject *Sender);
+    void __fastcall btnCompilerFindClick(TObject *Sender);
+    void __fastcall btnAssemblerFindClick(TObject *Sender);
+    void __fastcall btnEmulatorFindClick(TObject *Sender);
 private:    // User declarations
+    String  __fastcall  FindExecutable(const String& title, const String& path) const;
+    void    __fastcall  GetBuildOptions();
+    void    __fastcall  SaveMachineConfig();
+
 public:     // User declarations
-    __fastcall TfrmSettings(TComponent* Owner);
+            __fastcall  TfrmSettings(TComponent* Owner);
 };
 //---------------------------------------------------------------------------
 #endif

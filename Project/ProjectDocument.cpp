@@ -68,6 +68,11 @@ const MachineConfig& __fastcall ProjectDocument::MachineConfiguration() const
     return *m_MachineConfig;
 }
 //---------------------------------------------------------------------------
+MachineConfig& __fastcall ProjectDocument::WritableMachineConfiguration() const
+{
+    return *m_MachineConfig;
+}
+//---------------------------------------------------------------------------
 void __fastcall ProjectDocument::DoSave()
 {
     Push("Project");
