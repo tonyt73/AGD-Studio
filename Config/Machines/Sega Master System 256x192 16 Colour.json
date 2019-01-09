@@ -4,17 +4,17 @@
   "Tools": {
 	"Compiler" : {
 		"Path": "Compilers/Sega Master System/Compile.exe",
-		"Parameters": "%file"
-	}
+		"Parameters": "%file%"
+	},
 	"Assembler" : {
 		"Path" : "",
 		"Parameters" : "",
 		"Prepend" : "",
 		"Append" : ""
-	}
+	},
 	"Emulator" : {
 		"Path" : "",
-		"Parameters" : "",
+		"Parameters" : ""
 	}
   }, 
   "ImageSizing": {

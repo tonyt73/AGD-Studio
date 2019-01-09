@@ -4,17 +4,17 @@
   "Tools": {
 	"Compiler" : {
 		"Path": "Compilers/ZX Spectrum/Compile.exe",
-		"Parameters": "%file"
-	}
+		"Parameters": "%file%"
+	},
 	"Assembler" : {
 		"Path" : "",
 		"Parameters" : "",
 		"Prepend" : "",
 		"Append" : ""
-	}
+	},
 	"Emulator" : {
 		"Path" : "",
-		"Parameters" : "",
+		"Parameters" : ""
 	}
   }, 
   "ImageSizing": {

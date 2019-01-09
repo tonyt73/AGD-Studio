@@ -5,17 +5,17 @@
   "Tools": {
 	"Compiler" : {
 		"Path": "Compilers/ZX Spectrum/Compile.exe",
-		"Parameters": "%file"
-	}
+		"Parameters": "%file%"
+	},
 	"Assembler" : {
 		"Path" : "Compilers/ZX Spectrum/Pasmo.exe",
 		"Parameters" : "%file% -sna",
 		"Prepend" : "",
 		"Append" : "org 30000"
-	}
+	},
 	"Emulator" : {
 		"Path" : "Compilers/ZX Spectrum/ZX Spin 0.7.exe",
-		"Parameters" : "%file%.sna",
+		"Parameters" : "%file%.sna"
 	}
   }, 
   "ImageSizing": {

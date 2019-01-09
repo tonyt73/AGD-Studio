@@ -4,18 +4,18 @@
   "Image" : "Images/Dragon.png",
   "Tools": {
 	"Compiler" : {
-		"Path": "Compilers\\Dragon\Compile.exe",
-		"Parameters": "%file"
-	}
+		"Path": "Compilers/Dragon/Compile.exe",
+		"Parameters": "%file%"
+	},
 	"Assembler" : {
 		"Path" : "",
 		"Parameters" : "",
 		"Prepend" : "",
 		"Append" : ""
-	}
+	},
 	"Emulator" : {
 		"Path" : "",
-		"Parameters" : "",
+		"Parameters" : ""
 	}
   }, 
   "ImageSizing": {

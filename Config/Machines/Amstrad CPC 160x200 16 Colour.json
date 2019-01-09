@@ -5,17 +5,17 @@
   "Tools": {
 	"Compiler" : {
 		"Path": "Compilers/Amstrad CPC/Compile.exe",
-		"Parameters": "%file"
-	}
+		"Parameters": "%file%"
+	},
 	"Assembler" : {
 		"Path" : "",
 		"Parameters" : "",
 		"Prepend" : "",
 		"Append" : ""
-	}
+	},
 	"Emulator" : {
 		"Path" : "",
-		"Parameters" : "",
+		"Parameters" : ""
 	}
   }, 
   "ImageSizing": {
