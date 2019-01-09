@@ -1,38 +1,34 @@
 object frmIDE: TfrmIDE
   Left = 0
   Top = 0
-  Width = 1078
-  Height = 749
+  Width = 800
+  Height = 600
   Align = alClient
   Constraints.MinHeight = 600
   Constraints.MinWidth = 800
   TabOrder = 0
-  ExplicitWidth = 800
-  ExplicitHeight = 600
   object dsIDE: TLMDDockSite
     Left = 0
     Top = 32
-    Width = 1078
-    Height = 717
+    Width = 800
+    Height = 568
     Manager = DockManager
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 800
-    ExplicitHeight = 568
     Layout = {
       EFBBBF3C3F786D6C2076657273696F6E3D22312E302220656E636F64696E673D
       227574662D38223F3E0D0A3C736974656C6973743E0D0A093C73697465206470
       693D223936222069643D2253454C465F53495445223E0D0A09093C7A6F6E6520
       6B696E643D22484F525A223E0D0A0909093C7A6F6E65206B696E643D22564552
-      54222073697A653D2238343222206473697A653D22302E373934333339363232
-      363431353039223E0D0A090909093C7A6F6E65206B696E643D22544142532220
-      73697A653D2235323122206473697A653D22302E373435333530353030373135
-      3330382220697373706163653D2231223E0D0A09090909093C7A6F6E65206B69
+      54222073697A653D2235363422206473697A653D22302E373231323237363231
+      343833333736223E0D0A090909093C7A6F6E65206B696E643D22544142532220
+      73697A653D2233373222206473697A653D22302E363736333633363336333633
+      3633362220697373706163653D2231223E0D0A09090909093C7A6F6E65206B69
       6E643D2250414E454C222069643D224C4D44446F636B50616E656C3222207669
       7369626C653D2230222F3E0D0A090909093C2F7A6F6E653E0D0A090909093C7A
-      6F6E65206B696E643D225441425322206163746976657461623D223022207369
-      7A653D2231373822206473697A653D22302E3235343634393439393238343639
-      32223E0D0A09090909093C7A6F6E65206B696E643D2250414E454C222069643D
+      6F6E65206B696E643D225441425322206163746976657461623D223122207369
+      7A653D2231373822206473697A653D22302E3332333633363336333633363336
+      34223E0D0A09090909093C7A6F6E65206B696E643D2250414E454C222069643D
       226470456469746F724B657973222076697369626C653D2231222F3E0D0A0909
       0909093C7A6F6E65206B696E643D2250414E454C222069643D2264704275696C
       64222076697369626C653D2231222F3E0D0A09090909093C7A6F6E65206B696E
@@ -42,19 +38,19 @@ object frmIDE: TfrmIDE
       222F3E0D0A09090909093C7A6F6E65206B696E643D2250414E454C222069643D
       226470546F646F222076697369626C653D2231222F3E0D0A090909093C2F7A6F
       6E653E0D0A0909093C2F7A6F6E653E0D0A0909093C7A6F6E65206B696E643D22
-      56455254222073697A653D2232313822206473697A653D22302E323035363630
-      333737333538343931223E0D0A090909093C7A6F6E65206B696E643D2250414E
+      56455254222073697A653D2232313822206473697A653D22302E323738373732
+      333738353136363234223E0D0A090909093C7A6F6E65206B696E643D2250414E
       454C222069643D22647050726F6A656374222076697369626C653D2231222073
-      697A653D2233343822206473697A653D22302E34393737393038363839323438
+      697A653D2232373422206473697A653D22302E34393737393038363839323438
       39222F3E0D0A090909093C7A6F6E65206B696E643D2250414E454C222069643D
       22647050726F70657274696573222076697369626C653D2231222073697A653D
-      2233353122206473697A653D22302E3530323230393133313037353131222F3E
+      2232373622206473697A653D22302E3530323230393133313037353131222F3E
       0D0A0909093C2F7A6F6E653E0D0A09093C2F7A6F6E653E0D0A093C2F73697465
       3E0D0A3C2F736974656C6973743E}
     object dpBuild: TLMDDockPanel
       Left = 6
-      Top = 533
-      Width = 842
+      Top = 384
+      Width = 564
       Height = 157
       ParentBackground = False
       TabOrder = 8
@@ -62,7 +58,7 @@ object frmIDE: TfrmIDE
       object tvBuild: TElXTree
         Left = 0
         Top = 21
-        Width = 842
+        Width = 564
         Height = 136
         Hint = ''
         PlusPosition = vaMiddle
@@ -108,16 +104,12 @@ object frmIDE: TfrmIDE
         FixedBottomRowNum = 0
         FixedColNum = 1
         GutterWidth = 0
-        ExplicitLeft = 1
-        ExplicitTop = 27
-        ExplicitWidth = 216
-        ExplicitHeight = 225
       end
     end
     object dpEditorKeys: TLMDDockPanel
       Left = 6
-      Top = 533
-      Width = 842
+      Top = 384
+      Width = 564
       Height = 157
       ParentBackground = False
       TabOrder = 11
@@ -125,7 +117,7 @@ object frmIDE: TfrmIDE
       object mbKeys: TMemo
         Left = 0
         Top = 21
-        Width = 842
+        Width = 564
         Height = 136
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
@@ -141,13 +133,12 @@ object frmIDE: TfrmIDE
         ScrollBars = ssBoth
         ShowHint = False
         TabOrder = 0
-        ExplicitWidth = 564
       end
     end
     object dpMessages: TLMDDockPanel
       Left = 6
-      Top = 533
-      Width = 842
+      Top = 384
+      Width = 564
       Height = 157
       ParentBackground = False
       TabOrder = 5
@@ -155,20 +146,19 @@ object frmIDE: TfrmIDE
       object memMessages: TMemo
         Left = 0
         Top = 21
-        Width = 842
+        Width = 564
         Height = 136
         Align = alClient
         Lines.Strings = (
           '')
         TabOrder = 0
-        ExplicitWidth = 564
       end
     end
     object dpProject: TLMDDockPanel
-      Left = 854
+      Left = 576
       Top = 6
       Width = 218
-      Height = 348
+      Height = 274
       Buttons = [pbPin, pbMaximize]
       ParentBackground = False
       TabOrder = 6
@@ -177,7 +167,7 @@ object frmIDE: TfrmIDE
         Left = 0
         Top = 21
         Width = 218
-        Height = 327
+        Height = 253
         Align = alClient
         BevelOuter = bvNone
         Padding.Left = 1
@@ -185,7 +175,6 @@ object frmIDE: TfrmIDE
         Padding.Right = 1
         Padding.Bottom = 1
         TabOrder = 0
-        ExplicitHeight = 253
         object tbrProject: TToolBar
           Left = 1
           Top = 1
@@ -262,7 +251,7 @@ object frmIDE: TfrmIDE
           Left = 1
           Top = 27
           Width = 216
-          Height = 299
+          Height = 225
           Hint = ''
           PlusPosition = vaMiddle
           BorderColorWindow = clWindow
@@ -301,22 +290,21 @@ object frmIDE: TfrmIDE
           FixedBottomRowNum = 0
           FixedColNum = 1
           GutterWidth = 0
-          ExplicitTop = 28
         end
       end
     end
     object dpProperties: TLMDDockPanel
-      Left = 854
-      Top = 360
+      Left = 576
+      Top = 286
       Width = 218
-      Height = 351
+      Height = 276
       Buttons = [pbPin, pbMaximize]
       ParentBackground = False
       TabOrder = 10
       Caption = 'Properties'
       object Splitter1: TSplitter
         Left = 0
-        Top = 308
+        Top = 233
         Width = 218
         Height = 3
         Cursor = crVSplit
@@ -331,7 +319,7 @@ object frmIDE: TfrmIDE
         Left = 0
         Top = 21
         Width = 218
-        Height = 287
+        Height = 212
         PropKinds = [pkProperties, pkReadOnly]
         SortType = stNone
         ArrangeKind = akByCategory
@@ -350,11 +338,10 @@ object frmIDE: TfrmIDE
         Constraints.MinWidth = 200
         TabOrder = 0
         OnClick = lmdPropertiesClick
-        ExplicitHeight = 212
       end
       object Panel2: TPanel
         Left = 0
-        Top = 311
+        Top = 236
         Width = 218
         Height = 40
         Align = alBottom
@@ -364,7 +351,6 @@ object frmIDE: TfrmIDE
         Padding.Right = 3
         Padding.Bottom = 3
         TabOrder = 1
-        ExplicitTop = 236
         object lblPropertyInfo: TLabel
           Left = 4
           Top = 4
@@ -379,8 +365,8 @@ object frmIDE: TfrmIDE
     end
     object dpSearchResults: TLMDDockPanel
       Left = 6
-      Top = 533
-      Width = 842
+      Top = 384
+      Width = 564
       Height = 157
       ParentBackground = False
       TabOrder = 7
@@ -388,8 +374,8 @@ object frmIDE: TfrmIDE
     end
     object dpTodo: TLMDDockPanel
       Left = 6
-      Top = 533
-      Width = 842
+      Top = 384
+      Width = 564
       Height = 157
       ParentBackground = False
       TabOrder = 9
@@ -398,8 +384,8 @@ object frmIDE: TfrmIDE
     object LMDDockPanel2: TLMDDockPanel
       Left = 6
       Top = 6
-      Width = 842
-      Height = 521
+      Width = 564
+      Height = 372
       PanelVisible = False
       ParentBackground = False
       TabOrder = 4
@@ -409,12 +395,11 @@ object frmIDE: TfrmIDE
   object Panel3: TPanel
     Left = 0
     Top = 0
-    Width = 1078
+    Width = 800
     Height = 32
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 800
     object tbrMain: TToolBar
       Left = 0
       Top = 0
@@ -542,7 +527,7 @@ object frmIDE: TfrmIDE
       end
     end
     object tbrSettings: TToolBar
-      Left = 1006
+      Left = 728
       Top = 0
       Width = 72
       Align = alRight
@@ -551,7 +536,6 @@ object frmIDE: TfrmIDE
       ButtonWidth = 32
       Images = imgIconsActive
       TabOrder = 1
-      ExplicitLeft = 728
       object btnEditorHelp: TToolButton
         Left = 0
         Top = 0

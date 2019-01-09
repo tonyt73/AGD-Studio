@@ -109,7 +109,7 @@ object frmNewImage: TfrmNewImage
   end
   object radSprite: TRadioButton
     Tag = 1
-    Left = 148
+    Left = 139
     Top = 64
     Width = 58
     Height = 17
@@ -119,7 +119,7 @@ object frmNewImage: TfrmNewImage
   end
   object radTile: TRadioButton
     Tag = 2
-    Left = 217
+    Left = 211
     Top = 64
     Width = 40
     Height = 17
@@ -143,9 +143,9 @@ object frmNewImage: TfrmNewImage
   end
   object radChrSet: TRadioButton
     Tag = 3
-    Left = 274
+    Left = 268
     Top = 64
-    Width = 67
+    Width = 73
     Height = 17
     Caption = 'Char Set'
     TabOrder = 4
