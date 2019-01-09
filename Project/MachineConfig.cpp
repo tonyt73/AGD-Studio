@@ -36,8 +36,14 @@ __fastcall MachineConfig::MachineConfig(const String& name)
     m_PropertyMap["ImageSizing.CharacterSet.Maximum.Height"] = &m_ImageSizing[itCharacterSet].Maximum.cy;
     m_PropertyMap["ImageSizing.CharacterSet.Step.Width"] = &m_ImageSizing[itCharacterSet].Step.cx;
     m_PropertyMap["ImageSizing.CharacterSet.Step.Height"] = &m_ImageSizing[itCharacterSet].Step.cy;
-    m_PropertyMap["CompilerInformation.Path"] = &m_CompilerInfo.Path;
-    m_PropertyMap["CompilerInformation.Parameters"] = &m_CompilerInfo.Parameters;
+    m_PropertyMap["Tools.Compiler.Path"] = &m_Compiler.Path;
+    m_PropertyMap["Tools.Compiler.Parameters"] = &m_Compiler.Parameters;
+    m_PropertyMap["Tools.Assembler.Path"] = &m_Assembler.Path;
+    m_PropertyMap["Tools.Assembler.Parameters"] = &m_Assembler.Parameters;
+    m_PropertyMap["Tools.Assembler.Prepend"] = &m_Assembler.Path;
+    m_PropertyMap["Tools.Assembler.Append"] = &m_Assembler.Parameters;
+    m_PropertyMap["Tools.Emulator.Path"] = &m_Emulator.Path;
+    m_PropertyMap["Tools.Emulator.Parameters"] = &m_Emulator.Parameters;
 
     m_GraphicsMode = std::make_unique<Agdx::GraphicsMode>();
 }
@@ -79,6 +85,24 @@ void __fastcall MachineConfig::GetMachinesList(std::vector<String>& list)
     }
 }
 //---------------------------------------------------------------------------
+void __fastcall MachineConfig::SetCompiler(const ToolInfo& info)
+{
+    m_Compiler = info;
+    Save();
+}
+//---------------------------------------------------------------------------
+void __fastcall MachineConfig::SetAssembler(const ToolInfoExt& info)
+{
+    m_Assembler = info;
+    Save();
+}
+//---------------------------------------------------------------------------
+void __fastcall MachineConfig::SetEmulator(const ToolInfo& info)
+{
+    m_Emulator = info;
+    Save();
+}
+//---------------------------------------------------------------------------
 void __fastcall MachineConfig::Save()
 {
     // {
@@ -86,6 +110,22 @@ void __fastcall MachineConfig::Save()
     Write("Name", m_Name);
     Write("Image", m_Image);
     Write("GraphicsMode", m_GraphicsModeName);
+    Push("Tools");
+        Push("Compiler");
+            Write("Path", m_Compiler.Path);
+            Write("Parameters", m_Compiler.Parameters);
+        Pop();
+        Push("Assembler");
+            Write("Path", m_Assembler.Path);
+            Write("Parameters", m_Assembler.Parameters);
+            Write("Prepend", m_Assembler.Prepend);
+            Write("Append", m_Assembler.Append);
+        Pop();
+        Push("Emulator");
+            Write("Path", m_Emulator.Path);
+            Write("Parameters", m_Emulator.Parameters);
+        Pop();
+    Pop();
     Push("ImageSizing");
         Push("Object");
             Push("Minimum");
@@ -143,10 +183,6 @@ void __fastcall MachineConfig::Save()
                 Write("Height", (unsigned int)m_ImageSizing[itCharacterSet].Step.cy);
             Pop();
         Pop();
-    Pop();
-    Push("CompilerInformation");
-        Write("Path", m_CompilerInfo.Path);
-        Write("Parameters", m_CompilerInfo.Parameters);
     Pop();
     // }
     Close();

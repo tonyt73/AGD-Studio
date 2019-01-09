@@ -10,10 +10,15 @@ class MachineConfig : public System::JsonFile
 {
 public:
 
-    struct CompilerInfo
+    struct ToolInfo
     {
         String  Path;
         String  Parameters;
+    };
+    struct ToolInfoExt : public ToolInfo
+    {
+        String  Prepend;
+        String  Append;
     };
 
 protected:
@@ -22,9 +27,14 @@ protected:
     String                              m_GraphicsModeName;     // json loader
     std::unique_ptr<Agdx::GraphicsMode> m_GraphicsMode;
     ImageSizing                         m_ImageSizing[itEnd];   // of each image type
-    CompilerInfo                        m_CompilerInfo;
+    ToolInfo                            m_Compiler;
+    ToolInfoExt                         m_Assembler;
+    ToolInfo                            m_Emulator;
 
     const ImageSizing&      __fastcall  GetImageSizing(ImageTypes type) const;
+    void                    __fastcall  SetCompiler(const ToolInfo& info);
+    void                    __fastcall  SetAssembler(const ToolInfoExt& info);
+    void                    __fastcall  SetEmulator(const ToolInfo& info);
 
                             __fastcall  MachineConfig();
     void                    __fastcall  Save();
@@ -41,7 +51,9 @@ public:
     String                  __property  Name = { read = m_Name };
     String                  __property  Image = { read = m_Image };
     const ImageSizing       __property  ImageSizing[ImageTypes type] = { read = GetImageSizing };
-    const CompilerInfo      __property  CompilerInfo = { read = m_CompilerInfo };
+    __property  const ToolInfo&         Compiler = { read = m_Compiler, write = SetCompiler };
+    __property  const ToolInfoExt&      Assembler = { read = m_Assembler, write = SetAssembler };
+    __property  const ToolInfo&         Emulator = { read = m_Emulator, write = SetEmulator };
 };
 
 //---------------------------------------------------------------------------
