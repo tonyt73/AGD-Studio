@@ -96,10 +96,14 @@ String __fastcall Path::Create(Location location, const String& subFolder)
     return folder;
 }
 //---------------------------------------------------------------------------
+bool __fastcall Path::Exists(const String& path)
+{
+    return System::Ioutils::TDirectory::Exists(path);
+}
+//---------------------------------------------------------------------------
 bool __fastcall Path::Exists(Location location, const String& subFolder)
 {
-    auto folder = GetFolder(location, subFolder);
-    return System::Ioutils::TDirectory::Exists(folder);
+    return Exists(GetFolder(location, subFolder));
 }
 //---------------------------------------------------------------------------
 void __fastcall Path::Delete(Location location, const String& subFolder)

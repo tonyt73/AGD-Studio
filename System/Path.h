@@ -32,6 +32,7 @@ public:
     static  String          __fastcall  GetFolderRelativeTo(const Location location, const String& path);
     static  String          __fastcall  GetActiveProjectFolder();
     static  String          __fastcall  Create(Location location, const String& subFolder);
+    static  bool            __fastcall  Exists(const String& path);
     static  bool            __fastcall  Exists(Location location, const String& subFolder = "");
     static  void            __fastcall  Delete(Location location, const String& subFolder);
     static  void            __fastcall  Rename(Location location, const String& fromSubFolder, const String& toSubFolder);
