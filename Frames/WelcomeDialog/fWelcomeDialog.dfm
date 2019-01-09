@@ -13,7 +13,6 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     BevelOuter = bvNone
     TabOrder = 0
     StyleElements = [seFont, seBorder]
-    ExplicitLeft = 362
     object imgStartNewProject: TImage
       Left = 104
       Top = 266
@@ -56,14 +55,14 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     object lblStartNewProject: TLabel
       Left = 104
       Top = 262
-      Width = 184
-      Height = 22
+      Width = 191
+      Height = 23
       Cursor = crHandPoint
       Caption = '      Start a new project'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -19
-      Font.Name = 'Bauhaus Md BT'
+      Font.Name = 'Roboto'
       Font.Style = []
       ParentFont = False
       StyleElements = [seClient, seBorder]
@@ -6366,14 +6365,14 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       object lblOpenExistingProject: TLabel
         Left = 0
         Top = 4
-        Width = 227
-        Height = 22
+        Width = 239
+        Height = 23
         Cursor = crHandPoint
         Caption = '      Open an existing project'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -19
-        Font.Name = 'Bauhaus Md BT'
+        Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
         StyleElements = [seClient, seBorder]
@@ -6414,13 +6413,13 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       object lblChangeTheme: TLabel
         Left = 0
         Top = 79
-        Width = 150
-        Height = 22
+        Width = 159
+        Height = 23
         Caption = '      Change Theme'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -19
-        Font.Name = 'Bauhaus Md BT'
+        Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
         StyleElements = [seClient, seBorder]
@@ -6430,7 +6429,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       end
       object imgChangeTheme: TImage
         Left = 0
-        Top = 81
+        Top = 83
         Width = 16
         Height = 16
         AutoSize = True
@@ -6459,15 +6458,15 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           65C2D64EB544D1BA24C0D2773635EBD72F8A8FF40000000049454E44AE426082}
       end
       object cmbThemes: TComboBox
-        Left = 156
-        Top = 75
-        Width = 221
-        Height = 29
+        Left = 166
+        Top = 79
+        Width = 213
+        Height = 27
         Style = csDropDownList
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Comfortaa'
+        Font.Height = -16
+        Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
         TabOrder = 0
@@ -6486,7 +6485,6 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     ParentBackground = False
     TabOrder = 1
     StyleElements = [seFont, seBorder]
-    ExplicitWidth = 362
   end
   object dlgOpen: TOpenTextFileDialog
     DefaultExt = 'agdx'
