@@ -2117,23 +2117,12 @@ object frmSettings: TfrmSettings
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000}
   end
-  object dlgOpen: TFileOpenDialog
-    DefaultExtension = '*.exe'
-    FavoriteLinks = <
-      item
-      end>
-    FileTypes = <
-      item
-        DisplayName = 'Applications'
-        FileMask = '*.exe'
-      end
-      item
-        DisplayName = 'All Files'
-        FileMask = '*.*'
-      end>
-    FileTypeIndex = 0
-    Options = [fdoPathMustExist, fdoFileMustExist]
-    Left = 72
-    Top = 228
+  object dlgOpen: TOpenDialog
+    DefaultExt = '*.exe'
+    Filter = 'Applications|*.exe|All Files|*.*'
+    FilterIndex = 0
+    Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
+    Left = 32
+    Top = 256
   end
 end

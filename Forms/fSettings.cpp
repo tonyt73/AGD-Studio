@@ -128,8 +128,8 @@ String __fastcall TfrmSettings::FindExecutable(const String& title, const String
         folder = System::File::Combine(System::Path::Application, "Compilers");
     }
 
-    dlgOpen->DefaultFolder = folder;
-    dlgOpen->Title = "Locate AGD Compiler";
+    dlgOpen->InitialDir = folder;
+    dlgOpen->Title = title;
     if (dlgOpen->Execute())
     {
         auto file = dlgOpen->FileName;

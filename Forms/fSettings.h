@@ -76,8 +76,8 @@ __published:    // IDE-managed Components
     TEdit *edtCompilerExe;
     TEdit *edtCompilerParams;
     TButton *btnCompilerFind;
-    TFileOpenDialog *dlgOpen;
     TEdit *edtBuildMachine;
+    TOpenDialog *dlgOpen;
     void __fastcall FormCreate(TObject *Sender);
     void __fastcall btnProfileClick(TObject *Sender);
     void __fastcall btnOkClick(TObject *Sender);
