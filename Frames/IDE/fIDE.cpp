@@ -432,7 +432,7 @@ void __fastcall TfrmIDE::actViewMessagesExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actGameRunExecute(TObject *Sender)
 {
-	//
+    //
 }
 //---------------------------------------------------------------------------
 

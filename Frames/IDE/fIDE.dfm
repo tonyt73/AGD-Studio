@@ -354,12 +354,10 @@ object frmIDE: TfrmIDE
         object lblPropertyInfo: TLabel
           Left = 4
           Top = 4
-          Width = 210
-          Height = 32
+          Width = 99
+          Height = 13
           Align = alClient
           Caption = 'Property information'
-          ExplicitWidth = 99
-          ExplicitHeight = 13
         end
       end
     end
@@ -404,6 +402,7 @@ object frmIDE: TfrmIDE
       Left = 0
       Top = 0
       Width = 384
+      Height = 29
       Align = alLeft
       AutoSize = True
       ButtonHeight = 32
@@ -530,6 +529,7 @@ object frmIDE: TfrmIDE
       Left = 728
       Top = 0
       Width = 72
+      Height = 29
       Align = alRight
       AutoSize = True
       ButtonHeight = 32
