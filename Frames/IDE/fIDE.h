@@ -219,13 +219,4 @@ public:        // User declarations
             __property  TNotifyEvent OnFormClose = { read = FOnFormClose, write = FOnFormClose };
 };
 //---------------------------------------------------------------------------
-class TAGDDockPanel : public TLMDDockPanel
-{
-protected:
-   virtual void __fastcall WndProc(Winapi::Messages::TMessage &Message);
-
-public:
-                __fastcall  TAGDDockPanel(TComponent* AOwner);
-};
-//---------------------------------------------------------------------------
 #endif
