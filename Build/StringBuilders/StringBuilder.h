@@ -6,19 +6,11 @@
 //---------------------------------------------------------------------------
 namespace StringBuilders
 {
-//typedef std::tuple<bool, String> Result;
-//typedef std::tuple<bool, String, String> BuildResult;
-
 struct Result
 {
     Result()
     : Success(false)
     , Reason("Not Implemented") {}
-
-    Result(bool success, String reason, const String& content)
-    : Success(success)
-    , Reason(reason)
-    , Content(content) {}
 
     bool    Success;
     String  Reason;
@@ -29,8 +21,10 @@ class StringBuilder
 {
 private:
     Result                      m_Result;
-protected:
 
+    void            __fastcall  Clear();
+
+protected:
     void            __fastcall  AddLine(String line);
     void            __fastcall  LineBreak();
     void            __fastcall  Success();

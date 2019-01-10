@@ -12,6 +12,13 @@ __fastcall StringBuilders::StringBuilder::~StringBuilder()
 {
 }
 //---------------------------------------------------------------------------
+void __fastcall StringBuilders::StringBuilder::Clear()
+{
+    m_Result.Success = false;
+    m_Result.Reason = "Not Implemented";
+    m_Result.Content = "";
+}
+//---------------------------------------------------------------------------
 void __fastcall StringBuilders::StringBuilder::AddLine(String line)
 {
     m_Result.Content += line + "\r\n";
@@ -34,6 +41,7 @@ void __fastcall StringBuilders::StringBuilder::Reason(String reason)
 //---------------------------------------------------------------------------
 const StringBuilders::Result& __fastcall StringBuilders::StringBuilder::Build()
 {
+    Clear();
     Execute();
     return m_Result;
 }
