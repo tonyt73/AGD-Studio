@@ -32,6 +32,7 @@
 #include "Project/Document.h"
 #include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
+#include "Build/BuildManager.h"
 #include "Factories/DocumentEditorFactory.h"
 //---------------------------------------------------------------------------
 class TfrmIDE : public TFrame
@@ -200,17 +201,19 @@ __published:    // IDE-managed Components
 private:    // User declarations
     ::Messaging::Registrar  m_Registrar;
     DocumentEditorFactory   m_DocumentEditorFactory;
+    BuildManager            m_Builder;
 
-    void __fastcall UpdateDocumentProperties(Document* document);
-    void __fastcall OnDocumentClose(TObject *Sender, TLMDockPanelCloseAction& action);
-    void __fastcall RegisterDocumentEditors();
-    void __fastcall RefreshMruList();
-    void __fastcall mruOnClick(TObject *Sender);
-    void __fastcall OnMessageEvent(const MessageEvent& message);
-    void __fastcall OnUpdateProperties(const UpdateProperties& event);
+    void    __fastcall  UpdateDocumentProperties(Document* document);
+    void    __fastcall  OnDocumentClose(TObject *Sender, TLMDockPanelCloseAction& action);
+    void    __fastcall  RegisterDocumentEditors();
+    void    __fastcall  RefreshMruList();
+    void    __fastcall  mruOnClick(TObject *Sender);
+    void    __fastcall  OnMessageEvent(const MessageEvent& message);
+    void    __fastcall  OnUpdateProperties(const UpdateProperties& event);
+
+    TNotifyEvent        FOnFormClose;
 
 public:        // User declarations
-    TNotifyEvent        FOnFormClose;
             __fastcall  TfrmIDE(TComponent* Owner);
             __fastcall ~TfrmIDE();
 

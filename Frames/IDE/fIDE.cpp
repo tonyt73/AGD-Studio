@@ -67,6 +67,8 @@ void __fastcall TfrmIDE::OnActivate(TWinControl* parent)
         ThemeSettings::ReapplyStyle();
         Color = StyleServices()->GetStyleColor(scGenericGradientBase);
         tvProject->BackGroundColor = StyleServices()->GetStyleColor(scGenericGradientBase);
+        tvBuild->BackGroundColor = StyleServices()->GetStyleColor(scGenericGradientBase);
+        m_Builder.TreeView = tvBuild;
         dsIDE->Invalidate();
         RefreshMruList();
     }
@@ -432,7 +434,7 @@ void __fastcall TfrmIDE::actViewMessagesExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actGameRunExecute(TObject *Sender)
 {
-    //
+    m_Builder.Execute();
 }
 //---------------------------------------------------------------------------
 
