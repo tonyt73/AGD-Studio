@@ -1,6 +1,5 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
-#pragma hdrstop
 #include "Project/ProjectManager.h"
 #include "Frames/CodeEditor/fEditorCode.h"
 #include "Frames/ImageEditor/fEditorImage.h"
