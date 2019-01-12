@@ -15,8 +15,6 @@ public: // singleton
 private:
     // list of documents grouped by type
     typedef std::map<String, DocumentList> DocumentMap;
-    typedef DocumentMap::iterator  DocumentMapIt;
-
     DocumentMap                     m_Documents;
 
     // the document factory
