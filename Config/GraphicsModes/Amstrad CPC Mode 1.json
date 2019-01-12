@@ -9,6 +9,45 @@
   "BitsPerPixel": 2,
   "TranparentColor": 0,
   "SupportsLogicalColorRemapping" : true,
+  "PixelBitRemapping" : [
+     {
+		"Link" : "http://www.cpcmania.com/Docs/Programming/Painting_pixels_introduction_to_video_memory.htm",
+		"Remap" : [
+			{
+				"Mask" : 128,
+				"Shift" : 1
+			},
+			{
+				"Mask" : 64,
+				"Shift" : 1
+			},
+			{
+				"Mask" : 32,
+				"Shift" : 2
+			},
+			{
+				"Mask" : 16,
+				"Shift" : 3
+			},
+			{
+				"Mask" : 8,
+				"Shift" : -4
+			},
+			{
+				"Mask" : 4,
+				"Shift" : -2
+			},
+			{
+				"Mask" : 2,
+				"Shift" : -1
+			},
+			{
+				"Mask" : 1,
+				"Shift" : 0
+			}
+		]
+	 }
+  ],
   "ExportInformation" : {
      "Object" : {
 		"BitmapDataOnly" : true

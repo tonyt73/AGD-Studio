@@ -11,42 +11,39 @@
   "SupportsLogicalColorRemapping" : true,
   "PixelBitRemapping" : [
      {
+		"Link" : "http://www.cpcmania.com/Docs/Programming/Painting_pixels_introduction_to_video_memory.htm",
 		"Remap" : [
 			{
-				"Mask" : 1,
-				"Shift" : -7
+				"Mask" : 128,
+				"Shift" : 3
 			},
 			{
-				"Mask" : 2,
-				"Shift" : -2
+				"Mask" : 64,
+				"Shift" : 6
 			},
 			{
-				"Mask" : 4,
-				"Shift" : -3
-			},
-			{
-				"Mask" : 8,
-				"Shift" : 2
-			}
-		]
-	 },
-     {
-		"Remap" : [
-			{
-				"Mask" : 1,
-				"Shift" : -6
-			},
-			{
-				"Mask" : 2,
+				"Mask" : 32,
 				"Shift" : -1
 			},
 			{
-				"Mask" : 4,
-				"Shift" : -2
+				"Mask" : 16,
+				"Shift" : 3
 			},
 			{
 				"Mask" : 8,
-				"Shift" : 3
+				"Shift" : -2
+			},
+			{
+				"Mask" : 4,
+				"Shift" : 1
+			},
+			{
+				"Mask" : 2,
+				"Shift" : -5
+			},
+			{
+				"Mask" : 1,
+				"Shift" : -2
 			}
 		]
 	 }
