@@ -25,6 +25,7 @@ void __fastcall SectionBuilders::Tiles::Execute()
     dm.GetAllOfType("Image", images);
     for (auto image : images)
     {
+        // TODO: Add support for big images
         auto tile = dynamic_cast<TileDocument*>(image);
         if (tile != nullptr)
         {
