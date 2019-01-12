@@ -28,6 +28,8 @@ public:
     void            __fastcall  ChangeFrame(int frame);
     GraphicsBuffer& __fastcall  Canvas() const;
     void            __fastcall  Draw(const TPoint& pt, TBitmap* canvas, bool selected = false) const;
+    std::vector<unsigned char>
+                    __fastcall  GetExportNativeFormat() const;
 };
 typedef std::vector<std::unique_ptr<Image>> ImageList;
 typedef std::map<unsigned int, std::unique_ptr<Image>> ImageMap;

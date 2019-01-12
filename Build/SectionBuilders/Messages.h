@@ -1,18 +1,18 @@
 //---------------------------------------------------------------------------
-#ifndef ObjectsH
-#define ObjectsH
+#ifndef MessagesH
+#define MessagesH
 //---------------------------------------------------------------------------
-#include "Build/StringBuilders/StringBuilder.h"
+#include "Build/SectionBuilders/SectionBuilder.h"
 //---------------------------------------------------------------------------
-namespace StringBuilders
+namespace SectionBuilders
 {
-class Objects : public StringBuilder
+class Messages : public SectionBuilder
 {
 protected:
     void    __fastcall  Execute() final;
 public:
-            __fastcall  Objects();
-    virtual __fastcall ~Objects();
+            __fastcall  Messages();
+    virtual __fastcall ~Messages();
 };
 }
 //---------------------------------------------------------------------------

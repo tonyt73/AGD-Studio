@@ -1,18 +1,18 @@
 //---------------------------------------------------------------------------
-#ifndef WindowH
-#define WindowH
+#ifndef ControlsH
+#define ControlsH
 //---------------------------------------------------------------------------
-#include "Build/StringBuilders/StringBuilder.h"
+#include "Build/SectionBuilders/SectionBuilder.h"
 //---------------------------------------------------------------------------
-namespace StringBuilders
+namespace SectionBuilders
 {
-class Window : public StringBuilders::StringBuilder
+class Controls : public SectionBuilder
 {
 protected:
     void    __fastcall  Execute() final;
 public:
-            __fastcall  Window();
-    virtual __fastcall ~Window();
+            __fastcall  Controls();
+    virtual __fastcall ~Controls();
 };
 }
 //---------------------------------------------------------------------------

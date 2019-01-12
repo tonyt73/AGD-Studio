@@ -1,20 +1,19 @@
 //---------------------------------------------------------------------------
-#ifndef MapH
-#define MapH
+#ifndef ProjectH
+#define ProjectH
 //---------------------------------------------------------------------------
-#include "Build/StringBuilders/StringBuilder.h"
+#include "Build/SectionBuilders/SectionBuilder.h"
 //---------------------------------------------------------------------------
-namespace StringBuilders
+namespace SectionBuilders
 {
-class Map : public StringBuilder
+class Project : public SectionBuilder
 {
 protected:
     void    __fastcall  Execute() final;
 public:
-            __fastcall  Map();
-    virtual __fastcall ~Map();
+            __fastcall  Project();
+    virtual __fastcall ~Project();
 };
 }
 //---------------------------------------------------------------------------
 #endif
-

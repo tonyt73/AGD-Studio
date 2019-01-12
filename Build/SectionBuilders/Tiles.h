@@ -1,18 +1,18 @@
 //---------------------------------------------------------------------------
-#ifndef MessagesH
-#define MessagesH
+#ifndef TilesH
+#define TilesH
 //---------------------------------------------------------------------------
-#include "Build/StringBuilders/StringBuilder.h"
+#include "Build/SectionBuilders/SectionBuilder.h"
 //---------------------------------------------------------------------------
-namespace StringBuilders
+namespace SectionBuilders
 {
-class Messages : public StringBuilder
+class Tiles : public SectionBuilder
 {
 protected:
     void    __fastcall  Execute() final;
 public:
-            __fastcall  Messages();
-    virtual __fastcall ~Messages();
+            __fastcall  Tiles();
+    virtual __fastcall ~Tiles();
 };
 }
 //---------------------------------------------------------------------------

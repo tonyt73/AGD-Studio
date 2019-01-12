@@ -31,7 +31,7 @@ private:
         int           Shift;
     };
 
-    // The list of pixels (dependent on number of pixels byte) and their remapping
+    // The list of pixels (dependent on number of pixels per byte) and their remapping
     struct PixelRemapping
     {
         std::vector<RemapData>  Remaps;
@@ -57,7 +57,7 @@ protected:
     int                         m_LogicalIndex;             // json loader
     bool                        m_SupportsRemapping;        // supports remapping of the logical colors to any of the palette colors
     ExportInfo                  m_ExportInfo[itEnd];        // flags for image data export
-    PixelRemappingList          m_PixelRemapping;           // a list of  masks/shifts used to remap pixel bits into contiguous pixel bits for certain graphics modes
+    PixelRemappingList          m_PixelRemapping;           // a list of  masks/shifts used to remap pixel bits into machine specific formats for certain graphics modes
     PixelRemapping              m_PixelRemappingLoader;     // used to load the pixel remapping list
     RemapData                   m_RemapDataLoader;          // used to load the remap data into the m_PixelRemappingLoader
 
@@ -77,6 +77,7 @@ public:
             void    __fastcall  LoadLogicalCLUT(String path = "", String name = "");
                                 // Remap a logical color to a new palette color
     void            __fastcall  RemapColor(int paletteTableIndex, int colorTableIndex);
+    unsigned char   __fastcall  RemapPixels(unsigned char pixels) const;
     void            __fastcall  RestoreDefaultPalette();
     const Palette&  __fastcall  Palette() const;
 

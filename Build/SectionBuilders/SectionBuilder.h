@@ -1,10 +1,10 @@
 //---------------------------------------------------------------------------
-#ifndef StringBuilderH
-#define StringBuilderH
+#ifndef SectionBuilderH
+#define SectionBuilderH
 //---------------------------------------------------------------------------
 #include <tuple>
 //---------------------------------------------------------------------------
-namespace StringBuilders
+namespace SectionBuilders
 {
 struct Result
 {
@@ -17,7 +17,7 @@ struct Result
     String  Content;
 };
 //---------------------------------------------------------------------------
-class StringBuilder
+class SectionBuilder
 {
 private:
     Result                      m_Result;
@@ -33,8 +33,8 @@ protected:
     virtual void    __fastcall  Execute() = 0;
 
 public:
-                    __fastcall  StringBuilder();
-    virtual         __fastcall ~StringBuilder();
+                    __fastcall  SectionBuilder();
+    virtual         __fastcall ~SectionBuilder();
 
     const Result&   __fastcall  Build();
 };

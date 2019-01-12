@@ -4,14 +4,14 @@
 //---------------------------------------------------------------------------
 #include <list>
 #include "Build/Builder.h"
-#include "Build/StringBuilders/StringBuilder.h"
+#include "Build/SectionBuilders/SectionBuilder.h"
 //---------------------------------------------------------------------------
 class AgdBuilder : public Builder
 {
 private:
-    typedef std::list<std::unique_ptr<StringBuilders::StringBuilder>> StringBuilderList;
+    typedef std::list<std::unique_ptr<SectionBuilders::SectionBuilder>> SectionBuilderList;
 
-    StringBuilderList           m_StringBuilders;
+    SectionBuilderList           m_SectionBuilders;
 
 public:
                     __fastcall  AgdBuilder(BuildMessages& buildMessages);

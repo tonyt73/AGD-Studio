@@ -1,18 +1,18 @@
 //---------------------------------------------------------------------------
-#ifndef ScreensH
-#define ScreensH
+#ifndef FontH
+#define FontH
 //---------------------------------------------------------------------------
-#include "Build/StringBuilders/StringBuilder.h"
+#include "Build/SectionBuilders/SectionBuilder.h"
 //---------------------------------------------------------------------------
-namespace StringBuilders
+namespace SectionBuilders
 {
-class Screens : public StringBuilder
+class Font : public SectionBuilder
 {
 protected:
     void    __fastcall  Execute() final;
 public:
-            __fastcall  Screens();
-    virtual __fastcall ~Screens();
+            __fastcall  Font();
+    virtual __fastcall ~Font();
 };
 }
 //---------------------------------------------------------------------------

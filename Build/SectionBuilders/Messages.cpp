@@ -1,19 +1,19 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
-#include "Build/StringBuilders/Messages.h"
+#include "Build/SectionBuilders/Messages.h"
 #include "Project/DocumentManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall StringBuilders::Messages::Messages()
+__fastcall SectionBuilders::Messages::Messages()
 {
 }
 //---------------------------------------------------------------------------
-__fastcall StringBuilders::Messages::~Messages()
+__fastcall SectionBuilders::Messages::~Messages()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall StringBuilders::Messages::Execute()
+void __fastcall SectionBuilders::Messages::Execute()
 {
     const auto& dm = theDocumentManager;
     auto msgs = dm.Get("Text", "Message", "Messages");

@@ -1,35 +1,35 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
 #include "AgdBuilder.h"
-#include "Build/StringBuilders/Project.h"
-#include "Build/StringBuilders/Window.h"
-#include "Build/StringBuilders/Controls.h"
-#include "Build/StringBuilders/JumpTable.h"
-#include "Build/StringBuilders/Messages.h"
-#include "Build/StringBuilders/Events.h"
-#include "Build/StringBuilders/Font.h"
-#include "Build/StringBuilders/Tiles.h"
-#include "Build/StringBuilders/Sprites.h"
-#include "Build/StringBuilders/Objects.h"
-#include "Build/StringBuilders/Map.h"
-#include "Build/StringBuilders/Screens.h"
+#include "Build/SectionBuilders/Project.h"
+#include "Build/SectionBuilders/Window.h"
+#include "Build/SectionBuilders/Controls.h"
+#include "Build/SectionBuilders/JumpTable.h"
+#include "Build/SectionBuilders/Messages.h"
+#include "Build/SectionBuilders/Events.h"
+#include "Build/SectionBuilders/Font.h"
+#include "Build/SectionBuilders/Tiles.h"
+#include "Build/SectionBuilders/Sprites.h"
+#include "Build/SectionBuilders/Objects.h"
+#include "Build/SectionBuilders/Map.h"
+#include "Build/SectionBuilders/Screens.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall AgdBuilder::AgdBuilder(BuildMessages& buildMessages)
 : Builder(buildMessages)
 {
-    m_StringBuilders.push_back(std::move(std::make_unique<StringBuilders::Project>()));
-    m_StringBuilders.push_back(std::move(std::make_unique<StringBuilders::Window>()));
-    m_StringBuilders.push_back(std::move(std::make_unique<StringBuilders::Controls>()));
-    m_StringBuilders.push_back(std::move(std::make_unique<StringBuilders::JumpTable>()));
-    m_StringBuilders.push_back(std::move(std::make_unique<StringBuilders::Messages>()));
-    m_StringBuilders.push_back(std::move(std::make_unique<StringBuilders::Events>()));
-    m_StringBuilders.push_back(std::move(std::make_unique<StringBuilders::Font>()));
-    m_StringBuilders.push_back(std::move(std::make_unique<StringBuilders::Tiles>()));
-    m_StringBuilders.push_back(std::move(std::make_unique<StringBuilders::Sprites>()));
-    m_StringBuilders.push_back(std::move(std::make_unique<StringBuilders::Objects>()));
-    m_StringBuilders.push_back(std::move(std::make_unique<StringBuilders::Screens>()));
+    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Project>()));
+    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Window>()));
+    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Controls>()));
+    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::JumpTable>()));
+    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Messages>()));
+    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Events>()));
+    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Font>()));
+    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Tiles>()));
+    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Sprites>()));
+    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Objects>()));
+    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Screens>()));
 }
 //---------------------------------------------------------------------------
 __fastcall AgdBuilder::~AgdBuilder()
@@ -43,7 +43,7 @@ bool __fastcall AgdBuilder::Execute()
 
     String agdContent;
 
-    for (auto& builder : m_StringBuilders)
+    for (auto& builder : m_SectionBuilders)
     {
         // TODO: change to this when the 64 bit compiler supports it
         //auto[success, reason, content] = builder->Build();

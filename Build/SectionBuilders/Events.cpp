@@ -1,22 +1,22 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
 #include <System.StrUtils.hpp>
-#include "Build/StringBuilders/Events.h"
+#include "Build/SectionBuilders/Events.h"
 #include "Project/FileDefinitions.h"
 #include "System/File.h"
 #include "System/Path.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall StringBuilders::Events::Events()
+__fastcall SectionBuilders::Events::Events()
 {
 }
 //---------------------------------------------------------------------------
-__fastcall StringBuilders::Events::~Events()
+__fastcall SectionBuilders::Events::~Events()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall StringBuilders::Events::Execute()
+void __fastcall SectionBuilders::Events::Execute()
 {
     auto gamePath = System::Path::Project;
     auto definitions = std::make_unique<FileDefinitions>();

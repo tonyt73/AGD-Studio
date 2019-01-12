@@ -44,7 +44,7 @@ GraphicsBuffer& __fastcall Image::Canvas() const
 //---------------------------------------------------------------------------
 void __fastcall Image::ChangeFrame(int frame)
 {
-    Canvas().Set(m_Image->Frame[0]);
+    Canvas().Set(m_Image->Frame[frame]);
 }
 //---------------------------------------------------------------------------
 void __fastcall Image::Draw(const TPoint& pt, TBitmap* canvas, bool selected) const
@@ -61,3 +61,9 @@ void __fastcall Image::Draw(const TPoint& pt, TBitmap* canvas, bool selected) co
     }
 }
 //---------------------------------------------------------------------------
+std::vector<unsigned char> __fastcall Image::GetExportNativeFormat() const
+{
+    return m_Canvas->GetNative(m_Image->ImageType);
+}
+//---------------------------------------------------------------------------
+

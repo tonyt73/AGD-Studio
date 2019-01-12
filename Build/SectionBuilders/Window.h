@@ -1,18 +1,18 @@
 //---------------------------------------------------------------------------
-#ifndef ProjectH
-#define ProjectH
+#ifndef WindowH
+#define WindowH
 //---------------------------------------------------------------------------
-#include "Build/StringBuilders/StringBuilder.h"
+#include "Build/SectionBuilders/SectionBuilder.h"
 //---------------------------------------------------------------------------
-namespace StringBuilders
+namespace SectionBuilders
 {
-class Project : public StringBuilder
+class Window : public SectionBuilders::SectionBuilder
 {
 protected:
     void    __fastcall  Execute() final;
 public:
-            __fastcall  Project();
-    virtual __fastcall ~Project();
+            __fastcall  Window();
+    virtual __fastcall ~Window();
 };
 }
 //---------------------------------------------------------------------------

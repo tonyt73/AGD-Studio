@@ -1,19 +1,20 @@
 //---------------------------------------------------------------------------
-#ifndef EventsH
-#define EventsH
+#ifndef MapH
+#define MapH
 //---------------------------------------------------------------------------
-#include "Build/StringBuilders/StringBuilder.h"
+#include "Build/SectionBuilders/SectionBuilder.h"
 //---------------------------------------------------------------------------
-namespace StringBuilders
+namespace SectionBuilders
 {
-class Events : public StringBuilder
+class Map : public SectionBuilder
 {
 protected:
     void    __fastcall  Execute() final;
 public:
-            __fastcall  Events();
-    virtual __fastcall ~Events();
+            __fastcall  Map();
+    virtual __fastcall ~Map();
 };
 }
 //---------------------------------------------------------------------------
 #endif
+

@@ -106,10 +106,26 @@ void __fastcall GraphicsBuffer::SetRenderInGreyscale(bool value)
 //---------------------------------------------------------------------------
 void __fastcall GraphicsBuffer::GetBuffer(int index, ByteBuffer& buffer) const
 {
-    if (index < m_Buffers.size())
+    if (0 <= index && index < m_Buffers.size())
     {
         buffer.assign(m_Buffers[index].begin(), m_Buffers[index].end());
     }
+}
+//---------------------------------------------------------------------------
+std::vector<unsigned char> __fastcall GraphicsBuffer::GetNative(ImageTypes type) const
+{
+    std::vector<unsigned char> data;
+    for (auto buffer = 0; buffer < m_Buffers.size(); buffer++)
+    {
+        if (buffer == 0 && m_GraphicsMode.ExportInformation[type].BitmapDataOnly || !m_GraphicsMode.ExportInformation[type].BitmapDataOnly)
+        {
+            for (const auto& byte : m_Buffers[buffer])
+            {
+                data.push_back(m_GraphicsMode.RemapPixels(byte));
+            }
+        }
+    }
+    return data;
 }
 //---------------------------------------------------------------------------
 String __fastcall GraphicsBuffer::Get() const

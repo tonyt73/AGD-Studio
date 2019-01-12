@@ -1,18 +1,18 @@
 //---------------------------------------------------------------------------
-#ifndef ControlsH
-#define ControlsH
+#ifndef ObjectsH
+#define ObjectsH
 //---------------------------------------------------------------------------
-#include "Build/StringBuilders/StringBuilder.h"
+#include "Build/SectionBuilders/SectionBuilder.h"
 //---------------------------------------------------------------------------
-namespace StringBuilders
+namespace SectionBuilders
 {
-class Controls : public StringBuilder
+class Objects : public SectionBuilder
 {
 protected:
     void    __fastcall  Execute() final;
 public:
-            __fastcall  Controls();
-    virtual __fastcall ~Controls();
+            __fastcall  Objects();
+    virtual __fastcall ~Objects();
 };
 }
 //---------------------------------------------------------------------------

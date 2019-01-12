@@ -46,6 +46,7 @@ protected:
   virtual unsigned char __fastcall  GetColorIndex(unsigned char index) const;
   virtual void          __fastcall  SetColorIndex(unsigned char index, int logicalIndex);
     void                __fastcall  SetRenderInGreyscale(bool value);
+    unsigned char       __fastcall  RemapPixel(unsigned char pixel) const;
     virtual void        __fastcall  Render() const = 0;
 
 public:
@@ -59,6 +60,8 @@ public:
     virtual void        __fastcall  GetColor(unsigned int X, unsigned int Y, unsigned char colorIndex = 0) = 0;
                                     // Retrieves the specified buffer index from the graphics buffer
     void                __fastcall  GetBuffer(int index, ByteBuffer& buffer) const;
+std::vector<unsigned char>          // Get the native byte data for the buffer
+                        __fastcall  GetNative(ImageTypes type) const;
                                     // Get the hex data of the image
     String              __fastcall  Get() const;
                                     // Set the bitmap data from the hex data

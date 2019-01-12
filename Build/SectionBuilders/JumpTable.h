@@ -1,18 +1,21 @@
 //---------------------------------------------------------------------------
-#ifndef TilesH
-#define TilesH
+#ifndef JumpTableH
+#define JumpTableH
 //---------------------------------------------------------------------------
-#include "Build/StringBuilders/StringBuilder.h"
+#include "Build/SectionBuilders/SectionBuilder.h"
 //---------------------------------------------------------------------------
-namespace StringBuilders
+namespace SectionBuilders
 {
-class Tiles : public StringBuilder
+class JumpTable : public SectionBuilder
 {
+private:
+    // TODO: put this into an editor
+    int                 m_Steps[22];
 protected:
     void    __fastcall  Execute() final;
 public:
-            __fastcall  Tiles();
-    virtual __fastcall ~Tiles();
+            __fastcall  JumpTable();
+    virtual __fastcall ~JumpTable();
 };
 }
 //---------------------------------------------------------------------------

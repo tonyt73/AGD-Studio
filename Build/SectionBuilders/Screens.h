@@ -1,18 +1,18 @@
 //---------------------------------------------------------------------------
-#ifndef SpritesH
-#define SpritesH
+#ifndef ScreensH
+#define ScreensH
 //---------------------------------------------------------------------------
-#include "Build/StringBuilders/StringBuilder.h"
+#include "Build/SectionBuilders/SectionBuilder.h"
 //---------------------------------------------------------------------------
-namespace StringBuilders
+namespace SectionBuilders
 {
-class Sprites : public StringBuilder
+class Screens : public SectionBuilder
 {
 protected:
     void    __fastcall  Execute() final;
 public:
-            __fastcall  Sprites();
-    virtual __fastcall ~Sprites();
+            __fastcall  Screens();
+    virtual __fastcall ~Screens();
 };
 }
 //---------------------------------------------------------------------------

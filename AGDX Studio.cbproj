@@ -75,7 +75,7 @@
         <Icon_MainIcon>$(BDS)\bin\cbuilder_PROJECTICON.ico</Icon_MainIcon>
         <UWP_CppLogo44>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_44.png</UWP_CppLogo44>
         <UWP_CppLogo150>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_150.png</UWP_CppLogo150>
-        <ILINK_LibraryPath>Frames\WindowEditor\;Frames\JumpEditor\;Build\StringBuilders\;Build\;Frames\IDE\;Frames\ImportDialog\;Frames\WelcomeDialog\;Frames\MapEditor\;Frames\MusicEditor\;Frames\CodeEditor\;Frames\ImageEditor\;Import\;Graphics\;Factories\;Messaging\;System\;File\;Project\;Settings\;Frames\;Forms\;..\;..\Frames\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <ILINK_LibraryPath>Frames\WindowEditor\;Frames\JumpEditor\;Build\SectionBuilders\;Build\;Frames\IDE\;Frames\ImportDialog\;Frames\WelcomeDialog\;Frames\MapEditor\;Frames\MusicEditor\;Frames\CodeEditor\;Frames\ImageEditor\;Import\;Graphics\;Factories\;Messaging\;System\;File\;Project\;Settings\;Frames\;Forms\;..\;..\Frames\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <SanitizedProjectName>AGDX_Studio</SanitizedProjectName>
         <Custom_Styles>&quot;Onyx Blue|VCLSTYLE|$(BDSCOMMONDIR)\Styles\OnyxBlue.vsf&quot;</Custom_Styles>
         <RunBCCOutOfProcess>true</RunBCCOutOfProcess>
@@ -86,7 +86,7 @@
         <VerInfo_Locale>3081</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=1.0.6663.80;InternalName=agdx.exe;LegalCopyright=2019 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Programmed by Tony Thompson</VerInfo_Keys>
         <VerInfo_AutoGenVersion>true</VerInfo_AutoGenVersion>
-        <IncludePath>Frames\WindowEditor\;Frames\JumpEditor\;Build\StringBuilders\;Build\;System\;Messaging\;Frames\MusicEditor\;Frames\MapEditor\;Forms\;Frames\ImageEditor\;Frames\WelcomeDialog\;Frames\IDE\;Frames\;Frames\CodeEditor\;Settings\;Graphics\;Project\;Factories\;$(IncludePath)</IncludePath>
+        <IncludePath>Frames\WindowEditor\;Frames\JumpEditor\;Build\SectionBuilders\;Build\;System\;Messaging\;Frames\MusicEditor\;Frames\MapEditor\;Forms\;Frames\ImageEditor\;Frames\WelcomeDialog\;Frames\IDE\;Frames\;Frames\CodeEditor\;Settings\;Graphics\;Project\;Factories\;$(IncludePath)</IncludePath>
         <BCC_UseClassicCompiler>false</BCC_UseClassicCompiler>
         <BCC_InstructionSet>6</BCC_InstructionSet>
         <BCC_StackFrames>true</BCC_StackFrames>
@@ -229,56 +229,56 @@
             <DependentOn>Build\EmuBuilder.h</DependentOn>
             <BuildOrder>71</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Build\StringBuilders\Controls.cpp">
-            <DependentOn>Build\StringBuilders\Controls.h</DependentOn>
+        <CppCompile Include="Build\SectionBuilders\Controls.cpp">
+            <DependentOn>Build\SectionBuilders\Controls.h</DependentOn>
             <BuildOrder>75</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Build\StringBuilders\Events.cpp">
-            <DependentOn>Build\StringBuilders\Events.h</DependentOn>
+        <CppCompile Include="Build\SectionBuilders\Events.cpp">
+            <DependentOn>Build\SectionBuilders\Events.h</DependentOn>
             <BuildOrder>78</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Build\StringBuilders\Font.cpp">
-            <DependentOn>Build\StringBuilders\Font.h</DependentOn>
+        <CppCompile Include="Build\SectionBuilders\Font.cpp">
+            <DependentOn>Build\SectionBuilders\Font.h</DependentOn>
             <BuildOrder>79</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Build\StringBuilders\JumpTable.cpp">
-            <DependentOn>Build\StringBuilders\JumpTable.h</DependentOn>
+        <CppCompile Include="Build\SectionBuilders\JumpTable.cpp">
+            <DependentOn>Build\SectionBuilders\JumpTable.h</DependentOn>
             <BuildOrder>76</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Build\StringBuilders\Map.cpp">
-            <DependentOn>Build\StringBuilders\Map.h</DependentOn>
+        <CppCompile Include="Build\SectionBuilders\Map.cpp">
+            <DependentOn>Build\SectionBuilders\Map.h</DependentOn>
             <BuildOrder>83</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Build\StringBuilders\Messages.cpp">
-            <DependentOn>Build\StringBuilders\Messages.h</DependentOn>
+        <CppCompile Include="Build\SectionBuilders\Messages.cpp">
+            <DependentOn>Build\SectionBuilders\Messages.h</DependentOn>
             <BuildOrder>77</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Build\StringBuilders\Objects.cpp">
-            <DependentOn>Build\StringBuilders\Objects.h</DependentOn>
+        <CppCompile Include="Build\SectionBuilders\Objects.cpp">
+            <DependentOn>Build\SectionBuilders\Objects.h</DependentOn>
             <BuildOrder>82</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Build\StringBuilders\Project.cpp">
-            <DependentOn>Build\StringBuilders\Project.h</DependentOn>
+        <CppCompile Include="Build\SectionBuilders\Project.cpp">
+            <DependentOn>Build\SectionBuilders\Project.h</DependentOn>
             <BuildOrder>73</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Build\StringBuilders\Screens.cpp">
-            <DependentOn>Build\StringBuilders\Screens.h</DependentOn>
+        <CppCompile Include="Build\SectionBuilders\Screens.cpp">
+            <DependentOn>Build\SectionBuilders\Screens.h</DependentOn>
             <BuildOrder>84</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Build\StringBuilders\Sprites.cpp">
-            <DependentOn>Build\StringBuilders\Sprites.h</DependentOn>
-            <BuildOrder>81</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Build\StringBuilders\StringBuilder.cpp">
-            <DependentOn>Build\StringBuilders\StringBuilder.h</DependentOn>
+        <CppCompile Include="Build\SectionBuilders\SectionBuilder.cpp">
+            <DependentOn>Build\SectionBuilders\SectionBuilder.h</DependentOn>
             <BuildOrder>72</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Build\StringBuilders\Tiles.cpp">
-            <DependentOn>Build\StringBuilders\Tiles.h</DependentOn>
+        <CppCompile Include="Build\SectionBuilders\Sprites.cpp">
+            <DependentOn>Build\SectionBuilders\Sprites.h</DependentOn>
+            <BuildOrder>81</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\SectionBuilders\Tiles.cpp">
+            <DependentOn>Build\SectionBuilders\Tiles.h</DependentOn>
             <BuildOrder>80</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Build\StringBuilders\Window.cpp">
-            <DependentOn>Build\StringBuilders\Window.h</DependentOn>
+        <CppCompile Include="Build\SectionBuilders\Window.cpp">
+            <DependentOn>Build\SectionBuilders\Window.h</DependentOn>
             <BuildOrder>74</BuildOrder>
         </CppCompile>
         <CppCompile Include="Factories\DocumentEditorFactory.cpp">
@@ -606,29 +606,29 @@
             <DependentOn>System\Path.h</DependentOn>
             <BuildOrder>18</BuildOrder>
         </CppCompile>
-        <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
-        <FormResources Include="Frames\MusicEditor\fEditorMusic.dfm"/>
+        <FormResources Include="Frames\WindowEditor\fEditorWindow.dfm"/>
         <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
-        <FormResources Include="Frames\IDE\fIDE.dfm"/>
+        <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
+        <FormResources Include="Frames\MapEditor\LabelledImage.dfm"/>
+        <FormResources Include="Frames\MapEditor\fEditorMap.dfm"/>
+        <FormResources Include="Frames\MapEditor\AssetSelection.dfm"/>
+        <FormResources Include="Frames\MusicEditor\fEditorMusic.dfm"/>
+        <FormResources Include="Frames\JumpEditor\fEditorJump.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fPaletteAttribute.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fMultiImageView.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fEditorImage.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fBlockTypes.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fULAplusBitmap.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fToolbarShape.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fToolbar.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fSelectionImage.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fPaletteBitmap.dfm"/>
         <FormResources Include="Frames\CodeEditor\fEditorCode.dfm"/>
         <FormResources Include="Forms\fSettings.dfm"/>
         <FormResources Include="Forms\fNewImage.dfm"/>
         <FormResources Include="Forms\fMain.dfm"/>
         <FormResources Include="Forms\fAbout.dfm"/>
-        <FormResources Include="Frames\MapEditor\LabelledImage.dfm"/>
-        <FormResources Include="Frames\MapEditor\fEditorMap.dfm"/>
-        <FormResources Include="Frames\MapEditor\AssetSelection.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fULAplusBitmap.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fPaletteAttribute.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fMultiImageView.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fEditorImage.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fBlockTypes.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fToolbarShape.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fToolbar.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fSelectionImage.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fPaletteBitmap.dfm"/>
-        <FormResources Include="Frames\JumpEditor\fEditorJump.dfm"/>
-        <FormResources Include="Frames\WindowEditor\fEditorWindow.dfm"/>
+        <FormResources Include="Frames\IDE\fIDE.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -662,29 +662,14 @@
                 </Excluded_Packages>
             </CPlusPlusBuilder.Personality>
             <Deployment Version="3">
+                <DeployFile LocalName=".\Win64\Release\AGDX Studio.exe" Configuration="Release" Class="ProjectOutput">
+                    <Platform Name="Win64">
+                        <RemoteName>AGDX_Studio.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32c260.dll" Class="DependencyModule">
                     <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32260.dll" Class="DependencyModule">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin64\cc64260mt.dll" Class="DependencyModule">
-                    <Platform Name="Win64">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32250mt.dll" Class="DependencyModule">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName=".\Win32\Debug\AGDX Studio.exe" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>AGDX_Studio.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -704,6 +689,16 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile Condition="'$(UsingDelphiRTL)'=='true'" LocalName="$(BDS)\bin64\borlndmm.dll" Class="DependencyModule">
+                    <Platform Name="Win64">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32260.dll" Class="DependencyModule">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin64\cc64260mt.dll" Class="DependencyModule">
                     <Platform Name="Win64">
                         <Overwrite>true</Overwrite>
                     </Platform>
@@ -734,6 +729,11 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32250mt.dll" Class="DependencyModule">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin64\cc64250mt.dll" Class="DependencyModule">
                     <Platform Name="Win64">
                         <Overwrite>true</Overwrite>
@@ -760,14 +760,14 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName=".\Win64\Release\AGDX Studio.exe" Configuration="Release" Class="ProjectOutput">
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin64\cc64250.dll" Class="DependencyModule">
                     <Platform Name="Win64">
-                        <RemoteName>AGDX_Studio.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin64\cc64250.dll" Class="DependencyModule">
-                    <Platform Name="Win64">
+                <DeployFile LocalName=".\Win32\Debug\AGDX Studio.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>AGDX_Studio.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

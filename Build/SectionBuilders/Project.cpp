@@ -1,19 +1,19 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
-#include "Build/StringBuilders/Project.h"
+#include "Build/SectionBuilders/Project.h"
 #include "Project/DocumentManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall StringBuilders::Project::Project()
+__fastcall SectionBuilders::Project::Project()
 {
 }
 //---------------------------------------------------------------------------
-__fastcall StringBuilders::Project::~Project()
+__fastcall SectionBuilders::Project::~Project()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall StringBuilders::Project::Execute()
+void __fastcall SectionBuilders::Project::Execute()
 {
     const auto& project = theDocumentManager.ProjectConfig();
 

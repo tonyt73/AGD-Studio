@@ -4,7 +4,7 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall StringBuilders::JumpTable::JumpTable()
+__fastcall SectionBuilders::JumpTable::JumpTable()
 {
     m_Steps[ 0] =   0;
     m_Steps[ 1] = -15;
@@ -30,11 +30,11 @@ __fastcall StringBuilders::JumpTable::JumpTable()
     m_Steps[21] =  16;
 }
 //---------------------------------------------------------------------------
-__fastcall StringBuilders::JumpTable::~JumpTable()
+__fastcall SectionBuilders::JumpTable::~JumpTable()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall StringBuilders::JumpTable::Execute()
+void __fastcall SectionBuilders::JumpTable::Execute()
 {
     String def = "DEFINEJUMP ";
     for (auto i = 1; i <= 21; i++)

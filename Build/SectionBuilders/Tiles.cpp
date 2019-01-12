@@ -1,18 +1,18 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
-#include "Sprites.h"
+#include "Tiles.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall StringBuilders::Sprites::Sprites()
+__fastcall SectionBuilders::Tiles::Tiles()
 {
 }
 //---------------------------------------------------------------------------
-__fastcall StringBuilders::Sprites::~Sprites()
+__fastcall SectionBuilders::Tiles::~Tiles()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall StringBuilders::Sprites::Execute()
+void __fastcall SectionBuilders::Tiles::Execute()
 {
 }
 //---------------------------------------------------------------------------

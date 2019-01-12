@@ -1,19 +1,23 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
-#include "Font.h"
+#include "Controls.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
+using namespace SectionBuilders;
 //---------------------------------------------------------------------------
-__fastcall StringBuilders::Font::Font()
+__fastcall SectionBuilders::Controls::Controls()
 {
 }
 //---------------------------------------------------------------------------
-__fastcall StringBuilders::Font::~Font()
+__fastcall SectionBuilders::Controls::~Controls()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall StringBuilders::Font::Execute()
+void __fastcall SectionBuilders::Controls::Execute()
 {
+    AddLine("DEFINECONTROLS  'Q' 'A' 'O' 'P' ' ' 'Z' 'I'");
+    LineBreak();
+    Success();
 }
 //---------------------------------------------------------------------------
 

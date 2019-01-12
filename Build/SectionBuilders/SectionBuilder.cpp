@@ -1,47 +1,47 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
-#include "Build/StringBuilders/StringBuilder.h"
+#include "Build/SectionBuilders/SectionBuilder.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall StringBuilders::StringBuilder::StringBuilder()
+__fastcall SectionBuilders::SectionBuilder::SectionBuilder()
 {
 }
 //---------------------------------------------------------------------------
-__fastcall StringBuilders::StringBuilder::~StringBuilder()
+__fastcall SectionBuilders::SectionBuilder::~SectionBuilder()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall StringBuilders::StringBuilder::Clear()
+void __fastcall SectionBuilders::SectionBuilder::Clear()
 {
     m_Result.Success = false;
     m_Result.Reason = "Not Implemented";
     m_Result.Content = "";
 }
 //---------------------------------------------------------------------------
-void __fastcall StringBuilders::StringBuilder::AddLine(String line)
+void __fastcall SectionBuilders::SectionBuilder::AddLine(String line)
 {
     m_Result.Content += line + "\r\n";
 }
 //---------------------------------------------------------------------------
-void __fastcall StringBuilders::StringBuilder::LineBreak()
+void __fastcall SectionBuilders::SectionBuilder::LineBreak()
 {
     m_Result.Content += "\r\n";
 }
 //---------------------------------------------------------------------------
-void __fastcall StringBuilders::StringBuilder::Success()
+void __fastcall SectionBuilders::SectionBuilder::Success()
 {
     m_Result.Success = true;
     m_Result.Reason = "Ok";
 }
 //---------------------------------------------------------------------------
-void __fastcall StringBuilders::StringBuilder::Failure(String reason)
+void __fastcall SectionBuilders::SectionBuilder::Failure(String reason)
 {
     m_Result.Success = false;
     m_Result.Reason = reason;
 }
 //---------------------------------------------------------------------------
-const StringBuilders::Result& __fastcall StringBuilders::StringBuilder::Build()
+const SectionBuilders::Result& __fastcall SectionBuilders::SectionBuilder::Build()
 {
     Clear();
     Execute();

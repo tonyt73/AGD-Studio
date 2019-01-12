@@ -1,23 +1,19 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
-#include "Controls.h"
+#include "Map.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-using namespace StringBuilders;
 //---------------------------------------------------------------------------
-__fastcall StringBuilders::Controls::Controls()
+__fastcall SectionBuilders::Map::Map()
 {
 }
 //---------------------------------------------------------------------------
-__fastcall StringBuilders::Controls::~Controls()
+__fastcall SectionBuilders::Map::~Map()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall StringBuilders::Controls::Execute()
+void __fastcall SectionBuilders::Map::Execute()
 {
-    AddLine("DEFINECONTROLS  'Q' 'A' 'O' 'P' ' ' 'Z' 'I'");
-    LineBreak();
-    Success();
 }
 //---------------------------------------------------------------------------
 

@@ -89,6 +89,24 @@ void __fastcall GraphicsMode::RemapColor(int logicalIndex, int paletteIndex)
     }
 }
 //---------------------------------------------------------------------------
+unsigned char __fastcall GraphicsMode::RemapPixels(unsigned char pixels) const
+{
+    if (m_PixelRemapping.size() == 0)
+        return pixels;
+    // mangle the pixel
+    unsigned char mangledByte;
+    for (const auto& remaps : m_PixelRemapping)
+    {
+        for (const auto& remap : remaps.Remaps)
+        {
+            auto bit = pixels & remap.Mask;
+            bit = remap.Shift >= 0 ? bit >> remap.Shift : bit << abs(remap.Shift);
+            mangledByte |= bit;
+        }
+    }
+    return mangledByte;
+}
+//---------------------------------------------------------------------------
 void __fastcall GraphicsMode::RestoreDefaultPalette()
 {
     m_LogicalColors = m_DefaultLogicalColors;

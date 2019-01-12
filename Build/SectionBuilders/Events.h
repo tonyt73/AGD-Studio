@@ -1,18 +1,18 @@
 //---------------------------------------------------------------------------
-#ifndef FontH
-#define FontH
+#ifndef EventsH
+#define EventsH
 //---------------------------------------------------------------------------
-#include "Build/StringBuilders/StringBuilder.h"
+#include "Build/SectionBuilders/SectionBuilder.h"
 //---------------------------------------------------------------------------
-namespace StringBuilders
+namespace SectionBuilders
 {
-class Font : public StringBuilder
+class Events : public SectionBuilder
 {
 protected:
     void    __fastcall  Execute() final;
 public:
-            __fastcall  Font();
-    virtual __fastcall ~Font();
+            __fastcall  Events();
+    virtual __fastcall ~Events();
 };
 }
 //---------------------------------------------------------------------------
