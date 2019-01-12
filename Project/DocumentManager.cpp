@@ -23,7 +23,7 @@ DocumentManager& DocumentManager::get()
 __fastcall DocumentManager::DocumentManager()
 {
     Register("Game", "Configuration", &ProjectDocument::Create);
-    //Register("Text", "Plain", &TextDocument::Create);
+    Register("Text", "Plain", &TextDocument::Create);
     Register("Text", "Event", &EventDocument::Create);
     Register("Text", "Message", &MessageDocument::Create);
     //Register("Image", "Single", &ImageDocument::Create);
@@ -63,10 +63,10 @@ Document* __fastcall DocumentManager::Add(const String& type, const String& subT
                 documents.push_back(document);
                 m_Documents.emplace(std::make_pair(document->Type, documents));
             }
-            // assign an id if we don't have one, but need one
             ::Messaging::Bus::Publish<Event>(Event("document.added"));
         }
         document->Load();
+        // assign an id if we don't have one, but need one
         document->AssignId();
         theProjectManager.AddToTreeView(document);
         return document;

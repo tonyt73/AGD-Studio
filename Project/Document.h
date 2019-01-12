@@ -45,6 +45,7 @@ protected:
             TPropertyInfoMap        m_PropertyInfo;
             void*                   m_TreeNode;
             void*                   m_DockPanel;
+            bool                    m_ReadOnly;
 
             // document reference id
             unsigned int            m_RefId;        // used by editor to find documents quickly
@@ -80,6 +81,7 @@ const TPropertyInfoMap& __fastcall  GetPropertyInfo() const;
     __property          String      Type        = { read = m_Type                           };
     __property          String      SubType     = { read = m_SubType                        };
     __property          bool        IsMultiDoc  = { read = m_MultiDoc                       };
+    __property          bool        IsReadOnly  = { read = m_ReadOnly                       };
     __property          void*       TreeNode    = { read = m_TreeNode, write = m_TreeNode   };
     __property          void*       DockPanel   = { read = m_DockPanel, write = m_DockPanel };
 

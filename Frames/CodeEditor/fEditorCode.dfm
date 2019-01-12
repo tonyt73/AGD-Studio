@@ -3591,7 +3591,7 @@ object frmEditorCode: TfrmEditorCode
             'ple" fontStyle="bold"/>'
           '</Attributes>')
       end>
-    ActiveSyntaxScheme = 'AGD'
+    ActiveSyntaxScheme = 'Text'
     ActiveColorScheme = 'Dark'
     Left = 64
     Top = 48

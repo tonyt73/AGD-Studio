@@ -77,6 +77,7 @@ void __fastcall TfrmEditorCode::SetDocument(Document* document)
         auto extension = System::File::Extension(document->Path).SubString(2, 32);
         auto sc = GetSyntaxScByExt(extension);
         lmdDocument->ActiveSyntaxScheme = sc;
+        lmdDocument->ReadOnly = document->IsReadOnly;
     }
     Color = StyleServices()->GetStyleColor(scGenericGradientBase);
 }

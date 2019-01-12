@@ -103,6 +103,7 @@ __fastcall AGDDocument::AGDDocument(const String& name)
     m_SubType = "AGD";
     m_Folder = "Game\\Output";
     m_Extension = "agd";
+    m_ReadOnly = true;
     RegisterProperty("Name", "Details", "The name of the AGD source code file");
     auto file = GetFile();
     if (m_Name != "unnamed" && !System::File::Exists(file))
