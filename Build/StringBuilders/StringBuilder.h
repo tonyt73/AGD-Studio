@@ -28,7 +28,7 @@ protected:
     void            __fastcall  AddLine(String line);
     void            __fastcall  LineBreak();
     void            __fastcall  Success();
-    void            __fastcall  Reason(String reason);
+    void            __fastcall  Failure(String reason);
 
     virtual void    __fastcall  Execute() = 0;
 

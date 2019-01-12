@@ -32,10 +32,12 @@ void __fastcall StringBuilders::StringBuilder::LineBreak()
 void __fastcall StringBuilders::StringBuilder::Success()
 {
     m_Result.Success = true;
+    m_Result.Reason = "Ok";
 }
 //---------------------------------------------------------------------------
-void __fastcall StringBuilders::StringBuilder::Reason(String reason)
+void __fastcall StringBuilders::StringBuilder::Failure(String reason)
 {
+    m_Result.Success = false;
     m_Result.Reason = reason;
 }
 //---------------------------------------------------------------------------

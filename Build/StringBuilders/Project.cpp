@@ -24,12 +24,13 @@ void __fastcall StringBuilders::Project::Execute()
     AddLine("; AUTHOR     : " + project->Author);
     AddLine("; BUILD DATE : " + DateTimeToStr(Now()));
     AddLine(";");
+    AddLine("; This file is read-only and periodically auto generated.");
+    AddLine(";");
     AddLine(";DEFINEMACHINE \"" + project->Machine + "\"");
     AddLine(";");
     LineBreak();
 
     Success();
-    Reason("Ok");
 }
 //---------------------------------------------------------------------------
 

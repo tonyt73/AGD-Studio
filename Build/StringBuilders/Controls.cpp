@@ -15,6 +15,9 @@ __fastcall StringBuilders::Controls::~Controls()
 //---------------------------------------------------------------------------
 void __fastcall StringBuilders::Controls::Execute()
 {
+    AddLine("DEFINECONTROLS  'Q' 'A' 'O' 'P' ' ' 'Z' 'I'");
+    LineBreak();
+    Success();
 }
 //---------------------------------------------------------------------------
 
