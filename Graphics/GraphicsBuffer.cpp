@@ -117,7 +117,7 @@ std::vector<unsigned char> __fastcall GraphicsBuffer::GetNative(ImageTypes type)
     std::vector<unsigned char> data;
     for (auto buffer = 0; buffer < m_Buffers.size(); buffer++)
     {
-        if (buffer == 0 && m_GraphicsMode.ExportInformation[type].BitmapDataOnly || !m_GraphicsMode.ExportInformation[type].BitmapDataOnly)
+        if ((buffer == 0 && m_GraphicsMode.ExportInformation[type].BitmapDataOnly) || !m_GraphicsMode.ExportInformation[type].BitmapDataOnly)
         {
             for (const auto& byte : m_Buffers[buffer])
             {
