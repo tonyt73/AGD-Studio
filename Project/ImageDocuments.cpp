@@ -4,6 +4,7 @@
 //---------------------------------------------------------------------------
 #include "ImageDocuments.h"
 #include "DocumentManager.h"
+#include "GraphicsTypes.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -56,7 +57,13 @@ void __fastcall ImageDocument::DoSave()
             }
             ArrayEnd(); // Layers
         }
+        DoSaveExtra();
     Pop();  // image
+}
+//---------------------------------------------------------------------------
+void __fastcall ImageDocument::DoSaveExtra()
+{
+    // do nothing
 }
 //---------------------------------------------------------------------------
 void __fastcall ImageDocument::OnEndObject(const String& object)
@@ -251,16 +258,62 @@ __fastcall SpriteDocument::SpriteDocument(const String& name, const String& extr
 //---------------------------------------------------------------------------
 __fastcall ObjectDocument::ObjectDocument(const String& name, const String& extra)
 : ImageDocument(name)
-, m_Room(255)
+, m_Room(nullptr)
+, m_Position(nullptr)
+, m_State(osDisabled)
 {
+    m_Room = make_unique<AGDX::Point>();
+    m_Position = make_unique<AGDX::Point>();
     m_ImageType = itObject;
     m_SubType = "Object";
     m_Folder = "Images\\Objects";
+
+    m_PropertyMap["Image.Room.X"] = &m_Room->X;
+    m_PropertyMap["Image.Room.Y"] = &m_Room->Y;
+    m_PropertyMap["Image.Position.X"] = &m_Position->X;
+    m_PropertyMap["Image.Position.Y"] = &m_Position->Y;
+    m_PropertyMap["Image.State"] = &m_State;
+
     RegisterProperty("Name", "Details", "The name of the object");
-    RegisterProperty("Room", "Details", "The index of the room the Object is in");
+    RegisterProperty("Room", "Details", "The Location of the room the Object is in. In Across (X) and Down (Y) coordinates");
+    RegisterProperty("Position", "Details", "The pixel position of the object in the room");
+    RegisterProperty("State", "Details", "The state the Object is in (Unassigned, Inventory or Room)");
     m_File = GetFile();
     ExtractSize(extra);
     AddFrame();
+}
+//---------------------------------------------------------------------------
+const AGDX::Point& __fastcall ObjectDocument::GetRoom()
+{
+    return *m_Room;
+}
+//---------------------------------------------------------------------------
+void  __fastcall ObjectDocument::SetRoom(const AGDX::Point& pt)
+{
+    *m_Room = pt;
+}
+//---------------------------------------------------------------------------
+const AGDX::Point& __fastcall ObjectDocument::GetPosition()
+{
+    return *m_Position;
+}
+//---------------------------------------------------------------------------
+void __fastcall ObjectDocument::SetPosition(const AGDX::Point& pt)
+{
+    *m_Position = pt;
+}
+//---------------------------------------------------------------------------
+void __fastcall ObjectDocument::DoSaveExtra()
+{
+    Push("Room");
+        Write("X", (int)m_Room->X);
+        Write("Y", (int)m_Room->Y);
+    Pop();
+    Push("Position");
+        Write("X", (int)m_Position->X);
+        Write("Y", (int)m_Position->Y);
+    Pop();
+    Write("State", m_State);
 }
 //---------------------------------------------------------------------------
 __fastcall TileDocument::TileDocument(const String& name, const String& extra)

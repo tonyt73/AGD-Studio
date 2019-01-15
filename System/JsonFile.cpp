@@ -225,6 +225,7 @@ void __fastcall JsonFile::Load(const String& file)
                     break;
             }
         }
+        OnLoaded();
     }
 }
 //---------------------------------------------------------------------------
@@ -234,6 +235,11 @@ void __fastcall JsonFile::OnStartObject(const String& object)
 }
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::OnEndObject(const String& object)
+{
+    // do nothing; should be overridden
+}
+//---------------------------------------------------------------------------
+void __fastcall JsonFile::OnLoaded()
 {
     // do nothing; should be overridden
 }

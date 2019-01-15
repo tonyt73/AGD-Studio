@@ -3,6 +3,7 @@
 #include "Build/SectionBuilders/Objects.h"
 #include "Project/DocumentManager.h"
 #include "Project/ImageDocuments.h"
+#include "Project/MapDocuments.h"
 #include "Graphics/GraphicsMode.h"
 #include "Graphics/Image.h"
 //---------------------------------------------------------------------------
@@ -19,8 +20,14 @@ __fastcall SectionBuilders::Objects::~Objects()
 void __fastcall SectionBuilders::Objects::Execute()
 {
     const auto& dm = theDocumentManager;
+    // get the objects in the map
+    auto mapDoc = dynamic_cast<TiledMapDocument*>(dm.Get("Map", "Tiled", "Tile Map"));
+    assert(mapDoc != nullptr);
+    auto objectsInMap = mapDoc->Get(itObject);
+    // get the list of object images
     DocumentList images;
     dm.GetAllOfType("Image", images);
+
     for (auto image : images)
     {
         // TODO: Add support for big images
@@ -36,7 +43,7 @@ void __fastcall SectionBuilders::Objects::Execute()
             auto data = image->GetExportNativeFormat();
             if (mc.Name.Pos("ZX Spectrum") != 0)
             {
-                // extract the image colour and remove the last 4 bytes from the data
+                // extract the image colour and remove the last 4 bytes (attributes) from the data
                 line += IntToStr(data.back()) + " ";
                 // remove the attributes
                 data.pop_back();
@@ -45,14 +52,17 @@ void __fastcall SectionBuilders::Objects::Execute()
                 data.pop_back();
             }
             // add the room
-            line += IntToStr(object->Room) + " ";
-            // TODO: Get y/x for the obejct from the map?
-            line += IntToStr(0) + " " + IntToStr(0) + " ";
+            auto roomIndex = object->State == osRoom ? mapDoc->GetRoomIndex(object->Room) : (object->State == osDisabled ? 254 : 255);
+            line += IntToStr((int)roomIndex) + " ";
+            line += IntToStr((int)object->Position.Y) + " " + IntToStr((int)object->Position.X) + " ";
+            AddLine(line);
             // export the machine graphics data
+            line = "             ";
             for (auto byte : data)
             {
                 line += IntToStr(byte) + " ";
             }
+            line = line.SubString(1, line.Length() - 1);
             AddLine(line);
             LineBreak();
         }

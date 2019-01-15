@@ -10,13 +10,13 @@ class TiledMapDocument;
 class Entity
 {
 protected:
-    TPoint          m_Pt;           // position of the entity
-    TPoint          m_DragPt;       // the offset of the entity been dragged
-    unsigned int    m_Id;           // the document id
-    unsigned int    m_LoadId;
-    ImageDocument*  m_Document;     // the image document we represent
-    bool            m_Dirty;        // flag: entity needs to be rendered
-    bool            m_Selected;     // flag: entity is selected
+    TPoint                          m_Pt;           // position of the entity
+    TPoint                          m_DragPt;       // the offset of the entity been dragged
+    unsigned int                    m_Id;           // the document id
+    unsigned int                    m_LoadId;
+    ImageDocument*                  m_Document;     // the image document we represent
+    bool                            m_Dirty;        // flag: entity needs to be rendered
+    bool                            m_Selected;     // flag: entity is selected
 
     friend class TiledMapDocument;
 
@@ -24,7 +24,7 @@ protected:
     TPoint              __fastcall  GetPoint() const;
     void                __fastcall  SetDragPoint(const TPoint& pt);
     TPoint              __fastcall  GetDragPoint() const;
-   const ImageDocument* __fastcall  GetDocument() const;
+   ImageDocument* const __fastcall  GetDocument() const;
     unsigned int        __fastcall  GetId() const;
     void                __fastcall  SetId(unsigned int id);
     void                __fastcall  SetSelected(bool state);
@@ -41,12 +41,12 @@ public:
     void                __fastcall  Clear();
     void                __fastcall  Clean();
 
-    __property  unsigned int                Id       = { read = GetId, write = SetId                };
-    __property  ImageDocument const * const Image    = { read = GetDocument                         };
-    __property  TPoint                      Pt       = { read = GetPoint, write = SetPoint          };
-    __property  TPoint                      DragPt   = { read = GetDragPoint, write = SetDragPoint  };
-    __property  bool                        Dirty    = { read = m_Dirty, write = SetDirty           };
-    __property  bool                        Selected = { read = m_Selected, write = SetSelected     };
+    __property  unsigned int        Id       = { read = GetId, write = SetId                };
+    __property ImageDocument* const Image    = { read = GetDocument                         };
+    __property  TPoint              Pt       = { read = GetPoint, write = SetPoint          };
+    __property  TPoint              DragPt   = { read = GetDragPoint, write = SetDragPoint  };
+    __property  bool                Dirty    = { read = m_Dirty, write = SetDirty           };
+    __property  bool                Selected = { read = m_Selected, write = SetSelected     };
 };
 typedef std::vector<Entity>     EntityList;
 //---------------------------------------------------------------------------
@@ -68,20 +68,28 @@ protected:
             TColor                  m_BackgroundColor;
             Entity                  m_EntityLoader;
             TSize                   m_ActiveRoom;
+    std::map<int, int>              m_AgdScreenMap; // a map from studio to .AGD screen indexes
 
             void        __fastcall  OnEndObject(const String& object);
             void        __fastcall  OnDocumentChanged(const DocumentChange<String>& message);
             void        __fastcall  OnStartRoomSet(const StartRoomSet& event);
             void        __fastcall  DoSave();
-            void        __fastcall  GetRoom(int room);
+            void        __fastcall  UpdateObjectRooms();
+            bool        __fastcall  IsRoomEmpty(int x, int y);
+            void        __fastcall  OnLoaded();
+
 
 public:
                         __fastcall  TiledMapDocument(const String& name);
                         __fastcall ~TiledMapDocument();
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new TiledMapDocument(name); };
 
+            EntityList  __fastcall  Get(ImageTypes type) const;
     const   EntityList& __fastcall  Get(MapEntities type, TSize room = TSize(0,0));
             void        __fastcall  Set(MapEntities type, const EntityList& entities);
+
+            TRect       __fastcall  GetMinimalMapSize();
+            int         __fastcall  GetRoomIndex(const AGDX::Point& room);
 
 __published:
     __property          int         RoomsAcross     = { read = m_Across         , write = m_Across          };

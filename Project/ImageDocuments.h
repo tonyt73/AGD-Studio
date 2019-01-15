@@ -4,6 +4,7 @@
 //---------------------------------------------------------------------------
 #include "Project/Document.h"
 #include "Graphics/GraphicsTypes.h"
+#include "Graphics/Point.h"
 //---------------------------------------------------------------------------
 // ImageDocument
 // This class encapulates what is an image document.
@@ -49,6 +50,7 @@ protected:
             int         __fastcall  GetLayerCount() const;
             void        __fastcall  AddLayer(const String& name, const String& value);
     virtual void        __fastcall  DoSave();
+    virtual void        __fastcall  DoSaveExtra();
 
 public:
                         __fastcall  ImageDocument(const String& name);
@@ -85,13 +87,27 @@ public:
 class ObjectDocument : public ImageDocument
 {
 private:
-            unsigned char           m_Room;
+    // note: for the IDE property editor to work on there properties, they must be new'd for TPersisent to work
+    std::unique_ptr<AGDX::Point>    m_Room;
+    std::unique_ptr<AGDX::Point>    m_Position;
+            ObjectState             m_State;
+
+    const AGDX::Point&  __fastcall  GetRoom();
+            void        __fastcall  SetRoom(const AGDX::Point& pt);
+    const AGDX::Point&  __fastcall  GetPosition();
+            void        __fastcall  SetPosition(const AGDX::Point& pt);
+
+protected:
+    virtual void        __fastcall  DoSaveExtra();
+
 public:
                         __fastcall  ObjectDocument(const String& name, const String& extra);
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ObjectDocument(name, extra); };
 
 __published:
-          unsigned char __property  Room            = { read = m_Room                       };
+    __property  const AGDX::Point&  Room            = { read = GetRoom, write = SetRoom         };
+    __property  const AGDX::Point&  Position        = { read = GetPosition, write = SetPosition };
+          ObjectState   __property  State           = { read = m_State, write = m_State         };
 };
 //---------------------------------------------------------------------------
 class TileDocument : public ImageDocument

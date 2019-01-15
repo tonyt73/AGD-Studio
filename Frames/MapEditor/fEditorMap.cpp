@@ -666,3 +666,4 @@ void __fastcall TfrmEditorMap::actPasteExecute(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+

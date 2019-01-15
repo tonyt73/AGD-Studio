@@ -128,6 +128,9 @@ __published:    // IDE-managed Components
     TAction *actCopy;
     TAction *actCut;
     TAction *actPaste;
+    TStatusBar *sbrWorkspace;
+    TStatusBar *sbrRoomSelection;
+    TStatusBar *StatusBar1;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actLineExecute(TObject *Sender);

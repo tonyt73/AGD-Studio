@@ -34,7 +34,6 @@ __fastcall AgdBuilder::AgdBuilder(BuildMessages& buildMessages)
 //---------------------------------------------------------------------------
 __fastcall AgdBuilder::~AgdBuilder()
 {
-
 }
 //---------------------------------------------------------------------------
 bool __fastcall AgdBuilder::Execute()
@@ -55,7 +54,7 @@ bool __fastcall AgdBuilder::Execute()
         else
         {
             // log an error
-            //return false;
+            return false;
         }
     }
 

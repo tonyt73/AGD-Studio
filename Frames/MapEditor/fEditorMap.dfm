@@ -139,7 +139,7 @@ object frmEditorMap: TfrmEditorMap
               Width = 356
               Height = 287
               ExplicitWidth = 356
-              ExplicitHeight = 287
+              ExplicitHeight = 138
               inherited panList: TFlowPanel
                 Width = 339
                 Height = 309
@@ -171,7 +171,7 @@ object frmEditorMap: TfrmEditorMap
               Width = 356
               Height = 287
               ExplicitWidth = 356
-              ExplicitHeight = 287
+              ExplicitHeight = 138
               inherited panList: TFlowPanel
                 Width = 339
                 Height = 309
@@ -202,7 +202,7 @@ object frmEditorMap: TfrmEditorMap
         Left = 0
         Top = 21
         Width = 0
-        Height = 256
+        Height = 237
         Align = alClient
         OnMouseDown = imgRoomSelectorMouseDown
         OnMouseEnter = imgWorkspaceMouseEnter
@@ -211,6 +211,21 @@ object frmEditorMap: TfrmEditorMap
         ExplicitTop = 327
         ExplicitWidth = 527
         ExplicitHeight = 312
+      end
+      object sbrRoomSelection: TStatusBar
+        Left = 0
+        Top = 258
+        Width = 0
+        Height = 19
+        Panels = <
+          item
+            Text = 'Screen Location: X, Y'
+            Width = 150
+          end
+          item
+            Width = 50
+          end>
+        ExplicitWidth = 978
       end
     end
     object dpScratchPad: TLMDDockPanel
@@ -246,7 +261,7 @@ object frmEditorMap: TfrmEditorMap
           Left = 0
           Top = 25
           Width = 364
-          Height = 263
+          Height = 244
           Align = alClient
           PopupMenu = popScratchPad
           OnMouseDown = imgScratchPadMouseDown
@@ -254,6 +269,7 @@ object frmEditorMap: TfrmEditorMap
           OnMouseMove = imgScratchPadMouseMove
           OnMouseUp = imgScratchPadMouseUp
           ExplicitTop = 31
+          ExplicitHeight = 263
         end
         object tbrScratchPad: TToolBar
           Left = 0
@@ -322,6 +338,21 @@ object frmEditorMap: TfrmEditorMap
             Style = tbsCheck
             OnClick = btnSPGridTileClick
           end
+        end
+        object StatusBar1: TStatusBar
+          Left = 0
+          Top = 269
+          Width = 364
+          Height = 19
+          Panels = <
+            item
+              Alignment = taCenter
+              Text = 'Block Position: X, Y'
+              Width = 150
+            end
+            item
+              Width = 50
+            end>
         end
       end
     end
@@ -538,7 +569,7 @@ object frmEditorMap: TfrmEditorMap
             Left = 0
             Top = 25
             Width = 527
-            Height = 610
+            Height = 591
             Align = alClient
             PopupMenu = popWorkspace
             OnMouseActivate = imgWorkspaceMouseActivate
@@ -547,6 +578,7 @@ object frmEditorMap: TfrmEditorMap
             OnMouseMove = imgWorkspaceMouseMove
             OnMouseUp = imgWorkspaceMouseUp
             ExplicitTop = 26
+            ExplicitHeight = 610
           end
           object tbrWorkspace: TToolBar
             Left = 0
@@ -601,6 +633,25 @@ object frmEditorMap: TfrmEditorMap
               ParentShowHint = False
               ShowHint = True
             end
+          end
+          object sbrWorkspace: TStatusBar
+            Left = 0
+            Top = 616
+            Width = 527
+            Height = 19
+            Panels = <
+              item
+                Alignment = taCenter
+                Text = 'Block Position: X, Y'
+                Width = 150
+              end
+              item
+                Text = 'Screen Location: X, Y'
+                Width = 150
+              end
+              item
+                Width = 50
+              end>
           end
         end
       end

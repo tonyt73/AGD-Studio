@@ -8,7 +8,7 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-const String BlockTypes[] = { "Empty", "Platform", "Wall", "Ladder", "Fodder", "Deadly", "Custom" };
+const String BlockTypes[] = { "EMPTYBLOCK", "PLATFORMBLOCK", "WALLBLOCK", "LADDERBLOCK", "FODDERBLOCK", "DEADLYBLOCK", "CUSTOMBLOCK" };
 //---------------------------------------------------------------------------
 __fastcall SectionBuilders::Tiles::Tiles()
 {
@@ -31,12 +31,13 @@ void __fastcall SectionBuilders::Tiles::Execute()
         {
             String line = "DEFINEBLOCK ";
             line += BlockTypes[StrToInt(tile->GetLayer("blocktype"))];
-            line += " ";
+            AddLine(line);
             const auto& gm = (*(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()));
             // make an image canvas
             auto image = std::make_unique<Agdx::Image>(tile, gm);
             image->ChangeFrame(0);
             auto data = image->GetExportNativeFormat();
+            line = line = "            ";
             // export the machine graphics data
             for (auto byte : data)
             {

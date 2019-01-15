@@ -2,6 +2,7 @@
 #include "agdx.pch.h"
 #pragma hdrstop
 //---------------------------------------------------------------------------
+#include <algorithm>
 #include "MapDocuments.h"
 #include "Project/DocumentManager.h"
 //---------------------------------------------------------------------------
@@ -86,7 +87,7 @@ void __fastcall Entity::Clean()
     m_Dirty = false;
 }
 //---------------------------------------------------------------------------
-const ImageDocument* __fastcall Entity::GetDocument() const
+ImageDocument* const __fastcall Entity::GetDocument() const
 {
     return m_Document;
 }
@@ -235,6 +236,19 @@ void __fastcall TiledMapDocument::OnEndObject(const String& object)
     }
 }
 //---------------------------------------------------------------------------
+EntityList __fastcall TiledMapDocument::Get(ImageTypes type) const
+{
+    EntityList list;
+    for (const auto& entity : m_Map)
+    {
+        if (entity.Image->ImageType == type)
+        {
+            list.push_back(entity);
+        }
+    }
+    return list;
+}
+//---------------------------------------------------------------------------
 const EntityList& __fastcall TiledMapDocument::Get(MapEntities type, TSize room)
 {
     if (type == meMap)
@@ -281,6 +295,7 @@ void __fastcall TiledMapDocument::Set(MapEntities type, const EntityList& entiti
     {
         m_Map.clear();
         m_Map = entities;
+        UpdateObjectRooms();
         ::Messaging::Bus::Publish<Event>(Event("map.updated"));
     }
     else if (type == meScratchPad)
@@ -310,6 +325,7 @@ void __fastcall TiledMapDocument::Set(MapEntities type, const EntityList& entiti
             ne.Pt = TPoint(e.Pt.x + minx, e.Pt.y + miny);
             m_Map.push_back(ne);
         }
+        UpdateObjectRooms();
         ::Messaging::Bus::Publish<Event>(Event("map.updated"));
     }
     else
@@ -344,6 +360,90 @@ void __fastcall TiledMapDocument::OnStartRoomSet(const StartRoomSet& event)
     StartLocationX = event.Room.x;
     StartLocationY = event.Room.y;
     ::Messaging::Bus::Publish<UpdateProperties>(UpdateProperties());
+}
+//---------------------------------------------------------------------------
+void __fastcall TiledMapDocument::UpdateObjectRooms()
+{
+    const auto& wi = theDocumentManager.ProjectConfig()->Window;
+    auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum;
+    auto roomSize = TSize(wi.Width * tileSize.cx, wi.Height * tileSize.cy);
+    std::vector<unsigned int> objectsToRemove;
+    for (auto entity : m_Map)
+    {
+        if (entity.Image->ImageType == itObject)
+        {
+            auto object = dynamic_cast<ObjectDocument*>(entity.Image);
+            assert(object != nullptr);
+
+            if (object->State == osRoom)
+            {
+                auto rm0 = TPoint(object->Room.X, object->Room.Y);
+                auto pt0 = TPoint(object->Position.X, object->Position.Y);
+                object->Room = AGDX::Point((int)(entity.Pt.X / roomSize.cx), (int)(entity.Pt.Y / roomSize.cy));
+                object->Position = AGDX::Point(entity.Pt.X - (object->Room.X * roomSize.cx), entity.Pt.Y - (object->Room.Y * roomSize.cy));
+                auto rm1 = TPoint(object->Room.X, object->Room.Y);
+                auto pt1 = TPoint(object->Position.X, object->Position.Y);
+            }
+            else
+            {
+                // remove any objects from the map that are not assigned to a room
+                objectsToRemove.push_back(entity.Id);
+            }
+        }
+    }
+    for (auto id : objectsToRemove)
+    {
+        m_Map.erase(std::remove_if(m_Map.begin(), m_Map.end(), [&](const Entity& e){ return e.Id == id; }));
+    }
+}
+//---------------------------------------------------------------------------
+bool __fastcall TiledMapDocument::IsRoomEmpty(int x, int y)
+{
+    return (Get(meRoom, TSize(x, y)).size() == 0);
+}
+//---------------------------------------------------------------------------
+TRect __fastcall TiledMapDocument::GetMinimalMapSize()
+{
+    m_AgdScreenMap.clear();
+    TRect rect(RoomsAcross, RoomsDown, 0, 0);
+    auto si = 0;
+    for (auto y = 0; y < 16; y++)
+    {
+        for (auto x = 0; x < 16; x++)
+        {
+            if (!IsRoomEmpty(x, y))
+            {
+                rect.Left   = std::min(x, (int)rect.Left  );
+                rect.Right  = std::max(x, (int)rect.Right );
+                rect.Top    = std::min(y, (int)rect.Top   );
+                rect.Bottom = std::max(y, (int)rect.Bottom);
+                m_AgdScreenMap[y * 16 + x] = si++;
+            }
+            else
+            {
+                m_AgdScreenMap[y * 16 + x] = -1;
+            }
+        }
+    }
+    return rect;
+}
+//---------------------------------------------------------------------------
+int __fastcall TiledMapDocument::GetRoomIndex(const AGDX::Point& room)
+{
+    // map room coords to room sequence index
+    const auto mapSize = GetMinimalMapSize();
+    if ((mapSize.Left <= room.X && room.X <= mapSize.Right ) && (mapSize.Top  <= room.Y && room.Y <= mapSize.Bottom))
+    {
+        auto ri = m_AgdScreenMap[room.Y * 16 + room.X];
+        assert(ri != -1);
+        return ri;
+    }
+    return 254;
+}
+//---------------------------------------------------------------------------
+void __fastcall TiledMapDocument::OnLoaded()
+{
+    UpdateObjectRooms();
 }
 //---------------------------------------------------------------------------
 
