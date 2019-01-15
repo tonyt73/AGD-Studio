@@ -24,7 +24,7 @@ void __fastcall SectionBuilders::Screens::Execute()
 
     const auto& wi = theDocumentManager.ProjectConfig()->Window;
     auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum;
-    const wPt = TPoint(wi.X * tileSize.cx, wi.Y * tileSize.cy);
+    auto wPt = TPoint(wi.X * tileSize.cx, wi.Y * tileSize.cy);
     auto ri = 0;
     for (auto ry = 0; ry < g_MaxMapRoomsDown; ry++ )
     {
@@ -75,7 +75,7 @@ void __fastcall SectionBuilders::Screens::Execute()
                     {
                         // get sprite id as sprite index
                         auto index = dm.GetAsIndex(entity.Id);
-                        line = "SPRITEPOSITION " + IntToStr(entity.SpriteType) + " " + IntToStr(index) + " " + IntToStr(wPt.y + (int)entity.Pt.y) + " " + IntToStr(wPt.x + (int)entity.Pt.x);
+                        line = "SPRITEPOSITION " + IntToStr(entity.SpriteType) + " " + IntToStr(index) + " " + IntToStr((int)(wPt.y + entity.Pt.y)) + " " + IntToStr((int)(wPt.x + entity.Pt.x));
                         AddLine(line);
                     }
                 }
