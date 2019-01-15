@@ -17,6 +17,7 @@ protected:
     ImageDocument*                  m_Document;     // the image document we represent
     bool                            m_Dirty;        // flag: entity needs to be rendered
     bool                            m_Selected;     // flag: entity is selected
+    int                             m_SpriteType;   // the type of sprite
 
     friend class TiledMapDocument;
 
@@ -29,6 +30,7 @@ protected:
     void                __fastcall  SetId(unsigned int id);
     void                __fastcall  SetSelected(bool state);
     void                __fastcall  SetDirty(bool state);
+    void                __fastcall  SetSpriteType(int type);
 
 public:
                         __fastcall  Entity();
@@ -41,16 +43,19 @@ public:
     void                __fastcall  Clear();
     void                __fastcall  Clean();
 
-    __property  unsigned int        Id       = { read = GetId, write = SetId                };
-    __property ImageDocument* const Image    = { read = GetDocument                         };
-    __property  TPoint              Pt       = { read = GetPoint, write = SetPoint          };
-    __property  TPoint              DragPt   = { read = GetDragPoint, write = SetDragPoint  };
-    __property  bool                Dirty    = { read = m_Dirty, write = SetDirty           };
-    __property  bool                Selected = { read = m_Selected, write = SetSelected     };
+    __property  unsigned int        Id          = { read = GetId, write = SetId                 };
+    __property ImageDocument* const Image       = { read = GetDocument                          };
+    __property  TPoint              Pt          = { read = GetPoint, write = SetPoint           };
+    __property  TPoint              DragPt      = { read = GetDragPoint, write = SetDragPoint   };
+    __property  bool                Dirty       = { read = m_Dirty, write = SetDirty            };
+    __property  bool                Selected    = { read = m_Selected, write = SetSelected      };
+    __property  int                 SpriteType  = { read = m_SpriteType, write = SetSpriteType };
 };
 typedef std::vector<Entity>     EntityList;
 //---------------------------------------------------------------------------
 enum MapEntities { meMap, meRoom, meScratchPad };
+const int g_MaxMapRoomsAcross = 16;
+const int g_MaxMapRoomsDown   = 16;
 //---------------------------------------------------------------------------
 class TiledMapDocument : public Document
 {
@@ -59,8 +64,6 @@ protected:
     EntityList                      m_Room;
     EntityList                      m_ScratchPad;
 
-            int                     m_Across;
-            int                     m_Down;
             int                     m_Width;
             int                     m_Height;
             int                     m_StartLocationX;
@@ -75,7 +78,6 @@ protected:
             void        __fastcall  OnStartRoomSet(const StartRoomSet& event);
             void        __fastcall  DoSave();
             void        __fastcall  UpdateObjectRooms();
-            bool        __fastcall  IsRoomEmpty(int x, int y);
             void        __fastcall  OnLoaded();
 
 
@@ -90,10 +92,9 @@ public:
 
             TRect       __fastcall  GetMinimalMapSize();
             int         __fastcall  GetRoomIndex(const AGDX::Point& room);
+            bool        __fastcall  IsRoomEmpty(int x, int y);
 
 __published:
-    __property          int         RoomsAcross     = { read = m_Across         , write = m_Across          };
-    __property          int         RoomsDown       = { read = m_Down           , write = m_Down            };
     __property          int         RoomWidth       = { read = m_Width          , write = m_Width           };
     __property          int         RoomHeight      = { read = m_Height         , write = m_Height          };
     __property          int         StartLocationX  = { read = m_StartLocationX , write = m_StartLocationX  };

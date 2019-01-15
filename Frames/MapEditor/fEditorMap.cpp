@@ -49,7 +49,7 @@ void __fastcall TfrmEditorMap::Initialise()
 
     // create the tile editors
     // TODO: change the size to ???
-    m_Workspace = std::make_unique<TileEditor>(imgWorkspace, m_ImageMap, TSize(16,16), true, true, 144, false);
+    m_Workspace = std::make_unique<TileEditor>(imgWorkspace, m_ImageMap, TSize(g_MaxMapRoomsAcross, g_MaxMapRoomsDown), true, true, 144, false);
     m_Workspace->Mode = TileEditor::temSelect;
     m_Workspace->StartRoom = TPoint(m_Document->StartLocationX, m_Document->StartLocationY);
 
@@ -59,7 +59,7 @@ void __fastcall TfrmEditorMap::Initialise()
     m_ScratchPad->GridRoom = false;
     m_ScratchPad->Mode = TileEditor::temSelect;
 
-    m_RoomSelector = std::make_unique<TileEditor>(imgRoomSelector, m_ImageMap, TSize(16,16), false, true, 8, true);
+    m_RoomSelector = std::make_unique<TileEditor>(imgRoomSelector, m_ImageMap, TSize(g_MaxMapRoomsAcross, g_MaxMapRoomsDown), false, true, 8, true);
     m_RoomSelector->Mode = TileEditor::temSelect;
     m_RoomSelector->GridRoom = true;
     m_RoomSelector->ShowStartRoom = true;
@@ -572,7 +572,7 @@ void __fastcall TfrmEditorMap::actToggleSingleRoomModeExecute(TObject *Sender)
     actStartRoomTool->Enabled = !actToggleSingleRoomMode->Checked;
     dpRoomSelector->PanelVisible = actToggleSingleRoomMode->Checked;
     dpRoomSelector->Zone->Height = std::max(dpRoomSelector->Zone->Height, 256);
-    m_Workspace->Rooms = actToggleSingleRoomMode->Checked ? TSize(1, 1) : TSize(16, 16);
+    m_Workspace->Rooms = actToggleSingleRoomMode->Checked ? TSize(1, 1) : TSize(g_MaxMapRoomsAcross, g_MaxMapRoomsDown);
     m_Workspace->SetEntities(m_Document->Get(actToggleSingleRoomMode->Checked ? meRoom : meMap, m_RoomSelector->SelectedRoom));
     m_Workspace->ShowStartRoom = !actToggleSingleRoomMode->Checked && actStartRoomTool->Checked;
     m_Workspace->UpdateMap();

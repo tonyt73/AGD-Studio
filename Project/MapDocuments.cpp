@@ -13,6 +13,7 @@ __fastcall Entity::Entity()
 , m_Document(nullptr)
 , m_Dirty(true)
 , m_Selected(false)
+, m_SpriteType(-1)
 {
 }
 //---------------------------------------------------------------------------
@@ -22,6 +23,7 @@ __fastcall Entity::Entity(const Entity& other)
 , m_Document(other.m_Document)
 , m_Dirty(true)
 , m_Selected(other.m_Selected)
+, m_SpriteType(other.m_SpriteType)
 {
 }
 //---------------------------------------------------------------------------
@@ -36,6 +38,7 @@ Entity& __fastcall Entity::operator=(const Entity& other)
     m_Document = other.m_Document;
     m_Dirty = true;
     m_Selected = other.m_Selected;
+    m_SpriteType = other.m_SpriteType;
     return *this;
 }
 //---------------------------------------------------------------------------
@@ -78,6 +81,7 @@ void __fastcall Entity::Clear()
 {
     m_Pt.x = 0;
     m_Pt.y = 0;
+    m_SpriteType = -1;
     m_Document = nullptr;
     m_Dirty = true;
 }
@@ -104,6 +108,11 @@ unsigned int __fastcall Entity::GetId() const
 void __fastcall Entity::SetId(unsigned int id)
 {
     m_Document = dynamic_cast<ImageDocument*>(theDocumentManager.Get(id));
+    if (m_Document->SubType == itSprite && m_SpriteType < 0)
+    {
+        // initialise the sprite type
+        m_SpriteType = 0;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall Entity::SetSelected(bool state)
@@ -117,13 +126,16 @@ void __fastcall Entity::SetDirty(bool state)
     m_Dirty = true;
 }
 //---------------------------------------------------------------------------
+void __fastcall Entity::SetSpriteType(int type)
+{
+    m_SpriteType = (type >= 0 && m_Document->ImageType == itSprite) ? type : -1;
+}
+//---------------------------------------------------------------------------
 
 
 //---------------------------------------------------------------------------
 _fastcall TiledMapDocument::TiledMapDocument(const String& name)
 : Document(name)
-, m_Across(11)
-, m_Down(5)
 , m_StartLocationX(5)
 , m_StartLocationY(2)
 , m_Width(32)
@@ -141,8 +153,6 @@ _fastcall TiledMapDocument::TiledMapDocument(const String& name)
     RegisterProperty("StartLocationY", "Start Room", "The y position of the start room into the map");
     RegisterProperty("BackgroundColor", "Visual", "The color of the background when no tile is present");
     // json loading properties
-    m_PropertyMap["Map.RoomsAcross"] = &m_Across;
-    m_PropertyMap["Map.RoomsDown"] = &m_Down;
     m_PropertyMap["Map.RoomWidth"] = &m_Width;
     m_PropertyMap["Map.RoomHeight"] = &m_Height;
     m_PropertyMap["Map.StartLocationX"] = &StartLocationX;
@@ -153,9 +163,11 @@ _fastcall TiledMapDocument::TiledMapDocument(const String& name)
     m_PropertyMap["Map.Map[].X"] = &m_EntityLoader.m_Pt.x;
     m_PropertyMap["Map.Map[].Y"] = &m_EntityLoader.m_Pt.y;
     m_PropertyMap["Map.Map[].RefId"] = &m_EntityLoader.m_LoadId;
+    m_PropertyMap["Map.Map[].SpriteType"] = &m_EntityLoader.m_SpriteType;
     m_PropertyMap["Map.ScratchPad[].X"] = &m_EntityLoader.m_Pt.x;
     m_PropertyMap["Map.ScratchPad[].Y"] = &m_EntityLoader.m_Pt.y;
     m_PropertyMap["Map.ScratchPad[].RefId"] = &m_EntityLoader.m_LoadId;
+    m_PropertyMap["Map.ScratchPad[].SpriteType"] = &m_EntityLoader.m_SpriteType;
     m_File = GetFile();
 
     // message subscriptions
@@ -171,8 +183,6 @@ __fastcall TiledMapDocument::~TiledMapDocument()
 void __fastcall TiledMapDocument::DoSave()
 {
     Push("Map");
-        Write("RoomsAcross", m_Across);
-        Write("RoomsDown", m_Down);
         Write("RoomWidth", m_Width);
         Write("RoomHeight", m_Height);
         Write("StartLocationX", m_StartLocationX);
@@ -184,6 +194,10 @@ void __fastcall TiledMapDocument::DoSave()
                 Write("X", (int)entity.m_Pt.x);
                 Write("Y", (int)entity.m_Pt.y);
                 Write("RefId", entity.Id);
+                if (entity.SpriteType >= 0)
+                {
+                    Write("SpriteType", entity.SpriteType);
+                }
             EndObject();
         }
         ArrayEnd(); // workspace
@@ -194,6 +208,10 @@ void __fastcall TiledMapDocument::DoSave()
                 Write("X", (int)entity.m_Pt.x);
                 Write("Y", (int)entity.m_Pt.y);
                 Write("RefId", entity.Id);
+                if (entity.SpriteType >= 0)
+                {
+                    Write("SpriteType", entity.SpriteType);
+                }
             EndObject();
         }
         ArrayEnd(); // scratchpad
@@ -202,7 +220,7 @@ void __fastcall TiledMapDocument::DoSave()
 //---------------------------------------------------------------------------
 void __fastcall TiledMapDocument::OnEndObject(const String& object)
 {
-    if (object == "Map.Workspace[]" || object == "Map.Map[]")
+    if (object == "Map.Map[]")
     {
         if (m_EntityLoader.m_LoadId != InvalidDocumentId)
         {
@@ -352,6 +370,7 @@ void __fastcall TiledMapDocument::OnDocumentChanged(const DocumentChange<String>
             [&](const Entity& entity) { return entity.Id == message.document->Id; }), m_ScratchPad.end());
         m_Room.erase(std::remove_if(m_Room.begin(),m_Room.end(),
             [&](const Entity& entity) { return entity.Id == message.document->Id; }), m_Room.end());
+        UpdateObjectRooms();
     }
 }
 //---------------------------------------------------------------------------
@@ -405,11 +424,11 @@ bool __fastcall TiledMapDocument::IsRoomEmpty(int x, int y)
 TRect __fastcall TiledMapDocument::GetMinimalMapSize()
 {
     m_AgdScreenMap.clear();
-    TRect rect(RoomsAcross, RoomsDown, 0, 0);
+    TRect rect(g_MaxMapRoomsAcross, g_MaxMapRoomsDown, 0, 0);
     auto si = 0;
-    for (auto y = 0; y < 16; y++)
+    for (auto y = 0; y < g_MaxMapRoomsDown; y++)
     {
-        for (auto x = 0; x < 16; x++)
+        for (auto x = 0; x < g_MaxMapRoomsAcross; x++)
         {
             if (!IsRoomEmpty(x, y))
             {
@@ -417,11 +436,11 @@ TRect __fastcall TiledMapDocument::GetMinimalMapSize()
                 rect.Right  = std::max(x, (int)rect.Right );
                 rect.Top    = std::min(y, (int)rect.Top   );
                 rect.Bottom = std::max(y, (int)rect.Bottom);
-                m_AgdScreenMap[y * 16 + x] = si++;
+                m_AgdScreenMap[y * g_MaxMapRoomsAcross + x] = si++;
             }
             else
             {
-                m_AgdScreenMap[y * 16 + x] = -1;
+                m_AgdScreenMap[y * g_MaxMapRoomsAcross + x] = -1;
             }
         }
     }
@@ -434,11 +453,10 @@ int __fastcall TiledMapDocument::GetRoomIndex(const AGDX::Point& room)
     const auto mapSize = GetMinimalMapSize();
     if ((mapSize.Left <= room.X && room.X <= mapSize.Right ) && (mapSize.Top  <= room.Y && room.Y <= mapSize.Bottom))
     {
-        auto ri = m_AgdScreenMap[room.Y * 16 + room.X];
-        assert(ri != -1);
+        auto ri = m_AgdScreenMap[room.Y * g_MaxMapRoomsAcross + room.X];
         return ri;
     }
-    return 254;
+    return -1;
 }
 //---------------------------------------------------------------------------
 void __fastcall TiledMapDocument::OnLoaded()

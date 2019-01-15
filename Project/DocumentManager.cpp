@@ -149,6 +149,28 @@ Document* __fastcall DocumentManager::Get(unsigned int id) const
     return nullptr;
 }
 //---------------------------------------------------------------------------
+int __fastcall DocumentManager::GetAsIndex(unsigned int id) const
+{
+    const auto& document = Get(id);
+    if (document != nullptr)
+    {
+        auto type = document->Type;
+        auto subType = document->SubType;
+        int i = 0;
+        auto it = m_Documents.find(type);
+        if (it != m_Documents.end())
+        for (const auto& doc : it->second)
+        {
+            if (doc->Id == id)
+            {
+                return i;
+            }
+            i += (doc->SubType == subType) ? 1 : 0;
+        }
+    }
+    return -1;
+}
+//---------------------------------------------------------------------------
 void __fastcall DocumentManager::Clear()
 {
     for (auto documentType : m_Documents)

@@ -36,6 +36,7 @@ public:
             void        __fastcall  DocumentFolders(std::vector<String>& folders) const;
             Document*   __fastcall  Get(const String& type, const String& subType, const String& name) const;
             Document*   __fastcall  Get(unsigned int id) const;
+            int         __fastcall  GetAsIndex(unsigned int id) const;
        ProjectDocument* __fastcall  ProjectConfig() const;
 
             void        __fastcall  GetAllOfType(const String& type, DocumentList& list) const;
