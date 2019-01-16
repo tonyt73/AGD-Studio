@@ -58,7 +58,7 @@ object SelectionPanelFrame: TSelectionPanelFrame
       AlignWithMargins = True
       Left = 19
       Top = 4
-      Width = 379
+      Width = 280
       Height = 26
       Anchors = [akLeft, akTop, akRight]
       AutoSize = False
@@ -72,7 +72,6 @@ object SelectionPanelFrame: TSelectionPanelFrame
       ParentFont = False
       OnClick = lblProjectNameClick
       OnMouseMove = panProjectInfoMouseMove
-      ExplicitWidth = 606
     end
     object lblMachine: TLabel
       Left = 19
@@ -102,6 +101,8 @@ object SelectionPanelFrame: TSelectionPanelFrame
       Anchors = [akTop, akRight, akBottom]
       Transparent = True
       Visible = False
+      OnClick = lblProjectNameClick
+      OnMouseMove = panProjectInfoMouseMove
       ExplicitLeft = 336
     end
     object prgLoading: TProgressBar

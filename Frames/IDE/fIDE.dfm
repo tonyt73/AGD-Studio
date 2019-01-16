@@ -345,19 +345,23 @@ object frmIDE: TfrmIDE
         Width = 218
         Height = 40
         Align = alBottom
+        BevelOuter = bvNone
         Constraints.MinHeight = 40
         Padding.Left = 3
         Padding.Top = 3
         Padding.Right = 3
         Padding.Bottom = 3
+        ParentBackground = False
         TabOrder = 1
         object lblPropertyInfo: TLabel
-          Left = 4
-          Top = 4
-          Width = 210
-          Height = 32
+          Left = 3
+          Top = 3
+          Width = 212
+          Height = 34
           Align = alClient
           Caption = 'Property information'
+          Transparent = False
+          WordWrap = True
           ExplicitWidth = 99
           ExplicitHeight = 13
         end
