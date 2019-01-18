@@ -38,6 +38,7 @@ __fastcall TfrmIDE::~TfrmIDE()
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::RegisterDocumentEditors()
 {
+    m_EraseHandlers.push_back(std::make_unique<TWinControlHandler>(Panel2));
     // TODO: Do this another way
     // ie. by document class type to editor?
     m_DocumentEditorFactory.Register("Game\\Events", &TfrmEditorCode::Create);

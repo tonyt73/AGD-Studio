@@ -34,6 +34,10 @@
 #include "Messaging/Messaging.h"
 #include "Build/BuildManager.h"
 #include "Factories/DocumentEditorFactory.h"
+#include "Frames/WndProcHandlers.h"
+#include <Vcl.BaseImageCollection.hpp>
+#include <Vcl.ImageCollection.hpp>
+#include <Vcl.VirtualImageList.hpp>
 //---------------------------------------------------------------------------
 class TfrmIDE : public TFrame
 {
@@ -45,7 +49,6 @@ __published:    // IDE-managed Components
     TAction *actEditCopy;
     TAction *actEditCut;
     TAction *actEditPaste;
-    TImageList *imgIconsActive;
     TMainMenu *mnuMain;
     TMenuItem *mnuFile;
     TMenuItem *mnuFileSave;
@@ -91,7 +94,6 @@ __published:    // IDE-managed Components
     TAction *actEditZoomReset;
     TToolButton *ToolButton12;
     TToolButton *ToolButton13;
-    TImageList *imgIconsDisabled;
     TLMDDockPanel *LMDDockPanel2;
     TLMDDockManager *DockManager;
     TLMDDockPanel *dpMessages;
@@ -161,6 +163,11 @@ __published:    // IDE-managed Components
     TMenuItem *Run1;
     TElXTree *tvBuild;
     TImageList *imgBuildNodes;
+    TImageCollection *imcActiveToolbar;
+    TVirtualImageList *imgActiveToolbar;
+    TVirtualImageList *imgDisabledToolbar;
+    TVirtualImageList *imgProjectTreeNodes;
+    TImageCollection *imcProjectTreeNodes;
     void __fastcall actEditCopyExecute(TObject *Sender);
     void __fastcall actEditCutExecute(TObject *Sender);
     void __fastcall actEditPasteExecute(TObject *Sender);
@@ -202,6 +209,7 @@ private:    // User declarations
     ::Messaging::Registrar  m_Registrar;
     DocumentEditorFactory   m_DocumentEditorFactory;
     BuildManager            m_Builder;
+    std::list<EraseHandler> m_EraseHandlers;    // stops flicking
 
     void    __fastcall  UpdateDocumentProperties(Document* document);
     void    __fastcall  OnDocumentClose(TObject *Sender, TLMDockPanelCloseAction& action);
