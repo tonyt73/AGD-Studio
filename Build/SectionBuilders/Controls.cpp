@@ -6,6 +6,7 @@
 using namespace SectionBuilders;
 //---------------------------------------------------------------------------
 __fastcall SectionBuilders::Controls::Controls()
+: SectionBuilder("Controls")
 {
 }
 //---------------------------------------------------------------------------

@@ -17,7 +17,7 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall AgdBuilder::AgdBuilder(BuildMessages& buildMessages)
-: Builder(buildMessages)
+: Builder(buildMessages, bmBuild, "AGD File Builder")
 {
     m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Project>()));
     m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Window>()));
@@ -40,6 +40,7 @@ bool __fastcall AgdBuilder::Execute()
 {
     auto agdFile = System::File::Combine(System::Path::Project, System::Path::ProjectName + ".agd");
     String agdContent;
+    BUILD_MSG("Building " + agdFile);
     for (auto& builder : m_SectionBuilders)
     {
         // TODO: change to this when the 64 bit compiler supports C++17
@@ -48,16 +49,31 @@ bool __fastcall AgdBuilder::Execute()
         if (result.Success)
         {
             agdContent += result.Content;
+            BUILD_LINE(bmOk, "Added AGD Section: " + builder->Description);
         }
         else
         {
             // log an error
+            BUILD_LINE(bmFailed, "Failed to add AGD Section: " + builder->Description);
+            BUILD_LINE(bmFailed, result.Reason);
+            BUILD_MSG(bmFailed);
             return false;
         }
     }
 
-    System::File::WriteText(agdFile, agdContent);
+    try
+    {
+        System::File::WriteText(agdFile, agdContent);
+        BUILD_LINE(bmOk, "Successfully wrote AGD file: " + agdFile);
+    }
+    catch(...)
+    {
+        BUILD_LINE(bmFailed, "Failed to write AGD file: " + agdFile);
+        BUILD_MSG(bmFailed);
+        return false;
+    }
 
+    BUILD_MSG(bmOk);
     return true;
 }
 //---------------------------------------------------------------------------

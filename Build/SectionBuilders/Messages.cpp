@@ -6,6 +6,7 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall SectionBuilders::Messages::Messages()
+: SectionBuilder("Messages")
 {
 }
 //---------------------------------------------------------------------------

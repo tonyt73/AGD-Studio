@@ -24,6 +24,7 @@ __fastcall TfrmIDE::TfrmIDE(TComponent* Owner)
 : TFrame(Owner)
 {
     RegisterDocumentEditors();
+    tvBuild->Items->Clear();
 }
 //---------------------------------------------------------------------------
 __fastcall TfrmIDE::~TfrmIDE()

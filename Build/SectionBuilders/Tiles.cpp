@@ -11,6 +11,7 @@
 const String BlockTypes[] = { "EMPTYBLOCK", "PLATFORMBLOCK", "WALLBLOCK", "LADDERBLOCK", "FODDERBLOCK", "DEADLYBLOCK", "CUSTOMBLOCK" };
 //---------------------------------------------------------------------------
 __fastcall SectionBuilders::Tiles::Tiles()
+: SectionBuilder("Tiles")
 {
 }
 //---------------------------------------------------------------------------

@@ -2,18 +2,16 @@
 #ifndef BuildManagerH
 #define BuildManagerH
 //---------------------------------------------------------------------------
+#include <list>
 #include "Build/BuildMessages.h"
-#include "Build/AgdBuilder.h"
-#include "Build/AsmBuilder.h"
-#include "Build/EmuBuilder.h"
+#include "Build/Builder.h"
 //---------------------------------------------------------------------------
 class BuildManager
 {
 private:
+    typedef     std::list<std::unique_ptr<Builder>> BuildersList;
+    BuildersList                m_Builders;
     BuildMessages               m_BuildMessages;
-    AgdBuilder                  m_AgdCompiler;
-    AsmBuilder                  m_Assembler;
-    EmuBuilder                  m_Emulator;
 
     void            __fastcall  SetTreeView(TElXTree* treeView);
 

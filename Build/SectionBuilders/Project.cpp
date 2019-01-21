@@ -6,6 +6,7 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall SectionBuilders::Project::Project()
+: SectionBuilder("Project Header")
 {
 }
 //---------------------------------------------------------------------------
@@ -16,7 +17,6 @@ __fastcall SectionBuilders::Project::~Project()
 void __fastcall SectionBuilders::Project::Execute()
 {
     const auto& project = theDocumentManager.ProjectConfig();
-
     AddLine(";");
     AddLine("; GAME       : " + project->Name);
     AddLine("; VERSION    : " + project->Version);
@@ -29,7 +29,6 @@ void __fastcall SectionBuilders::Project::Execute()
     AddLine(";DEFINEMACHINE \"" + project->Machine + "\"");
     AddLine(";");
     LineBreak();
-
     Success();
 }
 //---------------------------------------------------------------------------

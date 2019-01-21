@@ -5,6 +5,7 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall SectionBuilders::JumpTable::JumpTable()
+: SectionBuilder("Jump Table")
 {
     m_Steps[ 0] =   0;
     m_Steps[ 1] = -15;

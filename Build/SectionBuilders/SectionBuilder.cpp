@@ -4,7 +4,8 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall SectionBuilders::SectionBuilder::SectionBuilder()
+__fastcall SectionBuilders::SectionBuilder::SectionBuilder(const String& description)
+: m_Description(description)
 {
 }
 //---------------------------------------------------------------------------

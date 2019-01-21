@@ -10,6 +10,7 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall SectionBuilders::Objects::Objects()
+: SectionBuilder("Objects")
 {
 }
 //---------------------------------------------------------------------------
@@ -27,7 +28,6 @@ void __fastcall SectionBuilders::Objects::Execute()
     // get the list of object images
     DocumentList images;
     dm.GetAllOfType("Image", images);
-
     for (auto image : images)
     {
         // TODO: Add support for big images

@@ -5,7 +5,7 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall AsmBuilder::AsmBuilder(BuildMessages& buildMessages)
-: Builder(buildMessages)
+: Builder(buildMessages, bmBuild, "Assembly File Compile")
 {
 
 }

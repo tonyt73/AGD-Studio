@@ -161,13 +161,13 @@ __published:    // IDE-managed Components
     TToolButton *btnBuildRun;
     TAction *actGameRun;
     TMenuItem *Run1;
-    TElXTree *tvBuild;
     TImageList *imgBuildNodes;
     TImageCollection *imcActiveToolbar;
     TVirtualImageList *imgActiveToolbar;
     TVirtualImageList *imgDisabledToolbar;
     TVirtualImageList *imgProjectTreeNodes;
     TImageCollection *imcProjectTreeNodes;
+    TElXTree *tvBuild;
     void __fastcall actEditCopyExecute(TObject *Sender);
     void __fastcall actEditCutExecute(TObject *Sender);
     void __fastcall actEditPasteExecute(TObject *Sender);
