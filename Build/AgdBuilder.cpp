@@ -17,7 +17,7 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall AgdBuilder::AgdBuilder(BuildMessages& buildMessages)
-: Builder(buildMessages, bmBuild, "AGD File Builder")
+: Builder(buildMessages, bmBuild, "Build AGD File")
 {
     m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Project>()));
     m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Window>()));

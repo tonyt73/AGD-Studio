@@ -40,17 +40,17 @@ bool __fastcall BuildManager::Execute()
             // failed to execute a build process
             BUILD_LINE(bmFailed, "Build step FAILED");
             auto be = GetTickCount();
-            BUILD_LINE(bmFailed, "Elapsed time: " + IntToStr((int)(be - bs)) + "ms");
+            BUILD_LINE(bmTiming, "Elapsed time: " + IntToStr((int)(be - bs)) + "ms");
             BUILD_MSG_POP(false);
             return false;
         }
         BUILD_LINE(bmOk, "Build step completed successfully");
         auto be = GetTickCount();
-        BUILD_LINE(bmOk, "Elapsed time: " + IntToStr((int)(be - bs)) + "ms");
+        BUILD_LINE(bmTiming, "Elapsed time: " + IntToStr((int)(be - bs)) + "ms");
         BUILD_MSG_POP(true);
     }
     auto end = GetTickCount();
-    BUILD_LINE(bmOk, "Elapsed time: " + IntToStr((int)(end - start)) + "ms");
+    BUILD_LINE(bmTiming, "Elapsed time: " + IntToStr((int)(end - start)) + "ms");
     return true;
 }
 //---------------------------------------------------------------------------

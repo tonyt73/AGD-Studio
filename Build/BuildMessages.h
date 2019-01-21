@@ -4,7 +4,7 @@
 //---------------------------------------------------------------------------
 #include "ElXTree.hpp"
 //---------------------------------------------------------------------------
-enum BuildMessageType { bmOk, bmFailed, bmChecking, bmBuild, bmRun, bmProgress };
+enum BuildMessageType { bmOk = 0, bmFailed, bmChecking, bmBuild, bmRun, bmProgress, bmTiming };
 //---------------------------------------------------------------------------
 class BuildMessages
 {

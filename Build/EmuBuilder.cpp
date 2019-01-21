@@ -5,7 +5,7 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall EmuBuilder::EmuBuilder(BuildMessages& buildMessages)
-: Builder(buildMessages, bmRun, "Run Game in Emulator")
+: Builder(buildMessages, bmRun, "Run AGD Game")
 {
 
 }
