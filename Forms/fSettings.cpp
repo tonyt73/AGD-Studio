@@ -151,14 +151,16 @@ void __fastcall TfrmSettings::btnCompilerFindClick(TObject *Sender)
     edtCompilerExe->Text = FindExecutable("Locate AGD Compiler", edtCompilerExe->Text);
 }
 //---------------------------------------------------------------------------
+void __fastcall TfrmSettings::btnEngineFindClick(TObject *Sender)
+{
+    dlgOpen->FilterIndex = 1;
+    edtEngineFile->Text = FindExecutable("Locate AGD Engine File", edtEngineFile->Text);
+    dlgOpen->FilterIndex = 0;
+}
+//---------------------------------------------------------------------------
 void __fastcall TfrmSettings::btnAssemblerFindClick(TObject *Sender)
 {
     edtAssemblerExe->Text = FindExecutable("Locate Assembler", edtAssemblerExe->Text);
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmSettings::btnEmulatorFindClick(TObject *Sender)
-{
-    edtEmulatorExe->Text = FindExecutable("Locate Emulator", edtEmulatorExe->Text);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmSettings::GetBuildOptions()
@@ -167,6 +169,7 @@ void __fastcall TfrmSettings::GetBuildOptions()
     edtBuildMachine->Text = cfg.Name;
     edtCompilerExe->Text = cfg.Compiler.Path;
     edtCompilerParams->Text = cfg.Compiler.Parameters;
+    edtEngineFile->Text = cfg.Engine.Path;
     edtAssemblerExe->Text = cfg.Assembler.Path;
     edtAssemblerParams->Text = cfg.Assembler.Parameters;
     edtAssemblerPrepend->Text = cfg.Assembler.Prepend;
@@ -179,6 +182,7 @@ void __fastcall TfrmSettings::SaveMachineConfig()
 {
     auto& cfg = theDocumentManager.ProjectConfig()->WritableMachineConfiguration();
     cfg.Compiler = MachineConfig::ToolInfo(edtCompilerExe->Text, edtCompilerParams->Text);
+    cfg.Engine = MachineConfig::ToolInfo(edtEngineFile->Text, "");
     cfg.Assembler = MachineConfig::ToolInfoExt(edtAssemblerExe->Text, edtAssemblerParams->Text, edtAssemblerPrepend->Text, edtAssemblerAppend->Text);
     cfg.Emulator = MachineConfig::ToolInfo(edtEmulatorExe->Text, edtEmulatorParams->Text);
 }

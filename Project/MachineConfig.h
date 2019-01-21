@@ -39,11 +39,13 @@ protected:
     std::unique_ptr<Agdx::GraphicsMode> m_GraphicsMode;
     ImageSizing                         m_ImageSizing[itEnd];   // of each image type
     ToolInfo                            m_Compiler;
+    ToolInfo                            m_Engine;
     ToolInfoExt                         m_Assembler;
     ToolInfo                            m_Emulator;
 
     const ImageSizing&      __fastcall  GetImageSizing(ImageTypes type) const;
     void                    __fastcall  SetCompiler(const ToolInfo& info);
+    void                    __fastcall  SetEngine(const ToolInfo& info);
     void                    __fastcall  SetAssembler(const ToolInfoExt& info);
     void                    __fastcall  SetEmulator(const ToolInfo& info);
 
@@ -63,6 +65,7 @@ public:
     String                  __property  Image = { read = m_Image };
     const ImageSizing       __property  ImageSizing[ImageTypes type] = { read = GetImageSizing };
     __property  const ToolInfo&         Compiler = { read = m_Compiler, write = SetCompiler };
+    __property  const ToolInfo&         Engine = { read = m_Engine, write = SetEngine };
     __property  const ToolInfoExt&      Assembler = { read = m_Assembler, write = SetAssembler };
     __property  const ToolInfo&         Emulator = { read = m_Emulator, write = SetEmulator };
 };

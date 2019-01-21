@@ -78,6 +78,9 @@ __published:    // IDE-managed Components
     TButton *btnCompilerFind;
     TEdit *edtBuildMachine;
     TOpenDialog *dlgOpen;
+    TEdit *edtEngineFile;
+    TLabel *Label15;
+    TButton *btnEngineFind;
     void __fastcall FormCreate(TObject *Sender);
     void __fastcall btnProfileClick(TObject *Sender);
     void __fastcall btnOkClick(TObject *Sender);
@@ -86,7 +89,7 @@ __published:    // IDE-managed Components
     void __fastcall chkWelcomeSkipOnStartupClick(TObject *Sender);
     void __fastcall btnCompilerFindClick(TObject *Sender);
     void __fastcall btnAssemblerFindClick(TObject *Sender);
-    void __fastcall btnEmulatorFindClick(TObject *Sender);
+    void __fastcall btnEngineFindClick(TObject *Sender);
 private:    // User declarations
     String  __fastcall  FindExecutable(const String& title, const String& path) const;
     void    __fastcall  GetBuildOptions();

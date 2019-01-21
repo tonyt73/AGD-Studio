@@ -38,6 +38,7 @@ __fastcall MachineConfig::MachineConfig(const String& name)
     m_PropertyMap["ImageSizing.CharacterSet.Step.Height"] = &m_ImageSizing[itCharacterSet].Step.cy;
     m_PropertyMap["Tools.Compiler.Path"] = &m_Compiler.Path;
     m_PropertyMap["Tools.Compiler.Parameters"] = &m_Compiler.Parameters;
+    m_PropertyMap["Tools.Engine.Path"] = &m_Engine.Path;
     m_PropertyMap["Tools.Assembler.Path"] = &m_Assembler.Path;
     m_PropertyMap["Tools.Assembler.Parameters"] = &m_Assembler.Parameters;
     m_PropertyMap["Tools.Assembler.Prepend"] = &m_Assembler.Prepend;
@@ -91,6 +92,12 @@ void __fastcall MachineConfig::SetCompiler(const ToolInfo& info)
     Save();
 }
 //---------------------------------------------------------------------------
+void __fastcall MachineConfig::SetEngine(const ToolInfo& info)
+{
+    m_Engine = info;
+    Save();
+}
+//---------------------------------------------------------------------------
 void __fastcall MachineConfig::SetAssembler(const ToolInfoExt& info)
 {
     m_Assembler = info;
@@ -114,6 +121,9 @@ void __fastcall MachineConfig::Save()
         Push("Compiler");
             Write("Path", m_Compiler.Path);
             Write("Parameters", m_Compiler.Parameters);
+        Pop();
+        Push("Engine");
+            Write("Path", m_Engine.Path);
         Pop();
         Push("Assembler");
             Write("Path", m_Assembler.Path);
