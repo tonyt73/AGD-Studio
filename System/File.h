@@ -17,6 +17,7 @@ public:
     static  String  __fastcall  Extension(const String& file);
     static  String  __fastcall  PathOf(const String& file);
     static  String  __fastcall  ChangeExtension(const String& filename, const String& extension);
+    static  String  __fastcall  Cleanse(const String& file);
     static  String  __fastcall  Combine(const String& path, const String& filename);
     static  void    __fastcall  WriteText(const String& file, const String& content);
     static  void    __fastcall  AppendText(const String& file, const String& content);

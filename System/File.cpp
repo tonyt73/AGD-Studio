@@ -2,6 +2,7 @@
 #include "agdx.pch.h"
 #pragma hdrstop
 //---------------------------------------------------------------------------
+#include <System.SysUtils.hpp>
 #include "File.h"
 #include "Path.h"
 //---------------------------------------------------------------------------
@@ -40,9 +41,21 @@ String __fastcall File::ChangeExtension(const String& filename, const String& ex
     return System::Ioutils::TPath::ChangeExtension(filename, extension);
 }
 //---------------------------------------------------------------------------
+String __fastcall File::Cleanse(const String& file)
+{
+    auto lfile = file;
+    auto nfile = file;
+    do {
+        lfile = nfile;
+        nfile = StringReplace(nfile, "\\\\", "\\", TReplaceFlags());
+        nfile = StringReplace(nfile, "//", "/", TReplaceFlags());
+    } while (nfile != lfile);
+    return nfile;
+}
+//---------------------------------------------------------------------------
 String __fastcall File::Combine(const String& path, const String& filename)
 {
-    return System::Ioutils::TPath::Combine(path, filename);
+    return Cleanse(System::Ioutils::TPath::Combine(path, filename));
 }
 //---------------------------------------------------------------------------
 void __fastcall File::WriteText(const String& file, const String& content)
