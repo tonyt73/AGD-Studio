@@ -1,15 +1,15 @@
 //---------------------------------------------------------------------------
-#ifndef EmuBuilderH
-#define EmuBuilderH
+#ifndef PreChecksH
+#define PreChecksH
 //---------------------------------------------------------------------------
-#include "Build/Builder.h"
+#include "Build/BuildProcess.h"
 //---------------------------------------------------------------------------
-class EmuBuilder : public Builder
+class PreChecks : public BuildProcess
 {
 private:
 public:
-                    __fastcall  EmuBuilder(BuildMessages& buildMessages);
-    virtual         __fastcall ~EmuBuilder();
+                    __fastcall  PreChecks(BuildMessages& buildMessages);
+    virtual         __fastcall ~PreChecks();
 
             bool    __fastcall  Execute() final;
 };

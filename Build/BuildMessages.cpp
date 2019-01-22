@@ -57,3 +57,8 @@ void __fastcall BuildMessages::Message(BuildMessageType type)
     m_TreeView->Update();
 }
 //---------------------------------------------------------------------------
+void __fastcall BuildMessages::Time(int time)
+{
+    Message(bmTiming, "Elapsed time: " + IntToStr(time) + "ms");
+}
+//---------------------------------------------------------------------------

@@ -4,7 +4,7 @@
 //---------------------------------------------------------------------------
 #include "ElXTree.hpp"
 //---------------------------------------------------------------------------
-enum BuildMessageType { bmOk = 0, bmFailed, bmChecking, bmBuild, bmRun, bmProgress, bmTiming };
+enum BuildMessageType { bmOk = 0, bmFailed, bmChecking, bmBuild, bmRun, bmProgress, bmTiming, bmCopy, bmInfo, bmOutput };
 //---------------------------------------------------------------------------
 class BuildMessages
 {
@@ -30,6 +30,8 @@ public:
         void        __fastcall  Message(const String& message);
                                 // update the last message with a success/fail icon
         void        __fastcall  Message(BuildMessageType type);
+                                // log a build time
+        void        __fastcall  Time(int time);
 
     __property  TElXTree*       TreeView = { write = m_TreeView };
 };
@@ -39,5 +41,6 @@ public:
 #define BUILD_MSG(a) m_BuildMessages.Message(a)
 #define BUILD_LINE(a, b) m_BuildMessages.Message(a, b)
 #define BUILD_MSG_POP(result) m_BuildMessages.Pop(result)
+#define BUILD_TIME(time) m_BuildMessages.Time(time)
 //---------------------------------------------------------------------------
 #endif

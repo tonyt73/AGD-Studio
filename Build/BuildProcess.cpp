@@ -1,24 +1,17 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
-#include "Build/EmuBuilder.h"
+#include "BuildProcess.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall EmuBuilder::EmuBuilder(BuildMessages& buildMessages)
-: Builder(buildMessages, bmRun, "Run AGD Game")
+__fastcall BuildProcess::BuildProcess(BuildMessages& buildMessages, BuildMessageType type, const String& description)
+: m_BuildMessages(buildMessages)
+, m_Type(type)
+, m_Description(description)
 {
-
 }
 //---------------------------------------------------------------------------
-__fastcall EmuBuilder::~EmuBuilder()
+__fastcall BuildProcess::~BuildProcess()
 {
-
 }
 //---------------------------------------------------------------------------
-bool __fastcall EmuBuilder::Execute()
-{
-    auto agdFile = System::File::Combine(System::Path::Project, System::Path::ProjectName + ".agd");
-    return true;
-}
-//---------------------------------------------------------------------------
-

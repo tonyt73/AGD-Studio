@@ -1,12 +1,12 @@
 //---------------------------------------------------------------------------
-#ifndef BuilderH
-#define BuilderH
+#ifndef BuildProcessH
+#define BuildProcessH
 //---------------------------------------------------------------------------
 #include "BuildMessages.h"
 #include "System/File.h"
 #include "System/Path.h"
 //---------------------------------------------------------------------------
-class Builder
+class BuildProcess
 {
 private:
     String                      m_Description;
@@ -16,8 +16,8 @@ protected:
     BuildMessages&              m_BuildMessages;
 
 public:
-                    __fastcall  Builder(BuildMessages& buildMessages, BuildMessageType type, const String& description);
-    virtual         __fastcall ~Builder();
+                    __fastcall  BuildProcess(BuildMessages& buildMessages, BuildMessageType type, const String& description);
+    virtual         __fastcall ~BuildProcess();
 
     virtual bool    __fastcall  Execute() = 0;
 

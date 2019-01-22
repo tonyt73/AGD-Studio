@@ -1,12 +1,12 @@
 //---------------------------------------------------------------------------
-#ifndef AgdBuilderH
-#define AgdBuilderH
+#ifndef CreationH
+#define CreationH
 //---------------------------------------------------------------------------
 #include <list>
-#include "Build/Builder.h"
+#include "Build/BuildProcess.h"
 #include "Build/SectionBuilders/SectionBuilder.h"
 //---------------------------------------------------------------------------
-class AgdBuilder : public Builder
+class Creation : public BuildProcess
 {
 private:
     typedef std::list<std::unique_ptr<SectionBuilders::SectionBuilder>> SectionBuilderList;
@@ -14,8 +14,8 @@ private:
     SectionBuilderList           m_SectionBuilders;
 
 public:
-                    __fastcall  AgdBuilder(BuildMessages& buildMessages);
-    virtual         __fastcall ~AgdBuilder();
+                    __fastcall  Creation(BuildMessages& buildMessages);
+    virtual         __fastcall ~Creation();
 
             bool    __fastcall  Execute() final;
 };

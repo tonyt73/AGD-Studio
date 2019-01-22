@@ -2,19 +2,21 @@
 #include "agdx.pch.h"
 #include "Build/BuildManager.h"
 #include "Build/BuildMessages.h"
-#include "Build/AgdBuilder.h"
-#include "Build/AsmBuilder.h"
-#include "Build/ChkBuilder.h"
-#include "Build/EmuBuilder.h"
+#include "Build/PreChecks.h"
+#include "Build/Creation.h"
+#include "Build/Compilation.h"
+#include "Build/Assembly.h"
+#include "Build/Emulation.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall BuildManager::BuildManager()
 {
-    m_Builders.push_back(std::move(std::make_unique<ChkBuilder>(m_BuildMessages)));
-    m_Builders.push_back(std::move(std::make_unique<AgdBuilder>(m_BuildMessages)));
-    m_Builders.push_back(std::move(std::make_unique<AsmBuilder>(m_BuildMessages)));
-    m_Builders.push_back(std::move(std::make_unique<EmuBuilder>(m_BuildMessages)));
+    m_BuildProcesses.push_back(std::move(std::make_unique<PreChecks>(m_BuildMessages)));
+    m_BuildProcesses.push_back(std::move(std::make_unique<Creation>(m_BuildMessages)));
+    m_BuildProcesses.push_back(std::move(std::make_unique<Compilation>(m_BuildMessages)));
+    m_BuildProcesses.push_back(std::move(std::make_unique<Assembly>(m_BuildMessages)));
+    m_BuildProcesses.push_back(std::move(std::make_unique<Emulation>(m_BuildMessages)));
 }
 //---------------------------------------------------------------------------
 __fastcall BuildManager::~BuildManager()
@@ -31,26 +33,26 @@ bool __fastcall BuildManager::Execute()
 {
     auto start = GetTickCount();
     BUILD_MSG_CLEAR;
-    for (auto& builder : m_Builders)
+    for (auto& process : m_BuildProcesses)
     {
         auto bs = GetTickCount();
-        BUILD_MSG_PUSH(builder->Type, builder->Description);
-        if (!builder->Execute())
+        BUILD_MSG_PUSH(process->Type, process->Description);
+        if (!process->Execute())
         {
             // failed to execute a build process
             BUILD_LINE(bmFailed, "Build step FAILED");
             auto be = GetTickCount();
-            BUILD_LINE(bmTiming, "Elapsed time: " + IntToStr((int)(be - bs)) + "ms");
+            BUILD_TIME(be - bs);
             BUILD_MSG_POP(false);
             return false;
         }
         BUILD_LINE(bmOk, "Build step completed successfully");
         auto be = GetTickCount();
-        BUILD_LINE(bmTiming, "Elapsed time: " + IntToStr((int)(be - bs)) + "ms");
+        BUILD_TIME(be - bs);
         BUILD_MSG_POP(true);
     }
     auto end = GetTickCount();
-    BUILD_LINE(bmTiming, "Elapsed time: " + IntToStr((int)(end - start)) + "ms");
+    BUILD_TIME(end - start);
     return true;
 }
 //---------------------------------------------------------------------------

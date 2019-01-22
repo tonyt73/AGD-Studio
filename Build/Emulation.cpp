@@ -1,17 +1,24 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
-#include "Builder.h"
+#include "Build/Emulation.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall Builder::Builder(BuildMessages& buildMessages, BuildMessageType type, const String& description)
-: m_BuildMessages(buildMessages)
-, m_Type(type)
-, m_Description(description)
+__fastcall Emulation::Emulation(BuildMessages& buildMessages)
+: BuildProcess(buildMessages, bmRun, "Run Game")
 {
+
 }
 //---------------------------------------------------------------------------
-__fastcall Builder::~Builder()
+__fastcall Emulation::~Emulation()
 {
+
 }
 //---------------------------------------------------------------------------
+bool __fastcall Emulation::Execute()
+{
+    auto agdFile = System::File::Combine(System::Path::Project, System::Path::ProjectName + ".agd");
+    return true;
+}
+//---------------------------------------------------------------------------
+

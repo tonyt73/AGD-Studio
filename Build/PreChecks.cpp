@@ -1,20 +1,20 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
-#include "Build/ChkBuilder.h"
+#include "Build/PreChecks.h"
 #include "Project/DocumentManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall ChkBuilder::ChkBuilder(BuildMessages& buildMessages)
-: Builder(buildMessages, bmChecking, "Checking Project Dependencies")
+__fastcall PreChecks::PreChecks(BuildMessages& buildMessages)
+: BuildProcess(buildMessages, bmChecking, "Checking Project Dependencies")
 {
 }
 //---------------------------------------------------------------------------
-__fastcall ChkBuilder::~ChkBuilder()
+__fastcall PreChecks::~PreChecks()
 {
 }
 //---------------------------------------------------------------------------
-bool __fastcall ChkBuilder::Execute()
+bool __fastcall PreChecks::Execute()
 {
     const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
     auto cp = System::File::Exists(mc.Compiler.Path) || System::File::Exists(System::File::Combine(System::Path::Application, mc.Compiler.Path));

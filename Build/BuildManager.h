@@ -4,13 +4,13 @@
 //---------------------------------------------------------------------------
 #include <list>
 #include "Build/BuildMessages.h"
-#include "Build/Builder.h"
+#include "Build/BuildProcess.h"
 //---------------------------------------------------------------------------
 class BuildManager
 {
 private:
-    typedef     std::list<std::unique_ptr<Builder>> BuildersList;
-    BuildersList                m_Builders;
+    typedef std::list<std::unique_ptr<BuildProcess>> BuildProcesses;
+    BuildProcesses              m_BuildProcesses;
     BuildMessages               m_BuildMessages;
 
     void            __fastcall  SetTreeView(TElXTree* treeView);

@@ -1,15 +1,15 @@
 //---------------------------------------------------------------------------
-#ifndef ChkBuilderH
-#define ChkBuilderH
+#ifndef EmulationH
+#define EmulationH
 //---------------------------------------------------------------------------
-#include "Build/Builder.h"
+#include "Build/BuildProcess.h"
 //---------------------------------------------------------------------------
-class ChkBuilder : public Builder
+class Emulation : public BuildProcess
 {
 private:
 public:
-                    __fastcall  ChkBuilder(BuildMessages& buildMessages);
-    virtual         __fastcall ~ChkBuilder();
+                    __fastcall  Emulation(BuildMessages& buildMessages);
+    virtual         __fastcall ~Emulation();
 
             bool    __fastcall  Execute() final;
 };

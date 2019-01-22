@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
-#include "AgdBuilder.h"
+#include "Creation.h"
 #include "Build/SectionBuilders/Project.h"
 #include "Build/SectionBuilders/Window.h"
 #include "Build/SectionBuilders/Controls.h"
@@ -16,8 +16,8 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall AgdBuilder::AgdBuilder(BuildMessages& buildMessages)
-: Builder(buildMessages, bmBuild, "Build AGD File")
+__fastcall Creation::Creation(BuildMessages& buildMessages)
+: BuildProcess(buildMessages, bmBuild, "Generate Game File (Project to AGD File)")
 {
     m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Project>()));
     m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Window>()));
@@ -32,11 +32,11 @@ __fastcall AgdBuilder::AgdBuilder(BuildMessages& buildMessages)
     m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Events>()));
 }
 //---------------------------------------------------------------------------
-__fastcall AgdBuilder::~AgdBuilder()
+__fastcall Creation::~Creation()
 {
 }
 //---------------------------------------------------------------------------
-bool __fastcall AgdBuilder::Execute()
+bool __fastcall Creation::Execute()
 {
     auto agdFile = System::File::Combine(System::Path::Project, System::Path::ProjectName + ".agd");
     String agdContent;

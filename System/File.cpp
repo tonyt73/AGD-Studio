@@ -90,11 +90,11 @@ File::StrLines __fastcall File::ReadLines(const String& file)
     return System::Ioutils::TFile::ReadAllLines(file);
 }
 //---------------------------------------------------------------------------
-void __fastcall File::Copy(const String& source, const String& destination)
+void __fastcall File::Copy(const String& source, const String& destination, bool overwrite)
 {
     auto path = System::Ioutils::TPath::GetDirectoryName(destination);
     System::Ioutils::TDirectory::CreateDirectory(path);
-    System::Ioutils::TFile::Copy(source, destination);
+    System::Ioutils::TFile::Copy(source, destination, overwrite);
 }
 //---------------------------------------------------------------------------
 void __fastcall File::Delete(const String& file)
