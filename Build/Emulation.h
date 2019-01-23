@@ -2,9 +2,9 @@
 #ifndef EmulationH
 #define EmulationH
 //---------------------------------------------------------------------------
-#include "Build/BuildProcess.h"
+#include "Build/ShellProcess.h"
 //---------------------------------------------------------------------------
-class Emulation : public BuildProcess
+class Emulation : public ShellProcess
 {
 private:
 public:

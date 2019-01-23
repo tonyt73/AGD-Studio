@@ -24,6 +24,9 @@ void __fastcall SectionBuilders::Objects::Execute()
     // get the objects in the map
     auto mapDoc = dynamic_cast<TiledMapDocument*>(dm.Get("Map", "Tiled", "Tile Map"));
     assert(mapDoc != nullptr);
+    const auto& wi = theDocumentManager.ProjectConfig()->Window;
+    auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum;
+    auto wPt = TPoint(wi.X * tileSize.cx, wi.Y * tileSize.cy);
     auto objectsInMap = mapDoc->Get(itObject);
     // get the list of object images
     DocumentList images;
@@ -54,7 +57,7 @@ void __fastcall SectionBuilders::Objects::Execute()
             // add the room
             auto roomIndex = object->State == osRoom ? mapDoc->GetRoomIndex(object->Room) : (object->State == osDisabled ? 254 : 255);
             line += IntToStr((int)roomIndex) + " ";
-            line += IntToStr((int)object->Position.Y) + " " + IntToStr((int)object->Position.X) + " ";
+            line += IntToStr((int)(wPt.Y + object->Position.Y)) + " " + IntToStr((int)(wPt.X + object->Position.X)) + " ";
             AddLine(line);
             // export the machine graphics data
             line = "             ";

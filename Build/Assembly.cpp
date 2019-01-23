@@ -1,18 +1,15 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
+#include <System.SysUtils.hpp>
 #include "Build/Assembly.h"
+#include "Project/DocumentManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "DosCommand"
 //---------------------------------------------------------------------------
 __fastcall Assembly::Assembly(BuildMessages& buildMessages)
-: BuildProcess(buildMessages, bmBuild, "Assemble Game+Engine (Assembly File to Emulator File)")
+: ShellProcess(buildMessages, bmBuild, "Assemble Game+Engine (Assembly File to Emulator File)")
 {
-    m_Shell = std::make_unique<TDosCommand>(nullptr);
-
-    m_Shell->OnNewLine = OnNewLineEvent;
-    m_Shell->OnExecuteError = OnErrorEvent;
-    m_Shell->OnTerminateProcess = OnTerminateProcessEvent;
 }
 //---------------------------------------------------------------------------
 __fastcall Assembly::~Assembly()
@@ -21,26 +18,20 @@ __fastcall Assembly::~Assembly()
 //---------------------------------------------------------------------------
 bool __fastcall Assembly::Execute()
 {
-    auto agdFile = System::File::Combine(System::Path::Project, System::Path::ProjectName + ".agd");
-    m_Shell->CurrentDir = System::File::PathOf(agdFile);
-    BUILD_MSG("Compiling " + agdFile);
+    const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
+    auto asmFile = System::File::Combine(System::Path::Project, System::Path::ProjectName + ".asm");
+    auto path = System::File::PathOf(asmFile);
+    BUILD_MSG("Assembling " + asmFile);
 
-    return true;
-}
-//---------------------------------------------------------------------------
-void __fastcall Assembly::OnNewLineEvent(System::TObject* ASender, const System::UnicodeString ANewLine, TOutputType AOutputType)
-{
+    auto assembler = System::File::Resolve(System::Path::Application, mc.Assembler.Path);
+    auto parameters = StringReplace(mc.Assembler.Parameters, "%infile%", System::File::NameWithoutExtension(asmFile), TReplaceFlags());
+    parameters = StringReplace(parameters, "%outfile%", System::File::NameWithoutExtension(asmFile), TReplaceFlags());
+    System::File::PrependText(asmFile, mc.Assembler.Prepend);
+    System::File::AppendText(asmFile, mc.Assembler.Append);
 
-}
-//---------------------------------------------------------------------------
-void __fastcall Assembly::OnErrorEvent(System::TObject* ASender, System::Sysutils::Exception* AE, bool &AHandled)
-{
-
-}
-//---------------------------------------------------------------------------
-void __fastcall Assembly::OnTerminateProcessEvent(System::TObject* ASender, bool &ACanTerminate)
-{
-
+    BUILD_LINE(bmBuild, "Execute Assembler");
+    auto cmdline = assembler + " " + parameters;
+    return ShellExecute(path, cmdline);
 }
 //---------------------------------------------------------------------------
 

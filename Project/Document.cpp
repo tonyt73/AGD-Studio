@@ -139,6 +139,7 @@ bool __fastcall Document::Load()
         JsonFile::Load(m_File);
         // make sure the next ref id is up to date
         s_NextRefId = max(s_NextRefId, m_RefId);
+        OnLoad();
         return true;
     }
     return false;

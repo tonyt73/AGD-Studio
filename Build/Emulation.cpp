@@ -1,24 +1,31 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
 #include "Build/Emulation.h"
+#include "Project/DocumentManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall Emulation::Emulation(BuildMessages& buildMessages)
-: BuildProcess(buildMessages, bmRun, "Run Game")
+: ShellProcess(buildMessages, bmRun, "Run Game")
 {
-
 }
 //---------------------------------------------------------------------------
 __fastcall Emulation::~Emulation()
 {
-
 }
 //---------------------------------------------------------------------------
 bool __fastcall Emulation::Execute()
 {
-    auto agdFile = System::File::Combine(System::Path::Project, System::Path::ProjectName + ".agd");
-    return true;
+    const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
+    auto gameFile = System::File::Combine(System::Path::Project, System::Path::ProjectName);
+    BUILD_MSG("Launching Game " + gameFile);
+
+    auto emulator = System::File::Resolve(System::Path::Application, mc.Emulator.Path);
+    auto parameters = StringReplace(mc.Emulator.Parameters, "%infile%", gameFile, TReplaceFlags());
+
+    auto path = System::File::PathOf(emulator);
+    auto cmdline = emulator + " " + parameters;
+    return ShellExecute(path, cmdline, false);
 }
 //---------------------------------------------------------------------------
 

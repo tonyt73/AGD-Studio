@@ -21,7 +21,6 @@ private:
     typedef std::vector<String>     FramesList;
     typedef std::map<String, String>LayerMap;
 
-            void        __fastcall  OnEndObject(const String& object);
             int         __fastcall  CountFrames() const;
             int         __fastcall  CountImagesPerFrame() const;
             void        __fastcall  SetFrames(int frames);
@@ -45,6 +44,7 @@ protected:
             String                  m_LayerName;        // used to load layers into the above layers list
             String                  m_LayerData;        // used to load layers into the above layers list
 
+    virtual void        __fastcall  OnEndObject(const String& object);
             void        __fastcall  ExtractSize(const String& extra);
 
             int         __fastcall  GetLayerCount() const;
@@ -91,11 +91,15 @@ private:
     std::unique_ptr<AGDX::Point>    m_Room;
     std::unique_ptr<AGDX::Point>    m_Position;
             ObjectState             m_State;
+            int                     m_ReadPtX;
+            int                     m_ReadPtY;
 
     const AGDX::Point&  __fastcall  GetRoom();
             void        __fastcall  SetRoom(const AGDX::Point& pt);
     const AGDX::Point&  __fastcall  GetPosition();
             void        __fastcall  SetPosition(const AGDX::Point& pt);
+            void        __fastcall  SetState(ObjectState state);
+            void        __fastcall  OnEndObject(const String& object);
 
 protected:
     virtual void        __fastcall  DoSaveExtra();
@@ -107,7 +111,7 @@ public:
 __published:
     __property  const AGDX::Point&  Room            = { read = GetRoom, write = SetRoom         };
     __property  const AGDX::Point&  Position        = { read = GetPosition, write = SetPosition };
-          ObjectState   __property  State           = { read = m_State, write = m_State         };
+          ObjectState   __property  State           = { read = m_State, write = SetState        };
 };
 //---------------------------------------------------------------------------
 class TileDocument : public ImageDocument

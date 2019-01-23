@@ -268,10 +268,10 @@ __fastcall ObjectDocument::ObjectDocument(const String& name, const String& extr
     m_SubType = "Object";
     m_Folder = "Images\\Objects";
 
-    m_PropertyMap["Image.Room.X"] = &m_Room->X;
-    m_PropertyMap["Image.Room.Y"] = &m_Room->Y;
-    m_PropertyMap["Image.Position.X"] = &m_Position->X;
-    m_PropertyMap["Image.Position.Y"] = &m_Position->Y;
+    m_PropertyMap["Image.Room.X"] = &m_ReadPtX;
+    m_PropertyMap["Image.Room.Y"] = &m_ReadPtY;
+    m_PropertyMap["Image.Position.X"] = &m_ReadPtX;
+    m_PropertyMap["Image.Position.Y"] = &m_ReadPtY;
     m_PropertyMap["Image.State"] = &m_State;
 
     RegisterProperty("Name", "Details", "The name of the object");
@@ -281,6 +281,19 @@ __fastcall ObjectDocument::ObjectDocument(const String& name, const String& extr
     m_File = GetFile();
     ExtractSize(extra);
     AddFrame();
+}
+//---------------------------------------------------------------------------
+void __fastcall ObjectDocument::OnEndObject(const String& object)
+{
+    ::ImageDocument::OnEndObject(object);
+    if (object == "Image.Room")
+    {
+        *m_Room = AGDX::Point(m_ReadPtX, m_ReadPtY);
+    }
+    else if (object == "Image.Position")
+    {
+        *m_Position = AGDX::Point(m_ReadPtX, m_ReadPtY);
+    }
 }
 //---------------------------------------------------------------------------
 const AGDX::Point& __fastcall ObjectDocument::GetRoom()
@@ -303,15 +316,20 @@ void __fastcall ObjectDocument::SetPosition(const AGDX::Point& pt)
     *m_Position = pt;
 }
 //---------------------------------------------------------------------------
+void  __fastcall ObjectDocument::SetState(ObjectState state)
+{
+    m_State = state;
+}
+//---------------------------------------------------------------------------
 void __fastcall ObjectDocument::DoSaveExtra()
 {
     Push("Room");
-        Write("X", (int)m_Room->X);
-        Write("Y", (int)m_Room->Y);
+        Write("X", m_Room->X);
+        Write("Y", m_Room->Y);
     Pop();
     Push("Position");
-        Write("X", (int)m_Position->X);
-        Write("Y", (int)m_Position->Y);
+        Write("X", m_Position->X);
+        Write("Y", m_Position->Y);
     Pop();
     Write("State", m_State);
 }

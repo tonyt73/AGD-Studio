@@ -86,28 +86,6 @@ void __fastcall SectionBuilders::Screens::Execute()
         }
     }
 
-    const auto& mapSize = mapDoc->GetMinimalMapSize();
-    AddLine("MAP WIDTH " + IntToStr((int)mapSize.Width() + 1));
-    AddLine("    STARTSCREEN " + IntToStr(mapDoc->GetRoomIndex(AGDX::Point(mapDoc->StartLocationX, mapDoc->StartLocationY))));
-    for (auto y = mapSize.Top; y <= mapSize.Bottom; y++)
-    {
-        String line = "    ";
-        for (auto x = mapSize.Left; x <= mapSize.Right; x++)
-        {
-            auto ri = mapDoc->GetRoomIndex(AGDX::Point(x, y));
-            if (ri != -1)
-            {
-                line += IntToStr(ri) + " ";
-            }
-            else
-            {
-                line += "255 ";
-            }
-        }
-        AddLine(line);
-    }
-    AddLine("ENDMAP");
-
     // no screens is ok
     Success();
 }

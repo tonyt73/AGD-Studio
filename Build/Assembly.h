@@ -3,16 +3,11 @@
 #define AssemblyH
 //---------------------------------------------------------------------------
 #include "DosCommand.hpp"
-#include "Build/BuildProcess.h"
+#include "Build/ShellProcess.h"
 //---------------------------------------------------------------------------
-class Assembly : public BuildProcess
+class Assembly : public ShellProcess
 {
 private:
-   std::unique_ptr<TDosCommand> m_Shell;
-
-            void    __fastcall  OnNewLineEvent(System::TObject* ASender, const System::UnicodeString ANewLine, TOutputType AOutputType);
-            void    __fastcall  OnErrorEvent(System::TObject* ASender, System::Sysutils::Exception* AE, bool &AHandled);
-            void    __fastcall  OnTerminateProcessEvent(System::TObject* ASender, bool &ACanTerminate);
 
 public:
                     __fastcall  Assembly(BuildMessages& buildMessages);

@@ -29,6 +29,7 @@ __fastcall Creation::Creation(BuildMessages& buildMessages)
     m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Sprites>()));
     m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Screens>()));
     m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Objects>()));
+    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Map>()));
     m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Events>()));
 }
 //---------------------------------------------------------------------------

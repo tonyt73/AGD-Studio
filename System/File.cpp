@@ -58,11 +58,22 @@ String __fastcall File::Combine(const String& path, const String& filename)
     return Cleanse(System::Ioutils::TPath::Combine(path, filename));
 }
 //---------------------------------------------------------------------------
+String __fastcall File::Resolve(const String& parent, const String& path)
+{
+    return System::File::Exists(path) ? path : System::File::Combine(parent, path);
+}
+//---------------------------------------------------------------------------
 void __fastcall File::WriteText(const String& file, const String& content)
 {
     auto path = ExtractFilePath(file);
     System::Ioutils::TDirectory::CreateDirectory(path);
     System::Ioutils::TFile::WriteAllText(file, content);
+}
+//---------------------------------------------------------------------------
+void __fastcall File::PrependText(const String& file, const String& content)
+{
+    auto text = ReadText(file);
+    WriteText(file, content + text);
 }
 //---------------------------------------------------------------------------
 void __fastcall File::AppendText(const String& file, const String& content)
