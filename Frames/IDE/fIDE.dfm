@@ -67,7 +67,6 @@ object frmIDE: TfrmIDE
         UseThemeForSelection = True
         ActiveBorderType = fbtFlat
         Align = alClient
-        AutoCollapse = True
         AutoExpand = True
         Style.TextColor = clBtnText
         Style.FontSize = 8
