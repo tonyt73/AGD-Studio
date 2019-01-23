@@ -2,7 +2,8 @@
 #ifndef BuildProcessH
 #define BuildProcessH
 //---------------------------------------------------------------------------
-#include "BuildMessages.h"
+#include "Build/BuildMessages.h"
+#include "Build/Parameterizer.h"
 #include "System/File.h"
 #include "System/Path.h"
 //---------------------------------------------------------------------------

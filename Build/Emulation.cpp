@@ -21,7 +21,7 @@ bool __fastcall Emulation::Execute()
     BUILD_MSG("Launching Game " + gameFile);
 
     auto emulator = System::File::Resolve(System::Path::Application, mc.Emulator.Path);
-    auto parameters = StringReplace(mc.Emulator.Parameters, "%infile%", gameFile, TReplaceFlags());
+    auto parameters = Parameter::ization(mc.Emulator.Parameters);
 
     auto path = System::File::PathOf(emulator);
     auto cmdline = emulator + " " + parameters;
