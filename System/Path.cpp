@@ -67,7 +67,7 @@ String __fastcall Path::GetFolderRelativeTo(const Location location, const Strin
 //---------------------------------------------------------------------------
 String __fastcall Path::GetActiveProjectFolder()
 {
-    return Projects + Separator + ProjectName;
+    return Projects + ProjectName + Separator;
 }
 //---------------------------------------------------------------------------
 TStringDynArray __fastcall Path::GetFiles(const String& folder, const String& filter)
