@@ -36,9 +36,9 @@ void __fastcall SectionBuilders::Screens::Execute()
                 auto roomEntities = mapDoc->Get(meRoom, TSize(rx, ry));
                 auto roomPt = TPoint(rx * tileSize.cx * wi.Width, ry * tileSize.cy * wi.Height);
                 String line = "DEFINESCREEN ";
-                for (auto y = 0; y < mapDoc->RoomHeight; y++)
+                for (auto y = 0; y < wi.Height; y++)
                 {
-                    for (auto x = 0; x < mapDoc->RoomWidth; x++)
+                    for (auto x = 0; x < wi.Width; x++)
                     {
                         auto entity = find_if(roomEntities.begin(), roomEntities.end(),
                             [&](const Entity& e)

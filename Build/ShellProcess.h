@@ -15,9 +15,10 @@ private:
             void    __fastcall  OnNewLineEvent(System::TObject* ASender, const System::UnicodeString ANewLine, TOutputType AOutputType);
             void    __fastcall  OnErrorEvent(System::TObject* ASender, System::Sysutils::Exception* AE, bool &AHandled);
             void    __fastcall  OnTerminatedEvent(System::TObject* ASender);
+            void    __fastcall  OnTerminateProcessEvent(System::TObject* ASender, bool &ACanTerminate);
 
 protected:
-            bool    __fastcall  ShellExecute(const String& path, const String& cmdline, bool wait = true);
+            bool    __fastcall  ShellExecute(const String& path, const String& cmdline, bool wait = true, int timeOut = 0);
 
 
 public:

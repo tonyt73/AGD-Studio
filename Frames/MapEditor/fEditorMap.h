@@ -131,6 +131,7 @@ __published:    // IDE-managed Components
     TStatusBar *sbrWorkspace;
     TStatusBar *sbrRoomSelection;
     TStatusBar *StatusBar1;
+    TImage *imgLock;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actLineExecute(TObject *Sender);

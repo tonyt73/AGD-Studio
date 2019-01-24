@@ -14,6 +14,8 @@ __fastcall Entity::Entity()
 , m_Dirty(true)
 , m_Selected(false)
 , m_SpriteType(-1)
+, m_RoomLocked(false)
+, m_Room(-1, -1)
 {
 }
 //---------------------------------------------------------------------------
@@ -24,6 +26,8 @@ __fastcall Entity::Entity(const Entity& other)
 , m_Dirty(true)
 , m_Selected(other.m_Selected)
 , m_SpriteType(other.m_SpriteType)
+, m_RoomLocked(other.m_RoomLocked)
+, m_Room(other.m_Room)
 {
 }
 //---------------------------------------------------------------------------
@@ -39,6 +43,8 @@ Entity& __fastcall Entity::operator=(const Entity& other)
     m_Dirty = true;
     m_Selected = other.m_Selected;
     m_SpriteType = other.m_SpriteType;
+    m_RoomLocked = other.m_RoomLocked;
+    m_Room = other.m_Room;
     return *this;
 }
 //---------------------------------------------------------------------------
@@ -82,6 +88,9 @@ void __fastcall Entity::Clear()
     m_Pt.x = 0;
     m_Pt.y = 0;
     m_SpriteType = -1;
+    m_RoomLocked = false;
+    m_Room.x = -1;
+    m_Room.y = -1;
     m_Document = nullptr;
     m_Dirty = true;
 }
@@ -131,6 +140,12 @@ void __fastcall Entity::SetSpriteType(int type)
     m_SpriteType = (type >= 0 && m_Document->ImageType == itSprite) ? type : -1;
 }
 //---------------------------------------------------------------------------
+void __fastcall Entity::SetRoom(TPoint pt)
+{
+    m_Room = pt;
+    m_Dirty = true;
+}
+//---------------------------------------------------------------------------
 
 
 //---------------------------------------------------------------------------
@@ -138,32 +153,22 @@ _fastcall TiledMapDocument::TiledMapDocument(const String& name)
 : Document(name)
 , m_StartLocationX(5)
 , m_StartLocationY(2)
-, m_Width(32)
-, m_Height(24)
-, m_BackgroundColor(clBlack)
 {
     m_Type = "Map";
     m_SubType = "Tiled";
     m_Folder = "Game\\Map";
-    RegisterProperty("RoomsAcross", "Dimensions", "The number in rooms accross for the map");
-    RegisterProperty("RoomsDown", "Dimensions", "The number in rooms down for the map");
-    RegisterProperty("RoomWidth", "Dimensions", "The width in character blocks for a map room");
-    RegisterProperty("RoomHeight", "Dimensions", "The height in character blocks for a map room");
     RegisterProperty("StartLocationX", "Start Room", "The x position of the start room into the map");
     RegisterProperty("StartLocationY", "Start Room", "The y position of the start room into the map");
-    RegisterProperty("BackgroundColor", "Visual", "The color of the background when no tile is present");
     // json loading properties
-    m_PropertyMap["Map.RoomWidth"] = &m_Width;
-    m_PropertyMap["Map.RoomHeight"] = &m_Height;
-    m_PropertyMap["Map.StartLocationX"] = &StartLocationX;
-    m_PropertyMap["Map.StartLocationY"] = &StartLocationY;
-    m_PropertyMap["Map.Workspace[].X"] = &m_EntityLoader.m_Pt.x;
-    m_PropertyMap["Map.Workspace[].Y"] = &m_EntityLoader.m_Pt.y;
-    m_PropertyMap["Map.Workspace[].RefId"] = &m_EntityLoader.m_LoadId;
-    m_PropertyMap["Map.Map[].X"] = &m_EntityLoader.m_Pt.x;
-    m_PropertyMap["Map.Map[].Y"] = &m_EntityLoader.m_Pt.y;
-    m_PropertyMap["Map.Map[].RefId"] = &m_EntityLoader.m_LoadId;
-    m_PropertyMap["Map.Map[].SpriteType"] = &m_EntityLoader.m_SpriteType;
+    m_PropertyMap["Map.StartLocation.X"] = &StartLocationX;
+    m_PropertyMap["Map.StartLocation.Y"] = &StartLocationY;
+    m_PropertyMap["Map.Entities[].X"] = &m_EntityLoader.m_Pt.x;
+    m_PropertyMap["Map.Entities[].Y"] = &m_EntityLoader.m_Pt.y;
+    m_PropertyMap["Map.Entities[].RefId"] = &m_EntityLoader.m_LoadId;
+    m_PropertyMap["Map.Entities[].SpriteType"] = &m_EntityLoader.m_SpriteType;
+    m_PropertyMap["Map.Entities[].Room.Locked"] = &m_EntityLoader.m_RoomLocked;
+    m_PropertyMap["Map.Entities[].Room.X"] = &m_EntityLoader.m_Room.x;
+    m_PropertyMap["Map.Entities[].Room.Y"] = &m_EntityLoader.m_Room.y;
     m_PropertyMap["Map.ScratchPad[].X"] = &m_EntityLoader.m_Pt.x;
     m_PropertyMap["Map.ScratchPad[].Y"] = &m_EntityLoader.m_Pt.y;
     m_PropertyMap["Map.ScratchPad[].RefId"] = &m_EntityLoader.m_LoadId;
@@ -183,11 +188,11 @@ __fastcall TiledMapDocument::~TiledMapDocument()
 void __fastcall TiledMapDocument::DoSave()
 {
     Push("Map");
-        Write("RoomWidth", m_Width);
-        Write("RoomHeight", m_Height);
-        Write("StartLocationX", m_StartLocationX);
-        Write("StartLocationY", m_StartLocationY);
-        ArrayStart("Map");
+        Push("StartLocation");
+            Write("X", m_StartLocationX);
+            Write("Y", m_StartLocationY);
+        Pop();
+        ArrayStart("Entities");
         for (const auto& entity : m_Map)
         {
             StartObject();
@@ -197,6 +202,11 @@ void __fastcall TiledMapDocument::DoSave()
                 if (entity.SpriteType >= 0)
                 {
                     Write("SpriteType", entity.SpriteType);
+                    Push("Room");
+                        Write("Locked", entity.RoomLocked);
+                        Write("X", (int)entity.Room.x);
+                        Write("Y", (int)entity.Room.y);
+                    Pop();
                 }
             EndObject();
         }
@@ -220,7 +230,7 @@ void __fastcall TiledMapDocument::DoSave()
 //---------------------------------------------------------------------------
 void __fastcall TiledMapDocument::OnEndObject(const String& object)
 {
-    if (object == "Map.Map[]")
+    if (object == "Map.Entities[]")
     {
         if (m_EntityLoader.m_LoadId != InvalidDocumentId)
         {

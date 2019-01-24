@@ -18,7 +18,7 @@ __fastcall ShellProcess::~ShellProcess()
 {
 }
 //---------------------------------------------------------------------------
-bool __fastcall ShellProcess::ShellExecute(const String& path, const String& cmdline, bool wait)
+bool __fastcall ShellProcess::ShellExecute(const String& path, const String& cmdline, bool wait, int timeOut)
 {
     m_Errored = false;
     bool result = true;
@@ -34,6 +34,7 @@ bool __fastcall ShellProcess::ShellExecute(const String& path, const String& cmd
             m_Shell->CurrentDir = path;
             BUILD_LINE(bmOutput, "» " + cmdline);
             m_Shell->CommandLine = cmdline;
+            m_Shell->MaxTimeAfterBeginning = timeOut;
             m_Shell->Execute();
             m_ShellDone = false;
             while (wait && !m_ShellDone)
@@ -78,6 +79,7 @@ void __fastcall ShellProcess::OnNewLineEvent(System::TObject* ASender, const Sys
 //---------------------------------------------------------------------------
 void __fastcall ShellProcess::OnErrorEvent(System::TObject* ASender, System::Sysutils::Exception* AE, bool &AHandled)
 {
+    m_ShellDone = true;
     m_Errored = true;
     BUILD_LINE(bmFailed, "Exception: " + AE->ToString());
     AHandled = true;
@@ -86,6 +88,18 @@ void __fastcall ShellProcess::OnErrorEvent(System::TObject* ASender, System::Sys
 void __fastcall ShellProcess::OnTerminatedEvent(System::TObject* ASender)
 {
     m_ShellDone = true;
+    if (m_Shell->EndStatus == esTime)
+    {
+        m_Errored = true;
+        BUILD_LINE(bmFailed, m_Shell->CommandLine + ", has timed out!");
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall ShellProcess::OnTerminateProcessEvent(System::TObject* ASender, bool &ACanTerminate)
+{
+    ACanTerminate = true;
+    m_ShellDone = true;
+    m_Errored = true;
 }
 //---------------------------------------------------------------------------
 

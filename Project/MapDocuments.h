@@ -18,6 +18,8 @@ protected:
     bool                            m_Dirty;        // flag: entity needs to be rendered
     bool                            m_Selected;     // flag: entity is selected
     int                             m_SpriteType;   // the type of sprite
+    bool                            m_RoomLocked;   // the sprite is locked to the room
+    TPoint                          m_Room;         // the x,y location of the room we are locked to
 
     friend class TiledMapDocument;
 
@@ -31,6 +33,7 @@ protected:
     void                __fastcall  SetSelected(bool state);
     void                __fastcall  SetDirty(bool state);
     void                __fastcall  SetSpriteType(int type);
+    void                __fastcall  SetRoom(TPoint pt);
 
 public:
                         __fastcall  Entity();
@@ -49,7 +52,9 @@ public:
     __property  TPoint              DragPt      = { read = GetDragPoint, write = SetDragPoint   };
     __property  bool                Dirty       = { read = m_Dirty, write = SetDirty            };
     __property  bool                Selected    = { read = m_Selected, write = SetSelected      };
-    __property  int                 SpriteType  = { read = m_SpriteType, write = SetSpriteType };
+    __property  int                 SpriteType  = { read = m_SpriteType, write = SetSpriteType  };
+    __property  bool                RoomLocked  = { read = m_RoomLocked, write = m_RoomLocked   };
+    __property  TPoint              Room        = { read = m_Room, write = SetRoom              };
 };
 typedef std::vector<Entity>     EntityList;
 //---------------------------------------------------------------------------
@@ -64,14 +69,12 @@ protected:
     EntityList                      m_Room;
     EntityList                      m_ScratchPad;
 
-            int                     m_Width;
-            int                     m_Height;
+                                    // TODO: Convert to AGDX:Point for better display in the property editor
             int                     m_StartLocationX;
             int                     m_StartLocationY;
-            TColor                  m_BackgroundColor;
             Entity                  m_EntityLoader;
             TSize                   m_ActiveRoom;
-    std::map<int, int>              m_AgdScreenMap; // a map from studio to .AGD screen indexes
+            std::map<int, int>      m_AgdScreenMap; // a mapping from Studio to .AGD screen indexes
 
             void        __fastcall  OnEndObject(const String& object);
             void        __fastcall  OnDocumentChanged(const DocumentChange<String>& message);
@@ -95,11 +98,8 @@ public:
             bool        __fastcall  IsRoomEmpty(int x, int y);
 
 __published:
-    __property          int         RoomWidth       = { read = m_Width          , write = m_Width           };
-    __property          int         RoomHeight      = { read = m_Height         , write = m_Height          };
     __property          int         StartLocationX  = { read = m_StartLocationX , write = m_StartLocationX  };
     __property          int         StartLocationY  = { read = m_StartLocationY , write = m_StartLocationY  };
-    __property          TColor      BackgroundColor = { read = m_BackgroundColor, write = m_BackgroundColor };
 };
 //---------------------------------------------------------------------------
 #endif

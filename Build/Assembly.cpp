@@ -5,7 +5,6 @@
 #include "Project/DocumentManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-#pragma link "DosCommand"
 //---------------------------------------------------------------------------
 __fastcall Assembly::Assembly(BuildMessages& buildMessages)
 : ShellProcess(buildMessages, bmBuild, "Assemble Game+Engine (Assembly File to Emulator File)")
