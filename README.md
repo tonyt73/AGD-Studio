@@ -8,11 +8,13 @@ Editors for:
   * Tiles/Blocks)
 * Events (Code)
   * Syntax highlighting editor
+    * AGD syntax (done)
+    * Asm syntax (TBD)
   * Code folding
 * Map
 * Messages
-* Window size and position
-* Keys
+* Window size and position (TBD)
+* Keys (TBD)
 
 Automated build system:
 * Produces AGD compiler output on the fly
@@ -21,6 +23,8 @@ Automated build system:
 Themes:
 * Multiple user selectable UI themes
 * Dockable content editors and helper panel
+  * Future improvements:
+    * Save layout per project
 
 
 ## Build Instructions
