@@ -4,6 +4,7 @@
 #include "Project/ProjectManager.h"
 #include "Project/MachineConfig.h"
 #include "Settings/Settings.h"
+#include "Settings/ThemeManager.h"
 #include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
@@ -15,27 +16,7 @@ __fastcall TfrmWelcomeDialog::TfrmWelcomeDialog(TComponent* Owner)
 , m_LoadingPanel(nullptr)
 {
     // load the themes
-    if (cmbThemes->Items->Count == 0)
-    {
-        auto sl = std::make_unique<TStringList>();
-        for (auto i = 0; i < TStyleManager::StyleNames.Length; i++)
-        {
-            if (TStyleManager::StyleNames[i] != "Windows")
-            {
-                sl->Add(TStyleManager::StyleNames[i]);
-            }
-        }
-        sl->Sort();
-        const String style = appSettings.ActiveStyle;
-        for (auto i = 0; i < sl->Count; i++)
-        {
-            cmbThemes->Items->Add(sl->Strings[i]);
-            if (sl->Strings[i] == style)
-            {
-                cmbThemes->ItemIndex = cmbThemes->Items->Count - 1;
-            }
-        }
-    }
+    Project::ThemeManager::LoadStyles(cmbThemes);
     // load the machines
     cmbMachines->Items->Clear();
     std::vector<String> machines;
@@ -131,8 +112,7 @@ void __fastcall TfrmWelcomeDialog::lblStartNewProjectMouseLeave(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::cmbThemesChange(TObject *Sender)
 {
-    TStyleManager::SetStyle(cmbThemes->Text);
-    appSettings.ActiveStyle = cmbThemes->Text;
+    Project::ThemeManager::SetStyle(cmbThemes->Text);
     UpdateColors();
 }
 //---------------------------------------------------------------------------

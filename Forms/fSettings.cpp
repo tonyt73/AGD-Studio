@@ -2,8 +2,9 @@
 #include "agdx.pch.h"
 #include "fSettings.h"
 #include "Project/DocumentManager.h"
+#include "Project/MachineConfig.h"
 #include "Settings/Settings.h"
-#include "MachineConfig.h"
+#include "Settings/ThemeManager.h"
 #include "System/File.h"
 #include "System/Path.h"
 //---------------------------------------------------------------------------
@@ -36,25 +37,7 @@ void __fastcall TfrmSettings::FormCreate(TObject *Sender)
     chkLoadLastProjectClick(nullptr);
     //panButtons->Color = StyleServices()->GetStyleColor(scGenericGradientBase);
     // load the themes
-    cmbThemes->Items->Clear();
-    auto sl = std::make_unique<TStringList>();
-    for (auto i = 0; i < TStyleManager::StyleNames.Length; i++)
-    {
-        if (TStyleManager::StyleNames[i] != "Windows")
-        {
-            sl->Add(TStyleManager::StyleNames[i]);
-        }
-    }
-    sl->Sort();
-    const String style = appSettings.ActiveStyle;
-    for (auto i = 0; i < sl->Count; i++)
-    {
-        cmbThemes->Items->Add(sl->Strings[i]);
-        if (sl->Strings[i] == style)
-        {
-            cmbThemes->ItemIndex = cmbThemes->Items->Count - 1;
-        }
-    }
+    Project::ThemeManager::LoadStyles(cmbThemes);
     // load the machines
     cmbMachines->Items->Clear();
     std::vector<String> machines;
@@ -90,8 +73,7 @@ void __fastcall TfrmSettings::btnOkClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmSettings::cmbThemesChange(TObject *Sender)
 {
-    TStyleManager::SetStyle(cmbThemes->Text);
-    appSettings.ActiveStyle = cmbThemes->Text;
+    Project::ThemeManager::SetStyle(cmbThemes->Text);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmSettings::chkLoadLastProjectClick(TObject *Sender)

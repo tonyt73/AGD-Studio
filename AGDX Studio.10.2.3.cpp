@@ -2,7 +2,6 @@
 #include "agdx.pch.h"
 #pragma hdrstop
 #include "Settings/Settings.h"
-#include "Settings/ThemeManager.h"
 #include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 #include <Vcl.Styles.hpp>
@@ -13,11 +12,11 @@
 USEFORM("Frames\WindowEditor\fEditorWindow.cpp", frmEditorWindow); /* TFrame: File Type */
 USEFORM("Frames\WelcomeDialog\fWelcomeDialog.cpp", frmWelcomeDialog); /* TFrame: File Type */
 USEFORM("Frames\WelcomeDialog\fSelectionPanel.cpp", SelectionPanelFrame); /* TFrame: File Type */
+USEFORM("Frames\MusicEditor\fEditorMusic.cpp", frmEditorMusic); /* TFrame: File Type */
 USEFORM("Frames\MapEditor\LabelledImage.cpp", frmLabelledImage); /* TFrame: File Type */
 USEFORM("Frames\MapEditor\fEditorMap.cpp", frmEditorMap); /* TFrame: File Type */
 USEFORM("Frames\MapEditor\AssetSelection.cpp", frmAssetSelection); /* TFrame: File Type */
 USEFORM("Frames\JumpEditor\fEditorJump.cpp", frmEditorJump); /* TFrame: File Type */
-USEFORM("Frames\MusicEditor\fEditorMusic.cpp", frmEditorMusic); /* TFrame: File Type */
 USEFORM("Frames\ImageEditor\fULAplusBitmap.cpp", frmULAplusBitmap); /* TFrame: File Type */
 USEFORM("Frames\ImageEditor\fEditorImage.cpp", frmEditorImage); /* TFrame: File Type */
 USEFORM("Frames\ImageEditor\fBlockTypes.cpp", frmBlockTypes); /* TFrame: File Type */
@@ -40,9 +39,10 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
     {
          Application->Initialize();
          Application->MainFormOnTaskBar = true;
-         Project::ThemeManager::SetStyle(appSettings.ActiveStyle.Trim() != "" ? appSettings.ActiveStyle : "Onyx Blue");
+         TStyleManager::TrySetStyle("Onyx Blue");
+         TStyleManager::TrySetStyle(appSettings.ActiveStyle.Trim() != "" ? appSettings.ActiveStyle : "Onyx Blue");
          Application->CreateForm(__classid(TfrmMain), &frmMain);
-         Application->Run();
+		Application->Run();
     }
     catch (Exception &exception)
     {

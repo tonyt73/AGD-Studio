@@ -546,7 +546,7 @@ object frmSettings: TfrmSettings
         Images = ImageList2
         ParentFont = False
         TabHeight = 32
-        TabOrder = 0
+        TabOrder = 1
         object tabCompiler: TTabSheet
           Caption = 'Compiler'
           DesignSize = (
@@ -623,7 +623,7 @@ object frmSettings: TfrmSettings
             ParentFont = False
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 1
+            TabOrder = 2
           end
           object btnCompilerFind: TButton
             Left = 429
@@ -632,7 +632,7 @@ object frmSettings: TfrmSettings
             Height = 24
             Anchors = [akTop, akRight]
             Caption = '...'
-            TabOrder = 2
+            TabOrder = 1
             OnClick = btnCompilerFindClick
           end
           object edtEngineFile: TEdit
@@ -752,7 +752,7 @@ object frmSettings: TfrmSettings
             ParentFont = False
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 1
+            TabOrder = 2
           end
           object edtAssemblerPrepend: TEdit
             Left = 84
@@ -769,7 +769,7 @@ object frmSettings: TfrmSettings
             ParentFont = False
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 2
+            TabOrder = 3
           end
           object btnAssemblerFind: TButton
             Left = 429
@@ -778,7 +778,7 @@ object frmSettings: TfrmSettings
             Height = 24
             Anchors = [akTop, akRight]
             Caption = '...'
-            TabOrder = 3
+            TabOrder = 1
             OnClick = btnAssemblerFindClick
           end
           object edtAssemblerAppend: TEdit
@@ -863,7 +863,7 @@ object frmSettings: TfrmSettings
             ParentFont = False
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 1
+            TabOrder = 2
           end
           object btnEmulatorFind: TButton
             Left = 429
@@ -872,7 +872,7 @@ object frmSettings: TfrmSettings
             Height = 24
             Anchors = [akTop, akRight]
             Caption = '...'
-            TabOrder = 2
+            TabOrder = 1
           end
         end
       end
@@ -890,7 +890,7 @@ object frmSettings: TfrmSettings
         Font.Style = []
         ParentFont = False
         ReadOnly = True
-        TabOrder = 1
+        TabOrder = 0
       end
     end
     object tabMachines: TTabSheet

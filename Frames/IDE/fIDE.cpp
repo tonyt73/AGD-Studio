@@ -8,8 +8,8 @@
 #include "Frames/CodeEditor/fEditorCode.h"
 #include "Frames/MapEditor/fEditorMap.h"
 #include "Project/ProjectManager.h"
+#include "Settings/ThemeManager.h"
 #include "Messaging/Messaging.h"
-#include "Settings/ThemeSettings.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "LMDDckSite"
@@ -66,7 +66,7 @@ void __fastcall TfrmIDE::OnActivate(TWinControl* parent)
             Application->MainForm->Menu = mnuMain;
             Application->MainForm->Caption = ApplicationName;
         }
-        ThemeSettings::ReapplyStyle();
+        Project::ThemeManager::ReapplyStyle();
         Color = StyleServices()->GetStyleColor(scGenericGradientBase);
         tvProject->BackGroundColor = StyleServices()->GetStyleColor(scGenericGradientBase);
         tvBuild->BackGroundColor = StyleServices()->GetStyleColor(scGenericGradientBase);
@@ -86,7 +86,7 @@ void __fastcall TfrmIDE::OnMessageEvent(const MessageEvent& message)
 {
     if (message.Type < etHelpKeys)
     {
-        const String Types[4] = { "Info : ", "Warn : ", "Error: ", "Debug: " };
+        const String Types[] = { "Info : ", "Warn : ", "Error: ", "Debug: " };
         memMessages->Lines->Add(Types[message.Type] + message.Message);
     }
     else if (message.Type == etHelpKeys)
