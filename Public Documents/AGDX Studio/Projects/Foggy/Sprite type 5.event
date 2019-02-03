@@ -1,4 +1,3 @@
-; Created by AGDv import
 ;EVENT SPRITETYPE5
 IF A 0
     ANIMATE
@@ -9,7 +8,7 @@ IF COLLISION 0
         SILENCE
         LET E = Y
         LET F = X
-        IF SCREEN 25
+        IF SCREEN  7, 4
             IF OPT 4
                 LET LINE 9
                 LET COLUMN 14
@@ -23,7 +22,7 @@ IF COLLISION 0
                 REMOVE
             ENDIF
         ENDIF
-        IF SCREEN 1
+        IF SCREEN  5, 7
             IF OPT 4
                 LET LINE 15
                 LET COLUMN 22
@@ -37,10 +36,10 @@ IF COLLISION 0
                 REMOVE
             ENDIF
         ENDIF
-        IF SCREEN 5
+        IF SCREEN  6, 7
             IF K = 3
                 IF OPT 19
-                    LET SCREEN = 27
+                    LET SCREEN =  1, 3
                 ENDIF
             ENDIF
             LET Y = E

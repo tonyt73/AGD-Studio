@@ -1,4 +1,3 @@
-; Created by AGDv import
 ;EVENT SPRITETYPE2
 IF A 0
     ANIMATE
@@ -9,7 +8,7 @@ IF COLLISION 0
         SILENCE
         LET E = Y
         LET F = X
-        IF SCREEN 0
+        IF SCREEN  5, 6
             IF OPT 0
                 LET LINE 8
                 LET COLUMN 28
@@ -23,7 +22,7 @@ IF COLLISION 0
                 REMOVE
             ENDIF
         ENDIF
-        IF SCREEN 11
+        IF SCREEN  5, 5
             IF OPT 5
                 LET LINE 2
                 LET COLUMN 20
@@ -37,7 +36,7 @@ IF COLLISION 0
                 REMOVE
             ENDIF
         ENDIF
-        IF SCREEN 4
+        IF SCREEN  6, 6
             IF OPT 6
                 COLOUR 71
                 LET LINE 2
@@ -55,7 +54,7 @@ IF COLLISION 0
                 PUT X Y 6
             ENDIF
         ENDIF
-        IF SCREEN 9
+        IF SCREEN  8, 7
             IF OPT 8
                 LET LINE 4
                 LET COLUMN 2
@@ -72,7 +71,7 @@ IF COLLISION 0
                 PUT X Y 8
             ENDIF
         ENDIF
-        IF SCREEN 20
+        IF SCREEN  3, 3
             IF OPT 15
                 LET LINE 4
                 LET COLUMN 8
@@ -87,7 +86,7 @@ IF COLLISION 0
                 PUT X Y 15
             ENDIF
         ENDIF
-        IF SCREEN 13
+        IF SCREEN  3, 5
             IF OPT 7
                 LET LINE 17
                 LET COLUMN 14
@@ -100,7 +99,7 @@ IF COLLISION 0
                 PUT X Y 7
             ENDIF
         ENDIF
-        IF SCREEN 14
+        IF SCREEN  2, 5
             IF OPT 11
                 LET LINE 15
                 LET COLUMN 7
@@ -112,7 +111,7 @@ IF COLLISION 0
                 PUT X Y 11
             ENDIF
         ENDIF
-        IF SCREEN 5
+        IF SCREEN  6, 7
             IF OPT 10
                 LET E = Y
                 LET F = X
@@ -130,7 +129,7 @@ IF COLLISION 0
                 BEEP 70
             ENDIF
         ENDIF
-        IF SCREEN 14
+        IF SCREEN  2, 5
             IF OPT 14
                 LET LINE = 9
                 LET COLUMN = 11
@@ -144,7 +143,7 @@ IF COLLISION 0
                 PUT X Y 14
             ENDIF
         ENDIF
-        IF SCREEN 16
+        IF SCREEN  3, 7
             IF OPT 9
                 LET Y = 72
                 LET X = 120
@@ -158,7 +157,7 @@ IF COLLISION 0
                 PUT X Y 2
             ENDIF
         ENDIF
-        IF SCREEN 15
+        IF SCREEN  3, 6
             IF OPT 17
                 LET LINE 15
                 LET COLUMN 20
@@ -171,7 +170,7 @@ IF COLLISION 0
                 PUT X Y 17
             ENDIF
         ENDIF
-        IF SCREEN 23
+        IF SCREEN  5, 3
             IF OPT 18
                 LET LINE 5
                 LET COLUMN 24
@@ -185,7 +184,7 @@ IF COLLISION 0
                 REMOVE
             ENDIF
         ENDIF
-        IF SCREEN 10
+        IF SCREEN  6, 5
             IF OPT 16
                 LET LINE 4
                 LET COLUMN 17

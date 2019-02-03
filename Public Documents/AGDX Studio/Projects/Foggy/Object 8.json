@@ -1,12 +1,21 @@
 {
-    "Document": {
-        "RefId": 9
+  "Document": {
+    "RefId": 9
+  },
+  "Image": {
+    "Width": 16,
+    "Height": 16,
+    "Room": {
+      "X": 7,
+      "Y": 6
     },
-    "Image": {
-        "Width": 16,
-        "Height": 16,
-        "Frames": [
-            "0F001180000002C002C007E01BF827FC587E793E787A7936792A38541EB807E047474747"
-        ]
-    }
+    "Position": {
+      "X": 160,
+      "Y": 104
+    },
+    "State": 0,
+    "Frames": [
+      "0F001180000002C002C007E01BF827FC587E793E787A7936792A38541EB807E047474747"
+    ]
+  }
 }

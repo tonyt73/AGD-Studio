@@ -1,4 +1,3 @@
-; Created by AGDv import
 ;EVENT INITSPRITE
 IF TYPE 4
     LET SETTINGA = 1

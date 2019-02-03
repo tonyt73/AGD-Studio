@@ -1,27 +1,26 @@
-; Created by AGDv import
 ;EVENT PLAYER
 IF CANGODOWN
-    FALL
+    TABLEFALL
 ENDIF
 DETECTOBJ
 IF OBJ <> 255
     GET OBJ
     BEEP 50
-    IF SCREEN = 1
+    IF SCREEN =  5, 7
         ADD 1 TO K
         COLOUR 79
         LET LINE 20
         LET COLUMN 29
         DISPLAY K
     ENDIF
-    IF SCREEN = 16
+    IF SCREEN =  3, 7
         ADD 1 TO K
         COLOUR 79
         LET LINE 20
         LET COLUMN 29
         DISPLAY K
     ENDIF
-    IF SCREEN = 7
+    IF SCREEN =  7, 7
         IF GOT 3
             ADD 1 TO K
             COLOUR 79
@@ -30,12 +29,12 @@ IF OBJ <> 255
             DISPLAY K
         ENDIF
     ENDIF
-    IF SCREEN = 13
+    IF SCREEN =  3, 5
         IF GOT 9
             ADD 1 TO C
         ENDIF
     ENDIF
-    IF SCREEN = 17
+    IF SCREEN =  8, 5
         ADD 1 TO LIVES
         COLOUR 78
         LET LINE 21
@@ -43,7 +42,7 @@ IF OBJ <> 255
         DISPLAY LIVES
         LET H = 1
     ENDIF
-    IF SCREEN = 19
+    IF SCREEN =  3, 4
         ADD 1 TO LIVES
         COLOUR 78
         LET LINE 21
@@ -180,7 +179,7 @@ IF KEY FIRE
         IF CANGODOWN
         ELSE
             BEEP 40
-            JUMP 7
+            TABLEJUMP
         ENDIF
     ENDIF
 ENDIF
