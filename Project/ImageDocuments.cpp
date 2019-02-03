@@ -12,6 +12,7 @@ __fastcall ImageDocument::ImageDocument(const String& name)
 : Document(name)
 , m_MultiFrame(false)
 , m_CanModifyFrames(false)
+, m_CanBeLocked(false)
 , m_Width(0)
 , m_Height(0)
 , m_FramesLoaded(0)
@@ -248,6 +249,7 @@ __fastcall SpriteDocument::SpriteDocument(const String& name, const String& extr
     m_ImageType = itSprite;
     m_MultiFrame = true;
     m_CanModifyFrames = true;
+    m_CanBeLocked = true;
     m_SubType = "Sprite";
     m_Folder = "Images\\Sprites";
     RegisterProperty("Name", "Details", "The name of the sprite");

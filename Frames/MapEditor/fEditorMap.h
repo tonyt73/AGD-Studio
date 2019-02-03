@@ -132,6 +132,11 @@ __published:    // IDE-managed Components
     TStatusBar *sbrRoomSelection;
     TStatusBar *StatusBar1;
     TImage *imgLock;
+    TToolButton *ToolButton1;
+    TToolButton *btnEntityPrev;
+    TAction *actEntityToggleLocks;
+    TToolButton *btnEntityNext;
+    TToolButton *btnEntityLock;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actLineExecute(TObject *Sender);
@@ -177,6 +182,7 @@ __published:    // IDE-managed Components
     void __fastcall actCopyExecute(TObject *Sender);
     void __fastcall actCutExecute(TObject *Sender);
     void __fastcall actPasteExecute(TObject *Sender);
+    void __fastcall actEntityToggleLocksExecute(TObject *Sender);
 
 private:    // User declarations
     ::Messaging::Registrar      m_Registrar;        // the messaging registrar

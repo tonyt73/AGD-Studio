@@ -23,12 +23,12 @@ void __fastcall SectionBuilders::Map::Execute()
     assert(mapDoc != nullptr);
 
     const auto& mapSize = mapDoc->GetMinimalMapSize();
-    AddLine("MAP WIDTH " + IntToStr((int)mapSize.Width() + 1));
+    AddLine("MAP WIDTH " + IntToStr((int)mapSize.Width() + 3));
     AddLine("    STARTSCREEN " + IntToStr(mapDoc->GetRoomIndex(AGDX::Point(mapDoc->StartLocationX, mapDoc->StartLocationY))));
     for (auto y = mapSize.Top; y <= mapSize.Bottom; y++)
     {
         String line = "    ";
-        for (auto x = mapSize.Left; x <= mapSize.Right; x++)
+        for (auto x = Max(0, mapSize.Left - 1); x <= Min(16, mapSize.Right + 1); x++)
         {
             auto ri = mapDoc->GetRoomIndex(AGDX::Point(x, y));
             if (ri != -1)

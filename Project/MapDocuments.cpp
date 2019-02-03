@@ -56,6 +56,7 @@ bool __fastcall Entity::operator==(const Entity& other)
 void __fastcall Entity::SetPoint(const TPoint& pt)
 {
     m_Pt = pt;
+
     m_Dirty = true;
 }
 //---------------------------------------------------------------------------
@@ -142,8 +143,20 @@ void __fastcall Entity::SetSpriteType(int type)
 //---------------------------------------------------------------------------
 void __fastcall Entity::SetRoom(TPoint pt)
 {
-    m_Room = pt;
-    m_Dirty = true;
+    if (m_Document->CanBeLocked && !m_RoomLocked)
+    {
+        m_Room = pt;
+        m_Dirty = true;
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall Entity::SetRoomLocked(bool lock)
+{
+    if (m_Document->CanBeLocked)
+    {
+        m_RoomLocked = lock;
+        m_Dirty = true;
+    }
 }
 //---------------------------------------------------------------------------
 
@@ -302,7 +315,7 @@ const EntityList& __fastcall TiledMapDocument::Get(MapEntities type, TSize room)
         for (auto& e : m_Map)
         {
             auto pt = e.Pt;
-            if (minx <=  pt.x && pt.x < maxx && miny <= pt.y && pt.y < maxy)
+            if ((minx <=  pt.x && pt.x < maxx && miny <= pt.y && pt.y < maxy && !e.RoomLocked) || (e.RoomLocked && e.Room.X == room.cx && e.Room.Y == room.cy))
             {
                 auto ne = e;
                 // re-position entity to relative to 0,0
@@ -323,7 +336,7 @@ void __fastcall TiledMapDocument::Set(MapEntities type, const EntityList& entiti
     {
         m_Map.clear();
         m_Map = entities;
-        UpdateObjectRooms();
+        UpdateEntityRooms();
         ::Messaging::Bus::Publish<Event>(Event("map.updated"));
     }
     else if (type == meScratchPad)
@@ -353,7 +366,7 @@ void __fastcall TiledMapDocument::Set(MapEntities type, const EntityList& entiti
             ne.Pt = TPoint(e.Pt.x + minx, e.Pt.y + miny);
             m_Map.push_back(ne);
         }
-        UpdateObjectRooms();
+        UpdateEntityRooms();
         ::Messaging::Bus::Publish<Event>(Event("map.updated"));
     }
     else
@@ -380,7 +393,7 @@ void __fastcall TiledMapDocument::OnDocumentChanged(const DocumentChange<String>
             [&](const Entity& entity) { return entity.Id == message.document->Id; }), m_ScratchPad.end());
         m_Room.erase(std::remove_if(m_Room.begin(),m_Room.end(),
             [&](const Entity& entity) { return entity.Id == message.document->Id; }), m_Room.end());
-        UpdateObjectRooms();
+        UpdateEntityRooms();
     }
 }
 //---------------------------------------------------------------------------
@@ -391,7 +404,7 @@ void __fastcall TiledMapDocument::OnStartRoomSet(const StartRoomSet& event)
     ::Messaging::Bus::Publish<UpdateProperties>(UpdateProperties());
 }
 //---------------------------------------------------------------------------
-void __fastcall TiledMapDocument::UpdateObjectRooms()
+void __fastcall TiledMapDocument::UpdateEntityRooms()
 {
     const auto& wi = theDocumentManager.ProjectConfig()->Window;
     auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum;
@@ -399,6 +412,9 @@ void __fastcall TiledMapDocument::UpdateObjectRooms()
     std::vector<unsigned int> objectsToRemove;
     for (auto entity : m_Map)
     {
+        // recalculate the entitys room based on its current position (currently only sprites can be locked to rooms)
+        entity.Room = TPoint((int)(entity.Pt.X / roomSize.cx), (int)(entity.Pt.Y / roomSize.cy));
+        // update the location of the objects in the room
         if (entity.Image->ImageType == itObject)
         {
             auto object = dynamic_cast<ObjectDocument*>(entity.Image);
@@ -406,12 +422,8 @@ void __fastcall TiledMapDocument::UpdateObjectRooms()
 
             if (object->State == osRoom)
             {
-                auto rm0 = TPoint(object->Room.X, object->Room.Y);
-                auto pt0 = TPoint(object->Position.X, object->Position.Y);
                 object->Room = AGDX::Point((int)(entity.Pt.X / roomSize.cx), (int)(entity.Pt.Y / roomSize.cy));
                 object->Position = AGDX::Point(entity.Pt.X - (object->Room.X * roomSize.cx), entity.Pt.Y - (object->Room.Y * roomSize.cy));
-                auto rm1 = TPoint(object->Room.X, object->Room.Y);
-                auto pt1 = TPoint(object->Position.X, object->Position.Y);
             }
             else
             {
@@ -454,6 +466,7 @@ TRect __fastcall TiledMapDocument::GetMinimalMapSize()
             }
         }
     }
+    m_ScreenCount = si;
     return rect;
 }
 //---------------------------------------------------------------------------
@@ -471,7 +484,7 @@ int __fastcall TiledMapDocument::GetRoomIndex(const AGDX::Point& room)
 //---------------------------------------------------------------------------
 void __fastcall TiledMapDocument::OnLoaded()
 {
-    UpdateObjectRooms();
+    UpdateEntityRooms();
 }
 //---------------------------------------------------------------------------
 

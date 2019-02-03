@@ -10,6 +10,7 @@
 //---------------------------------------------------------------------------
 __fastcall TileEditor::TileEditor(TImage* const view, Agdx::ImageMap& imageMap, const TSize& rooms, bool usesGridTile, bool usesGridRoom, int border, bool readOnly)
 : m_View(view)
+, m_LockIcon(nullptr)
 , m_ImageMap(imageMap)
 , m_Rooms(rooms)
 , m_UsesGridTile(usesGridTile)
@@ -597,7 +598,23 @@ void __fastcall TileEditor::DrawGrids() const
         }
     }
 }
-//------    ---------------------------------------------------------------------
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::DrawEntityLocks() const
+{
+    auto Canvas = m_View->Picture->Bitmap->Canvas;
+    for (auto& entity : m_Entities)
+    {
+        if (entity.RoomLocked && m_LockIcon != nullptr)
+        {
+            auto pt = entity.Pt;
+            pt.x = Snap(pt.x, m_TileSize.cx);
+            pt.y = Snap(pt.y, m_TileSize.cy);
+            pt = MapToView(pt);
+            Canvas->Draw(pt.x, pt.y, m_LockIcon->Picture->Graphic);
+        }
+    }
+}
+//---------------------------------------------------------------------------
 void __fastcall TileEditor::DrawGroupSelect() const
 {
     if (m_MouseMode == mmGroupSelect)
@@ -628,7 +645,7 @@ void __fastcall TileEditor::DrawEntities(int filters)
         {
             auto pt = entity.Pt;
             pt.x = Snap(pt.x, m_TileSize.cx);
-            pt.y = Snap(pt.y, m_TileSize.cx);
+            pt.y = Snap(pt.y, m_TileSize.cy);
             pt += m_BorderScaled;
             m_ImageMap[entity.Id]->Draw(pt, m_Content.get(), entity.Selected);
             entity.Clean();
@@ -731,6 +748,7 @@ void __fastcall TileEditor::Refresh()
         PatBlt(m_View->Picture->Bitmap->Canvas->Handle, 0, 0, m_View->Width, m_View->Height, BLACKNESS);
     }
     StretchBlt(m_View->Picture->Bitmap->Canvas->Handle, 0, 0, m_View->Width, m_View->Height, m_Content->Canvas->Handle, cx, cy, cw, ch, SRCCOPY);
+    DrawEntityLocks();
     DrawGrids();
     DrawGroupSelect();
     DrawSelectedRoom();
@@ -819,6 +837,24 @@ void __fastcall TileEditor::Add(const EntityList& entities)
     UpdateMap();
 }
 //---------------------------------------------------------------------------
+void __fastcall TileEditor::ToggleEntityLocks()
+{
+    auto update = false;
+    for (auto& entity : m_Entities)
+    {
+        if (entity.Selected)
+        {
+            auto locked = entity.RoomLocked;
+            entity.RoomLocked = !entity.RoomLocked;
+            update = entity.RoomLocked != locked;
+        }
+    }
+    if (update)
+    {
+        Refresh();
+    }
+}
+//---------------------------------------------------------------------------
 void __fastcall TileEditor::UnselectAll(bool update)
 {
     m_SelectionCount = 0;
@@ -842,7 +878,7 @@ void __fastcall TileEditor::SelectRoom(TSize room)
     UpdateMap();
 }
 //---------------------------------------------------------------------------
-int __fastcall TileEditor::Snap(int value, int range)
+int __fastcall TileEditor::Snap(int value, int range) const
 {
     return ((int)(value / range)) * range;
 }

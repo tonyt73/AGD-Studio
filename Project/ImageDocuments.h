@@ -31,6 +31,7 @@ private:
 protected:
             bool                    m_MultiFrame;       // flag: supports multiple frames
             bool                    m_CanModifyFrames;  // flag: supports adding/deleting frames
+            bool                    m_CanBeLocked;      // flag: supports locking the image to a room
             int                     m_Width;            // width of a frame
             int                     m_Height;           // height of a frame
             int                     m_NumOfFrames;      // the number of frames
@@ -65,6 +66,7 @@ public:
 
             bool        __property  MultiFrame      = { read = m_MultiFrame                 };
             bool        __property  CanModifyFrames = { read = m_CanModifyFrames            };
+            bool        __property  CanBeLocked     = { read = m_CanBeLocked                };
             String      __property  Frame[int index]= { read = GetFrame, write = SetFrame   };
             String      __property  Hint[int index] = { read = GetHint                      };
             int         __property  Layers          = { read = GetLayerCount                };

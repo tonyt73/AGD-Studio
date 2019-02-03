@@ -29,6 +29,7 @@ private:
     std::unique_ptr<TBitmap>        m_Tile0Content;     // 1:1 content with all tile0's used to clear the m_Conent quickly
     TSize                           m_ContentSize;      // the size of the content window that we need (content bitmap is always larger for blt reasons)
     TImage* const                   m_View;             // the UI image we render to
+    TImage*                         m_LockIcon;         // the lock icon
     EntityList                      m_Entities;         // all the map entities
     EntityList                      m_ToolEntities;     // the entities for the current tool (select etc)
     EntityList                      m_ClipboardEntities;// the entities for the clipboard (copy, cut, paste)
@@ -95,10 +96,11 @@ private:
     void                __fastcall  DrawToolEntities();
     void                __fastcall  DrawMap();
     void                __fastcall  DrawGrids() const;
+    void                __fastcall  DrawEntityLocks() const;
     void                __fastcall  DrawGroupSelect() const;
     void                __fastcall  DrawSelectedRoom() const;
     void                __fastcall  DrawStartRoom() const;
-    int                 __fastcall  Snap(int value, int range);
+    int                 __fastcall  Snap(int value, int range) const;
     void                __fastcall  Get(const TRect& rect, EntityList& entities) const;
     void                __fastcall  ReplaceEntities();
     void                __fastcall  UpdateTile0Content();
@@ -131,6 +133,7 @@ public:
     void                __fastcall  SetEntities(const EntityList& entities);
     const EntityList&   __fastcall  GetEntities() const;
     void                __fastcall  Add(const EntityList& entities);
+    void                __fastcall  ToggleEntityLocks();
     EntityList          __fastcall  GetSelection(bool resetToOrigin = false) const;
     void                __fastcall  DeleteSelection();
     void                __fastcall  UnselectAll(bool update = true);
@@ -138,20 +141,21 @@ public:
     void                __fastcall  Cut();
     void                __fastcall  Paste();
 
-    __property  TEMode              Mode = { read = m_Mode, write = SetMode };
-    __property  TSize               Rooms = { write = SetRooms };
-    __property  float               Scale = { read = m_ScaleFactor, write = SetScale };
-    __property  bool                GridTile = { read = m_ShowGridTile, write = SetGridTile };
-    __property  bool                GridRoom = { read = m_ShowGridRoom, write = SetGridRoom };
-    __property  unsigned int        Tile0Id = { read = m_Tile0Id, write = SetTile0Id };
-    __property  unsigned int        SelectedEntity = { read = m_SelectedEntity, write = SetSelectedEntity };
-    __property  bool                ReadOnly = { read = m_ReadOnly, write = SetReadOnly };
-    __property  TSize               SelectedRoom = { read = m_SelectedRoom };
-    __property  TPoint              StartRoom = { read = m_StartRoom, write = SetStartRoom };
-    __property  bool                ShowSelectedRoom = { read = m_ShowSelectedRoom, write = SetShowSelectedRoom };
-    __property  bool                ShowStartRoom = { read = m_ShowStartRoom, write = SetShowStartRoom };
+    __property  TEMode              Mode            = { read = m_Mode, write = SetMode                          };
+    __property  TSize               Rooms           = { write = SetRooms                                        };
+    __property  float               Scale           = { read = m_ScaleFactor, write = SetScale                  };
+    __property  bool                GridTile        = { read = m_ShowGridTile, write = SetGridTile              };
+    __property  bool                GridRoom        = { read = m_ShowGridRoom, write = SetGridRoom              };
+    __property  unsigned int        Tile0Id         = { read = m_Tile0Id, write = SetTile0Id                    };
+    __property  unsigned int        SelectedEntity  = { read = m_SelectedEntity, write = SetSelectedEntity      };
+    __property  bool                ReadOnly        = { read = m_ReadOnly, write = SetReadOnly                  };
+    __property  TSize               SelectedRoom    = { read = m_SelectedRoom                                   };
+    __property  TPoint              StartRoom       = { read = m_StartRoom, write = SetStartRoom                };
+    __property  bool                ShowSelectedRoom= { read = m_ShowSelectedRoom, write = SetShowSelectedRoom  };
+    __property  bool                ShowStartRoom   = { read = m_ShowStartRoom, write = SetShowStartRoom        };
+    __property  TImage*             LockIcon        = { write = m_LockIcon                                      };
 
-    __property TNotifyOnEntityClick OnEntitySelected = { read = FOnEntitySelected, write = FOnEntitySelected };
+    __property TNotifyOnEntityClick OnEntitySelected= { read = FOnEntitySelected, write = FOnEntitySelected     };
 
 };
 //---------------------------------------------------------------------------

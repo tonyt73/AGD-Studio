@@ -38,11 +38,16 @@ void __fastcall SectionBuilders::Tiles::Execute()
             auto image = std::make_unique<Agdx::Image>(tile, gm);
             image->ChangeFrame(0);
             auto data = image->GetExportNativeFormat();
-            line = line = "            ";
+            line = "            ";
             // export the machine graphics data
+            auto i = 0;
             for (auto byte : data)
             {
                 line += IntToStr(byte) + " ";
+                if (++i == 8)
+                {
+                    line += "\r\n            ";
+                }
             }
             AddLine(line);
             LineBreak();

@@ -51,7 +51,8 @@ void __fastcall SectionBuilders::Screens::Execute()
                             auto index = dm.GetAsIndex(entity->Id);
                             if (index != -1)
                             {
-                                line += IntToStr(index) + " ";
+                                auto number = "   " + IntToStr(index);
+                                line += number.SubString(number.Length() - 2, 3) + " ";
                             }
                             else
                             {
@@ -63,7 +64,7 @@ void __fastcall SectionBuilders::Screens::Execute()
                         else
                         {
                             // tile 0
-                            line += "0 ";
+                            line += "  0 ";
                         }
                     }
                     AddLine(line);

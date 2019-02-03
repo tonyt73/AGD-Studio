@@ -38,9 +38,14 @@ void __fastcall SectionBuilders::Sprites::Execute()
                 image->ChangeFrame(i);
                 auto data = image->GetExportNativeFormat();
                 // export the machine graphics data
+                auto w = 0;
                 for (auto byte : data)
                 {
                     line += IntToStr(byte) + " ";
+                    if (++w % 16 == 0)
+                    {
+                        line += "\r\n             ";
+                    }
                 }
                 AddLine(line);
             }

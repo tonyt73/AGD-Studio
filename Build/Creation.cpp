@@ -22,9 +22,9 @@ __fastcall Creation::Creation(BuildMessages& buildMessages)
     m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Project>()));
     m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Window>()));
     m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Controls>()));
-    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::JumpTable>()));
     m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Messages>()));
     m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Font>()));
+    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::JumpTable>()));
     m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Tiles>()));
     m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Sprites>()));
     m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Screens>()));

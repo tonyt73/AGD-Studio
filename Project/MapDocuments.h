@@ -34,6 +34,7 @@ protected:
     void                __fastcall  SetDirty(bool state);
     void                __fastcall  SetSpriteType(int type);
     void                __fastcall  SetRoom(TPoint pt);
+    void                __fastcall  SetRoomLocked(bool lock);
 
 public:
                         __fastcall  Entity();
@@ -53,7 +54,7 @@ public:
     __property  bool                Dirty       = { read = m_Dirty, write = SetDirty            };
     __property  bool                Selected    = { read = m_Selected, write = SetSelected      };
     __property  int                 SpriteType  = { read = m_SpriteType, write = SetSpriteType  };
-    __property  bool                RoomLocked  = { read = m_RoomLocked, write = m_RoomLocked   };
+    __property  bool                RoomLocked  = { read = m_RoomLocked, write = SetRoomLocked  };
     __property  TPoint              Room        = { read = m_Room, write = SetRoom              };
 };
 typedef std::vector<Entity>     EntityList;
@@ -72,6 +73,7 @@ protected:
                                     // TODO: Convert to AGDX:Point for better display in the property editor
             int                     m_StartLocationX;
             int                     m_StartLocationY;
+            int                     m_ScreenCount;
             Entity                  m_EntityLoader;
             TSize                   m_ActiveRoom;
             std::map<int, int>      m_AgdScreenMap; // a mapping from Studio to .AGD screen indexes
@@ -80,7 +82,7 @@ protected:
             void        __fastcall  OnDocumentChanged(const DocumentChange<String>& message);
             void        __fastcall  OnStartRoomSet(const StartRoomSet& event);
             void        __fastcall  DoSave();
-            void        __fastcall  UpdateObjectRooms();
+            void        __fastcall  UpdateEntityRooms();
             void        __fastcall  OnLoaded();
 
 
@@ -96,6 +98,8 @@ public:
             TRect       __fastcall  GetMinimalMapSize();
             int         __fastcall  GetRoomIndex(const AGDX::Point& room);
             bool        __fastcall  IsRoomEmpty(int x, int y);
+
+            int         __property  ScreenCount = { read = m_ScreenCount };
 
 __published:
     __property          int         StartLocationX  = { read = m_StartLocationX , write = m_StartLocationX  };

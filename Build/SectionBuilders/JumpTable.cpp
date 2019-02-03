@@ -37,6 +37,7 @@ __fastcall SectionBuilders::JumpTable::~JumpTable()
 //---------------------------------------------------------------------------
 void __fastcall SectionBuilders::JumpTable::Execute()
 {
+#if 0
     String def = "DEFINEJUMP ";
     for (auto i = 1; i <= 21; i++)
     {
@@ -51,6 +52,10 @@ void __fastcall SectionBuilders::JumpTable::Execute()
         def += " ";
     }
     def += "99";
+#else
+    // foggy jump table
+    String def = "DEFINEJUMP 249 250 251 254 254 255 255 255 0 0 0 1 1 1 2 2 6 7 6 15 16 99";
+#endif
     AddLine(def);
     LineBreak();
 

@@ -52,6 +52,7 @@ void __fastcall TfrmEditorMap::Initialise()
     m_Workspace = std::make_unique<TileEditor>(imgWorkspace, m_ImageMap, TSize(g_MaxMapRoomsAcross, g_MaxMapRoomsDown), true, true, 144, false);
     m_Workspace->Mode = TileEditor::temSelect;
     m_Workspace->StartRoom = TPoint(m_Document->StartLocationX, m_Document->StartLocationY);
+    m_Workspace->LockIcon = imgLock;
 
     m_ScratchPad = std::make_unique<TileEditor>(imgScratchPad, m_ImageMap, TSize(8,8), true, false, 8, false);
     m_ScratchPad->Mode = TileEditor::temSelect;
@@ -616,6 +617,11 @@ void __fastcall TfrmEditorMap::actEntityPrevExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::actEntityToggleLocksExecute(TObject *Sender)
+{
+    m_Workspace->ToggleEntityLocks();
+}
+//---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::sbxWorkspaceMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled)
 {
     if (WheelDelta < 0)
@@ -665,5 +671,4 @@ void __fastcall TfrmEditorMap::actPasteExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-
 
