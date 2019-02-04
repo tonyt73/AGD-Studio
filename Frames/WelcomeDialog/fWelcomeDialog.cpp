@@ -136,7 +136,11 @@ void __fastcall TfrmWelcomeDialog::RefreshMRUList()
     m_MostRecentlyUsedItems.clear();
     for (const auto& item : theProjectManager.GetMostRecentlyUsedList())
     {
-        NewMostRecentlyUsedItem(item.Name, item.Path, item.Machine);
+        auto file = System::File::Combine(System::Path::Documents, item.Path);
+        if (System::File::Exists(file))
+        {
+            NewMostRecentlyUsedItem(item.Name, item.Path, item.Machine);
+        }
     }
 }
 //---------------------------------------------------------------------------
@@ -175,6 +179,7 @@ void __fastcall TfrmWelcomeDialog::OnActivate(TWinControl* parent)
 {
     if (parent != nullptr)
     {
+        Project::ThemeManager::LoadStyles(cmbThemes);
         Parent = parent;
         Visible = true;
         dynamic_cast<TForm*>(Parent)->Caption = "Welcome to " + ApplicationName;
