@@ -38,17 +38,10 @@ Themes:
   * http://files.lmd.de/downloads/lmd2019vcl/setupvcl19td26.zip
   * Unzip and run the Setup application
   * Click Next to all questions to Install all defaults
-* Install DosCommand component from Get It
-  * Launch GitIt from the Tools menu
-  * Enter Dos in the search box
-  * Install the DosCommand component
 * Install Rad Studio Get It UI styles
   * Launch GitIt from the Tools menu
   * Select the Styles radio button on the left
   * Install all VCL styles
-* Install the 64bit DosCommand files
-  * Open the zip file in AGDx Studio\Missing files
-  * Open the readme.txt and follow the instructions
 * Install the Application Configuration files
   * Open up the location you cloned this repo to
   * Move the ```Config``` folder to ```%AppData%```
