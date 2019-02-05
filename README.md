@@ -52,3 +52,6 @@ Themes:
   * Open the AGDX Studio.cproj file
 * Press F9 to build and run the application
 
+<img src="images/Welcome.png>
+
+<img src="imgaes/IDE.png">
