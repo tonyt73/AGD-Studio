@@ -34,14 +34,11 @@ Themes:
   * https://www.embarcadero.com/products/cbuilder/starter
   * Register if you need to (its free)
   * Install the 32 bit and 64 bit Windows compilers (OSX, iOS & Android are optional)
+  * I personally use Rad Studio 10.2.3 as 10.3 (latest) is very buggy
 * Download the trial version of LMD Innovative components
   * http://files.lmd.de/downloads/lmd2019vcl/setupvcl19td26.zip
   * Unzip and run the Setup application
   * Click Next to all questions to Install all defaults
-* Install Rad Studio Get It UI styles
-  * Launch GitIt from the Tools menu
-  * Select the Styles radio button on the left
-  * Install all VCL styles
 * Install the Application Configuration files
   * Open up the location you cloned this repo to
   * Move the ```Config``` folder to ```%AppData%```
