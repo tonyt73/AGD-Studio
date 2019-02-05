@@ -20,9 +20,6 @@
 #include <Vcl.Dialogs.hpp>
 #include <Vcl.ExtDlgs.hpp>
 #include <Vcl.WinXPanels.hpp>
-#include <Vcl.BaseImageCollection.hpp>
-#include <Vcl.ImageCollection.hpp>
-#include <Vcl.VirtualImageList.hpp>
 #include "LMDInsPropInsp.hpp"
 #include "LMDInsPropPage.hpp"
 #include "LMDDckSite.hpp"
@@ -162,12 +159,8 @@ __published:    // IDE-managed Components
     TAction *actGameRun;
     TMenuItem *Run1;
     TImageList *imgBuildNodes;
-    TImageCollection *imcActiveToolbar;
-    TVirtualImageList *imgActiveToolbar;
-    TVirtualImageList *imgDisabledToolbar;
-    TVirtualImageList *imgProjectTreeNodes;
-    TImageCollection *imcProjectTreeNodes;
     TElXTree *tvBuild;
+	TImageList *imgToolbar;
     void __fastcall actEditCopyExecute(TObject *Sender);
     void __fastcall actEditCutExecute(TObject *Sender);
     void __fastcall actEditPasteExecute(TObject *Sender);
