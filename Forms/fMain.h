@@ -32,6 +32,9 @@ private:    // User declarations
     void __fastcall ShowIDE();
     void __fastcall SaveSettings();
 
+    TfrmWelcomeDialog*  __fastcall  GetWelcome();
+    TfrmIDE*            __fastcall  GetIDE();
+
 private:
 
     enum TFormView
@@ -42,8 +45,11 @@ private:
     };
 
     TFormView                           m_FormView;
-    std::unique_ptr<TfrmWelcomeDialog>  m_WelcomeDialog;
-    std::unique_ptr<TfrmIDE>            m_IDEDialog;
+    std::unique_ptr<TfrmWelcomeDialog>  m_WelcomeFrame;
+    std::unique_ptr<TfrmIDE>            m_IDEFrame;
+
+    __property      TfrmWelcomeDialog*  Welcome = { read = GetWelcome };
+    __property      TfrmIDE*            IDE = { read = GetIDE };
 
 public:        // User declaration
             __fastcall TfrmMain(TComponent* Owner);

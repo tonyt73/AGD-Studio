@@ -7,23 +7,20 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
-// ---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 TfrmMain *frmMain;
 //---------------------------------------------------------------------------
 __fastcall TfrmMain::TfrmMain(TComponent* Owner)
 : TForm(Owner)
 , m_FormView(fvNone)
-, m_WelcomeDialog(std::unique_ptr<TfrmWelcomeDialog>(new TfrmWelcomeDialog(this)))
-, m_IDEDialog(std::unique_ptr<TfrmIDE>(new TfrmIDE(this)))
+, m_WelcomeFrame(nullptr)
+, m_IDEFrame(nullptr)
 {
-    m_WelcomeDialog->OnDone  = OnWelcomeDone;
-    m_IDEDialog->OnFormClose = OnIDEClose;
 }
-// ---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 void __fastcall TfrmMain::FormCreate(TObject *Sender)
 {
     Application->OnMessage = AppMessage;
-    theProjectManager.Initialise(m_IDEDialog->tvProject);
     // check command line parameters
     if (!System::File::Exists(ParamStr(1)))
     {
@@ -62,7 +59,7 @@ void __fastcall TfrmMain::FormActivate(TObject *Sender)
     if (atStartup && appSettings.WelcomeSkipOnStartup)
     {
         // We skipped the Welcome dialog; so finish off the main form setup
-        m_IDEDialog->OnActivate(this);
+        IDE->OnActivate(this);
     }
     atStartup = false;
 }
@@ -81,17 +78,36 @@ void __fastcall TfrmMain::FormCloseQuery(TObject *Sender, bool &CanClose)
         CanClose = true;
     }
 }
-// ---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 void __fastcall TfrmMain::FormDestroy(TObject *Sender)
 {
-    m_WelcomeDialog->OnActivate(nullptr);
-    m_IDEDialog->OnActivate(nullptr);
+    Welcome->OnActivate(nullptr);
+    IDE->OnActivate(nullptr);
     m_FormView = fvNone;
 
-    m_WelcomeDialog = nullptr;
-    m_IDEDialog = nullptr;
+    m_WelcomeFrame = nullptr;
+    m_IDEFrame = nullptr;
 }
-// ---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+TfrmWelcomeDialog* __fastcall TfrmMain::GetWelcome()
+{
+    if (m_WelcomeFrame == nullptr)
+    {
+        m_WelcomeFrame = std::make_unique<TfrmWelcomeDialog>(this);
+    }
+    return m_WelcomeFrame.get();
+}
+//---------------------------------------------------------------------------
+TfrmIDE* __fastcall TfrmMain::GetIDE()
+{
+    if (m_IDEFrame == nullptr)
+    {
+        m_IDEFrame = std::make_unique<TfrmIDE>(this);
+        theProjectManager.Initialise(m_IDEFrame->tvProject);
+    }
+    return m_IDEFrame.get();
+}
+//---------------------------------------------------------------------------
 void __fastcall TfrmMain::AppMessage(tagMSG &Msg, bool &Handled)
 {
     if (Msg.message == WM_DPICHANGED)
@@ -100,7 +116,7 @@ void __fastcall TfrmMain::AppMessage(tagMSG &Msg, bool &Handled)
         int a = 0;
     }
 }
-// ---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 void __fastcall TfrmMain::OnIDEClose(TObject *Sender)
 {
     if (!appSettings.WelcomeSkipOnClose)
@@ -109,7 +125,7 @@ void __fastcall TfrmMain::OnIDEClose(TObject *Sender)
         ShowWelcomeDialog();
     }
 }
-// ---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 void __fastcall TfrmMain::OnWelcomeDone(TObject *Sender)
 {
     // show the IDE
@@ -118,11 +134,11 @@ void __fastcall TfrmMain::OnWelcomeDone(TObject *Sender)
         ShowIDE();
     }
 }
-// ---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 void __fastcall TfrmMain::ShowWelcomeDialog()
 {
-    m_IDEDialog->OnActivate(nullptr);
-    m_WelcomeDialog->OnActivate(this);
+    Welcome->OnDone  = OnWelcomeDone;
+    Welcome->OnActivate(this);
     m_FormView  = fvWelcomeDialog;
     BorderIcons = TBorderIcons() << biMinimize << biSystemMenu;
     AutoSize = true;
@@ -131,20 +147,22 @@ void __fastcall TfrmMain::ShowWelcomeDialog()
     TPoint pt = appSettings.WelcomePosition;
     Left   = pt.X;
     Top    = pt.Y;
-    Width  = m_WelcomeDialog->Width;
-    Height = m_WelcomeDialog->Height;
+    Width  = Welcome->Width;
+    Height = Welcome->Height;
     WindowState = wsNormal;
     if (Left == 0 && Top == 0)
     {
         Position = poScreenCenter;
     }
+    IDE->OnFormClose = OnIDEClose;
+    IDE->OnActivate(nullptr);
 }
-// ---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 void __fastcall TfrmMain::ShowIDE()
 {
     appSettings.WelcomePosition = TPoint(Left, Top);
-    m_WelcomeDialog->OnActivate(nullptr);
-    m_IDEDialog->OnActivate(this);
+    Welcome->OnActivate(nullptr);
+    IDE->OnActivate(this);
     m_FormView = fvNone;
     AutoSize = false;
     BorderIcons = TBorderIcons() << biMaximize << biMinimize << biSystemMenu;
@@ -159,7 +177,7 @@ void __fastcall TfrmMain::ShowIDE()
     WindowState = appSettings.WindowState;
     m_FormView  = fvGameIDE;
 }
-// ---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 void __fastcall TfrmMain::SaveSettings()
 {
     if (m_FormView == fvGameIDE)
