@@ -1,5 +1,9 @@
+<img src="Screenshots/Welcome.png" width="512">
+
 # AGDX-Studio
 An integrated development environment for Jonathan Cauldwell's Arcade Game Designer (AGD)
+
+<img src="Screenshots/IDE.png" height=400>
 
 Editors for:
 * Images 
@@ -52,6 +56,3 @@ Themes:
   * Open the AGDX Studio.cproj file
 * Press F9 to build and run the application
 
-<img src="Screenshots/Welcome.png>
-
-<img src="Screenshots/IDE.png">
