@@ -1,7 +1,6 @@
 <img src="Screenshots/Welcome.png" width="512">
 
-# AGDX-Studio
-An integrated development environment for Jonathan Cauldwell's Arcade Game Designer (AGD)
+# An integrated development environment for Jonathan Cauldwell's Arcade Game Designer (AGD)
 
 <img src="Screenshots/IDE.png" height=400>
 
