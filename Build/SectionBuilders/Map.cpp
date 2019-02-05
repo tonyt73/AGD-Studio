@@ -31,7 +31,7 @@ void __fastcall SectionBuilders::Map::Execute()
         for (auto x = Max(0, mapSize.Left - 1); x <= Min(16, mapSize.Right + 1); x++)
         {
             auto ri = mapDoc->GetRoomIndex(AGDX::Point(x, y));
-            if (ri != -1)
+            if (ri != 255)
             {
                 line += IntToStr(ri) + " ";
             }

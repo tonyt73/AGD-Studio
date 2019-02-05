@@ -6,7 +6,6 @@
 //---------------------------------------------------------------------------
 class Emulation : public ShellProcess
 {
-private:
 public:
                     __fastcall  Emulation(BuildMessages& buildMessages);
     virtual         __fastcall ~Emulation();
