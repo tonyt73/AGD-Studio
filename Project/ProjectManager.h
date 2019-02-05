@@ -57,7 +57,7 @@ public:
     bool        __fastcall  Remove(const String& type, const String& name);
 
     void        __fastcall  RemoveMostRecentlyUsedItem(const String& name, const String& path);
-    cMRUList    __fastcall  GetMostRecentlyUsedList() const;
+    cMRUList    __fastcall  GetMostRecentlyUsedList();
 };
 //---------------------------------------------------------------------------
 #define theProjectManager ProjectManager::get()

@@ -18,6 +18,7 @@ ProjectManager& ProjectManager::get()
 //---------------------------------------------------------------------------
 __fastcall ProjectManager::ProjectManager()
 : m_TreeView(nullptr)
+, m_MostRecentUsedList(nullptr)
 {
 }
 //---------------------------------------------------------------------------
@@ -28,11 +29,14 @@ __fastcall ProjectManager::~ProjectManager()
 void __fastcall ProjectManager::Initialise(Elxtree::TElXTree* treeView)
 {
     m_TreeView = treeView;
-    m_MostRecentUsedList = std::make_unique<MostRecentlyUsedList>();
 }
 //---------------------------------------------------------------------------
-cMRUList __fastcall ProjectManager::GetMostRecentlyUsedList() const
+cMRUList __fastcall ProjectManager::GetMostRecentlyUsedList()
 {
+    if (m_MostRecentUsedList == nullptr)
+    {
+        m_MostRecentUsedList = std::make_unique<MostRecentlyUsedList>();
+    }
     return m_MostRecentUsedList->GetList();
 }
 //---------------------------------------------------------------------------
