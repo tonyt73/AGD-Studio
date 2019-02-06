@@ -61,9 +61,16 @@ void __fastcall SectionBuilders::Objects::Execute()
             AddLine(line);
             // export the machine graphics data
             line = "             ";
+            auto x = 0;
             for (auto byte : data)
             {
                 line += IntToStr(byte) + " ";
+                if (++x == 16)
+                {
+                    x = 0;
+                    AddLine(line);
+                    line = "             ";
+                }
             }
             line = line.SubString(1, line.Length() - 1);
             AddLine(line);

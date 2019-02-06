@@ -42,46 +42,10 @@ void __fastcall SectionBuilders::Events::Execute()
                 {
                     lc++;
                     if (line.Trim().UpperCase().Pos(definition.Section) == 0)
-                    {
-                        // transform SCREEN = X, Y into SCREEN = INDEX
-                        auto p = line.Pos(" SCREEN ");
-                        if (p > 0)
-                        {
-                            auto c = line.Pos(",");
-                            if (c > 0)
-                            {
-                                for (auto i = p; i < line.Length(); i++)
-                                {
-                                    if (IsNumber(line[i]))
-                                    {
-                                        try
-                                        {
-                                            auto x = StrToInt(line.SubString(i, c - i));
-                                            auto y = StrToInt(line.SubString(c + 1, line.Length()));
-                                            auto index = mapDoc->GetRoomIndex(AGDX::Point(x, y));
-                                            if (index < 0 || index >= mapDoc->ScreenCount)
-                                            {
-                                                Failure("Failed to convert SCREEN X, Y to SCREEN INDEX! Event: " + definition.Section + ", Line: " + IntToStr(lc));
-                                            }
-                                            line = line.SubString(1, i - 1);
-                                            line += " " + IntToStr(index);
-                                        }
-                                        catch (EConvertError&)
-                                        {
-                                            Failure("Failed to convert SCREEN X, Y to SCREEN INDEX! Event: " + definition.Section + ", Line: " + IntToStr(lc));
-                                            return;
-                                        }
-                                        break;
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                Failure("Failed to convert SCREEN X, Y to SCREEN INDEX! Event: " + definition.Section + ", Line: " + IntToStr(lc));
-                                return;
-                            }
-                        }
-                        AddLine(line);
+					{
+						// TODO: replace AGDx keywords with there AGD original
+						line = line;
+						AddLine(line);
                     }
                 }
                 LineBreak();
