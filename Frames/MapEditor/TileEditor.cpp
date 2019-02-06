@@ -5,6 +5,7 @@
 #include "Project/DocumentManager.h"
 #include "Messaging/Messaging.h"
 #include "Frames/MouseState.h"
+#include "Settings/ThemeManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -32,9 +33,12 @@ __fastcall TileEditor::TileEditor(TImage* const view, Agdx::ImageMap& imageMap, 
 , m_GraphicsMode(*(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()))
 , m_ReadOnly(readOnly)
 , m_ActiveMapTool(nullptr)
+, FOnEntitySelected(nullptr)
+, FRetrieveRoomIndex(nullptr)
 {
     Scale = m_ScaleFactor;
 
+    m_View->Picture->Bitmap->Canvas->Font->Style = TFontStyles() << fsBold;
     CreateViewBitmap();
     Clear();
 }
@@ -131,17 +135,8 @@ void __fastcall TileEditor::OnMouseDownSelectMode(TMouseButton Button, TShiftSta
                 auto pt = ViewToMap(X, Y);
                 pt.x /= m_TileSize.cx * wi.Width;
                 pt.y /= m_TileSize.cy * wi.Height;
-                if (Shift.Contains(ssAlt))
-                {
-                    // change the start room when Alt is pressed
-                    StartRoom = pt;
-                    ::Messaging::Bus::Publish<StartRoomSet>(StartRoomSet(m_StartRoom));
-                }
-                else
-                {
-                    // else change the current edited room
-                    SelectRoom(TSize(pt.x, pt.y));
-                }
+                // change the current edited room
+                SelectRoom(TSize(pt.x, pt.y));
             }
             else if (m_SelectionCount > 0)
             {
@@ -175,15 +170,14 @@ void __fastcall TileEditor::OnMouseDownSelectMode(TMouseButton Button, TShiftSta
             m_GroupSelectEndMS.X = Snap(m_GroupSelectEndMS.X, m_TileSize.cx);
             m_GroupSelectEndMS.Y = Snap(m_GroupSelectEndMS.Y, m_TileSize.cy);
         }
-        else if (ShowStartRoom && !ShowSelectedRoom && ms.Alt)
+        else if (ShowStartRoom && ms.Alt)
         {
-            // change the selected room on the map
+            // try to change the selected room on the map
             const auto& wi = theDocumentManager.ProjectConfig()->Window;
             auto pt = ViewToMap(X, Y);
             pt.x /= m_TileSize.cx * wi.Width;
             pt.y /= m_TileSize.cy * wi.Height;
-            StartRoom = pt;
-            ::Messaging::Bus::Publish<StartRoomSet>(StartRoomSet(m_StartRoom));
+            ::Messaging::Bus::Publish<SetStartRoom>(SetStartRoom(pt));
         }
     }
 }
@@ -501,6 +495,7 @@ void __fastcall TileEditor::SetScale(float scale)
     m_BorderScaled.x = m_Border / m_Scale.x;
     m_BorderScaled.y = m_Border / m_Scale.y;
     CreateViewBitmap();
+    m_View->Picture->Bitmap->Canvas->Font->Size = (-12 * 72 * std::max(1.f, m_Scale.y)) / m_View->Picture->Bitmap->Canvas->Font->PixelsPerInch;
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::SetMode(TEMode mode)
@@ -533,13 +528,19 @@ void __fastcall TileEditor::SetShowSelectedRoom(bool state)
     UpdateMap();
 }
 //---------------------------------------------------------------------------
+void __fastcall TileEditor::SetShowRoomNumbers(bool state)
+{
+    m_ShowRoomNumbers = state && m_UsesGridRoom;
+    UpdateMap();
+}
+//---------------------------------------------------------------------------
 void __fastcall TileEditor::SetShowStartRoom(bool state)
 {
     m_ShowStartRoom = state;
     UpdateMap();
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::SetStartRoom(TPoint location)
+void __fastcall TileEditor::SetStartRoomCoords(TPoint location)
 {
     if ((location.x != m_StartRoom.x || location.y != m_StartRoom.y) && 0 <= location.x && location.y < m_Rooms.cx && 0 <= location.y && location.y < m_Rooms.cy)
     {
@@ -595,6 +596,43 @@ void __fastcall TileEditor::DrawGrids() const
         {
             Canvas->MoveTo(xs    , y);
             Canvas->LineTo(xe + 1, y);
+        }
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::DrawRoomNumbers() const
+{
+    if (m_ShowRoomNumbers && FRetrieveRoomIndex)
+    {
+        const auto& wi = theDocumentManager.ProjectConfig()->Window;
+        auto Canvas = m_View->Picture->Bitmap->Canvas;
+        Canvas->Font->Color = Project::ThemeManager::Foreground;
+        Canvas->Pen->Style = psSolid;
+        auto xs =  (m_BorderScaled.x - m_MapOffsetMS.X) * m_Scale.x;
+        auto ys =  (m_BorderScaled.y - m_MapOffsetMS.Y) * m_Scale.y;
+        auto rx = wi.Width  * m_TileSize.cx * m_Scale.x;
+        auto ry = wi.Height * m_TileSize.cy * m_Scale.y;
+        auto ty = ys;
+        for (auto y = 0; y < g_MaxMapRoomsDown; y++)
+        {
+            auto tx = xs;
+            for (auto x = 0; x < g_MaxMapRoomsAcross; x++)
+            {
+                auto ri = FRetrieveRoomIndex(AGDX::Point(x, y));
+                if (ri != 255)
+                {
+                    // draw number
+                    auto number = IntToStr(ri);
+                    auto ts = Canvas->TextExtent(number);
+                    Canvas->Pen->Color = Project::ThemeManager::Background;
+                    Canvas->Brush->Color = Project::ThemeManager::Background;
+                    Canvas->Rectangle(TRect(tx, ty, tx + ts.Width + 6, ty + ts.Height + 4));
+                    Canvas->Brush->Color = Project::ThemeManager::Highlight;
+                    Canvas->TextOut(tx + 3, ty + 2, number);
+                }
+                tx += rx;
+            }
+            ty += ry;
         }
     }
 }
@@ -750,6 +788,7 @@ void __fastcall TileEditor::Refresh()
     StretchBlt(m_View->Picture->Bitmap->Canvas->Handle, 0, 0, m_View->Width, m_View->Height, m_Content->Canvas->Handle, cx, cy, cw, ch, SRCCOPY);
     DrawEntityLocks();
     DrawGrids();
+    DrawRoomNumbers();
     DrawGroupSelect();
     DrawSelectedRoom();
     DrawStartRoom();

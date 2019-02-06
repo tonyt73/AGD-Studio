@@ -114,7 +114,6 @@ __published:    // IDE-managed Components
     TToolButton *btnWSGridTile;
     TToolButton *btnWSGridRoom;
     TToolBar *tbrModes;
-    TToolButton *btnShowStart;
     TAction *actStartRoomTool;
     TToolButton *btnToggleSingleRoomEditMode;
     TAction *actToggleSingleRoomMode;
@@ -137,6 +136,11 @@ __published:    // IDE-managed Components
     TAction *actEntityToggleLocks;
     TToolButton *btnEntityNext;
     TToolButton *btnEntityLock;
+    TPanel *panToggles;
+    TToolBar *ToolBar1;
+    TToolButton *btnShowStart;
+    TToolButton *ToolButton3;
+    TAction *actToggleRoomNumbers;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actLineExecute(TObject *Sender);
@@ -183,6 +187,7 @@ __published:    // IDE-managed Components
     void __fastcall actCutExecute(TObject *Sender);
     void __fastcall actPasteExecute(TObject *Sender);
     void __fastcall actEntityToggleLocksExecute(TObject *Sender);
+    void __fastcall actToggleRoomNumbersExecute(TObject *Sender);
 
 private:    // User declarations
     ::Messaging::Registrar      m_Registrar;        // the messaging registrar
@@ -201,11 +206,12 @@ private:    // User declarations
             bool    __fastcall  IsActive() const;
             void    __fastcall  OnEvent(const Event& event);
             void    __fastcall  OnRoomSelected(const RoomSelected& event);
-            void    __fastcall  OnStartRoomSet(const StartRoomSet& event);
+            void    __fastcall  OnStartRoomChanged(const StartRoomChanged& event);
             void    __fastcall  OnDocumentChanged(const DocumentChange<String>& message);
             void    __fastcall  OnMapResize(const OnMapResized& message);
             void     __fastcall OnEntityClick(ImageDocument* document);
             void    __fastcall  OnWorkspaceEntitySelected(const Entity& entity);
+            int     __fastcall  OnRetrieveRoomIndex(const AGDX::Point& pt);
             void    __fastcall  ShowKeysHelp();
 
 public:        // User declarations

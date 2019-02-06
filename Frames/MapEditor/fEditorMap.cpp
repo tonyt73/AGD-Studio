@@ -27,7 +27,7 @@ __fastcall TfrmEditorMap::TfrmEditorMap(TComponent* Owner)
     m_Registrar.Subscribe<Event>(OnEvent);
     m_Registrar.Subscribe<OnMapResized>(OnMapResize);
     m_Registrar.Subscribe<RoomSelected>(OnRoomSelected);
-    m_Registrar.Subscribe<StartRoomSet>(OnStartRoomSet);
+    m_Registrar.Subscribe<StartRoomChanged>(OnStartRoomChanged);
     m_Registrar.Subscribe<DocumentChange<String>>(OnDocumentChanged);
 }
 //---------------------------------------------------------------------------
@@ -51,8 +51,9 @@ void __fastcall TfrmEditorMap::Initialise()
     // TODO: change the size to ???
     m_Workspace = std::make_unique<TileEditor>(imgWorkspace, m_ImageMap, TSize(g_MaxMapRoomsAcross, g_MaxMapRoomsDown), true, true, 144, false);
     m_Workspace->Mode = TileEditor::temSelect;
-    m_Workspace->StartRoom = TPoint(m_Document->StartLocationX, m_Document->StartLocationY);
+    m_Workspace->StartRoom = TPoint(m_Document->StartRoomLocation.X, m_Document->StartRoomLocation.Y);
     m_Workspace->LockIcon = imgLock;
+    m_Workspace->RetrieveRoomIndex = OnRetrieveRoomIndex;
 
     m_ScratchPad = std::make_unique<TileEditor>(imgScratchPad, m_ImageMap, TSize(8,8), true, false, 8, false);
     m_ScratchPad->Mode = TileEditor::temSelect;
@@ -65,8 +66,9 @@ void __fastcall TfrmEditorMap::Initialise()
     m_RoomSelector->GridRoom = true;
     m_RoomSelector->ShowStartRoom = true;
     m_RoomSelector->ShowSelectedRoom = true;
-    m_RoomSelector->StartRoom = TPoint(m_Document->StartLocationX, m_Document->StartLocationY);
+    m_RoomSelector->StartRoom = TPoint(m_Document->StartRoomLocation.X, m_Document->StartRoomLocation.Y);
     m_RoomSelector->Scale = 0.5f;
+    m_RoomSelector->RetrieveRoomIndex = OnRetrieveRoomIndex;
     // and set their tile sets
     m_Workspace->SetEntities(m_Document->Get(meMap));
     m_ScratchPad->SetEntities(m_Document->Get(meScratchPad));
@@ -294,9 +296,9 @@ void __fastcall TfrmEditorMap::OnRoomSelected(const RoomSelected& event)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::OnStartRoomSet(const StartRoomSet& event)
+void __fastcall TfrmEditorMap::OnStartRoomChanged(const StartRoomChanged& event)
 {
-    if (event.Id == "start.room.set")
+    if (event.Id == "start.room.changed")
     {
         m_Workspace->StartRoom = event.Room;
         m_RoomSelector->StartRoom = event.Room;
@@ -570,7 +572,7 @@ void __fastcall TfrmEditorMap::actGridRoomExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actToggleSingleRoomModeExecute(TObject *Sender)
 {
-    actStartRoomTool->Enabled = !actToggleSingleRoomMode->Checked;
+    //actStartRoomTool->Enabled = !actToggleSingleRoomMode->Checked;
     dpRoomSelector->PanelVisible = actToggleSingleRoomMode->Checked;
     dpRoomSelector->Zone->Height = std::max(dpRoomSelector->Zone->Height, 256);
     m_Workspace->Rooms = actToggleSingleRoomMode->Checked ? TSize(1, 1) : TSize(g_MaxMapRoomsAcross, g_MaxMapRoomsDown);
@@ -669,6 +671,17 @@ void __fastcall TfrmEditorMap::actPasteExecute(TObject *Sender)
     {
         m_ScratchPad->Paste();
     }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::actToggleRoomNumbersExecute(TObject *Sender)
+{
+    m_Workspace->ShowRoomNumbers = actToggleRoomNumbers->Checked;
+    m_RoomSelector->ShowRoomNumbers = actToggleRoomNumbers->Checked;
+}
+//---------------------------------------------------------------------------
+int __fastcall TfrmEditorMap::OnRetrieveRoomIndex(const AGDX::Point& pt)
+{
+    return m_Document->GetRoomIndex(pt);
 }
 //---------------------------------------------------------------------------
 

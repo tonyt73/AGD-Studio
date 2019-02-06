@@ -66,6 +66,7 @@ private:
     bool                            m_ReadOnly;         // read only - no changes allowed - room selection only
     bool                            m_ShowSelectedRoom; // show the selected room highlighted
     bool                            m_ShowStartRoom;    // show the start room highlighted
+    bool                            m_ShowRoomNumbers;  // show room index numbers
     TPoint                          m_StartRoom;        // the location of the start room
     MapPencilTool                   m_MapPencilTool;    // pencil tool - plot single entites
     MapRectTool                     m_MapRectTool;      // rect tool - draw tiles (only) in a rectangle
@@ -89,13 +90,15 @@ private:
     void                __fastcall  SetReadOnly(bool state);
     void                __fastcall  SetShowSelectedRoom(bool state);
     void                __fastcall  SetShowStartRoom(bool state);
-    void                __fastcall  SetStartRoom(TPoint location);
+    void                __fastcall  SetShowRoomNumbers(bool state);
+    void                __fastcall  SetStartRoomCoords(TPoint location);
     void                __fastcall  SetScale(float scale);
     void                __fastcall  SetMode(TEMode mode);
     void                __fastcall  DrawEntities(int filters);
     void                __fastcall  DrawToolEntities();
     void                __fastcall  DrawMap();
     void                __fastcall  DrawGrids() const;
+    void                __fastcall  DrawRoomNumbers() const;
     void                __fastcall  DrawEntityLocks() const;
     void                __fastcall  DrawGroupSelect() const;
     void                __fastcall  DrawSelectedRoom() const;
@@ -117,6 +120,8 @@ private:
 
     typedef void __fastcall (__closure *TNotifyOnEntityClick)(const Entity& entity);
     TNotifyOnEntityClick            FOnEntitySelected;
+    typedef int __fastcall (__closure *TRetrieveRoomIndex)(const AGDX::Point& pt) const;
+    TRetrieveRoomIndex   __fastcall FRetrieveRoomIndex;
 
 public:
 
@@ -150,12 +155,14 @@ public:
     __property  unsigned int        SelectedEntity  = { read = m_SelectedEntity, write = SetSelectedEntity      };
     __property  bool                ReadOnly        = { read = m_ReadOnly, write = SetReadOnly                  };
     __property  TSize               SelectedRoom    = { read = m_SelectedRoom                                   };
-    __property  TPoint              StartRoom       = { read = m_StartRoom, write = SetStartRoom                };
+    __property  TPoint              StartRoom       = { read = m_StartRoom, write = SetStartRoomCoords          };
     __property  bool                ShowSelectedRoom= { read = m_ShowSelectedRoom, write = SetShowSelectedRoom  };
     __property  bool                ShowStartRoom   = { read = m_ShowStartRoom, write = SetShowStartRoom        };
+    __property  bool                ShowRoomNumbers = { read = m_ShowRoomNumbers, write = SetShowRoomNumbers    };
     __property  TImage*             LockIcon        = { write = m_LockIcon                                      };
 
     __property TNotifyOnEntityClick OnEntitySelected= { read = FOnEntitySelected, write = FOnEntitySelected     };
+    __property TRetrieveRoomIndex  RetrieveRoomIndex= { read = FRetrieveRoomIndex, write = FRetrieveRoomIndex   };
 
 };
 //---------------------------------------------------------------------------
