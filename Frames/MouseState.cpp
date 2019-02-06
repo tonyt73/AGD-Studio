@@ -20,12 +20,14 @@ __fastcall MouseState::MouseState(TMouseButton button, const TShiftState& shiftS
 __fastcall MouseState::MouseState(const TShiftState& shiftState)
 : m_ShiftState(shiftState)
 {
+    auto altState = (GetKeyState(VK_MENU) & 0x8000) != 0;
     m_Shift       =  shiftState.Contains(ssShift) && !shiftState.Contains(ssCtrl  ) && !shiftState.Contains(ssAlt  );
     m_Ctrl        = !shiftState.Contains(ssShift) &&  shiftState.Contains(ssCtrl  ) && !shiftState.Contains(ssAlt  );
-    m_Alt         = !shiftState.Contains(ssShift) &&  shiftState.Contains(ssCtrl  ) &&  shiftState.Contains(ssAlt  );
+    m_Alt         = !shiftState.Contains(ssShift) && !shiftState.Contains(ssCtrl  ) && (shiftState.Contains(ssAlt  ) || altState);
     m_Left        =  shiftState.Contains(ssLeft ) && !shiftState.Contains(ssMiddle) && !shiftState.Contains(ssRight);
     m_Middle      = !shiftState.Contains(ssLeft ) &&  shiftState.Contains(ssMiddle) && !shiftState.Contains(ssRight);
     m_Right       = !shiftState.Contains(ssLeft ) && !shiftState.Contains(ssMiddle) &&  shiftState.Contains(ssRight);
+
     m_NoModifiers = !m_Shift && !m_Ctrl && !m_Alt;
 }
 //---------------------------------------------------------------------------
