@@ -116,7 +116,7 @@ __published:    // IDE-managed Components
     TToolBar *tbrModes;
     TAction *actStartRoomTool;
     TToolButton *btnToggleSingleRoomEditMode;
-    TAction *actToggleSingleRoomMode;
+    TAction *actEditModeFullMap;
     TPanel *panGrids;
     TPanel *panModes;
     TAction *actEntityNext;
@@ -138,9 +138,13 @@ __published:    // IDE-managed Components
     TToolButton *btnEntityLock;
     TPanel *panToggles;
     TToolBar *ToolBar1;
-    TToolButton *btnShowStart;
-    TToolButton *ToolButton3;
+    TToolButton *btnToggleDisplayStart;
+    TToolButton *btnToggleDisplayRoomNumbers;
     TAction *actToggleRoomNumbers;
+    TToolButton *btnToggleDisplayLocks;
+    TAction *actToggleShowLocks;
+    TToolButton *ToolButton2;
+    TAction *actEditModeSingleScreen;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actLineExecute(TObject *Sender);
@@ -178,7 +182,7 @@ __published:    // IDE-managed Components
     void __fastcall btnSPGridTileClick(TObject *Sender);
     void __fastcall actGridTileExecute(TObject *Sender);
     void __fastcall actGridRoomExecute(TObject *Sender);
-    void __fastcall actToggleSingleRoomModeExecute(TObject *Sender);
+    void __fastcall actEditModeFullMapExecute(TObject *Sender);
     void __fastcall actStartRoomToolExecute(TObject *Sender);
     void __fastcall actEntityNextExecute(TObject *Sender);
     void __fastcall actEntityPrevExecute(TObject *Sender);

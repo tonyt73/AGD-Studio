@@ -170,7 +170,7 @@ void __fastcall TfrmEditorMap::imgWorkspaceMouseUp(TObject *Sender, TMouseButton
 {
     m_Workspace->OnMouseUp(Button,Shift, X, Y);
     // copy the workspace to the map document
-    m_Document->Set(actToggleSingleRoomMode->Checked ? meRoom : meMap, m_Workspace->GetEntities());
+    m_Document->Set(actEditModeSingleScreen->Checked ? meRoom : meMap, m_Workspace->GetEntities());
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::imgRoomSelectorMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
@@ -309,7 +309,7 @@ void __fastcall TfrmEditorMap::OnDocumentChanged(const DocumentChange<String>& m
 {
     if (message.Id == "document.removing")
     {
-        m_Workspace->SetEntities(m_Document->Get(actToggleSingleRoomMode->Checked ? meRoom : meMap, m_RoomSelector->SelectedRoom));
+        m_Workspace->SetEntities(m_Document->Get(actEditModeSingleScreen->Checked ? meRoom : meMap, m_RoomSelector->SelectedRoom));
         m_ScratchPad->SetEntities(m_Document->Get(meScratchPad));
         m_RoomSelector->SetEntities(m_Document->Get(meMap));
         m_Workspace->UpdateMap();
@@ -476,7 +476,7 @@ void __fastcall TfrmEditorMap::actDeleteExecute(TObject *Sender)
     if (dpWorkspace == m_ActivePanel)
     {
         m_Workspace->DeleteSelection();
-        m_Document->Set(actToggleSingleRoomMode->Checked ? meRoom : meMap, m_Workspace->GetEntities());
+        m_Document->Set(actEditModeSingleScreen->Checked ? meRoom : meMap, m_Workspace->GetEntities());
     }
     else if (dpScratchPad == m_ActivePanel)
     {
@@ -570,14 +570,14 @@ void __fastcall TfrmEditorMap::actGridRoomExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actToggleSingleRoomModeExecute(TObject *Sender)
+void __fastcall TfrmEditorMap::actEditModeFullMapExecute(TObject *Sender)
 {
-    //actStartRoomTool->Enabled = !actToggleSingleRoomMode->Checked;
-    dpRoomSelector->PanelVisible = actToggleSingleRoomMode->Checked;
+    //actStartRoomTool->Enabled = !actEditModeSingleScreen->Checked;
+    dpRoomSelector->PanelVisible = actEditModeSingleScreen->Checked;
     dpRoomSelector->Zone->Height = std::max(dpRoomSelector->Zone->Height, 256);
-    m_Workspace->Rooms = actToggleSingleRoomMode->Checked ? TSize(1, 1) : TSize(g_MaxMapRoomsAcross, g_MaxMapRoomsDown);
-    m_Workspace->SetEntities(m_Document->Get(actToggleSingleRoomMode->Checked ? meRoom : meMap, m_RoomSelector->SelectedRoom));
-    m_Workspace->ShowStartRoom = !actToggleSingleRoomMode->Checked && actStartRoomTool->Checked;
+    m_Workspace->Rooms = actEditModeSingleScreen->Checked ? TSize(1, 1) : TSize(g_MaxMapRoomsAcross, g_MaxMapRoomsDown);
+    m_Workspace->SetEntities(m_Document->Get(actEditModeSingleScreen->Checked ? meRoom : meMap, m_RoomSelector->SelectedRoom));
+    m_Workspace->ShowStartRoom = !actEditModeSingleScreen->Checked && actStartRoomTool->Checked;
     m_Workspace->UpdateMap();
     m_RoomSelector->UpdateMap();
 }
