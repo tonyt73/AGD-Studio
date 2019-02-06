@@ -143,13 +143,27 @@ public:
     __property  TSize Room = { read = m_Room };
 };
 //---------------------------------------------------------------------------
-class StartRoomSet : public Event
+class SetStartRoom : public Event
 {
 private:
     TPoint  m_Room;
 public:
-    __fastcall StartRoomSet(TPoint room)
-    : Event("start.room.set")
+    __fastcall SetStartRoom(TPoint room)
+    : Event("set.start.room")
+    , m_Room(room)
+    {
+    }
+
+    __property  TPoint Room = { read = m_Room };
+};
+//---------------------------------------------------------------------------
+class StartRoomChanged : public Event
+{
+private:
+    TPoint  m_Room;
+public:
+    __fastcall StartRoomChanged(TPoint room)
+    : Event("start.room.changed")
     , m_Room(room)
     {
     }
