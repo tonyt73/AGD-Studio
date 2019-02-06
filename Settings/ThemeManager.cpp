@@ -66,4 +66,24 @@ TStringDynArray __fastcall ThemeManager::GetStyles()
     return System::Path::GetFiles(System::Path::lpApplication, "*.vsf", "Styles");
 }
 //---------------------------------------------------------------------------
+TColor __fastcall ThemeManager::GetSelectionColor()
+{
+    return StyleServices()->GetStyleColor(scButtonFocused);
+}
+//---------------------------------------------------------------------------
+TColor __fastcall ThemeManager::GetHighlightColor()
+{
+    return StyleServices()->GetStyleColor(scButtonHot);
+}
+//---------------------------------------------------------------------------
+TColor __fastcall ThemeManager::GetBackgroundColor()
+{
+    return StyleServices()->GetStyleColor(scButtonNormal);
+}
+//---------------------------------------------------------------------------
+TColor __fastcall ThemeManager::GetForegroundColor()
+{
+    return StyleServices()->GetStyleFontColor(sfTextLabelNormal);
+}
+//---------------------------------------------------------------------------
 } // namespace Project
