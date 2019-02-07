@@ -120,7 +120,7 @@ private:
 
     typedef void __fastcall (__closure *TNotifyOnEntityClick)(const Entity& entity);
     TNotifyOnEntityClick            FOnEntitySelected;
-    typedef int __fastcall (__closure *TRetrieveRoomIndex)(const AGDX::Point& pt) const;
+    typedef int __fastcall (__closure *TRetrieveRoomIndex)(const TPoint& pt) const;
     TRetrieveRoomIndex   __fastcall FRetrieveRoomIndex;
 
 public:

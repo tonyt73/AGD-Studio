@@ -33,7 +33,7 @@ void __fastcall SectionBuilders::Screens::Execute()
 		{
 			for (auto rx = 0; rx < g_MaxMapRoomsAcross; rx++)
 			{
-				if (mapDoc->GetRoomIndex(AGDX::Point(rx, ry)) == ri)
+				if (mapDoc->GetRoomIndex(TPoint(rx, ry)) == ri)
 				{
 					auto roomEntities = mapDoc->Get(meRoom, TSize(rx, ry));
 					auto roomPt = TPoint(rx * tileSize.cx * wi.Width, ry * tileSize.cy * wi.Height);

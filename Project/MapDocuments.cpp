@@ -320,7 +320,7 @@ const EntityList& __fastcall TiledMapDocument::Get(MapEntities type, TSize room)
         auto miny = room.cy * tileSize.cy * wi.Height;
         auto maxx = minx + (tileSize.cx * wi.Width);
         auto maxy = miny + (tileSize.cy * wi.Height);
-        auto ri = GetRoomIndex(AGDX::Point(room.cx, room.cy));
+        auto ri = GetRoomIndex(TPoint(room.cx, room.cy));
         for (auto& e : m_Map)
         {
             auto pt = e.Pt;
@@ -408,17 +408,17 @@ void __fastcall TiledMapDocument::OnDocumentChanged(const DocumentChange<String>
 //---------------------------------------------------------------------------
 void __fastcall TiledMapDocument::OnSetStartRoom(const SetStartRoom& event)
 {
-    SetStartRoomCoords(AGDX::Point(event.Room.x, event.Room.y));
+    SetStartRoomCoords(event.Room);
 }
 //---------------------------------------------------------------------------
-void __fastcall TiledMapDocument::SetStartRoomCoords(const AGDX::Point& coords)
+void __fastcall TiledMapDocument::SetStartRoomCoords(const TPoint& coords)
 {
     auto ri = GetRoomIndex(coords);
     if (ri != 255)
     {
         m_StartRoomIndex = ri;
         m_StartRoomCoords = coords;
-        ::Messaging::Bus::Publish<StartRoomChanged>(TPoint(coords.X, coords.Y));
+        ::Messaging::Bus::Publish<StartRoomChanged>(coords);
         ::Messaging::Bus::Publish<UpdateProperties>(UpdateProperties());
     }
     else
@@ -426,6 +426,11 @@ void __fastcall TiledMapDocument::SetStartRoomCoords(const AGDX::Point& coords)
         // post an error to the message list
         ::Messaging::Bus::Publish<MessageEvent>(ErrorMessageEvent("Cannot set an unused screen as the games Start Location"));
     }
+}
+//---------------------------------------------------------------------------
+int __fastcall TiledMapDocument::GetStartRoomCoords(int index) const
+{
+    return index ? m_StartRoomCoords.Y : m_StartRoomCoords.X;
 }
 //---------------------------------------------------------------------------
 void __fastcall TiledMapDocument::UpdateEntityRooms()
@@ -439,7 +444,7 @@ void __fastcall TiledMapDocument::UpdateEntityRooms()
 		// recalculate the entitys room based on its current position (currently only sprites can be locked to rooms)
 		if (!entity.RoomLocked)
 		{
-			entity.RoomIndex = GetRoomIndex(AGDX::Point((int)(entity.Pt.X / roomSize.cx), (int)(entity.Pt.Y / roomSize.cy)), true);
+			entity.RoomIndex = GetRoomIndex(TPoint((int)(entity.Pt.X / roomSize.cx), (int)(entity.Pt.Y / roomSize.cy)), true);
         }
 		// update the location of the objects in the room
 		if (entity.Image->ImageType == itObject)
@@ -449,8 +454,8 @@ void __fastcall TiledMapDocument::UpdateEntityRooms()
 
             if (object->State == osRoom)
             {
-                object->Room = AGDX::Point((int)(entity.Pt.X / roomSize.cx), (int)(entity.Pt.Y / roomSize.cy));
-                object->Position = AGDX::Point(entity.Pt.X - (object->Room.X * roomSize.cx), entity.Pt.Y - (object->Room.Y * roomSize.cy));
+                object->Room = TPoint((int)(entity.Pt.X / roomSize.cx), (int)(entity.Pt.Y / roomSize.cy));
+                object->Position = TPoint(entity.Pt.X - (object->Room.X * roomSize.cx), entity.Pt.Y - (object->Room.Y * roomSize.cy));
             }
             else
             {
@@ -491,7 +496,7 @@ TRect __fastcall TiledMapDocument::GetMinimalMapSize()
     return rect;
 }
 //---------------------------------------------------------------------------
-int __fastcall TiledMapDocument::GetRoomIndex(const AGDX::Point& room, bool newIdForUndefinedRoom)
+int __fastcall TiledMapDocument::GetRoomIndex(const TPoint& room, bool newIdForUndefinedRoom)
 {
     assert(0 <= room.X && room.X < m_RoomMappingWidth);
 	assert(0 <= room.Y && room.Y < m_RoomMappingHeight);
@@ -499,6 +504,8 @@ int __fastcall TiledMapDocument::GetRoomIndex(const AGDX::Point& room, bool newI
 	if (ri == 255 && newIdForUndefinedRoom)
 	{
         ri = m_ScreenCount++;
+        m_RoomMapping[room.Y * m_RoomMappingWidth + room.X] = ri;
+
     }
 	return ri;
 }
@@ -509,7 +516,7 @@ void __fastcall TiledMapDocument::UpdateScreenCoords()
     {
         for (auto x = 0; x < g_MaxMapRoomsAcross; x++)
         {
-            const auto& coords = AGDX::Point(x, y);
+            const auto& coords = TPoint(x, y);
             auto ri = GetRoomIndex(coords);
             if (ri == m_StartRoomIndex)
             {
@@ -522,6 +529,7 @@ void __fastcall TiledMapDocument::UpdateScreenCoords()
 //---------------------------------------------------------------------------
 void __fastcall TiledMapDocument::OnLoaded()
 {
+    GetMinimalMapSize();
     UpdateScreenCoords();
     UpdateEntityRooms();
 }

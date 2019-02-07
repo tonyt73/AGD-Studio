@@ -72,7 +72,7 @@ protected:
 
                                     // TODO: Convert to AGDX:Point for better display in the property editor
 			int                     m_StartRoomIndex;
-			AGDX::Point				m_StartRoomCoords;
+            TPoint                  m_StartRoomCoords;
 			int                     m_ScreenCount;
 			Entity                  m_EntityLoader;
 			TSize                   m_ActiveRoom;
@@ -88,7 +88,8 @@ protected:
 			void        __fastcall  UpdateEntityRooms();
             void        __fastcall  UpdateScreenCoords();
 			void        __fastcall  OnLoaded();
-            void        __fastcall  SetStartRoomCoords(const AGDX::Point& coords);
+            int         __fastcall  GetStartRoomCoords(int index) const;
+            void        __fastcall  SetStartRoomCoords(const TPoint& coords);
 
 
 public:
@@ -101,14 +102,15 @@ public:
 			void        __fastcall  Set(MapEntities type, const EntityList& entities);
 
 			TRect       __fastcall  GetMinimalMapSize();
-			int         __fastcall  GetRoomIndex(const AGDX::Point& room, bool newIdForUndefinedRoom = false);
+			int         __fastcall  GetRoomIndex(const TPoint& room, bool newIdForUndefinedRoom = false);
 			bool        __fastcall  IsRoomEmpty(int x, int y);
 
 			int         __property  ScreenCount = { read = m_ScreenCount };
 
 __published:
-	__property          int         StartRoomIndex	    = { read = m_StartRoomIndex  };
-	__property          AGDX::Point StartRoomLocation   = { read = m_StartRoomCoords, write = SetStartRoomCoords };
+	__property          int         StartRoomIndex  = { read = m_StartRoomIndex  };
+	__property          int         StartRoomX      = { read = GetStartRoomCoords, index = 0 };
+	__property          int         StartRoomY      = { read = GetStartRoomCoords, index = 1 };
 };
 //---------------------------------------------------------------------------
 #endif

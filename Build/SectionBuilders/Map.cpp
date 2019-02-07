@@ -30,7 +30,7 @@ void __fastcall SectionBuilders::Map::Execute()
         String line = "    ";
         for (auto x = Max(0, mapSize.Left - 1); x <= Min(16, mapSize.Right + 1); x++)
         {
-            auto ri = mapDoc->GetRoomIndex(AGDX::Point(x, y));
+            auto ri = mapDoc->GetRoomIndex(TPoint(x, y));
 			line += IntToStr(ri) + " ";
 		}
         AddLine(line);

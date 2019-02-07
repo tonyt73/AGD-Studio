@@ -51,7 +51,7 @@ void __fastcall TfrmEditorMap::Initialise()
     // TODO: change the size to ???
     m_Workspace = std::make_unique<TileEditor>(imgWorkspace, m_ImageMap, TSize(g_MaxMapRoomsAcross, g_MaxMapRoomsDown), true, true, 144, false);
     m_Workspace->Mode = TileEditor::temSelect;
-    m_Workspace->StartRoom = TPoint(m_Document->StartRoomLocation.X, m_Document->StartRoomLocation.Y);
+    m_Workspace->StartRoom = TPoint(m_Document->StartRoomX, m_Document->StartRoomY);
     m_Workspace->LockIcon = imgLock;
     m_Workspace->RetrieveRoomIndex = OnRetrieveRoomIndex;
 
@@ -66,7 +66,7 @@ void __fastcall TfrmEditorMap::Initialise()
     m_RoomSelector->GridRoom = true;
     m_RoomSelector->ShowStartRoom = true;
     m_RoomSelector->ShowSelectedRoom = true;
-    m_RoomSelector->StartRoom = TPoint(m_Document->StartRoomLocation.X, m_Document->StartRoomLocation.Y);
+    m_RoomSelector->StartRoom = TPoint(m_Document->StartRoomX, m_Document->StartRoomY);
     m_RoomSelector->Scale = 0.5f;
     m_RoomSelector->RetrieveRoomIndex = OnRetrieveRoomIndex;
     // and set their tile sets
@@ -679,7 +679,7 @@ void __fastcall TfrmEditorMap::actToggleRoomNumbersExecute(TObject *Sender)
     m_RoomSelector->ShowRoomNumbers = actToggleRoomNumbers->Checked;
 }
 //---------------------------------------------------------------------------
-int __fastcall TfrmEditorMap::OnRetrieveRoomIndex(const AGDX::Point& pt)
+int __fastcall TfrmEditorMap::OnRetrieveRoomIndex(const TPoint& pt)
 {
     return m_Document->GetRoomIndex(pt);
 }

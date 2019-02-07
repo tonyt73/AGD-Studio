@@ -4,7 +4,6 @@
 //---------------------------------------------------------------------------
 #include "Project/Document.h"
 #include "Graphics/GraphicsTypes.h"
-#include "Graphics/Point.h"
 //---------------------------------------------------------------------------
 // ImageDocument
 // This class encapulates what is an image document.
@@ -90,16 +89,16 @@ class ObjectDocument : public ImageDocument
 {
 private:
     // note: for the IDE property editor to work on there properties, they must be new'd for TPersisent to work
-    std::unique_ptr<AGDX::Point>    m_Room;
-    std::unique_ptr<AGDX::Point>    m_Position;
+            TPoint                  m_Room;
+            TPoint                  m_Position;
             ObjectState             m_State;
             int                     m_ReadPtX;
             int                     m_ReadPtY;
 
-    const AGDX::Point&  __fastcall  GetRoom();
-            void        __fastcall  SetRoom(const AGDX::Point& pt);
-    const AGDX::Point&  __fastcall  GetPosition();
-            void        __fastcall  SetPosition(const AGDX::Point& pt);
+         const TPoint&  __fastcall  GetRoom();
+            void        __fastcall  SetRoom(const TPoint& pt);
+         const TPoint&  __fastcall  GetPosition();
+            void        __fastcall  SetPosition(const TPoint& pt);
             void        __fastcall  SetState(ObjectState state);
             void        __fastcall  OnEndObject(const String& object);
 
@@ -111,8 +110,8 @@ public:
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ObjectDocument(name, extra); };
 
 __published:
-    __property  const AGDX::Point&  Room            = { read = GetRoom, write = SetRoom         };
-    __property  const AGDX::Point&  Position        = { read = GetPosition, write = SetPosition };
+    __property       const TPoint&  Room            = { read = GetRoom, write = SetRoom         };
+    __property       const TPoint&  Position        = { read = GetPosition, write = SetPosition };
           ObjectState   __property  State           = { read = m_State, write = SetState        };
 };
 //---------------------------------------------------------------------------

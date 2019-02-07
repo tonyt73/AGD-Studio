@@ -215,7 +215,7 @@ private:    // User declarations
             void    __fastcall  OnMapResize(const OnMapResized& message);
             void     __fastcall OnEntityClick(ImageDocument* document);
             void    __fastcall  OnWorkspaceEntitySelected(const Entity& entity);
-            int     __fastcall  OnRetrieveRoomIndex(const AGDX::Point& pt);
+            int     __fastcall  OnRetrieveRoomIndex(const TPoint& pt);
             void    __fastcall  ShowKeysHelp();
 
 public:        // User declarations

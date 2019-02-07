@@ -618,7 +618,7 @@ void __fastcall TileEditor::DrawRoomNumbers() const
             auto tx = xs;
             for (auto x = 0; x < g_MaxMapRoomsAcross; x++)
             {
-                auto ri = FRetrieveRoomIndex(AGDX::Point(x, y));
+                auto ri = FRetrieveRoomIndex(TPoint(x, y));
                 if (ri != 255)
                 {
                     // draw number

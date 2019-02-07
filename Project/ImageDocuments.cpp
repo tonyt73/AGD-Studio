@@ -260,20 +260,16 @@ __fastcall SpriteDocument::SpriteDocument(const String& name, const String& extr
 //---------------------------------------------------------------------------
 __fastcall ObjectDocument::ObjectDocument(const String& name, const String& extra)
 : ImageDocument(name)
-, m_Room(nullptr)
-, m_Position(nullptr)
 , m_State(osDisabled)
 {
-    m_Room = make_unique<AGDX::Point>();
-    m_Position = make_unique<AGDX::Point>();
     m_ImageType = itObject;
     m_SubType = "Object";
     m_Folder = "Images\\Objects";
 
-    m_PropertyMap["Image.Room.X"] = &m_ReadPtX;
-    m_PropertyMap["Image.Room.Y"] = &m_ReadPtY;
-    m_PropertyMap["Image.Position.X"] = &m_ReadPtX;
-    m_PropertyMap["Image.Position.Y"] = &m_ReadPtY;
+    m_PropertyMap["Image.Room.X"] = &m_Room.X;
+    m_PropertyMap["Image.Room.Y"] = &m_Room.Y;
+    m_PropertyMap["Image.Position.X"] = &m_Position.X;
+    m_PropertyMap["Image.Position.Y"] = &m_Position.Y;
     m_PropertyMap["Image.State"] = &m_State;
 
     RegisterProperty("Name", "Details", "The name of the object");
@@ -290,32 +286,32 @@ void __fastcall ObjectDocument::OnEndObject(const String& object)
     ::ImageDocument::OnEndObject(object);
     if (object == "Image.Room")
     {
-        *m_Room = AGDX::Point(m_ReadPtX, m_ReadPtY);
+        m_Room = TPoint(m_ReadPtX, m_ReadPtY);
     }
     else if (object == "Image.Position")
     {
-        *m_Position = AGDX::Point(m_ReadPtX, m_ReadPtY);
+        m_Position = TPoint(m_ReadPtX, m_ReadPtY);
     }
 }
 //---------------------------------------------------------------------------
-const AGDX::Point& __fastcall ObjectDocument::GetRoom()
+const TPoint& __fastcall ObjectDocument::GetRoom()
 {
-    return *m_Room;
+    return m_Room;
 }
 //---------------------------------------------------------------------------
-void  __fastcall ObjectDocument::SetRoom(const AGDX::Point& pt)
+void  __fastcall ObjectDocument::SetRoom(const TPoint& pt)
 {
-    *m_Room = pt;
+    m_Room = pt;
 }
 //---------------------------------------------------------------------------
-const AGDX::Point& __fastcall ObjectDocument::GetPosition()
+const TPoint& __fastcall ObjectDocument::GetPosition()
 {
-    return *m_Position;
+    return m_Position;
 }
 //---------------------------------------------------------------------------
-void __fastcall ObjectDocument::SetPosition(const AGDX::Point& pt)
+void __fastcall ObjectDocument::SetPosition(const TPoint& pt)
 {
-    *m_Position = pt;
+    m_Position = pt;
 }
 //---------------------------------------------------------------------------
 void  __fastcall ObjectDocument::SetState(ObjectState state)
@@ -326,12 +322,12 @@ void  __fastcall ObjectDocument::SetState(ObjectState state)
 void __fastcall ObjectDocument::DoSaveExtra()
 {
     Push("Room");
-        Write("X", m_Room->X);
-        Write("Y", m_Room->Y);
+        Write("X", (int)m_Room.X);
+        Write("Y", (int)m_Room.Y);
     Pop();
     Push("Position");
-        Write("X", m_Position->X);
-        Write("Y", m_Position->Y);
+        Write("X", (int)m_Position.X);
+        Write("Y", (int)m_Position.Y);
     Pop();
     Write("State", m_State);
 }
