@@ -13,11 +13,11 @@
 USEFORM("Frames\WindowEditor\fEditorWindow.cpp", frmEditorWindow); /* TFrame: File Type */
 USEFORM("Frames\WelcomeDialog\fWelcomeDialog.cpp", frmWelcomeDialog); /* TFrame: File Type */
 USEFORM("Frames\WelcomeDialog\fSelectionPanel.cpp", SelectionPanelFrame); /* TFrame: File Type */
-USEFORM("Frames\MusicEditor\fEditorMusic.cpp", frmEditorMusic); /* TFrame: File Type */
 USEFORM("Frames\MapEditor\LabelledImage.cpp", frmLabelledImage); /* TFrame: File Type */
 USEFORM("Frames\MapEditor\fEditorMap.cpp", frmEditorMap); /* TFrame: File Type */
 USEFORM("Frames\MapEditor\AssetSelection.cpp", frmAssetSelection); /* TFrame: File Type */
 USEFORM("Frames\JumpEditor\fEditorJump.cpp", frmEditorJump); /* TFrame: File Type */
+USEFORM("Frames\MusicEditor\fEditorMusic.cpp", frmEditorMusic); /* TFrame: File Type */
 USEFORM("Frames\ImageEditor\fULAplusBitmap.cpp", frmULAplusBitmap); /* TFrame: File Type */
 USEFORM("Frames\ImageEditor\fEditorImage.cpp", frmEditorImage); /* TFrame: File Type */
 USEFORM("Frames\ImageEditor\fBlockTypes.cpp", frmBlockTypes); /* TFrame: File Type */

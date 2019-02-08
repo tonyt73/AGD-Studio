@@ -89,18 +89,11 @@ class ObjectDocument : public ImageDocument
 {
 private:
     // note: for the IDE property editor to work on there properties, they must be new'd for TPersisent to work
-            TPoint                  m_Room;
+            int                     m_RoomIndex;
             TPoint                  m_Position;
             ObjectState             m_State;
             int                     m_ReadPtX;
             int                     m_ReadPtY;
-
-         const TPoint&  __fastcall  GetRoom();
-            void        __fastcall  SetRoom(const TPoint& pt);
-         const TPoint&  __fastcall  GetPosition();
-            void        __fastcall  SetPosition(const TPoint& pt);
-            void        __fastcall  SetState(ObjectState state);
-            void        __fastcall  OnEndObject(const String& object);
 
 protected:
     virtual void        __fastcall  DoSaveExtra();
@@ -110,9 +103,9 @@ public:
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ObjectDocument(name, extra); };
 
 __published:
-    __property       const TPoint&  Room            = { read = GetRoom, write = SetRoom         };
-    __property       const TPoint&  Position        = { read = GetPosition, write = SetPosition };
-          ObjectState   __property  State           = { read = m_State, write = SetState        };
+    __property                 int  RoomIndex       = { read = m_RoomIndex, write = m_RoomIndex };
+    __property       const TPoint&  Position        = { read = m_Position, write = m_Position   };
+          ObjectState   __property  State           = { read = m_State, write = m_State         };
 };
 //---------------------------------------------------------------------------
 class TileDocument : public ImageDocument

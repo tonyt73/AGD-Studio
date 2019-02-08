@@ -266,8 +266,7 @@ __fastcall ObjectDocument::ObjectDocument(const String& name, const String& extr
     m_SubType = "Object";
     m_Folder = "Images\\Objects";
 
-    m_PropertyMap["Image.Room.X"] = &m_Room.X;
-    m_PropertyMap["Image.Room.Y"] = &m_Room.Y;
+    m_PropertyMap["Image.RoomIndex"] = &m_RoomIndex;
     m_PropertyMap["Image.Position.X"] = &m_Position.X;
     m_PropertyMap["Image.Position.Y"] = &m_Position.Y;
     m_PropertyMap["Image.State"] = &m_State;
@@ -281,55 +280,14 @@ __fastcall ObjectDocument::ObjectDocument(const String& name, const String& extr
     AddFrame();
 }
 //---------------------------------------------------------------------------
-void __fastcall ObjectDocument::OnEndObject(const String& object)
-{
-    ::ImageDocument::OnEndObject(object);
-    if (object == "Image.Room")
-    {
-        m_Room = TPoint(m_ReadPtX, m_ReadPtY);
-    }
-    else if (object == "Image.Position")
-    {
-        m_Position = TPoint(m_ReadPtX, m_ReadPtY);
-    }
-}
-//---------------------------------------------------------------------------
-const TPoint& __fastcall ObjectDocument::GetRoom()
-{
-    return m_Room;
-}
-//---------------------------------------------------------------------------
-void  __fastcall ObjectDocument::SetRoom(const TPoint& pt)
-{
-    m_Room = pt;
-}
-//---------------------------------------------------------------------------
-const TPoint& __fastcall ObjectDocument::GetPosition()
-{
-    return m_Position;
-}
-//---------------------------------------------------------------------------
-void __fastcall ObjectDocument::SetPosition(const TPoint& pt)
-{
-    m_Position = pt;
-}
-//---------------------------------------------------------------------------
-void  __fastcall ObjectDocument::SetState(ObjectState state)
-{
-    m_State = state;
-}
-//---------------------------------------------------------------------------
 void __fastcall ObjectDocument::DoSaveExtra()
 {
-    Push("Room");
-        Write("X", (int)m_Room.X);
-        Write("Y", (int)m_Room.Y);
-    Pop();
+    Write("RoomIndex", m_RoomIndex);
+    Write("State", m_State);
     Push("Position");
         Write("X", (int)m_Position.X);
         Write("Y", (int)m_Position.Y);
     Pop();
-    Write("State", m_State);
 }
 //---------------------------------------------------------------------------
 __fastcall TileDocument::TileDocument(const String& name, const String& extra)

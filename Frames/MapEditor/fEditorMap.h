@@ -114,7 +114,7 @@ __published:    // IDE-managed Components
     TToolButton *btnWSGridTile;
     TToolButton *btnWSGridRoom;
     TToolBar *tbrModes;
-    TAction *actStartRoomTool;
+    TAction *actToggleStartRoom;
     TToolButton *btnToggleSingleRoomEditMode;
     TAction *actEditModeFullMap;
     TPanel *panGrids;
@@ -145,6 +145,8 @@ __published:    // IDE-managed Components
     TAction *actToggleShowLocks;
     TToolButton *ToolButton2;
     TAction *actEditModeSingleScreen;
+    TAction *actToggleTileTypes;
+    TToolButton *btnToggleTileTypes;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actLineExecute(TObject *Sender);
@@ -183,7 +185,7 @@ __published:    // IDE-managed Components
     void __fastcall actGridTileExecute(TObject *Sender);
     void __fastcall actGridRoomExecute(TObject *Sender);
     void __fastcall actEditModeFullMapExecute(TObject *Sender);
-    void __fastcall actStartRoomToolExecute(TObject *Sender);
+    void __fastcall actToggleStartRoomExecute(TObject *Sender);
     void __fastcall actEntityNextExecute(TObject *Sender);
     void __fastcall actEntityPrevExecute(TObject *Sender);
     void __fastcall sbxWorkspaceMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled);
@@ -192,6 +194,8 @@ __published:    // IDE-managed Components
     void __fastcall actPasteExecute(TObject *Sender);
     void __fastcall actEntityToggleLocksExecute(TObject *Sender);
     void __fastcall actToggleRoomNumbersExecute(TObject *Sender);
+    void __fastcall actToggleShowLocksExecute(TObject *Sender);
+    void __fastcall actToggleTileTypesExecute(TObject *Sender);
 
 private:    // User declarations
     ::Messaging::Registrar      m_Registrar;        // the messaging registrar

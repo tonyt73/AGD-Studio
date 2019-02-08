@@ -9,7 +9,7 @@
 //---------------------------------------------------------------------------
 using namespace Agdx;
 //---------------------------------------------------------------------------
-std::unique_ptr<TBitmap> Image::m_Selection = nullptr;
+std::unique_ptr<TBitmap> Image::m_Overlay = nullptr;
 //---------------------------------------------------------------------------
 __fastcall Image::Image(unsigned int width, unsigned int height, const GraphicsMode& graphicsMode)
 : m_Image(nullptr)
@@ -27,13 +27,12 @@ __fastcall Image::Image(ImageDocument const * const image, const Agdx::GraphicsM
     m_Bitmap->Height = image->Height;
     m_Bitmap->PixelFormat = pf32bit;
     m_Canvas->Draw(m_Bitmap.get());
-    if (m_Selection == nullptr)
+    if (m_Overlay == nullptr)
     {
-        m_Selection = std::make_unique<TBitmap>();
-        m_Selection->PixelFormat = pf32bit;
-        m_Selection->Width = 1;
-        m_Selection->Height = 1;
-        ((TColor*)m_Selection->ScanLine[0])[0] = (TColor)0x7F00FF00;
+        m_Overlay = std::make_unique<TBitmap>();
+        m_Overlay->PixelFormat = pf32bit;
+        m_Overlay->Width = 1;
+        m_Overlay->Height = 1;
     }
 }
 //---------------------------------------------------------------------------
@@ -47,17 +46,18 @@ void __fastcall Image::ChangeFrame(int frame)
     Canvas().Set(m_Image->Frame[frame]);
 }
 //---------------------------------------------------------------------------
-void __fastcall Image::Draw(const TPoint& pt, TBitmap* canvas, bool selected) const
+void __fastcall Image::Draw(const TPoint& pt, TBitmap* canvas, TColor overlayColor) const
 {
     BitBlt(canvas->Canvas->Handle, pt.x, pt.y, m_Image->Width, m_Image->Height, m_Bitmap->Canvas->Handle, 0, 0, SRCCOPY);
-    if (selected)
+    if (overlayColor != clBlack)
     {
         BLENDFUNCTION bfn;
         bfn.BlendOp = AC_SRC_OVER;
         bfn.BlendFlags = 0;
         bfn.SourceConstantAlpha = 128;
         bfn.AlphaFormat = 0;
-        AlphaBlend(canvas->Canvas->Handle, pt.x, pt.y, m_Image->Width, m_Image->Height, m_Selection->Canvas->Handle, 0, 0, 1, 1, bfn);
+        ((TColor*)m_Overlay->ScanLine[0])[0] = overlayColor;
+        AlphaBlend(canvas->Canvas->Handle, pt.x, pt.y, m_Image->Width, m_Image->Height, m_Overlay->Canvas->Handle, 0, 0, 1, 1, bfn);
     }
 }
 //---------------------------------------------------------------------------

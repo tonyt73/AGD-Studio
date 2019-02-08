@@ -55,7 +55,7 @@ void __fastcall SectionBuilders::Objects::Execute()
                 data.pop_back();
             }
             // add the room
-            auto roomIndex = object->State == osRoom ? mapDoc->GetRoomIndex(object->Room) : (object->State == osDisabled ? 254 : 255);
+            auto roomIndex = object->State == osRoom ? ((ObjectDocument*)object)->RoomIndex : (object->State == osDisabled ? 254 : 255);
             line += IntToStr((int)roomIndex) + " ";
             line += IntToStr((int)(wPt.Y + object->Position.Y)) + " " + IntToStr((int)(wPt.X + object->Position.X)) + " ";
             AddLine(line);

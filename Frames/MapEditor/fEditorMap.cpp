@@ -577,14 +577,14 @@ void __fastcall TfrmEditorMap::actEditModeFullMapExecute(TObject *Sender)
     dpRoomSelector->Zone->Height = std::max(dpRoomSelector->Zone->Height, 256);
     m_Workspace->Rooms = actEditModeSingleScreen->Checked ? TSize(1, 1) : TSize(g_MaxMapRoomsAcross, g_MaxMapRoomsDown);
     m_Workspace->SetEntities(m_Document->Get(actEditModeSingleScreen->Checked ? meRoom : meMap, m_RoomSelector->SelectedRoom));
-    m_Workspace->ShowStartRoom = !actEditModeSingleScreen->Checked && actStartRoomTool->Checked;
+    m_Workspace->ShowStartRoom = !actEditModeSingleScreen->Checked && actToggleStartRoom->Checked;
     m_Workspace->UpdateMap();
     m_RoomSelector->UpdateMap();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actStartRoomToolExecute(TObject *Sender)
+void __fastcall TfrmEditorMap::actToggleStartRoomExecute(TObject *Sender)
 {
-    m_Workspace->ShowStartRoom = actStartRoomTool->Checked;
+    m_Workspace->ShowStartRoom = actToggleStartRoom->Checked;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actEntityNextExecute(TObject *Sender)
@@ -682,6 +682,16 @@ void __fastcall TfrmEditorMap::actToggleRoomNumbersExecute(TObject *Sender)
 int __fastcall TfrmEditorMap::OnRetrieveRoomIndex(const TPoint& pt)
 {
     return m_Document->GetRoomIndex(pt);
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::actToggleShowLocksExecute(TObject *Sender)
+{
+    m_Workspace->LockIcon = actToggleShowLocks->Checked ? imgLock : nullptr;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::actToggleTileTypesExecute(TObject *Sender)
+{
+    m_Workspace->ShowTileTypes = actToggleTileTypes->Checked;
 }
 //---------------------------------------------------------------------------
 

@@ -454,8 +454,9 @@ void __fastcall TiledMapDocument::UpdateEntityRooms()
 
             if (object->State == osRoom)
             {
-                object->Room = TPoint((int)(entity.Pt.X / roomSize.cx), (int)(entity.Pt.Y / roomSize.cy));
-                object->Position = TPoint(entity.Pt.X - (object->Room.X * roomSize.cx), entity.Pt.Y - (object->Room.Y * roomSize.cy));
+                auto roomCoords = TPoint((int)(entity.Pt.X / roomSize.cx), (int)(entity.Pt.Y / roomSize.cy));
+                object->RoomIndex = GetRoomIndex(roomCoords, true);
+                object->Position = TPoint(entity.Pt.X - (roomCoords.X * roomSize.cx), entity.Pt.Y - (roomCoords.Y * roomSize.cy));
             }
             else
             {

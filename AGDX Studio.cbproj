@@ -7,7 +7,7 @@
         <MainSource>AGDx Studio.cpp</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <Platform Condition="'$(Platform)'==''">Win64</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
@@ -93,6 +93,8 @@
         <BCC_EnableBatchCompilation>true</BCC_EnableBatchCompilation>
         <BCC_StopPCHAfter>agdx.pch.h</BCC_StopPCHAfter>
         <RunBCCOutOfProcess>true</RunBCCOutOfProcess>
+        <BCC_DisableWarnings>true</BCC_DisableWarnings>
+        <BCC_SelectedWarnings>false</BCC_SelectedWarnings>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <PackageImports>bindcompvcl;bindengine;fmx;fmxase;fmxdae;fmxobj;lmdrtbar;lmdrtchart;lmdrtchartdb;lmdrtcore;lmdrtdesign;lmdrtdialog;lmdrtdocking;lmdrtelcore;lmdrteldb;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtplugin;lmdrtprint;lmdrtrtf;lmdrtrtfdb;lmdrtrtlx;lmdrtscript;lmdrtscriptimp;lmdrtsearch;lmdrtsearchdb;lmdrtshell;lmdrtstorage;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;lmdrttxtdb;lmdrtweb;rtl;vcl;vclactnband;vcldb;vclimg;vclwinx;vclx;$(PackageImports)</PackageImports>
@@ -109,6 +111,7 @@
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <Icon_MainIcon>icon.ico</Icon_MainIcon>
         <BCC_EnableBatchCompilation>false</BCC_EnableBatchCompilation>
+        <AppEnableHighDPI>true</AppEnableHighDPI>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <PackageImports>bindcomp;bindcompfmx;bindcompvcl;bindengine;fmx;fmxase;fmxdae;fmxobj;lmdrtbar;lmdrtchart;lmdrtchartdb;lmdrtcore;lmdrtdesign;lmdrtdialog;lmdrtdocking;lmdrtelcore;lmdrteldb;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtplugin;lmdrtprint;lmdrtrtf;lmdrtrtfdb;lmdrtrtlx;lmdrtscript;lmdrtscriptimp;lmdrtsearch;lmdrtsearchdb;lmdrtshell;lmdrtstorage;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;lmdrttxtdb;lmdrtweb;rtl;vcl;vclactnband;vcldb;vclimg;vclwinx;vclx;$(PackageImports)</PackageImports>
@@ -122,6 +125,7 @@
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <Icon_MainIcon>icon.ico</Icon_MainIcon>
+        <AppEnableHighDPI>true</AppEnableHighDPI>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
@@ -153,6 +157,7 @@
         <VerInfo_Build>0</VerInfo_Build>
         <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=agdx.exe;LegalCopyright=2018 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Programmed by Tony Thompson</VerInfo_Keys>
         <Icon_MainIcon>icon.ico</Icon_MainIcon>
+        <AppEnableHighDPI>true</AppEnableHighDPI>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;fmx.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtprint.bpi;VclSmp.bpi;lmdrtcore.bpi;vclwinx.bpi</LinkPackageImports>
@@ -161,6 +166,7 @@
         <Icon_MainIcon>Icon.ico</Icon_MainIcon>
         <VerInfo_Build>0</VerInfo_Build>
         <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=agdx.exe;LegalCopyright=2018 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Programmed by Tony Thompson</VerInfo_Keys>
+        <AppEnableHighDPI>true</AppEnableHighDPI>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>
@@ -174,6 +180,7 @@
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=agdx.exe;LegalCopyright=2018 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Programmed by Tony Thompson</VerInfo_Keys>
         <Icon_MainIcon>icon.ico</Icon_MainIcon>
+        <AppEnableHighDPI>true</AppEnableHighDPI>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
         <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;fmx.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtprint.bpi;VclSmp.bpi;lmdrtcore.bpi;vclwinx.bpi</LinkPackageImports>
@@ -182,6 +189,7 @@
         <VerInfo_Build>0</VerInfo_Build>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=agdx.exe;LegalCopyright=2018 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=Programmed by Tony Thompson</VerInfo_Keys>
+        <AppEnableHighDPI>true</AppEnableHighDPI>
     </PropertyGroup>
     <ItemGroup>
         <CppCompile Include="AGDx Studio.cpp">
@@ -191,6 +199,10 @@
             <BuildOrder>14</BuildOrder>
             <PCH>true</PCH>
         </PCHCompile>
+        <CppCompile Include="Build\AgdxKeywordSubstition.cpp">
+            <DependentOn>Build\AgdxKeywordSubstition.h</DependentOn>
+            <BuildOrder>94</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Build\Assembly.cpp">
             <DependentOn>Build\Assembly.h</DependentOn>
             <BuildOrder>38</BuildOrder>
@@ -209,7 +221,7 @@
         </CppCompile>
         <CppCompile Include="Build\Compilation.cpp">
             <DependentOn>Build\Compilation.h</DependentOn>
-            <BuildOrder>54</BuildOrder>
+            <BuildOrder>41</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\Creation.cpp">
             <DependentOn>Build\Creation.h</DependentOn>
@@ -221,67 +233,67 @@
         </CppCompile>
         <CppCompile Include="Build\Parameterizer.cpp">
             <DependentOn>Build\Parameterizer.h</DependentOn>
-            <BuildOrder>56</BuildOrder>
+            <BuildOrder>43</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\PreChecks.cpp">
             <DependentOn>Build\PreChecks.h</DependentOn>
-            <BuildOrder>53</BuildOrder>
+            <BuildOrder>40</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\SectionBuilders\Controls.cpp">
             <DependentOn>Build\SectionBuilders\Controls.h</DependentOn>
-            <BuildOrder>43</BuildOrder>
+            <BuildOrder>47</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\SectionBuilders\Events.cpp">
             <DependentOn>Build\SectionBuilders\Events.h</DependentOn>
-            <BuildOrder>46</BuildOrder>
+            <BuildOrder>50</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\SectionBuilders\Font.cpp">
             <DependentOn>Build\SectionBuilders\Font.h</DependentOn>
-            <BuildOrder>47</BuildOrder>
+            <BuildOrder>51</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\SectionBuilders\JumpTable.cpp">
             <DependentOn>Build\SectionBuilders\JumpTable.h</DependentOn>
-            <BuildOrder>44</BuildOrder>
+            <BuildOrder>48</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\SectionBuilders\Map.cpp">
             <DependentOn>Build\SectionBuilders\Map.h</DependentOn>
-            <BuildOrder>51</BuildOrder>
+            <BuildOrder>55</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\SectionBuilders\Messages.cpp">
             <DependentOn>Build\SectionBuilders\Messages.h</DependentOn>
-            <BuildOrder>45</BuildOrder>
+            <BuildOrder>49</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\SectionBuilders\Objects.cpp">
             <DependentOn>Build\SectionBuilders\Objects.h</DependentOn>
-            <BuildOrder>50</BuildOrder>
+            <BuildOrder>54</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\SectionBuilders\Project.cpp">
             <DependentOn>Build\SectionBuilders\Project.h</DependentOn>
-            <BuildOrder>41</BuildOrder>
+            <BuildOrder>45</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\SectionBuilders\Screens.cpp">
             <DependentOn>Build\SectionBuilders\Screens.h</DependentOn>
-            <BuildOrder>52</BuildOrder>
+            <BuildOrder>56</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\SectionBuilders\SectionBuilder.cpp">
             <DependentOn>Build\SectionBuilders\SectionBuilder.h</DependentOn>
-            <BuildOrder>40</BuildOrder>
+            <BuildOrder>44</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\SectionBuilders\Sprites.cpp">
             <DependentOn>Build\SectionBuilders\Sprites.h</DependentOn>
-            <BuildOrder>49</BuildOrder>
+            <BuildOrder>53</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\SectionBuilders\Tiles.cpp">
             <DependentOn>Build\SectionBuilders\Tiles.h</DependentOn>
-            <BuildOrder>48</BuildOrder>
+            <BuildOrder>52</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\SectionBuilders\Window.cpp">
             <DependentOn>Build\SectionBuilders\Window.h</DependentOn>
-            <BuildOrder>42</BuildOrder>
+            <BuildOrder>46</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\ShellProcess.cpp">
             <DependentOn>Build\ShellProcess.h</DependentOn>
-            <BuildOrder>55</BuildOrder>
+            <BuildOrder>42</BuildOrder>
         </CppCompile>
         <CppCompile Include="Factories\DocumentEditorFactory.cpp">
             <DependentOn>Factories\DocumentEditorFactory.h</DependentOn>
@@ -526,10 +538,6 @@
             <DependentOn>Graphics\Palette.h</DependentOn>
             <BuildOrder>28</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Graphics\Point.cpp">
-            <DependentOn>Graphics\Point.h</DependentOn>
-            <BuildOrder>33</BuildOrder>
-        </CppCompile>
         <CppCompile Include="Graphics\ULAPlusGraphicsBuffer.cpp">
             <DependentOn>Graphics\ULAPlusGraphicsBuffer.h</DependentOn>
             <BuildOrder>32</BuildOrder>
@@ -623,26 +631,26 @@
         <FormResources Include="Frames\WindowEditor\fEditorWindow.dfm"/>
         <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
         <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
+        <FormResources Include="Frames\MusicEditor\fEditorMusic.dfm"/>
         <FormResources Include="Frames\MapEditor\LabelledImage.dfm"/>
         <FormResources Include="Frames\MapEditor\fEditorMap.dfm"/>
         <FormResources Include="Frames\MapEditor\AssetSelection.dfm"/>
         <FormResources Include="Frames\JumpEditor\fEditorJump.dfm"/>
-        <FormResources Include="Frames\MusicEditor\fEditorMusic.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fMultiImageView.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fULAplusBitmap.dfm"/>
         <FormResources Include="Frames\ImageEditor\fEditorImage.dfm"/>
         <FormResources Include="Frames\ImageEditor\fBlockTypes.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fPaletteAttribute.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fULAplusBitmap.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fMultiImageView.dfm"/>
         <FormResources Include="Frames\ImageEditor\fToolbarShape.dfm"/>
         <FormResources Include="Frames\ImageEditor\fToolbar.dfm"/>
         <FormResources Include="Frames\ImageEditor\fSelectionImage.dfm"/>
         <FormResources Include="Frames\ImageEditor\fPaletteBitmap.dfm"/>
-        <FormResources Include="Forms\fNewImage.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fPaletteAttribute.dfm"/>
         <FormResources Include="Forms\fMain.dfm"/>
         <FormResources Include="Forms\fAbout.dfm"/>
-        <FormResources Include="Forms\fSettings.dfm"/>
+        <FormResources Include="Forms\fNewImage.dfm"/>
         <FormResources Include="Frames\IDE\fIDE.dfm"/>
         <FormResources Include="Frames\CodeEditor\fEditorCode.dfm"/>
+        <FormResources Include="Forms\fSettings.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -677,7 +685,7 @@
             <Deployment Version="3">
                 <DeployFile LocalName=".\Win64\Release\AGDx Studio.exe" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win64">
-                        <RemoteName>AGDX_Studio.exe</RemoteName>
+                        <RemoteName>AGDx_Studio.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

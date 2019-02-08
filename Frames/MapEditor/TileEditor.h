@@ -67,6 +67,7 @@ private:
     bool                            m_ShowSelectedRoom; // show the selected room highlighted
     bool                            m_ShowStartRoom;    // show the start room highlighted
     bool                            m_ShowRoomNumbers;  // show room index numbers
+    bool                            m_ShowTileTypes;    // show the tile types using their image editor colours
     TPoint                          m_StartRoom;        // the location of the start room
     MapPencilTool                   m_MapPencilTool;    // pencil tool - plot single entites
     MapRectTool                     m_MapRectTool;      // rect tool - draw tiles (only) in a rectangle
@@ -91,6 +92,7 @@ private:
     void                __fastcall  SetShowSelectedRoom(bool state);
     void                __fastcall  SetShowStartRoom(bool state);
     void                __fastcall  SetShowRoomNumbers(bool state);
+    void                __fastcall  SetShowTileTypes(bool state);
     void                __fastcall  SetStartRoomCoords(TPoint location);
     void                __fastcall  SetScale(float scale);
     void                __fastcall  SetMode(TEMode mode);
@@ -159,11 +161,11 @@ public:
     __property  bool                ShowSelectedRoom= { read = m_ShowSelectedRoom, write = SetShowSelectedRoom  };
     __property  bool                ShowStartRoom   = { read = m_ShowStartRoom, write = SetShowStartRoom        };
     __property  bool                ShowRoomNumbers = { read = m_ShowRoomNumbers, write = SetShowRoomNumbers    };
+    __property  bool                ShowTileTypes   = { read = m_ShowTileTypes, write = SetShowTileTypes        };
     __property  TImage*             LockIcon        = { write = m_LockIcon                                      };
 
     __property TNotifyOnEntityClick OnEntitySelected= { read = FOnEntitySelected, write = FOnEntitySelected     };
     __property TRetrieveRoomIndex  RetrieveRoomIndex= { read = FRetrieveRoomIndex, write = FRetrieveRoomIndex   };
-
 };
 //---------------------------------------------------------------------------
 #endif

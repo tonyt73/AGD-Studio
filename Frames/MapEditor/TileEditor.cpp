@@ -6,6 +6,7 @@
 #include "Messaging/Messaging.h"
 #include "Frames/MouseState.h"
 #include "Settings/ThemeManager.h"
+#include "ImageEditor/BlockColors.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -20,6 +21,8 @@ __fastcall TileEditor::TileEditor(TImage* const view, Agdx::ImageMap& imageMap, 
 , m_ShowGridRoom(usesGridRoom)
 , m_ShowSelectedRoom(false)
 , m_ShowStartRoom(false)
+, m_ShowRoomNumbers(false)
+, m_ShowTileTypes(false)
 , m_Border(border)
 , m_ScaleFactor(2)
 , m_MouseMode(mmTool)
@@ -534,6 +537,12 @@ void __fastcall TileEditor::SetShowRoomNumbers(bool state)
     UpdateMap();
 }
 //---------------------------------------------------------------------------
+void __fastcall TileEditor::SetShowTileTypes(bool state)
+{
+    m_ShowTileTypes = state;
+    UpdateMap();
+}
+//---------------------------------------------------------------------------
 void __fastcall TileEditor::SetShowStartRoom(bool state)
 {
     m_ShowStartRoom = state;
@@ -685,7 +694,9 @@ void __fastcall TileEditor::DrawEntities(int filters)
             pt.x = Snap(pt.x, m_TileSize.cx);
             pt.y = Snap(pt.y, m_TileSize.cy);
             pt += m_BorderScaled;
-            m_ImageMap[entity.Id]->Draw(pt, m_Content.get(), entity.Selected);
+            auto tileType = StrToIntDef(entity.Image->GetLayer("blocktype"), -1);
+            auto overlayColor = (TColor)(entity.Selected ? (TColor)0x7F00FF00 : (m_ShowTileTypes && tileType != -1 ? g_BlockColors[tileType] : clBlack));
+            m_ImageMap[entity.Id]->Draw(pt, m_Content.get(), overlayColor);
             entity.Clean();
         }
     }
@@ -697,7 +708,7 @@ void __fastcall TileEditor::DrawToolEntities()
     {
         for (auto& entity : m_ToolEntities)
         {
-            m_ImageMap[entity.Id]->Draw(entity.Pt + m_BorderScaled, m_Content.get(), false);
+            m_ImageMap[entity.Id]->Draw(entity.Pt + m_BorderScaled, m_Content.get());
             entity.Clean();
         }
     }
