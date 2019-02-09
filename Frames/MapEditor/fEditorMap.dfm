@@ -540,16 +540,15 @@ object frmEditorMap: TfrmEditorMap
           DisabledImages = tbrImagesDisabled
           Images = tbrImagesEnabled
           TabOrder = 3
-          object btnToggleSingleRoomEditMode: TToolButton
+          object btnEditModeMultiple: TToolButton
             Left = 0
             Top = 0
             Action = actEditModeFullMap
             Grouped = True
             ParentShowHint = False
             ShowHint = True
-            Style = tbsCheck
           end
-          object ToolButton2: TToolButton
+          object btnEditModeSingle: TToolButton
             Left = 40
             Top = 0
             Action = actEditModeSingleScreen
@@ -578,14 +577,14 @@ object frmEditorMap: TfrmEditorMap
           Caption = 'MODES'
           TabOrder = 5
         end
-        object panToggles: TPanel
+        object panVisuals: TPanel
           Left = 0
           Top = 230
           Width = 81
           Height = 24
           Align = alTop
           BevelOuter = bvNone
-          Caption = 'DISPLAY'
+          Caption = 'VISUALS'
           TabOrder = 6
         end
         object ToolBar1: TToolBar
@@ -619,6 +618,8 @@ object frmEditorMap: TfrmEditorMap
             Left = 0
             Top = 38
             Action = actToggleShowLocks
+            ParentShowHint = False
+            ShowHint = True
             Style = tbsCheck
           end
           object btnToggleTileTypes: TToolButton
@@ -784,7 +785,7 @@ object frmEditorMap: TfrmEditorMap
     Left = 124
     Top = 65
     Bitmap = {
-      494C01010C006000400020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010C0060004C0020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000008000000001002000000000000000
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2911,7 +2912,7 @@ object frmEditorMap: TfrmEditorMap
     Left = 220
     Top = 65
     Bitmap = {
-      494C01010C006000400020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010C0060004C0020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000008000000001002000000000000000
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5116,22 +5117,19 @@ object frmEditorMap: TfrmEditorMap
       OnExecute = actGridRoomExecute
     end
     object actEditModeFullMap: TAction
-      AutoCheck = True
       Caption = 'actToggleSingleRoomMode'
       Checked = True
-      GroupIndex = 43
+      GroupIndex = 2
       Hint = 'Full Map Edit Mode'
       ImageIndex = 9
       ShortCut = 32850
       OnExecute = actEditModeFullMapExecute
     end
     object actEditModeSingleScreen: TAction
-      AutoCheck = True
       Caption = 'actEditModeSingleScreen'
-      GroupIndex = 43
-      Hint = 'Single Room Edit Mode'
+      GroupIndex = 2
+      Hint = 'Single Room Edit Mode (Alt+R)'
       ImageIndex = 10
-      ShortCut = 32850
       OnExecute = actEditModeFullMapExecute
     end
     object actToggleStartRoom: TAction
@@ -5156,6 +5154,7 @@ object frmEditorMap: TfrmEditorMap
       Checked = True
       Hint = 'Toggle the Display of Sprite Room Locks'
       ImageIndex = 8
+      ShortCut = 32844
       OnExecute = actToggleShowLocksExecute
     end
     object actToggleTileTypes: TAction
@@ -5319,7 +5318,7 @@ object frmEditorMap: TfrmEditorMap
     Left = 335
     Top = 67
     Bitmap = {
-      494C01010C00D000100010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010C00D0001C0010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

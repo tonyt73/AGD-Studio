@@ -57,8 +57,6 @@ static      unsigned int            s_NextRefId;    // next unused ref id. Reset
             String      __fastcall  GetFile(String name = "");
                                     // update the documents json content
     virtual void        __fastcall  Update() {};//= 0;
-                                    // convert json data to document data
-    virtual void        __fastcall  OnLoad() {};//= 0;
 
             void        __fastcall  RegisterProperty(const String& property, const String& category, const String& info);
     virtual void        __fastcall  DoSave() = 0;

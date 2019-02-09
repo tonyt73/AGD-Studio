@@ -20,10 +20,6 @@ __fastcall ProjectDocument::ProjectDocument(const String& name, const String& ma
     m_Type = "Game";
     m_SubType = "Configuration";
     m_Folder = "Game\\Configuration";
-    m_Window.X = 0;
-    m_Window.Y = 0;
-    m_Window.Width = 32;
-    m_Window.Height = 24;
 
     RegisterProperty("Name", "Details", "The name of your game");
     RegisterProperty("Author", "Details", "Your name");
@@ -47,7 +43,18 @@ __fastcall ProjectDocument::ProjectDocument(const String& name, const String& ma
 
     m_Registrar.Subscribe<OnChange<String>>(OnChangeString);
 
+    // set the max window size for the machines graphics mode
     m_MachineConfig = std::make_unique<MachineConfig>(machine);
+    if (machine != "")
+    {
+        // Load the machine
+        m_MachineConfig->Load(m_MachineName);
+
+        m_Window.X = 0;
+        m_Window.Y = 0;
+        m_Window.Width =  m_MachineConfig->GraphicsMode()->Width  / m_MachineConfig->ImageSizing[itTile].Minimum.cx;
+        m_Window.Height = m_MachineConfig->GraphicsMode()->Height / m_MachineConfig->ImageSizing[itTile].Minimum.cy;
+    }
 }
 //---------------------------------------------------------------------------
 __fastcall ProjectDocument::~ProjectDocument()

@@ -10,6 +10,8 @@
 //---------------------------------------------------------------------------
 __fastcall Entity::Entity()
 : m_Pt(0,0)
+, m_Id(0)
+, m_LoadId(0)
 , m_Document(nullptr)
 , m_Dirty(true)
 , m_Selected(false)
@@ -22,6 +24,7 @@ __fastcall Entity::Entity()
 __fastcall Entity::Entity(const Entity& other)
 : m_Pt(other.m_Pt)
 , m_Id(other.m_Id)
+, m_LoadId(0)
 , m_Document(other.m_Document)
 , m_Dirty(true)
 , m_Selected(other.m_Selected)
@@ -39,6 +42,7 @@ Entity& __fastcall Entity::operator=(const Entity& other)
 {
 	m_Pt = other.m_Pt;
 	m_Id = other.m_Id;
+    m_LoadId = 0;
 	m_Document = other.m_Document;
 	m_Dirty = true;
 	m_Selected = other.m_Selected;
@@ -50,13 +54,12 @@ Entity& __fastcall Entity::operator=(const Entity& other)
 //---------------------------------------------------------------------------
 bool __fastcall Entity::operator==(const Entity& other)
 {
-    return (m_Pt == other.m_Pt && m_Id == other.m_Id && m_Document == other.m_Document);
+    return (m_Pt == other.m_Pt && m_Id == other.m_Id);
 }
 //---------------------------------------------------------------------------
 void __fastcall Entity::SetPoint(const TPoint& pt)
 {
     m_Pt = pt;
-
     m_Dirty = true;
 }
 //---------------------------------------------------------------------------
@@ -117,11 +120,13 @@ unsigned int __fastcall Entity::GetId() const
 void __fastcall Entity::SetId(unsigned int id)
 {
     m_Document = dynamic_cast<ImageDocument*>(theDocumentManager.Get(id));
-    if (m_Document->SubType == itSprite && m_SpriteType < 0)
+    m_Id = id;
+    if (m_Document != nullptr && m_Document->SubType == itSprite && m_SpriteType < 0)
     {
         // initialise the sprite type
         m_SpriteType = 0;
     }
+    m_Dirty = true;
 }
 //---------------------------------------------------------------------------
 void __fastcall Entity::SetSelected(bool state)
@@ -142,7 +147,7 @@ void __fastcall Entity::SetSpriteType(int type)
 //---------------------------------------------------------------------------
 void __fastcall Entity::SetRoomIndex(unsigned int index)
 {
-	if (m_Document->CanBeLocked && !m_RoomLocked)
+	if (m_Document->CanBeLocked && !m_RoomLocked && m_RoomIndex != index)
 	{
         m_RoomIndex = index;
         m_Dirty = true;
@@ -164,6 +169,8 @@ void __fastcall Entity::SetRoomLocked(bool lock)
 _fastcall TiledMapDocument::TiledMapDocument(const String& name)
 : Document(name)
 , m_StartRoomIndex(0)
+, m_RoomMappingWidth(g_MaxMapRoomsAcross)
+, m_RoomMappingHeight(g_MaxMapRoomsDown)
 {
     m_Type = "Map";
     m_SubType = "Tiled";
@@ -190,6 +197,10 @@ _fastcall TiledMapDocument::TiledMapDocument(const String& name)
     // message subscriptions
     m_Registrar.Subscribe<DocumentChange<String>>(OnDocumentChanged);
     m_Registrar.Subscribe<SetStartRoom>(OnSetStartRoom);
+    for (auto i = 0; i < m_RoomMappingWidth * m_RoomMappingHeight; i++)
+    {
+        m_RoomMapping.push_back(255);
+    }
 }
 //---------------------------------------------------------------------------
 __fastcall TiledMapDocument::~TiledMapDocument()
@@ -252,10 +263,15 @@ void __fastcall TiledMapDocument::OnEndObject(const String& object)
     {
         if (m_EntityLoader.m_LoadId != InvalidDocumentId)
         {
+            // load the entities document
             m_EntityLoader.Id = m_EntityLoader.m_LoadId;
             if (m_EntityLoader.Image != nullptr)
             {
                 m_Map.push_back(m_EntityLoader);
+            }
+            else
+            {
+                ::Messaging::Bus::Publish<MessageEvent>(ErrorMessageEvent("The Workspace editor failed to load the required image for a map entity."));
             }
             m_EntityLoader.Clear();
         }
@@ -272,6 +288,10 @@ void __fastcall TiledMapDocument::OnEndObject(const String& object)
             if (m_EntityLoader.Image != nullptr)
             {
                 m_ScratchPad.push_back(m_EntityLoader);
+            }
+            else
+            {
+                ::Messaging::Bus::Publish<MessageEvent>(ErrorMessageEvent("The ScatchPad editor failed to load the required image for a map entity."));
             }
             m_EntityLoader.Clear();
         }
@@ -441,22 +461,26 @@ void __fastcall TiledMapDocument::UpdateEntityRooms()
     std::vector<unsigned int> objectsToRemove;
     for (auto entity : m_Map)
     {
-		// recalculate the entitys room based on its current position (currently only sprites can be locked to rooms)
-		if (!entity.RoomLocked)
+        auto roomPt = TPoint((int)(entity.Pt.X / roomSize.cx), (int)(entity.Pt.Y / roomSize.cy));
+		// recalculate the entitys room based on its current position (currently only sprites/objects can be locked to rooms)
+        auto object = dynamic_cast<ObjectDocument*>(entity.Image);
+		if (entity.Image->CanBeLocked && !entity.RoomLocked)
 		{
-			entity.RoomIndex = GetRoomIndex(TPoint((int)(entity.Pt.X / roomSize.cx), (int)(entity.Pt.Y / roomSize.cy)), true);
+			entity.RoomIndex = GetRoomIndex(roomPt, true);
+            if (object)
+            {
+                object->RoomIndex = entity.RoomIndex;
+                object->State = osRoom;
+            }
         }
-		// update the location of the objects in the room
+		// update the location of the objects in the room (to screen space)
 		if (entity.Image->ImageType == itObject)
 		{
-            auto object = dynamic_cast<ObjectDocument*>(entity.Image);
             assert(object != nullptr);
 
-            if (object->State == osRoom)
+            if (object->State == osRoom && object->RoomIndex < 254)
             {
-                auto roomCoords = TPoint((int)(entity.Pt.X / roomSize.cx), (int)(entity.Pt.Y / roomSize.cy));
-                object->RoomIndex = GetRoomIndex(roomCoords, true);
-                object->Position = TPoint(entity.Pt.X - (roomCoords.X * roomSize.cx), entity.Pt.Y - (roomCoords.Y * roomSize.cy));
+                object->Position = TPoint(std::max(0, (int)(entity.Pt.X - (roomPt.X * roomSize.cx))), std::min(255, (int)(entity.Pt.Y - (roomPt.Y * roomSize.cy))));
             }
             else
             {
@@ -528,8 +552,17 @@ void __fastcall TiledMapDocument::UpdateScreenCoords()
     }
 }
 //---------------------------------------------------------------------------
+void __fastcall TiledMapDocument::OnLoading()
+{
+    m_RoomMapping.clear();
+}
+//---------------------------------------------------------------------------
 void __fastcall TiledMapDocument::OnLoaded()
 {
+    if (m_RoomMapping.size() != m_RoomMappingWidth * m_RoomMappingHeight)
+    {
+        ::Messaging::Bus::Publish<MessageEvent>(ErrorMessageEvent("The Room Mapping object in the TileMap.json file has " + IntToStr((int)m_RoomMapping.size()) + " indexes when it should have " + IntToStr(m_RoomMappingWidth * m_RoomMappingHeight)));
+    }
     GetMinimalMapSize();
     UpdateScreenCoords();
     UpdateEntityRooms();

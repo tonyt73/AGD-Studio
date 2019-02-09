@@ -184,6 +184,7 @@ void __fastcall JsonFile::Load(const String& file)
 {
     if (File::File::Exists(file))
     {
+        OnLoading();
         auto json = File::File::ReadText(file);
         auto sr = std::make_unique<TStringReader>(json);
         auto jr = std::make_unique<TJsonTextReader>(sr.get());
@@ -235,6 +236,11 @@ void __fastcall JsonFile::OnStartObject(const String& object)
 }
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::OnEndObject(const String& object)
+{
+    // do nothing; should be overridden
+}
+//---------------------------------------------------------------------------
+void __fastcall JsonFile::OnLoading()
 {
     // do nothing; should be overridden
 }

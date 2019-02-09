@@ -115,7 +115,7 @@ __published:    // IDE-managed Components
     TToolButton *btnWSGridRoom;
     TToolBar *tbrModes;
     TAction *actToggleStartRoom;
-    TToolButton *btnToggleSingleRoomEditMode;
+    TToolButton *btnEditModeMultiple;
     TAction *actEditModeFullMap;
     TPanel *panGrids;
     TPanel *panModes;
@@ -136,14 +136,14 @@ __published:    // IDE-managed Components
     TAction *actEntityToggleLocks;
     TToolButton *btnEntityNext;
     TToolButton *btnEntityLock;
-    TPanel *panToggles;
+    TPanel *panVisuals;
     TToolBar *ToolBar1;
     TToolButton *btnToggleDisplayStart;
     TToolButton *btnToggleDisplayRoomNumbers;
     TAction *actToggleRoomNumbers;
     TToolButton *btnToggleDisplayLocks;
     TAction *actToggleShowLocks;
-    TToolButton *ToolButton2;
+    TToolButton *btnEditModeSingle;
     TAction *actEditModeSingleScreen;
     TAction *actToggleTileTypes;
     TToolButton *btnToggleTileTypes;
@@ -219,7 +219,7 @@ private:    // User declarations
             void    __fastcall  OnMapResize(const OnMapResized& message);
             void     __fastcall OnEntityClick(ImageDocument* document);
             void    __fastcall  OnWorkspaceEntitySelected(const Entity& entity);
-            int     __fastcall  OnRetrieveRoomIndex(const TPoint& pt);
+            int     __fastcall  OnRetrieveRoomIndex(const TPoint& pt, bool newIndex = false);
             void    __fastcall  ShowKeysHelp();
 
 public:        // User declarations

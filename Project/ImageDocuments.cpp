@@ -263,6 +263,7 @@ __fastcall ObjectDocument::ObjectDocument(const String& name, const String& extr
 , m_State(osDisabled)
 {
     m_ImageType = itObject;
+    m_CanBeLocked = true;
     m_SubType = "Object";
     m_Folder = "Images\\Objects";
 
@@ -278,6 +279,27 @@ __fastcall ObjectDocument::ObjectDocument(const String& name, const String& extr
     m_File = GetFile();
     ExtractSize(extra);
     AddFrame();
+}
+//---------------------------------------------------------------------------
+int __fastcall ObjectDocument::GetPosition(int index)
+{
+    return index ? m_Position.Y : m_Position.X;
+}
+//---------------------------------------------------------------------------
+void __fastcall ObjectDocument::SetPosition(int value, int index)
+{
+    if (index)
+        m_Position.Y = value;
+    else
+        m_Position.X = value;
+}
+//---------------------------------------------------------------------------
+void __fastcall ObjectDocument::SetRoomIndex(int value)
+{
+    if (0 <= value && value <= 255)
+    {
+        m_RoomIndex = value;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall ObjectDocument::DoSaveExtra()

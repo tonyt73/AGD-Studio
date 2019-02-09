@@ -95,7 +95,7 @@ void __fastcall TfrmEditorMap::actSelectExecute(TObject *Sender)
 {
     btnSelect->Down = true;
     m_Workspace->Mode = TileEditor::temSelect;
-    m_Workspace->SelectedEntity = m_LastSelectedId;
+    m_Workspace->ToolEntity = m_LastSelectedId;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actPencilExecute(TObject *Sender)
@@ -103,7 +103,7 @@ void __fastcall TfrmEditorMap::actPencilExecute(TObject *Sender)
     btnPencil->Down = true;
     m_Workspace->UnselectAll();
     m_Workspace->Mode = TileEditor::temPencil;
-    m_Workspace->SelectedEntity = m_LastSelectedId;
+    m_Workspace->ToolEntity = m_LastSelectedId;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actLineExecute(TObject *Sender)
@@ -111,7 +111,7 @@ void __fastcall TfrmEditorMap::actLineExecute(TObject *Sender)
     btnLine->Down = true;
     m_Workspace->UnselectAll();
     m_Workspace->Mode = TileEditor::temLine;
-    m_Workspace->SelectedEntity = m_LastSelectedId;
+    m_Workspace->ToolEntity = m_LastSelectedId;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actRectExecute(TObject *Sender)
@@ -119,7 +119,7 @@ void __fastcall TfrmEditorMap::actRectExecute(TObject *Sender)
     btnRect->Down = true;
     m_Workspace->UnselectAll();
     m_Workspace->Mode = TileEditor::temRect;
-    m_Workspace->SelectedEntity = m_LastSelectedId;
+    m_Workspace->ToolEntity = m_LastSelectedId;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actZoomInExecute(TObject *Sender)
@@ -510,7 +510,7 @@ void __fastcall TfrmEditorMap::pgcAssetsChange(TObject *Sender)
 void __fastcall TfrmEditorMap::OnEntityClick(ImageDocument* document)
 {
     m_LastSelectedId = document->Id;
-    m_Workspace->SelectedEntity = document->Id;
+    m_Workspace->ToolEntity = document->Id;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::OnWorkspaceEntitySelected(const Entity& entity)
@@ -544,7 +544,7 @@ void __fastcall TfrmEditorMap::btnWSGridTileClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::btnSPGridTileClick(TObject *Sender)
 {
-    btnSPGridTile->Down = !btnSPGridTile->Down;
+    //btnSPGridTile->Down = !btnSPGridTile->Down;
     m_ScratchPad->GridTile = btnSPGridTile->Down;
 }
 //---------------------------------------------------------------------------
@@ -572,6 +572,16 @@ void __fastcall TfrmEditorMap::actGridRoomExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actEditModeFullMapExecute(TObject *Sender)
 {
+    if (actEditModeFullMap->Checked)
+    {
+        actEditModeFullMap->Checked = false;
+        actEditModeSingleScreen->Checked = true;
+    }
+    else
+    {
+        actEditModeSingleScreen->Checked = false;
+        actEditModeFullMap->Checked = true;
+    }
     //actStartRoomTool->Enabled = !actEditModeSingleScreen->Checked;
     dpRoomSelector->PanelVisible = actEditModeSingleScreen->Checked;
     dpRoomSelector->Zone->Height = std::max(dpRoomSelector->Zone->Height, 256);
@@ -679,9 +689,9 @@ void __fastcall TfrmEditorMap::actToggleRoomNumbersExecute(TObject *Sender)
     m_RoomSelector->ShowRoomNumbers = actToggleRoomNumbers->Checked;
 }
 //---------------------------------------------------------------------------
-int __fastcall TfrmEditorMap::OnRetrieveRoomIndex(const TPoint& pt)
+int __fastcall TfrmEditorMap::OnRetrieveRoomIndex(const TPoint& pt, bool newIndex)
 {
-    return m_Document->GetRoomIndex(pt);
+    return m_Document->GetRoomIndex(pt, newIndex);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actToggleShowLocksExecute(TObject *Sender)

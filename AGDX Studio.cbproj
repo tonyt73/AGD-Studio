@@ -7,7 +7,7 @@
         <MainSource>AGDx Studio.cpp</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win64</Platform>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
@@ -199,10 +199,6 @@
             <BuildOrder>14</BuildOrder>
             <PCH>true</PCH>
         </PCHCompile>
-        <CppCompile Include="Build\AgdxKeywordSubstition.cpp">
-            <DependentOn>Build\AgdxKeywordSubstition.h</DependentOn>
-            <BuildOrder>94</BuildOrder>
-        </CppCompile>
         <CppCompile Include="Build\Assembly.cpp">
             <DependentOn>Build\Assembly.h</DependentOn>
             <BuildOrder>38</BuildOrder>
@@ -631,11 +627,11 @@
         <FormResources Include="Frames\WindowEditor\fEditorWindow.dfm"/>
         <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
         <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
-        <FormResources Include="Frames\MusicEditor\fEditorMusic.dfm"/>
         <FormResources Include="Frames\MapEditor\LabelledImage.dfm"/>
         <FormResources Include="Frames\MapEditor\fEditorMap.dfm"/>
         <FormResources Include="Frames\MapEditor\AssetSelection.dfm"/>
         <FormResources Include="Frames\JumpEditor\fEditorJump.dfm"/>
+        <FormResources Include="Frames\MusicEditor\fEditorMusic.dfm"/>
         <FormResources Include="Frames\ImageEditor\fULAplusBitmap.dfm"/>
         <FormResources Include="Frames\ImageEditor\fEditorImage.dfm"/>
         <FormResources Include="Frames\ImageEditor\fBlockTypes.dfm"/>
@@ -766,9 +762,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName=".\Win64\Debug\AGDx Studio.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName=".\Win64\Debug\AGDX Studio.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win64">
-                        <RemoteName>AGDx_Studio.exe</RemoteName>
+                        <RemoteName>AGDX_Studio.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

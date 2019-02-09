@@ -57,7 +57,7 @@ void __fastcall SectionBuilders::Objects::Execute()
             // add the room
             auto roomIndex = object->State == osRoom ? ((ObjectDocument*)object)->RoomIndex : (object->State == osDisabled ? 254 : 255);
             line += IntToStr((int)roomIndex) + " ";
-            line += IntToStr((int)(wPt.Y + object->Position.Y)) + " " + IntToStr((int)(wPt.X + object->Position.X)) + " ";
+            line += IntToStr((int)(wPt.Y + object->Y)) + " " + IntToStr((int)(wPt.X + object->X)) + " ";
             AddLine(line);
             // export the machine graphics data
             line = "             ";

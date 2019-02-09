@@ -55,6 +55,7 @@ protected:
     virtual void    __fastcall  OnStartObject(const String& object);
     virtual void    __fastcall  OnEndObject(const String& object);
 
+    virtual void    __fastcall  OnLoading();
     virtual void    __fastcall  OnLoaded();
 
 public:

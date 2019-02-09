@@ -102,11 +102,11 @@ String __fastcall Document::GetFile(String name)
     {
         name = m_Name;
     }
-    // Documents/{project name}
+    // Projects/{project name}
     auto file = System::File::Combine(System::Path::Projects, System::Path::ProjectName);
-    // Documents/{project name}/{document name}
+    // Projects/{project name}/{document name}
     file = System::File::Combine(file, name);
-    // Documents/{project name}/{document name}.{extension)
+    // Projects/{project name}/{document name}.{extension)
     file = System::File::ChangeExtension(file, m_Extension);
     return file;
 }
@@ -139,7 +139,6 @@ bool __fastcall Document::Load()
         JsonFile::Load(m_File);
         // make sure the next ref id is up to date
         s_NextRefId = max(s_NextRefId, m_RefId);
-        OnLoad();
         return true;
     }
     return false;

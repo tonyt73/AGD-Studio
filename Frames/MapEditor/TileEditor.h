@@ -33,7 +33,8 @@ private:
     EntityList                      m_Entities;         // all the map entities
     EntityList                      m_ToolEntities;     // the entities for the current tool (select etc)
     EntityList                      m_ClipboardEntities;// the entities for the clipboard (copy, cut, paste)
-    Entity                          m_SingleSelect;     // a single selected entity
+    Entity                          m_ToolEntity;       // the image document selected in the map editor UI
+    Entity                          m_HoverEntity;      // the entity the mouse is hovering over
     TEMode                          m_Mode;             // tool mode (pencil, line etc)
     bool                            m_Dirty;            // flag: tool is dirty - map needs updating
     const Agdx::GraphicsMode&       m_GraphicsMode;     // the graphics mode used by the project
@@ -62,7 +63,6 @@ private:
     int                             m_Border;           // the size of a border around the tiles
     int                             m_SelectionCount;   // the number of entities selected
     unsigned int                    m_Tile0Id;          // tile 0 id
-    unsigned int                    m_SelectedEntity;   // selected entity id
     bool                            m_ReadOnly;         // read only - no changes allowed - room selection only
     bool                            m_ShowSelectedRoom; // show the selected room highlighted
     bool                            m_ShowStartRoom;    // show the start room highlighted
@@ -83,11 +83,12 @@ private:
     void                __fastcall  ResetToOrigin(EntityList& list, const TPoint& originPt) const;
     bool                __fastcall  GetGridTile();
     bool                __fastcall  GetGridRoom();
+    unsigned int        __fastcall  GetToolEntity() const;
     void                __fastcall  SetGridTile(bool value);
     void                __fastcall  SetGridRoom(bool value);
     void                __fastcall  SetRooms(TSize rooms);
     void                __fastcall  SetTile0Id(unsigned int id);
-    void                __fastcall  SetSelectedEntity(unsigned int id);
+    void                __fastcall  SetToolEntity(unsigned int id);
     void                __fastcall  SetReadOnly(bool state);
     void                __fastcall  SetShowSelectedRoom(bool state);
     void                __fastcall  SetShowStartRoom(bool state);
@@ -96,8 +97,10 @@ private:
     void                __fastcall  SetStartRoomCoords(TPoint location);
     void                __fastcall  SetScale(float scale);
     void                __fastcall  SetMode(TEMode mode);
+    void                __fastcall  SetLockIcon(TImage* icon);
     void                __fastcall  DrawEntities(int filters);
     void                __fastcall  DrawToolEntities();
+    void                __fastcall  DrawHoverEntity();
     void                __fastcall  DrawMap();
     void                __fastcall  DrawGrids() const;
     void                __fastcall  DrawRoomNumbers() const;
@@ -109,6 +112,7 @@ private:
     void                __fastcall  Get(const TRect& rect, EntityList& entities) const;
     void                __fastcall  ReplaceEntities();
     void                __fastcall  UpdateTile0Content();
+    void                __fastcall  SelectHover();
     bool                __fastcall  GetEntityUnderMouse(int X, int Y, Entity& entity, ImageTypes imageType, bool selectIt = false);
 
     void                __fastcall  OnMouseDownSelectMode(TMouseButton Button, TShiftState Shift, int X, int Y);
@@ -122,7 +126,7 @@ private:
 
     typedef void __fastcall (__closure *TNotifyOnEntityClick)(const Entity& entity);
     TNotifyOnEntityClick            FOnEntitySelected;
-    typedef int __fastcall (__closure *TRetrieveRoomIndex)(const TPoint& pt) const;
+    typedef int __fastcall (__closure *TRetrieveRoomIndex)(const TPoint& pt, bool newIndex) const;
     TRetrieveRoomIndex   __fastcall FRetrieveRoomIndex;
 
 public:
@@ -154,7 +158,7 @@ public:
     __property  bool                GridTile        = { read = m_ShowGridTile, write = SetGridTile              };
     __property  bool                GridRoom        = { read = m_ShowGridRoom, write = SetGridRoom              };
     __property  unsigned int        Tile0Id         = { read = m_Tile0Id, write = SetTile0Id                    };
-    __property  unsigned int        SelectedEntity  = { read = m_SelectedEntity, write = SetSelectedEntity      };
+    __property  unsigned int        ToolEntity      = { read = GetToolEntity, write = SetToolEntity             };
     __property  bool                ReadOnly        = { read = m_ReadOnly, write = SetReadOnly                  };
     __property  TSize               SelectedRoom    = { read = m_SelectedRoom                                   };
     __property  TPoint              StartRoom       = { read = m_StartRoom, write = SetStartRoomCoords          };
@@ -162,7 +166,7 @@ public:
     __property  bool                ShowStartRoom   = { read = m_ShowStartRoom, write = SetShowStartRoom        };
     __property  bool                ShowRoomNumbers = { read = m_ShowRoomNumbers, write = SetShowRoomNumbers    };
     __property  bool                ShowTileTypes   = { read = m_ShowTileTypes, write = SetShowTileTypes        };
-    __property  TImage*             LockIcon        = { write = m_LockIcon                                      };
+    __property  TImage*             LockIcon        = { write = SetLockIcon                                     };
 
     __property TNotifyOnEntityClick OnEntitySelected= { read = FOnEntitySelected, write = FOnEntitySelected     };
     __property TRetrieveRoomIndex  RetrieveRoomIndex= { read = FRetrieveRoomIndex, write = FRetrieveRoomIndex   };

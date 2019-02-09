@@ -87,6 +87,7 @@ protected:
 			void        __fastcall  DoSave();
 			void        __fastcall  UpdateEntityRooms();
             void        __fastcall  UpdateScreenCoords();
+			void        __fastcall  OnLoading();
 			void        __fastcall  OnLoaded();
             int         __fastcall  GetStartRoomCoords(int index) const;
             void        __fastcall  SetStartRoomCoords(const TPoint& coords);
