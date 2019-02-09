@@ -10,6 +10,13 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
+const TColor c_ColorRoomSelected    = (TColor)0x7F00FF00;   // 127 alpha - green
+const TColor c_ColorStartRoom       = (TColor)0x7FFFFF00;   // 127 alpha - yellow
+const TColor c_ColorTileGrid        = (TColor)0x00004080;   // a kind of light brown/yellow
+const TColor c_ColorRoomGrid        = (TColor)0x0048BAF7;   // a kind of dark brown/yellow
+const TColor c_ColorEntitySelected  = (TColor)0x7F00FF00;   // 127 alpha - green
+const TColor c_ColorHoverEntity     = (TColor)0x7F00AF00;   // 127 alpha - darker green
+//---------------------------------------------------------------------------
 __fastcall TileEditor::TileEditor(TImage* const view, Agdx::ImageMap& imageMap, const TSize& rooms, bool usesGridTile, bool usesGridRoom, int border, bool readOnly)
 : m_View(view)
 , m_LockIcon(nullptr)
@@ -670,7 +677,7 @@ void __fastcall TileEditor::DrawGrids() const
     if (m_UsesGridTile && m_ShowGridTile)
     {
         auto sx = m_TileSize.cx * m_Scale.x;
-        Canvas->Pen->Color = (TColor)0x00004080;
+        Canvas->Pen->Color = c_ColorTileGrid;
         for (auto x = xs; x <= xe; x += sx)
         {
             Canvas->MoveTo(x, ys);
@@ -685,7 +692,7 @@ void __fastcall TileEditor::DrawGrids() const
     }
     if (m_UsesGridRoom && m_ShowGridRoom)
     {
-        Canvas->Pen->Color = (TColor)0x0048BAF7;
+        Canvas->Pen->Color = c_ColorRoomGrid;
         auto rx = wi.Width  * m_TileSize.cx * m_Scale.x;
         auto ry = wi.Height * m_TileSize.cy * m_Scale.y;
         for (auto x = xs; x <= xe; x += rx)
@@ -787,7 +794,7 @@ void __fastcall TileEditor::DrawEntities(int filters)
             pt.y = Snap(pt.y, m_TileSize.cy);
             pt += m_BorderScaled;
             auto tileType = StrToIntDef(entity.Image->GetLayer("blocktype"), -1);
-            auto overlayColor = (TColor)(entity.Selected ? (TColor)0x7F00FF00 : (m_ShowTileTypes && tileType != -1 ? g_BlockColors[tileType] : clBlack));
+            auto overlayColor = (entity.Selected ? c_ColorEntitySelected : (m_ShowTileTypes && tileType != -1 ? g_BlockColors[tileType] : clBlack));
             m_ImageMap[entity.Id]->Draw(pt, m_Content.get(), overlayColor);
             entity.Clean();
         }
@@ -810,7 +817,7 @@ void __fastcall TileEditor::DrawHoverEntity()
 {
     if (m_HoverEntity.Id)
     {
-        m_ImageMap[m_HoverEntity.Id]->Draw(m_HoverEntity.Pt + m_BorderScaled, m_Content.get(), (TColor)0x7F00AF00);
+        m_ImageMap[m_HoverEntity.Id]->Draw(m_HoverEntity.Pt + m_BorderScaled, m_Content.get(), c_ColorHoverEntity);
     }
 }
 //---------------------------------------------------------------------------
@@ -836,7 +843,7 @@ void __fastcall TileEditor::DrawSelectedRoom() const
         shade->PixelFormat = pf32bit;
         shade->Width = 1;
         shade->Height = 1;
-        ((TColor*)shade->ScanLine[0])[0] = (TColor)0x7F00FF00;
+        ((TColor*)shade->ScanLine[0])[0] = c_ColorRoomSelected;
         BLENDFUNCTION bfn;
         bfn.BlendOp = AC_SRC_OVER;
         bfn.BlendFlags = 0;
@@ -857,7 +864,7 @@ void __fastcall TileEditor::DrawStartRoom() const
         shade->PixelFormat = pf32bit;
         shade->Width = 1;
         shade->Height = 1;
-        ((TColor*)shade->ScanLine[0])[0] = (TColor)0x7FFFFF00;
+        ((TColor*)shade->ScanLine[0])[0] = c_ColorStartRoom;
         BLENDFUNCTION bfn;
         bfn.BlendOp = AC_SRC_OVER;
         bfn.BlendFlags = 0;
