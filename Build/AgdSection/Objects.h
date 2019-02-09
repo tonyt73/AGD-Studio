@@ -1,18 +1,18 @@
 //---------------------------------------------------------------------------
-#ifndef ControlsH
-#define ControlsH
+#ifndef ObjectsH
+#define ObjectsH
 //---------------------------------------------------------------------------
-#include "Build/SectionBuilders/SectionBuilder.h"
+#include "Build/AgdSection/SectionBuilder.h"
 //---------------------------------------------------------------------------
 namespace SectionBuilders
 {
-class Controls : public SectionBuilder
+class Objects : public SectionBuilder
 {
 protected:
     void    __fastcall  Execute() final;
 public:
-            __fastcall  Controls();
-    virtual __fastcall ~Controls();
+            __fastcall  Objects();
+    virtual __fastcall ~Objects();
 };
 }
 //---------------------------------------------------------------------------

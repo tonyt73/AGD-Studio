@@ -1,18 +1,18 @@
 //---------------------------------------------------------------------------
-#ifndef ObjectsH
-#define ObjectsH
+#ifndef WindowH
+#define WindowH
 //---------------------------------------------------------------------------
-#include "Build/SectionBuilders/SectionBuilder.h"
+#include "Build/AgdSection/SectionBuilder.h"
 //---------------------------------------------------------------------------
 namespace SectionBuilders
 {
-class Objects : public SectionBuilder
+class Window : public SectionBuilder
 {
 protected:
     void    __fastcall  Execute() final;
 public:
-            __fastcall  Objects();
-    virtual __fastcall ~Objects();
+            __fastcall  Window();
+    virtual __fastcall ~Window();
 };
 }
 //---------------------------------------------------------------------------

@@ -1,20 +1,19 @@
 //---------------------------------------------------------------------------
-#ifndef MapH
-#define MapH
+#ifndef EventsH
+#define EventsH
 //---------------------------------------------------------------------------
-#include "Build/SectionBuilders/SectionBuilder.h"
+#include "Build/AgdSection/SectionBuilder.h"
 //---------------------------------------------------------------------------
 namespace SectionBuilders
 {
-class Map : public SectionBuilder
+class Events : public SectionBuilder
 {
 protected:
     void    __fastcall  Execute() final;
 public:
-            __fastcall  Map();
-    virtual __fastcall ~Map();
+            __fastcall  Events();
+    virtual __fastcall ~Events();
 };
 }
 //---------------------------------------------------------------------------
 #endif
-

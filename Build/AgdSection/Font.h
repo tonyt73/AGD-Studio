@@ -1,18 +1,18 @@
 //---------------------------------------------------------------------------
-#ifndef EventsH
-#define EventsH
+#ifndef FontH
+#define FontH
 //---------------------------------------------------------------------------
-#include "Build/SectionBuilders/SectionBuilder.h"
+#include "Build/AgdSection/SectionBuilder.h"
 //---------------------------------------------------------------------------
 namespace SectionBuilders
 {
-class Events : public SectionBuilder
+class Font : public SectionBuilder
 {
 protected:
     void    __fastcall  Execute() final;
 public:
-            __fastcall  Events();
-    virtual __fastcall ~Events();
+            __fastcall  Font();
+    virtual __fastcall ~Font();
 };
 }
 //---------------------------------------------------------------------------

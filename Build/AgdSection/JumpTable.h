@@ -1,18 +1,21 @@
 //---------------------------------------------------------------------------
-#ifndef SpritesH
-#define SpritesH
+#ifndef JumpTableH
+#define JumpTableH
 //---------------------------------------------------------------------------
-#include "Build/SectionBuilders/SectionBuilder.h"
+#include "Build/AgdSection/SectionBuilder.h"
 //---------------------------------------------------------------------------
 namespace SectionBuilders
 {
-class Sprites : public SectionBuilder
+class JumpTable : public SectionBuilder
 {
+private:
+    // TODO: put this into an editor
+    int                 m_Steps[22];
 protected:
     void    __fastcall  Execute() final;
 public:
-            __fastcall  Sprites();
-    virtual __fastcall ~Sprites();
+            __fastcall  JumpTable();
+    virtual __fastcall ~JumpTable();
 };
 }
 //---------------------------------------------------------------------------

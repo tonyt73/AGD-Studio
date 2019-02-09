@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
-#include "Build/SectionBuilders/Project.h"
+#include "Build/AgdSection/Project.h"
 #include "Project/DocumentManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

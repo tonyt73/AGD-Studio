@@ -1,18 +1,18 @@
 //---------------------------------------------------------------------------
-#ifndef MessagesH
-#define MessagesH
+#ifndef ProjectH
+#define ProjectH
 //---------------------------------------------------------------------------
-#include "Build/SectionBuilders/SectionBuilder.h"
+#include "Build/AgdSection/SectionBuilder.h"
 //---------------------------------------------------------------------------
 namespace SectionBuilders
 {
-class Messages : public SectionBuilder
+class Project : public SectionBuilder
 {
 protected:
     void    __fastcall  Execute() final;
 public:
-            __fastcall  Messages();
-    virtual __fastcall ~Messages();
+            __fastcall  Project();
+    virtual __fastcall ~Project();
 };
 }
 //---------------------------------------------------------------------------

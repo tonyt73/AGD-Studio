@@ -2,7 +2,7 @@
 #include "agdx.pch.h"
 #include <System.StrUtils.hpp>
 #include <System.Character.hpp>
-#include "Build/SectionBuilders/Events.h"
+#include "Build/AgdSection/Events.h"
 #include "Project/DocumentManager.h"
 #include "Project/MapDocuments.h"
 #include "Project/FileDefinitions.h"

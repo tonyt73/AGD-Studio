@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
-#include "Build/SectionBuilders/Font.h"
+#include "Build/AgdSection/Font.h"
 #include "Project/DocumentManager.h"
 #include "Project/ImageDocuments.h"
 #include "Graphics/GraphicsMode.h"

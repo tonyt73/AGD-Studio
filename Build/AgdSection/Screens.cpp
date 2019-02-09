@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
-#include "Build/SectionBuilders/Screens.h"
+#include "Build/AgdSection/Screens.h"
 #include "Project/DocumentManager.h"
 #include "Project/ImageDocuments.h"
 #include "Project/MapDocuments.h"

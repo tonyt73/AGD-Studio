@@ -1,36 +1,36 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
 #include "Creation.h"
-#include "Build/SectionBuilders/Project.h"
-#include "Build/SectionBuilders/Window.h"
-#include "Build/SectionBuilders/Controls.h"
-#include "Build/SectionBuilders/JumpTable.h"
-#include "Build/SectionBuilders/Messages.h"
-#include "Build/SectionBuilders/Events.h"
-#include "Build/SectionBuilders/Font.h"
-#include "Build/SectionBuilders/Tiles.h"
-#include "Build/SectionBuilders/Sprites.h"
-#include "Build/SectionBuilders/Objects.h"
-#include "Build/SectionBuilders/Map.h"
-#include "Build/SectionBuilders/Screens.h"
+#include "Build/AgdSection/Project.h"
+#include "Build/AgdSection/Window.h"
+#include "Build/AgdSection/Controls.h"
+#include "Build/AgdSection/JumpTable.h"
+#include "Build/AgdSection/Messages.h"
+#include "Build/AgdSection/Events.h"
+#include "Build/AgdSection/Font.h"
+#include "Build/AgdSection/Tiles.h"
+#include "Build/AgdSection/Sprites.h"
+#include "Build/AgdSection/Objects.h"
+#include "Build/AgdSection/Map.h"
+#include "Build/AgdSection/Screens.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall Creation::Creation(BuildMessages& buildMessages)
 : BuildProcess(buildMessages, bmBuild, "Generate Game File (Project to AGD File)")
 {
-    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Project>()));
-    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Window>()));
-    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Controls>()));
-    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Messages>()));
-    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Font>()));
-    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::JumpTable>()));
-    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Tiles>()));
-    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Sprites>()));
-    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Screens>()));
-    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Objects>()));
-    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Map>()));
-    m_SectionBuilders.push_back(std::move(std::make_unique<SectionBuilders::Events>()));
+    m_AgdBuilders.push_back(std::move(std::make_unique<SectionBuilders::Project>()));
+    m_AgdBuilders.push_back(std::move(std::make_unique<SectionBuilders::Window>()));
+    m_AgdBuilders.push_back(std::move(std::make_unique<SectionBuilders::Controls>()));
+    m_AgdBuilders.push_back(std::move(std::make_unique<SectionBuilders::Messages>()));
+    m_AgdBuilders.push_back(std::move(std::make_unique<SectionBuilders::Font>()));
+    m_AgdBuilders.push_back(std::move(std::make_unique<SectionBuilders::JumpTable>()));
+    m_AgdBuilders.push_back(std::move(std::make_unique<SectionBuilders::Tiles>()));
+    m_AgdBuilders.push_back(std::move(std::make_unique<SectionBuilders::Sprites>()));
+    m_AgdBuilders.push_back(std::move(std::make_unique<SectionBuilders::Screens>()));
+    m_AgdBuilders.push_back(std::move(std::make_unique<SectionBuilders::Objects>()));
+    m_AgdBuilders.push_back(std::move(std::make_unique<SectionBuilders::Map>()));
+    m_AgdBuilders.push_back(std::move(std::make_unique<SectionBuilders::Events>()));
 }
 //---------------------------------------------------------------------------
 __fastcall Creation::~Creation()
@@ -42,7 +42,7 @@ bool __fastcall Creation::Execute()
     auto agdFile = System::File::Combine(System::Path::Project, System::Path::ProjectName + ".agd");
     String agdContent;
     BUILD_MSG("Building " + agdFile);
-    for (auto& builder : m_SectionBuilders)
+    for (auto& builder : m_AgdBuilders)
     {
         // TODO: change to this when the 64 bit compiler supports C++17
         // auto[success, reason, content] = builder->Build();

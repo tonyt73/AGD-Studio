@@ -1,18 +1,18 @@
 //---------------------------------------------------------------------------
-#ifndef FontH
-#define FontH
+#ifndef ControlsH
+#define ControlsH
 //---------------------------------------------------------------------------
-#include "Build/SectionBuilders/SectionBuilder.h"
+#include "Build/AgdSection/SectionBuilder.h"
 //---------------------------------------------------------------------------
 namespace SectionBuilders
 {
-class Font : public SectionBuilder
+class Controls : public SectionBuilder
 {
 protected:
     void    __fastcall  Execute() final;
 public:
-            __fastcall  Font();
-    virtual __fastcall ~Font();
+            __fastcall  Controls();
+    virtual __fastcall ~Controls();
 };
 }
 //---------------------------------------------------------------------------

@@ -1,19 +1,20 @@
 //---------------------------------------------------------------------------
-#ifndef ScreensH
-#define ScreensH
+#ifndef MapH
+#define MapH
 //---------------------------------------------------------------------------
-#include "Build/SectionBuilders/SectionBuilder.h"
+#include "Build/AgdSection/SectionBuilder.h"
 //---------------------------------------------------------------------------
 namespace SectionBuilders
 {
-class Screens : public SectionBuilder
+class Map : public SectionBuilder
 {
 protected:
     void    __fastcall  Execute() final;
 public:
-            __fastcall  Screens();
-    virtual __fastcall ~Screens();
+            __fastcall  Map();
+    virtual __fastcall ~Map();
 };
 }
 //---------------------------------------------------------------------------
 #endif
+

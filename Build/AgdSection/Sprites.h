@@ -1,18 +1,18 @@
 //---------------------------------------------------------------------------
-#ifndef TilesH
-#define TilesH
+#ifndef SpritesH
+#define SpritesH
 //---------------------------------------------------------------------------
-#include "Build/SectionBuilders/SectionBuilder.h"
+#include "Build/AgdSection/SectionBuilder.h"
 //---------------------------------------------------------------------------
 namespace SectionBuilders
 {
-class Tiles : public SectionBuilder
+class Sprites : public SectionBuilder
 {
 protected:
     void    __fastcall  Execute() final;
 public:
-            __fastcall  Tiles();
-    virtual __fastcall ~Tiles();
+            __fastcall  Sprites();
+    virtual __fastcall ~Sprites();
 };
 }
 //---------------------------------------------------------------------------

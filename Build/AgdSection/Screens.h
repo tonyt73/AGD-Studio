@@ -1,18 +1,18 @@
 //---------------------------------------------------------------------------
-#ifndef ProjectH
-#define ProjectH
+#ifndef ScreensH
+#define ScreensH
 //---------------------------------------------------------------------------
-#include "Build/SectionBuilders/SectionBuilder.h"
+#include "Build/AgdSection/SectionBuilder.h"
 //---------------------------------------------------------------------------
 namespace SectionBuilders
 {
-class Project : public SectionBuilder
+class Screens : public SectionBuilder
 {
 protected:
     void    __fastcall  Execute() final;
 public:
-            __fastcall  Project();
-    virtual __fastcall ~Project();
+            __fastcall  Screens();
+    virtual __fastcall ~Screens();
 };
 }
 //---------------------------------------------------------------------------

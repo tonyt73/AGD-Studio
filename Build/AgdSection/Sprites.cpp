@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
-#include "Build/SectionBuilders/Sprites.h"
+#include "Build/AgdSection/Sprites.h"
 #include "Project/DocumentManager.h"
 #include "Project/ImageDocuments.h"
 #include "Graphics/GraphicsMode.h"
