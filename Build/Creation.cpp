@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
-#include "Creation.h"
+#include "Build/Creation.h"
 #include "Build/AgdSection/Project.h"
 #include "Build/AgdSection/Window.h"
 #include "Build/AgdSection/Controls.h"
@@ -13,6 +13,7 @@
 #include "Build/AgdSection/Objects.h"
 #include "Build/AgdSection/Map.h"
 #include "Build/AgdSection/Screens.h"
+#include "Project/DocumentManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -40,6 +41,7 @@ __fastcall Creation::~Creation()
 bool __fastcall Creation::Execute()
 {
     auto agdFile = System::File::Combine(System::Path::Project, System::Path::ProjectName + ".agd");
+    theDocumentManager.Add("Text", "AGD", System::Path::ProjectName + ".agd");
     String agdContent;
     BUILD_MSG("Building " + agdFile);
     for (auto& builder : m_AgdBuilders)

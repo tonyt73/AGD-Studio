@@ -38,7 +38,7 @@ bool __fastcall Compilation::Execute()
     System::File::Delete(compilerDst);
     BUILD_LINE(bmCopy, "Removing AGD Engine file from project folder");
     System::File::Delete(engineDst);
-
+    theDocumentManager.Add("Text", "Assembly", System::Path::ProjectName + ".asm");
     return result;
 }
 //---------------------------------------------------------------------------

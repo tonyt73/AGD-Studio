@@ -41,7 +41,7 @@ protected:
             String                  m_File;
             String                  m_Folder;
             String                  m_Extension;
-            bool                    m_MultiDoc;
+            bool                    m_ShowFileExtension;
             TPropertyInfoMap        m_PropertyInfo;
             void*                   m_TreeNode;
             void*                   m_DockPanel;
@@ -60,6 +60,7 @@ static      unsigned int            s_NextRefId;    // next unused ref id. Reset
 
             void        __fastcall  RegisterProperty(const String& property, const String& category, const String& info);
     virtual void        __fastcall  DoSave() = 0;
+            void        __fastcall  SetShowFileExtension(bool value);
 
 public:
                         __fastcall  Document(const String& name);
@@ -78,7 +79,7 @@ const TPropertyInfoMap& __fastcall  GetPropertyInfo() const;
     __property          String      File        = { read = GetFile                          };
     __property          String      Type        = { read = m_Type                           };
     __property          String      SubType     = { read = m_SubType                        };
-    __property          bool        IsMultiDoc  = { read = m_MultiDoc                       };
+    __property          bool        ShowFileExt = { read = m_ShowFileExtension              };
     __property          bool        IsReadOnly  = { read = m_ReadOnly                       };
     __property          void*       TreeNode    = { read = m_TreeNode, write = m_TreeNode   };
     __property          void*       DockPanel   = { read = m_DockPanel, write = m_DockPanel };

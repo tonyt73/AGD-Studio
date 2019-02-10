@@ -13,11 +13,11 @@ unsigned int Document::s_NextRefId = 0;
 //---------------------------------------------------------------------------
 __fastcall Document::Document(const String& name)
 : JsonFile()
-, m_Name(name)
+, m_Name(System::File::NameWithoutExtension(name))
 , m_Type("No Type")
 , m_SubType("No SubType")
 , m_Extension("json")
-, m_MultiDoc(false)
+, m_ShowFileExtension(false)
 , m_ReadOnly(false)
 , m_Folder("Misc\\Files")
 , m_TreeNode(nullptr)
@@ -94,6 +94,12 @@ void __fastcall Document::SetName(String name)
         ::Messaging::Bus::Publish<MessageEvent>(ErrorMessageEvent("Failed to rename document from [" + oldFile + "] to [" + newFile + "]"));
     }
     m_File = GetFile();
+}
+//---------------------------------------------------------------------------
+void __fastcall Document::SetShowFileExtension(bool value)
+{
+    m_ShowFileExtension = value;
+    m_Name = System::File::NameWithoutExtension(m_Name) + (!value ? String() : String("." + m_Extension));
 }
 //---------------------------------------------------------------------------
 String __fastcall Document::GetFile(String name)

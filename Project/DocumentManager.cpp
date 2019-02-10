@@ -26,15 +26,14 @@ __fastcall DocumentManager::DocumentManager()
     Register("Text", "Plain", &TextDocument::Create);
     Register("Text", "Event", &EventDocument::Create);
     Register("Text", "Message", &MessageDocument::Create);
-    //Register("Image", "Single", &ImageDocument::Create);
     Register("Image", "Object", &ObjectDocument::Create);
     Register("Image", "Sprite", &SpriteDocument::Create);
     Register("Image", "Tile", &TileDocument::Create);
     Register("Image", "Character Set", &CharacterSetDocument::Create);
-    //Register("Image", "TileSet", &TileSet::Create);
     Register("Map", "Tiled", &TiledMapDocument::Create);
     Register("Text", "SoundFx", &SfxDocument::Create);
     Register("Text", "AGD", &AGDDocument::Create);
+    Register("Text", "Assembly", &AssemblyDocument::Create);
 }
 //---------------------------------------------------------------------------
 void __fastcall DocumentManager::Register(const String& type, const String& subType, CreateDocumentFn pfnCreate)
@@ -53,6 +52,11 @@ Document* __fastcall DocumentManager::Add(const String& type, const String& subT
             auto dit = m_Documents.find(document->Type);
             if (dit != m_Documents.end())
             {
+                auto docIt = std::find_if(dit->second.begin(), dit->second.end(), [&](const Document* document) { return document->Name == name; });
+                if (docIt != dit->second.end())
+                {
+                    return *docIt;
+                }
                 // add the document to the list
                 dit->second.push_back(document);
             }
@@ -220,7 +224,7 @@ void __fastcall DocumentManager::Load(const String& name)
     for (const auto& fileInfo : projectDocument->Files())
     {
         ::Messaging::Bus::Publish<Event>(Event("project.loading.tick"));
-        Add(fileInfo.Type, fileInfo.SubType, System::File::NameWithoutExtension(fileInfo.Name));
+        Add(fileInfo.Type, fileInfo.SubType, fileInfo.Name);
     }
     appSettings.LastProject = name;
 }

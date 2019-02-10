@@ -49,4 +49,11 @@ public:
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new AGDDocument(name); };
 };
 //---------------------------------------------------------------------------
+class AssemblyDocument : public TextDocument
+{
+public:
+                        __fastcall  AssemblyDocument(const String& name);
+    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new AssemblyDocument(name); };
+};
+//---------------------------------------------------------------------------
 #endif

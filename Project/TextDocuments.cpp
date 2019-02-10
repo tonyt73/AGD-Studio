@@ -103,6 +103,7 @@ __fastcall AGDDocument::AGDDocument(const String& name)
     m_SubType = "AGD";
     m_Folder = "Game\\Output";
     m_Extension = "agd";
+    SetShowFileExtension(true);
     m_ReadOnly = true;
     RegisterProperty("Name", "Details", "The name of the AGD source code file");
     auto file = GetFile();
@@ -113,6 +114,18 @@ __fastcall AGDDocument::AGDDocument(const String& name)
         auto header = ";\r\n; " + System::Path::ProjectName + "\r\n; An AGDX game\r\n; Created: " + date + "\r\n; This file is read-only and periodically auto generated.";
         System::File::WriteText(file, header);
     }
+    m_File = GetFile();
+}
+//---------------------------------------------------------------------------
+__fastcall AssemblyDocument::AssemblyDocument(const String& name)
+: TextDocument(name)
+{
+    m_SubType = "Assembly";
+    m_Folder = "Game\\Output";
+    m_Extension = "asm";
+    SetShowFileExtension(true);
+    m_ReadOnly = true;
+    RegisterProperty("Name", "Details", "The name of the Assembly source code file");
     m_File = GetFile();
 }
 //---------------------------------------------------------------------------
