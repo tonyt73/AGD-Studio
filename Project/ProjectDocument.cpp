@@ -87,12 +87,12 @@ void __fastcall ProjectDocument::DoSave()
         Write("Author", m_Author);
         Write("Description", m_Description);
         Write("Machine", m_MachineConfig->Name);
-        Push("Window");
-            Write("X", m_Window.X);
-            Write("Y", m_Window.Y);
-            Write("Width", m_Window.Width);
-            Write("Height", m_Window.Height);
-        Pop(); // Window
+//        Push("Window");
+//            Write("X", m_Window.X);
+//            Write("Y", m_Window.Y);
+//            Write("Width", m_Window.Width);
+//            Write("Height", m_Window.Height);
+//        Pop(); // Window
     Pop();  // Project
     ArrayStart("Files");
     for (const auto& fi : m_Files)

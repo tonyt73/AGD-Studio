@@ -6,6 +6,7 @@
 #include "TextDocuments.h"
 #include "ImageDocuments.h"
 #include "MapDocuments.h"
+#include "WindowDocument.h"
 #include "DocumentManager.h"
 #include "ProjectManager.h"
 #include "Messaging/Messaging.h"
@@ -23,17 +24,18 @@ DocumentManager& DocumentManager::get()
 __fastcall DocumentManager::DocumentManager()
 {
     Register("Game", "Configuration", &ProjectDocument::Create);
-    Register("Text", "Plain", &TextDocument::Create);
-    Register("Text", "Event", &EventDocument::Create);
-    Register("Text", "Message", &MessageDocument::Create);
+    Register("Game", "Window", &WindowDocument::Create);
+    Register("Image", "Character Set", &CharacterSetDocument::Create);
     Register("Image", "Object", &ObjectDocument::Create);
     Register("Image", "Sprite", &SpriteDocument::Create);
     Register("Image", "Tile", &TileDocument::Create);
-    Register("Image", "Character Set", &CharacterSetDocument::Create);
     Register("Map", "Tiled", &TiledMapDocument::Create);
-    Register("Text", "SoundFx", &SfxDocument::Create);
     Register("Text", "AGD", &AGDDocument::Create);
     Register("Text", "Assembly", &AssemblyDocument::Create);
+    Register("Text", "Event", &EventDocument::Create);
+    Register("Text", "Message", &MessageDocument::Create);
+    Register("Text", "Plain", &TextDocument::Create);
+    Register("Text", "SoundFx", &SfxDocument::Create);
 }
 //---------------------------------------------------------------------------
 void __fastcall DocumentManager::Register(const String& type, const String& subType, CreateDocumentFn pfnCreate)

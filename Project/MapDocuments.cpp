@@ -226,15 +226,15 @@ void __fastcall TiledMapDocument::DoSave()
         for (const auto& entity : m_Map)
         {
             StartObject();
-                Write("X", (int)entity.m_Pt.x);
-                Write("Y", (int)entity.m_Pt.y);
+                Write("X", entity.m_Pt.x);
+                Write("Y", entity.m_Pt.y);
                 Write("RefId", entity.Id);
                 if (entity.SpriteType >= 0)
                 {
                     Write("SpriteType", entity.SpriteType);
                     Push("Room");
                         Write("Locked", entity.RoomLocked);
-						Write("Index", (int)entity.RoomIndex);
+						Write("Index", entity.RoomIndex);
 					Pop();
                 }
             EndObject();
@@ -244,8 +244,8 @@ void __fastcall TiledMapDocument::DoSave()
         for (const auto& entity : m_ScratchPad)
         {
             StartObject();
-                Write("X", (int)entity.m_Pt.x);
-                Write("Y", (int)entity.m_Pt.y);
+                Write("X", entity.m_Pt.x);
+                Write("Y", entity.m_Pt.y);
                 Write("RefId", entity.Id);
                 if (entity.SpriteType >= 0)
                 {

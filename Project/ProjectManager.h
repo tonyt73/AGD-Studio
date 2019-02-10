@@ -27,7 +27,8 @@ private:
                          tiFolderFile, tiFolderSprites, tiFolderMusic, tiFolderSfx, tiFolderPatterns, tiFolderTileSets, tiFolderMaps, tiFolderImages,
                          tiBuild, tiConfiguration,
                          tiFileC, tiFileH, tiFileAsm,
-                         tiAssetSprite, tiAssetMusic, tiAssetSfx, tiAssetPattern, tiAssetTile, tiAssetMap, tiAssetImage
+                         tiAssetSprite, tiAssetMusic, tiAssetSfx, tiAssetPattern, tiAssetTile, tiAssetMap, tiAssetImage,
+                         tiWindow
                        };
 
     std::map<String, TElXTreeItem*> m_TreeLeafNodes;

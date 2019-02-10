@@ -52,11 +52,12 @@ void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* 
     int index = tiFolderOpened;
     if (parent.LowerCase() == "game")
     {
-        if (caption == "code" || caption == "events" || caption == "agx")
-        {
+        if (caption == "sounds")
+            index = tiFolderSfx;
+        else if (caption == "map")
+            index = tiFolderMaps;
+        else
             index = tiFolderFile;
-        }
-        else if (caption == "sounds"    ) index = tiFolderSfx;
     }
     else if (parent.LowerCase() == "images")
     {
@@ -85,6 +86,7 @@ void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* 
         else if (caption == "messages"     ) index = tiConfiguration;
         else if (caption == "configuration") index = tiConfiguration;
         else if (caption == "output"       ) index = tiConfiguration;
+        else if (caption == "window"       ) index = tiWindow;
     }
     node->ImageIndex = index;
 }

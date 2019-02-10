@@ -7,6 +7,9 @@
 #include "Frames/ImageEditor/fEditorImage.h"
 #include "Frames/CodeEditor/fEditorCode.h"
 #include "Frames/MapEditor/fEditorMap.h"
+#include "Frames/WindowEditor/fEditorWindow.h"
+#include "Frames/JumpEditor/fEditorJump.h"
+#include "Frames/ControlsEditor/fEditorControls.h"
 #include "Project/ProjectManager.h"
 #include "Settings/ThemeManager.h"
 #include "Messaging/Messaging.h"
@@ -42,15 +45,18 @@ void __fastcall TfrmIDE::RegisterDocumentEditors()
     m_EraseHandlers.push_back(std::make_unique<TWinControlHandler>(Panel2));
     // TODO: Do this another way
     // ie. by document class type to editor?
+    m_DocumentEditorFactory.Register("Game\\Controls",  &TfrmEditorControls::Create);
     m_DocumentEditorFactory.Register("Game\\Events", &TfrmEditorCode::Create);
-    m_DocumentEditorFactory.Register("Game\\Messages", &TfrmEditorCode::Create);
-    m_DocumentEditorFactory.Register("Game\\Sounds", &TfrmEditorCode::Create);
-    m_DocumentEditorFactory.Register("Game\\Output", &TfrmEditorCode::Create);
-    m_DocumentEditorFactory.Register("Images\\Sprites", &TfrmEditorImage::Create);
-    m_DocumentEditorFactory.Register("Images\\Objects", &TfrmEditorImage::Create);
-    m_DocumentEditorFactory.Register("Images\\Tiles", &TfrmEditorImage::Create);
-    m_DocumentEditorFactory.Register("Images\\Character Set", &TfrmEditorImage::Create);
+    m_DocumentEditorFactory.Register("Game\\Jump",  &TfrmEditorJump::Create);
     m_DocumentEditorFactory.Register("Game\\Map",  &TfrmEditorMap::Create);
+    m_DocumentEditorFactory.Register("Game\\Messages", &TfrmEditorCode::Create);
+    m_DocumentEditorFactory.Register("Game\\Output", &TfrmEditorCode::Create);
+    m_DocumentEditorFactory.Register("Game\\Sounds", &TfrmEditorCode::Create);
+    m_DocumentEditorFactory.Register("Game\\Window", &TfrmEditorWindow::Create);
+    m_DocumentEditorFactory.Register("Images\\Character Set", &TfrmEditorImage::Create);
+    m_DocumentEditorFactory.Register("Images\\Objects", &TfrmEditorImage::Create);
+    m_DocumentEditorFactory.Register("Images\\Sprites", &TfrmEditorImage::Create);
+    m_DocumentEditorFactory.Register("Images\\Tiles", &TfrmEditorImage::Create);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::OnActivate(TWinControl* parent)

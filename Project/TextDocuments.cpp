@@ -2,8 +2,8 @@
 #include "agdx.pch.h"
 #pragma hdrstop
 //---------------------------------------------------------------------------
-#include "TextDocuments.h"
-#include "Messaging.h"
+#include "Project/TextDocuments.h"
+#include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
