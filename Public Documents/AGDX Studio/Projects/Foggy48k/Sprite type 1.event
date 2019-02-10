@@ -1,5 +1,0 @@
-; Created by AGDv import
-;EVENT SPRITETYPE1
-IF A 0
-    ANIMATE
-ENDIF
