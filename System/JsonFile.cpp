@@ -85,6 +85,11 @@ void __fastcall JsonFile::Write(const int& value) const
     m_JsonWriter->WriteValue(value);
 }
 //---------------------------------------------------------------------------
+void __fastcall JsonFile::Write(const long& value) const
+{
+    m_JsonWriter->WriteValue((int)value);
+}
+//---------------------------------------------------------------------------
 void __fastcall JsonFile::Write(const String& property, const String& value) const
 {
     m_JsonWriter->WritePropertyName(property);
@@ -101,6 +106,12 @@ void __fastcall JsonFile::Write(const String& property, const unsigned int& valu
 {
     m_JsonWriter->WritePropertyName(property);
     m_JsonWriter->WriteValue(value);
+}
+//---------------------------------------------------------------------------
+void __fastcall JsonFile::Write(const String& property, const long& value) const
+{
+    m_JsonWriter->WritePropertyName(property);
+    m_JsonWriter->WriteValue((int)value);
 }
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::Write(const String& property, const float& value) const
@@ -137,6 +148,14 @@ void __fastcall JsonFile::Set(const String& property, const unsigned int& value)
     if (m_PropertyMap.count(property) != 0)
     {
         ((*(unsigned int*)m_PropertyMap[property])) = value;
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall JsonFile::Set(const String& property, const long& value)
+{
+    if (m_PropertyMap.count(property) != 0)
+    {
+        ((*(long*)m_PropertyMap[property])) = value;
     }
 }
 //---------------------------------------------------------------------------

@@ -166,8 +166,8 @@ void __fastcall GraphicsMode::Save()
     Write("Name", m_Name);
     Write("Palette", m_PaletteName);
     Write("BufferType", m_BufferType);
-    Write("Width", (int)m_Width);
-    Write("Height", (int)m_Height);
+    Write("Width", m_Width);
+    Write("Height", m_Height);
     Write("ScalarX", m_ScalarX);
     Write("ScalarY", m_ScalarY);
     Write("BitsPerPixel", m_BitsPerPixel);

@@ -37,15 +37,18 @@ protected:
     void            __fastcall  ArrayEnd() const;
     void            __fastcall  Write(const String& value) const;
     void            __fastcall  Write(const int& value) const;
+    void            __fastcall  Write(const long& value) const;
     void            __fastcall  Write(const String& property, const String& value) const;
     void            __fastcall  Write(const String& property, const int& value) const;
     void            __fastcall  Write(const String& property, const unsigned int& value) const;
+    void            __fastcall  Write(const String& property, const long& value) const;
     void            __fastcall  Write(const String& property, const float& value) const;
     void            __fastcall  Write(const String& property, const bool& value) const;
     // read (on load)
     virtual void    __fastcall  Set(const String& property, const String& value);
     virtual void    __fastcall  Set(const String& property, const int& value);
     virtual void    __fastcall  Set(const String& property, const unsigned int& value);
+    virtual void    __fastcall  Set(const String& property, const long& value);
     virtual void    __fastcall  Set(const String& property, const float& value);
     virtual void    __fastcall  Set(const String& property, const bool& value);
 

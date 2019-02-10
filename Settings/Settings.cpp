@@ -107,20 +107,20 @@ void __fastcall Settings::Save()
     Pop();  // }
     Push("Welcome"); // {
         Push("Position"); // {
-            Write("X", (int)WelcomePosition.X);
-            Write("Y", (int)WelcomePosition.Y);
+            Write("X", WelcomePosition.X);
+            Write("Y", WelcomePosition.Y);
         Pop(); // }
         Write("SkipOnStartup", m_WelcomeSkipOnStartup);
         Write("SkipOnShutdown", m_WelcomeSkipOnClose);
     Pop(); // }
     Push("MainWindow"); // {
         Push("Position"); // {
-            Write("X", (int)WindowPosition.X);
-            Write("Y", (int)WindowPosition.Y);
+            Write("X", WindowPosition.X);
+            Write("Y", WindowPosition.Y);
         Pop(); // {
         Push("Size"); // {
-            Write("Width", (int)WindowSize.Width);
-            Write("Height", (int)WindowSize.Height);
+            Write("Width", WindowSize.Width);
+            Write("Height", WindowSize.Height);
         Pop(); // }
         Write("WindowState", (int)WindowState);
     Pop(); // }
