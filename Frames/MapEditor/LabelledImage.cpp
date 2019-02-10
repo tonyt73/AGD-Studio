@@ -92,7 +92,7 @@ void __fastcall TfrmLabelledImage::Update()
     image->Canvas().Draw(imgImage->Picture->Bitmap);
 
     panImage->Width = w;
-    panImage->Height = h + (lblCaption->Visible ? lblCaption->Height : 0) + (panTileType->Visible ? panTileType->Height : 0);
+    Height = h + (lblCaption->Visible ? lblCaption->Height : 0) + (panTileType->Visible ? panTileType->Height : 0);
 }
 //---------------------------------------------------------------------------
 
