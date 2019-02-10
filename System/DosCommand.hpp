@@ -36,6 +36,7 @@ class DELPHICLASS TReadPipe;
 class DELPHICLASS TDosThread;
 class DELPHICLASS TDosCommand;
 //-- type declarations -------------------------------------------------------
+#pragma pack(push,4)
 class PASCALIMPLEMENTATION EDosCommand : public System::Sysutils::Exception
 {
 	typedef System::Sysutils::Exception inherited;
@@ -57,7 +58,9 @@ public:
 	
 };
 
+#pragma pack(pop)
 
+#pragma pack(push,4)
 class PASCALIMPLEMENTATION ECreatePipeError : public System::Sysutils::Exception
 {
 	typedef System::Sysutils::Exception inherited;
@@ -79,7 +82,9 @@ public:
 	
 };
 
+#pragma pack(pop)
 
+#pragma pack(push,4)
 class PASCALIMPLEMENTATION ECreateProcessError : public System::Sysutils::Exception
 {
 	typedef System::Sysutils::Exception inherited;
@@ -101,7 +106,9 @@ public:
 	
 };
 
+#pragma pack(pop)
 
+#pragma pack(push,4)
 class PASCALIMPLEMENTATION EProcessTimer : public System::Sysutils::Exception
 {
 	typedef System::Sysutils::Exception inherited;
@@ -123,6 +130,7 @@ public:
 	
 };
 
+#pragma pack(pop)
 
 enum DECLSPEC_DENUM TOutputType : unsigned char { otEntireLine, otBeginningOfLine };
 
@@ -132,6 +140,7 @@ typedef System::UnicodeString __fastcall (__closure *TCharDecoding)(System::TObj
 
 typedef void __fastcall (__closure *TCharEncoding)(System::TObject* ASender, const System::UnicodeString AChars, System::Classes::TStream* AOutBuf);
 
+#pragma pack(push,4)
 class PASCALIMPLEMENTATION TProcessTimer : public System::TObject
 {
 	typedef System::TObject inherited;
@@ -171,6 +180,7 @@ public:
 	__property int SinceLastOutput = {read=get_SinceLastOutput, nodefault};
 };
 
+#pragma pack(pop)
 
 typedef void __fastcall (__closure *TNewLineEvent)(System::TObject* ASender, const System::UnicodeString ANewLine, TOutputType AOutputType);
 
@@ -180,6 +190,7 @@ typedef void __fastcall (__closure *TErrorEvent)(System::TObject* ASender, Syste
 
 typedef void __fastcall (__closure *TTerminateProcessEvent)(System::TObject* ASender, bool &ACanTerminate);
 
+#pragma pack(push,4)
 class PASCALIMPLEMENTATION TInputLines : public System::Sysutils::TSimpleRWSync
 {
 	typedef System::Sysutils::TSimpleRWSync inherited;
@@ -205,7 +216,9 @@ public:
 	__property System::UnicodeString Strings[int AIndex] = {read=get_Strings, write=set_Strings/*, default*/};
 };
 
+#pragma pack(pop)
 
+#pragma pack(push,4)
 class PASCALIMPLEMENTATION TSyncString : public System::Sysutils::TSimpleRWSync
 {
 	typedef System::Sysutils::TSimpleRWSync inherited;
@@ -226,6 +239,7 @@ public:
 	
 };
 
+#pragma pack(pop)
 
 class PASCALIMPLEMENTATION TReadPipe : public System::Classes::TThread
 {
