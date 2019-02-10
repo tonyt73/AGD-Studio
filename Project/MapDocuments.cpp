@@ -508,7 +508,8 @@ TRect __fastcall TiledMapDocument::GetMinimalMapSize()
     {
         for (auto x = 0; x < g_MaxMapRoomsAcross; x++)
         {
-            if (!IsRoomEmpty(x, y))
+            auto ri = m_RoomMapping[y * g_MaxMapRoomsAcross + x];
+            if (ri != 255)
             {
                 rect.Left   = std::min(x, (int)rect.Left  );
                 rect.Right  = std::max(x, (int)rect.Right );
@@ -518,6 +519,8 @@ TRect __fastcall TiledMapDocument::GetMinimalMapSize()
             }
         }
     }
+    rect.Left = std::max((int)(rect.Left - 1), 0);
+    rect.Right = std::min((int)(rect.Right + 1), 16);
     return rect;
 }
 //---------------------------------------------------------------------------
