@@ -110,6 +110,7 @@ object frmBlockTypes: TfrmBlockTypes
     Top = 265
     Width = 31
     Height = 30
+    Brush.Color = clYellow
   end
   object panBlock: TPanel
     Left = 8
