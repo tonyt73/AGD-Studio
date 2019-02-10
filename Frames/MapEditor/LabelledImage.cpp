@@ -4,6 +4,7 @@
 #include "LabelledImage.h"
 #include "DocumentManager.h"
 #include "Image.h"
+#include "BlockColors.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -51,13 +52,17 @@ void __fastcall TfrmLabelledImage::SetShowCaption(bool state)
 void __fastcall TfrmLabelledImage::SetImage(ImageDocument* document)
 {
     const String BlockTypes[] = { "Empty", "Platform", "Wall", "Ladder", "Fodder", "Deadly", "Custom" };
+    const TColor BlockColor[] = { clGray, clBlue, (TColor)0x00006AFF, clLime, clFuchsia, clRed, clYellow };
     m_Document = document;
     lblCaption->Caption = m_Document->Name;
+    panTileType->Visible = false;
     if (document->ImageType == itTile)
     {
-        auto bt = StrToInt(document->GetLayer("blocktype")[1]);
-        imgImage->Hint = BlockTypes[bt];
-        imgImage->ShowHint = true;
+        auto st = document->GetLayer("blocktype");
+        auto bt = StrToInt(st);
+        panTileType->Caption = BlockTypes[bt];
+        panTileType->Color = BlockColor[bt];
+        panTileType->Visible = true;
     }
     Update();
 }
@@ -87,6 +92,7 @@ void __fastcall TfrmLabelledImage::Update()
     image->Canvas().Draw(imgImage->Picture->Bitmap);
 
     panImage->Width = w;
-    panImage->Height = h + (lblCaption->Visible ? lblCaption->Height : 0);
+    panImage->Height = h + (lblCaption->Visible ? lblCaption->Height : 0) + (panTileType->Visible ? panTileType->Height : 0);
 }
 //---------------------------------------------------------------------------
+

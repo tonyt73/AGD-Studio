@@ -16,6 +16,7 @@ __published:    // IDE-managed Components
     TPanel *panImage;
     TImage *imgImage;
     TLabel *lblCaption;
+    TPanel *panTileType;
     void __fastcall imgImageClick(TObject *Sender);
 private:    // User declarations
     TNotifyEvent            FOnClick;
