@@ -157,7 +157,7 @@ void __fastcall TileEditor::OnMouseDownSelectMode(TMouseButton Button, TShiftSta
                     m_MouseMode = mmTool;
                 }
                 // selecting a single item; ready to move the selection
-                else if (m_HoverEntity.Id && FOnEntitySelected != nullptr)
+                else if (m_SelectionCount <= 1 && m_HoverEntity.Id && FOnEntitySelected != nullptr)
                 {
                     // if a single entity is selected then inform the UI
                     m_ToolEntity = m_HoverEntity;
@@ -200,18 +200,7 @@ void __fastcall TileEditor::OnMouseDownMapToolMode(TMouseButton Button, TShiftSt
         m_ActiveMapTool->Width  = m_ContentSize.cx;
         m_ActiveMapTool->Height = m_ContentSize.cy;
         m_ActiveMapTool->Begin(m_ToolEntities, m_ToolEntity, ViewToMap(X, Y), Shift);
-        // assign room indexes
-        auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum;
-        const auto& wi = theDocumentManager.ProjectConfig()->Window;
-        auto roomSize = TSize(wi.Width * tileSize.cx, wi.Height * tileSize.cy);
-        for (auto& e : m_ToolEntities)
-        {
-            if (!e.RoomLocked && e.Image->CanBeLocked)
-            {
-                auto roomPt = TPoint((int)(e.Pt.X / roomSize.cx), (int)(e.Pt.Y / roomSize.cy));
-                e.RoomIndex = FRetrieveRoomIndex(roomPt, true);
-            }
-        }
+        AssignRoomIndexes(m_ToolEntities);
         UpdateMap();
     }
 }
@@ -286,11 +275,10 @@ void __fastcall TileEditor::OnMouseMoveSelectMode(TShiftState Shift, int X, int 
             case mmTool:
                 if (m_Mode == temSelect && !ms.Left && ms.NoModifiers)
                 {
-                    bool refresh = false;
+                    bool refresh = ClearHover();
                     // find an object that intersects the mouse
-                    m_HoverEntity.Clear();
                     Entity entity;
-                    if ((GetEntityUnderMouse(X, Y, entity, itSprite) || GetEntityUnderMouse(X, Y, entity, itObject) || GetEntityUnderMouse(X, Y, entity, itTile)) && !entity.Selected)
+                    if ((GetEntityUnderMouse(X, Y, entity, itSprite) || GetEntityUnderMouse(X, Y, entity, itObject) || GetEntityUnderMouse(X, Y, entity, itTile)) /*&& !entity.Selected*/)
                     {
                         m_HoverEntity = entity;
                         refresh = true;
@@ -399,6 +387,7 @@ void __fastcall TileEditor::OnMouseUpSelectMode(TMouseButton Button, TShiftState
     {
         m_SelectionMove = false;
         m_SelectionCount = 0;
+        AssignRoomIndexes(m_Entities);
         // snap the selected items to the grid
         for (auto& e : m_Entities)
         {
@@ -815,7 +804,7 @@ void __fastcall TileEditor::DrawToolEntities()
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::DrawHoverEntity()
 {
-    if (m_HoverEntity.Id)
+    if (m_HoverEntity.Id && !m_HoverEntity.Selected)
     {
         m_ImageMap[m_HoverEntity.Id]->Draw(m_HoverEntity.Pt + m_BorderScaled, m_Content.get(), c_ColorHoverEntity);
     }
@@ -933,7 +922,7 @@ void __fastcall TileEditor::ResetToOrigin(EntityList& list, const TPoint& origin
 void __fastcall TileEditor::DeleteSelection()
 {
     m_Entities.erase(std::remove_if(m_Entities.begin(),m_Entities.end(),
-        [&](const Entity& entity) { return entity.Selected; }), m_Entities.end());
+        [&](const Entity& entity) { return m_HoverEntity == entity; }), m_Entities.end());
     m_SelectionCount = 0;
     UpdateMap();
 }
@@ -965,6 +954,19 @@ void __fastcall TileEditor::ToggleEntityLocks()
     {
         Refresh();
     }
+}
+//---------------------------------------------------------------------------
+bool __fastcall TileEditor::ClearHover()
+{
+    bool update = false;
+    if (m_HoverEntity.Id)
+    {
+        auto entity = std::find_if(m_Entities.begin(), m_Entities.end(), [&](const Entity& e) { return m_HoverEntity == e; });
+        entity->Dirty = true;
+        update = true;
+    }
+    m_HoverEntity.Clear();
+    return update;
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::SelectHover()
@@ -1034,6 +1036,22 @@ bool __fastcall TileEditor::GetEntityUnderMouse(int X, int Y, Entity& entity, Im
         }
     }
     return false;
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::AssignRoomIndexes(EntityList& entities)
+{
+    // assign room indexes
+    auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum;
+    const auto& wi = theDocumentManager.ProjectConfig()->Window;
+    auto roomSize = TSize(wi.Width * tileSize.cx, wi.Height * tileSize.cy);
+    for (auto& e : entities)
+    {
+        if (!e.RoomLocked && e.Image->CanBeLocked)
+        {
+            auto roomPt = TPoint((int)(e.Pt.X / roomSize.cx), (int)(e.Pt.Y / roomSize.cy));
+            e.RoomIndex = FRetrieveRoomIndex(roomPt, true);
+        }
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::Copy()
