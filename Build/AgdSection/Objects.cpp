@@ -4,6 +4,7 @@
 #include "Project/DocumentManager.h"
 #include "Project/ImageDocuments.h"
 #include "Project/MapDocuments.h"
+#include "Project/WindowDocument.h"
 #include "Graphics/GraphicsMode.h"
 #include "Graphics/Image.h"
 //---------------------------------------------------------------------------
@@ -24,9 +25,9 @@ void __fastcall SectionBuilders::Objects::Execute()
     // get the objects in the map
     auto mapDoc = dynamic_cast<TiledMapDocument*>(dm.Get("Map", "Tiled", "Tile Map"));
     assert(mapDoc != nullptr);
-    const auto& wi = theDocumentManager.ProjectConfig()->Window;
+    const auto& wi = (WindowDocument*)theDocumentManager.Get("Window", "Definition", "Window");
     auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum;
-    auto wPt = TPoint(wi.X * tileSize.cx, wi.Y * tileSize.cy);
+    auto wPt = TPoint(wi->Rect.Left * tileSize.cx, wi->Rect.Top * tileSize.cy);
     auto objectsInMap = mapDoc->Get(itObject);
     // get the list of object images
     DocumentList images;

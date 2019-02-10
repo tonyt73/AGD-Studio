@@ -3,6 +3,7 @@
 #include <System.Math.hpp>
 #include "TileEditor.h"
 #include "Project/DocumentManager.h"
+#include "Project/WindowDocument.h"
 #include "Messaging/Messaging.h"
 #include "Frames/MouseState.h"
 #include "Settings/ThemeManager.h"
@@ -58,13 +59,12 @@ __fastcall TileEditor::~TileEditor()
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::CreateViewBitmap()
 {
-    const auto& wi = theDocumentManager.ProjectConfig()->Window;
-    m_WindowSize.cx = wi.Width;
-    m_WindowSize.cy = wi.Height;
+    const auto& wi = (WindowDocument*)theDocumentManager.Get("Window", "Definition", "Window");
+    m_Window = wi->Rect;
     m_Content = std::make_unique<TBitmap>();
     m_Content->PixelFormat = pf32bit;
-    m_ContentSize.cx = m_TileSize.cx * wi.Width  * m_Rooms.cx;
-    m_ContentSize.cy = m_TileSize.cy * wi.Height * m_Rooms.cy;
+    m_ContentSize.cx = m_TileSize.cx * m_Window.Width()  * m_Rooms.cx;
+    m_ContentSize.cy = m_TileSize.cy * m_Window.Height() * m_Rooms.cy;
     m_Content->Width  = m_ContentSize.cx + (m_BorderScaled.x * 2);
     m_Content->Height = m_ContentSize.cy + (m_BorderScaled.y * 2);
     PatBlt(m_Content->Canvas->Handle, 0, 0, m_Content->Width, m_Content->Height, BLACKNESS);
@@ -140,10 +140,9 @@ void __fastcall TileEditor::OnMouseDownSelectMode(TMouseButton Button, TShiftSta
             {
                 // Change current room selection
                 // work out the room number
-                const auto& wi = theDocumentManager.ProjectConfig()->Window;
                 auto pt = ViewToMap(X, Y);
-                pt.x /= m_TileSize.cx * wi.Width;
-                pt.y /= m_TileSize.cy * wi.Height;
+                pt.x /= m_TileSize.cx * m_Window.Width();
+                pt.y /= m_TileSize.cy * m_Window.Height();
                 // change the current edited room
                 SelectRoom(TSize(pt.x, pt.y));
             }
@@ -183,10 +182,9 @@ void __fastcall TileEditor::OnMouseDownSelectMode(TMouseButton Button, TShiftSta
         else if (ShowStartRoom && ms.Alt)
         {
             // try to change the selected room on the map
-            const auto& wi = theDocumentManager.ProjectConfig()->Window;
             auto pt = ViewToMap(X, Y);
-            pt.x /= m_TileSize.cx * wi.Width;
-            pt.y /= m_TileSize.cy * wi.Height;
+            pt.x /= m_TileSize.cx * m_Window.Width();
+            pt.y /= m_TileSize.cy * m_Window.Height();
             ::Messaging::Bus::Publish<SetStartRoom>(SetStartRoom(pt));
         }
     }
@@ -397,7 +395,6 @@ void __fastcall TileEditor::OnMouseUpSelectMode(TMouseButton Button, TShiftState
                 //       Should add this to the machine config and only apply if needed
                 e.Pt = TPoint(Snap(e.Pt.X, m_TileSize.cx), Snap(e.Pt.Y, m_TileSize.cy));
                 e.DragPt = TPoint();
-                const auto& wi = theDocumentManager.ProjectConfig()->Window;
                 if (e.RoomLocked && e.RoomIndex < 254)
                 {
                     // get the rooms coords
@@ -416,9 +413,9 @@ void __fastcall TileEditor::OnMouseUpSelectMode(TMouseButton Button, TShiftState
                     }
                     // get the X pixels into the map, then remove the left edge of the game window
                     // this makes the left edge where the screen edge would be
-                    rmPt.Left = (rmPt.Left * wi.Width * m_TileSize.cx) - (wi.X * m_TileSize.cx);
+                    rmPt.Left = (rmPt.Left * m_Window.Width() * m_TileSize.cx) - (m_Window.Left * m_TileSize.cx);
                     // do the same for the top
-                    rmPt.Top = (rmPt.Top * wi.Height * m_TileSize.cy) - (wi.Y * m_TileSize.cy);
+                    rmPt.Top = (rmPt.Top * m_Window.Height() * m_TileSize.cy) - (m_Window.Top * m_TileSize.cy);
                     // window is maximum 1 byte wide and high (256)
                     rmPt.Right = rmPt.Left + 255;
                     rmPt.Bottom = rmPt.Top + 255;
@@ -655,7 +652,6 @@ void __fastcall TileEditor::UpdateMap()
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::DrawGrids() const
 {
-    const auto& wi = theDocumentManager.ProjectConfig()->Window;
     auto Canvas = m_View->Picture->Bitmap->Canvas;
     Canvas->Pen->Style = psSolid;
 
@@ -682,8 +678,8 @@ void __fastcall TileEditor::DrawGrids() const
     if (m_UsesGridRoom && m_ShowGridRoom)
     {
         Canvas->Pen->Color = c_ColorRoomGrid;
-        auto rx = wi.Width  * m_TileSize.cx * m_Scale.x;
-        auto ry = wi.Height * m_TileSize.cy * m_Scale.y;
+        auto rx = m_Window.Width()  * m_TileSize.cx * m_Scale.x;
+        auto ry = m_Window.Height() * m_TileSize.cy * m_Scale.y;
         for (auto x = xs; x <= xe; x += rx)
         {
             Canvas->MoveTo(x, ys);
@@ -701,14 +697,13 @@ void __fastcall TileEditor::DrawRoomNumbers() const
 {
     if (m_ShowRoomNumbers && FRetrieveRoomIndex)
     {
-        const auto& wi = theDocumentManager.ProjectConfig()->Window;
         auto Canvas = m_View->Picture->Bitmap->Canvas;
         Canvas->Font->Color = Project::ThemeManager::Foreground;
         Canvas->Pen->Style = psSolid;
         auto xs =  (m_BorderScaled.x - m_MapOffsetMS.X) * m_Scale.x;
         auto ys =  (m_BorderScaled.y - m_MapOffsetMS.Y) * m_Scale.y;
-        auto rx = wi.Width  * m_TileSize.cx * m_Scale.x;
-        auto ry = wi.Height * m_TileSize.cy * m_Scale.y;
+        auto rx = m_Window.Width()  * m_TileSize.cx * m_Scale.x;
+        auto ry = m_Window.Height() * m_TileSize.cy * m_Scale.y;
         auto ty = ys;
         for (auto y = 0; y < g_MaxMapRoomsDown; y++)
         {
@@ -838,8 +833,8 @@ void __fastcall TileEditor::DrawSelectedRoom() const
         bfn.BlendFlags = 0;
         bfn.SourceConstantAlpha = 128;
         bfn.AlphaFormat = 0;
-        auto ww = m_TileSize.cx * m_WindowSize.cx;
-        auto wh = m_TileSize.cy * m_WindowSize.cy;
+        auto ww = m_TileSize.cx * m_Window.Width();
+        auto wh = m_TileSize.cy * m_Window.Height();
         auto pt = MapToView(TPoint(m_SelectedRoom.cx * ww, m_SelectedRoom.cy * wh));
         AlphaBlend(m_View->Picture->Bitmap->Canvas->Handle, pt.x, pt.y, ww * m_Scale.x + 1, wh * m_Scale.y + 1, shade->Canvas->Handle, 0, 0, 1, 1, bfn);
     }
@@ -859,8 +854,8 @@ void __fastcall TileEditor::DrawStartRoom() const
         bfn.BlendFlags = 0;
         bfn.SourceConstantAlpha = 128;
         bfn.AlphaFormat = 0;
-        auto ww = m_TileSize.cx * m_WindowSize.cx;
-        auto wh = m_TileSize.cy * m_WindowSize.cy;
+        auto ww = m_TileSize.cx * m_Window.Width();
+        auto wh = m_TileSize.cy * m_Window.Height();
         auto pt = MapToView(TPoint(m_StartRoom.x * ww, m_StartRoom.y * wh));
         AlphaBlend(m_View->Picture->Bitmap->Canvas->Handle, pt.x, pt.y, ww * m_Scale.x + 1, wh * m_Scale.y + 1, shade->Canvas->Handle, 0, 0, 1, 1, bfn);
     }
@@ -1042,8 +1037,7 @@ void __fastcall TileEditor::AssignRoomIndexes(EntityList& entities)
 {
     // assign room indexes
     auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum;
-    const auto& wi = theDocumentManager.ProjectConfig()->Window;
-    auto roomSize = TSize(wi.Width * tileSize.cx, wi.Height * tileSize.cy);
+    auto roomSize = TSize(m_Window.Width() * tileSize.cx, m_Window.Height() * tileSize.cy);
     for (auto& e : entities)
     {
         if (!e.RoomLocked && e.Image->CanBeLocked)

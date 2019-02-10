@@ -91,7 +91,9 @@ protected:
 			void        __fastcall  OnLoaded();
             int         __fastcall  GetStartRoomCoords(int index) const;
             void        __fastcall  SetStartRoomCoords(const TPoint& coords);
+           const TRect& __fastcall  GetWindow() const;
 
+          __property  const TRect&  Window = { read = GetWindow };
 
 public:
 						__fastcall  TiledMapDocument(const String& name);

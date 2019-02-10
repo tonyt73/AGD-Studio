@@ -4,6 +4,8 @@
 #include "ElXTree.hpp"
 #include "Messaging/Messaging.h"
 #include "Project/ProjectDocument.h"
+#include "Project/ProjectManager.h"
+#include "Project/WindowDocument.h"
 #include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -33,10 +35,6 @@ __fastcall ProjectDocument::ProjectDocument(const String& name, const String& ma
     m_PropertyMap["Project.Author"] = &m_Author;
     m_PropertyMap["Project.Description"] = &m_Description;
     m_PropertyMap["Project.Machine"] = &m_MachineName;
-    m_PropertyMap["Project.Window.X"] = &m_Window.X;
-    m_PropertyMap["Project.Window.Y"] = &m_Window.Y;
-    m_PropertyMap["Project.Window.Width"] = &m_Window.Width;
-    m_PropertyMap["Project.Window.Height"] = &m_Window.Height;
     m_PropertyMap["Files[].Name"] = &m_FileInfo.Name;
     m_PropertyMap["Files[].Type"] = &m_FileInfo.Type;
     m_PropertyMap["Files[].SubType"] = &m_FileInfo.SubType;
@@ -49,11 +47,6 @@ __fastcall ProjectDocument::ProjectDocument(const String& name, const String& ma
     {
         // Load the machine
         m_MachineConfig->Load(m_MachineName);
-
-        m_Window.X = 0;
-        m_Window.Y = 0;
-        m_Window.Width =  m_MachineConfig->GraphicsMode()->Width  / m_MachineConfig->ImageSizing[itTile].Minimum.cx;
-        m_Window.Height = m_MachineConfig->GraphicsMode()->Height / m_MachineConfig->ImageSizing[itTile].Minimum.cy;
     }
 }
 //---------------------------------------------------------------------------
@@ -87,12 +80,6 @@ void __fastcall ProjectDocument::DoSave()
         Write("Author", m_Author);
         Write("Description", m_Description);
         Write("Machine", m_MachineConfig->Name);
-//        Push("Window");
-//            Write("X", m_Window.X);
-//            Write("Y", m_Window.Y);
-//            Write("Width", m_Window.Width);
-//            Write("Height", m_Window.Height);
-//        Pop(); // Window
     Pop();  // Project
     ArrayStart("Files");
     for (const auto& fi : m_Files)

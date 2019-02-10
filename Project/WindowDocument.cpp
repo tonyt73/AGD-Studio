@@ -10,8 +10,8 @@
 __fastcall WindowDocument::WindowDocument(const String& name)
 : Document(name)
 {
-    m_Type = "Game";
-    m_SubType = "Window";
+    m_Type = "Window";
+    m_SubType = "Definition";
     m_Extension = "json";
     m_Folder = "Game\\Window";
     RegisterProperty("Left", "Position", "The start X position of the window");
@@ -49,6 +49,11 @@ int __fastcall WindowDocument::Get(int index)
         case 4: return m_Rect.Width(); break;
         case 5: return m_Rect.Height(); break;
     }
+}
+//---------------------------------------------------------------------------
+void __fastcall WindowDocument::Set(const TRect& rect)
+{
+    m_Rect = rect;
 }
 //---------------------------------------------------------------------------
 

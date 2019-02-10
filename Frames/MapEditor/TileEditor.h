@@ -49,7 +49,7 @@ private:
     bool                            m_SelectionMove;    // flag: moving the entity selections
     bool                            m_ForceMapDraw;     // flag: force a full redraw of the map
     TPoint                          m_MapOffsetMS;      // offset into the map to render to the workspace (Coords in Map Space)
-    TSize                           m_WindowSize;       // the number of tiles across and down of the window area
+    TRect                           m_Window;           // the number of tiles across and down of the window area
     TSize                           m_TileSize;         // the size in pixels of a tile
     TSize                           m_Rooms;            // the number of rooms across and down
     TSize                           m_SelectedRoom;     // the currently selected room

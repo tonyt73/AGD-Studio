@@ -4,6 +4,7 @@
 #include "Project/DocumentManager.h"
 #include "Project/ImageDocuments.h"
 #include "Project/MapDocuments.h"
+#include "Project/WindowDocument.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -23,9 +24,9 @@ void __fastcall SectionBuilders::Screens::Execute()
     auto mapDoc = dynamic_cast<TiledMapDocument*>(dm.Get("Map", "Tiled", "Tile Map"));
     assert(mapDoc != nullptr);
 
-    const auto& wi = theDocumentManager.ProjectConfig()->Window;
+    const auto& wi = (WindowDocument*)theDocumentManager.Get("Window", "Definition", "Window");
     auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum;
-    auto wPt = TPoint(wi.X * tileSize.cx, wi.Y * tileSize.cy);
+    auto wPt = TPoint(wi->Rect.Left * tileSize.cx, wi->Rect.Top * tileSize.cy);
 	auto ri = 0;
 	for (auto ri = 0; ri < 255; ri++)
 	{
@@ -36,11 +37,11 @@ void __fastcall SectionBuilders::Screens::Execute()
 				if (mapDoc->GetRoomIndex(TPoint(rx, ry)) == ri)
 				{
 					auto roomEntities = mapDoc->Get(meRoom, TSize(rx, ry));
-					auto roomPt = TPoint(rx * tileSize.cx * wi.Width, ry * tileSize.cy * wi.Height);
+					auto roomPt = TPoint(rx * tileSize.cx * wi->Rect.Width(), ry * tileSize.cy * wi->Rect.Height());
 					String line = "DEFINESCREEN ";
-					for (auto y = 0; y < wi.Height; y++)
+					for (auto y = 0; y < wi->Rect.Height(); y++)
 					{
-						for (auto x = 0; x < wi.Width; x++)
+						for (auto x = 0; x < wi->Rect.Width(); x++)
 						{
 							auto entity = find_if(roomEntities.begin(), roomEntities.end(),
 								[&](const Entity& e)

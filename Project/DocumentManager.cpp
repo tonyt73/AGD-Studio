@@ -24,7 +24,6 @@ DocumentManager& DocumentManager::get()
 __fastcall DocumentManager::DocumentManager()
 {
     Register("Game", "Configuration", &ProjectDocument::Create);
-    Register("Game", "Window", &WindowDocument::Create);
     Register("Image", "Character Set", &CharacterSetDocument::Create);
     Register("Image", "Object", &ObjectDocument::Create);
     Register("Image", "Sprite", &SpriteDocument::Create);
@@ -36,6 +35,7 @@ __fastcall DocumentManager::DocumentManager()
     Register("Text", "Message", &MessageDocument::Create);
     Register("Text", "Plain", &TextDocument::Create);
     Register("Text", "SoundFx", &SfxDocument::Create);
+    Register("Window", "Definition", &WindowDocument::Create);
 }
 //---------------------------------------------------------------------------
 void __fastcall DocumentManager::Register(const String& type, const String& subType, CreateDocumentFn pfnCreate)

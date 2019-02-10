@@ -3,7 +3,8 @@
 #pragma hdrstop
 //---------------------------------------------------------------------------
 #include <algorithm>
-#include "MapDocuments.h"
+#include "Project/MapDocuments.h"
+#include "Project/WindowDocument.h"
 #include "Project/DocumentManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -334,12 +335,11 @@ const EntityList& __fastcall TiledMapDocument::Get(MapEntities type, TSize room)
         m_ActiveRoom = room;
         m_Room.clear();
         // Place the room entities into the room list
-        const auto& wi = theDocumentManager.ProjectConfig()->Window;
         auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum;
-        auto minx = room.cx * tileSize.cx * wi.Width;
-        auto miny = room.cy * tileSize.cy * wi.Height;
-        auto maxx = minx + (tileSize.cx * wi.Width);
-        auto maxy = miny + (tileSize.cy * wi.Height);
+        auto minx = room.cx * tileSize.cx * Window.Width();
+        auto miny = room.cy * tileSize.cy * Window.Height();
+        auto maxx = minx + (tileSize.cx * Window.Width());
+        auto maxy = miny + (tileSize.cy * Window.Height());
         auto ri = GetRoomIndex(TPoint(room.cx, room.cy));
         for (auto& e : m_Map)
         {
@@ -377,12 +377,11 @@ void __fastcall TiledMapDocument::Set(MapEntities type, const EntityList& entiti
     {
         m_Room = entities;
         // place the new entities into the room
-        const auto& wi = theDocumentManager.ProjectConfig()->Window;
         auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum;
-        auto minx = m_ActiveRoom.cx * tileSize.cx * wi.Width;
-        auto miny = m_ActiveRoom.cy * tileSize.cy * wi.Height;
-        auto maxx = minx + (tileSize.cx * wi.Width);
-        auto maxy = miny + (tileSize.cy * wi.Height);
+        auto minx = m_ActiveRoom.cx * tileSize.cx * Window.Width();
+        auto miny = m_ActiveRoom.cy * tileSize.cy * Window.Height();
+        auto maxx = minx + (tileSize.cx * Window.Width());
+        auto maxy = miny + (tileSize.cy * Window.Height());
 
         // remove the old room items
         m_Map.erase(std::remove_if(m_Map.begin(),m_Map.end(),
@@ -455,9 +454,8 @@ int __fastcall TiledMapDocument::GetStartRoomCoords(int index) const
 //---------------------------------------------------------------------------
 void __fastcall TiledMapDocument::UpdateEntityRooms()
 {
-    const auto& wi = theDocumentManager.ProjectConfig()->Window;
     auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum;
-    auto roomSize = TSize(wi.Width * tileSize.cx, wi.Height * tileSize.cy);
+    auto roomSize = TSize(Window.Width() * tileSize.cx, Window.Height() * tileSize.cy);
     std::vector<unsigned int> objectsToRemove;
     for (auto entity : m_Map)
     {
@@ -568,7 +566,17 @@ void __fastcall TiledMapDocument::OnLoaded()
     }
     GetMinimalMapSize();
     UpdateScreenCoords();
-    UpdateEntityRooms();
+    //UpdateEntityRooms();
+}
+//---------------------------------------------------------------------------
+const TRect& __fastcall TiledMapDocument::GetWindow() const
+{
+    auto wi = (WindowDocument*)theDocumentManager.Get("Window", "Definition", "Window");
+    if (wi != nullptr)
+    {
+        return wi->Rect;
+    }
+    return TRect();
 }
 //---------------------------------------------------------------------------
 
