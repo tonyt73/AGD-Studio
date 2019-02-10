@@ -141,9 +141,24 @@ String __fastcall GraphicsBuffer::Get() const
     return data;
 }
 //---------------------------------------------------------------------------
-void __fastcall GraphicsBuffer::Draw(TBitmap* bitmap) const
+void __fastcall GraphicsBuffer::Draw(TBitmap* bitmap, bool inMonochrome) const
 {
     StretchBlt(bitmap->Canvas->Handle, 0, 0, bitmap->Width, bitmap->Height, m_Bitmap->Canvas->Handle, 0, 0, Width, Height, SRCCOPY);
+    if (inMonochrome)
+    {
+        for (auto y = 0; y < bitmap->Height; y++)
+        {
+            auto sl = (TRGBA*)bitmap->ScanLine[y];
+            for (auto x = 0; x < bitmap->Width; x++)
+            {
+                auto gray = (int)((0.299 * sl[x].R) + (0.587 * sl[x].G) + (0.114 * sl[x].B));
+                sl[x].R = gray;
+                sl[x].G = gray;
+                sl[x].B = gray;
+            }
+        }
+
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall GraphicsBuffer::Assign(TBitmap* bitmap) const

@@ -67,7 +67,7 @@ std::vector<unsigned char>          // Get the native byte data for the buffer
                                     // Set the bitmap data from the hex data
     virtual void        __fastcall  Set(const String& data) = 0;
                                     // Copy the image onto the bitmap
-    void                __fastcall  Draw(TBitmap* bitmap) const;
+    void                __fastcall  Draw(TBitmap* bitmap, bool inMonochrome = false) const;
                                     // Copy the image bitmap onto the destination bitmap
     void                __fastcall  Assign(TBitmap* bitmap) const;
                                     // Begin drawing operations on the canvas

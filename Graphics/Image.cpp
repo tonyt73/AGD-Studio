@@ -13,12 +13,14 @@ std::unique_ptr<TBitmap> Image::m_Overlay = nullptr;
 //---------------------------------------------------------------------------
 __fastcall Image::Image(unsigned int width, unsigned int height, const GraphicsMode& graphicsMode)
 : m_Image(nullptr)
+, m_IsMonochrome(false)
 {
     GraphicsBuffer::Make(width, height, graphicsMode, m_Canvas);
 }
 //---------------------------------------------------------------------------
 __fastcall Image::Image(ImageDocument const * const image, const Agdx::GraphicsMode& graphicsMode)
 : m_Image(image)
+, m_IsMonochrome(false)
 {
     GraphicsBuffer::Make(image->Width, image->Height, graphicsMode, m_Canvas);
     Canvas().Set(image->Frame[0]);
@@ -46,11 +48,28 @@ void __fastcall Image::ChangeFrame(int frame)
     Canvas().Set(m_Image->Frame[frame]);
 }
 //---------------------------------------------------------------------------
-void __fastcall Image::Draw(const TPoint& pt, TBitmap* canvas, TColor overlayColor) const
+void __fastcall Image::Draw(const TPoint& pt, TBitmap* canvas, TColor overlayColor)
 {
-    BitBlt(canvas->Canvas->Handle, pt.x, pt.y, m_Image->Width, m_Image->Height, m_Bitmap->Canvas->Handle, 0, 0, SRCCOPY);
-    if (overlayColor != clBlack)
+    if (overlayColor == clBlack)
     {
+        if (m_IsMonochrome)
+        {
+            // restore image to color
+            m_IsMonochrome = false;
+            m_Canvas->Draw(m_Bitmap.get());
+        }
+        BitBlt(canvas->Canvas->Handle, pt.x, pt.y, m_Image->Width, m_Image->Height, m_Bitmap->Canvas->Handle, 0, 0, SRCCOPY);
+    }
+    else
+    {
+        if (!m_IsMonochrome)
+        {
+            // convert image to monochrome
+            m_IsMonochrome = true;
+            m_Canvas->Draw(m_Bitmap.get(), true);
+        }
+        BitBlt(canvas->Canvas->Handle, pt.x, pt.y, m_Image->Width, m_Image->Height, m_Bitmap->Canvas->Handle, 0, 0, SRCCOPY);
+        // overlay the color
         BLENDFUNCTION bfn;
         bfn.BlendOp = AC_SRC_OVER;
         bfn.BlendFlags = 0;

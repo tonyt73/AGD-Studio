@@ -19,5 +19,13 @@ struct ImageSizing
     TSize   Maximum;
     TSize   Step;
 };
+// TColor => TRGBA
+struct TRGBA
+{
+    unsigned char R;
+    unsigned char G;
+    unsigned char B;
+    unsigned char A;
+};
 //---------------------------------------------------------------------------
 #endif // GraphicsTypesH
