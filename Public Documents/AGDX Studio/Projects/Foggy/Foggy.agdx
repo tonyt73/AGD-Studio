@@ -1,691 +1,706 @@
 {
-    "Project": {
-        "Version": "1.0",
-        "Author": "",
-        "Description": "",
-        "Machine": "ZX Spectrum 256x192 16 Colour",
-        "Window": {
-            "X": 2,
-            "Y": 0,
-            "Width": 28,
-            "Height": 20
-        }
+  "Project": {
+    "Version": "1.0",
+    "Author": "",
+    "Description": "",
+    "Machine": "ZX Spectrum 256x192 16 Colour",
+    "Window": {
+      "X": 2,
+      "Y": 0,
+      "Width": 28,
+      "Height": 20
+    }
+  },
+  "Files": [
+    {
+      "Name": "Game Font.json",
+      "Type": "Image",
+      "SubType": "Character Set"
     },
-    "Files": [
-        {
-            "Name": "Messages.txt",
-            "Type": "Text",
-            "SubType": "Message"
-        },
-        {
-            "Name": "Sound effects.sfx",
-            "Type": "Text",
-            "SubType": "SoundFx"
-        },
-        {
-            "Name": "Player control.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Sprite type 1.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Sprite type 2.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Sprite type 3.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Sprite type 4.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Sprite type 5.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Sprite type 6.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Sprite type 7.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Sprite type 8.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Game initialisation.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Initialise sprite.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Kill player.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Introduction menu.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Main loop 1.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Main loop 2.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Restart screen.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Fell too far.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Lost game.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Completed game.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "New high score.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Collect block.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Game Font.json",
-            "Type": "Image",
-            "SubType": "Character Set"
-        },
-        {
-            "Name": "Object 1.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 2.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 3.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 4.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 5.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 6.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 7.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 8.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 9.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 10.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 11.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 12.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 13.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 14.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 15.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 16.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 17.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 18.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 19.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 20.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Sprite 1.json",
-            "Type": "Image",
-            "SubType": "Sprite"
-        },
-        {
-            "Name": "Sprite 2.json",
-            "Type": "Image",
-            "SubType": "Sprite"
-        },
-        {
-            "Name": "Sprite 3.json",
-            "Type": "Image",
-            "SubType": "Sprite"
-        },
-        {
-            "Name": "Sprite 4.json",
-            "Type": "Image",
-            "SubType": "Sprite"
-        },
-        {
-            "Name": "Sprite 5.json",
-            "Type": "Image",
-            "SubType": "Sprite"
-        },
-        {
-            "Name": "Sprite 6.json",
-            "Type": "Image",
-            "SubType": "Sprite"
-        },
-        {
-            "Name": "Sprite 7.json",
-            "Type": "Image",
-            "SubType": "Sprite"
-        },
-        {
-            "Name": "Sprite 8.json",
-            "Type": "Image",
-            "SubType": "Sprite"
-        },
-        {
-            "Name": "Sprite 9.json",
-            "Type": "Image",
-            "SubType": "Sprite"
-        },
-        {
-            "Name": "Sprite 10.json",
-            "Type": "Image",
-            "SubType": "Sprite"
-        },
-        {
-            "Name": "Sprite 11.json",
-            "Type": "Image",
-            "SubType": "Sprite"
-        },
-        {
-            "Name": "Block 1.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 2.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 3.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 4.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 5.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 6.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 7.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 8.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 9.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 10.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 11.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 12.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 13.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 14.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 15.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 16.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 17.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 18.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 19.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 20.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 21.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 22.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 23.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 24.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 25.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 26.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 27.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 28.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 29.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 30.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 31.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 32.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 33.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 34.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 35.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 36.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 37.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 38.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 39.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 40.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 41.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 42.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 43.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 44.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 45.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 46.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 47.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 48.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 49.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 50.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 51.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 52.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 53.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 54.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 55.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 56.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 57.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 58.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 59.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 60.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 61.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 62.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 63.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 64.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 65.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 66.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 67.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 68.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 69.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 70.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 71.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 72.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 73.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 74.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 75.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 76.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 77.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 78.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Block 79.json",
-            "Type": "Image",
-            "SubType": "Tile"
-        },
-        {
-            "Name": "Tile Map.json",
-            "Type": "Map",
-            "SubType": "Tiled"
-        }
-    ]
+    {
+      "Name": "Object 1.json",
+      "Type": "Image",
+      "SubType": "Object"
+    },
+    {
+      "Name": "Object 2.json",
+      "Type": "Image",
+      "SubType": "Object"
+    },
+    {
+      "Name": "Object 3.json",
+      "Type": "Image",
+      "SubType": "Object"
+    },
+    {
+      "Name": "Object 4.json",
+      "Type": "Image",
+      "SubType": "Object"
+    },
+    {
+      "Name": "Object 5.json",
+      "Type": "Image",
+      "SubType": "Object"
+    },
+    {
+      "Name": "Object 6.json",
+      "Type": "Image",
+      "SubType": "Object"
+    },
+    {
+      "Name": "Object 7.json",
+      "Type": "Image",
+      "SubType": "Object"
+    },
+    {
+      "Name": "Object 8.json",
+      "Type": "Image",
+      "SubType": "Object"
+    },
+    {
+      "Name": "Object 9.json",
+      "Type": "Image",
+      "SubType": "Object"
+    },
+    {
+      "Name": "Object 10.json",
+      "Type": "Image",
+      "SubType": "Object"
+    },
+    {
+      "Name": "Object 11.json",
+      "Type": "Image",
+      "SubType": "Object"
+    },
+    {
+      "Name": "Object 12.json",
+      "Type": "Image",
+      "SubType": "Object"
+    },
+    {
+      "Name": "Object 13.json",
+      "Type": "Image",
+      "SubType": "Object"
+    },
+    {
+      "Name": "Object 14.json",
+      "Type": "Image",
+      "SubType": "Object"
+    },
+    {
+      "Name": "Object 15.json",
+      "Type": "Image",
+      "SubType": "Object"
+    },
+    {
+      "Name": "Object 16.json",
+      "Type": "Image",
+      "SubType": "Object"
+    },
+    {
+      "Name": "Object 17.json",
+      "Type": "Image",
+      "SubType": "Object"
+    },
+    {
+      "Name": "Object 18.json",
+      "Type": "Image",
+      "SubType": "Object"
+    },
+    {
+      "Name": "Object 19.json",
+      "Type": "Image",
+      "SubType": "Object"
+    },
+    {
+      "Name": "Object 20.json",
+      "Type": "Image",
+      "SubType": "Object"
+    },
+    {
+      "Name": "Sprite 1.json",
+      "Type": "Image",
+      "SubType": "Sprite"
+    },
+    {
+      "Name": "Sprite 2.json",
+      "Type": "Image",
+      "SubType": "Sprite"
+    },
+    {
+      "Name": "Sprite 3.json",
+      "Type": "Image",
+      "SubType": "Sprite"
+    },
+    {
+      "Name": "Sprite 4.json",
+      "Type": "Image",
+      "SubType": "Sprite"
+    },
+    {
+      "Name": "Sprite 5.json",
+      "Type": "Image",
+      "SubType": "Sprite"
+    },
+    {
+      "Name": "Sprite 6.json",
+      "Type": "Image",
+      "SubType": "Sprite"
+    },
+    {
+      "Name": "Sprite 7.json",
+      "Type": "Image",
+      "SubType": "Sprite"
+    },
+    {
+      "Name": "Sprite 8.json",
+      "Type": "Image",
+      "SubType": "Sprite"
+    },
+    {
+      "Name": "Sprite 9.json",
+      "Type": "Image",
+      "SubType": "Sprite"
+    },
+    {
+      "Name": "Sprite 10.json",
+      "Type": "Image",
+      "SubType": "Sprite"
+    },
+    {
+      "Name": "Sprite 11.json",
+      "Type": "Image",
+      "SubType": "Sprite"
+    },
+    {
+      "Name": "Block 1.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 2.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 3.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 4.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 5.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 6.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 7.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 8.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 9.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 10.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 11.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 12.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 13.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 14.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 15.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 16.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 17.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 18.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 19.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 20.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 21.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 22.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 23.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 24.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 25.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 26.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 27.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 28.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 29.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 30.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 31.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 32.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 33.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 34.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 35.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 36.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 37.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 38.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 39.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 40.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 41.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 42.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 43.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 44.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 45.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 46.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 47.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 48.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 49.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 50.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 51.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 52.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 53.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 54.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 55.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 56.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 57.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 58.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 59.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 60.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 61.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 62.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 63.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 64.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 65.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 66.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 67.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 68.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 69.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 70.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 71.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 72.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 73.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 74.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 75.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 76.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 77.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 78.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Block 79.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Tile 1.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Sprite 12.json",
+      "Type": "Image",
+      "SubType": "Sprite"
+    },
+    {
+      "Name": "Tile 2.json",
+      "Type": "Image",
+      "SubType": "Tile"
+    },
+    {
+      "Name": "Tile Map.json",
+      "Type": "Map",
+      "SubType": "Tiled"
+    },
+    {
+      "Name": "Messages.txt",
+      "Type": "Text",
+      "SubType": "Message"
+    },
+    {
+      "Name": "Sound effects.sfx",
+      "Type": "Text",
+      "SubType": "SoundFx"
+    },
+    {
+      "Name": "Player control.event",
+      "Type": "Text",
+      "SubType": "Event"
+    },
+    {
+      "Name": "Sprite type 1.event",
+      "Type": "Text",
+      "SubType": "Event"
+    },
+    {
+      "Name": "Sprite type 2.event",
+      "Type": "Text",
+      "SubType": "Event"
+    },
+    {
+      "Name": "Sprite type 3.event",
+      "Type": "Text",
+      "SubType": "Event"
+    },
+    {
+      "Name": "Sprite type 4.event",
+      "Type": "Text",
+      "SubType": "Event"
+    },
+    {
+      "Name": "Sprite type 5.event",
+      "Type": "Text",
+      "SubType": "Event"
+    },
+    {
+      "Name": "Sprite type 6.event",
+      "Type": "Text",
+      "SubType": "Event"
+    },
+    {
+      "Name": "Sprite type 7.event",
+      "Type": "Text",
+      "SubType": "Event"
+    },
+    {
+      "Name": "Sprite type 8.event",
+      "Type": "Text",
+      "SubType": "Event"
+    },
+    {
+      "Name": "Game initialisation.event",
+      "Type": "Text",
+      "SubType": "Event"
+    },
+    {
+      "Name": "Initialise sprite.event",
+      "Type": "Text",
+      "SubType": "Event"
+    },
+    {
+      "Name": "Kill player.event",
+      "Type": "Text",
+      "SubType": "Event"
+    },
+    {
+      "Name": "Introduction menu.event",
+      "Type": "Text",
+      "SubType": "Event"
+    },
+    {
+      "Name": "Main loop 1.event",
+      "Type": "Text",
+      "SubType": "Event"
+    },
+    {
+      "Name": "Main loop 2.event",
+      "Type": "Text",
+      "SubType": "Event"
+    },
+    {
+      "Name": "Restart screen.event",
+      "Type": "Text",
+      "SubType": "Event"
+    },
+    {
+      "Name": "Fell too far.event",
+      "Type": "Text",
+      "SubType": "Event"
+    },
+    {
+      "Name": "Lost game.event",
+      "Type": "Text",
+      "SubType": "Event"
+    },
+    {
+      "Name": "Completed game.event",
+      "Type": "Text",
+      "SubType": "Event"
+    },
+    {
+      "Name": "New high score.event",
+      "Type": "Text",
+      "SubType": "Event"
+    },
+    {
+      "Name": "Collect block.event",
+      "Type": "Text",
+      "SubType": "Event"
+    }
+  ]
 }

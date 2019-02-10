@@ -27,7 +27,7 @@ IF I = 1
         ADD 1 TO I
     ENDIF
 ENDIF
-IF SCREEN  1, 3
+IF SCREEN 27
     IF G = 0
         COLOUR 69
         LET LINE 2
@@ -41,7 +41,7 @@ IF SCREEN  1, 3
         DELAY 25
     ENDIF
 ENDIF
-IF SCREEN  1, 3
+IF SCREEN 27
     WAITKEY
     ENDGAME
 ENDIF

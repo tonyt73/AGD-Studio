@@ -5,17 +5,14 @@
   "Image": {
     "Width": 16,
     "Height": 16,
-    "Room": {
-      "X": 5,
-      "Y": 6
-    },
+    "Frames": [
+      "3FC040205FD05FE85FF451F4541451945FF45FF440047FFC2AA87FFC7FFC000047474747"
+    ],
+    "RoomIndex": 0,
+    "State": 0,
     "Position": {
       "X": 192,
       "Y": 128
-    },
-    "State": 0,
-    "Frames": [
-      "3FC040205FD05FE85FF451F4541451945FF45FF440047FFC2AA87FFC7FFC000047474747"
-    ]
+    }
   }
 }

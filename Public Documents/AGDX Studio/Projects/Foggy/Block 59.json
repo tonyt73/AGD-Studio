@@ -10,8 +10,8 @@
     ],
     "Layers": [
       {
-       "Name": "blocktype",
-       "Data": "1"
+        "Name": "blocktype",
+        "Data": "1"
       }
     ]
   }
