@@ -3,13 +3,7 @@
     "Version": "1.0",
     "Author": "",
     "Description": "",
-    "Machine": "ZX Spectrum 256x192 16 Colour",
-    "Window": {
-      "X": 2,
-      "Y": 0,
-      "Width": 28,
-      "Height": 20
-    }
+    "Machine": "ZX Spectrum 256x192 16 Colour"
   },
   "Files": [
     {
@@ -568,21 +562,6 @@
       "SubType": "Tile"
     },
     {
-      "Name": "Tile 1.json",
-      "Type": "Image",
-      "SubType": "Tile"
-    },
-    {
-      "Name": "Sprite 12.json",
-      "Type": "Image",
-      "SubType": "Sprite"
-    },
-    {
-      "Name": "Tile 2.json",
-      "Type": "Image",
-      "SubType": "Tile"
-    },
-    {
       "Name": "Tile Map.json",
       "Type": "Map",
       "SubType": "Tiled"
@@ -701,6 +680,11 @@
       "Name": "Collect block.event",
       "Type": "Text",
       "SubType": "Event"
+    },
+    {
+      "Name": "Window.json",
+      "Type": "Window",
+      "SubType": "Definition"
     }
   ]
 }
