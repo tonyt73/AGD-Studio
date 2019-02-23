@@ -14,12 +14,12 @@ __fastcall WindowDocument::WindowDocument(const String& name)
     m_SubType = "Definition";
     m_Extension = "json";
     m_Folder = "Game\\Window";
-    RegisterProperty("Left", "Position", "The start X position of the window");
-    RegisterProperty("Top", "Position", "The start Y position of the window");
-    RegisterProperty("Right", "Position", "The end X position of the window");
-    RegisterProperty("Bottom", "Position", "The end Y position of the window");
-    RegisterProperty("Width", "Dimensions", "The width in pixels of the image");
-    RegisterProperty("Height", "Dimensions", "The height in pixels of the image");
+    RegisterProperty("Left", "Position", "The left most character column of the window");
+    RegisterProperty("Top", "Position", "The top most character row of the window");
+    RegisterProperty("Right", "Position", "The right most character column of the window");
+    RegisterProperty("Bottom", "Position", "The bottom most character row of the window");
+    RegisterProperty("Width", "Dimensions", "The width in characters of the window");
+    RegisterProperty("Height", "Dimensions", "The height in characters of the window");
     // json loading properties
     m_PropertyMap["Window.Left"] = &m_Rect.Left;
     m_PropertyMap["Window.Top"] = &m_Rect.Top;

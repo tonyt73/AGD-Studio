@@ -21,8 +21,8 @@ public:
            __property  const TRect& Rect   = { read = m_Rect         };
 
 __published:
-            int         __property  Top    = { read = Get, index = 0 };
-            int         __property  Left   = { read = Get, index = 1 };
+            int         __property  Left   = { read = Get, index = 0 };
+            int         __property  Top    = { read = Get, index = 1 };
             int         __property  Right  = { read = Get, index = 2 };
             int         __property  Bottom = { read = Get, index = 3 };
             int         __property  Width  = { read = Get, index = 4 };
