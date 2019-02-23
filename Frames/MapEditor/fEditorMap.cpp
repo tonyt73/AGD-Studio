@@ -25,7 +25,6 @@ __fastcall TfrmEditorMap::TfrmEditorMap(TComponent* Owner)
 , m_LastSelectedId(-1)
 {
     m_Registrar.Subscribe<Event>(OnEvent);
-    m_Registrar.Subscribe<OnMapResized>(OnMapResize);
     m_Registrar.Subscribe<RoomSelected>(OnRoomSelected);
     m_Registrar.Subscribe<StartRoomChanged>(OnStartRoomChanged);
     m_Registrar.Subscribe<DocumentChange<String>>(OnDocumentChanged);
@@ -337,10 +336,6 @@ void __fastcall TfrmEditorMap::OnDocumentChanged(const DocumentChange<String>& m
         assetsSprites->UpdateDocument(image);
         assetsObjects->UpdateDocument(image);
     }
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::OnMapResize(const OnMapResized& message)
-{
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::panWorkspaceViewResize(TObject *Sender)

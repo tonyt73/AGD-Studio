@@ -3,6 +3,8 @@
 #define TileEditorH
 //---------------------------------------------------------------------------
 #include "Project/MapDocuments.h"
+#include "Messaging/Messaging.h"
+#include "Messaging/Event.h"
 #include "Graphics/Image.h"
 #include "Graphics/GraphicsMode.h"
 #include "Frames/MapEditor/MapPencilTool.h"
@@ -25,6 +27,7 @@ private:
     enum MouseModes { mmTool, mmGroupSelect };
     enum EntityDrawFilters { edfDirty = 1, edfSelected = 2, edfFirstTile = 4, edfForce = 8 };
 
+    ::Messaging::Registrar          m_Registrar;        // the messaging registrar
     std::unique_ptr<TBitmap>        m_Content;          // 1:1 content
     std::unique_ptr<TBitmap>        m_Tile0Content;     // 1:1 content with all tile0's used to clear the m_Conent quickly
     TSize                           m_ContentSize;      // the size of the content window that we need (content bitmap is always larger for blt reasons)
@@ -74,6 +77,7 @@ private:
     MapLineTool                     m_MapLineTool;      // line tool - draw tiles (only) in a line
     MapTool*                        m_ActiveMapTool;    // the active tool (from 1 of 3 above)
 
+    void                __fastcall  OnWindowChanged(const WindowChangedEvent& event);
     void                __fastcall  CreateViewBitmap();
     void                __fastcall  Clear();
     void                __fastcall  SelectRoom(TSize room);

@@ -111,24 +111,6 @@ public:
     }
 };
 //---------------------------------------------------------------------------
-class OnMapResized : public Event
-{
-private:
-    unsigned int m_Width;
-    unsigned int m_Height;
-
-public:
-    __fastcall OnMapResized(unsigned int width, unsigned int height)
-    : Event("MapResized")
-    , m_Width(width)
-    , m_Height(height)
-    {
-    }
-
-    __property  unsigned int Width = { read = m_Width, write = m_Width };
-    __property  unsigned int Height = { read = m_Height, write = m_Height };
-};
-//---------------------------------------------------------------------------
 class RoomSelected : public Event
 {
 private:
@@ -178,6 +160,19 @@ public:
     : Event("update.properties")
     {
     }
+};
+//---------------------------------------------------------------------------
+class WindowChangedEvent : public Event
+{
+private:
+    const TRect&    m_Window;
+public:
+    __fastcall WindowChangedEvent(const TRect& window)
+    : Event("window.changed")
+    , m_Window(window)
+    {
+    }
+    __property  const TRect& Window = { read = m_Window };
 };
 //---------------------------------------------------------------------------
 #endif

@@ -216,7 +216,6 @@ private:    // User declarations
             void    __fastcall  OnRoomSelected(const RoomSelected& event);
             void    __fastcall  OnStartRoomChanged(const StartRoomChanged& event);
             void    __fastcall  OnDocumentChanged(const DocumentChange<String>& message);
-            void    __fastcall  OnMapResize(const OnMapResized& message);
             void     __fastcall OnEntityClick(ImageDocument* document);
             void    __fastcall  OnWorkspaceEntitySelected(const Entity& entity);
             int     __fastcall  OnRetrieveRoomIndex(const TPoint& pt, bool newIndex = false);

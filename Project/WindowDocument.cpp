@@ -54,6 +54,7 @@ int __fastcall WindowDocument::Get(int index)
 void __fastcall WindowDocument::Set(const TRect& rect)
 {
     m_Rect = rect;
+    ::Messaging::Bus::Publish<WindowChangedEvent>(WindowChangedEvent(rect));
 }
 //---------------------------------------------------------------------------
 

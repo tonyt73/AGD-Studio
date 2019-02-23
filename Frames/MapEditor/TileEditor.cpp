@@ -48,6 +48,8 @@ __fastcall TileEditor::TileEditor(TImage* const view, Agdx::ImageMap& imageMap, 
 {
     Scale = m_ScaleFactor;
 
+    m_Registrar.Subscribe<WindowChangedEvent>(OnWindowChanged);
+
     m_View->Picture->Bitmap->Canvas->Font->Style = TFontStyles() << fsBold;
     CreateViewBitmap();
     Clear();
@@ -55,6 +57,16 @@ __fastcall TileEditor::TileEditor(TImage* const view, Agdx::ImageMap& imageMap, 
 //---------------------------------------------------------------------------
 __fastcall TileEditor::~TileEditor()
 {
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::OnWindowChanged(const WindowChangedEvent& event)
+{
+    if (m_Window.Width() != event.Window.Width() || m_Window.Height() != event.Window.Height())
+    {
+        CreateViewBitmap();
+        Clear();
+        Refresh();
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::CreateViewBitmap()
