@@ -194,7 +194,6 @@ private:    // User declarations
 
     ::Messaging::Registrar      m_Registrar;
     EraseHandler                m_EraseHandlerView;
-    std::vector<int>            m_Messages;
 
     ImageDocument*              m_ImageDocument;    // the image document we are editing
     Agdx::ImageList             m_Frames;           // the image documents frames as bitmap images
@@ -225,6 +224,7 @@ private:    // User declarations
 public:        // User declarations
                     __fastcall  TfrmEditorImage(TComponent* Owner);
                     __fastcall ~TfrmEditorImage();
+
      static  TFrame* __fastcall Create(Document* document, TComponent* owner)
                                 {
                                     auto editor = new TfrmEditorImage(owner);
