@@ -117,11 +117,6 @@ void __fastcall TfrmEditorWindow::ShowKeysHelp()
     ::Messaging::Bus::Publish<MessageEvent>(HelpKeysMessageEvent(help));
 }
 //---------------------------------------------------------------------------
-MESSAGE void __fastcall TfrmEditorWindow::WMGetDlgCode(TMessage& msg)
-{
-    TFrame::Dispatch(&msg);
-}
-//---------------------------------------------------------------------------
 void __fastcall TfrmEditorWindow::imgViewMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
 {
     //

@@ -58,10 +58,6 @@ public:        // User declarations
                     __fastcall  TfrmEditorWindow(TComponent* Owner);
                     __fastcall ~TfrmEditorWindow();
 
-    BEGIN_MESSAGE_MAP
-        VCL_MESSAGE_HANDLER(WM_GETDLGCODE, TMessage, WMGetDlgCode)
-    END_MESSAGE_MAP(TFrame);
-
     static  TFrame* __fastcall  Create(Document* document, TComponent* owner)
                                 {
                                     auto editor = new TfrmEditorWindow(owner);
