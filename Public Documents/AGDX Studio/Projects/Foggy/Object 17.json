@@ -1,18 +1,18 @@
 {
-  "Document": {
-    "RefId": 18
-  },
-  "Image": {
-    "Width": 16,
-    "Height": 16,
-    "Frames": [
-      "000078001E00070003A0015000E0015003B8071C0E0C140628065002A002400047474747"
-    ],
-    "RoomIndex": 21,
-    "State": 0,
-    "Position": {
-      "X": 200,
-      "Y": 8
+    "Document": {
+        "RefId": 18
+    },
+    "Image": {
+        "Width": 16,
+        "Height": 16,
+        "Frames": [
+            "000078001E00070003A0015000E0015003B8071C0E0C140628065002A002400047474747"
+        ],
+        "RoomIndex": 21,
+        "State": 0,
+        "Position": {
+            "X": 200,
+            "Y": 8
+        }
     }
-  }
 }
