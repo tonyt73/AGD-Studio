@@ -65,7 +65,7 @@ __fastcall MessageDocument::MessageDocument(const String& name)
 : TextDocument(name)
 {
     m_SubType = "Message";
-    m_Folder = "Game\\Messages";
+    m_Folder = "Game\\Files";
     m_Extension = "txt";
     RegisterProperty("Name", "Details", "The name of the messages text file");
     auto file = GetFile();
@@ -83,7 +83,7 @@ __fastcall SfxDocument::SfxDocument(const String& name)
 : TextDocument(name)
 {
     m_SubType = "SoundFx";
-    m_Folder = "Game\\Sounds";
+    m_Folder = "Game\\Files";
     m_Extension = "sfx";
     RegisterProperty("Name", "Details", "The name of the SoundFx definitions file");
     auto file = GetFile();

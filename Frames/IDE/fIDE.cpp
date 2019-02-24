@@ -43,20 +43,13 @@ __fastcall TfrmIDE::~TfrmIDE()
 void __fastcall TfrmIDE::RegisterDocumentEditors()
 {
     m_EraseHandlers.push_back(std::make_unique<TWinControlHandler>(Panel2));
-    // TODO: Do this another way
-    // ie. by document class type to editor?
-    m_DocumentEditorFactory.Register("Game\\Controls",  &TfrmEditorControls::Create);
-    m_DocumentEditorFactory.Register("Game\\Events", &TfrmEditorCode::Create);
-    m_DocumentEditorFactory.Register("Game\\Jump",  &TfrmEditorJump::Create);
-    m_DocumentEditorFactory.Register("Game\\Map",  &TfrmEditorMap::Create);
-    m_DocumentEditorFactory.Register("Game\\Messages", &TfrmEditorCode::Create);
-    m_DocumentEditorFactory.Register("Game\\Output", &TfrmEditorCode::Create);
-    m_DocumentEditorFactory.Register("Game\\Sounds", &TfrmEditorCode::Create);
-    m_DocumentEditorFactory.Register("Game\\Window", &TfrmEditorWindow::Create);
-    m_DocumentEditorFactory.Register("Images\\Character Set", &TfrmEditorImage::Create);
-    m_DocumentEditorFactory.Register("Images\\Objects", &TfrmEditorImage::Create);
-    m_DocumentEditorFactory.Register("Images\\Sprites", &TfrmEditorImage::Create);
-    m_DocumentEditorFactory.Register("Images\\Tiles", &TfrmEditorImage::Create);
+    // map document type (and sub type if required) to an editor
+    m_DocumentEditorFactory.Register("Controls",  &TfrmEditorControls::Create);
+    m_DocumentEditorFactory.Register("Jump",  &TfrmEditorJump::Create);
+    m_DocumentEditorFactory.Register("Window", &TfrmEditorWindow::Create);
+    m_DocumentEditorFactory.Register("Map",  &TfrmEditorMap::Create);
+    m_DocumentEditorFactory.Register("Image", &TfrmEditorImage::Create);
+    m_DocumentEditorFactory.Register("Text", &TfrmEditorCode::Create);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::OnActivate(TWinControl* parent)
@@ -195,12 +188,20 @@ void __fastcall TfrmIDE::UpdateDocumentProperties(Document* document)
 {
     if (document != nullptr)
     {
+        // unregister all categories and their properties
+        for (auto c = 0; c < lmdProperties->Categories->Count; c++)
+        {
+            for (auto p = 0; p < lmdProperties->Categories->Items[c]->Count; p++)
+            {
+                lmdProperties->UnregisterPropCategory(lmdProperties->Categories->Items[c]->Name, lmdProperties->Categories->Items[c]->Items[p]->PropName);
+            }
+        }
         const auto properties = document->GetPropertyInfo();
         for (auto it : properties)
         {
             try
             {
-                lmdProperties->UnregisterPropCategory(it.second.category, it.first);
+                //lmdProperties->UnregisterPropCategory(it.second.category, it.first);
                 lmdProperties->RegisterPropCategory(it.second.category, it.first);
             }
             catch(...)

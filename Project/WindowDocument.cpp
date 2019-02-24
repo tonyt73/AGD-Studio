@@ -13,7 +13,7 @@ __fastcall WindowDocument::WindowDocument(const String& name)
     m_Type = "Window";
     m_SubType = "Definition";
     m_Extension = "json";
-    m_Folder = "Game\\Window";
+    m_Folder = "Game\\Configuration";
     RegisterProperty("Left", "Position", "The left most character column of the window");
     RegisterProperty("Top", "Position", "The top most character row of the window");
     RegisterProperty("Right", "Position", "The right most character column of the window");

@@ -5,7 +5,6 @@
 #include "Messaging/Messaging.h"
 #include "Project/ProjectDocument.h"
 #include "Project/ProjectManager.h"
-#include "Project/WindowDocument.h"
 #include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -28,7 +27,6 @@ __fastcall ProjectDocument::ProjectDocument(const String& name, const String& ma
     RegisterProperty("Version", "Details", "The version of your game");
     RegisterProperty("Description", "Details", "A description of your game");
     RegisterProperty("Machine", "Details", "The machine target of the game");
-    RegisterProperty("Window", "Details", "The dimensions of the Game Window");
 
     // json loading properties
     m_PropertyMap["Project.Version"] = &m_Version;
@@ -41,7 +39,7 @@ __fastcall ProjectDocument::ProjectDocument(const String& name, const String& ma
 
     m_Registrar.Subscribe<OnChange<String>>(OnChangeString);
 
-    // set the max window size for the machines graphics mode
+    // load the machine configuration
     m_MachineConfig = std::make_unique<MachineConfig>(machine);
     if (machine != "")
     {

@@ -7,6 +7,8 @@
 #include "ImageDocuments.h"
 #include "MapDocuments.h"
 #include "WindowDocument.h"
+#include "JumpTableDocument.h"
+#include "ControlsDocument.h"
 #include "DocumentManager.h"
 #include "ProjectManager.h"
 #include "Messaging/Messaging.h"
@@ -36,6 +38,8 @@ __fastcall DocumentManager::DocumentManager()
     Register("Text", "Plain", &TextDocument::Create);
     Register("Text", "SoundFx", &SfxDocument::Create);
     Register("Window", "Definition", &WindowDocument::Create);
+    Register("Jump", "Table", &JumpTableDocument::Create);
+    Register("Controls", "List", &ControlsDocument::Create);
 }
 //---------------------------------------------------------------------------
 void __fastcall DocumentManager::Register(const String& type, const String& subType, CreateDocumentFn pfnCreate)

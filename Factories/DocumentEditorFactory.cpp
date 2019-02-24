@@ -22,7 +22,11 @@ void __fastcall DocumentEditorFactory::Register(const String& documentFolder, Cr
 TFrame* __fastcall DocumentEditorFactory::Create(Document* document, TComponent* owner)
 {
     auto dp = dynamic_cast<TLMDDockPanel*>(owner);
-    auto it = m_Editors.find(document->Classification);
+    auto it = m_Editors.find(document->Type);
+    if (it == m_Editors.end())
+    {
+        it = m_Editors.find(document->Type + "\\" + document->SubType);
+    }
     if (it != m_Editors.end() && dp)
     {
         // create an instance of the document editor for the given document type
