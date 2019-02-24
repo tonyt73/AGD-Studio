@@ -28,7 +28,7 @@ private:
                          tiBuild, tiConfiguration,
                          tiFileC, tiFileH, tiFileAsm,
                          tiAssetSprite, tiAssetMusic, tiAssetSfx, tiAssetPattern, tiAssetTile, tiAssetMap, tiAssetImage,
-                         tiWindow
+                         tiWindow, tiKeyboard, tiText, tiFileAgd, tiFileFont
                        };
 
     std::map<String, TElXTreeItem*> m_TreeLeafNodes;
@@ -53,8 +53,8 @@ public:
     void        __fastcall  Close();
     void        __fastcall  Save();
 
-    Document*   __fastcall  Add(const String& type, const String& subType, const String& name, const String& extra = "");
-    Document*   __fastcall  Add(const String& type, const String& subType);
+    Document*   __fastcall  Add(const String& type, const String& subType, const String& name, const String& extra);
+    Document*   __fastcall  Add(const String& type, const String& subType, const String& extra);
     bool        __fastcall  Remove(const String& type, const String& name);
 
     void        __fastcall  RemoveMostRecentlyUsedItem(const String& name, const String& path);

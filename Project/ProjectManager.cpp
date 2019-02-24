@@ -62,6 +62,11 @@ void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* 
              if (caption == "messages"     ) index = tiConfiguration;
         else if (caption == "sound effects") index = tiAssetSfx;
     }
+    else if (parent.LowerCase() == "output")
+    {
+             if (caption.Pos(".asm") > 0   ) index = tiFileAsm;
+        else if (caption.Pos(".agd") > 0   ) index = tiFileAgd;
+    }
     else if (parent.LowerCase() == "images")
     {
              if (caption == "sprites"      ) index = tiFolderSprites;
@@ -81,15 +86,15 @@ void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* 
         else if (caption == "objects"      ) index = tiAssetImage;
         else if (caption == "music"        ) index = tiAssetMusic;
         else if (caption == "tiles"        ) index = tiAssetTile;
-        else if (caption == "character set") index = tiFileC;
+        else if (caption == "character set") index = tiFileFont;
         else if (caption == "tile sets"    ) index = tiAssetTile;
         else if (caption == "map"          ) index = tiAssetMap;
         else if (caption == "events"       ) index = tiConfiguration;
         else if (caption == "configuration") index = tiConfiguration;
-        else if (caption == "files"        ) index = tiConfiguration;
+        else if (caption == "files"        ) index = tiText;
         else if (caption == "output"       ) index = tiConfiguration;
         else if (caption == "window"       ) index = tiWindow;
-        else if (caption == "controls"     ) index = tiConfiguration;
+        else if (caption == "controls"     ) index = tiKeyboard;
         else if (caption == "jump table"   ) index = tiConfiguration;
     }
     node->ImageIndex = index;
@@ -135,7 +140,7 @@ void __fastcall ProjectManager::Open(const String& file)
     ClearTree(name);
     theDocumentManager.Clear();
     // create a new project file and load the file
-    auto config = dynamic_cast<ProjectDocument*>(Add("Game", "Configuration", name));
+    auto config = dynamic_cast<ProjectDocument*>(Add("Game", "Configuration", name, ""));
     assert(config != nullptr);
     // get the document manager to load all the files from the project file
     theDocumentManager.Load(name);
@@ -212,9 +217,9 @@ Document* __fastcall ProjectManager::Add(const String& type, const String& subTy
     return theDocumentManager.Add(type, subType, theDocumentManager.NextName(name), extra);
 }
 //---------------------------------------------------------------------------
-Document* __fastcall ProjectManager::Add(const String& type, const String& subType)
+Document* __fastcall ProjectManager::Add(const String& type, const String& subType, const String& extra)
 {
-    return theDocumentManager.Add(type, subType, theDocumentManager.NextName(type, subType));
+    return theDocumentManager.Add(type, subType, theDocumentManager.NextName(type, subType), extra);
 }
 //---------------------------------------------------------------------------
 bool __fastcall ProjectManager::Remove(const String& type, const String& name)
