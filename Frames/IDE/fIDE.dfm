@@ -405,12 +405,14 @@ object frmIDE: TfrmIDE
         object lblPropertyInfo: TLabel
           Left = 3
           Top = 3
-          Width = 99
-          Height = 13
+          Width = 212
+          Height = 34
           Align = alClient
           Caption = 'Property information'
           Transparent = True
           WordWrap = True
+          ExplicitWidth = 99
+          ExplicitHeight = 13
         end
       end
     end
@@ -850,19 +852,17 @@ object frmIDE: TfrmIDE
     Top = 88
     object mnuFile: TMenuItem
       Caption = '&File'
-      object NewAsset1: TMenuItem
+      object mnuFileNewAsset: TMenuItem
         Action = actFileNewAsset
       end
       object N4: TMenuItem
         Caption = '-'
       end
-      object OpenProject1: TMenuItem
+      object mnuFileOpenProject: TMenuItem
         Action = actFileProjectOpen
       end
       object mnuFileMru: TMenuItem
         Caption = 'Reopen'
-        object TMenuItem
-        end
       end
       object mnuFileSave: TMenuItem
         Action = actFileProjectSave
@@ -894,36 +894,49 @@ object frmIDE: TfrmIDE
     end
     object mnuView: TMenuItem
       Caption = '&View'
-      object BuildResults1: TMenuItem
+      object mnuViewBuildResults: TMenuItem
         Action = actViewBuildResults
         AutoCheck = True
       end
-      object SearchResults1: TMenuItem
+      object mnuViewSearchResults: TMenuItem
         Action = actViewSearchResults
         AutoCheck = True
       end
-      object Messages1: TMenuItem
+      object mnuViewMessages: TMenuItem
         Action = actViewMessages
         AutoCheck = True
       end
-      object odo1: TMenuItem
+      object mnuViewTodo: TMenuItem
         Action = actViewTodo
         AutoCheck = True
       end
-      object EditorKeys1: TMenuItem
+      object mnuViewEditorKeys: TMenuItem
         Action = actViewEditorKeys
         AutoCheck = True
       end
     end
     object mnuGame: TMenuItem
       Caption = '&Game'
-      object Run1: TMenuItem
+      object mnuRun: TMenuItem
         Action = actGameRun
+        Caption = 'Run'
       end
     end
-    object Help1: TMenuItem
+    object mnuTools: TMenuItem
+      Caption = 'Tools'
+      object mnuToolMachineDefinition: TMenuItem
+        Caption = 'Machine Definition Editor...'
+      end
+      object mnuToolKeyboardLayout: TMenuItem
+        Caption = 'Keyboard Layout Editor...'
+      end
+      object mnuToolGraphicsMode: TMenuItem
+        Caption = 'Graphics Mode Editor...'
+      end
+    end
+    object mnuHelp: TMenuItem
       Caption = '&Help'
-      object mnuHelp: TMenuItem
+      object mnuHelpHelp: TMenuItem
         Action = actHelp
       end
       object mnuHelpGettingStarted: TMenuItem
@@ -933,9 +946,9 @@ object frmIDE: TfrmIDE
         Action = actHelpKeymapReference
         Visible = False
       end
-      object mnuHelpTipOfTheDay: TMenuItem
-        Action = actHelpTipOfTheDay
-        Visible = False
+      object mnuSpecialThanks: TMenuItem
+        Caption = 'Special Thanks...'
+        Enabled = False
       end
       object N1: TMenuItem
         Caption = '-'
@@ -948,6 +961,7 @@ object frmIDE: TfrmIDE
       end
       object mnuHelpAbout: TMenuItem
         Action = actHelpAbout
+        Caption = '&About...'
       end
     end
   end
@@ -2305,8 +2319,8 @@ object frmIDE: TfrmIDE
     Filter = 'AGDX Project|*.agdx|All Files|*.*'
     Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
     Title = 'Open an Existing AGDX Project'
-    Left = 172
-    Top = 140
+    Left = 220
+    Top = 148
   end
   object popProject: TPopupMenu
     OnPopup = popProjectPopup
@@ -2865,8 +2879,8 @@ object frmIDE: TfrmIDE
   object imgToolbar: TImageList
     ColorDepth = cd32Bit
     DrawingStyle = dsTransparent
-    Left = 384
-    Top = 288
+    Left = 184
+    Top = 256
     Bitmap = {
       494C010116001800040010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
