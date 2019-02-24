@@ -15,8 +15,6 @@ __published:    // IDE-managed Components
     TButton *btnOk;
     TButton *btnCancel;
     TPanel *Panel1;
-    TLabel *Label1;
-    TEdit *edtName;
     TRadioButton *radObject;
     TRadioButton *radSprite;
     TRadioButton *radTile;
@@ -29,16 +27,13 @@ __published:    // IDE-managed Components
     void __fastcall edtWidthExit(TObject *Sender);
     void __fastcall edtHeightExit(TObject *Sender);
     void __fastcall FormCreate(TObject *Sender);
-    void __fastcall edtNameChange(TObject *Sender);
 private:    // User declarations
-    String  __fastcall  GetName() const;
     int     __fastcall  GetWidth() const;
     int     __fastcall  GetHeight() const;
     String  __fastcall  GetType() const;
 public:    // User declarations
     __fastcall TfrmNewImage(TComponent* Owner);
 
-    String  __property  Name = { read = GetName };
     int     __property  Width = { read = GetWidth };
     int     __property  Height = { read = GetHeight };
     String  __property  Type = { read = GetType };

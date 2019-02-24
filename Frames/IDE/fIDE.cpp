@@ -324,10 +324,9 @@ void __fastcall TfrmIDE::actFileNewAssetExecute(TObject *Sender)
     auto dialog = std::unique_ptr<TfrmNewImage>(new TfrmNewImage(this));
     if (dialog->ShowModal() == mrOk)
     {
-        auto name = dialog->Name;
         auto width = dialog->Width;
         auto height = dialog->Height;
-        theProjectManager.Add("Image", dialog->Type, name, IntToStr(width) + "x" + IntToStr(height));
+        theProjectManager.Add("Image", dialog->Type, IntToStr(width) + "x" + IntToStr(height));
     }
 }
 //---------------------------------------------------------------------------
@@ -375,7 +374,7 @@ void __fastcall TfrmIDE::actNewAssetExecute(TObject *Sender)
         // remove the ending 's' if it exists
         auto type = tvProject->Selected->Text;
         type = type[type.Length()] == 's' ? type.SubString(1, type.Length() - 1) : type;
-        theProjectManager.Add("Image", type);
+        theProjectManager.Add("Image", type, "");
     }
 }
 //---------------------------------------------------------------------------

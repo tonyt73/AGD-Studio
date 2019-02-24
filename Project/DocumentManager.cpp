@@ -225,7 +225,7 @@ void __fastcall DocumentManager::Save()
 //---------------------------------------------------------------------------
 void __fastcall DocumentManager::Load(const String& name)
 {
-    auto projectDocument = dynamic_cast<ProjectDocument*>(Get("Game","Configuration", name));
+    auto projectDocument = dynamic_cast<ProjectDocument*>(Get("Game", "Configuration", name));
     assert(projectDocument != nullptr);
     for (const auto& fileInfo : projectDocument->Files())
     {

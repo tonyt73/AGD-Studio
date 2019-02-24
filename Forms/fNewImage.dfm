@@ -1,10 +1,9 @@
 object frmNewImage: TfrmNewImage
   Left = 0
   Top = 0
-  ActiveControl = edtName
   BorderStyle = bsDialog
   Caption = 'New Image'
-  ClientHeight = 175
+  ClientHeight = 142
   ClientWidth = 349
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,19 +17,12 @@ object frmNewImage: TfrmNewImage
   OnCreate = FormCreate
   DesignSize = (
     349
-    175)
+    142)
   PixelsPerInch = 96
   TextHeight = 16
-  object Label1: TLabel
-    Left = 16
-    Top = 24
-    Width = 33
-    Height = 16
-    Caption = 'Name'
-  end
   object lblWidth: TLabel
     Left = 16
-    Top = 96
+    Top = 64
     Width = 33
     Height = 16
     Caption = 'Width'
@@ -38,17 +30,16 @@ object frmNewImage: TfrmNewImage
   end
   object lblHeight: TLabel
     Left = 212
-    Top = 96
+    Top = 64
     Width = 36
     Height = 16
     Anchors = [akTop, akRight]
     Caption = 'Height'
     Enabled = False
-    ExplicitLeft = 239
   end
   object Panel1: TPanel
     Left = 0
-    Top = 138
+    Top = 105
     Width = 349
     Height = 37
     Align = alBottom
@@ -60,6 +51,7 @@ object frmNewImage: TfrmNewImage
     Font.Style = []
     ParentFont = False
     TabOrder = 0
+    ExplicitTop = 138
     DesignSize = (
       349
       37)
@@ -71,7 +63,6 @@ object frmNewImage: TfrmNewImage
       Anchors = [akTop, akRight]
       Caption = 'OK'
       Default = True
-      Enabled = False
       ModalResult = 1
       TabOrder = 0
     end
@@ -87,18 +78,9 @@ object frmNewImage: TfrmNewImage
       TabOrder = 1
     end
   end
-  object edtName: TEdit
-    Left = 72
-    Top = 21
-    Width = 269
-    Height = 24
-    Anchors = [akLeft, akTop, akRight]
-    TabOrder = 6
-    OnChange = edtNameChange
-  end
   object radObject: TRadioButton
     Left = 72
-    Top = 64
+    Top = 24
     Width = 57
     Height = 17
     Caption = 'Object'
@@ -110,7 +92,7 @@ object frmNewImage: TfrmNewImage
   object radSprite: TRadioButton
     Tag = 1
     Left = 139
-    Top = 64
+    Top = 24
     Width = 58
     Height = 17
     Caption = 'Sprite'
@@ -120,7 +102,7 @@ object frmNewImage: TfrmNewImage
   object radTile: TRadioButton
     Tag = 2
     Left = 211
-    Top = 64
+    Top = 24
     Width = 40
     Height = 17
     Caption = 'Tile'
@@ -129,7 +111,7 @@ object frmNewImage: TfrmNewImage
   end
   object edtHeight: TSpinEdit
     Left = 268
-    Top = 93
+    Top = 61
     Width = 73
     Height = 26
     Anchors = [akTop, akRight]
@@ -144,7 +126,7 @@ object frmNewImage: TfrmNewImage
   object radChrSet: TRadioButton
     Tag = 3
     Left = 268
-    Top = 64
+    Top = 24
     Width = 73
     Height = 17
     Caption = 'Char Set'
@@ -153,7 +135,7 @@ object frmNewImage: TfrmNewImage
   end
   object edtWidth: TSpinEdit
     Left = 72
-    Top = 93
+    Top = 61
     Width = 73
     Height = 26
     Anchors = [akTop, akRight]
@@ -161,7 +143,7 @@ object frmNewImage: TfrmNewImage
     Increment = 8
     MaxValue = 128
     MinValue = 8
-    TabOrder = 7
+    TabOrder = 6
     Value = 16
     OnExit = edtWidthExit
   end

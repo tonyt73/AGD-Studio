@@ -87,6 +87,11 @@ void __fastcall ImageDocument::OnEndObject(const String& object)
     }
 }
 //---------------------------------------------------------------------------
+int __fastcall ImageDocument::GetIndex() const
+{
+    return theDocumentManager.GetAsIndex(Id);
+}
+//---------------------------------------------------------------------------
 int __fastcall ImageDocument::CountFrames() const
 {
     return m_Frames.size();

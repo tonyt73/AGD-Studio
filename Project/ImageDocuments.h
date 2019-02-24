@@ -34,6 +34,7 @@ protected:
             int                     m_Width;            // width of a frame
             int                     m_Height;           // height of a frame
             int                     m_NumOfFrames;      // the number of frames
+            int                     m_Index;            // the index of the image in its type list
             ImageTypes              m_ImageType;        // the type of graphic image we are
             FramesList              m_Frames;           // the list of frames
             String                  m_FrameLoader;      // used to load frames into the above frames list
@@ -47,6 +48,7 @@ protected:
     virtual void        __fastcall  OnEndObject(const String& object);
             void        __fastcall  ExtractSize(const String& extra);
 
+            int         __fastcall  GetIndex() const;
             int         __fastcall  GetLayerCount() const;
             void        __fastcall  AddLayer(const String& name, const String& value);
     virtual void        __fastcall  DoSave();
@@ -76,6 +78,7 @@ __published:
             int         __property  Height          = { read = m_Height                     };
             int         __property  Frames          = { read = CountFrames                  };
             int         __property  ImagesPerFrame  = { read = CountImagesPerFrame          };
+            int         __property  Index           = { read = GetIndex                     };
 };
 //---------------------------------------------------------------------------
 class SpriteDocument : public ImageDocument

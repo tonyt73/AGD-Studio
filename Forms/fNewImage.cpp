@@ -16,11 +16,6 @@ void __fastcall TfrmNewImage::FormCreate(TObject *Sender)
     radObjectClick(radObject);
 }
 //---------------------------------------------------------------------------
-String __fastcall TfrmNewImage::GetName() const
-{
-    return edtName->Text;
-}
-//---------------------------------------------------------------------------
 int __fastcall TfrmNewImage::GetWidth() const
 {
     return edtWidth->Value;
@@ -75,11 +70,6 @@ void __fastcall TfrmNewImage::edtHeightExit(TObject *Sender)
     {
         edtHeight->Value = ((int)((edtHeight->Value + edtHeight->Increment / 2) / edtHeight->Increment)) * edtHeight->Increment;
     }
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmNewImage::edtNameChange(TObject *Sender)
-{
-    btnOk->Enabled = edtName->Text.Trim() != "";
 }
 //---------------------------------------------------------------------------
 
