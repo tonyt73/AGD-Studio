@@ -425,11 +425,11 @@
             <DependentOn>Frames\ImageEditor\fULAplusBitmap.h</DependentOn>
             <BuildOrder>47</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Frames\JumpEditor\fEditorJump.cpp">
+        <CppCompile Include="Frames\JumpEditor\fEditorJumpTable.cpp">
             <Form>frmEditorJump</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\JumpEditor\fEditorJump.h</DependentOn>
+            <DependentOn>Frames\JumpEditor\fEditorJumpTable.h</DependentOn>
             <BuildOrder>48</BuildOrder>
         </CppCompile>
         <CppCompile Include="Frames\MapEditor\AssetSelection.cpp">
@@ -649,7 +649,7 @@
         <FormResources Include="Frames\MapEditor\LabelledImage.dfm"/>
         <FormResources Include="Frames\MusicEditor\fEditorMusic.dfm"/>
         <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
-        <FormResources Include="Frames\JumpEditor\fEditorJump.dfm"/>
+        <FormResources Include="Frames\JumpEditor\fEditorJumpTable.dfm"/>
         <FormResources Include="Frames\ImageEditor\fBlockTypes.dfm"/>
         <FormResources Include="Frames\ImageEditor\fEditorImage.dfm"/>
         <FormResources Include="Frames\ImageEditor\fMultiImageView.dfm"/>

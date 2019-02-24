@@ -4,4 +4,5 @@ object frmEditorControls: TfrmEditorControls
   Width = 887
   Height = 720
   TabOrder = 0
+  OnMouseActivate = FrameMouseActivate
 end

@@ -8,7 +8,7 @@
 #include "Frames/CodeEditor/fEditorCode.h"
 #include "Frames/MapEditor/fEditorMap.h"
 #include "Frames/WindowEditor/fEditorWindow.h"
-#include "Frames/JumpEditor/fEditorJump.h"
+#include "Frames/JumpEditor/fEditorJumpTable.h"
 #include "Frames/ControlsEditor/fEditorControls.h"
 #include "Project/ProjectManager.h"
 #include "Settings/ThemeManager.h"
@@ -45,7 +45,7 @@ void __fastcall TfrmIDE::RegisterDocumentEditors()
     m_EraseHandlers.push_back(std::make_unique<TWinControlHandler>(Panel2));
     // map document type (and sub type if required) to an editor
     m_DocumentEditorFactory.Register("Controls",  &TfrmEditorControls::Create);
-    m_DocumentEditorFactory.Register("Jump",  &TfrmEditorJump::Create);
+    m_DocumentEditorFactory.Register("Jump",  &TfrmEditorJumpTable::Create);
     m_DocumentEditorFactory.Register("Window", &TfrmEditorWindow::Create);
     m_DocumentEditorFactory.Register("Map",  &TfrmEditorMap::Create);
     m_DocumentEditorFactory.Register("Image", &TfrmEditorImage::Create);

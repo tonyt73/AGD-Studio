@@ -10,6 +10,7 @@ __fastcall MachineConfig::MachineConfig(const String& name)
 , m_Name(name)
 {
     m_PropertyMap["Name"] = &m_Name;
+    m_PropertyMap["Keyboard"] = &m_Keyboard;
     m_PropertyMap["Image"] = &m_Image;
     m_PropertyMap["GraphicsMode"] = &m_GraphicsModeName;
     m_PropertyMap["ImageSizing.Object.Minimum.Width"] = &m_ImageSizing[itObject].Minimum.cx;
@@ -115,6 +116,7 @@ void __fastcall MachineConfig::Save()
     // {
     Open(System::File::Combine(System::Path::Application, "Machines" + System::Path::Separator + m_Name + ".json"));
     Write("Name", m_Name);
+    Write("Keyboard", m_Keyboard);
     Write("Image", m_Image);
     Write("GraphicsMode", m_GraphicsModeName);
     Push("Tools");

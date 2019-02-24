@@ -3,7 +3,6 @@
 #define ControlsDocumentH
 //---------------------------------------------------------------------------
 #include "Project/Document.h"
-#include "Event.h"
 //---------------------------------------------------------------------------
 class ControlsDocument : public Document
 {
@@ -15,6 +14,7 @@ private:
             void        __fastcall  OnEndObject(const String& object);
             void        __fastcall  OnLoading();
             String      __fastcall  Get(int index);
+            bool        __fastcall  IsActive() const;
 
 public:
                         __fastcall  ControlsDocument(const String& name);

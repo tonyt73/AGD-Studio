@@ -3,19 +3,26 @@
 #define JumpTableDocumentH
 //---------------------------------------------------------------------------
 #include "Project/Document.h"
-#include "Event.h"
 //---------------------------------------------------------------------------
 class JumpTableDocument : public Document
 {
 private:
+    std::vector<unsigned char>      m_Steps;
+            unsigned char           m_Step;
+
             void        __fastcall  DoSave();
+            void        __fastcall  OnEndObject(const String& object);
+            void        __fastcall  OnLoading();
+    int                 __fastcall  GetStepCount() const;
+
 public:
                         __fastcall  JumpTableDocument(const String& name);
 
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new JumpTableDocument(name); };
+    int                 __fastcall  GetStep(int index) const;
+    void                __fastcall  SetStep(int index, int value);
 
-
-__published:
+    int                 __property  Count = { read = GetStepCount };
 };
 //---------------------------------------------------------------------------
 #endif

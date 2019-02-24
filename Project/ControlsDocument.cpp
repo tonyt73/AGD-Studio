@@ -58,6 +58,10 @@ String __fastcall ControlsDocument::Get(int index)
     // TODO: Add a machine key codes to key names files
     if (key == '~')
     {
+        return "Left Shift";
+    }
+    if (key == '.' || key == ',')
+    {
         return "Symbol Shift";
     }
     return IntToStr(key);

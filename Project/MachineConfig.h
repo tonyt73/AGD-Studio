@@ -34,6 +34,7 @@ public:
 
 protected:
     String                              m_Name;
+    String                              m_Keyboard;             // the Keyboard layout name
     String                              m_Image;                // a png file with an image of the machine 120x56
     String                              m_GraphicsModeName;     // json loader
     std::unique_ptr<Agdx::GraphicsMode> m_GraphicsMode;
@@ -62,6 +63,7 @@ public:
     void                    __fastcall  Load(const String& name);
 
     String                  __property  Name = { read = m_Name };
+    String                  __property  Keyboard = { read = m_Keyboard };
     String                  __property  Image = { read = m_Image };
     const ImageSizing       __property  ImageSizing[ImageTypes type] = { read = GetImageSizing };
     __property  const ToolInfo&         Compiler = { read = m_Compiler, write = SetCompiler };
