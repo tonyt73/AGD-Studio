@@ -1,6 +1,8 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
-#include "Controls.h"
+#include "Build/AgdSection/Controls.h"
+#include "Project/DocumentManager.h"
+#include "Project/ControlsDocument.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 using namespace SectionBuilders;
@@ -16,7 +18,21 @@ __fastcall SectionBuilders::Controls::~Controls()
 //---------------------------------------------------------------------------
 void __fastcall SectionBuilders::Controls::Execute()
 {
-    AddLine("DEFINECONTROLS  'Q' 'A' 'O' 'P' ' ' 'Z' 'I'");
+    const auto& Keys = (ControlsDocument*)theDocumentManager.Get("Controls", "List", "Controls");
+    String line = "DEFINECONTROLS  ";
+    for (auto i = keyFirst; i < keyLast; i++)
+    {
+        auto keyCode = Keys->GetAsciiCode(i);
+        if (keyCode <= 32 && keyCode <= 126)
+        {
+            line += "'" + UnicodeString::StringOfChar(keyCode, 1) + "' ";
+        }
+        else
+        {
+            line += IntToStr(keyCode) + " ";
+        }
+    }
+    AddLine(line);
     LineBreak();
     Success();
 }

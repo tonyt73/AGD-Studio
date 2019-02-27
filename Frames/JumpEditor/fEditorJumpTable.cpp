@@ -39,6 +39,7 @@ void __fastcall TfrmEditorJumpTable::ShowKeysHelp()
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorJumpTable::FrameMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate)
 {
+    ShowKeysHelp();
     theEditorManager.SetActive(this);
 }
 //---------------------------------------------------------------------------

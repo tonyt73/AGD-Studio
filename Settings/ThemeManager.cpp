@@ -20,6 +20,7 @@ void __fastcall ThemeManager::SetStyle(const String& styleName)
         TStyleManager::SetStyle(styleName);
     }
     appSettings.ActiveStyle = styleName;
+    ::Messaging::Bus::Publish<ThemeChangedEvent>(ThemeChangedEvent());
 }
 //---------------------------------------------------------------------------
 void __fastcall ThemeManager::LoadStyles(TComboBox* combo)

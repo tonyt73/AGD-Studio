@@ -41,6 +41,15 @@ void __fastcall JumpTableDocument::OnLoading()
     m_Steps.clear();
 }
 //---------------------------------------------------------------------------
+unsigned char __fastcall JumpTableDocument::RawStep(int index) const
+{
+    if (0 <= index && index < m_Steps.size() - 1)
+    {
+        return m_Steps[index];
+    }
+    return 0;
+}
+//---------------------------------------------------------------------------
 int __fastcall JumpTableDocument::GetStep(int index) const
 {
     if (0 <= index && index < m_Steps.size() - 1)

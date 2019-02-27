@@ -175,4 +175,13 @@ public:
     __property  const TRect& Window = { read = m_Window };
 };
 //---------------------------------------------------------------------------
+class ThemeChangedEvent : public Event
+{
+public:
+    __fastcall ThemeChangedEvent()
+    : Event("theme.changed")
+    {
+    }
+};
+//---------------------------------------------------------------------------
 #endif

@@ -106,14 +106,6 @@ __fastcall AGDDocument::AGDDocument(const String& name)
     SetShowFileExtension(true);
     m_ReadOnly = true;
     RegisterProperty("Name", "Details", "The name of the AGD source code file");
-    auto file = GetFile();
-    if (m_Name != "unnamed" && !System::File::Exists(file))
-    {
-        // create the file and add an AGD header
-        auto date = DateTimeToStr(Now());
-        auto header = ";\r\n; " + System::Path::ProjectName + "\r\n; An AGDX game\r\n; Created: " + date + "\r\n; This file is read-only and periodically auto generated.";
-        System::File::WriteText(file, header);
-    }
     m_File = GetFile();
 }
 //---------------------------------------------------------------------------

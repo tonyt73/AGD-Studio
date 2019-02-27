@@ -332,6 +332,13 @@
             <DependentOn>Frames\ControlsEditor\fEditorControls.h</DependentOn>
             <BuildOrder>94</BuildOrder>
         </CppCompile>
+        <CppCompile Include="Frames\ControlsEditor\fKeyCapture.cpp">
+            <Form>frmKeyCode</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\ControlsEditor\fKeyCapture.h</DependentOn>
+            <BuildOrder>97</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Frames\IDE\fIDE.cpp">
             <Form>frmIDE</Form>
             <FormType>dfm</FormType>
@@ -642,14 +649,14 @@
             <DependentOn>System\Path.h</DependentOn>
             <BuildOrder>85</BuildOrder>
         </CppCompile>
+        <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
         <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
         <FormResources Include="Frames\WindowEditor\fEditorWindow.dfm"/>
+        <FormResources Include="Frames\MapEditor\LabelledImage.dfm"/>
+        <FormResources Include="Frames\JumpEditor\fEditorJumpTable.dfm"/>
         <FormResources Include="Frames\MapEditor\AssetSelection.dfm"/>
         <FormResources Include="Frames\MapEditor\fEditorMap.dfm"/>
-        <FormResources Include="Frames\MapEditor\LabelledImage.dfm"/>
         <FormResources Include="Frames\MusicEditor\fEditorMusic.dfm"/>
-        <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
-        <FormResources Include="Frames\JumpEditor\fEditorJumpTable.dfm"/>
         <FormResources Include="Frames\ImageEditor\fBlockTypes.dfm"/>
         <FormResources Include="Frames\ImageEditor\fEditorImage.dfm"/>
         <FormResources Include="Frames\ImageEditor\fMultiImageView.dfm"/>
@@ -659,12 +666,13 @@
         <FormResources Include="Frames\ImageEditor\fPaletteAttribute.dfm"/>
         <FormResources Include="Frames\ImageEditor\fPaletteBitmap.dfm"/>
         <FormResources Include="Frames\ImageEditor\fSelectionImage.dfm"/>
-        <FormResources Include="Forms\fMain.dfm"/>
         <FormResources Include="Forms\fNewImage.dfm"/>
         <FormResources Include="Forms\fSettings.dfm"/>
-        <FormResources Include="Forms\fAbout.dfm"/>
         <FormResources Include="Frames\CodeEditor\fEditorCode.dfm"/>
+        <FormResources Include="Forms\fAbout.dfm"/>
+        <FormResources Include="Forms\fMain.dfm"/>
         <FormResources Include="Frames\ControlsEditor\fEditorControls.dfm"/>
+        <FormResources Include="Frames\ControlsEditor\fKeyCapture.dfm"/>
         <FormResources Include="Frames\IDE\fIDE.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
@@ -783,7 +791,7 @@
                 </DeployFile>
                 <DeployFile LocalName=".\Win64\Debug\AGDx Studio.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win64">
-                        <RemoteName>AGDx Studio.exe</RemoteName>
+                        <RemoteName>AGDx_Studio.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

@@ -35,6 +35,7 @@ USEFORM("Forms\fAbout.cpp", frmAbout);
 USEFORM("Frames\CodeEditor\fEditorCode.cpp", frmEditorCode); /* TFrame: File Type */
 USEFORM("Frames\ControlsEditor\fEditorControls.cpp", frmEditorControls); /* TFrame: File Type */
 USEFORM("Frames\IDE\fIDE.cpp", frmIDE); /* TFrame: File Type */
+USEFORM("Frames\ControlsEditor\fKeyCapture.cpp", frmKeyCode); /* TFrame: File Type */
 //---------------------------------------------------------------------------
 int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE, LPTSTR, int)
 {

@@ -80,4 +80,21 @@ void __fastcall ControlsDocument::OnLoading()
     m_Keys.clear();
 }
 //---------------------------------------------------------------------------
+unsigned char __fastcall ControlsDocument::GetAsciiCode(eAgdKeys key)
+{
+    if (0 <= key && key < m_Keys.size())
+    {
+        return m_Keys[key];
+    }
+    return 0;
+}
+//---------------------------------------------------------------------------
+void __fastcall ControlsDocument::SetAsciiCode(eAgdKeys key, unsigned char keyCode)
+{
+    if (0 <= key && key < m_Keys.size())
+    {
+        m_Keys[key] = keyCode;
+    }
+}
+//---------------------------------------------------------------------------
 
