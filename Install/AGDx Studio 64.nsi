@@ -6,7 +6,8 @@ SetCompressor /SOLID /FINAL lzma
 !include FontName.nsh
 
 ; HM NIS Edit Wizard helper defines
-!define PRODUCT_NAME "AGDx Studio 64"
+!define PRODUCT_NAME_SMALL "AGDx Studio"
+!define PRODUCT_NAME "${PRODUCT_NAME_SMALL} 64"
 !define PRODUCT_VERSION "0.1.0 BETA"
 !define PRODUCT_PUBLISHER "Tony Thompson"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\ADGx Studio 64"
@@ -74,7 +75,7 @@ RequestExecutionLevel admin ;Require admin rights on NT6+ (When UAC is turned on
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
 OutFile "${PRODUCT_NAME} ${PRODUCT_VERSION}.exe"
-InstallDir "$PROGRAMFILES64\${PRODUCT_NAME}"
+InstallDir "$PROGRAMFILES64\${PRODUCT_NAME_SMALL}"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
 ShowUnInstDetails show
