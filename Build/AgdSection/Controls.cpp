@@ -20,9 +20,9 @@ void __fastcall SectionBuilders::Controls::Execute()
 {
     const auto& Keys = (ControlsDocument*)theDocumentManager.Get("Controls", "List", "Controls");
     String line = "DEFINECONTROLS  ";
-    for (auto i = keyFirst; i < keyLast; i++)
+    for (auto i = 0; i < keyLast; i++)
     {
-        auto keyCode = Keys->GetAsciiCode(i);
+        auto keyCode = Keys->GetAsciiCode((eAgdKey)i);
         if (keyCode <= 32 && keyCode <= 126)
         {
             line += "'" + UnicodeString::StringOfChar(keyCode, 1) + "' ";

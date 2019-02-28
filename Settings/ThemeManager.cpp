@@ -2,6 +2,7 @@
 #include "agdx.pch.h"
 #pragma hdrstop
 //---------------------------------------------------------------------------
+#include "Vcl.Themes.hpp"
 #include "Settings/ThemeManager.h"
 #include "Settings/Settings.h"
 #include "System/File.h"
@@ -14,10 +15,16 @@ namespace Project
 //---------------------------------------------------------------------------
 void __fastcall ThemeManager::SetStyle(const String& styleName)
 {
-    if (!TStyleManager::TrySetStyle(styleName, false))
+    auto styleFile = System::File::Combine(System::Path::GetFolder(System::Path::lpApplication, "Styles"), styleName + ".vsf");
+    if (!TStyleManager::TrySetStyle(styleName, false) && System::File::Exists(styleFile))
     {
-        TStyleManager::LoadFromFile(System::File::Combine(System::Path::GetFolder(System::Path::lpApplication, "Styles"), styleName + ".vsf"));
-        TStyleManager::SetStyle(styleName);
+        try
+        {
+            TStyleManager::SetStyle(TStyleManager::LoadFromFile(styleFile));
+        }
+        catch(...)
+        {
+        }
     }
     appSettings.ActiveStyle = styleName;
     ::Messaging::Bus::Publish<ThemeChangedEvent>(ThemeChangedEvent());
@@ -28,18 +35,22 @@ void __fastcall ThemeManager::LoadStyles(TComboBox* combo)
     combo->Items->Clear();
     auto sl = std::make_unique<TStringList>();
     // load the styles defined in the application
-    for (auto i = 0; i < TStyleManager::StyleNames.Length; i++)
-    {
-        if (TStyleManager::StyleNames[i] != "Windows")
-        {
-            sl->Add(TStyleManager::StyleNames[i]);
-        }
-    }
+
+//    for (auto i = 0; i < TStyleManager::StyleNames.Length; i++)
+//    {
+//        if (TStyleManager::StyleNames[i] != "Windows")
+//        {
+//            sl->Add(TStyleManager::StyleNames[i]);
+//        }
+//    }
+    // default application style
+    sl->Add("Onyx Blue");
     // load the styles from the styles folder
     auto styles = Project::ThemeManager::GetStyles();
-    for (auto style : styles)
+    TStyleInfo si;
+    for (auto styleFile : styles)
     {
-        sl->Add(System::File::NameWithoutExtension(style));
+        sl->Add(System::File::NameWithoutExtension(styleFile));
     }
     sl->Sort();
     // add to the combo box

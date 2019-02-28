@@ -12,9 +12,9 @@
 class TfrmKeyCode : public TFrame
 {
 __published:	// IDE-managed Components
+    TLabel *lblKey;
     TPanel *panCaption;
     TEdit *edtKey;
-    TLabel *lblKey;
     void __fastcall edtKeyKeyPress(TObject *Sender, System::WideChar &Key);
     void __fastcall edtKeyMouseEnter(TObject *Sender);
     void __fastcall edtKeyMouseLeave(TObject *Sender);

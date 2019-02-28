@@ -80,7 +80,7 @@ void __fastcall ControlsDocument::OnLoading()
     m_Keys.clear();
 }
 //---------------------------------------------------------------------------
-unsigned char __fastcall ControlsDocument::GetAsciiCode(eAgdKeys key)
+unsigned char __fastcall ControlsDocument::GetAsciiCode(eAgdKey key)
 {
     if (0 <= key && key < m_Keys.size())
     {
@@ -89,7 +89,7 @@ unsigned char __fastcall ControlsDocument::GetAsciiCode(eAgdKeys key)
     return 0;
 }
 //---------------------------------------------------------------------------
-void __fastcall ControlsDocument::SetAsciiCode(eAgdKeys key, unsigned char keyCode)
+void __fastcall ControlsDocument::SetAsciiCode(eAgdKey key, unsigned char keyCode)
 {
     if (0 <= key && key < m_Keys.size())
     {

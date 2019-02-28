@@ -4,7 +4,7 @@
 //---------------------------------------------------------------------------
 #include "Project/Document.h"
 //---------------------------------------------------------------------------
-enum eAgdKeys { keyFirst = 0, keyUp = 0, keyDown, keyLeft, keyRight, keyFire1, keyFire2, keyFire3, keyOption1, keyOption2, keyOption3, keyOption4, keyLast };
+enum eAgdKey { keyFirst = 0, keyUp = 0, keyDown, keyLeft, keyRight, keyFire1, keyFire2, keyFire3, keyOption1, keyOption2, keyOption3, keyOption4, keyLast };
 class ControlsDocument : public Document
 {
 private:
@@ -22,8 +22,8 @@ public:
 
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ControlsDocument(name); };
 
-        unsigned char   __fastcall  GetAsciiCode(eAgdKeys key);
-        void            __fastcall  SetAsciiCode(eAgdKeys key, unsigned char keyCode);
+        unsigned char   __fastcall  GetAsciiCode(eAgdKey key);
+        void            __fastcall  SetAsciiCode(eAgdKey key, unsigned char keyCode);
 };
 //---------------------------------------------------------------------------
 #endif

@@ -44,7 +44,8 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE, LPTSTR, int)
         Application->Initialize();
         Application->MainFormOnTaskBar = true;
         Project::ThemeManager::SetStyle(appSettings.ActiveStyle.Trim() != "" ? appSettings.ActiveStyle : "Onyx Blue");
-        Application->CreateForm(__classid(TfrmMain), &frmMain);
+        TStyleManager::TrySetStyle("Onyx Blue");
+         Application->CreateForm(__classid(TfrmMain), &frmMain);
          Application->Run();
     }
     catch (Exception &exception)
