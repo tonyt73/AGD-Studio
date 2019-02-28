@@ -29,6 +29,8 @@ Themes:
   * Future improvements:
     * Save layout per project
 
+## Releases
+https://github.com/tonyt73/AGDX-Studio/releases
 
 ## Build Instructions
 
