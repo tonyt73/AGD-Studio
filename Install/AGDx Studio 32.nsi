@@ -20,6 +20,8 @@
 RequestExecutionLevel admin ;Require admin rights on NT6+ (When UAC is turned on)
 #RequestExecutionLevel user
 
+SetCompressor /SOLID lzma
+
 !ifndef IPersistFile
 !define IPersistFile {0000010b-0000-0000-c000-000000000046}
 !endif
