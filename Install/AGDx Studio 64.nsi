@@ -4,7 +4,7 @@
 !include FontName.nsh
 
 ; HM NIS Edit Wizard helper defines
-!define PRODUCT_NAME "AGDx Studio"
+!define PRODUCT_NAME "AGDx Studio 64"
 !define PRODUCT_VERSION "0.1.0 BETA"
 !define PRODUCT_PUBLISHER "Tony Thompson"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\ADGx Studio 64"
@@ -17,7 +17,8 @@
 !include LogicLib.nsh
 
 ;Request application privileges for Windows Vista
-#  RequestExecutionLevel user
+RequestExecutionLevel admin ;Require admin rights on NT6+ (When UAC is turned on)
+#RequestExecutionLevel user
 
 !ifndef IPersistFile
 !define IPersistFile {0000010b-0000-0000-c000-000000000046}
@@ -70,10 +71,8 @@
 ; MUI end ------
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "AGDx Studio ${PRODUCT_VERSION} 64.exe"
-RequestExecutionLevel admin ;Require admin rights on NT6+ (When UAC is turned on)
-#RequestExecutionLevel user
-InstallDir "$PROGRAMFILES\AGDx Studio"
+OutFile "${PRODUCT_NAME} ${PRODUCT_VERSION}.exe"
+InstallDir "$PROGRAMFILES\${PRODUCT_NAME}"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
 ShowUnInstDetails show
@@ -114,19 +113,19 @@ SectionEnd
 Section "Main files" SEC01
   SetOutPath "$INSTDIR"
   SetOverwrite ifnewer
-  CreateDirectory "$SMPROGRAMS\AGDx Studio 64"
-  CreateShortCut "$SMPROGRAMS\AGDx Studio 64\AGDx Studio 64.lnk" "$INSTDIR\AGDx Studio.exe"
-  push "$SMPROGRAMS\AGDx Studio 64\AGDx Studio 64.lnk"
+  CreateDirectory "$SMPROGRAMS\${PRODUCT_NAME}"
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk" "$INSTDIR\AGDx Studio.exe"
+  push "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk"
   call ShellLinkSetRunAs
   pop $0
   DetailPrint HR=$0
-  CreateShortCut "$SMPROGRAMS\AGDx Studio 64\AGDx Converter.lnk" "$INSTDIR\AGD Converter.exe"
-  push "$SMPROGRAMS\AGDx Studio 64\AGDx Converter.lnk"
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\AGDx Converter.lnk" "$INSTDIR\AGD Converter.exe"
+  push "$SMPROGRAMS\${PRODUCT_NAME}\AGDx Converter.lnk"
   call ShellLinkSetRunAs
   pop $0
   DetailPrint HR=$0
-  CreateShortCut "$DESKTOP\AGDx Studio 64.lnk" "$INSTDIR\AGDx Studio.exe"  
-  push "$DESKTOP\AGDx Studio 64.lnk"
+  CreateShortCut "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\AGDx Studio.exe"  
+  push "$DESKTOP\${PRODUCT_NAME}.lnk"
   call ShellLinkSetRunAs
   pop $0
   DetailPrint HR=$0
@@ -583,7 +582,7 @@ Section Uninstall
   Delete "$INSTDIR\vclx260.bpl"
 
   ; Application Folders
-  RMDir "$SMPROGRAMS\AGDx Studio 64"
+  RMDir "$SMPROGRAMS\${PRODUCT_NAME}"
   RMDir /r "$INSTDIR"
   ; Registry
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
