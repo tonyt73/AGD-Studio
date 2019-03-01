@@ -929,7 +929,7 @@ void __fastcall TileEditor::ResetToOrigin(EntityList& list, const TPoint& origin
 void __fastcall TileEditor::DeleteSelection()
 {
     m_Entities.erase(std::remove_if(m_Entities.begin(),m_Entities.end(),
-        [&](const Entity& entity) { return m_HoverEntity == entity; }), m_Entities.end());
+        [&](const Entity& entity) { return m_HoverEntity == entity || entity.Selected; }), m_Entities.end());
     m_SelectionCount = 0;
     UpdateMap();
 }
