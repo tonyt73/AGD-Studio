@@ -117,10 +117,10 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
             auto definitions = std::make_unique<FileDefinitions>();
             for (const auto& definition : definitions->GetDefinitions())
             {
-                Add("Text", definition.Type, definition.Filename);
+                theDocumentManager.Add("Text", definition.Type, definition.Filename, "");
             }
             // create a map
-            Add("Map", "Tiled", "Tile Map");
+            theDocumentManager.Add("Map", "Tiled", "Tile Map", "");
         }
         else
         {
