@@ -34,15 +34,6 @@ void __fastcall ThemeManager::LoadStyles(TComboBox* combo)
 {
     combo->Items->Clear();
     auto sl = std::make_unique<TStringList>();
-    // load the styles defined in the application
-
-//    for (auto i = 0; i < TStyleManager::StyleNames.Length; i++)
-//    {
-//        if (TStyleManager::StyleNames[i] != "Windows")
-//        {
-//            sl->Add(TStyleManager::StyleNames[i]);
-//        }
-//    }
     // default application style
     sl->Add("Onyx Blue");
     // load the styles from the styles folder
