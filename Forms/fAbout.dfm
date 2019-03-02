@@ -1,6 +1,8 @@
 object frmAbout: TfrmAbout
   Left = 0
   Top = 0
+  AlphaBlend = True
+  AlphaBlendValue = 240
   BorderIcons = []
   BorderStyle = bsNone
   ClientHeight = 284
@@ -14,6 +16,7 @@ object frmAbout: TfrmAbout
   FormStyle = fsStayOnTop
   OldCreateOrder = False
   Position = poMainFormCenter
+  Scaled = False
   OnCreate = FormCreate
   OnDeactivate = FormDeactivate
   DesignSize = (
