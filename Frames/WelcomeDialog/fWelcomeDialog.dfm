@@ -6427,6 +6427,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Top = 79
           Width = 159
           Height = 23
+          Cursor = crHandPoint
           Caption = '      Change Theme'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
