@@ -3898,6 +3898,21 @@ object frmEditorCode: TfrmEditorCode
       Caption = 'Search/replace previous'
       OnExecute = actSearchPreviousExecute
     end
+    object actZoomIn: TAction
+      Category = 'Zoom'
+      Caption = 'Zoom In'
+      OnExecute = actZoomInExecute
+    end
+    object actZoomOut: TAction
+      Category = 'Zoom'
+      Caption = 'Zoom Out'
+      OnExecute = actZoomOutExecute
+    end
+    object actZoomReset: TAction
+      Category = 'Zoom'
+      Caption = 'Zoom Reset'
+      OnExecute = actZoomResetExecute
+    end
   end
   object FontDialog: TFontDialog
     Font.Charset = DEFAULT_CHARSET
