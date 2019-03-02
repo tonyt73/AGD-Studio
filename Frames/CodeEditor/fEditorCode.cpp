@@ -58,6 +58,9 @@ __fastcall TfrmEditorCode::~TfrmEditorCode()
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorCode::SetDocument(Document* document)
 {
+    m_ActionMap["zoom.in"] = actZoomIn;
+    m_ActionMap["zoom.out"] = actZoomOut;
+    m_ActionMap["zoom.reset"] = actZoomReset;
     m_ActionMap["edit.copy"] = actCopy;
     m_ActionMap["edit.cut"] = actCut;
     m_ActionMap["edit.paste"] = actPaste;
@@ -102,6 +105,30 @@ void __fastcall TfrmEditorCode::actUndoExecute(TObject *Sender)
 void __fastcall TfrmEditorCode::actRedoExecute(TObject *Sender)
 {
     if (evEditor->Focused()) evEditor->Redo();
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorCode::actZoomInExecute(TObject *Sender)
+{
+    if (evEditor->Focused()&& evEditor->Font->Size <= 24)
+    {
+        evEditor->Font->Size++;
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorCode::actZoomOutExecute(TObject *Sender)
+{
+    if (evEditor->Focused() && evEditor->Font->Size >= 8)
+    {
+        evEditor->Font->Size--;
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorCode::actZoomResetExecute(TObject *Sender)
+{
+    if (evEditor->Focused())
+    {
+        evEditor->Font->Size = 10;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorCode::actGoToLineExecute(TObject *Sender)

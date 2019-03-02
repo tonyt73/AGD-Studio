@@ -86,6 +86,9 @@ __published:    // IDE-managed Components
     TAction *actFont;
     TFontDialog *FontDialog;
     TAction *actSearchPrevious;
+    TAction *actZoomIn;
+    TAction *actZoomOut;
+    TAction *actZoomReset;
     void __fastcall actUndoExecute(TObject *Sender);
     void __fastcall actRedoExecute(TObject *Sender);
     void __fastcall actGoToLineExecute(TObject *Sender);
@@ -107,6 +110,9 @@ __published:    // IDE-managed Components
     void __fastcall actSaveFileExecute(TObject *Sender);
     void __fastcall actSearchPreviousExecute(TObject *Sender);
     void __fastcall evEditorEnter(TObject *Sender);
+    void __fastcall actZoomInExecute(TObject *Sender);
+    void __fastcall actZoomOutExecute(TObject *Sender);
+    void __fastcall actZoomResetExecute(TObject *Sender);
 
 private:    // User declarations
     ::Messaging::Registrar      m_Registrar;
