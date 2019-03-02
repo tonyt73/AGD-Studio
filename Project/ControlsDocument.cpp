@@ -14,17 +14,17 @@ __fastcall ControlsDocument::ControlsDocument(const String& name)
     m_SubType = "List";
     m_Extension = "json";
     m_Folder = "Game\\Configuration";
-    RegisterProperty("Up", "Directional", "");
-    RegisterProperty("Down", "Directional", "");
-    RegisterProperty("Left", "Directional", "");
-    RegisterProperty("Right", "Directional", "");
-    RegisterProperty("Fire1", "Fire", "");
-    RegisterProperty("Fire2", "Fire", "");
-    RegisterProperty("Fire3", "Fire", "");
-    RegisterProperty("Option1", "Option", "");
-    RegisterProperty("Option2", "Option", "");
-    RegisterProperty("Option3", "Option", "");
-    RegisterProperty("Option4", "Option", "");
+    RegisterProperty("Up", "Directional", "The key for Player Up");
+    RegisterProperty("Down", "Directional", "The key for Player Down");
+    RegisterProperty("Left", "Directional", "The key for Player Left");
+    RegisterProperty("Right", "Directional", "The key for Player Right");
+    RegisterProperty("Fire1", "Fire", "The key for Fire 1");
+    RegisterProperty("Fire2", "Fire", "The key for Fire 2");
+    RegisterProperty("Fire3", "Fire", "The key for Fire 3");
+    RegisterProperty("Option1", "Option", "The key for Option 1");
+    RegisterProperty("Option2", "Option", "The key for Option 2");
+    RegisterProperty("Option3", "Option", "The key for Option 3");
+    RegisterProperty("Option4", "Option", "The key for Option 4");
     // json loading properties
     m_PropertyMap["Keys[]"] = &m_Key;
     m_File = GetFile();

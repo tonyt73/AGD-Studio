@@ -25,6 +25,19 @@ public:
 
         unsigned char   __fastcall  GetAsciiCode(eAgdKey key);
         void            __fastcall  SetAsciiCode(eAgdKey key, unsigned char keyCode);
+
+__published:
+        String          __property  Left = { read = Get, index = keyLeft };
+        String          __property  Right = { read = Get, index = keyRight };
+        String          __property  Up = { read = Get, index = keyUp };
+        String          __property  Down = { read = Get, index = keyDown };
+        String          __property  Fire1 = { read = Get, index = keyFire1 };
+        String          __property  Fire2 = { read = Get, index = keyFire2 };
+        String          __property  Fire3 = { read = Get, index = keyFire3 };
+        String          __property  Option1 = { read = Get, index = keyOption1 };
+        String          __property  Option2 = { read = Get, index = keyOption2 };
+        String          __property  Option3 = { read = Get, index = keyOption3 };
+        String          __property  Option4 = { read = Get, index = keyOption4 };
 };
 //---------------------------------------------------------------------------
 #endif
