@@ -2,6 +2,7 @@
 #include "agdx.pch.h"
 #pragma hdrstop
 //---------------------------------------------------------------------------
+#include "Project/DocumentManager.h"
 #include "Project/WindowDocument.h"
 #include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
@@ -25,6 +26,10 @@ __fastcall WindowDocument::WindowDocument(const String& name)
     m_PropertyMap["Window.Top"] = &m_Rect.Top;
     m_PropertyMap["Window.Right"] = &m_Rect.Right;
     m_PropertyMap["Window.Bottom"] = &m_Rect.Bottom;
+    m_Rect.Left = 0;
+    m_Rect.Top = 0;
+    m_Rect.Right = 1;
+    m_Rect.Bottom = 1;
     m_File = GetFile();
 }
 //---------------------------------------------------------------------------
@@ -36,6 +41,22 @@ void __fastcall WindowDocument::DoSave()
         Write("Right", m_Rect.Right);
         Write("Bottom", m_Rect.Bottom);
     Pop();  // window
+}
+//---------------------------------------------------------------------------
+void __fastcall WindowDocument::OnLoaded()
+{
+    const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
+
+    if (m_Rect.Width() == 0)
+    {
+        m_Rect.Left = 0;
+        m_Rect.Right = (mc.GraphicsMode()->Width / mc.ImageSizing[itTile].Minimum.cx) - 1;
+    }
+    if (m_Rect.Height() == 0)
+    {
+        m_Rect.Top = 0;
+        m_Rect.Bottom = (mc.GraphicsMode()->Height / mc.ImageSizing[itTile].Minimum.cy) - 1;
+    }
 }
 //---------------------------------------------------------------------------
 int __fastcall WindowDocument::Get(int index)

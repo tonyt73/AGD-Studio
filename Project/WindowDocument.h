@@ -11,6 +11,7 @@ private:
             TRect                   m_Rect;
 
             void        __fastcall  DoSave();
+            void        __fastcall  OnLoaded();
             int         __fastcall  Get(int index);
 public:
                         __fastcall  WindowDocument(const String& name);
