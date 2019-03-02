@@ -13,69 +13,12 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     BevelOuter = bvNone
     TabOrder = 0
     StyleElements = [seFont, seBorder]
-    object imgStartNewProject: TImage
-      Left = 104
-      Top = 266
-      Width = 16
-      Height = 16
-      Cursor = crHandPoint
-      AutoSize = True
-      Picture.Data = {
-        0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
-        001008060000001FF3FF610000001974455874536F6674776172650041646F62
-        6520496D616765526561647971C9653C000003584944415478DA5D535B689367
-        187EBEFF94266DDA34E921EDFF27D1B65BABAE4CCA58E6615DBDD05E5437109D
-        1755D8AD85290A8A8230E62E4A5B54B60BD9C5186E0C84219B76ACA215A7DDA6
-        CB543CACD6DADA6AD21C4C4C9A9AA4FF6FFFE3BE1445EA0B0F1F7CEFFB3EDF7B
-        783E3273228045B32C58A6D16D99FAF742A55FD09EC7AE11865B07425DA6798E
-        2B717D6C282998E0F7320CFB0D08594C23AF0868D0A0A3BE758B67E566C0E640
-        78F02018D6468A7186AEC9E2FADD76CE598DC2D820B2D1D12C6158F7120279C1
-        B855E5A96C73DBB240D5BBC81678E423FFB6D3FC31D65997AE6FDD004C9E86CC
-        8AC82413200C439610F8F6859B27FBA42BB52E789D4E01E6F25D7878E9649FC0
-        314931B8EB78C9B321A885E74864191C3E93EDEADFE1197A4D40FB5F24D91F69
-        1DEF95CE364AA4816BF91489DB7F4495B954BAA1B36735EE7F8B48C2343FF93A
-        D57127A286668EFBD5E27C48E498344087D74949E27430C35329DDDF58C3EDF1
-        BF550BB9742D3439838AD21CE2F7EE20366BFEEE71329739626DA4EF89740E17
-        4878A0CEF2771D82363B0D755E86A12990938FC0EAB3A87E7F1B0CD54261FC57
-        289A0B251E090C5F02BB5B045FE145EA9F9F40C2FD5ECBBFA50778F233AD8705
-        1C3E80B501BC0B286BA11BF100E9BF006D8EB6AA02F333F43400FF76A4AE7C47
-        0906EA2DA97D2BF4A72350F22A4CCDC4424101535A839AB60EE8F3B3C8C7A358
-        483C80E07480E518D8CB05B0DE0F91F8FB2CC8C8E1BA1F6BCAC99A050DCFA259
-        2344FB135A7CCE1EFFA66EC813BF41CDE5E1FA602792577FC1DD078993BAC5A8
-        929B0DDA7854A772D6F5E22E258A720A8D2237D5E71B097476BFCD6A6348DE18
-        A555BD9003EB9A1DA47A032243A72602FBA6DB5FC6F3C578F25ACA262D5F8F54
-        05BB7C0EB70E353981E9D0E3A9F89C7931F8916F77A928C1E05621317C2A6281
-        095021BD2965A3BFACE19D0395AD2B41F58AF46814C37F263F3FFF9F32DCBBA3
-        6A5CEC58010822E4B4894CE8429EB05CF912827856EB5DB6DC7DC845F7CF95D9
-        11BD781B8183B14AEACA4FF68A31714D732D67E75008E770F9EAD417C126C7D1
-        37A5ECDDB9B6ECBD239B2B4ED879D2F43863FED058CB7F56F4DD9C7E71A42DC0
-        7FA5A8D6A3D3A1F9A35F9E9B1BA2799945022C3581A289C24EF19422F6F29E8A
-        01CB28148A27C5BFF72AE17FFDDA6E3B583A4E520000000049454E44AE426082}
-    end
-    object lblStartNewProject: TLabel
-      Left = 104
-      Top = 262
-      Width = 191
-      Height = 23
-      Cursor = crHandPoint
-      Caption = '      Start a new project'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -19
-      Font.Name = 'Roboto'
-      Font.Style = []
-      ParentFont = False
-      StyleElements = [seClient, seBorder]
-      OnClick = lblStartNewProjectClick
-      OnMouseEnter = lblStartNewProjectMouseEnter
-      OnMouseLeave = lblStartNewProjectMouseLeave
-    end
     object imgLogo: TImage
       Left = 0
       Top = 0
       Width = 500
-      Height = 250
-      Align = alTop
+      Height = 248
+      Align = alClient
       AutoSize = True
       Center = True
       Picture.Data = {
@@ -6245,144 +6188,22 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         1BD90C503BC6F8D29DB50F5C69E5B1114D03C690A612800B9CF4E595F2F9D325
         23A861E3D692ED76D8F1C713A0411B71D57189633A0870566A91ABB64D943436
         A4FF0FD26170FB48BB86440000000049454E44AE426082}
+      Stretch = True
+      ExplicitHeight = 250
     end
-    object panStartNew: TPanel
-      Left = 104
-      Top = 291
-      Width = 379
-      Height = 135
-      BevelOuter = bvNone
-      TabOrder = 1
-      DesignSize = (
-        379
-        135)
-      object lblMachines: TLabel
-        Left = 27
-        Top = 48
-        Width = 55
-        Height = 20
-        Caption = 'Machine'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Segoe UI Semilight'
-        Font.Style = []
-        ParentFont = False
-      end
-      object Label1: TLabel
-        Left = 27
-        Top = 9
-        Width = 40
-        Height = 20
-        Caption = 'Name'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Segoe UI Semilight'
-        Font.Style = []
-        ParentFont = False
-      end
-      object lblFile: TLabel
-        Left = 27
-        Top = 129
-        Width = 334
-        Height = 17
-        Anchors = [akLeft, akTop, akRight]
-        AutoSize = False
-        EllipsisPosition = epPathEllipsis
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Comfortaa'
-        Font.Style = []
-        ParentFont = False
-        ExplicitWidth = 326
-      end
-      object btnCancel: TButton
-        Left = 270
-        Top = 91
-        Width = 91
-        Height = 32
-        Cancel = True
-        Caption = 'Cancel'
-        TabOrder = 2
-        OnClick = btnCreateClick
-      end
-      object btnCreate: TButton
-        Left = 173
-        Top = 91
-        Width = 91
-        Height = 32
-        Caption = 'Create'
-        Enabled = False
-        ModalResult = 1
-        TabOrder = 3
-        OnClick = btnCreateClick
-      end
-      object cmbMachines: TComboBox
-        Left = 101
-        Top = 45
-        Width = 260
-        Height = 28
-        Style = csDropDownList
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Segoe UI Semilight'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 1
-        Items.Strings = (
-          'Acorn Atom 256x192 Monochrome'
-          'Amstrad CPC 160x200 16 Colour'
-          'ZX Spectrum 256x192 16 Colour')
-      end
-      object edtName: TEdit
-        Left = 101
-        Top = 3
-        Width = 260
-        Height = 31
-        Anchors = [akLeft, akTop, akRight]
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Comfortaa'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 0
-        OnChange = edtNameChange
-        OnKeyDown = edtNameKeyDown
-      end
-    end
-    object panButtons: TPanel
-      Left = 104
-      Top = 290
-      Width = 379
-      Height = 135
-      BevelOuter = bvNone
-      ParentColor = True
+    object Panel1: TPanel
+      Left = 0
+      Top = 248
+      Width = 500
+      Height = 184
+      Align = alBottom
+      Caption = 'Panel1'
+      ShowCaption = False
       TabOrder = 0
-      object lblOpenExistingProject: TLabel
-        Left = 0
-        Top = 4
-        Width = 239
-        Height = 23
-        Cursor = crHandPoint
-        Caption = '      Open an existing project'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -19
-        Font.Name = 'Roboto'
-        Font.Style = []
-        ParentFont = False
-        StyleElements = [seClient, seBorder]
-        OnClick = lblOpenExistingProjectClick
-        OnMouseEnter = lblStartNewProjectMouseEnter
-        OnMouseLeave = lblStartNewProjectMouseLeave
-      end
-      object imgOpenExistingProject: TImage
-        Left = 0
-        Top = 8
+      ExplicitLeft = 24
+      object imgStartNewProject: TImage
+        Left = 104
+        Top = 19
         Width = 16
         Height = 16
         Cursor = crHandPoint
@@ -6390,32 +6211,42 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
           001008060000001FF3FF610000001974455874536F6674776172650041646F62
-          6520496D616765526561647971C9653C000002284944415478DAA593CB6B1351
-          14C6BF7B672681C61AB5694552EA2AD80A3541AB1B6D95FA405CE8C2852045AD
-          5514A9FF81CB6E4450901A936EAA0B97811645743615170AA2B5D30A2D71E113
-          BAA9D8A698944CE61ECFCD4C1FB4B8905C188639F7BBBF73CE77CF0822422D4B
-          D40C98CC1C1D5195F219529E1F900684614E0921F7F0D73A75101102CB7B6262
-          B09392D78701B7E28B0C03E383E7358475627D3E4E2021CDD00C276AAB463EDE
-          3F48A9AB4328E7EF8048C08A9F858C2400191CD69065907E99269CF4051866B8
-          83E31F7CC0957B287F19D6E9F9D19EA8AA5630843C85D26231289D108A9FC3CC
-          E86D145D79A33E127EC8804394EA1D4065769405862E7225B3625FF2AF1D94E6
-          17AB60A1E10C91DC9E342DDDCA1C033A2975F916036C941696FCBEFD74F8369E
-          47634B144D5D035C94175447FEBE158293E9D3267651B2E726A67359FCF95D58
-          F58BFDD8B92F81ADF1066EC3657F14C77C8051D78CB26CC59B27776D31F1E008
-          25BA4FE1C73B1BBB7AB280E7056E19F0BEA7A148AE1CF4C10A563489D9E9CF78
-          3EF2ECA270D2DDB4BDB5AD2ADCB1FF34D49CCD52195CBA3655AEB946F64170FF
-          5BDAF129F708ED7D4FA37A9028BC79139A3B0EA32E160395BEAE1EDA30070CB0
-          B6A1F8AB88B7B9DCCBA658E4A498CC1E23E5BA485EEB0796E6D9AC12364CE0DA
-          156EC0CF5763B05FBCBF746077E363E1648E17F8C2EA55C5E3F654D0E9BF01BA
-          281272616FFF58CBD4D0898256A68209FA9FA5E7DEF167ABC6BFF12FE39ACEFB
-          E55870880000000049454E44AE426082}
+          6520496D616765526561647971C9653C000003584944415478DA5D535B689367
+          187EBEFF94266DDA34E921EDFF27D1B65BABAE4CCA58E6615DBDD05E5437109D
+          1755D8AD85290A8A8230E62E4A5B54B60BD9C5186E0C84219B76ACA215A7DDA6
+          CB543CACD6DADA6AD21C4C4C9A9AA4FF6FFFE3BE1445EA0B0F1F7CEFFB3EDF7B
+          783E3273228045B32C58A6D16D99FAF742A55FD09EC7AE11865B07425DA6798E
+          2B717D6C282998E0F7320CFB0D08594C23AF0868D0A0A3BE758B67E566C0E640
+          78F02018D6468A7186AEC9E2FADD76CE598DC2D820B2D1D12C6158F7120279C1
+          B855E5A96C73DBB240D5BBC81678E423FFB6D3FC31D65997AE6FDD004C9E86CC
+          8AC82413200C439610F8F6859B27FBA42BB52E789D4E01E6F25D7878E9649FC0
+          314931B8EB78C9B321A885E74864191C3E93EDEADFE1197A4D40FB5F24D91F69
+          1DEF95CE364AA4816BF91489DB7F4495B954BAA1B36735EE7F8B48C2343FF93A
+          D57127A286668EFBD5E27C48E498344087D74949E27430C35329DDDF58C3EDF1
+          BF550BB9742D3439838AD21CE2F7EE20366BFEEE71329739626DA4EF89740E17
+          4878A0CEF2771D82363B0D755E86A12990938FC0EAB3A87E7F1B0CD54261FC57
+          289A0B251E090C5F02BB5B045FE145EA9F9F40C2FD5ECBBFA50778F233AD8705
+          1C3E80B501BC0B286BA11BF100E9BF006D8EB6AA02F333F43400FF76A4AE7C47
+          0906EA2DA97D2BF4A72350F22A4CCDC4424101535A839AB60EE8F3B3C8C7A358
+          483C80E07480E518D8CB05B0DE0F91F8FB2CC8C8E1BA1F6BCAC99A050DCFA259
+          2344FB135A7CCE1EFFA66EC813BF41CDE5E1FA602792577FC1DD078993BAC5A8
+          929B0DDA7854A772D6F5E22E258A720A8D2237D5E71B097476BFCD6A6348DE18
+          A555BD9003EB9A1DA47A032243A72602FBA6DB5FC6F3C578F25ACA262D5F8F54
+          05BB7C0EB70E353981E9D0E3A9F89C7931F8916F77A928C1E05621317C2A6281
+          095021BD2965A3BFACE19D0395AD2B41F58AF46814C37F263F3FFF9F32DCBBA3
+          6A5CEC58010822E4B4894CE8429EB05CF912827856EB5DB6DC7DC845F7CF95D9
+          11BD781B8183B14AEACA4FF68A31714D732D67E75008E770F9EAD417C126C7D1
+          37A5ECDDB9B6ECBD239B2B4ED879D2F43863FED058CB7F56F4DD9C7E71A42DC0
+          7FA5A8D6A3D3A1F9A35F9E9B1BA2799945022C3581A289C24EF19422F6F29E8A
+          01CB28148A27C5BFF72AE17FFDDA6E3B583A4E520000000049454E44AE426082}
       end
-      object lblChangeTheme: TLabel
-        Left = 0
-        Top = 79
-        Width = 159
+      object lblStartNewProject: TLabel
+        Left = 104
+        Top = 15
+        Width = 191
         Height = 23
-        Caption = '      Change Theme'
+        Cursor = crHandPoint
+        Caption = '      Start a new project'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -19
@@ -6423,54 +6254,236 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         Font.Style = []
         ParentFont = False
         StyleElements = [seClient, seBorder]
-        OnClick = lblChangeThemeClick
+        OnClick = lblStartNewProjectClick
         OnMouseEnter = lblStartNewProjectMouseEnter
         OnMouseLeave = lblStartNewProjectMouseLeave
       end
-      object imgChangeTheme: TImage
-        Left = 0
-        Top = 83
-        Width = 16
-        Height = 16
-        AutoSize = True
-        Picture.Data = {
-          0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
-          001008060000001FF3FF610000001974455874536F6674776172650041646F62
-          6520496D616765526561647971C9653C000002584944415478DA9D934D485451
-          14C77FF7CD388DE3F839E6D838686548A58515B8B02028089CC0CA9541AB2068
-          11B489A01A4D4C17516DDB04D1A245B92BD2CC8524E9268A7213C544C6348ACD
-          A868E3E8381FEF769ED98710945EDEE15E2EF7FECEFF7FEE79CADF3D3092CE9A
-          8D5A6BD6329452E4D88C59E5EDECD75DCD0D644D13E33F2F9B1236C320F8F825
-          CAD3D1A7EFB41EE0C24018BB10D43F2E5B3A3342B879A492330F865185EDBDFA
-          D1E9C3DC18F98A5D64C9B77C48AFA0F45FB29B62F7626319C7EF0EA2F282BD7A
-          FE5A604DFE7F8EBCB63E94EB4AAF4E7405245F2BB994E2A5882AB29CE0967584
-          F34B05327F83683D24E3927E523C8C43AD2637F854145C1605DD16E01EF544D9
-          8483623CEC22440D6F68490B20512CE1103F51588C406808021A67F0D99F8021
-          6A25FB4EE6A8649A12F2D9C3284D29A96C5C2069C93C1982F15111F4164E0AA0
-          CD02888579B16030C85EDC6C93A8C2C566525490A0393903B311742C845AFC0C
-          0B9F60E615B4A404D06F15F18914F12875ED9A5AAFA2B2047CA2D8EDCC90BBC1
-          C6A985B0781E2625A0ECF414D9E80446F83DAEDB2F5603AA3B4DEA7C061E15C5
-          694E91EFC9615FA49A46B1E073DEC74884481B7192C4B08DBD13C06B9CED16A0
-          4D2C74062838FB810A1D6263BE9D12AF9B9AD856B68CF9D86FB33A27CEEEAA73
-          E27F51E4C748195F70F47F5C0D503BAE63F83D949715E0B397D2F0F01076A9DD
-          B12CCCCF418DBF87EDE5DD109912D084BC88C665010AAFF6E9D98EA675355261
-          8700BC977A9E271DEE8319F377D32EAF94FED5C63F66B5D2DE6AF9A7CB91A54B
-          65C2D64EB544D1BA24C0D2773635EBD72F8A8FF40000000049454E44AE426082}
+      object panStartNew: TPanel
+        Left = 104
+        Top = 44
+        Width = 379
+        Height = 135
+        BevelOuter = bvNone
+        TabOrder = 1
+        DesignSize = (
+          379
+          135)
+        object lblMachines: TLabel
+          Left = 27
+          Top = 48
+          Width = 55
+          Height = 20
+          Caption = 'Machine'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Segoe UI Semilight'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label1: TLabel
+          Left = 27
+          Top = 9
+          Width = 40
+          Height = 20
+          Caption = 'Name'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Segoe UI Semilight'
+          Font.Style = []
+          ParentFont = False
+        end
+        object lblFile: TLabel
+          Left = 27
+          Top = 129
+          Width = 334
+          Height = 17
+          Anchors = [akLeft, akTop, akRight]
+          AutoSize = False
+          EllipsisPosition = epPathEllipsis
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Comfortaa'
+          Font.Style = []
+          ParentFont = False
+          ExplicitWidth = 326
+        end
+        object btnCancel: TButton
+          Left = 270
+          Top = 91
+          Width = 91
+          Height = 32
+          Cancel = True
+          Caption = 'Cancel'
+          TabOrder = 2
+          OnClick = btnCreateClick
+        end
+        object btnCreate: TButton
+          Left = 173
+          Top = 91
+          Width = 91
+          Height = 32
+          Caption = 'Create'
+          Enabled = False
+          ModalResult = 1
+          TabOrder = 3
+          OnClick = btnCreateClick
+        end
+        object cmbMachines: TComboBox
+          Left = 101
+          Top = 45
+          Width = 260
+          Height = 28
+          Style = csDropDownList
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Segoe UI Semilight'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 1
+          Items.Strings = (
+            'Acorn Atom 256x192 Monochrome'
+            'Amstrad CPC 160x200 16 Colour'
+            'ZX Spectrum 256x192 16 Colour')
+        end
+        object edtName: TEdit
+          Left = 101
+          Top = 3
+          Width = 260
+          Height = 31
+          Anchors = [akLeft, akTop, akRight]
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Comfortaa'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+          OnChange = edtNameChange
+          OnKeyDown = edtNameKeyDown
+        end
       end
-      object cmbThemes: TComboBox
-        Left = 166
-        Top = 79
-        Width = 213
-        Height = 27
-        Style = csDropDownList
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Roboto'
-        Font.Style = []
-        ParentFont = False
+      object panButtons: TPanel
+        Left = 104
+        Top = 44
+        Width = 379
+        Height = 135
+        BevelOuter = bvNone
+        ParentColor = True
         TabOrder = 0
-        OnChange = cmbThemesChange
+        object lblOpenExistingProject: TLabel
+          Left = 0
+          Top = 4
+          Width = 239
+          Height = 23
+          Cursor = crHandPoint
+          Caption = '      Open an existing project'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -19
+          Font.Name = 'Roboto'
+          Font.Style = []
+          ParentFont = False
+          StyleElements = [seClient, seBorder]
+          OnClick = lblOpenExistingProjectClick
+          OnMouseEnter = lblStartNewProjectMouseEnter
+          OnMouseLeave = lblStartNewProjectMouseLeave
+        end
+        object imgOpenExistingProject: TImage
+          Left = 0
+          Top = 8
+          Width = 16
+          Height = 16
+          Cursor = crHandPoint
+          AutoSize = True
+          Picture.Data = {
+            0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
+            001008060000001FF3FF610000001974455874536F6674776172650041646F62
+            6520496D616765526561647971C9653C000002284944415478DAA593CB6B1351
+            14C6BF7B672681C61AB5694552EA2AD80A3541AB1B6D95FA405CE8C2852045AD
+            5514A9FF81CB6E4450901A936EAA0B97811645743615170AA2B5D30A2D71E113
+            BAA9D8A698944CE61ECFCD4C1FB4B8905C188639F7BBBF73CE77CF0822422D4B
+            D40C98CC1C1D5195F219529E1F900684614E0921F7F0D73A75101102CB7B6262
+            B09392D78701B7E28B0C03E383E7358475627D3E4E2021CDD00C276AAB463EDE
+            3F48A9AB4328E7EF8048C08A9F858C2400191CD69065907E99269CF4051866B8
+            83E31F7CC0957B287F19D6E9F9D19EA8AA5630843C85D26231289D108A9FC3CC
+            E86D145D79A33E127EC8804394EA1D4065769405862E7225B3625FF2AF1D94E6
+            17AB60A1E10C91DC9E342DDDCA1C033A2975F916036C941696FCBEFD74F8369E
+            47634B144D5D035C94175447FEBE158293E9D3267651B2E726A67359FCF95D58
+            F58BFDD8B92F81ADF1066EC3657F14C77C8051D78CB26CC59B27776D31F1E008
+            25BA4FE1C73B1BBB7AB280E7056E19F0BEA7A148AE1CF4C10A563489D9E9CF78
+            3EF2ECA270D2DDB4BDB5AD2ADCB1FF34D49CCD52195CBA3655AEB946F64170FF
+            5BDAF129F708ED7D4FA37A9028BC79139A3B0EA32E160395BEAE1EDA30070CB0
+            B6A1F8AB88B7B9DCCBA658E4A498CC1E23E5BA485EEB0796E6D9AC12364CE0DA
+            156EC0CF5763B05FBCBF746077E363E1648E17F8C2EA55C5E3F654D0E9BF01BA
+            281272616FFF58CBD4D0898256A68209FA9FA5E7DEF167ABC6BFF12FE39ACEFB
+            E55870880000000049454E44AE426082}
+        end
+        object lblChangeTheme: TLabel
+          Left = 0
+          Top = 79
+          Width = 159
+          Height = 23
+          Caption = '      Change Theme'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -19
+          Font.Name = 'Roboto'
+          Font.Style = []
+          ParentFont = False
+          StyleElements = [seClient, seBorder]
+          OnClick = lblChangeThemeClick
+          OnMouseEnter = lblStartNewProjectMouseEnter
+          OnMouseLeave = lblStartNewProjectMouseLeave
+        end
+        object imgChangeTheme: TImage
+          Left = 0
+          Top = 83
+          Width = 16
+          Height = 16
+          AutoSize = True
+          Picture.Data = {
+            0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
+            001008060000001FF3FF610000001974455874536F6674776172650041646F62
+            6520496D616765526561647971C9653C000002584944415478DA9D934D485451
+            14C77FF7CD388DE3F839E6D838686548A58515B8B02028089CC0CA9541AB2068
+            11B489A01A4D4C17516DDB04D1A245B92BD2CC8524E9268A7213C544C6348ACD
+            A868E3E8381FEF769ED98710945EDEE15E2EF7FECEFF7FEE79CADF3D3092CE9A
+            8D5A6BD6329452E4D88C59E5EDECD75DCD0D644D13E33F2F9B1236C320F8F825
+            CAD3D1A7EFB41EE0C24018BB10D43F2E5B3A3342B879A492330F865185EDBDFA
+            D1E9C3DC18F98A5D64C9B77C48AFA0F45FB29B62F7626319C7EF0EA2F282BD7A
+            FE5A604DFE7F8EBCB63E94EB4AAF4E7405245F2BB994E2A5882AB29CE0967584
+            F34B05327F83683D24E3927E523C8C43AD2637F854145C1605DD16E01EF544D9
+            8483623CEC22440D6F68490B20512CE1103F51588C406808021A67F0D99F8021
+            6A25FB4EE6A8649A12F2D9C3284D29A96C5C2069C93C1982F15111F4164E0AA0
+            CD02888579B16030C85EDC6C93A8C2C566525490A0393903B311742C845AFC0C
+            0B9F60E615B4A404D06F15F18914F12875ED9A5AAFA2B2047CA2D8EDCC90BBC1
+            C6A985B0781E2625A0ECF414D9E80446F83DAEDB2F5603AA3B4DEA7C061E15C5
+            694E91EFC9615FA49A46B1E073DEC74884481B7192C4B08DBD13C06B9CED16A0
+            4D2C74062838FB810A1D6263BE9D12AF9B9AD856B68CF9D86FB33A27CEEEAA73
+            E27F51E4C748195F70F47F5C0D503BAE63F83D949715E0B397D2F0F01076A9DD
+            B12CCCCF418DBF87EDE5DD109912D084BC88C665010AAFF6E9D98EA675355261
+            8700BC977A9E271DEE8319F377D32EAF94FED5C63F66B5D2DE6AF9A7CB91A54B
+            65C2D64EB544D1BA24C0D2773635EBD72F8A8FF40000000049454E44AE426082}
+        end
+        object cmbThemes: TComboBox
+          Left = 166
+          Top = 79
+          Width = 213
+          Height = 27
+          Style = csDropDownList
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Roboto'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+          OnChange = cmbThemesChange
+        end
       end
     end
   end

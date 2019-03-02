@@ -35,6 +35,9 @@
 #include "Build/BuildManager.h"
 #include "Factories/DocumentEditorFactory.h"
 #include "Frames/WndProcHandlers.h"
+#include <Vcl.BaseImageCollection.hpp>
+#include <Vcl.ImageCollection.hpp>
+#include <Vcl.VirtualImageList.hpp>
 //---------------------------------------------------------------------------
 class TfrmIDE : public TFrame
 {
@@ -104,7 +107,6 @@ __published:    // IDE-managed Components
     TToolBar *tbrProject;
     TToolButton *tbnProjectExpandAll;
     TToolButton *tbnProjectCollapseAll;
-    TImageList *imgProject;
     TToolButton *tbnProjectZ1;
     TToolButton *tbnProjectShowLines;
     TToolButton *tbnProjectHideLines;
@@ -159,12 +161,15 @@ __published:    // IDE-managed Components
     TMenuItem *mnuRun;
     TImageList *imgBuildNodes;
     TElXTree *tvBuild;
-	TImageList *imgToolbar;
     TMenuItem *mnuTools;
     TMenuItem *mnuToolMachineDefinition;
     TMenuItem *mnuToolKeyboardLayout;
     TMenuItem *mnuToolGraphicsMode;
     TMenuItem *mnuSpecialThanks;
+    TImageCollection *icToolbar;
+    TVirtualImageList *vilToolbar;
+    TImageCollection *icProject;
+    TVirtualImageList *vilProject;
     void __fastcall actEditCopyExecute(TObject *Sender);
     void __fastcall actEditCutExecute(TObject *Sender);
     void __fastcall actEditPasteExecute(TObject *Sender);

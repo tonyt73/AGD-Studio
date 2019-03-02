@@ -43,6 +43,7 @@ __published:    // IDE-managed Components
     TPopupMenu *popConfigure;
     TMenuItem *Settings1;
     TMenuItem *CheckforUpdates1;
+    TPanel *Panel1;
     void __fastcall lblStartNewProjectMouseEnter(TObject *Sender);
     void __fastcall lblStartNewProjectMouseLeave(TObject *Sender);
     void __fastcall cmbThemesChange(TObject *Sender);
