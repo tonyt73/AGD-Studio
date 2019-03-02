@@ -74,6 +74,7 @@ const TPropertyInfoMap& __fastcall  GetPropertyInfo() const;
     virtual void        __fastcall  Save();
     virtual bool        __fastcall  Load();
             void        __fastcall  AssignId();
+            void        __fastcall  Close();
 
     __property         unsigned int Id          = { read = m_RefId                          };
     __property          String      File        = { read = GetFile                          };

@@ -257,6 +257,7 @@ bool __fastcall TfrmEditorMap::IsActive() const
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::OnEvent(const Event& event)
 {
+    actSmallActions->State = IsActive() ? asNormal : asSuspended;
     if (IsActive() && m_ActionMap.count(event.Id) == 1)
     {
         m_ActionMap[event.Id]->Execute();
@@ -697,6 +698,12 @@ void __fastcall TfrmEditorMap::actToggleShowLocksExecute(TObject *Sender)
 void __fastcall TfrmEditorMap::actToggleTileTypesExecute(TObject *Sender)
 {
     m_Workspace->ShowTileTypes = actToggleTileTypes->Checked;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::FrameEnter(TObject *Sender)
+{
+    actSmallActions->State = IsActive() ? asNormal : asSuspended;
+    tbrActions->State = IsActive() ? asNormal : asSuspended;
 }
 //---------------------------------------------------------------------------
 

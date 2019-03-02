@@ -188,14 +188,21 @@ void __fastcall TfrmIDE::UpdateDocumentProperties(Document* document)
 {
     if (document != nullptr)
     {
-        // unregister all categories and their properties
-        for (auto c = 0; c < lmdProperties->Categories->Count; c++)
-        {
-            for (auto p = 0; p < lmdProperties->Categories->Items[c]->Count; p++)
-            {
-                lmdProperties->UnregisterPropCategory(lmdProperties->Categories->Items[c]->Name, lmdProperties->Categories->Items[c]->Items[p]->PropName);
-            }
-        }
+//        // unregister all categories and their properties
+//        try
+//        {
+//            for (auto c = 0; c < lmdProperties->Categories->Count; c++)
+//            {
+//                for (auto p = 0; p < lmdProperties->Categories->Items[c]->Count; p++)
+//                {
+//                    lmdProperties->UnregisterPropCategory(lmdProperties->Categories->Items[c]->Name, lmdProperties->Categories->Items[c]->Items[p]->PropName);
+//                }
+//            }
+//        }
+//        catch(EAccessViolation &)
+//        {
+//            // do nothing, this is normal :-(
+//        }
         const auto properties = document->GetPropertyInfo();
         for (auto it : properties)
         {
@@ -264,16 +271,20 @@ void __fastcall TfrmIDE::lmdPropertiesClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::tvProjectItemSelectedChange(TObject *Sender, TElXTreeItem *Item)
 {
-    if (Item->Tag)
+    auto tag = (TObject*)Item->Tag;
+    if (Item->Tag && !IsBadReadPtr(tag, sizeof(TObject*)))
     {
-        auto doc = (Document*)((NativeInt)Item->Tag);
-        UpdateDocumentProperties(doc);
-        auto dockPanel = static_cast<TLMDDockPanel*>(doc->DockPanel);
-        if (dockPanel)
+        auto doc = dynamic_cast<Document*>(tag);
+        if (doc != nullptr)
         {
-            dockPanel->Activate();
-            dockPanel->Show();
-            dockPanel->SetFocus();
+            UpdateDocumentProperties(doc);
+            auto dockPanel = static_cast<TLMDDockPanel*>(doc->DockPanel);
+            if (dockPanel)
+            {
+                dockPanel->Activate();
+                dockPanel->Show();
+                dockPanel->SetFocus();
+            }
         }
     }
 }
@@ -283,9 +294,8 @@ void __fastcall TfrmIDE::OnDocumentClose(TObject *Sender, TLMDockPanelCloseActio
     auto dockPanel = dynamic_cast<TLMDDockPanel*>(Sender);
     if (dockPanel)
     {
-        action = caFree;    // this will call the editor destructor, which can optional save the document
-        Document* doc = (Document*)dockPanel->Tag;
-        doc->DockPanel = nullptr;
+        auto doc = (Document*)dockPanel->Tag;
+        doc->Close();
     }
 }
 //---------------------------------------------------------------------------
@@ -443,6 +453,13 @@ void __fastcall TfrmIDE::actViewMessagesExecute(TObject *Sender)
 void __fastcall TfrmIDE::actGameRunExecute(TObject *Sender)
 {
     m_Builder.Execute();
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::OnClose()
+{
+    // close all open dock panels
+    theDocumentManager.Close();
+    theProjectManager.Close();
 }
 //---------------------------------------------------------------------------
 

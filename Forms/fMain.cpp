@@ -69,7 +69,7 @@ void __fastcall TfrmMain::FormCloseQuery(TObject *Sender, bool &CanClose)
     SaveSettings();
     if (m_FormView == fvGameIDE)
     {
-        theProjectManager.Close();
+        IDE->OnClose();
         OnIDEClose(Sender);
         CanClose = appSettings.WelcomeSkipOnClose;
     }

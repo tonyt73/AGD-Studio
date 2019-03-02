@@ -187,6 +187,7 @@ void __fastcall DocumentManager::Clear()
     {
         for (auto document : documentType.second)
         {
+            document->Close();
             delete document;
         }
     }
@@ -202,16 +203,11 @@ void __fastcall DocumentManager::Save()
         // save all documents (except the project file) and add the document details to the project file
         for (const auto& documentType : m_Documents)
         {
-            if (documentType.first != "Game")
+            for (const auto& document : documentType.second)
             {
-                for (const auto& document : documentType.second)
-                {
-                    if (document->SubType != "Configuration")
-                    {
-                        document->Save();
-                        projectDocument->AddFile(System::File::NameWithExtension(document->File), document->Type, document->SubType);
-                    }
-                }
+                if (document->Type == "Game" && document->SubType == "Configuration") continue;
+                document->Save();
+                projectDocument->AddFile(System::File::NameWithExtension(document->File), document->Type, document->SubType);
             }
         }
         // if supported; load any changed palette mappings
@@ -312,6 +308,17 @@ bool __fastcall DocumentManager::IsFirstOfType(const Document* document) const
         }
     }
     return false;
+}
+//---------------------------------------------------------------------------
+void __fastcall DocumentManager::Close()
+{
+    for (const auto& documentType : m_Documents)
+    {
+        for (const auto& document : documentType.second)
+        {
+            document->Close();
+        }
+    }
 }
 //---------------------------------------------------------------------------
 

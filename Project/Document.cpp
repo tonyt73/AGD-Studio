@@ -37,12 +37,7 @@ __fastcall Document::Document(const String& name)
 //---------------------------------------------------------------------------
 __fastcall Document::~Document()
 {
-    auto panel = static_cast<TLMDDockPanel*>(m_DockPanel);
-    if (panel != nullptr)
-    {
-        panel->Free();
-        m_DockPanel = nullptr;
-    }
+    Close();
 }
 //----------------------------------------------------------------------------
 void __fastcall Document::RegisterProperty(const String& property, const String& category, const String& info)
@@ -70,6 +65,16 @@ void __fastcall Document::AssignId()
     if (m_SaveRefId && m_RefId == InvalidDocumentId)
     {
         m_RefId = ++s_NextRefId;
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall Document::Close()
+{
+    auto panel = static_cast<TLMDDockPanel*>(m_DockPanel);
+    if (panel != nullptr)
+    {
+        panel->Free();
+        m_DockPanel = nullptr;
     }
 }
 //---------------------------------------------------------------------------

@@ -223,6 +223,7 @@ public:        // User declarations
             __fastcall ~TfrmIDE();
 
     void    __fastcall  OnActivate(TWinControl* parent);
+    void    __fastcall  OnClose();
 
             __property  TNotifyEvent OnFormClose = { read = FOnFormClose, write = FOnFormClose };
 };

@@ -44,6 +44,7 @@ void __fastcall TfrmEditorControls::SetDocument(Document* document)
 
     ShowKeysHelp();
     UpdateColors();
+    Invalidate();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorControls::OnKeyChanged(TObject* Sender)

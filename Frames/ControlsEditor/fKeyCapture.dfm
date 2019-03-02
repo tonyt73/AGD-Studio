@@ -70,9 +70,9 @@ object frmKeyCode: TfrmKeyCode
     Font.Height = -32
     Font.Name = 'Roboto'
     Font.Style = [fsBold]
+    MaxLength = 3
     ParentFont = False
     TabOrder = 1
-    Text = '128'
     OnChange = edtKeyChange
     OnEnter = edtKeyMouseEnter
     OnExit = edtKeyMouseLeave

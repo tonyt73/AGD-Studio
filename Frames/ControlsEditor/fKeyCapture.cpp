@@ -66,6 +66,8 @@ void __fastcall TfrmKeyCode::SetKeyCode(unsigned char keyCode)
         m_KeyCode = keyCode;
         edtKey->Text = UnicodeString::StringOfChar(m_KeyCode, 1);
         UpdateKeyInfo();
+        Invalidate();
+        Parent->Invalidate();
     }
 }
 //---------------------------------------------------------------------------
