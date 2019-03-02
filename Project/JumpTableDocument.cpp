@@ -16,6 +16,8 @@ __fastcall JumpTableDocument::JumpTableDocument(const String& name)
     m_Folder = "Game\\Configuration";
     m_File = GetFile();
     m_PropertyMap["Steps[]"] = &m_Step;
+
+    DefaultJumpTable();
 }
 //---------------------------------------------------------------------------
 void __fastcall JumpTableDocument::DoSave()
@@ -39,6 +41,12 @@ void __fastcall JumpTableDocument::OnEndObject(const String& object)
 void __fastcall JumpTableDocument::OnLoading()
 {
     m_Steps.clear();
+}
+//---------------------------------------------------------------------------
+void __fastcall JumpTableDocument::OnLoaded()
+{
+    // set the default table if we loaded nothing
+    DefaultJumpTable();
 }
 //---------------------------------------------------------------------------
 unsigned char __fastcall JumpTableDocument::RawStep(int index) const
@@ -72,6 +80,35 @@ void __fastcall JumpTableDocument::SetStep(int index, int value)
 int __fastcall JumpTableDocument::GetStepCount() const
 {
     return m_Steps.size() - 1;
+}
+//---------------------------------------------------------------------------
+void __fastcall JumpTableDocument::DefaultJumpTable()
+{
+    if (m_Steps.size() == 0)
+    {
+        m_Steps.push_back(249);
+        m_Steps.push_back(250);
+        m_Steps.push_back(251);
+        m_Steps.push_back(254);
+        m_Steps.push_back(254);
+        m_Steps.push_back(255);
+        m_Steps.push_back(255);
+        m_Steps.push_back(255);
+        m_Steps.push_back(0);
+        m_Steps.push_back(0);
+        m_Steps.push_back(0);
+        m_Steps.push_back(1);
+        m_Steps.push_back(1);
+        m_Steps.push_back(1);
+        m_Steps.push_back(2);
+        m_Steps.push_back(2);
+        m_Steps.push_back(6);
+        m_Steps.push_back(7);
+        m_Steps.push_back(9);
+        m_Steps.push_back(13);
+        m_Steps.push_back(16);
+        m_Steps.push_back(99);
+    }
 }
 //---------------------------------------------------------------------------
 

@@ -13,7 +13,9 @@ private:
             void        __fastcall  DoSave();
             void        __fastcall  OnEndObject(const String& object);
             void        __fastcall  OnLoading();
-    int                 __fastcall  GetStepCount() const;
+            void        __fastcall  OnLoaded();
+            int         __fastcall  GetStepCount() const;
+            void        __fastcall  DefaultJumpTable();
 
 public:
                         __fastcall  JumpTableDocument(const String& name);
