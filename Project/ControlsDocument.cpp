@@ -80,6 +80,24 @@ void __fastcall ControlsDocument::OnLoading()
     m_Keys.clear();
 }
 //---------------------------------------------------------------------------
+void __fastcall ControlsDocument::OnLoaded()
+{
+    if (m_Keys.size() == 0)
+    {
+        m_Keys.push_back(0);
+        m_Keys.push_back(0);
+        m_Keys.push_back(0);
+        m_Keys.push_back(0);
+        m_Keys.push_back(0);
+        m_Keys.push_back(0);
+        m_Keys.push_back(0);
+        m_Keys.push_back(0);
+        m_Keys.push_back(0);
+        m_Keys.push_back(0);
+        m_Keys.push_back(0);
+    }
+}
+//---------------------------------------------------------------------------
 unsigned char __fastcall ControlsDocument::GetAsciiCode(eAgdKey key)
 {
     if (0 <= key && key < m_Keys.size())

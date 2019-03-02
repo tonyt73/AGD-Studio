@@ -14,6 +14,7 @@ private:
             void        __fastcall  DoSave();
             void        __fastcall  OnEndObject(const String& object);
             void        __fastcall  OnLoading();
+            void        __fastcall  OnLoaded();
             String      __fastcall  Get(int index);
             bool        __fastcall  IsActive() const;
 
