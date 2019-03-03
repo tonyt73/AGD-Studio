@@ -856,7 +856,7 @@ object frmIDE: TfrmIDE
     Left = 28
     Top = 88
     object mnuFile: TMenuItem
-      Caption = '&File'
+      Caption = '&Project'
       object mnuFileNewAsset: TMenuItem
         Action = actFileNewAsset
       end

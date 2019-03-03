@@ -212,6 +212,7 @@ private:    // User declarations
     DocumentEditorFactory   m_DocumentEditorFactory;
     BuildManager            m_Builder;
     std::list<EraseHandler> m_EraseHandlers;    // stops flicking
+    std::map<String,bool>   m_RegisteredCategories;
 
     void    __fastcall  UpdateDocumentProperties(Document* document);
     void    __fastcall  OnDocumentClose(TObject *Sender, TLMDockPanelCloseAction& action);

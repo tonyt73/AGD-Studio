@@ -32,6 +32,8 @@ __fastcall TfrmIDE::TfrmIDE(TComponent* Owner)
 //---------------------------------------------------------------------------
 __fastcall TfrmIDE::~TfrmIDE()
 {
+    OnClose();
+
     m_Registrar.Unsubscribe();
 
     if (Application && Application->MainForm)
@@ -188,32 +190,14 @@ void __fastcall TfrmIDE::UpdateDocumentProperties(Document* document)
 {
     if (document != nullptr)
     {
-//        // unregister all categories and their properties
-//        try
-//        {
-//            for (auto c = 0; c < lmdProperties->Categories->Count; c++)
-//            {
-//                for (auto p = 0; p < lmdProperties->Categories->Items[c]->Count; p++)
-//                {
-//                    lmdProperties->UnregisterPropCategory(lmdProperties->Categories->Items[c]->Name, lmdProperties->Categories->Items[c]->Items[p]->PropName);
-//                }
-//            }
-//        }
-//        catch(EAccessViolation &)
-//        {
-//            // do nothing, this is normal :-(
-//        }
         const auto properties = document->GetPropertyInfo();
         for (auto it : properties)
         {
-            try
+            auto category = it.second.category + "." + it.first;
+            if (m_RegisteredCategories.count(category) == 0)
             {
-                //lmdProperties->UnregisterPropCategory(it.second.category, it.first);
                 lmdProperties->RegisterPropCategory(it.second.category, it.first);
-            }
-            catch(...)
-            {
-                // ignore exception; since we've already registered this property category and there is no method to test for property registration
+                m_RegisteredCategories[category] = true;
             }
         }
         lmdProperties->Objects->SetOne(document);
@@ -271,20 +255,16 @@ void __fastcall TfrmIDE::lmdPropertiesClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::tvProjectItemSelectedChange(TObject *Sender, TElXTreeItem *Item)
 {
-    auto tag = (TObject*)Item->Tag;
-    if (Item->Tag && !IsBadReadPtr(tag, sizeof(TObject*)))
+    auto doc = reinterpret_cast<Document*>((TObject*)Item->Tag);
+    if (doc != nullptr)
     {
-        auto doc = dynamic_cast<Document*>(tag);
-        if (doc != nullptr)
+        UpdateDocumentProperties(doc);
+        auto dockPanel = static_cast<TLMDDockPanel*>(doc->DockPanel);
+        if (dockPanel)
         {
-            UpdateDocumentProperties(doc);
-            auto dockPanel = static_cast<TLMDDockPanel*>(doc->DockPanel);
-            if (dockPanel)
-            {
-                dockPanel->Activate();
-                dockPanel->Show();
-                dockPanel->SetFocus();
-            }
+            dockPanel->Activate();
+            dockPanel->Show();
+            dockPanel->SetFocus();
         }
     }
 }
@@ -457,8 +437,6 @@ void __fastcall TfrmIDE::actGameRunExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::OnClose()
 {
-    // close all open dock panels
-    theDocumentManager.Close();
     theProjectManager.Close();
 }
 //---------------------------------------------------------------------------
