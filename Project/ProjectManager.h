@@ -33,6 +33,7 @@ private:
 
     std::map<String, TElXTreeItem*> m_TreeLeafNodes;
     Elxtree::TElXTree*              m_TreeView;
+    bool                            m_IsOpen;
 
     void        __fastcall  SetTreeIcon(const String& parent, TElXTreeItem* node) const;
 

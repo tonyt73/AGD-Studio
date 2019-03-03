@@ -79,6 +79,7 @@ Document* __fastcall DocumentManager::Add(const String& type, const String& subT
         // assign an id if we don't have one, but need one
         document->AssignId();
         theProjectManager.AddToTreeView(document);
+        ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("Added Document '" + document->Name + "' to Project", etInformation));
         return document;
     }
     return nullptr;
@@ -96,11 +97,13 @@ bool __fastcall DocumentManager::Remove(const String& type, const String& name)
                 ::Messaging::Bus::Publish<DocumentChange<String>>(DocumentChange<String>("document.removing", (*it), name));
                 delete (*it);
                 dit->second.erase(it);
+                ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("Removed Document '" + (*it)->Name + "' from Project", etInformation));
                 ::Messaging::Bus::Publish<DocumentChange<String>>(DocumentChange<String>("document.removed", nullptr, name));
                 return true;
             }
         }
     }
+    ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("Tried to remove Document of Type '" + type + "' and Name '" + name + "', but document was not found in Project", etWarning));
     // wrong type? or not found
     return false;
 }
@@ -216,18 +219,22 @@ void __fastcall DocumentManager::Save()
         projectDocument->Save();
         // save other files (eg. text files)
         ::Messaging::Bus::Publish<Event>(Event("project.save"));
+        ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("Saved all Project files", etInformation));
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall DocumentManager::Load(const String& name)
 {
+    ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("Loading Project '" + name + "'", etInformation));
     auto projectDocument = dynamic_cast<ProjectDocument*>(Get("Game", "Configuration", name));
     assert(projectDocument != nullptr);
     for (const auto& fileInfo : projectDocument->Files())
     {
         ::Messaging::Bus::Publish<Event>(Event("project.loading.tick"));
+        ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("Loading Project file '" + fileInfo.Type + "." + fileInfo.SubType + "." + fileInfo.Name + "'", etInformation));
         Add(fileInfo.Type, fileInfo.SubType, fileInfo.Name);
     }
+    ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("Project '" + name + "' Loaded", etInformation));
     appSettings.LastProject = name;
 }
 //---------------------------------------------------------------------------

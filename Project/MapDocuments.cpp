@@ -6,6 +6,7 @@
 #include "Project/MapDocuments.h"
 #include "Project/WindowDocument.h"
 #include "Project/DocumentManager.h"
+#include "Messaging/Event.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -469,14 +470,11 @@ void __fastcall TiledMapDocument::UpdateEntityRooms()
         auto roomPt = TPoint((int)(entity.Pt.X / roomSize.cx), (int)(entity.Pt.Y / roomSize.cy));
 		// recalculate the entitys room based on its current position (currently only sprites/objects can be locked to rooms)
         auto object = dynamic_cast<ObjectDocument*>(entity.Image);
-		if (entity.Image->CanBeLocked && !entity.RoomLocked)
+        entity.RoomIndex = GetRoomIndex(roomPt, true);
+		if (entity.Image->CanBeLocked && !entity.RoomLocked && object)
 		{
-			entity.RoomIndex = GetRoomIndex(roomPt, true);
-            if (object)
-            {
-                object->RoomIndex = entity.RoomIndex;
-                object->State = osRoom;
-            }
+            object->RoomIndex = entity.RoomIndex;
+            object->State = osRoom;
         }
 		// update the location of the objects in the room (to screen space)
 		if (entity.Image->ImageType == itObject)
@@ -498,6 +496,7 @@ void __fastcall TiledMapDocument::UpdateEntityRooms()
     {
         m_Map.erase(std::remove_if(m_Map.begin(), m_Map.end(), [&](const Entity& e){ return e.Id == id; }));
     }
+    ::Messaging::Bus::Publish<UpdateProperties>(UpdateProperties());
 }
 //---------------------------------------------------------------------------
 bool __fastcall TiledMapDocument::IsRoomEmpty(int x, int y)

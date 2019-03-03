@@ -27,6 +27,8 @@ __fastcall TfrmIDE::TfrmIDE(TComponent* Owner)
 : TFrame(Owner)
 {
     RegisterDocumentEditors();
+    m_Registrar.Subscribe<MessageEvent>(OnMessageEvent);
+    m_Registrar.Subscribe<UpdateProperties>(OnUpdateProperties);
     tvBuild->Items->Clear();
 }
 //---------------------------------------------------------------------------
@@ -60,8 +62,6 @@ void __fastcall TfrmIDE::OnActivate(TWinControl* parent)
     {
         Parent = parent;
         Visible = true;
-        m_Registrar.Subscribe<MessageEvent>(OnMessageEvent);
-        m_Registrar.Subscribe<UpdateProperties>(OnUpdateProperties);
         if (Application && Application->MainForm)
         {
             Application->MainForm->Menu = mnuMain;
@@ -77,7 +77,6 @@ void __fastcall TfrmIDE::OnActivate(TWinControl* parent)
     }
     else
     {
-        m_Registrar.Unsubscribe();
         Visible = false;
         Parent = nullptr;
     }
@@ -87,8 +86,9 @@ void __fastcall TfrmIDE::OnMessageEvent(const MessageEvent& message)
 {
     if (message.Type < etHelpKeys)
     {
+        auto timeStamp = TDateTime::CurrentTime().TimeString();
         const String Types[] = { "Info : ", "Warn : ", "Error: ", "Debug: " };
-        memMessages->Lines->Add(Types[message.Type] + message.Message);
+        memMessages->Lines->Add(timeStamp + " : " + Types[message.Type] + message.Message);
     }
     else if (message.Type == etHelpKeys)
     {
@@ -275,6 +275,7 @@ void __fastcall TfrmIDE::OnDocumentClose(TObject *Sender, TLMDockPanelCloseActio
     if (dockPanel)
     {
         auto doc = (Document*)dockPanel->Tag;
+        ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("Closing Document: " + doc->Name, etInformation));
         doc->Close();
     }
 }
@@ -286,6 +287,7 @@ void __fastcall TfrmIDE::tvProjectDblClick(TObject *Sender)
         auto doc = (Document*)((NativeInt)tvProject->Selected->Tag);
         if (doc && doc->DockPanel == nullptr)
         {
+            ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("Opening Document: " + doc->Name, etInformation));
             auto dp = new TLMDDockPanel(this);
             if (m_DocumentEditorFactory.Create(doc, dp))
             {
@@ -303,6 +305,7 @@ void __fastcall TfrmIDE::tvProjectDblClick(TObject *Sender)
             }
             else
             {
+                ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("Failed to create editor for Document: " + doc->Name, etError));
                 delete dp;
             }
         }

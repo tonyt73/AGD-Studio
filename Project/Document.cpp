@@ -37,7 +37,6 @@ __fastcall Document::Document(const String& name)
 //---------------------------------------------------------------------------
 __fastcall Document::~Document()
 {
-    Close();
 }
 //----------------------------------------------------------------------------
 void __fastcall Document::RegisterProperty(const String& property, const String& category, const String& info)
@@ -70,12 +69,15 @@ void __fastcall Document::AssignId()
 //---------------------------------------------------------------------------
 void __fastcall Document::Close()
 {
-    JsonFile::Close();
-    auto panel = static_cast<TLMDDockPanel*>(m_DockPanel);
-    if (panel != nullptr)
+    Save();
+    if (m_DockPanel != nullptr)
     {
-        panel->Free();
-        m_DockPanel = nullptr;
+        auto panel = static_cast<TLMDDockPanel*>(m_DockPanel);
+        if (panel != nullptr)
+        {
+            panel->Free();
+            m_DockPanel = nullptr;
+        }
     }
 }
 //---------------------------------------------------------------------------
@@ -134,7 +136,7 @@ void __fastcall Document::Save()
         Pop();  // document
     }
     DoSave();
-    Close();
+    JsonFile::Close();
 }
 //---------------------------------------------------------------------------
 bool __fastcall Document::Load()

@@ -19,6 +19,7 @@ ProjectManager& ProjectManager::get()
 __fastcall ProjectManager::ProjectManager()
 : m_TreeView(nullptr)
 , m_MostRecentUsedList(nullptr)
+, m_IsOpen(false)
 {
 }
 //---------------------------------------------------------------------------
@@ -129,12 +130,14 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
         m_MostRecentUsedList->Remove(name, config->Path);
         m_MostRecentUsedList->Add(name, config->Path, config->Machine);
     }
+    m_IsOpen = true;
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::Open(const String& file)
 {
-    ::Messaging::Bus::Publish<MessageEvent>(MessageEvent(file, etInformation));
     Close();
+    ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("Loading Project: " + file, etInformation));
+    m_IsOpen = true;
     auto name = System::File::NameWithoutExtension(file);
     System::Path::ProjectName = name;
     ClearTree(name);
@@ -150,16 +153,27 @@ void __fastcall ProjectManager::Open(const String& file)
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::Save()
 {
-    theDocumentManager.Save();
+    if (m_IsOpen)
+    {
+        ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("Project Saved", etInformation));
+        theDocumentManager.Save();
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::Close()
 {
-    theDocumentManager.Clear();
+    if (m_IsOpen)
+    {
+        ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("Project Closed", etInformation));
+        theDocumentManager.Clear();
+        m_IsOpen = false;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::ClearTree(const String& rootName)
 {
+    if (!m_IsOpen) return;
+
     m_TreeLeafNodes.clear();
     m_TreeView->Items->Clear();
     m_TreeView->Items->Delete(m_TreeView->Items->Item[0]);
