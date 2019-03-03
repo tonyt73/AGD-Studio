@@ -70,6 +70,7 @@ void __fastcall Document::AssignId()
 //---------------------------------------------------------------------------
 void __fastcall Document::Close()
 {
+    JsonFile::Close();
     auto panel = static_cast<TLMDDockPanel*>(m_DockPanel);
     if (panel != nullptr)
     {
