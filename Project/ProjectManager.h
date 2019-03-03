@@ -45,9 +45,8 @@ protected:
 public:
 
                 __fastcall  ProjectManager();
-                __fastcall ~ProjectManager();
-    void        __fastcall  Initialise(Elxtree::TElXTree* treeView);
 
+    void        __fastcall  Initialise(Elxtree::TElXTree* treeView);
     void        __fastcall  New(const String& name, const String& machine);
     void        __fastcall  Open(const String& file);
     void        __fastcall  Close();

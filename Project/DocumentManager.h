@@ -43,10 +43,8 @@ public:
             bool        __fastcall  IsFirstOfType(const Document* document) const;
 
             void        __fastcall  Clear();
-            void        __fastcall  Close();
             void        __fastcall  Save();
             void        __fastcall  Load(const String& name);
-
 };
 //---------------------------------------------------------------------------
 #define theDocumentManager DocumentManager::get()

@@ -183,11 +183,11 @@ int __fastcall DocumentManager::GetAsIndex(unsigned int id) const
 //---------------------------------------------------------------------------
 void __fastcall DocumentManager::Clear()
 {
+    Save();
     for (auto documentType : m_Documents)
     {
         for (auto document : documentType.second)
         {
-            document->Close();
             delete document;
         }
     }
@@ -308,17 +308,6 @@ bool __fastcall DocumentManager::IsFirstOfType(const Document* document) const
         }
     }
     return false;
-}
-//---------------------------------------------------------------------------
-void __fastcall DocumentManager::Close()
-{
-    for (const auto& documentType : m_Documents)
-    {
-        for (const auto& document : documentType.second)
-        {
-            document->Close();
-        }
-    }
 }
 //---------------------------------------------------------------------------
 

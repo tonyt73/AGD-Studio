@@ -22,10 +22,6 @@ __fastcall ProjectManager::ProjectManager()
 {
 }
 //---------------------------------------------------------------------------
-__fastcall ProjectManager::~ProjectManager()
-{
-}
-//---------------------------------------------------------------------------
 void __fastcall ProjectManager::Initialise(Elxtree::TElXTree* treeView)
 {
     m_TreeView = treeView;
@@ -159,7 +155,6 @@ void __fastcall ProjectManager::Save()
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::Close()
 {
-    Save();
     theDocumentManager.Clear();
 }
 //---------------------------------------------------------------------------
@@ -203,7 +198,7 @@ void __fastcall ProjectManager::ClearTree(const String& rootName)
 //---------------------------------------------------------------------------
 Document* __fastcall ProjectManager::AddToTreeView(Document* document)
 {
-    if (document)
+    if (document != nullptr)
     {
         auto folder = document->Classification;
         auto node = m_TreeView->Items->AddChild(m_TreeLeafNodes[folder], document->Name);
