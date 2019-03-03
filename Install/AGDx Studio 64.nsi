@@ -8,7 +8,7 @@ SetCompressor /SOLID /FINAL lzma
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME_SMALL "AGDx Studio"
 !define PRODUCT_NAME "${PRODUCT_NAME_SMALL} 64"
-!define PRODUCT_VERSION "0.2.2 BETA"
+!define PRODUCT_VERSION "0.3.0 BETA"
 !define PRODUCT_PUBLISHER "Tony Thompson"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\ADGx Studio 64"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
