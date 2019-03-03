@@ -70,9 +70,6 @@ void __fastcall TfrmMain::FormCloseQuery(TObject *Sender, bool &CanClose)
     {
         IDE->OnClose();
         OnIDEClose(Sender);
-        // reconstruct the IDE frame
-        m_IDEFrame = nullptr;
-        GetIDE();
         CanClose = appSettings.WelcomeSkipOnClose;
     }
     else
