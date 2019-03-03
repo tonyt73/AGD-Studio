@@ -75,7 +75,7 @@ void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* 
         else if (caption == "tile sets"    ) index = tiFolderTileSets;
         else if (caption == "map"          ) index = tiFolderMaps;
     }
-    else
+    else if (node->Parent)
     {
         caption = node->Parent->Text.LowerCase();
              if (caption == "sprites"      ) index = tiAssetSprite;
@@ -93,6 +93,10 @@ void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* 
         else if (caption == "window"       ) index = tiWindow;
         else if (caption == "controls"     ) index = tiKeyboard;
         else if (caption == "jump table"   ) index = tiConfiguration;
+    }
+    else
+    {
+        int a = 0;
     }
     node->ImageIndex = index;
 }
@@ -175,8 +179,6 @@ void __fastcall ProjectManager::Close()
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::ClearTree(const String& rootName)
 {
-    if (!m_IsOpen) return;
-
     m_TreeLeafNodes.clear();
     m_TreeView->Items->Clear();
     m_TreeView->Items->Delete(m_TreeView->Items->Item[0]);
