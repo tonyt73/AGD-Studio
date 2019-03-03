@@ -31,6 +31,8 @@ private:
             void        __fastcall  OnChangeString(const OnChange<String>& event);
             void        __fastcall  OnEndObject(const String& object);
             void        __fastcall  DoSave();
+            String      __fastcall  GetGraphicsMode() const;
+            int         __fastcall  GetScreenSize(int index) const;
 
 protected:
 friend class TfrmSettings;
@@ -55,7 +57,9 @@ __published:
     __property  String       Author = { read = m_Author     , write = m_Author      };
     __property  String  Description = { read = m_Description, write = m_Description };
     __property  String      Machine = { read = m_MachineName                        };
-    // TODO: Keys, Jump Table
+    __property  String GraphicsMode = { read = GetGraphicsMode                      };
+    __property  int     ScreenWidth = { read = GetScreenSize, index = 0             };
+    __property  int    ScreenHeight = { read = GetScreenSize, index = 1             };
 };
 //---------------------------------------------------------------------------
 #endif

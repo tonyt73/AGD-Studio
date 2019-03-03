@@ -22,11 +22,14 @@ __fastcall ProjectDocument::ProjectDocument(const String& name, const String& ma
     m_SubType = "Configuration";
     m_Folder = "Game\\Configuration";
 
-    RegisterProperty("Name", "Details", "The name of your game");
-    RegisterProperty("Author", "Details", "Your name");
-    RegisterProperty("Version", "Details", "The version of your game");
-    RegisterProperty("Description", "Details", "A description of your game");
-    RegisterProperty("Machine", "Details", "The machine target of the game");
+    RegisterProperty("Name", "Project Details", "The name of your game");
+    RegisterProperty("Author", "Project Details", "Your name");
+    RegisterProperty("Version", "Project Details", "The version of your game");
+    RegisterProperty("Description", "Project Details", "A description of your game");
+    RegisterProperty("Machine", "Machine Details", "The machine target of the game");
+    RegisterProperty("GraphicsMode", "Machine Details", "The graphics mode of the target machine");
+    RegisterProperty("ScreenWidth", "Machine Details", "The width of the screen in pixels");
+    RegisterProperty("ScreenHeight", "Machine Details", "The height of the screen in pixels");
 
     // json loading properties
     m_PropertyMap["Project.Version"] = &m_Version;
@@ -64,6 +67,16 @@ void __fastcall ProjectDocument::OnEndObject(const String& object)
 const MachineConfig& __fastcall ProjectDocument::MachineConfiguration() const
 {
     return *m_MachineConfig;
+}
+//---------------------------------------------------------------------------
+String __fastcall ProjectDocument::GetGraphicsMode() const
+{
+    return m_MachineConfig->GraphicsMode()->Name;
+}
+//---------------------------------------------------------------------------
+int __fastcall ProjectDocument::GetScreenSize(int index) const
+{
+    return index ? m_MachineConfig->GraphicsMode()->Height : m_MachineConfig->GraphicsMode()->Width;
 }
 //---------------------------------------------------------------------------
 MachineConfig& __fastcall ProjectDocument::WritableMachineConfiguration() const
