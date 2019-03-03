@@ -114,7 +114,7 @@ void __fastcall TfrmEditorWindow::ShowKeysHelp()
     const String help =
         "Cursor Keys       : Move Window\r\n"
         "Shift+Cursor Keys : Resize Window\r\n";
-    ::Messaging::Bus::Publish<MessageEvent>(HelpKeysMessageEvent(help));
+    HelpKeysMessage(help);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorWindow::imgViewMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)

@@ -426,7 +426,7 @@ void __fastcall TfrmEditorMap::ShowKeysHelp()
         "Ctrl + Shift + G      : Toggle tile grid\r\n"
         "Alt + E               : Toggle screen edit mode (multiple/single)\r\n"
         "Alt + R               : Toggle start room edit mode\r\n";
-    ::Messaging::Bus::Publish<MessageEvent>(HelpKeysMessageEvent(help));
+    HelpKeysMessage(help);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::imgWorkspaceMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate)

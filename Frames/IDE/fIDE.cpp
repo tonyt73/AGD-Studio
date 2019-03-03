@@ -279,7 +279,7 @@ void __fastcall TfrmIDE::OnDocumentClose(TObject *Sender, TLMDockPanelCloseActio
     if (dockPanel)
     {
         auto doc = (Document*)dockPanel->Tag;
-        ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("[IDE] Closing Document: " + doc->Name, etInformation));
+        InformationMessage("[IDE] Closing Document: " + doc->Name);
         doc->Close();
     }
 }
@@ -291,7 +291,7 @@ void __fastcall TfrmIDE::tvProjectDblClick(TObject *Sender)
         auto doc = (Document*)((NativeInt)tvProject->Selected->Tag);
         if (doc && doc->DockPanel == nullptr)
         {
-            ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("[IDE] Opening Document: " + doc->Name, etInformation));
+            InformationMessage("[[IDE] Opening Document: " + doc->Name);
             auto dp = new TLMDDockPanel(this);
             if (m_DocumentEditorFactory.Create(doc, dp))
             {
@@ -309,7 +309,7 @@ void __fastcall TfrmIDE::tvProjectDblClick(TObject *Sender)
             }
             else
             {
-                ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("[IDE] Failed to create editor for Document: " + doc->Name, etError));
+                ErrorMessage("[IDE] Failed to create editor for Document: " + doc->Name);
                 delete dp;
             }
         }

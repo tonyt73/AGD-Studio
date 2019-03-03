@@ -70,7 +70,7 @@ bool __fastcall TfrmEditorControls::IsActive() const
 void __fastcall TfrmEditorControls::ShowKeysHelp()
 {
     const String help = "Enter the character for the key or an ASCII code from 1 - 127.\r\nDelete the character to unset it.";
-    ::Messaging::Bus::Publish<MessageEvent>(HelpKeysMessageEvent(help));
+    HelpKeysMessage(help);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorControls::FrameMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate)

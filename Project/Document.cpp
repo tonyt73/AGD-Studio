@@ -94,12 +94,12 @@ void __fastcall Document::SetName(String name)
         }
         auto newFile = GetFile();
         System::File::Rename(oldFile, newFile);
-        ::Messaging::Bus::Publish<MessageEvent>(ErrorMessageEvent("[Document] Renamed document from [" + oldFile + "] to [" + newFile + "]"));
+        ErrorMessage("[Document] Renamed document from [" + oldFile + "] to [" + newFile + "]");
         ::Messaging::Bus::Publish<DocumentChange<String>>(DocumentChange<String>("document.renamed", this, oldName));
     }
     else
     {
-        ::Messaging::Bus::Publish<MessageEvent>(ErrorMessageEvent("[Document] Failed to rename document from [" + oldFile + "] to [" + newFile + "]"));
+        ErrorMessage("[Document] Failed to rename document from [" + oldFile + "] to [" + newFile + "]");
     }
     m_File = GetFile();
 }

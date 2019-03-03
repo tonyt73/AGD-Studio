@@ -34,7 +34,7 @@ void __fastcall TfrmEditorJumpTable::ShowKeysHelp()
     const String help =
         "Left/Right Cursor Keys : Move Active Step\r\n"
         "Up/Down Cursor Keys    : Adjust Step Value\r\n";
-    ::Messaging::Bus::Publish<MessageEvent>(HelpKeysMessageEvent(help));
+    HelpKeysMessage(help);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorJumpTable::FrameMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate)

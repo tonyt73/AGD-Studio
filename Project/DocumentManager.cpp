@@ -79,7 +79,7 @@ Document* __fastcall DocumentManager::Add(const String& type, const String& subT
         // assign an id if we don't have one, but need one
         document->AssignId();
         theProjectManager.AddToTreeView(document);
-        ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("[DocumentManager] Added Document '" + document->Name + "' to Project", etInformation));
+        InformationMessage("[DocumentManager] Added Document '" + document->Name + "' to Project");
         return document;
     }
     return nullptr;
@@ -97,13 +97,13 @@ bool __fastcall DocumentManager::Remove(const String& type, const String& name)
                 ::Messaging::Bus::Publish<DocumentChange<String>>(DocumentChange<String>("document.removing", (*it), name));
                 delete (*it);
                 dit->second.erase(it);
-                ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("[DocumentManager] Removed Document '" + (*it)->Name + "' from Project", etInformation));
+                InformationMessage("[DocumentManager] Removed Document '" + (*it)->Name + "' from Project");
                 ::Messaging::Bus::Publish<DocumentChange<String>>(DocumentChange<String>("document.removed", nullptr, name));
                 return true;
             }
         }
     }
-    ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("[DocumentManager] Tried to remove Document of Type '" + type + "' and Name '" + name + "', but document was not found in Project", etWarning));
+    WarningMessage("[DocumentManager] Tried to remove Document of Type '" + type + "' and Name '" + name + "', but document was not found in Project");
     // wrong type? or not found
     return false;
 }
@@ -220,22 +220,22 @@ void __fastcall DocumentManager::Save()
         projectDocument->Save();
         // save other files (eg. text files)
         ::Messaging::Bus::Publish<Event>(Event("project.save"));
-        ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("[DocumentManager] Saved all Project files", etInformation));
+        InformationMessage("[DocumentManager] Saved all Project files");
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall DocumentManager::Load(const String& name)
 {
-    ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("[DocumentManager] Loading Project '" + name + "'", etInformation));
+    InformationMessage("[DocumentManager] Loading Project '" + name + "'");
     auto projectDocument = dynamic_cast<ProjectDocument*>(Get("Game", "Configuration", name));
     assert(projectDocument != nullptr);
     for (const auto& fileInfo : projectDocument->Files())
     {
         ::Messaging::Bus::Publish<Event>(Event("project.loading.tick"));
-        ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("[DocumentManager] Loading Project file '" + fileInfo.Type + "." + fileInfo.SubType + "." + fileInfo.Name + "'", etInformation));
+        InformationMessage("[DocumentManager] Loading Project file '" + fileInfo.Type + "." + fileInfo.SubType + "." + fileInfo.Name + "'");
         Add(fileInfo.Type, fileInfo.SubType, fileInfo.Name);
     }
-    ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("[DocumentManager] Project '" + name + "' Loaded", etInformation));
+    InformationMessage("[DocumentManager] Project '" + name + "' Loaded");
     appSettings.LastProject = name;
 }
 //---------------------------------------------------------------------------

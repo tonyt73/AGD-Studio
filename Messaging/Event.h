@@ -65,51 +65,12 @@ public:
     __property  String      Message = { read = m_Id };
     __property  MessageType Type    = { read = m_MessageType };
 };
-//---------------------------------------------------------------------------
-class ErrorMessageEvent : public MessageEvent
-{
-public:
-    __fastcall ErrorMessageEvent(const String& message)
-    : MessageEvent(message, etError)
-    {
-    }
-};
-//---------------------------------------------------------------------------
-class WarningMessageEvent : public MessageEvent
-{
-public:
-    __fastcall WarningMessageEvent(const String& message)
-    : MessageEvent(message, etWarning)
-    {
-    }
-};
-//---------------------------------------------------------------------------
-class InformationMessageEvent : public MessageEvent
-{
-public:
-    __fastcall InformationMessageEvent(const String& message)
-    : MessageEvent(message, etInformation)
-    {
-    }
-};
-//---------------------------------------------------------------------------
-class DebugMessageEvent : public MessageEvent
-{
-public:
-    __fastcall DebugMessageEvent(const String& message)
-    : MessageEvent(message, etDebug)
-    {
-    }
-};
-//---------------------------------------------------------------------------
-class HelpKeysMessageEvent : public MessageEvent
-{
-public:
-    __fastcall HelpKeysMessageEvent(const String& message)
-    : MessageEvent(message, etHelpKeys)
-    {
-    }
-};
+#define ClearMessage(a) ::Messaging::Bus::Publish<MessageEvent>(MessageEvent((a), etClear))
+#define ErrorMessage(a) ::Messaging::Bus::Publish<MessageEvent>(MessageEvent((a), etError))
+#define WarningMessage(a) ::Messaging::Bus::Publish<MessageEvent>(MessageEvent((a), etWarning))
+#define InformationMessage(a) ::Messaging::Bus::Publish<MessageEvent>(MessageEvent((a), etInformation))
+#define DebugMessage(a) ::Messaging::Bus::Publish<MessageEvent>(MessageEvent((a), etDebug))
+#define HelpKeysMessage(a) ::Messaging::Bus::Publish<MessageEvent>(MessageEvent((a), etHelpKeys))
 //---------------------------------------------------------------------------
 class RoomSelected : public Event
 {
