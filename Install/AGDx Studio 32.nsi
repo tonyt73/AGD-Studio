@@ -8,7 +8,7 @@ SetCompressor /SOLID lzma
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME_SMALL "AGDx Studio"
 !define PRODUCT_NAME "${PRODUCT_NAME_SMALL} 32"
-!define PRODUCT_VERSION "0.2.0 BETA"
+!define PRODUCT_VERSION "0.2.2 BETA"
 !define PRODUCT_PUBLISHER "Tony Thompson"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
@@ -166,6 +166,7 @@ Section "Main files" SEC01
   File "..\Binaries\32\vcl260.bpl"
   File "..\Binaries\32\vclactnband260.bpl"
   File "..\Binaries\32\vclimg260.bpl"
+  File "..\Binaries\32\vclsmp260.bpl"
   File "..\Binaries\32\vclwinx260.bpl"
   File "..\Binaries\32\vclx260.bpl"
   SetOverwrite off
@@ -597,6 +598,7 @@ Section Uninstall
   Delete "$INSTDIR\vclactnband260.bpl"
   Delete "$INSTDIR\vclimg260.bpl"
   Delete "$INSTDIR\vclwinx260.bpl"
+  Delete "$INSTDIR\vclsmp260.bpl"
   Delete "$INSTDIR\vclx260.bpl"
 
   ; Application Folders
