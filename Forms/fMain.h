@@ -25,7 +25,6 @@ __published:    // IDE-managed Components
     void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
     void __fastcall FormActivate(TObject *Sender);
 private:    // User declarations
-    void __fastcall AppMessage(tagMSG &Msg, bool &Handled);
     void __fastcall OnIDEClose(TObject *Sender);
     void __fastcall OnWelcomeDone(TObject *Sender);
     void __fastcall ShowWelcomeDialog();

@@ -20,7 +20,6 @@ __fastcall TfrmMain::TfrmMain(TComponent* Owner)
 //---------------------------------------------------------------------------
 void __fastcall TfrmMain::FormCreate(TObject *Sender)
 {
-    Application->OnMessage = AppMessage;
     // check command line parameters
     if (!System::File::Exists(ParamStr(1)))
     {
@@ -71,6 +70,11 @@ void __fastcall TfrmMain::FormCloseQuery(TObject *Sender, bool &CanClose)
     {
         IDE->OnClose();
         OnIDEClose(Sender);
+        // reconstruct the IDE frame
+        auto frame = m_IDEFrame.release();
+        delete frame;
+        m_IDEFrame = nullptr;
+        GetIDE();
         CanClose = appSettings.WelcomeSkipOnClose;
     }
     else
@@ -106,15 +110,6 @@ TfrmIDE* __fastcall TfrmMain::GetIDE()
         theProjectManager.Initialise(m_IDEFrame->tvProject);
     }
     return m_IDEFrame.get();
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmMain::AppMessage(tagMSG &Msg, bool &Handled)
-{
-    if (Msg.message == WM_DPICHANGED)
-    {
-        // adjust toolbars
-        int a = 0;
-    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmMain::OnIDEClose(TObject *Sender)
