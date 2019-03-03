@@ -178,6 +178,13 @@ _fastcall TiledMapDocument::TiledMapDocument(const String& name)
     m_Folder = "Game\\Map";
     RegisterProperty("StartLocation", "Start Room", "The coordinates of the start room into the map");
     RegisterProperty("StartScreenIndex", "AGD Screen Index", "The index of the start screen");
+	RegisterProperty("StartRoomIndex", "Start Room Details", "The AGD room index of the start location");
+	RegisterProperty("StartRoomX", "Start Room Details", "The rooms across to the start room location");
+	RegisterProperty("StartRoomY", "Start Room Details", "The rooms down to the start room location");
+    RegisterProperty("NumberOfRooms","Map Details","The number of rooms defined");
+    RegisterProperty("MaxRoomsAcross","Map Details","The maximum number of rooms across that you can define");
+    RegisterProperty("MaxRoomsDown","Map Details","The maximum number of rooms down that you can define");
+
     // json loading properties
     m_PropertyMap["Map.StartLocation"] = &StartRoomIndex;
     m_PropertyMap["Map.Entities[].X"] = &m_EntityLoader.m_Pt.x;
@@ -577,6 +584,21 @@ const TRect& __fastcall TiledMapDocument::GetWindow() const
         return wi->Rect;
     }
     return TRect();
+}
+//---------------------------------------------------------------------------
+int __fastcall TiledMapDocument::GetNumberOfRooms()
+{
+    int count = 0;
+    for (auto room : m_RoomMapping)
+    {
+        count += room == 255 ? 0 : 1;
+    }
+    return count;
+}
+//---------------------------------------------------------------------------
+int __fastcall TiledMapDocument::GetMaxRooms(int index)
+{
+    return index ? g_MaxMapRoomsDown : g_MaxMapRoomsAcross;
 }
 //---------------------------------------------------------------------------
 

@@ -92,6 +92,8 @@ protected:
             int         __fastcall  GetStartRoomCoords(int index) const;
             void        __fastcall  SetStartRoomCoords(const TPoint& coords);
            const TRect& __fastcall  GetWindow() const;
+            int         __fastcall  GetNumberOfRooms();
+            int         __fastcall  GetMaxRooms(int index);
 
           __property  const TRect&  Window = { read = GetWindow };
 
@@ -114,6 +116,9 @@ __published:
 	__property          int         StartRoomIndex  = { read = m_StartRoomIndex  };
 	__property          int         StartRoomX      = { read = GetStartRoomCoords, index = 0 };
 	__property          int         StartRoomY      = { read = GetStartRoomCoords, index = 1 };
+    __property          int         NumberOfRooms   = { read = GetNumberOfRooms };
+    __property          int         MaxRoomsAcross  = { read = GetMaxRooms, index = 0 };
+    __property          int         MaxRoomsDown    = { read = GetMaxRooms, index = 1 };
 };
 //---------------------------------------------------------------------------
 #endif
