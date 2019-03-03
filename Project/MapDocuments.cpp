@@ -280,13 +280,13 @@ void __fastcall TiledMapDocument::OnEndObject(const String& object)
             }
             else
             {
-                ::Messaging::Bus::Publish<MessageEvent>(ErrorMessageEvent("The Workspace editor failed to load the required image for a map entity."));
+                ::Messaging::Bus::Publish<MessageEvent>(ErrorMessageEvent("[TiledMap] The Workspace editor failed to load the required image for a map entity."));
             }
             m_EntityLoader.Clear();
         }
         else
         {
-            ::Messaging::Bus::Publish<MessageEvent>(ErrorMessageEvent("Encountered an invalid map entity while loading workspace JSON object"));
+            ::Messaging::Bus::Publish<MessageEvent>(ErrorMessageEvent("[TiledMap] Encountered an invalid map entity while loading workspace JSON object"));
         }
     }
     else if (object == "Map.ScratchPad[]")
@@ -300,13 +300,13 @@ void __fastcall TiledMapDocument::OnEndObject(const String& object)
             }
             else
             {
-                ::Messaging::Bus::Publish<MessageEvent>(ErrorMessageEvent("The ScatchPad editor failed to load the required image for a map entity."));
+                ::Messaging::Bus::Publish<MessageEvent>(ErrorMessageEvent("[TiledMap] The ScatchPad editor failed to load the required image for a map entity."));
             }
             m_EntityLoader.Clear();
         }
         else
         {
-            ::Messaging::Bus::Publish<MessageEvent>(ErrorMessageEvent("Encountered an invalid map entity while loading scratch pad JSON object"));
+            ::Messaging::Bus::Publish<MessageEvent>(ErrorMessageEvent("[TiledMap] Encountered an invalid map entity while loading scratch pad JSON object"));
         }
     }
     else if (object == "Map.RoomMapping.Indexes[]")
@@ -451,7 +451,7 @@ void __fastcall TiledMapDocument::SetStartRoomCoords(const TPoint& coords)
     else
     {
         // post an error to the message list
-        ::Messaging::Bus::Publish<MessageEvent>(ErrorMessageEvent("Cannot set an unused screen as the games Start Location"));
+        ::Messaging::Bus::Publish<MessageEvent>(ErrorMessageEvent("[TiledMap] Cannot set an unused screen as the games Start Location"));
     }
 }
 //---------------------------------------------------------------------------
@@ -568,7 +568,7 @@ void __fastcall TiledMapDocument::OnLoaded()
 {
     if (m_RoomMapping.size() != m_RoomMappingWidth * m_RoomMappingHeight)
     {
-        ::Messaging::Bus::Publish<MessageEvent>(ErrorMessageEvent("The Room Mapping object in the TileMap.json file has " + IntToStr((int)m_RoomMapping.size()) + " indexes when it should have " + IntToStr(m_RoomMappingWidth * m_RoomMappingHeight)));
+        ::Messaging::Bus::Publish<MessageEvent>(ErrorMessageEvent("[TiledMap] The Room Mapping object in the TileMap.json file has " + IntToStr((int)m_RoomMapping.size()) + " indexes when it should have " + IntToStr(m_RoomMappingWidth * m_RoomMappingHeight)));
     }
     GetMinimalMapSize();
     UpdateScreenCoords();

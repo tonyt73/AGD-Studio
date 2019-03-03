@@ -30,7 +30,6 @@ __fastcall Document::Document(const String& name)
     RegisterProperty("Path", "Details", "The full path of the document");
     RegisterProperty("Name", "Details", "The name of the asset/document");
     RegisterProperty("Classification", "Details", "The classification of the document");
-    //m_PropertyMap["Document.Name"] = &m_Name;
     m_PropertyMap["Document.RefId"] = &m_RefId;
     m_File = GetFile();
 }
@@ -95,11 +94,12 @@ void __fastcall Document::SetName(String name)
         }
         auto newFile = GetFile();
         System::File::Rename(oldFile, newFile);
+        ::Messaging::Bus::Publish<MessageEvent>(ErrorMessageEvent("[Document] Renamed document from [" + oldFile + "] to [" + newFile + "]"));
         ::Messaging::Bus::Publish<DocumentChange<String>>(DocumentChange<String>("document.renamed", this, oldName));
     }
     else
     {
-        ::Messaging::Bus::Publish<MessageEvent>(ErrorMessageEvent("Failed to rename document from [" + oldFile + "] to [" + newFile + "]"));
+        ::Messaging::Bus::Publish<MessageEvent>(ErrorMessageEvent("[Document] Failed to rename document from [" + oldFile + "] to [" + newFile + "]"));
     }
     m_File = GetFile();
 }

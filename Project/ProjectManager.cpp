@@ -99,6 +99,8 @@ void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* 
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::New(const String& name, const String& machine)
 {
+    ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("[ProjectManager] Creating new Project: '" + name + "' for machine '" + machine + ";", etClear));
+    ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("[ProjectManager] Project Saved", etInformation));
     System::Path::ProjectName = name;
     Close();
     if (m_TreeView)
@@ -136,7 +138,8 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
 void __fastcall ProjectManager::Open(const String& file)
 {
     Close();
-    ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("Loading Project: " + file, etInformation));
+    ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("[ProjectManager] Loading Project: " + file, etClear));
+    Application->ProcessMessages();
     m_IsOpen = true;
     auto name = System::File::NameWithoutExtension(file);
     System::Path::ProjectName = name;
@@ -155,7 +158,7 @@ void __fastcall ProjectManager::Save()
 {
     if (m_IsOpen)
     {
-        ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("Project Saved", etInformation));
+        ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("[ProjectManager] Project Saved", etInformation));
         theDocumentManager.Save();
     }
 }
@@ -164,7 +167,7 @@ void __fastcall ProjectManager::Close()
 {
     if (m_IsOpen)
     {
-        ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("Project Closed", etInformation));
+        ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("[ProjectManager] Project Closed", etInformation));
         theDocumentManager.Clear();
         m_IsOpen = false;
     }
