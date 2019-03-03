@@ -50,7 +50,7 @@ public:
     __property  const Document* document = { read = m_Document };
 };
 //---------------------------------------------------------------------------
-enum MessageType { etInformation, etWarning, etError, etDebug, etHelpKeys };
+enum MessageType { etInformation, etWarning, etError, etDebug, etClear, etHelpKeys };
 class MessageEvent : public Event
 {
 protected:

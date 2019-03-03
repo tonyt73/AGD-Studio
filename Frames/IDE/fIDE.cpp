@@ -86,8 +86,12 @@ void __fastcall TfrmIDE::OnMessageEvent(const MessageEvent& message)
 {
     if (message.Type < etHelpKeys)
     {
+        if (message.Type == etClear)
+        {
+            memMessages->Lines->Clear();
+        }
         auto timeStamp = TDateTime::CurrentTime().TimeString();
-        const String Types[] = { "Info : ", "Warn : ", "Error: ", "Debug: " };
+        const String Types[] = { "Info : ", "Warn : ", "Error: ", "Debug: ", "Info : " };
         memMessages->Lines->Add(timeStamp + " : " + Types[message.Type] + message.Message);
     }
     else if (message.Type == etHelpKeys)
@@ -275,7 +279,7 @@ void __fastcall TfrmIDE::OnDocumentClose(TObject *Sender, TLMDockPanelCloseActio
     if (dockPanel)
     {
         auto doc = (Document*)dockPanel->Tag;
-        ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("Closing Document: " + doc->Name, etInformation));
+        ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("[IDE] Closing Document: " + doc->Name, etInformation));
         doc->Close();
     }
 }
@@ -287,7 +291,7 @@ void __fastcall TfrmIDE::tvProjectDblClick(TObject *Sender)
         auto doc = (Document*)((NativeInt)tvProject->Selected->Tag);
         if (doc && doc->DockPanel == nullptr)
         {
-            ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("Opening Document: " + doc->Name, etInformation));
+            ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("[IDE] Opening Document: " + doc->Name, etInformation));
             auto dp = new TLMDDockPanel(this);
             if (m_DocumentEditorFactory.Create(doc, dp))
             {
@@ -305,7 +309,7 @@ void __fastcall TfrmIDE::tvProjectDblClick(TObject *Sender)
             }
             else
             {
-                ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("Failed to create editor for Document: " + doc->Name, etError));
+                ::Messaging::Bus::Publish<MessageEvent>(MessageEvent("[IDE] Failed to create editor for Document: " + doc->Name, etError));
                 delete dp;
             }
         }
