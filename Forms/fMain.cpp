@@ -71,8 +71,6 @@ void __fastcall TfrmMain::FormCloseQuery(TObject *Sender, bool &CanClose)
         IDE->OnClose();
         OnIDEClose(Sender);
         // reconstruct the IDE frame
-        auto frame = m_IDEFrame.release();
-        delete frame;
         m_IDEFrame = nullptr;
         GetIDE();
         CanClose = appSettings.WelcomeSkipOnClose;
@@ -88,9 +86,8 @@ void __fastcall TfrmMain::FormDestroy(TObject *Sender)
     Welcome->OnActivate(nullptr);
     IDE->OnActivate(nullptr);
     m_FormView = fvNone;
-
-    m_WelcomeFrame = nullptr;
     m_IDEFrame = nullptr;
+    m_WelcomeFrame = nullptr;
 }
 //---------------------------------------------------------------------------
 TfrmWelcomeDialog* __fastcall TfrmMain::GetWelcome()
