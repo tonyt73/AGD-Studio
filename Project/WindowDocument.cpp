@@ -21,16 +21,30 @@ __fastcall WindowDocument::WindowDocument(const String& name)
     RegisterProperty("Bottom", "Position", "The bottom most character row of the window");
     RegisterProperty("Width", "Dimensions", "The width in characters of the window");
     RegisterProperty("Height", "Dimensions", "The height in characters of the window");
+    RegisterProperty("Columns", "Screen Resolution", "The width in characters of the graphics mode");
+    RegisterProperty("Rows", "Screen Resolution", "The height in characters of the graphics mode");
+    RegisterProperty("PixelsWidth", "Screen Resolution", "The width in pixels of the screens graphics mode");
+    RegisterProperty("PixelsHeight", "Screen Resolution", "The height in pixels of the screens graphics mode");
     // json loading properties
     m_PropertyMap["Window.Left"] = &m_Rect.Left;
     m_PropertyMap["Window.Top"] = &m_Rect.Top;
     m_PropertyMap["Window.Right"] = &m_Rect.Right;
     m_PropertyMap["Window.Bottom"] = &m_Rect.Bottom;
-    m_Rect.Left = 0;
-    m_Rect.Top = 0;
-    m_Rect.Right = 1;
-    m_Rect.Bottom = 1;
+
     m_File = GetFile();
+
+    if (theDocumentManager.ProjectConfig() != nullptr)
+    {
+        const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
+        m_SizeInCharacters.cx = mc.GraphicsMode()->Width  / mc.ImageSizing[itTile].Minimum.cx;
+        m_SizeInCharacters.cy = mc.GraphicsMode()->Height / mc.ImageSizing[itTile].Minimum.cy;
+        m_SizeInPixels.cx = mc.GraphicsMode()->Width;
+        m_SizeInPixels.cy = mc.GraphicsMode()->Height;
+        m_Rect.Left = 0;
+        m_Rect.Top = 0;
+        m_Rect.Right = m_SizeInCharacters.cx - 1;
+        m_Rect.Bottom = m_SizeInCharacters.cy - 1;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall WindowDocument::DoSave()
@@ -47,15 +61,20 @@ void __fastcall WindowDocument::OnLoaded()
 {
     const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
 
-    if (m_Rect.Width() == 0)
+    m_SizeInCharacters.cx = mc.GraphicsMode()->Width  / mc.ImageSizing[itTile].Minimum.cx;
+    m_SizeInCharacters.cy = mc.GraphicsMode()->Height / mc.ImageSizing[itTile].Minimum.cy;
+    m_SizeInPixels.cx = mc.GraphicsMode()->Width;
+    m_SizeInPixels.cy = mc.GraphicsMode()->Height;
+
+    if (m_Rect.Width() <= 1)
     {
         m_Rect.Left = 0;
-        m_Rect.Right = (mc.GraphicsMode()->Width / mc.ImageSizing[itTile].Minimum.cx) - 1;
+        m_Rect.Right = m_SizeInCharacters.cx - 1;
     }
-    if (m_Rect.Height() == 0)
+    if (m_Rect.Height() <= 1)
     {
         m_Rect.Top = 0;
-        m_Rect.Bottom = (mc.GraphicsMode()->Height / mc.ImageSizing[itTile].Minimum.cy) - 1;
+        m_Rect.Bottom = m_SizeInCharacters.cy - 1;
     }
 }
 //---------------------------------------------------------------------------
@@ -69,13 +88,20 @@ int __fastcall WindowDocument::Get(int index)
         case 3: return m_Rect.Bottom; break;
         case 4: return m_Rect.Width(); break;
         case 5: return m_Rect.Height(); break;
+        case 6: return m_SizeInCharacters.cx; break;
+        case 7: return m_SizeInCharacters.cy; break;
+        case 8: return m_SizeInPixels.cx; break;
+        case 9: return m_SizeInPixels.cy; break;
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall WindowDocument::Set(const TRect& rect)
 {
-    m_Rect = rect;
-    ::Messaging::Bus::Publish<WindowChangedEvent>(WindowChangedEvent(rect));
+    if (rect.Width() > 8 && rect.Height() > 4)
+    {
+        m_Rect = rect;
+        ::Messaging::Bus::Publish<WindowChangedEvent>(WindowChangedEvent(rect));
+    }
 }
 //---------------------------------------------------------------------------
 
