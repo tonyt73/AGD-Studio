@@ -24,6 +24,7 @@ private:	// User declarations
     std::map<unsigned char, String> m_KeyMap;
 
     unsigned char   m_KeyCode;
+    bool            m_NotSet;
 
     void            __fastcall  UpdateKeyInfo();
     void            __fastcall  SetKeyCode(unsigned char keyCode);

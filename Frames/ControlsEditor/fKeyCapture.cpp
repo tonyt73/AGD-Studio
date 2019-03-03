@@ -10,6 +10,7 @@
 __fastcall TfrmKeyCode::TfrmKeyCode(TComponent* Owner)
 : TFrame(Owner)
 , m_KeyCode(0)
+, m_NotSet(true)
 {
     m_KeyMap[0] = "Not Set";
     m_KeyMap[32] = "Space";
@@ -26,14 +27,24 @@ void __fastcall TfrmKeyCode::edtKeyKeyPress(TObject *Sender, System::WideChar &K
     if (Key == VK_RETURN)
     {
         auto oldKeyCode = m_KeyCode;
-        if (edtKey->Text.Length() == 1)
+        if (edtKey->Text == "")
         {
-            m_KeyCode = edtKey->Text[1];
+            m_NotSet = true;
+            m_KeyCode = 0;
         }
         else
         {
-            m_KeyCode = std::min(127, StrToIntDef(edtKey->Text, 0));
-            edtKey->Text = IntToStr(m_KeyCode);
+            m_NotSet = false;
+            if (edtKey->Text.Length() == 1)
+            {
+
+                m_KeyCode = edtKey->Text[1];
+            }
+            else
+            {
+                m_KeyCode = std::min(127, StrToIntDef(edtKey->Text, 0));
+                edtKey->Text = IntToStr(m_KeyCode);
+            }
         }
         if (FOnChanged != nullptr && oldKeyCode != m_KeyCode)
         {
@@ -64,6 +75,7 @@ void __fastcall TfrmKeyCode::SetKeyCode(unsigned char keyCode)
     if (0 <= keyCode and keyCode < 128)
     {
         m_KeyCode = keyCode;
+        m_NotSet = keyCode == 0;
         edtKey->Text = UnicodeString::StringOfChar(m_KeyCode, 1);
         UpdateKeyInfo();
         Invalidate();
