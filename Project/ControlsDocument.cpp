@@ -28,6 +28,7 @@ __fastcall ControlsDocument::ControlsDocument(const String& name)
     // json loading properties
     m_PropertyMap["Keys[]"] = &m_Key;
     m_File = GetFile();
+    DefaultKeys();
 }
 //---------------------------------------------------------------------------
 void __fastcall ControlsDocument::DoSave()
@@ -82,20 +83,7 @@ void __fastcall ControlsDocument::OnLoading()
 //---------------------------------------------------------------------------
 void __fastcall ControlsDocument::OnLoaded()
 {
-    if (m_Keys.size() == 0)
-    {
-        m_Keys.push_back(0);
-        m_Keys.push_back(0);
-        m_Keys.push_back(0);
-        m_Keys.push_back(0);
-        m_Keys.push_back(0);
-        m_Keys.push_back(0);
-        m_Keys.push_back(0);
-        m_Keys.push_back(0);
-        m_Keys.push_back(0);
-        m_Keys.push_back(0);
-        m_Keys.push_back(0);
-    }
+    DefaultKeys();
 }
 //---------------------------------------------------------------------------
 unsigned char __fastcall ControlsDocument::GetAsciiCode(eAgdKey key)
@@ -112,6 +100,14 @@ void __fastcall ControlsDocument::SetAsciiCode(eAgdKey key, unsigned char keyCod
     if (0 <= key && key < m_Keys.size())
     {
         m_Keys[key] = keyCode;
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall ControlsDocument::DefaultKeys()
+{
+    while (m_Keys.size() < 11)
+    {
+        m_Keys.push_back(0);
     }
 }
 //---------------------------------------------------------------------------

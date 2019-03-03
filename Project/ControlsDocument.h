@@ -17,6 +17,7 @@ private:
             void        __fastcall  OnLoaded();
             String      __fastcall  Get(int index);
             bool        __fastcall  IsActive() const;
+            void        __fastcall  DefaultKeys();
 
 public:
                         __fastcall  ControlsDocument(const String& name);
