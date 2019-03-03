@@ -244,7 +244,7 @@ void __fastcall TfrmEditorMap::RefreshAssets()
         m_ImageMap[image->Id] = std::make_unique<Agdx::Image>(img, gm);
         if (image->SubType == "Tile")
         {
-            assetsTiles->Add(img, !firstTile);
+            assetsTiles->Add(img, true);
             if (firstTile)
             {
                 m_Workspace->Tile0Id = img->Id;
