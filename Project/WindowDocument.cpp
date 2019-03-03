@@ -86,8 +86,8 @@ int __fastcall WindowDocument::Get(int index)
         case 1: return m_Rect.Top; break;
         case 2: return m_Rect.Right; break;
         case 3: return m_Rect.Bottom; break;
-        case 4: return m_Rect.Width(); break;
-        case 5: return m_Rect.Height(); break;
+        case 4: return m_Rect.Width() + 1; break;
+        case 5: return m_Rect.Height() + 1; break;
         case 6: return m_SizeInCharacters.cx; break;
         case 7: return m_SizeInCharacters.cy; break;
         case 8: return m_SizeInPixels.cx; break;
