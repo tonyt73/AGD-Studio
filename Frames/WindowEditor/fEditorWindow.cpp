@@ -134,7 +134,7 @@ void __fastcall TfrmEditorWindow::actMoveLeftExecute(TObject *Sender)
 void __fastcall TfrmEditorWindow::actMoveRightExecute(TObject *Sender)
 {
     auto w = m_Document->Width;
-    if (IsActive() && m_Document->Left + w + 1 < m_View->Width)
+    if (IsActive() && m_Document->Left + w + 1 <= m_View->Width)
     {
         m_Document->Set(TRect (m_Document->Left + 1, m_Document->Top, m_Document->Right + 1, m_Document->Bottom));
         DrawView();
@@ -153,7 +153,7 @@ void __fastcall TfrmEditorWindow::actMoveUpExecute(TObject *Sender)
 void __fastcall TfrmEditorWindow::actMoveDownExecute(TObject *Sender)
 {
     auto h = m_Document->Height;
-    if (IsActive() && m_Document->Top + h + 1 < m_View->Height)
+    if (IsActive() && m_Document->Top + h + 1 <= m_View->Height)
     {
         m_Document->Set(TRect (m_Document->Left, m_Document->Top + 1, m_Document->Right, m_Document->Bottom + 1));
         DrawView();
@@ -171,7 +171,7 @@ void __fastcall TfrmEditorWindow::actWidthDecExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorWindow::actWidthIncExecute(TObject *Sender)
 {
-    if (IsActive() && m_Document->Left + m_Document->Width + 1 < m_View->Width)
+    if (IsActive() && m_Document->Left + m_Document->Width + 1 <= m_View->Width)
     {
         m_Document->Set(TRect (m_Document->Left, m_Document->Top, m_Document->Right + 1, m_Document->Bottom));
         DrawView();
@@ -189,7 +189,7 @@ void __fastcall TfrmEditorWindow::actHeightDecExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorWindow::actHeightIncExecute(TObject *Sender)
 {
-    if (IsActive() && m_Document->Top + m_Document->Height + 1 < m_View->Height)
+    if (IsActive() && m_Document->Top + m_Document->Height + 1 <= m_View->Height)
     {
         m_Document->Set(TRect (m_Document->Left, m_Document->Top, m_Document->Right, m_Document->Bottom + 1));
         DrawView();
