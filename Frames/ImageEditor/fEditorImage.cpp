@@ -343,24 +343,33 @@ void __fastcall TfrmEditorImage::panEditorContainerClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::actZoomInExecute(TObject *Sender)
 {
-    sbxView->HorzScrollBar->Position = 0;
-    sbxView->VertScrollBar->Position = 0;
-    m_Magnification = std::min(64.f, m_Magnification + 2.f);
-    sbxViewResize(NULL);
+    if (IsActive())
+    {
+        sbxView->HorzScrollBar->Position = 0;
+        sbxView->VertScrollBar->Position = 0;
+        m_Magnification = std::min(64.f, m_Magnification + 2.f);
+        sbxViewResize(NULL);
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::actZoomOutExecute(TObject *Sender)
 {
-    sbxView->HorzScrollBar->Position = 0;
-    sbxView->VertScrollBar->Position = 0;
-    m_Magnification = std::max(8.f, m_Magnification - 2.f);
-    sbxViewResize(NULL);
+    if (IsActive())
+    {
+        sbxView->HorzScrollBar->Position = 0;
+        sbxView->VertScrollBar->Position = 0;
+        m_Magnification = std::max(8.f, m_Magnification - 2.f);
+        sbxViewResize(NULL);
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::actZoomResetExecute(TObject *Sender)
 {
-    m_Magnification = 8.f;
-    sbxViewResize(NULL);
+    if (IsActive())
+    {
+        m_Magnification = 8.f;
+        sbxViewResize(NULL);
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::sbxViewResize(TObject *Sender)
@@ -532,31 +541,40 @@ void __fastcall TfrmEditorImage::popRemoveFrameClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::actAnimatePlayExecute(TObject *Sender)
 {
-    btnAnimatePlay->Down = true;
-    tmrAnimate->Enabled = true;
-    tbrTools->Enabled = false;
-    tbrBlockType->Enabled = false;
-    tbrShiftRotates->Enabled = false;
+    if (IsActive())
+    {
+        btnAnimatePlay->Down = true;
+        tmrAnimate->Enabled = true;
+        tbrTools->Enabled = false;
+        tbrBlockType->Enabled = false;
+        tbrShiftRotates->Enabled = false;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::actAnimateStopExecute(TObject *Sender)
 {
-    btnAnimateStop->Down = true;
-    tmrAnimate->Enabled = false;
-    tbrTools->Enabled = true;
-    tbrBlockType->Enabled = true;
-    tbrShiftRotates->Enabled = true;
+    if (IsActive())
+    {
+        btnAnimateStop->Down = true;
+        tmrAnimate->Enabled = false;
+        tbrTools->Enabled = true;
+        tbrBlockType->Enabled = true;
+        tbrShiftRotates->Enabled = true;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::actToggleAnimationExecute(TObject *Sender)
 {
-    if (btnAnimatePlay->Down)
+    if (IsActive())
     {
-        actAnimateStopExecute(Sender);
-    }
-    else
-    {
-        actAnimatePlayExecute(Sender);
+        if (btnAnimatePlay->Down)
+        {
+            actAnimateStopExecute(Sender);
+        }
+        else
+        {
+            actAnimatePlayExecute(Sender);
+        }
     }
 }
 //---------------------------------------------------------------------------
@@ -568,12 +586,18 @@ void __fastcall TfrmEditorImage::tmrAnimateTimer(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::actUndoExecute(TObject *Sender)
 {
-    //
+    if (IsActive())
+    {
+
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::actRedoExecute(TObject *Sender)
 {
-    //
+    if (IsActive())
+    {
+
+    }
 }
 //---------------------------------------------------------------------------
 TPoint __fastcall TfrmEditorImage::ToImagePt(int X, int Y)
@@ -680,48 +704,54 @@ void __fastcall TfrmEditorImage::imgEditorMouseUp(TObject *Sender, TMouseButton 
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::actModePaintExecute(TObject *Sender)
 {
-    actPencil->Enabled = true;
-    actLine->Enabled = true;
-    actShape->Enabled = true;
-    palAttribute->Visible = m_GraphicsMode.TypeOfBuffer == btAttribute;
-    palBitmap->Visible = m_GraphicsMode.TypeOfBuffer == btBitmap;
-    palULAPlus->Visible = m_GraphicsMode.TypeOfBuffer == btULAplus;
-    palBlocks->Visible = false;
-    actGridPixel->Enabled = true;
-    actGridCharacter->Enabled = true;
-    actGridPixel->Checked = m_GridPixel;
-    actGridCharacter->Checked = m_GridBlock;
-    actMonoOff->Enabled = true;
-    actMonoOff->Checked = true;
-    actMonoOffExecute(NULL);
-    btnModePaint->Down = true;
-    RefreshView(true);
-    barStatus->Panels->Items[0]->Text = m_LastModeString;
+    if (IsActive())
+    {
+        actPencil->Enabled = true;
+        actLine->Enabled = true;
+        actShape->Enabled = true;
+        palAttribute->Visible = m_GraphicsMode.TypeOfBuffer == btAttribute;
+        palBitmap->Visible = m_GraphicsMode.TypeOfBuffer == btBitmap;
+        palULAPlus->Visible = m_GraphicsMode.TypeOfBuffer == btULAplus;
+        palBlocks->Visible = false;
+        actGridPixel->Enabled = true;
+        actGridCharacter->Enabled = true;
+        actGridPixel->Checked = m_GridPixel;
+        actGridCharacter->Checked = m_GridBlock;
+        actMonoOff->Enabled = true;
+        actMonoOff->Checked = true;
+        actMonoOffExecute(NULL);
+        btnModePaint->Down = true;
+        RefreshView(true);
+        barStatus->Panels->Items[0]->Text = m_LastModeString;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::actModeBlockExecute(TObject *Sender)
 {
-    m_LastModeString = barStatus->Panels->Items[3]->Text;
-    barStatus->Panels->Items[0]->Text = "Block Type Mode - Set";
-    actPencil->Enabled = false;
-    actLine->Enabled = false;
-    actShape->Enabled = false;
-    palAttribute->Visible = false;
-    palBitmap->Visible = false;
-    palULAPlus->Visible = false;
-    palBlocks->Visible = true;
-    m_GridPixel = actGridPixel->Checked;
-    m_GridBlock = actGridCharacter->Checked;
-    actGridPixel->Checked = false;
-    actGridCharacter->Checked = true;
-    actGridPixel->Enabled = false;
-    actGridCharacter->Enabled = false;
-    actMonoOn->Checked = true;
-    actMonoOff->Enabled = false;
-    actMonoOnExecute(NULL);
-    btnModeBlock->Down = true;
-    m_BlockTypeTool.Begin(m_Frames[m_SelectedFrame]->Canvas());
-    RefreshView(true);
+    if (IsActive())
+    {
+        m_LastModeString = barStatus->Panels->Items[3]->Text;
+        barStatus->Panels->Items[0]->Text = "Block Type Mode - Set";
+        actPencil->Enabled = false;
+        actLine->Enabled = false;
+        actShape->Enabled = false;
+        palAttribute->Visible = false;
+        palBitmap->Visible = false;
+        palULAPlus->Visible = false;
+        palBlocks->Visible = true;
+        m_GridPixel = actGridPixel->Checked;
+        m_GridBlock = actGridCharacter->Checked;
+        actGridPixel->Checked = false;
+        actGridCharacter->Checked = true;
+        actGridPixel->Enabled = false;
+        actGridCharacter->Enabled = false;
+        actMonoOn->Checked = true;
+        actMonoOff->Enabled = false;
+        actMonoOnExecute(NULL);
+        btnModeBlock->Down = true;
+        m_BlockTypeTool.Begin(m_Frames[m_SelectedFrame]->Canvas());
+        RefreshView(true);
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorImage::ShowKeysHelp()

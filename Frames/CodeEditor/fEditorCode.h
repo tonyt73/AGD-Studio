@@ -122,6 +122,7 @@ private:    // User declarations
 
     std::map<String, TAction*>  m_ActionMap;
 
+    bool            __fastcall  IsActive() const;
     void            __fastcall  SetDocument(Document* document);
     String          __fastcall  GetSyntaxScByExt(const String& extension);
     void            __fastcall  UpdateStatus();
