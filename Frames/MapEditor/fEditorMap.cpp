@@ -92,38 +92,50 @@ void __fastcall TfrmEditorMap::Initialise()
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actSelectExecute(TObject *Sender)
 {
-    btnSelect->Down = true;
-    m_Workspace->Mode = TileEditor::temSelect;
-    m_Workspace->ToolEntity = m_LastSelectedId;
+    if (IsActive())
+    {
+        btnSelect->Down = true;
+        m_Workspace->Mode = TileEditor::temSelect;
+        m_Workspace->ToolEntity = m_LastSelectedId;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actPencilExecute(TObject *Sender)
 {
-    btnPencil->Down = true;
-    m_Workspace->UnselectAll();
-    m_Workspace->Mode = TileEditor::temPencil;
-    m_Workspace->ToolEntity = m_LastSelectedId;
+    if (IsActive())
+    {
+        btnPencil->Down = true;
+        m_Workspace->UnselectAll();
+        m_Workspace->Mode = TileEditor::temPencil;
+        m_Workspace->ToolEntity = m_LastSelectedId;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actLineExecute(TObject *Sender)
 {
-    btnLine->Down = true;
-    m_Workspace->UnselectAll();
-    m_Workspace->Mode = TileEditor::temLine;
-    m_Workspace->ToolEntity = m_LastSelectedId;
+    if (IsActive())
+    {
+        btnLine->Down = true;
+        m_Workspace->UnselectAll();
+        m_Workspace->Mode = TileEditor::temLine;
+        m_Workspace->ToolEntity = m_LastSelectedId;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actRectExecute(TObject *Sender)
 {
-    btnRect->Down = true;
-    m_Workspace->UnselectAll();
-    m_Workspace->Mode = TileEditor::temRect;
-    m_Workspace->ToolEntity = m_LastSelectedId;
+    if (IsActive())
+    {
+        btnRect->Down = true;
+        m_Workspace->UnselectAll();
+        m_Workspace->Mode = TileEditor::temRect;
+        m_Workspace->ToolEntity = m_LastSelectedId;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actZoomInExecute(TObject *Sender)
 {
-    if (m_Workspace->Scale < 4)
+    if (IsActive() && m_Workspace->Scale < 4)
     {
         m_Workspace->Scale++;
         m_Workspace->Refresh();
@@ -132,7 +144,7 @@ void __fastcall TfrmEditorMap::actZoomInExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actZoomOutExecute(TObject *Sender)
 {
-    if (m_Workspace->Scale > 1)
+    if (IsActive() && m_Workspace->Scale > 1)
     {
         m_Workspace->Scale--;
         m_Workspace->Refresh();
@@ -141,18 +153,27 @@ void __fastcall TfrmEditorMap::actZoomOutExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actZoomResetExecute(TObject *Sender)
 {
-    m_Workspace->Scale = 1;
-    m_Workspace->Refresh();
+    if (IsActive())
+    {
+        m_Workspace->Scale = 1;
+        m_Workspace->Refresh();
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actUndoExecute(TObject *Sender)
 {
-    //
+    if (IsActive())
+    {
+
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actRedoExecute(TObject *Sender)
 {
-    //
+    if (IsActive())
+    {
+
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::imgWorkspaceMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
@@ -257,7 +278,6 @@ bool __fastcall TfrmEditorMap::IsActive() const
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::OnEvent(const Event& event)
 {
-    actSmallActions->State = IsActive() ? asNormal : asSuspended;
     if (IsActive() && m_ActionMap.count(event.Id) == 1)
     {
         m_ActionMap[event.Id]->Execute();
@@ -437,47 +457,62 @@ void __fastcall TfrmEditorMap::imgWorkspaceMouseEnter(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actCopyToScratchPadExecute(TObject *Sender)
 {
-    m_ScratchPad->Add(m_Workspace->GetSelection(true));
+    if (IsActive())
+    {
+        m_ScratchPad->Add(m_Workspace->GetSelection(true));
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actMoveToScratchPadExecute(TObject *Sender)
 {
-    m_ScratchPad->Add(m_Workspace->GetSelection(true));
-    m_Workspace->DeleteSelection();
+    if (IsActive())
+    {
+        m_ScratchPad->Add(m_Workspace->GetSelection(true));
+        m_Workspace->DeleteSelection();
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actCopyToWorkspaceExecute(TObject *Sender)
 {
-    m_Workspace->Add(m_ScratchPad->GetSelection());
+    if (IsActive())
+    {
+        m_Workspace->Add(m_ScratchPad->GetSelection());
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actDuplicateExecute(TObject *Sender)
 {
-    if (dpWorkspace == m_ActivePanel)
+    if (IsActive())
     {
-        auto list = m_Workspace->GetSelection();
-        m_Workspace->UnselectAll();
-        m_Workspace->Add(list);
-    }
-    else if (dpScratchPad == m_ActivePanel)
-    {
-        auto list = m_ScratchPad->GetSelection();
-        m_ScratchPad->UnselectAll();
-        m_ScratchPad->Add(list);
+        if (dpWorkspace == m_ActivePanel)
+        {
+            auto list = m_Workspace->GetSelection();
+            m_Workspace->UnselectAll();
+            m_Workspace->Add(list);
+        }
+        else if (dpScratchPad == m_ActivePanel)
+        {
+            auto list = m_ScratchPad->GetSelection();
+            m_ScratchPad->UnselectAll();
+            m_ScratchPad->Add(list);
+        }
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actDeleteExecute(TObject *Sender)
 {
-    if (dpWorkspace == m_ActivePanel)
+    if (IsActive())
     {
-        m_Workspace->DeleteSelection();
-        m_Document->Set(actEditModeSingleScreen->Checked ? meRoom : meMap, m_Workspace->GetEntities());
-    }
-    else if (dpScratchPad == m_ActivePanel)
-    {
-        m_ScratchPad->DeleteSelection();
-        m_Document->Set(meScratchPad, m_ScratchPad->GetEntities());
+        if (dpWorkspace == m_ActivePanel)
+        {
+            m_Workspace->DeleteSelection();
+            m_Document->Set(actEditModeSingleScreen->Checked ? meRoom : meMap, m_Workspace->GetEntities());
+        }
+        else if (dpScratchPad == m_ActivePanel)
+        {
+            m_ScratchPad->DeleteSelection();
+            m_Document->Set(meScratchPad, m_ScratchPad->GetEntities());
+        }
     }
 }
 //---------------------------------------------------------------------------
@@ -546,88 +581,109 @@ void __fastcall TfrmEditorMap::btnSPGridTileClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actGridTileExecute(TObject *Sender)
 {
-    if (dpWorkspace == m_ActivePanel)
+    if (IsActive())
     {
-        btnWSGridTile->Down = !btnWSGridTile->Down;
-        btnWSGridTileClick(Sender);
-    }
-    else
-    {
-        btnSPGridTileClick(Sender);
+        if (dpWorkspace == m_ActivePanel)
+        {
+            btnWSGridTile->Down = !btnWSGridTile->Down;
+            btnWSGridTileClick(Sender);
+        }
+        else
+        {
+            btnSPGridTileClick(Sender);
+        }
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actGridRoomExecute(TObject *Sender)
 {
-    if (dpWorkspace == m_ActivePanel)
+    if (IsActive())
     {
-        btnWSGridRoom->Down = !btnWSGridRoom->Down;
-        btnWSGridRoomClick(Sender);
+        if (dpWorkspace == m_ActivePanel)
+        {
+            btnWSGridRoom->Down = !btnWSGridRoom->Down;
+            btnWSGridRoomClick(Sender);
+        }
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actEditModeFullMapExecute(TObject *Sender)
 {
-    if (actEditModeFullMap->Checked)
+    if (IsActive())
     {
-        actEditModeFullMap->Checked = false;
-        actEditModeSingleScreen->Checked = true;
+        if (actEditModeFullMap->Checked)
+        {
+            actEditModeFullMap->Checked = false;
+            actEditModeSingleScreen->Checked = true;
+        }
+        else
+        {
+            actEditModeSingleScreen->Checked = false;
+            actEditModeFullMap->Checked = true;
+        }
+        //actStartRoomTool->Enabled = !actEditModeSingleScreen->Checked;
+        dpRoomSelector->PanelVisible = actEditModeSingleScreen->Checked;
+        dpRoomSelector->Zone->Height = std::max(dpRoomSelector->Zone->Height, 256);
+        m_Workspace->Rooms = actEditModeSingleScreen->Checked ? TSize(1, 1) : TSize(g_MaxMapRoomsAcross, g_MaxMapRoomsDown);
+        m_Workspace->SetEntities(m_Document->Get(actEditModeSingleScreen->Checked ? meRoom : meMap, m_RoomSelector->SelectedRoom));
+        m_Workspace->ShowStartRoom = !actEditModeSingleScreen->Checked && actToggleStartRoom->Checked;
+        m_Workspace->UpdateMap();
+        m_RoomSelector->UpdateMap();
     }
-    else
-    {
-        actEditModeSingleScreen->Checked = false;
-        actEditModeFullMap->Checked = true;
-    }
-    //actStartRoomTool->Enabled = !actEditModeSingleScreen->Checked;
-    dpRoomSelector->PanelVisible = actEditModeSingleScreen->Checked;
-    dpRoomSelector->Zone->Height = std::max(dpRoomSelector->Zone->Height, 256);
-    m_Workspace->Rooms = actEditModeSingleScreen->Checked ? TSize(1, 1) : TSize(g_MaxMapRoomsAcross, g_MaxMapRoomsDown);
-    m_Workspace->SetEntities(m_Document->Get(actEditModeSingleScreen->Checked ? meRoom : meMap, m_RoomSelector->SelectedRoom));
-    m_Workspace->ShowStartRoom = !actEditModeSingleScreen->Checked && actToggleStartRoom->Checked;
-    m_Workspace->UpdateMap();
-    m_RoomSelector->UpdateMap();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actToggleStartRoomExecute(TObject *Sender)
 {
-    m_Workspace->ShowStartRoom = actToggleStartRoom->Checked;
+    if (IsActive())
+    {
+        m_Workspace->ShowStartRoom = actToggleStartRoom->Checked;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actEntityNextExecute(TObject *Sender)
 {
-    if (pgcAssets->ActivePage == tabTiles)
+    if (IsActive())
     {
-        assetsTiles->Next();
-    }
-    else if (pgcAssets->ActivePage == tabSprites)
-    {
-        assetsSprites->Next();
-    }
-    else
-    {
-        assetsObjects->Next();
+        if (pgcAssets->ActivePage == tabTiles)
+        {
+            assetsTiles->Next();
+        }
+        else if (pgcAssets->ActivePage == tabSprites)
+        {
+            assetsSprites->Next();
+        }
+        else
+        {
+            assetsObjects->Next();
+        }
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actEntityPrevExecute(TObject *Sender)
 {
-    if (pgcAssets->ActivePage == tabTiles)
+    if (IsActive())
     {
-        assetsTiles->Prev();
-    }
-    else if (pgcAssets->ActivePage == tabSprites)
-    {
-        assetsSprites->Prev();
-    }
-    else
-    {
-        assetsObjects->Prev();
+        if (pgcAssets->ActivePage == tabTiles)
+        {
+            assetsTiles->Prev();
+        }
+        else if (pgcAssets->ActivePage == tabSprites)
+        {
+            assetsSprites->Prev();
+        }
+        else
+        {
+            assetsObjects->Prev();
+        }
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actEntityToggleLocksExecute(TObject *Sender)
 {
-    m_Workspace->ToggleEntityLocks();
+    if (IsActive())
+    {
+        m_Workspace->ToggleEntityLocks();
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::sbxWorkspaceMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled)
@@ -645,44 +701,56 @@ void __fastcall TfrmEditorMap::sbxWorkspaceMouseWheel(TObject *Sender, TShiftSta
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actCopyExecute(TObject *Sender)
 {
-    if (dpWorkspace == m_ActivePanel)
+    if (IsActive())
     {
-        m_Workspace->Copy();
-    }
-    else if (dpScratchPad == m_ActivePanel)
-    {
-        m_ScratchPad->Copy();
+        if (dpWorkspace == m_ActivePanel)
+        {
+            m_Workspace->Copy();
+        }
+        else if (dpScratchPad == m_ActivePanel)
+        {
+            m_ScratchPad->Copy();
+        }
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actCutExecute(TObject *Sender)
 {
-    if (dpWorkspace == m_ActivePanel)
+    if (IsActive())
     {
-        m_Workspace->Cut();
-    }
-    else if (dpScratchPad == m_ActivePanel)
-    {
-        m_ScratchPad->Cut();
+        if (dpWorkspace == m_ActivePanel)
+        {
+            m_Workspace->Cut();
+        }
+        else if (dpScratchPad == m_ActivePanel)
+        {
+            m_ScratchPad->Cut();
+        }
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actPasteExecute(TObject *Sender)
 {
-    if (dpWorkspace == m_ActivePanel)
+    if (IsActive())
     {
-        m_Workspace->Paste();
-    }
-    else if (dpScratchPad == m_ActivePanel)
-    {
-        m_ScratchPad->Paste();
+        if (dpWorkspace == m_ActivePanel)
+        {
+            m_Workspace->Paste();
+        }
+        else if (dpScratchPad == m_ActivePanel)
+        {
+            m_ScratchPad->Paste();
+        }
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actToggleRoomNumbersExecute(TObject *Sender)
 {
-    m_Workspace->ShowRoomNumbers = actToggleRoomNumbers->Checked;
-    m_RoomSelector->ShowRoomNumbers = actToggleRoomNumbers->Checked;
+    if (IsActive())
+    {
+        m_Workspace->ShowRoomNumbers = actToggleRoomNumbers->Checked;
+        m_RoomSelector->ShowRoomNumbers = actToggleRoomNumbers->Checked;
+    }
 }
 //---------------------------------------------------------------------------
 int __fastcall TfrmEditorMap::OnRetrieveRoomIndex(const TPoint& pt, bool newIndex)
@@ -692,18 +760,18 @@ int __fastcall TfrmEditorMap::OnRetrieveRoomIndex(const TPoint& pt, bool newInde
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actToggleShowLocksExecute(TObject *Sender)
 {
-    m_Workspace->LockIcon = actToggleShowLocks->Checked ? imgLock : nullptr;
+    if (IsActive())
+    {
+        m_Workspace->LockIcon = actToggleShowLocks->Checked ? imgLock : nullptr;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actToggleTileTypesExecute(TObject *Sender)
 {
-    m_Workspace->ShowTileTypes = actToggleTileTypes->Checked;
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::FrameEnter(TObject *Sender)
-{
-    actSmallActions->State = IsActive() ? asNormal : asSuspended;
-    tbrActions->State = IsActive() ? asNormal : asSuspended;
+    if (IsActive())
+    {
+        m_Workspace->ShowTileTypes = actToggleTileTypes->Checked;
+    }
 }
 //---------------------------------------------------------------------------
 

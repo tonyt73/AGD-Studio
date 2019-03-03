@@ -7,8 +7,6 @@ object frmEditorMap: TfrmEditorMap
   DoubleBuffered = False
   ParentDoubleBuffered = False
   TabOrder = 0
-  OnEnter = FrameEnter
-  OnExit = FrameEnter
   object imgLock: TImage
     Left = 56
     Top = 293

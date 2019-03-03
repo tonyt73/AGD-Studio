@@ -196,7 +196,6 @@ __published:    // IDE-managed Components
     void __fastcall actToggleRoomNumbersExecute(TObject *Sender);
     void __fastcall actToggleShowLocksExecute(TObject *Sender);
     void __fastcall actToggleTileTypesExecute(TObject *Sender);
-    void __fastcall FrameEnter(TObject *Sender);
 
 private:    // User declarations
     ::Messaging::Registrar      m_Registrar;        // the messaging registrar
