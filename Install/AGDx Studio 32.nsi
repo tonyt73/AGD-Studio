@@ -8,7 +8,7 @@ SetCompressor /SOLID lzma
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME_SMALL "AGDx Studio"
 !define PRODUCT_NAME "${PRODUCT_NAME_SMALL} 32"
-!define PRODUCT_VERSION "0.3.1 BETA"
+!define PRODUCT_VERSION "0.3.2 BETA"
 !define PRODUCT_PUBLISHER "Tony Thompson"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
@@ -146,7 +146,7 @@ Section "Main files" SEC01
   pop $0
   DetailPrint HR=$0
   File "..\Binaries\32\AGDx Studio.exe"
-  File "..\Binaries\32\AGDx-Studio.dll"
+  File "..\Binaries\32\AGDx-Studio.exe"
   File "..\Binaries\32\AGD Converter.exe"
   File "..\Binaries\32\borlndmm.dll"
   File "..\Binaries\32\cc32c260.dll"
@@ -578,7 +578,7 @@ Section Uninstall
   ; Application Files
   Delete "$INSTDIR\uninst.exe"
   Delete "$INSTDIR\AGDx Studio.exe"
-  Delete "$INSTDIR\AGDx-Studio.dll"
+  Delete "$INSTDIR\AGDx-Studio.exe"
   Delete "$INSTDIR\borlndmm.dll"
   Delete "$INSTDIR\cc32x260.dll"
   Delete "$INSTDIR\cc32x260mt.bpl"

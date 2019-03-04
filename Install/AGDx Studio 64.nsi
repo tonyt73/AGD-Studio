@@ -8,7 +8,7 @@ SetCompressor /SOLID /FINAL lzma
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME_SMALL "AGDx Studio"
 !define PRODUCT_NAME "${PRODUCT_NAME_SMALL} 64"
-!define PRODUCT_VERSION "0.3.1 BETA"
+!define PRODUCT_VERSION "0.3.2 BETA"
 !define PRODUCT_PUBLISHER "Tony Thompson"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\ADGx Studio 64"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
@@ -133,7 +133,7 @@ Section "Main files" SEC01
   pop $0
   DetailPrint HR=$0
   File "..\Binaries\64\AGDx Studio.exe"
-  File "..\Binaries\64\AGDx-Studio.dll"
+  File "..\Binaries\64\AGDx-Studio.exe"
   File "..\Binaries\64\AGD Converter.exe"
   File "..\Binaries\64\borlndmm.dll"
   File "..\Binaries\64\cc64260.dll"
@@ -586,6 +586,10 @@ Section Uninstall
   Delete "$INSTDIR\vclsmp260.bpl"
   Delete "$INSTDIR\vclx260.bpl"
 
+  ; Delete shortcuts
+  Delete "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk"
+  Delete "$SMPROGRAMS\${PRODUCT_NAME}\AGDx Converter.lnk"
+  Delete "$DESKTOP\${PRODUCT_NAME}.lnk"
   ; Application Folders
   RMDir "$SMPROGRAMS\${PRODUCT_NAME}"
   RMDir /r "$INSTDIR"
