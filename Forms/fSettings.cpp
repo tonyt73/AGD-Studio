@@ -145,6 +145,11 @@ void __fastcall TfrmSettings::btnAssemblerFindClick(TObject *Sender)
     edtAssemblerExe->Text = FindExecutable("Locate Assembler", edtAssemblerExe->Text);
 }
 //---------------------------------------------------------------------------
+void __fastcall TfrmSettings::btnEmulatorFindClick(TObject *Sender)
+{
+    edtEmulatorExe->Text = FindExecutable("Locate Emulator", edtEmulatorExe->Text);
+}
+//---------------------------------------------------------------------------
 void __fastcall TfrmSettings::GetBuildOptions()
 {
     const auto& cfg = theDocumentManager.ProjectConfig()->MachineConfiguration();
