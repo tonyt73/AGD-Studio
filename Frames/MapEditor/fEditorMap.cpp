@@ -135,18 +135,18 @@ void __fastcall TfrmEditorMap::actRectExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actZoomInExecute(TObject *Sender)
 {
-    if (IsActive() && m_Workspace->Scale < 4)
+    if (IsActive() && m_Workspace->Scale > 1)
     {
-        m_Workspace->Scale++;
+        m_Workspace->Scale--;
         m_Workspace->Refresh();
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actZoomOutExecute(TObject *Sender)
 {
-    if (IsActive() && m_Workspace->Scale > 1)
+    if (IsActive() && m_Workspace->Scale < 4)
     {
-        m_Workspace->Scale--;
+        m_Workspace->Scale++;
         m_Workspace->Refresh();
     }
 }
