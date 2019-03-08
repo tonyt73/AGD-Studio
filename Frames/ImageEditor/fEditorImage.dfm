@@ -1241,6 +1241,9 @@ object frmEditorImage: TfrmEditorImage
         TabOrder = 3
         OnMouseActivate = imgEditorMouseActivate
         ExplicitTop = 336
+        inherited panBlock: TPanel
+          Hint = 'Left Mouse Button applies the Block type to the chacter position'
+        end
       end
     end
   end
