@@ -16,8 +16,8 @@ Editors for:
   * Code folding
 * Map
 * Messages
-* Window size and position (TBD)
-* Keys (TBD)
+* Window size and position
+* Keys
 
 Automated build system:
 * Produces AGD compiler output on the fly
