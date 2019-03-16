@@ -234,3 +234,4 @@ Forms/fHidden.cpp
 Forms/fHidden.dfm
 Forms/fHidden.h
 Deployment file.txt
+*.old
