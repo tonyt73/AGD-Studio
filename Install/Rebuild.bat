@@ -10,4 +10,6 @@
 @rem Update the Version
 @Versioner.exe -cproj "..\AGDx-Studio.cbproj" -install ".\\"
 
-@call Build.cmd
+@call Build.bat
+
+@pause
