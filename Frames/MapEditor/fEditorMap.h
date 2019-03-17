@@ -208,6 +208,7 @@ private:    // User declarations
     TLMDDockPanel*              m_ActivePanel;      // the active dock panel
     Agdx::ImageMap              m_ImageMap;         // a rendering of each tile, object, sprite that is shared with all the editors
     int                         m_LastSelectedId;   // last selected document id
+    int                         m_Scale;
 
             void    __fastcall  Initialise();
             void    __fastcall  RefreshAssets();

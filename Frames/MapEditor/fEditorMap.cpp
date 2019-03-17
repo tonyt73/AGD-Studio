@@ -19,10 +19,13 @@
 #pragma link "LMDToolBar"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
+const float g_Scales[] = { 0.33f, 0.5f, 1.0f, 2.0f, 3.0f, 4.0f, 6.0f, 8.0f, 16.f };
+//---------------------------------------------------------------------------
 __fastcall TfrmEditorMap::TfrmEditorMap(TComponent* Owner)
 : TFrame(Owner)
 , m_ActivePanel(nullptr)
 , m_LastSelectedId(-1)
+, m_Scale(2)
 {
     m_Registrar.Subscribe<Event>(OnEvent);
     m_Registrar.Subscribe<RoomSelected>(OnRoomSelected);
@@ -135,18 +138,18 @@ void __fastcall TfrmEditorMap::actRectExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actZoomInExecute(TObject *Sender)
 {
-    if (IsActive() && m_Workspace->Scale > 1)
+    if (IsActive() && m_Scale < 8)
     {
-        m_Workspace->Scale--;
+        m_Workspace->Scale = g_Scales[++m_Scale];
         m_Workspace->Refresh();
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actZoomOutExecute(TObject *Sender)
 {
-    if (IsActive() && m_Workspace->Scale < 4)
+    if (IsActive() && m_Scale > 0)
     {
-        m_Workspace->Scale++;
+        m_Workspace->Scale = g_Scales[--m_Scale];
         m_Workspace->Refresh();
     }
 }
@@ -155,7 +158,8 @@ void __fastcall TfrmEditorMap::actZoomResetExecute(TObject *Sender)
 {
     if (IsActive())
     {
-        m_Workspace->Scale = 1;
+        m_Scale = 2;
+        m_Workspace->Scale = g_Scales[m_Scale];
         m_Workspace->Refresh();
     }
 }
