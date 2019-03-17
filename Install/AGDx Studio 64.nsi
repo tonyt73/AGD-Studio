@@ -580,7 +580,7 @@ Section Uninstall
   ; Application Files
   Delete "$INSTDIR\uninst.exe"
   Delete "$INSTDIR\AGDx Studio.exe"
-  Delete "$INSTDIR\AGDx-Studio.dll"
+  Delete "$INSTDIR\AGDx-Studio.exe"
   Delete "$INSTDIR\borlndmm.dll"
   Delete "$INSTDIR\cc32x260.dll"
   Delete "$INSTDIR\cc32x260mt.bpl"
