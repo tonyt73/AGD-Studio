@@ -235,3 +235,5 @@ Forms/fHidden.dfm
 Forms/fHidden.h
 Deployment file.txt
 *.old
+AGD Studio.cbproj
+AGD Studio.cpp
