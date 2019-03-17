@@ -35,9 +35,9 @@ void __fastcall TfrmSettings::FormCreate(TObject *Sender)
     chkLoadLastProject->Checked = appSettings.LoadLastProject;
     chkWelcomeSkipOnStartupClick(nullptr);
     chkLoadLastProjectClick(nullptr);
-    //panButtons->Color = StyleServices()->GetStyleColor(scGenericGradientBase);
+    //panButtons->Color = ThemeManager::Background;
     // load the themes
-    Project::ThemeManager::LoadStyles(cmbThemes);
+    ThemeManager::LoadStyles(cmbThemes);
     // load the machines
     cmbMachines->Items->Clear();
     std::vector<String> machines;
@@ -73,7 +73,7 @@ void __fastcall TfrmSettings::btnOkClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmSettings::cmbThemesChange(TObject *Sender)
 {
-    Project::ThemeManager::SetStyle(cmbThemes->Text);
+    ThemeManager::SetStyle(cmbThemes->Text);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmSettings::chkLoadLastProjectClick(TObject *Sender)

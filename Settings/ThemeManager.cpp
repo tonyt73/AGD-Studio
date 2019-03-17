@@ -10,9 +10,6 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-namespace Project
-{
-//---------------------------------------------------------------------------
 void __fastcall ThemeManager::SetStyle(const String& styleName)
 {
     auto styleFile = System::File::Combine(System::Path::GetFolder(System::Path::lpApplication, "Styles"), styleName + ".vsf");
@@ -37,7 +34,7 @@ void __fastcall ThemeManager::LoadStyles(TComboBox* combo)
     // default application style
     sl->Add("Onyx Blue");
     // load the styles from the styles folder
-    auto styles = Project::ThemeManager::GetStyles();
+    auto styles = GetStyles();
     TStyleInfo si;
     for (auto styleFile : styles)
     {
@@ -69,24 +66,19 @@ TStringDynArray __fastcall ThemeManager::GetStyles()
     return System::Path::GetFiles(System::Path::lpApplication, "*.vsf", "Styles");
 }
 //---------------------------------------------------------------------------
-TColor __fastcall ThemeManager::GetSelectionColor()
+TColor __fastcall ThemeManager::GetColor(int index)
 {
-    return StyleServices()->GetStyleColor(scButtonFocused);
+    switch (index)
+    {
+        // button highlight
+        case 0: return StyleServices()->GetSystemColor(clHighlight); break;
+        // button background
+        case 1: return StyleServices()->GetSystemColor(clBtnFace); break;
+        // button text
+        case 2: return StyleServices()->GetSystemColor(clBtnText); break;
+        // button shadow
+        case 3: return StyleServices()->GetSystemColor(clBtnShadow); break;
+    }
 }
 //---------------------------------------------------------------------------
-TColor __fastcall ThemeManager::GetHighlightColor()
-{
-    return StyleServices()->GetStyleColor(scButtonHot);
-}
-//---------------------------------------------------------------------------
-TColor __fastcall ThemeManager::GetBackgroundColor()
-{
-    return StyleServices()->GetStyleColor(scButtonNormal);
-}
-//---------------------------------------------------------------------------
-TColor __fastcall ThemeManager::GetForegroundColor()
-{
-    return StyleServices()->GetStyleFontColor(sfTextLabelNormal);
-}
-//---------------------------------------------------------------------------
-} // namespace Project
+

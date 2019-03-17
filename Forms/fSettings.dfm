@@ -3,8 +3,8 @@ object frmSettings: TfrmSettings
   Top = 0
   BorderStyle = bsDialog
   Caption = 'Settings'
-  ClientHeight = 325
-  ClientWidth = 482
+  ClientHeight = 362
+  ClientWidth = 533
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -318,15 +318,16 @@ object frmSettings: TfrmSettings
   object pgcSettings: TPageControl
     Left = 0
     Top = 0
-    Width = 482
-    Height = 289
-    ActivePage = tabProfile
+    Width = 533
+    Height = 326
+    ActivePage = TabSheet1
     Align = alClient
     Images = ImageList1
     TabHeight = 40
     TabOrder = 1
     TabWidth = 128
-    ExplicitWidth = 494
+    ExplicitWidth = 482
+    ExplicitHeight = 289
     object tabProfile: TTabSheet
       Caption = 'Profile'
       Font.Charset = DEFAULT_CHARSET
@@ -335,10 +336,11 @@ object frmSettings: TfrmSettings
       Font.Name = 'Roboto'
       Font.Style = []
       ParentFont = False
-      ExplicitWidth = 486
+      ExplicitWidth = 474
+      ExplicitHeight = 239
       DesignSize = (
-        474
-        239)
+        525
+        276)
       object Label1: TLabel
         Left = 59
         Top = 19
@@ -368,7 +370,7 @@ object frmSettings: TfrmSettings
       object edtDeveloper: TEdit
         Left = 144
         Top = 16
-        Width = 319
+        Width = 370
         Height = 24
         Anchors = [akLeft, akTop, akRight]
         Font.Charset = DEFAULT_CHARSET
@@ -379,12 +381,12 @@ object frmSettings: TfrmSettings
         ParentFont = False
         TabOrder = 0
         Text = 'Anonymous'
-        ExplicitWidth = 331
+        ExplicitWidth = 319
       end
       object cmbMachines: TComboBox
         Left = 144
         Top = 54
-        Width = 319
+        Width = 370
         Height = 24
         Style = csDropDownList
         Anchors = [akLeft, akTop, akRight]
@@ -401,16 +403,17 @@ object frmSettings: TfrmSettings
           'Acorn Atom 256x192 Monochrome'
           'Amstrad CPC 160x200 16 Colour'
           'ZX Spectrum 256x192 16 Colour')
-        ExplicitWidth = 331
+        ExplicitWidth = 319
       end
     end
     object tabInterface: TTabSheet
       Caption = 'Interface'
       ImageIndex = 1
-      ExplicitWidth = 486
+      ExplicitWidth = 474
+      ExplicitHeight = 239
       DesignSize = (
-        474
-        239)
+        525
+        276)
       object Label5: TLabel
         Left = 71
         Top = 19
@@ -453,7 +456,7 @@ object frmSettings: TfrmSettings
       object cmbThemes: TComboBox
         Left = 144
         Top = 16
-        Width = 319
+        Width = 370
         Height = 23
         Style = csDropDownList
         Anchors = [akLeft, akTop, akRight]
@@ -470,7 +473,7 @@ object frmSettings: TfrmSettings
         Items.Strings = (
           'Dark'
           '')
-        ExplicitWidth = 331
+        ExplicitWidth = 319
       end
       object chkWelcomeSkipOnStartup: TCheckBox
         Left = 144
@@ -521,10 +524,11 @@ object frmSettings: TfrmSettings
     object TabSheet1: TTabSheet
       Caption = 'Build'
       ImageIndex = 3
-      ExplicitWidth = 486
+      ExplicitWidth = 474
+      ExplicitHeight = 239
       DesignSize = (
-        474
-        239)
+        525
+        276)
       object Label6: TLabel
         Left = 61
         Top = 19
@@ -541,9 +545,9 @@ object frmSettings: TfrmSettings
       object pgcBuild: TPageControl
         Left = 17
         Top = 60
-        Width = 454
-        Height = 176
-        ActivePage = tabCompiler
+        Width = 505
+        Height = 213
+        ActivePage = TabSheet2
         Anchors = [akLeft, akTop, akRight, akBottom]
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -554,12 +558,15 @@ object frmSettings: TfrmSettings
         ParentFont = False
         TabHeight = 32
         TabOrder = 1
+        ExplicitWidth = 454
+        ExplicitHeight = 176
         object tabCompiler: TTabSheet
           Caption = 'Compiler'
-          ExplicitWidth = 458
+          ExplicitWidth = 446
+          ExplicitHeight = 134
           DesignSize = (
-            446
-            134)
+            497
+            171)
           object Label13: TLabel
             Left = 8
             Top = 16
@@ -599,10 +606,27 @@ object frmSettings: TfrmSettings
             Font.Style = []
             ParentFont = False
           end
+          object Label19: TLabel
+            Left = 0
+            Top = 136
+            Width = 497
+            Height = 35
+            Align = alBottom
+            AutoSize = False
+            Caption = 
+              'AGD Compiler: Must be the compiler specific to the specified mac' +
+              'hine.'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Roboto'
+            Font.Style = []
+            ParentFont = False
+          end
           object edtCompilerExe: TEdit
             Left = 84
             Top = 13
-            Width = 327
+            Width = 378
             Height = 24
             Hint = 'The location of the AGD Compiler executable file'
             Anchors = [akLeft, akTop, akRight]
@@ -615,12 +639,12 @@ object frmSettings: TfrmSettings
             ParentShowHint = False
             ShowHint = True
             TabOrder = 0
-            ExplicitWidth = 339
+            ExplicitWidth = 327
           end
           object edtCompilerParams: TEdit
             Left = 84
             Top = 43
-            Width = 327
+            Width = 378
             Height = 24
             Hint = 'Parameters to pass to the AGD Compiler'
             Anchors = [akLeft, akTop, akRight]
@@ -633,10 +657,10 @@ object frmSettings: TfrmSettings
             ParentShowHint = False
             ShowHint = True
             TabOrder = 2
-            ExplicitWidth = 339
+            ExplicitWidth = 327
           end
           object btnCompilerFind: TButton
-            Left = 417
+            Left = 468
             Top = 13
             Width = 26
             Height = 24
@@ -644,12 +668,12 @@ object frmSettings: TfrmSettings
             Caption = '...'
             TabOrder = 1
             OnClick = btnCompilerFindClick
-            ExplicitLeft = 429
+            ExplicitLeft = 417
           end
           object edtEngineFile: TEdit
             Left = 84
             Top = 73
-            Width = 327
+            Width = 378
             Height = 24
             Hint = 'The AGD Engine file for the machine'
             Anchors = [akLeft, akTop, akRight]
@@ -662,10 +686,10 @@ object frmSettings: TfrmSettings
             ParentShowHint = False
             ShowHint = True
             TabOrder = 3
-            ExplicitWidth = 339
+            ExplicitWidth = 327
           end
           object btnEngineFind: TButton
-            Left = 417
+            Left = 468
             Top = 73
             Width = 26
             Height = 24
@@ -673,15 +697,16 @@ object frmSettings: TfrmSettings
             Caption = '...'
             TabOrder = 4
             OnClick = btnEngineFindClick
-            ExplicitLeft = 429
+            ExplicitLeft = 417
           end
         end
         object tabAssembler: TTabSheet
           Caption = 'Assembler'
-          ExplicitWidth = 458
+          ExplicitWidth = 446
+          ExplicitHeight = 134
           DesignSize = (
-            446
-            134)
+            497
+            171)
           object Label7: TLabel
             Left = 8
             Top = 16
@@ -734,10 +759,28 @@ object frmSettings: TfrmSettings
             Font.Style = []
             ParentFont = False
           end
+          object Label20: TLabel
+            Left = 0
+            Top = 136
+            Width = 497
+            Height = 35
+            Align = alBottom
+            AutoSize = False
+            Caption = 
+              'Assembler: Can be either a machine specific Assembler or a Build' +
+              ' batch file.'#13'                       Must produce a game binary f' +
+              'ile for the Emulator.'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Roboto'
+            Font.Style = []
+            ParentFont = False
+          end
           object edtAssemblerExe: TEdit
             Left = 84
             Top = 13
-            Width = 327
+            Width = 378
             Height = 24
             Hint = 'The location of the Assembler executable file'
             Anchors = [akLeft, akTop, akRight]
@@ -750,12 +793,12 @@ object frmSettings: TfrmSettings
             ParentShowHint = False
             ShowHint = True
             TabOrder = 0
-            ExplicitWidth = 339
+            ExplicitWidth = 327
           end
           object edtAssemblerParams: TEdit
             Left = 84
             Top = 43
-            Width = 327
+            Width = 378
             Height = 24
             Hint = 'Parameters to pass to the Assembler'
             Anchors = [akLeft, akTop, akRight]
@@ -768,12 +811,12 @@ object frmSettings: TfrmSettings
             ParentShowHint = False
             ShowHint = True
             TabOrder = 2
-            ExplicitWidth = 339
+            ExplicitWidth = 327
           end
           object edtAssemblerPrepend: TEdit
             Left = 84
             Top = 73
-            Width = 327
+            Width = 378
             Height = 24
             Hint = 'Text to prepend to the beginning of the generated assembly file.'
             Anchors = [akLeft, akTop, akRight]
@@ -786,10 +829,10 @@ object frmSettings: TfrmSettings
             ParentShowHint = False
             ShowHint = True
             TabOrder = 3
-            ExplicitWidth = 339
+            ExplicitWidth = 327
           end
           object btnAssemblerFind: TButton
-            Left = 417
+            Left = 468
             Top = 13
             Width = 26
             Height = 24
@@ -797,12 +840,12 @@ object frmSettings: TfrmSettings
             Caption = '...'
             TabOrder = 1
             OnClick = btnAssemblerFindClick
-            ExplicitLeft = 429
+            ExplicitLeft = 417
           end
           object edtAssemblerAppend: TEdit
             Left = 84
             Top = 103
-            Width = 327
+            Width = 378
             Height = 24
             Hint = 'Text to append to the end of the generated assembly file.'
             Anchors = [akLeft, akTop, akRight]
@@ -815,16 +858,17 @@ object frmSettings: TfrmSettings
             ParentShowHint = False
             ShowHint = True
             TabOrder = 4
-            ExplicitWidth = 339
+            ExplicitWidth = 327
           end
         end
         object tabEmulator: TTabSheet
           Caption = 'Emulator'
           ImageIndex = 1
-          ExplicitWidth = 458
+          ExplicitWidth = 446
+          ExplicitHeight = 134
           DesignSize = (
-            446
-            134)
+            497
+            171)
           object Label11: TLabel
             Left = 8
             Top = 16
@@ -851,10 +895,25 @@ object frmSettings: TfrmSettings
             Font.Style = []
             ParentFont = False
           end
+          object Label21: TLabel
+            Left = 0
+            Top = 136
+            Width = 497
+            Height = 35
+            Align = alBottom
+            AutoSize = False
+            Caption = 'Emulator: The machine emulation application.'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Roboto'
+            Font.Style = []
+            ParentFont = False
+          end
           object edtEmulatorExe: TEdit
             Left = 84
             Top = 13
-            Width = 327
+            Width = 378
             Height = 24
             Hint = 'The location of the Emulator executable file'
             Anchors = [akLeft, akTop, akRight]
@@ -867,12 +926,12 @@ object frmSettings: TfrmSettings
             ParentShowHint = False
             ShowHint = True
             TabOrder = 0
-            ExplicitWidth = 339
+            ExplicitWidth = 327
           end
           object edtEmulatorParams: TEdit
             Left = 84
             Top = 43
-            Width = 327
+            Width = 378
             Height = 24
             Hint = 'Parameters to pass to the Emulator'
             Anchors = [akLeft, akTop, akRight]
@@ -885,10 +944,10 @@ object frmSettings: TfrmSettings
             ParentShowHint = False
             ShowHint = True
             TabOrder = 2
-            ExplicitWidth = 339
+            ExplicitWidth = 327
           end
           object btnEmulatorFind: TButton
-            Left = 417
+            Left = 468
             Top = 13
             Width = 26
             Height = 24
@@ -896,12 +955,14 @@ object frmSettings: TfrmSettings
             Caption = '...'
             TabOrder = 1
             OnClick = btnEmulatorFindClick
-            ExplicitLeft = 429
+            ExplicitLeft = 417
           end
         end
         object TabSheet2: TTabSheet
           Caption = 'Parameters'
           ImageIndex = 2
+          ExplicitLeft = 0
+          ExplicitTop = 43
           object Label16: TLabel
             Left = 16
             Top = 8
@@ -918,26 +979,26 @@ object frmSettings: TfrmSettings
           object Label17: TLabel
             Left = 24
             Top = 40
-            Width = 249
-            Height = 18
+            Width = 272
+            Height = 16
             Caption = '%GamePath%: The Projects full path'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -15
-            Font.Name = 'Roboto'
+            Font.Height = -13
+            Font.Name = 'Courier New'
             Font.Style = []
             ParentFont = False
           end
           object Label18: TLabel
             Left = 24
             Top = 64
-            Width = 258
-            Height = 18
+            Width = 272
+            Height = 16
             Caption = '%GameFile%: The Projects Name only'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -15
-            Font.Name = 'Roboto'
+            Font.Height = -13
+            Font.Name = 'Courier New'
             Font.Style = []
             ParentFont = False
           end
@@ -946,7 +1007,7 @@ object frmSettings: TfrmSettings
       object edtBuildMachine: TEdit
         Left = 144
         Top = 16
-        Width = 319
+        Width = 370
         Height = 24
         Anchors = [akLeft, akTop, akRight]
         Enabled = False
@@ -958,20 +1019,21 @@ object frmSettings: TfrmSettings
         ParentFont = False
         ReadOnly = True
         TabOrder = 0
-        ExplicitWidth = 331
+        ExplicitWidth = 319
       end
     end
     object tabMachines: TTabSheet
       Caption = 'Machines'
       ImageIndex = 2
       TabVisible = False
-      ExplicitWidth = 486
+      ExplicitWidth = 474
+      ExplicitHeight = 239
     end
   end
   object Panel1: TPanel
     Left = 0
-    Top = 289
-    Width = 482
+    Top = 326
+    Width = 533
     Height = 36
     Align = alBottom
     BevelOuter = bvNone
@@ -982,12 +1044,13 @@ object frmSettings: TfrmSettings
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 494
+    ExplicitTop = 289
+    ExplicitWidth = 482
     DesignSize = (
-      482
+      533
       36)
     object btnCancel: TButton
-      Left = 387
+      Left = 438
       Top = 4
       Width = 80
       Height = 28
@@ -996,10 +1059,10 @@ object frmSettings: TfrmSettings
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 0
-      ExplicitLeft = 399
+      ExplicitLeft = 387
     end
     object btnOk: TButton
-      Left = 301
+      Left = 352
       Top = 4
       Width = 80
       Height = 28
@@ -1009,7 +1072,7 @@ object frmSettings: TfrmSettings
       ModalResult = 1
       TabOrder = 1
       OnClick = btnOkClick
-      ExplicitLeft = 313
+      ExplicitLeft = 301
     end
   end
   object ImageList1: TImageList
@@ -1017,8 +1080,8 @@ object frmSettings: TfrmSettings
     DrawingStyle = dsTransparent
     Height = 32
     Width = 32
-    Left = 92
-    Top = 271
+    Left = 84
+    Top = 319
     Bitmap = {
       494C010104000800040020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004000000001002000000000000080
@@ -2086,8 +2149,8 @@ object frmSettings: TfrmSettings
   object ImageList2: TImageList
     ColorDepth = cd32Bit
     DrawingStyle = dsTransparent
-    Left = 160
-    Top = 272
+    Left = 136
+    Top = 320
     Bitmap = {
       494C010103000800040010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
@@ -2233,7 +2296,7 @@ object frmSettings: TfrmSettings
     Filter = 'Applications|*.exe|All Files|*.*'
     FilterIndex = 0
     Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
-    Left = 32
-    Top = 272
+    Left = 24
+    Top = 320
   end
 end

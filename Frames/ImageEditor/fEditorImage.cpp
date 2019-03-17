@@ -7,6 +7,7 @@
 #include "Frames/ImageEditor/CanvasPencilTool.h"
 #include "Frames/ImageEditor/CanvasLineTool.h"
 #include "Frames/ImageEditor/CanvasShapeTool.h"
+#include "Settings/ThemeManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "LMDDckSite"
@@ -92,7 +93,7 @@ void __fastcall TfrmEditorImage::SetDocument(Document* document)
 //    m_CanvasToolMap[btnRotateRight90->Tag] = std::make_unique<CanvasRotateRight90Tool>();
 
     m_ImageDocument = dynamic_cast<ImageDocument*>(document);
-    panEditorContainer->Color = StyleServices()->GetStyleColor(scGenericGradientBase);
+    panEditorContainer->Color = ThemeManager::Background;
     m_BlockTypeTool.Document = m_ImageDocument;
 
     // convert the documents images into frames

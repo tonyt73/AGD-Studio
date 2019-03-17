@@ -67,10 +67,10 @@ void __fastcall TfrmIDE::OnActivate(TWinControl* parent)
             Application->MainForm->Menu = mnuMain;
             Application->MainForm->Caption = ApplicationName;
         }
-        Project::ThemeManager::ReapplyStyle();
-        Color = StyleServices()->GetStyleColor(scGenericGradientBase);
-        tvProject->BackGroundColor = StyleServices()->GetStyleColor(scGenericGradientBase);
-        tvBuild->BackGroundColor = StyleServices()->GetStyleColor(scGenericGradientBase);
+        ThemeManager::ReapplyStyle();
+        Color = ThemeManager::Background;
+        tvProject->BackGroundColor = ThemeManager::Background;
+        tvBuild->BackGroundColor = ThemeManager::Background;
         m_Builder.TreeView = tvBuild;
         dsIDE->Invalidate();
         RefreshMruList();

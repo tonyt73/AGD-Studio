@@ -3,6 +3,7 @@
 #include <math.h>
 #include "LabelledImage.h"
 #include "DocumentManager.h"
+#include "ThemeManager.h"
 #include "Image.h"
 #include "BlockColors.h"
 //---------------------------------------------------------------------------
@@ -14,7 +15,7 @@ __fastcall TfrmLabelledImage::TfrmLabelledImage(TComponent* Owner)
 , m_Document(nullptr)
 , m_GraphicsMode(*(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()))
 {
-    panImage->Color = StyleServices()->GetStyleColor(scGenericBackground);
+    panImage->Color = ThemeManager::Background;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmLabelledImage::imgImageClick(TObject *Sender)
@@ -23,10 +24,19 @@ void __fastcall TfrmLabelledImage::imgImageClick(TObject *Sender)
     if (FOnClick != nullptr) FOnClick(this);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmLabelledImage::SetSelected(bool state)
+//TStyleColor
+//  scBorder,
+//  scButtonDisabled, scButtonFocused, scButtonHot, scButtonNormal, scButtonPressed,
+//  scCategoryButtons, scCategoryButtonsGradientBase, scCategoryButtonsGradientEnd, scCategoryPanelGroup,
+//  scComboBox, scComboBoxDisabled,
+//  scEdit, scEditDisabled, scGrid,
+//  scGenericBackground, scGenericGradientBase, scGenericGradientEnd,
+//  scHintGradientBase, scHintGradientEnd, scListBox, scListBoxDisabled, scListView, scPanel, scPanelDisabled, scSplitter, scToolBarGradientBase, scToolBarGradientEnd, scTreeView, scWindow
+    void __fastcall TfrmLabelledImage::SetSelected(bool state)
 {
     m_Selected = state;
-    panImage->Color = StyleServices()->GetStyleColor(state ? scButtonFocused : scGenericBackground);
+
+    panImage->Color = state ? ThemeManager::Highlight : ThemeManager::Background;
     if (state)
     {
         // change all other TfrmImage

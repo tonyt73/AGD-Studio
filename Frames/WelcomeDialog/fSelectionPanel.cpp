@@ -4,6 +4,7 @@
 #include "fSelectionPanel.h"
 #include "System/File.h"
 #include "Project/MachineConfig.h"
+#include "Settings/ThemeManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -15,10 +16,10 @@ __fastcall TSelectionPanelFrame::TSelectionPanelFrame(TComponent* Owner)
 , FOnClick(nullptr)
 , FOnRemoveClick(nullptr)
 {
-    panProjectInfo->Color = StyleServices()->GetStyleColor(scGenericGradientEnd);
-    panRemove->Color = StyleServices()->GetStyleColor(scGenericGradientEnd);
-    lblProjectName->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
-    lblProjectPath->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
+    panProjectInfo->Color = ThemeManager::Background;//StyleServices()->GetStyleColor(scGenericGradientEnd);
+    panRemove->Color = ThemeManager::Background;//StyleServices()->GetStyleColor(scGenericGradientEnd);
+    lblProjectName->Font->Color = ThemeManager::Foreground;//StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
+    lblProjectPath->Font->Color = ThemeManager::Foreground;//StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
     imgRemove->Visible = false;
 }
 //---------------------------------------------------------------------------
@@ -119,7 +120,7 @@ void __fastcall TSelectionPanelFrame::SetLoading(bool state)
 //---------------------------------------------------------------------------
 void __fastcall TSelectionPanelFrame::UpdateControl()
 {
-    TColor color = StyleServices()->GetStyleColor(m_Selected ? scButtonFocused : (m_Highlighted ? scButtonHot : scGenericGradientEnd));
+    TColor color = m_Selected ? ThemeManager::Highlight : (m_Highlighted ? ThemeManager::Highlight : ThemeManager::Background);
     panProjectInfo->Color = color;
     panRemove->Color = color;
     imgRemove->Visible = m_Highlighted;

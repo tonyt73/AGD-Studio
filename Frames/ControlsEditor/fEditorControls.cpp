@@ -82,12 +82,12 @@ void __fastcall TfrmEditorControls::FrameMouseActivate(TObject *Sender, TMouseBu
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorControls::UpdateColors()
 {
-    Line1->Brush->Color = Project::ThemeManager::Highlight;
-    Line1->Pen->Color = Project::ThemeManager::Highlight;
-    Line2->Brush->Color = Project::ThemeManager::Highlight;
-    Line2->Pen->Color = Project::ThemeManager::Highlight;
-    Line3->Brush->Color = Project::ThemeManager::Highlight;
-    Line3->Pen->Color = Project::ThemeManager::Highlight;
+    Line1->Brush->Color = ThemeManager::Highlight;
+    Line1->Pen->Color = ThemeManager::Highlight;
+    Line2->Brush->Color = ThemeManager::Highlight;
+    Line2->Pen->Color = ThemeManager::Highlight;
+    Line3->Brush->Color = ThemeManager::Highlight;
+    Line3->Pen->Color = ThemeManager::Highlight;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorControls::OnThemeChangedEvent(const ThemeChangedEvent& event)

@@ -3,6 +3,7 @@
 #include "fEditorWindow.h"
 #include "Project/DocumentManager.h"
 #include "Project/EditorManager.h"
+#include "Settings/ThemeManager.h"
 #include "Graphics/GraphicsMode.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -28,7 +29,7 @@ __fastcall TfrmEditorWindow::~TfrmEditorWindow()
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorWindow::FrameResize(TObject *Sender)
 {
-    Color = StyleServices()->GetStyleColor(scGenericGradientBase);
+    Color = ThemeManager::Background;//StyleServices()->GetStyleColor(scGenericGradientBase);
     auto s = 8;
     for (; s <= 128; s++)
     {

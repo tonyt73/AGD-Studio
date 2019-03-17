@@ -6200,7 +6200,6 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       Caption = 'Panel1'
       ShowCaption = False
       TabOrder = 0
-      ExplicitLeft = 24
       object imgStartNewProject: TImage
         Left = 104
         Top = 19

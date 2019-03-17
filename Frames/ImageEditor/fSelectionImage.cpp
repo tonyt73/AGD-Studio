@@ -2,6 +2,7 @@
 #include "agdx.pch.h"
 //---------------------------------------------------------------------------
 #include "fSelectionImage.h"
+#include "Settings/ThemeManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -38,7 +39,7 @@ void __fastcall TSelectionImageFrame::SetSelected(bool state)
         }
     }
     m_Selected = state;
-    Color = m_Selected ? StyleServices()->GetStyleColor(scButtonHot) : StyleServices()->GetStyleColor(scPanel);
+    Color = m_Selected ? ThemeManager::Highlight : ThemeManager::Background;
 }
 //---------------------------------------------------------------------------
 void __fastcall TSelectionImageFrame::SetScale(int scale)
@@ -46,7 +47,7 @@ void __fastcall TSelectionImageFrame::SetScale(int scale)
     m_Scale = scale;
     Width  = (m_ScalarX * scale * imgBitmap->Picture->Bitmap->Width ) + Padding->Left + Padding->Right;
     Height = (m_ScalarY * scale * imgBitmap->Picture->Bitmap->Height) + Padding->Top  + Padding->Bottom;
-    Color = m_Selected ? StyleServices()->GetStyleColor(scButtonHot) : StyleServices()->GetStyleColor(scPanel);
+    Color = m_Selected ? ThemeManager::Highlight : ThemeManager::Background;
 }
 //---------------------------------------------------------------------------
 void __fastcall TSelectionImageFrame::imgBitmapClick(TObject *Sender)

@@ -3,6 +3,7 @@
 #include "fAbout.h"
 #include <ctime>
 #include <iomanip>
+#include "Settings/ThemeManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -20,18 +21,16 @@ void __fastcall TfrmAbout::FormDeactivate(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmAbout::FormCreate(TObject *Sender)
 {
-    //lblTitle1->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
-    lblVersion->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
-    lblBuild->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
-    lblCopyright->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
-    lblAGDCopyright->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
-    shpFrame->Pen->Color = StyleServices()->GetStyleFontColor(sfTabTextActiveHot);
-    Color = StyleServices()->GetStyleColor(scGenericGradientEnd);
+    lblVersion->Font->Color = ThemeManager::Foreground;
+    lblBuild->Font->Color = ThemeManager::Foreground;
+    lblCopyright->Font->Color = ThemeManager::Foreground;
+    lblAGDCopyright->Font->Color = ThemeManager::Foreground;
+    shpFrame->Pen->Color = ThemeManager::Highlight;
+    Color = ThemeManager::Background;
     // read application file version and update the labels
     int Major, Minor, Release, Build;
     GetBuildVersion(Major, Minor, Release, Build);
     lblVersion->Caption = "Version " + IntToStr(Major) + "." + IntToStr(Minor);
-    //lblBuild->Caption = "Build #AGDx-" + IntToStr(Major)+"."+IntToStr(Minor)+"."+IntToStr(Release)+"."+IntToStr(Build);
     lblBuild->Caption = "Build #AGDx-" + IntToStr(Major)+"."+IntToStr(Minor)+", built on " + DatePlusDays(Release);
 }
 //---------------------------------------------------------------------------

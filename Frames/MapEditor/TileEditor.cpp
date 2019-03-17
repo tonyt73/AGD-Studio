@@ -710,7 +710,7 @@ void __fastcall TileEditor::DrawRoomNumbers() const
     if (m_ShowRoomNumbers && FRetrieveRoomIndex)
     {
         auto Canvas = m_View->Picture->Bitmap->Canvas;
-        Canvas->Font->Color = Project::ThemeManager::Foreground;
+        Canvas->Font->Color = ThemeManager::Foreground;
         Canvas->Pen->Style = psSolid;
         auto xs =  (m_BorderScaled.x - m_MapOffsetMS.X) * m_Scale.x;
         auto ys =  (m_BorderScaled.y - m_MapOffsetMS.Y) * m_Scale.y;
@@ -728,10 +728,10 @@ void __fastcall TileEditor::DrawRoomNumbers() const
                     // draw number
                     auto number = IntToStr(ri);
                     auto ts = Canvas->TextExtent(number);
-                    Canvas->Pen->Color = Project::ThemeManager::Background;
-                    Canvas->Brush->Color = Project::ThemeManager::Background;
+                    Canvas->Pen->Color = ThemeManager::Background;
+                    Canvas->Brush->Color = ThemeManager::Background;
                     Canvas->Rectangle(TRect(tx, ty, tx + ts.Width + 6, ty + ts.Height + 4));
-                    Canvas->Brush->Color = Project::ThemeManager::Highlight;
+                    Canvas->Brush->Color = ThemeManager::Highlight;
                     Canvas->TextOut(tx + 3, ty + 2, number);
                 }
                 tx += rx;

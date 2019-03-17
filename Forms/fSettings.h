@@ -85,6 +85,9 @@ __published:    // IDE-managed Components
     TLabel *Label16;
     TLabel *Label17;
     TLabel *Label18;
+    TLabel *Label19;
+    TLabel *Label20;
+    TLabel *Label21;
     void __fastcall FormCreate(TObject *Sender);
     void __fastcall btnProfileClick(TObject *Sender);
     void __fastcall btnOkClick(TObject *Sender);

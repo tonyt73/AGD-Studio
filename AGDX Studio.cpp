@@ -28,14 +28,14 @@ USEFORM("Frames\ImageEditor\fULAplusBitmap.cpp", frmULAplusBitmap); /* TFrame: F
 USEFORM("Frames\ImageEditor\fPaletteAttribute.cpp", frmPaletteAttribute); /* TFrame: File Type */
 USEFORM("Frames\ImageEditor\fPaletteBitmap.cpp", frmPaletteBitmap); /* TFrame: File Type */
 USEFORM("Frames\ImageEditor\fSelectionImage.cpp", SelectionImageFrame); /* TFrame: File Type */
-USEFORM("Forms\fMain.cpp", frmMain);
 USEFORM("Forms\fNewImage.cpp", frmNewImage);
 USEFORM("Forms\fSettings.cpp", frmSettings);
-USEFORM("Forms\fAbout.cpp", frmAbout);
 USEFORM("Frames\CodeEditor\fEditorCode.cpp", frmEditorCode); /* TFrame: File Type */
+USEFORM("Forms\fAbout.cpp", frmAbout);
+USEFORM("Forms\fMain.cpp", frmMain);
 USEFORM("Frames\ControlsEditor\fEditorControls.cpp", frmEditorControls); /* TFrame: File Type */
-USEFORM("Frames\IDE\fIDE.cpp", frmIDE); /* TFrame: File Type */
 USEFORM("Frames\ControlsEditor\fKeyCapture.cpp", frmKeyCode); /* TFrame: File Type */
+USEFORM("Frames\IDE\fIDE.cpp", frmIDE); /* TFrame: File Type */
 //---------------------------------------------------------------------------
 int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE, LPTSTR, int)
 {
@@ -43,7 +43,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE, LPTSTR, int)
     {
         Application->Initialize();
         Application->MainFormOnTaskBar = true;
-        Project::ThemeManager::SetStyle(appSettings.ActiveStyle.Trim() != "" ? appSettings.ActiveStyle : "Onyx Blue");
+        ThemeManager::SetStyle(appSettings.ActiveStyle.Trim() != "" ? appSettings.ActiveStyle : "Onyx Blue");
         Application->CreateForm(__classid(TfrmMain), &frmMain);
         Application->Run();
     }

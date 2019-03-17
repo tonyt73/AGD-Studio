@@ -16,7 +16,7 @@ __fastcall TfrmWelcomeDialog::TfrmWelcomeDialog(TComponent* Owner)
 , m_LoadingPanel(nullptr)
 {
     // load the themes
-    Project::ThemeManager::LoadStyles(cmbThemes);
+    ThemeManager::LoadStyles(cmbThemes);
     // load the machines
     cmbMachines->Items->Clear();
     std::vector<String> machines;
@@ -102,17 +102,17 @@ void __fastcall TfrmWelcomeDialog::SelectionPanelOnRemoveClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::lblStartNewProjectMouseEnter(TObject *Sender)
 {
-    ((TLabel*)Sender)->Font->Color = StyleServices()->GetStyleColor(scButtonHot);
+    ((TLabel*)Sender)->Font->Color = ThemeManager::Highlight;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::lblStartNewProjectMouseLeave(TObject *Sender)
 {
-    ((TLabel*)Sender)->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
+    ((TLabel*)Sender)->Font->Color = ThemeManager::Foreground;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::cmbThemesChange(TObject *Sender)
 {
-    Project::ThemeManager::SetStyle(cmbThemes->Text);
+    ThemeManager::SetStyle(cmbThemes->Text);
     UpdateColors();
 }
 //---------------------------------------------------------------------------
@@ -123,11 +123,11 @@ void __fastcall TfrmWelcomeDialog::lblChangeThemeClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::UpdateColors()
 {
-    panMain->Color = StyleServices()->GetStyleColor(scGenericGradientBase);
-    panRecentProjects->Color = StyleServices()->GetStyleColor(scGenericGradientEnd);
-    lblStartNewProject->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
-    lblOpenExistingProject->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
-    lblChangeTheme->Font->Color = StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
+    panMain->Color = ThemeManager::Background;
+    panRecentProjects->Color = ThemeManager::Shadow;
+    lblStartNewProject->Font->Color = ThemeManager::Foreground;
+    lblOpenExistingProject->Font->Color = ThemeManager::Foreground;
+    lblChangeTheme->Font->Color = ThemeManager::Foreground;
     for (auto panel : m_MostRecentlyUsedItems) panel->UpdateControl();
 }
 //---------------------------------------------------------------------------
@@ -179,7 +179,7 @@ void __fastcall TfrmWelcomeDialog::OnActivate(TWinControl* parent)
 {
     if (parent != nullptr)
     {
-        Project::ThemeManager::LoadStyles(cmbThemes);
+        ThemeManager::LoadStyles(cmbThemes);
         Parent = parent;
         Visible = true;
         dynamic_cast<TForm*>(Parent)->Caption = "Welcome to " + ApplicationName;

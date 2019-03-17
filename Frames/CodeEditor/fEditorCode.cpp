@@ -6,6 +6,7 @@
 #include "fEditorCode.h"
 #include "fMain.h"
 #include "Project/EditorManager.h"
+#include "Settings/ThemeManager.h"
 #include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -88,7 +89,7 @@ void __fastcall TfrmEditorCode::SetDocument(Document* document)
         lmdDocument->ActiveSyntaxScheme = sc;
         lmdDocument->ReadOnly = document->IsReadOnly;
     }
-    Color = StyleServices()->GetStyleColor(scGenericGradientBase);
+    Color = ThemeManager::Background;
 }
 //---------------------------------------------------------------------------
 String __fastcall TfrmEditorCode::GetSyntaxScByExt(const String& extension)

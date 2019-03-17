@@ -97,7 +97,7 @@ void __fastcall TfrmKeyCode::edtKeyMouseEnter(TObject *Sender)
 {
     ParentBackground = false;
     ParentColor = false;
-    Color = edtKey->Focused() ? Project::ThemeManager::Selection : Project::ThemeManager::Highlight;
+    Color = edtKey->Focused() ? ThemeManager::Highlight : ThemeManager::Background;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmKeyCode::edtKeyMouseLeave(TObject *Sender)

@@ -4,6 +4,7 @@
 #include "fEditorJumpTable.h"
 #include "Project/DocumentManager.h"
 #include "Project/EditorManager.h"
+#include "Settings/ThemeManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -45,7 +46,7 @@ void __fastcall TfrmEditorJumpTable::FrameMouseActivate(TObject *Sender, TMouseB
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorJumpTable::FrameResize(TObject *Sender)
 {
-    Color = StyleServices()->GetStyleColor(scGenericGradientBase);
+    Color = ThemeManager::Background;
     auto s = 2;
     for (; s <= 128; s++)
     {
@@ -75,12 +76,12 @@ void __fastcall TfrmEditorJumpTable::DrawView()
     // draw the window area
     if (m_View != nullptr)
     {
-        m_View->Canvas->Brush->Color = clGray;
+        m_View->Canvas->Brush->Color = ThemeManager::Background;
         m_View->Canvas->FillRect(TRect(0, 0, m_View->Width, m_View->Height));
         auto x = 0;
         auto y = 80;
-        m_View->Canvas->Pen->Color = clBlack;
-        m_View->Canvas->Brush->Color = clRed;
+        m_View->Canvas->Pen->Color = ThemeManager::Foreground;
+        m_View->Canvas->Brush->Color = ThemeManager::Highlight;
         for (auto i = -1; i < m_Document->Count; i++)
         {
             y += m_Document->GetStep(i);
