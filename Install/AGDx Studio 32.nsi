@@ -604,6 +604,7 @@ Section Uninstall
   Delete "$INSTDIR\lmdrtcore260.bpl"
   Delete "$INSTDIR\lmdrtdocking260.bpl"
   Delete "$INSTDIR\lmdrtelcore260.bpl"
+  Delete "$INSTDIR\lmdrtelpro260.bpl"
   Delete "$INSTDIR\lmdrtinspector260.bpl"
   Delete "$INSTDIR\lmdrtl260.bpl"
   Delete "$INSTDIR\lmdrtlog260.bpl"
