@@ -291,7 +291,7 @@ void __fastcall TfrmIDE::tvProjectDblClick(TObject *Sender)
         auto doc = (Document*)((NativeInt)tvProject->Selected->Tag);
         if (doc && doc->DockPanel == nullptr)
         {
-            InformationMessage("[[IDE] Opening Document: " + doc->Name);
+            InformationMessage("[IDE] Opening Document: " + doc->Name);
             auto dp = new TLMDDockPanel(this);
             if (m_DocumentEditorFactory.Create(doc, dp))
             {

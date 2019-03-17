@@ -20,6 +20,9 @@
 #include <Vcl.Dialogs.hpp>
 #include <Vcl.ExtDlgs.hpp>
 #include <Vcl.WinXPanels.hpp>
+#include <Vcl.BaseImageCollection.hpp>
+#include <Vcl.ImageCollection.hpp>
+#include <Vcl.VirtualImageList.hpp>
 #include "LMDInsPropInsp.hpp"
 #include "LMDInsPropPage.hpp"
 #include "LMDDckSite.hpp"
@@ -35,9 +38,6 @@
 #include "Build/BuildManager.h"
 #include "Factories/DocumentEditorFactory.h"
 #include "Frames/WndProcHandlers.h"
-#include <Vcl.BaseImageCollection.hpp>
-#include <Vcl.ImageCollection.hpp>
-#include <Vcl.VirtualImageList.hpp>
 //---------------------------------------------------------------------------
 class TfrmIDE : public TFrame
 {
