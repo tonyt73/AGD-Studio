@@ -8,6 +8,6 @@
 @title "Build New Major Release"
 
 @rem Update the Version
-@Versioner.exe -cproj "..\AGDx-Studio.cbproj" -install ".\\" -major -backup
+@Versioner.exe -cproj "..\AGDx Studio.cbproj" -install ".\\" -major -backup
 
 @call Build.cmd

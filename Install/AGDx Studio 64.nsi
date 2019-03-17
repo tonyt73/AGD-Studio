@@ -8,7 +8,7 @@ SetCompressor /SOLID /FINAL lzma
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME_SMALL "AGDx Studio"
 !define PRODUCT_NAME "${PRODUCT_NAME_SMALL} 64"
-!define PRODUCT_VERSION "0.4 BETA"
+!define PRODUCT_VERSION "0.5 BETA"
 !define PRODUCT_PUBLISHER "Tony Thompson"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\ADGx Studio 64"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
@@ -61,7 +61,7 @@ RequestExecutionLevel admin ;Require admin rights on NT6+ (When UAC is turned on
 ; Instfiles page
 !insertmacro MUI_PAGE_INSTFILES
 ; Finish page
-!define MUI_FINISHPAGE_RUN "$INSTDIR\AGDx Studio.exe"
+!define MUI_FINISHPAGE_RUN "$INSTDIR\AGD Studio.exe"
 #!define MUI_FINISHPAGE_SHOWREADME "$INSTDIR\ReadMe.txt"
 !insertmacro MUI_PAGE_FINISH
 
@@ -81,13 +81,30 @@ ShowInstDetails show
 ShowUnInstDetails show
 
 Function .onInit
-UserInfo::GetAccountType
-pop $0
-${If} $0 != "admin" ;Require admin rights on NT4+
-    MessageBox mb_iconstop "Administrator rights required!"
-    SetErrorLevel 740 ;ERROR_ELEVATION_REQUIRED
-    Quit
-${EndIf}
+	UserInfo::GetAccountType
+	pop $0
+	${If} $0 != "admin" ;Require admin rights on NT4+
+		MessageBox mb_iconstop "Administrator rights required!"
+		SetErrorLevel 740 ;ERROR_ELEVATION_REQUIRED
+		Quit
+	${EndIf}
+
+	ReadRegStr $R0 HKLM \
+	"Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}" \
+	"UninstallString"
+	StrCmp $R0 "" done
+	
+	MessageBox MB_OKCANCEL|MB_ICONEXCLAMATION \
+	"${PRODUCT_NAME} is already installed. $\n$\nClick `OK` to remove the \
+	previous version or `Cancel` to cancel this upgrade." \
+	IDOK uninst
+	Abort
+ 
+;Run the uninstaller
+uninst:
+    ClearErrors
+    Exec $R0
+done:
 FunctionEnd
 
 ; Font(s)
@@ -117,7 +134,7 @@ Section "Main files" SEC01
   SetOutPath "$INSTDIR"
   SetOverwrite ifnewer
   CreateDirectory "$SMPROGRAMS\${PRODUCT_NAME}"
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk" "$INSTDIR\AGDx Studio.exe"
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk" "$INSTDIR\AGD Studio.exe"
   push "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk"
   call ShellLinkSetRunAs
   pop $0
@@ -127,13 +144,13 @@ Section "Main files" SEC01
   call ShellLinkSetRunAs
   pop $0
   DetailPrint HR=$0
-  CreateShortCut "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\AGDx Studio.exe"  
+  CreateShortCut "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\AGD Studio.exe"  
   push "$DESKTOP\${PRODUCT_NAME}.lnk"
   call ShellLinkSetRunAs
   pop $0
   DetailPrint HR=$0
   File "..\Binaries\64\AGDx Studio.exe"
-  File "..\Binaries\64\AGDx-Studio.exe"
+  File "..\Binaries\64\AGD Studio.exe"
   File "..\Binaries\64\AGD Converter.exe"
   File "..\Binaries\64\borlndmm.dll"
   File "..\Binaries\64\cc64260.dll"
@@ -580,7 +597,7 @@ Section Uninstall
   ; Application Files
   Delete "$INSTDIR\uninst.exe"
   Delete "$INSTDIR\AGDx Studio.exe"
-  Delete "$INSTDIR\AGDx-Studio.exe"
+  Delete "$INSTDIR\AGD Studio.exe"
   Delete "$INSTDIR\borlndmm.dll"
   Delete "$INSTDIR\cc32x260.dll"
   Delete "$INSTDIR\cc32x260mt.bpl"

@@ -8,7 +8,7 @@ SetCompressor /SOLID lzma
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME_SMALL "AGDx Studio"
 !define PRODUCT_NAME "${PRODUCT_NAME_SMALL} 32"
-!define PRODUCT_VERSION "0.4 BETA"
+!define PRODUCT_VERSION "0.5 BETA"
 !define PRODUCT_PUBLISHER "Tony Thompson"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
@@ -82,13 +82,30 @@ ShowInstDetails show
 ShowUnInstDetails show
 
 Function .onInit
-UserInfo::GetAccountType
-pop $0
-${If} $0 != "admin" ;Require admin rights on NT4+
-    MessageBox mb_iconstop "Administrator rights required!"
-    SetErrorLevel 740 ;ERROR_ELEVATION_REQUIRED
-    Quit
-${EndIf}
+	UserInfo::GetAccountType
+	pop $0
+	${If} $0 != "admin" ;Require admin rights on NT4+
+		MessageBox mb_iconstop "Administrator rights required!"
+		SetErrorLevel 740 ;ERROR_ELEVATION_REQUIRED
+		Quit
+	${EndIf}
+
+	ReadRegStr $R0 HKLM \
+	"Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}" \
+	"UninstallString"
+	StrCmp $R0 "" done
+ 
+	MessageBox MB_OKCANCEL|MB_ICONEXCLAMATION \
+	"${PRODUCT_NAME} is already installed. $\n$\nClick `OK` to remove the \
+	previous version or `Cancel` to cancel this upgrade." \
+	IDOK uninst
+	Abort
+ 
+;Run the uninstaller
+uninst:
+    ClearErrors
+    Exec $R0
+done:
 FunctionEnd
 
 ; Font(s)
@@ -118,12 +135,12 @@ Section "Main files" SEC01
   SetOutPath "$INSTDIR"
   SetOverwrite ifnewer
   CreateDirectory "$SMPROGRAMS\${PRODUCT_NAME}"
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk" "$INSTDIR\AGDx Studio.exe"
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk" "$INSTDIR\AGD Studio.exe"
   push "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk"
   call ShellLinkSetRunAs
   pop $0
   DetailPrint HR=$0
-  push "$SMPROGRAMS\${PRODUCT_NAME}\AGDx Studio.exe"
+  push "$SMPROGRAMS\${PRODUCT_NAME}\AGD Studio.exe"
   call ShellLinkSetRunAs
   pop $0
   DetailPrint HR=$0
@@ -136,17 +153,17 @@ Section "Main files" SEC01
   call ShellLinkSetRunAs
   pop $0
   DetailPrint HR=$0
-  CreateShortCut "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\AGDx Studio.exe"  
+  CreateShortCut "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\AGD Studio.exe"  
   push "$DESKTOP\${PRODUCT_NAME}.lnk"
   call ShellLinkSetRunAs
   pop $0
   DetailPrint HR=$0
-  push "$DESKTOP\AGDx Studio.exe"
+  push "$DESKTOP\AGD Studio.exe"
   call ShellLinkSetRunAs
   pop $0
   DetailPrint HR=$0
   File "..\Binaries\32\AGDx Studio.exe"
-  File "..\Binaries\32\AGDx-Studio.exe"
+  File "..\Binaries\32\AGD Studio.exe"
   File "..\Binaries\32\AGD Converter.exe"
   File "..\Binaries\32\borlndmm.dll"
   File "..\Binaries\32\cc32c260.dll"
@@ -350,18 +367,13 @@ Section "Configuration Files" SEC02
   CreateDirectory "$APPDATA\AGDx Studio\Images\"
   SetOutPath "$APPDATA\AGDx Studio\Images\"
   File "${APP_DATA}\AGDx Studio\Images\Acorn Atom.png"
-  File "${APP_DATA}\AGDx Studio\Images\Acorn Atom2.png"
   File "${APP_DATA}\AGDx Studio\Images\Amstrad CPC.png"
-  File "${APP_DATA}\AGDx Studio\Images\Amstrad CPC2.png"
   File "${APP_DATA}\AGDx Studio\Images\BBC.png"
-  File "${APP_DATA}\AGDx Studio\Images\BBC2.png"
-  File "${APP_DATA}\AGDx Studio\Images\BBC3.png"
   File "${APP_DATA}\AGDx Studio\Images\Dragon.png"
   File "${APP_DATA}\AGDx Studio\Images\Sam Coupe.png"
   File "${APP_DATA}\AGDx Studio\Images\Spectrum Next.png"
   File "${APP_DATA}\AGDx Studio\Images\Timex.png"
   File "${APP_DATA}\AGDx Studio\Images\ZX Spectrum.png"
-  File "${APP_DATA}\AGDx Studio\Images\ZX Spectrum2.png"
 SectionEnd
 
 
@@ -595,7 +607,7 @@ Section Uninstall
   ; Application Files
   Delete "$INSTDIR\uninst.exe"
   Delete "$INSTDIR\AGDx Studio.exe"
-  Delete "$INSTDIR\AGDx-Studio.exe"
+  Delete "$INSTDIR\AGD Studio.exe"
   Delete "$INSTDIR\borlndmm.dll"
   Delete "$INSTDIR\cc32x260.dll"
   Delete "$INSTDIR\cc32x260mt.bpl"
