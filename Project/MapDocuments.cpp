@@ -108,7 +108,7 @@ void __fastcall Entity::Clean()
     m_Dirty = false;
 }
 //---------------------------------------------------------------------------
-SharedImagePtr const __fastcall Entity::GetDocument() const
+ImageDocument* const __fastcall Entity::GetDocument() const
 {
     return m_Document;
 }
