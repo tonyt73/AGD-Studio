@@ -156,6 +156,7 @@ Section "Main files" SEC01
   File "..\Binaries\32\lmdrtcore260.bpl"
   File "..\Binaries\32\lmdrtdocking260.bpl"
   File "..\Binaries\32\lmdrtelcore260.bpl"
+  File "..\Binaries\32\lmdrtelpro260.bpl"
   File "..\Binaries\32\lmdrtinspector260.bpl"
   File "..\Binaries\32\lmdrtl260.bpl"
   File "..\Binaries\32\lmdrtlog260.bpl"
