@@ -25,6 +25,7 @@
 #pragma link "fToolbar"
 #pragma link "fToolbarShape"
 #pragma link "fULAplusBitmap"
+#pragma link "fPaletteMonoAttribute"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorImage::TfrmEditorImage(TComponent* Owner)
@@ -110,7 +111,8 @@ void __fastcall TfrmEditorImage::SetDocument(Document* document)
     btnTool->ImageIndex = actPencil->ImageIndex;
     m_CanvasTool = btnPencil->Tag;
 
-    palAttribute->Visible = m_GraphicsMode.TypeOfBuffer == btAttribute;
+    palAttribute->Visible = m_GraphicsMode.TypeOfBuffer == btAttribute && m_GraphicsMode.LogicalColors == 16;
+    palMonoAttribute->Visible = m_GraphicsMode.TypeOfBuffer == btAttribute && m_GraphicsMode.LogicalColors == 2;
     palBitmap->Visible = m_GraphicsMode.TypeOfBuffer == btBitmap;
     palULAPlus->Visible = m_GraphicsMode.TypeOfBuffer == btULAplus;
     palBlocks->Visible = false;
@@ -614,6 +616,10 @@ void __fastcall TfrmEditorImage::SetCanvasColors()
     {
         palAttribute->Set(m_Frames[m_SelectedFrame]->Canvas());
     }
+    else if (palMonoAttribute->Visible)
+    {
+        palMonoAttribute->Set(m_Frames[m_SelectedFrame]->Canvas());
+    }
     else if (palBitmap->Visible)
     {
         palBitmap->Set(m_Frames[m_SelectedFrame]->Canvas());
@@ -710,7 +716,8 @@ void __fastcall TfrmEditorImage::actModePaintExecute(TObject *Sender)
         actPencil->Enabled = true;
         actLine->Enabled = true;
         actShape->Enabled = true;
-        palAttribute->Visible = m_GraphicsMode.TypeOfBuffer == btAttribute;
+        palAttribute->Visible = m_GraphicsMode.TypeOfBuffer == btAttribute && m_GraphicsMode.LogicalColors == 16;
+        palMonoAttribute->Visible = m_GraphicsMode.TypeOfBuffer == btAttribute && m_GraphicsMode.LogicalColors == 2;
         palBitmap->Visible = m_GraphicsMode.TypeOfBuffer == btBitmap;
         palULAPlus->Visible = m_GraphicsMode.TypeOfBuffer == btULAplus;
         palBlocks->Visible = false;
@@ -737,6 +744,7 @@ void __fastcall TfrmEditorImage::actModeBlockExecute(TObject *Sender)
         actLine->Enabled = false;
         actShape->Enabled = false;
         palAttribute->Visible = false;
+        palMonoAttribute->Visible = false;
         palBitmap->Visible = false;
         palULAPlus->Visible = false;
         palBlocks->Visible = true;

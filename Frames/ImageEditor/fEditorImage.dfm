@@ -2,7 +2,7 @@ object frmEditorImage: TfrmEditorImage
   Left = 0
   Top = 0
   Width = 1102
-  Height = 890
+  Height = 920
   TabOrder = 0
   OnEndDock = FrameEndDock
   OnMouseActivate = imgEditorMouseActivate
@@ -66,7 +66,7 @@ object frmEditorImage: TfrmEditorImage
   end
   object barStatus: TStatusBar
     Left = 0
-    Top = 871
+    Top = 901
     Width = 1102
     Height = 19
     Panels = <
@@ -90,12 +90,13 @@ object frmEditorImage: TfrmEditorImage
         Text = 'Graphics Mode'
         Width = 300
       end>
+    ExplicitTop = 871
   end
   object panToolbar: TPanel
     Left = 0
     Top = 42
     Width = 80
-    Height = 829
+    Height = 859
     Align = alLeft
     AutoSize = True
     BevelOuter = bvNone
@@ -105,6 +106,7 @@ object frmEditorImage: TfrmEditorImage
     TabOrder = 2
     OnClick = panEditorContainerClick
     OnMouseActivate = imgEditorMouseActivate
+    ExplicitHeight = 829
     object lblTools: TLabel
       Left = 0
       Top = 0
@@ -485,7 +487,7 @@ object frmEditorImage: TfrmEditorImage
     Left = 80
     Top = 42
     Width = 846
-    Height = 829
+    Height = 859
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 3
@@ -493,7 +495,7 @@ object frmEditorImage: TfrmEditorImage
       Left = 0
       Top = 0
       Width = 846
-      Height = 729
+      Height = 759
       HorzScrollBar.Smooth = True
       HorzScrollBar.Tracking = True
       VertScrollBar.Smooth = True
@@ -507,11 +509,12 @@ object frmEditorImage: TfrmEditorImage
       TabOrder = 0
       OnMouseWheel = sbxViewMouseWheel
       OnResize = sbxViewResize
+      ExplicitHeight = 729
       object panEditorContainer: TPanel
         Left = 0
         Top = 0
         Width = 846
-        Height = 729
+        Height = 759
         Align = alClient
         BevelOuter = bvNone
         DoubleBuffered = False
@@ -526,11 +529,12 @@ object frmEditorImage: TfrmEditorImage
         StyleElements = [seClient, seBorder]
         OnClick = panEditorContainerClick
         OnMouseActivate = imgEditorMouseActivate
+        ExplicitHeight = 729
         object panViewFrame: TPanel
           Left = 128
           Top = 128
           Width = 590
-          Height = 473
+          Height = 503
           Align = alClient
           BevelOuter = bvNone
           Color = clWhite
@@ -543,11 +547,12 @@ object frmEditorImage: TfrmEditorImage
           ParentDoubleBuffered = False
           TabOrder = 0
           StyleElements = []
+          ExplicitHeight = 473
           object imgEditor: TImage
             Left = 1
             Top = 1
             Width = 588
-            Height = 471
+            Height = 501
             Align = alClient
             Stretch = True
             OnClick = panEditorContainerClick
@@ -564,7 +569,7 @@ object frmEditorImage: TfrmEditorImage
     end
     object panFrameView: TPanel
       Left = 0
-      Top = 729
+      Top = 759
       Width = 846
       Height = 100
       Align = alBottom
@@ -599,7 +604,7 @@ object frmEditorImage: TfrmEditorImage
     Left = 926
     Top = 42
     Width = 176
-    Height = 829
+    Height = 859
     Align = alRight
     BevelOuter = bvNone
     Caption = 'Panel1'
@@ -631,7 +636,7 @@ object frmEditorImage: TfrmEditorImage
       Left = 0
       Top = 24
       Width = 176
-      Height = 805
+      Height = 835
       Align = alClient
       BevelOuter = bvNone
       Caption = 'Panel3'
@@ -656,7 +661,7 @@ object frmEditorImage: TfrmEditorImage
       end
       inline palBitmap: TfrmPaletteBitmap
         Left = 0
-        Top = 1142
+        Top = 1202
         Width = 176
         Height = 312
         Align = alTop
@@ -672,7 +677,7 @@ object frmEditorImage: TfrmEditorImage
         ParentDoubleBuffered = False
         TabOrder = 1
         OnMouseActivate = imgEditorMouseActivate
-        ExplicitTop = 1142
+        ExplicitTop = 1202
         inherited ImageList1: TImageList
           Bitmap = {
             494C010103000800040020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
@@ -1213,7 +1218,7 @@ object frmEditorImage: TfrmEditorImage
       end
       inline palULAPlus: TfrmULAplusBitmap
         Left = 0
-        Top = 642
+        Top = 702
         Width = 176
         Height = 500
         Align = alTop
@@ -1230,11 +1235,11 @@ object frmEditorImage: TfrmEditorImage
         TabOrder = 2
         Visible = False
         OnMouseActivate = imgEditorMouseActivate
-        ExplicitTop = 642
+        ExplicitTop = 702
       end
       inline palBlocks: TfrmBlockTypes
         Left = 0
-        Top = 336
+        Top = 396
         Width = 176
         Height = 306
         Align = alTop
@@ -1243,6 +1248,27 @@ object frmEditorImage: TfrmEditorImage
         ExplicitTop = 336
         inherited panBlock: TPanel
           Hint = 'Left Mouse Button applies the Block type to the chacter position'
+        end
+      end
+      inline palMonoAttribute: TfrmPaletteMonoAttribute
+        Left = 0
+        Top = 336
+        Width = 176
+        Height = 60
+        Align = alTop
+        Constraints.MaxHeight = 60
+        Constraints.MaxWidth = 176
+        Constraints.MinHeight = 60
+        Constraints.MinWidth = 176
+        Enabled = False
+        Padding.Left = 8
+        Padding.Top = 8
+        Padding.Right = 8
+        Padding.Bottom = 8
+        TabOrder = 4
+        ExplicitTop = 8
+        inherited spdInkGreen: TSpeedButton
+          Down = True
         end
       end
     end

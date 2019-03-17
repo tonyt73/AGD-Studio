@@ -1,0 +1,78 @@
+object frmPaletteMonoAttribute: TfrmPaletteMonoAttribute
+  Left = 0
+  Top = 0
+  Width = 176
+  Height = 60
+  Constraints.MaxHeight = 60
+  Constraints.MaxWidth = 176
+  Constraints.MinHeight = 60
+  Constraints.MinWidth = 176
+  Padding.Left = 8
+  Padding.Top = 8
+  Padding.Right = 8
+  Padding.Bottom = 8
+  TabOrder = 0
+  object Bevel1: TBevel
+    Left = 8
+    Top = 22
+    Width = 154
+    Height = 2
+    Shape = bsTopLine
+  end
+  object spdInkBlack: TSpeedButton
+    Left = 8
+    Top = 28
+    Width = 28
+    Height = 28
+    Hint = 'Color - Attribute will be set the selected color'
+    GroupIndex = 1
+    Flat = True
+    Glyph.Data = {
+      FE000000424DFE00000000000000760000002800000010000000110000000100
+      0400000000008800000000000000000000001000000010000000000000000000
+      80000080000000808000800000008000800080800000C0C0C000808080000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00DDDDDDDDDDDD
+      DDDD000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000}
+    ParentShowHint = False
+    ShowHint = True
+  end
+  object spdInkGreen: TSpeedButton
+    Tag = 4
+    Left = 38
+    Top = 28
+    Width = 28
+    Height = 28
+    Hint = 'Color - Attribute will be set the selected color'
+    GroupIndex = 1
+    Flat = True
+    Glyph.Data = {
+      FE000000424DFE00000000000000760000002800000010000000110000000100
+      0400000000008800000000000000000000001000000010000000000000000000
+      80000080000000808000800000008000800080800000C0C0C000808080000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00DDDDDDDDDDDD
+      DDDDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+      AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+      AAAA222222222222222222222222222222222222222222222222222222222222
+      2222222222222222222222222222222222222222222222222222222222222222
+      2222}
+    ParentShowHint = False
+    ShowHint = True
+  end
+  object Label1: TLabel
+    Left = 12
+    Top = 7
+    Width = 19
+    Height = 13
+    Caption = 'INK'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+end

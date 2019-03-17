@@ -1,4 +1,4 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{D0C2ACDB-659A-4891-B603-0D187CA01644}</ProjectGuid>
         <ProjectVersion>18.6</ProjectVersion>
@@ -6,7 +6,7 @@
         <AppType>Application</AppType>
         <MainSource>AGDx Studio.cpp</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win64</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
     </PropertyGroup>
@@ -83,7 +83,7 @@
         <VerInfo_Release>6663</VerInfo_Release>
         <VerInfo_Build>80</VerInfo_Build>
         <VerInfo_Locale>3081</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=0.5.6663.80;InternalName=AGDx Studio;LegalCopyright=2019 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=0.5.6663;Comments=Programmed by Tony Thompson;SpecialBuild=BETA</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=0.6.6663.80;InternalName=AGDx Studio;LegalCopyright=2019 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=0.6.6663;Comments=Programmed by Tony Thompson;SpecialBuild=BETA</VerInfo_Keys>
         <VerInfo_AutoGenVersion>true</VerInfo_AutoGenVersion>
         <IncludePath>Frames\ControlsEditor\;Frames\WindowEditor\;Frames\JumpEditor\;Build\AgdSection\;Build\;System\;Messaging\;Frames\MusicEditor\;Frames\MapEditor\;Forms\;Frames\ImageEditor\;Frames\WelcomeDialog\;Frames\IDE\;Frames\;Frames\CodeEditor\;Settings\;Graphics\;Project\;Factories\;$(IncludePath)</IncludePath>
         <BCC_InstructionSet>6</BCC_InstructionSet>
@@ -393,6 +393,13 @@
             <DependentOn>Frames\ImageEditor\fPaletteBitmap.h</DependentOn>
             <BuildOrder>43</BuildOrder>
         </CppCompile>
+        <CppCompile Include="Frames\ImageEditor\fPaletteMonoAttribute.cpp">
+            <Form>frmPaletteMonoAttribute</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\ImageEditor\fPaletteMonoAttribute.h</DependentOn>
+            <BuildOrder>98</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Frames\ImageEditor\fSelectionImage.cpp">
             <Form>SelectionImageFrame</Form>
             <FormType>dfm</FormType>
@@ -663,6 +670,7 @@
         <FormResources Include="Frames\ControlsEditor\fEditorControls.dfm"/>
         <FormResources Include="Frames\ControlsEditor\fKeyCapture.dfm"/>
         <FormResources Include="Frames\IDE\fIDE.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fPaletteMonoAttribute.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -832,7 +840,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName=".\Win64\Release\AGDx_Studio.exe" Configuration="Release" Class="ProjectOutput">
+                <DeployFile LocalName=".\Win64\Release\AGDx Studio.exe" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="All Platforms">
                         <Overwrite>true</Overwrite>
                     </Platform>

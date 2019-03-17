@@ -36,6 +36,7 @@
 #include "fToolbar.h"
 #include "fToolbarShape.h"
 #include "fULAplusBitmap.h"
+#include "fPaletteMonoAttribute.h"
 //---------------------------------------------------------------------------
 class TfrmEditorImage : public TFrame
 {
@@ -147,6 +148,7 @@ __published:    // IDE-managed Components
     TfrmBlockTypes *palBlocks;
     TImageList *tbrImagesDisabled;
     TPanel *panModes;
+    TfrmPaletteMonoAttribute *palMonoAttribute;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actBrushExecute(TObject *Sender);

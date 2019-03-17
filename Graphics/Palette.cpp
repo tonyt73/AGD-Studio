@@ -46,7 +46,7 @@ TColor __fastcall Palette::GetTableColor(int index) const
     {
         return m_ColorTable[index];
     }
-    return clFuchsia;
+    return m_ColorTable[1];
 }
 //---------------------------------------------------------------------------
 TColor __fastcall Palette::GetGreyscale(int index) const
