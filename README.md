@@ -1,6 +1,6 @@
 <img src="Screenshots/Welcome.png" width="512">
 
-# An integrated development environment for Jonathan Cauldwell's Arcade Game Designer (AGD)
+# An IDE for Jonathan Cauldwell's Arcade Game Designer
 
 <img src="Screenshots/IDE.png" height=400>
 
@@ -44,14 +44,21 @@ https://github.com/tonyt73/AGDX-Studio/releases
   * http://files.lmd.de/downloads/lmd2019vcl/setupvcl19td26.zip
   * Unzip and run the Setup application
   * Click Next to all questions to Install all defaults
-* Install the Application Configuration files
-  * Open up the location you cloned this repo to
-  * Move the ```Config``` folder to ```%AppData%```
-    * Hint: Copy the above uri and paste into Windows Explorer
-  * Rename the ```Config``` folder to ```AGDX Studio```
-* Install the test project files
-  * Open up the location you cloned this repo to
-  * Move the contents of the ```Public Documents``` folder to ```C:\Users\Public\Documents\```
+  
+* Either:
+  * Install the latest release
+  * This will install all the configuration files and the example project
+  
+* Or:
+  * Install the Application Configuration files
+    * Open up the location you cloned this repo to
+    * Move the ```Config``` folder to ```%AppData%```
+      * Hint: Copy the above uri and paste into Windows Explorer
+    * Rename the ```Config``` folder to ```AGDX Studio```
+  * Install the test project files
+    * Open up the location you cloned this repo to
+    * Move the contents of the ```Public Documents``` folder to ```C:\Users\Public\Documents\```
+
 * Launch the Rad-Studio IDE
   * Open up the location you cloned this repo to
   * Open the AGDX Studio.cproj file
