@@ -12,8 +12,8 @@
 //---------------------------------------------------------------------------
 __fastcall Entity::Entity()
 : m_Pt(0,0)
-, m_Id(0)
-, m_LoadId(0)
+, m_Id(InvalidDocumentId)
+, m_LoadId(InvalidDocumentId)
 , m_Document(nullptr)
 , m_Dirty(true)
 , m_Selected(false)
@@ -26,7 +26,7 @@ __fastcall Entity::Entity()
 __fastcall Entity::Entity(const Entity& other)
 : m_Pt(other.m_Pt)
 , m_Id(other.m_Id)
-, m_LoadId(0)
+, m_LoadId(InvalidDocumentId)
 , m_Document(other.m_Document)
 , m_Dirty(true)
 , m_Selected(other.m_Selected)
@@ -42,9 +42,10 @@ __fastcall Entity::~Entity()
 //---------------------------------------------------------------------------
 Entity& __fastcall Entity::operator=(const Entity& other)
 {
+    assert(m_Id < 10000);
 	m_Pt = other.m_Pt;
 	m_Id = other.m_Id;
-    m_LoadId = 0;
+    m_LoadId = InvalidDocumentId;
 	m_Document = other.m_Document;
 	m_Dirty = true;
 	m_Selected = other.m_Selected;
@@ -56,6 +57,7 @@ Entity& __fastcall Entity::operator=(const Entity& other)
 //---------------------------------------------------------------------------
 bool __fastcall Entity::operator==(const Entity& other)
 {
+    assert(m_Id < 10000);
     return (m_Pt == other.m_Pt && m_Id == other.m_Id);
 }
 //---------------------------------------------------------------------------
@@ -91,6 +93,7 @@ TPoint __fastcall Entity::GetDragPoint() const
 //---------------------------------------------------------------------------
 void __fastcall Entity::Clear()
 {
+    m_Id = InvalidDocumentId;
     m_Pt.x = 0;
     m_Pt.y = 0;
     m_SpriteType = -1;
@@ -105,24 +108,22 @@ void __fastcall Entity::Clean()
     m_Dirty = false;
 }
 //---------------------------------------------------------------------------
-ImageDocument* const __fastcall Entity::GetDocument() const
+SharedImagePtr const __fastcall Entity::GetDocument() const
 {
     return m_Document;
 }
 //---------------------------------------------------------------------------
 unsigned int __fastcall Entity::GetId() const
 {
-    if (m_Document != nullptr)
-    {
-        return m_Document->Id;
-    }
-    return InvalidDocumentId;
+    assert(m_Id < 10000);
+    return m_Id;
 }
 //---------------------------------------------------------------------------
 void __fastcall Entity::SetId(unsigned int id)
 {
     m_Document = dynamic_cast<ImageDocument*>(theDocumentManager.Get(id));
     m_Id = id;
+    assert(m_Id < 10000);
     if (m_Document != nullptr && m_Document->SubType == itSprite && m_SpriteType < 0)
     {
         // initialise the sprite type
@@ -237,6 +238,10 @@ void __fastcall TiledMapDocument::DoSave()
             StartObject();
                 Write("X", entity.m_Pt.x);
                 Write("Y", entity.m_Pt.y);
+                if (entity.Id > 1000)
+                {
+                    int a = 0;
+                }
                 Write("RefId", entity.Id);
                 if (entity.SpriteType >= 0)
                 {
