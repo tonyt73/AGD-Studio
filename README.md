@@ -1,6 +1,6 @@
 <img src="Screenshots/Welcome.png" width="512">
 
-# An integrated development environment for Jonathan Cauldwell's Arcade Game Designer (AGD)
+# An IDE for Jonathan Cauldwell's Arcade Game Designer
 
 <img src="Screenshots/IDE.png" height=400>
 
