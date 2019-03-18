@@ -761,13 +761,14 @@ void __fastcall TileEditor::DrawSpriteTypes() const
             if (entity.IsSprite)
             {
                 auto pt = entity.Pt;
-                pt.x = Snap(pt.x, m_TileSize.cx);
+                pt.x = Snap(pt.x + entity.Image->Width, m_TileSize.cx);
                 pt.y = Snap(pt.y, m_TileSize.cy);
                 pt = MapToView(pt);
                 auto number = IntToStr(entity.SpriteType);
                 auto ts = Canvas->TextExtent(number);
                 Canvas->Pen->Color = ThemeManager::Background;
                 Canvas->Brush->Color = ThemeManager::Background;
+                pt.x -= ts.Width + 6;
                 Canvas->Rectangle(TRect(pt.x, pt.y, pt.x + ts.Width + 6, pt.y + ts.Height + 4));
                 Canvas->Brush->Color = ThemeManager::Highlight;
                 Canvas->TextOut(pt.x + 3, pt.y + 2, number);
