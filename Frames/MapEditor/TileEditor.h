@@ -71,6 +71,7 @@ private:
     bool                            m_ShowStartRoom;    // show the start room highlighted
     bool                            m_ShowRoomNumbers;  // show room index numbers
     bool                            m_ShowTileTypes;    // show the tile types using their image editor colours
+    bool                            m_ShowSpriteTypes;  // show the sprite type
     TPoint                          m_StartRoom;        // the location of the start room
     MapPencilTool                   m_MapPencilTool;    // pencil tool - plot single entites
     MapRectTool                     m_MapRectTool;      // rect tool - draw tiles (only) in a rectangle
@@ -98,6 +99,7 @@ private:
     void                __fastcall  SetShowStartRoom(bool state);
     void                __fastcall  SetShowRoomNumbers(bool state);
     void                __fastcall  SetShowTileTypes(bool state);
+    void                __fastcall  SetShowSpriteTypes(bool state);
     void                __fastcall  SetStartRoomCoords(TPoint location);
     void                __fastcall  SetScale(float scale);
     void                __fastcall  SetMode(TEMode mode);
@@ -108,6 +110,7 @@ private:
     void                __fastcall  DrawMap();
     void                __fastcall  DrawGrids() const;
     void                __fastcall  DrawRoomNumbers() const;
+    void                __fastcall  DrawSpriteTypes() const;
     void                __fastcall  DrawEntityLocks() const;
     void                __fastcall  DrawGroupSelect() const;
     void                __fastcall  DrawSelectedRoom() const;
@@ -151,6 +154,7 @@ public:
     const EntityList&   __fastcall  GetEntities() const;
     void                __fastcall  Add(const EntityList& entities);
     void                __fastcall  ToggleEntityLocks();
+    void                __fastcall  SetSpriteType(int type);
     EntityList          __fastcall  GetSelection(bool resetToOrigin = false) const;
     void                __fastcall  DeleteSelection();
     void                __fastcall  UnselectAll(bool update = true);
@@ -172,6 +176,7 @@ public:
     __property  bool                ShowStartRoom   = { read = m_ShowStartRoom, write = SetShowStartRoom        };
     __property  bool                ShowRoomNumbers = { read = m_ShowRoomNumbers, write = SetShowRoomNumbers    };
     __property  bool                ShowTileTypes   = { read = m_ShowTileTypes, write = SetShowTileTypes        };
+    __property  bool                ShowSpriteTypes = { read = m_ShowSpriteTypes, write = SetShowSpriteTypes    };
     __property  TImage*             LockIcon        = { write = SetLockIcon                                     };
 
     __property TNotifyOnEntityClick OnEntitySelected= { read = FOnEntitySelected, write = FOnEntitySelected     };

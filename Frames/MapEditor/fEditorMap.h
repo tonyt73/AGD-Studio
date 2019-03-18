@@ -147,6 +147,29 @@ __published:    // IDE-managed Components
     TAction *actEditModeSingleScreen;
     TAction *actToggleTileTypes;
     TToolButton *btnToggleTileTypes;
+    TPanel *Panel1;
+    TToolBar *ToolBar2;
+    TToolButton *ToolButton4;
+    TToolButton *ToolButton5;
+    TToolBar *ToolBar3;
+    TToolButton *ToolButton2;
+    TToolButton *ToolButton3;
+    TToolButton *ToolButton6;
+    TToolButton *ToolButton7;
+    TToolButton *ToolButton9;
+    TToolButton *ToolButton11;
+    TToolButton *ToolButton12;
+    TToolButton *ToolButton13;
+    TAction *actSpriteType0;
+    TAction *actShowSpriteTypes;
+    TAction *actSpriteType1;
+    TAction *actSpriteType2;
+    TAction *actSpriteType3;
+    TAction *actSpriteType4;
+    TAction *actSpriteType5;
+    TAction *actSpriteType6;
+    TAction *actSpriteType7;
+    TAction *actSpriteType8;
     void __fastcall actSelectExecute(TObject *Sender);
     void __fastcall actPencilExecute(TObject *Sender);
     void __fastcall actLineExecute(TObject *Sender);
@@ -196,6 +219,8 @@ __published:    // IDE-managed Components
     void __fastcall actToggleRoomNumbersExecute(TObject *Sender);
     void __fastcall actToggleShowLocksExecute(TObject *Sender);
     void __fastcall actToggleTileTypesExecute(TObject *Sender);
+    void __fastcall actSpriteType0Execute(TObject *Sender);
+    void __fastcall actShowSpriteTypesExecute(TObject *Sender);
 
 private:    // User declarations
     ::Messaging::Registrar      m_Registrar;        // the messaging registrar

@@ -29,6 +29,7 @@ protected:
     TPoint              __fastcall  GetDragPoint() const;
    ImageDocument* const __fastcall  GetDocument() const;
     unsigned int        __fastcall  GetId() const;
+    bool                __fastcall  GetIsSprite() const;
     void                __fastcall  SetId(unsigned int id);
     void                __fastcall  SetSelected(bool state);
     void                __fastcall  SetDirty(bool state);
@@ -53,6 +54,7 @@ public:
 	__property  TPoint              DragPt      = { read = GetDragPoint, write = SetDragPoint   };
 	__property  bool                Dirty       = { read = m_Dirty, write = SetDirty            };
 	__property  bool                Selected    = { read = m_Selected, write = SetSelected      };
+    __property  bool                IsSprite    = { read = GetIsSprite                          };
 	__property  int                 SpriteType  = { read = m_SpriteType, write = SetSpriteType  };
 	__property  bool                RoomLocked  = { read = m_RoomLocked, write = SetRoomLocked  };
 	__property  unsigned int        RoomIndex   = { read = m_RoomIndex, write = SetRoomIndex    };

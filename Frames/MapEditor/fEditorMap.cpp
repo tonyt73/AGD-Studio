@@ -428,8 +428,12 @@ void __fastcall TfrmEditorMap::ShowKeysHelp()
         "Ctrl + Del            : Delete selection\r\n"
         "Ctrl + G              : Toggle room grid\r\n"
         "Ctrl + Shift + G      : Toggle tile grid\r\n"
+        "Ctrl + T              : Toggle sprite types\r\n"
         "Alt + E               : Toggle screen edit mode (multiple/single)\r\n"
-        "Alt + R               : Toggle start room edit mode\r\n";
+        "Alt + R               : Toggle start room edit mode\r\n\r\n"
+        "Sprite Types\r\n"
+        "0                     : Set selected sprite(s) as Player sprite\r\n"
+        "Shift + (1 - 8)       : Set selected sprite(s) as Sprite Type {no.}\r\n";
     HelpKeysMessage(help);
 }
 //---------------------------------------------------------------------------
@@ -775,6 +779,23 @@ void __fastcall TfrmEditorMap::actToggleTileTypesExecute(TObject *Sender)
     if (IsActive())
     {
         m_Workspace->ShowTileTypes = actToggleTileTypes->Checked;
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::actSpriteType0Execute(TObject *Sender)
+{
+    if (IsActive())
+    {
+        auto action = dynamic_cast<TAction*>(Sender);
+        m_Workspace->SetSpriteType(action->Tag);
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorMap::actShowSpriteTypesExecute(TObject *Sender)
+{
+    if (IsActive())
+    {
+        m_Workspace->ShowSpriteTypes = actShowSpriteTypes->Checked;
     }
 }
 //---------------------------------------------------------------------------

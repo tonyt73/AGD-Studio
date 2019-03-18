@@ -124,7 +124,7 @@ void __fastcall Entity::SetId(unsigned int id)
     m_Document = dynamic_cast<ImageDocument*>(theDocumentManager.Get(id));
     m_Id = id;
     assert(m_Id < 10000);
-    if (m_Document != nullptr && m_Document->SubType == itSprite && m_SpriteType < 0)
+    if (m_Document != nullptr && m_Document->ImageType == itSprite && m_SpriteType < 0)
     {
         // initialise the sprite type
         m_SpriteType = 0;
@@ -141,6 +141,11 @@ void __fastcall Entity::SetSelected(bool state)
 void __fastcall Entity::SetDirty(bool state)
 {
     m_Dirty = true;
+}
+//---------------------------------------------------------------------------
+bool __fastcall Entity::GetIsSprite() const
+{
+    return m_Document->ImageType == itSprite;
 }
 //---------------------------------------------------------------------------
 void __fastcall Entity::SetSpriteType(int type)
@@ -238,12 +243,9 @@ void __fastcall TiledMapDocument::DoSave()
             StartObject();
                 Write("X", entity.m_Pt.x);
                 Write("Y", entity.m_Pt.y);
-                if (entity.Id > 1000)
-                {
-                    int a = 0;
-                }
+                assert (entity.Id < 10000);
                 Write("RefId", entity.Id);
-                if (entity.SpriteType >= 0)
+                if (entity.IsSprite && entity.SpriteType >= 0)
                 {
                     Write("SpriteType", entity.SpriteType);
                     Push("Room");

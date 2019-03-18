@@ -581,6 +581,12 @@ void __fastcall TileEditor::SetShowTileTypes(bool state)
     UpdateMap();
 }
 //---------------------------------------------------------------------------
+void __fastcall TileEditor::SetShowSpriteTypes(bool state)
+{
+    m_ShowSpriteTypes = state;
+    UpdateMap();
+}
+//---------------------------------------------------------------------------
 void __fastcall TileEditor::SetShowStartRoom(bool state)
 {
     m_ShowStartRoom = state;
@@ -710,6 +716,7 @@ void __fastcall TileEditor::DrawRoomNumbers() const
     if (m_ShowRoomNumbers && FRetrieveRoomIndex)
     {
         auto Canvas = m_View->Picture->Bitmap->Canvas;
+        Canvas->Font->Size = 10;
         Canvas->Font->Color = ThemeManager::Foreground;
         Canvas->Pen->Style = psSolid;
         auto xs =  (m_BorderScaled.x - m_MapOffsetMS.X) * m_Scale.x;
@@ -737,6 +744,34 @@ void __fastcall TileEditor::DrawRoomNumbers() const
                 tx += rx;
             }
             ty += ry;
+        }
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::DrawSpriteTypes() const
+{
+    if (m_ShowSpriteTypes && m_ScaleFactor >= 2.0f)
+    {
+        auto Canvas = m_View->Picture->Bitmap->Canvas;
+        Canvas->Font->Size = 8;
+        Canvas->Font->Color = ThemeManager::Foreground;
+        Canvas->Pen->Style = psSolid;
+        for (auto& entity : m_Entities)
+        {
+            if (entity.IsSprite)
+            {
+                auto pt = entity.Pt;
+                pt.x = Snap(pt.x, m_TileSize.cx);
+                pt.y = Snap(pt.y, m_TileSize.cy);
+                pt = MapToView(pt);
+                auto number = IntToStr(entity.SpriteType);
+                auto ts = Canvas->TextExtent(number);
+                Canvas->Pen->Color = ThemeManager::Background;
+                Canvas->Brush->Color = ThemeManager::Background;
+                Canvas->Rectangle(TRect(pt.x, pt.y, pt.x + ts.Width + 6, pt.y + ts.Height + 4));
+                Canvas->Brush->Color = ThemeManager::Highlight;
+                Canvas->TextOut(pt.x + 3, pt.y + 2, number);
+            }
         }
     }
 }
@@ -899,6 +934,7 @@ void __fastcall TileEditor::Refresh()
         PatBlt(m_View->Picture->Bitmap->Canvas->Handle, 0, 0, m_View->Width, m_View->Height, BLACKNESS);
     }
     StretchBlt(m_View->Picture->Bitmap->Canvas->Handle, 0, 0, m_View->Width, m_View->Height, m_Content->Canvas->Handle, cx, cy, cw, ch, SRCCOPY);
+    DrawSpriteTypes();
     DrawEntityLocks();
     DrawGrids();
     DrawRoomNumbers();
@@ -955,6 +991,23 @@ void __fastcall TileEditor::ToggleEntityLocks()
             auto locked = entity.RoomLocked;
             entity.RoomLocked = !entity.RoomLocked;
             update |= entity.RoomLocked != locked;
+        }
+    }
+    if (update)
+    {
+        Refresh();
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::SetSpriteType(int type)
+{
+    auto update = false;
+    for (auto& entity : m_Entities)
+    {
+        if (entity.IsSprite && entity.Selected)
+        {
+            update |= entity.SpriteType != type;
+            entity.SpriteType = type;
         }
     }
     if (update)
