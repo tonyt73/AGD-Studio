@@ -104,7 +104,7 @@ private:
     void                __fastcall  SetScale(float scale);
     void                __fastcall  SetMode(TEMode mode);
     void                __fastcall  SetLockIcon(TImage* icon);
-    void                __fastcall  DrawEntities(int filters);
+    void                __fastcall  DrawEntities(int filters, ImageTypes type = itInvalid);
     void                __fastcall  DrawToolEntities();
     void                __fastcall  DrawHoverEntity();
     void                __fastcall  DrawMap();

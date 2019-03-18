@@ -811,12 +811,13 @@ void __fastcall TileEditor::DrawGroupSelect() const
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::DrawEntities(int filters)
+void __fastcall TileEditor::DrawEntities(int filters, ImageTypes type)
 {
     for (auto& entity : m_Entities)
     {
         bool draw  = (filters & edfForce) == edfForce;
              draw |= ((filters & edfDirty) == edfDirty) && entity.Dirty;
+             draw &= type == itInvalid ? true : entity.Type == type;
              draw &= (((filters & edfSelected ) == edfSelected ) && entity.Selected) || (((filters & edfSelected ) == 0) && !entity.Selected);
              draw &= (((filters & edfFirstTile) == edfFirstTile) && (entity.Image->ImageType == itTile && entity.Image->IsFirstOfType())) || (((filters & edfFirstTile) == 0) && !(entity.Image->ImageType == itTile && entity.Image->IsFirstOfType()));
         if (draw)
@@ -857,9 +858,11 @@ void __fastcall TileEditor::DrawMap()
 {
     auto filter = edfForce;//m_ForceMapDraw ? edfForce : edfDirty;
     // draw all dirty tile 0's (unselected)
-    DrawEntities(filter + edfFirstTile);
+    DrawEntities(filter + edfFirstTile, itTile);
     // draw all other dirty non tile 0's  (unselected)
-    DrawEntities(filter);
+    DrawEntities(filter, itTile);
+    DrawEntities(filter, itObject);
+    DrawEntities(filter, itSprite);
     // draw all other dirty non tile 0's  (selected)
     DrawEntities(filter + edfSelected);
     DrawToolEntities();
@@ -1073,7 +1076,7 @@ void __fastcall TileEditor::ReplaceEntities()
     {
         // remove the existing entity at the location
         m_Entities.erase(std::remove_if(m_Entities.begin(),m_Entities.end(),
-            [&](const Entity& entity) { return entity.Pt.x == e.Pt.x && entity.Pt.y == e.Pt.y; }), m_Entities.end());
+            [&](const Entity& entity) { return entity.Type == e.Type && entity.Pt.x == e.Pt.x && entity.Pt.y == e.Pt.y; }), m_Entities.end());
         // add the new entity at the location
         m_Entities.push_back(e);
     }

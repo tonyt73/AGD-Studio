@@ -15,6 +15,7 @@ __fastcall Entity::Entity()
 , m_Id(InvalidDocumentId)
 , m_LoadId(InvalidDocumentId)
 , m_Document(nullptr)
+, m_ImageType(itInvalid)
 , m_Dirty(true)
 , m_Selected(false)
 , m_SpriteType(-1)
@@ -28,6 +29,7 @@ __fastcall Entity::Entity(const Entity& other)
 , m_Id(other.m_Id)
 , m_LoadId(InvalidDocumentId)
 , m_Document(other.m_Document)
+, m_ImageType(other.m_ImageType)
 , m_Dirty(true)
 , m_Selected(other.m_Selected)
 , m_SpriteType(other.m_SpriteType)
@@ -47,6 +49,7 @@ Entity& __fastcall Entity::operator=(const Entity& other)
 	m_Id = other.m_Id;
     m_LoadId = InvalidDocumentId;
 	m_Document = other.m_Document;
+    m_ImageType = other.m_ImageType;
 	m_Dirty = true;
 	m_Selected = other.m_Selected;
 	m_SpriteType = other.m_SpriteType;
@@ -122,12 +125,17 @@ unsigned int __fastcall Entity::GetId() const
 void __fastcall Entity::SetId(unsigned int id)
 {
     m_Document = dynamic_cast<ImageDocument*>(theDocumentManager.Get(id));
-    m_Id = id;
-    assert(m_Id < 10000);
-    if (m_Document != nullptr && m_Document->ImageType == itSprite && m_SpriteType < 0)
+    m_Id = InvalidDocumentId;
+    if (m_Document != nullptr)
     {
-        // initialise the sprite type
-        m_SpriteType = 0;
+        m_Id = id;
+        assert(m_Id < 10000);
+        m_ImageType = m_Document->ImageType;
+        if (m_Document->ImageType == itSprite && m_SpriteType < 0)
+        {
+            // initialise the sprite type
+            m_SpriteType = 0;
+        }
     }
     m_Dirty = true;
 }
@@ -145,12 +153,12 @@ void __fastcall Entity::SetDirty(bool state)
 //---------------------------------------------------------------------------
 bool __fastcall Entity::GetIsSprite() const
 {
-    return m_Document->ImageType == itSprite;
+    return m_ImageType == itSprite;
 }
 //---------------------------------------------------------------------------
 void __fastcall Entity::SetSpriteType(int type)
 {
-    m_SpriteType = (type >= 0 && m_Document->ImageType == itSprite) ? type : -1;
+    m_SpriteType = (type >= 0 && m_ImageType == itSprite) ? type : -1;
 }
 //---------------------------------------------------------------------------
 void __fastcall Entity::SetRoomIndex(unsigned int index)
