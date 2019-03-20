@@ -1,0 +1,35 @@
+; AGD template for a main loop timer bar.
+; By J. Cauldwell, September 2015.
+
+; We use T for the time left and U as a counter to determine when we remove a bit of the bar.
+; When it reaches 8, we decrement the time bar.  By adjusting this value we could speed up or
+; slow down the counter for different levels of difficulty.
+
+IF T = 0
+    AT 0 0
+    PRINT "TIME"
+    LET T = 32
+    WHILE T < 255                       ; to the end of the screen.
+        LET A = 2                       ; start plotting 2 pixels down.
+        REPEAT 4                        ; 4 pixel high bar.
+            PLOT T A                    ; plot a pixel.
+            ADD 1 TO A                  ; down one pixel.
+        ENDREPEAT
+        ADD 1 TO T                      ; one pixel along.
+    ENDWHILE
+ENDIF
+
+ADD 1 TO U
+IF U > 8                                ; every 8th loop.
+    LET U = 0
+    SUBTRACT 1 FROM T                   ; timer goes down one.
+    LET A = 2                           ; pixels start at 2.
+    REPEAT 4                            ; bar is 4 pixels high.
+        PLOT T A                        ; unplot the pixel.
+        ADD 1 TO A                      ; next pixel down.
+    ENDREPEAT
+    IF T <= 32                          ; have we reached the left edge?
+        KILL                            ; kill the player.
+        LET T = 0                       ; reset T so we redraw the bar next time
+    ENDIF
+ENDIF

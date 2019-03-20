@@ -1,0 +1,23 @@
+{
+  "Palette": {
+    "Name": "BBC Micro"
+  },
+  "ColorTable": [
+    "$000000",
+    "$1D23E2",
+    "$00FF65",
+    "$00FFF3",
+    "$FF0059",
+    "$FF00EF",
+    "$FFFD83",
+    "$FFFFFF",
+    "$000000",
+    "$1D23E2",
+    "$00FF65",
+    "$00FFF3",
+    "$FF0059",
+    "$FF00EF",
+    "$FFFD83",
+    "$FFFFFF",
+  ]
+}

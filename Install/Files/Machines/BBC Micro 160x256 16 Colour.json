@@ -1,0 +1,79 @@
+{
+  "Name": "BBC Micro 160x256 16 Colour",
+  "Image" : "Images/BBC.png",
+  "GraphicsMode": "BBC Micro Mode 2",
+  "Tools": {
+	"Compiler" : {
+		"Path": "Compilers/BBC/Compile.exe",
+		"Parameters": "%file%"
+	},
+	"Assembler" : {
+		"Path" : "",
+		"Parameters" : "",
+		"Prepend" : "",
+		"Append" : ""
+	},
+	"Emulator" : {
+		"Path" : "",
+		"Parameters" : ""
+	}
+  }, 
+  "ImageSizing": {
+    "Object": {
+      "Minimum": {
+        "Width": 8,
+        "Height": 16
+      },
+      "Maximum": {
+        "Width": 40,
+        "Height": 96
+      },
+      "Step": {
+        "Width": 8,
+        "Height": 16
+      }
+    },
+    "Sprite": {
+      "Minimum": {
+        "Width": 8,
+        "Height": 16
+      },
+      "Maximum": {
+        "Width": 40,
+        "Height": 96
+      },
+      "Step": {
+        "Width": 8,
+        "Height": 16
+      }
+    },
+    "Tile": {
+      "Minimum": {
+        "Width": 4,
+        "Height": 8
+      },
+      "Maximum": {
+        "Width": 40,
+        "Height": 96
+      },
+      "Step": {
+        "Width": 4,
+        "Height": 8
+      }
+    },
+    "CharacterSet": {
+      "Minimum": {
+        "Width": 4,
+        "Height": 8
+      },
+      "Maximum": {
+        "Width": 4,
+        "Height": 8
+      },
+      "Step": {
+        "Width": 0,
+        "Height": 0
+      }
+    }
+  }
+}

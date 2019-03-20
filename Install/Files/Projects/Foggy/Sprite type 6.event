@@ -1,0 +1,40 @@
+;EVENT SPRITETYPE6
+IF SETTINGA = 0
+    IF CANGOLEFT
+        SPRITELEFT
+        SUBTRACT 16 FROM X
+        ADD 16 TO X
+    ELSE
+        LET SETTINGA = 1
+    ENDIF
+ELSE
+    IF CANGORIGHT
+        SPRITERIGHT
+        ADD 16 TO X
+        SUBTRACT 16 FROM X
+    ELSE
+        LET SETTINGA = 0
+    ENDIF
+ENDIF
+IF SETTINGA = 1
+    IF A = 0
+        ANIMATE
+        IF FRAME = 3
+            BEEP 35
+        ENDIF
+    ENDIF
+ENDIF
+IF SETTINGA = 0
+    IF A = 0
+        ANIMBACK
+        IF FRAME = 3
+            BEEP 35
+        ENDIF
+    ENDIF
+ENDIF
+IF COLLISION 0
+    KILL
+ENDIF
+IF IMAGE = 8
+    SPRITEINK 6
+ENDIF

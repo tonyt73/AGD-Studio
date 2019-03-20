@@ -1,0 +1,18 @@
+{
+  "Document": {
+    "RefId": 8
+  },
+  "Image": {
+    "Width": 16,
+    "Height": 16,
+    "RoomIndex": 9,
+    "Position": {
+      "X": 88,
+      "Y": 8
+    },
+    "State": 0,
+    "Frames": [
+      "0004000C000001FE00AA0000400C600C600C600C0000FFFEAAAA0000600C600C47474747"
+    ]
+  }
+}

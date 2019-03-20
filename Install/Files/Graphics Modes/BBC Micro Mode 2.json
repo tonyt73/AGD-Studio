@@ -1,0 +1,44 @@
+{
+  "Name": "BBC Micro Mode 2",
+  "Palette": "BBC Micro",
+  "BufferType": 0,
+  "Width": 160,
+  "Height": 256,
+  "ScalarX": 2.0,
+  "ScalarY": 1.0,
+  "BitsPerPixel": 4,
+  "TranparentColor": 0,
+  "SupportsLogicalColorRemapping" : true,
+  "ExportInformation" : {
+     "Object" : {
+		"BitmapDataOnly" : true
+	 },
+     "Sprite" : {
+		"BitmapDataOnly" : true
+	 },
+     "Tile" : {
+		"BitmapDataOnly" : true
+	 },
+     "CharacterSet" : {
+		"BitmapDataOnly" : true
+	 }
+  },
+  "LogicalColors": [
+    0,
+    1,
+	2,
+	3,
+	4,
+	5,
+	6,
+	7,
+	8,
+	9,
+	10,
+	11,
+	12,
+	13,
+	14,
+	15
+  ]
+}

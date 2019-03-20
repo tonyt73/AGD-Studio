@@ -1,0 +1,74 @@
+; AGD template for ladder/platform pursuer sprites.
+; This code moves enemy sprites around a screen, going up and down ladders.
+; By J. Cauldwell, December 2012.
+
+; Move up ladders.
+IF DIRECTION = UP
+  IF LADDERABOVE
+      SPRITEUP
+  ELSE
+      GETRANDOM 2
+      IF RND = 0
+          LET DIRECTION = LEFT
+      ELSE
+          LET DIRECTION = RIGHT
+      ENDIF
+  ENDIF
+ENDIF
+
+; Move down ladders.
+IF DIRECTION = DOWN
+    IF LADDERBELOW
+        SPRITEDOWN
+    ELSE
+        GETRANDOM 2
+        IF RND = 0
+            LET DIRECTION = LEFT
+        ELSE
+            LET DIRECTION = RIGHT
+        ENDIF
+    ENDIF
+ENDIF
+
+; Move left.
+IF DIRECTION = LEFT
+    IF CANGOLEFT
+        SPRITELEFT
+    ELSE
+        LET DIRECTION = RIGHT
+    ENDIF
+    GETRANDOM 4
+    IF RND = 0
+        IF LADDERABOVE
+            LET DIRECTION = UP
+        ELSE
+            IF LADDERBELOW
+                LET DIRECTION = DOWN
+            ENDIF
+        ENDIF
+    ENDIF
+ENDIF
+
+; Move right.
+IF DIRECTION = RIGHT
+    IF CANGORIGHT
+        SPRITERIGHT
+    ELSE
+        LET DIRECTION = LEFT
+    ENDIF
+    GETRANDOM 4
+    IF RND = 0
+        IF LADDERABOVE
+            LET DIRECTION = UP
+        ELSE
+            IF LADDERBELOW
+                LET DIRECTION = DOWN
+            ENDIF
+        ENDIF
+    ENDIF
+ENDIF
+
+; Make this sprite deadly to the player.
+IF COLLISION 0
+    KILL
+ENDIF

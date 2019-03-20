@@ -237,3 +237,14 @@ Deployment file.txt
 *.old
 AGDStudio.cbp*
 AGDStudio.cpp
+Install/Files/Compilers/ZX Spectrum/Pasmo/NEWS
+Install/Files/Compilers/ZX Spectrum/Pasmo/pasmodoc.html
+Install/Files/Compilers/ZX Spectrum/Pasmo/README
+Install/Files/Compilers/ZX Spectrum/Spin/128.ROM
+Install/Files/Compilers/ZX Spectrum/Spin/48.ROM
+Install/Files/Compilers/ZX Spectrum/Spin/Default.spincfg
+Install/Files/Compilers/ZX Spectrum/Spin/spin.ini
+Install/Files/Compilers/ZX Spectrum/Spin/whatsnew.txt
+Install/Files/Compilers/ZX Spectrum/Spin/ZXSpin keys.txt
+Install/Files/Compilers/ZX Spectrum/Spin/ZXSpin.exe.manifest
+Install/Files/Compilers/ZX Spectrum/Spin/ZXSpin.hlp

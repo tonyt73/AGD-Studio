@@ -1,0 +1,30 @@
+{
+    "Application": {
+        "Style": "Onyx Blue"
+    },
+    "Project": {
+        "Developer": "Anonymous",
+        "DefaultMachine": "ZX Spectrum 256x192 16 Colour",
+        "LastLoaded": "",
+        "LoadLastOnStartup": false
+    },
+    "Welcome": {
+        "Position": {
+            "X": 489,
+            "Y": 504
+        },
+        "SkipOnStartup": false,
+        "SkipOnShutdown": false
+    },
+    "MainWindow": {
+        "Position": {
+            "X": 0,
+            "Y": 0
+        },
+        "Size": {
+            "Width": 1024,
+            "Height": 768
+        },
+        "WindowState": 0
+    }
+}

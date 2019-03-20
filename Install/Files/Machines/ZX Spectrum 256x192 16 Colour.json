@@ -1,0 +1,83 @@
+{
+    "Name": "ZX Spectrum 256x192 16 Colour",
+    "Keyboard": "ZX Spectrum",
+    "Image": "Images/ZX Spectrum.png",
+    "GraphicsMode": "ZX Spectrum Colour",
+    "Tools": {
+        "Compiler": {
+            "Path": "Compilers/ZX Spectrum/0.7.0/CompilerZX.exe",
+            "Parameters": "%GameName%"
+        },
+        "Engine": {
+            "Path": "Compilers/ZX Spectrum/0.7.0/EngineZX.asm"
+        },
+        "Assembler": {
+            "Path": "Compilers/ZX Spectrum/pasmo/Pasmo.exe",
+            "Parameters": "--tapbas \"%GamePath%%GameName%.asm\" \"%GamePath%%GameName%.tap\"",
+            "Prepend": "",
+            "Append": "\r\nend 32000"
+        },
+        "Emulator": {
+            "Path": "Compilers/ZX Spectrum/Spin/ZXSpin.exe",
+            "Parameters": "\"%GamePath%%GameName%.tap\""
+        }
+    },
+    "ImageSizing": {
+        "Object": {
+            "Minimum": {
+                "Width": 16,
+                "Height": 16
+            },
+            "Maximum": {
+                "Width": 128,
+                "Height": 128
+            },
+            "Step": {
+                "Width": 16,
+                "Height": 16
+            }
+        },
+        "Sprite": {
+            "Minimum": {
+                "Width": 16,
+                "Height": 16
+            },
+            "Maximum": {
+                "Width": 128,
+                "Height": 128
+            },
+            "Step": {
+                "Width": 16,
+                "Height": 16
+            }
+        },
+        "Tile": {
+            "Minimum": {
+                "Width": 8,
+                "Height": 8
+            },
+            "Maximum": {
+                "Width": 128,
+                "Height": 128
+            },
+            "Step": {
+                "Width": 8,
+                "Height": 8
+            }
+        },
+        "CharacterSet": {
+            "Minimum": {
+                "Width": 8,
+                "Height": 8
+            },
+            "Maximum": {
+                "Width": 8,
+                "Height": 8
+            },
+            "Step": {
+                "Width": 0,
+                "Height": 0
+            }
+        }
+    }
+}
