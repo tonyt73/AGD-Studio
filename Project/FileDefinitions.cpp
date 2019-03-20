@@ -14,7 +14,7 @@ __fastcall FileDefinitions::FileDefinitions()
 //---------------------------------------------------------------------------
 void __fastcall FileDefinitions::Load()
 {
-    auto file = System::File::Combine(System::Path::Application, "File Definitions.json");
+    auto file = System::File::Combine(System::Path::Common, "File Definitions.json");
     if (System::File::Exists(file))
     {
         // yes, load it
