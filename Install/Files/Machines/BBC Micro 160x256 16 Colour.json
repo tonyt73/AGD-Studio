@@ -5,7 +5,7 @@
   "Tools": {
 	"Compiler" : {
 		"Path": "Compilers/BBC/Compile.exe",
-		"Parameters": "%file%"
+        "Parameters": "\"%GameName%\""
 	},
 	"Assembler" : {
 		"Path" : "",

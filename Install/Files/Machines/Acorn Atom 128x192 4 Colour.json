@@ -5,7 +5,7 @@
   "Tools": {
 	"Compiler" : {
 		"Path": "Compilers/Acorn Atom/Compile.exe",
-		"Parameters": "%file%"
+         "Parameters": "\"%GameName%\""
 	},
 	"Assembler" : {
 		"Path" : "",

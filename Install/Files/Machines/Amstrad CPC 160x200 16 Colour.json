@@ -5,7 +5,7 @@
   "Tools": {
 	"Compiler" : {
 		"Path": "Compilers/Amstrad CPC/Compile.exe",
-		"Parameters": "%file%"
+        "Parameters": "\"%GameName%\""
 	},
 	"Assembler" : {
 		"Path" : "",

@@ -5,7 +5,7 @@
   "Tools": {
 	"Compiler" : {
 		"Path": "Compilers/Dragon/Compile.exe",
-		"Parameters": "%file%"
+		"Parameters": "\"%GameName%\""
 	},
 	"Assembler" : {
 		"Path" : "",

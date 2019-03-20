@@ -4,7 +4,7 @@
   "Tools": {
 	"Compiler" : {
 		"Path": "Compilers/Sinclair QL/Compile.exe",
-		"Parameters": "%file%"
+		"Parameters": "\"%GameName%\""
 	},
 	"Assembler" : {
 		"Path" : "",

@@ -4,7 +4,7 @@
   "Tools": {
 	"Compiler" : {
 		"Path": "Compilers/Sega Master System/Compile.exe",
-		"Parameters": "%file%"
+		"Parameters": "\"%GameName%\""
 	},
 	"Assembler" : {
 		"Path" : "",
