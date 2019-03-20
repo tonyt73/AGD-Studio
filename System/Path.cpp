@@ -27,7 +27,7 @@ void __fastcall Path::Init()
 {
     const String appName = ApplicationName;
     m_Separator = System::Ioutils::TPath::DirectorySeparatorChar;
-    m_Application = System::Ioutils::TPath::GetHomePath() + m_Separator + appName + m_Separator;
+    m_Application = System::Ioutils::TPath::GetSharedDocumentsPath() + m_Separator + appName + m_Separator;
     m_Common = System::Ioutils::TPath::GetSharedDocumentsPath() + m_Separator + appName + m_Separator + "Common" + m_Separator;
     m_Documents = System::Ioutils::TPath::GetSharedDocumentsPath() + m_Separator;
     m_Projects = System::Ioutils::TPath::GetSharedDocumentsPath() + m_Separator + appName + m_Separator + "Projects" + m_Separator;

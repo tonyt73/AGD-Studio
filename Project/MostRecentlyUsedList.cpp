@@ -23,7 +23,7 @@ __fastcall MostRecentlyUsedList::~MostRecentlyUsedList()
 //---------------------------------------------------------------------------
 void __fastcall MostRecentlyUsedList::Load()
 {
-    auto file = System::File::Combine(System::Path::Application, "Mru.json");
+    auto file = System::File::Combine(System::Path::Common, "Mru.json");
     if (System::File::Exists(file))
     {
         GUARD(m_Loading);
@@ -34,7 +34,7 @@ void __fastcall MostRecentlyUsedList::Load()
 void __fastcall MostRecentlyUsedList::Save()
 {
     if (m_Loading) return;
-    auto file = System::Path::Application + "Mru.json";
+    auto file = System::Path::Common + "Mru.json";
     Open(file); // {
     ArrayStart("List"); // [
     for (const auto& mru : m_MostRecentlyUsedList)

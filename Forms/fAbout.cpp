@@ -31,7 +31,7 @@ void __fastcall TfrmAbout::FormCreate(TObject *Sender)
     int Major, Minor, Release, Build;
     GetBuildVersion(Major, Minor, Release, Build);
     lblVersion->Caption = "Version " + IntToStr(Major) + "." + IntToStr(Minor);
-    lblBuild->Caption = "Build #AGDx-" + IntToStr(Major)+"."+IntToStr(Minor)+", built on " + DatePlusDays(Release);
+    lblBuild->Caption = "Build# AGD Studio " + IntToStr(Major)+"."+IntToStr(Minor)+", built on " + DatePlusDays(Release);
 }
 //---------------------------------------------------------------------------
 String __fastcall TfrmAbout::DatePlusDays(int days) const

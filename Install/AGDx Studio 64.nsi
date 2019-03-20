@@ -8,7 +8,7 @@ SetCompressor /SOLID /FINAL lzma
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME_SMALL "AGDx Studio"
 !define PRODUCT_NAME "${PRODUCT_NAME_SMALL} 64"
-!define PRODUCT_VERSION "0.8 BETA"
+!define PRODUCT_VERSION "0.9 BETA"
 !define PRODUCT_PUBLISHER "Tony Thompson"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\ADGx Studio 64"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
@@ -111,15 +111,9 @@ FunctionEnd
 Section "Fonts" SEC00
   StrCpy $FONT_DIR $FONTS
   !insertmacro InstallTTF '..\Fonts\Comfortaa-Bold.TTF'
-  !insertmacro InstallTTF '..\Fonts\Comfortaa-Light.TTF'
   !insertmacro InstallTTF '..\Fonts\Comfortaa-Regular.TTF'
-  !insertmacro InstallTTF '..\Fonts\Roboto-Black.TTF'
   !insertmacro InstallTTF '..\Fonts\Roboto-Bold.TTF'
-  !insertmacro InstallTTF '..\Fonts\Roboto-BoldCondensed.TTF'
-  !insertmacro InstallTTF '..\Fonts\Roboto-Light.TTF'
-  !insertmacro InstallTTF '..\Fonts\Roboto-Medium.TTF'
   !insertmacro InstallTTF '..\Fonts\Roboto-Regular.TTF'
-  !insertmacro InstallTTF '..\Fonts\Roboto-Thin.TTF'
 SendMessage ${HWND_BROADCAST} ${WM_FONTCHANGE} 0 0 /TIMEOUT=5000
 SectionEnd
 

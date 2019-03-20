@@ -149,7 +149,7 @@ const GraphicsMode::ExportInfo& __fastcall GraphicsMode::GetExportInformation(Im
 void __fastcall GraphicsMode::Load(const String& name)
 {
     m_LogicalColors.clear();
-    JsonFile::Load(System::File::Combine(System::Path::Application, "GraphicsModes" + System::Path::Separator + name + ".json"));
+    JsonFile::Load(System::File::Combine(System::Path::Application, "Graphics Modes" + System::Path::Separator + name + ".json"));
     m_Palette->Load(m_PaletteName);
     auto path = System::File::Combine("Saved Palettes", Name);
     path = System::Path::Create(System::Path::lpCommon, path);
@@ -162,7 +162,7 @@ void __fastcall GraphicsMode::Load(const String& name)
 void __fastcall GraphicsMode::Save()
 {
     // {
-    Open(System::File::Combine(System::Path::Application, "GraphicsModes" + System::Path::Separator + m_Name + ".json"));
+    Open(System::File::Combine(System::Path::Application, "Graphics Modes" + System::Path::Separator + m_Name + ".json"));
     Write("Name", m_Name);
     Write("Palette", m_PaletteName);
     Write("BufferType", m_BufferType);

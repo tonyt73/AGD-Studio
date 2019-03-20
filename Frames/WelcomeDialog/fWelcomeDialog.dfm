@@ -6520,4 +6520,25 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       Caption = 'Check for Updates'
     end
   end
+  object dlgInvalidProject: TTaskDialog
+    Buttons = <
+      item
+        Caption = 'Launch the AGD Converter application'
+        ModalResult = 100
+      end>
+    Caption = 'Open an existing Project'
+    CommonButtons = [tcbClose]
+    Flags = [tfAllowDialogCancellation, tfUseCommandLinks, tfSizeToContent]
+    MainIcon = 1
+    RadioButtons = <>
+    Text = 
+      'AGDx Studio cannot open the specified file.'#13#10'If you want to use ' +
+      'a ZX Spectrum AGD Snapshot file (*.sna) or an AGD file (*.agd) t' +
+      'hen;'#13#10'Launch the AGD Converter application to convert your file ' +
+      'to into an AGDx Studio project.'
+    Title = 'Invalid AGDx Studio Project File'
+    OnButtonClicked = dlgInvalidProjectButtonClicked
+    Left = 224
+    Top = 304
+  end
 end

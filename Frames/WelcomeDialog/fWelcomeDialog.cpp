@@ -78,8 +78,15 @@ void __fastcall TfrmWelcomeDialog::lblOpenExistingProjectClick(TObject *Sender)
     dlgOpen->InitialDir = System::Path::Projects;
     if (dlgOpen->Execute())
     {
-        theProjectManager.Open(dlgOpen->FileName);
-        if (FOnDone) FOnDone(this);
+        if (System::File::Extension(dlgOpen->FileName) == ".agdx")
+        {
+            theProjectManager.Open(dlgOpen->FileName);
+            if (FOnDone) FOnDone(this);
+        }
+        else
+        {
+            dlgInvalidProject->Execute();
+        }
     }
 }
 //---------------------------------------------------------------------------
@@ -192,6 +199,24 @@ void __fastcall TfrmWelcomeDialog::OnActivate(TWinControl* parent)
         Visible = false;
         Parent = nullptr;
         m_Registrar.Unsubscribe();
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmWelcomeDialog::dlgInvalidProjectButtonClicked(TObject *Sender, TModalResult ModalResult, bool &CanClose)
+{
+    if (ModalResult != mrClose)
+    {
+        // launch the agd converter
+        auto dir = System::File::PathOf(Application->ExeName);
+        auto app =  System::File::Combine(dir, "AGD Converter.exe");
+        if (System::File::Exists(app))
+        {
+            ShellExecute(NULL, L"open", app.c_str(), NULL, dir.c_str(), SW_SHOWNORMAL);
+        }
+        else
+        {
+            MessageDlg("The 'AGD Converter' application was not found\r\nPlease reinstall AGD Studio", mtError, TMsgDlgButtons() << mbOK, 0);
+        }
     }
 }
 //---------------------------------------------------------------------------

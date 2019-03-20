@@ -25,7 +25,7 @@
 //---------------------------------------------------------------------------
 #pragma hdrstop
 
-const String ApplicationName = "AGDx Studio";
+const String ApplicationName = "AGD Studio";
 
 #endif // pch_h
 

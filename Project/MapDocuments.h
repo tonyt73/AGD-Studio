@@ -74,7 +74,6 @@ protected:
     EntityList                      m_Room;
     EntityList                      m_ScratchPad;
 
-                                    // TODO: Convert to AGDX:Point for better display in the property editor
 			int                     m_StartRoomIndex;
             TPoint                  m_StartRoomCoords;
 			int                     m_ScreenCount;

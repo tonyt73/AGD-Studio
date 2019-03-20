@@ -44,6 +44,7 @@ __published:    // IDE-managed Components
     TMenuItem *Settings1;
     TMenuItem *CheckforUpdates1;
     TPanel *Panel1;
+    TTaskDialog *dlgInvalidProject;
     void __fastcall lblStartNewProjectMouseEnter(TObject *Sender);
     void __fastcall lblStartNewProjectMouseLeave(TObject *Sender);
     void __fastcall cmbThemesChange(TObject *Sender);
@@ -53,6 +54,7 @@ __published:    // IDE-managed Components
     void __fastcall btnCreateClick(TObject *Sender);
     void __fastcall edtNameChange(TObject *Sender);
     void __fastcall edtNameKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
+    void __fastcall dlgInvalidProjectButtonClicked(TObject *Sender, TModalResult ModalResult, bool &CanClose);
 
 private:    // Function declarations
     void     __fastcall     SelectionPanelOnClick(TObject *Sender);

@@ -55,7 +55,7 @@ __fastcall EventDocument::EventDocument(const String& name)
     {
         // create the file and add an AGD header
         auto date = DateTimeToStr(Now());
-        auto header = ";\r\n; " + System::Path::ProjectName + "\r\n; An AGDX game\r\n; Created: " + date + "\r\n; Event: " + System::File::NameWithoutExtension(file) + "\r\n;";
+        auto header = ";\r\n; " + System::Path::ProjectName + "\r\n; An AGD game\r\n; Created: " + date + "\r\n; Event: " + System::File::NameWithoutExtension(file) + "\r\n;";
         System::File::WriteText(file, header);
     }
     m_File = GetFile();
@@ -73,7 +73,7 @@ __fastcall MessageDocument::MessageDocument(const String& name)
     {
         // create the file and add an AGD header
         auto date = DateTimeToStr(Now());
-        auto header = ";\r\n; " + System::Path::ProjectName + "\r\n; An AGDX game\r\n; Created: " + date + "\r\n; Simply place a new message per line. Comments ';' are stripped before compilation\r\n;";
+        auto header = ";\r\n; " + System::Path::ProjectName + "\r\n; An AGD game\r\n; Created: " + date + "\r\n; Simply place a new message per line. Comments ';' are stripped before compilation\r\n;";
         System::File::WriteText(file, header);
     }
     m_File = file;
@@ -91,7 +91,7 @@ __fastcall SfxDocument::SfxDocument(const String& name)
     {
         // create the file and add an AGD header
         auto date = DateTimeToStr(Now());
-        auto header = ";\r\n; " + System::Path::ProjectName + "\r\n; An AGDX game\r\n; Created: " + date + "\r\n; Simply place a Sound Fx file name per line. Comments ';' are stripped before compilation\r\n;";
+        auto header = ";\r\n; " + System::Path::ProjectName + "\r\n; An AGD game\r\n; Created: " + date + "\r\n; Simply place a Sound Fx file name per line. Comments ';' are stripped before compilation\r\n;";
         System::File::WriteText(file, header);
     }
     m_File = GetFile();

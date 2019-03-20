@@ -7,10 +7,10 @@
 @call "C:\Program Files (x86)\Embarcadero\Studio\20.0\bin\rsvars.bat"
 
 chdir ..
-msbuild "AGDx Studio.cbproj" /t:build /p:config="Release" /p:platform=Win64
 msbuild "AGD Studio.cbproj" /t:build /p:config="Release" /p:platform=Win64
-msbuild "AGDx Studio.cbproj" /t:build /p:config="Release" /p:platform=Win32
+msbuild "AGDStudio.cbproj" /t:build /p:config="Release" /p:platform=Win64
 msbuild "AGD Studio.cbproj" /t:build /p:config="Release" /p:platform=Win32
+msbuild "AGDStudio.cbproj" /t:build /p:config="Release" /p:platform=Win32
 copy Win32\Release\*.exe Binaries\32
 copy Win64\Release\*.exe Binaries\64
 
