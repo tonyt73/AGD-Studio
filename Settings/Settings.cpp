@@ -37,7 +37,7 @@ __fastcall Settings::Settings()
     m_PropertyMap["MainWindow.Size.Width"] = &m_WindowSize.Width;
     m_PropertyMap["MainWindow.Size.Height"] = &m_WindowSize.Height;
 
-    Load(System::File::Combine(System::Path::Application, "Settings.json"));
+    Load(System::File::Combine(System::Path::Common, "Settings.json"));
 }
 //---------------------------------------------------------------------------
 __fastcall Settings::~Settings()
@@ -95,7 +95,7 @@ void __fastcall Settings::SetString(int index, String value)
 void __fastcall Settings::Save()
 {
     // {
-    Open(System::File::Combine(System::Path::Application, "Settings.json"));
+    Open(System::File::Combine(System::Path::Common, "Settings.json"));
     Push("Application"); // {
         Write("Style", ActiveStyle);
     Pop(); // }
