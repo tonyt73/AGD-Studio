@@ -5,11 +5,11 @@
     "GraphicsMode": "ZX Spectrum Colour",
     "Tools": {
         "Compiler": {
-            "Path": "Compilers/ZX Spectrum/0.7.3/CompilerZX.exe",
+            "Path": "Compilers/ZX Spectrum/0.7.0/CompilerZX.exe",
             "Parameters": "\"%GameName%\""
         },
         "Engine": {
-            "Path": "Compilers/ZX Spectrum/0.7.3/EngineZX.asm"
+            "Path": "Compilers/ZX Spectrum/0.7.0/EngineZX.asm"
         },
         "Assembler": {
             "Path": "Compilers/ZX Spectrum/pasmo/Pasmo.exe",

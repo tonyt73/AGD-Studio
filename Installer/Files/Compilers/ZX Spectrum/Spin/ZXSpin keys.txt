@@ -1,0 +1,51 @@
+ZXSpin main window keys/shortcuts.
+
+F1: Brings the ZXSpin main window to the front from all other dialogs where appropriate.
+
+LeftShift: CAPS SHIFT
+Ctrl: SYMBOL SHIFT
+
+(Right shift can be configured as symbol shift in the controller options).
+
+All special keys ({}[], Backspace, /?.,<> etc can all be used in BASIC, and some games.
+
+Alt-F4: Quit
+Alt-Enter: Fullscreen
+Alt-F9: Start audio capture (real tape mode)
+Alt-1: 100% window size
+Alt-2: 200% window size
+
+F3/Pause: Pause the Emulator
+Escape: Exit Fullscreen mode/Enter debugger
+Home: Capture/Release mouse pointer (activates mouse emulation modes)
+F1: Full speed mode
+F2: Load a file
+Ctrl-F2: Save Snapshot
+Shift-F2: reload the last loaded file
+F4: Fullscreen
+Shift-F5: Hard Reset
+Ctrl-F5: Usr0 Reset
+F5: Activate NMI
+F6: Show tape browser
+F7: Activate/Deactivate keystick mode
+F8: Open Options
+F9: Start tape recording (DRB or WAV/CSW recording)
+F10: Back one tape block
+F11: Play/stop tape
+F12: Forward one tape block
+
+Insert: insert rollback point (RZX recording only)
+Delete: step back to last rollback point (RZX Recording only, pauses emulation)
+
+Debugger keys:
+
+Alt-S: Single Step
+Alt-Shift-S: Step Over
+Alt-X: Exit Function
+Alt-R: Run
+Alt-Shift-R: Run to current position
+
+Ctrl-B: Set Breakpoint
+Ctrl-S: Save Disassembly
+Ctrl-F: Find Value Reference
+Ctrl-Shift-F: Find Address

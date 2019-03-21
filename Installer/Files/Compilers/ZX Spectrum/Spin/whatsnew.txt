@@ -1,0 +1,573 @@
+v0.666 - The Spectrum Emulator of the Beast
+-------------------------------------------
+
+- Marko fixed and implemented a new way of saving your snapshots - save
+  them as TZX files! You have a choice of schemes, which will grow as 
+  more are added. Use Speedlock 2 for 128k snaps, please.
+  
+- Work done on the debugger and asembler means that the following bugs
+  were fixed:
+  
+  Fixed the stack display to resize instead of the AY tab
+  Fixed UNTIL command
+  Added new BASE control - allows you to view a memory bank relative to 
+  a set position
+  
+  Added BASE assembler directive and expanded ORG syntax - you can now 
+  do, for example: ORG RAM3:49152, which will treat the base address as 
+  49152, so you can assemble code for the 128 to be paged in and out.
+  
+- Fixed TRDOS paging (Fire and Ice cheat now works)
+
+- Can now create blank disks for the +3 from the main window.
+
+- Fixed the edge detector and $19 block handling so that some tapes that
+  failed in 0.622 should now load
+  
+- ZXSpin is now Vista-aware, and improvements have been made to the 
+  user interface under Vista.
+  
+- The assembler now accepts instructions at the start of a line, and no
+  longer needs whitespace.
+   
+
+v0.622 - Finally, this is all the bugs fixed. Honest.
+-----------------------------------------------------
+
+- Fixed screen corruption when switching from Pentagon back to proper
+  spectrum models.
+  
+- Fixed a problem with repeating "special" keys in BASIC.
+
+- Fixed +D paging under 128k models. It's currently unknown if this piece
+  of hardware actually did work with the 128k.. but it does now. If the
+  current documentation is to be believed, the 128k would never start up!
+  
+- Added shortcuts to many of the menus, and a small readme with the keys
+  listed.
+  
+
+v0.621 - Ok, I lied
+-------------------
+
+- Fixed a bug in the tape handler where edges of $10 blocks with no pause
+  attached wouldn't complete their final edge properly.
+
+- Woody fixed a bug in TRDOS disk formatting. 
+
+
+v0.62 - The last release ever?
+------------------------------
+
+- Added TZX 1.20 support. Well, added the blocks that might be worth adding
+  while the rest of that utterly brain-dead spec can go whistle. 
+  
+- Added MGT +D Support, for reading .mgt image files. 
+
+- A few bug fixes in the debugger, with a little PC-trace system. 
+
+- Dunny included the right version of ATAPI.dll for a change - should fix
+  all your IDE woes.
+  
+
+v0.61 - And we thought we'd never come back to it
+-------------------------------------------------
+
+- Added Direct3D mode to the list of rendering engines. Full 32bit alpha-
+  channel scanlines can be had here, with nice filtered scaling.
+  
+- Added a prelimary "Find A Game" helper to the file menu. It searches WOS
+  using infoseek and downloads the games directly into SPIN.
+  
+- Added OpenGL to the list of rendering engines.
+
+- Added .pok file support - you can load them from the tools/pokes menu item
+  or drag'n'drop them onto the main window
+  
+- Added multiple joystick buttons - emulated as keypresses.
+
+- Fixed the timing routines to allow some sound hardware to run at 100% speed.
+
+- Plenty of Assembler and Debugger issues addressed
+
+- Re-arranged the the options page into something more sensible now. There's a
+  lot more room for more options.
+  
+- Added a "boost loading tones" option to... boost the loading tones. Basically
+  makes the loaders that you hear on a tzx or tap file stand out more, so you 
+  can send them to a real speccy via the EAR socket directly from your 
+  soundcard.
+  
+- Added the ultimate in tape emulation... Tape Wobble and Tape Hiss. Available
+  from an options page near you now. Note that this special offer does not 
+  apply to accelerated loading.
+  
+- Added a Multithreading option to the System page. Allows SPIN to run much 
+  smoother, but with the added risk that it could lock up your whole system
+  if anything goes wrong. Quite a gamble.
+  
+- Fixed some bugs in the TZX renderer for obscure blocks like the CALL block.
+
+- ZXSpin will now remember which windows you had open in your last session.
+
+- Added a tape block progress bar, which "grows" as blocks load. Nice.
+
+- Added 8bit registers view to the debugger. It's in the "view" menu.
+
+- Added much more accurate "ULA snow" and IR contention. Note that truly
+  accurate snow is probably not an option for now, as it will require enormous
+  amounts of CPU power to emulate, and a radical rewrite of the entire display
+  system.
+  
+- Added Animated GIF saving, either as a "movie" from the recording menu, or 
+  when saving an image with flashing attributes from the file menu.
+  
+- Added custom display palettes - use the options to set them up.
+
+- Added DivIDE emulation. This was a pain, as the documentation for the device
+  is less than... perfect. The IDE emulation has been upgraded to 16bit, so
+  you can use .hdf files with any firmware now. There's a few included for
+  your perusal. The only one I can't distribute is esxdos, as it's a closed
+  beta. Also emulates RWap's rather hacky 128k compatible DivIDE - hacky, 
+  because there's a few firmwares that refuse to work with it. Note that 
+  the +3e firmware (ROM) has to be set up with writeable EEPROMs, or it won't
+  run.
+  
+- Added the ability to import binaries into the DivIDE EEPROM/RAM pages.
+
+- Added new reset options - shift-click (or use the menu option) to hard
+  reset, otherwise you'll get a soft reset. There's a subtle difference.
+  
+- Added Pentagon 128k emulation, along with .trd/.scl support. Now you can 
+  emulate those lovely demos from demotopia in all their Pentagon glory!
+  
+- Added gigascreen smoothing. Not an emulation of the actual mechanism of
+  gigascreen, as that still flickers quite horrendously. This one smooths 
+  out the display to make a nice steady picture. Stellar demo makes use of
+  it, as does eyeache and eyeache 2. You can find the option on the display
+  emulation options page.
+  
+- Added MIDI emulation - now SPIN will pipe 128k MIDI commands out of the 
+  RS232 and into your PC's MIDI hardware. Give it a try - but be sure you
+  use the "mute" option on the Sound volumes options page for the AY.
+  
+- Marko and Woody fixed a load of bugs in this release, too many to mention
+  here. Their help is most gratefully acknowledged.
+  
+v0.504 - Oops, I did it again
+-----------------------------
+
+- Fixed a small problem involving the weird bugs mentioned with ROMs and as a
+  nasty side effect, 48k snapshots.
+- Marko fixed the "double buttons" bug on the toolbar.
+
+
+v0.503 - How not to release an Emulator
+---------------------------------------
+
+- Fixed some very weird bugs indeed with default configs and the configs menu.
+
+
+v0.502 - I'll kill him, I swear I will
+---------------------------------------
+
+- Removed a small issue where SPIN saved it's button graphics out to c:\ when
+  run...
+
+
+v0.501 - Windows 98 Friendly
+----------------------------
+
+- Fixed the corrupted titlebars and resource leak in windows98.
+- Marko fixed a bug in the debugger not clearing breakpoints properly.
+- Fixed a mouse capture bug in the titlebar buttons and a few related issues.
+- Added a small change to the QuickBASIC - selects appropriate hardware now.
+- Marko sorted a small glitch in the sound synch code, (which was only apparent
+  on his machine) which has now resulted in the appearance of a "latency"
+  slider in the sound options. You can use this instead of frameskip (if you're
+  absolutely sure your machine can do 50fps) to sort out any sound synch
+  problems. Hopefully.
+- Fixed bugs in the assembler editor: line numbers now update properly and
+  dragging the selection out of the window no longer produces an error.
+- Dunny added user-definable keys to the joystick options, so you can select
+  which PC keys to use for joystick control. Note that most PC keyboards have
+  limitations on which keys you can press at the same time. If you find that a
+  certain combination of simultaneous keypresses doesn't work, THIS IS NOT A
+  BUG IN SPIN - it's your keyboard.
+- Reenabled the "define keys" option for PC joysticks (it had no effect in
+  v0.5).
+- SPIN now prompts for a filename and directory when the user selects "Create
+  New" in the "Insert Disk" dialog.
+- Added "8-Bit Stretch" to the video options - this only works in GDI mode and
+  can result in faster rendering on some systems but on others shows no speed
+  increase (it may even slow them down). Try it if you get slow frame rates in
+  GDI mode.
+- If SPIN's configuration file specifies DirectDraw and DirectDraw fails to
+  initialise, SPIN will now switch to GDI mode instead of crashing.
+- Fixed symbol key mapping in international keyboard layouts.
+
+
+v0.5 - Emulation fixes, changes, and other gubbins.
+---------------------------------------------------
+
+- Dropped OpenGL support.
+- Woody added more speedups, and fixed some issues with 128k port contention.
+- Woody also fixed some glaring errors in Dunny's DirectX code, so SPIN is now
+  compatible with DirectX9, and also more stable.
+- Fixed a rather daft bug concerning paths in zip files.
+- Added full border emulation (for a larger border) - same size as the Speccy
+  output originally now.
+- Changed the title bar graphics. Just for fun.
+- Removed some annoying tape clicks when the tape feedback is muted.
+- Marko Added SpecDrum emulation, and some speedups to the sound code.
+- Woody fixed a couple of non-loading +3 disk protection routines.
+- Made the 10h tape loading faster still and fixed a few related issues.
+- Marko added more options to the debugger.
+- Reduced the sound clicks when the emulation starts and stops to silence (with
+  a few exceptions).
+- Added mousewheel "zoom" to the main window.
+- Damien Guard added a new options page, so saving and loading multiple
+  configurations becomes simplicity itself.
+- Dunny fixed up the threading, so it's a *lot* faster and more stable now.
+- Sorted a lot of themeing problems with Windows XP - all windows should
+  display properly now.
+- Fixed some small options page bugs - peripherals blocking hardware changes
+  etc.
+- Fixed a bug in the joystick init code if no joystick is attached.
+- SPIN now has an inbuilt Z80 assembler, accessed from the Tools Menu.
+- Reorganised the menus for easier use.
+
+
+v0.4 - OpenGL and Seriously fast tapes
+--------------------------------------
+
+- Added OpenGL (fullscreen/Windowed mode) support - way cool, check it out.
+  Might need a fast PC though.
+- Altered the functionality of the toolbar - rightclick some buttons to get
+  more options, ie - you can right click the reset button and then choose a
+  normal reset or a Usr0.
+- Fixed a possible startup Bug.
+- Fixed a bug with ULA Snow and a reset - also demos such as Yolka97 work
+  properly now :)
+- Fixed a last used folder bug with zip files - it now opens the folder the
+  last zip came from, rather than the temporary folder it extracted to.
+- Added the ability to load snaps with shift held down to avoid switching
+  hardware, which is usefule for loading snaps made in 128k/+2 mode in a +2
+  emulation.
+- Fixed a bug regarding pauses and B increments which prevented Doomsday.tzx
+  from loading.
+- Fixed a small bug that didn't list zip files in the disk manager.
+- Added undetected loaders to the speedloader detection list - Indiana Jones
+  and the Last Crusade's level loader, and Kentucky Racing. (Both Alcatraz).
+- Added Marko's 10h Acceleration to the speedloader - it's quite possibly the
+  fastest non-flashloading system in any emulator :)
+- Fixed a bug in the tape browser that can cause lockups and BSODs on 9x
+  machines.
+- Fixed more small bugs in the tzx editor to do with view positions and menus
+  and such.
+- Added Sinclair InfoSeek pasting ability to the ArchiveInfo Block editor.
+- Fixed an interrupt table overwrite bug in the z80 core.
+- Fixes to the auto tape controls - might be better now, needs testing, but
+  seems to stop when it should.
+- Now detects Windows NT in order to overcome certain slowdowns in windows GDI.
+- Added Interface II Rom support (*.rom)
+- Added ZXPrinter output - save those listings to disk :)
+- Added Kempston Mouse support.
+- Removed most of the old GDI graphics code, and added DirectDraw support.
+
+
+V0.3a - Bugs and more tapes
+---------------------------
+
+- Forgot to enable the Tape Browser's Save options! D'oh! You could still save
+  by using eject, but still...
+- Fixed a small bug in the CSW recorder.
+- Fixed a bug in tape recording that really only affected CSW Saving. 
+- Added TZX -> WAV/CSW conversions.
+- Fixed a bug that could prevent SPIN from starting - an .ini problem.
+  Surprise, surprise.
+- Fixed a couple of bugs in the block insert routines for the TZX Editor.
+- Added Real Tape loading - SPIN can now load from real spectrum tapes through
+  a tape recorder attached to the Soundcard's line-in socket. Currently the
+  noise is filtered, so it may not be too reliable. 
+- Added more functionality to the tape button on the main window - if you have
+  a Tape Recording going (with the F9 key) and you click the button, it will
+  stop recording. It will not start recording though.
+
+
+V0.3 - Rewrite
+--------------
+
+Emulation/Environment:
+
+- Rewritten a sigificantly large portion of the emulation engine. Should be way
+  more stable than before, but probably a lot of bugs to iron out. Also makes
+  updates a lot easier.
+- Folder locations bug in Snapshots folder.
+- Bugs in the Binary Files dialog fixed.
+- Added Fuller Joystick support.
+- Added CSW association - it *is* a speccy format after all.
+- Fixed a small bug which could kill some machines when Fullscreen was
+  activated.
+- Fixed auto-associate on startup.
+- Fixed an "Emulate Memory Contention" bug.
+- Added Magnum Lightgun support.
+- Added 48k Keyboard helper - it's in the Help menu - which can be useful when
+  programming BASIC in 48k Mode, and has a command finder which displays the
+  correct keypresses for keywords and functions, and a Quick BASIC helper which
+  can alleviate the tedium of typing in all those long listings :)
+- Various fixes to the speed (TZX Files should speedload a touch faster) and
+  the graphics are more reliable now.
+- Better handling of zip files (they don't set the last visited folder to the
+  temp folder) and MRU items don't set them either.
+- Added an FPS counter - click it to get % emulation speed, and click again to
+  go back to FPS.
+- Fixed a bug concerning the speed of the emulation when muted sound was chosen
+  in conjunction with the autothrottle.
+- SPIN Now saves the positions of all its' windows, not just the main window.
+- Added Support for external ROM files - install them to the ROMs folder and
+  then select them into the appropriate hardware in the Options window.
+- Thanks to Steve Snake (Author of Klive) Losing Victoria now runs in the same
+  manner as the real 128k Spectrum (and the same as Klive does), ie - by losing
+  synch in the endpart. Thanks Steve!
+
+RZX Recording/Playback:
+
+- Added RZX files to the list of Associated filetypes
+- RZX handling now brought further into line with RamSoft's spec. 
+- RZX now has compressed snapshot block support, and compressed IRB support. At
+  last :)
+
+Tapes/Disk Support:
+
+- Better handling of Tape flashloading.
+- Added CSW/WAV recording (MIC output)
+- Added TZX/TAP saves (ROM trap method).
+- Added Fuller Box AY Support. 
+- Added a new tape/disk opening method - hold down shift if you want to
+  override the auto tape/disk loader, and opt *not* to load them when they
+  open.
+- Fixed another bug in Flashloading that caused some tapes to skip around.
+- Speedups to the tapes - reworked to take advantage of Delphi's optimiser.
+- Altered the behaviour of the Autoload - tapes automatically play under
+  autoload. 
+- Added an option to hold down CTRL to load tapes in Usr0 mode... Hi Jon! :-)
+- Added TZX Direct Recording Block recording support.
+- Added a *Basic* TZX editor - you can rearrage/delete/duplicate blocks, and
+  edit their properties.
+- Added MRU List for tapes in the Tape Browser
+
+
+v0.2b - Goodness knows what I'm calling this one
+------------------------------------------------
+
+- Added Minimise Button.
+- *MORE* +3 copyprotected disks now load - we're getting close to perfect +3
+  fdc now.
+- Added (most of) Eq TetraChloride's UI suggestions.
+- Fixed bug in thread priorities - now uses < 1% CPU time when paused.
+- Fixed the "F10 Rewind Tape" key bug.
+- Upped the volume again - SPIN is now as loud as it gets :)
+- Fixed the Volume controls - they now go all the way up to max.
+- Fixed Sound mute-on-focus-lost error - *any* window (even SPIN's own windows)
+  open and the sound muted.
+- Added CPU speed options - Anyone for a 100mhz speccy? You might need to mute
+  the sound for a decent framerate.
+- Fixed another snap saving problem - not all banks were saved in a 128k .sna
+- Fixed a bug which wouldn't allow keys 1..9 or 0 to be used for the user
+  definable keystick.
+- Added Hints to the status bar, with a groovy little Hardware icon :)
+- And other UI improvements - should be a little more forgiving of large fonts
+  now. Not perfect, but a lot better.
+- Fixed a small bug which forced a frameskip of 1 when the sound was muted
+- Added Clive.
+- Fixed small bugs in the error reporting for the Pokes window, and the binary
+  files window.
+- Small bug fixes to the disassembly window, concerning certain IX+D opcodes
+- Fixed the Archive Info Block bug - no entries were displayed :)
+- Added and option to use a high-resolution timer to synchronise the emulation
+  speed, rather than relying on DirectSound synchronisation. This might fix
+  some people's speed problems.
+- Added Disk manager dialog - SPIN can now create blank floppy disks.
+- Fixed a bug in the sound init - if DSound is unavailable, then sound will be
+  muted from then on, and you won't be notified on subsequent runs.
+- Altered the shutdown methods a bit - XP machines were taking 3-4 seconds for
+  SPIN to quit :(
+- Added Full +3e IDE emulation - both IDE channels.
+- Fixed auto tape/disk loading for +3e mode
+- More bugs in the tapes fixed.
+- The old blitz loading is now incorporated permanently into Speedloading, and
+  Blitz now describes the new loading technique. Try it, you might like it.
+- Fixed the temp folder bug - SPIN no longer requires its' own temporary
+  folder.
+- Fixed a small bug which didn't properly select the correct hardware for some
+  snaps
+- Added Filetype associations - whilst still maintaining the ability to run
+  multiple instances of SPIN, I might add. That was a headache :)
+- Woody updated the graphics routines a touch - and every little counts.
+- He also added +3 Disk acceleration - kinda like Speedloading for disks
+  (though not as thorough)
+- Added Maximise (full screen) button
+- Fixed small bug which would affect drag and drop when SPIN was set to pause
+  when the focus was lost
+- Fixed an error unzipping files - sometimes, when you opened a file dialog, it
+  would start in  the temporary folder.
+- Fixed more RZX bugs, but Sabre wulf is still giving me headaches - SPIN can
+  record and play back, but SpecEMU can't use the recordings :( Don't know if
+  it's emulation or RZX causing that atm.
+
+
+v0.2a - Damned Stupid bugs
+--------------------------
+
+- Fixed the "Temp Folder" bug for Zip support.
+- Woody attempted to fix the AY sound envelope bug - we need confirmation that
+  this is done (suggested by Matthew Westcott).
+- Added Mute on Lose Focus (suggested by Mike Wynne)
+- Added Mute Button to toolbar (again, suggested by Mike Wynne)
+- Fixed sound volume - should be about 2x louder now.
+
+
+V0.2 - Emulation Update
+------------------------
+
+- Added Sound Mute option
+- Added Multiface emulation - if you have the ROMs :) This involved a large
+  amount of changes to the whole emulation, so will probably have broken some
+  stuff.
+- RZX saving fixed - broken due to new port behaviour
+- +3 Paging bugs fixed
+- Fixed the Usr0 reset option - was broken in 0.1d.
+- Fixed a possible Win2k/XP bug in the save dialogs.
+- Fixed a nasty, horrible sound looping noise when pausing the emulation.
+- Added WAV loading support - 8bit/16 mono/stereo, simple WAVs, only fmt_ and
+  Data single blocks.
+- Plus 3 Floppy Disk code updated .All the tzx vault's dsk images work fine
+  now.
+- Fixed a problem in NT/2k/XP with the Bitmap saving dialog.
+- Fixed a bug which could hang the emulator when it suspends or pauses
+- Added more debugger functions
+- Added Zip Support - both auto loading and "select file from zip".
+- Added Direct POKEing - POKE database support will be along later.
+- Added full speed option - watch it fly :)
+- Fixed a whole bunch of keyboard bugs. 
+- Virtually rewrote the thread communications. Much more stable now.
+- New option to use all available CPU time. This is better for slower machines.
+- Fixed a problem with .tap files - the wav support was getting in the way...
+- Fixed a problem with the debugger not appearing on breakpoints.
+- Fixed a "Win32 API Function Failed" error that appears if certain error
+  messages appear.
+- Fixed a small bug in the Disk loader, which could cause an exception.
+- Added more keyboard keys - the [{}]|\ and copyright symbols are now directly
+  available from the PC keyboard's keys (but the ¬ key is copyright symbol)
+- Added "Search Tipshop" box to the pokes window
+- Fixed up the menus to accept accelerator keys
+- Added option to Pause the emulation when SPIN loses the focus (deactivates)
+- Fixed a bug where SPIN would not pop to the foreground when a file is dropped
+  on it, in Win2k/XP
+- Added WOS, TipShop and TZXVault links on the help menu.
+
+
+V0.1d - New stuff added
+-----------------------
+
+- Realtime Audio settings window - change the panning/volume in real time.
+- Altered behaviour of the "Don't change Hardware to match Snaphots" option to
+  include *all* hardware types (except where unavoidable, ie, loading a 128k
+  snap into a 48k emulation).
+- Auto tape and disk load - jumps straight to LOAD "" (48k) or the loader
+  option in 128k modes.
+- Fixed a small bug involving +2a's and snapshots :)
+- Added loading and saving of Binary files (chunks of memory)
+- Fixed a few bugs in resizing, and implemented a different method
+- Added (slow) bilinear resizing option.
+- Added CSW Support to the TZX loader.
+- Known non-working CSWs (From Andy Barker's Loading Schemes Page) :
+- 	Mask.csw - Won't load at all
+- 	Myla Di'Kaich.csw - No speedloading
+- 	Sailing.csw - Won't load at all
+- Added support for Twister's loading scheme to be speedloaded.
+- Added Flashloading for Standard *TZX* blocks - CSWs and non $10 blocks won't
+  flashload, even if they are using the standard ROM loader and ROM timings.
+- Fixed various bugs in the tape loading system - should be perfect now (Yeah,
+  right!).
+- Added the basic bones of the debugger - work in progress, and likely to be
+  for a *long* time.
+- Fixed some bloody stupid bugs in the joysticks - they should all work now.
+- Added more features to the +3 fdc code - most edsks of protected disks work,
+  but a few still don't.
+- Fixed a drag and drop bug which wouldn't let you drop more than a few files
+  before refusing any more.
+
+- Known bugs: The debugger is buggy (no surprise there then). The emulation
+  locks up sometimes, usually after a pause (user requested or not, such as
+  when the options open). I know why, just not how to fix.
+- Loads of others :)
+
+
+V0.1c - Really stupid bugs
+--------------------------
+
+- Fixed z80 48k snapshots loading
+- Fixed bug which prevented Scanlines modes from being saved
+- Fixed Pretty daft - "black Screen" bug
+
+- Added Option to ignore hardware changes for snap loading. If a 48k snap is
+  loaded, it will use the currently selected hardware and the timings for it.
+  48k Usr0 mode demos now load properly if you choose a 128k model. I don't
+  know of any other emulator that does this (although RealSpec might).
+
+
+V0.1b - small updates
+---------------------
+
+- Fixed joysticks detection - no longer warns you that there is no stick
+  attached if you select None in the list of stick emulations.
+- Fixed folders not using the ones you selected.
+- Fixed a bug in the keyboard routine - special PC symbol keys work properly
+  now.
+- Fixed some other *stupid* bugs in the keyboard routines...
+- Fixed a bug with the mouse pointer being visible in fullscreen.
+- Fixed Snapshot saving in 48k mode (SP pointer bug), and a related bug in 128k
+  snap saving.
+- Fixed Z80 block compression
+
+- Changed Reset Icon to a power icon, thanks Neuro, (I'm not sure about it
+  though, I liked my Bin)
+- Changes to F_Key mappings - see readme for info.
+- Changed Sound pitch a little - sounds better now, especially AY Sound.
+
+- Added MRU list, ten most recent files
+- Added drag and drop support.
+- Added ULA Snow effect, and Floating bus based on RamSoft's technical docs -
+  with minor changes - probably errors in the translation from Italian to
+  English :)
+- Added Resizeable main window.
+- Added All joystick types keystick and PC Joystick.
+- Added more tape controls - FF block, REW block, FF to end, REW to start.
+- Now saves window size and position.
+- Added "Tape Auto Rewind" feature
+- Added - Ctrl key can be used instead of Shift to get stuff like : rather than
+  ; on symbol keys.
+- Added +3 Floopy drive emulation - full read/write support for dsk's, read
+  only for e-dsk.
+
+V0.1a - update time!
+--------------------
+
+- Fixed resource leak in graphics
+- Switching "Auto Adjust Framerate" on and off now works.
+- Fixed bug in sound - beeper clips properly now.
+- Small bug in the non-mmx interpolated gfx routine.
+- Updated all but the joystick options now.
+- Saving and loading of settings implemented.
+- Fixed widestereo routines to use user-settings
+- Fixed file open/cancel bug
+- Fixed Auto tape controls preventing some games from loading
+- Temporary fix for MDA multicolours
+- MMX will now be disabled if the host machine doesn't support MMX extensions
+- MMX can also be disabled by setting UseMMX = 0 in SPIN.ini
+- Fixed bug where the emulator would hang if the tape started playing with no
+  tape inserted
+- Small speedup in the Z80's port read routines
+- Many parts of the Z80 Core recoded in Pure Assembly.
