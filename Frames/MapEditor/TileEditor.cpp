@@ -31,6 +31,7 @@ __fastcall TileEditor::TileEditor(TImage* const view, Agdx::ImageMap& imageMap, 
 , m_ShowStartRoom(false)
 , m_ShowRoomNumbers(false)
 , m_ShowTileTypes(false)
+, m_ShowSpriteTypes(false)
 , m_Border(border)
 , m_ScaleFactor(2)
 , m_MouseMode(mmTool)
