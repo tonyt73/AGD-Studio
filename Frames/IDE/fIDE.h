@@ -170,6 +170,8 @@ __published:    // IDE-managed Components
     TVirtualImageList *vilToolbar;
     TImageCollection *icProject;
     TVirtualImageList *vilProject;
+    TMenuItem *N5;
+    TMenuItem *Settings1;
     void __fastcall actEditCopyExecute(TObject *Sender);
     void __fastcall actEditCutExecute(TObject *Sender);
     void __fastcall actEditPasteExecute(TObject *Sender);
