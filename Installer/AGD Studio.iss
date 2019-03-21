@@ -11,7 +11,7 @@ UninstallDisplayIcon={app}\AGD Studio.exe
 OutputBaseFilename=AGD Studio Setup
 Compression=lzma2
 SolidCompression=yes
-OutputDir=C:\Users\Kiwi\Documents\Embarcadero\Studio\Projects\AGD Studio\Install
+OutputDir=C:\Users\Kiwi\Documents\Embarcadero\Studio\Projects\AGD Studio\Installer
 WizardImageFile=agdxstudio-installer-side.bmp
 WizardSmallImageFile=agdxstudio-installer-top.bmp
 WizardImageStretch=yes
@@ -53,55 +53,55 @@ Name: "{commondocs}\AGD Studio\Projects"
 
 [Files]
 ; x64 (64 bit) application files (Program Files)
-Source: "..\Binaries\64\AGD Studio.exe"; DestDir: "{app}"; Check: Is64BitInstallMode
-Source: "..\Binaries\64\AGDStudio.exe"; DestDir: "{app}"; Check: Is64BitInstallMode
-Source: "..\Binaries\64\AGD Converter.exe"; DestDir: "{app}"; Check: Is64BitInstallMode
-Source: "..\Binaries\64\borlndmm.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
-Source: "..\Binaries\64\cc64260.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
-Source: "..\Binaries\64\cc64260mt.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
-Source: "..\Binaries\64\lmdrtcore260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
-Source: "..\Binaries\64\lmdrtdocking260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
-Source: "..\Binaries\64\lmdrtelcore260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
-Source: "..\Binaries\64\lmdrtelpro260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
-Source: "..\Binaries\64\lmdrtinspector260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
-Source: "..\Binaries\64\lmdrtl260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
-Source: "..\Binaries\64\lmdrtlog260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
-Source: "..\Binaries\64\lmdrtprint260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
-Source: "..\Binaries\64\lmdrtrtlx260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
-Source: "..\Binaries\64\lmdrtsyntax260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
-Source: "..\Binaries\64\rtl260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
-Source: "..\Binaries\64\vcl260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
-Source: "..\Binaries\64\vclactnband260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
-Source: "..\Binaries\64\vclimg260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
-Source: "..\Binaries\64\vclsmp260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
-Source: "..\Binaries\64\vclwinx260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
-Source: "..\Binaries\64\vclx260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "Binaries\64\AGD Studio.exe"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "Binaries\64\AGDStudio.exe"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "Binaries\64\AGD Converter.exe"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "Binaries\64\borlndmm.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "Binaries\64\cc64260.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "Binaries\64\cc64260mt.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "Binaries\64\lmdrtcore260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "Binaries\64\lmdrtdocking260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "Binaries\64\lmdrtelcore260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "Binaries\64\lmdrtelpro260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "Binaries\64\lmdrtinspector260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "Binaries\64\lmdrtl260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "Binaries\64\lmdrtlog260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "Binaries\64\lmdrtprint260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "Binaries\64\lmdrtrtlx260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "Binaries\64\lmdrtsyntax260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "Binaries\64\rtl260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "Binaries\64\vcl260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "Binaries\64\vclactnband260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "Binaries\64\vclimg260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "Binaries\64\vclsmp260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "Binaries\64\vclwinx260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "Binaries\64\vclx260.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 ; x86 (32 bit) application files (Program Files (x86))
-Source: "..\Binaries\32\AGD Studio.exe"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags: solidbreak
-Source: "..\Binaries\32\AGDStudio.exe"; DestDir: "{app}"; Check: not Is64BitInstallMode
-Source: "..\Binaries\32\AGD Converter.exe"; DestDir: "{app}"; Check: not Is64BitInstallMode
-Source: "..\Binaries\32\borlndmm.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
-Source: "..\Binaries\32\cc32c260.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
-Source: "..\Binaries\32\cc32c260mt.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
-Source: "..\Binaries\32\cc32260.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
-Source: "..\Binaries\32\cc32260mt.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
-Source: "..\Binaries\32\lmdrtcore260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
-Source: "..\Binaries\32\lmdrtdocking260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
-Source: "..\Binaries\32\lmdrtelcore260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
-Source: "..\Binaries\32\lmdrtelpro260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
-Source: "..\Binaries\32\lmdrtinspector260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
-Source: "..\Binaries\32\lmdrtl260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
-Source: "..\Binaries\32\lmdrtlog260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
-Source: "..\Binaries\32\lmdrtprint260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
-Source: "..\Binaries\32\lmdrtrtlx260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
-Source: "..\Binaries\32\lmdrtsyntax260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
-Source: "..\Binaries\32\rtl260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
-Source: "..\Binaries\32\vcl260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
-Source: "..\Binaries\32\vclactnband260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
-Source: "..\Binaries\32\vclimg260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
-Source: "..\Binaries\32\vclsmp260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
-Source: "..\Binaries\32\vclwinx260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
-Source: "..\Binaries\32\vclx260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "Binaries\32\AGD Studio.exe"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags: solidbreak
+Source: "Binaries\32\AGDStudio.exe"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "Binaries\32\AGD Converter.exe"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "Binaries\32\borlndmm.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "Binaries\32\cc32c260.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "Binaries\32\cc32c260mt.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "Binaries\32\cc32260.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "Binaries\32\cc32260mt.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "Binaries\32\lmdrtcore260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "Binaries\32\lmdrtdocking260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "Binaries\32\lmdrtelcore260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "Binaries\32\lmdrtelpro260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "Binaries\32\lmdrtinspector260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "Binaries\32\lmdrtl260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "Binaries\32\lmdrtlog260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "Binaries\32\lmdrtprint260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "Binaries\32\lmdrtrtlx260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "Binaries\32\lmdrtsyntax260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "Binaries\32\rtl260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "Binaries\32\vcl260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "Binaries\32\vclactnband260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "Binaries\32\vclimg260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "Binaries\32\vclsmp260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "Binaries\32\vclwinx260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "Binaries\32\vclx260.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
 ; COMMON FILES
 Source: "Files\Common\AGDX Commands.csv"; DestDir: "{commondocs}\AGD Studio\Common"; Flags: solidbreak 
 Source: "Files\Common\File Definitions.json"; DestDir: "{commondocs}\AGD Studio\Common";
