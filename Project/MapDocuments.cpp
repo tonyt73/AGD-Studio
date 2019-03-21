@@ -191,38 +191,41 @@ _fastcall TiledMapDocument::TiledMapDocument(const String& name)
     m_Type = "Map";
     m_SubType = "Tiled";
     m_Folder = "Game\\Map";
-    RegisterProperty("StartLocation", "Start Room", "The coordinates of the start room into the map");
-    RegisterProperty("StartScreenIndex", "AGD Screen Index", "The index of the start screen");
-	RegisterProperty("StartRoomIndex", "Start Room Details", "The AGD room index of the start location");
-	RegisterProperty("StartRoomX", "Start Room Details", "The rooms across to the start room location");
-	RegisterProperty("StartRoomY", "Start Room Details", "The rooms down to the start room location");
-    RegisterProperty("NumberOfRooms","Map Details","The number of rooms defined");
-    RegisterProperty("MaxRoomsAcross","Map Details","The maximum number of rooms across that you can define");
-    RegisterProperty("MaxRoomsDown","Map Details","The maximum number of rooms down that you can define");
-
-    // json loading properties
-    m_PropertyMap["Map.StartLocation"] = &StartRoomIndex;
-    m_PropertyMap["Map.Entities[].X"] = &m_EntityLoader.m_Pt.x;
-    m_PropertyMap["Map.Entities[].Y"] = &m_EntityLoader.m_Pt.y;
-    m_PropertyMap["Map.Entities[].RefId"] = &m_EntityLoader.m_LoadId;
-    m_PropertyMap["Map.Entities[].SpriteType"] = &m_EntityLoader.m_SpriteType;
-    m_PropertyMap["Map.Entities[].Room.Locked"] = &m_EntityLoader.m_RoomLocked;
-	m_PropertyMap["Map.Entities[].Room.Index"] = &m_EntityLoader.m_RoomIndex;
-    m_PropertyMap["Map.ScratchPad[].X"] = &m_EntityLoader.m_Pt.x;
-    m_PropertyMap["Map.ScratchPad[].Y"] = &m_EntityLoader.m_Pt.y;
-    m_PropertyMap["Map.ScratchPad[].RefId"] = &m_EntityLoader.m_LoadId;
-    m_PropertyMap["Map.ScratchPad[].SpriteType"] = &m_EntityLoader.m_SpriteType;
-    m_PropertyMap["Map.RoomMapping.Width"] = &m_RoomMappingWidth;
-    m_PropertyMap["Map.RoomMapping.Height"] = &m_RoomMappingHeight;
-    m_PropertyMap["Map.RoomMapping.Indexes[]"] = &m_RoomMappingIndex;
-    m_File = GetFile();
-
-    // message subscriptions
-    m_Registrar.Subscribe<DocumentChange<String>>(OnDocumentChanged);
-    m_Registrar.Subscribe<SetStartRoom>(OnSetStartRoom);
-    for (auto i = 0; i < m_RoomMappingWidth * m_RoomMappingHeight; i++)
+    if (name != Unnamed)
     {
-        m_RoomMapping.push_back(255);
+        RegisterProperty("StartLocation", "Start Room", "The coordinates of the start room into the map");
+        RegisterProperty("StartScreenIndex", "AGD Screen Index", "The index of the start screen");
+        RegisterProperty("StartRoomIndex", "Start Room Details", "The AGD room index of the start location");
+        RegisterProperty("StartRoomX", "Start Room Details", "The rooms across to the start room location");
+        RegisterProperty("StartRoomY", "Start Room Details", "The rooms down to the start room location");
+        RegisterProperty("NumberOfRooms","Map Details","The number of rooms defined");
+        RegisterProperty("MaxRoomsAcross","Map Details","The maximum number of rooms across that you can define");
+        RegisterProperty("MaxRoomsDown","Map Details","The maximum number of rooms down that you can define");
+
+        // json loading properties
+        m_PropertyMap["Map.StartLocation"] = &StartRoomIndex;
+        m_PropertyMap["Map.Entities[].X"] = &m_EntityLoader.m_Pt.x;
+        m_PropertyMap["Map.Entities[].Y"] = &m_EntityLoader.m_Pt.y;
+        m_PropertyMap["Map.Entities[].RefId"] = &m_EntityLoader.m_LoadId;
+        m_PropertyMap["Map.Entities[].SpriteType"] = &m_EntityLoader.m_SpriteType;
+        m_PropertyMap["Map.Entities[].Room.Locked"] = &m_EntityLoader.m_RoomLocked;
+        m_PropertyMap["Map.Entities[].Room.Index"] = &m_EntityLoader.m_RoomIndex;
+        m_PropertyMap["Map.ScratchPad[].X"] = &m_EntityLoader.m_Pt.x;
+        m_PropertyMap["Map.ScratchPad[].Y"] = &m_EntityLoader.m_Pt.y;
+        m_PropertyMap["Map.ScratchPad[].RefId"] = &m_EntityLoader.m_LoadId;
+        m_PropertyMap["Map.ScratchPad[].SpriteType"] = &m_EntityLoader.m_SpriteType;
+        m_PropertyMap["Map.RoomMapping.Width"] = &m_RoomMappingWidth;
+        m_PropertyMap["Map.RoomMapping.Height"] = &m_RoomMappingHeight;
+        m_PropertyMap["Map.RoomMapping.Indexes[]"] = &m_RoomMappingIndex;
+        m_File = GetFile();
+
+        // message subscriptions
+        m_Registrar.Subscribe<DocumentChange<String>>(OnDocumentChanged);
+        m_Registrar.Subscribe<SetStartRoom>(OnSetStartRoom);
+        for (auto i = 0; i < m_RoomMappingWidth * m_RoomMappingHeight; i++)
+        {
+            m_RoomMapping.push_back(255);
+        }
     }
 }
 //---------------------------------------------------------------------------

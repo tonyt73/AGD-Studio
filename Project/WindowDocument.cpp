@@ -15,35 +15,38 @@ __fastcall WindowDocument::WindowDocument(const String& name)
     m_SubType = "Definition";
     m_Extension = "json";
     m_Folder = "Game\\Configuration";
-    RegisterProperty("Left", "Position", "The left most character column of the window");
-    RegisterProperty("Top", "Position", "The top most character row of the window");
-    RegisterProperty("Right", "Position", "The right most character column of the window");
-    RegisterProperty("Bottom", "Position", "The bottom most character row of the window");
-    RegisterProperty("Width", "Dimensions", "The width in characters of the window");
-    RegisterProperty("Height", "Dimensions", "The height in characters of the window");
-    RegisterProperty("Columns", "Screen Resolution", "The width in characters of the graphics mode");
-    RegisterProperty("Rows", "Screen Resolution", "The height in characters of the graphics mode");
-    RegisterProperty("PixelsWidth", "Screen Resolution", "The width in pixels of the screens graphics mode");
-    RegisterProperty("PixelsHeight", "Screen Resolution", "The height in pixels of the screens graphics mode");
-    // json loading properties
-    m_PropertyMap["Window.Left"] = &m_Rect.Left;
-    m_PropertyMap["Window.Top"] = &m_Rect.Top;
-    m_PropertyMap["Window.Right"] = &m_Rect.Right;
-    m_PropertyMap["Window.Bottom"] = &m_Rect.Bottom;
-
-    m_File = GetFile();
-
-    if (theDocumentManager.ProjectConfig() != nullptr)
+    if (name != Unnamed)
     {
-        const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
-        m_SizeInCharacters.cx = mc.GraphicsMode()->Width  / mc.ImageSizing[itTile].Minimum.cx;
-        m_SizeInCharacters.cy = mc.GraphicsMode()->Height / mc.ImageSizing[itTile].Minimum.cy;
-        m_SizeInPixels.cx = mc.GraphicsMode()->Width;
-        m_SizeInPixels.cy = mc.GraphicsMode()->Height;
-        m_Rect.Left = 0;
-        m_Rect.Top = 0;
-        m_Rect.Right = m_SizeInCharacters.cx - 1;
-        m_Rect.Bottom = m_SizeInCharacters.cy - 1;
+        RegisterProperty("Left", "Position", "The left most character column of the window");
+        RegisterProperty("Top", "Position", "The top most character row of the window");
+        RegisterProperty("Right", "Position", "The right most character column of the window");
+        RegisterProperty("Bottom", "Position", "The bottom most character row of the window");
+        RegisterProperty("Width", "Dimensions", "The width in characters of the window");
+        RegisterProperty("Height", "Dimensions", "The height in characters of the window");
+        RegisterProperty("Columns", "Screen Resolution", "The width in characters of the graphics mode");
+        RegisterProperty("Rows", "Screen Resolution", "The height in characters of the graphics mode");
+        RegisterProperty("PixelsWidth", "Screen Resolution", "The width in pixels of the screens graphics mode");
+        RegisterProperty("PixelsHeight", "Screen Resolution", "The height in pixels of the screens graphics mode");
+        // json loading properties
+        m_PropertyMap["Window.Left"] = &m_Rect.Left;
+        m_PropertyMap["Window.Top"] = &m_Rect.Top;
+        m_PropertyMap["Window.Right"] = &m_Rect.Right;
+        m_PropertyMap["Window.Bottom"] = &m_Rect.Bottom;
+
+        m_File = GetFile();
+
+        if (theDocumentManager.ProjectConfig() != nullptr)
+        {
+            const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
+            m_SizeInCharacters.cx = mc.GraphicsMode()->Width  / mc.ImageSizing[itTile].Minimum.cx;
+            m_SizeInCharacters.cy = mc.GraphicsMode()->Height / mc.ImageSizing[itTile].Minimum.cy;
+            m_SizeInPixels.cx = mc.GraphicsMode()->Width;
+            m_SizeInPixels.cy = mc.GraphicsMode()->Height;
+            m_Rect.Left = 0;
+            m_Rect.Top = 0;
+            m_Rect.Right = m_SizeInCharacters.cx - 1;
+            m_Rect.Bottom = m_SizeInCharacters.cy - 1;
+        }
     }
 }
 //---------------------------------------------------------------------------

@@ -21,17 +21,20 @@ __fastcall ImageDocument::ImageDocument(const String& name)
     m_SubType = "Single";
     m_Folder = "Images\\Images";
     m_SaveRefId = true;
-    RegisterProperty("Name", "Details", "The name of the image");
-    RegisterProperty("Width", "Dimensions", "The width in pixels of the image");
-    RegisterProperty("Height", "Dimensions", "The height in pixels of the image");
-    RegisterProperty("Frames", "Dimensions", "The number of frames in the image");
-    RegisterProperty("ImagesPerFrame", "Dimensions", "The number of separate AGD images used in a frame");
-    // json loading properties
-    m_PropertyMap["Image.Width"] = &m_Width;
-    m_PropertyMap["Image.Height"] = &m_Height;
-    m_PropertyMap["Image.Frames[]"] = &m_FrameLoader;
-    m_PropertyMap["Image.Layers[].Name"] = &m_LayerName;
-    m_PropertyMap["Image.Layers[].Data"] = &m_LayerData;
+    if (name != Unnamed)
+    {
+        RegisterProperty("Name", "Details", "The name of the image");
+        RegisterProperty("Width", "Dimensions", "The width in pixels of the image");
+        RegisterProperty("Height", "Dimensions", "The height in pixels of the image");
+        RegisterProperty("Frames", "Dimensions", "The number of frames in the image");
+        RegisterProperty("ImagesPerFrame", "Dimensions", "The number of separate AGD images used in a frame");
+        // json loading properties
+        m_PropertyMap["Image.Width"] = &m_Width;
+        m_PropertyMap["Image.Height"] = &m_Height;
+        m_PropertyMap["Image.Frames[]"] = &m_FrameLoader;
+        m_PropertyMap["Image.Layers[].Name"] = &m_LayerName;
+        m_PropertyMap["Image.Layers[].Data"] = &m_LayerData;
+    }
     m_File = GetFile();
 }
 //---------------------------------------------------------------------------
@@ -252,15 +255,18 @@ __fastcall SpriteDocument::SpriteDocument(const String& name, const String& extr
 : ImageDocument(name)
 {
     m_ImageType = itSprite;
+    m_File = GetFile();
     m_MultiFrame = true;
     m_CanModifyFrames = true;
     m_CanBeLocked = true;
     m_SubType = "Sprite";
     m_Folder = "Images\\Sprites";
-    RegisterProperty("Name", "Details", "The name of the sprite");
-    m_File = GetFile();
-    ExtractSize(extra);
-    AddFrame();
+    if (name != Unnamed)
+    {
+        RegisterProperty("Name", "Details", "The name of the sprite");
+        ExtractSize(extra);
+        AddFrame();
+    }
 }
 //---------------------------------------------------------------------------
 __fastcall ObjectDocument::ObjectDocument(const String& name, const String& extra)
@@ -324,10 +330,13 @@ __fastcall TileDocument::TileDocument(const String& name, const String& extra)
     m_File = GetFile();
     m_SubType = "Tile";
     m_Folder = "Images\\Tiles";
-    RegisterProperty("Name", "Details", "The name of the tile");
-    ExtractSize(extra);
-    AddFrame();
-    AddLayer("blocktype","0");
+    if (name != Unnamed)
+    {
+        RegisterProperty("Name", "Details", "The name of the tile");
+        ExtractSize(extra);
+        AddFrame();
+        AddLayer("blocktype","0");
+    }
 }
 //---------------------------------------------------------------------------
 __fastcall CharacterSetDocument::CharacterSetDocument(const String& name, const String& extra)
@@ -339,17 +348,20 @@ __fastcall CharacterSetDocument::CharacterSetDocument(const String& name, const 
     m_File = GetFile();
     m_SubType = "Character Set";
     m_Folder = "Images\\Character Set";
-    RegisterProperty("Name", "Details", "The name of the character set");
-    ExtractSize(extra);
-    m_CanModifyFrames = true;   // yes to get the default frames in
-    for (auto i = 0; i < 96; i++)
+    if (name != Unnamed)
     {
-        switch (i)
+        RegisterProperty("Name", "Details", "The name of the character set");
+        ExtractSize(extra);
+        m_CanModifyFrames = true;   // yes to get the default frames in
+        for (auto i = 0; i < 96; i++)
         {
-            case  0: AddFrame(-1, "Space"); break;
-            case 95: AddFrame(-1, "©"); break;
-            case 92: AddFrame(-1, "Vert.Line"); break;
-            default: AddFrame(-1, UnicodeString().StringOfChar(32 + i, 1)); break;
+            switch (i)
+            {
+                case  0: AddFrame(-1, "Space"); break;
+                case 95: AddFrame(-1, "©"); break;
+                case 92: AddFrame(-1, "Vert.Line"); break;
+                default: AddFrame(-1, UnicodeString().StringOfChar(32 + i, 1)); break;
+            }
         }
     }
     m_CanModifyFrames = false;  // no for the editor

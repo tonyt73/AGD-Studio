@@ -14,8 +14,11 @@ __fastcall TextDocument::TextDocument(const String& name)
     m_SubType = "Plain";
     m_Extension = "txt";
     m_Folder = "Game\\Files";
-    RegisterProperty("Name", "Details", "The name of the document");
-    RegisterProperty("Filename", "File", "The name and path of the file");
+    if (name != Unnamed)
+    {
+        RegisterProperty("Name", "Details", "The name of the document");
+        RegisterProperty("Filename", "File", "The name and path of the file");
+    }
     m_File = GetFile();
 }
 //---------------------------------------------------------------------------
@@ -51,14 +54,14 @@ __fastcall EventDocument::EventDocument(const String& name)
     m_Extension = "event";
     RegisterProperty("Name", "Details", "The name of the event source code file");
     auto file = GetFile();
-    if (m_Name != "unnamed" && !System::File::Exists(file))
+    if (name != Unnamed && !System::File::Exists(file))
     {
         // create the file and add an AGD header
         auto date = DateTimeToStr(Now());
         auto header = ";\r\n; " + System::Path::ProjectName + "\r\n; An AGD game\r\n; Created: " + date + "\r\n; Event: " + System::File::NameWithoutExtension(file) + "\r\n;";
         System::File::WriteText(file, header);
     }
-    m_File = GetFile();
+    m_File = file;
 }
 //---------------------------------------------------------------------------
 __fastcall MessageDocument::MessageDocument(const String& name)
@@ -69,7 +72,7 @@ __fastcall MessageDocument::MessageDocument(const String& name)
     m_Extension = "txt";
     RegisterProperty("Name", "Details", "The name of the messages text file");
     auto file = GetFile();
-    if (m_Name != "unnamed" && !System::File::Exists(file))
+    if (name != Unnamed && !System::File::Exists(file))
     {
         // create the file and add an AGD header
         auto date = DateTimeToStr(Now());
@@ -87,14 +90,14 @@ __fastcall SfxDocument::SfxDocument(const String& name)
     m_Extension = "sfx";
     RegisterProperty("Name", "Details", "The name of the SoundFx definitions file");
     auto file = GetFile();
-    if (m_Name != "unnamed" && !System::File::Exists(file))
+    if (name != Unnamed && !System::File::Exists(file))
     {
         // create the file and add an AGD header
         auto date = DateTimeToStr(Now());
         auto header = ";\r\n; " + System::Path::ProjectName + "\r\n; An AGD game\r\n; Created: " + date + "\r\n; Simply place a Sound Fx file name per line. Comments ';' are stripped before compilation\r\n;";
         System::File::WriteText(file, header);
     }
-    m_File = GetFile();
+    m_File = file;
 }
 //---------------------------------------------------------------------------
 __fastcall AGDDocument::AGDDocument(const String& name)
@@ -104,9 +107,12 @@ __fastcall AGDDocument::AGDDocument(const String& name)
     m_Folder = "Game\\Output";
     m_Extension = "agd";
     SetShowFileExtension(true);
-    m_ReadOnly = true;
-    RegisterProperty("Name", "Details", "The name of the AGD source code file");
     m_File = GetFile();
+    m_ReadOnly = true;
+    if (name != Unnamed)
+    {
+        RegisterProperty("Name", "Details", "The name of the AGD source code file");
+    }
 }
 //---------------------------------------------------------------------------
 __fastcall AssemblyDocument::AssemblyDocument(const String& name)

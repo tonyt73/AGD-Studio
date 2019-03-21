@@ -15,9 +15,12 @@ __fastcall JumpTableDocument::JumpTableDocument(const String& name)
     m_Extension = "json";
     m_Folder = "Game\\Configuration";
     m_File = GetFile();
-    m_PropertyMap["Steps[]"] = &m_Step;
+    if (name != Unnamed)
+    {
+        m_PropertyMap["Steps[]"] = &m_Step;
 
-    DefaultJumpTable();
+        DefaultJumpTable();
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall JumpTableDocument::DoSave()

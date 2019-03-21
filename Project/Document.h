@@ -21,6 +21,7 @@
 // we aren't using Delphi's persistence.
 //---------------------------------------------------------------------------
 const unsigned int InvalidDocumentId = 0;
+const String       Unnamed = "unnamed";
 //---------------------------------------------------------------------------
 class Document : public System::JsonFile
 {

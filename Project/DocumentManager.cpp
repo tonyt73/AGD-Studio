@@ -112,7 +112,7 @@ void __fastcall DocumentManager::DocumentFolders(std::vector<String>& folders) c
 {
     for (auto it : m_FactoryMap)
     {
-        auto doc = std::unique_ptr<Document>(it.second("unnamed",""));
+        auto doc = std::unique_ptr<Document>(it.second(Unnamed,""));
         auto folder = doc->Classification;
         if (std::find(folders.begin(), folders.end(), folder) == folders.end())
         {
