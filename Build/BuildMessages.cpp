@@ -5,7 +5,8 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall BuildMessages::BuildMessages()
-: m_GroupNode(nullptr)
+: m_TreeView(nullptr)
+, m_GroupNode(nullptr)
 , m_MsgNode(nullptr)
 {
 }

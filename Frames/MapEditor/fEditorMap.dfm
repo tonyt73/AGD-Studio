@@ -651,7 +651,6 @@ object frmEditorMap: TfrmEditorMap
           BevelOuter = bvNone
           Caption = 'SPRITES'
           TabOrder = 8
-          ExplicitTop = 330
         end
         object ToolBar2: TToolBar
           Left = 0
@@ -663,7 +662,6 @@ object frmEditorMap: TfrmEditorMap
           ButtonWidth = 40
           Images = tbrImagesEnabled
           TabOrder = 9
-          ExplicitTop = 354
           object btnToggleSpriteLocks: TToolButton
             Left = 0
             Top = 0
@@ -699,7 +697,6 @@ object frmEditorMap: TfrmEditorMap
           ShowHint = False
           TabOrder = 10
           Transparent = False
-          ExplicitTop = 392
           object btnSpriteType1: TToolButton
             Tag = 1
             Left = 0
