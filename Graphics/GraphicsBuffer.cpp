@@ -56,7 +56,7 @@ void __fastcall GraphicsBuffer::Make(unsigned int width, unsigned int height, co
     {
         case btBitmap:      buffer = std::make_unique<BitmapGraphicsBuffer>(width, height, mode);   break;
         case btAttribute:   buffer = std::make_unique<AttributeGraphicsBuffer>(width, height, mode);break;
-        case btULAplus:     buffer = std::make_unique<ULAPlusGraphicsBuffer>(width, height, mode);break;
+        case btULAplus:     buffer = std::make_unique<ULAPlusGraphicsBuffer>(width, height, mode);  break;
         default: assert(0); break;
     }
 }
