@@ -326,8 +326,6 @@ object frmSettings: TfrmSettings
     TabHeight = 40
     TabOrder = 1
     TabWidth = 128
-    ExplicitWidth = 482
-    ExplicitHeight = 289
     object tabProfile: TTabSheet
       Caption = 'Profile'
       Font.Charset = DEFAULT_CHARSET
@@ -336,8 +334,6 @@ object frmSettings: TfrmSettings
       Font.Name = 'Roboto'
       Font.Style = []
       ParentFont = False
-      ExplicitWidth = 474
-      ExplicitHeight = 239
       DesignSize = (
         525
         276)
@@ -381,7 +377,6 @@ object frmSettings: TfrmSettings
         ParentFont = False
         TabOrder = 0
         Text = 'Anonymous'
-        ExplicitWidth = 319
       end
       object cmbMachines: TComboBox
         Left = 144
@@ -403,14 +398,11 @@ object frmSettings: TfrmSettings
           'Acorn Atom 256x192 Monochrome'
           'Amstrad CPC 160x200 16 Colour'
           'ZX Spectrum 256x192 16 Colour')
-        ExplicitWidth = 319
       end
     end
     object tabInterface: TTabSheet
       Caption = 'Interface'
       ImageIndex = 1
-      ExplicitWidth = 474
-      ExplicitHeight = 239
       DesignSize = (
         525
         276)
@@ -473,7 +465,6 @@ object frmSettings: TfrmSettings
         Items.Strings = (
           'Dark'
           '')
-        ExplicitWidth = 319
       end
       object chkWelcomeSkipOnStartup: TCheckBox
         Left = 144
@@ -524,8 +515,6 @@ object frmSettings: TfrmSettings
     object TabSheet1: TTabSheet
       Caption = 'Build'
       ImageIndex = 3
-      ExplicitWidth = 474
-      ExplicitHeight = 239
       DesignSize = (
         525
         276)
@@ -547,7 +536,7 @@ object frmSettings: TfrmSettings
         Top = 60
         Width = 505
         Height = 213
-        ActivePage = TabSheet2
+        ActivePage = tabCompiler
         Anchors = [akLeft, akTop, akRight, akBottom]
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -558,12 +547,8 @@ object frmSettings: TfrmSettings
         ParentFont = False
         TabHeight = 32
         TabOrder = 1
-        ExplicitWidth = 454
-        ExplicitHeight = 176
         object tabCompiler: TTabSheet
           Caption = 'Compiler'
-          ExplicitWidth = 446
-          ExplicitHeight = 134
           DesignSize = (
             497
             171)
@@ -639,7 +624,6 @@ object frmSettings: TfrmSettings
             ParentShowHint = False
             ShowHint = True
             TabOrder = 0
-            ExplicitWidth = 327
           end
           object edtCompilerParams: TEdit
             Left = 84
@@ -657,7 +641,6 @@ object frmSettings: TfrmSettings
             ParentShowHint = False
             ShowHint = True
             TabOrder = 2
-            ExplicitWidth = 327
           end
           object btnCompilerFind: TButton
             Left = 468
@@ -668,7 +651,6 @@ object frmSettings: TfrmSettings
             Caption = '...'
             TabOrder = 1
             OnClick = btnCompilerFindClick
-            ExplicitLeft = 417
           end
           object edtEngineFile: TEdit
             Left = 84
@@ -686,7 +668,6 @@ object frmSettings: TfrmSettings
             ParentShowHint = False
             ShowHint = True
             TabOrder = 3
-            ExplicitWidth = 327
           end
           object btnEngineFind: TButton
             Left = 468
@@ -697,13 +678,10 @@ object frmSettings: TfrmSettings
             Caption = '...'
             TabOrder = 4
             OnClick = btnEngineFindClick
-            ExplicitLeft = 417
           end
         end
         object tabAssembler: TTabSheet
           Caption = 'Assembler'
-          ExplicitWidth = 446
-          ExplicitHeight = 134
           DesignSize = (
             497
             171)
@@ -793,7 +771,6 @@ object frmSettings: TfrmSettings
             ParentShowHint = False
             ShowHint = True
             TabOrder = 0
-            ExplicitWidth = 327
           end
           object edtAssemblerParams: TEdit
             Left = 84
@@ -811,7 +788,6 @@ object frmSettings: TfrmSettings
             ParentShowHint = False
             ShowHint = True
             TabOrder = 2
-            ExplicitWidth = 327
           end
           object edtAssemblerPrepend: TEdit
             Left = 84
@@ -829,7 +805,6 @@ object frmSettings: TfrmSettings
             ParentShowHint = False
             ShowHint = True
             TabOrder = 3
-            ExplicitWidth = 327
           end
           object btnAssemblerFind: TButton
             Left = 468
@@ -840,7 +815,6 @@ object frmSettings: TfrmSettings
             Caption = '...'
             TabOrder = 1
             OnClick = btnAssemblerFindClick
-            ExplicitLeft = 417
           end
           object edtAssemblerAppend: TEdit
             Left = 84
@@ -858,14 +832,11 @@ object frmSettings: TfrmSettings
             ParentShowHint = False
             ShowHint = True
             TabOrder = 4
-            ExplicitWidth = 327
           end
         end
         object tabEmulator: TTabSheet
           Caption = 'Emulator'
           ImageIndex = 1
-          ExplicitWidth = 446
-          ExplicitHeight = 134
           DesignSize = (
             497
             171)
@@ -926,7 +897,6 @@ object frmSettings: TfrmSettings
             ParentShowHint = False
             ShowHint = True
             TabOrder = 0
-            ExplicitWidth = 327
           end
           object edtEmulatorParams: TEdit
             Left = 84
@@ -944,7 +914,6 @@ object frmSettings: TfrmSettings
             ParentShowHint = False
             ShowHint = True
             TabOrder = 2
-            ExplicitWidth = 327
           end
           object btnEmulatorFind: TButton
             Left = 468
@@ -955,14 +924,11 @@ object frmSettings: TfrmSettings
             Caption = '...'
             TabOrder = 1
             OnClick = btnEmulatorFindClick
-            ExplicitLeft = 417
           end
         end
         object TabSheet2: TTabSheet
           Caption = 'Parameters'
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 43
           object Label16: TLabel
             Left = 16
             Top = 8
@@ -1019,15 +985,12 @@ object frmSettings: TfrmSettings
         ParentFont = False
         ReadOnly = True
         TabOrder = 0
-        ExplicitWidth = 319
       end
     end
     object tabMachines: TTabSheet
       Caption = 'Machines'
       ImageIndex = 2
       TabVisible = False
-      ExplicitWidth = 474
-      ExplicitHeight = 239
     end
   end
   object Panel1: TPanel
@@ -1044,8 +1007,6 @@ object frmSettings: TfrmSettings
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitTop = 289
-    ExplicitWidth = 482
     DesignSize = (
       533
       36)
@@ -1059,7 +1020,6 @@ object frmSettings: TfrmSettings
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 0
-      ExplicitLeft = 387
     end
     object btnOk: TButton
       Left = 352
@@ -1072,7 +1032,6 @@ object frmSettings: TfrmSettings
       ModalResult = 1
       TabOrder = 1
       OnClick = btnOkClick
-      ExplicitLeft = 301
     end
   end
   object ImageList1: TImageList
