@@ -46,6 +46,7 @@ SHRSIZ equ 6               ; bytes per particle.
 ; Game starts here.  No reason why screen data couldn't go between start and contrl to put them in
 ; contended RAM, leaving the code and rest of the game in uncontended memory at 32768 and beyond.
 
+       org 32000
 start  equ $
 
 ; Set up the font.
