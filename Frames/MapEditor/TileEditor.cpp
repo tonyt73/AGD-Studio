@@ -47,6 +47,7 @@ __fastcall TileEditor::TileEditor(TImage* const view, Agdx::ImageMap& imageMap, 
 , FOnEntitySelected(nullptr)
 , FRetrieveRoomIndex(nullptr)
 {
+    assert(view != nullptr);
     Scale = m_ScaleFactor;
 
     m_Registrar.Subscribe<WindowChangedEvent>(OnWindowChanged);
@@ -72,7 +73,8 @@ void __fastcall TileEditor::OnWindowChanged(const WindowChangedEvent& event)
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::CreateViewBitmap()
 {
-    const auto& wi = (WindowDocument*)theDocumentManager.Get("Window", "Definition", "Window");
+	const auto& wi = (WindowDocument*)theDocumentManager.Get("Window", "Definition", "Window");
+    assert(wi != nullptr);
     m_Window = wi->Rect;
     m_Content = std::make_unique<TBitmap>();
     m_Content->PixelFormat = pf32bit;
