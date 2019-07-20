@@ -46,19 +46,17 @@ bool __fastcall Creation::Execute()
     BUILD_MSG("Building " + agdFile);
     for (auto& builder : m_AgdBuilders)
     {
-        // TODO: change to this when the 64 bit compiler supports C++17
-        // auto[success, reason, content] = builder->Build();
-        auto result = builder->Build();
-        if (result.Success)
-        {
-            agdContent += result.Content;
+		auto [success, reason, content] = builder->Build();
+		if (success)
+		{
+            agdContent += content;
             BUILD_LINE(bmOk, "Added AGD Section: " + builder->Description);
         }
         else
         {
             // log an error
             BUILD_LINE(bmFailed, "Failed to add AGD Section: " + builder->Description);
-            BUILD_LINE(bmFailed, result.Reason);
+            BUILD_LINE(bmFailed, reason);
             BUILD_MSG(bmFailed);
             return false;
         }
