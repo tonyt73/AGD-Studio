@@ -73,11 +73,13 @@ void __fastcall TfrmIDE::OnActivate(TWinControl* parent)
         tvBuild->BackGroundColor = ThemeManager::Background;
         m_Builder.TreeView = tvBuild;
         dsIDE->Invalidate();
-        RefreshMruList();
-    }
-    else
-    {
-        Visible = false;
+		RefreshMruList();
+		actActions->State = asNormal;
+	}
+	else
+	{
+		actActions->State = asSuspended;
+		Visible = false;
         Parent = nullptr;
     }
 }
