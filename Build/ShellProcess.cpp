@@ -18,7 +18,7 @@ __fastcall ShellProcess::~ShellProcess()
 {
     try
     {
-        delete m_Shell.release();
+        m_Shell.reset();
     }
     catch (Exception& e)
     {
