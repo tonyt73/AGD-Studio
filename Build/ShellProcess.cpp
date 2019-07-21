@@ -16,6 +16,13 @@ __fastcall ShellProcess::ShellProcess(BuildMessages& buildMessages, BuildMessage
 //---------------------------------------------------------------------------
 __fastcall ShellProcess::~ShellProcess()
 {
+    try
+    {
+        delete m_Shell.release();
+    }
+    catch (Exception& e)
+    {
+    }
 }
 //---------------------------------------------------------------------------
 bool __fastcall ShellProcess::ShellExecute(const String& path, const String& cmdline, bool wait, int timeOut)
