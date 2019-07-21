@@ -99,8 +99,6 @@
         <VerInfo_MinorVer>11</VerInfo_MinorVer>
         <VerInfo_PreRelease>true</VerInfo_PreRelease>
         <VerInfo_Special>true</VerInfo_Special>
-        <BCC_PCHUsage>UseDontGenerate</BCC_PCHUsage>
-        <BCC_PCHCache>true</BCC_PCHCache>
         <ILINK_DisplayTime>true</ILINK_DisplayTime>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
@@ -918,6 +916,16 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtrtlx260.bpl" Configuration="Debug" Class="DependencyPackage">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtlog260.bpl" Configuration="Debug" Class="DependencyPackage">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32c260mt.dll" Class="DependencyModule">
                     <Platform Name="Win32">
                         <Overwrite>true</Overwrite>
@@ -942,16 +950,6 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtelcore260.bpl" Configuration="Release" Class="DependencyPackage">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtrtlx260.bpl" Configuration="Debug" Class="DependencyPackage">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtlog260.bpl" Configuration="Debug" Class="DependencyPackage">
                     <Platform Name="Win32">
                         <Overwrite>true</Overwrite>
                     </Platform>
