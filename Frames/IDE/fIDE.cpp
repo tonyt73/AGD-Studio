@@ -73,13 +73,13 @@ void __fastcall TfrmIDE::OnActivate(TWinControl* parent)
         tvBuild->BackGroundColor = ThemeManager::Background;
         m_Builder.TreeView = tvBuild;
         dsIDE->Invalidate();
-		RefreshMruList();
-		actActions->State = asNormal;
-	}
-	else
-	{
-		actActions->State = asSuspended;
-		Visible = false;
+        RefreshMruList();
+        actActions->State = asNormal;
+    }
+    else
+    {
+        actActions->State = asSuspended;
+        Visible = false;
         Parent = nullptr;
     }
 }
@@ -307,6 +307,7 @@ void __fastcall TfrmIDE::tvProjectDblClick(TObject *Sender)
                 dp->Activate();
                 dp->Show();
                 dp->SetFocus();
+                dp->Refresh();
                 ::Messaging::Bus::Publish<Event>(Event("editor.show"));
             }
             else

@@ -408,14 +408,12 @@ object frmIDE: TfrmIDE
         object lblPropertyInfo: TLabel
           Left = 3
           Top = 3
-          Width = 202
-          Height = 34
+          Width = 99
+          Height = 13
           Align = alClient
           Caption = 'Property information'
           Transparent = True
           WordWrap = True
-          ExplicitWidth = 99
-          ExplicitHeight = 13
         end
       end
     end
