@@ -50,8 +50,7 @@ TStringDynArray Path::GetFolders(Location location, const String& subFolder)
     {
         return System::Ioutils::TDirectory::GetDirectories(folder);
     }
-    TStringDynArray empty;
-    return empty;
+    return TStringDynArray();
 }
 //---------------------------------------------------------------------------
 String __fastcall Path::GetFolderRelativeTo(const Location location, const String& path)
