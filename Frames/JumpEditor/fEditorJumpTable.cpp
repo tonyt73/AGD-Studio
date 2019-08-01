@@ -3,7 +3,7 @@
 #pragma hdrstop
 #include "fEditorJumpTable.h"
 #include "Project/DocumentManager.h"
-#include "Project/EditorManager.h"
+#include "Frames/EditorManager.h"
 #include "Settings/ThemeManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

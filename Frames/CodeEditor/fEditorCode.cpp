@@ -5,7 +5,7 @@
 #include <LMDSedKeyBindingsDialog.hpp>
 #include "fEditorCode.h"
 #include "fMain.h"
-#include "Project/EditorManager.h"
+#include "Frames/EditorManager.h"
 #include "Settings/ThemeManager.h"
 #include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------

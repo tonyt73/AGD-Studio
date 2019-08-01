@@ -2,7 +2,7 @@
 #include "agdx.pch.h"
 #include "fEditorImage.h"
 #include "Project/DocumentManager.h"
-#include "Project/EditorManager.h"
+#include "Frames/EditorManager.h"
 #include "Frames/ImageEditor/fSelectionImage.h"
 #include "Frames/ImageEditor/CanvasPencilTool.h"
 #include "Frames/ImageEditor/CanvasLineTool.h"

@@ -2,7 +2,7 @@
 #include "agdx.pch.h"
 #include "Frames/MapEditor/fEditorMap.h"
 #include "Project/DocumentManager.h"
-#include "Project/EditorManager.h"
+#include "Frames/EditorManager.h"
 #include "Messaging/Messaging.h"
 #include "Messaging/Event.h"
 //---------------------------------------------------------------------------
@@ -387,10 +387,10 @@ void __fastcall TfrmEditorMap::panScratchPadViewResize(TObject *Sender)
 void __fastcall TfrmEditorMap::pgcAssetsResize(TObject *Sender)
 {
     const auto minWidth = 400;
-    if (dpAssets->Width < minWidth)
+    if (dpAssets != nullptr && dpAssets->Width < minWidth)
     {
         auto dz = dpAssets->Zone;
-        while (dz->Parent)
+        while (dz != nullptr && dz->Parent)
         {
             dz->Width = minWidth;
             dz = dz->Parent;

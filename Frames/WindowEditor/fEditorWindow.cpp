@@ -2,7 +2,7 @@
 #include "agdx.pch.h"
 #include "fEditorWindow.h"
 #include "Project/DocumentManager.h"
-#include "Project/EditorManager.h"
+#include "Frames/EditorManager.h"
 #include "Settings/ThemeManager.h"
 #include "Graphics/GraphicsMode.h"
 //---------------------------------------------------------------------------
