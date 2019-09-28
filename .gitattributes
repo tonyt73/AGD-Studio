@@ -1,4 +1,4 @@
-*.cpp linguist-language=Rad Studio C++
-*.h linguist-language=Rad Studio C++
-*.dfm linguist-language=Rad Studio C++
+*.cpp linguist-language=Rad_Studio_C++
+*.h linguist-language=Rad_Studio_C++
+*.dfm linguist-language=Rad_Studio_C++
 *.json linguist-language=JSON
