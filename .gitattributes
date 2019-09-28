@@ -1,1 +1,4 @@
 *.cpp linguist-language=C++
+*.h linguist-language=C++
+*.dfm linguist-language=C++
+*.json linguist-language=JSON
