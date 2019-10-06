@@ -119,105 +119,20 @@ __recovery/
 
 # Castalia statistics file (since XE7 Castalia is distributed with Delphi)
 *.stat
-TommyGun/Scintilla/Source/SciActions.hpp
-TommyGun/Scintilla/Source/SciActionsRes.hpp
-TommyGun/Scintilla/Source/SciAddLanguageFormUnit.hpp
-TommyGun/Scintilla/Source/SciAutoComplete.hpp
-TommyGun/Scintilla/Source/SciCallTips.hpp
-TommyGun/Scintilla/Source/SciConfirmReplaceDlg.hpp
-TommyGun/Scintilla/Source/SciControllerHandler.hpp
-TommyGun/Scintilla/Source/SciDetectUtils.hpp
-TommyGun/Scintilla/Source/SciDocTabCtrl.hpp
-TommyGun/Scintilla/Source/SciFileExtensionsManager.hpp
-TommyGun/Scintilla/Source/SciKeyBindings.hpp
-TommyGun/Scintilla/Source/SciKeyEditForm.hpp
-TommyGun/Scintilla/Source/SciLanguageManager.hpp
-TommyGun/Scintilla/Source/SciLanguageManagerOptFrm.hpp
-TommyGun/Scintilla/Source/SciMacroRecording.hpp
-TommyGun/Scintilla/Source/SciPropertyMgr.hpp
-TommyGun/Scintilla/Source/SciReplaceTextDlg.hpp
-TommyGun/Scintilla/Source/SciResLang.hpp
-TommyGun/Scintilla/Source/SciResLangDcl.hpp
-TommyGun/Scintilla/Source/SciScintilla.hpp
-TommyGun/Scintilla/Source/SciScintillaBase.hpp
-TommyGun/Scintilla/Source/SciScintillaMemo.hpp
-TommyGun/Scintilla/Source/SciScintillaOptionsDlg.hpp
-TommyGun/Scintilla/Source/SciScintillaOptionsFrm.hpp
-TommyGun/Scintilla/Source/SciScintillaReg.hpp
-TommyGun/Scintilla/Source/SciSearchReplace.hpp
-TommyGun/Scintilla/Source/SciSearchReplaceBase.hpp
-TommyGun/Scintilla/Source/SciSearchTextDlg.hpp
-TommyGun/Scintilla/Source/SciStreamDefault.hpp
-TommyGun/Scintilla/Source/SciStyleLoader.hpp
-TommyGun/Scintilla/Source/SciSupport.hpp
-TommyGun/Scintilla/Source/SciWhatToFillUnit.hpp
-TommyGun/Scintilla/Source/SciWhatToFillUnitLng.hpp
-TommyGun/Scintilla/Source/sciAbbrevationManager.hpp
-TommyGun/Scintilla/Source/sciPrint.hpp
-TommyGun/Scintilla/Source/sciUtils.hpp
-TommyGun/Scintilla/Source/tcFontCombobox.hpp
-TommyGun/Scintilla/b6obj/DScintilla_R6.obj
-TommyGun/Scintilla/b6obj/SciActions.obj
-TommyGun/Scintilla/b6obj/SciActionsRes.obj
-TommyGun/Scintilla/b6obj/SciAddLanguageFormUnit.obj
-TommyGun/Scintilla/b6obj/SciAutoComplete.obj
-TommyGun/Scintilla/b6obj/SciCallTips.obj
-TommyGun/Scintilla/b6obj/SciConfirmReplaceDlg.obj
-TommyGun/Scintilla/b6obj/SciControllerHandler.obj
-TommyGun/Scintilla/b6obj/SciDetectUtils.obj
-TommyGun/Scintilla/b6obj/SciDocTabCtrl.obj
-TommyGun/Scintilla/b6obj/SciFileExtensionsManager.obj
-TommyGun/Scintilla/b6obj/SciKeyBindings.obj
-TommyGun/Scintilla/b6obj/SciKeyEditForm.obj
-TommyGun/Scintilla/b6obj/SciLanguageManager.obj
-TommyGun/Scintilla/b6obj/SciLanguageManagerOptFrm.obj
-TommyGun/Scintilla/b6obj/SciMacroRecording.obj
-TommyGun/Scintilla/b6obj/SciPropertyMgr.obj
-TommyGun/Scintilla/b6obj/SciReplaceTextDlg.obj
-TommyGun/Scintilla/b6obj/SciResLang.obj
-TommyGun/Scintilla/b6obj/SciResLangDcl.obj
-TommyGun/Scintilla/b6obj/SciScintilla.obj
-TommyGun/Scintilla/b6obj/SciScintillaBase.obj
-TommyGun/Scintilla/b6obj/SciScintillaMemo.obj
-TommyGun/Scintilla/b6obj/SciScintillaOptionsDlg.obj
-TommyGun/Scintilla/b6obj/SciScintillaOptionsFrm.obj
-TommyGun/Scintilla/b6obj/SciScintillaReg.obj
-TommyGun/Scintilla/b6obj/SciSearchReplace.obj
-TommyGun/Scintilla/b6obj/SciSearchReplaceBase.obj
-TommyGun/Scintilla/b6obj/SciSearchTextDlg.obj
-TommyGun/Scintilla/b6obj/SciStreamDefault.obj
-TommyGun/Scintilla/b6obj/SciStyleLoader.obj
-TommyGun/Scintilla/b6obj/SciSupport.obj
-TommyGun/Scintilla/b6obj/SciWhatToFillUnit.obj
-TommyGun/Scintilla/b6obj/SciWhatToFillUnitLng.obj
-TommyGun/Scintilla/b6obj/Scintilla_R6.obj
-TommyGun/Scintilla/b6obj/sciAbbrevationManager.obj
-TommyGun/Scintilla/b6obj/sciPrint.obj
-TommyGun/Scintilla/b6obj/sciUtils.obj
-TommyGun/Scintilla/b6obj/tcFontCombobox.obj
 sh.exe.stackdump
 *.Styles
-TommyGun/Scorpio/pch.h
-FastFuel2/build/generated/mockable-android-14.jar
-FastFuel2/build/generated/mockable-Google-Inc.-Google-APIs-14.jar
 *.$$$
 =======
 
 # Android/Java
 *.lock
 *.bin
-<<<<<<< 32c875722232392b2487e9bcc99de8c4a45cd669
->>>>>>> Added about
-Retro Studio.pch.cache
 Thumbs.db
 tmp.i
 =======
 *.jar
 *.ap_
 manifest-*-report.txt
-FastFuel2/app/build/intermediates/res/resources-debug-androidTest.ap_
-FastFuel2/app/build/intermediates/res/resources-debug.ap_
-FastFuel2/app/build/outputs/logs/manifest-merger-debug-report.txt
 >>>>>>> fixed repo and gitignore
 *.astinfo
 *.astcache
@@ -237,16 +152,7 @@ Deployment file.txt
 *.old
 AGDStudio.cbp*
 AGDStudio.cpp
-Install/Files/Compilers/ZX Spectrum/Pasmo/NEWS
-Install/Files/Compilers/ZX Spectrum/Pasmo/pasmodoc.html
-Install/Files/Compilers/ZX Spectrum/Pasmo/README
-Install/Files/Compilers/ZX Spectrum/Spin/128.ROM
-Install/Files/Compilers/ZX Spectrum/Spin/48.ROM
-Install/Files/Compilers/ZX Spectrum/Spin/Default.spincfg
-Install/Files/Compilers/ZX Spectrum/Spin/spin.ini
-Install/Files/Compilers/ZX Spectrum/Spin/whatsnew.txt
-Install/Files/Compilers/ZX Spectrum/Spin/ZXSpin keys.txt
-Install/Files/Compilers/ZX Spectrum/Spin/ZXSpin.exe.manifest
-Install/Files/Compilers/ZX Spectrum/Spin/ZXSpin.hlp
+Install/Files/Compilers/ZX Spectrum/*
 oldicon.ico
 Installer/agdxstudio-installer-top.old.bmp
+__astcache/*
