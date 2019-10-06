@@ -2,7 +2,7 @@
 #include "agdx.pch.h"
 //---------------------------------------------------------------------------
 #include "fULAplusBitmap.h"
-#include "DocumentManager.h"
+#include "Project/DocumentManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"

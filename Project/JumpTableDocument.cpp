@@ -2,7 +2,7 @@
 #include "agdx.pch.h"
 #pragma hdrstop
 //---------------------------------------------------------------------------
-#include "Project/JumpTableDocument.h"
+#include "JumpTableDocument.h"
 #include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

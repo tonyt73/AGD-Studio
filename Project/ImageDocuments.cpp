@@ -4,7 +4,7 @@
 //---------------------------------------------------------------------------
 #include "ImageDocuments.h"
 #include "DocumentManager.h"
-#include "GraphicsTypes.h"
+#include "Graphics/GraphicsTypes.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------

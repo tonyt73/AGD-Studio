@@ -14,8 +14,8 @@
 //- STL ---------------------------------------------------------------------
 #include <memory>
 //- APP ---------------------------------------------------------------------
-#include "fWelcomeDialog.h"
-#include "fIDE.h"
+#include "Frames/WelcomeDialog/fWelcomeDialog.h"
+#include "Frames/IDE/fIDE.h"
 //---------------------------------------------------------------------------
 class TfrmMain : public TForm
 {

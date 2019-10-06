@@ -2,10 +2,10 @@
 #include "agdx.pch.h"
 #include <math.h>
 #include "LabelledImage.h"
-#include "DocumentManager.h"
-#include "ThemeManager.h"
-#include "Image.h"
-#include "BlockColors.h"
+#include "Project/DocumentManager.h"
+#include "Settings/ThemeManager.h"
+#include "Graphics/Image.h"
+#include "Frames/ImageEditor/BlockColors.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"

@@ -7,7 +7,7 @@
 #include "Messaging/Messaging.h"
 #include "Frames/MouseState.h"
 #include "Settings/ThemeManager.h"
-#include "ImageEditor/BlockColors.h"
+#include "Frames/ImageEditor/BlockColors.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------

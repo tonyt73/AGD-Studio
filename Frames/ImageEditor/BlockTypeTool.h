@@ -3,7 +3,7 @@
 #define BlockTypeToolH
 //---------------------------------------------------------------------------
 #include "Graphics/GraphicsBuffer.h"
-#include "ImageDocuments.h"
+#include "Project/ImageDocuments.h"
 //---------------------------------------------------------------------------
 class BlockTypeTool
 {

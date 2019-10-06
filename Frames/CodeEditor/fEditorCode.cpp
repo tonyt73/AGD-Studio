@@ -4,7 +4,7 @@
 #include <LMDSedColorSchemeDialog.hpp>
 #include <LMDSedKeyBindingsDialog.hpp>
 #include "fEditorCode.h"
-#include "fMain.h"
+#include "Forms/fMain.h"
 #include "Frames/EditorManager.h"
 #include "Settings/ThemeManager.h"
 #include "Messaging/Messaging.h"
