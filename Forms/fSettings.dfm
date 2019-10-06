@@ -320,7 +320,7 @@ object frmSettings: TfrmSettings
     Top = 0
     Width = 533
     Height = 326
-    ActivePage = TabSheet1
+    ActivePage = tabProfile
     Align = alClient
     Images = ImageList1
     TabHeight = 40
@@ -592,10 +592,13 @@ object frmSettings: TfrmSettings
             ParentFont = False
           end
           object Label19: TLabel
-            Left = 0
-            Top = 136
-            Width = 497
+            AlignWithMargins = True
+            Left = 8
+            Top = 133
+            Width = 481
             Height = 35
+            Margins.Left = 8
+            Margins.Right = 8
             Align = alBottom
             AutoSize = False
             Caption = 
@@ -607,6 +610,9 @@ object frmSettings: TfrmSettings
             Font.Name = 'Roboto'
             Font.Style = []
             ParentFont = False
+            ExplicitLeft = 0
+            ExplicitTop = 136
+            ExplicitWidth = 497
           end
           object edtCompilerExe: TEdit
             Left = 84
@@ -738,10 +744,13 @@ object frmSettings: TfrmSettings
             ParentFont = False
           end
           object Label20: TLabel
-            Left = 0
-            Top = 136
-            Width = 497
+            AlignWithMargins = True
+            Left = 8
+            Top = 133
+            Width = 481
             Height = 35
+            Margins.Left = 8
+            Margins.Right = 8
             Align = alBottom
             AutoSize = False
             Caption = 
@@ -754,6 +763,9 @@ object frmSettings: TfrmSettings
             Font.Name = 'Roboto'
             Font.Style = []
             ParentFont = False
+            ExplicitLeft = 0
+            ExplicitTop = 136
+            ExplicitWidth = 497
           end
           object edtAssemblerExe: TEdit
             Left = 84
@@ -867,10 +879,13 @@ object frmSettings: TfrmSettings
             ParentFont = False
           end
           object Label21: TLabel
-            Left = 0
-            Top = 136
-            Width = 497
+            AlignWithMargins = True
+            Left = 8
+            Top = 133
+            Width = 481
             Height = 35
+            Margins.Left = 8
+            Margins.Right = 8
             Align = alBottom
             AutoSize = False
             Caption = 'Emulator: The machine emulation application.'
@@ -880,6 +895,9 @@ object frmSettings: TfrmSettings
             Font.Name = 'Roboto'
             Font.Style = []
             ParentFont = False
+            ExplicitLeft = 0
+            ExplicitTop = 136
+            ExplicitWidth = 497
           end
           object edtEmulatorExe: TEdit
             Left = 84
