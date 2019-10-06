@@ -46,9 +46,9 @@ bool __fastcall Creation::Execute()
     BUILD_MSG("Building " + agdFile);
     for (auto& builder : m_AgdBuilders)
     {
-		auto [success, reason, content] = builder->Build();
-		if (success)
-		{
+        auto [success, reason, content] = builder->Build();
+        if (success)
+        {
             agdContent += content;
             BUILD_LINE(bmOk, "Added AGD Section: " + builder->Description);
         }
