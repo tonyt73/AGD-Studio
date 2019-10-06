@@ -6,8 +6,8 @@
         <AppType>Application</AppType>
         <MainSource>AGD Studio.cpp</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win64</Platform>
+        <Config Condition="'$(Config)'==''">Release</Config>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
@@ -85,7 +85,6 @@
         <VerInfo_Locale>3081</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=0.12.6663.80;InternalName=AGDx Studio;LegalCopyright=2019 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=0.12.6663;Comments=Programmed by Tony Thompson;SpecialBuild=BETA</VerInfo_Keys>
         <VerInfo_AutoGenVersion>true</VerInfo_AutoGenVersion>
-        <IncludePath>Frames\ControlsEditor\;Frames\WindowEditor\;Frames\JumpEditor\;Build\AgdSection\;Build\;System\;Messaging\;Frames\MusicEditor\;Frames\MapEditor\;Forms\;Frames\ImageEditor\;Frames\WelcomeDialog\;Frames\IDE\;Frames\;Frames\CodeEditor\;Settings\;Graphics\;Project\;Factories\;$(IncludePath)</IncludePath>
         <BCC_InstructionSet>6</BCC_InstructionSet>
         <BCC_CallingConvention>fastcall</BCC_CallingConvention>
         <BCC_PCHInject>agdx.pch.h</BCC_PCHInject>
@@ -96,7 +95,7 @@
         <BCC_SelectedWarnings>false</BCC_SelectedWarnings>
         <BCC_UseClassicCompiler>false</BCC_UseClassicCompiler>
         <VerInfo_MajorVer>0</VerInfo_MajorVer>
-        <VerInfo_MinorVer>11</VerInfo_MinorVer>
+        <VerInfo_MinorVer>12</VerInfo_MinorVer>
         <VerInfo_PreRelease>true</VerInfo_PreRelease>
         <VerInfo_Special>true</VerInfo_Special>
         <ILINK_DisplayTime>true</ILINK_DisplayTime>
@@ -156,6 +155,7 @@
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <Icon_MainIcon>icon.ico</Icon_MainIcon>
         <AppEnableHighDPI>true</AppEnableHighDPI>
+        <VerInfo_MinorVer>12</VerInfo_MinorVer>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;VclSmp.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtprint.bpi;lmdrtelpro.bpi</LinkPackageImports>
@@ -343,7 +343,7 @@
         </CppCompile>
         <None Include="Frames\ImageEditor\BlockColors.h">
             <BuildOrder>58</BuildOrder>
-        </None>
+        </None>        
         <CppCompile Include="Frames\ImageEditor\BlockTypeTool.cpp">
             <DependentOn>Frames\ImageEditor\BlockTypeTool.h</DependentOn>
             <BuildOrder>34</BuildOrder>
@@ -522,6 +522,9 @@
             <DependentOn>Frames\WndProcHandlers.h</DependentOn>
             <BuildOrder>31</BuildOrder>
         </CppCompile>
+        <None Include="Graphics\GraphicsTypes.h">
+            <BuildOrder>34</BuildOrder>
+        </None>
         <CppCompile Include="Graphics\AttributeGraphicsBuffer.cpp">
             <DependentOn>Graphics\AttributeGraphicsBuffer.h</DependentOn>
             <BuildOrder>61</BuildOrder>
@@ -538,9 +541,6 @@
             <DependentOn>Graphics\GraphicsMode.h</DependentOn>
             <BuildOrder>64</BuildOrder>
         </CppCompile>
-        <None Include="Graphics\GraphicsTypes.h">
-            <BuildOrder>34</BuildOrder>
-        </None>
         <CppCompile Include="Graphics\Image.cpp">
             <DependentOn>Graphics\Image.h</DependentOn>
             <BuildOrder>65</BuildOrder>
@@ -647,32 +647,32 @@
             <DependentOn>System\Path.h</DependentOn>
             <BuildOrder>85</BuildOrder>
         </CppCompile>
+        <FormResources Include="Frames\WindowEditor\fEditorWindow.dfm"/>
         <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
         <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
-        <FormResources Include="Frames\WindowEditor\fEditorWindow.dfm"/>
+        <FormResources Include="Frames\MapEditor\fEditorMap.dfm"/>
         <FormResources Include="Frames\MapEditor\LabelledImage.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fULAplusBitmap.dfm"/>
         <FormResources Include="Frames\JumpEditor\fEditorJumpTable.dfm"/>
         <FormResources Include="Frames\MapEditor\AssetSelection.dfm"/>
-        <FormResources Include="Frames\MapEditor\fEditorMap.dfm"/>
         <FormResources Include="Frames\MusicEditor\fEditorMusic.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fULAplusBitmap.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fToolbarShape.dfm"/>
         <FormResources Include="Frames\ImageEditor\fBlockTypes.dfm"/>
         <FormResources Include="Frames\ImageEditor\fEditorImage.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fMultiImageView.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fPaletteMonoAttribute.dfm"/>
         <FormResources Include="Frames\ImageEditor\fSelectionImage.dfm"/>
         <FormResources Include="Frames\ImageEditor\fToolbar.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fToolbarShape.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fMultiImageView.dfm"/>
         <FormResources Include="Frames\ImageEditor\fPaletteAttribute.dfm"/>
         <FormResources Include="Frames\ImageEditor\fPaletteBitmap.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fPaletteMonoAttribute.dfm"/>
+        <FormResources Include="Forms\fMain.dfm"/>
         <FormResources Include="Forms\fNewImage.dfm"/>
         <FormResources Include="Forms\fSettings.dfm"/>
-        <FormResources Include="Frames\CodeEditor\fEditorCode.dfm"/>
         <FormResources Include="Forms\fAbout.dfm"/>
-        <FormResources Include="Forms\fMain.dfm"/>
+        <FormResources Include="Frames\IDE\fIDE.dfm"/>
+        <FormResources Include="Frames\CodeEditor\fEditorCode.dfm"/>
         <FormResources Include="Frames\ControlsEditor\fEditorControls.dfm"/>
         <FormResources Include="Frames\ControlsEditor\fKeyCapture.dfm"/>
-        <FormResources Include="Frames\IDE\fIDE.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -692,8 +692,8 @@
             <CPlusPlusBuilder.Personality>
                 <ProjectProperties>
                     <ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
-                    <ProjectProperties Name="ManagePaths">True</ProjectProperties>
-                    <ProjectProperties Name="VerifyPackages">False</ProjectProperties>
+                    <ProjectProperties Name="ManagePaths">False</ProjectProperties>
+                    <ProjectProperties Name="VerifyPackages">True</ProjectProperties>
                     <ProjectProperties Name="IndexFiles">False</ProjectProperties>
                 </ProjectProperties>
                 <Source>
@@ -703,22 +703,40 @@
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k260.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp260.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
                 </Excluded_Packages>
-                <VFOLDERS>
-                    <VFOLDER ID="{70AD064D-0C14-4011-8644-91CBFBA4BB20}" name="Virtual Folder 1"/>
-                </VFOLDERS>
             </CPlusPlusBuilder.Personality>
             <Deployment Version="3">
+                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtl260.bpl" Configuration="Debug" Class="DependencyPackage">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32c260.dll" Class="DependencyModule">
                     <Platform Name="Win32">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName=".\Win64\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="All Platforms">
+                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtdocking260.bpl" Configuration="Debug" Class="DependencyPackage">
+                    <Platform Name="Win32">
                         <Overwrite>true</Overwrite>
                     </Platform>
-                    <Platform Name="Win64">
-                        <RemoteName>AGD_Studio.exe</RemoteName>
+                </DeployFile>
+                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtcore260.bpl" Configuration="Release" Class="DependencyPackage">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtrtlx260.bpl" Configuration="Debug" Class="DependencyPackage">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\Redist\Win32\rtl260.bpl" Configuration="Debug" Class="DependencyPackage">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtprint260.bpl" Configuration="Debug" Class="DependencyPackage">
+                    <Platform Name="Win32">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -732,6 +750,25 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName=".\Win64\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="All Platforms">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                    <Platform Name="Win64">
+                        <RemoteName>AGD_Studio.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\Redist\Win32\vclwinx260.bpl" Configuration="Debug" Class="DependencyPackage">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtelcore260.bpl" Configuration="Debug" Class="DependencyPackage">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtsyntax260.bpl" Configuration="Release" Class="DependencyPackage">
                     <Platform Name="Win32">
                         <Overwrite>true</Overwrite>
@@ -742,7 +779,22 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtcore260.bpl" Configuration="Debug" Class="DependencyPackage">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\Win32\vclx260.bpl" Configuration="Release" Class="DependencyPackage">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtsyntax260.bpl" Configuration="Debug" Class="DependencyPackage">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\Redist\Win32\vcl260.bpl" Configuration="Debug" Class="DependencyPackage">
                     <Platform Name="Win32">
                         <Overwrite>true</Overwrite>
                     </Platform>
@@ -767,12 +819,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx32\libcgcrtl.dylib" Class="DependencyModule">
-                    <Platform Name="OSX32">
+                <DeployFile Condition="'$(UsingDelphiRTL)'=='true'" LocalName="$(BDS)\bin64\borlndmm.dll" Class="DependencyModule">
+                    <Platform Name="Win64">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32260mt.dll" Class="DependencyModule">
+                <DeployFile LocalName="$(BDS)\Redist\Win32\vclimg260.bpl" Configuration="Debug" Class="DependencyPackage">
                     <Platform Name="Win32">
                         <Overwrite>true</Overwrite>
                     </Platform>
@@ -782,8 +834,33 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile Condition="'$(UsingDelphiRTL)'=='true'" LocalName="$(BDS)\bin64\borlndmm.dll" Class="DependencyModule">
-                    <Platform Name="Win64">
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32260mt.dll" Class="DependencyModule">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtl260.bpl" Configuration="Release" Class="DependencyPackage">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\Redist\Win32\vclactnband260.bpl" Configuration="Debug" Class="DependencyPackage">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx32\libcgcrtl.dylib" Class="DependencyModule">
+                    <Platform Name="OSX32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtinspector260.bpl" Configuration="Debug" Class="DependencyPackage">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\Redist\Win32\vclx260.bpl" Configuration="Debug" Class="DependencyPackage">
+                    <Platform Name="Win32">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -794,17 +871,6 @@
                 </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx64\libcgstl.dylib" Class="DependencyModule">
                     <Platform Name="OSX64">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtl260.bpl" Configuration="Release" Class="DependencyPackage">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName=".\Win32\Debug\AGD Studio.tds" Configuration="Debug" Class="DebugSymbols">
-                    <Platform Name="Win32">
-                        <RemoteName>AGD_Studio.tds</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -831,36 +897,8 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtprint260.bpl" Configuration="Release" Class="DependencyPackage">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32c260mt.dll" Class="DependencyModule">
                     <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win32\vcl260.bpl" Configuration="Release" Class="DependencyPackage">
-                    <Platform Name="Win32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName=".\Win64\Release\AGD_Studio.exe" Configuration="Release" Class="ProjectOutput">
-                    <Platform Name="All Platforms">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                    <Platform Name="Win64">
-                        <RemoteName>AGD_Studio.exe</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName=".\Win32\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="All Platforms">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                    <Platform Name="Win32">
-                        <RemoteName>AGD_Studio.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -873,18 +911,46 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtprint260.bpl" Configuration="Release" Class="DependencyPackage">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtelcore260.bpl" Configuration="Release" Class="DependencyPackage">
                     <Platform Name="Win32">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtcore260.bpl" Configuration="Release" Class="DependencyPackage">
+                <DeployFile LocalName="$(BDSCOMMONDIR)\BPL\lmdrtlog260.bpl" Configuration="Debug" Class="DependencyPackage">
                     <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\Redist\Win32\vcl260.bpl" Configuration="Release" Class="DependencyPackage">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName=".\Win32\Debug\AGD_Studio.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="All Platforms">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                    <Platform Name="Win32">
+                        <RemoteName>AGD_Studio.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx64\libcgcrtl.dylib" Class="DependencyModule">
                     <Platform Name="OSX64">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName=".\Win64\Release\AGD_Studio.exe" Configuration="Release" Class="ProjectOutput">
+                    <Platform Name="All Platforms">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                    <Platform Name="Win64">
+                        <RemoteName>AGD_Studio.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -1164,29 +1230,7 @@
                         <Operation>0</Operation>
                     </Platform>
                 </DeployClass>
-                <DeployClass Name="iPad_Launch1024">
-                    <Platform Name="iOSDevice32">
-                        <Operation>1</Operation>
-                    </Platform>
-                    <Platform Name="iOSDevice64">
-                        <Operation>1</Operation>
-                    </Platform>
-                    <Platform Name="iOSSimulator">
-                        <Operation>1</Operation>
-                    </Platform>
-                </DeployClass>
                 <DeployClass Name="iPad_Launch1024x768">
-                    <Platform Name="iOSDevice32">
-                        <Operation>1</Operation>
-                    </Platform>
-                    <Platform Name="iOSDevice64">
-                        <Operation>1</Operation>
-                    </Platform>
-                    <Platform Name="iOSSimulator">
-                        <Operation>1</Operation>
-                    </Platform>
-                </DeployClass>
-                <DeployClass Name="iPad_Launch1536">
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
                     </Platform>
@@ -1220,17 +1264,6 @@
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="iPad_Launch1668x2388">
-                    <Platform Name="iOSDevice32">
-                        <Operation>1</Operation>
-                    </Platform>
-                    <Platform Name="iOSDevice64">
-                        <Operation>1</Operation>
-                    </Platform>
-                    <Platform Name="iOSSimulator">
-                        <Operation>1</Operation>
-                    </Platform>
-                </DeployClass>
-                <DeployClass Name="iPad_Launch2048">
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
                     </Platform>
@@ -1286,17 +1319,6 @@
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="iPad_Launch2732x2048">
-                    <Platform Name="iOSDevice32">
-                        <Operation>1</Operation>
-                    </Platform>
-                    <Platform Name="iOSDevice64">
-                        <Operation>1</Operation>
-                    </Platform>
-                    <Platform Name="iOSSimulator">
-                        <Operation>1</Operation>
-                    </Platform>
-                </DeployClass>
-                <DeployClass Name="iPad_Launch768">
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
                     </Platform>
@@ -1620,11 +1642,11 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="Linux64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="Linux64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="OSX64" Name="$(PROJECTNAME).app"/>
