@@ -1489,11 +1489,13 @@
     <BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
     <BCC_ExternalTypeFilesClang>true</BCC_ExternalTypeFilesClang>
     <BCC_InstructionSet>6</BCC_InstructionSet>
+    <BCC_MergeDuplicateStrings>true</BCC_MergeDuplicateStrings>
     <BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
     <BCC_OutputDir>$(Platform)\$(Config)</BCC_OutputDir>
     <BCC_PCHInject>agdx.pch.h</BCC_PCHInject>
     <BCC_PCHUsage>UseDontGenerate</BCC_PCHUsage>
     <BCC_PCHWithExternalTypeFiles>false</BCC_PCHWithExternalTypeFiles>
+    <BCC_RequireMathFuncErrorNumber>false</BCC_RequireMathFuncErrorNumber>
     <BCC_SelectedWarnings>false</BCC_SelectedWarnings>
     <BCC_SmartPCHCache>false</BCC_SmartPCHCache>
     <BCC_StopPCHAfter>agdx.pch.h</BCC_StopPCHAfter>
