@@ -133,13 +133,12 @@ tmp.i
 *.jar
 *.ap_
 manifest-*-report.txt
->>>>>>> fixed repo and gitignore
 *.astinfo
 *.astcache
 AGDX Studio 10.3.eof
 *.res
 *.res
-__astcache/fPaletteAttribute.cpp.fd8b267b2e5ed82773879492c98e27ce.astcache-1a7dc758
+__astcache/*
 *.res
 *.groupproj
 Launcher.pch.h
@@ -155,9 +154,10 @@ AGDStudio.cpp
 Install/Files/Compilers/ZX Spectrum/*
 oldicon.ico
 Installer/agdxstudio-installer-top.old.bmp
-__astcache/*
+*/__astcache/*
 Sort Projects.ps1
 SortXML.ps1
 *.d
 *.o-*
 backup/*
+*.pdi
