@@ -23,16 +23,16 @@ __fastcall TModernStyleTreeView::TModernStyleTreeView(TComponent* Owner)
 //---------------------------------------------------------------------------
 void __fastcall TModernStyleTreeView::CreateWnd()
 {
-	TTreeView::CreateWnd();
-	SetWindowTheme(Handle, L"Explorer", NULL);
+    TTreeView::CreateWnd();
+    SetWindowTheme(Handle, L"Explorer", NULL);
 }
 //---------------------------------------------------------------------------
 namespace Modernstyletreeview
 {
-  void __fastcall PACKAGE Register()
-  {
-	TComponentClass classes[1] = {__classid(TModernStyleTreeView)};
-	RegisterComponents("Scorpio", classes, 0);
-  }
+    void __fastcall PACKAGE Register()
+    {
+        TComponentClass classes[1] = {__classid(TModernStyleTreeView)};
+        RegisterComponents("Scorpio", classes, 0);
+    }
 }//---------------------------------------------------------------------------
 

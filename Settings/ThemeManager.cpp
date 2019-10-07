@@ -12,26 +12,26 @@
 //---------------------------------------------------------------------------
 void __fastcall ThemeManager::SetStyle(const String& styleName)
 {
-	auto styleFile = System::File::Combine(System::Path::GetFolder(System::Path::lpApplication, "Styles"), styleName + ".vsf");
-	auto styleNameNoSpaces = StringReplace(styleName, " ", "", TReplaceFlags(rfReplaceAll || rfIgnoreCase)).LowerCase();
-	for (auto name : TStyleManager::StyleNames)
-	{
-		auto nameWithoutSpaces = StringReplace(name, " ", "", TReplaceFlags(rfReplaceAll || rfIgnoreCase)).LowerCase();
-		if (styleNameNoSpaces == nameWithoutSpaces)
-		{
-			auto style = TStyleManager::Style[name];
-			TStyleManager::SetStyle(style);
-			appSettings.ActiveStyle = styleName;
-			::Messaging::Bus::Publish<ThemeChangedEvent>(ThemeChangedEvent());
-			return;
-		}
-	}
-	if (!TStyleManager::TrySetStyle(styleName, false) && System::File::Exists(styleFile))
-	{
-		TStyleManager::SetStyle(TStyleManager::LoadFromFile(styleFile));
-		appSettings.ActiveStyle = styleName;
-		::Messaging::Bus::Publish<ThemeChangedEvent>(ThemeChangedEvent());
-	}
+    auto styleFile = System::File::Combine(System::Path::GetFolder(System::Path::lpApplication, "Styles"), styleName + ".vsf");
+    auto styleNameNoSpaces = StringReplace(styleName, " ", "", TReplaceFlags(rfReplaceAll || rfIgnoreCase)).LowerCase();
+    for (auto name : TStyleManager::StyleNames)
+    {
+        auto nameWithoutSpaces = StringReplace(name, " ", "", TReplaceFlags(rfReplaceAll || rfIgnoreCase)).LowerCase();
+        if (styleNameNoSpaces == nameWithoutSpaces)
+        {
+            auto style = TStyleManager::Style[name];
+            TStyleManager::SetStyle(style);
+            appSettings.ActiveStyle = styleName;
+            ::Messaging::Bus::Publish<ThemeChangedEvent>(ThemeChangedEvent());
+            return;
+        }
+    }
+    if (!TStyleManager::TrySetStyle(styleName, false) && System::File::Exists(styleFile))
+    {
+        TStyleManager::SetStyle(TStyleManager::LoadFromFile(styleFile));
+        appSettings.ActiveStyle = styleName;
+        ::Messaging::Bus::Publish<ThemeChangedEvent>(ThemeChangedEvent());
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall ThemeManager::LoadStyles(TComboBox* combo)

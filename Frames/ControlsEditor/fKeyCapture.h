@@ -11,7 +11,7 @@
 //---------------------------------------------------------------------------
 class TfrmKeyCode : public TFrame
 {
-__published:	// IDE-managed Components
+__published:    // IDE-managed Components
     TLabel *lblKey;
     TPanel *panCaption;
     TEdit *edtKey;
@@ -20,7 +20,7 @@ __published:	// IDE-managed Components
     void __fastcall edtKeyMouseLeave(TObject *Sender);
     void __fastcall edtKeyChange(TObject *Sender);
     void __fastcall FrameMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
-private:	// User declarations
+private:    // User declarations
     std::map<unsigned char, String> m_KeyMap;
 
     unsigned char   m_KeyCode;
@@ -32,7 +32,7 @@ private:	// User declarations
     void            __fastcall  SetCaption(const String& caption);
     TNotifyEvent                FOnChanged;
 
-public:		// User declarations
+public:        // User declarations
                     __fastcall  TfrmKeyCode(TComponent* Owner);
 __published:
     String          __property  Caption = { read = GetCaption, write = SetCaption };

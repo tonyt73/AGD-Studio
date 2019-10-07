@@ -45,15 +45,15 @@ __fastcall Entity::~Entity()
 Entity& __fastcall Entity::operator=(const Entity& other)
 {
     assert(m_Id < 10000);
-	m_Pt = other.m_Pt;
-	m_Id = other.m_Id;
+    m_Pt = other.m_Pt;
+    m_Id = other.m_Id;
     m_LoadId = InvalidDocumentId;
-	m_Document = other.m_Document;
+    m_Document = other.m_Document;
     m_ImageType = other.m_ImageType;
-	m_Dirty = true;
-	m_Selected = other.m_Selected;
-	m_SpriteType = other.m_SpriteType;
-	m_RoomLocked = other.m_RoomLocked;
+    m_Dirty = true;
+    m_Selected = other.m_Selected;
+    m_SpriteType = other.m_SpriteType;
+    m_RoomLocked = other.m_RoomLocked;
     m_RoomIndex = other.m_RoomIndex;
     return *this;
 }
@@ -101,7 +101,7 @@ void __fastcall Entity::Clear()
     m_Pt.y = 0;
     m_SpriteType = -1;
     m_RoomLocked = false;
-	m_RoomIndex = 255;
+    m_RoomIndex = 255;
     m_Document = nullptr;
     m_Dirty = true;
 }
@@ -163,8 +163,8 @@ void __fastcall Entity::SetSpriteType(int type)
 //---------------------------------------------------------------------------
 void __fastcall Entity::SetRoomIndex(unsigned int index)
 {
-	if (m_Document->CanBeLocked && !m_RoomLocked && m_RoomIndex != index)
-	{
+    if (m_Document->CanBeLocked && !m_RoomLocked && m_RoomIndex != index)
+    {
         m_RoomIndex = index;
         m_Dirty = true;
     }
@@ -237,8 +237,8 @@ __fastcall TiledMapDocument::~TiledMapDocument()
 void __fastcall TiledMapDocument::DoSave()
 {
     Push("Map");
-		Write("StartLocation", StartRoomIndex);
-		Push("RoomMapping");
+        Write("StartLocation", StartRoomIndex);
+        Push("RoomMapping");
             Write("Width", m_RoomMappingWidth);
             Write("Height", m_RoomMappingHeight);
             ArrayStart("Indexes");
@@ -261,8 +261,8 @@ void __fastcall TiledMapDocument::DoSave()
                     Write("SpriteType", entity.SpriteType);
                     Push("Room");
                         Write("Locked", entity.RoomLocked);
-						Write("Index", entity.RoomIndex);
-					Pop();
+                        Write("Index", entity.RoomIndex);
+                    Pop();
                 }
             EndObject();
         }
@@ -486,17 +486,17 @@ void __fastcall TiledMapDocument::UpdateEntityRooms()
     for (auto entity : m_Map)
     {
         auto roomPt = TPoint((int)(entity.Pt.X / roomSize.cx), (int)(entity.Pt.Y / roomSize.cy));
-		// recalculate the entitys room based on its current position (currently only sprites/objects can be locked to rooms)
+        // recalculate the entitys room based on its current position (currently only sprites/objects can be locked to rooms)
         auto object = dynamic_cast<ObjectDocument*>(entity.Image);
         entity.RoomIndex = GetRoomIndex(roomPt, true);
-		if (entity.Image->CanBeLocked && !entity.RoomLocked && object)
-		{
+        if (entity.Image->CanBeLocked && !entity.RoomLocked && object)
+        {
             object->RoomIndex = entity.RoomIndex;
             object->State = osRoom;
         }
-		// update the location of the objects in the room (to screen space)
-		if (entity.Image->ImageType == itObject)
-		{
+        // update the location of the objects in the room (to screen space)
+        if (entity.Image->ImageType == itObject)
+        {
             assert(object != nullptr);
 
             if (object->State == osRoom && object->RoomIndex < 254)
@@ -549,15 +549,15 @@ TRect __fastcall TiledMapDocument::GetMinimalMapSize()
 int __fastcall TiledMapDocument::GetRoomIndex(const TPoint& room, bool newIdForUndefinedRoom)
 {
     assert(0 <= room.X && room.X < m_RoomMappingWidth);
-	assert(0 <= room.Y && room.Y < m_RoomMappingHeight);
-	auto ri = m_RoomMapping[room.Y * m_RoomMappingWidth + room.X];
-	if (ri == 255 && newIdForUndefinedRoom)
-	{
+    assert(0 <= room.Y && room.Y < m_RoomMappingHeight);
+    auto ri = m_RoomMapping[room.Y * m_RoomMappingWidth + room.X];
+    if (ri == 255 && newIdForUndefinedRoom)
+    {
         ri = m_ScreenCount++;
         m_RoomMapping[room.Y * m_RoomMappingWidth + room.X] = ri;
 
     }
-	return ri;
+    return ri;
 }
 //---------------------------------------------------------------------------
 void __fastcall TiledMapDocument::UpdateScreenCoords()

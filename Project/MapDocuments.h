@@ -36,30 +36,30 @@ protected:
     void                __fastcall  SetDirty(bool state);
     void                __fastcall  SetSpriteType(int type);
     void                __fastcall  SetRoomIndex(unsigned int index);
-	void                __fastcall  SetRoomLocked(bool lock);
+    void                __fastcall  SetRoomLocked(bool lock);
 
 public:
-						__fastcall  Entity();
-						__fastcall  Entity(const Entity& other);
-						__fastcall ~Entity();
+                        __fastcall  Entity();
+                        __fastcall  Entity(const Entity& other);
+                        __fastcall ~Entity();
 
-	Entity&             __fastcall  operator=(const Entity& other);
-	bool                __fastcall  operator==(const Entity& other);
+    Entity&             __fastcall  operator=(const Entity& other);
+    bool                __fastcall  operator==(const Entity& other);
 
-	void                __fastcall  Clear();
-	void                __fastcall  Clean();
+    void                __fastcall  Clear();
+    void                __fastcall  Clean();
 
-	__property  unsigned int        Id          = { read = GetId, write = SetId                 };
-	__property ImageDocument* const Image       = { read = GetDocument                          };
-	__property  TPoint              Pt          = { read = GetPoint, write = SetPoint           };
-	__property  TPoint              DragPt      = { read = GetDragPoint, write = SetDragPoint   };
-	__property  bool                Dirty       = { read = m_Dirty, write = SetDirty            };
-	__property  bool                Selected    = { read = m_Selected, write = SetSelected      };
+    __property  unsigned int        Id          = { read = GetId, write = SetId                 };
+    __property ImageDocument* const Image       = { read = GetDocument                          };
+    __property  TPoint              Pt          = { read = GetPoint, write = SetPoint           };
+    __property  TPoint              DragPt      = { read = GetDragPoint, write = SetDragPoint   };
+    __property  bool                Dirty       = { read = m_Dirty, write = SetDirty            };
+    __property  bool                Selected    = { read = m_Selected, write = SetSelected      };
     __property  bool                IsSprite    = { read = GetIsSprite                          };
-	__property  int                 SpriteType  = { read = m_SpriteType, write = SetSpriteType  };
+    __property  int                 SpriteType  = { read = m_SpriteType, write = SetSpriteType  };
     __property  ImageTypes          Type        = { read = m_ImageType                          };
-	__property  bool                RoomLocked  = { read = m_RoomLocked, write = SetRoomLocked  };
-	__property  unsigned int        RoomIndex   = { read = m_RoomIndex, write = SetRoomIndex    };
+    __property  bool                RoomLocked  = { read = m_RoomLocked, write = SetRoomLocked  };
+    __property  unsigned int        RoomIndex   = { read = m_RoomIndex, write = SetRoomIndex    };
 };
 typedef std::vector<Entity>     EntityList;
 //---------------------------------------------------------------------------
@@ -74,24 +74,24 @@ protected:
     EntityList                      m_Room;
     EntityList                      m_ScratchPad;
 
-			int                     m_StartRoomIndex;
+            int                     m_StartRoomIndex;
             TPoint                  m_StartRoomCoords;
-			int                     m_ScreenCount;
-			Entity                  m_EntityLoader;
-			TSize                   m_ActiveRoom;
-			std::vector<int>        m_RoomMapping; // a mapping from Studio to .AGD screen indexes
-			int                     m_RoomMappingWidth;
-			int                     m_RoomMappingHeight;
-			int                     m_RoomMappingIndex;
+            int                     m_ScreenCount;
+            Entity                  m_EntityLoader;
+            TSize                   m_ActiveRoom;
+            std::vector<int>        m_RoomMapping; // a mapping from Studio to .AGD screen indexes
+            int                     m_RoomMappingWidth;
+            int                     m_RoomMappingHeight;
+            int                     m_RoomMappingIndex;
 
-			void        __fastcall  OnEndObject(const String& object);
-			void        __fastcall  OnDocumentChanged(const DocumentChange<String>& message);
-			void        __fastcall  OnSetStartRoom(const SetStartRoom& event);
-			void        __fastcall  DoSave();
-			void        __fastcall  UpdateEntityRooms();
+            void        __fastcall  OnEndObject(const String& object);
+            void        __fastcall  OnDocumentChanged(const DocumentChange<String>& message);
+            void        __fastcall  OnSetStartRoom(const SetStartRoom& event);
+            void        __fastcall  DoSave();
+            void        __fastcall  UpdateEntityRooms();
             void        __fastcall  UpdateScreenCoords();
-			void        __fastcall  OnLoading();
-			void        __fastcall  OnLoaded();
+            void        __fastcall  OnLoading();
+            void        __fastcall  OnLoaded();
             int         __fastcall  GetStartRoomCoords(int index) const;
             void        __fastcall  SetStartRoomCoords(const TPoint& coords);
            const TRect& __fastcall  GetWindow() const;
@@ -101,24 +101,24 @@ protected:
           __property  const TRect&  Window = { read = GetWindow };
 
 public:
-						__fastcall  TiledMapDocument(const String& name);
-						__fastcall ~TiledMapDocument();
-	static  Document*   __fastcall  Create(const String& name, const String& extra) { return new TiledMapDocument(name); };
+                        __fastcall  TiledMapDocument(const String& name);
+                        __fastcall ~TiledMapDocument();
+    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new TiledMapDocument(name); };
 
-			EntityList  __fastcall  Get(ImageTypes type) const;
-	const   EntityList& __fastcall  Get(MapEntities type, TSize room = TSize(0,0));
-			void        __fastcall  Set(MapEntities type, const EntityList& entities);
+            EntityList  __fastcall  Get(ImageTypes type) const;
+    const   EntityList& __fastcall  Get(MapEntities type, TSize room = TSize(0,0));
+            void        __fastcall  Set(MapEntities type, const EntityList& entities);
 
-			TRect       __fastcall  GetMinimalMapSize();
-			int         __fastcall  GetRoomIndex(const TPoint& room, bool newIdForUndefinedRoom = false);
-			bool        __fastcall  IsRoomEmpty(int x, int y);
+            TRect       __fastcall  GetMinimalMapSize();
+            int         __fastcall  GetRoomIndex(const TPoint& room, bool newIdForUndefinedRoom = false);
+            bool        __fastcall  IsRoomEmpty(int x, int y);
 
-			int         __property  ScreenCount = { read = m_ScreenCount };
+            int         __property  ScreenCount = { read = m_ScreenCount };
 
 __published:
-	__property          int         StartRoomIndex  = { read = m_StartRoomIndex  };
-	__property          int         StartRoomX      = { read = GetStartRoomCoords, index = 0 };
-	__property          int         StartRoomY      = { read = GetStartRoomCoords, index = 1 };
+    __property          int         StartRoomIndex  = { read = m_StartRoomIndex  };
+    __property          int         StartRoomX      = { read = GetStartRoomCoords, index = 0 };
+    __property          int         StartRoomY      = { read = GetStartRoomCoords, index = 1 };
     __property          int         NumberOfRooms   = { read = GetNumberOfRooms };
     __property          int         MaxRoomsAcross  = { read = GetMaxRooms, index = 0 };
     __property          int         MaxRoomsDown    = { read = GetMaxRooms, index = 1 };

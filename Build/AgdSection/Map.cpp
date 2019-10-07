@@ -23,16 +23,16 @@ void __fastcall SectionBuilders::Map::Execute()
     assert(mapDoc != nullptr);
 
     const auto& mapSize = mapDoc->GetMinimalMapSize();
-	AddLine("MAP WIDTH " + IntToStr((int)mapSize.Width() + 1));
-	AddLine("    STARTSCREEN " + IntToStr(mapDoc->StartRoomIndex));
+    AddLine("MAP WIDTH " + IntToStr((int)mapSize.Width() + 1));
+    AddLine("    STARTSCREEN " + IntToStr(mapDoc->StartRoomIndex));
     for (auto y = mapSize.Top; y <= mapSize.Bottom; y++)
     {
         String line = "    ";
         for (auto x = mapSize.Left; x <= mapSize.Right; x++)
         {
             auto ri = mapDoc->GetRoomIndex(TPoint(x, y));
-			line += IntToStr(ri) + " ";
-		}
+            line += IntToStr(ri) + " ";
+        }
         AddLine(line);
     }
     AddLine("ENDMAP");

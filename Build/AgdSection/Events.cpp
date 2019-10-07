@@ -42,10 +42,10 @@ void __fastcall SectionBuilders::Events::Execute()
                 {
                     lc++;
                     if (line.Trim().UpperCase().Pos(definition.Section) == 0)
-					{
-						// TODO: replace AGDx keywords with there AGD original
-						line = line;
-						AddLine(line);
+                    {
+                        // TODO: replace AGDx keywords with there AGD original
+                        line = line;
+                        AddLine(line);
                     }
                 }
                 LineBreak();

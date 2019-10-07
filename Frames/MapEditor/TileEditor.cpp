@@ -73,7 +73,7 @@ void __fastcall TileEditor::OnWindowChanged(const WindowChangedEvent& event)
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::CreateViewBitmap()
 {
-	const auto& wi = (WindowDocument*)theDocumentManager.Get("Window", "Definition", "Window");
+    const auto& wi = (WindowDocument*)theDocumentManager.Get("Window", "Definition", "Window");
     assert(wi != nullptr);
     m_Window = wi->Rect;
     m_Content = std::make_unique<TBitmap>();
