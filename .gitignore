@@ -156,3 +156,8 @@ Install/Files/Compilers/ZX Spectrum/*
 oldicon.ico
 Installer/agdxstudio-installer-top.old.bmp
 __astcache/*
+Sort Projects.ps1
+SortXML.ps1
+*.d
+*.o-*
+backup/*
