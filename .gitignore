@@ -161,3 +161,4 @@ SortXML.ps1
 *.o-*
 backup/*
 *.pdi
+images/*
