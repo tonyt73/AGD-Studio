@@ -6,7 +6,9 @@
 #include "fAdvancedSettings.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-#pragma link "RzTreeVw"
+#pragma link "ElTreeInplaceEditors"
+#pragma link "ElXPThemedControl"
+#pragma link "ElXTree"
 #pragma resource "*.dfm"
 TfrmAdvancedSettings *frmAdvancedSettings;
 //---------------------------------------------------------------------------
@@ -15,3 +17,5 @@ __fastcall TfrmAdvancedSettings::TfrmAdvancedSettings(TComponent* Owner)
 {
 }
 //---------------------------------------------------------------------------
+
+
