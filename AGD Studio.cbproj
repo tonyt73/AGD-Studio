@@ -5,7 +5,7 @@
     <Config Condition="'$(Config)'==''">Release</Config>
     <FrameworkType>VCL</FrameworkType>
     <MainSource>AGD Studio.cpp</MainSource>
-    <Platform Condition="'$(Platform)'==''">Win32</Platform>
+    <Platform Condition="'$(Platform)'==''">Win64</Platform>
     <ProjectGuid>{D0C2ACDB-659A-4891-B603-0D187CA01644}</ProjectGuid>
     <ProjectVersion>18.7</ProjectVersion>
     <TargetedPlatforms>3</TargetedPlatforms>
@@ -180,7 +180,7 @@
     <AppEnableHighDPI>true</AppEnableHighDPI>
     <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
     <Icon_MainIcon>Icon.ico</Icon_MainIcon>
-    <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;VclSmp.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtprint.bpi;lmdrtelpro.bpi</LinkPackageImports>
+    <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;VclSmp.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtprint.bpi;lmdrtelpro.bpi;ScorpioComponents.bpi</LinkPackageImports>
   </PropertyGroup>
   <ItemGroup>
     <BuildConfiguration Include="Base">
@@ -561,6 +561,14 @@
       <BuildOrder>67</BuildOrder>
       <DependentOn>Graphics\ULAPlusGraphicsBuffer.h</DependentOn>
     </CppCompile>
+    <CppCompile Include="Interceptor\Interceptor.cpp">
+      <BuildOrder>98</BuildOrder>
+      <DependentOn>Interceptor\Interceptor.h</DependentOn>
+    </CppCompile>
+    <CppCompile Include="Interceptor\TreeViewInterceptor.cpp">
+      <BuildOrder>99</BuildOrder>
+      <DependentOn>Interceptor\TreeViewInterceptor.h</DependentOn>
+    </CppCompile>
     <CppCompile Include="Messaging\Event.cpp">
       <BuildOrder>79</BuildOrder>
       <DependentOn>Messaging\Event.h</DependentOn>
@@ -649,9 +657,6 @@
       <BuildOrder>85</BuildOrder>
       <DependentOn>System\Path.h</DependentOn>
     </CppCompile>
-    <DelphiCompile Include="System\DosCommand.pas">
-      <BuildOrder>0</BuildOrder>
-    </DelphiCompile>
     <FormResources Include="Forms\fAbout.dfm" />
     <FormResources Include="Forms\fAdvancedSettings.dfm" />
     <FormResources Include="Forms\fMain.dfm" />
@@ -684,9 +689,6 @@
     </None>
     <None Include="Graphics\GraphicsTypes.h">
       <BuildOrder>34</BuildOrder>
-    </None>
-    <None Include="System\DosCommand.hpp">
-      <BuildOrder>93</BuildOrder>
     </None>
     <PCHCompile Include="agdx.pch.h">
       <BuildOrder>14</BuildOrder>
