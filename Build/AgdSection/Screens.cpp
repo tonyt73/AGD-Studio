@@ -1,5 +1,6 @@
 //---------------------------------------------------------------------------
 #include "agdx.pch.h"
+#include <math.h>
 #include "Build/AgdSection/Screens.h"
 #include "Project/DocumentManager.h"
 #include "Project/ImageDocuments.h"
@@ -78,7 +79,7 @@ void __fastcall SectionBuilders::Screens::Execute()
                     {
                         if (entity.IsSprite)
                         {
-                            auto type = Max(0, entity.SpriteType);
+                            auto type = max(0, entity.SpriteType);
                             // get sprite id as sprite index
                             auto index = dm.GetAsIndex(entity.Id);
                             line = "SPRITEPOSITION " + IntToStr(type) + " " + IntToStr(index) + " " + IntToStr((int)(wPt.y + entity.Pt.y)) + " " + IntToStr((int)(wPt.x + entity.Pt.x));
