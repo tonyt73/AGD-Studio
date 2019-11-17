@@ -97,6 +97,9 @@ void __fastcall SectionBuilders::Screens::Execute()
         // no screens is ok
         Success();
     }
-    Failure("Window not Set");
+    else
+    {
+        Failure("Window dimensions are not set");
+    }
 }
 //---------------------------------------------------------------------------

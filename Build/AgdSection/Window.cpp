@@ -22,12 +22,12 @@ void __fastcall SectionBuilders::Window::Execute()
     {
         AddLine("DEFINEWINDOW " + IntToStr((int)Window->Rect.Top) + " " + IntToStr((int)Window->Rect.Left) + " " + IntToStr((int)Window->Rect.Height()) + " " + IntToStr((int)Window->Rect.Width()));
         LineBreak();
-		Success();
+        Success();
     } 
-	else
-	{
-		Failure("Window dimensions are not set");
-	}
+    else
+    {
+        Failure("Window dimensions are not set");
+    }
 }
 //---------------------------------------------------------------------------
 
