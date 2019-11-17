@@ -106,6 +106,11 @@ TfrmIDE* __fastcall TfrmMain::GetIDE()
     return m_IDEFrame.get();
 }
 //---------------------------------------------------------------------------
+TFrame* __fastcall TfrmMain::GetActiveForm()
+{
+    return m_FormView == fvGameIDE ? (TFrame*)GetIDE() : (TFrame*)GetWelcome();
+}
+//---------------------------------------------------------------------------
 void __fastcall TfrmMain::OnIDEClose(TObject *Sender)
 {
     if (!appSettings.WelcomeSkipOnClose)
@@ -183,6 +188,18 @@ void __fastcall TfrmMain::SaveSettings()
         TPoint pt(Left, Top);
         appSettings.WelcomePosition = pt;
     }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmMain::FormBeforeMonitorDpiChanged(TObject *Sender, int OldDPI, int NewDPI)
+{
+    // don't show window updates while the forms and components are getting DPI resized
+    SendMessage(Handle, WM_SETREDRAW, 0, 0);
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmMain::FormAfterMonitorDpiChanged(TObject *Sender, int OldDPI, int NewDPI)
+{
+    // show the DPI resize changes
+    SendMessage(Handle, WM_SETREDRAW, 1, 0);
 }
 //---------------------------------------------------------------------------
 

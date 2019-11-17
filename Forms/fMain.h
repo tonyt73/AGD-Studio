@@ -24,6 +24,11 @@ __published:    // IDE-managed Components
     void __fastcall FormDestroy(TObject *Sender);
     void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
     void __fastcall FormActivate(TObject *Sender);
+    void __fastcall FormBeforeMonitorDpiChanged(TObject *Sender, int OldDPI, int NewDPI);
+    void __fastcall FormAfterMonitorDpiChanged(TObject *Sender, int OldDPI, int NewDPI);
+
+
+
 private:    // User declarations
     void __fastcall OnIDEClose(TObject *Sender);
     void __fastcall OnWelcomeDone(TObject *Sender);
@@ -33,6 +38,7 @@ private:    // User declarations
 
     TfrmWelcomeDialog*  __fastcall  GetWelcome();
     TfrmIDE*            __fastcall  GetIDE();
+    TFrame*             __fastcall  GetActiveForm();
 
 private:
 
@@ -49,6 +55,7 @@ private:
 
     __property      TfrmWelcomeDialog*  Welcome = { read = GetWelcome };
     __property      TfrmIDE*            IDE = { read = GetIDE };
+    __property      TFrame*             Active = { read = GetActiveForm };
 
 public:        // User declaration
             __fastcall TfrmMain(TComponent* Owner);
