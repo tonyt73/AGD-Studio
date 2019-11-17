@@ -5,7 +5,7 @@
 [Setup]
 AppName=AGD Studio
 AppVersion=0.12 BETA
-DefaultDirName={pf}\AGD Studio
+DefaultDirName={commonpf}\AGD Studio
 DefaultGroupName=AGD Studio
 UninstallDisplayIcon={app}\AGD Studio.exe
 OutputBaseFilename=AGD Studio Setup
@@ -52,6 +52,8 @@ Name: "{commondocs}\AGD Studio\Common\Saved Palettes"
 Name: "{commondocs}\AGD Studio\Projects"
 
 [Files]
+; Styling
+Source: VclStylesinno.dll; DestDir: {app}; Flags: dontcopy
 ; x64 (64 bit) application files (Program Files)
 Source: "Binaries\64\AGD Studio.exe"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "Binaries\64\AGDStudio.exe"; DestDir: "{app}"; Check: Is64BitInstallMode
@@ -506,3 +508,23 @@ begin
   Result := '';
 end;
 
+// Import the LoadVCLStyle function from VclStylesInno.DLL
+procedure LoadVCLStyle(VClStyleFile: String); external 'LoadVCLStyleW@files:VclStylesInno.dll stdcall';
+// Import the UnLoadVCLStyles function from VclStylesInno.DLL
+procedure UnLoadVCLStyles; external 'UnLoadVCLStyles@files:VclStylesInno.dll stdcall';
+ 
+function InitializeSetup(): Boolean;
+begin
+  Log('Styling: Extracting Style file');
+  ExtractTemporaryFile('Windows 10 Black Pearl.vsf');
+  Log('Styling: Loading Style file');
+  LoadVCLStyle(ExpandConstant('{tmp}\Windows 10 Black Pearl.vsf'));
+  Log('Styling: Done');
+  Result := True;
+end;
+ 
+procedure DeinitializeSetup();
+begin
+  UnLoadVCLStyles;
+  Log('Styling: Unload Styles');
+end;
