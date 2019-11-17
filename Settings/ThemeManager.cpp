@@ -39,7 +39,7 @@ void __fastcall ThemeManager::LoadStyles(TComboBox* combo)
     combo->Items->Clear();
     auto sl = std::make_unique<TStringList>();
     // default application style
-    sl->Add("Onyx Blue");
+    sl->Add("Windows 10 Black Pearl");
     // load the styles from the styles folder
     auto styles = GetStyles();
     TStyleInfo si;
