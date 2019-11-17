@@ -415,6 +415,7 @@ object frmEditorMap: TfrmEditorMap
         Width = 82
         Height = 635
         Align = alLeft
+        AutoSize = True
         BevelOuter = bvNone
         Constraints.MaxWidth = 82
         Constraints.MinWidth = 82
