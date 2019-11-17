@@ -26,73 +26,77 @@ void __fastcall SectionBuilders::Screens::Execute()
     assert(mapDoc != nullptr);
 
     const auto& wi = (WindowDocument*)theDocumentManager.Get("Window", "Definition", "Window");
-    auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum;
-    auto wPt = TPoint(wi->Rect.Left * tileSize.cx, wi->Rect.Top * tileSize.cy);
-    auto ri = 0;
-    for (auto ri = 0; ri < 255; ri++)
+    if (wi)
     {
-        for (auto ry = 0; ry < g_MaxMapRoomsDown; ry++ )
+        auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum;
+        auto wPt = TPoint(wi->Rect.Left * tileSize.cx, wi->Rect.Top * tileSize.cy);
+        auto ri = 0;
+        for (auto ri = 0; ri < 255; ri++)
         {
-            for (auto rx = 0; rx < g_MaxMapRoomsAcross; rx++)
+            for (auto ry = 0; ry < g_MaxMapRoomsDown; ry++ )
             {
-                if (mapDoc->GetRoomIndex(TPoint(rx, ry)) == ri)
+                for (auto rx = 0; rx < g_MaxMapRoomsAcross; rx++)
                 {
-                    auto roomEntities = mapDoc->Get(meRoom, TSize(rx, ry));
-                    auto roomPt = TPoint(rx * tileSize.cx * wi->Rect.Width(), ry * tileSize.cy * wi->Rect.Height());
-                    String line = "DEFINESCREEN ";
-                    for (auto y = 0; y < wi->Rect.Height(); y++)
+                    if (mapDoc->GetRoomIndex(TPoint(rx, ry)) == ri)
                     {
-                        for (auto x = 0; x < wi->Rect.Width(); x++)
+                        auto roomEntities = mapDoc->Get(meRoom, TSize(rx, ry));
+                        auto roomPt = TPoint(rx * tileSize.cx * wi->Rect.Width(), ry * tileSize.cy * wi->Rect.Height());
+                        String line = "DEFINESCREEN ";
+                        for (auto y = 0; y < wi->Rect.Height(); y++)
                         {
-                            auto entity = find_if(roomEntities.begin(), roomEntities.end(),
-                                [&](const Entity& e)
-                                {
-                                    return ((e.Image->ImageType == itTile) && (e.Pt.x == x * tileSize.cx) && (e.Pt.y == y * tileSize.cy));
-                                } );
-                            if (entity != roomEntities.end())
+                            for (auto x = 0; x < wi->Rect.Width(); x++)
                             {
-                                // get tile id as tile index
-                                auto index = dm.GetAsIndex(entity->Id);
-                                if (index != -1)
+                                auto entity = find_if(roomEntities.begin(), roomEntities.end(),
+                                    [&](const Entity& e)
+                                    {
+                                        return ((e.Image->ImageType == itTile) && (e.Pt.x == x * tileSize.cx) && (e.Pt.y == y * tileSize.cy));
+                                    } );
+                                if (entity != roomEntities.end())
                                 {
-                                    auto number = "   " + IntToStr(index);
-                                    line += number.SubString(number.Length() - 2, 3) + " ";
+                                    // get tile id as tile index
+                                    auto index = dm.GetAsIndex(entity->Id);
+                                    if (index != -1)
+                                    {
+                                        auto number = "   " + IntToStr(index);
+                                        line += number.SubString(number.Length() - 2, 3) + " ";
+                                    }
+                                    else
+                                    {
+                                        // badly referenced tile
+                                        Failure("Tile Id: " + IntToStr((int)entity->Id) + ", in map was not found in the document manager.");
+                                        return;
+                                    }
                                 }
                                 else
                                 {
-                                    // badly referenced tile
-                                    Failure("Tile Id: " + IntToStr((int)entity->Id) + ", in map was not found in the document manager.");
-                                    return;
+                                    // tile 0
+                                    line += "  0 ";
                                 }
                             }
-                            else
+                            AddLine(line);
+                            line = "             ";
+                        }
+                        // list sprites
+                        for (const auto& entity : roomEntities)
+                        {
+                            if (entity.IsSprite)
                             {
-                                // tile 0
-                                line += "  0 ";
+                                auto type = max(0, entity.SpriteType);
+                                // get sprite id as sprite index
+                                auto index = dm.GetAsIndex(entity.Id);
+                                line = "SPRITEPOSITION " + IntToStr(type) + " " + IntToStr(index) + " " + IntToStr((int)(wPt.y + entity.Pt.y)) + " " + IntToStr((int)(wPt.x + entity.Pt.x));
+                                AddLine(line);
                             }
                         }
-                        AddLine(line);
-                        line = "             ";
-                    }
-                    // list sprites
-                    for (const auto& entity : roomEntities)
-                    {
-                        if (entity.IsSprite)
-                        {
-                            auto type = max(0, entity.SpriteType);
-                            // get sprite id as sprite index
-                            auto index = dm.GetAsIndex(entity.Id);
-                            line = "SPRITEPOSITION " + IntToStr(type) + " " + IntToStr(index) + " " + IntToStr((int)(wPt.y + entity.Pt.y)) + " " + IntToStr((int)(wPt.x + entity.Pt.x));
-                            AddLine(line);
-                        }
-                    }
 
-                    LineBreak();
+                        LineBreak();
+                    }
                 }
             }
         }
+        // no screens is ok
+        Success();
     }
-    // no screens is ok
-    Success();
+    Failure("Window not Set");
 }
 //---------------------------------------------------------------------------
