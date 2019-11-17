@@ -6212,8 +6212,6 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       Caption = 'Panel1'
       ShowCaption = False
       TabOrder = 0
-      ExplicitTop = 248
-      ExplicitHeight = 166
       object imgStartNewProject: TImage
         Left = 104
         Top = 22
@@ -6438,10 +6436,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         object lblChangeTheme: TLabel
           Left = 0
           Top = 79
-          Width = 159
+          Width = 89
           Height = 23
           Cursor = crHandPoint
-          Caption = '      Change Theme'
+          Caption = '      Theme'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -19
@@ -6484,9 +6482,9 @@ object frmWelcomeDialog: TfrmWelcomeDialog
             65C2D64EB544D1BA24C0D2773635EBD72F8A8FF40000000049454E44AE426082}
         end
         object cmbThemes: TComboBox
-          Left = 166
+          Left = 104
           Top = 79
-          Width = 213
+          Width = 275
           Height = 27
           Style = csDropDownList
           Font.Charset = DEFAULT_CHARSET
