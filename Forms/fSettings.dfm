@@ -320,7 +320,7 @@ object frmSettings: TfrmSettings
     Top = 0
     Width = 533
     Height = 326
-    ActivePage = tabProfile
+    ActivePage = TabSheet1
     Align = alClient
     Images = ImageList1
     TabHeight = 40
@@ -947,6 +947,10 @@ object frmSettings: TfrmSettings
         object TabSheet2: TTabSheet
           Caption = 'Parameters'
           ImageIndex = 2
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Label16: TLabel
             Left = 16
             Top = 8
@@ -1009,6 +1013,10 @@ object frmSettings: TfrmSettings
       Caption = 'Machines'
       ImageIndex = 2
       TabVisible = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
   end
   object Panel1: TPanel

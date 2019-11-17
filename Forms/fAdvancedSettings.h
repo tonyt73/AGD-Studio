@@ -1,5 +1,4 @@
 //---------------------------------------------------------------------------
-
 #ifndef fAdvancedSettingsH
 #define fAdvancedSettingsH
 //---------------------------------------------------------------------------
@@ -31,7 +30,6 @@ __published:    // IDE-managed Components
     TElXTree *ElXTree1;
     TSplitter *splSplitter;
     TImageList *ImageList1;
-    TTreeView *TreeView1;
 private:    // User declarations
 public:        // User declarations
     __fastcall TfrmAdvancedSettings(TComponent* Owner);

@@ -1,8 +1,5 @@
 //---------------------------------------------------------------------------
-
-#include <vcl.h>
-#pragma hdrstop
-
+#include "agdx.pch.h"
 #include "fAdvancedSettings.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

@@ -1,7 +1,6 @@
 object frmAbout: TfrmAbout
   Left = 0
   Top = 0
-  AlphaBlend = True
   AlphaBlendValue = 240
   BorderIcons = []
   BorderStyle = bsNone
@@ -14,6 +13,8 @@ object frmAbout: TfrmAbout
   Font.Name = 'Tahoma'
   Font.Style = []
   FormStyle = fsStayOnTop
+  GlassFrame.Enabled = True
+  GlassFrame.Bottom = 84
   OldCreateOrder = False
   Position = poMainFormCenter
   Scaled = False
@@ -4147,8 +4148,9 @@ object frmAbout: TfrmAbout
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
-    Font.Name = 'Tahoma'
-    Font.Style = []
+    Font.Name = 'Segoe UI Semilight'
+    Font.Style = [fsBold]
+    GlowSize = 2
     ParentFont = False
   end
 end
