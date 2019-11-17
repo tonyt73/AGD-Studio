@@ -2,6 +2,7 @@
 ; AGD Studio Install Setup
 ;
 
+
 [Setup]
 AppName=AGD Studio
 AppVersion=0.12 BETA
@@ -53,7 +54,8 @@ Name: "{commondocs}\AGD Studio\Projects"
 
 [Files]
 ; Styling
-Source: VclStylesinno.dll; DestDir: {app}; Flags: dontcopy
+Source: VclStylesinno.dll; DestDir: {app}; Flags: uninsneveruninstall
+Source: "Files\Styles\Windows 10 Black Pearl.vsf"; DestDir: "{commondocs}\AGD Studio\Styles"
 ; x64 (64 bit) application files (Program Files)
 Source: "Binaries\64\AGD Studio.exe"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "Binaries\64\AGDStudio.exe"; DestDir: "{app}"; Check: Is64BitInstallMode
@@ -212,7 +214,6 @@ Source: "Files\Styles\Tablet Light.vsf"; DestDir: "{commondocs}\AGD Studio\Style
 Source: "Files\Styles\Turquoise Gray.vsf"; DestDir: "{commondocs}\AGD Studio\Styles"
 Source: "Files\Styles\Vapor.vsf"; DestDir: "{commondocs}\AGD Studio\Styles"
 Source: "Files\Styles\Wedgewood Light.vsf"; DestDir: "{commondocs}\AGD Studio\Styles"
-Source: "Files\Styles\Windows 10 Black Pearl.vsf"; DestDir: "{commondocs}\AGD Studio\Styles"
 Source: "Files\Styles\Windows 10 Blue Whale LE.vsf"; DestDir: "{commondocs}\AGD Studio\Styles"
 Source: "Files\Styles\Windows 10 Blue Whale.vsf"; DestDir: "{commondocs}\AGD Studio\Styles"
 Source: "Files\Styles\Windows 10 Blue.vsf"; DestDir: "{commondocs}\AGD Studio\Styles"
@@ -509,9 +510,11 @@ begin
 end;
 
 // Import the LoadVCLStyle function from VclStylesInno.DLL
-procedure LoadVCLStyle(VClStyleFile: String); external 'LoadVCLStyleW@files:VclStylesInno.dll stdcall';
+procedure LoadVCLStyle(VClStyleFile: String); external 'LoadVCLStyleW@files:VclStylesInno.dll stdcall setuponly';
+procedure LoadVCLStyle_UnInstall(VClStyleFile: String); external 'LoadVCLStyleW@{app}\VclStylesInno.dll stdcall uninstallonly';
 // Import the UnLoadVCLStyles function from VclStylesInno.DLL
-procedure UnLoadVCLStyles; external 'UnLoadVCLStyles@files:VclStylesInno.dll stdcall';
+procedure UnLoadVCLStyles; external 'UnLoadVCLStyles@files:VclStylesInno.dll stdcall setuponly';
+procedure UnLoadVCLStyles_UnInstall; external 'UnLoadVCLStyles@{app}\VclStylesInno.dll stdcall uninstallonly';
  
 function InitializeSetup(): Boolean;
 begin
@@ -522,9 +525,20 @@ begin
   Log('Styling: Done');
   Result := True;
 end;
+
+function InitializeUninstall: Boolean;
+begin
+  Result := True;
+  LoadVCLStyle_UnInstall(ExpandConstant('{commondocs}\AGD Studio\Styles\Windows 10 Black Pearl.vsf'));
+end;
  
 procedure DeinitializeSetup();
 begin
   UnLoadVCLStyles;
   Log('Styling: Unload Styles');
+end;
+
+procedure DeinitializeUninstall();
+begin
+  UnLoadVCLStyles_UnInstall;
 end;
