@@ -3,7 +3,7 @@
 #include "Build/AgdSection/Objects.h"
 #include "Project/DocumentManager.h"
 #include "Project/ObjectDocument.h"
-#include "Project/MapDocuments.h"
+#include "Project/TiledMapDocument.h"
 #include "Project/WindowDocument.h"
 #include "Graphics/GraphicsMode.h"
 #include "Graphics/Image.h"

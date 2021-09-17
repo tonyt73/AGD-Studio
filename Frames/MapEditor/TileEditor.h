@@ -2,7 +2,7 @@
 #ifndef TileEditorH
 #define TileEditorH
 //---------------------------------------------------------------------------
-#include "Project/MapDocuments.h"
+#include "Project/TiledMapDocument.h"
 #include "Messaging/Messaging.h"
 #include "Messaging/Event.h"
 #include "Graphics/Image.h"
@@ -33,11 +33,11 @@ private:
     TSize                           m_ContentSize;      // the size of the content window that we need (content bitmap is always larger for blt reasons)
     TImage* const                   m_View;             // the UI image we render to
     TImage*                         m_LockIcon;         // the lock icon
-    EntityList                      m_Entities;         // all the map entities
-    EntityList                      m_ToolEntities;     // the entities for the current tool (select etc)
-    EntityList                      m_ClipboardEntities;// the entities for the clipboard (copy, cut, paste)
-    Entity                          m_ToolEntity;       // the image document selected in the map editor UI
-    Entity                          m_HoverEntity;      // the entity the mouse is hovering over
+    MapEntityList                   m_Entities;         // all the map entities
+    MapEntityList                   m_ToolEntities;     // the entities for the current tool (select etc)
+    MapEntityList                   m_ClipboardEntities;// the entities for the clipboard (copy, cut, paste)
+    MapEntity                          m_ToolEntity;       // the image document selected in the map editor UI
+    MapEntity                          m_HoverEntity;      // the entity the mouse is hovering over
     TEMode                          m_Mode;             // tool mode (pencil, line etc)
     bool                            m_Dirty;            // flag: tool is dirty - map needs updating
     const Agdx::GraphicsMode&       m_GraphicsMode;     // the graphics mode used by the project
@@ -85,7 +85,7 @@ private:
     void                __fastcall  ValidatePosition();
     TPoint              __fastcall  MapToView(const TPoint& pt) const;
     TPoint              __fastcall  ViewToMap(int X, int Y) const;
-    void                __fastcall  ResetToOrigin(EntityList& list, const TPoint& originPt) const;
+    void                __fastcall  ResetToOrigin(MapEntityList& list, const TPoint& originPt) const;
     bool                __fastcall  GetGridTile();
     bool                __fastcall  GetGridRoom();
     unsigned int        __fastcall  GetToolEntity() const;
@@ -116,13 +116,13 @@ private:
     void                __fastcall  DrawSelectedRoom() const;
     void                __fastcall  DrawStartRoom() const;
     int                 __fastcall  Snap(int value, int range) const;
-    void                __fastcall  Get(const TRect& rect, EntityList& entities) const;
+    void                __fastcall  Get(const TRect& rect, MapEntityList& entities) const;
     void                __fastcall  ReplaceEntities();
     void                __fastcall  UpdateTile0Content();
     bool                __fastcall  ClearHover();
     void                __fastcall  SelectHover();
-    bool                __fastcall  GetEntityUnderMouse(int X, int Y, Entity& entity, ImageTypes imageType, bool selectIt = false);
-    void                __fastcall  AssignRoomIndexes(EntityList& entities);
+    bool                __fastcall  GetEntityUnderMouse(int X, int Y, MapEntity& entity, ImageTypes imageType, bool selectIt = false);
+    void                __fastcall  AssignRoomIndexes(MapEntityList& entities);
 
     void                __fastcall  OnMouseDownSelectMode(TMouseButton Button, TShiftState Shift, int X, int Y);
     void                __fastcall  OnMouseDownMapToolMode(TMouseButton Button, TShiftState Shift, int X, int Y);
@@ -133,7 +133,7 @@ private:
 
     __property  bool                IsDirty = { read = m_Dirty, write = m_Dirty };
 
-    typedef void __fastcall (__closure *TNotifyOnEntityClick)(const Entity& entity);
+    typedef void __fastcall (__closure *TNotifyOnEntityClick)(const MapEntity& entity);
     TNotifyOnEntityClick            FOnEntitySelected;
     typedef int __fastcall (__closure *TRetrieveRoomIndex)(const TPoint& pt, bool newIndex) const;
     TRetrieveRoomIndex   __fastcall FRetrieveRoomIndex;
@@ -150,12 +150,12 @@ public:
     void                __fastcall  Refresh();
     void                __fastcall  UpdateMap();
 
-    void                __fastcall  SetEntities(const EntityList& entities);
-    const EntityList&   __fastcall  GetEntities() const;
-    void                __fastcall  Add(const EntityList& entities);
+    void                __fastcall  SetEntities(const MapEntityList& entities);
+   const MapEntityList& __fastcall  GetEntities() const;
+    void                __fastcall  Add(const MapEntityList& entities);
     void                __fastcall  ToggleEntityLocks();
     void                __fastcall  SetSpriteType(int type);
-    EntityList          __fastcall  GetSelection(bool resetToOrigin = false) const;
+    MapEntityList       __fastcall  GetSelection(bool resetToOrigin = false) const;
     void                __fastcall  DeleteSelection();
     void                __fastcall  UnselectAll(bool update = true);
     void                __fastcall  Copy();

@@ -75,7 +75,7 @@ void __fastcall TfrmEditorMap::Initialise()
     m_Workspace->SetEntities(m_Document->Get(meMap));
     m_ScratchPad->SetEntities(m_Document->Get(meScratchPad));
     m_RoomSelector->SetEntities(m_Document->Get(meMap));
-    // On Entity Select handler
+    // On MapEntity Select handler
     m_Workspace->OnEntitySelected = OnWorkspaceEntitySelected;
 
     // fix up the image flicker
@@ -552,7 +552,7 @@ void __fastcall TfrmEditorMap::OnEntityClick(ImageDocument* document)
     m_Workspace->ToolEntity = document->Id;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::OnWorkspaceEntitySelected(const Entity& entity)
+void __fastcall TfrmEditorMap::OnWorkspaceEntitySelected(const MapEntity& entity)
 {
     switch (entity.Image->ImageType)
     {

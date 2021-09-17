@@ -4,7 +4,7 @@
 #include "Build/AgdSection/Screens.h"
 #include "Project/DocumentManager.h"
 #include "Project/ImageDocument.h"
-#include "Project/MapDocuments.h"
+#include "Project/TiledMapDocument.h"
 #include "Project/WindowDocument.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -47,7 +47,7 @@ void __fastcall SectionBuilders::Screens::Execute()
                             for (auto x = 0; x < wi->Rect.Width(); x++)
                             {
                                 auto entity = find_if(roomEntities.begin(), roomEntities.end(),
-                                    [&](const Entity& e)
+                                    [&](const MapEntity& e)
                                     {
                                         return ((e.Image->ImageType == itTile) && (e.Pt.x == x * tileSize.cx) && (e.Pt.y == y * tileSize.cy));
                                     } );

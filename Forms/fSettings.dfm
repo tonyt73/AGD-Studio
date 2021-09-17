@@ -3,24 +3,27 @@ object frmSettings: TfrmSettings
   Top = 0
   BorderStyle = bsDialog
   Caption = 'Settings'
-  ClientHeight = 362
-  ClientWidth = 533
+  ClientHeight = 543
+  ClientWidth = 800
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -19
+  Font.Height = -29
   Font.Name = 'Roboto'
   Font.Style = []
-  OldCreateOrder = False
   Position = poMainFormCenter
   OnCreate = FormCreate
-  PixelsPerInch = 96
-  TextHeight = 23
+  PixelsPerInch = 144
+  TextHeight = 35
   object btnProfile: TSpeedButton
-    Left = 8
-    Top = 8
-    Width = 136
-    Height = 42
+    Left = 12
+    Top = 12
+    Width = 204
+    Height = 63
+    Margins.Left = 5
+    Margins.Top = 5
+    Margins.Right = 5
+    Margins.Bottom = 5
     GroupIndex = 1
     Down = True
     Caption = 'Profile'
@@ -96,10 +99,14 @@ object frmSettings: TfrmSettings
   end
   object btnInterface: TSpeedButton
     Tag = 1
-    Left = 8
-    Top = 56
-    Width = 136
-    Height = 42
+    Left = 12
+    Top = 84
+    Width = 204
+    Height = 63
+    Margins.Left = 5
+    Margins.Top = 5
+    Margins.Right = 5
+    Margins.Bottom = 5
     GroupIndex = 1
     Caption = 'Interface'
     Glyph.Data = {
@@ -206,10 +213,14 @@ object frmSettings: TfrmSettings
   end
   object btnMachines: TSpeedButton
     Tag = 2
-    Left = 8
-    Top = 104
-    Width = 136
-    Height = 42
+    Left = 12
+    Top = 156
+    Width = 204
+    Height = 63
+    Margins.Left = 5
+    Margins.Top = 5
+    Margins.Right = 5
+    Margins.Bottom = 5
     GroupIndex = 1
     Caption = 'Machines'
     Enabled = False
@@ -318,76 +329,101 @@ object frmSettings: TfrmSettings
   object pgcSettings: TPageControl
     Left = 0
     Top = 0
-    Width = 533
-    Height = 326
+    Width = 800
+    Height = 489
+    Margins.Left = 5
+    Margins.Top = 5
+    Margins.Right = 5
+    Margins.Bottom = 5
     ActivePage = TabSheet1
     Align = alClient
     Images = ImageList1
-    TabHeight = 40
+    TabHeight = 60
     TabOrder = 1
-    TabWidth = 128
+    TabWidth = 192
     object tabProfile: TTabSheet
+      Margins.Left = 5
+      Margins.Top = 5
+      Margins.Right = 5
+      Margins.Bottom = 5
       Caption = 'Profile'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -17
+      Font.Height = -26
       Font.Name = 'Roboto'
       Font.Style = []
       ParentFont = False
       DesignSize = (
-        525
-        276)
+        792
+        419)
       object Label1: TLabel
-        Left = 59
-        Top = 19
-        Width = 69
-        Height = 18
+        Left = 89
+        Top = 29
+        Width = 104
+        Height = 28
+        Margins.Left = 5
+        Margins.Top = 5
+        Margins.Right = 5
+        Margins.Bottom = 5
         Caption = 'Developer'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -15
+        Font.Height = -23
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
       end
       object Label4: TLabel
-        Left = 16
-        Top = 57
-        Width = 112
-        Height = 18
+        Left = 24
+        Top = 86
+        Width = 171
+        Height = 28
+        Margins.Left = 5
+        Margins.Top = 5
+        Margins.Right = 5
+        Margins.Bottom = 5
         Caption = 'Default Machine'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -15
+        Font.Height = -23
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
       end
       object edtDeveloper: TEdit
-        Left = 144
-        Top = 16
-        Width = 370
-        Height = 24
+        Left = 216
+        Top = 24
+        Width = 559
+        Height = 32
+        Margins.Left = 5
+        Margins.Top = 5
+        Margins.Right = 5
+        Margins.Bottom = 5
         Anchors = [akLeft, akTop, akRight]
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -20
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
         TabOrder = 0
         Text = 'Anonymous'
+        ExplicitWidth = 555
       end
       object cmbMachines: TComboBox
-        Left = 144
-        Top = 54
-        Width = 370
+        Left = 216
+        Top = 81
+        Width = 559
         Height = 24
+        Margins.Left = 5
+        Margins.Top = 5
+        Margins.Right = 5
+        Margins.Bottom = 5
         Style = csDropDownList
         Anchors = [akLeft, akTop, akRight]
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -20
         Font.Name = 'Tahoma'
         Font.Style = []
         ItemIndex = 2
@@ -401,60 +437,80 @@ object frmSettings: TfrmSettings
       end
     end
     object tabInterface: TTabSheet
+      Margins.Left = 5
+      Margins.Top = 5
+      Margins.Right = 5
+      Margins.Bottom = 5
       Caption = 'Interface'
       ImageIndex = 1
       DesignSize = (
-        525
-        276)
+        792
+        419)
       object Label5: TLabel
-        Left = 71
-        Top = 19
-        Width = 47
-        Height = 18
+        Left = 107
+        Top = 29
+        Width = 71
+        Height = 28
+        Margins.Left = 5
+        Margins.Top = 5
+        Margins.Right = 5
+        Margins.Bottom = 5
         Caption = 'Theme'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -15
+        Font.Height = -23
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
       end
       object Label2: TLabel
-        Left = 16
-        Top = 56
-        Width = 102
-        Height = 18
+        Left = 24
+        Top = 84
+        Width = 154
+        Height = 28
+        Margins.Left = 5
+        Margins.Top = 5
+        Margins.Right = 5
+        Margins.Bottom = 5
         Caption = 'Welcome Page'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -15
+        Font.Height = -23
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
       end
       object Label3: TLabel
-        Left = 69
-        Top = 115
-        Width = 49
-        Height = 18
+        Left = 104
+        Top = 173
+        Width = 74
+        Height = 28
+        Margins.Left = 5
+        Margins.Top = 5
+        Margins.Right = 5
+        Margins.Bottom = 5
         Caption = 'Project'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -15
+        Font.Height = -23
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
       end
       object cmbThemes: TComboBox
-        Left = 144
-        Top = 16
-        Width = 370
+        Left = 216
+        Top = 24
+        Width = 559
         Height = 23
+        Margins.Left = 5
+        Margins.Top = 5
+        Margins.Right = 5
+        Margins.Bottom = 5
         Style = csDropDownList
         Anchors = [akLeft, akTop, akRight]
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -20
         Font.Name = 'Roboto'
         Font.Style = []
         ItemIndex = 0
@@ -467,14 +523,18 @@ object frmSettings: TfrmSettings
           '')
       end
       object chkWelcomeSkipOnStartup: TCheckBox
-        Left = 144
-        Top = 50
-        Width = 257
-        Height = 29
+        Left = 216
+        Top = 75
+        Width = 386
+        Height = 44
+        Margins.Left = 5
+        Margins.Top = 5
+        Margins.Right = 5
+        Margins.Bottom = 5
         Caption = 'Skip on startup'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -20
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
@@ -482,29 +542,37 @@ object frmSettings: TfrmSettings
         OnClick = chkWelcomeSkipOnStartupClick
       end
       object chkWelcomeSkipOnClose: TCheckBox
-        Left = 144
-        Top = 78
-        Width = 257
-        Height = 27
+        Left = 216
+        Top = 117
+        Width = 386
+        Height = 41
+        Margins.Left = 5
+        Margins.Top = 5
+        Margins.Right = 5
+        Margins.Bottom = 5
         Caption = 'Skip on shutdown'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -20
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
         TabOrder = 2
       end
       object chkLoadLastProject: TCheckBox
-        Left = 144
-        Top = 111
-        Width = 257
-        Height = 29
+        Left = 216
+        Top = 167
+        Width = 386
+        Height = 43
+        Margins.Left = 5
+        Margins.Top = 5
+        Margins.Right = 5
+        Margins.Bottom = 5
         Caption = 'Load last on startup'
         Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -20
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
@@ -513,92 +581,124 @@ object frmSettings: TfrmSettings
       end
     end
     object TabSheet1: TTabSheet
+      Margins.Left = 5
+      Margins.Top = 5
+      Margins.Right = 5
+      Margins.Bottom = 5
       Caption = 'Build'
       ImageIndex = 3
       DesignSize = (
-        525
-        276)
+        792
+        419)
       object Label6: TLabel
-        Left = 61
-        Top = 19
-        Width = 59
-        Height = 18
+        Left = 92
+        Top = 29
+        Width = 89
+        Height = 28
+        Margins.Left = 5
+        Margins.Top = 5
+        Margins.Right = 5
+        Margins.Bottom = 5
         Caption = 'Machine'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -15
+        Font.Height = -23
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
       end
       object pgcBuild: TPageControl
-        Left = 17
-        Top = 60
-        Width = 505
-        Height = 213
+        Left = 26
+        Top = 90
+        Width = 1024
+        Height = 463
+        Margins.Left = 5
+        Margins.Top = 5
+        Margins.Right = 5
+        Margins.Bottom = 5
         ActivePage = tabCompiler
         Anchors = [akLeft, akTop, akRight, akBottom]
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -16
+        Font.Height = -24
         Font.Name = 'Roboto'
         Font.Style = []
         Images = ImageList2
         ParentFont = False
-        TabHeight = 32
+        TabHeight = 48
         TabOrder = 1
+        ExplicitWidth = 757
+        ExplicitHeight = 320
         object tabCompiler: TTabSheet
+          Margins.Left = 5
+          Margins.Top = 5
+          Margins.Right = 5
+          Margins.Bottom = 5
           Caption = 'Compiler'
           DesignSize = (
-            497
-            171)
+            1016
+            405)
           object Label13: TLabel
-            Left = 8
-            Top = 16
-            Width = 61
-            Height = 16
+            Left = 12
+            Top = 24
+            Width = 97
+            Height = 24
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Caption = 'Executable'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -13
+            Font.Height = -20
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
           end
           object Label14: TLabel
-            Left = 8
-            Top = 46
-            Width = 66
-            Height = 16
+            Left = 12
+            Top = 69
+            Width = 102
+            Height = 24
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Caption = 'Parameters'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -13
+            Font.Height = -20
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
           end
           object Label15: TLabel
-            Left = 8
-            Top = 76
-            Width = 62
-            Height = 16
+            Left = 12
+            Top = 114
+            Width = 97
+            Height = 24
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Caption = 'Engine File'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -13
+            Font.Height = -20
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
           end
           object Label19: TLabel
             AlignWithMargins = True
-            Left = 8
-            Top = 133
-            Width = 481
-            Height = 35
-            Margins.Left = 8
-            Margins.Right = 8
+            Left = 12
+            Top = 348
+            Width = 992
+            Height = 52
+            Margins.Left = 12
+            Margins.Top = 5
+            Margins.Right = 12
+            Margins.Bottom = 5
             Align = alBottom
             AutoSize = False
             Caption = 
@@ -606,151 +706,197 @@ object frmSettings: TfrmSettings
               'hine.'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -13
+            Font.Height = -20
             Font.Name = 'Roboto'
             Font.Style = []
             ParentFont = False
-            ExplicitLeft = 0
-            ExplicitTop = 136
-            ExplicitWidth = 497
+            ExplicitTop = 200
+            ExplicitWidth = 722
           end
           object edtCompilerExe: TEdit
-            Left = 84
-            Top = 13
-            Width = 378
-            Height = 24
+            Left = 126
+            Top = 20
+            Width = 837
+            Height = 32
             Hint = 'The location of the AGD Compiler executable file'
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Anchors = [akLeft, akTop, akRight]
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -13
+            Font.Height = -20
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 0
+            ExplicitWidth = 567
           end
           object edtCompilerParams: TEdit
-            Left = 84
-            Top = 43
-            Width = 378
-            Height = 24
+            Left = 126
+            Top = 65
+            Width = 837
+            Height = 32
             Hint = 'Parameters to pass to the AGD Compiler'
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Anchors = [akLeft, akTop, akRight]
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -13
+            Font.Height = -20
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 2
+            ExplicitWidth = 567
           end
           object btnCompilerFind: TButton
-            Left = 468
-            Top = 13
-            Width = 26
-            Height = 24
+            Left = 972
+            Top = 20
+            Width = 39
+            Height = 36
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Anchors = [akTop, akRight]
             Caption = '...'
             TabOrder = 1
             OnClick = btnCompilerFindClick
+            ExplicitLeft = 702
           end
           object edtEngineFile: TEdit
-            Left = 84
-            Top = 73
-            Width = 378
-            Height = 24
+            Left = 126
+            Top = 110
+            Width = 837
+            Height = 32
             Hint = 'The AGD Engine file for the machine'
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Anchors = [akLeft, akTop, akRight]
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -13
+            Font.Height = -20
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 3
+            ExplicitWidth = 567
           end
           object btnEngineFind: TButton
-            Left = 468
-            Top = 73
-            Width = 26
-            Height = 24
+            Left = 972
+            Top = 110
+            Width = 39
+            Height = 36
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Anchors = [akTop, akRight]
             Caption = '...'
             TabOrder = 4
             OnClick = btnEngineFindClick
+            ExplicitLeft = 702
           end
         end
         object tabAssembler: TTabSheet
+          Margins.Left = 5
+          Margins.Top = 5
+          Margins.Right = 5
+          Margins.Bottom = 5
           Caption = 'Assembler'
           DesignSize = (
-            497
-            171)
+            1016
+            405)
           object Label7: TLabel
-            Left = 8
-            Top = 16
-            Width = 61
-            Height = 16
+            Left = 12
+            Top = 24
+            Width = 97
+            Height = 24
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Caption = 'Executable'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -13
+            Font.Height = -20
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
           end
           object Label8: TLabel
-            Left = 8
-            Top = 46
-            Width = 66
-            Height = 16
+            Left = 12
+            Top = 69
+            Width = 102
+            Height = 24
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Caption = 'Parameters'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -13
+            Font.Height = -20
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
           end
           object Label9: TLabel
-            Left = 8
-            Top = 76
-            Width = 47
-            Height = 16
+            Left = 12
+            Top = 114
+            Width = 73
+            Height = 24
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Caption = 'Prepend'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -13
+            Font.Height = -20
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
           end
           object Label10: TLabel
-            Left = 8
-            Top = 106
-            Width = 43
-            Height = 16
+            Left = 12
+            Top = 159
+            Width = 67
+            Height = 24
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Caption = 'Append'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -13
+            Font.Height = -20
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
           end
           object Label20: TLabel
             AlignWithMargins = True
-            Left = 8
-            Top = 133
-            Width = 481
-            Height = 35
-            Margins.Left = 8
-            Margins.Right = 8
+            Left = 12
+            Top = 348
+            Width = 992
+            Height = 52
+            Margins.Left = 12
+            Margins.Top = 5
+            Margins.Right = 12
+            Margins.Bottom = 5
             Align = alBottom
             AutoSize = False
             Caption = 
@@ -759,233 +905,297 @@ object frmSettings: TfrmSettings
               'ile for the Emulator.'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -13
+            Font.Height = -20
             Font.Name = 'Roboto'
             Font.Style = []
             ParentFont = False
-            ExplicitLeft = 0
-            ExplicitTop = 136
-            ExplicitWidth = 497
+            ExplicitTop = 200
+            ExplicitWidth = 722
           end
           object edtAssemblerExe: TEdit
-            Left = 84
-            Top = 13
-            Width = 378
-            Height = 24
+            Left = 126
+            Top = 20
+            Width = 837
+            Height = 32
             Hint = 'The location of the Assembler executable file'
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Anchors = [akLeft, akTop, akRight]
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -13
+            Font.Height = -20
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 0
+            ExplicitWidth = 567
           end
           object edtAssemblerParams: TEdit
-            Left = 84
-            Top = 43
-            Width = 378
-            Height = 24
+            Left = 126
+            Top = 65
+            Width = 837
+            Height = 32
             Hint = 'Parameters to pass to the Assembler'
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Anchors = [akLeft, akTop, akRight]
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -13
+            Font.Height = -20
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 2
+            ExplicitWidth = 567
           end
           object edtAssemblerPrepend: TEdit
-            Left = 84
-            Top = 73
-            Width = 378
-            Height = 24
+            Left = 126
+            Top = 110
+            Width = 837
+            Height = 32
             Hint = 'Text to prepend to the beginning of the generated assembly file.'
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Anchors = [akLeft, akTop, akRight]
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -13
+            Font.Height = -20
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 3
+            ExplicitWidth = 567
           end
           object btnAssemblerFind: TButton
-            Left = 468
-            Top = 13
-            Width = 26
-            Height = 24
+            Left = 972
+            Top = 20
+            Width = 39
+            Height = 36
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Anchors = [akTop, akRight]
             Caption = '...'
             TabOrder = 1
             OnClick = btnAssemblerFindClick
+            ExplicitLeft = 702
           end
           object edtAssemblerAppend: TEdit
-            Left = 84
-            Top = 103
-            Width = 378
-            Height = 24
+            Left = 126
+            Top = 155
+            Width = 837
+            Height = 32
             Hint = 'Text to append to the end of the generated assembly file.'
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Anchors = [akLeft, akTop, akRight]
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -13
+            Font.Height = -20
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 4
+            ExplicitWidth = 567
           end
         end
         object tabEmulator: TTabSheet
+          Margins.Left = 5
+          Margins.Top = 5
+          Margins.Right = 5
+          Margins.Bottom = 5
           Caption = 'Emulator'
           ImageIndex = 1
           DesignSize = (
-            497
-            171)
+            1016
+            405)
           object Label11: TLabel
-            Left = 8
-            Top = 16
-            Width = 61
-            Height = 16
+            Left = 12
+            Top = 24
+            Width = 97
+            Height = 24
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Caption = 'Executable'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -13
+            Font.Height = -20
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
           end
           object Label12: TLabel
-            Left = 8
-            Top = 46
-            Width = 66
-            Height = 16
+            Left = 12
+            Top = 69
+            Width = 102
+            Height = 24
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Caption = 'Parameters'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -13
+            Font.Height = -20
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
           end
           object Label21: TLabel
             AlignWithMargins = True
-            Left = 8
-            Top = 133
-            Width = 481
-            Height = 35
-            Margins.Left = 8
-            Margins.Right = 8
+            Left = 12
+            Top = 348
+            Width = 992
+            Height = 52
+            Margins.Left = 12
+            Margins.Top = 5
+            Margins.Right = 12
+            Margins.Bottom = 5
             Align = alBottom
             AutoSize = False
             Caption = 'Emulator: The machine emulation application.'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -13
+            Font.Height = -20
             Font.Name = 'Roboto'
             Font.Style = []
             ParentFont = False
-            ExplicitLeft = 0
-            ExplicitTop = 136
-            ExplicitWidth = 497
+            ExplicitTop = 200
+            ExplicitWidth = 722
           end
           object edtEmulatorExe: TEdit
-            Left = 84
-            Top = 13
-            Width = 378
-            Height = 24
+            Left = 126
+            Top = 20
+            Width = 837
+            Height = 32
             Hint = 'The location of the Emulator executable file'
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Anchors = [akLeft, akTop, akRight]
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -13
+            Font.Height = -20
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 0
+            ExplicitWidth = 567
           end
           object edtEmulatorParams: TEdit
-            Left = 84
-            Top = 43
-            Width = 378
-            Height = 24
+            Left = 126
+            Top = 65
+            Width = 837
+            Height = 32
             Hint = 'Parameters to pass to the Emulator'
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Anchors = [akLeft, akTop, akRight]
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -13
+            Font.Height = -20
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 2
+            ExplicitWidth = 567
           end
           object btnEmulatorFind: TButton
-            Left = 468
-            Top = 13
-            Width = 26
-            Height = 24
+            Left = 972
+            Top = 20
+            Width = 39
+            Height = 36
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Anchors = [akTop, akRight]
             Caption = '...'
             TabOrder = 1
             OnClick = btnEmulatorFindClick
+            ExplicitLeft = 702
           end
         end
         object TabSheet2: TTabSheet
+          Margins.Left = 5
+          Margins.Top = 5
+          Margins.Right = 5
+          Margins.Bottom = 5
           Caption = 'Parameters'
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Label16: TLabel
-            Left = 16
-            Top = 8
-            Width = 300
-            Height = 18
+            Left = 24
+            Top = 12
+            Width = 455
+            Height = 28
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Caption = 'Parameters can use the following variables:'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -15
+            Font.Height = -23
             Font.Name = 'Roboto'
             Font.Style = []
             ParentFont = False
           end
           object Label17: TLabel
-            Left = 24
-            Top = 40
-            Width = 272
-            Height = 16
+            Left = 36
+            Top = 60
+            Width = 408
+            Height = 22
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Caption = '%GamePath%: The Projects full path'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -13
+            Font.Height = -20
             Font.Name = 'Courier New'
             Font.Style = []
             ParentFont = False
           end
           object Label18: TLabel
-            Left = 24
-            Top = 64
-            Width = 272
-            Height = 16
+            Left = 36
+            Top = 96
+            Width = 408
+            Height = 22
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Caption = '%GameFile%: The Projects Name only'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -13
+            Font.Height = -20
             Font.Name = 'Courier New'
             Font.Style = []
             ParentFont = False
@@ -993,54 +1203,67 @@ object frmSettings: TfrmSettings
         end
       end
       object edtBuildMachine: TEdit
-        Left = 144
-        Top = 16
-        Width = 370
-        Height = 24
+        Left = 216
+        Top = 24
+        Width = 559
+        Height = 32
+        Margins.Left = 5
+        Margins.Top = 5
+        Margins.Right = 5
+        Margins.Bottom = 5
         Anchors = [akLeft, akTop, akRight]
         Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -20
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
         ReadOnly = True
         TabOrder = 0
+        ExplicitWidth = 555
       end
     end
     object tabMachines: TTabSheet
+      Margins.Left = 5
+      Margins.Top = 5
+      Margins.Right = 5
+      Margins.Bottom = 5
       Caption = 'Machines'
       ImageIndex = 2
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
     end
   end
   object Panel1: TPanel
     Left = 0
-    Top = 326
-    Width = 533
-    Height = 36
+    Top = 489
+    Width = 800
+    Height = 54
+    Margins.Left = 5
+    Margins.Top = 5
+    Margins.Right = 5
+    Margins.Bottom = 5
     Align = alBottom
     BevelOuter = bvNone
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -11
+    Font.Height = -17
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
     TabOrder = 0
     DesignSize = (
-      533
-      36)
+      800
+      54)
     object btnCancel: TButton
-      Left = 438
-      Top = 4
-      Width = 80
-      Height = 28
+      Left = 657
+      Top = 6
+      Width = 120
+      Height = 42
+      Margins.Left = 5
+      Margins.Top = 5
+      Margins.Right = 5
+      Margins.Bottom = 5
       Anchors = [akTop, akRight]
       Cancel = True
       Caption = 'Cancel'
@@ -1048,10 +1271,14 @@ object frmSettings: TfrmSettings
       TabOrder = 0
     end
     object btnOk: TButton
-      Left = 352
-      Top = 4
-      Width = 80
-      Height = 28
+      Left = 528
+      Top = 6
+      Width = 120
+      Height = 42
+      Margins.Left = 5
+      Margins.Top = 5
+      Margins.Right = 5
+      Margins.Bottom = 5
       Anchors = [akTop, akRight]
       Caption = 'OK'
       Default = True

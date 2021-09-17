@@ -35,7 +35,7 @@ void __fastcall MapTool::SnapToTileGrid(TRect& rect) const
     rect.Bottom = Snap(rect.Bottom, m_TileSize.cy);
 }
 //---------------------------------------------------------------------------
-void __fastcall MapTool::Set(EntityList& list, const Entity& entity)
+void __fastcall MapTool::Set(MapEntityList& list, const MapEntity& entity)
 {
     if (Flags & allowOnlyOne)
     {
@@ -57,14 +57,14 @@ void __fastcall MapTool::Set(EntityList& list, const Entity& entity)
     }
 }
 //---------------------------------------------------------------------------
-String __fastcall MapTool::Begin(EntityList& list, Entity entity, const TPoint& pt, const TShiftState& buttons)
+String __fastcall MapTool::Begin(MapEntityList& list, MapEntity entity, const TPoint& pt, const TShiftState& buttons)
 {
     Tool::Begin(pt, buttons);
     Apply(list, entity);
     return String();
 }
 //---------------------------------------------------------------------------
-void __fastcall MapTool::Move(EntityList& list, Entity entity, const TPoint& pt, const TShiftState& buttons)
+void __fastcall MapTool::Move(MapEntityList& list, MapEntity entity, const TPoint& pt, const TShiftState& buttons)
 {
     Tool::Move(pt, buttons);
     if (Flags & resetOnMove)
@@ -75,7 +75,7 @@ void __fastcall MapTool::Move(EntityList& list, Entity entity, const TPoint& pt,
     Apply(list, entity);
 }
 //---------------------------------------------------------------------------
-String __fastcall MapTool::End(EntityList& list, Entity entity, const TPoint& pt)
+String __fastcall MapTool::End(MapEntityList& list, MapEntity entity, const TPoint& pt)
 {
     Tool::End(pt);
     if (pt != LastPt)

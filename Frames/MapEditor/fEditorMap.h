@@ -27,7 +27,7 @@
 #include "LMDToolBar.hpp"
 #include "Frames/MapEditor/TileEditor.h"
 #include "Project/Document.h"
-#include "Project/MapDocuments.h"
+#include "Project/TiledMapDocument.h"
 #include "Messaging/Messaging.h"
 #include "Frames/WndProcHandlers.h"
 #include "AssetSelection.h"
@@ -243,7 +243,7 @@ private:    // User declarations
             void    __fastcall  OnStartRoomChanged(const StartRoomChanged& event);
             void    __fastcall  OnDocumentChanged(const DocumentChange<String>& message);
             void     __fastcall OnEntityClick(ImageDocument* document);
-            void    __fastcall  OnWorkspaceEntitySelected(const Entity& entity);
+            void    __fastcall  OnWorkspaceEntitySelected(const MapEntity& entity);
             int     __fastcall  OnRetrieveRoomIndex(const TPoint& pt, bool newIndex = false);
             void    __fastcall  ShowKeysHelp();
 

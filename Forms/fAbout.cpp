@@ -3,6 +3,8 @@
 #include "fAbout.h"
 #include <ctime>
 #include <iomanip>
+#include <systdate.h>
+#include <System.StrUtils.hpp>
 #include "Settings/ThemeManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -32,6 +34,7 @@ void __fastcall TfrmAbout::FormCreate(TObject *Sender)
     GetBuildVersion(Major, Minor, Release, Build);
     lblVersion->Caption = "Version " + IntToStr(Major) + "." + IntToStr(Minor);
     lblBuild->Caption = "Build# AGD Studio " + IntToStr(Major)+"."+IntToStr(Minor)+", built on " + DatePlusDays(Release);
+    lblCopyright->Caption = ReplaceStr(lblCopyright->Caption, "(c)", TDateTime::CurrentDate().FormatString("yyyy"));
 }
 //---------------------------------------------------------------------------
 String __fastcall TfrmAbout::DatePlusDays(int days) const

@@ -3,15 +3,24 @@ object frmEditorMap: TfrmEditorMap
   Top = 0
   Width = 990
   Height = 669
+  Margins.Left = 5
+  Margins.Top = 5
+  Margins.Right = 5
+  Margins.Bottom = 5
   AutoSize = True
   DoubleBuffered = False
   ParentDoubleBuffered = False
   TabOrder = 0
+  PixelsPerInch = 144
   object imgLock: TImage
-    Left = 56
-    Top = 293
+    Left = 84
+    Top = 440
     Width = 16
     Height = 16
+    Margins.Left = 5
+    Margins.Top = 5
+    Margins.Right = 5
+    Margins.Bottom = 5
     AutoSize = True
     Picture.Data = {
       0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
@@ -47,41 +56,53 @@ object frmEditorMap: TfrmEditorMap
     Top = 0
     Width = 990
     Height = 669
+    Margins.Left = 5
+    Margins.Top = 5
+    Margins.Right = 5
+    Margins.Bottom = 5
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 1485
+    ExplicitHeight = 1004
     Layout = {
-      EFBBBF3C3F786D6C2076657273696F6E3D22312E302220656E636F64696E673D
-      227574662D38223F3E0D0A3C736974656C6973743E0D0A093C73697465206470
-      693D223936222069643D2253454C465F53495445223E0D0A09093C7A6F6E6520
-      6B696E643D2256455254223E0D0A0909093C7A6F6E65206B696E643D22484F52
-      5A222073697A653D2236353722206473697A653D2231223E0D0A090909093C7A
-      6F6E65206B696E643D225441425322206163746976657461623D223022207369
-      7A653D2236303822206473697A653D22302E3632353531343430333239323138
-      312220697373706163653D2231223E0D0A09090909093C7A6F6E65206B696E64
-      3D2250414E454C222069643D226470576F726B7370616365222076697369626C
-      653D2231222F3E0D0A090909093C2F7A6F6E653E0D0A090909093C7A6F6E6520
-      6B696E643D2256455254222073697A653D2233363422206473697A653D22302E
-      333734343835353936373037383139223E0D0A09090909093C7A6F6E65206B69
-      6E643D2250414E454C222069643D226470536372617463685061642220766973
-      69626C653D2231222073697A653D2233303922206473697A653D22302E343734
-      3237323933303634383737222F3E0D0A09090909093C7A6F6E65206B696E643D
-      2250414E454C222069643D226470417373657473222076697369626C653D2231
-      222073697A653D2233343222206473697A653D22302E35323537323730363933
-      35313233222F3E0D0A090909093C2F7A6F6E653E0D0A0909093C2F7A6F6E653E
-      0D0A0909093C7A6F6E65206B696E643D2250414E454C222069643D226470526F
-      6F6D53656C6563746F72222076697369626C653D2230222073697A653D223237
-      3722206473697A653D22302E343235343939323331393530383435222F3E0D0A
-      09093C2F7A6F6E653E0D0A093C2F736974653E0D0A3C2F736974656C6973743E}
+      3C3F786D6C2076657273696F6E3D22312E30223F3E0D0A3C736974656C697374
+      3E0D0A20203C73697465206470693D22313434222069643D2253454C465F5349
+      5445223E0D0A202020203C7A6F6E65206B696E643D2256455254223E0D0A2020
+      202020203C7A6F6E65206B696E643D22484F525A222073697A653D2236353722
+      206473697A653D2231223E0D0A20202020202020203C7A6F6E65206B696E643D
+      225441425322206163746976657461623D2230222073697A653D223432362220
+      6473697A653D22302E3433383237313630343933383237322220697373706163
+      653D2274727565223E0D0A202020202020202020203C7A6F6E65206B696E643D
+      2250414E454C222069643D226470576F726B7370616365222076697369626C65
+      3D2274727565222F3E0D0A20202020202020203C2F7A6F6E653E0D0A20202020
+      202020203C7A6F6E65206B696E643D2256455254222073697A653D2235343622
+      206473697A653D22302E353631373238333935303631373238223E0D0A202020
+      202020202020203C7A6F6E65206B696E643D2250414E454C222069643D226470
+      53637261746368506164222076697369626C653D2274727565222073697A653D
+      2233303922206473697A653D22302E3437343237323933303634383737222F3E
+      0D0A202020202020202020203C7A6F6E65206B696E643D2250414E454C222069
+      643D226470417373657473222076697369626C653D2274727565222073697A65
+      3D2233343222206473697A653D22302E3532353732373036393335313233222F
+      3E0D0A20202020202020203C2F7A6F6E653E0D0A2020202020203C2F7A6F6E65
+      3E0D0A2020202020203C7A6F6E65206B696E643D2250414E454C222069643D22
+      6470526F6F6D53656C6563746F72222076697369626C653D2266616C73652220
+      73697A653D2234313622206473697A653D22302E343235343939323331393530
+      383435222F3E0D0A202020203C2F7A6F6E653E0D0A20203C2F736974653E0D0A
+      3C2F736974656C6973743E0D0A}
     object dpAssets: TLMDDockPanel
       Tag = 100
-      Left = 620
+      Left = 438
       Top = 321
-      Width = 364
+      Width = 546
       Height = 342
+      Margins.Left = 5
+      Margins.Top = 5
+      Margins.Right = 5
+      Margins.Bottom = 5
       Buttons = [pbPin, pbMaximize]
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 3355443
-      Font.Height = -11
+      Font.Height = -17
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentBackground = False
@@ -91,59 +112,79 @@ object frmEditorMap: TfrmEditorMap
       OnCloseQuery = dpToolsCloseQuery
       object pgcAssets: TPageControl
         Left = 0
-        Top = 21
-        Width = 364
-        Height = 321
+        Top = 29
+        Width = 546
+        Height = 313
+        Margins.Left = 5
+        Margins.Top = 5
+        Margins.Right = 5
+        Margins.Bottom = 5
         ActivePage = tabTiles
         Align = alClient
-        Constraints.MinHeight = 172
-        Constraints.MinWidth = 256
+        Constraints.MinHeight = 258
+        Constraints.MinWidth = 384
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -11
+        Font.Height = -17
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         MultiLine = True
         ParentFont = False
-        TabHeight = 24
+        TabHeight = 36
         TabOrder = 0
-        TabWidth = 80
+        TabWidth = 120
         OnChange = pgcAssetsChange
         OnMouseEnter = imgWorkspaceMouseEnter
         OnResize = pgcAssetsResize
         object tabTiles: TTabSheet
+          Margins.Left = 5
+          Margins.Top = 5
+          Margins.Right = 5
+          Margins.Bottom = 5
           Caption = 'TILES'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -11
+          Font.Height = -17
           Font.Name = 'Tahoma'
           Font.Style = []
           ParentFont = False
           inline assetsTiles: TfrmAssetSelection
             Left = 0
             Top = 0
-            Width = 356
-            Height = 287
+            Width = 538
+            Height = 267
+            Margins.Left = 8
+            Margins.Top = 8
+            Margins.Right = 8
+            Margins.Bottom = 8
             Align = alClient
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -11
+            Font.Height = -17
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
             TabOrder = 0
-            ExplicitWidth = 356
-            ExplicitHeight = 287
+            ExplicitWidth = 534
+            ExplicitHeight = 431
             inherited sbxList: TScrollBox
-              Width = 356
-              Height = 287
-              ExplicitWidth = 356
-              ExplicitHeight = 287
+              Width = 538
+              Height = 267
+              Margins.Left = 8
+              Margins.Top = 8
+              Margins.Right = 8
+              Margins.Bottom = 8
+              ExplicitWidth = 534
+              ExplicitHeight = 431
               inherited panList: TFlowPanel
-                Width = 339
-                Height = 309
-                ExplicitWidth = 339
-                ExplicitHeight = 309
+                Width = 509
+                Height = 464
+                Margins.Left = 8
+                Margins.Top = 8
+                Margins.Right = 8
+                Margins.Bottom = 8
+                ExplicitWidth = 509
+                ExplicitHeight = 464
               end
             end
             inherited popMenu: TPopupMenu
@@ -153,10 +194,14 @@ object frmEditorMap: TfrmEditorMap
           end
         end
         object tabSprites: TTabSheet
+          Margins.Left = 5
+          Margins.Top = 5
+          Margins.Right = 5
+          Margins.Bottom = 5
           Caption = 'SPRITES'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -11
+          Font.Height = -17
           Font.Name = 'Tahoma'
           Font.Style = []
           ImageIndex = 1
@@ -164,31 +209,47 @@ object frmEditorMap: TfrmEditorMap
           inline assetsSprites: TfrmAssetSelection
             Left = 0
             Top = 0
-            Width = 356
-            Height = 287
+            Width = 538
+            Height = 267
+            Margins.Left = 8
+            Margins.Top = 8
+            Margins.Right = 8
+            Margins.Bottom = 8
             Align = alClient
             TabOrder = 0
-            ExplicitWidth = 356
-            ExplicitHeight = 287
+            ExplicitWidth = 534
+            ExplicitHeight = 431
             inherited sbxList: TScrollBox
-              Width = 356
-              Height = 287
-              ExplicitWidth = 356
-              ExplicitHeight = 287
+              Width = 538
+              Height = 267
+              Margins.Left = 8
+              Margins.Top = 8
+              Margins.Right = 8
+              Margins.Bottom = 8
+              ExplicitWidth = 534
+              ExplicitHeight = 431
               inherited panList: TFlowPanel
-                Width = 339
-                Height = 309
-                ExplicitWidth = 339
-                ExplicitHeight = 309
+                Width = 509
+                Height = 464
+                Margins.Left = 8
+                Margins.Top = 8
+                Margins.Right = 8
+                Margins.Bottom = 8
+                ExplicitWidth = 509
+                ExplicitHeight = 464
               end
             end
           end
         end
         object tabObjects: TTabSheet
+          Margins.Left = 5
+          Margins.Top = 5
+          Margins.Right = 5
+          Margins.Bottom = 5
           Caption = 'OBJECTS'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -11
+          Font.Height = -17
           Font.Name = 'Tahoma'
           Font.Style = []
           ImageIndex = 2
@@ -196,22 +257,34 @@ object frmEditorMap: TfrmEditorMap
           inline assetsObjects: TfrmAssetSelection
             Left = 0
             Top = 0
-            Width = 356
-            Height = 287
+            Width = 538
+            Height = 267
+            Margins.Left = 8
+            Margins.Top = 8
+            Margins.Right = 8
+            Margins.Bottom = 8
             Align = alClient
             TabOrder = 0
-            ExplicitWidth = 356
-            ExplicitHeight = 287
+            ExplicitWidth = 534
+            ExplicitHeight = 431
             inherited sbxList: TScrollBox
-              Width = 356
-              Height = 287
-              ExplicitWidth = 356
-              ExplicitHeight = 287
+              Width = 538
+              Height = 267
+              Margins.Left = 8
+              Margins.Top = 8
+              Margins.Right = 8
+              Margins.Bottom = 8
+              ExplicitWidth = 534
+              ExplicitHeight = 431
               inherited panList: TFlowPanel
-                Width = 339
-                Height = 309
-                ExplicitWidth = 339
-                ExplicitHeight = 309
+                Width = 509
+                Height = 464
+                Margins.Left = 8
+                Margins.Top = 8
+                Margins.Right = 8
+                Margins.Bottom = 8
+                ExplicitWidth = 509
+                ExplicitHeight = 464
               end
             end
           end
@@ -221,12 +294,16 @@ object frmEditorMap: TfrmEditorMap
     object dpRoomSelector: TLMDDockPanel
       Left = 0
       Top = 0
-      Width = 0
-      Height = 277
+      Width = 978
+      Height = 416
+      Margins.Left = 5
+      Margins.Top = 5
+      Margins.Right = 5
+      Margins.Bottom = 5
       PanelVisible = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 3355443
-      Font.Height = -11
+      Font.Height = -17
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentBackground = False
@@ -235,43 +312,56 @@ object frmEditorMap: TfrmEditorMap
       Caption = 'ROOM SELECTION'
       object imgRoomSelector: TImage
         Left = 0
-        Top = 21
-        Width = 0
-        Height = 237
+        Top = 29
+        Width = 978
+        Height = 358
+        Margins.Left = 5
+        Margins.Top = 5
+        Margins.Right = 5
+        Margins.Bottom = 5
         Align = alClient
         OnMouseDown = imgRoomSelectorMouseDown
         OnMouseEnter = imgWorkspaceMouseEnter
         OnMouseMove = imgRoomSelectorMouseMove
         OnMouseUp = imgRoomSelectorMouseUp
-        ExplicitTop = 327
-        ExplicitWidth = 527
-        ExplicitHeight = 312
+        ExplicitTop = 32
+        ExplicitWidth = 1467
+        ExplicitHeight = 355
       end
       object sbrRoomSelection: TStatusBar
         Left = 0
-        Top = 258
-        Width = 0
-        Height = 19
+        Top = 387
+        Width = 978
+        Height = 29
+        Margins.Left = 5
+        Margins.Top = 5
+        Margins.Right = 5
+        Margins.Bottom = 5
         Panels = <
           item
             Text = 'Screen Location: X, Y'
-            Width = 150
+            Width = 225
           end
           item
-            Width = 50
+            Width = 75
           end>
+        ExplicitWidth = 1467
       end
     end
     object dpScratchPad: TLMDDockPanel
       Tag = 100
-      Left = 620
+      Left = 438
       Top = 6
-      Width = 364
+      Width = 546
       Height = 309
+      Margins.Left = 5
+      Margins.Top = 5
+      Margins.Right = 5
+      Margins.Bottom = 5
       Buttons = [pbPin, pbMaximize]
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 3355443
-      Font.Height = -11
+      Font.Height = -17
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentBackground = False
@@ -281,89 +371,131 @@ object frmEditorMap: TfrmEditorMap
       OnCloseQuery = dpToolsCloseQuery
       object panScratchPadView: TPanel
         Left = 0
-        Top = 21
-        Width = 364
-        Height = 288
+        Top = 29
+        Width = 546
+        Height = 280
+        Margins.Left = 5
+        Margins.Top = 5
+        Margins.Right = 5
+        Margins.Bottom = 5
         Align = alClient
         BevelOuter = bvNone
-        Constraints.MinHeight = 154
-        Constraints.MinWidth = 256
+        Constraints.MinHeight = 231
+        Constraints.MinWidth = 384
         ShowCaption = False
         TabOrder = 0
         OnResize = panScratchPadViewResize
+        ExplicitTop = 32
+        ExplicitHeight = 432
         object imgScratchPad: TImage
           Left = 0
-          Top = 25
-          Width = 364
-          Height = 244
+          Top = 38
+          Width = 546
+          Height = 214
+          Margins.Left = 5
+          Margins.Top = 5
+          Margins.Right = 5
+          Margins.Bottom = 5
           Align = alClient
           PopupMenu = popScratchPad
           OnMouseDown = imgScratchPadMouseDown
           OnMouseEnter = imgWorkspaceMouseEnter
           OnMouseMove = imgScratchPadMouseMove
           OnMouseUp = imgScratchPadMouseUp
-          ExplicitTop = 31
-          ExplicitHeight = 263
+          ExplicitHeight = 366
         end
         object tbrScratchPad: TToolBar
           Left = 0
           Top = 0
-          Width = 364
-          Height = 25
-          ButtonHeight = 24
-          ButtonWidth = 24
+          Width = 546
+          Height = 38
+          Margins.Left = 5
+          Margins.Top = 5
+          Margins.Right = 5
+          Margins.Bottom = 5
+          ButtonHeight = 620
+          ButtonWidth = 182
           Caption = 'tbrScratchPad'
           Images = imgSmallIcons
           TabOrder = 0
           object btnScratchCopyFrom: TToolButton
             Left = 0
             Top = 0
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Action = actCopyToWorkspace
             ParentShowHint = False
             ShowHint = True
           end
           object btnSep2: TToolButton
-            Left = 24
+            Left = 182
             Top = 0
-            Width = 8
+            Width = 12
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Caption = 'btnSep2'
             ImageIndex = 1
             Style = tbsSeparator
           end
           object btnScratchDuplicate: TToolButton
-            Left = 32
+            Left = 194
             Top = 0
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Action = actDuplicate
             ParentShowHint = False
             ShowHint = True
           end
           object btnSep3: TToolButton
-            Left = 56
+            Left = 0
             Top = 0
-            Width = 8
+            Width = 12
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Caption = 'btnSep3'
             ImageIndex = 4
+            Wrap = True
             Style = tbsSeparator
           end
           object btnScratchDelete: TToolButton
-            Left = 64
-            Top = 0
+            Left = 0
+            Top = 632
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Action = actDelete
             ParentShowHint = False
             ShowHint = True
           end
           object btnSep1: TToolButton
-            Left = 88
-            Top = 0
-            Width = 8
+            Left = 182
+            Top = 632
+            Width = 12
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Caption = 'btnSep1'
             ImageIndex = 3
             Style = tbsSeparator
           end
           object btnSPGridTile: TToolButton
-            Left = 96
-            Top = 0
+            Left = 194
+            Top = 632
             Hint = 'Toggle the tile grid (Ctrl+T)'
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Caption = 'Toggle Tile Grid'
             Down = True
             ImageIndex = 5
@@ -375,33 +507,42 @@ object frmEditorMap: TfrmEditorMap
         end
         object StatusBar1: TStatusBar
           Left = 0
-          Top = 269
-          Width = 364
-          Height = 19
+          Top = 252
+          Width = 546
+          Height = 28
+          Margins.Left = 5
+          Margins.Top = 5
+          Margins.Right = 5
+          Margins.Bottom = 5
           Panels = <
             item
               Alignment = taCenter
               Text = 'Block Position: X, Y'
-              Width = 150
+              Width = 225
             end
             item
-              Width = 50
+              Width = 75
             end>
           Visible = False
+          ExplicitTop = 404
         end
       end
     end
     object dpWorkspace: TLMDDockPanel
       Tag = 100
       Left = 6
-      Top = 28
-      Width = 608
-      Height = 635
+      Top = 37
+      Width = 426
+      Height = 626
+      Margins.Left = 5
+      Margins.Top = 5
+      Margins.Right = 5
+      Margins.Bottom = 5
       ClientKind = dkDocument
       Buttons = [pbMaximize]
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 3355443
-      Font.Height = -11
+      Font.Height = -17
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentBackground = False
@@ -412,57 +553,78 @@ object frmEditorMap: TfrmEditorMap
       object panToolbars: TPanel
         Left = 0
         Top = 0
-        Width = 82
-        Height = 635
+        Width = 123
+        Height = 626
+        Margins.Left = 5
+        Margins.Top = 5
+        Margins.Right = 5
+        Margins.Bottom = 5
         Align = alLeft
         AutoSize = True
         BevelOuter = bvNone
-        Constraints.MaxWidth = 82
-        Constraints.MinWidth = 82
+        Constraints.MaxWidth = 123
+        Constraints.MinWidth = 123
         TabOrder = 0
         OnMouseEnter = imgWorkspaceMouseEnter
+        ExplicitHeight = 953
         object lblTools: TLabel
           Left = 0
           Top = 0
-          Width = 82
-          Height = 20
+          Width = 123
+          Height = 30
+          Margins.Left = 5
+          Margins.Top = 5
+          Margins.Right = 5
+          Margins.Bottom = 5
           Align = alTop
           Alignment = taCenter
           AutoSize = False
           Caption = 'TOOLS'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -11
+          Font.Height = -17
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 81
         end
         object tbrTools: TToolBar
           Left = 0
-          Top = 20
-          Width = 82
-          Height = 80
+          Top = 30
+          Width = 123
+          Height = 1212
+          Margins.Left = 5
+          Margins.Top = 5
+          Margins.Right = 5
+          Margins.Bottom = 5
           AutoSize = True
-          ButtonHeight = 40
-          ButtonWidth = 40
+          ButtonHeight = 303
+          ButtonWidth = 305
           DisabledImages = tbrImagesDisabled
           Images = tbrImagesEnabled
           TabOrder = 1
           object btnSelect: TToolButton
             Left = 0
             Top = 0
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Action = actSelect
             Grouped = True
             ParentShowHint = False
+            Wrap = True
             ShowHint = True
             Style = tbsCheck
           end
           object btnPencil: TToolButton
             Tag = 2
-            Left = 40
-            Top = 0
+            Left = 0
+            Top = 303
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Action = actPencil
             Grouped = True
             ParentShowHint = False
@@ -473,17 +635,26 @@ object frmEditorMap: TfrmEditorMap
           object btnLine: TToolButton
             Tag = 4
             Left = 0
-            Top = 40
+            Top = 606
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Action = actLine
             Grouped = True
             ParentShowHint = False
+            Wrap = True
             ShowHint = True
             Style = tbsCheck
           end
           object btnRect: TToolButton
             Tag = 5
-            Left = 40
-            Top = 40
+            Left = 0
+            Top = 909
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Action = actRect
             Grouped = True
             ParentShowHint = False
@@ -493,29 +664,43 @@ object frmEditorMap: TfrmEditorMap
         end
         object tbrGrids: TToolBar
           Left = 0
-          Top = 192
-          Width = 82
-          Height = 38
+          Top = 1590
+          Width = 123
+          Height = 256
+          Margins.Left = 5
+          Margins.Top = 5
+          Margins.Right = 5
+          Margins.Bottom = 5
           AutoSize = True
-          ButtonHeight = 38
-          ButtonWidth = 40
+          ButtonHeight = 128
+          ButtonWidth = 135
           Images = tbrImagesEnabled
           TabOrder = 0
+          ExplicitTop = 288
           object btnWSGridRoom: TToolButton
             Left = 0
             Top = 0
             Hint = 'Room Grid Toggle (Ctrl+G)'
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Down = True
             ImageIndex = 5
             ParentShowHint = False
+            Wrap = True
             ShowHint = True
             Style = tbsCheck
             OnClick = btnWSGridRoomClick
           end
           object btnWSGridTile: TToolButton
-            Left = 40
-            Top = 0
+            Left = 0
+            Top = 128
             Hint = 'Tile Grid Toggle (Ctrl+Shift+G)'
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             ImageIndex = 4
             ParentShowHint = False
             ShowHint = True
@@ -525,35 +710,54 @@ object frmEditorMap: TfrmEditorMap
         end
         object panSplitter4: TPanel
           Left = 0
-          Top = 188
-          Width = 82
-          Height = 4
+          Top = 1584
+          Width = 123
+          Height = 6
+          Margins.Left = 5
+          Margins.Top = 5
+          Margins.Right = 5
+          Margins.Bottom = 5
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 2
+          ExplicitTop = 282
         end
         object tbrModes: TToolBar
           Left = 0
-          Top = 124
-          Width = 82
-          Height = 40
+          Top = 1278
+          Width = 123
+          Height = 270
+          Margins.Left = 5
+          Margins.Top = 5
+          Margins.Right = 5
+          Margins.Bottom = 5
           AutoSize = True
-          ButtonHeight = 40
-          ButtonWidth = 40
+          ButtonHeight = 135
+          ButtonWidth = 135
           DisabledImages = tbrImagesDisabled
           Images = tbrImagesEnabled
           TabOrder = 3
+          ExplicitTop = 186
           object btnEditModeMultiple: TToolButton
             Left = 0
             Top = 0
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Action = actEditModeFullMap
             Grouped = True
             ParentShowHint = False
+            Wrap = True
             ShowHint = True
           end
           object btnEditModeSingle: TToolButton
-            Left = 40
-            Top = 0
+            Left = 0
+            Top = 135
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Action = actEditModeSingleScreen
             Grouped = True
             ParentShowHint = False
@@ -562,55 +766,84 @@ object frmEditorMap: TfrmEditorMap
         end
         object panGrids: TPanel
           Left = 0
-          Top = 164
-          Width = 82
-          Height = 24
+          Top = 1548
+          Width = 123
+          Height = 36
+          Margins.Left = 5
+          Margins.Top = 5
+          Margins.Right = 5
+          Margins.Bottom = 5
           Align = alTop
           BevelOuter = bvNone
           Caption = 'GRIDS'
           TabOrder = 4
+          ExplicitTop = 246
         end
         object panModes: TPanel
           Left = 0
-          Top = 100
-          Width = 82
-          Height = 24
+          Top = 1242
+          Width = 123
+          Height = 36
+          Margins.Left = 5
+          Margins.Top = 5
+          Margins.Right = 5
+          Margins.Bottom = 5
           Align = alTop
           BevelOuter = bvNone
           Caption = 'MODES'
           TabOrder = 5
+          ExplicitTop = 150
         end
         object panVisuals: TPanel
           Left = 0
-          Top = 230
-          Width = 82
-          Height = 24
+          Top = 1846
+          Width = 123
+          Height = 36
+          Margins.Left = 5
+          Margins.Top = 5
+          Margins.Right = 5
+          Margins.Bottom = 5
           Align = alTop
           BevelOuter = bvNone
           Caption = 'VISUALS'
           TabOrder = 6
+          ExplicitTop = 345
         end
         object ToolBar1: TToolBar
           Left = 0
-          Top = 254
-          Width = 82
-          Height = 114
+          Top = 1882
+          Width = 123
+          Height = 2160
+          Margins.Left = 5
+          Margins.Top = 5
+          Margins.Right = 5
+          Margins.Bottom = 5
           AutoSize = True
-          ButtonHeight = 38
-          ButtonWidth = 40
+          ButtonHeight = 432
+          ButtonWidth = 458
           Images = tbrImagesEnabled
           TabOrder = 7
+          ExplicitTop = 381
           object btnToggleDisplayStart: TToolButton
             Left = 0
             Top = 0
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Action = actToggleStartRoom
             ParentShowHint = False
+            Wrap = True
             ShowHint = True
             Style = tbsCheck
           end
           object btnToggleDisplayRoomNumbers: TToolButton
-            Left = 40
-            Top = 0
+            Left = 0
+            Top = 432
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Action = actToggleRoomNumbers
             ParentShowHint = False
             Wrap = True
@@ -619,15 +852,24 @@ object frmEditorMap: TfrmEditorMap
           end
           object btnToggleDisplayLocks: TToolButton
             Left = 0
-            Top = 38
+            Top = 864
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Action = actToggleShowLocks
             ParentShowHint = False
+            Wrap = True
             ShowHint = True
             Style = tbsCheck
           end
           object btnToggleTileTypes: TToolButton
-            Left = 40
-            Top = 38
+            Left = 0
+            Top = 1296
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Action = actToggleTileTypes
             ParentShowHint = False
             Wrap = True
@@ -636,8 +878,12 @@ object frmEditorMap: TfrmEditorMap
           end
           object btnToggleSpriteTypes: TToolButton
             Left = 0
-            Top = 76
+            Top = 1728
             Hint = 'Toggle the Display of Sprite Types'
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Action = actShowSpriteTypes
             ParentShowHint = False
             ShowHint = True
@@ -645,35 +891,54 @@ object frmEditorMap: TfrmEditorMap
         end
         object Panel1: TPanel
           Left = 0
-          Top = 368
-          Width = 82
-          Height = 24
+          Top = 4042
+          Width = 123
+          Height = 36
+          Margins.Left = 5
+          Margins.Top = 5
+          Margins.Right = 5
+          Margins.Bottom = 5
           Align = alTop
           BevelOuter = bvNone
           Caption = 'SPRITES'
           TabOrder = 8
+          ExplicitTop = 552
         end
         object ToolBar2: TToolBar
           Left = 0
-          Top = 392
-          Width = 82
-          Height = 38
+          Top = 4078
+          Width = 123
+          Height = 256
+          Margins.Left = 5
+          Margins.Top = 5
+          Margins.Right = 5
+          Margins.Bottom = 5
           AutoSize = True
-          ButtonHeight = 38
-          ButtonWidth = 40
+          ButtonHeight = 128
+          ButtonWidth = 135
           Images = tbrImagesEnabled
           TabOrder = 9
+          ExplicitTop = 588
           object btnToggleSpriteLocks: TToolButton
             Left = 0
             Top = 0
             Hint = 'Toggles the locked to room state of all selected Sprites'
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Action = actToggleSpriteLocks
             ParentShowHint = False
+            Wrap = True
             ShowHint = True
           end
           object btnSpriteType0: TToolButton
-            Left = 40
-            Top = 0
+            Left = 0
+            Top = 128
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Action = actSpriteType0
             ParentShowHint = False
             ShowHint = True
@@ -681,15 +946,19 @@ object frmEditorMap: TfrmEditorMap
         end
         object ToolBar3: TToolBar
           Left = 0
-          Top = 430
-          Width = 82
+          Top = 4334
+          Width = 123
           Height = 50
+          Margins.Left = 5
+          Margins.Top = 5
+          Margins.Right = 5
+          Margins.Bottom = 5
           AutoSize = True
           ButtonHeight = 25
           ButtonWidth = 16
           Font.Charset = DEFAULT_CHARSET
           Font.Color = 3355443
-          Font.Height = -15
+          Font.Height = -23
           Font.Name = 'Courier New'
           Font.Style = [fsBold]
           ParentFont = False
@@ -698,10 +967,15 @@ object frmEditorMap: TfrmEditorMap
           ShowHint = False
           TabOrder = 10
           Transparent = False
+          ExplicitTop = 645
           object btnSpriteType1: TToolButton
             Tag = 1
             Left = 0
             Top = 0
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Action = actSpriteType1
             AutoSize = True
             ParentShowHint = False
@@ -710,6 +984,10 @@ object frmEditorMap: TfrmEditorMap
           object btnSpriteType2: TToolButton
             Left = 20
             Top = 0
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Action = actSpriteType2
             AutoSize = True
             ParentShowHint = False
@@ -719,6 +997,10 @@ object frmEditorMap: TfrmEditorMap
             Tag = 3
             Left = 40
             Top = 0
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Action = actSpriteType3
             AutoSize = True
             ParentShowHint = False
@@ -727,6 +1009,10 @@ object frmEditorMap: TfrmEditorMap
           object btnSpriteType4: TToolButton
             Left = 60
             Top = 0
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Action = actSpriteType4
             AutoSize = True
             ParentShowHint = False
@@ -737,6 +1023,10 @@ object frmEditorMap: TfrmEditorMap
             Tag = 5
             Left = 0
             Top = 25
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Action = actSpriteType5
             AutoSize = True
             ParentShowHint = False
@@ -745,6 +1035,10 @@ object frmEditorMap: TfrmEditorMap
           object btnSpriteType6: TToolButton
             Left = 20
             Top = 25
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Action = actSpriteType6
             AutoSize = True
             ParentShowHint = False
@@ -754,6 +1048,10 @@ object frmEditorMap: TfrmEditorMap
             Tag = 7
             Left = 40
             Top = 25
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Action = actSpriteType7
             AutoSize = True
             ParentShowHint = False
@@ -763,6 +1061,10 @@ object frmEditorMap: TfrmEditorMap
             Tag = 8
             Left = 60
             Top = 25
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Action = actSpriteType8
             AutoSize = True
             ParentShowHint = False
@@ -771,29 +1073,45 @@ object frmEditorMap: TfrmEditorMap
         end
       end
       object sbxWorkspace: TScrollBox
-        Left = 82
+        Left = 123
         Top = 0
-        Width = 526
-        Height = 635
+        Width = 303
+        Height = 626
+        Margins.Left = 5
+        Margins.Top = 5
+        Margins.Right = 5
+        Margins.Bottom = 5
         Align = alClient
         BorderStyle = bsNone
         TabOrder = 1
         OnMouseWheel = sbxWorkspaceMouseWheel
+        ExplicitWidth = 789
+        ExplicitHeight = 953
         object panWorkspaceView: TPanel
           Left = 0
           Top = 0
-          Width = 526
-          Height = 635
+          Width = 303
+          Height = 626
+          Margins.Left = 5
+          Margins.Top = 5
+          Margins.Right = 5
+          Margins.Bottom = 5
           Align = alClient
           BevelOuter = bvNone
           ShowCaption = False
           TabOrder = 0
           OnResize = panWorkspaceViewResize
+          ExplicitWidth = 789
+          ExplicitHeight = 953
           object imgWorkspace: TImage
             Left = 0
-            Top = 25
-            Width = 526
-            Height = 591
+            Top = 38
+            Width = 303
+            Height = 559
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Align = alClient
             PopupMenu = popWorkspace
             OnMouseActivate = imgWorkspaceMouseActivate
@@ -801,81 +1119,126 @@ object frmEditorMap: TfrmEditorMap
             OnMouseEnter = imgWorkspaceMouseEnter
             OnMouseMove = imgWorkspaceMouseMove
             OnMouseUp = imgWorkspaceMouseUp
-            ExplicitTop = 26
-            ExplicitWidth = 527
-            ExplicitHeight = 610
+            ExplicitWidth = 789
+            ExplicitHeight = 886
           end
           object tbrWorkspace: TToolBar
             Left = 0
             Top = 0
-            Width = 526
-            Height = 25
-            ButtonHeight = 24
-            ButtonWidth = 24
+            Width = 303
+            Height = 38
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
+            ButtonHeight = 1395
+            ButtonWidth = 410
             Images = imgSmallIcons
             TabOrder = 0
+            ExplicitWidth = 789
             object btnScratchCopyTo: TToolButton
               Left = 0
               Top = 0
+              Margins.Left = 5
+              Margins.Top = 5
+              Margins.Right = 5
+              Margins.Bottom = 5
               Action = actCopyToScratchPad
               ParentShowHint = False
+              Wrap = True
               ShowHint = True
             end
             object btnScratchMoveTo: TToolButton
-              Left = 24
-              Top = 0
+              Left = 0
+              Top = 1395
+              Margins.Left = 5
+              Margins.Top = 5
+              Margins.Right = 5
+              Margins.Bottom = 5
               Action = actMoveToScratchPad
               ParentShowHint = False
               ShowHint = True
             end
             object ToolButton8: TToolButton
-              Left = 48
-              Top = 0
-              Width = 8
+              Left = 0
+              Top = 1395
+              Width = 12
+              Margins.Left = 5
+              Margins.Top = 5
+              Margins.Right = 5
+              Margins.Bottom = 5
               Caption = 'ToolButton8'
               ImageIndex = 2
+              Wrap = True
               Style = tbsSeparator
             end
             object btnViewDuplicate: TToolButton
-              Left = 56
-              Top = 0
+              Left = 0
+              Top = 2802
+              Margins.Left = 5
+              Margins.Top = 5
+              Margins.Right = 5
+              Margins.Bottom = 5
               Action = actDuplicate
               ParentShowHint = False
               ShowHint = True
             end
             object ToolButton10: TToolButton
-              Left = 80
-              Top = 0
-              Width = 8
+              Left = 0
+              Top = 2802
+              Width = 12
+              Margins.Left = 5
+              Margins.Top = 5
+              Margins.Right = 5
+              Margins.Bottom = 5
               Caption = 'ToolButton10'
               ImageIndex = 3
+              Wrap = True
               Style = tbsSeparator
             end
             object btnViewDelete: TToolButton
-              Left = 88
-              Top = 0
+              Left = 0
+              Top = 4209
+              Margins.Left = 5
+              Margins.Top = 5
+              Margins.Right = 5
+              Margins.Bottom = 5
               Action = actDelete
               ParentShowHint = False
               ShowHint = True
             end
             object ToolButton1: TToolButton
-              Left = 112
-              Top = 0
-              Width = 8
+              Left = 0
+              Top = 4209
+              Width = 12
+              Margins.Left = 5
+              Margins.Top = 5
+              Margins.Right = 5
+              Margins.Bottom = 5
               Caption = 'ToolButton1'
               ImageIndex = 3
+              Wrap = True
               Style = tbsSeparator
             end
             object btnEntityPrev: TToolButton
-              Left = 120
-              Top = 0
+              Left = 0
+              Top = 5616
+              Margins.Left = 5
+              Margins.Top = 5
+              Margins.Right = 5
+              Margins.Bottom = 5
               Action = actEntityPrev
               ParentShowHint = False
+              Wrap = True
               ShowHint = True
             end
             object btnEntityNext: TToolButton
-              Left = 144
-              Top = 0
+              Left = 0
+              Top = 7011
+              Margins.Left = 5
+              Margins.Top = 5
+              Margins.Right = 5
+              Margins.Bottom = 5
               Action = actEntityNext
               ParentShowHint = False
               ShowHint = True
@@ -883,27 +1246,33 @@ object frmEditorMap: TfrmEditorMap
           end
           object sbrWorkspace: TStatusBar
             Left = 0
-            Top = 616
-            Width = 526
-            Height = 19
+            Top = 597
+            Width = 303
+            Height = 29
+            Margins.Left = 5
+            Margins.Top = 5
+            Margins.Right = 5
+            Margins.Bottom = 5
             Panels = <
               item
                 Alignment = taCenter
                 Text = 'Block Position: X, Y'
-                Width = 150
+                Width = 225
               end
               item
                 Text = 'Screen Location: X, Y'
-                Width = 150
+                Width = 225
               end
               item
                 Text = 'Screen Index: 255'
-                Width = 100
+                Width = 150
               end
               item
-                Width = 50
+                Width = 75
               end>
             Visible = False
+            ExplicitTop = 924
+            ExplicitWidth = 789
           end
         end
       end

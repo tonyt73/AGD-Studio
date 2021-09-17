@@ -2,7 +2,7 @@
 #ifndef ShellProcessH
 #define ShellProcessH
 //---------------------------------------------------------------------------
-#include "DosCommand.hpp"
+#include <DosCommand.hpp>
 #include "Build/BuildProcess.h"
 //---------------------------------------------------------------------------
 class ShellProcess : public BuildProcess

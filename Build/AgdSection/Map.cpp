@@ -2,7 +2,7 @@
 #include "agdx.pch.h"
 #include "Build/AgdSection/Map.h"
 #include "Project/DocumentManager.h"
-#include "Project/MapDocuments.h"
+#include "Project/TiledMapDocument.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------

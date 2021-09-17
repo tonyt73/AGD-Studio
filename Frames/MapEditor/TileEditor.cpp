@@ -163,7 +163,7 @@ void __fastcall TileEditor::OnMouseDownSelectMode(TMouseButton Button, TShiftSta
             }
             else if (m_SelectionCount > 0 || m_HoverEntity.Id)
             {
-                Entity entity;
+                MapEntity entity;
                 if (!GetEntityUnderMouse(X, Y, entity, itSprite) && !GetEntityUnderMouse(X, Y, entity, itObject) && !GetEntityUnderMouse(X, Y, entity, itTile))
                 {
                     // clear selection with a click on empty space
@@ -290,7 +290,7 @@ void __fastcall TileEditor::OnMouseMoveSelectMode(TShiftState Shift, int X, int 
                 {
                     bool refresh = ClearHover();
                     // find an object that intersects the mouse
-                    Entity entity;
+                    MapEntity entity;
                     if ((GetEntityUnderMouse(X, Y, entity, itSprite) || GetEntityUnderMouse(X, Y, entity, itObject) || GetEntityUnderMouse(X, Y, entity, itTile)) /*&& !entity.Selected*/)
                     {
                         m_HoverEntity = entity;
@@ -618,7 +618,7 @@ void __fastcall TileEditor::SetLockIcon(TImage* icon)
     Refresh();
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::SetEntities(const EntityList& entities)
+void __fastcall TileEditor::SetEntities(const MapEntityList& entities)
 {
     m_Entities.clear();
     m_Entities = entities;
@@ -629,10 +629,10 @@ void __fastcall TileEditor::SetEntities(const EntityList& entities)
     }
 }
 //---------------------------------------------------------------------------
-EntityList __fastcall TileEditor::GetSelection(bool resetToOrigin) const
+MapEntityList __fastcall TileEditor::GetSelection(bool resetToOrigin) const
 {
-    EntityList selection;
-    std::copy_if(m_Entities.begin(), m_Entities.end(), back_inserter(selection), [](const Entity& e){ return e.Selected; });
+    MapEntityList selection;
+    std::copy_if(m_Entities.begin(), m_Entities.end(), back_inserter(selection), [](const MapEntity& e){ return e.Selected; });
     if (!resetToOrigin)
     {
         // move the selected entity down 1 and across 1
@@ -648,15 +648,15 @@ EntityList __fastcall TileEditor::GetSelection(bool resetToOrigin) const
     return selection;
 }
 //---------------------------------------------------------------------------
-const EntityList& __fastcall TileEditor::GetEntities() const
+const MapEntityList& __fastcall TileEditor::GetEntities() const
 {
     return m_Entities;
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::Get(const TRect& rect, EntityList& entities) const
+void __fastcall TileEditor::Get(const TRect& rect, MapEntityList& entities) const
 {
     // get all entities that start within the rect
-    std::copy_if(m_Entities.begin(), m_Entities.end(), entities.begin(), [rect](const Entity e) { return rect.Contains(e.Pt); });
+    std::copy_if(m_Entities.begin(), m_Entities.end(), entities.begin(), [rect](const MapEntity e) { return rect.Contains(e.Pt); });
 }
 //---------------------------------------------------------------------------
 unsigned int __fastcall TileEditor::GetToolEntity() const
@@ -951,7 +951,7 @@ void __fastcall TileEditor::Refresh()
     m_View->Refresh();
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::ResetToOrigin(EntityList& list, const TPoint& originPt) const
+void __fastcall TileEditor::ResetToOrigin(MapEntityList& list, const TPoint& originPt) const
 {
     // reposition the entities to 0,0 (origin)
     // find the minimum position
@@ -972,12 +972,12 @@ void __fastcall TileEditor::ResetToOrigin(EntityList& list, const TPoint& origin
 void __fastcall TileEditor::DeleteSelection()
 {
     m_Entities.erase(std::remove_if(m_Entities.begin(),m_Entities.end(),
-        [&](const Entity& entity) { return m_HoverEntity == entity || entity.Selected; }), m_Entities.end());
+        [&](const MapEntity& entity) { return m_HoverEntity == entity || entity.Selected; }), m_Entities.end());
     m_SelectionCount = 0;
     UpdateMap();
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::Add(const EntityList& entities)
+void __fastcall TileEditor::Add(const MapEntityList& entities)
 {
     m_SelectionCount = entities.size();
     m_PrevMouseMode = mmGroupSelect;
@@ -1028,7 +1028,7 @@ bool __fastcall TileEditor::ClearHover()
     bool update = false;
     if (m_HoverEntity.Id)
     {
-        auto entity = std::find_if(m_Entities.begin(), m_Entities.end(), [&](const Entity& e) { return m_HoverEntity == e; });
+        auto entity = std::find_if(m_Entities.begin(), m_Entities.end(), [&](const MapEntity& e) { return m_HoverEntity == e; });
         entity->Dirty = true;
         update = true;
     }
@@ -1039,7 +1039,7 @@ bool __fastcall TileEditor::ClearHover()
 void __fastcall TileEditor::SelectHover()
 {
     UnselectAll();
-    auto entity = std::find_if(m_Entities.begin(), m_Entities.end(), [&](const Entity& e) { return m_HoverEntity == e; });
+    auto entity = std::find_if(m_Entities.begin(), m_Entities.end(), [&](const MapEntity& e) { return m_HoverEntity == e; });
     entity->Selected = true;
     m_SelectionCount = 1;
     m_HoverEntity.Clear();
@@ -1079,13 +1079,13 @@ void __fastcall TileEditor::ReplaceEntities()
     {
         // remove the existing entity at the location
         m_Entities.erase(std::remove_if(m_Entities.begin(),m_Entities.end(),
-            [&](const Entity& entity) { return entity.Type == e.Type && entity.Pt.x == e.Pt.x && entity.Pt.y == e.Pt.y; }), m_Entities.end());
+            [&](const MapEntity& entity) { return entity.Type == e.Type && entity.Pt.x == e.Pt.x && entity.Pt.y == e.Pt.y; }), m_Entities.end());
         // add the new entity at the location
         m_Entities.push_back(e);
     }
 }
 //---------------------------------------------------------------------------
-bool __fastcall TileEditor::GetEntityUnderMouse(int X, int Y, Entity& entity, ImageTypes imageType, bool selectIt)
+bool __fastcall TileEditor::GetEntityUnderMouse(int X, int Y, MapEntity& entity, ImageTypes imageType, bool selectIt)
 {
     auto pt = ViewToMap(X, Y);
     for (auto& e : m_Entities)
@@ -1105,7 +1105,7 @@ bool __fastcall TileEditor::GetEntityUnderMouse(int X, int Y, Entity& entity, Im
     return false;
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::AssignRoomIndexes(EntityList& entities)
+void __fastcall TileEditor::AssignRoomIndexes(MapEntityList& entities)
 {
     // assign room indexes
     auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum;

@@ -8,10 +8,10 @@
 __fastcall ShellProcess::ShellProcess(BuildMessages& buildMessages, BuildMessageType type, const String& description)
 : BuildProcess(buildMessages, type, description)
 {
-    m_Shell = std::make_unique<TDosCommand>(nullptr);
-    m_Shell->OnNewLine = OnNewLineEvent;
-    m_Shell->OnExecuteError = OnErrorEvent;
-    m_Shell->OnTerminated = OnTerminatedEvent;
+//    m_Shell = std::make_unique<TDosCommand>(nullptr);
+//    m_Shell->OnNewLine = OnNewLineEvent;
+//    m_Shell->OnExecuteError = OnErrorEvent;
+//    m_Shell->OnTerminated = OnTerminatedEvent;
 }
 //---------------------------------------------------------------------------
 __fastcall ShellProcess::~ShellProcess()

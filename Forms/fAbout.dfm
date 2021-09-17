@@ -4,42 +4,50 @@ object frmAbout: TfrmAbout
   AlphaBlendValue = 240
   BorderIcons = []
   BorderStyle = bsNone
-  ClientHeight = 284
-  ClientWidth = 402
+  ClientHeight = 288
+  ClientWidth = 404
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
+  Font.Height = -15
   Font.Name = 'Tahoma'
   Font.Style = []
   FormStyle = fsStayOnTop
-  GlassFrame.Enabled = True
   GlassFrame.Bottom = 84
-  OldCreateOrder = False
+  GlassFrame.SheetOfGlass = True
   Position = poMainFormCenter
   Scaled = False
   OnCreate = FormCreate
   OnDeactivate = FormDeactivate
+  PixelsPerInch = 144
   DesignSize = (
-    402
-    284)
-  PixelsPerInch = 96
-  TextHeight = 13
+    404
+    288)
+  TextHeight = 18
   object shpFrame: TShape
     Left = 0
     Top = 0
-    Width = 402
-    Height = 284
+    Width = 404
+    Height = 288
+    Margins.Left = 5
+    Margins.Top = 5
+    Margins.Right = 5
+    Margins.Bottom = 5
     Align = alClient
     Brush.Style = bsClear
-    ExplicitWidth = 414
-    ExplicitHeight = 299
+    Pen.Width = 2
+    ExplicitWidth = 603
+    ExplicitHeight = 426
   end
   object imgLogo: TImage
-    Left = 1
-    Top = 1
+    Left = 2
+    Top = 2
     Width = 400
     Height = 200
+    Margins.Left = 5
+    Margins.Top = 5
+    Margins.Right = 5
+    Margins.Bottom = 5
     AutoSize = True
     Center = True
     Picture.Data = {
@@ -4086,16 +4094,20 @@ object frmAbout: TfrmAbout
   end
   object lblVersion: TLabel
     Left = 0
-    Top = 156
-    Width = 402
-    Height = 13
+    Top = 153
+    Width = 404
+    Height = 24
+    Margins.Left = 5
+    Margins.Top = 5
+    Margins.Right = 5
+    Margins.Bottom = 5
     Alignment = taCenter
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     Caption = 'Version 1.0.0'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -17
     Font.Name = 'Courier New'
     Font.Style = [fsBold]
     Font.Quality = fqProof
@@ -4104,33 +4116,43 @@ object frmAbout: TfrmAbout
   end
   object lblCopyright: TLabel
     Left = 0
-    Top = 261
-    Width = 402
-    Height = 12
+    Top = 254
+    Width = 404
+    Height = 18
+    Margins.Left = 5
+    Margins.Top = 5
+    Margins.Right = 5
+    Margins.Bottom = 5
     Alignment = taCenter
     Anchors = [akLeft, akRight, akBottom]
     AutoSize = False
-    Caption = #169' 2019 Tony Thompson. All rights reserved.'
+    Caption = #169' (c) Tony Thompson. All rights reserved.'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -9
+    Font.Height = -14
     Font.Name = 'Segoe UI'
     Font.Style = []
     Font.Quality = fqProof
     ParentFont = False
+    ExplicitTop = 392
+    ExplicitWidth = 603
   end
   object lblBuild: TLabel
     Left = 0
-    Top = 243
-    Width = 402
-    Height = 12
+    Top = 226
+    Width = 404
+    Height = 18
+    Margins.Left = 5
+    Margins.Top = 5
+    Margins.Right = 5
+    Margins.Bottom = 5
     Alignment = taCenter
     Anchors = [akLeft, akRight, akBottom]
     AutoSize = False
     Caption = 'Build #RS-100.231, built on Feburary 19, 2017'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -9
+    Font.Height = -14
     Font.Name = 'Segoe UI'
     Font.Style = []
     Font.Quality = fqProof
@@ -4138,19 +4160,24 @@ object frmAbout: TfrmAbout
   end
   object lblAGDCopyright: TLabel
     Left = 0
-    Top = 214
-    Width = 402
-    Height = 19
+    Top = 321
+    Width = 404
+    Height = 29
+    Margins.Left = 5
+    Margins.Top = 5
+    Margins.Right = 5
+    Margins.Bottom = 5
     Alignment = taCenter
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     Caption = 'AGD is copyright Jonathan Cauldwell'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -18
     Font.Name = 'Segoe UI Semilight'
     Font.Style = [fsBold]
     GlowSize = 2
     ParentFont = False
+    ExplicitWidth = 603
   end
 end

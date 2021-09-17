@@ -15,7 +15,7 @@ __fastcall MapPencilTool::~MapPencilTool()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall MapPencilTool::Apply(EntityList& list, Entity entity)
+void __fastcall MapPencilTool::Apply(MapEntityList& list, MapEntity entity)
 {
     SnapToTileGrid(LastPt);
     entity.Pt = LastPt;
