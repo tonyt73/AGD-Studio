@@ -4,7 +4,10 @@
 //---------------------------------------------------------------------------
 #include "Project/ProjectDocument.h"
 #include "Project/TextDocuments.h"
-#include "Project/ImageDocuments.h"
+#include "Project/CharacterSetDocument.h"
+#include "Project/ObjectDocument.h"
+#include "Project/SpriteDocument.h"
+#include "Project/TileDocument.h"
 #include "Project/MapDocuments.h"
 #include "Project/WindowDocument.h"
 #include "Project/JumpTableDocument.h"

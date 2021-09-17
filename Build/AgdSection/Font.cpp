@@ -2,7 +2,7 @@
 #include "agdx.pch.h"
 #include "Build/AgdSection/Font.h"
 #include "Project/DocumentManager.h"
-#include "Project/ImageDocuments.h"
+#include "Project/CharacterSetDocument.h"
 #include "Graphics/GraphicsMode.h"
 #include "Graphics/Image.h"
 //---------------------------------------------------------------------------

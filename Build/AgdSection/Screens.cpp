@@ -3,7 +3,7 @@
 #include <math.h>
 #include "Build/AgdSection/Screens.h"
 #include "Project/DocumentManager.h"
-#include "Project/ImageDocuments.h"
+#include "Project/ImageDocument.h"
 #include "Project/MapDocuments.h"
 #include "Project/WindowDocument.h"
 //---------------------------------------------------------------------------

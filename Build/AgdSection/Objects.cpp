@@ -2,7 +2,7 @@
 #include "agdx.pch.h"
 #include "Build/AgdSection/Objects.h"
 #include "Project/DocumentManager.h"
-#include "Project/ImageDocuments.h"
+#include "Project/ObjectDocument.h"
 #include "Project/MapDocuments.h"
 #include "Project/WindowDocument.h"
 #include "Graphics/GraphicsMode.h"

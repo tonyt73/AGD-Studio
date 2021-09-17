@@ -21,7 +21,7 @@
 #include <Vcl.Imaging.pngimage.hpp>
 #include <Vcl.Buttons.hpp>
 #include "LMDDckSite.hpp"
-#include "Project/ImageDocuments.h"
+#include "Project/ImageDocument.h"
 #include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
 #include "Graphics/Image.h"

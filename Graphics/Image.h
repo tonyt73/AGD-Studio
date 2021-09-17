@@ -4,7 +4,7 @@
 //---------------------------------------------------------------------------
 #include <memory>
 #include "Graphics/GraphicsBuffer.h"
-#include "Project/ImageDocuments.h"
+#include "Project/ImageDocument.h"
 //---------------------------------------------------------------------------
 namespace Agdx
 {

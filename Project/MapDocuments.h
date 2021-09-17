@@ -3,7 +3,7 @@
 #define MapDocumentsH
 //---------------------------------------------------------------------------
 #include "Project/Document.h"
-#include "Project/ImageDocuments.h"
+#include "Project/ObjectDocument.h"
 #include "Messaging/Event.h"
 //---------------------------------------------------------------------------
 class TiledMapDocument;
