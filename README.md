@@ -49,6 +49,20 @@ https://github.com/tonyt73/AGDX-Studio/releases
   * This will install all the configuration files and the example project
 
 * Launch the Rad-Studio IDE
+  * Install the DOSCommand component from GetIt Package Manager
+   * Setup the paths for DOS Command
+   * Tools -> Options -> IDE -> Environment Variables
+    * New..
+    * DOSCMD = $(BDSCatalogRepository)\\DOSCommand-2021.09cb-D11\Packages\{latest version}
+    * {latest version} = Sydney, Rio, Alexandria etc
+   * Tools -> Options -> Language -> Paths and Directories
+    * Windows 32-bit
+     * System Include path [...] -> Add $(DOSCMD)\cpp\Win32\Release
+    * Windows 64-bit
+     * System Include path [...] -> Add $(DOSCMD)\cpp\Win64\Release
+    * Click Save
+
+
   * Open up the location you cloned this repo to
   * Open the AGDX Studio.cproj file
 * Press F9 to build and run the application
