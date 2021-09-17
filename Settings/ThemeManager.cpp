@@ -2,6 +2,7 @@
 #include "agdx.pch.h"
 #pragma hdrstop
 //---------------------------------------------------------------------------
+#include <System.StrUtils.hpp>
 #include "Vcl.Themes.hpp"
 #include "Settings/ThemeManager.h"
 #include "Settings/Settings.h"
@@ -52,10 +53,13 @@ void __fastcall ThemeManager::LoadStyles(TComboBox* combo)
     const String style = appSettings.ActiveStyle;
     for (auto i = 0; i < sl->Count; i++)
     {
-        combo->Items->Add(sl->Strings[i]);
-        if (sl->Strings[i] == style)
-        {
-            combo->ItemIndex = combo->Items->Count - 1;
+        auto styleName = sl->Strings[i];
+        if (styleName.Pos(" ") > 0 && combo->Items->IndexOf(styleName) == -1) {
+            combo->Items->Add(styleName);
+            if (styleName == style)
+            {
+                combo->ItemIndex = combo->Items->Count - 1;
+            }
         }
     }
 }
