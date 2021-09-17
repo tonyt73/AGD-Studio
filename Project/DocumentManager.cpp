@@ -205,6 +205,7 @@ void __fastcall DocumentManager::Save()
 //---------------------------------------------------------------------------
 void __fastcall DocumentManager::Load(const String& name)
 {
+    auto start = TDateTime::CurrentTime();
     InformationMessage("[DocumentManager] Loading Project '" + name + "'");
     auto projectDocument = dynamic_cast<ProjectDocument*>(Get("Game", "Configuration", name));
     assert(projectDocument != nullptr);
@@ -213,7 +214,9 @@ void __fastcall DocumentManager::Load(const String& name)
         InformationMessage("[DocumentManager] Loading Project file '" + fileInfo.Type + "." + fileInfo.SubType + "." + fileInfo.Name + "'");
         Add(fileInfo.Type, fileInfo.SubType, fileInfo.Name);
     }
-    InformationMessage("[DocumentManager] Project '" + name + "' Loaded");
+    auto end = TDateTime::CurrentTime();
+    auto ms = (end - start).FormatString("zzz");
+    InformationMessage("[DocumentManager] Project '" + name + "' Loaded in " + ms + "ms");
     appSettings.LastProject = name;
 }
 //---------------------------------------------------------------------------
