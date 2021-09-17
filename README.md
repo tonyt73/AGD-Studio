@@ -52,14 +52,14 @@ https://github.com/tonyt73/AGDX-Studio/releases
   * Install the DOSCommand component from GetIt Package Manager
    * Setup the paths for DOS Command
    * Tools -> Options -> IDE -> Environment Variables
-    * New..
-    * DOSCMD = $(BDSCatalogRepository)\\DOSCommand-2021.09cb-D11\Packages\{latest version}
-    * {latest version} = Sydney, Rio, Alexandria etc
+     * New..
+     * DOSCMD = $(BDSCatalogRepository)\\DOSCommand-2021.09cb-D11\Packages\{latest version}
+     * {latest version} = Sydney, Rio, Alexandria etc
    * Tools -> Options -> Language -> Paths and Directories
-    * Windows 32-bit
-     * System Include path [...] -> Add $(DOSCMD)\cpp\Win32\Release
-    * Windows 64-bit
-     * System Include path [...] -> Add $(DOSCMD)\cpp\Win64\Release
+     * Windows 32-bit
+       * System Include path [...] -> Add $(DOSCMD)\cpp\Win32\Release
+     * Windows 64-bit
+       * System Include path [...] -> Add $(DOSCMD)\cpp\Win64\Release
     * Click Save
 
 
