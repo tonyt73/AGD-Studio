@@ -36,12 +36,12 @@ https://github.com/tonyt73/AGDX-Studio/releases
 
 * Clone this repo on to your PC
 * Download and Install the Embarcardero Rad-Studio C++ Community Edition
-  * https://www.embarcadero.com/products/cbuilder/starter
+  * https://www.embarcadero.com/products/cbuilder/starter/free-download
   * Register if you need to (its free)
   * Install the 32 bit and 64 bit Windows compilers (OSX, iOS & Android are optional)
   * I personally use Rad Studio 10.3.1 (latest)
 * Download the trial version of LMD Innovative components
-  * http://files.lmd.de/downloads/lmd2019vcl/setupvcl19td26.zip
+  * http://files.lmd.de/downloads/
   * Unzip and run the Setup application
   * Click Next to all questions to Install all defaults
 
@@ -53,13 +53,16 @@ https://github.com/tonyt73/AGDX-Studio/releases
    * Setup the paths for DOS Command
    * Tools -> Options -> IDE -> Environment Variables
      * New..
-     * DOSCMD = $(BDSCatalogRepository)\\DOSCommand-2021.09cb-D11\Packages\{latest version}
+	 * DOSCMD_HDR = <location of Dos Command source code>\DOSCommand\Packages\Alexandria\cpp
+     * DOSCMD_LIB = $(BDSCOMMONDIR)\Dcp
      * {latest version} = Sydney, Rio, Alexandria etc
    * Tools -> Options -> Language -> Paths and Directories
      * Windows 32-bit
-       * System Include path [...] -> Add $(DOSCMD)\cpp\Win32\Release
+	   * System Library Path [...] -> Add $(DOSCMD_LIB)
+       * System Include path [...] -> Add $(DOSCMD_HDR)\cpp\Win32\Release
      * Windows 64-bit
-       * System Include path [...] -> Add $(DOSCMD)\cpp\Win64\Release
+	   * System Library Path [...] -> Add $(DOSCMD_LIB)\Win64\Release
+       * System Include path [...] -> Add $(DOSCMD_HDR)\cpp\Win64\Release
     * Click Save
 
 

@@ -9,30 +9,28 @@ object frmNewImage: TfrmNewImage
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -13
-  Font.Name = 'Tahoma'
+  Font.Name = 'Roboto'
   Font.Style = []
-  OldCreateOrder = False
   Position = poMainFormCenter
   ScreenSnap = True
   OnCreate = FormCreate
   DesignSize = (
     349
     142)
-  PixelsPerInch = 96
-  TextHeight = 16
+  TextHeight = 15
   object lblWidth: TLabel
     Left = 16
     Top = 64
-    Width = 33
-    Height = 16
+    Width = 32
+    Height = 15
     Caption = 'Width'
     Enabled = False
   end
   object lblHeight: TLabel
     Left = 212
     Top = 64
-    Width = 36
-    Height = 16
+    Width = 37
+    Height = 15
     Anchors = [akTop, akRight]
     Caption = 'Height'
     Enabled = False
@@ -51,7 +49,6 @@ object frmNewImage: TfrmNewImage
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitTop = 138
     DesignSize = (
       349
       37)
@@ -113,7 +110,7 @@ object frmNewImage: TfrmNewImage
     Left = 268
     Top = 61
     Width = 73
-    Height = 26
+    Height = 24
     Anchors = [akTop, akRight]
     Enabled = False
     Increment = 8
@@ -137,7 +134,7 @@ object frmNewImage: TfrmNewImage
     Left = 72
     Top = 61
     Width = 73
-    Height = 26
+    Height = 24
     Anchors = [akTop, akRight]
     Enabled = False
     Increment = 8

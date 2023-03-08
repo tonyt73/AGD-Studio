@@ -3,6 +3,7 @@
 *.lo
 *.o
 *.obj
+*.cpp-*
 
 # Precompiled Headers
 *.gch
@@ -162,3 +163,4 @@ SortXML.ps1
 backup/*
 *.pdi
 images/*
+*.bak

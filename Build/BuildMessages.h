@@ -2,7 +2,7 @@
 #ifndef BuildMessagesH
 #define BuildMessagesH
 //---------------------------------------------------------------------------
-#include "ElXTree.hpp"
+#include <ElXTree.hpp>
 //---------------------------------------------------------------------------
 enum BuildMessageType { bmOk = 0, bmFailed, bmChecking, bmBuild, bmRun, bmProgress, bmTiming, bmCopy, bmInfo, bmOutput, bmWarning };
 //---------------------------------------------------------------------------
