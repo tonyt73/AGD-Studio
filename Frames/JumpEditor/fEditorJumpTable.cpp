@@ -123,7 +123,7 @@ void __fastcall TfrmEditorJumpTable::actUpExecute(TObject *Sender)
 {
     if (IsActive())
     {
-        m_Document->SetStep(m_ActiveStep, m_Document->GetStep(m_ActiveStep) + 1);
+        m_Document->SetStep(m_ActiveStep, m_Document->GetStep(m_ActiveStep) - 1);
         DrawView();
     }
 }
@@ -132,7 +132,7 @@ void __fastcall TfrmEditorJumpTable::actDownExecute(TObject *Sender)
 {
     if (IsActive())
     {
-        m_Document->SetStep(m_ActiveStep, m_Document->GetStep(m_ActiveStep) - 1);
+        m_Document->SetStep(m_ActiveStep, m_Document->GetStep(m_ActiveStep) + 1);
         DrawView();
     }
 }
