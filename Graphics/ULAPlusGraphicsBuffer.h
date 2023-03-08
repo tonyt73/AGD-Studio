@@ -12,7 +12,7 @@ namespace Agdx
 // ZX Spectrum ULA+ graphics buffer
 // Used by ZX Spectrum, ZX Spectrum Next
 // Attributes are:
-// bit 7, 6     - palette index
+// bits 7, 6    - palette index
 // bits 5,4,3   - paper
 // bits 2,1,0   - ink
 // attributes can be 8x8 or 8x1
