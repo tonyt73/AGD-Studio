@@ -30,7 +30,7 @@ Themes:
     * Save layout per project
 
 ## Releases
-https://github.com/tonyt73/AGDX-Studio/releases
+https://github.com/tonyt73/AGD-Studio/releases
 
 ## Build Instructions
 
@@ -39,7 +39,7 @@ https://github.com/tonyt73/AGDX-Studio/releases
   * https://www.embarcadero.com/products/cbuilder/starter/free-download
   * Register if you need to (its free)
   * Install the 32 bit and 64 bit Windows compilers (OSX, iOS & Android are optional)
-  * I personally use Rad Studio 10.3.1 (latest)
+  * I personally use Rad Studio 11.2
 * Download the trial version of LMD Innovative components
   * http://files.lmd.de/downloads/
   * Unzip and run the Setup application
@@ -58,7 +58,7 @@ https://github.com/tonyt73/AGDX-Studio/releases
      * {latest version} = Sydney, Rio, Alexandria etc
    * Tools -> Options -> Language -> Paths and Directories
      * Windows 32-bit
-	   * System Library Path [...] -> Add $(DOSCMD_LIB)
+       * System Library Path [...] -> Add $(DOSCMD_LIB)
        * System Include path [...] -> Add $(DOSCMD_HDR)\cpp\Win32\Release
      * Windows 64-bit
 	   * System Library Path [...] -> Add $(DOSCMD_LIB)\Win64\Release
@@ -67,6 +67,6 @@ https://github.com/tonyt73/AGDX-Studio/releases
 
 
   * Open up the location you cloned this repo to
-  * Open the AGDX Studio.cproj file
+  * Open the AGD Studio.cproj file
 * Press F9 to build and run the application
 
