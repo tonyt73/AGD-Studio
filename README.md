@@ -8,10 +8,10 @@ Editors for:
 * Images 
   * Sprites
   * Objects
-  * Tiles/Blocks)
+  * Tiles/Blocks
 * Events (Code)
   * Syntax highlighting editor
-    * AGD syntax (done)
+    * AGD syntax
     * Asm syntax (TBD)
   * Code folding
 * Map
