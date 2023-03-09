@@ -18,37 +18,39 @@ object frmIDE: TfrmIDE
     Constraints.MinWidth = 800
     TabOrder = 0
     Layout = {
-      EFBBBF3C3F786D6C2076657273696F6E3D22312E302220656E636F64696E673D
-      227574662D38223F3E0D0A3C736974656C6973743E0D0A093C73697465206470
-      693D223936222069643D2253454C465F53495445223E0D0A09093C7A6F6E6520
-      6B696E643D22484F525A223E0D0A0909093C7A6F6E65206B696E643D22564552
-      54222073697A653D2235373422206473697A653D22302E373334303135333435
-      323638353432223E0D0A090909093C7A6F6E65206B696E643D22544142532220
-      73697A653D2233343522206473697A653D22302E363238343135333030353436
-      3434382220697373706163653D2231223E0D0A09090909093C7A6F6E65206B69
-      6E643D2250414E454C222069643D224C4D44446F636B50616E656C3222207669
-      7369626C653D2230222F3E0D0A090909093C2F7A6F6E653E0D0A090909093C7A
-      6F6E65206B696E643D225441425322206163746976657461623D223122207369
-      7A653D2232303422206473697A653D22302E3337313538343639393435333535
-      32223E0D0A09090909093C7A6F6E65206B696E643D2250414E454C222069643D
-      226470456469746F724B657973222076697369626C653D2231222F3E0D0A0909
-      0909093C7A6F6E65206B696E643D2250414E454C222069643D2264704275696C
-      64222076697369626C653D2231222F3E0D0A09090909093C7A6F6E65206B696E
-      643D2250414E454C222069643D2264704D65737361676573222076697369626C
-      653D2231222F3E0D0A09090909093C7A6F6E65206B696E643D2250414E454C22
-      2069643D226470536561726368526573756C7473222076697369626C653D2231
-      222F3E0D0A09090909093C7A6F6E65206B696E643D2250414E454C222069643D
-      226470546F646F222076697369626C653D2231222F3E0D0A090909093C2F7A6F
-      6E653E0D0A0909093C2F7A6F6E653E0D0A0909093C7A6F6E65206B696E643D22
-      56455254222073697A653D2232303822206473697A653D22302E323635393834
-      363534373331343538223E0D0A090909093C7A6F6E65206B696E643D2250414E
-      454C222069643D22647050726F6A656374222076697369626C653D2231222073
-      697A653D2232373322206473697A653D22302E34393737393038363839323438
-      39222F3E0D0A090909093C7A6F6E65206B696E643D2250414E454C222069643D
-      22647050726F70657274696573222076697369626C653D2231222073697A653D
-      2232373622206473697A653D22302E3530323230393133313037353131222F3E
-      0D0A0909093C2F7A6F6E653E0D0A09093C2F7A6F6E653E0D0A093C2F73697465
-      3E0D0A3C2F736974656C6973743E}
+      3C3F786D6C2076657273696F6E3D22312E30223F3E0D0A3C736974656C697374
+      3E0D0A20203C73697465206470693D223936222069643D2253454C465F534954
+      45223E0D0A202020203C7A6F6E65206B696E643D22484F525A223E0D0A202020
+      2020203C7A6F6E65206B696E643D2256455254222073697A653D223537342220
+      6473697A653D22302E373334303135333435323638353432223E0D0A20202020
+      202020203C7A6F6E65206B696E643D2254414253222073697A653D2233343522
+      206473697A653D22302E36323834313533303035343634343822206973737061
+      63653D2274727565223E0D0A202020202020202020203C7A6F6E65206B696E64
+      3D2250414E454C222069643D224C4D44446F636B50616E656C32222076697369
+      626C653D2266616C7365222F3E0D0A20202020202020203C2F7A6F6E653E0D0A
+      20202020202020203C7A6F6E65206B696E643D22544142532220616374697665
+      7461623D2231222073697A653D2232303422206473697A653D22302E33373135
+      3834363939343533353532223E0D0A202020202020202020203C7A6F6E65206B
+      696E643D2250414E454C222069643D226470456469746F724B65797322207669
+      7369626C653D2274727565222F3E0D0A202020202020202020203C7A6F6E6520
+      6B696E643D2250414E454C222069643D2264704275696C64222076697369626C
+      653D2274727565222F3E0D0A202020202020202020203C7A6F6E65206B696E64
+      3D2250414E454C222069643D2264704D65737361676573222076697369626C65
+      3D2274727565222F3E0D0A202020202020202020203C7A6F6E65206B696E643D
+      2250414E454C222069643D226470536561726368526573756C74732220766973
+      69626C653D2274727565222F3E0D0A202020202020202020203C7A6F6E65206B
+      696E643D2250414E454C222069643D226470546F646F222076697369626C653D
+      2274727565222F3E0D0A20202020202020203C2F7A6F6E653E0D0A2020202020
+      203C2F7A6F6E653E0D0A2020202020203C7A6F6E65206B696E643D2256455254
+      222073697A653D2232303822206473697A653D22302E32363539383436353437
+      3331343538223E0D0A20202020202020203C7A6F6E65206B696E643D2250414E
+      454C222069643D22647050726F6A656374222076697369626C653D2274727565
+      222073697A653D2232373322206473697A653D22302E34393737393038363839
+      32343839222F3E0D0A20202020202020203C7A6F6E65206B696E643D2250414E
+      454C222069643D22647050726F70657274696573222076697369626C653D2274
+      727565222073697A653D2232373622206473697A653D22302E35303232303931
+      33313037353131222F3E0D0A2020202020203C2F7A6F6E653E0D0A202020203C
+      2F7A6F6E653E0D0A20203C2F736974653E0D0A3C2F736974656C6973743E0D0A}
     object dpBuild: TLMDDockPanel
       Left = 6
       Top = 357
@@ -230,6 +232,7 @@ object frmIDE: TfrmIDE
             Hint = 'Collapse All'
             Caption = 'tbnProjectCollapseAll'
             ImageIndex = 1
+            ImageName = 'tv collapse'
             ParentShowHint = False
             ShowHint = True
             OnClick = tbnProjectCollapseAllClick
@@ -239,6 +242,7 @@ object frmIDE: TfrmIDE
             Top = 0
             Hint = 'Show Folders'
             ImageIndex = 4
+            ImageName = 'tv showfolders'
             ParentShowHint = False
             ShowHint = True
             OnClick = tbnProjectShowFoldersClick
@@ -248,6 +252,7 @@ object frmIDE: TfrmIDE
             Top = 0
             Hint = 'Expand All'
             ImageIndex = 0
+            ImageName = 'tv expand'
             ParentShowHint = False
             ShowHint = True
             OnClick = tbnProjectExpandAllClick
@@ -258,6 +263,7 @@ object frmIDE: TfrmIDE
             Width = 8
             Caption = 'tbnProjectZ1'
             ImageIndex = 2
+            ImageName = 'tv showlines'
             Style = tbsSeparator
           end
           object tbnProjectShowLines: TToolButton
@@ -266,6 +272,7 @@ object frmIDE: TfrmIDE
             Hint = 'Show Lines'
             Grouped = True
             ImageIndex = 2
+            ImageName = 'tv showlines'
             ParentShowHint = False
             ShowHint = True
             Style = tbsCheck
@@ -277,6 +284,7 @@ object frmIDE: TfrmIDE
             Hint = 'Hide Lines'
             Grouped = True
             ImageIndex = 3
+            ImageName = 'tv hidelines'
             ParentShowHint = False
             ShowHint = True
             Style = tbsCheck
@@ -294,12 +302,18 @@ object frmIDE: TfrmIDE
           ActiveBorderType = fbtNone
           Align = alClient
           Style.ParentColors = False
-          Style.FontSize = 8
+          Style.TextColor = 3355443
+          Style.FontSize = 9
           Style.FontStyles = []
-          Style.FontName = 'Tahoma'
+          Style.FontName = 'Segoe UI'
           CustomPlusMinus = True
           DoInplaceEdit = False
           Flat = True
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = 3355443
+          Font.Height = -12
+          Font.Name = 'Segoe UI'
+          Font.Style = []
           HeaderHeight = 19
           HeaderSections.Data = {
             F1FFFFFF010000000000000000000000FFFFFFFF000001010100000000000000
@@ -313,7 +327,7 @@ object frmIDE: TfrmIDE
           HorzScrollBarStyles.ThemeGlobalMode = True
           Images = imgProjectNodes
           ItemIndent = 18
-          LineHeight = 18
+          LineHeight = 19
           MinusPicture.Data = {
             EE000000424DEE0000000000000076000000280000000F0000000F0000000100
             04000000000078000000C40E0000C40E00001000000010000000000000004040
@@ -323,6 +337,7 @@ object frmIDE: TfrmIDE
             0000000011222110000000011221221100000011221112211000011221101122
             1100012211000112210001211000001121000111000000011100000000000000
             000000000000000000000000000000000000}
+          ParentFont = False
           PlusMinusTransparent = True
           PlusPicture.Data = {
             EE000000424DEE0000000000000076000000280000000F0000000F0000000100
@@ -345,6 +360,7 @@ object frmIDE: TfrmIDE
           VertScrollBarStyles.ThemeGlobalMode = True
           ParentThemeMode = False
           ThemeGlobalMode = True
+          TextColor = 3355443
           OnItemSelectedChange = tvProjectItemSelectedChange
           OnDblClick = tvProjectDblClick
           FixedTopRowNum = 0
@@ -423,8 +439,8 @@ object frmIDE: TfrmIDE
           Caption = 'Property information'
           Transparent = True
           WordWrap = True
-          ExplicitWidth = 99
-          ExplicitHeight = 13
+          ExplicitWidth = 111
+          ExplicitHeight = 15
         end
       end
     end
@@ -502,6 +518,7 @@ object frmIDE: TfrmIDE
         Width = 8
         Caption = 'ToolButton1'
         ImageIndex = 7
+        ImageName = 'paste_plain'
         Style = tbsSeparator
       end
       object ToolButton4: TToolButton
@@ -524,6 +541,7 @@ object frmIDE: TfrmIDE
         Width = 8
         Caption = 'ToolButton6'
         ImageIndex = 1
+        ImageName = 'folder'
         Style = tbsSeparator
       end
       object btnEditCopy: TToolButton
@@ -553,6 +571,7 @@ object frmIDE: TfrmIDE
         Width = 8
         Caption = 'ToolButton11'
         ImageIndex = 9
+        ImageName = 'find'
         Style = tbsSeparator
       end
       object ToolButton10: TToolButton
@@ -617,6 +636,7 @@ object frmIDE: TfrmIDE
         Width = 8
         Caption = 'ToolButton14'
         ImageIndex = 6
+        ImageName = 'cut'
         Style = tbsSeparator
         Visible = False
       end
@@ -640,6 +660,7 @@ object frmIDE: TfrmIDE
       Caption = '&Save'
       Hint = 'Save project'
       ImageIndex = 2
+      ImageName = 'disk'
       ShortCut = 16467
       OnExecute = actFileProjectSaveExecute
     end
@@ -655,6 +676,7 @@ object frmIDE: TfrmIDE
       Caption = '&Copy'
       Hint = 'Copy'
       ImageIndex = 5
+      ImageName = 'page_white_copy'
       ShortCut = 16451
       OnExecute = actEditCopyExecute
     end
@@ -663,6 +685,7 @@ object frmIDE: TfrmIDE
       Caption = 'Cu&t'
       Hint = 'Cut'
       ImageIndex = 6
+      ImageName = 'cut'
       ShortCut = 16472
       OnExecute = actEditCutExecute
     end
@@ -671,6 +694,7 @@ object frmIDE: TfrmIDE
       Caption = '&Paste'
       Hint = 'Paste'
       ImageIndex = 7
+      ImageName = 'paste_plain'
       ShortCut = 16470
       OnExecute = actEditPasteExecute
     end
@@ -678,6 +702,7 @@ object frmIDE: TfrmIDE
       Category = 'Help'
       Caption = '&Help'
       ImageIndex = 15
+      ImageName = 'help'
       ShortCut = 112
     end
     object actHelpGettingStarted: TAction
@@ -708,6 +733,7 @@ object frmIDE: TfrmIDE
       Enabled = False
       Hint = 'Undo'
       ImageIndex = 3
+      ImageName = 'arrow_undo'
       ShortCut = 16474
       OnExecute = actEditUndoExecute
     end
@@ -717,6 +743,7 @@ object frmIDE: TfrmIDE
       Enabled = False
       Hint = 'Redo'
       ImageIndex = 4
+      ImageName = 'arrow_redo'
       ShortCut = 24666
       OnExecute = actEditRedoExecute
     end
@@ -725,6 +752,7 @@ object frmIDE: TfrmIDE
       Caption = 'Zoom &In'
       Hint = 'Zoom In'
       ImageIndex = 11
+      ImageName = 'zoom_in'
       OnExecute = actEditZoomInExecute
     end
     object actEditZoomOut: TAction
@@ -732,6 +760,7 @@ object frmIDE: TfrmIDE
       Caption = 'Zoom &Out'
       Hint = 'Zoom Out'
       ImageIndex = 12
+      ImageName = 'zoom_out'
       OnExecute = actEditZoomOutExecute
     end
     object actEditZoomReset: TAction
@@ -739,6 +768,7 @@ object frmIDE: TfrmIDE
       Caption = 'Zoom &Reset'
       Hint = 'Zoom Reset'
       ImageIndex = 13
+      ImageName = 'zoom_actual'
       OnExecute = actEditZoomResetExecute
     end
     object actFileNewAsset: TAction
@@ -746,6 +776,7 @@ object frmIDE: TfrmIDE
       Caption = 'New Image...'
       Hint = 'Create a new game image'
       ImageIndex = 0
+      ImageName = 'asterisk_orange'
       ShortCut = 16462
       OnExecute = actFileNewAssetExecute
     end
@@ -754,6 +785,7 @@ object frmIDE: TfrmIDE
       Caption = 'Find...'
       Hint = 'Search the active document'
       ImageIndex = 9
+      ImageName = 'find'
       ShortCut = 16454
       OnExecute = actEditFindExecute
     end
@@ -768,6 +800,7 @@ object frmIDE: TfrmIDE
       Category = 'Edit'
       Caption = 'Replace'
       ImageIndex = 10
+      ImageName = 'text_replace'
       ShortCut = 16456
       OnExecute = actEditReplaceExecute
     end
@@ -782,17 +815,20 @@ object frmIDE: TfrmIDE
       Caption = 'Open Project...'
       Hint = 'Open an existing project.'
       ImageIndex = 1
+      ImageName = 'folder'
       ShortCut = 16463
       OnExecute = actFileProjectOpenExecute
     end
     object actNewAsset: TAction
       Caption = 'New Image (Default Size)'
       ImageIndex = 0
+      ImageName = 'asterisk_orange'
       OnExecute = actNewAssetExecute
     end
     object actDeleteAsset: TAction
       Caption = 'Delete Image'
       ImageIndex = 8
+      ImageName = 'cross'
       ShortCut = 8238
       OnExecute = actDeleteAssetExecute
     end
@@ -800,6 +836,7 @@ object frmIDE: TfrmIDE
       Caption = 'Settings...'
       Hint = 'Show the application settings dialog'
       ImageIndex = 16
+      ImageName = 'cog'
       ShortCut = 24698
       OnExecute = actSettingsExecute
     end
@@ -807,11 +844,13 @@ object frmIDE: TfrmIDE
       Caption = 'Help'
       Hint = 'Show Editor Help'
       ImageIndex = 15
+      ImageName = 'help'
       OnExecute = actEditorHelpExecute
     end
     object actNewAssetCustom: TAction
       Caption = 'New Asset... (Custom Size)'
       ImageIndex = 0
+      ImageName = 'asterisk_orange'
     end
     object actViewBuildResults: TAction
       Category = 'View'
@@ -857,6 +896,7 @@ object frmIDE: TfrmIDE
       Caption = 'Run...'
       Hint = 'Build and Run the game'
       ImageIndex = 14
+      ImageName = 'control_play_blue'
       SecondaryShortCuts.Strings = (
         'F5')
       ShortCut = 120
@@ -3630,109 +3670,90 @@ object frmIDE: TfrmIDE
     Top = 192
   end
   object vilToolbar: TVirtualImageList
-    DisabledGrayscale = False
-    DisabledSuffix = '_Disabled'
     Images = <
       item
         CollectionIndex = 0
         CollectionName = 'asterisk_orange'
-        Disabled = False
         Name = 'asterisk_orange'
       end
       item
         CollectionIndex = 1
         CollectionName = 'folder'
-        Disabled = False
         Name = 'folder'
       end
       item
         CollectionIndex = 2
         CollectionName = 'disk'
-        Disabled = False
         Name = 'disk'
       end
       item
         CollectionIndex = 3
         CollectionName = 'arrow_undo'
-        Disabled = False
         Name = 'arrow_undo'
       end
       item
         CollectionIndex = 4
         CollectionName = 'arrow_redo'
-        Disabled = False
         Name = 'arrow_redo'
       end
       item
         CollectionIndex = 5
         CollectionName = 'page_white_copy'
-        Disabled = False
         Name = 'page_white_copy'
       end
       item
         CollectionIndex = 6
         CollectionName = 'cut'
-        Disabled = False
         Name = 'cut'
       end
       item
         CollectionIndex = 7
         CollectionName = 'paste_plain'
-        Disabled = False
         Name = 'paste_plain'
       end
       item
         CollectionIndex = 8
         CollectionName = 'cross'
-        Disabled = False
         Name = 'cross'
       end
       item
         CollectionIndex = 9
         CollectionName = 'find'
-        Disabled = False
         Name = 'find'
       end
       item
         CollectionIndex = 10
         CollectionName = 'text_replace'
-        Disabled = False
         Name = 'text_replace'
       end
       item
         CollectionIndex = 11
         CollectionName = 'zoom_in'
-        Disabled = False
         Name = 'zoom_in'
       end
       item
         CollectionIndex = 12
         CollectionName = 'zoom_out'
-        Disabled = False
         Name = 'zoom_out'
       end
       item
         CollectionIndex = 13
         CollectionName = 'zoom_actual'
-        Disabled = False
         Name = 'zoom_actual'
       end
       item
         CollectionIndex = 14
         CollectionName = 'control_play_blue'
-        Disabled = False
         Name = 'control_play_blue'
       end
       item
         CollectionIndex = 15
         CollectionName = 'help'
-        Disabled = False
         Name = 'help'
       end
       item
         CollectionIndex = 16
         CollectionName = 'cog'
-        Disabled = False
         Name = 'cog'
       end>
     ImageCollection = icToolbar
@@ -3829,37 +3850,30 @@ object frmIDE: TfrmIDE
     Top = 192
   end
   object vilProject: TVirtualImageList
-    DisabledGrayscale = False
-    DisabledSuffix = '_Disabled'
     Images = <
       item
         CollectionIndex = 0
         CollectionName = 'tv expand'
-        Disabled = False
         Name = 'tv expand'
       end
       item
         CollectionIndex = 1
         CollectionName = 'tv collapse'
-        Disabled = False
         Name = 'tv collapse'
       end
       item
         CollectionIndex = 2
         CollectionName = 'tv showlines'
-        Disabled = False
         Name = 'tv showlines'
       end
       item
         CollectionIndex = 3
         CollectionName = 'tv hidelines'
-        Disabled = False
         Name = 'tv hidelines'
       end
       item
         CollectionIndex = 4
         CollectionName = 'tv showfolders'
-        Disabled = False
         Name = 'tv showfolders'
       end>
     ImageCollection = icProject

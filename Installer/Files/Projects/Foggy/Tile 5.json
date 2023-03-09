@@ -1,18 +1,18 @@
 {
-  "Document": {
-    "RefId": 37
-  },
-  "Image": {
-    "Width": 8,
-    "Height": 8,
-    "Frames": [
-      "7E818D8D81A1817E4E"
-    ],
-    "Layers": [
-      {
-       "Name": "blocktype",
-       "Data": "2"
-      }
-    ]
-  }
+    "Document": {
+        "RefId": 37
+    },
+    "Image": {
+        "Width": 8,
+        "Height": 8,
+        "Frames": [
+            "7E818D8D81A1817E4E"
+        ],
+        "Layers": [
+            {
+                "Name": "blocktype",
+                "Data": "2"
+            }
+        ]
+    }
 }

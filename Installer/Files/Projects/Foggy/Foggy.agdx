@@ -7,134 +7,9 @@
     },
     "Files": [
         {
-            "Name": "Window.json",
-            "Type": "Window",
-            "SubType": "Definition"
-        },
-        {
-            "Name": "JumpTable.json",
-            "Type": "Jump",
-            "SubType": "Table"
-        },
-        {
             "Name": "Controls.json",
             "Type": "Controls",
             "SubType": "List"
-        },
-        {
-            "Name": "Messages.txt",
-            "Type": "Text",
-            "SubType": "Message"
-        },
-        {
-            "Name": "Sound effects.sfx",
-            "Type": "Text",
-            "SubType": "SoundFx"
-        },
-        {
-            "Name": "Player control.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Sprite type 1.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Sprite type 2.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Sprite type 3.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Sprite type 4.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Sprite type 5.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Sprite type 6.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Sprite type 7.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Sprite type 8.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Game initialisation.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Initialise sprite.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Kill player.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Introduction menu.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Main loop 1.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Main loop 2.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Restart screen.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Fell too far.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Lost game.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Completed game.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "New high score.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Collect block.event",
-            "Type": "Text",
-            "SubType": "Event"
         },
         {
             "Name": "Game Font.json",
@@ -692,9 +567,144 @@
             "SubType": "Tile"
         },
         {
+            "Name": "JumpTable.json",
+            "Type": "Jump",
+            "SubType": "Table"
+        },
+        {
             "Name": "Tile Map.json",
             "Type": "Map",
             "SubType": "Tiled"
+        },
+        {
+            "Name": "Messages.txt",
+            "Type": "Text",
+            "SubType": "Message"
+        },
+        {
+            "Name": "Sound effects.sfx",
+            "Type": "Text",
+            "SubType": "SoundFx"
+        },
+        {
+            "Name": "Player control.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Sprite type 1.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Sprite type 2.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Sprite type 3.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Sprite type 4.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Sprite type 5.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Sprite type 6.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Sprite type 7.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Sprite type 8.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Game initialisation.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Initialise sprite.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Kill player.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Introduction menu.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Main loop 1.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Main loop 2.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Restart screen.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Fell too far.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Lost game.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Completed game.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "New high score.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Collect block.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Foggy.agd",
+            "Type": "Text",
+            "SubType": "AGD"
+        },
+        {
+            "Name": "Foggy.asm",
+            "Type": "Text",
+            "SubType": "Assembly"
+        },
+        {
+            "Name": "Window.json",
+            "Type": "Window",
+            "SubType": "Definition"
         }
     ]
 }
