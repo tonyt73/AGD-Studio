@@ -229,11 +229,10 @@ String __fastcall DocumentManager::NextName(const String& type, const String& su
         auto exists = false;
         do {
             exists = false;
-            name = subType + " " + IntToStr(i);
+            name = subType + " " + IntToStr(i++);
             for (const auto& document : it->second) {
                 exists |= (document->SubType == subType && document->Name == name);
             }
-            i++;
         } while (exists);
     }
     return name;
