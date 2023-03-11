@@ -1,10 +1,12 @@
 <img src="Screenshots/Welcome.png" width="512">
 
-[![license](https://img.shields.io/github/license/tonyt73/TommyGun)](./LICENSE.txt)
-![release](https://img.shields.io/github/v/release/tonyt73/AGD-Studio?include_prereleases)
+[![license](https://img.shields.io/github/license/tonyt73/agd-studio)](./LICENSE.txt)
+![release](https://img.shields.io/github/v/release/tonyt73/agd-studio?include_prereleases)
 ![downloads](https://img.shields.io/github/downloads/tonyt73/agd-studio/total)
 
-
+![stars](https://img.shields.io/github/stars/tonyt73/agd-studio?style=social)
+![forks](https://img.shields.io/github/forks/tonyt73/agd-studio?style=social)
+![watchers](https://img.shields.io/github/watchers/tonyt73/agd-studio?style=social)
 
 # An IDE for Jonathan Cauldwell's Arcade Game Designer
 
