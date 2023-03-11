@@ -37,9 +37,9 @@ __fastcall DocumentManager::DocumentManager()
     Register("Text", "AGD", &AGDDocument::Create);
     Register("Text", "Assembly", &AssemblyDocument::Create);
     Register("Text", "Event", &EventDocument::Create);
-    Register("Text", "Message", &MessageDocument::Create);
     Register("Text", "Plain", &TextDocument::Create);
     Register("Text", "SoundFx", &SfxDocument::Create);
+    Register("Text", "Messages", &MessageDocument::Create);
     Register("Window", "Definition", &WindowDocument::Create);
     Register("Jump", "Table", &JumpTableDocument::Create);
     Register("Controls", "List", &ControlsDocument::Create);

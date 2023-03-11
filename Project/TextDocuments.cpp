@@ -67,7 +67,7 @@ __fastcall EventDocument::EventDocument(const String& name)
 __fastcall MessageDocument::MessageDocument(const String& name)
 : TextDocument(name)
 {
-    m_SubType = "Message";
+    m_SubType = "Messages";
     m_Folder = "Game\\Files";
     m_Extension = "txt";
     RegisterProperty("Name", "Details", "The name of the messages text file");

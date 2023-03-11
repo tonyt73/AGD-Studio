@@ -128,6 +128,7 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
             theDocumentManager.Add("Controls", "List", "Controls", "");
             theDocumentManager.Add("Jump", "Table", "JumpTable", "");
             theDocumentManager.Add("Window", "Definition", "Window", "");
+            theDocumentManager.Add("Text", "Messages", "Messages", "");
         }
         else
         {
