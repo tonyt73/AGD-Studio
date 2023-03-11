@@ -18,7 +18,8 @@ const int SCHEMES_EXTS_COUNT = 28;
 const String SCHEMES_EXTS[SCHEMES_EXTS_COUNT] =
 {
     "cpp", "hpp", "cxx", "h",
-    "c", "js", "vb", "pl", "pm", "py", "tcl",
+    "c",
+    "js", "vb", "pl", "pm", "py", "tcl",
     "html", "htm",
     "xml", "php", "asp", "lua", "rex",
     "dfm", "pas", "css",

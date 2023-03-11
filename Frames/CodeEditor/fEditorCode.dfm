@@ -1,14 +1,14 @@
 object frmEditorCode: TfrmEditorCode
   Left = 0
   Top = 0
-  Width = 892
-  Height = 731
+  Width = 880
+  Height = 693
   TabOrder = 0
   object evEditor: TLMDEditView
     Left = 0
     Top = 0
-    Width = 892
-    Height = 712
+    Width = 880
+    Height = 674
     Align = alClient
     BevelEdges = []
     BevelInner = bvNone
@@ -29,12 +29,14 @@ object frmEditorCode: TfrmEditorCode
     CustomKeyBindings = <>
     OnStatusChanged = evEditorStatusChanged
     OnEnter = evEditorEnter
+    ExplicitWidth = 892
+    ExplicitHeight = 712
     GutterBarsEmpty = False
   end
   object sbStatus: TStatusBar
     Left = 0
-    Top = 712
-    Width = 892
+    Top = 674
+    Width = 880
     Height = 19
     Panels = <
       item
@@ -61,6 +63,8 @@ object frmEditorCode: TfrmEditorCode
       item
         Width = 50
       end>
+    ExplicitTop = 712
+    ExplicitWidth = 892
   end
   object lmdDocument: TLMDEditDocument
     Lines.Strings = (
