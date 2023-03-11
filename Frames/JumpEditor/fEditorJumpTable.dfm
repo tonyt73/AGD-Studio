@@ -1,8 +1,8 @@
 object frmEditorJumpTable: TfrmEditorJumpTable
   Left = 0
   Top = 0
-  Width = 887
-  Height = 720
+  Width = 871
+  Height = 681
   TabOrder = 0
   OnMouseActivate = FrameMouseActivate
   OnResize = FrameResize

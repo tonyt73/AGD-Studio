@@ -3,15 +3,15 @@
 #define fEditorJumpTableH
 //---------------------------------------------------------------------------
 #include <System.Classes.hpp>
+#include <System.Actions.hpp>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
-#include "LMDDckSite.hpp"
-#include "Project/JumpTableDocument.h"
-#include <System.Actions.hpp>
 #include <Vcl.ActnList.hpp>
 #include <Vcl.ComCtrls.hpp>
 #include <Vcl.ExtCtrls.hpp>
+#include "LMDDckSite.hpp"
+#include "Project/JumpTableDocument.h"
 //---------------------------------------------------------------------------
 class TfrmEditorJumpTable : public TFrame
 {
