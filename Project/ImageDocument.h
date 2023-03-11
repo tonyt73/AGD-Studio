@@ -10,7 +10,7 @@
 // It is only used to manage the image content (aka: frames and optionally layers).
 // It DOES NOT know the format of the image data; as that is specified by the
 // the project machine and graphics mode used.
-// All frames are stored in there machine dependent graphic format in hex.
+// All frames are stored in their machine dependent graphic format in hex.
 // Basically it is standard bitmap data.
 // Only the graphic mode class knows how to encode this information.
 //---------------------------------------------------------------------------
