@@ -53,16 +53,18 @@ https://github.com/tonyt73/AGD-Studio/releases
    * Setup the paths for DOS Command
    * Tools -> Options -> IDE -> Environment Variables
      * New..
-	 * DOSCMD_HDR = <location of Dos Command source code>\DOSCommand\Packages\Alexandria\cpp
-     * DOSCMD_LIB = $(BDSCOMMONDIR)\Dcp
+        * Variable: DOSCMD_HDR
+        * Value: {location of Dos Command source code}\DOSCommand\Packages\Alexandria\cpp
+        * Variable: DOSCMD_LIB
+        * Value: $(BDSCOMMONDIR)\Dcp
      * {latest version} = Sydney, Rio, Alexandria etc
    * Tools -> Options -> Language -> Paths and Directories
      * Windows 32-bit
-       * System Library Path [...] -> Add $(DOSCMD_LIB)
-       * System Include path [...] -> Add $(DOSCMD_HDR)\cpp\Win32\Release
+        * System Library Path [...] -> Add $(DOSCMD_LIB)
+        * System Include path [...] -> Add $(DOSCMD_HDR)\Win32\Release
      * Windows 64-bit
-	   * System Library Path [...] -> Add $(DOSCMD_LIB)\Win64\Release
-       * System Include path [...] -> Add $(DOSCMD_HDR)\cpp\Win64\Release
+        * System Library Path [...] -> Add $(DOSCMD_LIB)\Win64\Release
+        * System Include path [...] -> Add $(DOSCMD_HDR)\Win64\Release
     * Click Save
 
 
