@@ -1,8 +1,8 @@
 <img src="Screenshots/Welcome.png" width="512">
 
-[![license](https://img.shields.io/github/license/tonyt73/TommyGun)](./LICENSE.txt)
+[![license](https://img.shields.io/github/license/tonyt73/TommyGun)](./LICENSE.txt)  ![release](https://img.shields.io/github/v/release/tonyt73/AGD-Studio?include_prereleases)
 
-![release](https://img.shields.io/github/v/release/tonyt73/AGD-Studio?include_prereleases)
+
 
 # An IDE for Jonathan Cauldwell's Arcade Game Designer
 
