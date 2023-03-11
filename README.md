@@ -1,5 +1,5 @@
 <img src="Screenshots/Welcome.png" width="512">
-[![license](https://img.shields.io/github/license/tonyt73/AGD-Studio)](./LICENSE.txt)
+[![license](https://img.shields.io/github/license/tonyt73/AGD-Studio)](./License.txt)
 
 # An IDE for Jonathan Cauldwell's Arcade Game Designer
 
