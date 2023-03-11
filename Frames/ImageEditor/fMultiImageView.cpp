@@ -41,7 +41,7 @@ void __fastcall TMultiImageViewFrame::Clear()
 void __fastcall TMultiImageViewFrame::Add(const Agdx::GraphicsBuffer& image, const String& hint)
 {
     static int i = 8236;
-    auto control = new TSelectionImageFrame(this, image);
+    auto control = new TSelectionImageFrame(this, image, hint);
     control->Name = "SelectionImageFrame" + IntToStr(++i);
     control->Hint = hint;
     control->Update();

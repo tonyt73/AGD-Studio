@@ -1,8 +1,8 @@
 object MultiImageViewFrame: TMultiImageViewFrame
   Left = 0
   Top = 0
-  Width = 451
-  Height = 100
+  Width = 435
+  Height = 61
   HorzScrollBar.ParentColor = False
   HorzScrollBar.Smooth = True
   HorzScrollBar.Style = ssHotTrack

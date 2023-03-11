@@ -1,8 +1,8 @@
 object SelectionImageFrame: TSelectionImageFrame
   Left = 0
   Top = 0
-  Width = 113
-  Height = 113
+  Width = 124
+  Height = 75
   Color = clBtnFace
   Ctl3D = True
   Font.Charset = DEFAULT_CHARSET
@@ -24,12 +24,16 @@ object SelectionImageFrame: TSelectionImageFrame
   object imgBitmap: TImage
     Left = 4
     Top = 4
-    Width = 105
-    Height = 105
+    Width = 116
+    Height = 67
     Align = alClient
+    ParentShowHint = False
+    ShowHint = True
     Stretch = True
     OnClick = imgBitmapClick
     OnMouseEnter = imgBitmapMouseEnter
     OnMouseLeave = imgBitmapMouseLeave
+    ExplicitWidth = 105
+    ExplicitHeight = 105
   end
 end

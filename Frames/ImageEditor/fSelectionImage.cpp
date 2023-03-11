@@ -7,9 +7,10 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
-__fastcall TSelectionImageFrame::TSelectionImageFrame(TComponent* Owner, const Agdx::GraphicsBuffer& image)
+__fastcall TSelectionImageFrame::TSelectionImageFrame(TComponent* Owner, const Agdx::GraphicsBuffer& image, const String& hint)
 : TFrame(Owner)
 , m_Image(image)
+, m_Hint(hint)
 , m_Selected(false)
 , m_Scale(4)
 , m_ScalarX(image.ScalarX)
@@ -20,6 +21,7 @@ __fastcall TSelectionImageFrame::TSelectionImageFrame(TComponent* Owner, const A
 //---------------------------------------------------------------------------
 void __fastcall TSelectionImageFrame::Update()
 {
+    Hint = m_Hint;
     m_Image.Assign(imgBitmap->Picture->Bitmap);
     imgBitmap->Hint = Hint;
 }

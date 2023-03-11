@@ -18,6 +18,7 @@ __published:// IDE-managed Components
     void __fastcall imgBitmapMouseLeave(TObject *Sender);
 private:    // User declarations
     const Agdx::GraphicsBuffer& m_Image;
+    String              m_Hint;
     bool                m_Selected;
     int                 m_Scale;
     float               m_ScalarX;
@@ -27,7 +28,7 @@ private:    // User declarations
     void    __fastcall  SetSelected(bool state);
     void    __fastcall  SetScale(int scale);
 public:     // User declarations
-            __fastcall  TSelectionImageFrame(TComponent* Owner, const Agdx::GraphicsBuffer& image);
+            __fastcall  TSelectionImageFrame(TComponent* Owner, const Agdx::GraphicsBuffer& image, const String& hint = "");
 
     void    __fastcall  Update();
 
