@@ -43,10 +43,11 @@ protected:
             String                  m_Folder;
             String                  m_Extension;
             bool                    m_ShowFileExtension;
+            bool                    m_ReadOnly;
             TPropertyInfoMap        m_PropertyInfo;
+            // TODO: Remove these 2 and put them in to the document manager
             void*                   m_TreeNode;
             void*                   m_DockPanel;
-            bool                    m_ReadOnly;
 
             // document reference id
             unsigned int            m_RefId;        // used by editor to find documents quickly
@@ -59,6 +60,7 @@ static      unsigned int            s_NextRefId;    // next unused ref id. Reset
                                     // update the documents json content
     virtual void        __fastcall  Update() {};//= 0;
 
+                                    // LMD property editor - property is item been edited, category is section and info is the hint description
             void        __fastcall  RegisterProperty(const String& property, const String& category, const String& info);
     virtual void        __fastcall  DoSave() = 0;
             void        __fastcall  SetShowFileExtension(bool value);
