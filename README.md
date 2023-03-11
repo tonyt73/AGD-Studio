@@ -1,6 +1,8 @@
 <img src="Screenshots/Welcome.png" width="512">
 
-[![license](https://img.shields.io/github/license/tonyt73/TommyGun)](./LICENSE.txt)  ![release](https://img.shields.io/github/v/release/tonyt73/AGD-Studio?include_prereleases)
+[![license](https://img.shields.io/github/license/tonyt73/TommyGun)](./LICENSE.txt)
+![release](https://img.shields.io/github/v/release/tonyt73/AGD-Studio?include_prereleases)
+![downloads](https://img.shields.io/github/downloads/tonyt73/agd-studio/total)
 
 
 
