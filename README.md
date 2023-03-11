@@ -1,7 +1,7 @@
 <img src="Screenshots/Welcome.png" width="512">
 
 [![license](https://img.shields.io/github/license/tonyt73/agd-studio?style=for-the-badge)](./LICENSE.txt)
-[![release](https://img.shields.io/github/v/release/tonyt73/agd-studio?include_prereleases?style=for-the-badge)](https://github.com/tonyt73/AGD-Studio/releases)
+[![release](https://img.shields.io/github/v/release/tonyt73/agd-studio?include_prereleases&style=for-the-badge)](https://github.com/tonyt73/AGD-Studio/releases)
 [![downloads](https://img.shields.io/github/downloads/tonyt73/agd-studio/total?style=for-the-badge)](https://github.com/tonyt73/AGD-Studio/releases)
 
 ![stars](https://img.shields.io/github/stars/tonyt73/agd-studio?style=social)
