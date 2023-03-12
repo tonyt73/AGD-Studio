@@ -29,8 +29,6 @@ object frmEditorCode: TfrmEditorCode
     CustomKeyBindings = <>
     OnStatusChanged = evEditorStatusChanged
     OnEnter = evEditorEnter
-    ExplicitWidth = 892
-    ExplicitHeight = 712
     GutterBarsEmpty = False
   end
   object sbStatus: TStatusBar
@@ -63,8 +61,6 @@ object frmEditorCode: TfrmEditorCode
       item
         Width = 50
       end>
-    ExplicitTop = 712
-    ExplicitWidth = 892
   end
   object lmdDocument: TLMDEditDocument
     Lines.Strings = (

@@ -24,7 +24,6 @@
 class TfrmEditorCode : public TFrame
 {
 __published:    // IDE-managed Components
-    //TBCEditor *BCEditor1;
     TLMDEditView *evEditor;
     TStatusBar *sbStatus;
     TLMDEditDocument *lmdDocument;
@@ -123,7 +122,6 @@ private:    // User declarations
     std::map<String, TAction*>  m_ActionMap;
 
     bool            __fastcall  IsActive() const;
-    void            __fastcall  SetDocument(Document* document);
     String          __fastcall  GetSyntaxScByExt(const String& extension);
     void            __fastcall  UpdateStatus();
     void            __fastcall  OnEvent(const Event& event);
@@ -133,6 +131,7 @@ private:    // User declarations
 public:        // User declarations
                     __fastcall  TfrmEditorCode(TComponent* Owner);
                     __fastcall  ~TfrmEditorCode();
+    void            __fastcall  SetDocument(Document* document);
     static  TFrame* __fastcall  Create(Document* document, TComponent* owner)
                                 {
                                     auto editor = new TfrmEditorCode(owner);
