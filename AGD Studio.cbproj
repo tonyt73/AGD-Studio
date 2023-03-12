@@ -79,7 +79,7 @@
         <ILINK_DisplayTime>true</ILINK_DisplayTime>
         <ILINK_LibraryPath>Components\;Frames\ControlsEditor\;Frames\WindowEditor\;Frames\JumpEditor\;Build\AgdSection\;Build\;Frames\IDE\;Frames\WelcomeDialog\;Frames\MapEditor\;Frames\MusicEditor\;Frames\CodeEditor\;Frames\ImageEditor\;Graphics\;Factories\;Messaging\;System\;Project\;Settings\;Frames\;Forms\;..\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\release\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
-        <IncludePath>Components\;$(IncludePath)</IncludePath>
+        <IncludePath>Frames\ImageEditor\;Frames\CodeEditor\;Components\;$(IncludePath)</IncludePath>
         <IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>
         <Multithreaded>true</Multithreaded>
         <ProjectType>CppVCLApplication</ProjectType>
