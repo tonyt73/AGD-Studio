@@ -64,10 +64,10 @@ https://github.com/tonyt73/AGD-Studio/releases
    * Tools -> Options -> IDE -> Environment Variables
      * New..
         * Variable: DOSCMD_HDR
-        * Value: {location of Dos Command source code}\DOSCommand\Packages\Alexandria\cpp
+        * Value: {location of Dos Command source code}\DOSCommand\Packages\{your version}\cpp
         * Variable: DOSCMD_LIB
         * Value: $(BDSCOMMONDIR)\Dcp
-     * {latest version} = Sydney, Rio, Alexandria etc
+     * {your version} = Sydney, Rio, Alexandria etc
    * Tools -> Options -> Language -> Paths and Directories
      * Windows 32-bit
         * System Library Path [...] -> Add $(DOSCMD_LIB)
