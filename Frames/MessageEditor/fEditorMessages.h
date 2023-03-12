@@ -7,11 +7,16 @@
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
 #include <Vcl.ExtCtrls.hpp>
+#include "LMDDckSite.hpp"
 #include "Project/Document.h"
+#include "Graphics/Image.h"
+#include "Graphics/GraphicsMode.h"
 #include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
-#include "LMDDckSite.hpp"
 #include "Project/TextDocuments.h"
+#include "Project/CharacterSetDocument.h"
+#include "fEditorCode.h"
+#include "fMultiImageView.h"
 //---------------------------------------------------------------------------
 class TfrmEditorMessages : public TFrame
 {
@@ -21,14 +26,17 @@ __published:// IDE-managed Components
     TPanel *Panel1;
     TPanel *Panel2;
     TSplitter *Splitter1;
+    TfrmEditorCode *ecMessageEditor;
+    TMultiImageViewFrame *fFramesView;
     void __fastcall FrameMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate);
 private:    // User declarations
-    MessageDocument*            m_Document;
-    std::unique_ptr<TBitmap>    m_View;
+    Document*                   m_Document;
+    Agdx::ImageList             m_Frames;           // the image documents frames as bitmap images
+    const Agdx::GraphicsMode&   m_GraphicsMode;     // the graphics mode used by the project
+
 
     void            __fastcall  SetDocument(Document* document);
     bool            __fastcall  IsActive() const;
-    void            __fastcall  ShowKeysHelp();
 
 public:     // User declarations
                     __fastcall  TfrmEditorMessages(TComponent* Owner);
