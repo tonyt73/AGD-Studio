@@ -34,7 +34,7 @@ void __fastcall TfrmAbout::FormCreate(TObject *Sender)
     GetBuildVersion(Major, Minor, BuildDate, BuildTime);
     auto version = IntToStr(Major) + "." + IntToStr(Minor);
     lblVersion->Caption = "Version " + version;
-    lblBuild->Caption = "Build# AGD Studio " + version + "." + ", built on " + DatePlusDays(BuildDate);
+    lblBuild->Caption = "Build# AGD Studio " + version + ", built on " + DatePlusDays(BuildDate);
     lblCopyright->Caption = ReplaceStr(lblCopyright->Caption, "(c)", TDateTime::CurrentDate().FormatString("yyyy"));
 }
 //---------------------------------------------------------------------------
