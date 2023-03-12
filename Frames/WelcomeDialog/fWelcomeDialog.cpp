@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "agdx.pch.h"
+#include "AgdStudio.pch.h"
 #include "Frames/WelcomeDialog/fWelcomeDialog.h"
 #include "Project/ProjectManager.h"
 #include "Project/MachineConfig.h"

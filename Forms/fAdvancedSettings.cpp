@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "agdx.pch.h"
+#include "AgdStudio.pch.h"
 #include "fAdvancedSettings.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

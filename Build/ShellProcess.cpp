@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "agdx.pch.h"
+#include "AgdStudio.pch.h"
 #include "Build/ShellProcess.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

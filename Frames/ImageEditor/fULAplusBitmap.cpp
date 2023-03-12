@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "agdx.pch.h"
+#include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
 #include "fULAplusBitmap.h"
 #include "Project/DocumentManager.h"

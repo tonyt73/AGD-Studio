@@ -5,7 +5,7 @@
 #include "Project/TiledMapDocument.h"
 #include "System/File.h"
 #include "System/Path.h"
-#include "agdx.pch.h"
+#include "AgdStudio.pch.h"
 #include <System.Character.hpp>
 #include <System.StrUtils.hpp>
 //---------------------------------------------------------------------------

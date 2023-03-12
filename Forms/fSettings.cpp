@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "agdx.pch.h"
+#include "AgdStudio.pch.h"
 #include "fSettings.h"
 #include "Project/DocumentManager.h"
 #include "Project/MachineConfig.h"

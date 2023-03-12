@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "agdx.pch.h"
+#include "AgdStudio.pch.h"
 #include <math.h>
 #include "LabelledImage.h"
 #include "Project/DocumentManager.h"

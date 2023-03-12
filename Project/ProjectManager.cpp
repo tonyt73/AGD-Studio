@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "agdx.pch.h"
+#include "AgdStudio.pch.h"
 #include "Project/ProjectManager.h"
 #include "Frames/CodeEditor/fEditorCode.h"
 #include "Frames/ImageEditor/fEditorImage.h"

@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "agdx.pch.h"
+#include "AgdStudio.pch.h"
 #include "Frames/MapEditor/AssetSelection.h"
 #include "Frames/MapEditor/LabelledImage.h"
 //---------------------------------------------------------------------------

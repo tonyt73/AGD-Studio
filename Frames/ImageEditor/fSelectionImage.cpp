@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "agdx.pch.h"
+#include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
 #include "fSelectionImage.h"
 #include "Settings/ThemeManager.h"

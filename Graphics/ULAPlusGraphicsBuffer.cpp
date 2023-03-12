@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "agdx.pch.h"
+#include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
 #include "Graphics/GraphicsTypes.h"
 #include "Graphics/GraphicsMode.h"

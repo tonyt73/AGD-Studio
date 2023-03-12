@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "agdx.pch.h"
+#include "AgdStudio.pch.h"
 #include "Build/Creation.h"
 #include "Build/AgdSection/Project.h"
 #include "Build/AgdSection/Window.h"

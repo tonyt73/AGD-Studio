@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "agdx.pch.h"
+#include "AgdStudio.pch.h"
 #include "Build/Emulation.h"
 #include "Project/DocumentManager.h"
 //---------------------------------------------------------------------------

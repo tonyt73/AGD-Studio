@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "agdx.pch.h"
+#include "AgdStudio.pch.h"
 #include "Build/BuildManager.h"
 #include "Build/BuildMessages.h"
 #include "Build/PreChecks.h"

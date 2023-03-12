@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "agdx.pch.h"
+#include "AgdStudio.pch.h"
 #include "Build/AgdSection/SectionBuilder.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

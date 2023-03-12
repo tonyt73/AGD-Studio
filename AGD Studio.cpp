@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "agdx.pch.h"
+#include "AgdStudio.pch.h"
 #pragma hdrstop
 #include "Messaging/Messaging.h"
 #include "Settings/Settings.h"
