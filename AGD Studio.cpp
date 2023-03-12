@@ -43,15 +43,15 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE, LPTSTR, int)
 {
     try
     {
-        Application->Initialize();
-        Application->MainFormOnTaskBar = true;
-        ThemeManager::SetStyle(appSettings.ActiveStyle.Trim() != "" ? appSettings.ActiveStyle : "Windows 10 Black Pearl");
-        Application->CreateForm(__classid(TfrmMain), &frmMain);
+         Application->Initialize();
+         Application->MainFormOnTaskBar = true;
+         ThemeManager::SetStyle(appSettings.ActiveStyle.Trim() != "" ? appSettings.ActiveStyle : "Windows 10 Black Pearl");
+         Application->CreateForm(__classid(TfrmMain), &frmMain);
          Application->Run();
     }
     catch (Exception &exception)
     {
-        Application->ShowException(&exception);
+         Application->ShowException(&exception);
     }
     catch (...)
     {
