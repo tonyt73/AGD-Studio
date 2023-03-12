@@ -1,20 +1,21 @@
 object frmEditorImage: TfrmEditorImage
   Left = 0
   Top = 0
-  Width = 1102
-  Height = 920
+  Width = 1270
+  Height = 1077
   TabOrder = 0
   OnEndDock = FrameEndDock
   OnMouseActivate = imgEditorMouseActivate
   object panToolOptions: TPanel
     Left = 0
     Top = 0
-    Width = 1102
+    Width = 1270
     Height = 42
     Align = alTop
     AutoSize = True
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitWidth = 1102
     object btnTool: TButton
       Left = 0
       Top = 0
@@ -30,13 +31,14 @@ object frmEditorImage: TfrmEditorImage
     object Panel2: TPanel
       Left = 57
       Top = 0
-      Width = 1045
+      Width = 1213
       Height = 42
       Align = alClient
       BevelOuter = bvNone
       ShowCaption = False
       TabOrder = 1
       OnMouseActivate = imgEditorMouseActivate
+      ExplicitWidth = 1045
       inline toolbarShape: TfrmToolbarShape
         Left = 0
         Top = 0
@@ -66,8 +68,8 @@ object frmEditorImage: TfrmEditorImage
   end
   object barStatus: TStatusBar
     Left = 0
-    Top = 901
-    Width = 1102
+    Top = 1058
+    Width = 1270
     Height = 19
     Panels = <
       item
@@ -90,13 +92,14 @@ object frmEditorImage: TfrmEditorImage
         Text = 'Graphics Mode'
         Width = 300
       end>
-    ExplicitTop = 871
+    ExplicitTop = 901
+    ExplicitWidth = 1102
   end
   object panToolbar: TPanel
     Left = 0
     Top = 42
     Width = 80
-    Height = 859
+    Height = 1016
     Align = alLeft
     AutoSize = True
     BevelOuter = bvNone
@@ -106,7 +109,7 @@ object frmEditorImage: TfrmEditorImage
     TabOrder = 2
     OnClick = panEditorContainerClick
     OnMouseActivate = imgEditorMouseActivate
-    ExplicitHeight = 829
+    ExplicitHeight = 859
     object lblTools: TLabel
       Left = 0
       Top = 0
@@ -486,16 +489,18 @@ object frmEditorImage: TfrmEditorImage
   object panContainer: TPanel
     Left = 80
     Top = 42
-    Width = 846
-    Height = 859
+    Width = 1014
+    Height = 1016
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 3
+    ExplicitWidth = 846
+    ExplicitHeight = 859
     object sbxView: TScrollBox
       Left = 0
       Top = 0
-      Width = 846
-      Height = 759
+      Width = 1014
+      Height = 916
       HorzScrollBar.Smooth = True
       HorzScrollBar.Tracking = True
       VertScrollBar.Smooth = True
@@ -509,12 +514,13 @@ object frmEditorImage: TfrmEditorImage
       TabOrder = 0
       OnMouseWheel = sbxViewMouseWheel
       OnResize = sbxViewResize
-      ExplicitHeight = 729
+      ExplicitWidth = 846
+      ExplicitHeight = 759
       object panEditorContainer: TPanel
         Left = 0
         Top = 0
-        Width = 846
-        Height = 759
+        Width = 1014
+        Height = 916
         Align = alClient
         BevelOuter = bvNone
         DoubleBuffered = False
@@ -529,12 +535,13 @@ object frmEditorImage: TfrmEditorImage
         StyleElements = [seClient, seBorder]
         OnClick = panEditorContainerClick
         OnMouseActivate = imgEditorMouseActivate
-        ExplicitHeight = 729
+        ExplicitWidth = 846
+        ExplicitHeight = 759
         object panViewFrame: TPanel
           Left = 128
           Top = 128
-          Width = 590
-          Height = 503
+          Width = 758
+          Height = 660
           Align = alClient
           BevelOuter = bvNone
           Color = clWhite
@@ -547,12 +554,13 @@ object frmEditorImage: TfrmEditorImage
           ParentDoubleBuffered = False
           TabOrder = 0
           StyleElements = []
-          ExplicitHeight = 473
+          ExplicitWidth = 590
+          ExplicitHeight = 503
           object imgEditor: TImage
             Left = 1
             Top = 1
-            Width = 588
-            Height = 501
+            Width = 756
+            Height = 658
             Align = alClient
             Stretch = True
             OnClick = panEditorContainerClick
@@ -562,6 +570,7 @@ object frmEditorImage: TfrmEditorImage
             OnMouseUp = imgEditorMouseUp
             ExplicitLeft = 0
             ExplicitTop = 0
+            ExplicitWidth = 588
             ExplicitHeight = 264
           end
         end
@@ -569,8 +578,8 @@ object frmEditorImage: TfrmEditorImage
     end
     object panFrameView: TPanel
       Left = 0
-      Top = 759
-      Width = 846
+      Top = 916
+      Width = 1014
       Height = 100
       Align = alBottom
       AutoSize = True
@@ -578,10 +587,12 @@ object frmEditorImage: TfrmEditorImage
       DoubleBuffered = False
       ParentDoubleBuffered = False
       TabOrder = 1
+      ExplicitTop = 759
+      ExplicitWidth = 846
       inline fFrameView: TMultiImageViewFrame
         Left = 0
         Top = 0
-        Width = 846
+        Width = 1014
         Height = 100
         HorzScrollBar.ParentColor = False
         HorzScrollBar.Smooth = True
@@ -596,21 +607,29 @@ object frmEditorImage: TfrmEditorImage
         ParentCtl3D = False
         ParentDoubleBuffered = False
         TabOrder = 0
-        ExplicitWidth = 846
+        ExplicitLeft = 2
+        ExplicitWidth = 1014
+        ExplicitHeight = 100
+        inherited Timer1: TTimer
+          Left = 216
+          Top = 65528
+        end
       end
     end
   end
   object Panel1: TPanel
-    Left = 926
+    Left = 1094
     Top = 42
     Width = 176
-    Height = 859
+    Height = 1016
     Align = alRight
     BevelOuter = bvNone
     Caption = 'Panel1'
     ShowCaption = False
     TabOrder = 4
     OnMouseActivate = imgEditorMouseActivate
+    ExplicitLeft = 926
+    ExplicitHeight = 859
     object Label2: TLabel
       Left = 0
       Top = 0
@@ -636,12 +655,13 @@ object frmEditorImage: TfrmEditorImage
       Left = 0
       Top = 24
       Width = 176
-      Height = 835
+      Height = 992
       Align = alClient
       BevelOuter = bvNone
       Caption = 'Panel3'
       ShowCaption = False
       TabOrder = 0
+      ExplicitHeight = 835
       inline palAttribute: TfrmPaletteAttribute
         Left = 0
         Top = 0
@@ -1245,7 +1265,7 @@ object frmEditorImage: TfrmEditorImage
         Align = alTop
         TabOrder = 3
         OnMouseActivate = imgEditorMouseActivate
-        ExplicitTop = 336
+        ExplicitTop = 396
         inherited panBlock: TPanel
           Hint = 'Left Mouse Button applies the Block type to the chacter position'
         end
@@ -1266,7 +1286,7 @@ object frmEditorImage: TfrmEditorImage
         Padding.Right = 8
         Padding.Bottom = 8
         TabOrder = 4
-        ExplicitTop = 8
+        ExplicitTop = 336
         inherited spdInkGreen: TSpeedButton
           Down = True
         end

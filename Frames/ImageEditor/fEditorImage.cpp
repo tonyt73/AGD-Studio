@@ -15,17 +15,10 @@
 #pragma link "fToolbarShape"
 #pragma link "fToolbar"
 #pragma link "fPaletteAttribute"
-#pragma link "fPaletteBitmap"
-#pragma link "fULAplusBitmap"
-#pragma link "fBlockTypes"
-#pragma link "fBlockTypes"
-#pragma link "fMultiImageView"
-#pragma link "fPaletteAttribute"
-#pragma link "fPaletteBitmap"
-#pragma link "fToolbar"
-#pragma link "fToolbarShape"
-#pragma link "fULAplusBitmap"
 #pragma link "fPaletteMonoAttribute"
+#pragma link "fPaletteBitmap"
+#pragma link "fULAplusBitmap"
+#pragma link "fBlockTypes"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorImage::TfrmEditorImage(TComponent* Owner)
@@ -662,8 +655,8 @@ void __fastcall TfrmEditorImage::imgEditorMouseMove(TObject *Sender, TShiftState
     auto w = 8 / m_GraphicsMode.ScalarX;
     auto h = 8 / m_GraphicsMode.ScalarY;
     auto pt = ToImagePt(X,Y);
-    barStatus->Panels->Items[2]->Text = "P=" + IntToStr((int)pt.X) + ", " + IntToStr((int)pt.Y) +
-                                        ",C=" + IntToStr((int)(pt.X/w)) + ", " + IntToStr((int)(pt.Y/h));
+    barStatus->Panels->Items[2]->Text = "P=" + IntToStr((int)pt.X)     + ", " + IntToStr((int)pt.Y) +
+                                       ",C=" + IntToStr((int)(pt.X/w)) + ", " + IntToStr((int)(pt.Y/h));
     if (btnAnimateStop->Down)
     {
         if (btnModePaint->Down)

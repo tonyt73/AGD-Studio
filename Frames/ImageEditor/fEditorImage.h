@@ -6,14 +6,14 @@
 #include <System.Actions.hpp>
 #include <System.ImageList.hpp>
 #include <Vcl.ActnCtrls.hpp>
+#include <Vcl.ActnList.hpp>
 #include <Vcl.ActnMan.hpp>
 #include <Vcl.ActnPopup.hpp>
+#include <Vcl.ComCtrls.hpp>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
-#include <Vcl.ComCtrls.hpp>
 #include <Vcl.ToolWin.hpp>
-#include <Vcl.ActnList.hpp>
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.ImgList.hpp>
 #include <Vcl.Menus.hpp>
