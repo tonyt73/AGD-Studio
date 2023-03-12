@@ -17,7 +17,7 @@ __fastcall SectionBuilders::Messages::~Messages()
 void __fastcall SectionBuilders::Messages::Execute()
 {
     const auto& dm = theDocumentManager;
-    auto msgs = dm.Get("Text", "Message", "Messages");
+    auto msgs = dm.Get("Text", "Messages", "Messages");
     if (msgs != nullptr)
     {
         auto file = msgs->File;
