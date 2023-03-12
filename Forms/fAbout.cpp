@@ -1,11 +1,11 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#include "fAbout.h"
 #include <ctime>
 #include <iomanip>
 #include <systdate.h>
 #include <System.StrUtils.hpp>
 #include "Settings/ThemeManager.h"
+#include "fAbout.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -30,10 +30,11 @@ void __fastcall TfrmAbout::FormCreate(TObject *Sender)
     shpFrame->Pen->Color = ThemeManager::Highlight;
     Color = ThemeManager::Background;
     // read application file version and update the labels
-    int Major, Minor, Release, Build;
-    GetBuildVersion(Major, Minor, Release, Build);
-    lblVersion->Caption = "Version " + IntToStr(Major) + "." + IntToStr(Minor);
-    lblBuild->Caption = "Build# AGD Studio " + IntToStr(Major)+"."+IntToStr(Minor)+", built on " + DatePlusDays(Release);
+    int Major, Minor, BuildDate, BuildTime;
+    GetBuildVersion(Major, Minor, BuildDate, BuildTime);
+    auto version = IntToStr(Major) + "." + IntToStr(Minor);
+    lblVersion->Caption = "Version " + version;
+    lblBuild->Caption = "Build# AGD Studio " + version + "." + ", built on " + DatePlusDays(BuildDate);
     lblCopyright->Caption = ReplaceStr(lblCopyright->Caption, "(c)", TDateTime::CurrentDate().FormatString("yyyy"));
 }
 //---------------------------------------------------------------------------
@@ -46,12 +47,12 @@ String __fastcall TfrmAbout::DatePlusDays(int days) const
     return String(datestr);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAbout::GetBuildVersion(int& Major, int& Minor, int& Release, int& Build) const
+void __fastcall TfrmAbout::GetBuildVersion(int& Major, int& Minor, int& Date, int& Time) const
 {
-    Major       = 0;
-    Minor       = 0;
-    Release     = 0;
-    Build       = 0;
+    Major = 0;
+    Minor = 0;
+    Date  = 0;
+    Time  = 0;
     DWORD temp  = 0;
     DWORD infoLen = GetFileVersionInfoSize(Application->ExeName.c_str(), &temp);
     if (infoLen > 0)
@@ -61,10 +62,10 @@ void __fastcall TfrmAbout::GetBuildVersion(int& Major, int& Minor, int& Release,
         auto res = GetFileVersionInfo(Application->ExeName.c_str(), 0, infoLen, pBuf);
         if (VerQueryValue((void*)pBuf, L"\\", (LPVOID*)(&fileInfo), (unsigned int*)&temp))
         {
-            Major   = (int)((fileInfo->dwFileVersionMS >> 16) & 0xffff);
-            Minor   = (int)((fileInfo->dwFileVersionMS      ) & 0xffff);
-            Release = (int)((fileInfo->dwFileVersionLS >> 16) & 0xffff);
-            Build   = (int)((fileInfo->dwFileVersionLS      ) & 0xffff);
+            Major = HIWORD(fileInfo->dwFileVersionMS);
+            Minor = LOWORD(fileInfo->dwFileVersionMS);
+            Date  = HIWORD(fileInfo->dwFileVersionLS);
+            Time  = LOWORD(fileInfo->dwFileVersionLS);
         }
         free(pBuf);
     }
