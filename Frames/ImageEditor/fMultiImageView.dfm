@@ -30,7 +30,7 @@ object MultiImageViewFrame: TMultiImageViewFrame
   object Timer1: TTimer
     Interval = 500
     OnTimer = Timer1Timer
-    Left = 216
-    Top = 40
+    Left = 196
+    Top = 12
   end
 end

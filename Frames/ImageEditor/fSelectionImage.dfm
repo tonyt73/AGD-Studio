@@ -2,14 +2,15 @@ object SelectionImageFrame: TSelectionImageFrame
   Left = 0
   Top = 0
   Width = 124
-  Height = 75
+  Height = 182
+  AutoSize = True
   Color = clBtnFace
   Ctl3D = True
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -32
-  Font.Name = 'Consolas'
-  Font.Style = []
+  Font.Name = 'Ebrima'
+  Font.Style = [fsBold]
   Padding.Left = 4
   Padding.Top = 4
   Padding.Right = 4
@@ -19,21 +20,39 @@ object SelectionImageFrame: TSelectionImageFrame
   ParentCtl3D = False
   ParentFont = False
   TabOrder = 0
-  OnMouseEnter = imgBitmapMouseEnter
-  OnMouseLeave = imgBitmapMouseLeave
+  OnClick = imgBitmapClick
   object imgBitmap: TImage
-    Left = 4
-    Top = 4
-    Width = 116
-    Height = 67
+    AlignWithMargins = True
+    Left = 7
+    Top = 49
+    Width = 110
+    Height = 126
     Align = alClient
     ParentShowHint = False
     ShowHint = True
     Stretch = True
     OnClick = imgBitmapClick
-    OnMouseEnter = imgBitmapMouseEnter
-    OnMouseLeave = imgBitmapMouseLeave
-    ExplicitWidth = 105
-    ExplicitHeight = 105
+    ExplicitLeft = 4
+    ExplicitTop = 72
+    ExplicitWidth = 116
+    ExplicitHeight = 106
+  end
+  object panHint: TPanel
+    AlignWithMargins = True
+    Left = 7
+    Top = 7
+    Width = 110
+    Height = 36
+    Align = alTop
+    BevelOuter = bvSpace
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -32
+    Font.Name = 'Impact'
+    Font.Style = []
+    Padding.Bottom = 8
+    ParentFont = False
+    TabOrder = 0
+    OnClick = imgBitmapClick
   end
 end

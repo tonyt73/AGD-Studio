@@ -13,9 +13,8 @@ class TSelectionImageFrame : public TFrame
 {
 __published:// IDE-managed Components
     TImage *imgBitmap;
+    TPanel *panHint;
     void __fastcall imgBitmapClick(TObject *Sender);
-    void __fastcall imgBitmapMouseEnter(TObject *Sender);
-    void __fastcall imgBitmapMouseLeave(TObject *Sender);
 private:    // User declarations
     const Agdx::GraphicsBuffer& m_Image;
     String              m_Hint;
