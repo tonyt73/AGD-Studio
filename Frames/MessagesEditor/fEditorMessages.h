@@ -28,15 +28,26 @@ __published:// IDE-managed Components
     TSplitter *Splitter1;
     TfrmEditorCode *ecMessageEditor;
     TMultiImageViewFrame *fFramesView;
+    TScrollBox *sbxView;
+    TImage *imgView;
+    TTimer *tmrRefreshView;
     void __fastcall FrameMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate);
+    void __fastcall FrameResize(TObject *Sender);
+    void __fastcall OnStatusChanged(TLMDCustomEditView *AView, TLMDViewStatusChanges AChanges);
+    void __fastcall tmrRefreshViewTimer(TObject *Sender);
+    void __fastcall OnScroll(TObject *Sender, TScrollCode ScrollCode, int &ScrollPos);
 private:    // User declarations
-    Document*                   m_Document;
+    Document*                   m_Document;         // the messages document
+    CharacterSetDocument*       m_CharacterSet;     // the character set document
     Agdx::ImageList             m_Frames;           // the image documents frames as bitmap images
     const Agdx::GraphicsMode&   m_GraphicsMode;     // the graphics mode used by the project
-
+    bool                        m_RefreshView;      // get the timer function to refresh the view
+    std::unique_ptr<TImage>     m_Tile;
 
     void            __fastcall  SetDocument(Document* document);
     bool            __fastcall  IsActive() const;
+    void            __fastcall  RefreshView();
+    void            __fastcall  RefreshCharacterSet();
 
 public:     // User declarations
                     __fastcall  TfrmEditorMessages(TComponent* Owner);

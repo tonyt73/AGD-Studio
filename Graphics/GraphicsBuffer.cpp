@@ -157,7 +157,6 @@ void __fastcall GraphicsBuffer::Draw(TBitmap* bitmap, bool inMonochrome) const
                 sl[x].B = gray;
             }
         }
-
     }
 }
 //---------------------------------------------------------------------------

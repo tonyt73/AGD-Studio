@@ -489,11 +489,11 @@
             <DependentOn>Frames\MapEditor\TileEditor.h</DependentOn>
             <BuildOrder>56</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Frames\MessageEditor\fEditorMessages.cpp">
+        <CppCompile Include="Frames\MessagesEditor\fEditorMessages.cpp">
             <Form>frmEditorMessage</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\MessageEditor\fEditorMessages.h</DependentOn>
+            <DependentOn>Frames\MessagesEditor\fEditorMessages.h</DependentOn>
             <BuildOrder>62</BuildOrder>
         </CppCompile>
         <CppCompile Include="Frames\MouseState.cpp">
@@ -684,7 +684,7 @@
         <FormResources Include="Frames\MapEditor\LabelledImage.dfm"/>
         <FormResources Include="Frames\MusicEditor\fEditorMusic.dfm"/>
         <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
-        <FormResources Include="Frames\MessageEditor\fEditorMessages.dfm"/>
+        <FormResources Include="Frames\MessagesEditor\fEditorMessages.dfm"/>
         <FormResources Include="Forms\fAbout.dfm"/>
         <FormResources Include="Frames\ImageEditor\fEditorImage.dfm"/>
         <FormResources Include="Frames\ImageEditor\fMultiImageView.dfm"/>

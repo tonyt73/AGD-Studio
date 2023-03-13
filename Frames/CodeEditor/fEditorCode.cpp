@@ -326,8 +326,8 @@ void __fastcall TfrmEditorCode::UpdateStatus()
     Breaks.set_length(0);
     Books.set_length(0);
 
-    actReplace->Enabled = (evEditor->Document!=nullptr) && (! evEditor->Document->ReadOnly);
-    actSearch->Enabled = evEditor->Document!=nullptr;
+    actReplace->Enabled = (evEditor->Document != nullptr) && (! evEditor->Document->ReadOnly);
+    actSearch->Enabled = evEditor->Document != nullptr;
     actSearchNext->Enabled = (evEditor->Document==nullptr) ? false : (! evEditor->Document->ReadOnly) || (evEditor->SearchState!=stInReplace);
 
     actCopy->Enabled = evEditor->CanCopy;
@@ -345,18 +345,18 @@ void __fastcall TfrmEditorCode::UpdateStatus()
     actToggleShowRuler->Enabled = true;
     actToggleCursorBound->Enabled = true;
 
-    actGoToLine->Enabled = evEditor->Document!=nullptr;
+    actGoToLine->Enabled = evEditor->Document != nullptr;
  
-    actFoldAll->Enabled = evEditor->Document!=nullptr;
-    actFoldAllInCurrent->Enabled = evEditor->Document!=nullptr;
-    actFoldCurrentTop->Enabled = evEditor->Document!=nullptr;
-    actFoldTops->Enabled = evEditor->Document!=nullptr;
-    actFoldTopsInCurrent->Enabled = evEditor->Document!=nullptr;
+    actFoldAll->Enabled = evEditor->Document != nullptr;
+    actFoldAllInCurrent->Enabled = evEditor->Document != nullptr;
+    actFoldCurrentTop->Enabled = evEditor->Document != nullptr;
+    actFoldTops->Enabled = evEditor->Document != nullptr;
+    actFoldTopsInCurrent->Enabled = evEditor->Document != nullptr;
 
-    actUnfoldAll->Enabled = evEditor->Document!=nullptr;
-    actUnfoldAllInCurrent->Enabled = evEditor->Document!=nullptr;
-    actUnfoldTops->Enabled = evEditor->Document!=nullptr;
-    actUnfoldTopsInCurrent->Enabled = evEditor->Document!=nullptr;
+    actUnfoldAll->Enabled = evEditor->Document != nullptr;
+    actUnfoldAllInCurrent->Enabled = evEditor->Document != nullptr;
+    actUnfoldTops->Enabled = evEditor->Document != nullptr;
+    actUnfoldTopsInCurrent->Enabled = evEditor->Document != nullptr;
 
     actUndo->Enabled = evEditor->CanUndo && (! lmdDocument->ReadOnly);
     actRedo->Enabled = evEditor->CanRedo && (! lmdDocument->ReadOnly);

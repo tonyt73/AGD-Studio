@@ -27,6 +27,8 @@ __published:    // IDE-managed Components
     TLMDEditView *evEditor;
     TStatusBar *sbStatus;
     TLMDEditDocument *lmdDocument;
+    TEditUndo *actUndo;
+    TEditUndo *actRedo;
     TActionList *Actions;
     TAction *actBmkSet_0;
     TAction *actBmkSet_9;
@@ -34,8 +36,6 @@ __published:    // IDE-managed Components
     TAction *actBmkSet_7;
     TAction *actBmkSet_6;
     TAction *actBmkSet_5;
-    TEditUndo *actUndo;
-    TEditUndo *actRedo;
     TAction *actBmkSet_4;
     TAction *actToggleShowLineEnds;
     TAction *actToggleShowTabs;
@@ -83,11 +83,11 @@ __published:    // IDE-managed Components
     TAction *actToggleCursorBound;
     TAction *actToggleShowRuler;
     TAction *actFont;
-    TFontDialog *FontDialog;
     TAction *actSearchPrevious;
     TAction *actZoomIn;
     TAction *actZoomOut;
     TAction *actZoomReset;
+    TFontDialog *FontDialog;
     void __fastcall actUndoExecute(TObject *Sender);
     void __fastcall actRedoExecute(TObject *Sender);
     void __fastcall actGoToLineExecute(TObject *Sender);

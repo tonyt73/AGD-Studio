@@ -5,6 +5,7 @@ object frmEditorMessages: TfrmEditorMessages
   Height = 824
   TabOrder = 0
   OnMouseActivate = FrameMouseActivate
+  OnResize = FrameResize
   object panCharacterSet: TPanel
     Left = 0
     Top = 0
@@ -32,8 +33,6 @@ object frmEditorMessages: TfrmEditorMessages
       ParentCtl3D = False
       ParentDoubleBuffered = False
       TabOrder = 0
-      ExplicitLeft = 309
-      ExplicitTop = 26
       ExplicitWidth = 1204
     end
   end
@@ -45,9 +44,6 @@ object frmEditorMessages: TfrmEditorMessages
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 41
-    ExplicitWidth = 596
-    ExplicitHeight = 320
     object Splitter1: TSplitter
       Left = 521
       Top = 0
@@ -66,7 +62,6 @@ object frmEditorMessages: TfrmEditorMessages
       BevelOuter = bvNone
       Constraints.MinWidth = 200
       TabOrder = 0
-      ExplicitHeight = 620
       inline ecMessageEditor: TfrmEditorCode
         Left = 0
         Top = 0
@@ -74,21 +69,22 @@ object frmEditorMessages: TfrmEditorMessages
         Height = 763
         Align = alClient
         TabOrder = 0
-        ExplicitLeft = 213
-        ExplicitTop = 318
+        ExplicitWidth = 521
+        ExplicitHeight = 763
         inherited evEditor: TLMDEditView
           Width = 521
           Height = 744
-          CompletionSettings.ItemHeight = 15
-          ExplicitLeft = 3
-          ExplicitTop = -6
+          OnScroll = OnScroll
+          OnStatusChanged = OnStatusChanged
           ExplicitWidth = 521
-          ExplicitHeight = 712
+          ExplicitHeight = 744
           GutterBarsEmpty = False
         end
         inherited sbStatus: TStatusBar
           Top = 744
           Width = 521
+          ExplicitTop = 744
+          ExplicitWidth = 521
         end
       end
     end
@@ -101,10 +97,39 @@ object frmEditorMessages: TfrmEditorMessages
       AutoSize = True
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitLeft = 265
-      ExplicitTop = 6
-      ExplicitWidth = 721
-      ExplicitHeight = 620
+      object sbxView: TScrollBox
+        Left = 0
+        Top = 0
+        Width = 677
+        Height = 763
+        HorzScrollBar.Smooth = True
+        HorzScrollBar.Tracking = True
+        VertScrollBar.Smooth = True
+        VertScrollBar.Tracking = True
+        Align = alClient
+        DoubleBuffered = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -8
+        Font.Name = 'Small Fonts'
+        Font.Style = []
+        ParentDoubleBuffered = False
+        ParentFont = False
+        TabOrder = 0
+        object imgView: TImage
+          Left = -2
+          Top = -2
+          Width = 523
+          Height = 555
+          Stretch = True
+        end
+      end
     end
+  end
+  object tmrRefreshView: TTimer
+    Interval = 100
+    OnTimer = tmrRefreshViewTimer
+    Left = 588
+    Top = 400
   end
 end

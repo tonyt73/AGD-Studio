@@ -10,7 +10,7 @@
 #include "Frames/WindowEditor/fEditorWindow.h"
 #include "Frames/JumpEditor/fEditorJumpTable.h"
 #include "Frames/ControlsEditor/fEditorControls.h"
-#include "Frames/MessageEditor/fEditorMessages.h"
+#include "Frames/MessagesEditor/fEditorMessages.h"
 #include "Project/ProjectManager.h"
 #include "Settings/ThemeManager.h"
 #include "Messaging/Messaging.h"
