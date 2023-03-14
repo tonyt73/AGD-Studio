@@ -14,8 +14,9 @@ SolidCompression=yes
 OutputDir=.
 WizardImageFile=agdxstudio-installer-side.bmp
 WizardSmallImageFile=agdxstudio-installer-top.bmp
+WizardStyle=modern
 WizardImageStretch=yes
-PrivilegesRequired=lowest
+PrivilegesRequired=admin
 DisableDirPage=yes
 DisableProgramGroupPage=yes
 AppPublisher=Tony Thompson
@@ -43,6 +44,9 @@ Name: "{commondocs}\AGD Studio\Compilers\Enterprise"
 Name: "{commondocs}\AGD Studio\Compilers\ZX Spectrum\0.7.0"
 Name: "{commondocs}\AGD Studio\Compilers\ZX Spectrum\0.7.2"
 Name: "{commondocs}\AGD Studio\Compilers\ZX Spectrum\0.7.3"
+Name: "{commondocs}\AGD Studio\Compilers\ZX Spectrum\Pasmo"
+Name: "{commondocs}\AGD Studio\Compilers\ZX Spectrum\Spin"
+Name: "{commondocs}\AGD Studio\Fonts"
 Name: "{commondocs}\AGD Studio\Graphics Modes"
 Name: "{commondocs}\AGD Studio\Images"
 Name: "{commondocs}\AGD Studio\Keyboards"
@@ -85,7 +89,6 @@ Source: "C:\Users\Public\Documents\Embarcadero\Studio\22.0\BPL\win64\lmdrtsyntax
 ; x86 (32 bit) application files (Program Files (x86))
 Source: "Binaries\Win32\AGD Studio.exe"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags: solidbreak
 Source: "Binaries\Win32\Launcher.exe"; DestDir: "{app}"; Check: not Is64BitInstallMode
-;Source: "C:\Program Files (x86)\Embarcadero\Studio\22.0\bin\AGD Converter.exe"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\22.0\bin\borlndmm.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\22.0\bin\cc32c280.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\22.0\bin\cc32c280mt.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
@@ -108,21 +111,9 @@ Source: "C:\Users\Public\Documents\Embarcadero\Studio\22.0\BPL\lmdrtlog280.bpl";
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\22.0\BPL\lmdrtprint280.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\22.0\BPL\lmdrtrtlx280.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\22.0\BPL\lmdrtsyntax280.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
-; COMMON FILES
-Source: "Files\Common\File Definitions.json"; DestDir: "{commondocs}\AGD Studio\Common";
-Source: "Files\Common\Mru.json"; DestDir: "{commondocs}\AGD Studio\Common"; Flags: onlyifdoesntexist uninsneveruninstall
-Source: "Files\Common\Settings.json"; DestDir: "{commondocs}\AGD Studio\Common"; Flags: onlyifdoesntexist uninsneveruninstall
-; GRAPHICS MODES
-Source: "Files\Graphics Modes\*.json"; DestDir: "{commondocs}\AGD Studio\Graphics Modes" 
-; MACHINES
-Source: "Files\Machines\*.json"; DestDir: "{commondocs}\AGD Studio\Machines" 
-; PALETTES
-Source: "Files\Palettes\*.json"; DestDir: "{commondocs}\AGD Studio\Palettes" 
-; UI STYLES
-Source: "Files\Styles\*.vsf"; DestDir: "{commondocs}\AGD Studio\Styles" 
-; CODE TEMPLATES
+; DOCUMENTS
 Source: "Files\Coding Templates\*.AGD"; DestDir: "{commondocs}\AGD Studio\Coding Templates"
-; COMPILERS
+Source: "Files\Common\*.*"; DestDir: "{commondocs}\AGD Studio\Common";
 Source: "Files\Compilers\Acorn Atom\*.*"; DestDir: "{commondocs}\AGD Studio\Compilers\Acorn Atom" 
 Source: "Files\Compilers\Amstrad CPC\*.*"; DestDir: "{commondocs}\AGD Studio\Compilers\Amstrad CPC" 
 Source: "Files\Compilers\Dragon\*.*"; DestDir: "{commondocs}\AGD Studio\Compilers\Dragon" 
@@ -130,21 +121,23 @@ Source: "Files\Compilers\Enterprise\*.*"; DestDir: "{commondocs}\AGD Studio\Comp
 Source: "Files\Compilers\ZX Spectrum\0.7.0\*.*"; DestDir: "{commondocs}\AGD Studio\Compilers\ZX Spectrum\0.7.0" 
 Source: "Files\Compilers\ZX Spectrum\0.7.2\*.*"; DestDir: "{commondocs}\AGD Studio\Compilers\ZX Spectrum\0.7.2" 
 Source: "Files\Compilers\ZX Spectrum\0.7.3\*.*"; DestDir: "{commondocs}\AGD Studio\Compilers\ZX Spectrum\0.7.3" 
-; IMAGES
-Source: "Files\Images\*.png"; DestDir: "{commondocs}\AGD Studio\Images" 
-; PASMO
 Source: "Files\Compilers\ZX Spectrum\Pasmo\*.*"; DestDir: "{commondocs}\AGD Studio\Compilers\ZX Spectrum\Pasmo" 
-; ZX SPIN
 Source: "Files\Compilers\ZX Spectrum\Spin\*.*"; DestDir: "{commondocs}\AGD Studio\Compilers\ZX Spectrum\Spin" 
-; FONTS
-Source: "Files\Fonts\*.TTF"; DestDir: "{fonts}"; FontInstall: "Comfortaa (Open Type)"; Flags: onlyifdoesntexist uninsneveruninstall fontisnttruetype
-; EXAMPLE PROJECTS
-; FOGGY
+Source: "Files\Fonts\*.TTF"; DestDir: "{commonfonts}"; FontInstall: "Comfortaa (Open Type)"; Flags: onlyifdoesntexist uninsneveruninstall fontisnttruetype
+Source: "Files\Graphics Modes\*.json"; DestDir: "{commondocs}\AGD Studio\Graphics Modes" 
+Source: "Files\Images\*.png"; DestDir: "{commondocs}\AGD Studio\Images" 
+Source: "Files\Keyboards\*.png"; DestDir: "{commondocs}\AGD Studio\Keyboards" 
+Source: "Files\Machines\*.json"; DestDir: "{commondocs}\AGD Studio\Machines" 
+Source: "Files\Palettes\*.json"; DestDir: "{commondocs}\AGD Studio\Palettes" 
 Source: "Files\Projects\Foggy\*.*"; DestDir: "{commondocs}\AGD Studio\Projects\Foggy"
+Source: "Files\Saved Palettes\Amstrad CPC Mode 0\*.json"; DestDir: "{commondocs}\AGD Studio\Saved Palettes\Amstrad CPC Mode 0" 
+Source: "Files\Saved Palettes\BBC Micro Mode 1\*.json"; DestDir: "{commondocs}\AGD Studio\Saved Palettes\BBC Micro Mode 1" 
+Source: "Files\Saved Palettes\BBC Micro Mode 2\*.json"; DestDir: "{commondocs}\AGD Studio\Saved Palettes\BBC Micro Mode 2" 
+Source: "Files\Saved Palettes\ZX Spectrum ULA+\*.json"; DestDir: "{commondocs}\AGD Studio\Saved Palettes\ZX Spectrum ULA+" 
+Source: "Files\Styles\*.vsf"; DestDir: "{commondocs}\AGD Studio\Styles" 
 
 [Icons]
 Name: "{group}\AGD Studio"; Filename: "{app}\Launcher.exe"
-;Name: "{group}\AGD Converter"; Filename: "{app}\AGD Converter.exe"
 
 [Code]
 procedure DirectoryCopy(SourcePath, DestPath: string);
@@ -197,13 +190,8 @@ begin
 end;
 
 function PrepareToInstall(var NeedsRestart: Boolean): String;
-var
-   OldDir, NewDir: String;
 begin
   Log('PrepareToInstall() called');
-  OldDir := ExpandConstant('{commondocs}') + '\AGDx Studio';
-  NewDir := ExpandConstant('{commondocs}') + '\AGD Studio';
-  DirectoryCopy(OldDir, NewDir);
   Result := '';
 end;
 

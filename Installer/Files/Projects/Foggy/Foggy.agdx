@@ -579,7 +579,7 @@
         {
             "Name": "Messages.txt",
             "Type": "Text",
-            "SubType": "Message"
+            "SubType": "Messages"
         },
         {
             "Name": "Sound effects.sfx",
