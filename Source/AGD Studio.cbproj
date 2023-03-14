@@ -75,13 +75,13 @@
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <DCC_Namespace>System;Vcl;Vcl.Imaging;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
         <DynamicRTL>true</DynamicRTL>
-        <FinalOutputDir>.\$(Platform)\$(Config)</FinalOutputDir>
+        <FinalOutputDir>.\Binaries\$(Platform)\$(Config)</FinalOutputDir>
         <Icon_MainIcon>$(BDS)\bin\cbuilder_PROJECTICON.ico</Icon_MainIcon>
         <ILINK_DisplayTime>true</ILINK_DisplayTime>
         <ILINK_LibraryPath>Components\;Frames\ControlsEditor\;Frames\WindowEditor\;Frames\JumpEditor\;Build\AgdSection\;Build\;Frames\IDE\;Frames\WelcomeDialog\;Frames\MapEditor\;Frames\MusicEditor\;Frames\CodeEditor\;Frames\ImageEditor\;Graphics\;Factories\;Messaging\;System\;Project\;Settings\;Frames\;Forms\;..\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\release\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
         <IncludePath>Frames\ImageEditor\;Frames\CodeEditor\;Components\;$(IncludePath)</IncludePath>
-        <IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>
+        <IntermediateOutputDir>.\Binaries\$(Platform)\$(Config)</IntermediateOutputDir>
         <Multithreaded>true</Multithreaded>
         <ProjectType>CppVCLApplication</ProjectType>
         <SanitizedProjectName>AGD_Studio</SanitizedProjectName>
@@ -95,7 +95,7 @@
         <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=0.13.6663.80;InternalName=AGD Studio;LegalCopyright=2022 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=0.13.6663;Comments=Programmed by Tony Thompson;SpecialBuild=BETA</VerInfo_Keys>
         <VerInfo_Locale>3081</VerInfo_Locale>
         <VerInfo_MajorVer>0</VerInfo_MajorVer>
-        <VerInfo_MinorVer>12</VerInfo_MinorVer>
+        <VerInfo_MinorVer>13</VerInfo_MinorVer>
         <VerInfo_PreRelease>true</VerInfo_PreRelease>
         <VerInfo_Release>6663</VerInfo_Release>
         <VerInfo_Special>true</VerInfo_Special>
@@ -175,6 +175,7 @@
         <LinkPackageStatics>VclSmp.lib;lmdrtprint.lib;xmlrtl.lib;DOSCommandCR.lib;DbxCommonDriver.lib;dbrtl.lib</LinkPackageStatics>
         <BCC_OptimizeMaximum>true</BCC_OptimizeMaximum>
         <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
+        <VerInfo_MinorVer>13</VerInfo_MinorVer>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
         <AppEnableHighDPI>true</AppEnableHighDPI>
@@ -649,7 +650,6 @@
             <DependentOn>Project\WindowDocument.h</DependentOn>
             <BuildOrder>86</BuildOrder>
         </CppCompile>
-        <None Include="README.md"/>
         <CppCompile Include="Settings\Settings.cpp">
             <DependentOn>Settings\Settings.h</DependentOn>
             <BuildOrder>94</BuildOrder>
@@ -724,11 +724,11 @@
         <BorlandProject>
             <CPlusPlusBuilder.Personality>
                 <Excluded_Packages>
+                    <Excluded_Packages Name="C:\USERS\PUBLIC\DOCUMENTS\EMBARCADERO\STUDIO\22.0\bpl\dcllmdgrid280.bpl">LMD 2022 - LMD-Tools GridPack</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k280.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp280.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k280.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp280.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="C:\USERS\PUBLIC\DOCUMENTS\EMBARCADERO\STUDIO\22.0\bpl\dcllmdgrid280.bpl">LMD 2022 - LMD-Tools GridPack</Excluded_Packages>
                 </Excluded_Packages>
                 <ProjectProperties>
                     <ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
@@ -793,14 +793,14 @@
                 </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx64\libcgcrtl.dylib" Class="DependencyModule"/>
                 <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx64\libcgstl.dylib" Class="DependencyModule"/>
-                <DeployFile LocalName=".\Win32\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput"/>
-                <DeployFile LocalName=".\Win32\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput"/>
-                <DeployFile LocalName=".\Win32\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput">
+                <DeployFile LocalName=".\Binaries\Win32\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>AGD_Studio.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName=".\Win32\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput"/>
+                <DeployFile LocalName=".\Win32\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Win64\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Win64\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win64">
@@ -809,14 +809,14 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName=".\Win64\Release\AGD_Studio.exe" Configuration="Release" Class="ProjectOutput"/>
-                <DeployFile LocalName="README.md" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win64">
+                <DeployFile LocalName="Project\README.md" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="README.md" Configuration="Release" Class="ProjectFile">
-                    <Platform Name="Win32">
+                <DeployFile LocalName="README.md" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win64">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
