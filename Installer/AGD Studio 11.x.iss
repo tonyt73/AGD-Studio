@@ -5,7 +5,7 @@
 
 [Setup]
 AppName=AGD Studio
-AppVersion=0.12 BETA
+AppVersion=0.13 BETA
 DefaultDirName={commonpf}\AGD Studio
 DefaultGroupName=AGD Studio
 UninstallDisplayIcon={app}\AGD Studio.exe
@@ -58,7 +58,7 @@ Source: VclStylesinno.dll; DestDir: {app}; Flags: uninsneveruninstall
 Source: "Files\Styles\Windows 10 Black Pearl.vsf"; DestDir: "{commondocs}\AGD Studio\Styles"
 ; x64 (64 bit) application files (Program Files)
 Source: "Binaries\Win64\AGD Studio.exe"; DestDir: "{app}"; Check: Is64BitInstallMode
-Source: "Binaries\Win64\AGDStudio.exe"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "Binaries\Win32\Launcher.exe"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\22.0\bin64\borlndmm.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\22.0\bin64\cc64280.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\22.0\bin64\cc64280mt.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
@@ -81,7 +81,7 @@ Source: "C:\Users\Public\Documents\Embarcadero\Studio\22.0\BPL\win64\lmdrtrtlx28
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\22.0\BPL\win64\lmdrtsyntax280.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 ; x86 (32 bit) application files (Program Files (x86))
 Source: "Binaries\Win32\AGD Studio.exe"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags: solidbreak
-Source: "Binaries\Win32\AGDStudio.exe"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "Binaries\Win32\Launcher.exe"; DestDir: "{app}"; Check: not Is64BitInstallMode
 ;Source: "C:\Program Files (x86)\Embarcadero\Studio\22.0\bin\AGD Converter.exe"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\22.0\bin\borlndmm.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\22.0\bin\cc32c280.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
@@ -141,7 +141,7 @@ Source: "Files\Fonts\*.TTF"; DestDir: "{fonts}"; FontInstall: "Comfortaa (Open T
 Source: "Files\Projects\Foggy\*.*"; DestDir: "{commondocs}\AGD Studio\Projects\Foggy"
 
 [Icons]
-Name: "{group}\AGD Studio"; Filename: "{app}\AGDStudio.exe"
+Name: "{group}\AGD Studio"; Filename: "{app}\Launcher.exe"
 ;Name: "{group}\AGD Converter"; Filename: "{app}\AGD Converter.exe"
 
 [Code]
