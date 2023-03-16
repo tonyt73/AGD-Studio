@@ -4,7 +4,7 @@
 
 [Setup]
 AppName=AGD Studio
-AppVersion=0.15 BETA
+AppVersion=0.14 BETA
 DefaultDirName={commonpf}\AGD Studio
 DefaultGroupName=AGD Studio
 UninstallDisplayIcon={app}\AGD Studio.exe
@@ -86,6 +86,7 @@ Source: "C:\Users\Public\Documents\Embarcadero\Studio\22.0\BPL\win64\lmdrtlog280
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\22.0\BPL\win64\lmdrtprint280.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\22.0\BPL\win64\lmdrtrtlx280.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\22.0\BPL\win64\lmdrtsyntax280.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "C:\Users\Public\Documents\Embarcadero\Studio\22.0\BPL\win64\DOSCommandCR280.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 ; x86 (32 bit) application files (Program Files (x86))
 Source: "Binaries\Win32\AGD Studio.exe"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags: solidbreak
 Source: "Binaries\Win32\Launcher.exe"; DestDir: "{app}"; Check: not Is64BitInstallMode
@@ -111,6 +112,7 @@ Source: "C:\Users\Public\Documents\Embarcadero\Studio\22.0\BPL\lmdrtlog280.bpl";
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\22.0\BPL\lmdrtprint280.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\22.0\BPL\lmdrtrtlx280.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\22.0\BPL\lmdrtsyntax280.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "C:\Users\Public\Documents\Embarcadero\Studio\22.0\BPL\DOSCommandCR280.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
 ; DOCUMENTS
 Source: "Files\Coding Templates\*.AGD"; DestDir: "{commondocs}\AGD Studio\Coding Templates"
 Source: "Files\Common\*.*"; DestDir: "{commondocs}\AGD Studio\Common";
