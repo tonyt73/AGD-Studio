@@ -30,9 +30,12 @@ void __fastcall TfrmAbout::FormCreate(TObject *Sender)
     shpFrame->Pen->Color = ThemeManager::Highlight;
     Color = ThemeManager::Background;
     // read application file version and update the labels
-    int Major, Minor, BuildDate, BuildTime;
-    GetBuildVersion(Major, Minor, BuildDate, BuildTime);
+    int Major, Minor, BuildDate, BuildTime, Patch;
+    GetBuildVersion(Major, Minor, BuildDate, BuildTime, Patch);
     auto version = IntToStr(Major) + "." + IntToStr(Minor);
+    if (Patch != 0) {
+        version += "." + IntToStr(Patch);
+    }
     lblVersion->Caption = "Version " + version;
     lblBuild->Caption = "Build# AGD Studio " + version + ", built on " + DatePlusDays(BuildDate);
     lblCopyright->Caption = ReplaceStr(lblCopyright->Caption, "(c)", TDateTime::CurrentDate().FormatString("yyyy"));
@@ -47,7 +50,7 @@ String __fastcall TfrmAbout::DatePlusDays(int days) const
     return String(datestr);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAbout::GetBuildVersion(int& Major, int& Minor, int& Date, int& Time) const
+void __fastcall TfrmAbout::GetBuildVersion(int& Major, int& Minor, int& Date, int& Time, int& Patch) const
 {
     Major = 0;
     Minor = 0;
@@ -66,6 +69,7 @@ void __fastcall TfrmAbout::GetBuildVersion(int& Major, int& Minor, int& Date, in
             Minor = LOWORD(fileInfo->dwFileVersionMS);
             Date  = HIWORD(fileInfo->dwFileVersionLS);
             Time  = LOWORD(fileInfo->dwFileVersionLS);
+            Patch = HIWORD(fileInfo->dwProductVersionLS);
         }
         free(pBuf);
     }

@@ -21,7 +21,7 @@ __published:    // IDE-managed Components
     void    __fastcall FormCreate(TObject *Sender);
 private:    // User declarations
     String  __fastcall  DatePlusDays(int days) const;
-    void    __fastcall  GetBuildVersion(int& major, int& minor, int& date, int& time) const;
+    void    __fastcall  GetBuildVersion(int& major, int& minor, int& date, int& time, int& patch) const;
 
 public:        // User declarations
             __fastcall  TfrmAbout(TComponent* Owner);
