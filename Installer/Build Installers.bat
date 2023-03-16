@@ -3,4 +3,4 @@
 @rem  
 
 @rem Build Installer Packages
-"C:\Program Files (x86)\Inno Setup 6\iscc.exe" "AGD Studio 11.x.iss"
+"C:\Program Files (x86)\Inno Setup 6\iscc.exe" "AGD Studio.iss"

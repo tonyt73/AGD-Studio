@@ -41,7 +41,7 @@ object SelectionPanelFrame: TSelectionPanelFrame
       Height = 17
       Anchors = [akLeft, akTop, akRight]
       AutoSize = False
-      Caption = 'Documents\Retro Studio\Big Sprite Demo'
+      Caption = 'Documents\AGD Studio\Demo'
       EllipsisPosition = epPathEllipsis
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -52,7 +52,6 @@ object SelectionPanelFrame: TSelectionPanelFrame
       ParentFont = False
       OnClick = lblProjectNameClick
       OnMouseMove = panProjectInfoMouseMove
-      ExplicitWidth = 311
     end
     object lblProjectName: TLabel
       AlignWithMargins = True
@@ -80,7 +79,7 @@ object SelectionPanelFrame: TSelectionPanelFrame
       Height = 17
       Anchors = [akLeft, akTop, akRight]
       AutoSize = False
-      Caption = 'Documents\Retro Studio\Big Sprite Demo'
+      Caption = 'Documents\AGD Studio\Demo'
       EllipsisPosition = epPathEllipsis
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -91,7 +90,6 @@ object SelectionPanelFrame: TSelectionPanelFrame
       ParentFont = False
       OnClick = lblProjectNameClick
       OnMouseMove = panProjectInfoMouseMove
-      ExplicitWidth = 311
     end
     object imgLogo: TImage
       Left = 305
@@ -103,7 +101,6 @@ object SelectionPanelFrame: TSelectionPanelFrame
       Visible = False
       OnClick = lblProjectNameClick
       OnMouseMove = panProjectInfoMouseMove
-      ExplicitLeft = 336
     end
     object prgLoading: TProgressBar
       Left = 19

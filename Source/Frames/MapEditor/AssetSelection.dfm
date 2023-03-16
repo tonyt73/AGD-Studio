@@ -14,8 +14,6 @@ object frmAssetSelection: TfrmAssetSelection
     VertScrollBar.Tracking = True
     Align = alClient
     BorderStyle = bsNone
-    DoubleBuffered = True
-    ParentDoubleBuffered = False
     TabOrder = 0
     OnMouseWheel = sbxListMouseWheel
     OnResize = sbxListResize

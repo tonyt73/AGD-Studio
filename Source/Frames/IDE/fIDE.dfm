@@ -2,18 +2,30 @@ object frmIDE: TfrmIDE
   Left = 0
   Top = 0
   Width = 800
-  Height = 600
+  Height = 817
   Align = alClient
   Constraints.MinHeight = 600
   Constraints.MinWidth = 800
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = [fsBold]
+  ParentFont = False
   TabOrder = 0
   object dsIDE: TLMDDockSite
     Left = 0
     Top = 33
     Width = 800
-    Height = 567
+    Height = 784
     Manager = DockManager
     Align = alClient
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
     Constraints.MinHeight = 567
     Constraints.MinWidth = 800
     TabOrder = 0
@@ -23,14 +35,14 @@ object frmIDE: TfrmIDE
       45223E0D0A202020203C7A6F6E65206B696E643D22484F525A223E0D0A202020
       2020203C7A6F6E65206B696E643D2256455254222073697A653D223537342220
       6473697A653D22302E373334303135333435323638353432223E0D0A20202020
-      202020203C7A6F6E65206B696E643D2254414253222073697A653D2233343522
-      206473697A653D22302E36323834313533303035343634343822206973737061
+      202020203C7A6F6E65206B696E643D2254414253222073697A653D2235363222
+      206473697A653D22302E37333336383134363231343039393222206973737061
       63653D2274727565223E0D0A202020202020202020203C7A6F6E65206B696E64
       3D2250414E454C222069643D224C4D44446F636B50616E656C32222076697369
       626C653D2266616C7365222F3E0D0A20202020202020203C2F7A6F6E653E0D0A
       20202020202020203C7A6F6E65206B696E643D22544142532220616374697665
-      7461623D2231222073697A653D2232303422206473697A653D22302E33373135
-      3834363939343533353532223E0D0A202020202020202020203C7A6F6E65206B
+      7461623D2231222073697A653D2232303422206473697A653D22302E32363633
+      3138353337383539303038223E0D0A202020202020202020203C7A6F6E65206B
       696E643D2250414E454C222069643D226470456469746F724B65797322207669
       7369626C653D2274727565222F3E0D0A202020202020202020203C7A6F6E6520
       6B696E643D2250414E454C222069643D2264704275696C64222076697369626C
@@ -45,20 +57,20 @@ object frmIDE: TfrmIDE
       222073697A653D2232303822206473697A653D22302E32363539383436353437
       3331343538223E0D0A20202020202020203C7A6F6E65206B696E643D2250414E
       454C222069643D22647050726F6A656374222076697369626C653D2274727565
-      222073697A653D2232373322206473697A653D22302E34393737393038363839
+      222073697A653D2233383122206473697A653D22302E34393737393038363839
       32343839222F3E0D0A20202020202020203C7A6F6E65206B696E643D2250414E
       454C222069643D22647050726F70657274696573222076697369626C653D2274
-      727565222073697A653D2232373622206473697A653D22302E35303232303931
+      727565222073697A653D2233383522206473697A653D22302E35303232303931
       33313037353131222F3E0D0A2020202020203C2F7A6F6E653E0D0A202020203C
       2F7A6F6E653E0D0A20203C2F736974653E0D0A3C2F736974656C6973743E0D0A}
     object dpBuild: TLMDDockPanel
       Left = 6
-      Top = 357
+      Top = 574
       Width = 574
       Height = 183
       ParentBackground = False
       TabOrder = 8
-      Caption = 'Build'
+      Caption = 'BUILD'
       object tvBuild: TElXTree
         Left = 0
         Top = 21
@@ -72,17 +84,11 @@ object frmIDE: TfrmIDE
         ActiveBorderType = fbtFlat
         Align = alClient
         AutoExpand = True
-        Style.TextColor = clBtnText
         Style.FontSize = 8
-        Style.FontStyles = []
+        Style.FontStyles = [fsBold]
         Style.FontName = 'Tahoma'
         CustomPlusMinus = True
         DoInplaceEdit = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBtnText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
         FullRowSelect = False
         HeaderHeight = 19
         HeaderSections.Data = {
@@ -110,7 +116,6 @@ object frmIDE: TfrmIDE
           1100012211000112210001211000001121000111000000011100000000000000
           000000000000000000000000000000000000}
         MultiSelect = False
-        ParentFont = False
         ParentShowHint = False
         PlusMinusTransparent = True
         PlusPicture.Data = {
@@ -135,7 +140,6 @@ object frmIDE: TfrmIDE
         VertScrollBarStyles.ShowTrackHint = True
         VertScrollBarStyles.Width = 17
         UseSystemHintColors = True
-        TextColor = clBtnText
         BackGroundColor = clBtnFace
         FixedTopRowNum = 0
         FixedBottomRowNum = 0
@@ -145,12 +149,12 @@ object frmIDE: TfrmIDE
     end
     object dpEditorKeys: TLMDDockPanel
       Left = 6
-      Top = 357
+      Top = 574
       Width = 574
       Height = 183
       ParentBackground = False
       TabOrder = 11
-      Caption = 'Editor Keys'
+      Caption = 'EDITOR KEYS'
       object mbKeys: TMemo
         Left = 0
         Top = 21
@@ -174,12 +178,12 @@ object frmIDE: TfrmIDE
     end
     object dpMessages: TLMDDockPanel
       Left = 6
-      Top = 357
+      Top = 574
       Width = 574
       Height = 183
       ParentBackground = False
       TabOrder = 5
-      Caption = 'Messages'
+      Caption = 'MESSAGES'
       object memMessages: TMemo
         Left = 0
         Top = 21
@@ -196,16 +200,16 @@ object frmIDE: TfrmIDE
       Left = 586
       Top = 6
       Width = 208
-      Height = 273
+      Height = 381
       Buttons = [pbPin, pbMaximize]
       ParentBackground = False
       TabOrder = 6
-      Caption = 'Project'
+      Caption = 'PROJECT'
       object Panel1: TPanel
         Left = 0
         Top = 21
         Width = 208
-        Height = 252
+        Height = 360
         Align = alClient
         BevelOuter = bvNone
         Padding.Left = 1
@@ -295,7 +299,7 @@ object frmIDE: TfrmIDE
           Left = 1
           Top = 27
           Width = 206
-          Height = 224
+          Height = 332
           Hint = ''
           PlusPosition = vaMiddle
           BorderColorWindow = clWindow
@@ -372,16 +376,16 @@ object frmIDE: TfrmIDE
     end
     object dpProperties: TLMDDockPanel
       Left = 586
-      Top = 285
+      Top = 393
       Width = 208
-      Height = 276
+      Height = 385
       Buttons = [pbPin, pbMaximize]
       ParentBackground = False
       TabOrder = 10
-      Caption = 'Properties'
+      Caption = 'PROPERTIES'
       object Splitter1: TSplitter
         Left = 0
-        Top = 233
+        Top = 342
         Width = 208
         Height = 3
         Cursor = crVSplit
@@ -396,7 +400,7 @@ object frmIDE: TfrmIDE
         Left = 0
         Top = 21
         Width = 208
-        Height = 212
+        Height = 321
         PropKinds = [pkProperties, pkReadOnly]
         SortType = stNone
         ArrangeKind = akByCategory
@@ -418,7 +422,7 @@ object frmIDE: TfrmIDE
       end
       object Panel2: TPanel
         Left = 0
-        Top = 236
+        Top = 345
         Width = 208
         Height = 40
         Align = alBottom
@@ -433,40 +437,44 @@ object frmIDE: TfrmIDE
         object lblPropertyInfo: TLabel
           Left = 3
           Top = 3
-          Width = 202
-          Height = 34
+          Width = 99
+          Height = 13
           Align = alClient
           Caption = 'Property information'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
           Transparent = True
           WordWrap = True
-          ExplicitWidth = 111
-          ExplicitHeight = 15
         end
       end
     end
     object dpSearchResults: TLMDDockPanel
       Left = 6
-      Top = 357
+      Top = 574
       Width = 574
       Height = 183
       ParentBackground = False
       TabOrder = 7
-      Caption = 'Search Results'
+      Caption = 'SEARCH RESULTS'
     end
     object dpTodo: TLMDDockPanel
       Left = 6
-      Top = 357
+      Top = 574
       Width = 574
       Height = 183
       ParentBackground = False
       TabOrder = 9
-      Caption = 'Todo'
+      Caption = 'TODO'
     end
     object LMDDockPanel2: TLMDDockPanel
       Left = 6
       Top = 6
       Width = 574
-      Height = 345
+      Height = 562
       PanelVisible = False
       ParentBackground = False
       TabOrder = 4

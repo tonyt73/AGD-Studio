@@ -299,7 +299,7 @@ void __fastcall TfrmIDE::tvProjectDblClick(TObject *Sender)
             auto dp = new TLMDDockPanel(this);
             if (m_DocumentEditorFactory.Create(doc, dp))
             {
-                dp->Caption = doc->Name;
+                dp->Caption = doc->Name.UpperCase();
                 dp->Tag = (NativeInt)doc;
                 doc->DockPanel = dp;
                 UpdateDocumentProperties(doc);

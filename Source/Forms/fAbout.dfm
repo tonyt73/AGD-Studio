@@ -4116,7 +4116,7 @@ object frmAbout: TfrmAbout
   end
   object lblCopyright: TLabel
     Left = 0
-    Top = 254
+    Top = 260
     Width = 404
     Height = 18
     Margins.Left = 5
@@ -4129,19 +4129,17 @@ object frmAbout: TfrmAbout
     Caption = #169' (c) Tony Thompson. All rights reserved.'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -14
-    Font.Name = 'Segoe UI'
+    Font.Height = -11
+    Font.Name = 'Roboto'
     Font.Style = []
     Font.Quality = fqProof
     ParentFont = False
-    ExplicitTop = 392
-    ExplicitWidth = 603
   end
   object lblBuild: TLabel
     Left = 0
-    Top = 226
+    Top = 241
     Width = 404
-    Height = 18
+    Height = 17
     Margins.Left = 5
     Margins.Top = 5
     Margins.Right = 5
@@ -4152,17 +4150,17 @@ object frmAbout: TfrmAbout
     Caption = 'Build #RS-100.231, built on Feburary 19, 2017'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -14
-    Font.Name = 'Segoe UI'
+    Font.Height = -11
+    Font.Name = 'Roboto'
     Font.Style = []
     Font.Quality = fqProof
     ParentFont = False
   end
   object lblAGDCopyright: TLabel
     Left = 0
-    Top = 321
+    Top = 214
     Width = 404
-    Height = 29
+    Height = 17
     Margins.Left = 5
     Margins.Top = 5
     Margins.Right = 5
@@ -4173,11 +4171,10 @@ object frmAbout: TfrmAbout
     Caption = 'AGD is copyright Jonathan Cauldwell'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -18
-    Font.Name = 'Segoe UI Semilight'
+    Font.Height = -13
+    Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     GlowSize = 2
     ParentFont = False
-    ExplicitWidth = 603
   end
 end

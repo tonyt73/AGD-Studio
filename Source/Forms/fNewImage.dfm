@@ -27,7 +27,7 @@ object frmNewImage: TfrmNewImage
     Enabled = False
   end
   object lblHeight: TLabel
-    Left = 212
+    Left = 208
     Top = 64
     Width = 37
     Height = 15
@@ -42,18 +42,14 @@ object frmNewImage: TfrmNewImage
     Height = 37
     Align = alBottom
     BevelOuter = bvNone
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
     TabOrder = 0
+    ExplicitTop = 104
+    ExplicitWidth = 345
     DesignSize = (
       349
       37)
     object btnOk: TButton
-      Left = 182
+      Left = 178
       Top = 6
       Width = 75
       Height = 25
@@ -62,9 +58,10 @@ object frmNewImage: TfrmNewImage
       Default = True
       ModalResult = 1
       TabOrder = 0
+      ExplicitLeft = 174
     end
     object btnCancel: TButton
-      Left = 266
+      Left = 262
       Top = 6
       Width = 75
       Height = 25
@@ -73,6 +70,7 @@ object frmNewImage: TfrmNewImage
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 1
+      ExplicitLeft = 258
     end
   end
   object radObject: TRadioButton
@@ -107,7 +105,7 @@ object frmNewImage: TfrmNewImage
     OnClick = radObjectClick
   end
   object edtHeight: TSpinEdit
-    Left = 268
+    Left = 264
     Top = 61
     Width = 73
     Height = 24
@@ -131,7 +129,7 @@ object frmNewImage: TfrmNewImage
     OnClick = radObjectClick
   end
   object edtWidth: TSpinEdit
-    Left = 72
+    Left = 68
     Top = 61
     Width = 73
     Height = 24

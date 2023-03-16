@@ -11,16 +11,14 @@ object frmAdvancedSettings: TfrmAdvancedSettings
   DefaultMonitor = dmMainForm
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Height = -13
+  Font.Name = 'Roboto'
   Font.Style = []
   FormStyle = fsStayOnTop
   GlassFrame.Bottom = 48
-  OldCreateOrder = False
   Position = poMainFormCenter
   ScreenSnap = True
-  PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   object splSplitter: TSplitter
     Left = 273
     Top = 0
@@ -38,13 +36,13 @@ object frmAdvancedSettings: TfrmAdvancedSettings
     BevelOuter = bvNone
     ShowCaption = False
     TabOrder = 0
-    ExplicitTop = 384
-    ExplicitWidth = 807
+    ExplicitTop = 408
+    ExplicitWidth = 790
     DesignSize = (
       794
       48)
     object Button1: TButton
-      Left = 596
+      Left = 592
       Top = 8
       Width = 80
       Height = 30
@@ -52,10 +50,10 @@ object frmAdvancedSettings: TfrmAdvancedSettings
       Caption = 'Save'
       ModalResult = 1
       TabOrder = 0
-      ExplicitLeft = 609
+      ExplicitLeft = 588
     end
     object Button2: TButton
-      Left = 693
+      Left = 689
       Top = 8
       Width = 80
       Height = 30
@@ -63,7 +61,7 @@ object frmAdvancedSettings: TfrmAdvancedSettings
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 1
-      ExplicitLeft = 706
+      ExplicitLeft = 685
     end
   end
   object crdPanels: TCardPanel
@@ -75,8 +73,8 @@ object frmAdvancedSettings: TfrmAdvancedSettings
     ActiveCard = Card1
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 531
-    ExplicitHeight = 384
+    ExplicitWidth = 514
+    ExplicitHeight = 408
     object Card1: TCard
       Left = 0
       Top = 0
@@ -85,8 +83,8 @@ object frmAdvancedSettings: TfrmAdvancedSettings
       Caption = 'Card1'
       CardIndex = 0
       TabOrder = 0
-      ExplicitWidth = 531
-      ExplicitHeight = 384
+      ExplicitWidth = 514
+      ExplicitHeight = 408
     end
     object Card2: TCard
       Left = 0
@@ -96,8 +94,6 @@ object frmAdvancedSettings: TfrmAdvancedSettings
       Caption = 'Card2'
       CardIndex = 1
       TabOrder = 1
-      ExplicitWidth = 531
-      ExplicitHeight = 384
     end
   end
   object ElXTree1: TElXTree
@@ -109,9 +105,9 @@ object frmAdvancedSettings: TfrmAdvancedSettings
     PlusPosition = vaMiddle
     BorderColorWindow = clWindow
     Align = alLeft
-    Style.FontSize = 8
+    Style.FontSize = 10
     Style.FontStyles = []
-    Style.FontName = 'Tahoma'
+    Style.FontName = 'Roboto'
     BorderStyle = bsNone
     CustomPlusMinus = True
     HeaderHeight = 19
@@ -226,7 +222,7 @@ object frmAdvancedSettings: TfrmAdvancedSettings
       0000000000000000000000000000000000000000000000000000000000000000
       000000FFFFFFFF00000000010000000600000043007500730074006F006D0001
       000000010000000000000000000000000000000000}
-    LineHeight = 18
+    LineHeight = 19
     MinusPicture.Data = {
       EE000000424DEE0000000000000076000000280000000F0000000F0000000100
       04000000000078000000C40E0000C40E00001000000000000000000000004040
@@ -263,7 +259,7 @@ object frmAdvancedSettings: TfrmAdvancedSettings
     FixedBottomRowNum = 0
     FixedColNum = 1
     GutterWidth = 0
-    ExplicitHeight = 384
+    ExplicitHeight = 408
   end
   object ImageList1: TImageList
     Left = 556

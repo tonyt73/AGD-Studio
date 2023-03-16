@@ -13,8 +13,6 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     BevelOuter = bvNone
     TabOrder = 0
     StyleElements = [seFont, seBorder]
-    ExplicitLeft = 426
-    ExplicitHeight = 432
     object imgLogo: TImage
       Left = 0
       Top = 0
@@ -6214,7 +6212,6 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       Caption = 'Panel1'
       ShowCaption = False
       TabOrder = 0
-      ExplicitHeight = 182
       object imgStartNewProject: TImage
         Left = 104
         Top = 22
@@ -6386,7 +6383,13 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         Width = 379
         Height = 135
         BevelOuter = bvNone
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
         ParentColor = True
+        ParentFont = False
         TabOrder = 0
         object lblOpenExistingProject: TLabel
           Left = 0
@@ -6510,11 +6513,15 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     Align = alClient
     BevelOuter = bvNone
     Color = clBtnShadow
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Roboto'
+    Font.Style = []
     ParentBackground = False
+    ParentFont = False
     TabOrder = 1
     StyleElements = [seFont, seBorder]
-    ExplicitWidth = 426
-    ExplicitHeight = 432
   end
   object dlgOpen: TOpenTextFileDialog
     DefaultExt = 'agdx'

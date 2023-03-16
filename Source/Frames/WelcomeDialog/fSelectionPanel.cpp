@@ -16,10 +16,10 @@ __fastcall TSelectionPanelFrame::TSelectionPanelFrame(TComponent* Owner)
 , FOnClick(nullptr)
 , FOnRemoveClick(nullptr)
 {
-    panProjectInfo->Color = ThemeManager::Background;//StyleServices()->GetStyleColor(scGenericGradientEnd);
-    panRemove->Color = ThemeManager::Background;//StyleServices()->GetStyleColor(scGenericGradientEnd);
-    lblProjectName->Font->Color = ThemeManager::Foreground;//StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
-    lblProjectPath->Font->Color = ThemeManager::Foreground;//StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
+    panProjectInfo->Color = ThemeManager::Background;       //StyleServices()->GetStyleColor(scGenericGradientEnd);
+    panRemove->Color = ThemeManager::Background;            //StyleServices()->GetStyleColor(scGenericGradientEnd);
+    lblProjectName->Font->Color = ThemeManager::Foreground; //StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
+    lblProjectPath->Font->Color = ThemeManager::Foreground; //StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
     imgRemove->Visible = false;
 }
 //---------------------------------------------------------------------------

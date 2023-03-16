@@ -3,6 +3,12 @@ object frmEditorImage: TfrmEditorImage
   Top = 0
   Width = 1270
   Height = 1077
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = [fsBold]
+  ParentFont = False
   TabOrder = 0
   OnEndDock = FrameEndDock
   OnMouseActivate = imgEditorMouseActivate
@@ -15,7 +21,6 @@ object frmEditorImage: TfrmEditorImage
     AutoSize = True
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 1102
     object btnTool: TButton
       Left = 0
       Top = 0
@@ -38,7 +43,6 @@ object frmEditorImage: TfrmEditorImage
       ShowCaption = False
       TabOrder = 1
       OnMouseActivate = imgEditorMouseActivate
-      ExplicitWidth = 1045
       inline toolbarShape: TfrmToolbarShape
         Left = 0
         Top = 0
@@ -92,8 +96,8 @@ object frmEditorImage: TfrmEditorImage
         Text = 'Graphics Mode'
         Width = 300
       end>
-    ExplicitTop = 901
-    ExplicitWidth = 1102
+    ParentFont = True
+    UseSystemFont = False
   end
   object panToolbar: TPanel
     Left = 0
@@ -109,7 +113,6 @@ object frmEditorImage: TfrmEditorImage
     TabOrder = 2
     OnClick = panEditorContainerClick
     OnMouseActivate = imgEditorMouseActivate
-    ExplicitHeight = 859
     object lblTools: TLabel
       Left = 0
       Top = 0
@@ -121,12 +124,6 @@ object frmEditorImage: TfrmEditorImage
       Caption = 'TOOLS'
       Constraints.MaxHeight = 24
       Constraints.MinHeight = 24
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
       Layout = tlCenter
     end
     object tbrShiftRotates: TToolBar
@@ -494,8 +491,6 @@ object frmEditorImage: TfrmEditorImage
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 3
-    ExplicitWidth = 846
-    ExplicitHeight = 859
     object sbxView: TScrollBox
       Left = 0
       Top = 0
@@ -514,8 +509,6 @@ object frmEditorImage: TfrmEditorImage
       TabOrder = 0
       OnMouseWheel = sbxViewMouseWheel
       OnResize = sbxViewResize
-      ExplicitWidth = 846
-      ExplicitHeight = 759
       object panEditorContainer: TPanel
         Left = 0
         Top = 0
@@ -535,8 +528,6 @@ object frmEditorImage: TfrmEditorImage
         StyleElements = [seClient, seBorder]
         OnClick = panEditorContainerClick
         OnMouseActivate = imgEditorMouseActivate
-        ExplicitWidth = 846
-        ExplicitHeight = 759
         object panViewFrame: TPanel
           Left = 128
           Top = 128
@@ -554,8 +545,6 @@ object frmEditorImage: TfrmEditorImage
           ParentDoubleBuffered = False
           TabOrder = 0
           StyleElements = []
-          ExplicitWidth = 590
-          ExplicitHeight = 503
           object imgEditor: TImage
             Left = 1
             Top = 1
@@ -587,8 +576,6 @@ object frmEditorImage: TfrmEditorImage
       DoubleBuffered = False
       ParentDoubleBuffered = False
       TabOrder = 1
-      ExplicitTop = 759
-      ExplicitWidth = 846
       inline fFrameView: TMultiImageViewFrame
         Left = 0
         Top = 0
@@ -604,10 +591,15 @@ object frmEditorImage: TfrmEditorImage
         AutoScroll = True
         DoubleBuffered = True
         Ctl3D = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Roboto'
+        Font.Style = []
         ParentCtl3D = False
         ParentDoubleBuffered = False
+        ParentFont = False
         TabOrder = 0
-        ExplicitLeft = 2
         ExplicitWidth = 1014
         ExplicitHeight = 100
         inherited Timer1: TTimer
@@ -628,8 +620,6 @@ object frmEditorImage: TfrmEditorImage
     ShowCaption = False
     TabOrder = 4
     OnMouseActivate = imgEditorMouseActivate
-    ExplicitLeft = 926
-    ExplicitHeight = 859
     object Label2: TLabel
       Left = 0
       Top = 0
@@ -661,7 +651,6 @@ object frmEditorImage: TfrmEditorImage
       Caption = 'Panel3'
       ShowCaption = False
       TabOrder = 0
-      ExplicitHeight = 835
       inline palAttribute: TfrmPaletteAttribute
         Left = 0
         Top = 0
@@ -672,10 +661,16 @@ object frmEditorImage: TfrmEditorImage
         Constraints.MaxWidth = 176
         Constraints.MinHeight = 336
         Constraints.MinWidth = 176
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
         Padding.Left = 8
         Padding.Top = 8
         Padding.Right = 8
         Padding.Bottom = 8
+        ParentFont = False
         TabOrder = 0
         OnMouseActivate = imgEditorMouseActivate
       end
@@ -690,11 +685,17 @@ object frmEditorImage: TfrmEditorImage
         Constraints.MinHeight = 105
         Constraints.MinWidth = 176
         DoubleBuffered = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
         Padding.Left = 8
         Padding.Top = 8
         Padding.Right = 8
         Padding.Bottom = 8
         ParentDoubleBuffered = False
+        ParentFont = False
         TabOrder = 1
         OnMouseActivate = imgEditorMouseActivate
         ExplicitTop = 1202
@@ -1247,11 +1248,17 @@ object frmEditorImage: TfrmEditorImage
         Constraints.MinHeight = 105
         Constraints.MinWidth = 176
         DoubleBuffered = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Roboto'
+        Font.Style = []
         Padding.Left = 8
         Padding.Top = 8
         Padding.Right = 8
         Padding.Bottom = 8
         ParentDoubleBuffered = False
+        ParentFont = False
         TabOrder = 2
         Visible = False
         OnMouseActivate = imgEditorMouseActivate
@@ -1263,6 +1270,12 @@ object frmEditorImage: TfrmEditorImage
         Width = 176
         Height = 306
         Align = alTop
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Roboto'
+        Font.Style = []
+        ParentFont = False
         TabOrder = 3
         OnMouseActivate = imgEditorMouseActivate
         ExplicitTop = 396
@@ -1281,10 +1294,16 @@ object frmEditorImage: TfrmEditorImage
         Constraints.MinHeight = 60
         Constraints.MinWidth = 176
         Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
         Padding.Left = 8
         Padding.Top = 8
         Padding.Right = 8
         Padding.Bottom = 8
+        ParentFont = False
         TabOrder = 4
         ExplicitTop = 336
         inherited spdInkGreen: TSpeedButton

@@ -775,3 +775,5 @@ void __fastcall TfrmEditorImage::imgEditorMouseActivate(TObject *Sender, TMouseB
 }
 //---------------------------------------------------------------------------
 
+
+

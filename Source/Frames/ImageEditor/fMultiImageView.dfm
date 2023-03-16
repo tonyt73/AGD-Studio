@@ -13,8 +13,14 @@ object MultiImageViewFrame: TMultiImageViewFrame
   AutoScroll = True
   DoubleBuffered = True
   Ctl3D = False
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
   ParentCtl3D = False
   ParentDoubleBuffered = False
+  ParentFont = False
   TabOrder = 0
   OnMouseWheel = FrameMouseWheel
   object panImages: TPanel

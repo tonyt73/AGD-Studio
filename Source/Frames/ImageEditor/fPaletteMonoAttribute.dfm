@@ -7,10 +7,16 @@ object frmPaletteMonoAttribute: TfrmPaletteMonoAttribute
   Constraints.MaxWidth = 176
   Constraints.MinHeight = 60
   Constraints.MinWidth = 176
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = [fsBold]
   Padding.Left = 8
   Padding.Top = 8
   Padding.Right = 8
   Padding.Bottom = 8
+  ParentFont = False
   TabOrder = 0
   object Bevel1: TBevel
     Left = 8
@@ -68,11 +74,5 @@ object frmPaletteMonoAttribute: TfrmPaletteMonoAttribute
     Width = 19
     Height = 13
     Caption = 'INK'
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = [fsBold]
-    ParentFont = False
   end
 end

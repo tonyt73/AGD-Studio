@@ -3,6 +3,12 @@ object frmEditorCode: TfrmEditorCode
   Top = 0
   Width = 880
   Height = 693
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  ParentFont = False
   TabOrder = 0
   object evEditor: TLMDEditView
     Left = 0
@@ -62,6 +68,8 @@ object frmEditorCode: TfrmEditorCode
       item
         Width = 50
       end>
+    ParentFont = True
+    UseSystemFont = False
   end
   object lmdDocument: TLMDEditDocument
     Lines.Strings = (

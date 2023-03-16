@@ -86,23 +86,23 @@ void __fastcall TfrmLabelledImage::Update()
     auto sy = image->Canvas().ScalarY;
 
     // resize the component based on the size of the image
-    for (auto i = 3; i >= 1; i--)
-    {
-        auto size = pow(2, i);
-        if (size * m_Document->Width <= 64 && size * m_Document->Height <= 64)
-        {
-            w = size * m_Document->Width * sx;
-            h = size * m_Document->Height * sy;
-            break;
-        }
-    }
+//    for (auto i = 3; i >= 1; i--)
+//    {
+//        auto size = pow(2, i);
+//        if (size * m_Document->Width <= 32 && size * m_Document->Height <= 32)
+//        {
+//            w = size * m_Document->Width * sx;
+//            h = size * m_Document->Height * sy;
+//            break;
+//        }
+//    }
 
     // Draw the image
     image->Canvas().Assign(imgImage->Picture->Bitmap);
     image->Canvas().Draw(imgImage->Picture->Bitmap);
 
     panImage->Width = w;
-    Height = h + (lblCaption->Visible ? lblCaption->Height : 0) + (panTileType->Visible ? panTileType->Height : 0);
+    panImage->Height = h + (lblCaption->Visible ? lblCaption->Height : 0) + (panTileType->Visible ? panTileType->Height : 0);
 }
 //---------------------------------------------------------------------------
 

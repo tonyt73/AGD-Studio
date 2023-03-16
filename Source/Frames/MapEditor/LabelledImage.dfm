@@ -1,8 +1,8 @@
 object frmLabelledImage: TfrmLabelledImage
   Left = 0
   Top = 0
-  Width = 68
-  Height = 133
+  Width = 97
+  Height = 119
   Constraints.MinHeight = 56
   Color = clBtnFace
   ParentBackground = False
@@ -11,8 +11,8 @@ object frmLabelledImage: TfrmLabelledImage
   object panImage: TPanel
     Left = 0
     Top = 0
-    Width = 68
-    Height = 133
+    Width = 97
+    Height = 119
     Align = alClient
     BevelOuter = bvNone
     Caption = 'panImage'
@@ -27,21 +27,24 @@ object frmLabelledImage: TfrmLabelledImage
     ShowCaption = False
     TabOrder = 0
     StyleElements = [seFont]
+    ExplicitWidth = 68
+    ExplicitHeight = 133
     object imgImage: TImage
       Left = 4
       Top = 28
-      Width = 60
-      Height = 79
+      Width = 89
+      Height = 65
       Align = alClient
       Center = True
       Stretch = True
       OnClick = imgImageClick
+      ExplicitWidth = 60
       ExplicitHeight = 60
     end
     object lblCaption: TLabel
       Left = 4
       Top = 4
-      Width = 60
+      Width = 89
       Height = 24
       Align = alTop
       Alignment = taCenter
@@ -55,8 +58,8 @@ object frmLabelledImage: TfrmLabelledImage
     end
     object panTileType: TPanel
       Left = 4
-      Top = 107
-      Width = 60
+      Top = 93
+      Width = 89
       Height = 22
       Align = alBottom
       BevelOuter = bvNone
@@ -65,6 +68,8 @@ object frmLabelledImage: TfrmLabelledImage
       TabOrder = 0
       StyleElements = [seFont]
       OnClick = imgImageClick
+      ExplicitTop = 107
+      ExplicitWidth = 60
     end
   end
 end

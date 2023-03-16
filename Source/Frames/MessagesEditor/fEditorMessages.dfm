@@ -3,6 +3,12 @@ object frmEditorMessages: TfrmEditorMessages
   Top = 0
   Width = 1204
   Height = 824
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'Roboto'
+  Font.Style = []
+  ParentFont = False
   TabOrder = 0
   OnMouseActivate = FrameMouseActivate
   OnResize = FrameResize
@@ -30,8 +36,14 @@ object frmEditorMessages: TfrmEditorMessages
       AutoScroll = True
       DoubleBuffered = True
       Ctl3D = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Roboto'
+      Font.Style = []
       ParentCtl3D = False
       ParentDoubleBuffered = False
+      ParentFont = False
       TabOrder = 0
       ExplicitWidth = 1204
     end

@@ -8,11 +8,17 @@ object frmPaletteBitmap: TfrmPaletteBitmap
   Constraints.MinHeight = 105
   Constraints.MinWidth = 176
   DoubleBuffered = False
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = [fsBold]
   Padding.Left = 8
   Padding.Top = 8
   Padding.Right = 8
   Padding.Bottom = 8
   ParentDoubleBuffered = False
+  ParentFont = False
   TabOrder = 0
   object panColorL: TPanel
     Left = 8
@@ -93,13 +99,7 @@ object frmPaletteBitmap: TfrmPaletteBitmap
         Height = 16
         Align = alTop
         AutoSize = False
-        Caption = 'Logical Colours'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
+        Caption = 'LOGICAL COLOURS'
       end
       object imgLogicalColors: TImage
         Left = 0
@@ -135,13 +135,7 @@ object frmPaletteBitmap: TfrmPaletteBitmap
         Height = 20
         Align = alTop
         AutoSize = False
-        Caption = 'System Palette Colours'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
+        Caption = 'SYSTEM PALETTE COLOURS'
         Layout = tlCenter
       end
       object imgSystemColors: TImage

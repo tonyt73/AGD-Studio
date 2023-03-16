@@ -7,10 +7,16 @@ object frmPaletteAttribute: TfrmPaletteAttribute
   Constraints.MaxWidth = 176
   Constraints.MinHeight = 336
   Constraints.MinWidth = 176
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = [fsBold]
   Padding.Left = 8
   Padding.Top = 8
   Padding.Right = 8
   Padding.Bottom = 8
+  ParentFont = False
   TabOrder = 0
   object Bevel1: TBevel
     Left = 8
@@ -25,12 +31,6 @@ object frmPaletteAttribute: TfrmPaletteAttribute
     Width = 36
     Height = 13
     Caption = 'PAPER'
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = [fsBold]
-    ParentFont = False
   end
   object spdInkBlack: TSpeedButton
     Left = 8
@@ -743,17 +743,11 @@ object frmPaletteAttribute: TfrmPaletteAttribute
     OnClick = spdFlashOffClick
   end
   object lblPaletteBright: TLabel
-    Left = 12
-    Top = 184
+    Left = 11
+    Top = 181
     Width = 43
     Height = 13
     Caption = 'BRIGHT'
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = [fsBold]
-    ParentFont = False
   end
   object lblPaletteFlash: TLabel
     Left = 12
@@ -761,15 +755,9 @@ object frmPaletteAttribute: TfrmPaletteAttribute
     Width = 35
     Height = 13
     Caption = 'FLASH'
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = [fsBold]
-    ParentFont = False
   end
   object imgPaletteTransparent: TImage
-    Left = 74
+    Left = 11
     Top = 313
     Width = 16
     Height = 17
@@ -806,17 +794,11 @@ object frmPaletteAttribute: TfrmPaletteAttribute
     Transparent = True
   end
   object lblPaletteTransparent: TLabel
-    Left = 96
+    Left = 33
     Top = 315
-    Width = 69
+    Width = 82
     Height = 13
     Caption = 'is Transparent'
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
   end
   object Bevel2: TBevel
     Left = 8
@@ -845,11 +827,5 @@ object frmPaletteAttribute: TfrmPaletteAttribute
     Width = 19
     Height = 13
     Caption = 'INK'
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = [fsBold]
-    ParentFont = False
   end
 end

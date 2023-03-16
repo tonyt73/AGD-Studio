@@ -800,3 +800,13 @@ void __fastcall TfrmEditorMap::actShowSpriteTypesExecute(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+
+
+
+
+
+
+
+
+
+

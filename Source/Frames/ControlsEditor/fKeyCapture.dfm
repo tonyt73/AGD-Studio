@@ -3,10 +3,16 @@ object frmKeyCode: TfrmKeyCode
   Top = 0
   Width = 135
   Height = 130
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Roboto'
+  Font.Style = []
   Padding.Left = 7
   Padding.Top = 7
   Padding.Right = 7
   Padding.Bottom = 7
+  ParentFont = False
   TabOrder = 0
   OnMouseDown = FrameMouseDown
   OnMouseEnter = edtKeyMouseEnter

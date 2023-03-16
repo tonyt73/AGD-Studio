@@ -9,7 +9,7 @@ object SelectionImageFrame: TSelectionImageFrame
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -32
-  Font.Name = 'Ebrima'
+  Font.Name = 'Tahoma'
   Font.Style = [fsBold]
   Padding.Left = 4
   Padding.Top = 4

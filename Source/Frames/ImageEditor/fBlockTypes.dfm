@@ -3,6 +3,12 @@ object frmBlockTypes: TfrmBlockTypes
   Top = 0
   Width = 176
   Height = 306
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'Roboto'
+  Font.Style = []
+  ParentFont = False
   TabOrder = 0
   object btnPlatform: TSpeedButton
     Tag = 1
@@ -123,8 +129,8 @@ object frmBlockTypes: TfrmBlockTypes
     Color = clBlue
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -16
-    Font.Name = 'Tahoma'
+    Font.Height = -19
+    Font.Name = 'Roboto'
     Font.Style = [fsBold]
     ParentBackground = False
     ParentFont = False
@@ -144,8 +150,8 @@ object frmBlockTypes: TfrmBlockTypes
     Color = clBlue
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -16
-    Font.Name = 'Tahoma'
+    Font.Height = -19
+    Font.Name = 'Roboto'
     Font.Style = [fsBold]
     ParentBackground = False
     ParentFont = False
