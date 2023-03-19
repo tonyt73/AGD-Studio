@@ -96,6 +96,7 @@ void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* 
     }
     else
     {
+        // debug, break point to catch new doc types.
         int a = 0;
     }
     node->ImageIndex = index;
