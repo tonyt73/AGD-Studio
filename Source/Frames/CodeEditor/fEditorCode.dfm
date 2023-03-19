@@ -33,7 +33,7 @@ object frmEditorCode: TfrmEditorCode
     Gutter.LinesBarBg = clMaroon
     Gutter.FoldsBarBg = clGray
     CustomKeyBindings = <>
-    CompletionSettings.ItemHeight = 15
+    CompletionSettings.ItemHeight = 13
     OnStatusChanged = evEditorStatusChanged
     OnEnter = evEditorEnter
     GutterBarsEmpty = False

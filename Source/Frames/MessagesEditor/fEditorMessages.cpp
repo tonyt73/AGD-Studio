@@ -55,12 +55,12 @@ void __fastcall TfrmEditorMessages::SetDocument(Document* document)
 //---------------------------------------------------------------------------
 bool __fastcall TfrmEditorMessages::IsActive() const
 {
-    return theEditorManager.IsActive(this);
+    return theEditorManager.IsActive(ecMessageEditor);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMessages::FrameMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate)
 {
-    theEditorManager.SetActive(this);
+    theEditorManager.SetActive(ecMessageEditor);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMessages::FrameResize(TObject *Sender)
@@ -70,6 +70,7 @@ void __fastcall TfrmEditorMessages::FrameResize(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMessages::OnStatusChanged(TLMDCustomEditView *AView, TLMDViewStatusChanges AChanges)
 {
+    ecMessageEditor->UpdateStatus();
     // refresh the view
     m_RefreshView = true;
 }
