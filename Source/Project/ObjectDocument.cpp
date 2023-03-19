@@ -7,8 +7,8 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall ObjectDocument::ObjectDocument(const String& name, const String& extra)
-    : ImageDocument(name)
-    , m_State(osDisabled)
+: ImageDocument(name)
+, m_State(osDisabled)
 {
     m_ImageType = itObject;
     m_CanBeLocked = true;

@@ -7,7 +7,7 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall TileDocument::TileDocument(const String& name, const String& extra)
-    : ImageDocument(name)
+: ImageDocument(name)
 {
     m_ImageType = itTile;
     m_File = GetFile();

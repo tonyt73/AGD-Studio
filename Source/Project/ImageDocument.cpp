@@ -9,13 +9,13 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall ImageDocument::ImageDocument(const String& name)
-    : Document(name)
-    , m_MultiFrame(false)
-    , m_CanModifyFrames(false)
-    , m_CanBeLocked(false)
-    , m_Width(0)
-    , m_Height(0)
-    , m_FramesLoaded(0)
+: Document(name)
+, m_MultiFrame(false)
+, m_CanModifyFrames(false)
+, m_CanBeLocked(false)
+, m_Width(0)
+, m_Height(0)
+, m_FramesLoaded(0)
 {
     m_Type = "Image";
     m_SubType = "Single";

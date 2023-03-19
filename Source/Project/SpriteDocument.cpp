@@ -7,7 +7,7 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall SpriteDocument::SpriteDocument(const String& name, const String& extra)
-    : ImageDocument(name)
+: ImageDocument(name)
 {
     m_ImageType = itSprite;
     m_File = GetFile();

@@ -8,7 +8,7 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 __fastcall CharacterSetDocument::CharacterSetDocument(const String& name, const String& extra)
-    : ImageDocument(name)
+: ImageDocument(name)
 {
     m_SaveRefId = false;
     m_ImageType = itCharacterSet;
