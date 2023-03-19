@@ -43,7 +43,7 @@ This is handled by the LMD Editor component, with the file name been retrieved f
 
 ## DOCUMENT CLASS HIERARCHY
 ```
-(property editing)         (file content loaded/saved by the JsonFile class)                                    *UI Editor*
+(property editing)         (file content loaded/saved by the JsonFile class)                                    UI Editor
 TPersisent              <- JsonFile     <- Settings                                                             UI Settings Dialog
                                         <- Machine Configuration                                                None
                                         <- MRU List                                                             MRU File menu
@@ -58,11 +58,11 @@ TPersisent              <- JsonFile     <- Settings                             
                                                          <- Sprite Docoument                                    Image Editor
                                                          <- Tile Docoument                                      Image Editor
                                                            (file content loaded/saved by the code editor)
-                                                         <- Text  <- Event Docoument                            Text editor     overrides JSON file system saving to .txt files
-                                                         <- Sfx Docoument                                       Text editor
-                                                         <- AGD Docoument                                       Text editor
-                                                         <- Assembly Docoument                                  Text editor
-                                                         <- Messages Docoument                                  Messages editor
+                                                         <- Text  <- Event Docoument                            Text editor
+                                                                  <- Sfx Docoument                              Text editor
+                                                                  <- AGD Docoument                              Text editor
+                                                                  <- Assembly Docoument                         Text editor
+                                                                  <- Messages Docoument                         Messages editor
 ```
 
 ## PROJECT MANAGEMENT OF DOCUMENTS
