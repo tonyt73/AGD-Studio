@@ -24,6 +24,7 @@ There is also a `"Classification"` value which describes where in the project tr
 | Game\Files | Sounds Fx List | Text | SoundFx |
 | Game\Output | Various output files | Text | AGD/Asm |
 
+## USING AND EDITING DOCUMENTS
 Although `Type/SubType` may seem similar to a documents Classification. The Classification is used to group different `Type/SubType` combinations.
 From the `Type/SubType` specification of a document, we can then associate (register) a document creator for that document type.
 This done in the `DocumentManager` class, which itself is called from the `ProjectManager` singleton class.
@@ -42,34 +43,27 @@ This is handled by the LMD Editor component, with the file name been retrieved f
 
 ## DOCUMENT CLASS HIERARCHY
 ```
-                          (file content loaded/saved by the JsonFile class)
-TPersisent <- JsonFile <- Settings
-                       <- Machine Configuration
-                       <- MRU List
-                       <- File Definitions
-                       <- Document <- Project
-                                   <- Tiled Map
-                                   <- Controls
-                                   <- Jump Table
-                                   <- Window
-                                   <- Image <- Character Set
-                                            <- Object
-                                            <- Sprite
-                                            <- Tile
-                                   (file content loaded/saved by the code editor)
-                                   <- Text  <- Event
-                                            <- Message
-                                            <- Sfx
-                                            <- AGD
-                                            <- Assembly
+(property editing)         (file content loaded/saved by the JsonFile class)                                    *UI Editor*
+TPersisent              <- JsonFile     <- Settings                                                             UI Settings Dialog
+                                        <- Machine Configuration                                                None
+                                        <- MRU List                                                             MRU File menu
+                                        <- File Definitions                                                     None
+                                        <- Document <- Project Document                                         IDE Tree View
+                                                <- Tiled Map Document                                           Map editor
+                                                <- Controls Document                                            Controls editor
+                                                <- Jump Table Document                                          Jump Table editor
+                                                <- Window Document                                              Window editor
+                                                <- Image <- Character Set Docoument                             Image Editor
+                                                         <- Object Docoument                                    Image Editor
+                                                         <- Sprite Docoument                                    Image Editor
+                                                         <- Tile Docoument                                      Image Editor
+                                                           (file content loaded/saved by the code editor)
+                                                         <- Text  <- Event Docoument                            Text editor     overrides JSON file system saving to .txt files
+                                                         <- Sfx Docoument                                       Text editor
+                                                         <- AGD Docoument                                       Text editor
+                                                         <- Assembly Docoument                                  Text editor
+                                                         <- Messages Docoument                                  Messages editor
 ```
-
-## EDITING A DOCUMENT
-Each document type can have a specific editor associated with it.
-If a base class has an editor associated with it, then all instances inheriting from the base class, use that editor.
-For example the `ImageDocument` is associated with the Image Editor and thus all types of images use the same editor.
-The Keyboard/Joystick (`ControlsDocument`) class has its own editor.
-As does the `TextDocument` class, with an exception for Messages; which has its own Sub Type editor.
 
 ## PROJECT MANAGEMENT OF DOCUMENTS
 
