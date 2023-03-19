@@ -36,6 +36,7 @@ __fastcall Document::Document(const String& name)
 //---------------------------------------------------------------------------
 __fastcall Document::~Document()
 {
+    Close();
 }
 //----------------------------------------------------------------------------
 void __fastcall Document::RegisterProperty(const String& property, const String& category, const String& info)

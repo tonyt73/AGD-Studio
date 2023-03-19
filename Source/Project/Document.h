@@ -89,7 +89,7 @@ const TPropertyInfoMap& __fastcall  GetPropertyInfo() const;
     __property          void*       DockPanel   = { read = m_DockPanel, write = m_DockPanel };
 
 __published:
-    __property          String      Classification={read = m_Folder                         };
+    __property          String   Classification = { read = m_Folder                         };
     __property          String      Name        = { read = m_Name, write = SetName          };
     __property          String      Path        = { read = m_File                           };
 };
