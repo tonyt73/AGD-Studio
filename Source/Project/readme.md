@@ -1,12 +1,12 @@
 # PROJECT DOCUMENT SYSTEM OVERVIEW
 
-AGD Studio's editor system uses documents which can use specific or generic create editors for the user to edit document content.
+AGD Studio's editor system uses documents which can use specific or generic creation editors for the user to edit document content.
 
-The documents are defined from a common `Document` base class, which itself inherits from the `JsonFile` class.
-Documents (usually as I need to fix this) don't include UI references. They might
+The documents are defined from a common `Document` base class, which itself inherits from the `JsonFile` class. By default, all documents are JSON, unless overidden.
+Documents usually (I need to fix this) don't include UI references.
 Each type of AGD game element, such as the Images, the Map, the Event code, the Jump Table etc as defined as a document.
-A document has a "Type" and "Sub Type", which as to describe the purpose of the document.
-There is also a "Classification" value which describes where in the project tree (visual tree view component) a document fits.
+A document has a `"Type"` and `"Sub Type"`, which as to describe the purpose of the document.
+There is also a `"Classification"` value which describes where in the project tree (visual tree view component) a document fits.
 
 | Classification Path | Document Types | Type | Sub Type |
 | --- | --- | --- |--- |
@@ -24,13 +24,21 @@ There is also a "Classification" value which describes where in the project tree
 | Game\Files | Sounds Fx List | Text | SoundFx |
 | Game\Output | Various output files | Text | AGD/Asm |
 
-Although Type/SubType may seems similar to a documents Classification. The Classification is used to group different Type/SubType combinations.
-From the Type/SubType specification of a document, we can then associate a UI editor for that document type.
+Although `Type/SubType` may seem similar to a documents Classification. The Classification is used to group different `Type/SubType` combinations.
+From the `Type/SubType` specification of a document, we can then associate (register) a document creator for that document type.
+This done in the `DocumentManager` class, which itself is called from the `ProjectManager` singleton class.
+Registration of a document is based on the `Type\SubType` pairing and can use either a derived class (Specialised document) or base class object reference (Generic document).
+When the UI treeview opens a document, it needs to create the UI editor for it.
+This is done via the IDE UI component (`fIde.cpp`) using the `DocumentEditorFactory`. This sets the UI editors for each specialised and/or generic document types.
 
-The document base class can be used by the UI (Treeview) to show the properties of the inherited objects and implements the default Json load/save functions.
-Each version of a document can expose additional properties that the base class handles registration with the UI.
+* All Image types (`ImageDocument`) use the same generic image editor, there are no specialisation of the image editor.
+* Most text documents (`TextDocument`) use the generic text editor, with currently only the `Messages` document sub-type using a specialised editor.
+
+The document base class can be used by the UI (Treeview) to show the properties of the inherited objects and implements the default Json load/save functions and UI property access functions.
+Each version of a document can expose additional properties that the base class handles registration with the UI for them.
 The `TextDocument` class does not use the Json format and thus their save/load functions are overridden to return nothing.
 It is therefore up to the Text Editor to save the contents of a `TextDocument`.
+This is handled by the LMD Editor component, with the file name been retrieved from the `Document` base class.
 
 ## DOCUMENT CLASS HIERARCHY
 ```
