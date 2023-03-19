@@ -43,7 +43,7 @@ This is handled by the LMD Editor component, with the file name been retrieved f
 
 ## DOCUMENT CLASS HIERARCHY
 ```
-(property editing)         (file content loaded/saved by the JsonFile class)                                    UI Editor
+(UI property editing)      (file content loaded/saved by the JsonFile class)                                    UI Editor
 TPersisent              <- JsonFile     <- Settings                                                             UI Settings Dialog
                                         <- Machine Configuration                                                None
                                         <- MRU List                                                             MRU File menu
@@ -66,4 +66,8 @@ TPersisent              <- JsonFile     <- Settings                             
 ```
 
 ## PROJECT MANAGEMENT OF DOCUMENTS
+The `ProjectManager` class is responsible for creating a new project, loading an existing project and saving a project.
+It manages all documents associated with the project and it's supporting setting/configuration files.
+It is also the link between the IDE UI and the documents, responsible for managing the UI tree view, MRU list. (project view)
+TODO: I should move the registration of UI editors (fIDE) to here as well. As the IDE should be editor agnostic.
 
