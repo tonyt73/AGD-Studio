@@ -92,7 +92,6 @@ object frmEditorMessages: TfrmEditorMessages
         inherited evEditor: TLMDEditView
           Width = 521
           Height = 744
-          OnScroll = OnScroll
           OnStatusChanged = OnStatusChanged
           ExplicitWidth = 521
           ExplicitHeight = 744
@@ -134,6 +133,7 @@ object frmEditorMessages: TfrmEditorMessages
         ParentDoubleBuffered = False
         ParentFont = False
         TabOrder = 0
+        OnMouseWheel = sbxViewMouseWheel
         object imgView: TImage
           Left = -2
           Top = -2

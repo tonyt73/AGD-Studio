@@ -35,7 +35,7 @@ __published:// IDE-managed Components
     void __fastcall FrameResize(TObject *Sender);
     void __fastcall OnStatusChanged(TLMDCustomEditView *AView, TLMDViewStatusChanges AChanges);
     void __fastcall tmrRefreshViewTimer(TObject *Sender);
-    void __fastcall OnScroll(TObject *Sender, TScrollCode ScrollCode, int &ScrollPos);
+    void __fastcall sbxViewMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled);
 private:    // User declarations
     Document*                   m_Document;         // the messages document
     CharacterSetDocument*       m_CharacterSet;     // the character set document

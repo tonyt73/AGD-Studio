@@ -113,8 +113,7 @@ void __fastcall TfrmEditorMessages::RefreshView()
                 if (quote)
                 {
                     // draw the message index
-                    idx++;
-                    imgView->Canvas->TextOut(0, y - 2, IntToStr(idx));
+                    imgView->Canvas->TextOut(0, y - 2, IntToStr(idx++));
                 }
                 quote = !quote;
             }
@@ -149,9 +148,13 @@ void __fastcall TfrmEditorMessages::RefreshCharacterSet()
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMessages::OnScroll(TObject *Sender, TScrollCode ScrollCode, int &ScrollPos)
+void __fastcall TfrmEditorMessages::sbxViewMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled)
 {
-    //
+    if (WheelDelta > 0) {
+        sbxView->Perform(WM_VSCROLL, SB_LINEUP, (int)0);
+    } else {
+        sbxView->Perform(WM_VSCROLL, SB_LINEDOWN, (int)0);
+    }
 }
 //---------------------------------------------------------------------------
 
