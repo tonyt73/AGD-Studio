@@ -1,4 +1,4 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{D0C2ACDB-659A-4891-B603-0D187CA01644}</ProjectGuid>
         <ProjectVersion>19.5</ProjectVersion>
@@ -678,34 +678,34 @@
             <DependentOn>System\Path.h</DependentOn>
             <BuildOrder>100</BuildOrder>
         </CppCompile>
-        <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
-        <FormResources Include="Frames\WindowEditor\fEditorWindow.dfm"/>
-        <FormResources Include="Frames\MapEditor\AssetSelection.dfm"/>
-        <FormResources Include="Frames\MapEditor\fEditorMap.dfm"/>
-        <FormResources Include="Frames\MapEditor\LabelledImage.dfm"/>
-        <FormResources Include="Frames\MusicEditor\fEditorMusic.dfm"/>
-        <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
-        <FormResources Include="Frames\MessagesEditor\fEditorMessages.dfm"/>
-        <FormResources Include="Frames\JumpEditor\fEditorJumpTable.dfm"/>
+        <FormResources Include="Forms\fAbout.dfm"/>
+        <FormResources Include="Forms\fAdvancedSettings.dfm"/>
+        <FormResources Include="Forms\fMain.dfm"/>
+        <FormResources Include="Forms\fNewImage.dfm"/>
+        <FormResources Include="Forms\fSettings.dfm"/>
+        <FormResources Include="Frames\CodeEditor\fEditorCode.dfm"/>
+        <FormResources Include="Frames\ControlsEditor\fEditorControls.dfm"/>
+        <FormResources Include="Frames\ControlsEditor\fKeyCapture.dfm"/>
+        <FormResources Include="Frames\IDE\fIDE.dfm"/>
         <FormResources Include="Frames\ImageEditor\fBlockTypes.dfm"/>
         <FormResources Include="Frames\ImageEditor\fEditorImage.dfm"/>
         <FormResources Include="Frames\ImageEditor\fMultiImageView.dfm"/>
         <FormResources Include="Frames\ImageEditor\fPaletteAttribute.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fToolbar.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fToolbarShape.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fULAplusBitmap.dfm"/>
         <FormResources Include="Frames\ImageEditor\fPaletteBitmap.dfm"/>
         <FormResources Include="Frames\ImageEditor\fPaletteMonoAttribute.dfm"/>
         <FormResources Include="Frames\ImageEditor\fSelectionImage.dfm"/>
-        <FormResources Include="Forms\fNewImage.dfm"/>
-        <FormResources Include="Forms\fSettings.dfm"/>
-        <FormResources Include="Frames\CodeEditor\fEditorCode.dfm"/>
-        <FormResources Include="Forms\fAbout.dfm"/>
-        <FormResources Include="Forms\fAdvancedSettings.dfm"/>
-        <FormResources Include="Forms\fMain.dfm"/>
-        <FormResources Include="Frames\ControlsEditor\fEditorControls.dfm"/>
-        <FormResources Include="Frames\ControlsEditor\fKeyCapture.dfm"/>
-        <FormResources Include="Frames\IDE\fIDE.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fToolbar.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fToolbarShape.dfm"/>
+        <FormResources Include="Frames\ImageEditor\fULAplusBitmap.dfm"/>
+        <FormResources Include="Frames\JumpEditor\fEditorJumpTable.dfm"/>
+        <FormResources Include="Frames\MapEditor\AssetSelection.dfm"/>
+        <FormResources Include="Frames\MapEditor\fEditorMap.dfm"/>
+        <FormResources Include="Frames\MapEditor\LabelledImage.dfm"/>
+        <FormResources Include="Frames\MessagesEditor\fEditorMessages.dfm"/>
+        <FormResources Include="Frames\MusicEditor\fEditorMusic.dfm"/>
+        <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
+        <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
+        <FormResources Include="Frames\WindowEditor\fEditorWindow.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
