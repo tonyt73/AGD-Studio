@@ -16,7 +16,8 @@ __fastcall CharacterSetDocument::CharacterSetDocument(const String& name, const 
     m_File = GetFile();
     m_SubType = "Character Set";
     m_Folder = "Images\\Character Set";
-    if (name != Unnamed) {
+    if (IsValid(name))
+    {
         RegisterProperty("Name", "Details", "The name of the character set");
         ExtractSize(extra);
         m_CanModifyFrames = true; // yes to get the default frames in

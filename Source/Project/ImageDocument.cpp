@@ -21,7 +21,8 @@ __fastcall ImageDocument::ImageDocument(const String& name)
     m_SubType = "Single";
     m_Folder = "Images\\Images";
     m_SaveRefId = true;
-    if (name != Unnamed) {
+    if (IsValid(name))
+    {
         RegisterProperty("Name", "Details", "The name of the image");
         RegisterProperty("Width", "Dimensions", "The width in pixels of the image");
         RegisterProperty("Height", "Dimensions", "The height in pixels of the image");

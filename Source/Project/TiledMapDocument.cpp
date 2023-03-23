@@ -19,7 +19,8 @@ _fastcall TiledMapDocument::TiledMapDocument(const String& name)
     m_Type = "Map";
     m_SubType = "Tiled";
     m_Folder = "Game\\Map";
-    if (name != Unnamed) {
+    if (IsValid(name))
+    {
         RegisterProperty("StartLocation", "Start Room", "The coordinates of the start room into the map");
         RegisterProperty("StartScreenIndex", "AGD Screen Index", "The index of the start screen");
         RegisterProperty("StartRoomIndex", "Start Room Details", "The AGD room index of the start location");

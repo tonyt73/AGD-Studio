@@ -14,7 +14,7 @@ __fastcall ControlsDocument::ControlsDocument(const String& name)
     m_SubType = "List";
     m_Extension = "json";
     m_Folder = "Game\\Configuration";
-    if (name != Unnamed)
+    if (IsValid(name))
     {
         RegisterProperty("Up", "Directional", "The key for Player Up");
         RegisterProperty("Down", "Directional", "The key for Player Down");

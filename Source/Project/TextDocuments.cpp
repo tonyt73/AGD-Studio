@@ -14,7 +14,7 @@ __fastcall TextDocument::TextDocument(const String& name)
     m_SubType = "Plain";
     m_Extension = "txt";
     m_Folder = "Game\\Files";
-    if (name != Unnamed)
+    if (IsValid(name))
     {
         RegisterProperty("Name", "Details", "The name of the document");
         RegisterProperty("Filename", "File", "The name and path of the file");
@@ -54,7 +54,7 @@ __fastcall EventDocument::EventDocument(const String& name)
     m_Extension = "event";
     RegisterProperty("Name", "Details", "The name of the event source code file");
     auto file = GetFile();
-    if (name != Unnamed && !System::File::Exists(file))
+    if (IsValid(name) && !System::File::Exists(file))
     {
         // create the file and add an AGD header
         auto date = DateTimeToStr(Now());
@@ -72,7 +72,7 @@ __fastcall MessageDocument::MessageDocument(const String& name)
     m_Extension = "txt";
     RegisterProperty("Name", "Details", "The name of the messages text file");
     auto file = GetFile();
-    if (name != Unnamed && !System::File::Exists(file))
+    if (IsValid(name) && !System::File::Exists(file))
     {
         // create the file and add an AGD header
         auto date = DateTimeToStr(Now());
@@ -90,7 +90,7 @@ __fastcall SfxDocument::SfxDocument(const String& name)
     m_Extension = "sfx";
     RegisterProperty("Name", "Details", "The name of the SoundFx definitions file");
     auto file = GetFile();
-    if (name != Unnamed && !System::File::Exists(file))
+    if (IsValid(name) && !System::File::Exists(file))
     {
         // create the file and add an AGD header
         auto date = DateTimeToStr(Now());
@@ -109,7 +109,7 @@ __fastcall AGDDocument::AGDDocument(const String& name)
     SetShowFileExtension(true);
     m_File = GetFile();
     m_ReadOnly = true;
-    if (name != Unnamed)
+    if (IsValid(name))
     {
         RegisterProperty("Name", "Details", "The name of the AGD source code file");
     }

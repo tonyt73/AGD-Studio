@@ -16,7 +16,8 @@ __fastcall SpriteDocument::SpriteDocument(const String& name, const String& extr
     m_CanBeLocked = true;
     m_SubType = "Sprite";
     m_Folder = "Images\\Sprites";
-    if (name != Unnamed) {
+    if (IsValid(name))
+    {
         RegisterProperty("Name", "Details", "The name of the sprite");
         ExtractSize(extra);
         AddFrame();

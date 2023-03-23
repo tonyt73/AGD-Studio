@@ -126,18 +126,30 @@ String __fastcall Document::GetFile(String name)
     return file;
 }
 //---------------------------------------------------------------------------
+bool __fastcall Document::IsValid() const
+{
+    return IsValid(m_File);
+}
+//---------------------------------------------------------------------------
+bool __fastcall Document::IsValid(const String& name) const
+{
+    return name.Pos(Unnamed) < 0;
+}
+//---------------------------------------------------------------------------
 void __fastcall Document::Save()
 {
     m_File = GetFile();
-    Open(m_File);
-    if (m_SaveRefId)
-    {
-        Push("Document");
-            Write("RefId", m_RefId);
-        Pop();  // document
+    if (IsValid()) {
+        Open(m_File);
+        if (m_SaveRefId)
+        {
+            Push("Document");
+                Write("RefId", m_RefId);
+            Pop();  // document
+        }
+        DoSave();
+        JsonFile::Close();
     }
-    DoSave();
-    JsonFile::Close();
 }
 //---------------------------------------------------------------------------
 bool __fastcall Document::Load()

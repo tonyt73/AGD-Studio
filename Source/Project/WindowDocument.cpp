@@ -15,7 +15,7 @@ __fastcall WindowDocument::WindowDocument(const String& name)
     m_SubType = "Definition";
     m_Extension = "json";
     m_Folder = "Game\\Configuration";
-    if (name != Unnamed)
+    if (IsValid(name))
     {
         RegisterProperty("Left", "Position", "The left most character column of the window");
         RegisterProperty("Top", "Position", "The top most character row of the window");

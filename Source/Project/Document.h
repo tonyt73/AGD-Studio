@@ -57,6 +57,8 @@ static      unsigned int            s_NextRefId;    // next unused ref id. Reset
 
             void        __fastcall  SetName(String name);
             String      __fastcall  GetFile(String name = "");
+            bool        __fastcall  IsValid() const;
+            bool        __fastcall  IsValid(const String& name) const;
                                     // update the documents json content
     virtual void        __fastcall  Update() {};//= 0;
 
