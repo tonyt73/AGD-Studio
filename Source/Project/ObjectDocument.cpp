@@ -58,4 +58,5 @@ void __fastcall ObjectDocument::DoSaveExtra()
     Write("Y", (int)m_Position.Y);
     Pop();
 }
+//---------------------------------------------------------------------------
 

@@ -133,7 +133,7 @@ bool __fastcall Document::IsValid() const
 //---------------------------------------------------------------------------
 bool __fastcall Document::IsValid(const String& name) const
 {
-    return name.Pos(Unnamed) < 0;
+    return name.Pos(Unnamed) == 0;
 }
 //---------------------------------------------------------------------------
 void __fastcall Document::Save()
