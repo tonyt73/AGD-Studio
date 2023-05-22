@@ -36,8 +36,8 @@ private:
     MapEntityList                   m_Entities;         // all the map entities
     MapEntityList                   m_ToolEntities;     // the entities for the current tool (select etc)
     MapEntityList                   m_ClipboardEntities;// the entities for the clipboard (copy, cut, paste)
-    MapEntity                          m_ToolEntity;       // the image document selected in the map editor UI
-    MapEntity                          m_HoverEntity;      // the entity the mouse is hovering over
+    MapEntity                       m_ToolEntity;       // the image document selected in the map editor UI
+    MapEntity                       m_HoverEntity;      // the entity the mouse is hovering over
     TEMode                          m_Mode;             // tool mode (pencil, line etc)
     bool                            m_Dirty;            // flag: tool is dirty - map needs updating
     const Agdx::GraphicsMode&       m_GraphicsMode;     // the graphics mode used by the project

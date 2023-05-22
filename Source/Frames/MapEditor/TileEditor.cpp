@@ -126,7 +126,7 @@ void __fastcall TileEditor::Clear()
 void __fastcall TileEditor::ValidatePosition()
 {
     auto window = TSize(m_View->Width / m_Scale.x, m_View->Height / m_Scale.y);
-    m_MapOffsetMS.X = max(0, min((int)((m_BorderScaled.x * 2) + m_ContentSize.cx - window.cx ), (int)m_MapOffsetMS.X));
+    m_MapOffsetMS.X = max(0, min((int)((m_BorderScaled.x * 2) + m_ContentSize.cx - window.cx), (int)m_MapOffsetMS.X));
     m_MapOffsetMS.Y = max(0, min((int)((m_BorderScaled.y * 2) + m_ContentSize.cy - window.cy), (int)m_MapOffsetMS.Y));
 }
 //---------------------------------------------------------------------------
@@ -859,7 +859,7 @@ void __fastcall TileEditor::DrawHoverEntity()
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::DrawMap()
 {
-    auto filter = edfForce;//m_ForceMapDraw ? edfForce : edfDirty;
+    auto filter = m_ForceMapDraw ? edfForce : edfDirty;
     // draw all dirty tile 0's (unselected)
     DrawEntities(filter + edfFirstTile, itTile);
     // draw all other dirty non tile 0's  (unselected)
