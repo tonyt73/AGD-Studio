@@ -268,6 +268,10 @@ object frmEditorMap: TfrmEditorMap
                 Margins.Top = 8
                 Margins.Right = 8
                 Margins.Bottom = 8
+                Font.Height = -11
+                Font.Name = 'Tahoma'
+                Font.Style = [fsBold]
+                ParentFont = False
                 ExplicitWidth = 350
                 ExplicitHeight = 464
               end

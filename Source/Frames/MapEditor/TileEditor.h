@@ -29,7 +29,7 @@ private:
 
     ::Messaging::Registrar          m_Registrar;        // the messaging registrar
     std::unique_ptr<TBitmap>        m_Content;          // 1:1 content
-    std::unique_ptr<TBitmap>        m_Tile0Content;     // 1:1 content with all tile0's used to clear the m_Conent quickly
+    std::unique_ptr<TBitmap>        m_Tile0Content;     // 1:1 content with all tile0's used to clear the m_Content quickly
     TSize                           m_ContentSize;      // the size of the content window that we need (content bitmap is always larger for blt reasons)
     TImage* const                   m_View;             // the UI image we render to
     TImage*                         m_LockIcon;         // the lock icon
