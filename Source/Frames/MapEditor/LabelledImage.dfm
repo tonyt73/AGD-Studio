@@ -27,8 +27,6 @@ object frmLabelledImage: TfrmLabelledImage
     ShowCaption = False
     TabOrder = 0
     StyleElements = [seFont]
-    ExplicitWidth = 68
-    ExplicitHeight = 133
     object imgImage: TImage
       Left = 4
       Top = 28
@@ -38,8 +36,7 @@ object frmLabelledImage: TfrmLabelledImage
       Center = True
       Stretch = True
       OnClick = imgImageClick
-      ExplicitWidth = 60
-      ExplicitHeight = 60
+      ExplicitHeight = 89
     end
     object lblCaption: TLabel
       Left = 4
@@ -68,8 +65,8 @@ object frmLabelledImage: TfrmLabelledImage
       TabOrder = 0
       StyleElements = [seFont]
       OnClick = imgImageClick
-      ExplicitTop = 107
-      ExplicitWidth = 60
+      ExplicitLeft = 8
+      ExplicitTop = 97
     end
   end
 end
