@@ -8,6 +8,6 @@
 @title "Build New Minor Release"
 
 @rem Update the Version
-@Versioner.exe -cproj "..\AGD Studio.cbproj" -install ".\\" -minor -backup
+@Versioner.ps1 -File "..\Source\AGD Studio.cbproj" -minor
 
 @call Build.bat
