@@ -165,13 +165,13 @@ const MapEntityList& __fastcall TiledMapDocument::Get(MapEntityType type, TSize 
         auto maxx = minx + (tileSize.cx * Window.Width());
         auto maxy = miny + (tileSize.cy * Window.Height());
         auto ri = GetRoomIndex(TPoint(room.cx, room.cy));
-        for (auto& e : m_Map) {
-            auto pt = e.Pt;
-            if ((minx <= pt.x && pt.x < maxx && miny <= pt.y && pt.y < maxy && !e.RoomLocked) || (e.RoomLocked && e.RoomIndex == ri)) {
-                auto ne = e;
+        for (auto& entity : m_Map) {
+            auto pt = entity.Pt;
+            if ((minx <= pt.x && pt.x < maxx && miny <= pt.y && pt.y < maxy && !entity.RoomLocked) || (entity.RoomLocked && entity.RoomIndex == ri)) {
+                auto newEntity = entity;
                 // re-position entity to relative to 0,0
-                ne.Pt = TPoint(e.Pt.x - minx, e.Pt.y - miny);
-                m_Room.push_back(ne);
+                newEntity.Pt = TPoint(entity.Pt.x - minx, entity.Pt.y - miny);
+                m_Room.push_back(newEntity);
             }
         }
         return m_Room;
@@ -226,15 +226,9 @@ void __fastcall TiledMapDocument::OnDocumentChanged(const DocumentChange<String>
     if (message.Id == "document.renamed" && message.document != nullptr) {
         // TODO: find all the references and change them
     } else if (message.Id == "document.removing" && message.document != nullptr) {
-        m_Map.erase(std::remove_if(m_Map.begin(), m_Map.end(),
-                        [&](const MapEntity& entity) { return entity.Id == message.document->Id; }),
-            m_Map.end());
-        m_ScratchPad.erase(std::remove_if(m_ScratchPad.begin(), m_ScratchPad.end(),
-                               [&](const MapEntity& entity) { return entity.Id == message.document->Id; }),
-            m_ScratchPad.end());
-        m_Room.erase(std::remove_if(m_Room.begin(), m_Room.end(),
-                         [&](const MapEntity& entity) { return entity.Id == message.document->Id; }),
-            m_Room.end());
+        m_Map.erase(std::remove_if(m_Map.begin(), m_Map.end(), [&](const MapEntity& entity) { return entity.Id == message.document->Id; }), m_Map.end());
+        m_ScratchPad.erase(std::remove_if(m_ScratchPad.begin(), m_ScratchPad.end(), [&](const MapEntity& entity) { return entity.Id == message.document->Id; }), m_ScratchPad.end());
+        m_Room.erase(std::remove_if(m_Room.begin(), m_Room.end(), [&](const MapEntity& entity) { return entity.Id == message.document->Id; }), m_Room.end());
         UpdateEntityRooms();
     }
 }
@@ -267,6 +261,16 @@ void __fastcall TiledMapDocument::UpdateEntityRooms()
 {
     auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum;
     auto roomSize = TSize(Window.Width() * tileSize.cx, Window.Height() * tileSize.cy);
+    // remove room mappings for empty rooms
+    for (auto y = 0; y < g_MaxMapRoomsDown; y++) {
+        for (auto x = 0; x < g_MaxMapRoomsAcross; x++) {
+            auto ri = m_RoomMapping[y * g_MaxMapRoomsAcross + x];
+            if (ri != 255 && IsRoomEmpty(x, y)) {
+                m_RoomMapping[y * g_MaxMapRoomsAcross + x] = 255;
+            }
+        }
+    }
+    // update entity room indexes
     std::vector<unsigned int> objectsToRemove;
     for (auto entity : m_Map) {
         auto roomPt = TPoint((int)(entity.Pt.X / roomSize.cx), (int)(entity.Pt.Y / roomSize.cy));
@@ -300,17 +304,30 @@ bool __fastcall TiledMapDocument::IsRoomEmpty(int x, int y)
     return (Get(meRoom, TSize(x, y)).size() == 0);
 }
 //---------------------------------------------------------------------------
+bool __fastcall TiledMapDocument::IsRoomIndexUsed(const int roomIndex) const
+{
+    assert(roomIndex != 255);
+    auto maxRooms = m_RoomMappingWidth * m_RoomMappingHeight;
+    assert(0 <= roomIndex && roomIndex < maxRooms);
+    for (auto i = 0; i < maxRooms; i++) {
+        if (m_RoomMapping[i] == roomIndex) {
+            return true;
+        }
+    }
+    return false;
+}
+//---------------------------------------------------------------------------
 TRect __fastcall TiledMapDocument::GetMinimalMapSize()
 {
-    TRect rect(g_MaxMapRoomsAcross, g_MaxMapRoomsDown, 0, 0);
     m_ScreenCount = 0;
+    TRect rect(g_MaxMapRoomsAcross, g_MaxMapRoomsDown, 0, 0);
     for (auto y = 0; y < g_MaxMapRoomsDown; y++) {
         for (auto x = 0; x < g_MaxMapRoomsAcross; x++) {
             auto ri = m_RoomMapping[y * g_MaxMapRoomsAcross + x];
             if (ri != 255) {
-                rect.Left = std::min(x, (int)rect.Left);
-                rect.Right = std::max(x, (int)rect.Right);
-                rect.Top = std::min(y, (int)rect.Top);
+                rect.Left   = std::min(x, (int)rect.Left  );
+                rect.Right  = std::max(x, (int)rect.Right );
+                rect.Top    = std::min(y, (int)rect.Top   );
                 rect.Bottom = std::max(y, (int)rect.Bottom);
                 m_ScreenCount++;
             }
@@ -325,10 +342,24 @@ int __fastcall TiledMapDocument::GetRoomIndex(const TPoint& room, bool newIdForU
 {
     assert(0 <= room.X && room.X < m_RoomMappingWidth);
     assert(0 <= room.Y && room.Y < m_RoomMappingHeight);
+    // get either the existing room index or make a new one if required
     auto ri = m_RoomMapping[room.Y * m_RoomMappingWidth + room.X];
     if (ri == 255 && newIdForUndefinedRoom) {
-        ri = m_ScreenCount++;
-        m_RoomMapping[room.Y * m_RoomMappingWidth + room.X] = ri;
+        // find the lowest unused room index
+        auto maxRooms = m_RoomMappingWidth * m_RoomMappingHeight;
+        for (auto ri = 0; ri < maxRooms; ri++) {
+            // does this ri exist in the list of rooms
+            if (!IsRoomIndexUsed(ri)) {
+                // no, so assign it to the room
+                break;
+            }
+        }
+        if (ri != 255) {
+            m_RoomMapping[room.Y * m_RoomMappingWidth + room.X] = ri;
+        } else {
+            // no rooms left
+            // TODO: Show an error dialog
+        }
     }
     return ri;
 }

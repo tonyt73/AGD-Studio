@@ -56,6 +56,7 @@ public:
     TRect               __fastcall  GetMinimalMapSize();
     int                 __fastcall  GetRoomIndex(const TPoint& room, bool newIdForUndefinedRoom = false);
     bool                __fastcall  IsRoomEmpty(int x, int y);
+    bool                __fastcall  IsRoomIndexUsed(const int roomIndex) const;
 
     int                 __property  ScreenCount     = { read = m_ScreenCount                    };
 
