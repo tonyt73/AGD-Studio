@@ -273,6 +273,7 @@ void __fastcall TfrmEditorMap::RefreshAssets()
     assetsObjects->sbxListResize(nullptr);
     m_Workspace->UpdateMap();
     m_RoomSelector->UpdateMap();
+    ::Messaging::Bus::Publish<Event>(Event("update.properties"));
 }
 //---------------------------------------------------------------------------
 bool __fastcall TfrmEditorMap::IsActive() const
@@ -317,6 +318,7 @@ void __fastcall TfrmEditorMap::OnRoomSelected(const RoomSelected& event)
     {
         m_Workspace->SetEntities(m_Document->Get(meRoom, event.Room));
         m_Workspace->UpdateMap();
+        ::Messaging::Bus::Publish<Event>(Event("update.properties"));
     }
 }
 //---------------------------------------------------------------------------
@@ -326,6 +328,7 @@ void __fastcall TfrmEditorMap::OnStartRoomChanged(const StartRoomChanged& event)
     {
         m_Workspace->StartRoom = event.Room;
         m_RoomSelector->StartRoom = event.Room;
+        ::Messaging::Bus::Publish<Event>(Event("update.properties"));
     }
 }
 //---------------------------------------------------------------------------
@@ -351,8 +354,8 @@ void __fastcall TfrmEditorMap::OnDocumentChanged(const DocumentChange<String>& m
         m_ImageMap[message.document->Id] = std::make_unique<Agdx::Image>(image, gm);
         if (message.document->Id == m_Workspace->Tile0Id)
         {
-                m_Workspace->Tile0Id = image->Id;
-                m_RoomSelector->Tile0Id = image->Id;
+            m_Workspace->Tile0Id = image->Id;
+            m_RoomSelector->Tile0Id = image->Id;
         }
         m_Workspace->UpdateMap();
         m_ScratchPad->UpdateMap();
