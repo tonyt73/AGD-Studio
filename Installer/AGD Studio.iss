@@ -65,7 +65,7 @@ Source: VclStylesinno.dll; DestDir: {app}; Flags: uninsneveruninstall
 Source: "Files\Styles\Windows 10 Black Pearl.vsf"; DestDir: "{commondocs}\AGD Studio\Styles"
 ; x64 (64 bit) application files (Program Files)
 Source: "Binaries\Win64\AGD Studio.exe"; DestDir: "{app}"; Check: Is64BitInstallMode
-Source: "Binaries\Win32\Launcher.exe"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "Binaries\Win64\Launcher.exe"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\22.0\bin64\borlndmm.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\22.0\bin64\cc64280.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\22.0\bin64\cc64280mt.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
