@@ -21,6 +21,7 @@ __fastcall TSelectionPanelFrame::TSelectionPanelFrame(TComponent* Owner)
     lblProjectName->Font->Color = ThemeManager::Foreground; //StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
     lblProjectPath->Font->Color = ThemeManager::Foreground; //StyleServices()->GetStyleFontColor(sfSmCaptionTextNormal);
     imgRemove->Visible = false;
+    imgOpenProjectFolder->Visible = false;
 }
 //---------------------------------------------------------------------------
 __fastcall TSelectionPanelFrame::~TSelectionPanelFrame()
@@ -124,6 +125,7 @@ void __fastcall TSelectionPanelFrame::UpdateControl()
     panProjectInfo->Color = color;
     panRemove->Color = color;
     imgRemove->Visible = m_Highlighted;
+    imgOpenProjectFolder->Visible = m_Highlighted;
 }
 //---------------------------------------------------------------------------
 void __fastcall TSelectionPanelFrame::Tick()
@@ -140,6 +142,13 @@ void __fastcall TSelectionPanelFrame::lblProjectNameClick(TObject *Sender)
 void __fastcall TSelectionPanelFrame::imgRemoveClick(TObject *Sender)
 {
     if (FOnRemoveClick != nullptr) FOnRemoveClick(this);
+}
+//---------------------------------------------------------------------------
+void __fastcall TSelectionPanelFrame::imgOpenProjectFolderClick(TObject *Sender)
+{
+    auto folder = System::File::Combine(System::Path::Projects, m_Name);
+    ShellExecute(NULL, L"open", NULL, NULL, folder.c_str(), SW_SHOWNORMAL);
+
 }
 //---------------------------------------------------------------------------
 

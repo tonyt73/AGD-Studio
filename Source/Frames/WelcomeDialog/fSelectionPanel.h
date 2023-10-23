@@ -21,9 +21,11 @@ __published:// IDE-managed Components
     TLabel *lblMachine;
     TProgressBar *prgLoading;
     TImage *imgLogo;
+    TImage *imgOpenProjectFolder;
     void __fastcall panProjectInfoMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
     void __fastcall lblProjectNameClick(TObject *Sender);
     void __fastcall imgRemoveClick(TObject *Sender);
+    void __fastcall imgOpenProjectFolderClick(TObject *Sender);
 private:    // User declarations
             // properties
     String              m_Name;

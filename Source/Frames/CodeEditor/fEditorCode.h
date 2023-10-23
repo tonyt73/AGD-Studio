@@ -20,6 +20,15 @@
 #include "Project/Document.h"
 #include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
+#include "LMDButtonPanel.hpp"
+#include "LMDControl.hpp"
+#include "LMDCustomBevelPanel.hpp"
+#include "LMDCustomControl.hpp"
+#include "LMDCustomPanel.hpp"
+#include "LMDCustomPanelFill.hpp"
+#include "LMDCustomParentPanel.hpp"
+#include "LMDCustomToolBar.hpp"
+#include "LMDToolBar.hpp"
 //---------------------------------------------------------------------------
 class TfrmEditorCode : public TFrame
 {
@@ -88,6 +97,8 @@ __published:    // IDE-managed Components
     TAction *actZoomOut;
     TAction *actZoomReset;
     TFontDialog *FontDialog;
+    TLMDToolBar *LMDToolBar1;
+    TAction *Action1;
     void __fastcall actUndoExecute(TObject *Sender);
     void __fastcall actRedoExecute(TObject *Sender);
     void __fastcall actGoToLineExecute(TObject *Sender);

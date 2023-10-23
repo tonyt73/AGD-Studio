@@ -6,7 +6,7 @@ inherited frmToolbarShape: TfrmToolbarShape
     Left = 0
     Top = 0
     Width = 129
-    Height = 49
+    Height = 11
     Align = alLeft
     Caption = 'Rectangle'
     DropDownMenu = popShape
@@ -20,7 +20,7 @@ inherited frmToolbarShape: TfrmToolbarShape
     Left = 129
     Top = 0
     Width = 64
-    Height = 49
+    Height = 11
     Align = alLeft
     DropDownMenu = popFill
     ImageAlignment = iaCenter

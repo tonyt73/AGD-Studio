@@ -1,18 +1,20 @@
 object frmWelcomeDialog: TfrmWelcomeDialog
   Left = 0
   Top = 0
-  Width = 914
-  Height = 419
+  Width = 902
+  Height = 418
   TabOrder = 0
   object panMain: TPanel
-    Left = 414
+    Left = 402
     Top = 0
     Width = 500
-    Height = 419
+    Height = 418
     Align = alRight
     BevelOuter = bvNone
     TabOrder = 0
     StyleElements = [seFont, seBorder]
+    ExplicitLeft = 414
+    ExplicitHeight = 419
     object imgLogo: TImage
       Left = 0
       Top = 0
@@ -6207,11 +6209,12 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       Left = 0
       Top = 250
       Width = 500
-      Height = 169
+      Height = 168
       Align = alClient
       Caption = 'Panel1'
       ShowCaption = False
       TabOrder = 0
+      ExplicitHeight = 169
       object imgStartNewProject: TImage
         Left = 104
         Top = 22
@@ -6508,8 +6511,8 @@ object frmWelcomeDialog: TfrmWelcomeDialog
   object panRecentProjects: TPanel
     Left = 0
     Top = 0
-    Width = 414
-    Height = 419
+    Width = 402
+    Height = 418
     Align = alClient
     BevelOuter = bvNone
     Color = clBtnShadow
@@ -6522,6 +6525,8 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     ParentFont = False
     TabOrder = 1
     StyleElements = [seFont, seBorder]
+    ExplicitWidth = 414
+    ExplicitHeight = 419
   end
   object dlgOpen: TOpenTextFileDialog
     DefaultExt = 'agdx'

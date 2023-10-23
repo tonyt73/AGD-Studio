@@ -1,8 +1,8 @@
 object frmEditorCode: TfrmEditorCode
   Left = 0
   Top = 0
-  Width = 880
-  Height = 693
+  Width = 868
+  Height = 655
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -12,9 +12,9 @@ object frmEditorCode: TfrmEditorCode
   TabOrder = 0
   object evEditor: TLMDEditView
     Left = 0
-    Top = 0
-    Width = 880
-    Height = 674
+    Top = 33
+    Width = 868
+    Height = 603
     Align = alClient
     BevelEdges = []
     BevelInner = bvNone
@@ -36,12 +36,15 @@ object frmEditorCode: TfrmEditorCode
     CompletionSettings.ItemHeight = 13
     OnStatusChanged = evEditorStatusChanged
     OnEnter = evEditorEnter
+    ExplicitTop = 0
+    ExplicitWidth = 880
+    ExplicitHeight = 674
     GutterBarsEmpty = False
   end
   object sbStatus: TStatusBar
     Left = 0
-    Top = 674
-    Width = 880
+    Top = 636
+    Width = 868
     Height = 19
     Panels = <
       item
@@ -70,6 +73,32 @@ object frmEditorCode: TfrmEditorCode
       end>
     ParentFont = True
     UseSystemFont = False
+    ExplicitTop = 674
+    ExplicitWidth = 880
+  end
+  object LMDToolBar1: TLMDToolBar
+    Left = 0
+    Top = 0
+    Width = 868
+    Height = 33
+    Buttons = <
+      item
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        Index = 0
+        DisplayName = 'TLMDToolButton'
+        ThemeMode = ttmPlatform
+        UsePngGlyph = False
+        Margin = 1
+      end>
+    ButtonHeight = 30
+    ButtonWidth = 30
+    Align = alTop
+    Visible = False
+    TabOrder = 2
   end
   object lmdDocument: TLMDEditDocument
     Lines.Strings = (
@@ -3366,7 +3395,7 @@ object frmEditorCode: TfrmEditorCode
           '            '
           '    </Keywords>'
           ''
-          '    <Regex innerScheme='#39'Comment'#39' regex='#39'Rem.*$'#39' />'
+          '    <!--Regex innerScheme='#39'Comment'#39' regex='#39'Rem.*$'#39' /-->'
           '    <Regex innerScheme='#39'Comment'#39' regex=" ;.*$ " />'
           ''
           
@@ -3600,7 +3629,7 @@ object frmEditorCode: TfrmEditorCode
             'ple" fontStyle="bold"/>'
           '</Attributes>')
       end>
-    ActiveSyntaxScheme = 'Text'
+    ActiveSyntaxScheme = 'AGD'
     ActiveColorScheme = 'Dark'
     Left = 64
     Top = 48
@@ -3921,6 +3950,12 @@ object frmEditorCode: TfrmEditorCode
       Category = 'Zoom'
       Caption = 'Zoom Reset'
       OnExecute = actZoomResetExecute
+    end
+    object Action1: TAction
+      Category = 'Toolbar'
+      Caption = 'Variable Editor'
+      Hint = 'Toggle Variable Editor'
+      ShortCut = 24662
     end
   end
   object FontDialog: TFontDialog
