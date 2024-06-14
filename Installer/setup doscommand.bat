@@ -1,0 +1,2 @@
+@copy %USERPROFILE%\Documents\Embarcadero\Studio\22.0\CatalogRepository\DOSCommand-11cb\Packages\11AndAbove\cpp\Win32\Release\DosCommand.Register.hpp C:\Users\Public\Documents\Embarcadero\Studio\22.0\hpp\Win32
+@copy %USERPROFILE%\Documents\Embarcadero\Studio\22.0\CatalogRepository\DOSCommand-11cb\Packages\11AndAbove\cpp\Win64\Release\DosCommand.Register.hpp C:\Users\Public\Documents\Embarcadero\Studio\22.0\hpp\Win64
