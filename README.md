@@ -59,12 +59,13 @@ https://github.com/tonyt73/AGD-Studio/releases
 
 * Install the latest release
   * This will install all the configuration files and the example project
-  * Open up the location you cloned this repo to in Windows Explorer (Win+E)
-  * Run the batch file in `Installer\setup doscommand.bat` to install the header files correctly.
 
 * Launch the Rad-Studio IDE
   * Install the DOSCommand component from GetIt Package Manager
   * Close GetIt
+  * Fix DosCommand Install
+    * Open up the location you cloned this repo to in Windows Explorer (Win+E)
+    * Run the batch file in `Installer\setup doscommand.bat` to install the header files correctly.
   * Open the AGD Studio.cproj file from File > Open Project
-* Press F9 to build and run the application
+  * Press F9 to build and run the application
 
