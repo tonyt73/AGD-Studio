@@ -65,10 +65,10 @@ https://github.com/tonyt73/AGD-Studio/releases
    * Setup the paths for DOS Command
    * Tools -> Options -> IDE -> Environment Variables
      * New..
-        * Variable: DOSCMD_HDR
-        * Value: {location of Dos Command source code}\DOSCommand\Packages\{your version}\cpp
-        * Variable: DOSCMD_LIB
-        * Value: $(BDSCOMMONDIR)\Dcp
+        * Variable: `DOSCMD_HDR`
+        * Value: `${BDSCatalogRepository}\DOSCommand-11b\Packages\11AndAbove\cpp`
+        * Variable: `DOSCMD_LIB`
+        * Value: `$(BDSCOMMONDIR)\Dcp`
      * {your version} = Sydney, Rio, Alexandria etc
    * Tools -> Options -> Language -> Paths and Directories
      * Windows 32-bit
