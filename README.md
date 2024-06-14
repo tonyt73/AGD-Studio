@@ -72,11 +72,11 @@ https://github.com/tonyt73/AGD-Studio/releases
      * {your version} = Sydney, Rio, Alexandria etc
    * Tools -> Options -> Language -> Paths and Directories
      * Windows 32-bit
-        * System Library Path [...] -> Add `$(DOSCMD_LIB)`
         * System Include path [...] -> Add `$(DOSCMD_HDR)\Win32\Release`
+        * System Library Path [...] -> Add `$(DOSCMD_LIB)`
      * Windows 64-bit
-        * System Library Path [...] -> Add `$(DOSCMD_LIB)\Win64\Release`
         * System Include path [...] -> Add `$(DOSCMD_HDR)\Win64\Release`
+        * System Library Path [...] -> Add `$(DOSCMD_LIB)\Win64\Release`
     * Click Save
 
 
