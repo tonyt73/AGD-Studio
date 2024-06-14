@@ -99,6 +99,7 @@
         <VerInfo_Release>6663</VerInfo_Release>
         <VerInfo_Special>true</VerInfo_Special>
         <RunBCCOutOfProcess>true</RunBCCOutOfProcess>
+        <BCC_EnableLSPIndexing>false</BCC_EnableLSPIndexing>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <AppEnableHighDPI>true</AppEnableHighDPI>
@@ -180,6 +181,7 @@
         <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;VclSmp.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtprint.bpi;lmdrtelpro.bpi;xmlrtl.bpi;bindengine.bpi;DOSCommandCR.bpi;DbxCommonDriver.bpi;dbrtl.bpi</LinkPackageImports>
         <BCC_OptimizeMaximum>true</BCC_OptimizeMaximum>
         <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
+        <BCC_EnableLSPIndexing>false</BCC_EnableLSPIndexing>
     </PropertyGroup>
     <ItemGroup>
         <CppCompile Include="AGD Studio.cpp">
@@ -726,7 +728,7 @@
                 </Excluded_Packages>
                 <ProjectProperties>
                     <ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
-                    <ProjectProperties Name="IndexFiles">True</ProjectProperties>
+                    <ProjectProperties Name="IndexFiles">False</ProjectProperties>
                     <ProjectProperties Name="ManagePaths">False</ProjectProperties>
                     <ProjectProperties Name="VerifyPackages">True</ProjectProperties>
                 </ProjectProperties>
