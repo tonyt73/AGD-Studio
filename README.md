@@ -69,7 +69,6 @@ https://github.com/tonyt73/AGD-Studio/releases
         * Value: `${BDSCatalogRepository}\DOSCommand-11b\Packages\11AndAbove\cpp`
         * Variable: `DOSCMD_LIB`
         * Value: `$(BDSCOMMONDIR)\Dcp`
-     * {your version} = Sydney, Rio, Alexandria etc
    * Tools -> Options -> Language -> Paths and Directories
      * Windows 32-bit
         * System Include path [...] -> Add `$(DOSCMD_HDR)\Win32\Release`
