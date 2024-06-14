@@ -66,7 +66,7 @@ https://github.com/tonyt73/AGD-Studio/releases
    * Tools -> Options -> IDE -> Environment Variables
      * New..
         * Variable: `DOSCMD_HDR`
-        * Value: `${BDSCatalogRepository}\DOSCommand-11b\Packages\11AndAbove\cpp`
+        * Value: `$(BDSCatalogRepository)\DOSCommand-11b\Packages\11AndAbove\cpp`
         * Variable: `DOSCMD_LIB`
         * Value: `$(BDSCOMMONDIR)\Dcp`
    * Tools -> Options -> Language -> Paths and Directories
