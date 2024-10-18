@@ -15,8 +15,8 @@
 #include "Messaging/Messaging.h"
 #include "Project/TextDocuments.h"
 #include "Project/CharacterSetDocument.h"
-#include "fEditorCode.h"
-#include "fMultiImageView.h"
+#include "..\CodeEditor\fEditorCode.h"
+#include "..\ImageEditor\fMultiImageView.h"
 //---------------------------------------------------------------------------
 class TfrmEditorMessages : public TFrame
 {

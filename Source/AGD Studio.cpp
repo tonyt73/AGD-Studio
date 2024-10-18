@@ -47,7 +47,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE, LPTSTR, int)
          Application->MainFormOnTaskBar = true;
          ThemeManager::SetStyle(appSettings.ActiveStyle.Trim() != "" ? appSettings.ActiveStyle : "Windows 10 Black Pearl");
          Application->CreateForm(__classid(TfrmMain), &frmMain);
-         Application->Run();
+		 Application->Run();
     }
     catch (Exception &exception)
     {

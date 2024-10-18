@@ -46,6 +46,9 @@ object frmEditorMessages: TfrmEditorMessages
       ParentFont = False
       TabOrder = 0
       ExplicitWidth = 1204
+      inherited panImages: TPanel
+        StyleElements = [seFont, seClient, seBorder]
+      end
     end
   end
   object panContainer: TPanel
@@ -61,6 +64,7 @@ object frmEditorMessages: TfrmEditorMessages
       Top = 0
       Width = 6
       Height = 763
+      MinSize = 33
       ResizeStyle = rsUpdate
       ExplicitLeft = 328
       ExplicitHeight = 620
@@ -91,16 +95,21 @@ object frmEditorMessages: TfrmEditorMessages
         ExplicitHeight = 763
         inherited evEditor: TLMDEditView
           Width = 521
-          Height = 744
+          Height = 711
           OnStatusChanged = OnStatusChanged
+          ExplicitTop = 33
           ExplicitWidth = 521
-          ExplicitHeight = 744
+          ExplicitHeight = 711
           GutterBarsEmpty = False
         end
         inherited sbStatus: TStatusBar
           Top = 744
           Width = 521
           ExplicitTop = 744
+          ExplicitWidth = 521
+        end
+        inherited LMDToolBar1: TLMDToolBar
+          Width = 521
           ExplicitWidth = 521
         end
       end
