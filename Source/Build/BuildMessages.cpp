@@ -1,5 +1,6 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
+#include <System.StrUtils.hpp>
 #include "BuildMessages.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -40,9 +41,12 @@ void __fastcall BuildMessages::Pop(bool result)
 //---------------------------------------------------------------------------
 void __fastcall BuildMessages::Message(BuildMessageType type, const String& message)
 {
-    auto node = m_TreeView->Items->AddChild(m_GroupNode, message);
-    node->ImageIndex = type;
-    m_TreeView->Update();
+	auto lines = System::Strutils::SplitString(message, "\n");
+	for (auto line : lines) {
+		auto node = m_TreeView->Items->AddChild(m_GroupNode, line);
+		node->ImageIndex = type;
+	}
+	m_TreeView->Update();
 }
 //---------------------------------------------------------------------------
 void __fastcall BuildMessages::Message(const String& message)

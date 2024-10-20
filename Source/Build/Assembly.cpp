@@ -27,8 +27,7 @@ bool __fastcall Assembly::Execute()
     System::File::AppendText(asmFile, mc.Assembler.Append);
 
     BUILD_LINE(bmBuild, "Execute Assembler");
-    auto cmdline = assembler + " " + parameters;
-    return ShellExecute(System::File::PathOf(asmFile), cmdline);
+	return ShellExecute(System::File::PathOf(asmFile), assembler, parameters);
 }
 //---------------------------------------------------------------------------
 

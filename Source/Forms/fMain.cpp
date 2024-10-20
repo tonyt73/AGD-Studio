@@ -43,7 +43,7 @@ void __fastcall TfrmMain::FormCreate(TObject *Sender)
         Caption = ApplicationName;
         ShowIDE();
         auto path = TDirectory::GetCurrentDirectory();
-        auto project = System::File::NameWithExtension(ParamStr(1));
+		auto project = System::File::NameWithExtension(ParamStr(1));
         theProjectManager.Open(System::File::Combine(path, project));
     }
     // TODO: Remove: Used to generate initial JSON config files

@@ -32,8 +32,8 @@ bool __fastcall Compilation::Execute()
     System::File::Copy(engineSrc, engineDst, true);
     BUILD_LINE(bmBuild, "Execute AGD Compiler");
     auto parameters = Parameter::ization(mc.Compiler.Parameters);
-    auto cmdLine = System::File::NameWithExtension(compilerDst) + " " + parameters;
-    auto result = ShellExecute(path, cmdLine, true, 20);
+    auto cmdLine = System::File::NameWithExtension(compilerDst);
+	auto result = ShellExecute(path, cmdLine, parameters, true, 20);
     BUILD_LINE(bmCopy, "Removing compiler from project folder");
     System::File::Delete(compilerDst);
     BUILD_LINE(bmCopy, "Removing AGD Engine file from project folder");
