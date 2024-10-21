@@ -28,12 +28,7 @@ public:
 								Folders& operator=(const Folders&) = delete;
 								Folders& operator=(Folders&&) = delete;
 
-	static auto& instance()     {
-									static Folders folders;
-									folders.Init();
-									return folders;
-								}
-	void                        Init();
+	static void                 Init();
 
 	static TStringDynArray      GetFiles(const String& folder, const String& filter);
 	static TStringDynArray      GetFiles(Location location, const String& filter, const String& subFolder);

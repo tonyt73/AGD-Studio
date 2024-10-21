@@ -22,16 +22,19 @@ String Folders::m_Separator = "";
 //---------------------------------------------------------------------------
 void Folders::Init()
 {
-    const String appName = ApplicationName;
-	m_Separator = System::Ioutils::TPath::DirectorySeparatorChar;
-	m_Application = System::Ioutils::TPath::GetSharedDocumentsPath() + m_Separator + appName + m_Separator;
-	m_Common = System::Ioutils::TPath::GetSharedDocumentsPath() + m_Separator + appName + m_Separator + "Common" + m_Separator;
-	m_Documents = System::Ioutils::TPath::GetSharedDocumentsPath() + m_Separator;
-    m_Projects = System::Ioutils::TPath::GetSharedDocumentsPath() + m_Separator + appName + m_Separator + "Projects" + m_Separator;
+    if (m_Application == "") {
+        const String appName = ApplicationName;
+        m_Separator = System::Ioutils::TPath::DirectorySeparatorChar;
+        m_Application = System::Ioutils::TPath::GetSharedDocumentsPath() + m_Separator + appName + m_Separator;
+        m_Common = System::Ioutils::TPath::GetSharedDocumentsPath() + m_Separator + appName + m_Separator + "Common" + m_Separator;
+        m_Documents = System::Ioutils::TPath::GetSharedDocumentsPath() + m_Separator;
+        m_Projects = System::Ioutils::TPath::GetSharedDocumentsPath() + m_Separator + appName + m_Separator + "Projects" + m_Separator;
+    }
 }
 //---------------------------------------------------------------------------
 String Folders::GetFolder(const Location location, const String& subFolder)
 {
+    Init();
     auto folder = m_Common;
     if (location == lpApplication) folder = m_Application;
     else if (location == lpDocuments) folder = m_Documents;
