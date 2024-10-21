@@ -11,7 +11,7 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
-__fastcall TfrmLabelledImage::TfrmLabelledImage(TComponent* Owner)
+ TfrmLabelledImage::TfrmLabelledImage(TComponent* Owner)
 : TFrame(Owner)
 , m_Document(nullptr)
 , m_GraphicsMode(*(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()))
@@ -19,7 +19,7 @@ __fastcall TfrmLabelledImage::TfrmLabelledImage(TComponent* Owner)
     panImage->Color = ThemeManager::Background;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmLabelledImage::imgImageClick(TObject* Sender)
+void  TfrmLabelledImage::imgImageClick(TObject* Sender)
 {
     SetSelected(true);
     if (FOnClick != nullptr) FOnClick(this);
@@ -33,7 +33,7 @@ void __fastcall TfrmLabelledImage::imgImageClick(TObject* Sender)
 //  scEdit, scEditDisabled, scGrid,
 //  scGenericBackground, scGenericGradientBase, scGenericGradientEnd,
 //  scHintGradientBase, scHintGradientEnd, scListBox, scListBoxDisabled, scListView, scPanel, scPanelDisabled, scSplitter, scToolBarGradientBase, scToolBarGradientEnd, scTreeView, scWindow
-void __fastcall TfrmLabelledImage::SetSelected(bool state)
+void  TfrmLabelledImage::SetSelected(bool state)
 {
     m_Selected = state;
 
@@ -49,13 +49,13 @@ void __fastcall TfrmLabelledImage::SetSelected(bool state)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmLabelledImage::SetShowCaption(bool state)
+void  TfrmLabelledImage::SetShowCaption(bool state)
 {
     lblCaption->Visible = state;
     Update();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmLabelledImage::SetImage(Project::ImageDocument* document)
+void  TfrmLabelledImage::SetImage(Project::ImageDocument* document)
 {
     const String BlockTypes[] = { "Empty", "Platform", "Wall", "Ladder", "Fodder", "Deadly", "Custom" };
     const TColor BlockColor[] = { clGray, clBlue, (TColor)0x00006AFF, clLime, clFuchsia, clRed, clYellow };
@@ -73,7 +73,7 @@ void __fastcall TfrmLabelledImage::SetImage(Project::ImageDocument* document)
     Update();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmLabelledImage::Update()
+void  TfrmLabelledImage::Update()
 {
     auto iw    = m_Document->Width;
     auto ih    = m_Document->Height;

@@ -7,7 +7,7 @@
 //---------------------------------------------------------------------------
 using namespace Project;
 //---------------------------------------------------------------------------
-__fastcall TileDocument::TileDocument(const String& name, const String& extra)
+ TileDocument::TileDocument(const String& name, const String& extra)
 : ImageDocument(name)
 {
     m_ImageType = Visuals::itTile;

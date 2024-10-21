@@ -4,7 +4,7 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall TWinControlHandler::TWinControlHandler(TWinControl* winControl, bool paintOnErase)
+ TWinControlHandler::TWinControlHandler(TWinControl* winControl, bool paintOnErase)
 : m_WinControl(winControl)
 , m_PaintOnErase(paintOnErase)
 {
@@ -17,7 +17,7 @@ __fastcall TWinControlHandler::TWinControlHandler(TWinControl* winControl, bool 
     }
 }
 //---------------------------------------------------------------------------
-__fastcall TWinControlHandler::~TWinControlHandler()
+ TWinControlHandler::~TWinControlHandler()
 {
     if (m_WinControl)
     {
@@ -25,7 +25,7 @@ __fastcall TWinControlHandler::~TWinControlHandler()
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TWinControlHandler::NewWindowProc( Messages::TMessage &Message )
+void  TWinControlHandler::NewWindowProc( Messages::TMessage &Message )
 {
     if (m_WinControl)
     {

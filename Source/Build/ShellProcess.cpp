@@ -7,7 +7,7 @@
 //---------------------------------------------------------------------------
 using namespace Build;
 //---------------------------------------------------------------------------
-__fastcall ShellProcess::ShellProcess(BuildMessages& buildMessages, BuildMessageType type, const String& description)
+ ShellProcess::ShellProcess(BuildMessages& buildMessages, BuildMessageType type, const String& description)
 : BuildProcess(buildMessages, type, description)
 {
 	m_Shell = std::make_unique<TLMDStarterExt>(nullptr);
@@ -21,11 +21,11 @@ __fastcall ShellProcess::ShellProcess(BuildMessages& buildMessages, BuildMessage
     m_Shell->OnFinished = OnTerminatedEvent;
 }
 //---------------------------------------------------------------------------
-__fastcall ShellProcess::~ShellProcess()
+ ShellProcess::~ShellProcess()
 {
 }
 //---------------------------------------------------------------------------
-bool __fastcall ShellProcess::ShellExecute(const String& path, const String& cmdline, const String& parameters, bool wait, int timeOut)
+bool  ShellProcess::ShellExecute(const String& path, const String& cmdline, const String& parameters, bool wait, int timeOut)
 {
     m_Errored = false;
     bool result = true;
@@ -69,7 +69,7 @@ bool __fastcall ShellProcess::ShellExecute(const String& path, const String& cmd
     return result;
 }
 //---------------------------------------------------------------------------
-void __fastcall ShellProcess::OnOutputEvent(TObject* ASender, const System::UnicodeString ANewLine)
+void  ShellProcess::OnOutputEvent(TObject* ASender, const System::UnicodeString ANewLine)
 {
     if (ANewLine.LowerCase().Pos("error"))
     {
@@ -86,7 +86,7 @@ void __fastcall ShellProcess::OnOutputEvent(TObject* ASender, const System::Unic
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall ShellProcess::OnErrorEvent(TObject* ASender)
+void  ShellProcess::OnErrorEvent(TObject* ASender)
 {
 	m_Shell->TerminateProcess();
 	m_ShellDone = true;
@@ -94,7 +94,7 @@ void __fastcall ShellProcess::OnErrorEvent(TObject* ASender)
 	BUILD_LINE(bmFailed, "SHELL ERROR");// + m_Shell->LastError);
 }
 //---------------------------------------------------------------------------
-void __fastcall ShellProcess::OnTerminatedEvent(TObject* ASender)
+void  ShellProcess::OnTerminatedEvent(TObject* ASender)
 {
     m_ShellDone = true;
 }

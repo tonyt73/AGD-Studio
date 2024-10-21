@@ -12,7 +12,7 @@ using namespace Project;
 //---------------------------------------------------------------------------
 using namespace Project;
 static Settings* instance = nullptr;
-Settings& __fastcall Settings::get()
+Settings&  Settings::get()
 {
     if (instance == nullptr)
     {
@@ -21,7 +21,7 @@ Settings& __fastcall Settings::get()
     return *instance;
 }
 //---------------------------------------------------------------------------
-__fastcall Settings::Settings()
+ Settings::Settings()
 : JsonFile()
 {
     m_PropertyMap["Application.Style"] = &m_ActiveStyle;
@@ -41,36 +41,36 @@ __fastcall Settings::Settings()
     Load(Services::File::Combine(Services::Folders::Common, "Settings.json"));
 }
 //---------------------------------------------------------------------------
-__fastcall Settings::~Settings()
+ Settings::~Settings()
 {
     Save();
 }
 //---------------------------------------------------------------------------
-void __fastcall Settings::SetWelcomePosition(const TPoint& position)
+void  Settings::SetWelcomePosition(const TPoint& position)
 {
     m_WelcomePosition = position;
     Save();
 }
 //---------------------------------------------------------------------------
-void __fastcall Settings::SetWindowPosition(const TPoint& position)
+void  Settings::SetWindowPosition(const TPoint& position)
 {
     m_WindowPosition = position;
     Save();
 }
 //---------------------------------------------------------------------------
-void __fastcall Settings::SetWindowState(const TWindowState& state)
+void  Settings::SetWindowState(const TWindowState& state)
 {
     m_WindowState = state;
     Save();
 }
 //---------------------------------------------------------------------------
-void __fastcall Settings::SetWindowSize(const TSize& size)
+void  Settings::SetWindowSize(const TSize& size)
 {
     m_WindowSize = size;
     Save();
 }
 //---------------------------------------------------------------------------
-void __fastcall Settings::SetBool(int index, bool value)
+void  Settings::SetBool(int index, bool value)
 {
     switch (index)
     {
@@ -81,7 +81,7 @@ void __fastcall Settings::SetBool(int index, bool value)
     Save();
 }
 //---------------------------------------------------------------------------
-void __fastcall Settings::SetString(int index, String value)
+void  Settings::SetString(int index, String value)
 {
     switch (index)
     {
@@ -93,7 +93,7 @@ void __fastcall Settings::SetString(int index, String value)
     Save();
 }
 //---------------------------------------------------------------------------
-void __fastcall Settings::Save()
+void  Settings::Save()
 {
     // {
 	Open(Services::File::Combine(Services::Folders::Common, "Settings.json"));

@@ -8,16 +8,16 @@
 //---------------------------------------------------------------------------
 using namespace Build;
 //---------------------------------------------------------------------------
-__fastcall PreChecks::PreChecks(BuildMessages& buildMessages)
+ PreChecks::PreChecks(BuildMessages& buildMessages)
 : BuildProcess(buildMessages, bmChecking, "Checking Project Dependencies")
 {
 }
 //---------------------------------------------------------------------------
-__fastcall PreChecks::~PreChecks()
+ PreChecks::~PreChecks()
 {
 }
 //---------------------------------------------------------------------------
-bool __fastcall PreChecks::Execute()
+bool  PreChecks::Execute()
 {
     const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
     auto cp = Services::File::Exists(mc.Compiler.Path) || Services::File::Exists(Services::File::Combine(Services::Folders::Application, mc.Compiler.Path));

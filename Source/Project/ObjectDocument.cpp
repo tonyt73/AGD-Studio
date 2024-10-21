@@ -7,7 +7,7 @@
 //---------------------------------------------------------------------------
 using namespace Project;
 //---------------------------------------------------------------------------
-__fastcall ObjectDocument::ObjectDocument(const String& name, const String& extra)
+ ObjectDocument::ObjectDocument(const String& name, const String& extra)
 : ImageDocument(name)
 , m_State(Visuals::osDisabled)
 {
@@ -30,12 +30,12 @@ __fastcall ObjectDocument::ObjectDocument(const String& name, const String& extr
     AddFrame();
 }
 //---------------------------------------------------------------------------
-int __fastcall ObjectDocument::GetPosition(int index)
+int  ObjectDocument::GetPosition(int index)
 {
     return index ? m_Position.Y : m_Position.X;
 }
 //---------------------------------------------------------------------------
-void __fastcall ObjectDocument::SetPosition(int value, int index)
+void  ObjectDocument::SetPosition(int value, int index)
 {
     if (index)
         m_Position.Y = value;
@@ -43,14 +43,14 @@ void __fastcall ObjectDocument::SetPosition(int value, int index)
         m_Position.X = value;
 }
 //---------------------------------------------------------------------------
-void __fastcall ObjectDocument::SetRoomIndex(int value)
+void  ObjectDocument::SetRoomIndex(int value)
 {
     if (0 <= value && value <= 255) {
         m_RoomIndex = value;
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall ObjectDocument::DoSaveExtra()
+void  ObjectDocument::DoSaveExtra()
 {
     Write("RoomIndex", m_RoomIndex);
     Write("State", m_State);

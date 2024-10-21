@@ -22,16 +22,16 @@ public:
 private:
 
 
-    void        __fastcall  Load();
-    void        __fastcall  OnEndObject(const String& object);
+    void          Load();
+    void          OnEndObject(const String& object);
 
     DefinitionList          m_Definitions;
     Definition              m_DefinitionLoader;
 
 public:
-                            __fastcall  FileDefinitions();
+                              FileDefinitions();
 
-    const DefinitionList&   __fastcall  GetDefinitions() const;
+    const DefinitionList&     GetDefinitions() const;
 };
 //---------------------------------------------------------------------------
 } // Project namespace
