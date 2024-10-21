@@ -1,19 +1,14 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-//---------------------------------------------------------------------------
 #include "Project/ProjectManager.h"
 #include "Frames/CodeEditor/fEditorCode.h"
 #include "Frames/ImageEditor/fEditorImage.h"
-#include "Messaging/Event.h"
 #include "Project/ProjectDocument.h"
 #include "Project/FileDefinitions.h"
-#include "Project/Settings.h"
-#include "Services/File.h"
-#include "Services/Folders.h"
+#include "Settings/Settings.h"
+#include "Messaging/Event.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-//---------------------------------------------------------------------------
-using namespace Project;
 //---------------------------------------------------------------------------
 ProjectManager& ProjectManager::get()
 {
@@ -111,7 +106,7 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
 {
     ClearMessage("[ProjectManager] Creating new Project: '" + name + "' for machine '" + machine + ";");
     InformationMessage("[ProjectManager] Project Saved");
-    Services::Folders::ProjectName = name;
+    System::Path::ProjectName = name;
     Close();
     if (m_TreeView)
     {
@@ -152,8 +147,8 @@ void __fastcall ProjectManager::Open(const String& file)
     ClearMessage("[ProjectManager] Loading Project: " + file);
     Application->ProcessMessages();
     m_IsOpen = true;
-    auto name = Services::File::NameWithoutExtension(file);
-    Services::Folders::ProjectName = name;
+    auto name = System::File::NameWithoutExtension(file);
+    System::Path::ProjectName = name;
     ClearTree(name);
     theDocumentManager.Clear();
     // create a new project file and load the file

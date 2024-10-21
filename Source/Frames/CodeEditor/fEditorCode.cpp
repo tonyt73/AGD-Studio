@@ -52,7 +52,7 @@ const String SCHEMES_SYN[SCHEMES_EXTS_COUNT] =
 __fastcall TfrmEditorCode::TfrmEditorCode(TComponent* Owner)
 : TFrame(Owner)
 {
-    m_Registrar.Subscribe<::Messaging::Event>(OnEvent);
+    m_Registrar.Subscribe<Event>(OnEvent);
 
     m_SearchOptions.Searches.set_length(0);
     m_SearchOptions.Options.Clear();
@@ -72,7 +72,7 @@ bool __fastcall TfrmEditorCode::IsActive() const
     return theEditorManager.IsActive(this);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::SetDocument(Project::Document* document)
+void __fastcall TfrmEditorCode::SetDocument(Document* document)
 {
     theEditorManager.SetActive(this);
     m_ActionMap["zoom.in"] = actZoomIn;
@@ -91,10 +91,10 @@ void __fastcall TfrmEditorCode::SetDocument(Project::Document* document)
 
     m_Document = document;
     lmdDocument->ClearNoUndo();
-    if (Services::File::Exists(document->Path))
+    if (System::File::Exists(document->Path))
     {
         lmdDocument->LoadFromFile(document->Path, CP_ACP, true);
-        auto extension = Services::File::Extension(document->Path).SubString(2, 32);
+        auto extension = System::File::Extension(document->Path).SubString(2, 32);
         auto sc = GetSyntaxScByExt(extension);
         lmdDocument->ActiveSyntaxScheme = sc;
         lmdDocument->ReadOnly = document->IsReadOnly;
@@ -465,7 +465,7 @@ void __fastcall TfrmEditorCode::evEditorStatusChanged(TLMDCustomEditView *AView,
     UpdateStatus();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::OnEvent(const ::Messaging::Event& event)
+void __fastcall TfrmEditorCode::OnEvent(const Event& event)
 {
     if (evEditor != nullptr && IsActive() && m_ActionMap.count(event.Id) == 1)
     {

@@ -3,12 +3,9 @@
 #define FileDefinitionsH
 //---------------------------------------------------------------------------
 #include <vector>
-#include "Services/JsonFile.h"
+#include "System/JsonFile.h"
 //---------------------------------------------------------------------------
-namespace Project
-{
-//---------------------------------------------------------------------------
-class FileDefinitions : public Services::JsonFile
+class FileDefinitions : public System::JsonFile
 {
 public:
     struct Definition
@@ -33,7 +30,5 @@ public:
 
     const DefinitionList&   __fastcall  GetDefinitions() const;
 };
-//---------------------------------------------------------------------------
-} // Project namespace
 //---------------------------------------------------------------------------
 #endif

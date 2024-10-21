@@ -2,11 +2,8 @@
 #ifndef WindowDocumentH
 #define WindowDocumentH
 //---------------------------------------------------------------------------
-#include "Document.h"
-#include "Messaging/Event.h"
-//---------------------------------------------------------------------------
-namespace Project
-{
+#include "Project/Document.h"
+#include "Event.h"
 //---------------------------------------------------------------------------
 class WindowDocument : public Document
 {
@@ -38,7 +35,5 @@ __published:
             int         __property  PixelsWidth = { read = Get, index = 8 };
             int         __property  PixelsHeight= { read = Get, index = 9 };
 };
-//---------------------------------------------------------------------------
-} // Project namespace
 //---------------------------------------------------------------------------
 #endif

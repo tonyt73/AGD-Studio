@@ -2,10 +2,7 @@
 #ifndef MostRecentlyUsedListH
 #define MostRecentlyUsedListH
 //---------------------------------------------------------------------------
-#include "Services/JsonFile.h"
-//---------------------------------------------------------------------------
-namespace Project
-{
+#include "System/JsonFile.h"
 //---------------------------------------------------------------------------
 class MostRecentlyUsedItem
 {
@@ -28,7 +25,7 @@ public:
 typedef std::list<MostRecentlyUsedItem> MRUList;
 typedef const MRUList& cMRUList;
 //---------------------------------------------------------------------------
-class MostRecentlyUsedList : public Services::JsonFile
+class MostRecentlyUsedList : public System::JsonFile
 {
 private:
     MRUList                 m_MostRecentlyUsedList;
@@ -47,7 +44,5 @@ public:
     void        __fastcall  Remove(const String& name, const String& path);
     cMRUList    __fastcall  GetList() const;
 };
-//---------------------------------------------------------------------------
-} // Project namespace
 //---------------------------------------------------------------------------
 #endif

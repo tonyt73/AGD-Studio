@@ -1,12 +1,11 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-//---------------------------------------------------------------------------
 #include <math.h>
 #include "LabelledImage.h"
-#include "Frames/ImageEditor/BlockColors.h"
 #include "Project/DocumentManager.h"
 #include "Settings/ThemeManager.h"
-#include "Visuals/Image.h"
+#include "Graphics/Image.h"
+#include "Frames/ImageEditor/BlockColors.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -55,7 +54,7 @@ void __fastcall TfrmLabelledImage::SetShowCaption(bool state)
     Update();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmLabelledImage::SetImage(Project::ImageDocument* document)
+void __fastcall TfrmLabelledImage::SetImage(ImageDocument* document)
 {
     const String BlockTypes[] = { "Empty", "Platform", "Wall", "Ladder", "Fodder", "Deadly", "Custom" };
     const TColor BlockColor[] = { clGray, clBlue, (TColor)0x00006AFF, clLime, clFuchsia, clRed, clYellow };
@@ -63,7 +62,7 @@ void __fastcall TfrmLabelledImage::SetImage(Project::ImageDocument* document)
     lblCaption->Caption       = m_Document->Name.UpperCase();
     panTileType->Visible      = false;
 
-    if (document->ImageType  == Visuals::itTile) {
+    if (document->ImageType  == itTile) {
         auto st               = document->GetLayer("blocktype");
         auto bt               = StrToInt(st);
         panTileType->Caption  = BlockTypes[bt].UpperCase();
@@ -77,7 +76,7 @@ void __fastcall TfrmLabelledImage::Update()
 {
     auto iw    = m_Document->Width;
     auto ih    = m_Document->Height;
-    auto image = std::make_unique<Visuals::Image>(m_Document, m_GraphicsMode);
+    auto image = std::make_unique<Agdx::Image>(m_Document, m_GraphicsMode);
     auto sx    = image->Canvas().ScalarX;
     auto sy    = image->Canvas().ScalarY;
 

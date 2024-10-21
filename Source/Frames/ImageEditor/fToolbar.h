@@ -6,7 +6,7 @@
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
-#include "Services/Generic.h"
+#include "System/Generic.h"
 //---------------------------------------------------------------------------
 class TfrmToolbar : public TFrame
 {
@@ -14,7 +14,7 @@ __published:// IDE-managed Components
 private:    // User declarations
 public:     // User declarations
     __fastcall TfrmToolbar(TComponent* Owner);
-    virtual Services::Generic __fastcall GetParameters() const = 0;
+    virtual Generic __fastcall GetParameters() const = 0;
 };
 //---------------------------------------------------------------------------
 #endif

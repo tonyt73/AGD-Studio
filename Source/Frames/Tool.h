@@ -2,8 +2,8 @@
 #ifndef ToolH
 #define ToolH
 //---------------------------------------------------------------------------
+#include "System/Generic.h"
 #include "Frames/MouseState.h"
-#include "Services/Generic.h"
 //---------------------------------------------------------------------------
 class Tool
 {
@@ -22,7 +22,7 @@ private:
     TPoint                      m_LastPt;       // the last move point
     MouseState                  m_MouseState;   // the mouse/key states when the operation started
     bool                        m_IsDrawing;    // flag: We are drawing
-    Services::Generic           m_Parameters;   // the parameters specific for each tool
+    Generic                     m_Parameters;   // the parameters specific for each tool
     int                         m_Width;        // the width of the content we are changing
     int                         m_Height;       // the height of the content we are changing
 
@@ -42,7 +42,7 @@ public:
                     __fastcall  Tool();
     virtual         __fastcall ~Tool();
 
-  Services::Generic __property  Parameters = { read = m_Parameters, write = m_Parameters };
+            Generic __property  Parameters = { read = m_Parameters, write = m_Parameters };
             int     __property  Width = { read = m_Width, write = m_Width };
             int     __property  Height = { read = m_Height, write = m_Height };
   __property  const MouseState& MS = { read = m_MouseState };

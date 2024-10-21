@@ -2,10 +2,9 @@
 #include "AgdStudio.pch.h"
 #include <Vcl.Imaging.pngimage.hpp>
 #include "fSelectionPanel.h"
+#include "System/File.h"
 #include "Project/MachineConfig.h"
 #include "Settings/ThemeManager.h"
-#include "Services/File.h"
-#include "Services/Folders.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -44,10 +43,10 @@ void __fastcall TSelectionPanelFrame::SetName(String name)
 void __fastcall TSelectionPanelFrame::SetPath(String path)
 {
     m_Path = path;
-    lblProjectPath->Caption = Services::File::PathOf(path);
+    lblProjectPath->Caption = System::File::PathOf(path);
 
-    auto file = Services::File::Combine(Services::File::Combine(Services::Folders::Projects, m_Name), m_Name + ".png");
-    if (Services::File::Exists(file))
+    auto file = System::File::Combine(System::File::Combine(System::Path::Projects, m_Name), m_Name + ".png");
+    if (System::File::Exists(file))
     {
         auto image = std::make_unique<TPngImage>();
         image->LoadFromFile(file);
@@ -63,12 +62,12 @@ void __fastcall TSelectionPanelFrame::SetMachine(String machine)
 
     if (!imgLogo->Visible)
     {
-        auto mc = std::make_unique<Project::MachineConfig>(machine);
+        auto mc = std::make_unique<MachineConfig>(machine);
         mc->Load(machine);
         if (mc->Image.Trim() != "")
         {
-            auto file = Services::File::Combine(Services::Folders::Application, mc->Image);
-            if (Services::File::Exists(file))
+            auto file = System::File::Combine(System::Path::Application, mc->Image);
+            if (System::File::Exists(file))
             {
                 auto image = std::make_unique<TPngImage>();
                 image->LoadFromFile(file);
@@ -147,7 +146,7 @@ void __fastcall TSelectionPanelFrame::imgRemoveClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TSelectionPanelFrame::imgOpenProjectFolderClick(TObject *Sender)
 {
-    auto folder = Services::File::Combine(Services::Folders::Projects, m_Name);
+    auto folder = System::File::Combine(System::Path::Projects, m_Name);
     ShellExecute(NULL, L"open", NULL, NULL, folder.c_str(), SW_SHOWNORMAL);
 
 }

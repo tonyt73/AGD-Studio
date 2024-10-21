@@ -7,14 +7,11 @@
 //---------------------------------------------------------------------------
 #include <map>
 #include <vector>
-#include "Services/JsonFile.h"
+#include "System/JsonFile.h"
 #include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
-namespace Project
-{
-//---------------------------------------------------------------------------
 // Inheritence map
-// Document -> Services::JsonFile -> TPersistent
+// Document -> System::JsonFile -> TPersistent
 // TPersistent is a Delphi class used by the property editor to extract
 // published __property items from a class that can be then viewed/edited.
 // JsonFile does not use TPersistent; but Document does.
@@ -26,7 +23,7 @@ namespace Project
 const unsigned int InvalidDocumentId = 0;
 const String       Unnamed = "unnamed";
 //---------------------------------------------------------------------------
-class Document : public Services::JsonFile
+class Document : public System::JsonFile
 {
 public:
     struct TPropertyInfo
@@ -102,7 +99,4 @@ __published:
 typedef Document* (__fastcall *CreateDocumentFn)(const String& name, const String& extra);
 typedef std::vector<Document*> DocumentList;
 //---------------------------------------------------------------------------
-} // Project namespace
-//---------------------------------------------------------------------------
 #endif
-

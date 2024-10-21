@@ -5,8 +5,8 @@
 #include "Project/TiledMapDocument.h"
 #include "Messaging/Messaging.h"
 #include "Messaging/Event.h"
-#include "Visuals/Image.h"
-#include "Visuals/GraphicsMode.h"
+#include "Graphics/Image.h"
+#include "Graphics/GraphicsMode.h"
 #include "Frames/MapEditor/MapPencilTool.h"
 #include "Frames/MapEditor/MapLineTool.h"
 #include "Frames/MapEditor/MapRectTool.h"
@@ -33,15 +33,15 @@ private:
     TSize                           m_ContentSize;      // the size of the content window that we need (content bitmap is always larger for blt reasons)
     TImage* const                   m_View;             // the UI image we render to
     TImage*                         m_LockIcon;         // the lock icon
-    Project::MapEntityList          m_Entities;         // all the map entities
-    Project::MapEntityList          m_ToolEntities;     // the entities for the current tool (select etc)
-    Project::MapEntityList          m_ClipboardEntities;// the entities for the clipboard (copy, cut, paste)
-    Project::MapEntity              m_ToolEntity;       // the image document selected in the map editor UI
-    Project::MapEntity              m_HoverEntity;      // the entity the mouse is hovering over
+    MapEntityList                   m_Entities;         // all the map entities
+    MapEntityList                   m_ToolEntities;     // the entities for the current tool (select etc)
+    MapEntityList                   m_ClipboardEntities;// the entities for the clipboard (copy, cut, paste)
+    MapEntity                       m_ToolEntity;       // the image document selected in the map editor UI
+    MapEntity                       m_HoverEntity;      // the entity the mouse is hovering over
     TEMode                          m_Mode;             // tool mode (pencil, line etc)
     bool                            m_Dirty;            // flag: tool is dirty - map needs updating
-    const Visuals::GraphicsMode&       m_GraphicsMode;     // the graphics mode used by the project
-    Visuals::ImageMap&                 m_ImageMap;         // a map of all images as bitmaps
+    const Agdx::GraphicsMode&       m_GraphicsMode;     // the graphics mode used by the project
+    Agdx::ImageMap&                 m_ImageMap;         // a map of all images as bitmaps
     float                           m_ScaleFactor;      // the scale factor of the content view on to the overlays view
     TFPoint                         m_Scale;            // the applied scale factor for both x and y axes
     bool                            m_UsesGridTile;     // flag: uses a tile grid
@@ -78,14 +78,14 @@ private:
     MapLineTool                     m_MapLineTool;      // line tool - draw tiles (only) in a line
     MapTool*                        m_ActiveMapTool;    // the active tool (from 1 of 3 above)
 
-    void                __fastcall  OnWindowChanged(const ::Messaging::WindowChangedEvent& event);
+    void                __fastcall  OnWindowChanged(const WindowChangedEvent& event);
     void                __fastcall  CreateViewBitmap();
     void                __fastcall  Clear();
     void                __fastcall  SelectRoom(TSize room);
     void                __fastcall  ValidatePosition();
     TPoint              __fastcall  MapToView(const TPoint& pt) const;
     TPoint              __fastcall  ViewToMap(int X, int Y) const;
-    void                __fastcall  ResetToOrigin(Project::MapEntityList& list, const TPoint& originPt) const;
+    void                __fastcall  ResetToOrigin(MapEntityList& list, const TPoint& originPt) const;
     bool                __fastcall  GetGridTile();
     bool                __fastcall  GetGridRoom();
     unsigned int        __fastcall  GetToolEntity() const;
@@ -104,7 +104,7 @@ private:
     void                __fastcall  SetScale(float scale);
     void                __fastcall  SetMode(TEMode mode);
     void                __fastcall  SetLockIcon(TImage* icon);
-    void                __fastcall  DrawEntities(int filters, Visuals::ImageTypes type = Visuals::itInvalid);
+    void                __fastcall  DrawEntities(int filters, ImageTypes type = itInvalid);
     void                __fastcall  DrawToolEntities();
     void                __fastcall  DrawHoverEntity();
     void                __fastcall  DrawMap();
@@ -116,13 +116,13 @@ private:
     void                __fastcall  DrawSelectedRoom() const;
     void                __fastcall  DrawStartRoom() const;
     int                 __fastcall  Snap(int value, int range) const;
-    void                __fastcall  Get(const TRect& rect, Project::MapEntityList& entities) const;
+    void                __fastcall  Get(const TRect& rect, MapEntityList& entities) const;
     void                __fastcall  ReplaceEntities();
     void                __fastcall  UpdateTile0Content();
     bool                __fastcall  ClearHover();
     void                __fastcall  SelectHover();
-    bool                __fastcall  GetEntityUnderMouse(int X, int Y, Project::MapEntity& entity, Visuals::ImageTypes imageType, bool selectIt = false);
-    void                __fastcall  AssignRoomIndexes(Project::MapEntityList& entities);
+    bool                __fastcall  GetEntityUnderMouse(int X, int Y, MapEntity& entity, ImageTypes imageType, bool selectIt = false);
+    void                __fastcall  AssignRoomIndexes(MapEntityList& entities);
 
     void                __fastcall  OnMouseDownSelectMode(TMouseButton Button, TShiftState Shift, int X, int Y);
     void                __fastcall  OnMouseDownMapToolMode(TMouseButton Button, TShiftState Shift, int X, int Y);
@@ -133,14 +133,14 @@ private:
 
     __property  bool                IsDirty = { read = m_Dirty, write = m_Dirty };
 
-    typedef void __fastcall (__closure *TNotifyOnEntityClick)(const Project::MapEntity& entity);
+    typedef void __fastcall (__closure *TNotifyOnEntityClick)(const MapEntity& entity);
     TNotifyOnEntityClick            FOnEntitySelected;
     typedef int __fastcall (__closure *TRetrieveRoomIndex)(const TPoint& pt, bool newIndex) const;
     TRetrieveRoomIndex   __fastcall FRetrieveRoomIndex;
 
 public:
 
-                        __fastcall  TileEditor(TImage* const view, Visuals::ImageMap& imageMap, const TSize& rooms, bool usesGridTile, bool usesGridRoom, int border, bool readOnly = false);
+                        __fastcall  TileEditor(TImage* const view, Agdx::ImageMap& imageMap, const TSize& rooms, bool usesGridTile, bool usesGridRoom, int border, bool readOnly = false);
                         __fastcall ~TileEditor();
 
     void                __fastcall  OnMouseDown(TMouseButton Button, TShiftState Shift, int X, int Y);
@@ -150,12 +150,12 @@ public:
     void                __fastcall  Refresh();
     void                __fastcall  UpdateMap();
 
-    void                __fastcall  SetEntities(const Project::MapEntityList& entities);
-   const Project::MapEntityList& __fastcall  GetEntities() const;
-    void                __fastcall  Add(const Project::MapEntityList& entities);
+    void                __fastcall  SetEntities(const MapEntityList& entities);
+   const MapEntityList& __fastcall  GetEntities() const;
+    void                __fastcall  Add(const MapEntityList& entities);
     void                __fastcall  ToggleEntityLocks();
     void                __fastcall  SetSpriteType(int type);
- Project::MapEntityList __fastcall  GetSelection(bool resetToOrigin = false) const;
+    MapEntityList       __fastcall  GetSelection(bool resetToOrigin = false) const;
     void                __fastcall  DeleteSelection();
     void                __fastcall  UnselectAll(bool update = true);
     void                __fastcall  Copy();

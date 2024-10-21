@@ -1,12 +1,11 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
+#pragma hdrstop
 //---------------------------------------------------------------------------
 #include "JumpTableDocument.h"
 #include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-//---------------------------------------------------------------------------
-using namespace Project;
 //---------------------------------------------------------------------------
 __fastcall JumpTableDocument::JumpTableDocument(const String& name)
 : Document(name)

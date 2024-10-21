@@ -4,11 +4,7 @@
 //---------------------------------------------------------------------------
 #include "Project/Document.h"
 //---------------------------------------------------------------------------
-namespace Project
-{
-//---------------------------------------------------------------------------
 enum eAgdKey { keyFirst = 0, keyUp = 0, keyDown, keyLeft, keyRight, keyFire1, keyFire2, keyFire3, keyOption1, keyOption2, keyOption3, keyOption4, keyLast };
-static const eAgdKey AgdKeys[] = { keyUp, keyDown, keyLeft, keyRight, keyFire1, keyFire2, keyFire3, keyOption1, keyOption2, keyOption3, keyOption4, keyLast };
 class ControlsDocument : public Document
 {
 private:
@@ -44,7 +40,5 @@ __published:
         String          __property  Option3 = { read = Get, index = keyOption3 };
         String          __property  Option4 = { read = Get, index = keyOption4 };
 };
-//---------------------------------------------------------------------------
-} // Project namespace
 //---------------------------------------------------------------------------
 #endif

@@ -6,8 +6,8 @@
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
+#include "Graphics/GraphicsBuffer.h"
 #include <Vcl.ExtCtrls.hpp>
-#include "Visuals/GraphicsBuffer.h"
 //---------------------------------------------------------------------------
 class TMultiImageViewFrame : public TFrame
 {
@@ -26,7 +26,7 @@ public:     // User declarations
             __fastcall  TMultiImageViewFrame(TComponent* Owner);
 
     void    __fastcall  Clear();
-    void    __fastcall  Add(const  Visuals::GraphicsBuffer& image, const String& hint);
+    void    __fastcall  Add(const  Agdx::GraphicsBuffer& image, const String& hint);
     void    __fastcall  Select(int index);
 
     int     __property  Scale = { read = m_Scale, write = SetScale };

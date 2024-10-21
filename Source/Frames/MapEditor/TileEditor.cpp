@@ -1,14 +1,13 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-//---------------------------------------------------------------------------
 #include <System.Math.hpp>
 #include "TileEditor.h"
-#include "Frames/ImageEditor/BlockColors.h"
-#include "Frames/MouseState.h"
-#include "Messaging/Messaging.h"
 #include "Project/DocumentManager.h"
 #include "Project/WindowDocument.h"
+#include "Messaging/Messaging.h"
+#include "Frames/MouseState.h"
 #include "Settings/ThemeManager.h"
+#include "Frames/ImageEditor/BlockColors.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -19,7 +18,7 @@ const TColor c_ColorRoomGrid        = (TColor)0x0048BAF7;   // a kind of dark br
 const TColor c_ColorEntitySelected  = (TColor)0x7F00FF00;   // 127 alpha - green
 const TColor c_ColorHoverEntity     = (TColor)0x7F00AF00;   // 127 alpha - darker green
 //---------------------------------------------------------------------------
-__fastcall TileEditor::TileEditor(TImage* const view, Visuals::ImageMap& imageMap, const TSize& rooms, bool usesGridTile, bool usesGridRoom, int border, bool readOnly)
+__fastcall TileEditor::TileEditor(TImage* const view, Agdx::ImageMap& imageMap, const TSize& rooms, bool usesGridTile, bool usesGridRoom, int border, bool readOnly)
 : m_View(view)
 , m_LockIcon(nullptr)
 , m_ImageMap(imageMap)
@@ -41,7 +40,7 @@ __fastcall TileEditor::TileEditor(TImage* const view, Visuals::ImageMap& imageMa
 , m_ForceMapDraw(false)
 , m_SelectionCount(0)
 , m_Tile0Id(0)
-, m_TileSize(theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile].Minimum)
+, m_TileSize(theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum)
 , m_GraphicsMode(*(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()))
 , m_ReadOnly(readOnly)
 , m_ActiveMapTool(nullptr)
@@ -51,7 +50,7 @@ __fastcall TileEditor::TileEditor(TImage* const view, Visuals::ImageMap& imageMa
     assert(view != nullptr);
     Scale = m_ScaleFactor;
 
-    m_Registrar.Subscribe<::Messaging::WindowChangedEvent>(OnWindowChanged);
+    m_Registrar.Subscribe<WindowChangedEvent>(OnWindowChanged);
 
     m_View->Picture->Bitmap->Canvas->Font->Style = TFontStyles() << fsBold;
     CreateViewBitmap();
@@ -62,7 +61,7 @@ __fastcall TileEditor::~TileEditor()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::OnWindowChanged(const ::Messaging::WindowChangedEvent& event)
+void __fastcall TileEditor::OnWindowChanged(const WindowChangedEvent& event)
 {
     if (m_Window.Width() != event.Window.Width() || m_Window.Height() != event.Window.Height())
     {
@@ -74,7 +73,7 @@ void __fastcall TileEditor::OnWindowChanged(const ::Messaging::WindowChangedEven
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::CreateViewBitmap()
 {
-    const auto& wi = (Project::WindowDocument*)theDocumentManager.Get("Window", "Definition", "Window");
+    const auto& wi = (WindowDocument*)theDocumentManager.Get("Window", "Definition", "Window");
     assert(wi != nullptr);
     m_Window = wi->Rect;
     m_Content = std::make_unique<TBitmap>();
@@ -98,7 +97,7 @@ void __fastcall TileEditor::UpdateTile0Content()
     PatBlt(m_Tile0Content->Canvas->Handle, 0, 0, m_Tile0Content->Width, m_Tile0Content->Height, BLACKNESS);
     if (m_Tile0Id && m_ImageMap[m_Tile0Id])
     {
-        auto tile0 = std::make_unique<TBitmap>();
+        auto tile0 = std::make_unique<Graphics::TBitmap>();
         tile0->PixelFormat = pf32bit;
         tile0->Width = m_ImageMap[m_Tile0Id]->Canvas().Width;
         tile0->Height = m_ImageMap[m_Tile0Id]->Canvas().Height;
@@ -164,8 +163,8 @@ void __fastcall TileEditor::OnMouseDownSelectMode(TMouseButton Button, TShiftSta
             }
             else if (m_SelectionCount > 0 || m_HoverEntity.Id)
             {
-                Project::MapEntity entity;
-                if (!GetEntityUnderMouse(X, Y, entity, Visuals::itSprite) && !GetEntityUnderMouse(X, Y, entity, Visuals::itObject) && !GetEntityUnderMouse(X, Y, entity, Visuals::itTile))
+                MapEntity entity;
+                if (!GetEntityUnderMouse(X, Y, entity, itSprite) && !GetEntityUnderMouse(X, Y, entity, itObject) && !GetEntityUnderMouse(X, Y, entity, itTile))
                 {
                     // clear selection with a click on empty space
                     UnselectAll();
@@ -201,7 +200,7 @@ void __fastcall TileEditor::OnMouseDownSelectMode(TMouseButton Button, TShiftSta
             auto pt = ViewToMap(X, Y);
             pt.x /= m_TileSize.cx * m_Window.Width();
             pt.y /= m_TileSize.cy * m_Window.Height();
-            ::Messaging::Bus::Publish<::Messaging::SetStartRoom>(::Messaging::SetStartRoom(pt));
+            ::Messaging::Bus::Publish<SetStartRoom>(SetStartRoom(pt));
         }
     }
 }
@@ -291,8 +290,8 @@ void __fastcall TileEditor::OnMouseMoveSelectMode(TShiftState Shift, int X, int 
                 {
                     bool refresh = ClearHover();
                     // find an object that intersects the mouse
-                    Project::MapEntity entity;
-                    if ((GetEntityUnderMouse(X, Y, entity, Visuals::itSprite) || GetEntityUnderMouse(X, Y, entity, Visuals::itObject) || GetEntityUnderMouse(X, Y, entity, Visuals::itTile)) /*&& !entity.Selected*/)
+                    MapEntity entity;
+                    if ((GetEntityUnderMouse(X, Y, entity, itSprite) || GetEntityUnderMouse(X, Y, entity, itObject) || GetEntityUnderMouse(X, Y, entity, itTile)) /*&& !entity.Selected*/)
                     {
                         m_HoverEntity = entity;
                         refresh = true;
@@ -415,10 +414,10 @@ void __fastcall TileEditor::OnMouseUpSelectMode(TMouseButton Button, TShiftState
                 {
                     // get the rooms coords
                     TRect rmPt;
-                    for (auto i = 0; i < Project::g_MaxMapRoomsDown * Project::g_MaxMapRoomsAcross; i++)
+                    for (auto i = 0; i < g_MaxMapRoomsDown * g_MaxMapRoomsAcross; i++)
                     {
-                        auto x = i % Project::g_MaxMapRoomsAcross;
-                        auto y = i / Project::g_MaxMapRoomsDown;
+                        auto x = i % g_MaxMapRoomsAcross;
+                        auto y = i / g_MaxMapRoomsDown;
                         auto ri = FRetrieveRoomIndex(TPoint(x, y), false);
                         if (ri == e.RoomIndex)
                         {
@@ -514,7 +513,7 @@ void __fastcall TileEditor::SetTile0Id(unsigned int id)
 void __fastcall TileEditor::SetToolEntity(unsigned int id)
 {
     m_ToolEntity.Id = 0;
-    auto document = dynamic_cast<Project::ImageDocument*>(theDocumentManager.Get(id));
+    auto document = dynamic_cast<ImageDocument*>(theDocumentManager.Get(id));
     if (document != nullptr)
     {
         if (m_Mode != temSelect)
@@ -619,7 +618,7 @@ void __fastcall TileEditor::SetLockIcon(TImage* icon)
     Refresh();
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::SetEntities(const Project::MapEntityList& entities)
+void __fastcall TileEditor::SetEntities(const MapEntityList& entities)
 {
     m_Entities.clear();
     m_Entities = entities;
@@ -630,10 +629,10 @@ void __fastcall TileEditor::SetEntities(const Project::MapEntityList& entities)
     }
 }
 //---------------------------------------------------------------------------
-Project::MapEntityList __fastcall TileEditor::GetSelection(bool resetToOrigin) const
+MapEntityList __fastcall TileEditor::GetSelection(bool resetToOrigin) const
 {
-    Project::MapEntityList selection;
-    std::copy_if(m_Entities.begin(), m_Entities.end(), back_inserter(selection), [](const Project::MapEntity& e){ return e.Selected; });
+    MapEntityList selection;
+    std::copy_if(m_Entities.begin(), m_Entities.end(), back_inserter(selection), [](const MapEntity& e){ return e.Selected; });
     if (!resetToOrigin)
     {
         // move the selected entity down 1 and across 1
@@ -649,15 +648,15 @@ Project::MapEntityList __fastcall TileEditor::GetSelection(bool resetToOrigin) c
     return selection;
 }
 //---------------------------------------------------------------------------
-const Project::MapEntityList& __fastcall TileEditor::GetEntities() const
+const MapEntityList& __fastcall TileEditor::GetEntities() const
 {
     return m_Entities;
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::Get(const TRect& rect, Project::MapEntityList& entities) const
+void __fastcall TileEditor::Get(const TRect& rect, MapEntityList& entities) const
 {
     // get all entities that start within the rect
-    std::copy_if(m_Entities.begin(), m_Entities.end(), entities.begin(), [rect](const Project::MapEntity e) { return rect.Contains(e.Pt); });
+    std::copy_if(m_Entities.begin(), m_Entities.end(), entities.begin(), [rect](const MapEntity e) { return rect.Contains(e.Pt); });
 }
 //---------------------------------------------------------------------------
 unsigned int __fastcall TileEditor::GetToolEntity() const
@@ -728,10 +727,10 @@ void __fastcall TileEditor::DrawRoomNumbers() const
         auto rx = m_Window.Width()  * m_TileSize.cx * m_Scale.x;
         auto ry = m_Window.Height() * m_TileSize.cy * m_Scale.y;
         auto ty = ys;
-        for (auto y = 0; y < Project::g_MaxMapRoomsDown; y++)
+        for (auto y = 0; y < g_MaxMapRoomsDown; y++)
         {
             auto tx = xs;
-            for (auto x = 0; x < Project::g_MaxMapRoomsAcross; x++)
+            for (auto x = 0; x < g_MaxMapRoomsAcross; x++)
             {
                 auto ri = FRetrieveRoomIndex(TPoint(x, y), false);
                 if (ri != 255)
@@ -815,15 +814,15 @@ void __fastcall TileEditor::DrawGroupSelect() const
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::DrawEntities(int filters, Visuals::ImageTypes type)
+void __fastcall TileEditor::DrawEntities(int filters, ImageTypes type)
 {
     for (auto& entity : m_Entities)
     {
         bool draw  = (filters & edfForce) == edfForce;
              draw |= ((filters & edfDirty) == edfDirty) && entity.Dirty;
-             draw &= type == Visuals::itInvalid ? true : entity.Type == type;
+             draw &= type == itInvalid ? true : entity.Type == type;
              draw &= (((filters & edfSelected ) == edfSelected ) && entity.Selected) || (((filters & edfSelected ) == 0) && !entity.Selected);
-             draw &= (((filters & edfFirstTile) == edfFirstTile) && (entity.Image->ImageType == Visuals::itTile && entity.Image->IsFirstOfType())) || (((filters & edfFirstTile) == 0) && !(entity.Image->ImageType == Visuals::itTile && entity.Image->IsFirstOfType()));
+             draw &= (((filters & edfFirstTile) == edfFirstTile) && (entity.Image->ImageType == itTile && entity.Image->IsFirstOfType())) || (((filters & edfFirstTile) == 0) && !(entity.Image->ImageType == itTile && entity.Image->IsFirstOfType()));
         if (draw)
         {
             auto pt = entity.Pt;
@@ -862,11 +861,11 @@ void __fastcall TileEditor::DrawMap()
 {
     auto filter = m_ForceMapDraw ? edfForce : edfDirty;
     // draw all dirty tile 0's (unselected)
-    DrawEntities(filter + edfFirstTile, Visuals::itTile);
+    DrawEntities(filter + edfFirstTile, itTile);
     // draw all other dirty non tile 0's  (unselected)
-    DrawEntities(filter, Visuals::itTile);
-    DrawEntities(filter, Visuals::itObject);
-    DrawEntities(filter, Visuals::itSprite);
+    DrawEntities(filter, itTile);
+    DrawEntities(filter, itObject);
+    DrawEntities(filter, itSprite);
     // draw all other dirty non tile 0's  (selected)
     DrawEntities(filter + edfSelected);
     DrawToolEntities();
@@ -952,7 +951,7 @@ void __fastcall TileEditor::Refresh()
     m_View->Refresh();
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::ResetToOrigin(Project::MapEntityList& list, const TPoint& originPt) const
+void __fastcall TileEditor::ResetToOrigin(MapEntityList& list, const TPoint& originPt) const
 {
     // reposition the entities to 0,0 (origin)
     // find the minimum position
@@ -973,12 +972,12 @@ void __fastcall TileEditor::ResetToOrigin(Project::MapEntityList& list, const TP
 void __fastcall TileEditor::DeleteSelection()
 {
     m_Entities.erase(std::remove_if(m_Entities.begin(),m_Entities.end(),
-        [&](const Project::MapEntity& entity) { return m_HoverEntity == entity || entity.Selected; }), m_Entities.end());
+        [&](const MapEntity& entity) { return m_HoverEntity == entity || entity.Selected; }), m_Entities.end());
     m_SelectionCount = 0;
     UpdateMap();
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::Add(const Project::MapEntityList& entities)
+void __fastcall TileEditor::Add(const MapEntityList& entities)
 {
     m_SelectionCount = entities.size();
     m_PrevMouseMode = mmGroupSelect;
@@ -1029,7 +1028,7 @@ bool __fastcall TileEditor::ClearHover()
     bool update = false;
     if (m_HoverEntity.Id)
     {
-        auto entity = std::find_if(m_Entities.begin(), m_Entities.end(), [&](const Project::MapEntity& e) { return m_HoverEntity == e; });
+        auto entity = std::find_if(m_Entities.begin(), m_Entities.end(), [&](const MapEntity& e) { return m_HoverEntity == e; });
         entity->Dirty = true;
         update = true;
     }
@@ -1040,7 +1039,7 @@ bool __fastcall TileEditor::ClearHover()
 void __fastcall TileEditor::SelectHover()
 {
     UnselectAll();
-    auto entity = std::find_if(m_Entities.begin(), m_Entities.end(), [&](const Project::MapEntity& e) { return m_HoverEntity == e; });
+    auto entity = std::find_if(m_Entities.begin(), m_Entities.end(), [&](const MapEntity& e) { return m_HoverEntity == e; });
     entity->Selected = true;
     m_SelectionCount = 1;
     m_HoverEntity.Clear();
@@ -1065,7 +1064,7 @@ void __fastcall TileEditor::SelectRoom(TSize room)
 {
     m_SelectedRoom = room;
     UnselectAll(false);
-    ::Messaging::Bus::Publish<::Messaging::RoomSelected>(::Messaging::RoomSelected(room));
+    ::Messaging::Bus::Publish<RoomSelected>(RoomSelected(room));
     UpdateMap();
 }
 //---------------------------------------------------------------------------
@@ -1080,13 +1079,13 @@ void __fastcall TileEditor::ReplaceEntities()
     {
         // remove the existing entity at the location
         m_Entities.erase(std::remove_if(m_Entities.begin(),m_Entities.end(),
-            [&](const Project::MapEntity& entity) { return entity.Type == e.Type && entity.Pt.x == e.Pt.x && entity.Pt.y == e.Pt.y; }), m_Entities.end());
+            [&](const MapEntity& entity) { return entity.Type == e.Type && entity.Pt.x == e.Pt.x && entity.Pt.y == e.Pt.y; }), m_Entities.end());
         // add the new entity at the location
         m_Entities.push_back(e);
     }
 }
 //---------------------------------------------------------------------------
-bool __fastcall TileEditor::GetEntityUnderMouse(int X, int Y, Project::MapEntity& entity, Visuals::ImageTypes imageType, bool selectIt)
+bool __fastcall TileEditor::GetEntityUnderMouse(int X, int Y, MapEntity& entity, ImageTypes imageType, bool selectIt)
 {
     auto pt = ViewToMap(X, Y);
     for (auto& e : m_Entities)
@@ -1106,10 +1105,10 @@ bool __fastcall TileEditor::GetEntityUnderMouse(int X, int Y, Project::MapEntity
     return false;
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::AssignRoomIndexes(Project::MapEntityList& entities)
+void __fastcall TileEditor::AssignRoomIndexes(MapEntityList& entities)
 {
     // assign room indexes
-    auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile].Minimum;
+    auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum;
     auto roomSize = TSize(m_Window.Width() * tileSize.cx, m_Window.Height() * tileSize.cy);
     for (auto& e : entities)
     {

@@ -9,8 +9,8 @@
 #include <Vcl.ExtCtrls.hpp>
 #include "LMDDckSite.hpp"
 #include "Project/Document.h"
-#include "Visuals/Image.h"
-#include "Visuals/GraphicsMode.h"
+#include "Graphics/Image.h"
+#include "Graphics/GraphicsMode.h"
 #include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
 #include "Project/TextDocuments.h"
@@ -37,21 +37,21 @@ __published:// IDE-managed Components
     void __fastcall tmrRefreshViewTimer(TObject *Sender);
     void __fastcall sbxViewMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled);
 private:    // User declarations
-    Project::Document*             m_Document;         // the messages document
-    Project::CharacterSetDocument* m_CharacterSet;     // the character set document
-    Visuals::ImageList              m_Frames;           // the image documents frames as bitmap images
-    const Visuals::GraphicsMode&    m_GraphicsMode;     // the graphics mode used by the project
-    bool                            m_RefreshView;      // get the timer function to refresh the view
-    std::unique_ptr<TImage>         m_Tile;
+    Document*                   m_Document;         // the messages document
+    CharacterSetDocument*       m_CharacterSet;     // the character set document
+    Agdx::ImageList             m_Frames;           // the image documents frames as bitmap images
+    const Agdx::GraphicsMode&   m_GraphicsMode;     // the graphics mode used by the project
+    bool                        m_RefreshView;      // get the timer function to refresh the view
+    std::unique_ptr<TImage>     m_Tile;
 
-    void            __fastcall  SetDocument(Project::Document* document);
+    void            __fastcall  SetDocument(Document* document);
     bool            __fastcall  IsActive() const;
     void            __fastcall  RefreshView();
     void            __fastcall  RefreshCharacterSet();
 
 public:     // User declarations
                     __fastcall  TfrmEditorMessages(TComponent* Owner);
-    static  TFrame* __fastcall  Create(Project::Document* document, TComponent* owner)
+    static  TFrame* __fastcall  Create(Document* document, TComponent* owner)
                                 {
                                     auto editor = new TfrmEditorMessages(owner);
                                     editor->SetDocument(document);

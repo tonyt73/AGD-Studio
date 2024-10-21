@@ -1,13 +1,8 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-//---------------------------------------------------------------------------
 #include "FileDefinitions.h"
-#include "Services/File.h"
-#include "Services/Folders.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-//---------------------------------------------------------------------------
-using namespace Project;
 //---------------------------------------------------------------------------
 __fastcall FileDefinitions::FileDefinitions()
 {
@@ -19,11 +14,11 @@ __fastcall FileDefinitions::FileDefinitions()
 //---------------------------------------------------------------------------
 void __fastcall FileDefinitions::Load()
 {
-    auto file = Services::File::Combine(Services::Folders::Common, "File Definitions.json");
-    if (Services::File::Exists(file))
+    auto file = System::File::Combine(System::Path::Common, "File Definitions.json");
+    if (System::File::Exists(file))
     {
         // yes, load it
-        Services::JsonFile::Load(file);
+        System::JsonFile::Load(file);
     }
 }
 //---------------------------------------------------------------------------

@@ -1,18 +1,17 @@
 ﻿//---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
+#pragma hdrstop
 //---------------------------------------------------------------------------
 #include <System.hpp>
 #include "CharacterSetDocument.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-using namespace Project;
-//---------------------------------------------------------------------------
 __fastcall CharacterSetDocument::CharacterSetDocument(const String& name, const String& extra)
 : ImageDocument(name)
 {
     m_SaveRefId = false;
-    m_ImageType = Visuals::itCharacterSet;
+    m_ImageType = itCharacterSet;
     m_MultiFrame = true;
     m_File = GetFile();
     m_SubType = "Character Set";

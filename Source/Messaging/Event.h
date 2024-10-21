@@ -4,9 +4,6 @@
 //---------------------------------------------------------------------------
 #include "Project/Document.h"
 //---------------------------------------------------------------------------
-namespace Messaging
-{
-//---------------------------------------------------------------------------
 class Event
 {
 private:
@@ -39,10 +36,10 @@ template <class T>
 class DocumentChange : public Event
 {
 private:
-    const Project::Document* m_Document;
+    const Document* m_Document;
     T m_Value;
 public:
-    __fastcall DocumentChange(const String& id, const Project::Document* document, const T& value = T())
+    __fastcall DocumentChange(const String& id, const Document* document, const T& value = T())
     : Event(id)
     , m_Document(document)
     , m_Value(value)
@@ -50,7 +47,7 @@ public:
     }
 
     __property  T Value = { read = m_Value };
-    __property  const Project::Document* document = { read = m_Document };
+    __property  const Document* document = { read = m_Document };
 };
 //---------------------------------------------------------------------------
 enum MessageType { etInformation, etWarning, etError, etDebug, etClear, etHelpKeys };
@@ -68,6 +65,12 @@ public:
     __property  String      Message = { read = m_Id };
     __property  MessageType Type    = { read = m_MessageType };
 };
+#define ClearMessage(a) ::Messaging::Bus::Publish<MessageEvent>(MessageEvent((a), etClear))
+#define ErrorMessage(a) ::Messaging::Bus::Publish<MessageEvent>(MessageEvent((a), etError))
+#define WarningMessage(a) ::Messaging::Bus::Publish<MessageEvent>(MessageEvent((a), etWarning))
+#define InformationMessage(a) ::Messaging::Bus::Publish<MessageEvent>(MessageEvent((a), etInformation))
+#define DebugMessage(a) ::Messaging::Bus::Publish<MessageEvent>(MessageEvent((a), etDebug))
+#define HelpKeysMessage(a) ::Messaging::Bus::Publish<MessageEvent>(MessageEvent((a), etHelpKeys))
 //---------------------------------------------------------------------------
 class RoomSelected : public Event
 {
@@ -141,13 +144,5 @@ public:
     {
     }
 };
-//---------------------------------------------------------------------------
-} // Messaging namespace
-#define ClearMessage(a) ::Messaging::Bus::Publish<::Messaging::MessageEvent>(::Messaging::MessageEvent((a), ::Messaging::etClear))
-#define ErrorMessage(a) ::Messaging::Bus::Publish<::Messaging::MessageEvent>(::Messaging::MessageEvent((a), ::Messaging::etError))
-#define WarningMessage(a) ::Messaging::Bus::Publish<::Messaging::MessageEvent>(::Messaging::MessageEvent((a), ::Messaging::etWarning))
-#define InformationMessage(a) ::Messaging::Bus::Publish<::Messaging::MessageEvent>(::Messaging::MessageEvent((a), ::Messaging::etInformation))
-#define DebugMessage(a) ::Messaging::Bus::Publish<::Messaging::MessageEvent>(::Messaging::MessageEvent((a), ::Messaging::etDebug))
-#define HelpKeysMessage(a) ::Messaging::Bus::Publish<::Messaging::MessageEvent>(::Messaging::MessageEvent((a), ::Messaging::etHelpKeys))
 //---------------------------------------------------------------------------
 #endif

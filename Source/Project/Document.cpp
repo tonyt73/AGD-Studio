@@ -6,18 +6,14 @@
 #include "Project/Document.h"
 #include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
-#include "Services/File.h"
-#include "Services/Folders.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-//---------------------------------------------------------------------------
-using namespace Project;
 //---------------------------------------------------------------------------
 unsigned int Document::s_NextRefId = 0;
 //---------------------------------------------------------------------------
 __fastcall Document::Document(const String& name)
 : JsonFile()
-, m_Name(Services::File::NameWithoutExtension(name))
+, m_Name(System::File::NameWithoutExtension(name))
 , m_Type("No Type")
 , m_SubType("No SubType")
 , m_Extension("json")
@@ -91,7 +87,7 @@ void __fastcall Document::SetName(String name)
     auto oldName = m_Name;
     auto oldFile = GetFile(m_Name);
     auto newFile = GetFile(name);
-    if (Services::File::Exists(oldFile) && !Services::File::Exists(newFile))
+    if (System::File::Exists(oldFile) && !System::File::Exists(newFile))
     {
         m_Name = name;
         if (m_TreeNode)
@@ -99,9 +95,9 @@ void __fastcall Document::SetName(String name)
             ((TElXTreeItem*)m_TreeNode)->Text = name;
         }
         auto newFile = GetFile();
-        Services::File::Rename(oldFile, newFile);
+        System::File::Rename(oldFile, newFile);
         InformationMessage("[Document] Renamed document from [" + oldFile + "] to [" + newFile + "]");
-        ::Messaging::Bus::Publish<::Messaging::DocumentChange<String>>(::Messaging::DocumentChange<String>("document.renamed", this, oldName));
+        ::Messaging::Bus::Publish<DocumentChange<String>>(DocumentChange<String>("document.renamed", this, oldName));
     }
     else
     {
@@ -113,7 +109,7 @@ void __fastcall Document::SetName(String name)
 void __fastcall Document::SetShowFileExtension(bool value)
 {
     m_ShowFileExtension = value;
-    m_Name = Services::File::NameWithoutExtension(m_Name) + (!value ? String() : String("." + m_Extension));
+    m_Name = System::File::NameWithoutExtension(m_Name) + (!value ? String() : String("." + m_Extension));
 }
 //---------------------------------------------------------------------------
 String __fastcall Document::GetFile(String name)
@@ -123,11 +119,11 @@ String __fastcall Document::GetFile(String name)
         name = m_Name;
     }
     // Projects/{project name}
-    auto file = Services::File::Combine(Services::Folders::Projects, Services::Folders::ProjectName);
+    auto file = System::File::Combine(System::Path::Projects, System::Path::ProjectName);
     // Projects/{project name}/{document name}
-    file = Services::File::Combine(file, name);
+    file = System::File::Combine(file, name);
     // Projects/{project name}/{document name}.{extension)
-    file = Services::File::ChangeExtension(file, m_Extension);
+    file = System::File::ChangeExtension(file, m_Extension);
     return file;
 }
 //---------------------------------------------------------------------------
@@ -165,7 +161,7 @@ bool __fastcall Document::Load()
         m_File = GetFile();
     }
     // does it exist?
-    if (Services::File::Exists(m_File))
+    if (System::File::Exists(m_File))
     {
         // yes, load it
         JsonFile::Load(m_File);

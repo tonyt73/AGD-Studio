@@ -4,10 +4,7 @@
 //---------------------------------------------------------------------------
 #include "Project/Document.h"
 //---------------------------------------------------------------------------
-namespace Factories
-{
-//---------------------------------------------------------------------------
-typedef TFrame* (__fastcall *CreateDocumentEditorFn)(Project::Document*, TComponent*);
+typedef TFrame* (__fastcall *CreateDocumentEditorFn)(Document*, TComponent*);
 //---------------------------------------------------------------------------
 class DocumentEditorFactory
 {
@@ -18,9 +15,7 @@ private:
 
 public:
     void    __fastcall  Register(const String& documentFolder, CreateDocumentEditorFn pfnCreate);
-    TFrame* __fastcall  Create(Project::Document* document, TComponent* owner);
+    TFrame* __fastcall  Create(Document* document, TComponent* owner);
 };
-//---------------------------------------------------------------------------
-} // Factories namespace
 //---------------------------------------------------------------------------
 #endif
