@@ -23,13 +23,6 @@ __fastcall ShellProcess::ShellProcess(BuildMessages& buildMessages, BuildMessage
 //---------------------------------------------------------------------------
 __fastcall ShellProcess::~ShellProcess()
 {
-    try
-    {
-        m_Shell.reset();
-    }
-    catch (Exception& e)
-    {
-    }
 }
 //---------------------------------------------------------------------------
 bool __fastcall ShellProcess::ShellExecute(const String& path, const String& cmdline, const String& parameters, bool wait, int timeOut)
