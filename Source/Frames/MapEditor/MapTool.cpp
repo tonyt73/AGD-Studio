@@ -8,7 +8,7 @@
 //---------------------------------------------------------------------------
 __fastcall MapTool::MapTool()
 : Tool()
-, m_TileSize(theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum)
+, m_TileSize(theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile].Minimum)
 {
 }
 //---------------------------------------------------------------------------
@@ -35,7 +35,7 @@ void __fastcall MapTool::SnapToTileGrid(TRect& rect) const
     rect.Bottom = Snap(rect.Bottom, m_TileSize.cy);
 }
 //---------------------------------------------------------------------------
-void __fastcall MapTool::Set(MapEntityList& list, const MapEntity& entity)
+void __fastcall MapTool::Set(Project::MapEntityList& list, const Project::MapEntity& entity)
 {
     if (Flags & allowOnlyOne)
     {
@@ -57,14 +57,14 @@ void __fastcall MapTool::Set(MapEntityList& list, const MapEntity& entity)
     }
 }
 //---------------------------------------------------------------------------
-String __fastcall MapTool::Begin(MapEntityList& list, MapEntity entity, const TPoint& pt, const TShiftState& buttons)
+String __fastcall MapTool::Begin(Project::MapEntityList& list, Project::MapEntity entity, const TPoint& pt, const TShiftState& buttons)
 {
     Tool::Begin(pt, buttons);
     Apply(list, entity);
     return String();
 }
 //---------------------------------------------------------------------------
-void __fastcall MapTool::Move(MapEntityList& list, MapEntity entity, const TPoint& pt, const TShiftState& buttons)
+void __fastcall MapTool::Move(Project::MapEntityList& list, Project::MapEntity entity, const TPoint& pt, const TShiftState& buttons)
 {
     Tool::Move(pt, buttons);
     if (Flags & resetOnMove)
@@ -75,7 +75,7 @@ void __fastcall MapTool::Move(MapEntityList& list, MapEntity entity, const TPoin
     Apply(list, entity);
 }
 //---------------------------------------------------------------------------
-String __fastcall MapTool::End(MapEntityList& list, MapEntity entity, const TPoint& pt)
+String __fastcall MapTool::End(Project::MapEntityList& list, Project::MapEntity entity, const TPoint& pt)
 {
     Tool::End(pt);
     if (pt != LastPt)

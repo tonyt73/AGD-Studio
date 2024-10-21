@@ -4,6 +4,9 @@
 //---------------------------------------------------------------------------
 #include "ImageDocument.h"
 //---------------------------------------------------------------------------
+namespace Project
+{
+//---------------------------------------------------------------------------
 class TiledMapDocument;
 class MapEntity
 {
@@ -13,7 +16,7 @@ protected:
     unsigned int                    m_Id;           // the document id
     unsigned int                    m_LoadId;
     ImageDocument*                  m_Document;     // the image document we represent
-    ImageTypes                      m_ImageType;    // the type of image
+    Visuals::ImageTypes             m_ImageType;    // the type of image
     bool                            m_Dirty;        // flag: entity needs to be rendered
     bool                            m_Selected;     // flag: entity is selected
     int                             m_SpriteType;   // the type of sprite
@@ -55,10 +58,12 @@ public:
     __property  bool                Selected    = { read = m_Selected, write = SetSelected      };
     __property  bool                IsSprite    = { read = GetIsSprite                          };
     __property  int                 SpriteType  = { read = m_SpriteType, write = SetSpriteType  };
-    __property  ImageTypes          Type        = { read = m_ImageType                          };
+    __property  Visuals::ImageTypes Type        = { read = m_ImageType                          };
     __property  bool                RoomLocked  = { read = m_RoomLocked, write = SetRoomLocked  };
     __property  unsigned int        RoomIndex   = { read = m_RoomIndex, write = SetRoomIndex    };
 };
 typedef std::vector<MapEntity>      MapEntityList;
+//---------------------------------------------------------------------------
+} // Project namespace
 //---------------------------------------------------------------------------
 #endif

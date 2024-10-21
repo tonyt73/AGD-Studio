@@ -3,11 +3,11 @@
 #define fEditorMapH
 //---------------------------------------------------------------------------
 #include <System.Classes.hpp>
+#include <System.Actions.hpp>
+#include <System.ImageList.hpp>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
-#include <System.Actions.hpp>
-#include <System.ImageList.hpp>
 #include <Vcl.Imaging.pngimage.hpp>
 #include <Vcl.ActnList.hpp>
 #include <Vcl.ComCtrls.hpp>
@@ -224,26 +224,26 @@ __published:    // IDE-managed Components
 
 private:    // User declarations
     ::Messaging::Registrar      m_Registrar;        // the messaging registrar
-    TiledMapDocument*           m_Document;         // the map document we are editiing
+    Project::TiledMapDocument*  m_Document;         // the map document we are editiing
     std::unique_ptr<TileEditor> m_Workspace;        // the main workspace editor
     std::unique_ptr<TileEditor> m_ScratchPad;       // the scratch pad editor
     std::unique_ptr<TileEditor> m_RoomSelector;     // the room selection editor
     std::map<String, TAction*>  m_ActionMap;        // a map of actions; used by generic messaging to handle zoom in/out/reset, undo/redo
     std::list<EraseHandler>     m_EraseHandlers;    // stops flicking
     TLMDDockPanel*              m_ActivePanel;      // the active dock panel
-    Agdx::ImageMap              m_ImageMap;         // a rendering of each tile, object, sprite that is shared with all the editors
+    Visuals::ImageMap           m_ImageMap;         // a rendering of each tile, object, sprite that is shared with all the editors
     int                         m_LastSelectedId;   // last selected document id
     int                         m_Scale;
 
             void    __fastcall  Initialise();
             void    __fastcall  RefreshAssets();
             bool    __fastcall  IsActive() const;
-            void    __fastcall  OnEvent(const Event& event);
-            void    __fastcall  OnRoomSelected(const RoomSelected& event);
-            void    __fastcall  OnStartRoomChanged(const StartRoomChanged& event);
-            void    __fastcall  OnDocumentChanged(const DocumentChange<String>& message);
-            void     __fastcall OnEntityClick(ImageDocument* document);
-            void    __fastcall  OnWorkspaceEntitySelected(const MapEntity& entity);
+            void    __fastcall  OnEvent(const ::Messaging::Event& event);
+            void    __fastcall  OnRoomSelected(const ::Messaging::RoomSelected& event);
+            void    __fastcall  OnStartRoomChanged(const ::Messaging::StartRoomChanged& event);
+            void    __fastcall  OnDocumentChanged(const ::Messaging::DocumentChange<String>& message);
+            void     __fastcall OnEntityClick(Project::ImageDocument* document);
+            void    __fastcall  OnWorkspaceEntitySelected(const Project::MapEntity& entity);
             int     __fastcall  OnRetrieveRoomIndex(const TPoint& pt, bool newIndex = false);
             void    __fastcall  ShowKeysHelp();
 
@@ -251,16 +251,16 @@ public:        // User declarations
                     __fastcall  TfrmEditorMap(TComponent* Owner);
                     __fastcall ~TfrmEditorMap();
 
-    static  TFrame* __fastcall  Create(Document* document, TComponent* owner)
+    static  TFrame* __fastcall  Create(Project::Document* document, TComponent* owner)
                                 {
                                     auto editor = new TfrmEditorMap(owner);
-                                    editor->Document = dynamic_cast<TiledMapDocument*>(document);
+                                    editor->Document = dynamic_cast<Project::TiledMapDocument*>(document);
                                     document->DockPanel = dynamic_cast<TLMDDockPanel*>(owner);
                                     editor->Initialise();
                                     return editor;
                                 }
 
-    __property  Document*       Document = { read = m_Document, write = m_Document };
+  __property Project::Document* Document = { read = m_Document, write = m_Document };
 };
 //---------------------------------------------------------------------------
 #endif

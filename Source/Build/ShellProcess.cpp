@@ -1,9 +1,11 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#include "Build/ShellProcess.h"
+//---------------------------------------------------------------------------
+#include "ShellProcess.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-
+//---------------------------------------------------------------------------
+using namespace Build;
 //---------------------------------------------------------------------------
 __fastcall ShellProcess::ShellProcess(BuildMessages& buildMessages, BuildMessageType type, const String& description)
 : BuildProcess(buildMessages, type, description)
@@ -74,7 +76,7 @@ bool __fastcall ShellProcess::ShellExecute(const String& path, const String& cmd
     return result;
 }
 //---------------------------------------------------------------------------
-void __fastcall ShellProcess::OnOutputEvent(System::TObject* ASender, const System::UnicodeString ANewLine)
+void __fastcall ShellProcess::OnOutputEvent(TObject* ASender, const System::UnicodeString ANewLine)
 {
     if (ANewLine.LowerCase().Pos("error"))
     {
@@ -91,7 +93,7 @@ void __fastcall ShellProcess::OnOutputEvent(System::TObject* ASender, const Syst
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall ShellProcess::OnErrorEvent(System::TObject* ASender)
+void __fastcall ShellProcess::OnErrorEvent(TObject* ASender)
 {
 	m_Shell->TerminateProcess();
 	m_ShellDone = true;
@@ -99,7 +101,7 @@ void __fastcall ShellProcess::OnErrorEvent(System::TObject* ASender)
 	BUILD_LINE(bmFailed, "SHELL ERROR");// + m_Shell->LastError);
 }
 //---------------------------------------------------------------------------
-void __fastcall ShellProcess::OnTerminatedEvent(System::TObject* ASender)
+void __fastcall ShellProcess::OnTerminatedEvent(TObject* ASender)
 {
     m_ShellDone = true;
 }

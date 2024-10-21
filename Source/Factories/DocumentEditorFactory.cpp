@@ -1,11 +1,14 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#pragma hdrstop
+//---------------------------------------------------------------------------
 #include "LMDDckSite.hpp"
 //---------------------------------------------------------------------------
 #include "DocumentEditorFactory.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
+//---------------------------------------------------------------------------
+namespace Factories
+{
 //---------------------------------------------------------------------------
 void __fastcall DocumentEditorFactory::Register(const String& documentFolder, CreateDocumentEditorFn pfnCreate)
 {
@@ -19,7 +22,7 @@ void __fastcall DocumentEditorFactory::Register(const String& documentFolder, Cr
     }
 }
 //---------------------------------------------------------------------------
-TFrame* __fastcall DocumentEditorFactory::Create(Document* document, TComponent* owner)
+TFrame* __fastcall DocumentEditorFactory::Create(Project::Document* document, TComponent* owner)
 {
     auto dp = dynamic_cast<TLMDDockPanel*>(owner);
     auto it = m_Editors.find(document->Type + "." + document->SubType);
@@ -40,3 +43,4 @@ TFrame* __fastcall DocumentEditorFactory::Create(Document* document, TComponent*
     return nullptr;
 }
 //---------------------------------------------------------------------------
+}

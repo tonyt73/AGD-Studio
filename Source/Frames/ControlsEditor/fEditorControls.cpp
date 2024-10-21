@@ -12,23 +12,23 @@
 __fastcall TfrmEditorControls::TfrmEditorControls(TComponent* Owner)
 : TFrame(Owner)
 {
-    m_Registrar.Subscribe<ThemeChangedEvent>(OnThemeChangedEvent);
+    m_Registrar.Subscribe<::Messaging::ThemeChangedEvent>(OnThemeChangedEvent);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorControls::SetDocument(Document* document)
+void __fastcall TfrmEditorControls::SetDocument(Project::Document* document)
 {
-    m_Document = dynamic_cast<ControlsDocument*>(document);
-    kcLeft->KeyCode = m_Document->GetAsciiCode(keyLeft);
-    kcRight->KeyCode = m_Document->GetAsciiCode(keyRight);
-    kcUp->KeyCode = m_Document->GetAsciiCode(keyUp);
-    kcDown->KeyCode = m_Document->GetAsciiCode(keyDown);
-    kcFire1->KeyCode = m_Document->GetAsciiCode(keyFire1);
-    kcFire2->KeyCode = m_Document->GetAsciiCode(keyFire2);
-    kcFire3->KeyCode = m_Document->GetAsciiCode(keyFire3);
-    kcOption1->KeyCode = m_Document->GetAsciiCode(keyOption1);
-    kcOption2->KeyCode = m_Document->GetAsciiCode(keyOption2);
-    kcOption3->KeyCode = m_Document->GetAsciiCode(keyOption3);
-    kcOption4->KeyCode = m_Document->GetAsciiCode(keyOption4);
+    m_Document = dynamic_cast<Project::ControlsDocument*>(document);
+	kcLeft->KeyCode = m_Document->GetAsciiCode(Project::keyLeft);
+	kcRight->KeyCode = m_Document->GetAsciiCode(Project::keyRight);
+	kcUp->KeyCode = m_Document->GetAsciiCode(Project::keyUp);
+	kcDown->KeyCode = m_Document->GetAsciiCode(Project::keyDown);
+	kcFire1->KeyCode = m_Document->GetAsciiCode(Project::keyFire1);
+	kcFire2->KeyCode = m_Document->GetAsciiCode(Project::keyFire2);
+	kcFire3->KeyCode = m_Document->GetAsciiCode(Project::keyFire3);
+	kcOption1->KeyCode = m_Document->GetAsciiCode(Project::keyOption1);
+	kcOption2->KeyCode = m_Document->GetAsciiCode(Project::keyOption2);
+	kcOption3->KeyCode = m_Document->GetAsciiCode(Project::keyOption3);
+    kcOption4->KeyCode = m_Document->GetAsciiCode(Project::keyOption4);
 
     kcLeft->OnChanged = OnKeyChanged;
     kcRight->OnChanged = OnKeyChanged;
@@ -49,17 +49,17 @@ void __fastcall TfrmEditorControls::SetDocument(Document* document)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorControls::OnKeyChanged(TObject* Sender)
 {
-         if (Sender == kcLeft   ) m_Document->SetAsciiCode(keyLeft   , kcLeft->KeyCode   );
-    else if (Sender == kcRight  ) m_Document->SetAsciiCode(keyRight  , kcRight->KeyCode  );
-    else if (Sender == kcUp     ) m_Document->SetAsciiCode(keyUp     , kcUp->KeyCode     );
-    else if (Sender == kcDown   ) m_Document->SetAsciiCode(keyDown   , kcDown->KeyCode   );
-    else if (Sender == kcFire1  ) m_Document->SetAsciiCode(keyFire1  , kcFire1->KeyCode  );
-    else if (Sender == kcFire2  ) m_Document->SetAsciiCode(keyFire2  , kcFire2->KeyCode  );
-    else if (Sender == kcFire3  ) m_Document->SetAsciiCode(keyFire3  , kcFire3->KeyCode  );
-    else if (Sender == kcOption1) m_Document->SetAsciiCode(keyOption1, kcOption1->KeyCode);
-    else if (Sender == kcOption2) m_Document->SetAsciiCode(keyOption2, kcOption2->KeyCode);
-    else if (Sender == kcOption3) m_Document->SetAsciiCode(keyOption3, kcOption3->KeyCode);
-    else if (Sender == kcOption4) m_Document->SetAsciiCode(keyOption4, kcOption4->KeyCode);
+		 if (Sender == kcLeft   ) m_Document->SetAsciiCode(Project::keyLeft   , kcLeft->KeyCode   );
+	else if (Sender == kcRight  ) m_Document->SetAsciiCode(Project::keyRight  , kcRight->KeyCode  );
+	else if (Sender == kcUp     ) m_Document->SetAsciiCode(Project::keyUp     , kcUp->KeyCode     );
+	else if (Sender == kcDown   ) m_Document->SetAsciiCode(Project::keyDown   , kcDown->KeyCode   );
+	else if (Sender == kcFire1  ) m_Document->SetAsciiCode(Project::keyFire1  , kcFire1->KeyCode  );
+	else if (Sender == kcFire2  ) m_Document->SetAsciiCode(Project::keyFire2  , kcFire2->KeyCode  );
+	else if (Sender == kcFire3  ) m_Document->SetAsciiCode(Project::keyFire3  , kcFire3->KeyCode  );
+	else if (Sender == kcOption1) m_Document->SetAsciiCode(Project::keyOption1, kcOption1->KeyCode);
+	else if (Sender == kcOption2) m_Document->SetAsciiCode(Project::keyOption2, kcOption2->KeyCode);
+	else if (Sender == kcOption3) m_Document->SetAsciiCode(Project::keyOption3, kcOption3->KeyCode);
+    else if (Sender == kcOption4) m_Document->SetAsciiCode(Project::keyOption4, kcOption4->KeyCode);
 }
 //---------------------------------------------------------------------------
 bool __fastcall TfrmEditorControls::IsActive() const
@@ -70,7 +70,7 @@ bool __fastcall TfrmEditorControls::IsActive() const
 void __fastcall TfrmEditorControls::ShowKeysHelp()
 {
     const String help = "Enter the character for the key or an ASCII code from 1 - 127.\r\nDelete the character to unset it.";
-    HelpKeysMessage(help);
+    //HelpKeysMessage(help);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorControls::FrameMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate)
@@ -90,7 +90,7 @@ void __fastcall TfrmEditorControls::UpdateColors()
     Line3->Pen->Color = ThemeManager::Highlight;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorControls::OnThemeChangedEvent(const ThemeChangedEvent& event)
+void __fastcall TfrmEditorControls::OnThemeChangedEvent(const ::Messaging::ThemeChangedEvent& event)
 {
     UpdateColors();
 }

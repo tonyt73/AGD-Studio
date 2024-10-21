@@ -32,6 +32,23 @@ object frmEditorCode: TfrmEditorCode
     Gutter.BookmarksBarBg = clGrayText
     Gutter.LinesBarBg = clMaroon
     Gutter.FoldsBarBg = clGray
+    Gutter.Bars = <
+      item
+        Kind = gbBreakpointBar
+        Width = 15
+      end
+      item
+        Kind = gbBookmarkBar
+        Width = 15
+      end
+      item
+        Kind = gbLineNumberBar
+        Width = 15
+      end
+      item
+        Kind = gbFoldBar
+        Width = 15
+      end>
     CustomKeyBindings = <>
     CompletionSettings.ItemHeight = 13
     OnStatusChanged = evEditorStatusChanged
@@ -83,6 +100,7 @@ object frmEditorCode: TfrmEditorCode
     Height = 33
     Buttons = <
       item
+        ParentFont = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -12

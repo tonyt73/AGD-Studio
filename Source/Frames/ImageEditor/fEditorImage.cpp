@@ -1,5 +1,6 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
+//---------------------------------------------------------------------------
 #include "fEditorImage.h"
 #include "Project/DocumentManager.h"
 #include "Frames/EditorManager.h"
@@ -30,7 +31,7 @@ __fastcall TfrmEditorImage::TfrmEditorImage(TComponent* Owner)
 , m_LastModeString("Pixel Paint Mode - Pencil")
 , m_GraphicsMode(*(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()))
 {
-    m_Registrar.Subscribe<Event>(OnEvent);
+    m_Registrar.Subscribe<::Messaging::Event>(OnEvent);
 }
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorImage::~TfrmEditorImage()
@@ -44,7 +45,7 @@ bool __fastcall TfrmEditorImage::IsActive() const
     return theEditorManager.IsActive(this);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::OnEvent(const Event& event)
+void __fastcall TfrmEditorImage::OnEvent(const ::Messaging::Event& event)
 {
     if (IsActive() && m_ActionMap.count(event.Id) == 1)
     {
@@ -57,7 +58,7 @@ void __fastcall TfrmEditorImage::OnEvent(const Event& event)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::SetDocument(Document* document)
+void __fastcall TfrmEditorImage::SetDocument(Project::Document* document)
 {
     m_EraseHandlerView = std::make_unique<TWinControlHandler>(panViewFrame);
     m_ActionMap["zoom.in"] = actZoomIn;
@@ -86,7 +87,7 @@ void __fastcall TfrmEditorImage::SetDocument(Document* document)
 //    m_CanvasToolMap[btnRotateLeft90->Tag] = std::make_unique<CanvasRotateLeft90Tool>();
 //    m_CanvasToolMap[btnRotateRight90->Tag] = std::make_unique<CanvasRotateRight90Tool>();
 
-    m_ImageDocument = dynamic_cast<ImageDocument*>(document);
+    m_ImageDocument = dynamic_cast<Project::ImageDocument*>(document);
     panEditorContainer->Color = ThemeManager::Background;
     m_BlockTypeTool.Document = m_ImageDocument;
 
@@ -104,10 +105,10 @@ void __fastcall TfrmEditorImage::SetDocument(Document* document)
     btnTool->ImageIndex = actPencil->ImageIndex;
     m_CanvasTool = btnPencil->Tag;
 
-    palAttribute->Visible = m_GraphicsMode.TypeOfBuffer == btAttribute && m_GraphicsMode.LogicalColors == 16;
-    palMonoAttribute->Visible = m_GraphicsMode.TypeOfBuffer == btAttribute && m_GraphicsMode.LogicalColors == 2;
-    palBitmap->Visible = m_GraphicsMode.TypeOfBuffer == btBitmap;
-    palULAPlus->Visible = m_GraphicsMode.TypeOfBuffer == btULAplus;
+    palAttribute->Visible = m_GraphicsMode.TypeOfBuffer == Visuals::btAttribute && m_GraphicsMode.LogicalColors == 16;
+    palMonoAttribute->Visible = m_GraphicsMode.TypeOfBuffer == Visuals::btAttribute && m_GraphicsMode.LogicalColors == 2;
+    palBitmap->Visible = m_GraphicsMode.TypeOfBuffer == Visuals::btBitmap;
+    palULAPlus->Visible = m_GraphicsMode.TypeOfBuffer == Visuals::btULAplus;
     palBlocks->Visible = false;
     if (palBitmap->Visible)
     {
@@ -118,7 +119,7 @@ void __fastcall TfrmEditorImage::SetDocument(Document* document)
         palULAPlus->Init();
     }
     btnModePaint->Down = true;
-    btnModeBlock->Enabled = m_ImageDocument->ImageType == itTile;
+    btnModeBlock->Enabled = m_ImageDocument->ImageType == Visuals::itTile;
     barStatus->Panels->Items[0]->Text = "Pixel Paint Mode - Pencil";
     barStatus->Panels->Items[1]->Text = "P=" + IntToStr(m_ImageDocument->Width) + "x" + IntToStr(m_ImageDocument->Height) +
                                       ", C=" + IntToStr((int)(m_ImageDocument->Width / (8 / m_GraphicsMode.ScalarX))) + "x" +
@@ -478,7 +479,7 @@ void __fastcall TfrmEditorImage::RefreshFramesView()
     for (int i = 0; i < m_ImageDocument->Frames; i++)
     {
         // make an image canvas
-        auto image = std::make_unique<Agdx::Image>(m_ImageDocument->Width, m_ImageDocument->Height, gm);
+        auto image = std::make_unique<Visuals::Image>(m_ImageDocument->Width, m_ImageDocument->Height, gm);
         // set the graphic of the canvas from the image documents frame
         image->Canvas().Set(m_ImageDocument->Frame[i]);
         // add the new canvas to the frame view; along with a hint (character set only)
@@ -690,7 +691,7 @@ void __fastcall TfrmEditorImage::imgEditorMouseUp(TObject *Sender, TMouseButton 
                 auto redo = m_CanvasToolMap[m_CanvasTool]->End(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y));
                 m_ImageDocument->Frame[m_SelectedFrame] = m_Frames[m_SelectedFrame]->Canvas().Get();
                 RefreshView();
-                ::Messaging::Bus::Publish<DocumentChange<String>>(DocumentChange<String>("document.changed", m_ImageDocument));
+                ::Messaging::Bus::Publish<::Messaging::DocumentChange<String>>(::Messaging::DocumentChange<String>("document.changed", m_ImageDocument));
             }
         }
         else
@@ -709,10 +710,10 @@ void __fastcall TfrmEditorImage::actModePaintExecute(TObject *Sender)
         actPencil->Enabled = true;
         actLine->Enabled = true;
         actShape->Enabled = true;
-        palAttribute->Visible = m_GraphicsMode.TypeOfBuffer == btAttribute && m_GraphicsMode.LogicalColors == 16;
-        palMonoAttribute->Visible = m_GraphicsMode.TypeOfBuffer == btAttribute && m_GraphicsMode.LogicalColors == 2;
-        palBitmap->Visible = m_GraphicsMode.TypeOfBuffer == btBitmap;
-        palULAPlus->Visible = m_GraphicsMode.TypeOfBuffer == btULAplus;
+        palAttribute->Visible = m_GraphicsMode.TypeOfBuffer == Visuals::btAttribute && m_GraphicsMode.LogicalColors == 16;
+        palMonoAttribute->Visible = m_GraphicsMode.TypeOfBuffer == Visuals::btAttribute && m_GraphicsMode.LogicalColors == 2;
+        palBitmap->Visible = m_GraphicsMode.TypeOfBuffer == Visuals::btBitmap;
+        palULAPlus->Visible = m_GraphicsMode.TypeOfBuffer == Visuals::btULAplus;
         palBlocks->Visible = false;
         actGridPixel->Enabled = true;
         actGridCharacter->Enabled = true;

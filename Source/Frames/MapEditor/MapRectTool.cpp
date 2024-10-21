@@ -15,12 +15,12 @@ __fastcall MapRectTool::~MapRectTool()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall MapRectTool::Apply(MapEntityList& list, MapEntity entity)
+void __fastcall MapRectTool::Apply(Project::MapEntityList& list, Project::MapEntity entity)
 {
     DrawRect(list, entity, TRect(StartPt.x, StartPt.y, LastPt.x, LastPt.y));
 }
 //---------------------------------------------------------------------------
-void __fastcall MapRectTool::DrawRect(MapEntityList& list, MapEntity entity, TRect Rect)
+void __fastcall MapRectTool::DrawRect(Project::MapEntityList& list, Project::MapEntity entity, TRect Rect)
 {
     SnapToTileGrid(Rect);
     if (MS.Ctrl)

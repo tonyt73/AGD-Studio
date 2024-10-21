@@ -2,11 +2,14 @@
 #ifndef MachineConfigConfigH
 #define MachineConfigConfigH
 //---------------------------------------------------------------------------
-#include "System/JsonFile.h"
-#include "Graphics/GraphicsMode.h"
-#include "Graphics/GraphicsTypes.h"
+#include "Services/JsonFile.h"
+#include "Visuals/GraphicsMode.h"
+#include "Visuals/GraphicsTypes.h"
 //---------------------------------------------------------------------------
-class MachineConfig : public System::JsonFile
+namespace Project
+{
+//---------------------------------------------------------------------------
+class MachineConfig : public Services::JsonFile
 {
 public:
 
@@ -37,14 +40,14 @@ protected:
     String                              m_Keyboard;             // the Keyboard layout name
     String                              m_Image;                // a png file with an image of the machine 120x56
     String                              m_GraphicsModeName;     // json loader
-    std::unique_ptr<Agdx::GraphicsMode> m_GraphicsMode;
-    ImageSizing                         m_ImageSizing[itEnd];   // of each image type
+ std::unique_ptr<Visuals::GraphicsMode> m_GraphicsMode;
+    Visuals::ImageSizing                m_ImageSizing[Visuals::itEnd];   // of each image type
     ToolInfo                            m_Compiler;
     ToolInfo                            m_Engine;
     ToolInfoExt                         m_Assembler;
     ToolInfo                            m_Emulator;
 
-    const ImageSizing&      __fastcall  GetImageSizing(ImageTypes type) const;
+    const Visuals::ImageSizing& __fastcall  GetImageSizing(Visuals::ImageTypes type) const;
     void                    __fastcall  SetCompiler(const ToolInfo& info);
     void                    __fastcall  SetEngine(const ToolInfo& info);
     void                    __fastcall  SetAssembler(const ToolInfoExt& info);
@@ -57,7 +60,7 @@ public:
                             __fastcall  MachineConfig(const String& name);
     virtual                 __fastcall ~MachineConfig();
 
-    Agdx::GraphicsMode*     __fastcall  GraphicsMode() const;
+	Visuals::GraphicsMode*  __fastcall  GraphicsMode() const;
     static void             __fastcall  GetMachinesList(std::vector<String>& list);
 
     void                    __fastcall  Load(const String& name);
@@ -65,7 +68,7 @@ public:
     String                  __property  Name = { read = m_Name };
     String                  __property  Keyboard = { read = m_Keyboard };
     String                  __property  Image = { read = m_Image };
-    const ImageSizing       __property  ImageSizing[ImageTypes type] = { read = GetImageSizing };
+ const Visuals::ImageSizing __property  ImageSizing[Visuals::ImageTypes type] = { read = GetImageSizing };
     __property  const ToolInfo&         Compiler = { read = m_Compiler, write = SetCompiler };
     __property  const ToolInfo&         Engine = { read = m_Engine, write = SetEngine };
     __property  const ToolInfoExt&      Assembler = { read = m_Assembler, write = SetAssembler };
@@ -78,5 +81,7 @@ public:
 //public:
 //                        __fastcall MachineConfigWriter();
 //};
+//---------------------------------------------------------------------------
+} // namespace Project
 //---------------------------------------------------------------------------
 #endif

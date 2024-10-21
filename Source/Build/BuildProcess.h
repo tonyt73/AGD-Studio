@@ -2,10 +2,13 @@
 #ifndef BuildProcessH
 #define BuildProcessH
 //---------------------------------------------------------------------------
-#include "Build/BuildMessages.h"
-#include "Build/Parameterizer.h"
-#include "System/File.h"
-#include "System/Path.h"
+#include "BuildMessages.h"
+#include "Parameterizer.h"
+#include "Services/File.h"
+#include "Services/Folders.h"
+//---------------------------------------------------------------------------
+namespace Build
+{
 //---------------------------------------------------------------------------
 class BuildProcess
 {
@@ -25,5 +28,7 @@ public:
             String  __property  Description = { read = m_Description };
   BuildMessageType  __property  Type = { read = m_Type };
 };
+//---------------------------------------------------------------------------
+} // Build namespace
 //---------------------------------------------------------------------------
 #endif

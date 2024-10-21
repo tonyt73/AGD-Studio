@@ -46,7 +46,7 @@ function Sort-File {
 
     if (Test-Path -Path $File) {
         $lines = Get-Content -Path $File
-        Sort-Lines -Lines $lines -SplitSectionsBy $SplitSectionsBy | Out-File -FilePath $File
+        Sort-Lines -Lines $lines -SplitSectionsBy $SplitSectionsBy | Out-File -FilePath $File -Encoding Ascii
     }
 }
 
@@ -60,8 +60,11 @@ if (Test-Path -Path $projFile) {
     # create a new cbproj file
     Remove-Item -Path "$($projFile.BaseName).old" -ErrorAction Ignore
     Move-Item -Path $projFile -Destination "$($projFile.BaseName).old"
-    $lines | Out-File -FilePath $projFile
+    $lines | Out-File -FilePath $projFile -Encoding Ascii
 
     $cppFile = Get-ChildItem -Filter "$($projFile.BaseName).cpp"
     Sort-File -File $cppFile.FullName -SplitSectionsBy "USEFORM("
+	Write-Host "Sorted"
+} else {
+	Write-Error "File not found"
 }

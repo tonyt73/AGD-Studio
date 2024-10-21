@@ -1,15 +1,16 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#pragma hdrstop
 //---------------------------------------------------------------------------
 #include "SpriteDocument.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
+using namespace Project;
+//---------------------------------------------------------------------------
 __fastcall SpriteDocument::SpriteDocument(const String& name, const String& extra)
 : ImageDocument(name)
 {
-    m_ImageType = itSprite;
+    m_ImageType = Visuals::itSprite;
     m_File = GetFile();
     m_MultiFrame = true;
     m_CanModifyFrames = true;

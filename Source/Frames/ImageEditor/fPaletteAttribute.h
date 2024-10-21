@@ -9,7 +9,7 @@
 #include <Vcl.Buttons.hpp>
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Graphics.hpp>
-#include "Graphics/GraphicsBuffer.h"
+#include "Visuals/GraphicsBuffer.h"
 //---------------------------------------------------------------------------
 class TfrmPaletteAttribute : public TFrame
 {
@@ -60,7 +60,7 @@ private:    // User declarations
 public:     // User declarations
             __fastcall  TfrmPaletteAttribute(TComponent* Owner);
 
-    void    __fastcall  Set(Agdx::GraphicsBuffer& canvas);
+    void    __fastcall  Set(Visuals::GraphicsBuffer& canvas);
 };
 //---------------------------------------------------------------------------
 #endif

@@ -1,5 +1,6 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
+//---------------------------------------------------------------------------
 #include "Frames/MapEditor/fEditorMap.h"
 #include "Project/DocumentManager.h"
 #include "Frames/EditorManager.h"
@@ -27,10 +28,10 @@ __fastcall TfrmEditorMap::TfrmEditorMap(TComponent* Owner)
 , m_LastSelectedId(-1)
 , m_Scale(2)
 {
-    m_Registrar.Subscribe<Event>(OnEvent);
-    m_Registrar.Subscribe<RoomSelected>(OnRoomSelected);
-    m_Registrar.Subscribe<StartRoomChanged>(OnStartRoomChanged);
-    m_Registrar.Subscribe<DocumentChange<String>>(OnDocumentChanged);
+    m_Registrar.Subscribe<::Messaging::Event>(OnEvent);
+    m_Registrar.Subscribe<::Messaging::RoomSelected>(OnRoomSelected);
+    m_Registrar.Subscribe<::Messaging::StartRoomChanged>(OnStartRoomChanged);
+    m_Registrar.Subscribe<::Messaging::DocumentChange<String>>(OnDocumentChanged);
 }
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorMap::~TfrmEditorMap()
@@ -51,7 +52,7 @@ void __fastcall TfrmEditorMap::Initialise()
 
     // create the tile editors
     // TODO: change the size to ???
-    m_Workspace = std::make_unique<TileEditor>(imgWorkspace, m_ImageMap, TSize(g_MaxMapRoomsAcross, g_MaxMapRoomsDown), true, true, 144, false);
+    m_Workspace = std::make_unique<TileEditor>(imgWorkspace, m_ImageMap, TSize(Project::g_MaxMapRoomsAcross, Project::g_MaxMapRoomsDown), true, true, 144, false);
     m_Workspace->Mode = TileEditor::temSelect;
     m_Workspace->StartRoom = TPoint(m_Document->StartRoomX, m_Document->StartRoomY);
     m_Workspace->LockIcon = imgLock;
@@ -63,7 +64,7 @@ void __fastcall TfrmEditorMap::Initialise()
     m_ScratchPad->GridRoom = false;
     m_ScratchPad->Mode = TileEditor::temSelect;
 
-    m_RoomSelector = std::make_unique<TileEditor>(imgRoomSelector, m_ImageMap, TSize(g_MaxMapRoomsAcross, g_MaxMapRoomsDown), false, true, 8, true);
+    m_RoomSelector = std::make_unique<TileEditor>(imgRoomSelector, m_ImageMap, TSize(Project::g_MaxMapRoomsAcross, Project::g_MaxMapRoomsDown), false, true, 8, true);
     m_RoomSelector->Mode = TileEditor::temSelect;
     m_RoomSelector->GridRoom = true;
     m_RoomSelector->ShowStartRoom = true;
@@ -72,9 +73,9 @@ void __fastcall TfrmEditorMap::Initialise()
     m_RoomSelector->Scale = 0.5f;
     m_RoomSelector->RetrieveRoomIndex = OnRetrieveRoomIndex;
     // and set their tile sets
-    m_Workspace->SetEntities(m_Document->Get(meMap));
-    m_ScratchPad->SetEntities(m_Document->Get(meScratchPad));
-    m_RoomSelector->SetEntities(m_Document->Get(meMap));
+    m_Workspace->SetEntities(m_Document->Get(Project::meMap));
+    m_ScratchPad->SetEntities(m_Document->Get(Project::meScratchPad));
+    m_RoomSelector->SetEntities(m_Document->Get(Project::meMap));
     // On MapEntity Select handler
     m_Workspace->OnEntitySelected = OnWorkspaceEntitySelected;
 
@@ -194,7 +195,7 @@ void __fastcall TfrmEditorMap::imgWorkspaceMouseUp(TObject *Sender, TMouseButton
 {
     m_Workspace->OnMouseUp(Button,Shift, X, Y);
     // copy the workspace to the map document
-    m_Document->Set(actEditModeSingleScreen->Checked ? meRoom : meMap, m_Workspace->GetEntities());
+    m_Document->Set(actEditModeSingleScreen->Checked ? Project::meRoom : Project::meMap, m_Workspace->GetEntities());
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::imgRoomSelectorMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
@@ -226,7 +227,7 @@ void __fastcall TfrmEditorMap::imgScratchPadMouseUp(TObject *Sender, TMouseButto
 {
     m_ScratchPad->OnMouseUp(Button,Shift, X, Y);
     // copy the scratch pad to the map document
-    m_Document->Set(meScratchPad, m_ScratchPad->GetEntities());
+    m_Document->Set(Project::meScratchPad, m_ScratchPad->GetEntities());
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::RefreshAssets()
@@ -238,14 +239,14 @@ void __fastcall TfrmEditorMap::RefreshAssets()
     assetsSprites->Clear();
     assetsObjects->Clear();
     m_ImageMap.clear();
-    DocumentList images;
+    Project::DocumentList images;
     theDocumentManager.GetAllOfType("Image", images);
     const auto& gm = *(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode());
     bool firstTile = true;
     for (auto image : images)
     {
-        auto img = dynamic_cast<ImageDocument*>(image);
-        m_ImageMap[image->Id] = std::make_unique<Agdx::Image>(img, gm);
+        auto img = dynamic_cast<Project::ImageDocument*>(image);
+        m_ImageMap[image->Id] = std::make_unique<Visuals::Image>(img, gm);
         if (image->SubType == "Tile")
         {
             assetsTiles->Add(img, true);
@@ -273,7 +274,7 @@ void __fastcall TfrmEditorMap::RefreshAssets()
     assetsObjects->sbxListResize(nullptr);
     m_Workspace->UpdateMap();
     m_RoomSelector->UpdateMap();
-    ::Messaging::Bus::Publish<Event>(Event("update.properties"));
+    ::Messaging::Bus::Publish<::Messaging::Event>(::Messaging::Event("update.properties"));
 }
 //---------------------------------------------------------------------------
 bool __fastcall TfrmEditorMap::IsActive() const
@@ -281,7 +282,7 @@ bool __fastcall TfrmEditorMap::IsActive() const
     return theEditorManager.IsActive(this);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::OnEvent(const Event& event)
+void __fastcall TfrmEditorMap::OnEvent(const ::Messaging::Event& event)
 {
     if (IsActive() && m_ActionMap.count(event.Id) == 1)
     {
@@ -303,7 +304,7 @@ void __fastcall TfrmEditorMap::OnEvent(const Event& event)
     }
     else if (event.Id == "map.updated")
     {
-        m_RoomSelector->SetEntities(m_Document->Get(meMap));
+        m_RoomSelector->SetEntities(m_Document->Get(Project::meMap));
         m_RoomSelector->UpdateMap();
     }
     else if (event.Id == "document.added")
@@ -312,33 +313,33 @@ void __fastcall TfrmEditorMap::OnEvent(const Event& event)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::OnRoomSelected(const RoomSelected& event)
+void __fastcall TfrmEditorMap::OnRoomSelected(const ::Messaging::RoomSelected& event)
 {
     if (event.Id == "room.selected")
     {
-        m_Workspace->SetEntities(m_Document->Get(meRoom, event.Room));
+        m_Workspace->SetEntities(m_Document->Get(Project::meRoom, event.Room));
         m_Workspace->UpdateMap();
-        ::Messaging::Bus::Publish<Event>(Event("update.properties"));
+        ::Messaging::Bus::Publish<::Messaging::Event>(::Messaging::Event("update.properties"));
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::OnStartRoomChanged(const StartRoomChanged& event)
+void __fastcall TfrmEditorMap::OnStartRoomChanged(const ::Messaging::StartRoomChanged& event)
 {
     if (event.Id == "start.room.changed")
     {
         m_Workspace->StartRoom = event.Room;
         m_RoomSelector->StartRoom = event.Room;
-        ::Messaging::Bus::Publish<Event>(Event("update.properties"));
+        ::Messaging::Bus::Publish<::Messaging::Event>(::Messaging::Event("update.properties"));
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::OnDocumentChanged(const DocumentChange<String>& message)
+void __fastcall TfrmEditorMap::OnDocumentChanged(const ::Messaging::DocumentChange<String>& message)
 {
     if (message.Id == "document.removing")
     {
-        m_Workspace->SetEntities(m_Document->Get(actEditModeSingleScreen->Checked ? meRoom : meMap, m_RoomSelector->SelectedRoom));
-        m_ScratchPad->SetEntities(m_Document->Get(meScratchPad));
-        m_RoomSelector->SetEntities(m_Document->Get(meMap));
+        m_Workspace->SetEntities(m_Document->Get(actEditModeSingleScreen->Checked ? Project::meRoom : Project::meMap, m_RoomSelector->SelectedRoom));
+        m_ScratchPad->SetEntities(m_Document->Get(Project::meScratchPad));
+        m_RoomSelector->SetEntities(m_Document->Get(Project::meMap));
         m_Workspace->UpdateMap();
         m_ScratchPad->UpdateMap();
         m_RoomSelector->UpdateMap();
@@ -350,8 +351,8 @@ void __fastcall TfrmEditorMap::OnDocumentChanged(const DocumentChange<String>& m
     else if ("document.changed")
     {
         const auto& gm = *(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode());
-        auto image = dynamic_cast<const ImageDocument*>(message.document);
-        m_ImageMap[message.document->Id] = std::make_unique<Agdx::Image>(image, gm);
+        auto image = dynamic_cast<const Project::ImageDocument*>(message.document);
+        m_ImageMap[message.document->Id] = std::make_unique<Visuals::Image>(image, gm);
         if (message.document->Id == m_Workspace->Tile0Id)
         {
             m_Workspace->Tile0Id = image->Id;
@@ -517,12 +518,12 @@ void __fastcall TfrmEditorMap::actDeleteExecute(TObject *Sender)
         if (dpWorkspace == m_ActivePanel)
         {
             m_Workspace->DeleteSelection();
-            m_Document->Set(actEditModeSingleScreen->Checked ? meRoom : meMap, m_Workspace->GetEntities());
+            m_Document->Set(actEditModeSingleScreen->Checked ? Project::meRoom : Project::meMap, m_Workspace->GetEntities());
         }
         else if (dpScratchPad == m_ActivePanel)
         {
             m_ScratchPad->DeleteSelection();
-            m_Document->Set(meScratchPad, m_ScratchPad->GetEntities());
+            m_Document->Set(Project::meScratchPad, m_ScratchPad->GetEntities());
         }
     }
 }
@@ -549,25 +550,25 @@ void __fastcall TfrmEditorMap::pgcAssetsChange(TObject *Sender)
     actRect->Enabled = state;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::OnEntityClick(ImageDocument* document)
+void __fastcall TfrmEditorMap::OnEntityClick(Project::ImageDocument* document)
 {
     m_LastSelectedId = document->Id;
     m_Workspace->ToolEntity = document->Id;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::OnWorkspaceEntitySelected(const MapEntity& entity)
+void __fastcall TfrmEditorMap::OnWorkspaceEntitySelected(const Project::MapEntity& entity)
 {
     switch (entity.Image->ImageType)
     {
-        case itObject:
+        case Visuals::itObject:
             pgcAssets->ActivePage = tabObjects;
             assetsObjects->Select(entity.Image);
             break;
-        case itSprite:
+        case Visuals::itSprite:
             pgcAssets->ActivePage = tabSprites;
             assetsSprites->Select(entity.Image);
             break;
-        case itTile:
+        case Visuals::itTile:
             pgcAssets->ActivePage = tabTiles;
             assetsTiles->Select(entity.Image);
             break;
@@ -635,8 +636,8 @@ void __fastcall TfrmEditorMap::actEditModeFullMapExecute(TObject *Sender)
         //actStartRoomTool->Enabled = !actEditModeSingleScreen->Checked;
         dpRoomSelector->PanelVisible = actEditModeSingleScreen->Checked;
         dpRoomSelector->Zone->Height = std::max(dpRoomSelector->Zone->Height, 256);
-        m_Workspace->Rooms = actEditModeSingleScreen->Checked ? TSize(1, 1) : TSize(g_MaxMapRoomsAcross, g_MaxMapRoomsDown);
-        m_Workspace->SetEntities(m_Document->Get(actEditModeSingleScreen->Checked ? meRoom : meMap, m_RoomSelector->SelectedRoom));
+        m_Workspace->Rooms = actEditModeSingleScreen->Checked ? TSize(1, 1) : TSize(Project::g_MaxMapRoomsAcross, Project::g_MaxMapRoomsDown);
+        m_Workspace->SetEntities(m_Document->Get(actEditModeSingleScreen->Checked ? Project::meRoom : Project::meMap, m_RoomSelector->SelectedRoom));
         m_Workspace->ShowStartRoom = !actEditModeSingleScreen->Checked && actToggleStartRoom->Checked;
         m_Workspace->UpdateMap();
         m_RoomSelector->UpdateMap();

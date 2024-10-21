@@ -14,7 +14,7 @@ __fastcall CanvasTool::~CanvasTool()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall CanvasTool::DrawLine(Agdx::GraphicsBuffer& canvas, const TRect& Rect, bool set, LinePositions* list)
+void __fastcall CanvasTool::DrawLine(Visuals::GraphicsBuffer& canvas, const TRect& Rect, bool set, LinePositions* list)
 {
     auto dx = 1;
     auto dy = 1;
@@ -84,7 +84,7 @@ void __fastcall CanvasTool::DrawLine(Agdx::GraphicsBuffer& canvas, const TRect& 
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall CanvasTool::DrawVLine(Agdx::GraphicsBuffer& canvas, int x, int ys, int ye, bool set)
+void __fastcall CanvasTool::DrawVLine(Visuals::GraphicsBuffer& canvas, int x, int ys, int ye, bool set)
 {
     for (auto y = std::min(ys, ye); y <= std::max(ys, ye); y++)
     {
@@ -92,7 +92,7 @@ void __fastcall CanvasTool::DrawVLine(Agdx::GraphicsBuffer& canvas, int x, int y
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall CanvasTool::DrawHLine(Agdx::GraphicsBuffer& canvas, int xs, int xe, int y, bool set)
+void __fastcall CanvasTool::DrawHLine(Visuals::GraphicsBuffer& canvas, int xs, int xe, int y, bool set)
 {
     for (auto x = std::min(xs, xe); x <= std::max(xs, xe); x++)
     {
@@ -100,7 +100,7 @@ void __fastcall CanvasTool::DrawHLine(Agdx::GraphicsBuffer& canvas, int xs, int 
     }
 }
 //---------------------------------------------------------------------------
-String __fastcall CanvasTool::Begin(Agdx::GraphicsBuffer& canvas, const TPoint& pt, const TShiftState& buttons)
+String __fastcall CanvasTool::Begin(Visuals::GraphicsBuffer& canvas, const TPoint& pt, const TShiftState& buttons)
 {
     Width = canvas.Width;
     Height = canvas.Height;
@@ -110,7 +110,7 @@ String __fastcall CanvasTool::Begin(Agdx::GraphicsBuffer& canvas, const TPoint& 
     return m_Image;
 }
 //---------------------------------------------------------------------------
-void __fastcall CanvasTool::Move(Agdx::GraphicsBuffer& canvas, const TPoint& pt, const TShiftState& buttons)
+void __fastcall CanvasTool::Move(Visuals::GraphicsBuffer& canvas, const TPoint& pt, const TShiftState& buttons)
 {
     if (!IsDrawing) return;
     if (Flags & resetOnMove)
@@ -124,7 +124,7 @@ void __fastcall CanvasTool::Move(Agdx::GraphicsBuffer& canvas, const TPoint& pt,
     Tool::Move(pt, buttons);
 }
 //---------------------------------------------------------------------------
-String __fastcall CanvasTool::End(Agdx::GraphicsBuffer& canvas, const TPoint& pt)
+String __fastcall CanvasTool::End(Visuals::GraphicsBuffer& canvas, const TPoint& pt)
 {
     if (pt != LastPt)
     {

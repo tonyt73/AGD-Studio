@@ -24,8 +24,8 @@
 #include "Project/ImageDocument.h"
 #include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
-#include "Graphics/Image.h"
-#include "Graphics/GraphicsMode.h"
+#include "Visuals/Image.h"
+#include "Visuals/GraphicsMode.h"
 #include "Frames/ImageEditor/CanvasTool.h"
 #include "Frames/ImageEditor/BlockTypeTool.h"
 #include "Frames/WndProcHandlers.h"
@@ -197,22 +197,22 @@ private:    // User declarations
     ::Messaging::Registrar      m_Registrar;
     EraseHandler                m_EraseHandlerView;
 
-    ImageDocument*              m_ImageDocument;    // the image document we are editing
-    Agdx::ImageList             m_Frames;           // the image documents frames as bitmap images
+    Project::ImageDocument*     m_ImageDocument;    // the image document we are editing
+    Visuals::ImageList          m_Frames;           // the image documents frames as bitmap images
     std::map<String, TAction*>  m_ActionMap;        // a map of actions; used by generic messaging to handle zoom in/out/reset, undo/redo
     float                       m_Magnification;    // the magnification of the main view
     int                         m_SelectedFrame;    // the frame we are editing
     CanvasToolMap               m_CanvasToolMap;    // a map to all the canvas paint tools
     int                         m_CanvasTool;       // the selected canvas paint tool
     TfrmToolbar*                m_Toolbar;          // the current tools toolbar
-    const Agdx::GraphicsMode&   m_GraphicsMode;     // the graphics mode used by the project
+   const Visuals::GraphicsMode& m_GraphicsMode;     // the graphics mode used by the project
     bool                        m_GridPixel;
     bool                        m_GridBlock;
     BlockTypeTool               m_BlockTypeTool;
     String                      m_LastModeString;   //
 
-    void            __fastcall  SetDocument(Document* document);
-    void            __fastcall  OnEvent(const Event& event);
+    void            __fastcall  SetDocument(Project::Document* document);
+    void            __fastcall  OnEvent(const ::Messaging::Event& event);
     bool            __fastcall  IsActive() const;
     void            __fastcall  DrawGrids();
     void            __fastcall  RefreshView(bool redraw = false);
@@ -227,7 +227,7 @@ public:        // User declarations
                     __fastcall  TfrmEditorImage(TComponent* Owner);
                     __fastcall ~TfrmEditorImage();
 
-     static  TFrame* __fastcall Create(Document* document, TComponent* owner)
+     static  TFrame* __fastcall Create(Project::Document* document, TComponent* owner)
                                 {
                                     auto editor = new TfrmEditorImage(owner);
                                     editor->SetDocument(document);
@@ -235,7 +235,7 @@ public:        // User declarations
                                     return editor;
                                 }
 
-    __property  ImageDocument*  Image = { read = m_ImageDocument, write = m_ImageDocument };
+    __property  Project::ImageDocument*  Image = { read = m_ImageDocument, write = m_ImageDocument };
 };
 //---------------------------------------------------------------------------
 #endif

@@ -1,10 +1,9 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#pragma hdrstop
 //---------------------------------------------------------------------------
-#include "Project/DocumentManager.h"
 #include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
+#include "Project/DocumentManager.h"
 #include "Project/CharacterSetDocument.h"
 #include "Project/ControlsDocument.h"
 #include "Project/JumpTableDocument.h"
@@ -16,9 +15,13 @@
 #include "Project/TileDocument.h"
 #include "Project/TiledMapDocument.h"
 #include "Project/WindowDocument.h"
-#include "Settings/Settings.h"
+#include "Project/Settings.h"
+#include "Services/File.h"
+#include "Services/Folders.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
+//---------------------------------------------------------------------------
+using namespace Project;
 //---------------------------------------------------------------------------
 DocumentManager& DocumentManager::get()
 {
@@ -70,7 +73,7 @@ Document* __fastcall DocumentManager::Add(const String& type, const String& subT
                 documents.push_back(document);
                 m_Documents.emplace(std::make_pair(document->Type, documents));
             }
-            ::Messaging::Bus::Publish<Event>(Event("document.added"));
+            ::Messaging::Bus::Publish<::Messaging::Event>(::Messaging::Event("document.added"));
         }
         document->Load();
         // assign an id if we don't have one, but need one
@@ -88,11 +91,11 @@ bool __fastcall DocumentManager::Remove(const String& type, const String& name)
     if (dit != m_Documents.end()) {
         for (auto it = dit->second.begin(); it != dit->second.end(); it++) {
             if ((*it)->Name == name) {
-                ::Messaging::Bus::Publish<DocumentChange<String>>(DocumentChange<String>("document.removing", (*it), name));
+                ::Messaging::Bus::Publish<::Messaging::DocumentChange<String>>(::Messaging::DocumentChange<String>("document.removing", (*it), name));
                 delete (*it);
                 dit->second.erase(it);
                 InformationMessage("[DocumentManager] Removed Document '" + (*it)->Name + "' from Project");
-                ::Messaging::Bus::Publish<DocumentChange<String>>(DocumentChange<String>("document.removed", nullptr, name));
+                ::Messaging::Bus::Publish<::Messaging::DocumentChange<String>>(::Messaging::DocumentChange<String>("document.removed", nullptr, name));
                 return true;
             }
         }
@@ -115,7 +118,7 @@ void __fastcall DocumentManager::DocumentFolders(std::vector<String>& folders) c
 //---------------------------------------------------------------------------
 ProjectDocument* __fastcall DocumentManager::ProjectConfig() const
 {
-    const auto file = System::Path::ProjectName;
+    const auto file = Services::Folders::ProjectName;
     auto doc = Get("Game", "Configuration", file);
     if (doc != nullptr)
         return dynamic_cast<ProjectDocument*>(doc);
@@ -181,7 +184,7 @@ void __fastcall DocumentManager::Clear()
 //---------------------------------------------------------------------------
 void __fastcall DocumentManager::Save()
 {
-    auto projectDocument = dynamic_cast<ProjectDocument*>(Get("Game", "Configuration", System::Path::ProjectName));
+    auto projectDocument = dynamic_cast<ProjectDocument*>(Get("Game", "Configuration", Services::Folders::ProjectName));
     if (projectDocument) {
         projectDocument->ClearFiles();
         // save all documents (except the project file) and add the document details to the project file
@@ -190,7 +193,7 @@ void __fastcall DocumentManager::Save()
                 if (document->Type == "Game" && document->SubType == "Configuration")
                     continue;
                 document->Save();
-                projectDocument->AddFile(System::File::NameWithExtension(document->File), document->Type, document->SubType);
+                projectDocument->AddFile(Services::File::NameWithExtension(document->File), document->Type, document->SubType);
             }
         }
         // if supported; load any changed palette mappings
@@ -198,7 +201,7 @@ void __fastcall DocumentManager::Save()
         // now save the project file with all the document details included
         projectDocument->Save();
         // save other files (eg. text files)
-        ::Messaging::Bus::Publish<Event>(Event("project.save"));
+        ::Messaging::Bus::Publish<::Messaging::Event>(::Messaging::Event("project.save"));
         InformationMessage("[DocumentManager] Saved all Project files");
     }
 }
@@ -210,7 +213,7 @@ void __fastcall DocumentManager::Load(const String& name)
     auto projectDocument = dynamic_cast<ProjectDocument*>(Get("Game", "Configuration", name));
     assert(projectDocument != nullptr);
     for (const auto& fileInfo : projectDocument->Files()) {
-        ::Messaging::Bus::Publish<Event>(Event("project.loading.tick"));
+        ::Messaging::Bus::Publish<::Messaging::Event>(::Messaging::Event("project.loading.tick"));
         InformationMessage("[DocumentManager] Loading Project file '" + fileInfo.Type + "." + fileInfo.SubType + "." + fileInfo.Name + "'");
         Add(fileInfo.Type, fileInfo.SubType, fileInfo.Name);
     }

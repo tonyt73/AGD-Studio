@@ -26,7 +26,7 @@ void __fastcall TfrmAssetSelection::Clear()
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAssetSelection::Add(ImageDocument* image, bool enabled)
+void __fastcall TfrmAssetSelection::Add(Project::ImageDocument* image, bool enabled)
 {
     auto control = new TfrmLabelledImage(this);
     control->Name = "LabelledImage" + IntToStr(++g_NextAssetId);
@@ -36,7 +36,7 @@ void __fastcall TfrmAssetSelection::Add(ImageDocument* image, bool enabled)
     control->OnSelectedClick = OnImageClick;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAssetSelection::Select(const ImageDocument* image)
+void __fastcall TfrmAssetSelection::Select(const Project::ImageDocument* image)
 {
     for (auto i = 0; i < panList->ControlCount; i++)
     {
@@ -52,7 +52,7 @@ void __fastcall TfrmAssetSelection::Select(const ImageDocument* image)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAssetSelection::UpdateDocument(const ImageDocument* image)
+void __fastcall TfrmAssetSelection::UpdateDocument(const Project::ImageDocument* image)
 {
     for (auto i = 0; i < panList->ControlCount; i++)
     {

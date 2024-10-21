@@ -126,7 +126,7 @@ __published:    // IDE-managed Components
 
 private:    // User declarations
     ::Messaging::Registrar      m_Registrar;
-    Document*                   m_Document;
+    Project::Document*          m_Document;
     TLMDEditView*               m_ActiveEdit;
     TLMDEditSearchDlgOptions    m_SearchOptions;
 
@@ -134,16 +134,16 @@ private:    // User declarations
 
     bool            __fastcall  IsActive() const;
     String          __fastcall  GetSyntaxScByExt(const String& extension);
-    void            __fastcall  OnEvent(const Event& event);
+    void            __fastcall  OnEvent(const ::Messaging::Event& event);
 
     __property TLMDEditView*    ActiveEdit = { read = m_ActiveEdit };
 
 public:        // User declarations
                     __fastcall  TfrmEditorCode(TComponent* Owner);
                     __fastcall  ~TfrmEditorCode();
-    void            __fastcall  SetDocument(Document* document);
+    void            __fastcall  SetDocument(Project::Document* document);
     void            __fastcall  UpdateStatus();
-    static  TFrame* __fastcall  Create(Document* document, TComponent* owner)
+    static  TFrame* __fastcall  Create(Project::Document* document, TComponent* owner)
                                 {
                                     auto editor = new TfrmEditorCode(owner);
                                     editor->SetDocument(document);
