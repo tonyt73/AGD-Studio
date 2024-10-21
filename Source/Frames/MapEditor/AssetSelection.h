@@ -24,16 +24,16 @@ private:    // User declarations
     void    __fastcall  OnImageClick(TObject* Sender);
     int     __fastcall  FindSelected();
 
-    typedef void __fastcall (__closure *TNotifyImageOnSelectionEvent)(Project::ImageDocument* document);
+    typedef void __fastcall (__closure *TNotifyImageOnSelectionEvent)(ImageDocument* document);
     TNotifyImageOnSelectionEvent    FOnImageClick;
 
 public:        // User declarations
             __fastcall  TfrmAssetSelection(TComponent* Owner);
 
     void    __fastcall  Clear();
-    void    __fastcall  Add(Project::ImageDocument* image, bool enabled = true);
-    void    __fastcall  Select(const Project::ImageDocument* image);
-    void    __fastcall  UpdateDocument(const Project::ImageDocument* image);
+    void    __fastcall  Add(ImageDocument* image, bool enabled = true);
+    void    __fastcall  Select(const ImageDocument* image);
+    void    __fastcall  UpdateDocument(const ImageDocument* image);
     void    __fastcall  Next();
     void    __fastcall  Prev();
 

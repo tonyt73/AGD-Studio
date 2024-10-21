@@ -11,7 +11,7 @@ __fastcall TfrmPaletteMonoAttribute::TfrmPaletteMonoAttribute(TComponent* Owner)
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmPaletteMonoAttribute::Set(Visuals::GraphicsBuffer& canvas)
+void __fastcall TfrmPaletteMonoAttribute::Set(Agdx::GraphicsBuffer& canvas)
 {
     // change the color set of the canvas
     canvas.Color[0] = 1;

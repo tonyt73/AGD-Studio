@@ -84,7 +84,7 @@ object frmIDE: TfrmIDE
         ActiveBorderType = fbtFlat
         Align = alClient
         AutoExpand = True
-        Style.FontSize = 7
+        Style.FontSize = 8
         Style.FontStyles = [fsBold]
         Style.FontName = 'Tahoma'
         CustomPlusMinus = True
@@ -101,7 +101,7 @@ object frmIDE: TfrmIDE
         HeaderSections.Cells = {0000000001000000010000000000}
         HideFocusRect = True
         HideHintOnMove = False
-        HorzScrollBarStyles.Width = 19
+        HorzScrollBarStyles.Width = 17
         Images = imgBuildNodes
         ItemIndent = 18
         LineHeight = 18
@@ -138,7 +138,7 @@ object frmIDE: TfrmIDE
         HotTrack = False
         UnderlineTracked = False
         VertScrollBarStyles.ShowTrackHint = True
-        VertScrollBarStyles.Width = 19
+        VertScrollBarStyles.Width = 17
         UseSystemHintColors = True
         BackGroundColor = clBtnFace
         FixedTopRowNum = 0
@@ -307,7 +307,7 @@ object frmIDE: TfrmIDE
           Align = alClient
           Style.ParentColors = False
           Style.TextColor = 3355443
-          Style.FontSize = 8
+          Style.FontSize = 9
           Style.FontStyles = []
           Style.FontName = 'Segoe UI'
           CustomPlusMinus = True
@@ -327,7 +327,7 @@ object frmIDE: TfrmIDE
             0000000000000000000000000000000000000000020000000000020000000000
             0000000000000000}
           HeaderSections.Cells = {0000000001000000010000000000}
-          HorzScrollBarStyles.Width = 19
+          HorzScrollBarStyles.Width = 17
           HorzScrollBarStyles.ThemeGlobalMode = True
           Images = imgProjectNodes
           ItemIndent = 18
@@ -360,7 +360,7 @@ object frmIDE: TfrmIDE
           TabStop = True
           UseCustomScrollBars = False
           VertScrollBarStyles.ShowTrackHint = True
-          VertScrollBarStyles.Width = 19
+          VertScrollBarStyles.Width = 17
           VertScrollBarStyles.ThemeGlobalMode = True
           ParentThemeMode = False
           ThemeGlobalMode = True

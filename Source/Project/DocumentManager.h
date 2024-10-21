@@ -5,9 +5,6 @@
 #include "Project/Document.h"
 #include "Project/ProjectDocument.h"
 //---------------------------------------------------------------------------
-namespace Project
-{
-//---------------------------------------------------------------------------
 class DocumentManager
 {
 public: // singleton
@@ -50,8 +47,6 @@ ProjectDocument* __fastcall ProjectConfig() const;
     void        __fastcall  Load(const String& name);
 };
 //---------------------------------------------------------------------------
-} // Project namespace
-//---------------------------------------------------------------------------
-#define theDocumentManager Project::DocumentManager::get()
+#define theDocumentManager DocumentManager::get()
 //---------------------------------------------------------------------------
 #endif

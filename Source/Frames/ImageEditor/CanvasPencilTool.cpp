@@ -15,7 +15,7 @@ __fastcall CanvasPencilTool::~CanvasPencilTool()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall CanvasPencilTool::Apply(Visuals::GraphicsBuffer& canvas, const TPoint& pt)
+void __fastcall CanvasPencilTool::Apply(Agdx::GraphicsBuffer& canvas, const TPoint& pt)
 {
     if (MS.Left)
     {

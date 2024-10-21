@@ -1,18 +1,19 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
+#pragma hdrstop
 //---------------------------------------------------------------------------
 #include <System.StrUtils.hpp>
 #include "Vcl.Themes.hpp"
-#include "Project/Settings.h"
 #include "Settings/ThemeManager.h"
-#include "Services/File.h"
-#include "Services/Folders.h"
+#include "Settings/Settings.h"
+#include "System/File.h"
+#include "System/Path.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 void __fastcall ThemeManager::SetStyle(const String& styleName)
 {
-    auto styleFile = Services::File::Combine(Services::Folders::GetFolder(Services::Folders::lpApplication, "Styles"), styleName + ".vsf");
+    auto styleFile = System::File::Combine(System::Path::GetFolder(System::Path::lpApplication, "Styles"), styleName + ".vsf");
     auto styleNameNoSpaces = StringReplace(styleName, " ", "", TReplaceFlags(rfReplaceAll || rfIgnoreCase)).LowerCase();
     for (auto name : TStyleManager::StyleNames)
     {
@@ -22,15 +23,15 @@ void __fastcall ThemeManager::SetStyle(const String& styleName)
             auto style = TStyleManager::Style[name];
             TStyleManager::SetStyle(style);
             appSettings.ActiveStyle = styleName;
-            ::Messaging::Bus::Publish<::Messaging::ThemeChangedEvent>(::Messaging::ThemeChangedEvent());
+            ::Messaging::Bus::Publish<ThemeChangedEvent>(ThemeChangedEvent());
             return;
         }
     }
-    if (!TStyleManager::TrySetStyle(styleName, false) && Services::File::Exists(styleFile))
+    if (!TStyleManager::TrySetStyle(styleName, false) && System::File::Exists(styleFile))
     {
         TStyleManager::SetStyle(TStyleManager::LoadFromFile(styleFile));
         appSettings.ActiveStyle = styleName;
-        ::Messaging::Bus::Publish<::Messaging::ThemeChangedEvent>(::Messaging::ThemeChangedEvent());
+        ::Messaging::Bus::Publish<ThemeChangedEvent>(ThemeChangedEvent());
     }
 }
 //---------------------------------------------------------------------------
@@ -45,7 +46,7 @@ void __fastcall ThemeManager::LoadStyles(TComboBox* combo)
     TStyleInfo si;
     for (auto styleFile : styles)
     {
-        sl->Add(Services::File::NameWithoutExtension(styleFile));
+        sl->Add(System::File::NameWithoutExtension(styleFile));
     }
     sl->Sort();
     // add to the combo box
@@ -73,7 +74,7 @@ void __fastcall ThemeManager::ReapplyStyle()
 //---------------------------------------------------------------------------
 TStringDynArray __fastcall ThemeManager::GetStyles()
 {
-    return Services::Folders::GetFiles(Services::Folders::lpApplication, "*.vsf", "Styles");
+    return System::Path::GetFiles(System::Path::lpApplication, "*.vsf", "Styles");
 }
 //---------------------------------------------------------------------------
 TColor __fastcall ThemeManager::GetColor(int index)

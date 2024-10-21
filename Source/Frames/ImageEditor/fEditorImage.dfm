@@ -602,9 +602,6 @@ object frmEditorImage: TfrmEditorImage
         TabOrder = 0
         ExplicitWidth = 1014
         ExplicitHeight = 100
-        inherited panImages: TPanel
-          StyleElements = [seFont, seClient, seBorder]
-        end
         inherited Timer1: TTimer
           Left = 216
           Top = 65528
@@ -676,21 +673,6 @@ object frmEditorImage: TfrmEditorImage
         ParentFont = False
         TabOrder = 0
         OnMouseActivate = imgEditorMouseActivate
-        inherited lblPalettePaper: TLabel
-          StyleElements = [seFont, seClient, seBorder]
-        end
-        inherited lblPaletteBright: TLabel
-          StyleElements = [seFont, seClient, seBorder]
-        end
-        inherited lblPaletteFlash: TLabel
-          StyleElements = [seFont, seClient, seBorder]
-        end
-        inherited lblPaletteTransparent: TLabel
-          StyleElements = [seFont, seClient, seBorder]
-        end
-        inherited Label1: TLabel
-          StyleElements = [seFont, seClient, seBorder]
-        end
       end
       inline palBitmap: TfrmPaletteBitmap
         Left = 0
@@ -717,21 +699,6 @@ object frmEditorImage: TfrmEditorImage
         TabOrder = 1
         OnMouseActivate = imgEditorMouseActivate
         ExplicitTop = 1202
-        inherited Panel3: TPanel
-          StyleElements = [seFont, seClient, seBorder]
-          inherited panLogicalColorPicker: TPanel
-            StyleElements = [seFont, seClient, seBorder]
-            inherited lblLogicalColor: TLabel
-              StyleElements = [seFont, seClient, seBorder]
-            end
-          end
-          inherited panSystemColorPicker: TPanel
-            StyleElements = [seFont, seClient, seBorder]
-            inherited lblSystemColor: TLabel
-              StyleElements = [seFont, seClient, seBorder]
-            end
-          end
-        end
         inherited ImageList1: TImageList
           Bitmap = {
             494C010103000800040020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
@@ -1296,21 +1263,6 @@ object frmEditorImage: TfrmEditorImage
         Visible = False
         OnMouseActivate = imgEditorMouseActivate
         ExplicitTop = 702
-        inherited Panel3: TPanel
-          StyleElements = [seFont, seClient, seBorder]
-          inherited panPalettePicker: TPanel
-            StyleElements = [seFont, seClient, seBorder]
-            inherited lblLogicalColor: TLabel
-              StyleElements = [seFont, seClient, seBorder]
-            end
-          end
-          inherited panSystemColorPicker: TPanel
-            StyleElements = [seFont, seClient, seBorder]
-            inherited lblSystemColor: TLabel
-              StyleElements = [seFont, seClient, seBorder]
-            end
-          end
-        end
       end
       inline palBlocks: TfrmBlockTypes
         Left = 0
@@ -1329,9 +1281,6 @@ object frmEditorImage: TfrmEditorImage
         ExplicitTop = 396
         inherited panBlock: TPanel
           Hint = 'Left Mouse Button applies the Block type to the chacter position'
-        end
-        inherited panEmpty: TPanel
-          StyleElements = [seFont, seClient, seBorder]
         end
       end
       inline palMonoAttribute: TfrmPaletteMonoAttribute
@@ -1359,9 +1308,6 @@ object frmEditorImage: TfrmEditorImage
         ExplicitTop = 336
         inherited spdInkGreen: TSpeedButton
           Down = True
-        end
-        inherited Label1: TLabel
-          StyleElements = [seFont, seClient, seBorder]
         end
       end
     end

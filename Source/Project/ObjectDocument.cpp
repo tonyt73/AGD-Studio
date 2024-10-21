@@ -1,17 +1,16 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
+#pragma hdrstop
 //---------------------------------------------------------------------------
 #include "ObjectDocument.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-using namespace Project;
-//---------------------------------------------------------------------------
 __fastcall ObjectDocument::ObjectDocument(const String& name, const String& extra)
 : ImageDocument(name)
-, m_State(Visuals::osDisabled)
+, m_State(osDisabled)
 {
-    m_ImageType = Visuals::itObject;
+    m_ImageType = itObject;
     m_CanBeLocked = true;
     m_SubType = "Object";
     m_Folder = "Images\\Objects";

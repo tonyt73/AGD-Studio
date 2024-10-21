@@ -1,19 +1,18 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
+#pragma hdrstop
 //---------------------------------------------------------------------------
 #include "MapEntity.h"
 #include "Project/DocumentManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-using namespace Project;
-//---------------------------------------------------------------------------
 __fastcall MapEntity::MapEntity()
 : m_Pt(0, 0)
 , m_Id(InvalidDocumentId)
 , m_LoadId(InvalidDocumentId)
 , m_Document(nullptr)
-, m_ImageType(Visuals::itInvalid)
+, m_ImageType(itInvalid)
 , m_Dirty(true)
 , m_Selected(false)
 , m_SpriteType(-1)
@@ -126,7 +125,7 @@ void __fastcall MapEntity::SetId(unsigned int id)
         m_Id = id;
         assert(m_Id < 10000);
         m_ImageType = m_Document->ImageType;
-        if (m_Document->ImageType == Visuals::itSprite && m_SpriteType < 0) {
+        if (m_Document->ImageType == itSprite && m_SpriteType < 0) {
             // initialise the sprite type
             m_SpriteType = 0;
         }
@@ -147,12 +146,12 @@ void __fastcall MapEntity::SetDirty(bool state)
 //---------------------------------------------------------------------------
 bool __fastcall MapEntity::GetIsSprite() const
 {
-    return m_ImageType == Visuals::itSprite;
+    return m_ImageType == itSprite;
 }
 //---------------------------------------------------------------------------
 void __fastcall MapEntity::SetSpriteType(int type)
 {
-    m_SpriteType = (type >= 0 && m_ImageType == Visuals::itSprite) ? type : -1;
+    m_SpriteType = (type >= 0 && m_ImageType == itSprite) ? type : -1;
 }
 //---------------------------------------------------------------------------
 void __fastcall MapEntity::SetRoomIndex(unsigned int index)

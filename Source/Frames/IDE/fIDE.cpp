@@ -28,8 +28,8 @@ __fastcall TfrmIDE::TfrmIDE(TComponent* Owner)
 : TFrame(Owner)
 {
     RegisterDocumentEditors();
-    m_Registrar.Subscribe<::Messaging::MessageEvent>(OnMessageEvent);
-    m_Registrar.Subscribe<::Messaging::UpdateProperties>(OnUpdateProperties);
+    m_Registrar.Subscribe<MessageEvent>(OnMessageEvent);
+    m_Registrar.Subscribe<UpdateProperties>(OnUpdateProperties);
     tvBuild->Items->Clear();
 }
 //---------------------------------------------------------------------------
@@ -86,11 +86,11 @@ void __fastcall TfrmIDE::OnActivate(TWinControl* parent)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::OnMessageEvent(const ::Messaging::MessageEvent& message)
+void __fastcall TfrmIDE::OnMessageEvent(const MessageEvent& message)
 {
-    if (message.Type < ::Messaging::etHelpKeys)
+    if (message.Type < etHelpKeys)
     {
-        if (message.Type == ::Messaging::etClear)
+        if (message.Type == etClear)
         {
             memMessages->Lines->Clear();
         }
@@ -98,55 +98,55 @@ void __fastcall TfrmIDE::OnMessageEvent(const ::Messaging::MessageEvent& message
         const String Types[] = { "Info : ", "Warn : ", "Error: ", "Debug: ", "Info : " };
         memMessages->Lines->Add(timeStamp + " : " + Types[message.Type] + message.Message);
     }
-    else if (message.Type == ::Messaging::etHelpKeys)
+    else if (message.Type == etHelpKeys)
     {
         mbKeys->Lines->Clear();
         mbKeys->Lines->Add(message.Message);
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::OnUpdateProperties(const ::Messaging::UpdateProperties& event)
+void __fastcall TfrmIDE::OnUpdateProperties(const UpdateProperties& event)
 {
     if (event.Id == "update.properties")
     {
-        auto doc = (Project::Document*)((NativeInt)tvProject->Selected->Tag);
+        auto doc = (Document*)((NativeInt)tvProject->Selected->Tag);
         UpdateDocumentProperties(doc);
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditCopyExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<::Messaging::Event>(::Messaging::Event("edit.copy"));
+    ::Messaging::Bus::Publish<Event>(Event("edit.copy"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditCutExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<::Messaging::Event>(::Messaging::Event("edit.cut"));
+    ::Messaging::Bus::Publish<Event>(Event("edit.cut"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditPasteExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<::Messaging::Event>(::Messaging::Event("edit.paste"));
+    ::Messaging::Bus::Publish<Event>(Event("edit.paste"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditFindExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<::Messaging::Event>(::Messaging::Event("edit.find"));
+    ::Messaging::Bus::Publish<Event>(Event("edit.find"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditFindNextExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<::Messaging::Event>(::Messaging::Event("edit.find.next"));
+    ::Messaging::Bus::Publish<Event>(Event("edit.find.next"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditFindPreviousExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<::Messaging::Event>(::Messaging::Event("edit.find.prev"));
+    ::Messaging::Bus::Publish<Event>(Event("edit.find.prev"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditReplaceExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<::Messaging::Event>(::Messaging::Event("edit.replace"));
+    ::Messaging::Bus::Publish<Event>(Event("edit.replace"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileProjectSaveExecute(TObject *Sender)
@@ -171,30 +171,30 @@ void __fastcall TfrmIDE::actHelpAboutExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditUndoExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<::Messaging::Event>(::Messaging::Event("edit.undo"));
+    ::Messaging::Bus::Publish<Event>(Event("edit.undo"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditRedoExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<::Messaging::Event>(::Messaging::Event("edit.redo"));
+    ::Messaging::Bus::Publish<Event>(Event("edit.redo"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditZoomInExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<::Messaging::Event>(::Messaging::Event("zoom.in"));
+    ::Messaging::Bus::Publish<Event>(Event("zoom.in"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditZoomOutExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<::Messaging::Event>(::Messaging::Event("zoom.out"));
+    ::Messaging::Bus::Publish<Event>(Event("zoom.out"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditZoomResetExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<::Messaging::Event>(::Messaging::Event("zoom.reset"));
+    ::Messaging::Bus::Publish<Event>(Event("zoom.reset"));
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::UpdateDocumentProperties(Project::Document* document)
+void __fastcall TfrmIDE::UpdateDocumentProperties(Document* document)
 {
     if (document != nullptr)
     {
@@ -253,7 +253,7 @@ void __fastcall TfrmIDE::lmdPropertiesClick(TObject *Sender)
 {
     if (lmdProperties->Objects->Count >= 1)
     {
-        auto doc = dynamic_cast<Project::Document*>(lmdProperties->Objects->Item[0]);
+        auto doc = dynamic_cast<Document*>(lmdProperties->Objects->Item[0]);
         if (doc != nullptr && lmdProperties->ActiveItem != nullptr)
         {
             lblPropertyInfo->Caption = doc->GetPropertyInfo(lmdProperties->ActiveItem->PropName);
@@ -263,7 +263,7 @@ void __fastcall TfrmIDE::lmdPropertiesClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::tvProjectItemSelectedChange(TObject *Sender, TElXTreeItem *Item)
 {
-    auto doc = reinterpret_cast<Project::Document*>((TObject*)Item->Tag);
+    auto doc = reinterpret_cast<Document*>((TObject*)Item->Tag);
     if (doc != nullptr)
     {
         UpdateDocumentProperties(doc);
@@ -282,7 +282,7 @@ void __fastcall TfrmIDE::OnDocumentClose(TObject *Sender, TLMDockPanelCloseActio
     auto dockPanel = dynamic_cast<TLMDDockPanel*>(Sender);
     if (dockPanel)
     {
-        auto doc = (Project::Document*)dockPanel->Tag;
+        auto doc = (Document*)dockPanel->Tag;
         InformationMessage("[IDE] Closing Document: " + doc->Name);
         doc->Close();
     }
@@ -292,7 +292,7 @@ void __fastcall TfrmIDE::tvProjectDblClick(TObject *Sender)
 {
     if (tvProject->Selected)
     {
-        auto doc = (Project::Document*)((NativeInt)tvProject->Selected->Tag);
+        auto doc = (Document*)((NativeInt)tvProject->Selected->Tag);
         if (doc && doc->DockPanel == nullptr)
         {
             InformationMessage("[IDE] Opening Document: " + doc->Name);
@@ -310,7 +310,7 @@ void __fastcall TfrmIDE::tvProjectDblClick(TObject *Sender)
                 dp->Show();
                 dp->SetFocus();
                 dp->Refresh();
-                ::Messaging::Bus::Publish<::Messaging::Event>(::Messaging::Event("editor.show"));
+                ::Messaging::Bus::Publish<Event>(Event("editor.show"));
             }
             else
             {
@@ -334,7 +334,7 @@ void __fastcall TfrmIDE::actFileNewAssetExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileProjectOpenExecute(TObject *Sender)
 {
-    dlgOpen->InitialDir = Services::Folders::Projects;
+    dlgOpen->InitialDir = System::Path::Projects;
     if (dlgOpen->Execute())
     {
         theProjectManager.Open(dlgOpen->FileName);
@@ -414,7 +414,7 @@ void __fastcall TfrmIDE::actSettingsExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditorHelpExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<::Messaging::Event>(::Messaging::Event("editor.help"));
+    ::Messaging::Bus::Publish<Event>(Event("editor.help"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actViewBuildResultsExecute(TObject *Sender)

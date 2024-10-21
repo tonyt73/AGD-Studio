@@ -3,10 +3,7 @@
 #define ImageDocumentH
 //---------------------------------------------------------------------------
 #include "Project/Document.h"
-#include "Visuals/GraphicsTypes.h"
-//---------------------------------------------------------------------------
-namespace Project
-{
+#include "Graphics/GraphicsTypes.h"
 //---------------------------------------------------------------------------
 // ImageDocument
 // This class encapulates what is an image document.
@@ -38,7 +35,7 @@ protected:
             int                     m_Height;           // height of a frame
             int                     m_NumOfFrames;      // the number of frames
             int                     m_Index;            // the index of the image in its type list
-            Visuals::ImageTypes     m_ImageType;        // the type of graphic image we are
+            ImageTypes              m_ImageType;        // the type of graphic image we are
             FramesList              m_Frames;           // the list of frames
             String                  m_FrameLoader;      // used to load frames into the above frames list
             int                     m_FramesLoaded;     // a count of frames loaded
@@ -59,7 +56,7 @@ protected:
 
 public:
                         __fastcall  ImageDocument(const String& name);
-static Project::Document* __fastcall Create(const String& name, const String& extra) { return new ImageDocument(name); };
+    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ImageDocument(name); };
 
             bool        __fastcall  AddFrame(int index = -1, const String& hint = "");
             bool        __fastcall  DeleteFrame(int index);
@@ -74,7 +71,7 @@ static Project::Document* __fastcall Create(const String& name, const String& ex
             String      __property  Frame[int index]= { read = GetFrame, write = SetFrame   };
             String      __property  Hint[int index] = { read = GetHint                      };
             int         __property  Layers          = { read = GetLayerCount                };
-   Visuals::ImageTypes  __property  ImageType       = { read = m_ImageType                  };
+            ImageTypes  __property  ImageType       = { read = m_ImageType                  };
 
 __published:
             int         __property  Width           = { read = m_Width                      };
@@ -83,7 +80,5 @@ __published:
             int         __property  ImagesPerFrame  = { read = CountImagesPerFrame          };
             int         __property  Index           = { read = GetIndex                     };
 };
-//---------------------------------------------------------------------------
-} // Project namespace
 //---------------------------------------------------------------------------
 #endif

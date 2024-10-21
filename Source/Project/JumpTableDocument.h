@@ -2,10 +2,7 @@
 #ifndef JumpTableDocumentH
 #define JumpTableDocumentH
 //---------------------------------------------------------------------------
-#include "Document.h"
-//---------------------------------------------------------------------------
-namespace Project
-{
+#include "Project/Document.h"
 //---------------------------------------------------------------------------
 class JumpTableDocument : public Document
 {
@@ -30,7 +27,5 @@ public:
 
     int                 __property  Count = { read = GetStepCount };
 };
-//---------------------------------------------------------------------------
-} // Project namespace
 //---------------------------------------------------------------------------
 #endif

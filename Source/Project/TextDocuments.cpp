@@ -1,14 +1,11 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
+#pragma hdrstop
 //---------------------------------------------------------------------------
 #include "Project/TextDocuments.h"
 #include "Messaging/Messaging.h"
-#include "Services/File.h"
-#include "Services/Folders.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-//---------------------------------------------------------------------------
-using namespace Project;
 //---------------------------------------------------------------------------
 __fastcall TextDocument::TextDocument(const String& name)
 : Document(name)
@@ -40,12 +37,12 @@ bool __fastcall TextDocument::Load()
 //---------------------------------------------------------------------------
 void __fastcall TextDocument::Add(const String& lines)
 {
-    if (Services::File::Exists(m_File))
+    if (System::File::Exists(m_File))
     {
         // yes, load it
-        auto allLines = Services::File::ReadText(m_File);
+        auto allLines = System::File::ReadText(m_File);
         allLines += lines;
-        Services::File::WriteText(m_File, allLines);
+        System::File::WriteText(m_File, allLines);
     }
 }
 //---------------------------------------------------------------------------
@@ -57,12 +54,12 @@ __fastcall EventDocument::EventDocument(const String& name)
     m_Extension = "event";
     RegisterProperty("Name", "Details", "The name of the event source code file");
     auto file = GetFile();
-    if (IsValid(name) && !Services::File::Exists(file))
+    if (IsValid(name) && !System::File::Exists(file))
     {
         // create the file and add an AGD header
         auto date = DateTimeToStr(Now());
-        auto header = ";\r\n; " + Services::Folders::ProjectName + "\r\n; An AGD game\r\n; Created: " + date + "\r\n; Event: " + Services::File::NameWithoutExtension(file) + "\r\n;";
-        Services::File::WriteText(file, header);
+        auto header = ";\r\n; " + System::Path::ProjectName + "\r\n; An AGD game\r\n; Created: " + date + "\r\n; Event: " + System::File::NameWithoutExtension(file) + "\r\n;";
+        System::File::WriteText(file, header);
     }
     m_File = file;
 }
@@ -75,12 +72,12 @@ __fastcall MessageDocument::MessageDocument(const String& name)
     m_Extension = "txt";
     RegisterProperty("Name", "Details", "The name of the messages text file");
     auto file = GetFile();
-    if (IsValid(name) && !Services::File::Exists(file))
+    if (IsValid(name) && !System::File::Exists(file))
     {
         // create the file and add an AGD header
         auto date = DateTimeToStr(Now());
-        auto header = ";\r\n; " + Services::Folders::ProjectName + "\r\n; An AGD game\r\n; Created: " + date + "\r\n; Simply place a new message per line. Comments ';' are stripped before compilation\r\n;";
-        Services::File::WriteText(file, header);
+        auto header = ";\r\n; " + System::Path::ProjectName + "\r\n; An AGD game\r\n; Created: " + date + "\r\n; Simply place a new message per line. Comments ';' are stripped before compilation\r\n;";
+        System::File::WriteText(file, header);
     }
     m_File = file;
 }
@@ -93,12 +90,12 @@ __fastcall SfxDocument::SfxDocument(const String& name)
     m_Extension = "sfx";
     RegisterProperty("Name", "Details", "The name of the SoundFx definitions file");
     auto file = GetFile();
-    if (IsValid(name) && !Services::File::Exists(file))
+    if (IsValid(name) && !System::File::Exists(file))
     {
         // create the file and add an AGD header
         auto date = DateTimeToStr(Now());
-        auto header = ";\r\n; " + Services::Folders::ProjectName + "\r\n; An AGD game\r\n; Created: " + date + "\r\n; Simply place a Sound Fx file name per line. Comments ';' are stripped before compilation\r\n;";
-        Services::File::WriteText(file, header);
+        auto header = ";\r\n; " + System::Path::ProjectName + "\r\n; An AGD game\r\n; Created: " + date + "\r\n; Simply place a Sound Fx file name per line. Comments ';' are stripped before compilation\r\n;";
+        System::File::WriteText(file, header);
     }
     m_File = file;
 }

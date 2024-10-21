@@ -6,7 +6,7 @@ inherited frmToolbarShape: TfrmToolbarShape
     Left = 0
     Top = 0
     Width = 129
-    Height = 49
+    Height = 11
     Align = alLeft
     Caption = 'Rectangle'
     DropDownMenu = popShape
@@ -15,13 +15,12 @@ inherited frmToolbarShape: TfrmToolbarShape
     Style = bsSplitButton
     TabOrder = 0
     OnClick = btnShapeClick
-    ExplicitHeight = 11
   end
   object btnFillMode: TButton
     Left = 129
     Top = 0
     Width = 64
-    Height = 49
+    Height = 11
     Align = alLeft
     DropDownMenu = popFill
     ImageAlignment = iaCenter
@@ -30,7 +29,6 @@ inherited frmToolbarShape: TfrmToolbarShape
     Style = bsSplitButton
     TabOrder = 1
     OnClick = btnFillModeClick
-    ExplicitHeight = 11
   end
   object lstSmall: TImageList
     ColorDepth = cd32Bit

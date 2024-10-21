@@ -3,7 +3,7 @@
 #include "Forms/fMain.h"
 #include "Project/ProjectManager.h"
 #include "Project/MachineConfig.h"
-#include "Project/Settings.h"
+#include "Settings/Settings.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -21,7 +21,7 @@ __fastcall TfrmMain::TfrmMain(TComponent* Owner)
 void __fastcall TfrmMain::FormCreate(TObject *Sender)
 {
     // check command line parameters
-    if (!Services::File::Exists(ParamStr(1)))
+    if (!System::File::Exists(ParamStr(1)))
     {
         // create the welcome screen
         if (!appSettings.WelcomeSkipOnStartup)
@@ -43,8 +43,8 @@ void __fastcall TfrmMain::FormCreate(TObject *Sender)
         Caption = ApplicationName;
         ShowIDE();
         auto path = TDirectory::GetCurrentDirectory();
-		auto project = Services::File::NameWithExtension(ParamStr(1));
-        theProjectManager.Open(Services::File::Combine(path, project));
+		auto project = System::File::NameWithExtension(ParamStr(1));
+        theProjectManager.Open(System::File::Combine(path, project));
     }
     // TODO: Remove: Used to generate initial JSON config files
     //auto pw = std::make_unique<PaletteWriter>();

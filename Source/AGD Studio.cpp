@@ -1,8 +1,8 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-//---------------------------------------------------------------------------
+#pragma hdrstop
 #include "Messaging/Messaging.h"
-#include "Project/Settings.h"
+#include "Settings/Settings.h"
 #include "Settings/ThemeManager.h"
 //---------------------------------------------------------------------------
 #include <Vcl.Styles.hpp>
@@ -47,7 +47,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE, LPTSTR, int)
          Application->MainFormOnTaskBar = true;
          ThemeManager::SetStyle(appSettings.ActiveStyle.Trim() != "" ? appSettings.ActiveStyle : "Windows 10 Black Pearl");
          Application->CreateForm(__classid(TfrmMain), &frmMain);
-         Application->Run();
+		 Application->Run();
     }
     catch (Exception &exception)
     {

@@ -1,15 +1,12 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-//---------------------------------------------------------------------------
 #include "Frames/WelcomeDialog/fWelcomeDialog.h"
-#include "Messaging/Event.h"
-#include "Messaging/Messaging.h"
 #include "Project/ProjectManager.h"
 #include "Project/MachineConfig.h"
-#include "Project/Settings.h"
+#include "Settings/Settings.h"
 #include "Settings/ThemeManager.h"
-#include "Services/File.h"
-#include "Services/Folders.h"
+#include "Messaging/Event.h"
+#include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -23,7 +20,7 @@ __fastcall TfrmWelcomeDialog::TfrmWelcomeDialog(TComponent* Owner)
     // load the machines
     cmbMachines->Items->Clear();
     std::vector<String> machines;
-    Project::MachineConfig::GetMachinesList(machines);
+    MachineConfig::GetMachinesList(machines);
     for (const auto& machine : machines)
     {
         cmbMachines->Items->Add(machine);
@@ -39,7 +36,7 @@ __fastcall TfrmWelcomeDialog::~TfrmWelcomeDialog()
     m_Registrar.Unsubscribe();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmWelcomeDialog::OnEvent(const ::Messaging::Event& event)
+void __fastcall TfrmWelcomeDialog::OnEvent(const Event& event)
 {
     if (event.Id == "project.loading.tick" && m_LoadingPanel)
     {
@@ -78,10 +75,10 @@ void __fastcall TfrmWelcomeDialog::btnCreateClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::lblOpenExistingProjectClick(TObject *Sender)
 {
-    dlgOpen->InitialDir = Services::Folders::Projects;
+    dlgOpen->InitialDir = System::Path::Projects;
     if (dlgOpen->Execute())
     {
-        if (Services::File::Extension(dlgOpen->FileName) == ".agdx")
+        if (System::File::Extension(dlgOpen->FileName) == ".agdx")
         {
             theProjectManager.Open(dlgOpen->FileName);
             if (FOnDone) FOnDone(this);
@@ -146,8 +143,8 @@ void __fastcall TfrmWelcomeDialog::RefreshMRUList()
     m_MostRecentlyUsedItems.clear();
     for (const auto& item : theProjectManager.GetMostRecentlyUsedList())
     {
-        auto file = Services::File::Combine(Services::Folders::Documents, item.Path);
-        if (Services::File::Exists(file))
+        auto file = System::File::Combine(System::Path::Documents, item.Path);
+        if (System::File::Exists(file))
         {
             NewMostRecentlyUsedItem(item.Name, item.Path, item.Machine);
         }
@@ -170,8 +167,8 @@ void __fastcall TfrmWelcomeDialog::NewMostRecentlyUsedItem(const String& name, c
 void __fastcall TfrmWelcomeDialog::edtNameChange(TObject *Sender)
 {
     auto isEmpty = edtName->Text.Trim() == "";
-    auto file = ApplicationName + Services::Folders::Separator + edtName->Text;
-    auto projectExists = Services::File::Exists(file);
+    auto file = ApplicationName + System::Path::Separator + edtName->Text;
+    auto projectExists = System::File::Exists(file);
     lblFile->Caption = file;
     lblFile->Visible = !isEmpty;
     btnCreate->Enabled = !isEmpty && !projectExists;
@@ -195,7 +192,7 @@ void __fastcall TfrmWelcomeDialog::OnActivate(TWinControl* parent)
         dynamic_cast<TForm*>(Parent)->Caption = "Welcome to " + ApplicationName;
         RefreshMRUList();
         UpdateColors();
-        m_Registrar.Subscribe<::Messaging::Event>(OnEvent);
+        m_Registrar.Subscribe<Event>(OnEvent);
     }
     else
     {
@@ -210,9 +207,9 @@ void __fastcall TfrmWelcomeDialog::dlgInvalidProjectButtonClicked(TObject *Sende
     if (ModalResult != mrClose)
     {
         // launch the agd converter
-        auto dir = Services::File::PathOf(Application->ExeName);
-        auto app =  Services::File::Combine(dir, "AGD Converter.exe");
-		if (Services::File::Exists(app))
+        auto dir = System::File::PathOf(Application->ExeName);
+        auto app =  System::File::Combine(dir, "AGD Converter.exe");
+        if (System::File::Exists(app))
         {
             ShellExecute(NULL, L"open", app.c_str(), NULL, dir.c_str(), SW_SHOWNORMAL);
         }

@@ -7,7 +7,7 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
-__fastcall TSelectionImageFrame::TSelectionImageFrame(TComponent* Owner, const Visuals::GraphicsBuffer& image, const String& hint)
+__fastcall TSelectionImageFrame::TSelectionImageFrame(TComponent* Owner, const Agdx::GraphicsBuffer& image, const String& hint)
 : TFrame(Owner)
 , m_Image(image)
 , m_Hint(hint)
