@@ -7,7 +7,7 @@
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
 #include <Vcl.ExtCtrls.hpp>
-#include "Graphics/GraphicsBuffer.h"
+#include "Visuals/GraphicsBuffer.h"
 //---------------------------------------------------------------------------
 class TSelectionImageFrame : public TFrame
 {
@@ -16,7 +16,7 @@ __published:// IDE-managed Components
     TPanel *panHint;
     void __fastcall imgBitmapClick(TObject *Sender);
 private:    // User declarations
-    const Agdx::GraphicsBuffer& m_Image;
+ const Visuals::GraphicsBuffer& m_Image;
     String                      m_Hint;
     bool                        m_Selected;
     int                         m_Scale;
@@ -27,7 +27,7 @@ private:    // User declarations
     void    __fastcall          SetSelected(bool state);
     void    __fastcall          SetScale(int scale);
 public:     // User declarations
-            __fastcall          TSelectionImageFrame(TComponent* Owner, const Agdx::GraphicsBuffer& image, const String& hint = "");
+            __fastcall          TSelectionImageFrame(TComponent* Owner, const Visuals::GraphicsBuffer& image, const String& hint = "");
 
     void    __fastcall          Update();
 

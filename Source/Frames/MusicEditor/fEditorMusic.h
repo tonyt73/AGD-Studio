@@ -13,10 +13,10 @@ class TfrmEditorMusic : public TFrame
 {
 __published:    // IDE-managed Components
 private:    // User declarations
-    Document*                   m_Document;
+    Project::Document*          m_Document;
 public:        // User declarations
                     __fastcall  TfrmEditorMusic(TComponent* Owner);
-    static  TFrame* __fastcall  Create(Document* document, TComponent* owner)
+    static  TFrame* __fastcall  Create(Project::Document* document, TComponent* owner)
                                 {
                                     auto editor = new TfrmEditorMusic(owner);
                                     editor->Document = document;
@@ -24,7 +24,7 @@ public:        // User declarations
                                     return editor;
                                 }
 
-    __property  Document*       Document = { read = m_Document, write = m_Document };
+  __property Project::Document* Document = { read = m_Document, write = m_Document };
 };
 //---------------------------------------------------------------------------
 #endif

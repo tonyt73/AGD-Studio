@@ -79,9 +79,9 @@ void __fastcall TfrmToolbarShape::mnuRightTriangleClick(TObject *Sender)
     btnShape->Caption = "Right Triangle";
 }
 //---------------------------------------------------------------------------
-Generic __fastcall TfrmToolbarShape::Parameters() const
+Services::Generic __fastcall TfrmToolbarShape::Parameters() const
 {
-    Generic parameters;
+    Services::Generic parameters;
     parameters.Add("Shape", btnShape->ImageIndex);
     parameters.Add("Fill", btnFillMode->ImageIndex);
     return parameters;

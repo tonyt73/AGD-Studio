@@ -2,10 +2,13 @@
 #ifndef TiledMapDocumentH
 #define TiledMapDocumentH
 //---------------------------------------------------------------------------
-#include "Project/Document.h"
-#include "Project/MapEntity.h"
-#include "Project/ObjectDocument.h"
+#include "Document.h"
+#include "MapEntity.h"
+#include "ObjectDocument.h"
 #include "Messaging/Event.h"
+//---------------------------------------------------------------------------
+namespace Project
+{
 //---------------------------------------------------------------------------
 enum MapEntityType { meMap, meRoom, meScratchPad };
 const int g_MaxMapRoomsAcross = 16;
@@ -29,8 +32,8 @@ protected:
     int                             m_RoomMappingIndex;
 
     void                __fastcall  OnEndObject(const String& object);
-    void                __fastcall  OnDocumentChanged(const DocumentChange<String>& message);
-    void                __fastcall  OnSetStartRoom(const SetStartRoom& event);
+	void                __fastcall  OnDocumentChanged(const ::Messaging::DocumentChange<String>& message);
+    void                __fastcall  OnSetStartRoom(const ::Messaging::SetStartRoom& event);
     void                __fastcall  DoSave();
     void                __fastcall  UpdateEntityRooms();
     void                __fastcall  UpdateScreenCoords();
@@ -49,7 +52,7 @@ public:
                         __fastcall ~TiledMapDocument();
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new TiledMapDocument(name); };
 
-    MapEntityList       __fastcall  Get(ImageTypes type) const;
+    MapEntityList       __fastcall  Get(Visuals::ImageTypes type) const;
    const MapEntityList& __fastcall  Get(MapEntityType type, TSize room = TSize(0,0));
     void                __fastcall  Set(MapEntityType type, const MapEntityList& entities);
 
@@ -68,5 +71,7 @@ __published:
     int                 __property  MaxRoomsAcross  = { read = GetMaxRooms, index = 0           };
     int                 __property  MaxRoomsDown    = { read = GetMaxRooms, index = 1           };
 };
+//---------------------------------------------------------------------------
+} // Project namespace
 //---------------------------------------------------------------------------
 #endif

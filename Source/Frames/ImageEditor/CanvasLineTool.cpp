@@ -15,7 +15,7 @@ __fastcall CanvasLineTool::~CanvasLineTool()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall CanvasLineTool::Apply(Agdx::GraphicsBuffer& canvas, const TPoint& pt)
+void __fastcall CanvasLineTool::Apply(Visuals::GraphicsBuffer& canvas, const TPoint& pt)
 {
     if (MS.Left)
     {

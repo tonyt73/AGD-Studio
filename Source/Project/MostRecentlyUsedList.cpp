@@ -1,11 +1,15 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#pragma hdrstop
 //---------------------------------------------------------------------------
 #include "Project/MostRecentlyUsedList.h"
-#include "System/Guard.h"
+#include "Services/File.h"
+#include "Services/Folders.h"
+#include "Services/JsonFile.h"
+#include "Services/Guard.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
+//---------------------------------------------------------------------------
+using namespace Project;
 //---------------------------------------------------------------------------
 __fastcall MostRecentlyUsedList::MostRecentlyUsedList()
 : JsonFile()
@@ -23,18 +27,18 @@ __fastcall MostRecentlyUsedList::~MostRecentlyUsedList()
 //---------------------------------------------------------------------------
 void __fastcall MostRecentlyUsedList::Load()
 {
-    auto file = System::File::Combine(System::Path::Common, "Mru.json");
-    if (System::File::Exists(file))
+    auto file = Services::File::Combine(Services::Folders::Common, "Mru.json");
+    if (Services::File::Exists(file))
     {
         GUARD(m_Loading);
-        System::JsonFile::Load(file);
+        Services::JsonFile::Load(file);
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall MostRecentlyUsedList::Save()
 {
     if (m_Loading) return;
-    auto file = System::Path::Common + "Mru.json";
+    auto file = Services::Folders::Common + "Mru.json";
     Open(file); // {
     ArrayStart("List"); // [
     for (const auto& mru : m_MostRecentlyUsedList)
@@ -63,7 +67,7 @@ void __fastcall MostRecentlyUsedList::Add(const String& name, const String& path
     {
         m_MostRecentlyUsedList.pop_back();
     }
-    auto relativePath = System::Path::GetFolderRelativeTo(System::Path::lpDocuments, path);
+    auto relativePath = Services::Folders::GetFolderRelativeTo(Services::Folders::lpDocuments, path);
     if (addToFront)
         m_MostRecentlyUsedList.push_front(MostRecentlyUsedItem(name, relativePath, machine));
     else
@@ -73,7 +77,7 @@ void __fastcall MostRecentlyUsedList::Add(const String& name, const String& path
 //---------------------------------------------------------------------------
 void __fastcall MostRecentlyUsedList::Remove(const String& name, const String& path)
 {
-    auto relativePath = System::Path::GetFolderRelativeTo(System::Path::lpDocuments, path);
+    auto relativePath = Services::Folders::GetFolderRelativeTo(Services::Folders::lpDocuments, path);
     auto pos = relativePath.Pos('&');
     if (pos > 0)
     {

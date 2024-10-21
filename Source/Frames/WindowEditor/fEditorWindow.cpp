@@ -4,7 +4,7 @@
 #include "Project/DocumentManager.h"
 #include "Frames/EditorManager.h"
 #include "Settings/ThemeManager.h"
-#include "Graphics/GraphicsMode.h"
+#include "Visuals/GraphicsMode.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -16,10 +16,10 @@ __fastcall TfrmEditorWindow::TfrmEditorWindow(TComponent* Owner)
     const auto& gm = *(mc.GraphicsMode());
     m_View = make_unique<TBitmap>();
     m_View->PixelFormat = pf32bit;
-    m_View->Width = gm.Width / mc.ImageSizing[itCharacterSet].Minimum.Width;
-    m_View->Height = gm.Height / mc.ImageSizing[itCharacterSet].Minimum.Height;
+    m_View->Width = gm.Width / mc.ImageSizing[Visuals::itCharacterSet].Minimum.Width;
+    m_View->Height = gm.Height / mc.ImageSizing[Visuals::itCharacterSet].Minimum.Height;
 
-    m_Registrar.Subscribe<Event>(OnEvent);
+    m_Registrar.Subscribe<::Messaging::Event>(OnEvent);
 }
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorWindow::~TfrmEditorWindow()
@@ -95,9 +95,9 @@ void __fastcall TfrmEditorWindow::DrawView()
     sbrWindow->Panels->Items[5]->Text = "Height: " + IntToStr(m_Document->Height);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::SetDocument(Document* document)
+void __fastcall TfrmEditorWindow::SetDocument(Project::Document* document)
 {
-    m_Document = dynamic_cast<WindowDocument*>(document);
+    m_Document = dynamic_cast<Project::WindowDocument*>(document);
     ShowKeysHelp();
 }
 //---------------------------------------------------------------------------
@@ -106,7 +106,7 @@ bool __fastcall TfrmEditorWindow::IsActive() const
     return theEditorManager.IsActive(this);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::OnEvent(const Event& event)
+void __fastcall TfrmEditorWindow::OnEvent(const ::Messaging::Event& event)
 {
     if (IsActive())
     {

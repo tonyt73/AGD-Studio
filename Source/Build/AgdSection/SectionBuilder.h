@@ -3,10 +3,11 @@
 #define SectionBuilderH
 //---------------------------------------------------------------------------
 #include <tuple>
-#include "Build/BuildMessages.h"
+#include "..\BuildMessages.h"
 //---------------------------------------------------------------------------
-namespace SectionBuilders
+namespace Build
 {
+//---------------------------------------------------------------------------
 struct Result
 {
     Result()
@@ -42,6 +43,7 @@ public:
 
             String  __property  Description = { read = m_Description };
 };
-}
+//---------------------------------------------------------------------------
+} // Build namespace
 //---------------------------------------------------------------------------
 #endif

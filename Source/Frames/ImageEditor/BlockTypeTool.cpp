@@ -11,9 +11,9 @@ __fastcall BlockTypeTool::BlockTypeTool()
 : m_ImageDocument(nullptr)
 , m_BlockType(1)
 {
-    m_CanvasBitmap = std::make_unique<Graphics::TBitmap>();
+    m_CanvasBitmap = std::unique_ptr<TBitmap>();
     m_CanvasBitmap->PixelFormat = pf32bit;
-    m_BlendedBitmap = std::make_unique<Graphics::TBitmap>();
+    m_BlendedBitmap = std::unique_ptr<TBitmap>();
     m_BlendedBitmap->PixelFormat = pf32bit;
 }
 //---------------------------------------------------------------------------
@@ -25,7 +25,7 @@ TPoint __fastcall BlockTypeTool::PtToBlock(const TPoint& pt) const
     return bpt;
 }
 //---------------------------------------------------------------------------
-String __fastcall BlockTypeTool::Begin(Agdx::GraphicsBuffer& canvas)
+String __fastcall BlockTypeTool::Begin(Visuals::GraphicsBuffer& canvas)
 {
     m_CanvasBitmap->Width = m_ImageDocument->Width;
     m_CanvasBitmap->Height = m_ImageDocument->Height;

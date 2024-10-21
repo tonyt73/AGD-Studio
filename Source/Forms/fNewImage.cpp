@@ -39,7 +39,7 @@ String __fastcall TfrmNewImage::GetType() const
 //---------------------------------------------------------------------------
 void __fastcall TfrmNewImage::radObjectClick(TObject *Sender)
 {
-    auto type = (ImageTypes)((TControl*)Sender)->Tag;
+    auto type = (Visuals::ImageTypes)((TControl*)Sender)->Tag;
     const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
     edtWidth->Enabled = mc.ImageSizing[type].Step.cx != 0;
     lblWidth->Enabled = mc.ImageSizing[type].Step.cx != 0;

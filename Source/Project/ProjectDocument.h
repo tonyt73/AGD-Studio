@@ -7,6 +7,9 @@
 #include "Project/Document.h"
 #include "Project/MachineConfig.h"
 //---------------------------------------------------------------------------
+namespace Project
+{
+//---------------------------------------------------------------------------
 typedef struct FileInfo
 {
     String          Name;
@@ -28,23 +31,20 @@ private:
 
             String      __fastcall  GetFile() const;
             void        __fastcall  SetName(String name);
-            void        __fastcall  OnChangeString(const OnChange<String>& event);
+            void        __fastcall  OnChangeString(const ::Messaging::OnChange<String>& event);
             void        __fastcall  OnEndObject(const String& object);
             void        __fastcall  DoSave();
             String      __fastcall  GetGraphicsMode() const;
             int         __fastcall  GetScreenSize(int index) const;
 
-protected:
-friend class TfrmSettings;
-         MachineConfig& __fastcall  WritableMachineConfiguration() const;
-
 public:
-                        __fastcall  ProjectDocument(const String& name, const String& machine);
-                        __fastcall ~ProjectDocument();
-    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ProjectDocument(name, extra); };
+						__fastcall  ProjectDocument(const String& name, const String& machine);
+						__fastcall ~ProjectDocument();
+	static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ProjectDocument(name, extra); };
 
    const MachineConfig& __fastcall  MachineConfiguration() const;
-            bool        __fastcall  Load();
+		 MachineConfig& __fastcall  WriteableMachineConfiguration() const;
+			bool        __fastcall  Load();
 
             void        __fastcall  ClearFiles();
             void        __fastcall  AddFile(const String& file, const String& type, const String& subType);
@@ -61,5 +61,7 @@ __published:
     __property  int     ScreenWidth = { read = GetScreenSize, index = 0             };
     __property  int    ScreenHeight = { read = GetScreenSize, index = 1             };
 };
+//---------------------------------------------------------------------------
+} // Project namespace
 //---------------------------------------------------------------------------
 #endif

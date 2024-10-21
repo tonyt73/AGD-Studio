@@ -210,19 +210,19 @@ __published:    // IDE-managed Components
     void __fastcall actGameRunExecute(TObject *Sender);
 
 private:    // User declarations
-    ::Messaging::Registrar  m_Registrar;
-    DocumentEditorFactory   m_DocumentEditorFactory;
-    BuildManager            m_Builder;
-    std::list<EraseHandler> m_EraseHandlers;    // stops flicking
-    std::map<String,bool>   m_RegisteredCategories;
+    ::Messaging::Registrar              m_Registrar;
+    Factories::DocumentEditorFactory    m_DocumentEditorFactory;
+    Build::BuildManager                 m_Builder;
+    std::list<EraseHandler>             m_EraseHandlers;    // stops flicking
+    std::map<String,bool>               m_RegisteredCategories;
 
-    void    __fastcall  UpdateDocumentProperties(Document* document);
+    void    __fastcall  UpdateDocumentProperties(Project::Document* document);
     void    __fastcall  OnDocumentClose(TObject *Sender, TLMDockPanelCloseAction& action);
     void    __fastcall  RegisterDocumentEditors();
     void    __fastcall  RefreshMruList();
     void    __fastcall  mruOnClick(TObject *Sender);
-    void    __fastcall  OnMessageEvent(const MessageEvent& message);
-    void    __fastcall  OnUpdateProperties(const UpdateProperties& event);
+    void    __fastcall  OnMessageEvent(const ::Messaging::MessageEvent& message);
+    void    __fastcall  OnUpdateProperties(const ::Messaging::UpdateProperties& event);
 
     TNotifyEvent        FOnFormClose;
 

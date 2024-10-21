@@ -4,6 +4,9 @@
 //---------------------------------------------------------------------------
 #include <ElXTree.hpp>
 //---------------------------------------------------------------------------
+namespace Build
+{
+//---------------------------------------------------------------------------
 enum BuildMessageType { bmOk = 0, bmFailed, bmChecking, bmBuild, bmRun, bmProgress, bmTiming, bmCopy, bmInfo, bmOutput, bmWarning };
 //---------------------------------------------------------------------------
 class BuildMessages
@@ -42,5 +45,7 @@ public:
 #define BUILD_LINE(a, b) m_BuildMessages.Message(a, b)
 #define BUILD_MSG_POP(result) m_BuildMessages.Pop(result)
 #define BUILD_TIME(time) m_BuildMessages.Time(time)
+//---------------------------------------------------------------------------
+} // Build namespace
 //---------------------------------------------------------------------------
 #endif
