@@ -125,7 +125,7 @@ __published:    // IDE-managed Components
     void __fastcall actZoomResetExecute(TObject *Sender);
 
 private:    // User declarations
-    ::Messaging::Registrar      m_Registrar;
+    Registrar                   m_Registrar;
     Project::Document*          m_Document;
     TLMDEditView*               m_ActiveEdit;
     TLMDEditSearchDlgOptions    m_SearchOptions;

@@ -73,7 +73,7 @@ Document* __fastcall DocumentManager::Add(const String& type, const String& subT
                 documents.push_back(document);
                 m_Documents.emplace(std::make_pair(document->Type, documents));
             }
-            ::Messaging::Bus::Publish<Event>(Event("document.added"));
+            Bus::Publish<Event>(Event("document.added"));
         }
         document->Load();
         // assign an id if we don't have one, but need one
@@ -91,11 +91,11 @@ bool __fastcall DocumentManager::Remove(const String& type, const String& name)
     if (dit != m_Documents.end()) {
         for (auto it = dit->second.begin(); it != dit->second.end(); it++) {
             if ((*it)->Name == name) {
-                ::Messaging::Bus::Publish<DocumentChange<String>>(DocumentChange<String>("document.removing", (*it), name));
+                Bus::Publish<DocumentChange<String>>(DocumentChange<String>("document.removing", (*it), name));
                 delete (*it);
                 dit->second.erase(it);
                 InformationMessage("[DocumentManager] Removed Document '" + (*it)->Name + "' from Project");
-                ::Messaging::Bus::Publish<DocumentChange<String>>(DocumentChange<String>("document.removed", nullptr, name));
+                Bus::Publish<DocumentChange<String>>(DocumentChange<String>("document.removed", nullptr, name));
                 return true;
             }
         }
@@ -201,7 +201,7 @@ void __fastcall DocumentManager::Save()
         // now save the project file with all the document details included
         projectDocument->Save();
         // save other files (eg. text files)
-        ::Messaging::Bus::Publish<Event>(Event("project.save"));
+        Bus::Publish<Event>(Event("project.save"));
         InformationMessage("[DocumentManager] Saved all Project files");
     }
 }
@@ -213,7 +213,7 @@ void __fastcall DocumentManager::Load(const String& name)
     auto projectDocument = dynamic_cast<ProjectDocument*>(Get("Game", "Configuration", name));
     assert(projectDocument != nullptr);
     for (const auto& fileInfo : projectDocument->Files()) {
-        ::Messaging::Bus::Publish<Event>(Event("project.loading.tick"));
+        Bus::Publish<Event>(Event("project.loading.tick"));
         InformationMessage("[DocumentManager] Loading Project file '" + fileInfo.Type + "." + fileInfo.SubType + "." + fileInfo.Name + "'");
         Add(fileInfo.Type, fileInfo.SubType, fileInfo.Name);
     }

@@ -116,37 +116,37 @@ void __fastcall TfrmIDE::OnUpdateProperties(const UpdateProperties& event)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditCopyExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<Event>(Event("edit.copy"));
+    Bus::Publish<Event>(Event("edit.copy"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditCutExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<Event>(Event("edit.cut"));
+    Bus::Publish<Event>(Event("edit.cut"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditPasteExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<Event>(Event("edit.paste"));
+    Bus::Publish<Event>(Event("edit.paste"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditFindExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<Event>(Event("edit.find"));
+    Bus::Publish<Event>(Event("edit.find"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditFindNextExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<Event>(Event("edit.find.next"));
+    Bus::Publish<Event>(Event("edit.find.next"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditFindPreviousExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<Event>(Event("edit.find.prev"));
+    Bus::Publish<Event>(Event("edit.find.prev"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditReplaceExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<Event>(Event("edit.replace"));
+    Bus::Publish<Event>(Event("edit.replace"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileProjectSaveExecute(TObject *Sender)
@@ -171,27 +171,27 @@ void __fastcall TfrmIDE::actHelpAboutExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditUndoExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<Event>(Event("edit.undo"));
+    Bus::Publish<Event>(Event("edit.undo"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditRedoExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<Event>(Event("edit.redo"));
+    Bus::Publish<Event>(Event("edit.redo"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditZoomInExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<Event>(Event("zoom.in"));
+    Bus::Publish<Event>(Event("zoom.in"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditZoomOutExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<Event>(Event("zoom.out"));
+    Bus::Publish<Event>(Event("zoom.out"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditZoomResetExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<Event>(Event("zoom.reset"));
+    Bus::Publish<Event>(Event("zoom.reset"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::UpdateDocumentProperties(Project::Document* document)
@@ -310,7 +310,7 @@ void __fastcall TfrmIDE::tvProjectDblClick(TObject *Sender)
                 dp->Show();
                 dp->SetFocus();
                 dp->Refresh();
-                ::Messaging::Bus::Publish<Event>(Event("editor.show"));
+                Bus::Publish<Event>(Event("editor.show"));
             }
             else
             {
@@ -414,7 +414,7 @@ void __fastcall TfrmIDE::actSettingsExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditorHelpExecute(TObject *Sender)
 {
-    ::Messaging::Bus::Publish<Event>(Event("editor.help"));
+    Bus::Publish<Event>(Event("editor.help"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actViewBuildResultsExecute(TObject *Sender)

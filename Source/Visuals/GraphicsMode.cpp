@@ -87,7 +87,7 @@ void __fastcall GraphicsMode::RemapColor(int logicalIndex, int paletteIndex)
     if (0 <= logicalIndex && logicalIndex < m_LogicalColors.size() && 0 <= paletteIndex && paletteIndex < m_Palette->Colors)
     {
         m_LogicalColors[logicalIndex] = paletteIndex;
-        ::Messaging::Bus::Publish<Event>(Event("palette.remapped"));
+        Bus::Publish<Event>(Event("palette.remapped"));
     }
 }
 //---------------------------------------------------------------------------
@@ -112,7 +112,7 @@ unsigned char __fastcall GraphicsMode::RemapPixels(unsigned char pixels) const
 void __fastcall GraphicsMode::RestoreDefaultPalette()
 {
     m_LogicalColors = m_DefaultLogicalColors;
-    ::Messaging::Bus::Publish<Event>(Event("palette.remapped"));
+    Bus::Publish<Event>(Event("palette.remapped"));
 }
 //---------------------------------------------------------------------------
 const Palette& __fastcall GraphicsMode::Palette() const
@@ -266,7 +266,7 @@ void __fastcall GraphicsMode::LoadLogicalCLUT(String path, String name)
             // re-define the default CLUT
             m_DefaultLogicalColors.clear();
             m_DefaultLogicalColors = m_LogicalColors;
-            ::Messaging::Bus::Publish<Event>(Event("palette.remapped"));
+            Bus::Publish<Event>(Event("palette.remapped"));
         }
     }
 }

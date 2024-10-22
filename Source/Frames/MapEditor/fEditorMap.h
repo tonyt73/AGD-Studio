@@ -223,7 +223,7 @@ __published:    // IDE-managed Components
     void __fastcall actShowSpriteTypesExecute(TObject *Sender);
 
 private:    // User declarations
-    ::Messaging::Registrar      m_Registrar;        // the messaging registrar
+    Registrar      m_Registrar;        // the messaging registrar
     Project::TiledMapDocument*  m_Document;         // the map document we are editiing
     std::unique_ptr<TileEditor> m_Workspace;        // the main workspace editor
     std::unique_ptr<TileEditor> m_ScratchPad;       // the scratch pad editor
@@ -238,10 +238,10 @@ private:    // User declarations
             void                Initialise();
             void                RefreshAssets();
             bool                IsActive() const;
-            void                OnEvent(const ::Messaging::Event& event);
-            void                OnRoomSelected(const ::Messaging::RoomSelected& event);
-            void                OnStartRoomChanged(const ::Messaging::StartRoomChanged& event);
-            void                OnDocumentChanged(const ::Messaging::DocumentChange<String>& message);
+            void                OnEvent(const Event& event);
+            void                OnRoomSelected(const RoomSelected& event);
+            void                OnStartRoomChanged(const StartRoomChanged& event);
+            void                OnDocumentChanged(const DocumentChange<String>& message);
             void                OnEntityClick(Project::ImageDocument* document);
             void                OnWorkspaceEntitySelected(const Project::MapEntity& entity);
             int                 OnRetrieveRoomIndex(const TPoint& pt, bool newIndex = false);

@@ -101,7 +101,7 @@ void __fastcall Document::SetName(String name)
         auto newFile = GetFile();
         Services::File::Rename(oldFile, newFile);
         InformationMessage("[Document] Renamed document from [" + oldFile + "] to [" + newFile + "]");
-        ::Messaging::Bus::Publish<DocumentChange<String>>(DocumentChange<String>("document.renamed", this, oldName));
+        Bus::Publish<DocumentChange<String>>(DocumentChange<String>("document.renamed", this, oldName));
     }
     else
     {

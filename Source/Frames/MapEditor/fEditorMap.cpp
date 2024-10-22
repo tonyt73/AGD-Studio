@@ -28,10 +28,10 @@ __fastcall TfrmEditorMap::TfrmEditorMap(TComponent* Owner)
 , m_LastSelectedId(-1)
 , m_Scale(2)
 {
-    m_Registrar.Subscribe<::Messaging::Event>(OnEvent);
-    m_Registrar.Subscribe<::Messaging::RoomSelected>(OnRoomSelected);
-    m_Registrar.Subscribe<::Messaging::StartRoomChanged>(OnStartRoomChanged);
-    m_Registrar.Subscribe<::Messaging::DocumentChange<String>>(OnDocumentChanged);
+    m_Registrar.Subscribe<Event>(OnEvent);
+    m_Registrar.Subscribe<RoomSelected>(OnRoomSelected);
+    m_Registrar.Subscribe<StartRoomChanged>(OnStartRoomChanged);
+    m_Registrar.Subscribe<DocumentChange<String>>(OnDocumentChanged);
 }
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorMap::~TfrmEditorMap()
@@ -274,7 +274,7 @@ void TfrmEditorMap::RefreshAssets()
     assetsObjects->sbxListResize(nullptr);
     m_Workspace->UpdateMap();
     m_RoomSelector->UpdateMap();
-    ::Messaging::Bus::Publish<::Messaging::Event>(::Messaging::Event("update.properties"));
+    Bus::Publish<Event>(Event("update.properties"));
 }
 //---------------------------------------------------------------------------
 bool TfrmEditorMap::IsActive() const
@@ -282,7 +282,7 @@ bool TfrmEditorMap::IsActive() const
     return theEditorManager.IsActive(this);
 }
 //---------------------------------------------------------------------------
-void TfrmEditorMap::OnEvent(const ::Messaging::Event& event)
+void TfrmEditorMap::OnEvent(const Event& event)
 {
     if (IsActive() && m_ActionMap.count(event.Id) == 1)
     {
@@ -313,27 +313,27 @@ void TfrmEditorMap::OnEvent(const ::Messaging::Event& event)
     }
 }
 //---------------------------------------------------------------------------
-void TfrmEditorMap::OnRoomSelected(const ::Messaging::RoomSelected& event)
+void TfrmEditorMap::OnRoomSelected(const RoomSelected& event)
 {
     if (event.Id == "room.selected")
     {
         m_Workspace->SetEntities(m_Document->Get(Project::meRoom, event.Room));
         m_Workspace->UpdateMap();
-        ::Messaging::Bus::Publish<::Messaging::Event>(::Messaging::Event("update.properties"));
+        Bus::Publish<Event>(Event("update.properties"));
     }
 }
 //---------------------------------------------------------------------------
-void TfrmEditorMap::OnStartRoomChanged(const ::Messaging::StartRoomChanged& event)
+void TfrmEditorMap::OnStartRoomChanged(const StartRoomChanged& event)
 {
     if (event.Id == "start.room.changed")
     {
         m_Workspace->StartRoom = event.Room;
         m_RoomSelector->StartRoom = event.Room;
-        ::Messaging::Bus::Publish<::Messaging::Event>(::Messaging::Event("update.properties"));
+        Bus::Publish<Event>(Event("update.properties"));
     }
 }
 //---------------------------------------------------------------------------
-void TfrmEditorMap::OnDocumentChanged(const ::Messaging::DocumentChange<String>& message)
+void TfrmEditorMap::OnDocumentChanged(const DocumentChange<String>& message)
 {
     if (message.Id == "document.removing")
     {

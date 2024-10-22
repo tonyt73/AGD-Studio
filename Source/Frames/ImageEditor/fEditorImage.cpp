@@ -690,7 +690,7 @@ void __fastcall TfrmEditorImage::imgEditorMouseUp(TObject *Sender, TMouseButton 
                 auto redo = m_CanvasToolMap[m_CanvasTool]->End(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y));
                 m_ImageDocument->Frame[m_SelectedFrame] = m_Frames[m_SelectedFrame]->Canvas().Get();
                 RefreshView();
-                ::Messaging::Bus::Publish<DocumentChange<String>>(DocumentChange<String>("document.changed", m_ImageDocument));
+                Bus::Publish<DocumentChange<String>>(DocumentChange<String>("document.changed", m_ImageDocument));
             }
         }
         else

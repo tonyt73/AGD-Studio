@@ -19,7 +19,7 @@ __fastcall BitmapGraphicsBuffer::BitmapGraphicsBuffer(unsigned int width, unsign
     m_SetColors.push_back(1);
     m_SetColors.push_back(0);
 
-    m_Registrar.Subscribe<::Messaging::Event>(OnEvent);
+    m_Registrar.Subscribe<Event>(OnEvent);
 }
 //---------------------------------------------------------------------------
 __fastcall BitmapGraphicsBuffer::~BitmapGraphicsBuffer()

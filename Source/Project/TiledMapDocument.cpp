@@ -188,7 +188,7 @@ void __fastcall TiledMapDocument::Set(MapEntityType type, const MapEntityList& e
         m_Map.clear();
         m_Map = entities;
         UpdateEntityRooms();
-        ::Messaging::Bus::Publish<Event>(Event("map.updated"));
+        Bus::Publish<Event>(Event("map.updated"));
     } else if (type == meScratchPad) {
         m_ScratchPad.clear();
         m_ScratchPad = entities;
@@ -213,7 +213,7 @@ void __fastcall TiledMapDocument::Set(MapEntityType type, const MapEntityList& e
             m_Map.push_back(ne);
         }
         UpdateEntityRooms();
-        ::Messaging::Bus::Publish<Event>(Event("map.updated"));
+        Bus::Publish<Event>(Event("map.updated"));
     } else {
         assert(0);
     }
@@ -245,8 +245,8 @@ void __fastcall TiledMapDocument::SetStartRoomCoords(const TPoint& coords)
     if (ri != 255) {
         m_StartRoomIndex = ri;
         m_StartRoomCoords = coords;
-        ::Messaging::Bus::Publish<StartRoomChanged>(coords);
-        ::Messaging::Bus::Publish<UpdateProperties>(UpdateProperties());
+        Bus::Publish<StartRoomChanged>(coords);
+        Bus::Publish<UpdateProperties>(UpdateProperties());
     } else {
         // post an error to the message list
         ErrorMessage("[TiledMap] Cannot set an unused screen as the games Start Location");
@@ -297,7 +297,7 @@ void __fastcall TiledMapDocument::UpdateEntityRooms()
     for (auto id : objectsToRemove) {
         m_Map.erase(std::remove_if(m_Map.begin(), m_Map.end(), [&](const MapEntity& e) { return e.Id == id; }));
     }
-    ::Messaging::Bus::Publish<UpdateProperties>(UpdateProperties());
+    Bus::Publish<UpdateProperties>(UpdateProperties());
 }
 //---------------------------------------------------------------------------
 bool __fastcall TiledMapDocument::IsRoomEmpty(int x, int y)

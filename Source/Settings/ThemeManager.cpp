@@ -22,7 +22,7 @@ void __fastcall ThemeManager::SetStyle(const String& styleName)
             auto style = TStyleManager::Style[name];
             TStyleManager::SetStyle(style);
             appSettings.ActiveStyle = styleName;
-            ::Messaging::Bus::Publish<::Messaging::ThemeChangedEvent>(::Messaging::ThemeChangedEvent());
+            Bus::Publish<ThemeChangedEvent>(ThemeChangedEvent());
             return;
         }
     }
@@ -30,7 +30,7 @@ void __fastcall ThemeManager::SetStyle(const String& styleName)
     {
         TStyleManager::SetStyle(TStyleManager::LoadFromFile(styleFile));
         appSettings.ActiveStyle = styleName;
-        ::Messaging::Bus::Publish<::Messaging::ThemeChangedEvent>(::Messaging::ThemeChangedEvent());
+        Bus::Publish<ThemeChangedEvent>(ThemeChangedEvent());
     }
 }
 //---------------------------------------------------------------------------

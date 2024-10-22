@@ -210,7 +210,7 @@ __published:    // IDE-managed Components
     void __fastcall actGameRunExecute(TObject *Sender);
 
 private:    // User declarations
-    ::Messaging::Registrar              m_Registrar;
+    Registrar                           m_Registrar;
     Factories::DocumentEditorFactory    m_DocumentEditorFactory;
     Build::BuildManager                 m_Builder;
     std::list<EraseHandler>             m_EraseHandlers;    // stops flicking

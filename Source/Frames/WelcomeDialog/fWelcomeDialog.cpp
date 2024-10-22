@@ -39,7 +39,7 @@ __fastcall TfrmWelcomeDialog::~TfrmWelcomeDialog()
     m_Registrar.Unsubscribe();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmWelcomeDialog::OnEvent(const ::Messaging::Event& event)
+void __fastcall TfrmWelcomeDialog::OnEvent(const Event& event)
 {
     if (event.Id == "project.loading.tick" && m_LoadingPanel)
     {
@@ -195,7 +195,7 @@ void __fastcall TfrmWelcomeDialog::OnActivate(TWinControl* parent)
         dynamic_cast<TForm*>(Parent)->Caption = "Welcome to " + ApplicationName;
         RefreshMRUList();
         UpdateColors();
-        m_Registrar.Subscribe<::Messaging::Event>(OnEvent);
+        m_Registrar.Subscribe<Event>(OnEvent);
     }
     else
     {

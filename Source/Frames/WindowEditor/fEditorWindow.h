@@ -41,12 +41,12 @@ __published:// IDE-managed Components
     void __fastcall actHeightIncExecute(TObject *Sender);
     void __fastcall FrameMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate);
 private:    // User declarations
-    ::Messaging::Registrar      m_Registrar;
+    Registrar                   m_Registrar;
     Project::WindowDocument*    m_Document;
     std::unique_ptr<TBitmap>    m_View;
     int                         m_Scalar;
 
-    void            __fastcall  OnEvent(const ::Messaging::Event& event);
+    void            __fastcall  OnEvent(const Event& event);
     bool            __fastcall  IsActive() const;
     void            __fastcall  SetDocument(Project::Document* document);
     void            __fastcall  ShowKeysHelp();

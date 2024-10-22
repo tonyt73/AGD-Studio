@@ -6,21 +6,21 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 #if defined(_WIN32) || defined(__APPLE__) || defined(__linux__)
-unsigned int ::Messaging::Bus::s_NextId = 0;
-::Messaging::Bus::SubscriptionsMap* ::Messaging::Bus::s_Handlers = nullptr;
-//auto ::Messaging::Bus::m_Handlers = new ::Messaging::Bus::SubscriptionsMap();
+unsigned int Bus::s_NextId = 0;
+Bus::SubscriptionsMap* Bus::s_Handlers = nullptr;
+//auto Bus::m_Handlers = new Bus::SubscriptionsMap();
 //---------------------------------------------------------------------------
-__fastcall ::Messaging::Registrar::Registrar()
+__fastcall Registrar::Registrar()
 {
 }
 //---------------------------------------------------------------------------
-__fastcall ::Messaging::Registrar::~Registrar()
+__fastcall Registrar::~Registrar()
 {
     Unsubscribe();
 }
 //---------------------------------------------------------------------------
 // unsubscribe a handler from a message type
-void ::Messaging::Bus::Unsubscribe(unsigned int subscriptionId)
+void Bus::Unsubscribe(unsigned int subscriptionId)
 {
     if (s_Handlers == nullptr)
         return;
@@ -44,11 +44,11 @@ void ::Messaging::Bus::Unsubscribe(unsigned int subscriptionId)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall ::Messaging::Registrar::Unsubscribe()
+void __fastcall Registrar::Unsubscribe()
 {
     for (auto id : m_SubscriptionIds)
     {
-        ::Messaging::Bus::Unsubscribe(id);
+        Bus::Unsubscribe(id);
     }
     m_SubscriptionIds.clear();
 }

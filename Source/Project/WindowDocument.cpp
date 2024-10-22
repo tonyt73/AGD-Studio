@@ -104,8 +104,8 @@ void __fastcall WindowDocument::Set(const TRect& rect)
     if (rect.Width() > 8 && rect.Height() > 4)
     {
         m_Rect = rect;
-        ::Messaging::Bus::Publish<UpdateProperties>(UpdateProperties());
-        ::Messaging::Bus::Publish<WindowChangedEvent>(WindowChangedEvent(rect));
+        Bus::Publish<UpdateProperties>(UpdateProperties());
+        Bus::Publish<WindowChangedEvent>(WindowChangedEvent(rect));
     }
 }
 //---------------------------------------------------------------------------

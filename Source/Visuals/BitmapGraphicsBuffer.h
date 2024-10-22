@@ -14,7 +14,7 @@ namespace Visuals
 class BitmapGraphicsBuffer : public GraphicsBuffer
 {
 private:
-    ::Messaging::Registrar          m_Registrar;
+    Registrar                       m_Registrar;
     void                __fastcall  OnEvent(const Event& event);
 public:
                         __fastcall  BitmapGraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode);

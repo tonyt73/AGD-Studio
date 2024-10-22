@@ -122,7 +122,7 @@ public:
     template <class T>
     void    __fastcall  Subscribe(std::function<void (const T&)> handler)
     {
-        m_SubscriptionIds.push_back(::Messaging::Bus::Subscribe(handler));
+        m_SubscriptionIds.push_back(Bus::Subscribe(handler));
     }
     void    __fastcall  Unsubscribe();
 };

@@ -19,7 +19,7 @@ __fastcall TfrmEditorWindow::TfrmEditorWindow(TComponent* Owner)
     m_View->Width = gm.Width / mc.ImageSizing[Visuals::itCharacterSet].Minimum.Width;
     m_View->Height = gm.Height / mc.ImageSizing[Visuals::itCharacterSet].Minimum.Height;
 
-    m_Registrar.Subscribe<::Messaging::Event>(OnEvent);
+    m_Registrar.Subscribe<Event>(OnEvent);
 }
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorWindow::~TfrmEditorWindow()
@@ -106,7 +106,7 @@ bool __fastcall TfrmEditorWindow::IsActive() const
     return theEditorManager.IsActive(this);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::OnEvent(const ::Messaging::Event& event)
+void __fastcall TfrmEditorWindow::OnEvent(const Event& event)
 {
     if (IsActive())
     {

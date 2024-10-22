@@ -35,7 +35,7 @@ __published:// IDE-managed Components
     TShape *Line3;
     void __fastcall FrameMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate);
 private:    // User declarations
-    ::Messaging::Registrar      m_Registrar;
+    Registrar                   m_Registrar;
     Project::ControlsDocument*  m_Document;
     std::unique_ptr<TBitmap>    m_View;
 

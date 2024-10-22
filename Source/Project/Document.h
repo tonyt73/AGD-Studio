@@ -38,7 +38,7 @@ public:
     TPropertyInfoMap::iterator              TPropertyInfoMapIt;
 
 protected:
-            ::Messaging::Registrar  m_Registrar;
+            Registrar               m_Registrar;
             String                  m_Name;
             String                  m_Type;
             String                  m_SubType;

@@ -143,11 +143,11 @@ public:
 };
 //---------------------------------------------------------------------------
 } // Messaging namespace
-#define ClearMessage(a) ::Messaging::Bus::Publish<::Messaging::MessageEvent>(::Messaging::MessageEvent((a), ::Messaging::etClear))
-#define ErrorMessage(a) ::Messaging::Bus::Publish<::Messaging::MessageEvent>(::Messaging::MessageEvent((a), ::Messaging::etError))
-#define WarningMessage(a) ::Messaging::Bus::Publish<::Messaging::MessageEvent>(::Messaging::MessageEvent((a), ::Messaging::etWarning))
-#define InformationMessage(a) ::Messaging::Bus::Publish<::Messaging::MessageEvent>(::Messaging::MessageEvent((a), ::Messaging::etInformation))
-#define DebugMessage(a) ::Messaging::Bus::Publish<::Messaging::MessageEvent>(::Messaging::MessageEvent((a), ::Messaging::etDebug))
-#define HelpKeysMessage(a) ::Messaging::Bus::Publish<::Messaging::MessageEvent>(::Messaging::MessageEvent((a), ::Messaging::etHelpKeys))
+#define ClearMessage(a) Bus::Publish<MessageEvent>(MessageEvent((a), etClear))
+#define ErrorMessage(a) Bus::Publish<MessageEvent>(MessageEvent((a), etError))
+#define WarningMessage(a) Bus::Publish<MessageEvent>(MessageEvent((a), etWarning))
+#define InformationMessage(a) Bus::Publish<MessageEvent>(MessageEvent((a), etInformation))
+#define DebugMessage(a) Bus::Publish<MessageEvent>(MessageEvent((a), etDebug))
+#define HelpKeysMessage(a) Bus::Publish<MessageEvent>(MessageEvent((a), etHelpKeys))
 //---------------------------------------------------------------------------
 #endif

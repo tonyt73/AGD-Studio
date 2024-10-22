@@ -25,7 +25,7 @@ namespace Visuals
 class ULAPlusGraphicsBuffer : public GraphicsBuffer
 {
 private:
-    ::Messaging::Registrar          m_Registrar;
+    Registrar                       m_Registrar;
     void                __fastcall  OnEvent(const Event& event);
 public:
                         __fastcall  ULAPlusGraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode);

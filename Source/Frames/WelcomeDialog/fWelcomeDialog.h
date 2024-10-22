@@ -62,10 +62,10 @@ private:    // Function declarations
     void     __fastcall     UpdateColors();
     void     __fastcall     RefreshMRUList();
     void     __fastcall     NewMostRecentlyUsedItem(const String& name, const String& path, const String& machine);
-    void     __fastcall     OnEvent(const ::Messaging::Event& event);
+    void     __fastcall     OnEvent(const Event& event);
 
 private:    // Member declarations
-    ::Messaging::Registrar                              m_Registrar;
+    Registrar                                           m_Registrar;
     std::list<std::shared_ptr<TSelectionPanelFrame>>    m_MostRecentlyUsedItems;
     TSelectionPanelFrame*                               m_LoadingPanel;
 

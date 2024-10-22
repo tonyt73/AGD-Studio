@@ -194,7 +194,7 @@ __published:    // IDE-managed Components
 private:    // User declarations
     typedef std::map<int, std::unique_ptr<CanvasTool>> CanvasToolMap;
 
-    ::Messaging::Registrar      m_Registrar;
+    Registrar                   m_Registrar;
     EraseHandler                m_EraseHandlerView;
 
     Project::ImageDocument*     m_ImageDocument;    // the image document we are editing

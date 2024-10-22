@@ -51,7 +51,7 @@ const TColor c_ColorHoverEntity     = (TColor)0x7F00AF00;   // 127 alpha - darke
     assert(view != nullptr);
     Scale = m_ScaleFactor;
 
-    m_Registrar.Subscribe<::Messaging::WindowChangedEvent>(OnWindowChanged);
+    m_Registrar.Subscribe<WindowChangedEvent>(OnWindowChanged);
 
     m_View->Picture->Bitmap->Canvas->Font->Style = TFontStyles() << fsBold;
     CreateViewBitmap();
@@ -62,7 +62,7 @@ const TColor c_ColorHoverEntity     = (TColor)0x7F00AF00;   // 127 alpha - darke
 {
 }
 //---------------------------------------------------------------------------
-void TileEditor::OnWindowChanged(const ::Messaging::WindowChangedEvent& event)
+void TileEditor::OnWindowChanged(const WindowChangedEvent& event)
 {
     if (m_Window.Width() != event.Window.Width() || m_Window.Height() != event.Window.Height())
     {
@@ -201,7 +201,7 @@ void TileEditor::OnMouseDownSelectMode(TMouseButton Button, TShiftState Shift, i
             auto pt = ViewToMap(X, Y);
             pt.x /= m_TileSize.cx * m_Window.Width();
             pt.y /= m_TileSize.cy * m_Window.Height();
-            ::Messaging::Bus::Publish<::Messaging::SetStartRoom>(::Messaging::SetStartRoom(pt));
+            Bus::Publish<SetStartRoom>(SetStartRoom(pt));
         }
     }
 }
@@ -1065,7 +1065,7 @@ void TileEditor::SelectRoom(TSize room)
 {
     m_SelectedRoom = room;
     UnselectAll(false);
-    ::Messaging::Bus::Publish<::Messaging::RoomSelected>(::Messaging::RoomSelected(room));
+    Bus::Publish<RoomSelected>(RoomSelected(room));
     UpdateMap();
 }
 //---------------------------------------------------------------------------
