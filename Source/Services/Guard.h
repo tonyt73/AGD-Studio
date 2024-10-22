@@ -2,6 +2,9 @@
 #ifndef GuardH
 #define GuardH
 //---------------------------------------------------------------------------
+namespace Services
+{
+//---------------------------------------------------------------------------
 // A guard to use in a single function
 // Sets the supplied guard flag to true while the function is running
 // Check the flag in other functions to stop processing.
@@ -11,11 +14,14 @@
 class Guard
 {
 private:
-    bool&    m_Flag;
+    bool&       m_Flag;
 public:
-        __fastcall  Guard(bool& flag);
-        __fastcall ~Guard();
+    __fastcall  Guard(bool& flag);
+    __fastcall ~Guard();
 };
-#define GUARD(x) auto g = Guard(x)
+//---------------------------------------------------------------------------
+} // Services namespace
+//---------------------------------------------------------------------------
+#define GUARD(x) auto g = Services::Guard(x)
 //---------------------------------------------------------------------------
 #endif

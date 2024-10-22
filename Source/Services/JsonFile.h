@@ -4,10 +4,8 @@
 //---------------------------------------------------------------------------
 #include <map>
 #include <System.Json.Writers.hpp>
-#include "System/Path.h"
-#include "System/File.h"
 //---------------------------------------------------------------------------
-namespace System
+namespace Services
 {
 //---------------------------------------------------------------------------
 // This class and it's descendants MUST BE instantiated dynamically using 'new'
@@ -66,6 +64,6 @@ public:
     virtual         __fastcall ~JsonFile();
 };
 //---------------------------------------------------------------------------
-} // namespace File
+} // namespace Services
 //---------------------------------------------------------------------------
 #endif

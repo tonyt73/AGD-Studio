@@ -1,29 +1,20 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#pragma hdrstop
 //---------------------------------------------------------------------------
-#include "System/Path.h"
+#include "Folders.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
+using namespace Services;
 //---------------------------------------------------------------------------
-namespace System
-{
-String Path::m_Application;
-String Path::m_Common;
-String Path::m_Documents;
-String Path::m_Projects;
-String Path::m_ProjectName;
-String Path::m_Separator;
-class Path Path;
+String Folders::m_Application;
+String Folders::m_Common;
+String Folders::m_Documents;
+String Folders::m_Projects;
+String Folders::m_ProjectName;
+String Folders::m_Separator;
 //---------------------------------------------------------------------------
-__fastcall Path::Path()
-{
-    // Can't initialise the paths here; Android API is not available during static object construction
-    Init();
-}
-//---------------------------------------------------------------------------
-void __fastcall Path::Init()
+void Folders::Init()
 {
     const String appName = ApplicationName;
     m_Separator = System::Ioutils::TPath::DirectorySeparatorChar;
@@ -33,7 +24,7 @@ void __fastcall Path::Init()
     m_Projects = System::Ioutils::TPath::GetSharedDocumentsPath() + m_Separator + appName + m_Separator + "Projects" + m_Separator;
 }
 //---------------------------------------------------------------------------
-String __fastcall Path::GetFolder(const Location location, const String& subFolder)
+String Folders::GetFolder(const Location location, const String& subFolder)
 {
     auto folder = m_Common;
     if (location == lpApplication) folder = m_Application;
@@ -43,17 +34,16 @@ String __fastcall Path::GetFolder(const Location location, const String& subFold
     return folder;
 }
 //---------------------------------------------------------------------------
-TStringDynArray Path::GetFolders(Location location, const String& subFolder)
+void Folders::GetFolders(Location location, const String& subFolder, TStringDynArray& folders)
 {
-    auto folder = GetFolder(location, subFolder);
-    if (System::Ioutils::TDirectory::Exists(folder))
-    {
-        return System::Ioutils::TDirectory::GetDirectories(folder);
-    }
-    return TStringDynArray();
+	auto folder = GetFolder(location, subFolder);
+	if (System::Ioutils::TDirectory::Exists(folder))
+	{
+		folders = System::Ioutils::TDirectory::GetDirectories(folder);
+	}
 }
 //---------------------------------------------------------------------------
-String __fastcall Path::GetFolderRelativeTo(const Location location, const String& path)
+String Folders::GetFolderRelativeTo(const Location location, const String& path)
 {
     auto relPath = path;
     auto folder = GetFolder(location);
@@ -64,28 +54,27 @@ String __fastcall Path::GetFolderRelativeTo(const Location location, const Strin
     return relPath;
 }
 //---------------------------------------------------------------------------
-String __fastcall Path::GetActiveProjectFolder()
+String Folders::GetActiveProjectFolder()
 {
     return Projects + ProjectName + Separator;
 }
 //---------------------------------------------------------------------------
-TStringDynArray __fastcall Path::GetFiles(const String& folder, const String& filter)
+TStringDynArray Folders::GetFiles(const String& folder, const String& filter)
 {
-    if (System::Ioutils::TDirectory::Exists(folder))
-    {
-        return System::Ioutils::TDirectory::GetFiles(folder, filter);
-    }
-    TStringDynArray empty;
-    return empty;
+	if (System::Ioutils::TDirectory::Exists(folder))
+	{
+		return System::Ioutils::TDirectory::GetFiles(folder, filter);
+	}
+    return TStringDynArray();
 }
 //---------------------------------------------------------------------------
-TStringDynArray __fastcall Path::GetFiles(Location location, const String& filter, const String& subFolder)
+TStringDynArray Folders::GetFiles(Location location, const String& filter, const String& subFolder)
 {
     auto folder = GetFolder(location, subFolder);
     return GetFiles(folder, filter);
 }
 //---------------------------------------------------------------------------
-String __fastcall Path::Create(Location location, const String& subFolder)
+String Folders::Create(Location location, const String& subFolder)
 {
     auto folder = GetFolder(location, subFolder);
     if (!Exists(location, subFolder))
@@ -95,17 +84,17 @@ String __fastcall Path::Create(Location location, const String& subFolder)
     return folder;
 }
 //---------------------------------------------------------------------------
-bool __fastcall Path::Exists(const String& path)
+bool Folders::Exists(const String& path)
 {
     return System::Ioutils::TDirectory::Exists(path);
 }
 //---------------------------------------------------------------------------
-bool __fastcall Path::Exists(Location location, const String& subFolder)
+bool Folders::Exists(Location location, const String& subFolder)
 {
     return Exists(GetFolder(location, subFolder));
 }
 //---------------------------------------------------------------------------
-void __fastcall Path::Delete(Location location, const String& subFolder)
+void Folders::Delete(Location location, const String& subFolder)
 {
     if (Exists(location, subFolder))
     {
@@ -114,7 +103,7 @@ void __fastcall Path::Delete(Location location, const String& subFolder)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall Path::Rename(Location location, const String& fromSubFolder, const String& toSubFolder)
+void Folders::Rename(Location location, const String& fromSubFolder, const String& toSubFolder)
 {
     if (Exists(location, fromSubFolder))
     {
@@ -123,6 +112,4 @@ void __fastcall Path::Rename(Location location, const String& fromSubFolder, con
         System::Ioutils::TDirectory::Move(fromFolder, toFolder);
     }
 }
-//---------------------------------------------------------------------------
-} // File namespace
 //---------------------------------------------------------------------------
