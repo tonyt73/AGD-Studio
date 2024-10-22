@@ -1,13 +1,13 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
-#include "Project/ProjectManager.h"
+#include "ProjectManager.h"
+#include "ProjectDocument.h"
+#include "FileDefinitions.h"
+#include "Settings.h"
 #include "Frames/CodeEditor/fEditorCode.h"
 #include "Frames/ImageEditor/fEditorImage.h"
 #include "Messaging/Event.h"
-#include "Project/ProjectDocument.h"
-#include "Project/FileDefinitions.h"
-#include "Project/Settings.h"
 #include "Services/File.h"
 #include "Services/Folders.h"
 //---------------------------------------------------------------------------

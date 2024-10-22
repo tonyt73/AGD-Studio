@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
-#include "Project/MostRecentlyUsedList.h"
+#include "MostRecentlyUsedList.h"
 #include "Services/File.h"
 #include "Services/Folders.h"
 #include "Services/JsonFile.h"

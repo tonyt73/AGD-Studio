@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#include <System.SysUtils.hpp>
-#include "Build/Assembly.h"
+//---------------------------------------------------------------------------
+#include "Assembly.h"
 #include "Project/DocumentManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

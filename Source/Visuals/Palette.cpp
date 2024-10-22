@@ -1,7 +1,6 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
-#include "System.Math.hpp"
 #include "Palette.h"
 #include "Services/File.h"
 #include "Services/Folders.h"

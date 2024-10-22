@@ -2,8 +2,8 @@
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
 #include "AttributeGraphicsBuffer.h"
-#include "Visuals/GraphicsTypes.h"
-#include "Visuals/GraphicsMode.h"
+#include "GraphicsTypes.h"
+#include "GraphicsMode.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------

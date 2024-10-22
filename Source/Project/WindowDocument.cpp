@@ -1,8 +1,8 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
-#include "Project/DocumentManager.h"
-#include "Project/WindowDocument.h"
+#include "DocumentManager.h"
+#include "WindowDocument.h"
 #include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

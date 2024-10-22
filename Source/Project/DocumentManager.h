@@ -2,8 +2,8 @@
 #ifndef DocumentManagerH
 #define DocumentManagerH
 //---------------------------------------------------------------------------
-#include "Project/Document.h"
-#include "Project/ProjectDocument.h"
+#include "Document.h"
+#include "ProjectDocument.h"
 //---------------------------------------------------------------------------
 namespace Project
 {

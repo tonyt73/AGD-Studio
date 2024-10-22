@@ -2,7 +2,7 @@
 #ifndef ImageDocumentH
 #define ImageDocumentH
 //---------------------------------------------------------------------------
-#include "Project/Document.h"
+#include "Document.h"
 #include "Visuals/GraphicsTypes.h"
 //---------------------------------------------------------------------------
 namespace Project

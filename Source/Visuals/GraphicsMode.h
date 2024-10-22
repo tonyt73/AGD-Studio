@@ -2,7 +2,6 @@
 #ifndef GraphicsModeH
 #define GraphicsModeH
 //---------------------------------------------------------------------------
-#include <memory>
 #include "GraphicsTypes.h"
 #include "Palette.h"
 #include "Services/JsonFile.h"

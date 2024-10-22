@@ -2,11 +2,7 @@
 #ifndef ProjectManagerH
 #define ProjectManagerH
 //---------------------------------------------------------------------------
-#include <System.Classes.hpp>
-#include <memory>
 #include "ElXTree.hpp"
-//---------------------------------------------------------------------------
-#include <list>
 //---------------------------------------------------------------------------
 #include "DocumentManager.h"
 #include "MostRecentlyUsedList.h"

@@ -2,7 +2,6 @@
 #ifndef MessagingH
 #define MessagingH
 //---------------------------------------------------------------------------
-#if defined(_WIN32) || defined(__APPLE__) || defined(__linux__)
 #include <assert.h>
 #include <list>
 #include <memory>
@@ -130,5 +129,4 @@ public:
 } // namespace Messaging
 //---------------------------------------------------------------------------
 using namespace ::Messaging;
-#endif // defined(_WIN32) || defined(__APPLE__) || defined(__linux__)
 #endif

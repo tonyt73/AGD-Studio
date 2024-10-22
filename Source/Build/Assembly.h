@@ -2,7 +2,7 @@
 #ifndef AssemblyH
 #define AssemblyH
 //---------------------------------------------------------------------------
-#include "Build/ShellProcess.h"
+#include "ShellProcess.h"
 //---------------------------------------------------------------------------
 namespace Build
 {

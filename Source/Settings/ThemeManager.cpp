@@ -1,10 +1,8 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
-#include <System.StrUtils.hpp>
-#include "Vcl.Themes.hpp"
+#include "ThemeManager.h"
 #include "Project/Settings.h"
-#include "Settings/ThemeManager.h"
 #include "Services/File.h"
 #include "Services/Folders.h"
 //---------------------------------------------------------------------------

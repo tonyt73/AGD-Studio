@@ -1,6 +1,5 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#pragma hdrstop
 //---------------------------------------------------------------------------
 #include "JumpTableDocument.h"
 #include "Messaging/Messaging.h"

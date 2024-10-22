@@ -1,11 +1,10 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
-#include "Project/TiledMapDocument.h"
+#include "TiledMapDocument.h"
+#include "DocumentManager.h"
+#include "WindowDocument.h"
 #include "Messaging/Event.h"
-#include "Project/DocumentManager.h"
-#include "Project/WindowDocument.h"
-#include <algorithm>
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------

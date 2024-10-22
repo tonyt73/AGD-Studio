@@ -6,8 +6,8 @@
         <AppType>Application</AppType>
         <MainSource>AGD Studio.cpp</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win64</Platform>
+        <Config Condition="'$(Config)'==''">Release</Config>
+        <Platform Condition="'$(Platform)'==''">Win64x</Platform>
         <TargetedPlatforms>1048578</TargetedPlatforms>
         <ProjectName Condition="'$(ProjectName)'==''">AGD Studio</ProjectName>
     </PropertyGroup>

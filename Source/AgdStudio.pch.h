@@ -3,11 +3,16 @@
 //---------------------------------------------------------------------------
 // VCL
 #include <vcl.h>
+#include <Vcl.Themes.hpp>
+#include <Vcl.Styles.hpp>
 
 // System
+#include <System.hpp>
 #include <System.Classes.hpp>
 #include <System.SysUtils.hpp>
+#include <System.StrUtils.hpp>
 #include <System.UITypes.hpp>
+#include <System.Math.hpp>
 #include <System.IOUtils.hpp>
 #include <System.JSON.hpp>
 #include <System.Json.Types.hpp>
@@ -22,10 +27,11 @@
 #include <list>
 #include <vector>
 #include <map>
+#include <stack>
 //---------------------------------------------------------------------------
 #pragma hdrstop
 
-const String ApplicationName = "AGD Studio";
+const String const ApplicationName = "AGD Studio";
 
 #endif // pch_h
 

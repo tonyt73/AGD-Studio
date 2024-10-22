@@ -5,8 +5,6 @@
 #include "Project/Settings.h"
 #include "Settings/ThemeManager.h"
 //---------------------------------------------------------------------------
-#include <Vcl.Styles.hpp>
-#include <Vcl.Themes.hpp>
 #include <assert.h>
 #include <windows.h>
 //---------------------------------------------------------------------------

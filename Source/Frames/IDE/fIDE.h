@@ -207,7 +207,7 @@ __published:    // IDE-managed Components
     void __fastcall actViewTodoExecute(TObject *Sender);
     void __fastcall actViewEditorKeysExecute(TObject *Sender);
     void __fastcall actViewMessagesExecute(TObject *Sender);
-    void __fastcall actGameRunExecute(TObject *Sender);
+    void actGameRunExecute(TObject *Sender);
 
 private:    // User declarations
     Registrar                           m_Registrar;

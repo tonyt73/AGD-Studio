@@ -1,7 +1,6 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
-#include <math.h>
 #include "ScreensBuilder.h"
 #include "Project/DocumentManager.h"
 #include "Project/ImageDocument.h"

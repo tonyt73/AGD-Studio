@@ -2,10 +2,9 @@
 #ifndef ProjectDocumentH
 #define ProjectDocumentH
 //---------------------------------------------------------------------------
-#include <memory>
+#include "Document.h"
+#include "MachineConfig.h"
 #include "Messaging/Event.h"
-#include "Project/Document.h"
-#include "Project/MachineConfig.h"
 //---------------------------------------------------------------------------
 namespace Project
 {

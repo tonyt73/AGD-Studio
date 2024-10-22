@@ -2,9 +2,10 @@
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
 #include "ElXTree.hpp"
+//---------------------------------------------------------------------------
+#include "ProjectDocument.h"
+#include "ProjectManager.h"
 #include "Messaging/Messaging.h"
-#include "Project/ProjectDocument.h"
-#include "Project/ProjectManager.h"
 #include "Services/File.h"
 #include "Services/Folders.h"
 //---------------------------------------------------------------------------

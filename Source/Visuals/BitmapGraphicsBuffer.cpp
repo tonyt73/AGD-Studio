@@ -2,7 +2,6 @@
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
 #include "BitmapGraphicsBuffer.h"
-#include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

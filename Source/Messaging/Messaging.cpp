@@ -5,7 +5,6 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-#if defined(_WIN32) || defined(__APPLE__) || defined(__linux__)
 unsigned int Bus::s_NextId = 0;
 Bus::SubscriptionsMap* Bus::s_Handlers = nullptr;
 //auto Bus::m_Handlers = new Bus::SubscriptionsMap();
@@ -52,7 +51,5 @@ void __fastcall Registrar::Unsubscribe()
     }
     m_SubscriptionIds.clear();
 }
-//---------------------------------------------------------------------------
-#endif // defined(_WIN32) || defined(__APPLE__) || defined(__linux__)
 //---------------------------------------------------------------------------
 

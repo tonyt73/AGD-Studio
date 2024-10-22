@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
-#include "Project/TextDocuments.h"
+#include "TextDocuments.h"
 #include "Messaging/Messaging.h"
 #include "Services/File.h"
 #include "Services/Folders.h"
