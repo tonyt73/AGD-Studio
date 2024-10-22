@@ -7,13 +7,13 @@
 class CanvasShapeTool : public CanvasTool
 {
 private:
-    virtual void    __fastcall  Apply(Agdx::GraphicsBuffer& canvas, const TPoint& pt);
+    virtual void    __fastcall  Apply(Visuals::GraphicsBuffer& canvas, const TPoint& pt);
 
-            void    __fastcall  DrawRectangle(Agdx::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill);
-            void    __fastcall  DrawEllipse(Agdx::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill);
-            void    __fastcall  DrawDiamond(Agdx::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill);
-            void    __fastcall  DrawTriangle(Agdx::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill);
-            void    __fastcall  DrawRightTriangle(Agdx::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill);
+            void    __fastcall  DrawRectangle(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill);
+            void    __fastcall  DrawEllipse(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill);
+            void    __fastcall  DrawDiamond(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill);
+            void    __fastcall  DrawTriangle(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill);
+            void    __fastcall  DrawRightTriangle(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill);
 
 public:
                     __fastcall  CanvasShapeTool();

@@ -15,7 +15,7 @@ __fastcall CanvasShapeTool::~CanvasShapeTool()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall CanvasShapeTool::DrawRectangle(Agdx::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill)
+void __fastcall CanvasShapeTool::DrawRectangle(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill)
 {
     switch (fill)
     {
@@ -44,12 +44,12 @@ void __fastcall CanvasShapeTool::DrawRectangle(Agdx::GraphicsBuffer& canvas, con
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall CanvasShapeTool::DrawEllipse(Agdx::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill)
+void __fastcall CanvasShapeTool::DrawEllipse(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill)
 {
     // TODO: Implement Ellipse
 }
 //---------------------------------------------------------------------------
-void __fastcall CanvasShapeTool::DrawDiamond(Agdx::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill)
+void __fastcall CanvasShapeTool::DrawDiamond(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill)
 {
     auto xs = std::min(StartPt.X, pt.X);
     auto xe = std::max(StartPt.X, pt.X);
@@ -116,7 +116,7 @@ void __fastcall CanvasShapeTool::DrawDiamond(Agdx::GraphicsBuffer& canvas, const
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall CanvasShapeTool::DrawTriangle(Agdx::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill)
+void __fastcall CanvasShapeTool::DrawTriangle(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill)
 {
     auto xs = std::min(StartPt.X, pt.X);
     auto xe = std::max(StartPt.X, pt.X);
@@ -161,7 +161,7 @@ void __fastcall CanvasShapeTool::DrawTriangle(Agdx::GraphicsBuffer& canvas, cons
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall CanvasShapeTool::DrawRightTriangle(Agdx::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill)
+void __fastcall CanvasShapeTool::DrawRightTriangle(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill)
 {
     switch (fill)
     {
@@ -198,7 +198,7 @@ void __fastcall CanvasShapeTool::DrawRightTriangle(Agdx::GraphicsBuffer& canvas,
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall CanvasShapeTool::Apply(Agdx::GraphicsBuffer& canvas, const TPoint& pt)
+void __fastcall CanvasShapeTool::Apply(Visuals::GraphicsBuffer& canvas, const TPoint& pt)
 {
     auto shape = Parameters.Get<int>("Shape");
     auto fill = Parameters.Get<int>("Fill");

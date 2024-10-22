@@ -3,13 +3,16 @@
 #define CreationH
 //---------------------------------------------------------------------------
 #include <list>
-#include "Build/BuildProcess.h"
-#include "Build/AgdSection/SectionBuilder.h"
+#include "BuildProcess.h"
+#include "AgdSection/SectionBuilder.h"
+//---------------------------------------------------------------------------
+namespace Build
+{
 //---------------------------------------------------------------------------
 class Creation : public BuildProcess
 {
 private:
-    typedef std::list<std::unique_ptr<SectionBuilders::SectionBuilder>> SectionBuilderList;
+    typedef std::list<std::unique_ptr<SectionBuilder>> SectionBuilderList;
 
     SectionBuilderList           m_AgdBuilders;
 
@@ -19,5 +22,7 @@ public:
 
             bool    __fastcall  Execute() final;
 };
+//---------------------------------------------------------------------------
+} // Build namespace
 //---------------------------------------------------------------------------
 #endif

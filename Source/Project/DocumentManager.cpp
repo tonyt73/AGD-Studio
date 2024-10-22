@@ -1,10 +1,9 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#pragma hdrstop
 //---------------------------------------------------------------------------
-#include "Project/DocumentManager.h"
 #include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
+#include "Project/DocumentManager.h"
 #include "Project/CharacterSetDocument.h"
 #include "Project/ControlsDocument.h"
 #include "Project/JumpTableDocument.h"
@@ -16,9 +15,13 @@
 #include "Project/TileDocument.h"
 #include "Project/TiledMapDocument.h"
 #include "Project/WindowDocument.h"
-#include "Settings/Settings.h"
+#include "Project/Settings.h"
+#include "Services/File.h"
+#include "Services/Folders.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
+//---------------------------------------------------------------------------
+using namespace Project;
 //---------------------------------------------------------------------------
 DocumentManager& DocumentManager::get()
 {
@@ -115,7 +118,7 @@ void __fastcall DocumentManager::DocumentFolders(std::vector<String>& folders) c
 //---------------------------------------------------------------------------
 ProjectDocument* __fastcall DocumentManager::ProjectConfig() const
 {
-    const auto file = System::Path::ProjectName;
+    const auto file = Services::Folders::ProjectName;
     auto doc = Get("Game", "Configuration", file);
     if (doc != nullptr)
         return dynamic_cast<ProjectDocument*>(doc);
@@ -181,7 +184,7 @@ void __fastcall DocumentManager::Clear()
 //---------------------------------------------------------------------------
 void __fastcall DocumentManager::Save()
 {
-    auto projectDocument = dynamic_cast<ProjectDocument*>(Get("Game", "Configuration", System::Path::ProjectName));
+    auto projectDocument = dynamic_cast<ProjectDocument*>(Get("Game", "Configuration", Services::Folders::ProjectName));
     if (projectDocument) {
         projectDocument->ClearFiles();
         // save all documents (except the project file) and add the document details to the project file
@@ -190,7 +193,7 @@ void __fastcall DocumentManager::Save()
                 if (document->Type == "Game" && document->SubType == "Configuration")
                     continue;
                 document->Save();
-                projectDocument->AddFile(System::File::NameWithExtension(document->File), document->Type, document->SubType);
+                projectDocument->AddFile(Services::File::NameWithExtension(document->File), document->Type, document->SubType);
             }
         }
         // if supported; load any changed palette mappings

@@ -9,9 +9,9 @@
 #include <Vcl.Forms.hpp>
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.ImgList.hpp>
-#include "Graphics/GraphicsBuffer.h"
-#include "Graphics/GraphicsMode.h"
 #include <Vcl.Dialogs.hpp>
+#include "Visuals/GraphicsBuffer.h"
+#include "Visuals/GraphicsMode.h"
 //---------------------------------------------------------------------------
 class TfrmPaletteBitmap : public TFrame
 {
@@ -50,8 +50,8 @@ private:    // User declarations
     int                         m_CursorPhysical;   // mouse cursor on the physical colour picker
     std::unique_ptr<TBitmap>    m_LogicalPicker;    // the picker images double buffer
     std::unique_ptr<TBitmap>    m_PhysicalPicker;   // the picker images double buffer
-    Agdx::GraphicsMode&         m_GraphicsMode;     // the graphics mode used by the project
-    const Agdx::Palette&        m_Palette;          // the palette used by the graphics mode
+	Visuals::GraphicsMode&      m_GraphicsMode;     // the graphics mode used by the project
+    const Visuals::Palette&     m_Palette;          // the palette used by the graphics mode
 
     void    __fastcall  DrawPhysicalColors() const;
     void    __fastcall  DrawLogicalColors() const;
@@ -59,7 +59,7 @@ private:    // User declarations
 public:     // User declarations
             __fastcall  TfrmPaletteBitmap(TComponent* Owner);
     void    __fastcall  Init();
-    void    __fastcall  Set(Agdx::GraphicsBuffer& canvas);
+	void    __fastcall  Set(Visuals::GraphicsBuffer& canvas);
 };
 //---------------------------------------------------------------------------
 #endif

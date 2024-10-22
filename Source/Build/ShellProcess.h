@@ -5,7 +5,12 @@
 #include "LMDCustomComponent.hpp"
 #include "LMDShBase.hpp"
 #include "LMDStarter.hpp"
-#include "Build/BuildProcess.h"
+#include "BuildProcess.h"
+#include "Services/File.h"
+#include "Services/Folders.h"
+//---------------------------------------------------------------------------
+namespace Build
+{
 //---------------------------------------------------------------------------
 class ShellProcess : public BuildProcess
 {
@@ -26,5 +31,7 @@ public:
                     __fastcall  ShellProcess(BuildMessages& buildMessages, BuildMessageType type, const String& description);
     virtual         __fastcall ~ShellProcess();
 };
+//---------------------------------------------------------------------------
+} // Build namespace
 //---------------------------------------------------------------------------
 #endif

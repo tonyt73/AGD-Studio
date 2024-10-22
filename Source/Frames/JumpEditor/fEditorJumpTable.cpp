@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#pragma hdrstop
+//---------------------------------------------------------------------------
 #include "fEditorJumpTable.h"
 #include "Project/DocumentManager.h"
 #include "Frames/EditorManager.h"
@@ -19,9 +19,9 @@ __fastcall TfrmEditorJumpTable::TfrmEditorJumpTable(TComponent* Owner)
     m_View->Height = 192;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorJumpTable::SetDocument(Document* document)
+void __fastcall TfrmEditorJumpTable::SetDocument(Project::Document* document)
 {
-    m_Document = dynamic_cast<JumpTableDocument*>(document);
+    m_Document = dynamic_cast<Project::JumpTableDocument*>(document);
     ShowKeysHelp();
 }
 //---------------------------------------------------------------------------

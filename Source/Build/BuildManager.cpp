@@ -1,14 +1,17 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#include "Build/BuildManager.h"
-#include "Build/BuildMessages.h"
-#include "Build/PreChecks.h"
-#include "Build/Creation.h"
-#include "Build/Compilation.h"
-#include "Build/Assembly.h"
-#include "Build/Emulation.h"
+//---------------------------------------------------------------------------
+#include "BuildManager.h"
+#include "BuildMessages.h"
+#include "PreChecks.h"
+#include "Creation.h"
+#include "Compilation.h"
+#include "Assembly.h"
+#include "Emulation.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
+//---------------------------------------------------------------------------
+using namespace Build;
 //---------------------------------------------------------------------------
 __fastcall BuildManager::BuildManager()
 {

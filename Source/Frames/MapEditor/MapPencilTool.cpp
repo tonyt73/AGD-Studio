@@ -5,17 +5,17 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall MapPencilTool::MapPencilTool()
+ MapPencilTool::MapPencilTool()
 : MapTool()
 {
     Flags = modifies;
 }
 //---------------------------------------------------------------------------
-__fastcall MapPencilTool::~MapPencilTool()
+ MapPencilTool::~MapPencilTool()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall MapPencilTool::Apply(MapEntityList& list, MapEntity entity)
+void  MapPencilTool::Apply(Project::MapEntityList& list, Project::MapEntity entity)
 {
     SnapToTileGrid(LastPt);
     entity.Pt = LastPt;

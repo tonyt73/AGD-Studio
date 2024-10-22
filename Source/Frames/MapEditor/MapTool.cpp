@@ -6,28 +6,28 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall MapTool::MapTool()
+ MapTool::MapTool()
 : Tool()
-, m_TileSize(theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum)
+, m_TileSize(theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile].Minimum)
 {
 }
 //---------------------------------------------------------------------------
-__fastcall MapTool::~MapTool()
+ MapTool::~MapTool()
 {
 }
 //---------------------------------------------------------------------------
-int __fastcall MapTool::Snap(int value, int range) const
+int  MapTool::Snap(int value, int range) const
 {
     return ((int)(value / range)) * range;
 }
 //---------------------------------------------------------------------------
-void __fastcall MapTool::SnapToTileGrid(TPoint& pt) const
+void  MapTool::SnapToTileGrid(TPoint& pt) const
 {
     pt.x = Snap(pt.x, m_TileSize.cx);
     pt.y = Snap(pt.y, m_TileSize.cy);
 }
 //---------------------------------------------------------------------------
-void __fastcall MapTool::SnapToTileGrid(TRect& rect) const
+void  MapTool::SnapToTileGrid(TRect& rect) const
 {
     rect.Left   = Snap(rect.Left  , m_TileSize.cx);
     rect.Right  = Snap(rect.Right , m_TileSize.cx);
@@ -35,7 +35,7 @@ void __fastcall MapTool::SnapToTileGrid(TRect& rect) const
     rect.Bottom = Snap(rect.Bottom, m_TileSize.cy);
 }
 //---------------------------------------------------------------------------
-void __fastcall MapTool::Set(MapEntityList& list, const MapEntity& entity)
+void  MapTool::Set(Project::MapEntityList& list, const Project::MapEntity& entity)
 {
     if (Flags & allowOnlyOne)
     {
@@ -57,14 +57,14 @@ void __fastcall MapTool::Set(MapEntityList& list, const MapEntity& entity)
     }
 }
 //---------------------------------------------------------------------------
-String __fastcall MapTool::Begin(MapEntityList& list, MapEntity entity, const TPoint& pt, const TShiftState& buttons)
+String  MapTool::Begin(Project::MapEntityList& list, Project::MapEntity entity, const TPoint& pt, const TShiftState& buttons)
 {
     Tool::Begin(pt, buttons);
     Apply(list, entity);
     return String();
 }
 //---------------------------------------------------------------------------
-void __fastcall MapTool::Move(MapEntityList& list, MapEntity entity, const TPoint& pt, const TShiftState& buttons)
+void  MapTool::Move(Project::MapEntityList& list, Project::MapEntity entity, const TPoint& pt, const TShiftState& buttons)
 {
     Tool::Move(pt, buttons);
     if (Flags & resetOnMove)
@@ -75,7 +75,7 @@ void __fastcall MapTool::Move(MapEntityList& list, MapEntity entity, const TPoin
     Apply(list, entity);
 }
 //---------------------------------------------------------------------------
-String __fastcall MapTool::End(MapEntityList& list, MapEntity entity, const TPoint& pt)
+String  MapTool::End(Project::MapEntityList& list, Project::MapEntity entity, const TPoint& pt)
 {
     Tool::End(pt);
     if (pt != LastPt)

@@ -8,13 +8,13 @@
 //---------------------------------------------------------------------------
 static int g_NextAssetId = 0;
 //---------------------------------------------------------------------------
-__fastcall TfrmAssetSelection::TfrmAssetSelection(TComponent* Owner)
+ TfrmAssetSelection::TfrmAssetSelection(TComponent* Owner)
 : TFrame(Owner)
 , FOnImageClick(nullptr)
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAssetSelection::Clear()
+void TfrmAssetSelection::Clear()
 {
     for (auto c = panList->ControlCount - 1; c >= 0 ; c--)
     {
@@ -26,7 +26,7 @@ void __fastcall TfrmAssetSelection::Clear()
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAssetSelection::Add(ImageDocument* image, bool enabled)
+void TfrmAssetSelection::Add(Project::ImageDocument* image, bool enabled)
 {
     auto control = new TfrmLabelledImage(this);
     control->Name = "LabelledImage" + IntToStr(++g_NextAssetId);
@@ -36,7 +36,7 @@ void __fastcall TfrmAssetSelection::Add(ImageDocument* image, bool enabled)
     control->OnSelectedClick = OnImageClick;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAssetSelection::Select(const ImageDocument* image)
+void TfrmAssetSelection::Select(const Project::ImageDocument* image)
 {
     for (auto i = 0; i < panList->ControlCount; i++)
     {
@@ -52,7 +52,7 @@ void __fastcall TfrmAssetSelection::Select(const ImageDocument* image)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAssetSelection::UpdateDocument(const ImageDocument* image)
+void TfrmAssetSelection::UpdateDocument(const Project::ImageDocument* image)
 {
     for (auto i = 0; i < panList->ControlCount; i++)
     {
@@ -74,13 +74,13 @@ void __fastcall TfrmAssetSelection::OnImageClick(TObject* Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAssetSelection::sbxListMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled)
+void TfrmAssetSelection::sbxListMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled)
 {
     Handled = true;
     sbxList->VertScrollBar->Position -= WheelDelta;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAssetSelection::sbxListResize(TObject *Sender)
+void TfrmAssetSelection::sbxListResize(TObject *Sender)
 {
     auto my = 0;
     for (auto c = 0; c < panList->ControlCount; c++)
@@ -90,7 +90,7 @@ void __fastcall TfrmAssetSelection::sbxListResize(TObject *Sender)
     panList->Height = std::max(my, sbxList->Height);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAssetSelection::mnuToggleLabelsClick(TObject *Sender)
+void TfrmAssetSelection::mnuToggleLabelsClick(TObject *Sender)
 {
     for (auto c = 0; c < panList->ControlCount; c++)
     {
@@ -103,7 +103,7 @@ void __fastcall TfrmAssetSelection::mnuToggleLabelsClick(TObject *Sender)
     sbxListResize(nullptr);
 }
 //---------------------------------------------------------------------------
-int __fastcall TfrmAssetSelection::FindSelected()
+int TfrmAssetSelection::FindSelected()
 {
     for (auto c = 0; c < panList->ControlCount; c++)
     {
@@ -116,7 +116,7 @@ int __fastcall TfrmAssetSelection::FindSelected()
     return -1;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAssetSelection::Next()
+void TfrmAssetSelection::Next()
 {
     auto ci = FindSelected();
     if (ci != -1)
@@ -133,7 +133,7 @@ void __fastcall TfrmAssetSelection::Next()
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAssetSelection::Prev()
+void TfrmAssetSelection::Prev()
 {
     auto ci = FindSelected();
     if (ci != -1)

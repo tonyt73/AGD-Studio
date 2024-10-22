@@ -38,7 +38,7 @@ void __fastcall TMultiImageViewFrame::Clear()
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TMultiImageViewFrame::Add(const Agdx::GraphicsBuffer& image, const String& hint)
+void __fastcall TMultiImageViewFrame::Add(const Visuals::GraphicsBuffer& image, const String& hint)
 {
     static int i = 0;
     auto control = new TSelectionImageFrame(this, image, hint);

@@ -8,8 +8,11 @@
 //---------------------------------------------------------------------------
 #include <list>
 //---------------------------------------------------------------------------
-#include "Project/DocumentManager.h"
-#include "Project/MostRecentlyUsedList.h"
+#include "DocumentManager.h"
+#include "MostRecentlyUsedList.h"
+//---------------------------------------------------------------------------
+namespace Project
+{
 //---------------------------------------------------------------------------
 class ProjectManager
 {
@@ -61,6 +64,8 @@ public:
     cMRUList    __fastcall  GetMostRecentlyUsedList();
 };
 //---------------------------------------------------------------------------
-#define theProjectManager ProjectManager::get()
+} // Project namespace
+//---------------------------------------------------------------------------
+#define theProjectManager Project::ProjectManager::get()
 //---------------------------------------------------------------------------
 #endif

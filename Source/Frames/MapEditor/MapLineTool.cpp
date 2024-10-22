@@ -5,17 +5,17 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall MapLineTool::MapLineTool()
+ MapLineTool::MapLineTool()
 : MapTool()
 {
     Flags = resetOnMove | modifies;
 }
 //---------------------------------------------------------------------------
-__fastcall MapLineTool::~MapLineTool()
+ MapLineTool::~MapLineTool()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall MapLineTool::Apply(MapEntityList& list, MapEntity entity)
+void  MapLineTool::Apply(Project::MapEntityList& list, Project::MapEntity entity)
 {
     auto rect = TRect(StartPt.x, StartPt.y, LastPt.x, LastPt.y);
     SnapToTileGrid(rect);
@@ -42,7 +42,7 @@ void __fastcall MapLineTool::Apply(MapEntityList& list, MapEntity entity)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall MapLineTool::DrawLine(MapEntityList& list, MapEntity entity, TRect Rect)
+void  MapLineTool::DrawLine(Project::MapEntityList& list, Project::MapEntity entity, TRect Rect)
 {
     auto dx = 1;
     auto dy = 1;
@@ -100,7 +100,7 @@ void __fastcall MapLineTool::DrawLine(MapEntityList& list, MapEntity entity, TRe
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall MapLineTool::DrawLine(MapEntityList& list, MapEntity entity, TRect Rect, int dx, int dy)
+void  MapLineTool::DrawLine(Project::MapEntityList& list, Project::MapEntity entity, TRect Rect, int dx, int dy)
 {
     auto pt = TPoint(Rect.Left, Rect.Top);
     auto l = dx != 0 ? abs(Rect.Width()) : abs(Rect.Height());

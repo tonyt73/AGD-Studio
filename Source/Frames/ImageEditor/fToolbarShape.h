@@ -44,7 +44,7 @@ private:    // User declarations
 public:     // User declarations
             __fastcall  TfrmToolbarShape(TComponent* Owner);
 
-    Generic __fastcall  Parameters() const;
+    Services::Generic __fastcall  Parameters() const;
 };
 //---------------------------------------------------------------------------
 #endif

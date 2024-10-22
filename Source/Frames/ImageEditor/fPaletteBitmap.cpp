@@ -3,6 +3,8 @@
 //---------------------------------------------------------------------------
 #include "fPaletteBitmap.h"
 #include "Project/DocumentManager.h"
+#include "Services/File.h"
+#include "Services/Folders.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -182,7 +184,7 @@ void __fastcall TfrmPaletteBitmap::Update()
     panColorR->Font->Color = m_Palette.FontColorOf[m_GraphicsMode.FromLogicalColor[m_Brush]];
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmPaletteBitmap::Set(Agdx::GraphicsBuffer& canvas)
+void __fastcall TfrmPaletteBitmap::Set(Visuals::GraphicsBuffer& canvas)
 {
     canvas.Color[0] = m_Pen;
     canvas.Color[1] = m_Brush;
@@ -280,24 +282,24 @@ void __fastcall TfrmPaletteBitmap::btnSwapClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmPaletteBitmap::btnPaletteLoadClick(TObject *Sender)
 {
-    auto path = System::File::Combine("Saved Palettes", m_GraphicsMode.Name);
-    path = System::Path::Create(System::Path::lpCommon, path);
+	auto path = Services::File::Combine("Saved Palettes", m_GraphicsMode.Name);
+    path = Services::Folders::Create(Services::Folders::lpCommon, path);
     dlgOpen->InitialDir = path;
     if (dlgOpen->Execute())
     {
-        m_GraphicsMode.LoadLogicalCLUT(path, System::File::NameWithExtension(dlgOpen->FileName));
+        m_GraphicsMode.LoadLogicalCLUT(path, Services::File::NameWithExtension(dlgOpen->FileName));
         Update();
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmPaletteBitmap::btnPaletteSaveClick(TObject *Sender)
 {
-    auto path = System::File::Combine("Saved Palettes", m_GraphicsMode.Name);
-    path = System::Path::Create(System::Path::lpCommon, path);
+	auto path = Services::File::Combine("Saved Palettes", m_GraphicsMode.Name);
+	path = Services::Folders::Create(Services::Folders::lpCommon, path);
     dlgSave->InitialDir = path;
     if (dlgSave->Execute())
     {
-        m_GraphicsMode.SaveLogicalCLUT(path, System::File::NameWithoutExtension(dlgSave->FileName));
+        m_GraphicsMode.SaveLogicalCLUT(path, Services::File::NameWithoutExtension(dlgSave->FileName));
     }
 }
 //---------------------------------------------------------------------------

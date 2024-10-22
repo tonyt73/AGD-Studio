@@ -3,7 +3,10 @@
 #define ImageDocumentH
 //---------------------------------------------------------------------------
 #include "Project/Document.h"
-#include "Graphics/GraphicsTypes.h"
+#include "Visuals/GraphicsTypes.h"
+//---------------------------------------------------------------------------
+namespace Project
+{
 //---------------------------------------------------------------------------
 // ImageDocument
 // This class encapulates what is an image document.
@@ -35,7 +38,7 @@ protected:
             int                     m_Height;           // height of a frame
             int                     m_NumOfFrames;      // the number of frames
             int                     m_Index;            // the index of the image in its type list
-            ImageTypes              m_ImageType;        // the type of graphic image we are
+            Visuals::ImageTypes     m_ImageType;        // the type of graphic image we are
             FramesList              m_Frames;           // the list of frames
             String                  m_FrameLoader;      // used to load frames into the above frames list
             int                     m_FramesLoaded;     // a count of frames loaded
@@ -71,7 +74,7 @@ public:
             String      __property  Frame[int index]= { read = GetFrame, write = SetFrame   };
             String      __property  Hint[int index] = { read = GetHint                      };
             int         __property  Layers          = { read = GetLayerCount                };
-            ImageTypes  __property  ImageType       = { read = m_ImageType                  };
+   Visuals::ImageTypes  __property  ImageType       = { read = m_ImageType                  };
 
 __published:
             int         __property  Width           = { read = m_Width                      };
@@ -80,5 +83,7 @@ __published:
             int         __property  ImagesPerFrame  = { read = CountImagesPerFrame          };
             int         __property  Index           = { read = GetIndex                     };
 };
+//---------------------------------------------------------------------------
+} // Project namespace
 //---------------------------------------------------------------------------
 #endif

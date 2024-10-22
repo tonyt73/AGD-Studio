@@ -1,6 +1,5 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#pragma hdrstop
 //---------------------------------------------------------------------------
 #include "Project/DocumentManager.h"
 #include "Project/WindowDocument.h"
@@ -8,7 +7,9 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall WindowDocument::WindowDocument(const String& name)
+using namespace Project;
+//---------------------------------------------------------------------------
+ WindowDocument::WindowDocument(const String& name)
 : Document(name)
 {
     m_Type = "Window";
@@ -38,8 +39,8 @@ __fastcall WindowDocument::WindowDocument(const String& name)
         if (theDocumentManager.ProjectConfig() != nullptr)
         {
             const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
-            m_SizeInCharacters.cx = mc.GraphicsMode()->Width  / mc.ImageSizing[itTile].Minimum.cx;
-            m_SizeInCharacters.cy = mc.GraphicsMode()->Height / mc.ImageSizing[itTile].Minimum.cy;
+            m_SizeInCharacters.cx = mc.GraphicsMode()->Width  / mc.ImageSizing[Visuals::itTile].Minimum.cx;
+            m_SizeInCharacters.cy = mc.GraphicsMode()->Height / mc.ImageSizing[Visuals::itTile].Minimum.cy;
             m_SizeInPixels.cx = mc.GraphicsMode()->Width;
             m_SizeInPixels.cy = mc.GraphicsMode()->Height;
             m_Rect.Left = 0;
@@ -64,8 +65,8 @@ void __fastcall WindowDocument::OnLoaded()
 {
     const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
 
-    m_SizeInCharacters.cx = mc.GraphicsMode()->Width  / mc.ImageSizing[itTile].Minimum.cx;
-    m_SizeInCharacters.cy = mc.GraphicsMode()->Height / mc.ImageSizing[itTile].Minimum.cy;
+    m_SizeInCharacters.cx = mc.GraphicsMode()->Width  / mc.ImageSizing[Visuals::itTile].Minimum.cx;
+    m_SizeInCharacters.cy = mc.GraphicsMode()->Height / mc.ImageSizing[Visuals::itTile].Minimum.cy;
     m_SizeInPixels.cx = mc.GraphicsMode()->Width;
     m_SizeInPixels.cy = mc.GraphicsMode()->Height;
 

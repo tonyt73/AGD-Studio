@@ -1,12 +1,13 @@
 ﻿//---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#pragma hdrstop
 //---------------------------------------------------------------------------
 #include "ImageDocument.h"
 #include "DocumentManager.h"
-#include "Graphics/GraphicsTypes.h"
+#include "Visuals/GraphicsTypes.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
+//---------------------------------------------------------------------------
+using namespace Project;
 //---------------------------------------------------------------------------
 __fastcall ImageDocument::ImageDocument(const String& name)
 : Document(name)

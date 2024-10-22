@@ -1,16 +1,17 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#pragma hdrstop
 //---------------------------------------------------------------------------
 #include "ObjectDocument.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall ObjectDocument::ObjectDocument(const String& name, const String& extra)
+using namespace Project;
+//---------------------------------------------------------------------------
+ ObjectDocument::ObjectDocument(const String& name, const String& extra)
 : ImageDocument(name)
-, m_State(osDisabled)
+, m_State(Visuals::osDisabled)
 {
-    m_ImageType = itObject;
+    m_ImageType = Visuals::itObject;
     m_CanBeLocked = true;
     m_SubType = "Object";
     m_Folder = "Images\\Objects";
@@ -32,14 +33,6 @@ __fastcall ObjectDocument::ObjectDocument(const String& name, const String& extr
 int __fastcall ObjectDocument::GetPosition(int index)
 {
     return index ? m_Position.Y : m_Position.X;
-}
-//---------------------------------------------------------------------------
-void __fastcall ObjectDocument::SetPosition(int value, int index)
-{
-    if (index)
-        m_Position.Y = value;
-    else
-        m_Position.X = value;
 }
 //---------------------------------------------------------------------------
 void __fastcall ObjectDocument::SetRoomIndex(int value)

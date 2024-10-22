@@ -42,13 +42,13 @@ __published:// IDE-managed Components
     void __fastcall FrameMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate);
 private:    // User declarations
     ::Messaging::Registrar      m_Registrar;
-    WindowDocument*             m_Document;
+    Project::WindowDocument*    m_Document;
     std::unique_ptr<TBitmap>    m_View;
     int                         m_Scalar;
 
-    void            __fastcall  OnEvent(const Event& event);
+    void            __fastcall  OnEvent(const ::Messaging::Event& event);
     bool            __fastcall  IsActive() const;
-    void            __fastcall  SetDocument(Document* document);
+    void            __fastcall  SetDocument(Project::Document* document);
     void            __fastcall  ShowKeysHelp();
     void            __fastcall  DrawView();
 
@@ -56,7 +56,7 @@ public:        // User declarations
                     __fastcall  TfrmEditorWindow(TComponent* Owner);
                     __fastcall ~TfrmEditorWindow();
 
-    static  TFrame* __fastcall  Create(Document* document, TComponent* owner)
+    static  TFrame* __fastcall  Create(Project::Document* document, TComponent* owner)
                                 {
                                     auto editor = new TfrmEditorWindow(owner);
                                     editor->SetDocument(document);

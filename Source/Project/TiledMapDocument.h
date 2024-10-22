@@ -2,10 +2,13 @@
 #ifndef TiledMapDocumentH
 #define TiledMapDocumentH
 //---------------------------------------------------------------------------
-#include "Project/Document.h"
-#include "Project/MapEntity.h"
-#include "Project/ObjectDocument.h"
+#include "Document.h"
+#include "MapEntity.h"
+#include "ObjectDocument.h"
 #include "Messaging/Event.h"
+//---------------------------------------------------------------------------
+namespace Project
+{
 //---------------------------------------------------------------------------
 enum MapEntityType { meMap, meRoom, meScratchPad };
 const int g_MaxMapRoomsAcross = 16;
@@ -49,7 +52,7 @@ public:
                         __fastcall ~TiledMapDocument();
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new TiledMapDocument(name); };
 
-    MapEntityList       __fastcall  Get(ImageTypes type) const;
+    MapEntityList       __fastcall  Get(Visuals::ImageTypes type) const;
    const MapEntityList& __fastcall  Get(MapEntityType type, TSize room = TSize(0,0));
     void                __fastcall  Set(MapEntityType type, const MapEntityList& entities);
 
@@ -68,5 +71,7 @@ __published:
     int                 __property  MaxRoomsAcross  = { read = GetMaxRooms, index = 0           };
     int                 __property  MaxRoomsDown    = { read = GetMaxRooms, index = 1           };
 };
+//---------------------------------------------------------------------------
+} // Project namespace
 //---------------------------------------------------------------------------
 #endif

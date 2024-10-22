@@ -72,7 +72,7 @@ bool __fastcall TfrmEditorCode::IsActive() const
     return theEditorManager.IsActive(this);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::SetDocument(Document* document)
+void __fastcall TfrmEditorCode::SetDocument(Project::Document* document)
 {
     theEditorManager.SetActive(this);
     m_ActionMap["zoom.in"] = actZoomIn;
@@ -91,10 +91,10 @@ void __fastcall TfrmEditorCode::SetDocument(Document* document)
 
     m_Document = document;
     lmdDocument->ClearNoUndo();
-    if (System::File::Exists(document->Path))
+    if (Services::File::Exists(document->Path))
     {
         lmdDocument->LoadFromFile(document->Path, CP_ACP, true);
-        auto extension = System::File::Extension(document->Path).SubString(2, 32);
+        auto extension = Services::File::Extension(document->Path).SubString(2, 32);
         auto sc = GetSyntaxScByExt(extension);
         lmdDocument->ActiveSyntaxScheme = sc;
         lmdDocument->ReadOnly = document->IsReadOnly;

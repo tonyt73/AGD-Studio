@@ -1,12 +1,12 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#pragma hdrstop
 //---------------------------------------------------------------------------
 #include "Project/ControlsDocument.h"
 #include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
+using namespace Project;
 __fastcall ControlsDocument::ControlsDocument(const String& name)
 : Document(name)
 {

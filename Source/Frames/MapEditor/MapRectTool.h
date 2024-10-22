@@ -7,11 +7,11 @@
 class MapRectTool : public MapTool
 {
 private:
-            void    __fastcall  Apply(MapEntityList& list, MapEntity entity) final;
-            void    __fastcall  DrawRect(MapEntityList& list, MapEntity entity, TRect Rect);
+            void      Apply(Project::MapEntityList& list, Project::MapEntity entity) final;
+            void      DrawRect(Project::MapEntityList& list, Project::MapEntity entity, TRect Rect);
 public:
-                    __fastcall  MapRectTool();
-    virtual         __fastcall ~MapRectTool();
+                      MapRectTool();
+    virtual          ~MapRectTool();
 };
 //---------------------------------------------------------------------------
 #endif

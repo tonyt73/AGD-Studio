@@ -109,7 +109,7 @@ void __fastcall TfrmIDE::OnUpdateProperties(const UpdateProperties& event)
 {
     if (event.Id == "update.properties")
     {
-        auto doc = (Document*)((NativeInt)tvProject->Selected->Tag);
+        auto doc = (Project::Document*)((NativeInt)tvProject->Selected->Tag);
         UpdateDocumentProperties(doc);
     }
 }
@@ -194,7 +194,7 @@ void __fastcall TfrmIDE::actEditZoomResetExecute(TObject *Sender)
     ::Messaging::Bus::Publish<Event>(Event("zoom.reset"));
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::UpdateDocumentProperties(Document* document)
+void __fastcall TfrmIDE::UpdateDocumentProperties(Project::Document* document)
 {
     if (document != nullptr)
     {
@@ -253,7 +253,7 @@ void __fastcall TfrmIDE::lmdPropertiesClick(TObject *Sender)
 {
     if (lmdProperties->Objects->Count >= 1)
     {
-        auto doc = dynamic_cast<Document*>(lmdProperties->Objects->Item[0]);
+        auto doc = dynamic_cast<Project::Document*>(lmdProperties->Objects->Item[0]);
         if (doc != nullptr && lmdProperties->ActiveItem != nullptr)
         {
             lblPropertyInfo->Caption = doc->GetPropertyInfo(lmdProperties->ActiveItem->PropName);
@@ -263,7 +263,7 @@ void __fastcall TfrmIDE::lmdPropertiesClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::tvProjectItemSelectedChange(TObject *Sender, TElXTreeItem *Item)
 {
-    auto doc = reinterpret_cast<Document*>((TObject*)Item->Tag);
+    auto doc = reinterpret_cast<Project::Document*>((TObject*)Item->Tag);
     if (doc != nullptr)
     {
         UpdateDocumentProperties(doc);
@@ -282,7 +282,7 @@ void __fastcall TfrmIDE::OnDocumentClose(TObject *Sender, TLMDockPanelCloseActio
     auto dockPanel = dynamic_cast<TLMDDockPanel*>(Sender);
     if (dockPanel)
     {
-        auto doc = (Document*)dockPanel->Tag;
+        auto doc = (Project::Document*)dockPanel->Tag;
         InformationMessage("[IDE] Closing Document: " + doc->Name);
         doc->Close();
     }
@@ -292,7 +292,7 @@ void __fastcall TfrmIDE::tvProjectDblClick(TObject *Sender)
 {
     if (tvProject->Selected)
     {
-        auto doc = (Document*)((NativeInt)tvProject->Selected->Tag);
+        auto doc = (Project::Document*)((NativeInt)tvProject->Selected->Tag);
         if (doc && doc->DockPanel == nullptr)
         {
             InformationMessage("[IDE] Opening Document: " + doc->Name);
@@ -334,7 +334,7 @@ void __fastcall TfrmIDE::actFileNewAssetExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileProjectOpenExecute(TObject *Sender)
 {
-    dlgOpen->InitialDir = System::Path::Projects;
+    dlgOpen->InitialDir = Services::Folders::Projects;
     if (dlgOpen->Execute())
     {
         theProjectManager.Open(dlgOpen->FileName);

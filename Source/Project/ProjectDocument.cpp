@@ -5,11 +5,14 @@
 #include "Messaging/Messaging.h"
 #include "Project/ProjectDocument.h"
 #include "Project/ProjectManager.h"
-#include "Messaging/Messaging.h"
+#include "Services/File.h"
+#include "Services/Folders.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall ProjectDocument::ProjectDocument(const String& name, const String& machine)
+using namespace Project;
+//---------------------------------------------------------------------------
+ProjectDocument::ProjectDocument(const String& name, const String& machine)
 : Document(name)
 , m_MachineName(machine)
 , m_MachineConfig(nullptr)
@@ -69,6 +72,11 @@ const MachineConfig& __fastcall ProjectDocument::MachineConfiguration() const
     return *m_MachineConfig;
 }
 //---------------------------------------------------------------------------
+MachineConfig& __fastcall ProjectDocument::WriteableMachineConfiguration() const
+{
+    return *m_MachineConfig;
+}
+//---------------------------------------------------------------------------
 String __fastcall ProjectDocument::GetGraphicsMode() const
 {
     return m_MachineConfig->GraphicsMode()->Name;
@@ -79,10 +87,6 @@ int __fastcall ProjectDocument::GetScreenSize(int index) const
     return index ? m_MachineConfig->GraphicsMode()->Height : m_MachineConfig->GraphicsMode()->Width;
 }
 //---------------------------------------------------------------------------
-MachineConfig& __fastcall ProjectDocument::WritableMachineConfiguration() const
-{
-    return *m_MachineConfig;
-}
 //---------------------------------------------------------------------------
 void __fastcall ProjectDocument::DoSave()
 {
@@ -140,23 +144,23 @@ void __fastcall ProjectDocument::OnChangeString(const OnChange<String>& event)
 String __fastcall ProjectDocument::GetFile() const
 {
     // Documents/{project name}
-    auto file = System::File::Combine(System::Path::Projects, System::Path::ProjectName);
+    auto file = Services::File::Combine(Services::Folders::Projects, Services::Folders::ProjectName);
     // Documents/{project name}/{project name}
-    file = System::File::Combine(file, System::Path::ProjectName);
+    file = Services::File::Combine(file, Services::Folders::ProjectName);
     // Documents/{project name}/{project name}.agdx
-    file = System::File::ChangeExtension(file, m_Extension);
+    file = Services::File::ChangeExtension(file, m_Extension);
     return file;
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectDocument::SetName(String name)
 {
-    if (name.Trim().LowerCase() != m_Name.Trim().LowerCase() && !System::Path::Exists(System::Path::lpProjects, name))
+    if (name.Trim().LowerCase() != m_Name.Trim().LowerCase() && !Services::Folders::Exists(Services::Folders::lpProjects, name))
     {
         auto fromName = m_Name.Trim();
         auto toName = name.Trim();
         Document::SetName(toName );
-        System::Path::ProjectName = toName ;
-        System::Path::Rename(System::Path::lpProjects, fromName, toName);
+        Services::Folders::ProjectName = toName ;
+        Services::Folders::Rename(Services::Folders::lpProjects, fromName, toName);
         if (m_TreeNode)
         {
             auto node = ((TElXTreeItem*)m_TreeNode);

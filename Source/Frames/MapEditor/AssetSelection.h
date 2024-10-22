@@ -21,21 +21,21 @@ __published:    // IDE-managed Components
     void __fastcall sbxListResize(TObject *Sender);
     void __fastcall mnuToggleLabelsClick(TObject *Sender);
 private:    // User declarations
-    void    __fastcall  OnImageClick(TObject* Sender);
-    int     __fastcall  FindSelected();
+    void __fastcall OnImageClick(TObject* Sender);
+    int             FindSelected();
 
-    typedef void __fastcall (__closure *TNotifyImageOnSelectionEvent)(ImageDocument* document);
+    typedef void (__closure *TNotifyImageOnSelectionEvent)(Project::ImageDocument* document);
     TNotifyImageOnSelectionEvent    FOnImageClick;
 
-public:        // User declarations
-            __fastcall  TfrmAssetSelection(TComponent* Owner);
+public:    // User declarations
+                    TfrmAssetSelection(TComponent* Owner);
 
-    void    __fastcall  Clear();
-    void    __fastcall  Add(ImageDocument* image, bool enabled = true);
-    void    __fastcall  Select(const ImageDocument* image);
-    void    __fastcall  UpdateDocument(const ImageDocument* image);
-    void    __fastcall  Next();
-    void    __fastcall  Prev();
+    void            Clear();
+    void            Add(Project::ImageDocument* image, bool enabled = true);
+    void            Select(const Project::ImageDocument* image);
+    void            UpdateDocument(const Project::ImageDocument* image);
+    void            Next();
+    void            Prev();
 
     __property  TNotifyImageOnSelectionEvent    OnImageSelection = { read = FOnImageClick, write = FOnImageClick };
 };

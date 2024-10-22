@@ -15,7 +15,7 @@ __fastcall TfrmPaletteAttribute::TfrmPaletteAttribute(TComponent* Owner)
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmPaletteAttribute::Set(Agdx::GraphicsBuffer& canvas)
+void __fastcall TfrmPaletteAttribute::Set(Visuals::GraphicsBuffer& canvas)
 {
     // change the color set of the canvas
     canvas.Color[0] = m_Ink;

@@ -1,12 +1,13 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
+//---------------------------------------------------------------------------
 #include "fSettings.h"
 #include "Project/DocumentManager.h"
 #include "Project/MachineConfig.h"
-#include "Settings/Settings.h"
+#include "Project/Settings.h"
 #include "Settings/ThemeManager.h"
-#include "System/File.h"
-#include "System/Path.h"
+#include "Services/File.h"
+#include "Services/Folders.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "LMDControl"
@@ -41,7 +42,7 @@ void __fastcall TfrmSettings::FormCreate(TObject *Sender)
     // load the machines
     cmbMachines->Items->Clear();
     std::vector<String> machines;
-    MachineConfig::GetMachinesList(machines);
+    Project::MachineConfig::GetMachinesList(machines);
     for (const auto& machine : machines)
     {
         cmbMachines->Items->Add(machine);
@@ -105,9 +106,9 @@ void __fastcall TfrmSettings::chkWelcomeSkipOnStartupClick(TObject *Sender)
 String __fastcall TfrmSettings::FindExecutable(const String& title, const String& path) const
 {
     auto folder = path;
-    if (folder == "" || !System::Path::Exists(folder))
+    if (folder == "" || !Services::Folders::Exists(folder))
     {
-        folder = System::File::Combine(System::Path::Application, "Compilers");
+        folder = Services::File::Combine(Services::Folders::Application, "Compilers");
     }
 
     dlgOpen->InitialDir = folder;
@@ -115,7 +116,7 @@ String __fastcall TfrmSettings::FindExecutable(const String& title, const String
     if (dlgOpen->Execute())
     {
         auto file = dlgOpen->FileName;
-        auto relFilePath = System::Path::GetFolderRelativeTo(System::Path::lpApplication, file);
+        auto relFilePath = Services::Folders::GetFolderRelativeTo(Services::Folders::lpApplication, file);
         if (relFilePath != file)
         {
             return relFilePath;
@@ -167,11 +168,11 @@ void __fastcall TfrmSettings::GetBuildOptions()
 //---------------------------------------------------------------------------
 void __fastcall TfrmSettings::SaveMachineConfig()
 {
-    auto& cfg = theDocumentManager.ProjectConfig()->WritableMachineConfiguration();
-    cfg.Compiler = MachineConfig::ToolInfo(edtCompilerExe->Text, edtCompilerParams->Text);
-    cfg.Engine = MachineConfig::ToolInfo(edtEngineFile->Text, "");
-    cfg.Assembler = MachineConfig::ToolInfoExt(edtAssemblerExe->Text, edtAssemblerParams->Text, edtAssemblerPrepend->Text, edtAssemblerAppend->Text);
-    cfg.Emulator = MachineConfig::ToolInfo(edtEmulatorExe->Text, edtEmulatorParams->Text);
+	auto& cfg = theDocumentManager.ProjectConfig()->WriteableMachineConfiguration();
+    cfg.Compiler = Project::MachineConfig::ToolInfo(edtCompilerExe->Text, edtCompilerParams->Text);
+	cfg.Engine = Project::MachineConfig::ToolInfo(edtEngineFile->Text, "");
+	cfg.Assembler = Project::MachineConfig::ToolInfoExt(edtAssemblerExe->Text, edtAssemblerParams->Text, edtAssemblerPrepend->Text, edtAssemblerAppend->Text);
+    cfg.Emulator = Project::MachineConfig::ToolInfo(edtEmulatorExe->Text, edtEmulatorParams->Text);
 }
 //---------------------------------------------------------------------------
 

@@ -1,5 +1,6 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
+//---------------------------------------------------------------------------
 #include "fEditorMessages.h"
 #include "Frames/EditorManager.h"
 #include "Project/DocumentManager.h"
@@ -23,20 +24,20 @@ __fastcall TfrmEditorMessages::TfrmEditorMessages(TComponent* Owner)
     m_Tile->Picture->Bitmap->Height = 8;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMessages::SetDocument(Document* document)
+void __fastcall TfrmEditorMessages::SetDocument(Project::Document* document)
 {
     fFramesView->Timer1->Enabled = false;
     Color = ThemeManager::Background;
     m_Document = document;
     ecMessageEditor->SetDocument(document);
 
-    DocumentList images;
+    Project::DocumentList images;
     // TODO: Should take a subtype as well
     theDocumentManager.GetAllOfType("Image", images);
     // find the character set document
     for (auto image : images)
     {
-        auto charset = dynamic_cast<CharacterSetDocument*>(image);
+        auto charset = dynamic_cast<Project::CharacterSetDocument*>(image);
         if (charset)
         {
             m_CharacterSet = charset;
@@ -137,7 +138,7 @@ void __fastcall TfrmEditorMessages::RefreshCharacterSet()
     {
         if (m_Frames.size() < m_CharacterSet->Frames) {
             // make an image canvas
-            auto image = std::make_unique<Agdx::Image>(m_CharacterSet->Width, m_CharacterSet->Height, gm);
+            auto image = std::make_unique<Visuals::Image>(m_CharacterSet->Width, m_CharacterSet->Height, gm);
             // save the image
             m_Frames.push_back(std::move(image));
         }

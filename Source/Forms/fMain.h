@@ -53,9 +53,9 @@ private:
     std::unique_ptr<TfrmWelcomeDialog>  m_WelcomeFrame;
     std::unique_ptr<TfrmIDE>            m_IDEFrame;
 
-    __property      TfrmWelcomeDialog*  Welcome = { read = GetWelcome };
-    __property      TfrmIDE*            IDE = { read = GetIDE };
-    __property      TFrame*             Active = { read = GetActiveForm };
+    __property      TfrmWelcomeDialog*  Welcome = { read = GetWelcome    };
+    __property      TfrmIDE*            IDE     = { read = GetIDE        };
+    __property      TFrame*             Active  = { read = GetActiveForm };
 
 public:        // User declaration
             __fastcall TfrmMain(TComponent* Owner);

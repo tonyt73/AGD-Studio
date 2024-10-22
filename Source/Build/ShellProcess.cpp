@@ -1,9 +1,11 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#include "Build/ShellProcess.h"
+//---------------------------------------------------------------------------
+#include "ShellProcess.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-
+//---------------------------------------------------------------------------
+using namespace Build;
 //---------------------------------------------------------------------------
 __fastcall ShellProcess::ShellProcess(BuildMessages& buildMessages, BuildMessageType type, const String& description)
 : BuildProcess(buildMessages, type, description)
@@ -21,13 +23,7 @@ __fastcall ShellProcess::ShellProcess(BuildMessages& buildMessages, BuildMessage
 //---------------------------------------------------------------------------
 __fastcall ShellProcess::~ShellProcess()
 {
-    try
-    {
-        m_Shell.reset();
-    }
-    catch (Exception& e)
-    {
-    }
+    m_Shell->TerminateProcess();
 }
 //---------------------------------------------------------------------------
 bool __fastcall ShellProcess::ShellExecute(const String& path, const String& cmdline, const String& parameters, bool wait, int timeOut)

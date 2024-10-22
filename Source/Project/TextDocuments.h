@@ -2,8 +2,11 @@
 #ifndef TextDocumentsH
 #define TextDocumentsH
 //---------------------------------------------------------------------------
-#include "Project/Document.h"
-#include "Event.h"
+#include "Document.h"
+#include "Messaging/Event.h"
+//---------------------------------------------------------------------------
+namespace Project
+{
 //---------------------------------------------------------------------------
 class TextDocument : public Document
 {
@@ -55,5 +58,7 @@ public:
                         __fastcall  AssemblyDocument(const String& name);
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new AssemblyDocument(name); };
 };
+//---------------------------------------------------------------------------
+} // Project namespace
 //---------------------------------------------------------------------------
 #endif
