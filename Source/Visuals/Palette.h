@@ -2,12 +2,12 @@
 #ifndef PaletteH
 #define PaletteH
 //---------------------------------------------------------------------------
-#include "System/JsonFile.h"
+#include "Services/JsonFile.h"
 //---------------------------------------------------------------------------
-namespace Agdx
+namespace Visuals
 {
 //---------------------------------------------------------------------------
-class Palette : public JsonFile
+class Palette : public Services::JsonFile
 {
 protected:
     String                      m_Name;
@@ -48,5 +48,5 @@ public:
 //                __fastcall      PaletteWriter();
 //};
 //---------------------------------------------------------------------------
-}   // agdx
+} // Visual namespace
 #endif

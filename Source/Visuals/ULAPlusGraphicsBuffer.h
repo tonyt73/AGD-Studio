@@ -2,11 +2,11 @@
 #ifndef ULAPlusGraphicsBufferH
 #define ULAPlusGraphicsBufferH
 //---------------------------------------------------------------------------
-#include "Graphics/GraphicsBuffer.h"
+#include "GraphicsBuffer.h"
 #include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
-namespace Agdx
+namespace Visuals
 {
 //---------------------------------------------------------------------------
 // ZX Spectrum ULA+ graphics buffer
@@ -28,7 +28,7 @@ private:
     ::Messaging::Registrar          m_Registrar;
     void                __fastcall  OnEvent(const Event& event);
 public:
-                        __fastcall  ULAPlusGraphicsBuffer(unsigned int width, unsigned int height, const Agdx::GraphicsMode& mode);
+                        __fastcall  ULAPlusGraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode);
                         __fastcall ~ULAPlusGraphicsBuffer();
 
                 void    __fastcall  SetPixel(unsigned int X, unsigned int Y, bool set);
@@ -39,5 +39,6 @@ public:
                 bool    __fastcall  CanExport(int layer, ImageTypes ofType) const;
 };
 //---------------------------------------------------------------------------
-}   // agdx
+} // Visuals namespace
+//---------------------------------------------------------------------------
 #endif

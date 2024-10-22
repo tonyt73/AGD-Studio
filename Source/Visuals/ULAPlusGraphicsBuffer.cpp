@@ -1,13 +1,11 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
-#include "Graphics/GraphicsTypes.h"
-#include "Graphics/GraphicsMode.h"
 #include "ULAPlusGraphicsBuffer.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-using namespace Agdx;
+using namespace Visuals;
 //---------------------------------------------------------------------------
 //const unsigned char g_Transparent =    8; // attribute is transparent
 const unsigned char g_InkMask     = 0x07; // ink bits from attribute byte

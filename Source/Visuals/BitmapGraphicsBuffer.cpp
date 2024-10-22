@@ -2,12 +2,12 @@
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
 #include "BitmapGraphicsBuffer.h"
-#include "Messaging/Messaging.h"
 #include "Messaging/Event.h"
+#include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-using namespace Agdx;
+using namespace Visuals;
 //---------------------------------------------------------------------------
 __fastcall BitmapGraphicsBuffer::BitmapGraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode)
 : GraphicsBuffer(width, height, mode)
@@ -19,7 +19,7 @@ __fastcall BitmapGraphicsBuffer::BitmapGraphicsBuffer(unsigned int width, unsign
     m_SetColors.push_back(1);
     m_SetColors.push_back(0);
 
-    m_Registrar.Subscribe<Event>(OnEvent);
+    m_Registrar.Subscribe<::Messaging::Event>(OnEvent);
 }
 //---------------------------------------------------------------------------
 __fastcall BitmapGraphicsBuffer::~BitmapGraphicsBuffer()

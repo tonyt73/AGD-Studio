@@ -2,14 +2,14 @@
 #ifndef GraphicsBufferH
 #define GraphicsBufferH
 //---------------------------------------------------------------------------
-#include "Graphics/GraphicsTypes.h"
-#include "Graphics/GraphicsMode.h"
+#include "GraphicsTypes.h"
+#include "GraphicsMode.h"
 //---------------------------------------------------------------------------
 // Pixel Masks for 1, 2, 4 and 8 pixels per byte
 extern const unsigned char* g_PixelMasks[];
 extern const unsigned char* g_PixelShfts[];
 //---------------------------------------------------------------------------
-namespace Agdx
+namespace Visuals
 {
 //---------------------------------------------------------------------------
 // GraphicsBuffer base class.
@@ -24,7 +24,7 @@ private:
 protected:
     typedef std::vector<ByteBuffer> Buffers;
 
-    const Agdx::GraphicsMode&       m_GraphicsMode;     // the graphic mode definition
+    const GraphicsMode&             m_GraphicsMode;     // the graphic mode definition
     unsigned int                    m_Width;            // the width of the buffer in pixels
     unsigned int                    m_Height;           // the height of the buffer in pixels
     float                           m_ScalarX;          // the width scalar
@@ -35,11 +35,11 @@ protected:
     Buffers                         m_Buffers;          // the list of buffers
     BufferType                      m_BufferType;       // the type of graphics buffer this is
     std::vector<unsigned char>      m_SetColors;        // the list of color choices and their logical color index (i.e. pen/brush or ink/paper/flash/bright)
- std::unique_ptr<Graphics::TBitmap> m_Bitmap;           // the Windows bitmap we render to
+	std::unique_ptr<TBitmap>        m_Bitmap;           // the Windows bitmap we render to
     bool                            m_RenderInGreyscale;// flag: Indicates we render in greyscale
     bool                            m_Drawing;          // flag: Indicates we are drawing pixels; don't render immediately
 
-                        __fastcall  GraphicsBuffer(unsigned int width, unsigned int height, const Agdx::GraphicsMode& mode);
+                        __fastcall  GraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode);
     void                __fastcall  PushBuffer(unsigned int size);
     unsigned int        __fastcall  GetNumberOfBuffers() const;
     unsigned int        __fastcall  GetSizeOfBuffer(int index) const;
@@ -53,7 +53,7 @@ public:
     virtual             __fastcall ~GraphicsBuffer();
 
                                     // Make a suitable buffer for the buffer type
-    static void         __fastcall  Make(unsigned int width, unsigned int height, const Agdx::GraphicsMode& mode, std::unique_ptr<GraphicsBuffer>& buffer);
+    static void         __fastcall  Make(unsigned int width, unsigned int height, const Visuals::GraphicsMode& mode, std::unique_ptr<GraphicsBuffer>& buffer);
                                     // sets the pixel to the specified palette color index
     virtual void        __fastcall  SetPixel(unsigned int X, unsigned int Y, bool set = true) = 0;
                                     // retrieves the pixel color at the position specified
@@ -98,11 +98,12 @@ std::vector<unsigned char>          // Get the native byte data for the buffer
 //    BufferType          __fastcall  GetBufferType(int index) { return btInvalid}
 //
 //public:
-//                        __fastcall  CharacterMapGraphicsBuffer(unsigned int width, unsigned int height, const Agdx::GraphicsMode& mode);
+//                        __fastcall  CharacterMapGraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode);
 //
 //    void                __fastcall  Render() const;
 //    void                __fastcall  GetBuffer(BufferType type, ByteBuffer& buffer) const;
 //};
 //---------------------------------------------------------------------------
-}   // agdx
+} // Visuals namespace
+//---------------------------------------------------------------------------
 #endif

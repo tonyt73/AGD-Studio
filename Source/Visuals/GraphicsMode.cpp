@@ -1,14 +1,16 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#pragma hdrstop
 //---------------------------------------------------------------------------
 #include "GraphicsMode.h"
 #include "GraphicsBuffer.h"
 #include "Messaging/Messaging.h"
 #include "Messaging/Event.h"
+#include "Services/File.h"
+#include "Services/Folders.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-using namespace Agdx;
+//---------------------------------------------------------------------------
+using namespace Visuals;
 //---------------------------------------------------------------------------
 __fastcall GraphicsMode::GraphicsMode()
 : JsonFile()
@@ -42,7 +44,7 @@ __fastcall GraphicsMode::GraphicsMode()
     m_PropertyMap["ExportInformation.Tile.BitmapDataOnly"] = &m_ExportInfo[itTile].BitmapDataOnly;
     m_PropertyMap["ExportInformation.CharacterSet.BitmapDataOnly"] = &m_ExportInfo[itCharacterSet].BitmapDataOnly;
 
-    m_Palette = std::make_unique<Agdx::Palette>();
+    m_Palette = std::make_unique<::Palette>();
 }
 //---------------------------------------------------------------------------
 __fastcall GraphicsMode::GraphicsMode(const GraphicsMode& other)
@@ -149,10 +151,10 @@ const GraphicsMode::ExportInfo& __fastcall GraphicsMode::GetExportInformation(Im
 void __fastcall GraphicsMode::Load(const String& name)
 {
     m_LogicalColors.clear();
-    JsonFile::Load(System::File::Combine(System::Path::Application, "Graphics Modes" + System::Path::Separator + name + ".json"));
+    Services::JsonFile::Load(Services::File::Combine(Services::Folders::Application, "Graphics Modes" + Services::Folders::Separator + name + ".json"));
     m_Palette->Load(m_PaletteName);
-    auto path = System::File::Combine("Saved Palettes", Name);
-    path = System::Path::Create(System::Path::lpCommon, path);
+    auto path = Services::File::Combine("Saved Palettes", Name);
+    path = Services::Folders::Create(Services::Folders::lpCommon, path);
     SaveLogicalCLUT(path, "Default");
     LoadLogicalCLUT();
     m_DefaultLogicalColors.clear();
@@ -162,7 +164,7 @@ void __fastcall GraphicsMode::Load(const String& name)
 void __fastcall GraphicsMode::Save()
 {
     // {
-    Open(System::File::Combine(System::Path::Application, "Graphics Modes" + System::Path::Separator + m_Name + ".json"));
+    Open(Services::File::Combine(Services::Folders::Application, "Graphics Modes" + Services::Folders::Separator + m_Name + ".json"));
     Write("Name", m_Name);
     Write("Palette", m_PaletteName);
     Write("BufferType", m_BufferType);
@@ -216,13 +218,13 @@ void __fastcall GraphicsMode::SaveLogicalCLUT(String path, String name)
         }
         if (path == "")
         {
-            path = System::Path::Project;
+            path = Services::Folders::Project;
         }
         if (name.Pos(".clut.json") == 0)
         {
             name += ".clut.json";
         }
-        auto file = System::File::Combine(path, name);
+        auto file = Services::File::Combine(path, name);
         Open(file);
         Write("Palette", m_PaletteName);
         ArrayStart("LogicalColors"); // [
@@ -245,10 +247,10 @@ void __fastcall GraphicsMode::LoadLogicalCLUT(String path, String name)
         }
         if (path == "")
         {
-            path = System::Path::Project;
+            path = Services::Folders::Project;
         }
-        auto file = System::File::Combine(path, name);
-        if (System::File::Exists(file))
+        auto file = Services::File::Combine(path, name);
+		if (Services::File::Exists(file))
         {
             auto oldLogicalCount = m_LogicalColors.size();
             auto oldLogicalColors = m_LogicalColors;

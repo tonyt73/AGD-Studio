@@ -3,15 +3,16 @@
 #define GraphicsModeH
 //---------------------------------------------------------------------------
 #include <memory>
-#include "Graphics/GraphicsTypes.h"
-#include "Graphics/Palette.h"
-#include "System/JsonFile.h"
+#include "GraphicsTypes.h"
+#include "Palette.h"
+#include "Services/JsonFile.h"
 //---------------------------------------------------------------------------
 // We only support upto 256 colour screen modes
 //---------------------------------------------------------------------------
-namespace Agdx
+namespace Visuals
 {
-class GraphicsMode : public System::JsonFile
+//---------------------------------------------------------------------------
+class GraphicsMode : public Services::JsonFile
 {
 public:
     struct ExportInfo
@@ -50,7 +51,7 @@ protected:
     unsigned int                m_TranparentColor;          // the index into the palette that represents the transparent pixel color
     float                       m_ScalarX;                  // scaling factor for width
     float                       m_ScalarY;                  // scaling factor for height
- std::unique_ptr<Agdx::Palette> m_Palette;                  // the palette table for the graphics mode
+ std::unique_ptr<Palette> 		m_Palette;                  // the palette table for the graphics mode
     BufferType                  m_BufferType;               // the type of graphics buffer we are
     Table                       m_LogicalColors;            // palette table LOGICAL color indexes into the Total Colors table
     Table                       m_DefaultLogicalColors;     // default palette table LOGICAL color indexes into the Total Colors table
@@ -102,5 +103,6 @@ public:
 //                __fastcall      GraphicsModeWriter();
 //};
 //---------------------------------------------------------------------------
-}  //Agdx
+} // Visuals namespace
+//---------------------------------------------------------------------------
 #endif

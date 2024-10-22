@@ -4,6 +4,9 @@
 //---------------------------------------------------------------------------
 #include <vector>
 //---------------------------------------------------------------------------
+namespace Visuals
+{
+//---------------------------------------------------------------------------
 // btBitmap         the buffer represents a bitmap of pixels; from 1 bit (monochrome) to 2,4 or 8 bits (paletted colour).
 // btAttribute      the buffer represents the color values for the bitmap of pixels. Usually in 8x8 or 8x1 grouping.
 // btCharacterMap   the buffer represents a character display similar to the MSX
@@ -27,5 +30,7 @@ struct TRGBA
     unsigned char B;
     unsigned char A;
 };
+//---------------------------------------------------------------------------
+} // Visuals namespace
 //---------------------------------------------------------------------------
 #endif // GraphicsTypesH

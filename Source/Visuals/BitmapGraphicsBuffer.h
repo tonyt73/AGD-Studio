@@ -2,11 +2,10 @@
 #ifndef BitmapGraphicsBufferH
 #define BitmapGraphicsBufferH
 //---------------------------------------------------------------------------
-#include "Graphics/GraphicsBuffer.h"
+#include "GraphicsBuffer.h"
 #include "Messaging/Event.h"
-#include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
-namespace Agdx
+namespace Visuals
 {
 //---------------------------------------------------------------------------
 // A paletted bitmap buffer has pixels defined as a color value stored in a byte.
@@ -18,7 +17,7 @@ private:
     ::Messaging::Registrar          m_Registrar;
     void                __fastcall  OnEvent(const Event& event);
 public:
-                        __fastcall  BitmapGraphicsBuffer(unsigned int width, unsigned int height, const Agdx::GraphicsMode& mode);
+                        __fastcall  BitmapGraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode);
                         __fastcall ~BitmapGraphicsBuffer();
 
     void                __fastcall  SetPixel(unsigned int X, unsigned int Y, bool set);
@@ -27,6 +26,7 @@ public:
     void                __fastcall  Set(const String& data);
 };
 //---------------------------------------------------------------------------
-}   // agdx
+} // Visuals namespace
+//---------------------------------------------------------------------------
 #endif
 //---------------------------------------------------------------------------

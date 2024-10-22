@@ -2,9 +2,9 @@
 #ifndef AttributeGraphicsBufferH
 #define AttributeGraphicsBufferH
 //---------------------------------------------------------------------------
-#include "Graphics/GraphicsBuffer.h"
+#include "GraphicsBuffer.h"
 //---------------------------------------------------------------------------
-namespace Agdx
+namespace Visuals
 {
 //---------------------------------------------------------------------------
 // ZX Spectrum style attribute graphics buffer
@@ -20,7 +20,7 @@ class AttributeGraphicsBuffer : public GraphicsBuffer
 {
 private:
 public:
-                        __fastcall  AttributeGraphicsBuffer(unsigned int width, unsigned int height, const Agdx::GraphicsMode& mode);
+                        __fastcall  AttributeGraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode);
                         __fastcall ~AttributeGraphicsBuffer();
 
                 void    __fastcall  SetPixel(unsigned int X, unsigned int Y, bool set);
@@ -29,5 +29,6 @@ public:
                 void    __fastcall  Set(const String& data);
 };
 //---------------------------------------------------------------------------
-}   // agdx
+} // Visuals namespace
+//---------------------------------------------------------------------------
 #endif

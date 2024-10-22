@@ -1,13 +1,14 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#pragma hdrstop
 //---------------------------------------------------------------------------
-#include "Palette.h"
 #include "System.Math.hpp"
+#include "Palette.h"
+#include "Services/File.h"
+#include "Services/Folders.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-using namespace Agdx;
+using namespace Visuals;
 //---------------------------------------------------------------------------
 __fastcall Palette::Palette()
 : JsonFile()
@@ -91,13 +92,13 @@ void __fastcall Palette::OnEndObject(const String& object)
 void __fastcall Palette::Load(const String& name)
 {
     m_ColorTable.clear();
-    JsonFile::Load(System::File::Combine(System::Path::Application, "Palettes" + System::Path::Separator + name + ".json"));
+    Services::JsonFile::Load(Services::File::Combine(Services::Folders::Application, "Palettes" + Services::Folders::Separator + name + ".json"));
 }
 //---------------------------------------------------------------------------
 void __fastcall Palette::Save()
 {
 //    // {
-//    Open(System::File::Combine(System::Path::Application, "Palettes" + System::Path::Separator + m_Name + ".json"));
+//    Open(Services::File::Combine(Services::Folders::Application, "Palettes" + Services::Folders::Separator + m_Name + ".json"));
 //    Push("Palette"); // {
 //        Write("Name", m_Name);
 //    Pop(); // }
@@ -117,7 +118,7 @@ void __fastcall Palette::Save()
 //void __fastcall PaletteWriter::Validate()
 //{
 //    Save();
-//    auto file = System::File::Combine(System::Path::Application, "Palettes" + System::Path::Separator + m_Name + ".json");
+//    auto file = Services::File::Combine(Services::Folders::Application, "Palettes" + Services::Folders::Separator + m_Name + ".json");
 //    std::vector<TColor>         oldColorTable;
 //    oldColorTable.assign(m_ColorTable.begin(), m_ColorTable.end());
 //    m_ColorTable.clear();

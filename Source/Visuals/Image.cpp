@@ -1,13 +1,12 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#pragma hdrstop
 //---------------------------------------------------------------------------
 #include "Image.h"
 #include "GraphicsBuffer.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-using namespace Agdx;
+using namespace Visuals;
 //---------------------------------------------------------------------------
 std::unique_ptr<TBitmap> Image::m_Overlay = nullptr;
 //---------------------------------------------------------------------------
@@ -18,7 +17,7 @@ __fastcall Image::Image(unsigned int width, unsigned int height, const GraphicsM
     GraphicsBuffer::Make(width, height, graphicsMode, m_Canvas);
 }
 //---------------------------------------------------------------------------
-__fastcall Image::Image(ImageDocument const * const image, const Agdx::GraphicsMode& graphicsMode)
+__fastcall Image::Image(Project::ImageDocument const * const image, const Visuals::GraphicsMode& graphicsMode)
 : m_Image(image)
 , m_IsMonochrome(false)
 {
