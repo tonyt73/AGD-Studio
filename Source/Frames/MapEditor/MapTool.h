@@ -2,8 +2,8 @@
 #ifndef MapToolH
 #define MapToolH
 //---------------------------------------------------------------------------
+#include "../Tool.h"
 #include "Project/TiledMapDocument.h"
-#include "Frames/Tool.h"
 //---------------------------------------------------------------------------
 class MapTool : public Tool
 {

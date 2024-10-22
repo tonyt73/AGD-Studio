@@ -10,10 +10,10 @@ namespace Build
 class MapBuilder : public SectionBuilder
 {
 protected:
-    void    __fastcall  Execute() final;
+    void     Execute() final;
 public:
-            __fastcall  MapBuilder();
-    virtual __fastcall ~MapBuilder();
+             MapBuilder();
+    virtual ~MapBuilder();
 };
 //---------------------------------------------------------------------------
 } // Build namespace

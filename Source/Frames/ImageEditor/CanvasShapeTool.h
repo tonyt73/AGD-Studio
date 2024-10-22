@@ -2,22 +2,22 @@
 #ifndef CanvasShapeToolH
 #define CanvasShapeToolH
 //---------------------------------------------------------------------------
-#include "Frames/ImageEditor/CanvasTool.h"
+#include "CanvasTool.h"
 //---------------------------------------------------------------------------
 class CanvasShapeTool : public CanvasTool
 {
 private:
-    virtual void    __fastcall  Apply(Visuals::GraphicsBuffer& canvas, const TPoint& pt);
+    virtual void    Apply(Visuals::GraphicsBuffer& canvas, const TPoint& pt);
 
-            void    __fastcall  DrawRectangle(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill);
-            void    __fastcall  DrawEllipse(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill);
-            void    __fastcall  DrawDiamond(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill);
-            void    __fastcall  DrawTriangle(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill);
-            void    __fastcall  DrawRightTriangle(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill);
+            void    DrawRectangle(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill);
+            void    DrawEllipse(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill);
+            void    DrawDiamond(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill);
+            void    DrawTriangle(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill);
+            void    DrawRightTriangle(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill);
 
 public:
-                    __fastcall  CanvasShapeTool();
-    virtual         __fastcall ~CanvasShapeTool();
+                    CanvasShapeTool();
+    virtual        ~CanvasShapeTool();
 };
 //---------------------------------------------------------------------------
 #endif

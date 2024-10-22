@@ -5,17 +5,17 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall CanvasShapeTool::CanvasShapeTool()
+CanvasShapeTool::CanvasShapeTool()
 : CanvasTool()
 {
     Flags = usesUndo | modifies | resetOnMove;
 }
 //---------------------------------------------------------------------------
-__fastcall CanvasShapeTool::~CanvasShapeTool()
+CanvasShapeTool::~CanvasShapeTool()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall CanvasShapeTool::DrawRectangle(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill)
+void CanvasShapeTool::DrawRectangle(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill)
 {
     switch (fill)
     {
@@ -44,12 +44,12 @@ void __fastcall CanvasShapeTool::DrawRectangle(Visuals::GraphicsBuffer& canvas, 
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall CanvasShapeTool::DrawEllipse(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill)
+void CanvasShapeTool::DrawEllipse(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill)
 {
     // TODO: Implement Ellipse
 }
 //---------------------------------------------------------------------------
-void __fastcall CanvasShapeTool::DrawDiamond(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill)
+void CanvasShapeTool::DrawDiamond(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill)
 {
     auto xs = std::min(StartPt.X, pt.X);
     auto xe = std::max(StartPt.X, pt.X);
@@ -116,7 +116,7 @@ void __fastcall CanvasShapeTool::DrawDiamond(Visuals::GraphicsBuffer& canvas, co
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall CanvasShapeTool::DrawTriangle(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill)
+void CanvasShapeTool::DrawTriangle(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill)
 {
     auto xs = std::min(StartPt.X, pt.X);
     auto xe = std::max(StartPt.X, pt.X);
@@ -161,7 +161,7 @@ void __fastcall CanvasShapeTool::DrawTriangle(Visuals::GraphicsBuffer& canvas, c
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall CanvasShapeTool::DrawRightTriangle(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill)
+void CanvasShapeTool::DrawRightTriangle(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill)
 {
     switch (fill)
     {
@@ -198,7 +198,7 @@ void __fastcall CanvasShapeTool::DrawRightTriangle(Visuals::GraphicsBuffer& canv
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall CanvasShapeTool::Apply(Visuals::GraphicsBuffer& canvas, const TPoint& pt)
+void CanvasShapeTool::Apply(Visuals::GraphicsBuffer& canvas, const TPoint& pt)
 {
     auto shape = Parameters.Get<int>("Shape");
     auto fill = Parameters.Get<int>("Fill");

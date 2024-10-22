@@ -31,35 +31,35 @@ protected:
     int                             m_RoomMappingHeight;
     int                             m_RoomMappingIndex;
 
-    void                __fastcall  OnEndObject(const String& object);
-    void                __fastcall  OnDocumentChanged(const DocumentChange<String>& message);
-    void                __fastcall  OnSetStartRoom(const SetStartRoom& event);
-    void                __fastcall  DoSave();
-    void                __fastcall  UpdateEntityRooms();
-    void                __fastcall  UpdateScreenCoords();
-    void                __fastcall  OnLoading();
-    void                __fastcall  OnLoaded();
-    int                 __fastcall  GetStartRoomCoords(int index) const;
-    void                __fastcall  SetStartRoomCoords(const TPoint& coords);
-    const TRect&        __fastcall  GetWindow() const;
-    int                 __fastcall  GetNumberOfRooms();
-    int                 __fastcall  GetMaxRooms(int index);
+    void                 OnEndObject(const String& object);
+    void                 OnDocumentChanged(const DocumentChange<String>& message);
+    void                 OnSetStartRoom(const SetStartRoom& event);
+    void                 DoSave();
+    void                 UpdateEntityRooms();
+    void                 UpdateScreenCoords();
+    void                 OnLoading();
+    void                 OnLoaded();
+    int                  GetStartRoomCoords(int index) const;
+    void                 SetStartRoomCoords(const TPoint& coords);
+    const TRect&         GetWindow() const;
+    int                  GetNumberOfRooms();
+    int                  GetMaxRooms(int index);
 
     __property const TRect&         Window           = { read = GetWindow                       };
 
 public:
-                        __fastcall  TiledMapDocument(const String& name);
-                        __fastcall ~TiledMapDocument();
-    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new TiledMapDocument(name); };
+                         TiledMapDocument(const String& name);
+                        ~TiledMapDocument();
+    static  Document*    Create(const String& name, const String& extra) { return new TiledMapDocument(name); };
 
-    MapEntityList       __fastcall  Get(Visuals::ImageTypes type) const;
-   const MapEntityList& __fastcall  Get(MapEntityType type, TSize room = TSize(0,0));
-    void                __fastcall  Set(MapEntityType type, const MapEntityList& entities);
+    MapEntityList        Get(Visuals::ImageTypes type) const;
+   const MapEntityList&  Get(MapEntityType type, TSize room = TSize(0,0));
+    void                 Set(MapEntityType type, const MapEntityList& entities);
 
-    TRect               __fastcall  GetMinimalMapSize();
-    int                 __fastcall  GetRoomIndex(const TPoint& room, bool newIdForUndefinedRoom = false);
-    bool                __fastcall  IsRoomEmpty(int x, int y);
-    bool                __fastcall  IsRoomIndexUsed(const int roomIndex) const;
+    TRect                GetMinimalMapSize();
+    int                  GetRoomIndex(const TPoint& room, bool newIdForUndefinedRoom = false);
+    bool                 IsRoomEmpty(int x, int y);
+    bool                 IsRoomIndexUsed(const int roomIndex) const;
 
     int                 __property  ScreenCount     = { read = m_ScreenCount                    };
 

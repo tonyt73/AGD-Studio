@@ -20,7 +20,7 @@ namespace Visuals
 class GraphicsBuffer
 {
 private:
-                        __fastcall  GraphicsBuffer() = delete;
+                         GraphicsBuffer() = delete;
 protected:
     typedef std::vector<ByteBuffer> Buffers;
 
@@ -39,41 +39,41 @@ protected:
     bool                            m_RenderInGreyscale;// flag: Indicates we render in greyscale
     bool                            m_Drawing;          // flag: Indicates we are drawing pixels; don't render immediately
 
-                        __fastcall  GraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode);
-    void                __fastcall  PushBuffer(unsigned int size);
-    unsigned int        __fastcall  GetNumberOfBuffers() const;
-    unsigned int        __fastcall  GetSizeOfBuffer(int index) const;
-  virtual unsigned char __fastcall  GetColorIndex(unsigned char index) const;
-  virtual void          __fastcall  SetColorIndex(unsigned char index, int logicalIndex);
-    void                __fastcall  SetRenderInGreyscale(bool value);
-    unsigned char       __fastcall  RemapPixel(unsigned char pixel) const;
-    virtual void        __fastcall  Render() const = 0;
+                         GraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode);
+    void                 PushBuffer(unsigned int size);
+    unsigned int         GetNumberOfBuffers() const;
+    unsigned int         GetSizeOfBuffer(int index) const;
+  virtual unsigned char  GetColorIndex(unsigned char index) const;
+  virtual void           SetColorIndex(unsigned char index, int logicalIndex);
+    void                 SetRenderInGreyscale(bool value);
+    unsigned char        RemapPixel(unsigned char pixel) const;
+    virtual void         Render() const = 0;
 
 public:
-    virtual             __fastcall ~GraphicsBuffer();
+    virtual             ~GraphicsBuffer();
 
                                     // Make a suitable buffer for the buffer type
-    static void         __fastcall  Make(unsigned int width, unsigned int height, const Visuals::GraphicsMode& mode, std::unique_ptr<GraphicsBuffer>& buffer);
+    static void          Make(unsigned int width, unsigned int height, const Visuals::GraphicsMode& mode, std::unique_ptr<GraphicsBuffer>& buffer);
                                     // sets the pixel to the specified palette color index
-    virtual void        __fastcall  SetPixel(unsigned int X, unsigned int Y, bool set = true) = 0;
+    virtual void         SetPixel(unsigned int X, unsigned int Y, bool set = true) = 0;
                                     // retrieves the pixel color at the position specified
-    virtual void        __fastcall  GetColor(unsigned int X, unsigned int Y, unsigned char colorIndex = 0) = 0;
+    virtual void         GetColor(unsigned int X, unsigned int Y, unsigned char colorIndex = 0) = 0;
                                     // Retrieves the specified buffer index from the graphics buffer
-    void                __fastcall  GetBuffer(int index, ByteBuffer& buffer) const;
+    void                 GetBuffer(int index, ByteBuffer& buffer) const;
 std::vector<unsigned char>          // Get the native byte data for the buffer
-                        __fastcall  GetNative(ImageTypes type) const;
+                         GetNative(ImageTypes type) const;
                                     // Get the hex data of the image
-    String              __fastcall  Get() const;
+    String               Get() const;
                                     // Set the bitmap data from the hex data
-    virtual void        __fastcall  Set(const String& data) = 0;
+    virtual void         Set(const String& data) = 0;
                                     // Copy the image onto the bitmap
-    void                __fastcall  Draw(TBitmap* bitmap, bool inMonochrome = false) const;
+    void                 Draw(TBitmap* bitmap, bool inMonochrome = false) const;
                                     // Copy the image bitmap onto the destination bitmap
-    void                __fastcall  Assign(TBitmap* bitmap) const;
+    void                 Assign(TBitmap* bitmap) const;
                                     // Begin drawing operations on the canvas
-    void                __fastcall  Begin();
+    void                 Begin();
                                     // End drawing operations on the canvas
-    void                __fastcall  End();
+    void                 End();
 
     // Properties
                                     // Dimensions
@@ -95,13 +95,13 @@ std::vector<unsigned char>          // Get the native byte data for the buffer
 //{
 //private:
 //
-//    BufferType          __fastcall  GetBufferType(int index) { return btInvalid}
+//    BufferType           GetBufferType(int index) { return btInvalid}
 //
 //public:
-//                        __fastcall  CharacterMapGraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode);
+//                         CharacterMapGraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode);
 //
-//    void                __fastcall  Render() const;
-//    void                __fastcall  GetBuffer(BufferType type, ByteBuffer& buffer) const;
+//    void                 Render() const;
+//    void                 GetBuffer(BufferType type, ByteBuffer& buffer) const;
 //};
 //---------------------------------------------------------------------------
 } // Visuals namespace

@@ -25,30 +25,30 @@ protected:
 
     friend class TiledMapDocument;
 
-    void                __fastcall  SetPoint(const TPoint& pt);
-    TPoint              __fastcall  GetPoint() const;
-    void                __fastcall  SetDragPoint(const TPoint& pt);
-    TPoint              __fastcall  GetDragPoint() const;
-   ImageDocument* const __fastcall  GetDocument() const;
-    unsigned int        __fastcall  GetId() const;
-    bool                __fastcall  GetIsSprite() const;
-    void                __fastcall  SetId(unsigned int id);
-    void                __fastcall  SetSelected(bool state);
-    void                __fastcall  SetDirty(bool state);
-    void                __fastcall  SetSpriteType(int type);
-    void                __fastcall  SetRoomIndex(unsigned int index);
-    void                __fastcall  SetRoomLocked(bool lock);
+    void                 SetPoint(const TPoint& pt);
+    TPoint               GetPoint() const;
+    void                 SetDragPoint(const TPoint& pt);
+    TPoint               GetDragPoint() const;
+   ImageDocument* const  GetDocument() const;
+    unsigned int         GetId() const;
+    bool                 GetIsSprite() const;
+    void                 SetId(unsigned int id);
+    void                 SetSelected(bool state);
+    void                 SetDirty(bool state);
+    void                 SetSpriteType(int type);
+    void                 SetRoomIndex(unsigned int index);
+    void                 SetRoomLocked(bool lock);
 
 public:
-                        __fastcall  MapEntity();
-                        __fastcall  MapEntity(const MapEntity& other);
-                        __fastcall ~MapEntity();
+                         MapEntity();
+                         MapEntity(const MapEntity& other);
+                        ~MapEntity();
 
-    MapEntity&          __fastcall  operator=(const MapEntity& other);
-    bool                __fastcall  operator==(const MapEntity& other);
+    MapEntity&           operator=(const MapEntity& other);
+    bool                 operator==(const MapEntity& other);
 
-    void                __fastcall  Clear();
-    void                __fastcall  Clean();
+    void                 Clear();
+    void                 Clean();
 
     __property  unsigned int        Id          = { read = GetId, write = SetId                 };
     __property ImageDocument* const Image       = { read = GetDocument                          };

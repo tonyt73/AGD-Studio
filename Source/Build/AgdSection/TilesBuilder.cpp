@@ -13,16 +13,16 @@ using namespace Build;
 //---------------------------------------------------------------------------
 const String BlockTypes[] = { "EMPTYBLOCK", "PLATFORMBLOCK", "WALLBLOCK", "LADDERBLOCK", "FODDERBLOCK", "DEADLYBLOCK", "CUSTOMBLOCK" };
 //---------------------------------------------------------------------------
-__fastcall TilesBuilder::TilesBuilder()
+TilesBuilder::TilesBuilder()
 : SectionBuilder("TilesBuilder")
 {
 }
 //---------------------------------------------------------------------------
-__fastcall TilesBuilder::~TilesBuilder()
+TilesBuilder::~TilesBuilder()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall TilesBuilder::Execute()
+void TilesBuilder::Execute()
 {
     const auto& dm = theDocumentManager;
     Project::DocumentList images;

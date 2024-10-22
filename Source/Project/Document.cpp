@@ -3,7 +3,8 @@
 //---------------------------------------------------------------------------
 #include "ElXTree.hpp"
 #include "LMDDckSite.hpp"
-#include "Project/Document.h"
+//---------------------------------------------------------------------------
+#include "Document.h"
 #include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
 #include "Services/File.h"
@@ -15,7 +16,7 @@ using namespace Project;
 //---------------------------------------------------------------------------
 unsigned int Document::s_NextRefId = 0;
 //---------------------------------------------------------------------------
-__fastcall Document::Document(const String& name)
+Document::Document(const String& name)
 : JsonFile()
 , m_Name(Services::File::NameWithoutExtension(name))
 , m_Type("No Type")
@@ -38,23 +39,23 @@ __fastcall Document::Document(const String& name)
     m_File = GetFile();
 }
 //---------------------------------------------------------------------------
-__fastcall Document::~Document()
+Document::~Document()
 {
     m_Name = Unnamed;
     Close();
 }
 //----------------------------------------------------------------------------
-void __fastcall Document::RegisterProperty(const String& property, const String& category, const String& info)
+void Document::RegisterProperty(const String& property, const String& category, const String& info)
 {
     m_PropertyInfo[property] = { category, info };
 }
 //---------------------------------------------------------------------------
-const Document::TPropertyInfoMap& __fastcall Document::GetPropertyInfo() const
+const Document::TPropertyInfoMap& Document::GetPropertyInfo() const
 {
     return m_PropertyInfo;
 }
 //---------------------------------------------------------------------------
-String __fastcall Document::GetPropertyInfo(const String& property) const
+String Document::GetPropertyInfo(const String& property) const
 {
     auto info = m_PropertyInfo.find(property);
     if (info != m_PropertyInfo.end())
@@ -64,7 +65,7 @@ String __fastcall Document::GetPropertyInfo(const String& property) const
     return "Invalid property";
 }
 //---------------------------------------------------------------------------
-void __fastcall Document::AssignId()
+void Document::AssignId()
 {
     if (m_SaveRefId && m_RefId == InvalidDocumentId)
     {
@@ -72,7 +73,7 @@ void __fastcall Document::AssignId()
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall Document::Close()
+void Document::Close()
 {
     Save();
     if (m_DockPanel != nullptr)
@@ -86,7 +87,7 @@ void __fastcall Document::Close()
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall Document::SetName(String name)
+void Document::SetName(String name)
 {
     auto oldName = m_Name;
     auto oldFile = GetFile(m_Name);
@@ -110,13 +111,13 @@ void __fastcall Document::SetName(String name)
     m_File = GetFile();
 }
 //---------------------------------------------------------------------------
-void __fastcall Document::SetShowFileExtension(bool value)
+void Document::SetShowFileExtension(bool value)
 {
     m_ShowFileExtension = value;
     m_Name = Services::File::NameWithoutExtension(m_Name) + (!value ? String() : String("." + m_Extension));
 }
 //---------------------------------------------------------------------------
-String __fastcall Document::GetFile(String name)
+String Document::GetFile(String name)
 {
     if (name == "")
     {
@@ -131,17 +132,17 @@ String __fastcall Document::GetFile(String name)
     return file;
 }
 //---------------------------------------------------------------------------
-bool __fastcall Document::IsValid() const
+bool Document::IsValid() const
 {
     return IsValid(m_File);
 }
 //---------------------------------------------------------------------------
-bool __fastcall Document::IsValid(const String& name) const
+bool Document::IsValid(const String& name) const
 {
     return name.Pos(Unnamed) == 0;
 }
 //---------------------------------------------------------------------------
-void __fastcall Document::Save()
+void Document::Save()
 {
     m_File = GetFile();
     if (IsValid()) {
@@ -157,7 +158,7 @@ void __fastcall Document::Save()
     }
 }
 //---------------------------------------------------------------------------
-bool __fastcall Document::Load()
+bool Document::Load()
 {
     m_RefId = InvalidDocumentId;
     if (m_File.Trim() == "")

@@ -1,13 +1,12 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
-#include <vcl.graphics.hpp>
 #include "BlockTypeTool.h"
 #include "BlockColors.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall BlockTypeTool::BlockTypeTool()
+BlockTypeTool::BlockTypeTool()
 : m_ImageDocument(nullptr)
 , m_BlockType(1)
 {
@@ -17,7 +16,7 @@ __fastcall BlockTypeTool::BlockTypeTool()
     m_BlendedBitmap->PixelFormat = pf32bit;
 }
 //---------------------------------------------------------------------------
-TPoint __fastcall BlockTypeTool::PtToBlock(const TPoint& pt) const
+TPoint BlockTypeTool::PtToBlock(const TPoint& pt) const
 {
     TPoint bpt;
     bpt.X = pt.X / m_BlockWidth;
@@ -25,7 +24,7 @@ TPoint __fastcall BlockTypeTool::PtToBlock(const TPoint& pt) const
     return bpt;
 }
 //---------------------------------------------------------------------------
-String __fastcall BlockTypeTool::Begin(Visuals::GraphicsBuffer& canvas)
+String BlockTypeTool::Begin(Visuals::GraphicsBuffer& canvas)
 {
     m_CanvasBitmap->Width = m_ImageDocument->Width;
     m_CanvasBitmap->Height = m_ImageDocument->Height;
@@ -48,7 +47,7 @@ String __fastcall BlockTypeTool::Begin(Visuals::GraphicsBuffer& canvas)
     return m_Blocks;
 }
 //---------------------------------------------------------------------------
-char __fastcall BlockTypeTool::Move(const TPoint& pt, const TShiftState& buttons)
+char BlockTypeTool::Move(const TPoint& pt, const TShiftState& buttons)
 {
     auto bpt = PtToBlock(pt);
     auto offset = bpt.Y * m_BlocksAcross + bpt.X;
@@ -60,13 +59,13 @@ char __fastcall BlockTypeTool::Move(const TPoint& pt, const TShiftState& buttons
     return m_Blocks[offset+1];
 }
 //---------------------------------------------------------------------------
-String __fastcall BlockTypeTool::End()
+String BlockTypeTool::End()
 {
     m_ImageDocument->SetLayer("blocktype", m_Blocks);
     return m_Blocks;
 }
 //---------------------------------------------------------------------------
-void __fastcall BlockTypeTool::Apply()
+void BlockTypeTool::Apply()
 {
     const auto maskAlpha = 0.75f;
     // copy the canvas bitmap
@@ -109,7 +108,7 @@ void __fastcall BlockTypeTool::Apply()
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall BlockTypeTool::Draw(TBitmap* bitmap) const
+void BlockTypeTool::Draw(TBitmap* bitmap) const
 {
     StretchBlt(bitmap->Canvas->Handle, 0, 0, bitmap->Width, bitmap->Height, m_BlendedBitmap->Canvas->Handle, 0, 0, m_BlendedBitmap->Width, m_BlendedBitmap->Height, SRCCOPY);
 }

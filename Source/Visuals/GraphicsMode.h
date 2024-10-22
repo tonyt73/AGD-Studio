@@ -61,25 +61,25 @@ protected:
     PixelRemapping              m_PixelRemappingLoader;     // used to load the pixel remapping list
     RemapData                   m_RemapDataLoader;          // used to load the remap data into the m_PixelRemappingLoader
 
-    int             __fastcall  GetLogicalColors() const;
-    TColor          __fastcall  GetLogicalColor(int index) const;
-    int             __fastcall  GetColorFromLogicalIndex(int index) const;
-  const ExportInfo& __fastcall  GetExportInformation(ImageTypes imageType) const;
-    void            __fastcall  OnEndObject(const String& object);
-    void            __fastcall  Save();
+    int              GetLogicalColors() const;
+    TColor           GetLogicalColor(int index) const;
+    int              GetColorFromLogicalIndex(int index) const;
+  const ExportInfo&  GetExportInformation(ImageTypes imageType) const;
+    void             OnEndObject(const String& object);
+    void             Save();
 
 public:
-                    __fastcall  GraphicsMode();
-                    __fastcall  GraphicsMode(const GraphicsMode& other);
+                     GraphicsMode();
+                     GraphicsMode(const GraphicsMode& other);
 
-            void    __fastcall  Load(const String& name);
-            void    __fastcall  SaveLogicalCLUT(String path = "", String name = "");
-            void    __fastcall  LoadLogicalCLUT(String path = "", String name = "");
+            void     Load(const String& name);
+            void     SaveLogicalCLUT(String path = "", String name = "");
+            void     LoadLogicalCLUT(String path = "", String name = "");
                                 // Remap a logical color to a new palette color
-    void            __fastcall  RemapColor(int paletteTableIndex, int colorTableIndex);
-    unsigned char   __fastcall  RemapPixels(unsigned char pixels) const;
-    void            __fastcall  RestoreDefaultPalette();
-    const Palette&  __fastcall  Palette() const;
+    void             RemapColor(int paletteTableIndex, int colorTableIndex);
+    unsigned char    RemapPixels(unsigned char pixels) const;
+    void             RestoreDefaultPalette();
+    const Palette&   Palette() const;
 
     String          __property  Name = { read = m_Name };
     unsigned int    __property  BitsPerPixel = { read = m_BitsPerPixel };
@@ -99,7 +99,7 @@ public:
 //class GraphicsModeWriter : public GraphicsMode
 //{
 //public:
-//                __fastcall      GraphicsModeWriter();
+//                     GraphicsModeWriter();
 //};
 //---------------------------------------------------------------------------
 } // Visuals namespace

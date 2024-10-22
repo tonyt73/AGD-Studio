@@ -11,16 +11,16 @@
 namespace Build
 {
 //---------------------------------------------------------------------------
-__fastcall MessagesBuilder::MessagesBuilder()
+MessagesBuilder::MessagesBuilder()
 : SectionBuilder("MessagesBuilder")
 {
 }
 //---------------------------------------------------------------------------
-__fastcall MessagesBuilder::~MessagesBuilder()
+MessagesBuilder::~MessagesBuilder()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall MessagesBuilder::Execute()
+void MessagesBuilder::Execute()
 {
     const auto& dm = theDocumentManager;
     auto msgs = dm.Get("Text", "MessagesBuilder", "MessagesBuilder");

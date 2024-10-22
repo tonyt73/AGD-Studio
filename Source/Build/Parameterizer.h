@@ -8,7 +8,7 @@ namespace Build
 class Parameter
 {
 public:
-    static  String  __fastcall  ization(const String& parameters);
+    static  String   ization(const String& parameters);
 };
 //---------------------------------------------------------------------------
 } // Build namespace

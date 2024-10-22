@@ -25,21 +25,21 @@ private:
     Result                      m_Result;
     String                      m_Description;
 
-    void            __fastcall  Clear();
+    void             Clear();
 
 protected:
-    void            __fastcall  AddLine(String line);
-    void            __fastcall  LineBreak();
-    void            __fastcall  Success();
-    void            __fastcall  Failure(String reason);
+    void             AddLine(String line);
+    void             LineBreak();
+    void             Success();
+    void             Failure(String reason);
 
-    virtual void    __fastcall  Execute() = 0;
+    virtual void     Execute() = 0;
 
 public:
-                    __fastcall  SectionBuilder(const String& description);
-    virtual         __fastcall ~SectionBuilder();
+                     SectionBuilder(const String& description);
+    virtual         ~SectionBuilder();
 
-    const Result&   __fastcall  Build();
+    const Result&    Build();
 
             String  __property  Description = { read = m_Description };
 };

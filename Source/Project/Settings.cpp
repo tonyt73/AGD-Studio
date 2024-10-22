@@ -11,7 +11,7 @@
 using namespace Project;
 //---------------------------------------------------------------------------
 static Settings* instance = nullptr;
-Settings&  Settings::get()
+Settings& Settings::get()
 {
     if (instance == nullptr)
     {
@@ -46,27 +46,27 @@ Settings&  Settings::get()
     Save();
 }
 //---------------------------------------------------------------------------
-void  Settings::SetWelcomePosition(const TPoint& position)
+void Settings::SetWelcomePosition(const TPoint& position)
 {
     m_WelcomePosition = position;
 }
 //---------------------------------------------------------------------------
-void  Settings::SetWindowPosition(const TPoint& position)
+void Settings::SetWindowPosition(const TPoint& position)
 {
     m_WindowPosition = position;
 }
 //---------------------------------------------------------------------------
-void  Settings::SetWindowState(const TWindowState& state)
+void Settings::SetWindowState(const TWindowState& state)
 {
     m_WindowState = state;
 }
 //---------------------------------------------------------------------------
-void  Settings::SetWindowSize(const TSize& size)
+void Settings::SetWindowSize(const TSize& size)
 {
     m_WindowSize = size;
 }
 //---------------------------------------------------------------------------
-void  Settings::SetBool(int index, bool value)
+void Settings::SetBool(int index, bool value)
 {
     switch (index)
     {
@@ -76,7 +76,7 @@ void  Settings::SetBool(int index, bool value)
     }
 }
 //---------------------------------------------------------------------------
-void  Settings::SetString(int index, String value)
+void Settings::SetString(int index, String value)
 {
     switch (index)
     {
@@ -87,7 +87,7 @@ void  Settings::SetString(int index, String value)
     }
 }
 //---------------------------------------------------------------------------
-void  Settings::Save()
+void Settings::Save()
 {
     // {
 	Open(Services::File::Combine(Services::Folders::Common, "Settings.json"));

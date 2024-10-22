@@ -10,10 +10,10 @@ namespace Build
 class Compilation : public ShellProcess
 {
 public:
-                    __fastcall  Compilation(BuildMessages& buildMessages);
-    virtual         __fastcall ~Compilation();
+                     Compilation(BuildMessages& buildMessages);
+    virtual         ~Compilation();
 
-            bool    __fastcall  Execute() final;
+            bool     Execute() final;
 };
 //---------------------------------------------------------------------------
 } // Build namespace

@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
-#include "Frames/MapEditor/MapLineTool.h"
+#include "MapLineTool.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -15,7 +15,7 @@
 {
 }
 //---------------------------------------------------------------------------
-void  MapLineTool::Apply(Project::MapEntityList& list, Project::MapEntity entity)
+void MapLineTool::Apply(Project::MapEntityList& list, Project::MapEntity entity)
 {
     auto rect = TRect(StartPt.x, StartPt.y, LastPt.x, LastPt.y);
     SnapToTileGrid(rect);
@@ -42,7 +42,7 @@ void  MapLineTool::Apply(Project::MapEntityList& list, Project::MapEntity entity
     }
 }
 //---------------------------------------------------------------------------
-void  MapLineTool::DrawLine(Project::MapEntityList& list, Project::MapEntity entity, TRect Rect)
+void MapLineTool::DrawLine(Project::MapEntityList& list, Project::MapEntity entity, TRect Rect)
 {
     auto dx = 1;
     auto dy = 1;
@@ -100,7 +100,7 @@ void  MapLineTool::DrawLine(Project::MapEntityList& list, Project::MapEntity ent
     }
 }
 //---------------------------------------------------------------------------
-void  MapLineTool::DrawLine(Project::MapEntityList& list, Project::MapEntity entity, TRect Rect, int dx, int dy)
+void MapLineTool::DrawLine(Project::MapEntityList& list, Project::MapEntity entity, TRect Rect, int dx, int dy)
 {
     auto pt = TPoint(Rect.Left, Rect.Top);
     auto l = dx != 0 ? abs(Rect.Width()) : abs(Rect.Height());

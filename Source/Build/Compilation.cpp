@@ -8,16 +8,16 @@
 //---------------------------------------------------------------------------
 using namespace Build;
 //---------------------------------------------------------------------------
-__fastcall Compilation::Compilation(BuildMessages& buildMessages)
+Compilation::Compilation(BuildMessages& buildMessages)
 : ShellProcess(buildMessages, bmBuild, "Compile Game File (AGD File to Assembly File)")
 {
 }
 //---------------------------------------------------------------------------
-__fastcall Compilation::~Compilation()
+Compilation::~Compilation()
 {
 }
 //---------------------------------------------------------------------------
-bool __fastcall Compilation::Execute()
+bool Compilation::Execute()
 {
     const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
     auto agdFile = Services::File::Combine(Services::Folders::Project, Services::Folders::ProjectName + ".agd");

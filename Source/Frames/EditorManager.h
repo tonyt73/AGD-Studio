@@ -13,10 +13,10 @@ private:
     TFrame*             m_ActiveEditor;
 
 public:
-            __fastcall  EditorManager();
+             EditorManager();
 
-    void    __fastcall  SetActive(TFrame* editor);
-    bool    __fastcall  IsActive(const TFrame* editor) const;
+    void     SetActive(TFrame* editor);
+    bool     IsActive(const TFrame* editor) const;
 };
 //---------------------------------------------------------------------------
 #define theEditorManager EditorManager::get()

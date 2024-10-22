@@ -7,24 +7,24 @@
 //---------------------------------------------------------------------------
 using namespace Build;
 //---------------------------------------------------------------------------
-__fastcall BuildMessages::BuildMessages()
+BuildMessages::BuildMessages()
 : m_TreeView(nullptr)
 , m_GroupNode(nullptr)
 , m_MsgNode(nullptr)
 {
 }
 //---------------------------------------------------------------------------
-__fastcall BuildMessages::~BuildMessages()
+BuildMessages::~BuildMessages()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall BuildMessages::Clear()
+void BuildMessages::Clear()
 {
     m_TreeView->Items->Clear();
     m_TreeView->Update();
 }
 //---------------------------------------------------------------------------
-void __fastcall BuildMessages::Push(BuildMessageType type, const String& group)
+void BuildMessages::Push(BuildMessageType type, const String& group)
 {
     m_GroupType = type;
     m_GroupNode = m_TreeView->Items->Add(nullptr, group);
@@ -32,7 +32,7 @@ void __fastcall BuildMessages::Push(BuildMessageType type, const String& group)
     m_TreeView->Update();
 }
 //---------------------------------------------------------------------------
-void __fastcall BuildMessages::Pop(bool result)
+void BuildMessages::Pop(bool result)
 {
     m_GroupNode->ImageIndex = result ? m_GroupType : bmFailed;
     if (!result)
@@ -41,7 +41,7 @@ void __fastcall BuildMessages::Pop(bool result)
     m_GroupNode = nullptr;
 }
 //---------------------------------------------------------------------------
-void __fastcall BuildMessages::Message(BuildMessageType type, const String& message)
+void BuildMessages::Message(BuildMessageType type, const String& message)
 {
 	auto lines = System::Strutils::SplitString(message, "\n");
 	for (auto line : lines) {
@@ -51,20 +51,20 @@ void __fastcall BuildMessages::Message(BuildMessageType type, const String& mess
 	m_TreeView->Update();
 }
 //---------------------------------------------------------------------------
-void __fastcall BuildMessages::Message(const String& message)
+void BuildMessages::Message(const String& message)
 {
     m_MsgNode = m_TreeView->Items->AddChild(m_GroupNode, message);
     m_MsgNode->ImageIndex = bmProgress;
     m_TreeView->Update();
 }
 //---------------------------------------------------------------------------
-void __fastcall BuildMessages::Message(BuildMessageType type)
+void BuildMessages::Message(BuildMessageType type)
 {
     m_MsgNode->ImageIndex = type;
     m_TreeView->Update();
 }
 //---------------------------------------------------------------------------
-void __fastcall BuildMessages::Time(int time)
+void BuildMessages::Time(int time)
 {
     Message(bmTiming, "Elapsed time: " + IntToStr(time) + "ms");
 }

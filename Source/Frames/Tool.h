@@ -27,11 +27,11 @@ private:
     int                         m_Height;       // the height of the content we are changing
 
 protected:
-            bool    __fastcall  IsPointValid(const TPoint& pt) const;
+            bool     IsPointValid(const TPoint& pt) const;
 
-            void    __fastcall  Begin(const TPoint& pt, const TShiftState& buttons);
-            void    __fastcall  Move(const TPoint& pt, const TShiftState& buttons);
-            void    __fastcall  End(const TPoint& pt);
+            void     Begin(const TPoint& pt, const TShiftState& buttons);
+            void     Move(const TPoint& pt, const TShiftState& buttons);
+            void     End(const TPoint& pt);
 
             eFlags  __property  Flags = { read = m_Flags, write = m_Flags };
             TPoint  __property  StartPt = { read = m_StartPt, write = StartPt };
@@ -39,8 +39,8 @@ protected:
             bool    __property  IsDrawing = { read = m_IsDrawing, write = m_IsDrawing };
 
 public:
-                    __fastcall  Tool();
-    virtual         __fastcall ~Tool();
+                     Tool();
+    virtual         ~Tool();
 
   Services::Generic __property  Parameters = { read = m_Parameters, write = m_Parameters };
             int     __property  Width = { read = m_Width, write = m_Width };

@@ -12,7 +12,7 @@ class Event
 private:
     String  m_Id;
 public:
-            __fastcall  Event(const String& id) : m_Id(id) {}
+             Event(const String& id) : m_Id(id) {}
 
     __property  String  Id = { read = m_Id };
 };
@@ -24,7 +24,7 @@ private:
     T m_NewValue;
     T m_OldValue;
 public:
-    __fastcall OnChange(const String& id, const T& newValue, const T& oldValue = T())
+    OnChange(const String& id, const T& newValue, const T& oldValue = T())
     : Event(id)
     , m_NewValue(newValue)
     , m_OldValue(oldValue)
@@ -42,7 +42,7 @@ private:
     const Project::Document* m_Document;
     T m_Value;
 public:
-    __fastcall DocumentChange(const String& id, const Project::Document* document, const T& value = T())
+    DocumentChange(const String& id, const Project::Document* document, const T& value = T())
     : Event(id)
     , m_Document(document)
     , m_Value(value)
@@ -59,7 +59,7 @@ class MessageEvent : public Event
 protected:
     MessageType m_MessageType;
 public:
-    __fastcall MessageEvent(const String& message, MessageType type)
+    MessageEvent(const String& message, MessageType type)
     : Event(message)
     , m_MessageType(type)
     {
@@ -74,7 +74,7 @@ class RoomSelected : public Event
 private:
     TSize   m_Room;
 public:
-    __fastcall RoomSelected(TSize room)
+    RoomSelected(TSize room)
     : Event("room.selected")
     , m_Room(room)
     {
@@ -88,7 +88,7 @@ class SetStartRoom : public Event
 private:
     TPoint  m_Room;
 public:
-    __fastcall SetStartRoom(TPoint room)
+    SetStartRoom(TPoint room)
     : Event("set.start.room")
     , m_Room(room)
     {
@@ -102,7 +102,7 @@ class StartRoomChanged : public Event
 private:
     TPoint  m_Room;
 public:
-    __fastcall StartRoomChanged(TPoint room)
+    StartRoomChanged(TPoint room)
     : Event("start.room.changed")
     , m_Room(room)
     {
@@ -114,7 +114,7 @@ public:
 class UpdateProperties : public Event
 {
 public:
-    __fastcall UpdateProperties()
+    UpdateProperties()
     : Event("update.properties")
     {
     }
@@ -125,7 +125,7 @@ class WindowChangedEvent : public Event
 private:
     const TRect&    m_Window;
 public:
-    __fastcall WindowChangedEvent(const TRect& window)
+    WindowChangedEvent(const TRect& window)
     : Event("window.changed")
     , m_Window(window)
     {
@@ -136,7 +136,7 @@ public:
 class ThemeChangedEvent : public Event
 {
 public:
-    __fastcall ThemeChangedEvent()
+    ThemeChangedEvent()
     : Event("theme.changed")
     {
     }

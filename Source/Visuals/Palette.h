@@ -14,24 +14,24 @@ protected:
     String                      m_Color;            // json loader
     std::vector<TColor>         m_ColorTable;       // the table of Total Palette Colors
 
-    TColor      __fastcall      GetTableColor(int index) const;
-    TColor      __fastcall      GetGreyscale(int index) const;
-    int         __fastcall      GetTotalColors() const;
+    TColor           GetTableColor(int index) const;
+    TColor           GetGreyscale(int index) const;
+    int              GetTotalColors() const;
 
-    TColor      __fastcall      GetFontColorOf(int index) const;
+    TColor           GetFontColorOf(int index) const;
 
-    void        __fastcall      OnEndObject(const String& object);
-    void        __fastcall      Save();
+    void             OnEndObject(const String& object);
+    void             Save();
 
 public:
-                __fastcall      Palette();
-                __fastcall      Palette(const String& name);
-                __fastcall      Palette(const Palette& other);
-    Palette&    __fastcall      operator=(const Palette& other);
+                     Palette();
+                     Palette(const String& name);
+                     Palette(const Palette& other);
+    Palette&         operator=(const Palette& other);
 
-    void        __fastcall      Load(const String& name);
+    void             Load(const String& name);
 
-   static DWORD __fastcall      LuminanceOf(TColor Color);
+   static DWORD      LuminanceOf(TColor Color);
 
     String      __property      Name = { read = m_Name };
     TColor      __property      Greyscale[int index] = { read = GetGreyscale };
@@ -43,9 +43,9 @@ public:
 //class PaletteWriter : public Palette
 //{
 //private:
-//    void        __fastcall      Validate();
+//    void             Validate();
 //public:
-//                __fastcall      PaletteWriter();
+//                     PaletteWriter();
 //};
 //---------------------------------------------------------------------------
 } // Visual namespace

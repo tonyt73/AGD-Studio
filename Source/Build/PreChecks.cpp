@@ -13,11 +13,11 @@ using namespace Build;
 {
 }
 //---------------------------------------------------------------------------
-__fastcall PreChecks::~PreChecks()
+PreChecks::~PreChecks()
 {
 }
 //---------------------------------------------------------------------------
-bool __fastcall PreChecks::Execute()
+bool PreChecks::Execute()
 {
     const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
     auto cp = Services::File::Exists(mc.Compiler.Path) || Services::File::Exists(Services::File::Combine(Services::Folders::Application, mc.Compiler.Path));

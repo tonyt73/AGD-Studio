@@ -10,10 +10,10 @@ namespace Build
 class ControlsBuilder : public SectionBuilder
 {
 protected:
-    void    __fastcall  Execute() final;
+    void     Execute() final;
 public:
-            __fastcall  ControlsBuilder();
-    virtual __fastcall ~ControlsBuilder();
+             ControlsBuilder();
+    virtual ~ControlsBuilder();
 };
 //---------------------------------------------------------------------------
 } // Build namespace

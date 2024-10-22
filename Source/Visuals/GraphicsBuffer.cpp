@@ -23,7 +23,7 @@ const unsigned char g_PixelShft1[8] = { 7, 6, 5, 4, 3, 2, 1, 0 };
 const unsigned char* g_PixelMasks[9] = { NULL, g_PixelMask1, g_PixelMask2, NULL, g_PixelMask4, NULL, NULL, NULL, g_PixelMask8 };
 const unsigned char* g_PixelShfts[9] = { NULL, g_PixelShft1, g_PixelShft2, NULL, g_PixelShft4, NULL, NULL, NULL, g_PixelShft8 };
 //---------------------------------------------------------------------------
-__fastcall GraphicsBuffer::GraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode)
+GraphicsBuffer::GraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode)
 : m_GraphicsMode(mode)
 , m_BufferType(mode.TypeOfBuffer)
 , m_Width(width)
@@ -44,11 +44,11 @@ __fastcall GraphicsBuffer::GraphicsBuffer(unsigned int width, unsigned int heigh
     PatBlt(m_Bitmap->Canvas->Handle, 0, 0, width, height, BLACKNESS);
 }
 //---------------------------------------------------------------------------
-__fastcall GraphicsBuffer::~GraphicsBuffer()
+GraphicsBuffer::~GraphicsBuffer()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall GraphicsBuffer::Make(unsigned int width, unsigned int height, const GraphicsMode& mode, std::unique_ptr<GraphicsBuffer>& buffer)
+void GraphicsBuffer::Make(unsigned int width, unsigned int height, const GraphicsMode& mode, std::unique_ptr<GraphicsBuffer>& buffer)
 {
     buffer = nullptr;
     switch (mode.TypeOfBuffer)
@@ -60,17 +60,17 @@ void __fastcall GraphicsBuffer::Make(unsigned int width, unsigned int height, co
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall GraphicsBuffer::PushBuffer(unsigned int size)
+void GraphicsBuffer::PushBuffer(unsigned int size)
 {
     m_Buffers.push_back(ByteBuffer(size, 0));
 }
 //---------------------------------------------------------------------------
-unsigned int __fastcall GraphicsBuffer::GetNumberOfBuffers() const
+unsigned int GraphicsBuffer::GetNumberOfBuffers() const
 {
     return m_Buffers.size();
 }
 //---------------------------------------------------------------------------
-unsigned int __fastcall GraphicsBuffer::GetSizeOfBuffer(int index) const
+unsigned int GraphicsBuffer::GetSizeOfBuffer(int index) const
 {
     auto size = 0;
     if (0 <= index && index < m_Buffers.size())
@@ -80,7 +80,7 @@ unsigned int __fastcall GraphicsBuffer::GetSizeOfBuffer(int index) const
     return size;
 }
 //---------------------------------------------------------------------------
-unsigned char __fastcall GraphicsBuffer::GetColorIndex(unsigned char index) const
+unsigned char GraphicsBuffer::GetColorIndex(unsigned char index) const
 {
     if (0 <= index && index < m_SetColors.size())
     {
@@ -89,7 +89,7 @@ unsigned char __fastcall GraphicsBuffer::GetColorIndex(unsigned char index) cons
     return 0;
 }
 //---------------------------------------------------------------------------
-void __fastcall GraphicsBuffer::SetColorIndex(unsigned char index, int logicalIndex)
+void GraphicsBuffer::SetColorIndex(unsigned char index, int logicalIndex)
 {
     if (0 <= index && index < m_SetColors.size() && 0 <= logicalIndex && logicalIndex < m_GraphicsMode.LogicalColors)
     {
@@ -97,13 +97,13 @@ void __fastcall GraphicsBuffer::SetColorIndex(unsigned char index, int logicalIn
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall GraphicsBuffer::SetRenderInGreyscale(bool value)
+void GraphicsBuffer::SetRenderInGreyscale(bool value)
 {
     m_RenderInGreyscale = value;
     Render();
 }
 //---------------------------------------------------------------------------
-void __fastcall GraphicsBuffer::GetBuffer(int index, ByteBuffer& buffer) const
+void GraphicsBuffer::GetBuffer(int index, ByteBuffer& buffer) const
 {
     if (0 <= index && index < m_Buffers.size())
     {
@@ -111,7 +111,7 @@ void __fastcall GraphicsBuffer::GetBuffer(int index, ByteBuffer& buffer) const
     }
 }
 //---------------------------------------------------------------------------
-std::vector<unsigned char> __fastcall GraphicsBuffer::GetNative(ImageTypes type) const
+std::vector<unsigned char> GraphicsBuffer::GetNative(ImageTypes type) const
 {
     std::vector<unsigned char> data;
     for (auto buffer = 0; buffer < m_Buffers.size(); buffer++)
@@ -127,7 +127,7 @@ std::vector<unsigned char> __fastcall GraphicsBuffer::GetNative(ImageTypes type)
     return data;
 }
 //---------------------------------------------------------------------------
-String __fastcall GraphicsBuffer::Get() const
+String GraphicsBuffer::Get() const
 {
     String data;
     for (const auto& buffer : m_Buffers)
@@ -140,7 +140,7 @@ String __fastcall GraphicsBuffer::Get() const
     return data;
 }
 //---------------------------------------------------------------------------
-void __fastcall GraphicsBuffer::Draw(TBitmap* bitmap, bool inMonochrome) const
+void GraphicsBuffer::Draw(TBitmap* bitmap, bool inMonochrome) const
 {
     StretchBlt(bitmap->Canvas->Handle, 0, 0, bitmap->Width, bitmap->Height, m_Bitmap->Canvas->Handle, 0, 0, Width, Height, SRCCOPY);
     if (inMonochrome)
@@ -159,17 +159,17 @@ void __fastcall GraphicsBuffer::Draw(TBitmap* bitmap, bool inMonochrome) const
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall GraphicsBuffer::Assign(TBitmap* bitmap) const
+void GraphicsBuffer::Assign(TBitmap* bitmap) const
 {
     bitmap->Assign(m_Bitmap.get());
 }
 //---------------------------------------------------------------------------
-void __fastcall GraphicsBuffer::Begin()
+void GraphicsBuffer::Begin()
 {
     m_Drawing = true;
 }
 //---------------------------------------------------------------------------
-void __fastcall GraphicsBuffer::End()
+void GraphicsBuffer::End()
 {
     m_Drawing = false;
     Render();

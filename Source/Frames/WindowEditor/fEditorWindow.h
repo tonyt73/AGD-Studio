@@ -29,34 +29,34 @@ __published:// IDE-managed Components
     TAction *actWidthInc;
     TAction *actHeightDec;
     TAction *actHeightInc;
-    void __fastcall FrameResize(TObject *Sender);
-    void __fastcall imgViewMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
-    void __fastcall actMoveLeftExecute(TObject *Sender);
-    void __fastcall actMoveRightExecute(TObject *Sender);
-    void __fastcall actMoveUpExecute(TObject *Sender);
-    void __fastcall actMoveDownExecute(TObject *Sender);
-    void __fastcall actWidthDecExecute(TObject *Sender);
-    void __fastcall actWidthIncExecute(TObject *Sender);
-    void __fastcall actHeightDecExecute(TObject *Sender);
-    void __fastcall actHeightIncExecute(TObject *Sender);
-    void __fastcall FrameMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate);
+    void FrameResize(TObject *Sender);
+    void imgViewMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
+    void actMoveLeftExecute(TObject *Sender);
+    void actMoveRightExecute(TObject *Sender);
+    void actMoveUpExecute(TObject *Sender);
+    void actMoveDownExecute(TObject *Sender);
+    void actWidthDecExecute(TObject *Sender);
+    void actWidthIncExecute(TObject *Sender);
+    void actHeightDecExecute(TObject *Sender);
+    void actHeightIncExecute(TObject *Sender);
+    void FrameMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate);
 private:    // User declarations
     Registrar                   m_Registrar;
     Project::WindowDocument*    m_Document;
     std::unique_ptr<TBitmap>    m_View;
     int                         m_Scalar;
 
-    void            __fastcall  OnEvent(const Event& event);
-    bool            __fastcall  IsActive() const;
-    void            __fastcall  SetDocument(Project::Document* document);
-    void            __fastcall  ShowKeysHelp();
-    void            __fastcall  DrawView();
+    void             OnEvent(const Event& event);
+    bool             IsActive() const;
+    void             SetDocument(Project::Document* document);
+    void             ShowKeysHelp();
+    void             DrawView();
 
 public:        // User declarations
-                    __fastcall  TfrmEditorWindow(TComponent* Owner);
-                    __fastcall ~TfrmEditorWindow();
+                     TfrmEditorWindow(TComponent* Owner);
+                    ~TfrmEditorWindow();
 
-    static  TFrame* __fastcall  Create(Project::Document* document, TComponent* owner)
+    static  TFrame*  Create(Project::Document* document, TComponent* owner)
                                 {
                                     auto editor = new TfrmEditorWindow(owner);
                                     editor->SetDocument(document);

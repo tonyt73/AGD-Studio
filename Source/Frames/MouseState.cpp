@@ -5,11 +5,11 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall MouseState::MouseState()
+MouseState::MouseState()
 {
 }
 //---------------------------------------------------------------------------
-__fastcall MouseState::MouseState(TMouseButton button, const TShiftState& shiftState)
+MouseState::MouseState(TMouseButton button, const TShiftState& shiftState)
 : MouseState(shiftState)
 {
     m_Left   |= button == mbLeft;
@@ -17,7 +17,7 @@ __fastcall MouseState::MouseState(TMouseButton button, const TShiftState& shiftS
     m_Right  |= button == mbRight;
 }
 //---------------------------------------------------------------------------
-__fastcall MouseState::MouseState(const TShiftState& shiftState)
+MouseState::MouseState(const TShiftState& shiftState)
 : m_ShiftState(shiftState)
 {
     auto altState = (GetKeyState(VK_MENU) & 0x8000) != 0;
@@ -31,7 +31,7 @@ __fastcall MouseState::MouseState(const TShiftState& shiftState)
     m_NoModifiers = !m_Shift && !m_Ctrl && !m_Alt;
 }
 //---------------------------------------------------------------------------
-bool __fastcall MouseState::Has(TShiftState ss) const
+bool MouseState::Has(TShiftState ss) const
 {
     return m_ShiftState == ss;
 }

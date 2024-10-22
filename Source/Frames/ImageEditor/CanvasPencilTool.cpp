@@ -5,17 +5,17 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall CanvasPencilTool::CanvasPencilTool()
+CanvasPencilTool::CanvasPencilTool()
 : CanvasTool()
 {
     Flags = usesUndo | modifies;
 }
 //---------------------------------------------------------------------------
-__fastcall CanvasPencilTool::~CanvasPencilTool()
+CanvasPencilTool::~CanvasPencilTool()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall CanvasPencilTool::Apply(Visuals::GraphicsBuffer& canvas, const TPoint& pt)
+void CanvasPencilTool::Apply(Visuals::GraphicsBuffer& canvas, const TPoint& pt)
 {
     if (MS.Left)
     {

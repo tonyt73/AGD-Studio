@@ -15,7 +15,7 @@
 {
 }
 //---------------------------------------------------------------------------
-void  MapPencilTool::Apply(Project::MapEntityList& list, Project::MapEntity entity)
+void MapPencilTool::Apply(Project::MapEntityList& list, Project::MapEntity entity)
 {
     SnapToTileGrid(LastPt);
     entity.Pt = LastPt;

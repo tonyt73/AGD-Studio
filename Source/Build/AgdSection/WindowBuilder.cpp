@@ -9,16 +9,16 @@
 //---------------------------------------------------------------------------
 using namespace Build;
 //---------------------------------------------------------------------------
-__fastcall WindowBuilder::WindowBuilder()
+WindowBuilder::WindowBuilder()
 : SectionBuilder("WindowBuilder")
 {
 }
 //---------------------------------------------------------------------------
-__fastcall WindowBuilder::~WindowBuilder()
+WindowBuilder::~WindowBuilder()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall WindowBuilder::Execute()
+void WindowBuilder::Execute()
 {
     const auto& WindowBuilder = (Project::WindowDocument*)theDocumentManager.Get("WindowBuilder", "Definition", "WindowBuilder");
     if (WindowBuilder)

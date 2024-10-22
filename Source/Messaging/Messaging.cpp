@@ -9,11 +9,11 @@ unsigned int Bus::s_NextId = 0;
 Bus::SubscriptionsMap* Bus::s_Handlers = nullptr;
 //auto Bus::m_Handlers = new Bus::SubscriptionsMap();
 //---------------------------------------------------------------------------
-__fastcall Registrar::Registrar()
+Registrar::Registrar()
 {
 }
 //---------------------------------------------------------------------------
-__fastcall Registrar::~Registrar()
+Registrar::~Registrar()
 {
     Unsubscribe();
 }
@@ -43,7 +43,7 @@ void Bus::Unsubscribe(unsigned int subscriptionId)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall Registrar::Unsubscribe()
+void Registrar::Unsubscribe()
 {
     for (auto id : m_SubscriptionIds)
     {

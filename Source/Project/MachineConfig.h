@@ -47,23 +47,23 @@ protected:
     ToolInfoExt                         m_Assembler;
     ToolInfo                            m_Emulator;
 
-const Visuals::ImageSizing& __fastcall  GetImageSizing(Visuals::ImageTypes type) const;
-    void                    __fastcall  SetCompiler(const ToolInfo& info);
-    void                    __fastcall  SetEngine(const ToolInfo& info);
-    void                    __fastcall  SetAssembler(const ToolInfoExt& info);
-    void                    __fastcall  SetEmulator(const ToolInfo& info);
+const Visuals::ImageSizing&  GetImageSizing(Visuals::ImageTypes type) const;
+    void                     SetCompiler(const ToolInfo& info);
+    void                     SetEngine(const ToolInfo& info);
+    void                     SetAssembler(const ToolInfoExt& info);
+    void                     SetEmulator(const ToolInfo& info);
 
-                            __fastcall  MachineConfig();
-    void                    __fastcall  Save();
+                             MachineConfig();
+    void                     Save();
 
 public:
-                            __fastcall  MachineConfig(const String& name);
-    virtual                 __fastcall ~MachineConfig();
+                             MachineConfig(const String& name);
+    virtual                 ~MachineConfig();
 
-    Visuals::GraphicsMode*  __fastcall  GraphicsMode() const;
-    static void             __fastcall  GetMachinesList(std::vector<String>& list);
+    Visuals::GraphicsMode*   GraphicsMode() const;
+    static void              GetMachinesList(std::vector<String>& list);
 
-    void                    __fastcall  Load(const String& name);
+    void                     Load(const String& name);
 
     String                  __property  Name = { read = m_Name };
     String                  __property  Keyboard = { read = m_Keyboard };
@@ -79,7 +79,7 @@ public:
 //class MachineConfigWriter : public MachineConfig
 //{
 //public:
-//                        __fastcall MachineConfigWriter();
+//                        MachineConfigWriter();
 //};
 //---------------------------------------------------------------------------
 } // namespace Project

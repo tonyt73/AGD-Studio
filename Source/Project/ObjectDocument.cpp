@@ -30,19 +30,19 @@ using namespace Project;
     AddFrame();
 }
 //---------------------------------------------------------------------------
-int __fastcall ObjectDocument::GetPosition(int index)
+int ObjectDocument::GetPosition(int index)
 {
     return index ? m_Position.Y : m_Position.X;
 }
 //---------------------------------------------------------------------------
-void __fastcall ObjectDocument::SetRoomIndex(int value)
+void ObjectDocument::SetRoomIndex(int value)
 {
     if (0 <= value && value <= 255) {
         m_RoomIndex = value;
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall ObjectDocument::DoSaveExtra()
+void ObjectDocument::DoSaveExtra()
 {
     Write("RoomIndex", m_RoomIndex);
     Write("State", m_State);

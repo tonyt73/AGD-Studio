@@ -20,10 +20,10 @@ protected:
     BuildMessages&              m_BuildMessages;
 
 public:
-                    __fastcall  BuildProcess(BuildMessages& buildMessages, BuildMessageType type, const String& description);
-    virtual         __fastcall ~BuildProcess();
+                     BuildProcess(BuildMessages& buildMessages, BuildMessageType type, const String& description);
+    virtual         ~BuildProcess();
 
-    virtual bool    __fastcall  Execute() = 0;
+    virtual bool     Execute() = 0;
 
             String  __property  Description = { read = m_Description };
   BuildMessageType  __property  Type = { read = m_Type };

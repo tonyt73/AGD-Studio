@@ -9,7 +9,7 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
-__fastcall TfrmEditorWindow::TfrmEditorWindow(TComponent* Owner)
+TfrmEditorWindow::TfrmEditorWindow(TComponent* Owner)
 : TFrame(Owner)
 {
     const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
@@ -22,12 +22,12 @@ __fastcall TfrmEditorWindow::TfrmEditorWindow(TComponent* Owner)
     m_Registrar.Subscribe<Event>(OnEvent);
 }
 //---------------------------------------------------------------------------
-__fastcall TfrmEditorWindow::~TfrmEditorWindow()
+TfrmEditorWindow::~TfrmEditorWindow()
 {
     m_Registrar.Unsubscribe();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::FrameResize(TObject *Sender)
+void TfrmEditorWindow::FrameResize(TObject *Sender)
 {
     Color = ThemeManager::Background;
     auto s = 8;
@@ -51,7 +51,7 @@ void __fastcall TfrmEditorWindow::FrameResize(TObject *Sender)
     DrawView();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::DrawView()
+void TfrmEditorWindow::DrawView()
 {
     // draw the window area
     if (m_View != nullptr)
@@ -95,18 +95,18 @@ void __fastcall TfrmEditorWindow::DrawView()
     sbrWindow->Panels->Items[5]->Text = "Height: " + IntToStr(m_Document->Height);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::SetDocument(Project::Document* document)
+void TfrmEditorWindow::SetDocument(Project::Document* document)
 {
     m_Document = dynamic_cast<Project::WindowDocument*>(document);
     ShowKeysHelp();
 }
 //---------------------------------------------------------------------------
-bool __fastcall TfrmEditorWindow::IsActive() const
+bool TfrmEditorWindow::IsActive() const
 {
     return theEditorManager.IsActive(this);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::OnEvent(const Event& event)
+void TfrmEditorWindow::OnEvent(const Event& event)
 {
     if (IsActive())
     {
@@ -114,7 +114,7 @@ void __fastcall TfrmEditorWindow::OnEvent(const Event& event)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::ShowKeysHelp()
+void TfrmEditorWindow::ShowKeysHelp()
 {
     const String help =
         "Cursor Keys       : Move Window\r\n"
@@ -122,12 +122,12 @@ void __fastcall TfrmEditorWindow::ShowKeysHelp()
     HelpKeysMessage(help);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::imgViewMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
+void TfrmEditorWindow::imgViewMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
 {
     //
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::actMoveLeftExecute(TObject *Sender)
+void TfrmEditorWindow::actMoveLeftExecute(TObject *Sender)
 {
     if (IsActive() && m_Document->Left - 1 >= 0)
     {
@@ -136,7 +136,7 @@ void __fastcall TfrmEditorWindow::actMoveLeftExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::actMoveRightExecute(TObject *Sender)
+void TfrmEditorWindow::actMoveRightExecute(TObject *Sender)
 {
     auto w = m_Document->Width;
     if (IsActive() && m_Document->Left + w + 1 <= m_View->Width)
@@ -146,7 +146,7 @@ void __fastcall TfrmEditorWindow::actMoveRightExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::actMoveUpExecute(TObject *Sender)
+void TfrmEditorWindow::actMoveUpExecute(TObject *Sender)
 {
     if (IsActive() && m_Document->Top - 1 >= 0)
     {
@@ -155,7 +155,7 @@ void __fastcall TfrmEditorWindow::actMoveUpExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::actMoveDownExecute(TObject *Sender)
+void TfrmEditorWindow::actMoveDownExecute(TObject *Sender)
 {
     auto h = m_Document->Height;
     if (IsActive() && m_Document->Top + h + 1 <= m_View->Height)
@@ -165,7 +165,7 @@ void __fastcall TfrmEditorWindow::actMoveDownExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::actWidthDecExecute(TObject *Sender)
+void TfrmEditorWindow::actWidthDecExecute(TObject *Sender)
 {
     if (IsActive() && m_Document->Width > 8)
     {
@@ -174,7 +174,7 @@ void __fastcall TfrmEditorWindow::actWidthDecExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::actWidthIncExecute(TObject *Sender)
+void TfrmEditorWindow::actWidthIncExecute(TObject *Sender)
 {
     if (IsActive() && m_Document->Left + m_Document->Width + 1 <= m_View->Width)
     {
@@ -183,7 +183,7 @@ void __fastcall TfrmEditorWindow::actWidthIncExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::actHeightDecExecute(TObject *Sender)
+void TfrmEditorWindow::actHeightDecExecute(TObject *Sender)
 {
     if (IsActive() && m_Document->Height >= 8)
     {
@@ -192,7 +192,7 @@ void __fastcall TfrmEditorWindow::actHeightDecExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::actHeightIncExecute(TObject *Sender)
+void TfrmEditorWindow::actHeightIncExecute(TObject *Sender)
 {
     if (IsActive() && m_Document->Top + m_Document->Height + 1 <= m_View->Height)
     {
@@ -201,7 +201,7 @@ void __fastcall TfrmEditorWindow::actHeightIncExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::FrameMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate)
+void TfrmEditorWindow::FrameMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate)
 {
     theEditorManager.SetActive(this);
 }

@@ -3,6 +3,7 @@
 //---------------------------------------------------------------------------
 // VCL
 #include <vcl.h>
+#include <Vcl.Graphics.hpp>
 #include <Vcl.Themes.hpp>
 #include <Vcl.Styles.hpp>
 

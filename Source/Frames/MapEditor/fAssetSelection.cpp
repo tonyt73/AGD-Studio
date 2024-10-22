@@ -1,7 +1,8 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#include "Frames/MapEditor/AssetSelection.h"
-#include "Frames/MapEditor/LabelledImage.h"
+//---------------------------------------------------------------------------
+#include "fAssetSelection.h"
+#include "fLabelledImage.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"

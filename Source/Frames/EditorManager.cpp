@@ -11,17 +11,17 @@ EditorManager& EditorManager::get()
     return instance;
 }
 //---------------------------------------------------------------------------
-__fastcall EditorManager::EditorManager()
+EditorManager::EditorManager()
 : m_ActiveEditor(nullptr)
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall EditorManager::SetActive(TFrame* editor)
+void EditorManager::SetActive(TFrame* editor)
 {
     m_ActiveEditor = editor;
 }
 //---------------------------------------------------------------------------
-bool __fastcall EditorManager::IsActive(const TFrame* editor) const
+bool EditorManager::IsActive(const TFrame* editor) const
 {
     return m_ActiveEditor == editor;
 }

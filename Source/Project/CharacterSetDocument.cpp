@@ -7,7 +7,7 @@
 //---------------------------------------------------------------------------
 using namespace Project;
 //---------------------------------------------------------------------------
-__fastcall CharacterSetDocument::CharacterSetDocument(const String& name, const String& extra)
+CharacterSetDocument::CharacterSetDocument(const String& name, const String& extra)
 : ImageDocument(name)
 {
     m_SaveRefId = false;

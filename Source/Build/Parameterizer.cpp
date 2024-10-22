@@ -9,7 +9,7 @@
 //---------------------------------------------------------------------------
 using namespace Build;
 //---------------------------------------------------------------------------
-String __fastcall Parameter::ization(const String& parameters)
+String Parameter::ization(const String& parameters)
 {
     auto subbedParameters = parameters;
     const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();

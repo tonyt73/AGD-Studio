@@ -16,11 +16,11 @@ private:
     bool        m_Middle;
     bool        m_Right;
 public:
-            __fastcall  MouseState();
-            __fastcall  MouseState(TMouseButton button, const TShiftState& shiftState);
-            __fastcall  MouseState(const TShiftState& shiftState);
+             MouseState();
+             MouseState(TMouseButton button, const TShiftState& shiftState);
+             MouseState(const TShiftState& shiftState);
 
-    bool    __fastcall  Has(TShiftState ss) const;
+    bool     Has(TShiftState ss) const;
 
     __property  bool    Shift       = { read = m_Shift       };
     __property  bool    Ctrl        = { read = m_Ctrl        };

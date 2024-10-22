@@ -10,10 +10,10 @@ namespace Build
 class FontBuilder : public SectionBuilder
 {
 protected:
-    void    __fastcall  Execute() final;
+    void     Execute() final;
 public:
-            __fastcall  FontBuilder();
-    virtual __fastcall ~FontBuilder();
+             FontBuilder();
+    virtual ~FontBuilder();
 };
 //---------------------------------------------------------------------------
 } // Build namespace

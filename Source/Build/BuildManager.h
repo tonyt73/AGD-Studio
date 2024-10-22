@@ -16,13 +16,13 @@ private:
     BuildProcesses              m_BuildProcesses;
     BuildMessages               m_BuildMessages;
 
-    void            __fastcall  SetTreeView(TElXTree* treeView);
+    void             SetTreeView(TElXTree* treeView);
 
 public:
-                    __fastcall  BuildManager();
-    virtual         __fastcall ~BuildManager();
+                     BuildManager();
+    virtual         ~BuildManager();
 
-    bool            __fastcall  Execute();
+    bool             Execute();
 
     __property  TElXTree*       TreeView = { write = SetTreeView };
 };

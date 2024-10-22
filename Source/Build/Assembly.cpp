@@ -8,16 +8,16 @@
 //---------------------------------------------------------------------------
 using namespace Build;
 //---------------------------------------------------------------------------
-__fastcall Assembly::Assembly(BuildMessages& buildMessages)
+Assembly::Assembly(BuildMessages& buildMessages)
 : ShellProcess(buildMessages, bmBuild, "Assemble Game+Engine (Assembly File to Emulator File)")
 {
 }
 //---------------------------------------------------------------------------
-__fastcall Assembly::~Assembly()
+Assembly::~Assembly()
 {
 }
 //---------------------------------------------------------------------------
-bool __fastcall Assembly::Execute()
+bool Assembly::Execute()
 {
     const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
     auto asmFile = Services::File::Combine(Services::Folders::Project, Services::Folders::ProjectName + ".asm");

@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
-#include "Frames/MapEditor/MapRectTool.h"
+#include "MapRectTool.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -15,12 +15,12 @@
 {
 }
 //---------------------------------------------------------------------------
-void  MapRectTool::Apply(Project::MapEntityList& list, Project::MapEntity entity)
+void MapRectTool::Apply(Project::MapEntityList& list, Project::MapEntity entity)
 {
     DrawRect(list, entity, TRect(StartPt.x, StartPt.y, LastPt.x, LastPt.y));
 }
 //---------------------------------------------------------------------------
-void  MapRectTool::DrawRect(Project::MapEntityList& list, Project::MapEntity entity, TRect Rect)
+void MapRectTool::DrawRect(Project::MapEntityList& list, Project::MapEntity entity, TRect Rect)
 {
     SnapToTileGrid(Rect);
     if (MS.Ctrl)

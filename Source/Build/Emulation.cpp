@@ -13,11 +13,11 @@ using namespace Build;
 {
 }
 //---------------------------------------------------------------------------
-__fastcall Emulation::~Emulation()
+Emulation::~Emulation()
 {
 }
 //---------------------------------------------------------------------------
-bool __fastcall Emulation::Execute()
+bool Emulation::Execute()
 {
     const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
     auto gameFile = Services::File::Combine(Services::Folders::Project, Services::Folders::ProjectName);

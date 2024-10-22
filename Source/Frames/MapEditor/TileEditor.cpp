@@ -1,7 +1,6 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
-#include <System.Math.hpp>
 #include "TileEditor.h"
 #include "Frames/ImageEditor/BlockColors.h"
 #include "Frames/MouseState.h"

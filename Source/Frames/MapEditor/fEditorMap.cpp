@@ -8,7 +8,7 @@
 #include "Messaging/Event.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-#pragma link "AssetSelection"
+#pragma link "fAssetSelection"
 #pragma link "LMDButtonPanel"
 #pragma link "LMDControl"
 #pragma link "LMDCustomBevelPanel"
@@ -22,7 +22,7 @@
 //---------------------------------------------------------------------------
 const float g_Scales[] = { 0.33f, 0.5f, 1.0f, 2.0f, 3.0f, 4.0f, 6.0f, 8.0f, 16.f };
 //---------------------------------------------------------------------------
-__fastcall TfrmEditorMap::TfrmEditorMap(TComponent* Owner)
+TfrmEditorMap::TfrmEditorMap(TComponent* Owner)
 : TFrame(Owner)
 , m_ActivePanel(nullptr)
 , m_LastSelectedId(-1)
@@ -34,7 +34,7 @@ __fastcall TfrmEditorMap::TfrmEditorMap(TComponent* Owner)
     m_Registrar.Subscribe<DocumentChange<String>>(OnDocumentChanged);
 }
 //---------------------------------------------------------------------------
-__fastcall TfrmEditorMap::~TfrmEditorMap()
+TfrmEditorMap::~TfrmEditorMap()
 {
     m_Registrar.Unsubscribe();
 }
@@ -94,7 +94,7 @@ void TfrmEditorMap::Initialise()
     assetsObjects->OnImageSelection = OnEntityClick;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actSelectExecute(TObject *Sender)
+void TfrmEditorMap::actSelectExecute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -104,7 +104,7 @@ void __fastcall TfrmEditorMap::actSelectExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actPencilExecute(TObject *Sender)
+void TfrmEditorMap::actPencilExecute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -115,7 +115,7 @@ void __fastcall TfrmEditorMap::actPencilExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actLineExecute(TObject *Sender)
+void TfrmEditorMap::actLineExecute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -126,7 +126,7 @@ void __fastcall TfrmEditorMap::actLineExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actRectExecute(TObject *Sender)
+void TfrmEditorMap::actRectExecute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -137,7 +137,7 @@ void __fastcall TfrmEditorMap::actRectExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actZoomInExecute(TObject *Sender)
+void TfrmEditorMap::actZoomInExecute(TObject *Sender)
 {
     if (IsActive() && m_Scale < 8)
     {
@@ -146,7 +146,7 @@ void __fastcall TfrmEditorMap::actZoomInExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actZoomOutExecute(TObject *Sender)
+void TfrmEditorMap::actZoomOutExecute(TObject *Sender)
 {
     if (IsActive() && m_Scale > 0)
     {
@@ -155,7 +155,7 @@ void __fastcall TfrmEditorMap::actZoomOutExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actZoomResetExecute(TObject *Sender)
+void TfrmEditorMap::actZoomResetExecute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -165,7 +165,7 @@ void __fastcall TfrmEditorMap::actZoomResetExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actUndoExecute(TObject *Sender)
+void TfrmEditorMap::actUndoExecute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -173,7 +173,7 @@ void __fastcall TfrmEditorMap::actUndoExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actRedoExecute(TObject *Sender)
+void TfrmEditorMap::actRedoExecute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -181,49 +181,49 @@ void __fastcall TfrmEditorMap::actRedoExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::imgWorkspaceMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
+void TfrmEditorMap::imgWorkspaceMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
 {
     m_Workspace->OnMouseDown(Button, Shift, X, Y);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::imgWorkspaceMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
+void TfrmEditorMap::imgWorkspaceMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
 {
     m_Workspace->OnMouseMove(Shift, X, Y);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::imgWorkspaceMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
+void TfrmEditorMap::imgWorkspaceMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
 {
     m_Workspace->OnMouseUp(Button,Shift, X, Y);
     // copy the workspace to the map document
     m_Document->Set(actEditModeSingleScreen->Checked ? Project::meRoom : Project::meMap, m_Workspace->GetEntities());
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::imgRoomSelectorMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
+void TfrmEditorMap::imgRoomSelectorMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
 {
     m_RoomSelector->OnMouseDown(Button, Shift, X, Y);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::imgRoomSelectorMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
+void TfrmEditorMap::imgRoomSelectorMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
 {
     m_RoomSelector->OnMouseMove(Shift, X, Y);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::imgRoomSelectorMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
+void TfrmEditorMap::imgRoomSelectorMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
 {
     m_RoomSelector->OnMouseUp(Button, Shift, X, Y);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::imgScratchPadMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
+void TfrmEditorMap::imgScratchPadMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
 {
     m_ScratchPad->OnMouseDown(Button,Shift, X, Y);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::imgScratchPadMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
+void TfrmEditorMap::imgScratchPadMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
 {
     m_ScratchPad->OnMouseMove(Shift, X, Y);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::imgScratchPadMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
+void TfrmEditorMap::imgScratchPadMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
 {
     m_ScratchPad->OnMouseUp(Button,Shift, X, Y);
     // copy the scratch pad to the map document
@@ -441,13 +441,13 @@ void TfrmEditorMap::ShowKeysHelp()
     HelpKeysMessage(help);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::imgWorkspaceMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate)
+void TfrmEditorMap::imgWorkspaceMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate)
 {
     theEditorManager.SetActive(this);
     ShowKeysHelp();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::imgWorkspaceMouseEnter(TObject *Sender)
+void TfrmEditorMap::imgWorkspaceMouseEnter(TObject *Sender)
 {
     theEditorManager.SetActive(this);
     auto wc = dynamic_cast<TControl*>(Sender);
@@ -467,7 +467,7 @@ void __fastcall TfrmEditorMap::imgWorkspaceMouseEnter(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actCopyToScratchPadExecute(TObject *Sender)
+void TfrmEditorMap::actCopyToScratchPadExecute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -475,7 +475,7 @@ void __fastcall TfrmEditorMap::actCopyToScratchPadExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actMoveToScratchPadExecute(TObject *Sender)
+void TfrmEditorMap::actMoveToScratchPadExecute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -484,7 +484,7 @@ void __fastcall TfrmEditorMap::actMoveToScratchPadExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actCopyToWorkspaceExecute(TObject *Sender)
+void TfrmEditorMap::actCopyToWorkspaceExecute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -492,7 +492,7 @@ void __fastcall TfrmEditorMap::actCopyToWorkspaceExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actDuplicateExecute(TObject *Sender)
+void TfrmEditorMap::actDuplicateExecute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -511,7 +511,7 @@ void __fastcall TfrmEditorMap::actDuplicateExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actDeleteExecute(TObject *Sender)
+void TfrmEditorMap::actDeleteExecute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -528,17 +528,17 @@ void __fastcall TfrmEditorMap::actDeleteExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::mnuWSToggleToolbarClick(TObject *Sender)
+void TfrmEditorMap::mnuWSToggleToolbarClick(TObject *Sender)
 {
     tbrWorkspace->Visible = mnuWSToggleToolbar->Checked;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::mnuSPToggleToolbarClick(TObject *Sender)
+void TfrmEditorMap::mnuSPToggleToolbarClick(TObject *Sender)
 {
     tbrScratchPad->Visible = mnuSPToggleToolbar->Checked;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::pgcAssetsChange(TObject *Sender)
+void TfrmEditorMap::pgcAssetsChange(TObject *Sender)
 {
     auto state = pgcAssets->ActivePage == tabTiles;
     if (!state && (btnLine->Down || btnRect->Down))
@@ -575,23 +575,23 @@ void TfrmEditorMap::OnWorkspaceEntitySelected(const Project::MapEntity& entity)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::btnWSGridRoomClick(TObject *Sender)
+void TfrmEditorMap::btnWSGridRoomClick(TObject *Sender)
 {
     m_Workspace->GridRoom = btnWSGridRoom->Down;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::btnWSGridTileClick(TObject *Sender)
+void TfrmEditorMap::btnWSGridTileClick(TObject *Sender)
 {
     m_Workspace->GridTile = btnWSGridTile->Down;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::btnSPGridTileClick(TObject *Sender)
+void TfrmEditorMap::btnSPGridTileClick(TObject *Sender)
 {
     //btnSPGridTile->Down = !btnSPGridTile->Down;
     m_ScratchPad->GridTile = btnSPGridTile->Down;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actGridTileExecute(TObject *Sender)
+void TfrmEditorMap::actGridTileExecute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -607,7 +607,7 @@ void __fastcall TfrmEditorMap::actGridTileExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actGridRoomExecute(TObject *Sender)
+void TfrmEditorMap::actGridRoomExecute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -619,7 +619,7 @@ void __fastcall TfrmEditorMap::actGridRoomExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actEditModeFullMapExecute(TObject *Sender)
+void TfrmEditorMap::actEditModeFullMapExecute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -644,7 +644,7 @@ void __fastcall TfrmEditorMap::actEditModeFullMapExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actToggleStartRoomExecute(TObject *Sender)
+void TfrmEditorMap::actToggleStartRoomExecute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -652,7 +652,7 @@ void __fastcall TfrmEditorMap::actToggleStartRoomExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actEntityNextExecute(TObject *Sender)
+void TfrmEditorMap::actEntityNextExecute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -671,7 +671,7 @@ void __fastcall TfrmEditorMap::actEntityNextExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actEntityPrevExecute(TObject *Sender)
+void TfrmEditorMap::actEntityPrevExecute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -690,7 +690,7 @@ void __fastcall TfrmEditorMap::actEntityPrevExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actEntityToggleLocksExecute(TObject *Sender)
+void TfrmEditorMap::actEntityToggleLocksExecute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -698,7 +698,7 @@ void __fastcall TfrmEditorMap::actEntityToggleLocksExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::sbxWorkspaceMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled)
+void TfrmEditorMap::sbxWorkspaceMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled)
 {
     if (WheelDelta < 0)
     {
@@ -711,7 +711,7 @@ void __fastcall TfrmEditorMap::sbxWorkspaceMouseWheel(TObject *Sender, TShiftSta
     Handled = true;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actCopyExecute(TObject *Sender)
+void TfrmEditorMap::actCopyExecute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -726,7 +726,7 @@ void __fastcall TfrmEditorMap::actCopyExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actCutExecute(TObject *Sender)
+void TfrmEditorMap::actCutExecute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -741,7 +741,7 @@ void __fastcall TfrmEditorMap::actCutExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actPasteExecute(TObject *Sender)
+void TfrmEditorMap::actPasteExecute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -756,7 +756,7 @@ void __fastcall TfrmEditorMap::actPasteExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actToggleRoomNumbersExecute(TObject *Sender)
+void TfrmEditorMap::actToggleRoomNumbersExecute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -770,7 +770,7 @@ int TfrmEditorMap::OnRetrieveRoomIndex(const TPoint& pt, bool newIndex)
     return m_Document->GetRoomIndex(pt, newIndex);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actToggleShowLocksExecute(TObject *Sender)
+void TfrmEditorMap::actToggleShowLocksExecute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -778,7 +778,7 @@ void __fastcall TfrmEditorMap::actToggleShowLocksExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actToggleTileTypesExecute(TObject *Sender)
+void TfrmEditorMap::actToggleTileTypesExecute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -786,7 +786,7 @@ void __fastcall TfrmEditorMap::actToggleTileTypesExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actSpriteType0Execute(TObject *Sender)
+void TfrmEditorMap::actSpriteType0Execute(TObject *Sender)
 {
     if (IsActive())
     {
@@ -795,7 +795,7 @@ void __fastcall TfrmEditorMap::actSpriteType0Execute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actShowSpriteTypesExecute(TObject *Sender)
+void TfrmEditorMap::actShowSpriteTypesExecute(TObject *Sender)
 {
     if (IsActive())
     {

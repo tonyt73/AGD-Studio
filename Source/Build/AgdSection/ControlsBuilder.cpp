@@ -10,16 +10,16 @@
 namespace Build
 {
 //---------------------------------------------------------------------------
-__fastcall ControlsBuilder::ControlsBuilder()
+ControlsBuilder::ControlsBuilder()
 : SectionBuilder("ControlsBuilder")
 {
 }
 //---------------------------------------------------------------------------
-__fastcall ControlsBuilder::~ControlsBuilder()
+ControlsBuilder::~ControlsBuilder()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall ControlsBuilder::Execute()
+void ControlsBuilder::Execute()
 {
     const auto& Keys = (Project::ControlsDocument*)theDocumentManager.Get("ControlsBuilder", "List", "ControlsBuilder");
     String line = "DEFINECONTROLS  ";

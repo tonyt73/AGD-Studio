@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
-#include "Frames/MapEditor/MapTool.h"
+#include "MapTool.h"
 #include "Project/DocumentManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -16,18 +16,18 @@
 {
 }
 //---------------------------------------------------------------------------
-int  MapTool::Snap(int value, int range) const
+int MapTool::Snap(int value, int range) const
 {
     return ((int)(value / range)) * range;
 }
 //---------------------------------------------------------------------------
-void  MapTool::SnapToTileGrid(TPoint& pt) const
+void MapTool::SnapToTileGrid(TPoint& pt) const
 {
     pt.x = Snap(pt.x, m_TileSize.cx);
     pt.y = Snap(pt.y, m_TileSize.cy);
 }
 //---------------------------------------------------------------------------
-void  MapTool::SnapToTileGrid(TRect& rect) const
+void MapTool::SnapToTileGrid(TRect& rect) const
 {
     rect.Left   = Snap(rect.Left  , m_TileSize.cx);
     rect.Right  = Snap(rect.Right , m_TileSize.cx);
@@ -35,7 +35,7 @@ void  MapTool::SnapToTileGrid(TRect& rect) const
     rect.Bottom = Snap(rect.Bottom, m_TileSize.cy);
 }
 //---------------------------------------------------------------------------
-void  MapTool::Set(Project::MapEntityList& list, const Project::MapEntity& entity)
+void MapTool::Set(Project::MapEntityList& list, const Project::MapEntity& entity)
 {
     if (Flags & allowOnlyOne)
     {
@@ -57,14 +57,14 @@ void  MapTool::Set(Project::MapEntityList& list, const Project::MapEntity& entit
     }
 }
 //---------------------------------------------------------------------------
-String  MapTool::Begin(Project::MapEntityList& list, Project::MapEntity entity, const TPoint& pt, const TShiftState& buttons)
+String MapTool::Begin(Project::MapEntityList& list, Project::MapEntity entity, const TPoint& pt, const TShiftState& buttons)
 {
     Tool::Begin(pt, buttons);
     Apply(list, entity);
     return String();
 }
 //---------------------------------------------------------------------------
-void  MapTool::Move(Project::MapEntityList& list, Project::MapEntity entity, const TPoint& pt, const TShiftState& buttons)
+void MapTool::Move(Project::MapEntityList& list, Project::MapEntity entity, const TPoint& pt, const TShiftState& buttons)
 {
     Tool::Move(pt, buttons);
     if (Flags & resetOnMove)
@@ -75,7 +75,7 @@ void  MapTool::Move(Project::MapEntityList& list, Project::MapEntity entity, con
     Apply(list, entity);
 }
 //---------------------------------------------------------------------------
-String  MapTool::End(Project::MapEntityList& list, Project::MapEntity entity, const TPoint& pt)
+String MapTool::End(Project::MapEntityList& list, Project::MapEntity entity, const TPoint& pt)
 {
     Tool::End(pt);
     if (pt != LastPt)

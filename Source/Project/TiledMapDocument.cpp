@@ -56,12 +56,12 @@ _fastcall TiledMapDocument::TiledMapDocument(const String& name)
     }
 }
 //---------------------------------------------------------------------------
-__fastcall TiledMapDocument::~TiledMapDocument()
+TiledMapDocument::~TiledMapDocument()
 {
     m_Registrar.Unsubscribe();
 }
 //---------------------------------------------------------------------------
-void __fastcall TiledMapDocument::DoSave()
+void TiledMapDocument::DoSave()
 {
     Push("Map");
     Write("StartLocation", StartRoomIndex);
@@ -106,7 +106,7 @@ void __fastcall TiledMapDocument::DoSave()
     Pop(); // map
 }
 //---------------------------------------------------------------------------
-void __fastcall TiledMapDocument::OnEndObject(const String& object)
+void TiledMapDocument::OnEndObject(const String& object)
 {
     if (object == "Map.Entities[]") {
         if (m_EntityLoader.m_LoadId != InvalidDocumentId) {
@@ -138,7 +138,7 @@ void __fastcall TiledMapDocument::OnEndObject(const String& object)
     }
 }
 //---------------------------------------------------------------------------
-MapEntityList __fastcall TiledMapDocument::Get(Visuals::ImageTypes type) const
+MapEntityList TiledMapDocument::Get(Visuals::ImageTypes type) const
 {
     MapEntityList list;
     for (const auto& entity : m_Map) {
@@ -149,7 +149,7 @@ MapEntityList __fastcall TiledMapDocument::Get(Visuals::ImageTypes type) const
     return list;
 }
 //---------------------------------------------------------------------------
-const MapEntityList& __fastcall TiledMapDocument::Get(MapEntityType type, TSize room)
+const MapEntityList& TiledMapDocument::Get(MapEntityType type, TSize room)
 {
     if (type == meMap) {
         return m_Map;
@@ -181,7 +181,7 @@ const MapEntityList& __fastcall TiledMapDocument::Get(MapEntityType type, TSize 
     return m_Room;
 }
 //---------------------------------------------------------------------------
-void __fastcall TiledMapDocument::Set(MapEntityType type, const MapEntityList& entities)
+void TiledMapDocument::Set(MapEntityType type, const MapEntityList& entities)
 {
     if (type == meMap) {
         m_Map.clear();
@@ -218,7 +218,7 @@ void __fastcall TiledMapDocument::Set(MapEntityType type, const MapEntityList& e
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TiledMapDocument::OnDocumentChanged(const DocumentChange<String>& message)
+void TiledMapDocument::OnDocumentChanged(const DocumentChange<String>& message)
 {
     if (message.document != nullptr && message.document->Type != "Image") {
         return;
@@ -233,12 +233,12 @@ void __fastcall TiledMapDocument::OnDocumentChanged(const DocumentChange<String>
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TiledMapDocument::OnSetStartRoom(const SetStartRoom& event)
+void TiledMapDocument::OnSetStartRoom(const SetStartRoom& event)
 {
     SetStartRoomCoords(event.Room);
 }
 //---------------------------------------------------------------------------
-void __fastcall TiledMapDocument::SetStartRoomCoords(const TPoint& coords)
+void TiledMapDocument::SetStartRoomCoords(const TPoint& coords)
 {
     auto ri = GetRoomIndex(coords);
     if (ri != 255) {
@@ -252,12 +252,12 @@ void __fastcall TiledMapDocument::SetStartRoomCoords(const TPoint& coords)
     }
 }
 //---------------------------------------------------------------------------
-int __fastcall TiledMapDocument::GetStartRoomCoords(int index) const
+int TiledMapDocument::GetStartRoomCoords(int index) const
 {
     return index ? m_StartRoomCoords.Y : m_StartRoomCoords.X;
 }
 //---------------------------------------------------------------------------
-void __fastcall TiledMapDocument::UpdateEntityRooms()
+void TiledMapDocument::UpdateEntityRooms()
 {
     auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile].Minimum;
     auto roomSize = TSize(Window.Width() * tileSize.cx, Window.Height() * tileSize.cy);
@@ -299,12 +299,12 @@ void __fastcall TiledMapDocument::UpdateEntityRooms()
     Bus::Publish<UpdateProperties>(UpdateProperties());
 }
 //---------------------------------------------------------------------------
-bool __fastcall TiledMapDocument::IsRoomEmpty(int x, int y)
+bool TiledMapDocument::IsRoomEmpty(int x, int y)
 {
     return (Get(meRoom, TSize(x, y)).size() == 0);
 }
 //---------------------------------------------------------------------------
-bool __fastcall TiledMapDocument::IsRoomIndexUsed(const int roomIndex) const
+bool TiledMapDocument::IsRoomIndexUsed(const int roomIndex) const
 {
     assert(roomIndex != 255);
     auto maxRooms = m_RoomMappingWidth * m_RoomMappingHeight;
@@ -317,7 +317,7 @@ bool __fastcall TiledMapDocument::IsRoomIndexUsed(const int roomIndex) const
     return false;
 }
 //---------------------------------------------------------------------------
-TRect __fastcall TiledMapDocument::GetMinimalMapSize()
+TRect TiledMapDocument::GetMinimalMapSize()
 {
     m_ScreenCount = 0;
     TRect rect(g_MaxMapRoomsAcross, g_MaxMapRoomsDown, 0, 0);
@@ -338,7 +338,7 @@ TRect __fastcall TiledMapDocument::GetMinimalMapSize()
     return rect;
 }
 //---------------------------------------------------------------------------
-int __fastcall TiledMapDocument::GetRoomIndex(const TPoint& room, bool newIdForUndefinedRoom)
+int TiledMapDocument::GetRoomIndex(const TPoint& room, bool newIdForUndefinedRoom)
 {
     assert(0 <= room.X && room.X < m_RoomMappingWidth);
     assert(0 <= room.Y && room.Y < m_RoomMappingHeight);
@@ -364,7 +364,7 @@ int __fastcall TiledMapDocument::GetRoomIndex(const TPoint& room, bool newIdForU
     return ri;
 }
 //---------------------------------------------------------------------------
-void __fastcall TiledMapDocument::UpdateScreenCoords()
+void TiledMapDocument::UpdateScreenCoords()
 {
     for (auto y = 0; y < g_MaxMapRoomsDown; y++) {
         for (auto x = 0; x < g_MaxMapRoomsAcross; x++) {
@@ -378,12 +378,12 @@ void __fastcall TiledMapDocument::UpdateScreenCoords()
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TiledMapDocument::OnLoading()
+void TiledMapDocument::OnLoading()
 {
     m_RoomMapping.clear();
 }
 //---------------------------------------------------------------------------
-void __fastcall TiledMapDocument::OnLoaded()
+void TiledMapDocument::OnLoaded()
 {
     if (m_RoomMapping.size() != m_RoomMappingWidth * m_RoomMappingHeight) {
         ErrorMessage("[TiledMap] The Room Mapping object in the TileMap.json file has " + IntToStr((int)m_RoomMapping.size()) + " indexes when it should have " + IntToStr(m_RoomMappingWidth * m_RoomMappingHeight));
@@ -393,7 +393,7 @@ void __fastcall TiledMapDocument::OnLoaded()
     //UpdateEntityRooms();
 }
 //---------------------------------------------------------------------------
-const TRect& __fastcall TiledMapDocument::GetWindow() const
+const TRect& TiledMapDocument::GetWindow() const
 {
     auto wi = (WindowDocument*)theDocumentManager.Get("Window", "Definition", "Window");
     if (wi != nullptr) {
@@ -402,7 +402,7 @@ const TRect& __fastcall TiledMapDocument::GetWindow() const
     return TRect();
 }
 //---------------------------------------------------------------------------
-int __fastcall TiledMapDocument::GetNumberOfRooms()
+int TiledMapDocument::GetNumberOfRooms()
 {
     int count = 0;
     for (auto room : m_RoomMapping) {
@@ -411,7 +411,7 @@ int __fastcall TiledMapDocument::GetNumberOfRooms()
     return count;
 }
 //---------------------------------------------------------------------------
-int __fastcall TiledMapDocument::GetMaxRooms(int index)
+int TiledMapDocument::GetMaxRooms(int index)
 {
     return index ? g_MaxMapRoomsDown : g_MaxMapRoomsAcross;
 }

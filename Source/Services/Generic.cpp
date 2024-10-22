@@ -10,21 +10,21 @@ using namespace Services;
 const String tokenObj = "|";
 const String tokenSep = "^";
 //---------------------------------------------------------------------------
-__fastcall Generic::Generic()
+Generic::Generic()
 {
 }
 //---------------------------------------------------------------------------
-__fastcall Generic::Generic(const String& object)
+Generic::Generic(const String& object)
 : m_Object(object)
 {
 }
 //---------------------------------------------------------------------------
-__fastcall Generic::Generic(const Generic& other)
+Generic::Generic(const Generic& other)
 : m_Object(other.m_Object)
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall Generic::Process()
+void Generic::Process()
 {
     if (m_Objects.size() == 0 && m_Object.Length() > 0)
     {
@@ -41,27 +41,27 @@ void __fastcall Generic::Process()
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall Generic::Add(const String& name, const String& value)
+void Generic::Add(const String& name, const String& value)
 {
     m_Object += tokenObj + name + tokenSep + "string:"  + value;
 }
 //---------------------------------------------------------------------------
-void __fastcall Generic::Add(const String& name, const bool& value)
+void Generic::Add(const String& name, const bool& value)
 {
     m_Object += tokenObj + name + tokenSep + "bool:" + String(value ? "true" : "false");
 }
 //---------------------------------------------------------------------------
-void __fastcall Generic::Add(const String& name, const int& value)
+void Generic::Add(const String& name, const int& value)
 {
     m_Object += tokenObj + name + tokenSep + "int:" + IntToStr(value);
 }
 //---------------------------------------------------------------------------
-void __fastcall Generic::Add(const String& name, const float& value)
+void Generic::Add(const String& name, const float& value)
 {
     m_Object += tokenObj + name + tokenSep + "float:" + FloatToStrF(value, ffFixed, 6, 2);
 }
 //---------------------------------------------------------------------------
-bool __fastcall Generic::Get(const String& name, String& value)
+bool Generic::Get(const String& name, String& value)
 {
     Process();
     if (m_Objects.count(name) == 1)
@@ -75,7 +75,7 @@ bool __fastcall Generic::Get(const String& name, String& value)
     return false;
 }
 //---------------------------------------------------------------------------
-bool __fastcall Generic::Get(const String& name, bool& value)
+bool Generic::Get(const String& name, bool& value)
 {
     Process();
     if (m_Objects.count(name) == 1)
@@ -89,7 +89,7 @@ bool __fastcall Generic::Get(const String& name, bool& value)
     return false;
 }
 //---------------------------------------------------------------------------
-bool __fastcall Generic::Get(const String& name, int& value)
+bool Generic::Get(const String& name, int& value)
 {
     Process();
     if (m_Objects.count(name) == 1)
@@ -103,7 +103,7 @@ bool __fastcall Generic::Get(const String& name, int& value)
     return false;
 }
 //---------------------------------------------------------------------------
-bool __fastcall Generic::Get(const String& name, float& value)
+bool Generic::Get(const String& name, float& value)
 {
     Process();
     if (m_Objects.count(name) == 1)

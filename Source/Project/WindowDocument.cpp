@@ -51,7 +51,7 @@ using namespace Project;
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall WindowDocument::DoSave()
+void WindowDocument::DoSave()
 {
     Push("Window");
         Write("Left", m_Rect.Left);
@@ -61,7 +61,7 @@ void __fastcall WindowDocument::DoSave()
     Pop();  // window
 }
 //---------------------------------------------------------------------------
-void __fastcall WindowDocument::OnLoaded()
+void WindowDocument::OnLoaded()
 {
     const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
 
@@ -82,7 +82,7 @@ void __fastcall WindowDocument::OnLoaded()
     }
 }
 //---------------------------------------------------------------------------
-int __fastcall WindowDocument::Get(int index)
+int WindowDocument::Get(int index)
 {
     switch (index)
     {
@@ -99,7 +99,7 @@ int __fastcall WindowDocument::Get(int index)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall WindowDocument::Set(const TRect& rect)
+void WindowDocument::Set(const TRect& rect)
 {
     if (rect.Width() > 8 && rect.Height() > 4)
     {

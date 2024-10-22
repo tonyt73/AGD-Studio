@@ -2,7 +2,6 @@
 #ifndef ImageH
 #define ImageH
 //---------------------------------------------------------------------------
-#include <memory>
 #include "GraphicsBuffer.h"
 #include "Project/ImageDocument.h"
 //---------------------------------------------------------------------------
@@ -23,14 +22,14 @@ private:
     bool                                m_IsMonochrome;
 
 public:
-                    __fastcall  Image(unsigned int width, unsigned int height, const Visuals::GraphicsMode& graphicsMode);
-                    __fastcall  Image(Project::ImageDocument const * const image, const Visuals::GraphicsMode& graphicsMode);
+                     Image(unsigned int width, unsigned int height, const Visuals::GraphicsMode& graphicsMode);
+                     Image(Project::ImageDocument const * const image, const Visuals::GraphicsMode& graphicsMode);
 
-    void            __fastcall  ChangeFrame(int frame);
-    GraphicsBuffer& __fastcall  Canvas() const;
-    void            __fastcall  Draw(const TPoint& pt, TBitmap* canvas, TColor overlayColor = clBlack);
+    void             ChangeFrame(int frame);
+    GraphicsBuffer&  Canvas() const;
+    void             Draw(const TPoint& pt, TBitmap* canvas, TColor overlayColor = clBlack);
     std::vector<unsigned char>
-                    __fastcall  GetExportNativeFormat() const;
+                     GetExportNativeFormat() const;
 };
 typedef std::vector<std::unique_ptr<Image>> ImageList;
 typedef std::map<unsigned int, std::unique_ptr<Image>> ImageMap;

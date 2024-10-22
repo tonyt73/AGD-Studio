@@ -7,7 +7,7 @@
         <MainSource>AGD Studio.cpp</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Release</Config>
-        <Platform Condition="'$(Platform)'==''">Win64x</Platform>
+        <Platform Condition="'$(Platform)'==''">Win64</Platform>
         <TargetedPlatforms>1048578</TargetedPlatforms>
         <ProjectName Condition="'$(ProjectName)'==''">AGD Studio</ProjectName>
     </PropertyGroup>
@@ -502,11 +502,11 @@
             <DependentOn>Frames\JumpEditor\fEditorJumpTable.h</DependentOn>
             <BuildOrder>53</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Frames\MapEditor\AssetSelection.cpp">
+        <CppCompile Include="Frames\MapEditor\fAssetSelection.cpp">
             <Form>frmAssetSelection</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\MapEditor\AssetSelection.h</DependentOn>
+            <DependentOn>Frames\MapEditor\fAssetSelection.h</DependentOn>
             <BuildOrder>55</BuildOrder>
         </CppCompile>
         <CppCompile Include="Frames\MapEditor\fEditorMap.cpp">
@@ -516,12 +516,12 @@
             <DependentOn>Frames\MapEditor\fEditorMap.h</DependentOn>
             <BuildOrder>54</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Frames\MapEditor\LabelledImage.cpp">
+        <CppCompile Include="Frames\MapEditor\fLabelledImage.cpp">
             <Form>frmLabelledImage</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\MapEditor\LabelledImage.h</DependentOn>
-            <BuildOrder>57</BuildOrder>
+            <DependentOn>Frames\MapEditor\fLabelledImage.h</DependentOn>
+            <BuildOrder>104</BuildOrder>
         </CppCompile>
         <CppCompile Include="Frames\MapEditor\MapLineTool.cpp">
             <DependentOn>Frames\MapEditor\MapLineTool.h</DependentOn>
@@ -732,9 +732,8 @@
         </CppCompile>
         <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
         <FormResources Include="Frames\WindowEditor\fEditorWindow.dfm"/>
-        <FormResources Include="Frames\MapEditor\AssetSelection.dfm"/>
+        <FormResources Include="Frames\MapEditor\fAssetSelection.dfm"/>
         <FormResources Include="Frames\MapEditor\fEditorMap.dfm"/>
-        <FormResources Include="Frames\MapEditor\LabelledImage.dfm"/>
         <FormResources Include="Frames\MusicEditor\fEditorMusic.dfm"/>
         <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
         <FormResources Include="Frames\MessagesEditor\fEditorMessages.dfm"/>
@@ -758,6 +757,7 @@
         <FormResources Include="Frames\ControlsEditor\fEditorControls.dfm"/>
         <FormResources Include="Frames\ControlsEditor\fKeyCapture.dfm"/>
         <FormResources Include="Frames\IDE\fIDE.dfm"/>
+        <FormResources Include="Frames\MapEditor\fLabelledImage.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -859,6 +859,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName=".\Binaries\Win64\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput">
+                    <Platform Name="Win64">
+                        <RemoteName>AGD Studio.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName=".\Win32\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Win32\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Win64\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput"/>
@@ -870,6 +876,12 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="Project\README.md" Configuration="Release" Class="ProjectFile"/>
+                <DeployFile LocalName="Project\README.md" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Win64">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="README.md" Configuration="Debug" Class="ProjectFile"/>
                 <DeployClass Name="AdditionalDebugSymbols">
                     <Platform Name="iOSSimulator">

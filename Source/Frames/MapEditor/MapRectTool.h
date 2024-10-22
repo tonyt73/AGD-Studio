@@ -2,7 +2,7 @@
 #ifndef MapRectToolH
 #define MapRectToolH
 //---------------------------------------------------------------------------
-#include "Frames/MapEditor/MapTool.h"
+#include "MapTool.h"
 //---------------------------------------------------------------------------
 class MapRectTool : public MapTool
 {

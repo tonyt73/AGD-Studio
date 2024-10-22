@@ -9,7 +9,7 @@
 //---------------------------------------------------------------------------
 using namespace Visuals;
 //---------------------------------------------------------------------------
-__fastcall Palette::Palette()
+Palette::Palette()
 : JsonFile()
 , m_Name("unknown")
 {
@@ -18,13 +18,13 @@ __fastcall Palette::Palette()
     m_PropertyMap["ColorTable[]"] = &m_Color;
 }
 //---------------------------------------------------------------------------
-__fastcall Palette::Palette(const String& name)
+Palette::Palette(const String& name)
 : Palette()
 {
     m_Name = name;
 }
 //---------------------------------------------------------------------------
-__fastcall Palette::Palette(const Palette& other)
+Palette::Palette(const Palette& other)
 : Palette()
 {
     m_Name = other.m_Name;
@@ -32,7 +32,7 @@ __fastcall Palette::Palette(const Palette& other)
     m_ColorTable.assign(other.m_ColorTable.begin(), other.m_ColorTable.end());
 }
 //---------------------------------------------------------------------------
-Palette& __fastcall Palette::operator=(const Palette& other)
+Palette& Palette::operator=(const Palette& other)
 {
     m_Name = other.m_Name;
     m_ColorTable.clear();
@@ -40,7 +40,7 @@ Palette& __fastcall Palette::operator=(const Palette& other)
     return *this;
 }
 //---------------------------------------------------------------------------
-TColor __fastcall Palette::GetTableColor(int index) const
+TColor Palette::GetTableColor(int index) const
 {
     if (0 <= index && index < m_ColorTable.size())
     {
@@ -49,7 +49,7 @@ TColor __fastcall Palette::GetTableColor(int index) const
     return m_ColorTable[1];
 }
 //---------------------------------------------------------------------------
-TColor __fastcall Palette::GetGreyscale(int index) const
+TColor Palette::GetGreyscale(int index) const
 {
     auto color = GetTableColor(index);
     unsigned char r = (color & 0x000000FF);
@@ -60,17 +60,17 @@ TColor __fastcall Palette::GetGreyscale(int index) const
     return color;
 }
 //---------------------------------------------------------------------------
-int __fastcall Palette::GetTotalColors() const
+int Palette::GetTotalColors() const
 {
     return m_ColorTable.size();
 }
 //---------------------------------------------------------------------------
-TColor __fastcall Palette::GetFontColorOf(int index) const
+TColor Palette::GetFontColorOf(int index) const
 {
     return (LuminanceOf(GetTableColor(index)) < 128) ? clWhite : clBlack;
 }
 //---------------------------------------------------------------------------
-DWORD __fastcall Palette::LuminanceOf(TColor Color)
+DWORD Palette::LuminanceOf(TColor Color)
 {
     // get the luminance of the color
     DWORD dwRed       = (Color & 0x000000FF) >>  0;
@@ -80,7 +80,7 @@ DWORD __fastcall Palette::LuminanceOf(TColor Color)
     return dwLuminance;
 }
 //---------------------------------------------------------------------------
-void __fastcall Palette::OnEndObject(const String& object)
+void Palette::OnEndObject(const String& object)
 {
     if (object == "ColorTable[]")
     {
@@ -88,13 +88,13 @@ void __fastcall Palette::OnEndObject(const String& object)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall Palette::Load(const String& name)
+void Palette::Load(const String& name)
 {
     m_ColorTable.clear();
     Services::JsonFile::Load(Services::File::Combine(Services::Folders::Application, "Palettes" + Services::Folders::Separator + name + ".json"));
 }
 //---------------------------------------------------------------------------
-void __fastcall Palette::Save()
+void Palette::Save()
 {
 //    // {
 //    Open(Services::File::Combine(Services::Folders::Application, "Palettes" + Services::Folders::Separator + m_Name + ".json"));
@@ -114,7 +114,7 @@ void __fastcall Palette::Save()
 
 
 //---------------------------------------------------------------------------
-//void __fastcall PaletteWriter::Validate()
+//void PaletteWriter::Validate()
 //{
 //    Save();
 //    auto file = Services::File::Combine(Services::Folders::Application, "Palettes" + Services::Folders::Separator + m_Name + ".json");
@@ -130,7 +130,7 @@ void __fastcall Palette::Save()
 //    }
 //}
 //---------------------------------------------------------------------------
-//__fastcall PaletteWriter::PaletteWriter()
+//PaletteWriter::PaletteWriter()
 //: Palette("ZX Spectrum")
 //{
 //    m_ColorTable.push_back(clBlack);
@@ -161,7 +161,7 @@ void __fastcall Palette::Save()
 //    return (unsigned char) SimpleRoundTo((c3 * 255.0) / 7.0);
 //}
 ////---------------------------------------------------------------------------
-//__fastcall PaletteWriter::PaletteWriter()
+//PaletteWriter::PaletteWriter()
 //: Palette("ZX Spectrum Next 256")
 //{
 //    for (auto i = 0; i < 256; i++)
@@ -185,7 +185,7 @@ void __fastcall Palette::Save()
 //    Validate();
 //}
 //---------------------------------------------------------------------------
-//__fastcall PaletteWriter::PaletteWriter()
+//PaletteWriter::PaletteWriter()
 //: Palette("Amstrad CPC Mode 0")
 //{
 //    m_ColorTable.push_back(clBlack);
@@ -222,7 +222,7 @@ void __fastcall Palette::Save()
 //    Validate();
 //}
 ////---------------------------------------------------------------------------
-//__fastcall PaletteWriter::PaletteWriter()
+//PaletteWriter::PaletteWriter()
 //: Palette("Amstrad CPC Mode 1")
 //{
 //    m_ColorTable.push_back(clBlack);
@@ -259,7 +259,7 @@ void __fastcall Palette::Save()
 //    Validate();
 //}
 //---------------------------------------------------------------------------
-//__fastcall PaletteWriter::PaletteWriter()
+//PaletteWriter::PaletteWriter()
 //: Palette("Amstrad CPC Mode 2")
 //{
 //    m_ColorTable.push_back(clBlack);
@@ -294,7 +294,7 @@ void __fastcall Palette::Save()
 //    Validate();
 //}
 //---------------------------------------------------------------------------
-//__fastcall PaletteWriter::PaletteWriter()
+//PaletteWriter::PaletteWriter()
 //: Palette("Monochrome")
 //{
 //    m_ColorTable.push_back(clBlack);
@@ -304,7 +304,7 @@ void __fastcall Palette::Save()
 //    Validate();
 //}
 //---------------------------------------------------------------------------
-//__fastcall PaletteWriter::PaletteWriter()
+//PaletteWriter::PaletteWriter()
 //: Palette("Acorn Atom")
 //{
 //    m_ColorTable.push_back(clBlack);
@@ -314,7 +314,7 @@ void __fastcall Palette::Save()
 //    Validate();
 //}
 //---------------------------------------------------------------------------
-//__fastcall PaletteWriter::PaletteWriter()
+//PaletteWriter::PaletteWriter()
 //: Palette("Sam Coupe Mode 3")
 //{
 //    m_ColorTable.push_back(0x00000000);

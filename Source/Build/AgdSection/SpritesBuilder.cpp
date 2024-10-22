@@ -11,16 +11,16 @@
 //---------------------------------------------------------------------------
 using namespace Build;
 //---------------------------------------------------------------------------
-__fastcall SpritesBuilder::SpritesBuilder()
+SpritesBuilder::SpritesBuilder()
 : SectionBuilder("SpritesBuilder")
 {
 }
 //---------------------------------------------------------------------------
-__fastcall SpritesBuilder::~SpritesBuilder()
+SpritesBuilder::~SpritesBuilder()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall SpritesBuilder::Execute()
+void SpritesBuilder::Execute()
 {
     const auto& dm = theDocumentManager;
     Project::DocumentList images;

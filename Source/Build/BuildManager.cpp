@@ -13,7 +13,7 @@
 //---------------------------------------------------------------------------
 using namespace Build;
 //---------------------------------------------------------------------------
-__fastcall BuildManager::BuildManager()
+BuildManager::BuildManager()
 {
     m_BuildProcesses.push_back(std::move(std::make_unique<PreChecks>(m_BuildMessages)));
     m_BuildProcesses.push_back(std::move(std::make_unique<Creation>(m_BuildMessages)));
@@ -22,17 +22,17 @@ __fastcall BuildManager::BuildManager()
     m_BuildProcesses.push_back(std::move(std::make_unique<Emulation>(m_BuildMessages)));
 }
 //---------------------------------------------------------------------------
-__fastcall BuildManager::~BuildManager()
+BuildManager::~BuildManager()
 {
 
 }
 //---------------------------------------------------------------------------
-void __fastcall BuildManager::SetTreeView(TElXTree* treeView)
+void BuildManager::SetTreeView(TElXTree* treeView)
 {
     m_BuildMessages.TreeView = treeView;
 }
 //---------------------------------------------------------------------------
-bool __fastcall BuildManager::Execute()
+bool BuildManager::Execute()
 {
     auto start = GetTickCount();
     BUILD_MSG_CLEAR;

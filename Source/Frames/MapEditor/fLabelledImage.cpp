@@ -1,8 +1,7 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
-#include <math.h>
-#include "LabelledImage.h"
+#include "fLabelledImage.h"
 #include "Frames/ImageEditor/BlockColors.h"
 #include "Project/DocumentManager.h"
 #include "Settings/ThemeManager.h"

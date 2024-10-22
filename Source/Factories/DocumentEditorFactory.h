@@ -7,7 +7,7 @@
 namespace Factories
 {
 //---------------------------------------------------------------------------
-typedef TFrame* (__fastcall *CreateDocumentEditorFn)(Project::Document*, TComponent*);
+typedef TFrame* (*CreateDocumentEditorFn)(Project::Document*, TComponent*);
 //---------------------------------------------------------------------------
 class DocumentEditorFactory
 {
@@ -17,8 +17,8 @@ private:
     EditorMap           m_Editors;
 
 public:
-    void    __fastcall  Register(const String& documentFolder, CreateDocumentEditorFn pfnCreate);
-    TFrame* __fastcall  Create(Project::Document* document, TComponent* owner);
+    void     Register(const String& documentFolder, CreateDocumentEditorFn pfnCreate);
+    TFrame*  Create(Project::Document* document, TComponent* owner);
 };
 //---------------------------------------------------------------------------
 } // Factories namespace

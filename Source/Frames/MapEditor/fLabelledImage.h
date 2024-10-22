@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------------
-#ifndef LabelledImageH
-#define LabelledImageH
+#ifndef fLabelledImageH
+#define fLabelledImageH
 //---------------------------------------------------------------------------
 #include <System.Classes.hpp>
 #include <Vcl.Controls.hpp>

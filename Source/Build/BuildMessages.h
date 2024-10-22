@@ -18,23 +18,23 @@ private:
     BuildMessageType            m_GroupType;
 
 public:
-                    __fastcall  BuildMessages();
-    virtual         __fastcall ~BuildMessages();
+                     BuildMessages();
+    virtual         ~BuildMessages();
 
                                 // clear the tree view
-        void        __fastcall  Clear();
+        void         Clear();
                                 // push a new group/folder node
-        void        __fastcall  Push(BuildMessageType type, const String& group);
+        void         Push(BuildMessageType type, const String& group);
                                 // pop the last node
-        void        __fastcall  Pop(bool result);
+        void         Pop(bool result);
                                 // post a message in the current group node
-        void        __fastcall  Message(BuildMessageType type, const String& message);
+        void         Message(BuildMessageType type, const String& message);
                                 // post a message in the current group node
-        void        __fastcall  Message(const String& message);
+        void         Message(const String& message);
                                 // update the last message with a success/fail icon
-        void        __fastcall  Message(BuildMessageType type);
+        void         Message(BuildMessageType type);
                                 // log a build time
-        void        __fastcall  Time(int time);
+        void         Time(int time);
 
     __property  TElXTree*       TreeView = { write = m_TreeView };
 };

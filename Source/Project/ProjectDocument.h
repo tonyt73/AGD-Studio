@@ -28,26 +28,26 @@ private:
                 FileInfo            m_FileInfo;     // used by the json loader
                 FileList            m_Files;        // a list of files the project uses
 
-            String      __fastcall  GetFile() const;
-            void        __fastcall  SetName(String name);
-            void        __fastcall  OnChangeString(const OnChange<String>& event);
-            void        __fastcall  OnEndObject(const String& object);
-            void        __fastcall  DoSave();
-            String      __fastcall  GetGraphicsMode() const;
-            int         __fastcall  GetScreenSize(int index) const;
+            String       GetFile() const;
+            void         SetName(String name);
+            void         OnChangeString(const OnChange<String>& event);
+            void         OnEndObject(const String& object);
+            void         DoSave();
+            String       GetGraphicsMode() const;
+            int          GetScreenSize(int index) const;
 
 public:
-                        __fastcall  ProjectDocument(const String& name, const String& machine);
-                        __fastcall ~ProjectDocument();
-    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ProjectDocument(name, extra); };
+                         ProjectDocument(const String& name, const String& machine);
+                        ~ProjectDocument();
+    static  Document*    Create(const String& name, const String& extra) { return new ProjectDocument(name, extra); };
 
-   const MachineConfig& __fastcall  MachineConfiguration() const;
-         MachineConfig& __fastcall  WriteableMachineConfiguration() const;
-            bool        __fastcall  Load();
+   const MachineConfig&  MachineConfiguration() const;
+         MachineConfig&  WriteableMachineConfiguration() const;
+            bool         Load();
 
-            void        __fastcall  ClearFiles();
-            void        __fastcall  AddFile(const String& file, const String& type, const String& subType);
-    const FileList&     __fastcall  Files() const;
+            void         ClearFiles();
+            void         AddFile(const String& file, const String& type, const String& subType);
+    const FileList&      Files() const;
 
 __published:
     // Project settings

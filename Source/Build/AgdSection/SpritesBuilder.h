@@ -10,10 +10,10 @@ namespace Build
 class SpritesBuilder : public SectionBuilder
 {
 protected:
-    void    __fastcall  Execute() final;
+    void     Execute() final;
 public:
-            __fastcall  SpritesBuilder();
-    virtual __fastcall ~SpritesBuilder();
+             SpritesBuilder();
+    virtual ~SpritesBuilder();
 };
 //---------------------------------------------------------------------------
 } // Build namespace

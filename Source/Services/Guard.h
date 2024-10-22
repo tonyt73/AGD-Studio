@@ -16,8 +16,8 @@ class Guard
 private:
     bool&       m_Flag;
 public:
-    __fastcall  Guard(bool& flag);
-    __fastcall ~Guard();
+     Guard(bool& flag);
+    ~Guard();
 };
 //---------------------------------------------------------------------------
 } // Services namespace

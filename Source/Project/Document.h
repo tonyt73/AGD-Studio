@@ -59,31 +59,31 @@ protected:
 static      unsigned int            s_NextRefId;    // next unused ref id. Reset on load
             bool                    m_SaveRefId;    // flag:
 
-            void        __fastcall  SetName(String name);
-            String      __fastcall  GetFile(String name = "");
-            bool        __fastcall  IsValid() const;
-            bool        __fastcall  IsValid(const String& name) const;
+            void         SetName(String name);
+            String       GetFile(String name = "");
+            bool         IsValid() const;
+            bool         IsValid(const String& name) const;
                                     // update the documents json content
-    virtual void        __fastcall  Update() {};//= 0;
+    virtual void         Update() {};//= 0;
 
                                     // LMD property editor - property is item been edited, category is section and info is the hint description
-            void        __fastcall  RegisterProperty(const String& property, const String& category, const String& info);
-    virtual void        __fastcall  DoSave() = 0;
-            void        __fastcall  SetShowFileExtension(bool value);
+            void         RegisterProperty(const String& property, const String& category, const String& info);
+    virtual void         DoSave() = 0;
+            void         SetShowFileExtension(bool value);
 
 public:
-                        __fastcall  Document(const String& name);
-    virtual             __fastcall ~Document();
+                         Document(const String& name);
+    virtual             ~Document();
 
-    static  Document*   __fastcall  Create(const String& name, const String& extra)      { throw "Don't create this class";    }
+    static  Document*    Create(const String& name, const String& extra)      { throw "Don't create this class";    }
 
-const TPropertyInfoMap& __fastcall  GetPropertyInfo() const;
-            String      __fastcall  GetPropertyInfo(const String& property) const;
+const TPropertyInfoMap&  GetPropertyInfo() const;
+            String       GetPropertyInfo(const String& property) const;
 
-    virtual void        __fastcall  Save();
-    virtual bool        __fastcall  Load();
-            void        __fastcall  AssignId();
-            void        __fastcall  Close();
+    virtual void         Save();
+    virtual bool         Load();
+            void         AssignId();
+            void         Close();
 
     __property         unsigned int Id          = { read = m_RefId                          };
     __property          String      File        = { read = GetFile                          };
@@ -100,7 +100,7 @@ __published:
     __property          String      Path        = { read = m_File                           };
 };
 //---------------------------------------------------------------------------
-typedef Document* (__fastcall *CreateDocumentFn)(const String& name, const String& extra);
+typedef Document* (*CreateDocumentFn)(const String& name, const String& extra);
 typedef std::vector<Document*> DocumentList;
 //---------------------------------------------------------------------------
 } // Project namespace

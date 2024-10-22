@@ -9,7 +9,7 @@
 //---------------------------------------------------------------------------
 using namespace Project;
 //---------------------------------------------------------------------------
-__fastcall ImageDocument::ImageDocument(const String& name)
+ImageDocument::ImageDocument(const String& name)
 : Document(name)
 , m_MultiFrame(false)
 , m_CanModifyFrames(false)
@@ -39,7 +39,7 @@ __fastcall ImageDocument::ImageDocument(const String& name)
     m_File = GetFile();
 }
 //---------------------------------------------------------------------------
-void __fastcall ImageDocument::DoSave()
+void ImageDocument::DoSave()
 {
     Push("Image");
     Write("Width", m_Width);
@@ -63,12 +63,12 @@ void __fastcall ImageDocument::DoSave()
     Pop(); // image
 }
 //---------------------------------------------------------------------------
-void __fastcall ImageDocument::DoSaveExtra()
+void ImageDocument::DoSaveExtra()
 {
     // do nothing
 }
 //---------------------------------------------------------------------------
-void __fastcall ImageDocument::OnEndObject(const String& object)
+void ImageDocument::OnEndObject(const String& object)
 {
     if (object == "Image.Frames[]") {
         if (m_FramesLoaded < m_Frames.size()) {
@@ -82,17 +82,17 @@ void __fastcall ImageDocument::OnEndObject(const String& object)
     }
 }
 //---------------------------------------------------------------------------
-int __fastcall ImageDocument::GetIndex() const
+int ImageDocument::GetIndex() const
 {
     return theDocumentManager.GetAsIndex(Id);
 }
 //---------------------------------------------------------------------------
-int __fastcall ImageDocument::CountFrames() const
+int ImageDocument::CountFrames() const
 {
     return m_Frames.size();
 }
 //---------------------------------------------------------------------------
-int __fastcall ImageDocument::CountImagesPerFrame() const
+int ImageDocument::CountImagesPerFrame() const
 {
     const auto pc = theDocumentManager.ProjectConfig();
     if (pc) {
@@ -108,7 +108,7 @@ int __fastcall ImageDocument::CountImagesPerFrame() const
     return 1;
 }
 //---------------------------------------------------------------------------
-void __fastcall ImageDocument::SetFrames(int frames)
+void ImageDocument::SetFrames(int frames)
 {
     if (frames > 1 && frames != m_Frames.size()) {
         while (frames != m_Frames.size()) {
@@ -117,7 +117,7 @@ void __fastcall ImageDocument::SetFrames(int frames)
     }
 }
 //---------------------------------------------------------------------------
-String __fastcall ImageDocument::GetFrame(int frame) const
+String ImageDocument::GetFrame(int frame) const
 {
     if (0 <= frame && frame < m_Frames.size()) {
         return m_Frames[frame];
@@ -125,14 +125,14 @@ String __fastcall ImageDocument::GetFrame(int frame) const
     return "";
 }
 //---------------------------------------------------------------------------
-void __fastcall ImageDocument::SetFrame(int frame, const String& data)
+void ImageDocument::SetFrame(int frame, const String& data)
 {
     if (0 <= frame && frame < m_Frames.size()) {
         m_Frames[frame] = data;
     }
 }
 //---------------------------------------------------------------------------
-String __fastcall ImageDocument::GetHint(int frame) const
+String ImageDocument::GetHint(int frame) const
 {
     if (0 <= frame && frame < m_Hints.size()) {
         return m_Hints[frame];
@@ -140,7 +140,7 @@ String __fastcall ImageDocument::GetHint(int frame) const
     return "";
 }
 //---------------------------------------------------------------------------
-bool __fastcall ImageDocument::AddFrame(int index, const String& hint)
+bool ImageDocument::AddFrame(int index, const String& hint)
 {
     if (m_Frames.size() == 0 || (m_MultiFrame && m_CanModifyFrames)) {
         if (0 > index || index > m_Frames.size()) {
@@ -155,7 +155,7 @@ bool __fastcall ImageDocument::AddFrame(int index, const String& hint)
     return false;
 }
 //---------------------------------------------------------------------------
-bool __fastcall ImageDocument::DeleteFrame(int index)
+bool ImageDocument::DeleteFrame(int index)
 {
     if (m_Frames.size() > 1 && m_CanModifyFrames && 0 <= index && index < m_Frames.size()) {
         // can only delete new frames; can't delete the first frame
@@ -165,19 +165,19 @@ bool __fastcall ImageDocument::DeleteFrame(int index)
     return false;
 }
 //---------------------------------------------------------------------------
-int __fastcall ImageDocument::GetLayerCount() const
+int ImageDocument::GetLayerCount() const
 {
     return m_Layers.size();
 }
 //---------------------------------------------------------------------------
-void __fastcall ImageDocument::AddLayer(const String& name, const String& value)
+void ImageDocument::AddLayer(const String& name, const String& value)
 {
     if (!LayerExists(name)) {
         m_Layers[name] = value;
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall ImageDocument::ExtractSize(const String& extra)
+void ImageDocument::ExtractSize(const String& extra)
 {
     const auto pc = theDocumentManager.ProjectConfig();
     if (pc) {
@@ -195,7 +195,7 @@ void __fastcall ImageDocument::ExtractSize(const String& extra)
     }
 }
 //---------------------------------------------------------------------------
-String __fastcall ImageDocument::GetLayer(const String& name)
+String ImageDocument::GetLayer(const String& name)
 {
     String value;
     if (LayerExists(name)) {
@@ -204,19 +204,19 @@ String __fastcall ImageDocument::GetLayer(const String& name)
     return value;
 }
 //---------------------------------------------------------------------------
-void __fastcall ImageDocument::SetLayer(const String& name, const String& value)
+void ImageDocument::SetLayer(const String& name, const String& value)
 {
     if (LayerExists(name)) {
         m_Layers[name] = value;
     }
 }
 //---------------------------------------------------------------------------
-bool __fastcall ImageDocument::LayerExists(const String& name) const
+bool ImageDocument::LayerExists(const String& name) const
 {
     return m_Layers.count(name) == 1;
 }
 //---------------------------------------------------------------------------
-bool __fastcall ImageDocument::IsFirstOfType() const
+bool ImageDocument::IsFirstOfType() const
 {
     return theDocumentManager.IsFirstOfType(this);
 }

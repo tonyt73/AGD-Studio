@@ -2,14 +2,14 @@
 #ifndef TileEditorH
 #define TileEditorH
 //---------------------------------------------------------------------------
+#include "MapPencilTool.h"
+#include "MapLineTool.h"
+#include "MapRectTool.h"
 #include "Project/TiledMapDocument.h"
 #include "Messaging/Messaging.h"
 #include "Messaging/Event.h"
 #include "Visuals/Image.h"
 #include "Visuals/GraphicsMode.h"
-#include "Frames/MapEditor/MapPencilTool.h"
-#include "Frames/MapEditor/MapLineTool.h"
-#include "Frames/MapEditor/MapRectTool.h"
 //---------------------------------------------------------------------------
 class TileEditor
 {
@@ -124,12 +124,12 @@ private:
     bool                        GetEntityUnderMouse(int X, int Y, Project::MapEntity& entity, Visuals::ImageTypes imageType, bool selectIt = false);
     void                        AssignRoomIndexes(Project::MapEntityList& entities);
 
-    void            __fastcall  OnMouseDownSelectMode(TMouseButton Button, TShiftState Shift, int X, int Y);
-    void            __fastcall  OnMouseDownMapToolMode(TMouseButton Button, TShiftState Shift, int X, int Y);
-    void            __fastcall  OnMouseMoveSelectMode(TShiftState Shift, int X, int Y);
-    void            __fastcall  OnMouseMoveMapToolMode(TShiftState Shift, int X, int Y);
-    void            __fastcall  OnMouseUpSelectMode(TMouseButton Button, TShiftState Shift, int X, int Y);
-    void            __fastcall  OnMouseUpMapToolMode(TMouseButton Button, TShiftState Shift, int X, int Y);
+    void             OnMouseDownSelectMode(TMouseButton Button, TShiftState Shift, int X, int Y);
+    void             OnMouseDownMapToolMode(TMouseButton Button, TShiftState Shift, int X, int Y);
+    void             OnMouseMoveSelectMode(TShiftState Shift, int X, int Y);
+    void             OnMouseMoveMapToolMode(TShiftState Shift, int X, int Y);
+    void             OnMouseUpSelectMode(TMouseButton Button, TShiftState Shift, int X, int Y);
+    void             OnMouseUpMapToolMode(TMouseButton Button, TShiftState Shift, int X, int Y);
 
     __property  bool            IsDirty = { read = m_Dirty, write = m_Dirty };
 

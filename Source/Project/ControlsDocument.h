@@ -15,21 +15,21 @@ private:
         std::vector<unsigned char>  m_Keys;
             unsigned char           m_Key;
 
-            void        __fastcall  DoSave();
-            void        __fastcall  OnEndObject(const String& object);
-            void        __fastcall  OnLoading();
-            void        __fastcall  OnLoaded();
-            String      __fastcall  Get(int index);
-            bool        __fastcall  IsActive() const;
-            void        __fastcall  DefaultKeys();
+            void         DoSave();
+            void         OnEndObject(const String& object);
+            void         OnLoading();
+            void         OnLoaded();
+            String       Get(int index);
+            bool         IsActive() const;
+            void         DefaultKeys();
 
 public:
-                        __fastcall  ControlsDocument(const String& name);
+                         ControlsDocument(const String& name);
 
-    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ControlsDocument(name); };
+    static  Document*    Create(const String& name, const String& extra) { return new ControlsDocument(name); };
 
-        unsigned char   __fastcall  GetAsciiCode(eAgdKey key);
-        void            __fastcall  SetAsciiCode(eAgdKey key, unsigned char keyCode);
+        unsigned char    GetAsciiCode(eAgdKey key);
+        void             SetAsciiCode(eAgdKey key, unsigned char keyCode);
 
 __published:
         String          __property  Left = { read = Get, index = keyLeft };

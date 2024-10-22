@@ -22,7 +22,7 @@
 //---------------------------------------------------------------------------
 using namespace Build;
 //---------------------------------------------------------------------------
-__fastcall Creation::Creation(BuildMessages& buildMessages)
+Creation::Creation(BuildMessages& buildMessages)
 : BuildProcess(buildMessages, bmBuild, "Generate Game File (Project to AGD File)")
 {
     m_AgdBuilders.push_back(std::move(std::make_unique<ProjectBuilder>()));
@@ -39,11 +39,11 @@ __fastcall Creation::Creation(BuildMessages& buildMessages)
     m_AgdBuilders.push_back(std::move(std::make_unique<EventsBuilder>()));
 }
 //---------------------------------------------------------------------------
-__fastcall Creation::~Creation()
+Creation::~Creation()
 {
 }
 //---------------------------------------------------------------------------
-bool __fastcall Creation::Execute()
+bool Creation::Execute()
 {
     auto agdFile = Services::File::Combine(Services::Folders::Project, Services::Folders::ProjectName + ".agd");
     Project::DocumentManager::get().Add("Text", "AGD", Services::Folders::ProjectName + ".agd");

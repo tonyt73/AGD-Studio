@@ -10,7 +10,7 @@
 namespace Factories
 {
 //---------------------------------------------------------------------------
-void __fastcall DocumentEditorFactory::Register(const String& documentFolder, CreateDocumentEditorFn pfnCreate)
+void DocumentEditorFactory::Register(const String& documentFolder, CreateDocumentEditorFn pfnCreate)
 {
     if (m_Editors.count(documentFolder) == 0)
     {
@@ -22,7 +22,7 @@ void __fastcall DocumentEditorFactory::Register(const String& documentFolder, Cr
     }
 }
 //---------------------------------------------------------------------------
-TFrame* __fastcall DocumentEditorFactory::Create(Project::Document* document, TComponent* owner)
+TFrame* DocumentEditorFactory::Create(Project::Document* document, TComponent* owner)
 {
     auto dp = dynamic_cast<TLMDDockPanel*>(owner);
     auto it = m_Editors.find(document->Type + "." + document->SubType);

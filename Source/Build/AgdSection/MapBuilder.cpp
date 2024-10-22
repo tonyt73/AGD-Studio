@@ -9,16 +9,16 @@
 //---------------------------------------------------------------------------
 using namespace Build;
 //---------------------------------------------------------------------------
-__fastcall MapBuilder::MapBuilder()
+MapBuilder::MapBuilder()
 : SectionBuilder("MapBuilder")
 {
 }
 //---------------------------------------------------------------------------
-__fastcall MapBuilder::~MapBuilder()
+MapBuilder::~MapBuilder()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall MapBuilder::Execute()
+void MapBuilder::Execute()
 {
     const auto& dm = theDocumentManager;
     // get the objects in the map

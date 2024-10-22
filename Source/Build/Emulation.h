@@ -10,10 +10,10 @@ namespace Build
 class Emulation : public ShellProcess
 {
 public:
-                    __fastcall  Emulation(BuildMessages& buildMessages);
-    virtual         __fastcall ~Emulation();
+                     Emulation(BuildMessages& buildMessages);
+    virtual         ~Emulation();
 
-            bool    __fastcall  Execute() final;
+            bool     Execute() final;
 };
 //---------------------------------------------------------------------------
 } // Build namespace

@@ -10,16 +10,16 @@
 namespace Build
 {
 //---------------------------------------------------------------------------
-__fastcall JumpTableBuilder::JumpTableBuilder()
+JumpTableBuilder::JumpTableBuilder()
 : SectionBuilder("Jump Table")
 {
 }
 //---------------------------------------------------------------------------
-__fastcall JumpTableBuilder::~JumpTableBuilder()
+JumpTableBuilder::~JumpTableBuilder()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall JumpTableBuilder::Execute()
+void JumpTableBuilder::Execute()
 {
     const auto& JumpTableBuilder = (Project::JumpTableDocument*)theDocumentManager.Get("Jump", "Table", "JumpTableBuilder");
 

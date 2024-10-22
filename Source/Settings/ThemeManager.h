@@ -5,14 +5,14 @@
 class ThemeManager
 {
 private:
-    static  TColor          __fastcall  GetColor(int index);
+    static  TColor           GetColor(int index);
 
 public:
 
-    static  void            __fastcall  SetStyle(const String& styleName);
-    static  void            __fastcall  LoadStyles(TComboBox* combo);
-    static  void            __fastcall  ReapplyStyle();
-    static  TStringDynArray __fastcall  GetStyles();
+    static  void             SetStyle(const String& styleName);
+    static  void             LoadStyles(TComboBox* combo);
+    static  void             ReapplyStyle();
+    static  TStringDynArray  GetStyles();
 
             TColor          __property  Highlight       = { read = GetColor, index = 0 };
             TColor          __property  Background      = { read = GetColor, index = 1 };
