@@ -1,26 +1,27 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#pragma hdrstop
 //---------------------------------------------------------------------------
 #include "Settings.h"
-#include "System/File.h"
+#include "Services/File.h"
+#include "Services/Folders.h"
 #include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-namespace Project
-{
+using namespace Project;
+//---------------------------------------------------------------------------
 static Settings* instance = nullptr;
-Settings& __fastcall Settings::get()
+Settings&  Settings::get()
 {
     if (instance == nullptr)
     {
+        Services::Folders::Init();
         instance = new Settings();
     }
     return *instance;
 }
 //---------------------------------------------------------------------------
-__fastcall Settings::Settings()
+ Settings::Settings()
 : JsonFile()
 {
     m_PropertyMap["Application.Style"] = &m_ActiveStyle;
@@ -37,39 +38,35 @@ __fastcall Settings::Settings()
     m_PropertyMap["MainWindow.Size.Width"] = &m_WindowSize.Width;
     m_PropertyMap["MainWindow.Size.Height"] = &m_WindowSize.Height;
 
-    Load(System::File::Combine(System::Path::Common, "Settings.json"));
+    Load(Services::File::Combine(Services::Folders::Common, "Settings.json"));
 }
 //---------------------------------------------------------------------------
-__fastcall Settings::~Settings()
+ Settings::~Settings()
 {
     Save();
 }
 //---------------------------------------------------------------------------
-void __fastcall Settings::SetWelcomePosition(const TPoint& position)
+void  Settings::SetWelcomePosition(const TPoint& position)
 {
     m_WelcomePosition = position;
-    Save();
 }
 //---------------------------------------------------------------------------
-void __fastcall Settings::SetWindowPosition(const TPoint& position)
+void  Settings::SetWindowPosition(const TPoint& position)
 {
     m_WindowPosition = position;
-    Save();
 }
 //---------------------------------------------------------------------------
-void __fastcall Settings::SetWindowState(const TWindowState& state)
+void  Settings::SetWindowState(const TWindowState& state)
 {
     m_WindowState = state;
-    Save();
 }
 //---------------------------------------------------------------------------
-void __fastcall Settings::SetWindowSize(const TSize& size)
+void  Settings::SetWindowSize(const TSize& size)
 {
     m_WindowSize = size;
-    Save();
 }
 //---------------------------------------------------------------------------
-void __fastcall Settings::SetBool(int index, bool value)
+void  Settings::SetBool(int index, bool value)
 {
     switch (index)
     {
@@ -77,10 +74,9 @@ void __fastcall Settings::SetBool(int index, bool value)
         case 1: m_WelcomeSkipOnClose = value; break;
         case 2: m_LoadLastProject = value; break;
     }
-    Save();
 }
 //---------------------------------------------------------------------------
-void __fastcall Settings::SetString(int index, String value)
+void  Settings::SetString(int index, String value)
 {
     switch (index)
     {
@@ -89,13 +85,12 @@ void __fastcall Settings::SetString(int index, String value)
         case 2: m_Developer = value; break;
         case 3: m_DefaultMachine = value; break;
     }
-    Save();
 }
 //---------------------------------------------------------------------------
-void __fastcall Settings::Save()
+void  Settings::Save()
 {
     // {
-    Open(System::File::Combine(System::Path::Common, "Settings.json"));
+	Open(Services::File::Combine(Services::Folders::Common, "Settings.json"));
     Push("Application"); // {
         Write("Style", ActiveStyle);
     Pop(); // }
@@ -127,7 +122,5 @@ void __fastcall Settings::Save()
     // }
     Close();
 }
-//---------------------------------------------------------------------------
-} // namespace Project
 //---------------------------------------------------------------------------
 

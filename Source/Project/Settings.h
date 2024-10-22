@@ -2,16 +2,16 @@
 #ifndef SettingsH
 #define SettingsH
 //---------------------------------------------------------------------------
-#include "System/JsonFile.h"
 #include "Messaging/Event.h"
+#include "Services/JsonFile.h"
 //---------------------------------------------------------------------------
 namespace Project
 {
 //---------------------------------------------------------------------------
-class Settings : public System::JsonFile
+class Settings : public Services::JsonFile
 {
 public:
-    static Settings& __fastcall get();
+    static Settings&  get();
     Settings(Settings const&) = delete;
     void operator=(Settings const&) = delete;
 
@@ -28,19 +28,19 @@ private:
     String                      m_Developer;
     String                      m_DefaultMachine;
 
-    void            __fastcall  SetActiveStyle(const String& style);
-    void            __fastcall  SetWelcomePosition(const TPoint& position);
-    void            __fastcall  SetWindowPosition(const TPoint& position);
-    void            __fastcall  SetWindowState(const TWindowState& state);
-    void            __fastcall  SetWindowSize(const TSize& size);
-    void            __fastcall  SetBool(int index, bool value);
-    void            __fastcall  SetString(int index, String value);
+    void              SetActiveStyle(const String& style);
+    void              SetWelcomePosition(const TPoint& position);
+    void              SetWindowPosition(const TPoint& position);
+    void              SetWindowState(const TWindowState& state);
+    void              SetWindowSize(const TSize& size);
+    void              SetBool(int index, bool value);
+    void              SetString(int index, String value);
 
-    void            __fastcall  Save();
+    void              Save();
 
 public:
-                    __fastcall  Settings();
-                    __fastcall ~Settings();
+                      Settings();
+                     ~Settings();
 
     TWindowState    __property  WindowState             = { read = m_WindowState            , write = SetWindowState        };
     TPoint          __property  WindowPosition          = { read = m_WindowPosition         , write = SetWindowPosition     };
@@ -55,7 +55,7 @@ public:
     String          __property  DefaultMachine          = { read = m_DefaultMachine         , write = SetString, index = 3  };
 };
 //---------------------------------------------------------------------------
-} // namespace Project
+} // Project namespace
 //---------------------------------------------------------------------------
 #define appSettings Project::Settings::get()
 //---------------------------------------------------------------------------
