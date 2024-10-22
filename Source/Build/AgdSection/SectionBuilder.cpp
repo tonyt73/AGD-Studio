@@ -1,48 +1,51 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#include "Build/AgdSection/SectionBuilder.h"
+//---------------------------------------------------------------------------
+#include "SectionBuilder.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall SectionBuilders::SectionBuilder::SectionBuilder(const String& description)
+using namespace Build;
+//---------------------------------------------------------------------------
+__fastcall SectionBuilder::SectionBuilder(const String& description)
 : m_Description(description)
 {
 }
 //---------------------------------------------------------------------------
-__fastcall SectionBuilders::SectionBuilder::~SectionBuilder()
+__fastcall SectionBuilder::~SectionBuilder()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall SectionBuilders::SectionBuilder::Clear()
+void __fastcall SectionBuilder::Clear()
 {
     m_Result.Success = false;
     m_Result.Reason = "Not Implemented";
     m_Result.Content = "";
 }
 //---------------------------------------------------------------------------
-void __fastcall SectionBuilders::SectionBuilder::AddLine(String line)
+void __fastcall SectionBuilder::AddLine(String line)
 {
     m_Result.Content += line + "\r\n";
 }
 //---------------------------------------------------------------------------
-void __fastcall SectionBuilders::SectionBuilder::LineBreak()
+void __fastcall SectionBuilder::LineBreak()
 {
     m_Result.Content += "\r\n";
 }
 //---------------------------------------------------------------------------
-void __fastcall SectionBuilders::SectionBuilder::Success()
+void __fastcall SectionBuilder::Success()
 {
     m_Result.Success = true;
     m_Result.Reason = "Ok";
 }
 //---------------------------------------------------------------------------
-void __fastcall SectionBuilders::SectionBuilder::Failure(String reason)
+void __fastcall SectionBuilder::Failure(String reason)
 {
     m_Result.Success = false;
     m_Result.Reason = reason;
 }
 //---------------------------------------------------------------------------
-const SectionBuilders::Result& __fastcall SectionBuilders::SectionBuilder::Build()
+const Result& __fastcall SectionBuilder::Build()
 {
     Clear();
     Execute();

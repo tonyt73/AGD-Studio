@@ -1,38 +1,41 @@
 //---------------------------------------------------------------------------
-#include "Build/AgdSection/Events.h"
+#include "AgdStudio.pch.h"
+//---------------------------------------------------------------------------
+#include "EventsBuilder.h"
 #include "Project/DocumentManager.h"
 #include "Project/FileDefinitions.h"
 #include "Project/TiledMapDocument.h"
-#include "System/File.h"
-#include "System/Path.h"
-#include "AgdStudio.pch.h"
+#include "Services/File.h"
+#include "Services/Folders.h"
 #include <System.Character.hpp>
 #include <System.StrUtils.hpp>
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall SectionBuilders::Events::Events()
-    : SectionBuilder("Events")
+using namespace Build;
+//---------------------------------------------------------------------------
+__fastcall EventsBuilder::EventsBuilder()
+: SectionBuilder("EventsBuilder")
 {
 }
 //---------------------------------------------------------------------------
-__fastcall SectionBuilders::Events::~Events()
+__fastcall EventsBuilder::~EventsBuilder()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall SectionBuilders::Events::Execute()
+void __fastcall EventsBuilder::Execute()
 {
     const auto& dm = theDocumentManager;
     // get the objects in the map
-    auto mapDoc = dynamic_cast<TiledMapDocument*>(dm.Get("Map", "Tiled", "Tile Map"));
+    auto mapDoc = dynamic_cast<Project::TiledMapDocument*>(dm.Get("Map", "Tiled", "Tile Map"));
     assert(mapDoc != nullptr);
-    auto gamePath = System::Path::Project;
-    auto definitions = std::make_unique<FileDefinitions>();
+    auto gamePath = Services::Folders::Project;
+    auto definitions = std::make_unique<Project::FileDefinitions>();
     for (const auto& definition : definitions->GetDefinitions()) {
         if (definition.Type == "Event") {
-            auto file = System::File::Combine(gamePath, definition.Filename + ".event");
-            if (System::File::Exists(file)) {
-                auto lines = System::File::ReadLines(file);
+            auto file = Services::File::Combine(gamePath, definition.Filename + ".event");
+            if (Services::File::Exists(file)) {
+                auto lines = Services::File::ReadLines(file);
                 AddLine(definition.Section);
                 auto lc = 0;
                 for (auto line : lines) {

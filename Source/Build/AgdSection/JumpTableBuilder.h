@@ -1,12 +1,13 @@
 //---------------------------------------------------------------------------
-#ifndef JumpTableH
-#define JumpTableH
+#ifndef JumpTableBuilderH
+#define JumpTableBuilderH
 //---------------------------------------------------------------------------
-#include "Build/AgdSection/SectionBuilder.h"
+#include "SectionBuilder.h"
 //---------------------------------------------------------------------------
-namespace SectionBuilders
+namespace Build
 {
-class JumpTable : public SectionBuilder
+//---------------------------------------------------------------------------
+class JumpTableBuilder : public SectionBuilder
 {
 private:
     // TODO: put this into an editor
@@ -14,9 +15,10 @@ private:
 protected:
     void    __fastcall  Execute() final;
 public:
-            __fastcall  JumpTable();
-    virtual __fastcall ~JumpTable();
+            __fastcall  JumpTableBuilder();
+    virtual __fastcall ~JumpTableBuilder();
 };
-}
+//---------------------------------------------------------------------------
+} // Build namespace
 //---------------------------------------------------------------------------
 #endif

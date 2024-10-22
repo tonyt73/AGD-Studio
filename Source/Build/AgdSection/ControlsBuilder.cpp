@@ -1,28 +1,31 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#include "Build/AgdSection/Controls.h"
+//---------------------------------------------------------------------------
+#include "ControlsBuilder.h"
 #include "Project/DocumentManager.h"
 #include "Project/ControlsDocument.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-using namespace SectionBuilders;
 //---------------------------------------------------------------------------
-__fastcall SectionBuilders::Controls::Controls()
-: SectionBuilder("Controls")
+namespace Build
+{
+//---------------------------------------------------------------------------
+__fastcall ControlsBuilder::ControlsBuilder()
+: SectionBuilder("ControlsBuilder")
 {
 }
 //---------------------------------------------------------------------------
-__fastcall SectionBuilders::Controls::~Controls()
+__fastcall ControlsBuilder::~ControlsBuilder()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall SectionBuilders::Controls::Execute()
+void __fastcall ControlsBuilder::Execute()
 {
-    const auto& Keys = (ControlsDocument*)theDocumentManager.Get("Controls", "List", "Controls");
+    const auto& Keys = (Project::ControlsDocument*)theDocumentManager.Get("ControlsBuilder", "List", "ControlsBuilder");
     String line = "DEFINECONTROLS  ";
-    for (auto i = 0; i < keyLast; i++)
-    {
-        auto keyCode = Keys->GetAsciiCode((eAgdKey)i);
+	for (const auto key : Project::AgdKeys)
+	{
+		auto keyCode = Keys->GetAsciiCode(key);
         if (keyCode <= 32 && keyCode <= 126)
         {
             line += "'" + UnicodeString::StringOfChar(keyCode, 1) + "' ";
@@ -37,4 +40,4 @@ void __fastcall SectionBuilders::Controls::Execute()
     Success();
 }
 //---------------------------------------------------------------------------
-
+}

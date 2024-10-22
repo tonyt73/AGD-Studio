@@ -1,19 +1,22 @@
 //---------------------------------------------------------------------------
-#ifndef TilesH
-#define TilesH
+#ifndef MapBuilderH
+#define MapBuilderH
 //---------------------------------------------------------------------------
 #include "Build/AgdSection/SectionBuilder.h"
 //---------------------------------------------------------------------------
-namespace SectionBuilders
+namespace Build
 {
-class Tiles : public SectionBuilder
+//---------------------------------------------------------------------------
+class MapBuilder : public SectionBuilder
 {
 protected:
     void    __fastcall  Execute() final;
 public:
-            __fastcall  Tiles();
-    virtual __fastcall ~Tiles();
+            __fastcall  MapBuilder();
+    virtual __fastcall ~MapBuilder();
 };
-}
+//---------------------------------------------------------------------------
+} // Build namespace
 //---------------------------------------------------------------------------
 #endif
+

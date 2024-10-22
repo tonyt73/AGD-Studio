@@ -1,35 +1,38 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#include "Build/AgdSection/Font.h"
+//---------------------------------------------------------------------------
+#include "FontBuilder.h"
 #include "Project/DocumentManager.h"
 #include "Project/CharacterSetDocument.h"
-#include "Graphics/GraphicsMode.h"
-#include "Graphics/Image.h"
+#include "Visuals/GraphicsMode.h"
+#include "Visuals/Image.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall SectionBuilders::Font::Font()
-: SectionBuilder("Font")
+using namespace Build;
+//---------------------------------------------------------------------------
+__fastcall FontBuilder::FontBuilder()
+: SectionBuilder("FontBuilder")
 {
 }
 //---------------------------------------------------------------------------
-__fastcall SectionBuilders::Font::~Font()
+__fastcall FontBuilder::~FontBuilder()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall SectionBuilders::Font::Execute()
+void __fastcall FontBuilder::Execute()
 {
     const auto& dm = theDocumentManager;
-    auto font = dynamic_cast<CharacterSetDocument*>(dm.Get("Image", "Character Set", "Game Font"));
-    if (font != nullptr)
+    auto FontBuilder = dynamic_cast<Project::CharacterSetDocument*>(dm.Get("Image", "Character Set", "Game FontBuilder"));
+    if (FontBuilder != nullptr)
     {
-        if (font->Frames == 96)
+        if (FontBuilder->Frames == 96)
         {
             const auto& gm = (*(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()));
             // make an image canvas
-            auto image = std::make_unique<Agdx::Image>(font, gm);
-            String line = "DEFINEFONT ";
-            for (auto i = 0; i < font->Frames; i++)
+            auto image = std::make_unique<Visuals::Image>(FontBuilder, gm);
+            String line = "DEFINEFontBuilder ";
+            for (auto i = 0; i < FontBuilder->Frames; i++)
             {
                 // get the frame data in machine specific format
                 image->ChangeFrame(i);
@@ -46,12 +49,12 @@ void __fastcall SectionBuilders::Font::Execute()
         }
         else
         {
-            Failure("Character set does not have the correct number of characters (frames). It has " + IntToStr(font->Frames) + " when it needs 96");
+            Failure("Character set does not have the correct number of characters (frames). It has " + IntToStr(FontBuilder->Frames) + " when it needs 96");
             return;
         }
     }
 
-    // no font is ok
+    // no FontBuilder is ok
     Success();
 }
 //---------------------------------------------------------------------------

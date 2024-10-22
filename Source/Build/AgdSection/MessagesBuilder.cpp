@@ -1,30 +1,36 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#include "Build/AgdSection/Messages.h"
+//---------------------------------------------------------------------------
+#include "MessagesBuilder.h"
 #include "Project/DocumentManager.h"
+#include "Services/File.h"
+#include "Services/Folders.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall SectionBuilders::Messages::Messages()
-: SectionBuilder("Messages")
+namespace Build
+{
+//---------------------------------------------------------------------------
+__fastcall MessagesBuilder::MessagesBuilder()
+: SectionBuilder("MessagesBuilder")
 {
 }
 //---------------------------------------------------------------------------
-__fastcall SectionBuilders::Messages::~Messages()
+__fastcall MessagesBuilder::~MessagesBuilder()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall SectionBuilders::Messages::Execute()
+void __fastcall MessagesBuilder::Execute()
 {
     const auto& dm = theDocumentManager;
-    auto msgs = dm.Get("Text", "Messages", "Messages");
+    auto msgs = dm.Get("Text", "MessagesBuilder", "MessagesBuilder");
     if (msgs != nullptr)
     {
         auto file = msgs->File;
-        if (System::File::Exists(file))
+        if (Services::File::Exists(file))
         {
             AddLine("DEFINEMESSAGES");
-            AddLine(System::File::ReadText(file));
+            AddLine(Services::File::ReadText(file));
             LineBreak();
             Success();
         }
@@ -35,8 +41,8 @@ void __fastcall SectionBuilders::Messages::Execute()
     }
     else
     {
-        Failure("No Messages document registered with the document manager");
+        Failure("No MessagesBuilder document registered with the document manager");
     }
 }
 //---------------------------------------------------------------------------
-
+}

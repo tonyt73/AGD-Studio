@@ -1,22 +1,26 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-#include "Build/AgdSection/Project.h"
+//---------------------------------------------------------------------------
+#include "ProjectBuilder.h"
 #include "Project/DocumentManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall SectionBuilders::Project::Project()
+namespace Build
+{
+//---------------------------------------------------------------------------
+__fastcall ProjectBuilder::ProjectBuilder()
 : SectionBuilder("Project Header")
 {
 }
 //---------------------------------------------------------------------------
-__fastcall SectionBuilders::Project::~Project()
+__fastcall ProjectBuilder::~ProjectBuilder()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall SectionBuilders::Project::Execute()
+void __fastcall ProjectBuilder::Execute()
 {
-    const auto& project = theDocumentManager.ProjectConfig();
+    const auto& project = ::theDocumentManager.ProjectConfig();
     AddLine(";");
     AddLine("; GAME       : " + project->Name);
     AddLine("; VERSION    : " + project->Version);
@@ -32,4 +36,4 @@ void __fastcall SectionBuilders::Project::Execute()
     Success();
 }
 //---------------------------------------------------------------------------
-
+}

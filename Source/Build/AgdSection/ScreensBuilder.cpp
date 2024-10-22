@@ -1,7 +1,8 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
+//---------------------------------------------------------------------------
 #include <math.h>
-#include "Build/AgdSection/Screens.h"
+#include "ScreensBuilder.h"
 #include "Project/DocumentManager.h"
 #include "Project/ImageDocument.h"
 #include "Project/TiledMapDocument.h"
@@ -9,37 +10,39 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-__fastcall SectionBuilders::Screens::Screens()
-: SectionBuilder("Screens")
+using namespace Build;
+//---------------------------------------------------------------------------
+__fastcall ScreensBuilder::ScreensBuilder()
+: SectionBuilder("ScreensBuilder")
 {
 }
 //---------------------------------------------------------------------------
-__fastcall SectionBuilders::Screens::~Screens()
+__fastcall ScreensBuilder::~ScreensBuilder()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall SectionBuilders::Screens::Execute()
+void __fastcall ScreensBuilder::Execute()
 {
     const auto& dm = theDocumentManager;
     // get the objects in the map
-    auto mapDoc = dynamic_cast<TiledMapDocument*>(dm.Get("Map", "Tiled", "Tile Map"));
+    auto mapDoc = dynamic_cast<Project::TiledMapDocument*>(dm.Get("Map", "Tiled", "Tile Map"));
     assert(mapDoc != nullptr);
 
-    const auto& wi = (WindowDocument*)theDocumentManager.Get("Window", "Definition", "Window");
+    const auto& wi = (Project::WindowDocument*)theDocumentManager.Get("Window", "Definition", "Window");
     if (wi)
     {
-        auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[itTile].Minimum;
+        auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile].Minimum;
         auto wPt = TPoint(wi->Rect.Left * tileSize.cx, wi->Rect.Top * tileSize.cy);
         auto ri = 0;
         for (auto ri = 0; ri < 255; ri++)
         {
-            for (auto ry = 0; ry < g_MaxMapRoomsDown; ry++ )
+            for (auto ry = 0; ry < Project::g_MaxMapRoomsDown; ry++ )
             {
-                for (auto rx = 0; rx < g_MaxMapRoomsAcross; rx++)
+                for (auto rx = 0; rx < Project::g_MaxMapRoomsAcross; rx++)
                 {
                     if (mapDoc->GetRoomIndex(TPoint(rx, ry)) == ri)
                     {
-                        auto roomEntities = mapDoc->Get(meRoom, TSize(rx, ry));
+                        auto roomEntities = mapDoc->Get(Project::meRoom, TSize(rx, ry));
                         auto roomPt = TPoint(rx * tileSize.cx * wi->Rect.Width(), ry * tileSize.cy * wi->Rect.Height());
                         String line = "DEFINESCREEN ";
                         for (auto y = 0; y < wi->Rect.Height(); y++)
@@ -47,9 +50,9 @@ void __fastcall SectionBuilders::Screens::Execute()
                             for (auto x = 0; x < wi->Rect.Width(); x++)
                             {
                                 auto entity = find_if(roomEntities.begin(), roomEntities.end(),
-                                    [&](const MapEntity& e)
+                                    [&](const Project::MapEntity& e)
                                     {
-                                        return ((e.Image->ImageType == itTile) && (e.Pt.x == x * tileSize.cx) && (e.Pt.y == y * tileSize.cy));
+                                        return ((e.Image->ImageType == Visuals::itTile) && (e.Pt.x == x * tileSize.cx) && (e.Pt.y == y * tileSize.cy));
                                     } );
                                 if (entity != roomEntities.end())
                                 {

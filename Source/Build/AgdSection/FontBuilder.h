@@ -1,20 +1,21 @@
 //---------------------------------------------------------------------------
-#ifndef MapH
-#define MapH
+#ifndef FontBuilderH
+#define FontBuilderH
 //---------------------------------------------------------------------------
-#include "Build/AgdSection/SectionBuilder.h"
+#include "SectionBuilder.h"
 //---------------------------------------------------------------------------
-namespace SectionBuilders
+namespace Build
 {
-class Map : public SectionBuilder
+//---------------------------------------------------------------------------
+class FontBuilder : public SectionBuilder
 {
 protected:
     void    __fastcall  Execute() final;
 public:
-            __fastcall  Map();
-    virtual __fastcall ~Map();
+            __fastcall  FontBuilder();
+    virtual __fastcall ~FontBuilder();
 };
-}
+//---------------------------------------------------------------------------
+} // Build namespace
 //---------------------------------------------------------------------------
 #endif
-
