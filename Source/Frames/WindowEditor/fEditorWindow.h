@@ -46,17 +46,17 @@ private:    // User declarations
     std::unique_ptr<TBitmap>    m_View;
     int                         m_Scalar;
 
-    void             OnEvent(const Event& event);
-    bool             IsActive() const;
-    void             SetDocument(Project::Document* document);
-    void             ShowKeysHelp();
-    void             DrawView();
+    void                        OnEvent(const Event& event);
+    bool                        IsActive() const;
+    void                        SetDocument(Project::Document* document);
+    void                        ShowKeysHelp();
+    void                        DrawView();
 
 public:        // User declarations
-                     TfrmEditorWindow(TComponent* Owner);
-                    ~TfrmEditorWindow();
+                    __fastcall  TfrmEditorWindow(TComponent* Owner);
+                    __fastcall ~TfrmEditorWindow();
 
-    static  TFrame*  Create(Project::Document* document, TComponent* owner)
+    static  TFrame*             Create(Project::Document* document, TComponent* owner)
                                 {
                                     auto editor = new TfrmEditorWindow(owner);
                                     editor->SetDocument(document);

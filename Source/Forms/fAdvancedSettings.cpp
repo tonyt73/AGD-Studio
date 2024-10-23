@@ -10,7 +10,7 @@
 TfrmAdvancedSettings *frmAdvancedSettings;
 //---------------------------------------------------------------------------
 __fastcall TfrmAdvancedSettings::TfrmAdvancedSettings(TComponent* Owner)
-    : TForm(Owner)
+: TForm(Owner)
 {
 }
 //---------------------------------------------------------------------------

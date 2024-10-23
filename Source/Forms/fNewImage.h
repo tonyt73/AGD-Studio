@@ -32,7 +32,7 @@ private:    // User declarations
     int     __fastcall  GetHeight() const;
     String  __fastcall  GetType() const;
 public:    // User declarations
-    __fastcall TfrmNewImage(TComponent* Owner);
+    __fastcall          TfrmNewImage(TComponent* Owner);
 
     __property  int     Width  = { read = GetWidth  };
     __property  int     Height = { read = GetHeight };

@@ -9,7 +9,7 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
-TfrmEditorWindow::TfrmEditorWindow(TComponent* Owner)
+__fastcall TfrmEditorWindow::TfrmEditorWindow(TComponent* Owner)
 : TFrame(Owner)
 {
     const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
@@ -22,7 +22,7 @@ TfrmEditorWindow::TfrmEditorWindow(TComponent* Owner)
     m_Registrar.Subscribe<Event>(OnEvent);
 }
 //---------------------------------------------------------------------------
-TfrmEditorWindow::~TfrmEditorWindow()
+__fastcall TfrmEditorWindow::~TfrmEditorWindow()
 {
     m_Registrar.Unsubscribe();
 }

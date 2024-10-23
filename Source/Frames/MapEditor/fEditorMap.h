@@ -248,8 +248,8 @@ private:    // User declarations
     void                        ShowKeysHelp();
 
 public:        // User declarations
-                                TfrmEditorMap(TComponent* Owner);
-                               ~TfrmEditorMap();
+                    __fastcall  TfrmEditorMap(TComponent* Owner);
+                    __fastcall ~TfrmEditorMap();
 
     static  TFrame*  Create(Project::Document* document, TComponent* owner)
                                 {

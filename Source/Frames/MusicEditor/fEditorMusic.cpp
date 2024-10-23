@@ -6,7 +6,7 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
-TfrmEditorMusic::TfrmEditorMusic(TComponent* Owner)
+__fastcall TfrmEditorMusic::TfrmEditorMusic(TComponent* Owner)
 : TFrame(Owner)
 {
 }

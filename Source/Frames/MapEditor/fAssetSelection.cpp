@@ -9,7 +9,7 @@
 //---------------------------------------------------------------------------
 static int g_NextAssetId = 0;
 //---------------------------------------------------------------------------
- TfrmAssetSelection::TfrmAssetSelection(TComponent* Owner)
+__fastcall TfrmAssetSelection::TfrmAssetSelection(TComponent* Owner)
 : TFrame(Owner)
 , FOnImageClick(nullptr)
 {

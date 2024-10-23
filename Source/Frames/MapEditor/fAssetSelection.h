@@ -28,7 +28,7 @@ private:    // User declarations
     TNotifyImageOnSelectionEvent    FOnImageClick;
 
 public:    // User declarations
-                    TfrmAssetSelection(TComponent* Owner);
+    __fastcall      TfrmAssetSelection(TComponent* Owner);
 
     void            Clear();
     void            Add(Project::ImageDocument* image, bool enabled = true);

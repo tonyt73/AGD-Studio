@@ -56,7 +56,7 @@ private:
     __property      TFrame*             Active  = { read = GetActiveForm };
 
 public:        // User declaration
-                        __fastcall TfrmMain(TComponent* Owner);
+    __fastcall                          TfrmMain(TComponent* Owner);
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfrmMain *frmMain;

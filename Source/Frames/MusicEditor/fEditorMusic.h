@@ -15,8 +15,8 @@ __published:    // IDE-managed Components
 private:    // User declarations
     Project::Document*          m_Document;
 public:        // User declarations
-                     TfrmEditorMusic(TComponent* Owner);
-    static  TFrame*  Create(Project::Document* document, TComponent* owner)
+                     __fastcall TfrmEditorMusic(TComponent* Owner);
+    static  TFrame*             Create(Project::Document* document, TComponent* owner)
                                 {
                                     auto editor = new TfrmEditorMusic(owner);
                                     editor->Document = document;

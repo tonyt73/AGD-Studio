@@ -28,7 +28,7 @@ private:    // User declarations
     void    __fastcall      SetSelected(bool state);
     void    __fastcall      SetScale(int scale);
 public:     // User declarations
-                            TSelectionImageFrame(TComponent* Owner, const Visuals::GraphicsBuffer& image, const String& hint = "");
+            __fastcall      TSelectionImageFrame(TComponent* Owner, const Visuals::GraphicsBuffer& image, const String& hint = "");
 
     __fastcall  void        Update();
 

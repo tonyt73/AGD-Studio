@@ -10,7 +10,7 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
- TfrmLabelledImage::TfrmLabelledImage(TComponent* Owner)
+__fastcall TfrmLabelledImage::TfrmLabelledImage(TComponent* Owner)
 : TFrame(Owner)
 , m_Document(nullptr)
 , m_GraphicsMode(*(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()))

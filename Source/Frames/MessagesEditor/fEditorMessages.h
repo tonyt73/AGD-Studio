@@ -37,8 +37,8 @@ __published:// IDE-managed Components
     void __fastcall tmrRefreshViewTimer(TObject *Sender);
     void __fastcall sbxViewMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled);
 private:    // User declarations
-    Project::Document*             m_Document;         // the messages document
-    Project::CharacterSetDocument* m_CharacterSet;     // the character set document
+    Project::Document*              m_Document;         // the messages document
+    Project::CharacterSetDocument*  m_CharacterSet;     // the character set document
     Visuals::ImageList              m_Frames;           // the image documents frames as bitmap images
     const Visuals::GraphicsMode&    m_GraphicsMode;     // the graphics mode used by the project
     bool                            m_RefreshView;      // get the timer function to refresh the view
