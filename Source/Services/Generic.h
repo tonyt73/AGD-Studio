@@ -8,35 +8,36 @@ namespace Services
 class Generic
 {
 private:
-    String                      m_Object;
-    std::map<String, String>    m_Objects;
+    typedef StringMap std::map<String, String>;
+    String      m_Object;
+    StringMap   m_Objects;
 
-    void     Process();
+    void        Process();
 
 public:
-             Generic();
-             Generic(const String& object);
-             Generic(const Generic& other);
+                Generic();
+                Generic(const String& object);
+                Generic(const Generic& other);
 
-    void     Add(const String& name, const String& value);
-    void     Add(const String& name, const bool& value);
-    void     Add(const String& name, const int& value);
-    void     Add(const String& name, const float& value);
+    void        Add(const String& name, const String& value);
+    void        Add(const String& name, const bool& value);
+    void        Add(const String& name, const int& value);
+    void        Add(const String& name, const float& value);
 
-    bool     Get(const String& name, String& value);
-    bool     Get(const String& name, bool& value);
-    bool     Get(const String& name, int& value);
-    bool     Get(const String& name, float& value);
+    bool        Get(const String& name, String& value);
+    bool        Get(const String& name, bool& value);
+    bool        Get(const String& name, int& value);
+    bool        Get(const String& name, float& value);
 
     template <class T>
-    T        Get(const String& name)
-                        {
-                            T value;
-                            Get(name, value);
-                            return value;
-                        }
+    T           Get(const String& name)
+                    {
+                        T value;
+                        Get(name, value);
+                        return value;
+                    }
 
-    String   Get() const;
+    String      Get() const;
 };
 //---------------------------------------------------------------------------
 } // Services namespace

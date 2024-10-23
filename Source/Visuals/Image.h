@@ -22,15 +22,15 @@ private:
     bool                                m_IsMonochrome;
 
 public:
-                     Image(unsigned int width, unsigned int height, const Visuals::GraphicsMode& graphicsMode);
-                     Image(Project::ImageDocument const * const image, const Visuals::GraphicsMode& graphicsMode);
+                                        Image(unsigned int width, unsigned int height, const Visuals::GraphicsMode& graphicsMode);
+                                        Image(Project::ImageDocument const * const image, const Visuals::GraphicsMode& graphicsMode);
 
-    void             ChangeFrame(int frame);
-    GraphicsBuffer&  Canvas() const;
-    void             Draw(const TPoint& pt, TBitmap* canvas, TColor overlayColor = clBlack);
-    std::vector<unsigned char>
-                     GetExportNativeFormat() const;
+    void                                ChangeFrame(int frame);
+    GraphicsBuffer&                     Canvas() const;
+    void                                Draw(const TPoint& pt, TBitmap* canvas, TColor overlayColor = clBlack);
+    std::vector<unsigned char>          GetExportNativeFormat() const;
 };
+//---------------------------------------------------------------------------
 typedef std::vector<std::unique_ptr<Image>> ImageList;
 typedef std::map<unsigned int, std::unique_ptr<Image>> ImageMap;
 //---------------------------------------------------------------------------

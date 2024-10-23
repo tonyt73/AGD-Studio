@@ -42,7 +42,7 @@ __published:    // IDE-managed Components
     void __fastcall btnShapeClick(TObject *Sender);
 private:    // User declarations
 public:     // User declarations
-            __fastcall  TfrmToolbarShape(TComponent* Owner);
+                      __fastcall  TfrmToolbarShape(TComponent* Owner);
 
     Services::Generic __fastcall  Parameters() const;
 };

@@ -35,17 +35,17 @@ private:
     MostRecentlyUsedItem    m_Loader;
     bool                    m_Loading;
 
-    void         Save();
-    void         Load();
-    void         OnEndObject(const String& object);
+    void                    Save();
+    void                    Load();
+    void                    OnEndObject(const String& object);
 
 public:
-                 MostRecentlyUsedList();
-                ~MostRecentlyUsedList();
+                            MostRecentlyUsedList();
+                           ~MostRecentlyUsedList();
 
-    void         Add(const String& name, const String& path, const String& machine, bool addToFront = true);
-    void         Remove(const String& name, const String& path);
-    cMRUList     GetList() const;
+    void                    Add(const String& name, const String& path, const String& machine, bool addToFront = true);
+    void                    Remove(const String& name, const String& path);
+    cMRUList                GetList() const;
 };
 //---------------------------------------------------------------------------
 } // Project namespace

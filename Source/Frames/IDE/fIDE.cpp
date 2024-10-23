@@ -1,5 +1,6 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
+//---------------------------------------------------------------------------
 #include "Forms/fAbout.h"
 #include "Forms/fNewImage.h"
 #include "Forms/fSettings.h"

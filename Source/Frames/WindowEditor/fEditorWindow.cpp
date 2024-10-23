@@ -27,7 +27,7 @@ TfrmEditorWindow::~TfrmEditorWindow()
     m_Registrar.Unsubscribe();
 }
 //---------------------------------------------------------------------------
-void TfrmEditorWindow::FrameResize(TObject *Sender)
+void __fastcall TfrmEditorWindow::FrameResize(TObject *Sender)
 {
     Color = ThemeManager::Background;
     auto s = 8;
@@ -122,12 +122,12 @@ void TfrmEditorWindow::ShowKeysHelp()
     HelpKeysMessage(help);
 }
 //---------------------------------------------------------------------------
-void TfrmEditorWindow::imgViewMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
+void __fastcall TfrmEditorWindow::imgViewMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
 {
     //
 }
 //---------------------------------------------------------------------------
-void TfrmEditorWindow::actMoveLeftExecute(TObject *Sender)
+void __fastcall TfrmEditorWindow::actMoveLeftExecute(TObject *Sender)
 {
     if (IsActive() && m_Document->Left - 1 >= 0)
     {
@@ -136,7 +136,7 @@ void TfrmEditorWindow::actMoveLeftExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void TfrmEditorWindow::actMoveRightExecute(TObject *Sender)
+void __fastcall TfrmEditorWindow::actMoveRightExecute(TObject *Sender)
 {
     auto w = m_Document->Width;
     if (IsActive() && m_Document->Left + w + 1 <= m_View->Width)
@@ -146,7 +146,7 @@ void TfrmEditorWindow::actMoveRightExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void TfrmEditorWindow::actMoveUpExecute(TObject *Sender)
+void __fastcall TfrmEditorWindow::actMoveUpExecute(TObject *Sender)
 {
     if (IsActive() && m_Document->Top - 1 >= 0)
     {
@@ -155,7 +155,7 @@ void TfrmEditorWindow::actMoveUpExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void TfrmEditorWindow::actMoveDownExecute(TObject *Sender)
+void __fastcall TfrmEditorWindow::actMoveDownExecute(TObject *Sender)
 {
     auto h = m_Document->Height;
     if (IsActive() && m_Document->Top + h + 1 <= m_View->Height)
@@ -165,7 +165,7 @@ void TfrmEditorWindow::actMoveDownExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void TfrmEditorWindow::actWidthDecExecute(TObject *Sender)
+void __fastcall TfrmEditorWindow::actWidthDecExecute(TObject *Sender)
 {
     if (IsActive() && m_Document->Width > 8)
     {
@@ -174,7 +174,7 @@ void TfrmEditorWindow::actWidthDecExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void TfrmEditorWindow::actWidthIncExecute(TObject *Sender)
+void __fastcall TfrmEditorWindow::actWidthIncExecute(TObject *Sender)
 {
     if (IsActive() && m_Document->Left + m_Document->Width + 1 <= m_View->Width)
     {
@@ -183,7 +183,7 @@ void TfrmEditorWindow::actWidthIncExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void TfrmEditorWindow::actHeightDecExecute(TObject *Sender)
+void __fastcall TfrmEditorWindow::actHeightDecExecute(TObject *Sender)
 {
     if (IsActive() && m_Document->Height >= 8)
     {
@@ -192,7 +192,7 @@ void TfrmEditorWindow::actHeightDecExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void TfrmEditorWindow::actHeightIncExecute(TObject *Sender)
+void __fastcall TfrmEditorWindow::actHeightIncExecute(TObject *Sender)
 {
     if (IsActive() && m_Document->Top + m_Document->Height + 1 <= m_View->Height)
     {
@@ -201,7 +201,7 @@ void TfrmEditorWindow::actHeightIncExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void TfrmEditorWindow::FrameMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate)
+void __fastcall TfrmEditorWindow::FrameMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate)
 {
     theEditorManager.SetActive(this);
 }

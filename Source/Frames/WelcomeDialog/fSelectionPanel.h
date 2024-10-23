@@ -60,8 +60,8 @@ public:        // User declarations
     bool    __property  Loading = { write = SetLoading };
 
             // click events
-            __property  TNotifyEvent OnSelectedClick = { read = FOnClick, write = FOnClick };
-            __property  TNotifyEvent OnRemoveClick = { read = FOnRemoveClick, write = FOnRemoveClick };
+            __property  TNotifyEvent OnSelectedClick = { read = FOnClick      , write = FOnClick       };
+            __property  TNotifyEvent OnRemoveClick   = { read = FOnRemoveClick, write = FOnRemoveClick };
 };
 //---------------------------------------------------------------------------
 #endif

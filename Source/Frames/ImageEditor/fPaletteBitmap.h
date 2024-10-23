@@ -53,13 +53,13 @@ private:    // User declarations
 	Visuals::GraphicsMode&      m_GraphicsMode;     // the graphics mode used by the project
     const Visuals::Palette&     m_Palette;          // the palette used by the graphics mode
 
-    void    __fastcall  DrawPhysicalColors() const;
-    void    __fastcall  DrawLogicalColors() const;
-    void    __fastcall  Update();
+    void            __fastcall  DrawPhysicalColors() const;
+    void            __fastcall  DrawLogicalColors() const;
+    void            __fastcall  Update();
 public:     // User declarations
-            __fastcall  TfrmPaletteBitmap(TComponent* Owner);
-    void    __fastcall  Init();
-	void    __fastcall  Set(Visuals::GraphicsBuffer& canvas);
+                    __fastcall  TfrmPaletteBitmap(TComponent* Owner);
+    void            __fastcall  Init();
+	void            __fastcall  Set(Visuals::GraphicsBuffer& canvas);
 };
 //---------------------------------------------------------------------------
 #endif

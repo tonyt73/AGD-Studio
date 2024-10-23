@@ -140,7 +140,8 @@ private:    // User declarations
 
 public:        // User declarations
                     __fastcall  TfrmEditorCode(TComponent* Owner);
-                    __fastcall  ~TfrmEditorCode();
+                    __fastcall ~TfrmEditorCode();
+
     void            __fastcall  SetDocument(Project::Document* document);
     void            __fastcall  UpdateStatus();
     static  TFrame* __fastcall  Create(Project::Document* document, TComponent* owner)

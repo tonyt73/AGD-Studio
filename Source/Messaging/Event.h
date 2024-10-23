@@ -10,9 +10,9 @@ namespace Messaging
 class Event
 {
 private:
-    String  m_Id;
+    String      m_Id;
 public:
-             Event(const String& id) : m_Id(id) {}
+                Event(const String& id) : m_Id(id) {}
 
     __property  String  Id = { read = m_Id };
 };
@@ -31,7 +31,7 @@ public:
     {
     }
 
-    __property  T Value = { read = m_NewValue };
+    __property  T Value    = { read = m_NewValue };
     __property  T OldValue = { read = m_OldValue };
 };
 //---------------------------------------------------------------------------
@@ -49,7 +49,7 @@ public:
     {
     }
 
-    __property  T Value = { read = m_Value };
+    __property  T                        Value    = { read = m_Value    };
     __property  const Project::Document* document = { read = m_Document };
 };
 //---------------------------------------------------------------------------

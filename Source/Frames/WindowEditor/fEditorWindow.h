@@ -29,17 +29,17 @@ __published:// IDE-managed Components
     TAction *actWidthInc;
     TAction *actHeightDec;
     TAction *actHeightInc;
-    void FrameResize(TObject *Sender);
-    void imgViewMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
-    void actMoveLeftExecute(TObject *Sender);
-    void actMoveRightExecute(TObject *Sender);
-    void actMoveUpExecute(TObject *Sender);
-    void actMoveDownExecute(TObject *Sender);
-    void actWidthDecExecute(TObject *Sender);
-    void actWidthIncExecute(TObject *Sender);
-    void actHeightDecExecute(TObject *Sender);
-    void actHeightIncExecute(TObject *Sender);
-    void FrameMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate);
+    void __fastcall FrameResize(TObject *Sender);
+    void __fastcall imgViewMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
+    void __fastcall actMoveLeftExecute(TObject *Sender);
+    void __fastcall actMoveRightExecute(TObject *Sender);
+    void __fastcall actMoveUpExecute(TObject *Sender);
+    void __fastcall actMoveDownExecute(TObject *Sender);
+    void __fastcall actWidthDecExecute(TObject *Sender);
+    void __fastcall actWidthIncExecute(TObject *Sender);
+    void __fastcall actHeightDecExecute(TObject *Sender);
+    void __fastcall actHeightIncExecute(TObject *Sender);
+    void __fastcall FrameMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate);
 private:    // User declarations
     Registrar                   m_Registrar;
     Project::WindowDocument*    m_Document;

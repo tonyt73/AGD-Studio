@@ -220,7 +220,7 @@ void DocumentManager::Load(const String& name)
     auto end = TDateTime::CurrentTime();
     auto ms = (end - start).FormatString("zzz");
     InformationMessage("[DocumentManager] Project '" + name + "' Loaded in " + ms + "ms");
-    appSettings.LastProject = name;
+    theAppSettings.LastProject = name;
 }
 //---------------------------------------------------------------------------
 String DocumentManager::NextName(const String& type, const String& subType) const

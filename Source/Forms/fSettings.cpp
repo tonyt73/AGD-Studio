@@ -27,13 +27,13 @@ __fastcall TfrmSettings::TfrmSettings(TComponent* Owner)
 //---------------------------------------------------------------------------
 void __fastcall TfrmSettings::FormCreate(TObject *Sender)
 {
-    if (appSettings.Developer.Trim() != "")
+    if (theAppSettings.Developer.Trim() != "")
     {
-        edtDeveloper->Text = appSettings.Developer;
+        edtDeveloper->Text = theAppSettings.Developer;
     }
-    chkWelcomeSkipOnStartup->Checked = appSettings.WelcomeSkipOnStartup;
-    chkWelcomeSkipOnClose->Checked = appSettings.WelcomeSkipOnClose;
-    chkLoadLastProject->Checked = appSettings.LoadLastProject;
+    chkWelcomeSkipOnStartup->Checked = theAppSettings.WelcomeSkipOnStartup;
+    chkWelcomeSkipOnClose->Checked = theAppSettings.WelcomeSkipOnClose;
+    chkLoadLastProject->Checked = theAppSettings.LoadLastProject;
     chkWelcomeSkipOnStartupClick(nullptr);
     chkLoadLastProjectClick(nullptr);
     //panButtons->Color = ThemeManager::Background;
@@ -46,7 +46,7 @@ void __fastcall TfrmSettings::FormCreate(TObject *Sender)
     for (const auto& machine : machines)
     {
         cmbMachines->Items->Add(machine);
-        if (machine == appSettings.DefaultMachine || (cmbMachines->ItemIndex == -1 && machine.Pos("ZX Spectrum") > 0))
+        if (machine == theAppSettings.DefaultMachine || (cmbMachines->ItemIndex == -1 && machine.Pos("ZX Spectrum") > 0))
         {
             cmbMachines->ItemIndex = cmbMachines->Items->Count - 1;
         }
@@ -64,11 +64,11 @@ void __fastcall TfrmSettings::btnProfileClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmSettings::btnOkClick(TObject *Sender)
 {
-    appSettings.WelcomeSkipOnStartup = chkWelcomeSkipOnStartup->Checked;
-    appSettings.WelcomeSkipOnClose = chkWelcomeSkipOnClose->Checked;
-    appSettings.LoadLastProject = chkLoadLastProject->Checked;
-    appSettings.Developer = edtDeveloper->Text;
-    appSettings.DefaultMachine = cmbMachines->Items->Strings[cmbMachines->ItemIndex];
+    theAppSettings.WelcomeSkipOnStartup = chkWelcomeSkipOnStartup->Checked;
+    theAppSettings.WelcomeSkipOnClose = chkWelcomeSkipOnClose->Checked;
+    theAppSettings.LoadLastProject = chkLoadLastProject->Checked;
+    theAppSettings.Developer = edtDeveloper->Text;
+    theAppSettings.DefaultMachine = cmbMachines->Items->Strings[cmbMachines->ItemIndex];
     SaveMachineConfig();
 }
 //---------------------------------------------------------------------------

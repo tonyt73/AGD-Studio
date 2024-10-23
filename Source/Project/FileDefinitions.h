@@ -20,17 +20,16 @@ public:
 
 private:
 
-
-    void         Load();
-    void         OnEndObject(const String& object);
+    void                    Load();
+    void                    OnEndObject(const String& object);
 
     DefinitionList          m_Definitions;
     Definition              m_DefinitionLoader;
 
 public:
-                             FileDefinitions();
+                            FileDefinitions();
 
-    const DefinitionList&    GetDefinitions() const;
+    const DefinitionList&   GetDefinitions() const;
 };
 //---------------------------------------------------------------------------
 } // Project namespace

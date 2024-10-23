@@ -25,11 +25,11 @@ private:
     class Subscription_
     {
     private:
-        unsigned int    m_SubscriptionId;
+        unsigned int            m_SubscriptionId;
 
     public:
-                        Subscription_(unsigned int id) : m_SubscriptionId(id) {};
-        virtual        ~Subscription_() {};
+                                Subscription_(unsigned int id) : m_SubscriptionId(id) {};
+        virtual                ~Subscription_() {};
 
         __property unsigned int SubscriptionId = { read = m_SubscriptionId };
     };

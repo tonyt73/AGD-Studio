@@ -28,19 +28,19 @@ private:
     String                      m_Developer;
     String                      m_DefaultMachine;
 
-    void              SetActiveStyle(const String& style);
-    void              SetWelcomePosition(const TPoint& position);
-    void              SetWindowPosition(const TPoint& position);
-    void              SetWindowState(const TWindowState& state);
-    void              SetWindowSize(const TSize& size);
-    void              SetBool(int index, bool value);
-    void              SetString(int index, String value);
+    void                        SetActiveStyle(const String& style);
+    void                        SetWelcomePosition(const TPoint& position);
+    void                        SetWindowPosition(const TPoint& position);
+    void                        SetWindowState(const TWindowState& state);
+    void                        SetWindowSize(const TSize& size);
+    void                        SetBool(int index, bool value);
+    void                        SetString(int index, String value);
 
-    void              Save();
+    void                        Save();
 
 public:
-                      Settings();
-                     ~Settings();
+                                Settings();
+                               ~Settings();
 
     TWindowState    __property  WindowState             = { read = m_WindowState            , write = SetWindowState        };
     TPoint          __property  WindowPosition          = { read = m_WindowPosition         , write = SetWindowPosition     };
@@ -57,6 +57,6 @@ public:
 //---------------------------------------------------------------------------
 } // Project namespace
 //---------------------------------------------------------------------------
-#define appSettings Project::Settings::get()
+#define theAppSettings Project::Settings::get()
 //---------------------------------------------------------------------------
 #endif

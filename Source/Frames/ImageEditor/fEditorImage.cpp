@@ -1,5 +1,6 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
+//---------------------------------------------------------------------------
 #include "fEditorImage.h"
 #include "Project/DocumentManager.h"
 #include "Frames/EditorManager.h"

@@ -1,5 +1,6 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
+//---------------------------------------------------------------------------
 #include <LMDSedGotoLineDialog.hpp>
 #include <LMDSedColorSchemeDialog.hpp>
 #include <LMDSedKeyBindingsDialog.hpp>

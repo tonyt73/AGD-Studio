@@ -1,5 +1,6 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
+//---------------------------------------------------------------------------
 #include "Forms/fMain.h"
 #include "Project/ProjectManager.h"
 #include "Project/MachineConfig.h"
@@ -24,7 +25,7 @@ void __fastcall TfrmMain::FormCreate(TObject *Sender)
     if (!Services::File::Exists(ParamStr(1)))
     {
         // create the welcome screen
-        if (!appSettings.WelcomeSkipOnStartup)
+        if (!theAppSettings.WelcomeSkipOnStartup)
         {
             ShowWelcomeDialog();
         }
@@ -32,9 +33,9 @@ void __fastcall TfrmMain::FormCreate(TObject *Sender)
         {
             Caption = ApplicationName;
             ShowIDE();
-            if (appSettings.LoadLastProject && appSettings.LastProject.Trim() != "")
+            if (theAppSettings.LoadLastProject && theAppSettings.LastProject.Trim() != "")
             {
-                theProjectManager.Open(appSettings.LastProject);
+                theProjectManager.Open(theAppSettings.LastProject);
             }
         }
     }
@@ -55,7 +56,7 @@ void __fastcall TfrmMain::FormCreate(TObject *Sender)
 void __fastcall TfrmMain::FormActivate(TObject *Sender)
 {
     static bool atStartup = true;
-    if (atStartup && appSettings.WelcomeSkipOnStartup)
+    if (atStartup && theAppSettings.WelcomeSkipOnStartup)
     {
         // We skipped the Welcome dialog; so finish off the main form setup
         IDE->OnActivate(this);
@@ -70,7 +71,7 @@ void __fastcall TfrmMain::FormCloseQuery(TObject *Sender, bool &CanClose)
     {
         IDE->OnClose();
         OnIDEClose(Sender);
-        CanClose = appSettings.WelcomeSkipOnClose;
+        CanClose = theAppSettings.WelcomeSkipOnClose;
     }
     else
     {
@@ -113,7 +114,7 @@ TFrame* __fastcall TfrmMain::GetActiveForm()
 //---------------------------------------------------------------------------
 void __fastcall TfrmMain::OnIDEClose(TObject *Sender)
 {
-    if (!appSettings.WelcomeSkipOnClose)
+    if (!theAppSettings.WelcomeSkipOnClose)
     {
         // show the welcome screen
         ShowWelcomeDialog();
@@ -138,7 +139,7 @@ void __fastcall TfrmMain::ShowWelcomeDialog()
     AutoSize = true;
     BorderStyle = bsSingle;
     Menu = nullptr;
-    TPoint pt = appSettings.WelcomePosition;
+    TPoint pt = theAppSettings.WelcomePosition;
     Left   = pt.X;
     Top    = pt.Y;
     Width  = Welcome->Width;
@@ -154,7 +155,7 @@ void __fastcall TfrmMain::ShowWelcomeDialog()
 //---------------------------------------------------------------------------
 void __fastcall TfrmMain::ShowIDE()
 {
-    appSettings.WelcomePosition = TPoint(Left, Top);
+    theAppSettings.WelcomePosition = TPoint(Left, Top);
     Welcome->OnActivate(nullptr);
     IDE->OnActivate(this);
     m_FormView = fvNone;
@@ -164,11 +165,11 @@ void __fastcall TfrmMain::ShowIDE()
     // start the IDE up
     WindowState = wsNormal;
     Application->ProcessMessages();
-    Left        = appSettings.WindowPosition.X;
-    Top         = appSettings.WindowPosition.Y;
-    Width       = appSettings.WindowSize.Width;
-    Height      = appSettings.WindowSize.Height;
-    WindowState = appSettings.WindowState;
+    Left        = theAppSettings.WindowPosition.X;
+    Top         = theAppSettings.WindowPosition.Y;
+    Width       = theAppSettings.WindowSize.Width;
+    Height      = theAppSettings.WindowSize.Height;
+    WindowState = theAppSettings.WindowState;
     m_FormView  = fvGameIDE;
 }
 //---------------------------------------------------------------------------
@@ -176,17 +177,17 @@ void __fastcall TfrmMain::SaveSettings()
 {
     if (m_FormView == fvGameIDE)
     {
-        appSettings.WindowState = WindowState;
+        theAppSettings.WindowState = WindowState;
         if (WindowState == wsNormal)
         {
-            appSettings.WindowPosition = TPoint(Left, Top);
-            appSettings.WindowSize     = TSize(Width, Height);
+            theAppSettings.WindowPosition = TPoint(Left, Top);
+            theAppSettings.WindowSize     = TSize(Width, Height);
         }
     }
     else if (m_FormView == fvWelcomeDialog)
     {
         TPoint pt(Left, Top);
-        appSettings.WelcomePosition = pt;
+        theAppSettings.WelcomePosition = pt;
     }
 }
 //---------------------------------------------------------------------------

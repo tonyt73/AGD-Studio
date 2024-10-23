@@ -11,19 +11,19 @@ class TiledMapDocument;
 class MapEntity
 {
 protected:
-    TPoint                          m_Pt;           // position of the entity
-    TPoint                          m_DragPt;       // the offset of the entity been dragged
-    unsigned int                    m_Id;           // the document id
-    unsigned int                    m_LoadId;
-    ImageDocument*                  m_Document;     // the image document we represent
-    Visuals::ImageTypes             m_ImageType;    // the type of image
-    bool                            m_Dirty;        // flag: entity needs to be rendered
-    bool                            m_Selected;     // flag: entity is selected
-    int                             m_SpriteType;   // the type of sprite
-    bool                            m_RoomLocked;   // the sprite is locked to the room
-    unsigned int                    m_RoomIndex;    // the index of the room we are locked to
+    TPoint              m_Pt;           // position of the entity
+    TPoint              m_DragPt;       // the offset of the entity been dragged
+    unsigned int        m_Id;           // the document id
+    unsigned int        m_LoadId;
+    ImageDocument*      m_Document;     // the image document we represent
+    Visuals::ImageTypes m_ImageType;    // the type of image
+    bool                m_Dirty;        // flag: entity needs to be rendered
+    bool                m_Selected;     // flag: entity is selected
+    int                 m_SpriteType;   // the type of sprite
+    bool                m_RoomLocked;   // the sprite is locked to the room
+    unsigned int        m_RoomIndex;    // the index of the room we are locked to
 
-    friend class TiledMapDocument;
+    friend class        TiledMapDocument;
 
     void                 SetPoint(const TPoint& pt);
     TPoint               GetPoint() const;

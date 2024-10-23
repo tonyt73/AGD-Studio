@@ -28,7 +28,7 @@ __published:    // IDE-managed Components
     TShape *Shape6;
     void __fastcall btnPlatformClick(TObject *Sender);
 private:    // User declarations
-    char        m_BlockType;
+    char                m_BlockType;
     void    __fastcall  SetBlockType(char type);
 public:        // User declarations
             __fastcall  TfrmBlockTypes(TComponent* Owner);

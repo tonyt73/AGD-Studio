@@ -30,11 +30,11 @@ __published:    // IDE-managed Components
 
 
 private:    // User declarations
-    void __fastcall OnIDEClose(TObject *Sender);
-    void __fastcall OnWelcomeDone(TObject *Sender);
-    void __fastcall ShowWelcomeDialog();
-    void __fastcall ShowIDE();
-    void __fastcall SaveSettings();
+    void                __fastcall  OnIDEClose(TObject *Sender);
+    void                __fastcall  OnWelcomeDone(TObject *Sender);
+    void                __fastcall  ShowWelcomeDialog();
+    void                __fastcall  ShowIDE();
+    void                __fastcall  SaveSettings();
 
     TfrmWelcomeDialog*  __fastcall  GetWelcome();
     TfrmIDE*            __fastcall  GetIDE();
@@ -58,7 +58,7 @@ private:
     __property      TFrame*             Active  = { read = GetActiveForm };
 
 public:        // User declaration
-            __fastcall TfrmMain(TComponent* Owner);
+                        __fastcall TfrmMain(TComponent* Owner);
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfrmMain *frmMain;

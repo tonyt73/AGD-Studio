@@ -24,19 +24,19 @@ Settings& Settings::get()
  Settings::Settings()
 : JsonFile()
 {
-    m_PropertyMap["Application.Style"] = &m_ActiveStyle;
-    m_PropertyMap["Project.Developer"] = &m_Developer;
-    m_PropertyMap["Project.DefaultMachine"] = &m_DefaultMachine;
-    m_PropertyMap["Project.LastLoaded"] = &m_LastProject;
+    m_PropertyMap["Application.Style"        ] = &m_ActiveStyle;
+    m_PropertyMap["Project.Developer"        ] = &m_Developer;
+    m_PropertyMap["Project.DefaultMachine"   ] = &m_DefaultMachine;
+    m_PropertyMap["Project.LastLoaded"       ] = &m_LastProject;
     m_PropertyMap["Project.LoadLastOnStartup"] = &m_LoadLastProject;
-    m_PropertyMap["Welcome.Position.X"] = &m_WelcomePosition.X;
-    m_PropertyMap["Welcome.Position.Y"] = &m_WelcomePosition.Y;
-    m_PropertyMap["Welcome.SkipOnStartup"] = &m_WelcomeSkipOnStartup;
-    m_PropertyMap["Welcome.SkipOnShutdown"] = &m_WelcomeSkipOnClose;
-    m_PropertyMap["MainWindow.Position.X"] = &m_WindowPosition.X;
-    m_PropertyMap["MainWindow.Position.Y"] = &m_WindowPosition.Y;
-    m_PropertyMap["MainWindow.Size.Width"] = &m_WindowSize.Width;
-    m_PropertyMap["MainWindow.Size.Height"] = &m_WindowSize.Height;
+    m_PropertyMap["Welcome.Position.X"       ] = &m_WelcomePosition.X;
+    m_PropertyMap["Welcome.Position.Y"       ] = &m_WelcomePosition.Y;
+    m_PropertyMap["Welcome.SkipOnStartup"    ] = &m_WelcomeSkipOnStartup;
+    m_PropertyMap["Welcome.SkipOnShutdown"   ] = &m_WelcomeSkipOnClose;
+    m_PropertyMap["MainWindow.Position.X"    ] = &m_WindowPosition.X;
+    m_PropertyMap["MainWindow.Position.Y"    ] = &m_WindowPosition.Y;
+    m_PropertyMap["MainWindow.Size.Width"    ] = &m_WindowSize.Width;
+    m_PropertyMap["MainWindow.Size.Height"   ] = &m_WindowSize.Height;
 
     Load(Services::File::Combine(Services::Folders::Common, "Settings.json"));
 }

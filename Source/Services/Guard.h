@@ -14,10 +14,10 @@ namespace Services
 class Guard
 {
 private:
-    bool&       m_Flag;
+    bool&   m_Flag;
 public:
-     Guard(bool& flag);
-    ~Guard();
+            Guard(bool& flag);
+           ~Guard();
 };
 //---------------------------------------------------------------------------
 } // Services namespace

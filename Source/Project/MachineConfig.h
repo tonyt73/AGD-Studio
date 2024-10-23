@@ -47,23 +47,23 @@ protected:
     ToolInfoExt                         m_Assembler;
     ToolInfo                            m_Emulator;
 
-const Visuals::ImageSizing&  GetImageSizing(Visuals::ImageTypes type) const;
-    void                     SetCompiler(const ToolInfo& info);
-    void                     SetEngine(const ToolInfo& info);
-    void                     SetAssembler(const ToolInfoExt& info);
-    void                     SetEmulator(const ToolInfo& info);
+    const Visuals::ImageSizing&         GetImageSizing(Visuals::ImageTypes type) const;
+    void                                SetCompiler(const ToolInfo& info);
+    void                                SetEngine(const ToolInfo& info);
+    void                                SetAssembler(const ToolInfoExt& info);
+    void                                SetEmulator(const ToolInfo& info);
 
-                             MachineConfig();
-    void                     Save();
+                                        MachineConfig();
+    void                                Save();
 
 public:
-                             MachineConfig(const String& name);
-    virtual                 ~MachineConfig();
+                                        MachineConfig(const String& name);
+    virtual                            ~MachineConfig();
 
-    Visuals::GraphicsMode*   GraphicsMode() const;
-    static void              GetMachinesList(std::vector<String>& list);
+    Visuals::GraphicsMode*              GraphicsMode() const;
+    static void                         GetMachinesList(std::vector<String>& list);
 
-    void                     Load(const String& name);
+    void                                Load(const String& name);
 
     String                  __property  Name = { read = m_Name };
     String                  __property  Keyboard = { read = m_Keyboard };
@@ -79,7 +79,7 @@ public:
 //class MachineConfigWriter : public MachineConfig
 //{
 //public:
-//                        MachineConfigWriter();
+//   MachineConfigWriter();
 //};
 //---------------------------------------------------------------------------
 } // namespace Project

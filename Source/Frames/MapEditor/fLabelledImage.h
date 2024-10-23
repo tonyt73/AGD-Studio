@@ -29,7 +29,7 @@ private:    // User declarations
     void            __fastcall  SetImage(Project::ImageDocument* document);
 
 public:        // User declarations
-                     TfrmLabelledImage(TComponent* Owner);
+                                TfrmLabelledImage(TComponent* Owner);
 
     bool            __property  Selected        = { read = m_Selected, write = SetSelected };
 __property Project::ImageDocument* Image        = { read = m_Document, write = SetImage    };

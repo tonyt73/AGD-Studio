@@ -19,7 +19,7 @@ void ThemeManager::SetStyle(const String& styleName)
         {
             auto style = TStyleManager::Style[name];
             TStyleManager::SetStyle(style);
-            appSettings.ActiveStyle = styleName;
+            theAppSettings.ActiveStyle = styleName;
             Bus::Publish<ThemeChangedEvent>(ThemeChangedEvent());
             return;
         }
@@ -27,7 +27,7 @@ void ThemeManager::SetStyle(const String& styleName)
     if (!TStyleManager::TrySetStyle(styleName, false) && Services::File::Exists(styleFile))
     {
         TStyleManager::SetStyle(TStyleManager::LoadFromFile(styleFile));
-        appSettings.ActiveStyle = styleName;
+        theAppSettings.ActiveStyle = styleName;
         Bus::Publish<ThemeChangedEvent>(ThemeChangedEvent());
     }
 }
@@ -47,7 +47,7 @@ void ThemeManager::LoadStyles(TComboBox* combo)
     }
     sl->Sort();
     // add to the combo box
-    const String style = appSettings.ActiveStyle;
+    const String style = theAppSettings.ActiveStyle;
     for (auto i = 0; i < sl->Count; i++)
     {
         auto styleName = sl->Strings[i];

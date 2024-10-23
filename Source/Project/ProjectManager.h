@@ -34,30 +34,30 @@ private:
     Elxtree::TElXTree*              m_TreeView;
     bool                            m_IsOpen;
 
-    void         SetTreeIcon(const String& parent, TElXTreeItem* node) const;
+    void                            SetTreeIcon(const String& parent, TElXTreeItem* node) const;
 
 protected:
-                  friend    DocumentManager;
-    void         OnDocumentChange(Document* doc);
-    void         ClearTree(const String& rootName);
-    Document*    AddToTreeView(Document* document);
+    friend                          DocumentManager;
+    void                            OnDocumentChange(Document* doc);
+    void                            ClearTree(const String& rootName);
+    Document*                       AddToTreeView(Document* document);
 
 public:
 
-                 ProjectManager();
+                                    ProjectManager();
 
-    void         Initialise(Elxtree::TElXTree* treeView);
-    void         New(const String& name, const String& machine);
-    void         Open(const String& file);
-    void         Close();
-    void         Save();
+    void                            Initialise(Elxtree::TElXTree* treeView);
+    void                            New(const String& name, const String& machine);
+    void                            Open(const String& file);
+    void                            Close();
+    void                            Save();
 
-    Document*    Add(const String& type, const String& subType, const String& name, const String& extra);
-    Document*    Add(const String& type, const String& subType, const String& extra);
-    bool         Remove(const String& type, const String& name);
+    Document*                       Add(const String& type, const String& subType, const String& name, const String& extra);
+    Document*                       Add(const String& type, const String& subType, const String& extra);
+    bool                            Remove(const String& type, const String& name);
 
-    void         RemoveMostRecentlyUsedItem(const String& name, const String& path);
-    cMRUList     GetMostRecentlyUsedList();
+    void                            RemoveMostRecentlyUsedItem(const String& name, const String& path);
+    cMRUList                        GetMostRecentlyUsedList();
 };
 //---------------------------------------------------------------------------
 } // Project namespace

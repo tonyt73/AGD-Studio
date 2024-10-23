@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
-#include "Frames/WelcomeDialog/fWelcomeDialog.h"
+#include "fWelcomeDialog.h"
 #include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
 #include "Project/ProjectManager.h"
@@ -56,7 +56,7 @@ void __fastcall TfrmWelcomeDialog::lblStartNewProjectClick(TObject *Sender)
     edtName->SetFocus();
     for (int i = 0; i < cmbMachines->Items->Count; i++)
     {
-        if (cmbMachines->Items->Strings[i] == appSettings.DefaultMachine)
+        if (cmbMachines->Items->Strings[i] == theAppSettings.DefaultMachine)
         {
             cmbMachines->ItemIndex = i;
             break;

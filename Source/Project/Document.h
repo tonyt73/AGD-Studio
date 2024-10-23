@@ -59,31 +59,31 @@ protected:
 static      unsigned int            s_NextRefId;    // next unused ref id. Reset on load
             bool                    m_SaveRefId;    // flag:
 
-            void         SetName(String name);
-            String       GetFile(String name = "");
-            bool         IsValid() const;
-            bool         IsValid(const String& name) const;
+            void                    SetName(String name);
+            String                  GetFile(String name = "");
+            bool                    IsValid() const;
+            bool                    IsValid(const String& name) const;
                                     // update the documents json content
-    virtual void         Update() {};//= 0;
+    virtual void                    Update() {};//= 0;
 
                                     // LMD property editor - property is item been edited, category is section and info is the hint description
-            void         RegisterProperty(const String& property, const String& category, const String& info);
-    virtual void         DoSave() = 0;
-            void         SetShowFileExtension(bool value);
+            void                    RegisterProperty(const String& property, const String& category, const String& info);
+    virtual void                    DoSave() = 0;
+            void                    SetShowFileExtension(bool value);
 
 public:
-                         Document(const String& name);
-    virtual             ~Document();
+                                    Document(const String& name);
+    virtual                        ~Document();
 
-    static  Document*    Create(const String& name, const String& extra)      { throw "Don't create this class";    }
+    static  Document*               Create(const String& name, const String& extra)      { throw "Don't create this class";    }
 
-const TPropertyInfoMap&  GetPropertyInfo() const;
-            String       GetPropertyInfo(const String& property) const;
+const TPropertyInfoMap&             GetPropertyInfo() const;
+            String                  GetPropertyInfo(const String& property) const;
 
-    virtual void         Save();
-    virtual bool         Load();
-            void         AssignId();
-            void         Close();
+    virtual void                    Save();
+    virtual bool                    Load();
+            void                    AssignId();
+            void                    Close();
 
     __property         unsigned int Id          = { read = m_RefId                          };
     __property          String      File        = { read = GetFile                          };

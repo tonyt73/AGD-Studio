@@ -16,7 +16,7 @@ class GraphicsMode : public Services::JsonFile
 public:
     struct ExportInfo
     {
-        bool    BitmapDataOnly;
+        bool                    BitmapDataOnly;
     };
 
 private:
@@ -27,8 +27,8 @@ private:
     // i.e. Amstrad CPC Mode 0, 1, 2
     struct RemapData
     {
-        unsigned char Mask;
-        int           Shift;
+        unsigned char           Mask;
+        int                     Shift;
     };
 
     // The list of pixels (dependent on number of pixels per byte) and their remapping
@@ -50,7 +50,7 @@ protected:
     unsigned int                m_TranparentColor;          // the index into the palette that represents the transparent pixel color
     float                       m_ScalarX;                  // scaling factor for width
     float                       m_ScalarY;                  // scaling factor for height
- std::unique_ptr<Palette> 		m_Palette;                  // the palette table for the graphics mode
+    std::unique_ptr<Palette> 	m_Palette;                  // the palette table for the graphics mode
     BufferType                  m_BufferType;               // the type of graphics buffer we are
     Table                       m_LogicalColors;            // palette table LOGICAL color indexes into the Total Colors table
     Table                       m_DefaultLogicalColors;     // default palette table LOGICAL color indexes into the Total Colors table
@@ -61,25 +61,25 @@ protected:
     PixelRemapping              m_PixelRemappingLoader;     // used to load the pixel remapping list
     RemapData                   m_RemapDataLoader;          // used to load the remap data into the m_PixelRemappingLoader
 
-    int              GetLogicalColors() const;
-    TColor           GetLogicalColor(int index) const;
-    int              GetColorFromLogicalIndex(int index) const;
-  const ExportInfo&  GetExportInformation(ImageTypes imageType) const;
-    void             OnEndObject(const String& object);
-    void             Save();
+    int                         GetLogicalColors() const;
+    TColor                      GetLogicalColor(int index) const;
+    int                         GetColorFromLogicalIndex(int index) const;
+    const ExportInfo&           GetExportInformation(ImageTypes imageType) const;
+    void                        OnEndObject(const String& object);
+    void                        Save();
 
 public:
-                     GraphicsMode();
-                     GraphicsMode(const GraphicsMode& other);
+                                GraphicsMode();
+                                GraphicsMode(const GraphicsMode& other);
 
-            void     Load(const String& name);
-            void     SaveLogicalCLUT(String path = "", String name = "");
-            void     LoadLogicalCLUT(String path = "", String name = "");
+            void                Load(const String& name);
+            void                SaveLogicalCLUT(String path = "", String name = "");
+            void                LoadLogicalCLUT(String path = "", String name = "");
                                 // Remap a logical color to a new palette color
-    void             RemapColor(int paletteTableIndex, int colorTableIndex);
-    unsigned char    RemapPixels(unsigned char pixels) const;
-    void             RestoreDefaultPalette();
-    const Palette&   Palette() const;
+    void                        RemapColor(int paletteTableIndex, int colorTableIndex);
+    unsigned char               RemapPixels(unsigned char pixels) const;
+    void                        RestoreDefaultPalette();
+    const Palette&              Palette() const;
 
     String          __property  Name = { read = m_Name };
     unsigned int    __property  BitsPerPixel = { read = m_BitsPerPixel };

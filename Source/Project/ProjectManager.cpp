@@ -119,7 +119,7 @@ void ProjectManager::New(const String& name, const String& machine)
         // create a new project file, but load the file if it exists
         auto config = dynamic_cast<ProjectDocument*>(Add("Game", "Configuration", name, machine));
         assert(config != nullptr);
-        config->Author = appSettings.Developer;
+        config->Author = theAppSettings.Developer;
         if (config->Files().size() == 0)
         {
             // create the event files

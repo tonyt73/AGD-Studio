@@ -20,7 +20,7 @@ namespace Visuals
 class GraphicsBuffer
 {
 private:
-                         GraphicsBuffer() = delete;
+                                    GraphicsBuffer() = delete;
 protected:
     typedef std::vector<ByteBuffer> Buffers;
 
@@ -39,55 +39,55 @@ protected:
     bool                            m_RenderInGreyscale;// flag: Indicates we render in greyscale
     bool                            m_Drawing;          // flag: Indicates we are drawing pixels; don't render immediately
 
-                         GraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode);
-    void                 PushBuffer(unsigned int size);
-    unsigned int         GetNumberOfBuffers() const;
-    unsigned int         GetSizeOfBuffer(int index) const;
-  virtual unsigned char  GetColorIndex(unsigned char index) const;
-  virtual void           SetColorIndex(unsigned char index, int logicalIndex);
-    void                 SetRenderInGreyscale(bool value);
-    unsigned char        RemapPixel(unsigned char pixel) const;
-    virtual void         Render() const = 0;
+                                    GraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode);
+    void                            PushBuffer(unsigned int size);
+    unsigned int                    GetNumberOfBuffers() const;
+    unsigned int                    GetSizeOfBuffer(int index) const;
+    virtual unsigned char           GetColorIndex(unsigned char index) const;
+    virtual void                    SetColorIndex(unsigned char index, int logicalIndex);
+    void                            SetRenderInGreyscale(bool value);
+    unsigned char                   RemapPixel(unsigned char pixel) const;
+    virtual void                    Render() const = 0;
 
 public:
-    virtual             ~GraphicsBuffer();
+    virtual                        ~GraphicsBuffer();
 
                                     // Make a suitable buffer for the buffer type
-    static void          Make(unsigned int width, unsigned int height, const Visuals::GraphicsMode& mode, std::unique_ptr<GraphicsBuffer>& buffer);
+    static void                     Make(unsigned int width, unsigned int height, const Visuals::GraphicsMode& mode, std::unique_ptr<GraphicsBuffer>& buffer);
                                     // sets the pixel to the specified palette color index
-    virtual void         SetPixel(unsigned int X, unsigned int Y, bool set = true) = 0;
+    virtual void                    SetPixel(unsigned int X, unsigned int Y, bool set = true) = 0;
                                     // retrieves the pixel color at the position specified
-    virtual void         GetColor(unsigned int X, unsigned int Y, unsigned char colorIndex = 0) = 0;
+    virtual void                    GetColor(unsigned int X, unsigned int Y, unsigned char colorIndex = 0) = 0;
                                     // Retrieves the specified buffer index from the graphics buffer
-    void                 GetBuffer(int index, ByteBuffer& buffer) const;
-std::vector<unsigned char>          // Get the native byte data for the buffer
-                         GetNative(ImageTypes type) const;
+    void                            GetBuffer(int index, ByteBuffer& buffer) const;
+                                    // Get the native byte data for the buffer
+    std::vector<unsigned char>      GetNative(ImageTypes type) const;
                                     // Get the hex data of the image
-    String               Get() const;
+    String                          Get() const;
                                     // Set the bitmap data from the hex data
-    virtual void         Set(const String& data) = 0;
+    virtual void                    Set(const String& data) = 0;
                                     // Copy the image onto the bitmap
-    void                 Draw(TBitmap* bitmap, bool inMonochrome = false) const;
+    void                            Draw(TBitmap* bitmap, bool inMonochrome = false) const;
                                     // Copy the image bitmap onto the destination bitmap
-    void                 Assign(TBitmap* bitmap) const;
+    void                            Assign(TBitmap* bitmap) const;
                                     // Begin drawing operations on the canvas
-    void                 Begin();
+    void                            Begin();
                                     // End drawing operations on the canvas
-    void                 End();
+    void                            End();
 
     // Properties
                                     // Dimensions
-    unsigned int        __property  Width  = { read = m_Width  };
-    unsigned int        __property  Height = { read = m_Height };
-    unsigned int        __property  ScalarX = { read = m_ScalarX };
-    unsigned int        __property  ScalarY = { read = m_ScalarY };
+    unsigned int        __property  Width                       = { read = m_Width                                           };
+    unsigned int        __property  Height                      = { read = m_Height                                          };
+    unsigned int        __property  ScalarX                     = { read = m_ScalarX                                         };
+    unsigned int        __property  ScalarY                     = { read = m_ScalarY                                         };
                                     // Color
-    unsigned char       __property  Color[unsigned char index] = { read = GetColorIndex, write = SetColorIndex };
+    unsigned char       __property  Color[unsigned char index]  = { read = GetColorIndex, write = SetColorIndex              };
                                     // Buffer info (used by image tools)
-    BufferType          __property  BufferType = { read = m_BufferType };
-    unsigned int        __property  NumberOfBuffers = { read = GetNumberOfBuffers };
-    unsigned int        __property  SizeOfBuffer[int index] = { read = GetSizeOfBuffer };
-    bool                __property  RenderInGreyscale = { read = m_RenderInGreyscale, write = SetRenderInGreyscale };
+    BufferType          __property  BufferType                  = { read = m_BufferType                                      };
+    unsigned int        __property  NumberOfBuffers             = { read = GetNumberOfBuffers                                };
+    unsigned int        __property  SizeOfBuffer[int index]     = { read = GetSizeOfBuffer                                   };
+    bool                __property  RenderInGreyscale           = { read = m_RenderInGreyscale, write = SetRenderInGreyscale };
 };
 //---------------------------------------------------------------------------
 // TODO: To be implemented if MSX support is added

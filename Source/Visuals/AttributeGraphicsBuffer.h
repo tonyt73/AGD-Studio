@@ -20,13 +20,13 @@ class AttributeGraphicsBuffer : public GraphicsBuffer
 {
 private:
 public:
-                         AttributeGraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode);
-                        ~AttributeGraphicsBuffer();
+            AttributeGraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode);
+           ~AttributeGraphicsBuffer();
 
-                void     SetPixel(unsigned int X, unsigned int Y, bool set);
-                void     GetColor(unsigned int X, unsigned int Y, unsigned char colorIndex = 0);
-                void     Render() const;
-                void     Set(const String& data);
+    void    SetPixel(unsigned int X, unsigned int Y, bool set);
+    void    GetColor(unsigned int X, unsigned int Y, unsigned char colorIndex = 0);
+    void    Render() const;
+    void    Set(const String& data);
 };
 //---------------------------------------------------------------------------
 } // Visuals namespace

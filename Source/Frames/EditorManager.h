@@ -10,7 +10,7 @@ public: // singleton
     void operator=(EditorManager const&) = delete;
 
 private:
-    TFrame*             m_ActiveEditor;
+    TFrame*  m_ActiveEditor;
 
 public:
              EditorManager();

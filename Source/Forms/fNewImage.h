@@ -34,9 +34,9 @@ private:    // User declarations
 public:    // User declarations
     __fastcall TfrmNewImage(TComponent* Owner);
 
-    int     __property  Width = { read = GetWidth };
+    int     __property  Width  = { read = GetWidth  };
     int     __property  Height = { read = GetHeight };
-    String  __property  Type = { read = GetType };
+    String  __property  Type   = { read = GetType   };
 };
 //---------------------------------------------------------------------------
 #endif

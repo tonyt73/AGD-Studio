@@ -235,7 +235,7 @@ public:        // User declarations
                                     return editor;
                                 }
 
-    __property  Project::ImageDocument*  Image = { read = m_ImageDocument, write = m_ImageDocument };
+    __property Project::ImageDocument*  Image = { read = m_ImageDocument, write = m_ImageDocument };
 };
 //---------------------------------------------------------------------------
 #endif

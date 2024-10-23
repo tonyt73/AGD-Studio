@@ -53,17 +53,17 @@ private:    // User declarations
     Visuals::GraphicsMode&      m_GraphicsMode;     // the graphics mode used by the project
     const Visuals::Palette&     m_Palette;          // the palette used by the graphics mode
 
-    void    __fastcall  DrawSelectionBox(TBitmap* bitmap, int xs, int ys, int xe, int ye) const;
-    void    __fastcall  DrawPhysicalColors() const;
-    void    __fastcall  DrawPalettesColors() const;
-    void    __fastcall  Update();
+    void            __fastcall  DrawSelectionBox(TBitmap* bitmap, int xs, int ys, int xe, int ye) const;
+    void            __fastcall  DrawPhysicalColors() const;
+    void            __fastcall  DrawPalettesColors() const;
+    void            __fastcall  Update();
 
-    int     __fastcall  GetInk(int index = -1, int ink = -1) const;
-    int     __fastcall  GetPaper(int index = -1, int paper = -1) const;
+    int             __fastcall  GetInk(int index = -1, int ink = -1) const;
+    int             __fastcall  GetPaper(int index = -1, int paper = -1) const;
 public:        // User declarations
-            __fastcall  TfrmULAplusBitmap(TComponent* Owner);
-    void    __fastcall  Init();
-    void    __fastcall  Set(Visuals::GraphicsBuffer& canvas);
+                    __fastcall  TfrmULAplusBitmap(TComponent* Owner);
+    void            __fastcall  Init();
+    void            __fastcall  Set(Visuals::GraphicsBuffer& canvas);
 };
 //---------------------------------------------------------------------------
 #endif
