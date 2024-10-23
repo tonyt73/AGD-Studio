@@ -223,7 +223,7 @@ __published:    // IDE-managed Components
     void __fastcall actShowSpriteTypesExecute(TObject *Sender);
 
 private:    // User declarations
-    Registrar      m_Registrar;        // the messaging registrar
+    Registrar      				m_Registrar;        // the messaging registrar
     Project::TiledMapDocument*  m_Document;         // the map document we are editiing
     std::unique_ptr<TileEditor> m_Workspace;        // the main workspace editor
     std::unique_ptr<TileEditor> m_ScratchPad;       // the scratch pad editor
@@ -251,7 +251,7 @@ public:        // User declarations
                     __fastcall  TfrmEditorMap(TComponent* Owner);
                     __fastcall ~TfrmEditorMap();
 
-    static  TFrame*  Create(Project::Document* document, TComponent* owner)
+    static  TFrame*  			Create(Project::Document* document, TComponent* owner)
                                 {
                                     auto editor = new TfrmEditorMap(owner);
                                     editor->Document = dynamic_cast<Project::TiledMapDocument*>(document);

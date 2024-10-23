@@ -20,23 +20,23 @@
 class TfrmMain : public TForm
 {
 __published:    // IDE-managed Components
-    void __fastcall FormCreate(TObject *Sender);
-    void __fastcall FormDestroy(TObject *Sender);
-    void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
-    void __fastcall FormActivate(TObject *Sender);
-    void __fastcall FormBeforeMonitorDpiChanged(TObject *Sender, int OldDPI, int NewDPI);
-    void __fastcall FormAfterMonitorDpiChanged(TObject *Sender, int OldDPI, int NewDPI);
+    void 				__fastcall FormCreate(TObject *Sender);
+    void 				__fastcall FormDestroy(TObject *Sender);
+    void 				__fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
+    void 				__fastcall FormActivate(TObject *Sender);
+    void 				__fastcall FormBeforeMonitorDpiChanged(TObject *Sender, int OldDPI, int NewDPI);
+    void 				__fastcall FormAfterMonitorDpiChanged(TObject *Sender, int OldDPI, int NewDPI);
 
 private:    // User declarations
-    __fastcall  void                OnIDEClose(TObject *Sender);
-    __fastcall  void                OnWelcomeDone(TObject *Sender);
-    __fastcall  void                ShowWelcomeDialog();
-    __fastcall  void                ShowIDE();
-    __fastcall  void                SaveSettings();
+    void 				__fastcall OnIDEClose(TObject *Sender);
+    void 				__fastcall OnWelcomeDone(TObject *Sender);
+    void 				__fastcall ShowWelcomeDialog();
+    void 				__fastcall ShowIDE();
+    void 				__fastcall SaveSettings();
 
-    __fastcall  TfrmWelcomeDialog*  GetWelcome();
-    __fastcall  TfrmIDE*            GetIDE();
-    __fastcall  TFrame*             GetActiveForm();
+    TfrmWelcomeDialog*  __fastcall  GetWelcome();
+    TfrmIDE*            __fastcall  GetIDE();
+    TFrame*             __fastcall  GetActiveForm();
 
 private:
 
