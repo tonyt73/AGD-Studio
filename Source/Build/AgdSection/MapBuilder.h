@@ -2,7 +2,7 @@
 #ifndef MapBuilderH
 #define MapBuilderH
 //---------------------------------------------------------------------------
-#include "Build/AgdSection/SectionBuilder.h"
+#include "SectionBuilder.h"
 //---------------------------------------------------------------------------
 namespace Build
 {

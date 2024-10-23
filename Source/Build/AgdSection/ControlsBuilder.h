@@ -2,7 +2,7 @@
 #ifndef ControlsBuilderH
 #define ControlsBuilderH
 //---------------------------------------------------------------------------
-#include "Build/AgdSection/SectionBuilder.h"
+#include "SectionBuilder.h"
 //---------------------------------------------------------------------------
 namespace Build
 {
