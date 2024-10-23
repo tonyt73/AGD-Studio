@@ -33,11 +33,11 @@ public:
 
     static DWORD        LuminanceOf(TColor Color);
 
-    String  __property  Name                    = { read = m_Name         };
-    TColor  __property  Greyscale[int index]    = { read = GetGreyscale   };
-    TColor  __property  Color[int index]        = { read = GetTableColor  };
-    int     __property  Colors                  = { read = GetTotalColors };
-    TColor  __property  FontColorOf[int index]  = { read = GetFontColorOf };
+    __property  String  Name                    = { read = m_Name         };
+    __property  TColor  Greyscale[int index]    = { read = GetGreyscale   };
+    __property  TColor  Color[int index]        = { read = GetTableColor  };
+    __property  int     Colors                  = { read = GetTotalColors };
+    __property  TColor  FontColorOf[int index]  = { read = GetFontColorOf };
 };
 //---------------------------------------------------------------------------
 //class PaletteWriter : public Palette

@@ -51,7 +51,7 @@ private:    // User declarations
 
 public:     // User declarations
                         __fastcall  TfrmEditorMessages(TComponent* Owner);
-    static  TFrame*     __fastcall  Create(Project::Document* document, TComponent* owner)
+    static  TFrame*                 Create(Project::Document* document, TComponent* owner)
                                     {
                                         auto editor = new TfrmEditorMessages(owner);
                                         editor->SetDocument(document);

@@ -41,59 +41,59 @@ private:
     typedef std::vector<PixelRemapping> PixelRemappingList;
 
 protected:
-    String                      m_Name;                     // the name of the screen/graphics mode
-    String                      m_PaletteName;              // the name of the palette file to load
-    unsigned int                m_BitsPerPixel;             // the number of bits used to store a pixel
-    unsigned char               m_PixelsHighPerAttribute;   // the number of pixels high an attribute represents
-    unsigned int                m_Width;                    // the default width of the screen for this mode
-    unsigned int                m_Height;                   // the default height of the screen for this mode
-    unsigned int                m_TranparentColor;          // the index into the palette that represents the transparent pixel color
-    float                       m_ScalarX;                  // scaling factor for width
-    float                       m_ScalarY;                  // scaling factor for height
+                String          m_Name;                     // the name of the screen/graphics mode
+                String          m_PaletteName;              // the name of the palette file to load
+                unsigned int    m_BitsPerPixel;             // the number of bits used to store a pixel
+                unsigned char   m_PixelsHighPerAttribute;   // the number of pixels high an attribute represents
+                unsigned int    m_Width;                    // the default width of the screen for this mode
+                unsigned int    m_Height;                   // the default height of the screen for this mode
+                unsigned int    m_TranparentColor;          // the index into the palette that represents the transparent pixel color
+                float           m_ScalarX;                  // scaling factor for width
+                float           m_ScalarY;                  // scaling factor for height
     std::unique_ptr<Palette> 	m_Palette;                  // the palette table for the graphics mode
-    BufferType                  m_BufferType;               // the type of graphics buffer we are
-    Table                       m_LogicalColors;            // palette table LOGICAL color indexes into the Total Colors table
-    Table                       m_DefaultLogicalColors;     // default palette table LOGICAL color indexes into the Total Colors table
-    int                         m_LogicalIndex;             // json loader
-    bool                        m_SupportsRemapping;        // supports remapping of the logical colors to any of the palette colors
-    ExportInfo                  m_ExportInfo[itEnd];        // flags for image data export
-    PixelRemappingList          m_PixelRemapping;           // a list of  masks/shifts used to remap pixel bits into machine specific formats for certain graphics modes
-    PixelRemapping              m_PixelRemappingLoader;     // used to load the pixel remapping list
-    RemapData                   m_RemapDataLoader;          // used to load the remap data into the m_PixelRemappingLoader
+                BufferType      m_BufferType;               // the type of graphics buffer we are
+                Table           m_LogicalColors;            // palette table LOGICAL color indexes into the Total Colors table
+                Table           m_DefaultLogicalColors;     // default palette table LOGICAL color indexes into the Total Colors table
+                int             m_LogicalIndex;             // json loader
+                bool            m_SupportsRemapping;        // supports remapping of the logical colors to any of the palette colors
+                ExportInfo      m_ExportInfo[itEnd];        // flags for image data export
+            PixelRemappingList  m_PixelRemapping;           // a list of  masks/shifts used to remap pixel bits into machine specific formats for certain graphics modes
+            PixelRemapping      m_PixelRemappingLoader;     // used to load the pixel remapping list
+                RemapData       m_RemapDataLoader;          // used to load the remap data into the m_PixelRemappingLoader
 
-    int                         GetLogicalColors() const;
-    TColor                      GetLogicalColor(int index) const;
-    int                         GetColorFromLogicalIndex(int index) const;
-    const ExportInfo&           GetExportInformation(ImageTypes imageType) const;
-    void                        OnEndObject(const String& object);
-    void                        Save();
+                int             GetLogicalColors() const;
+                TColor          GetLogicalColor(int index) const;
+                int             GetColorFromLogicalIndex(int index) const;
+    const       ExportInfo&     GetExportInformation(ImageTypes imageType) const;
+                void            OnEndObject(const String& object);
+                void            Save();
 
 public:
                                 GraphicsMode();
                                 GraphicsMode(const GraphicsMode& other);
 
-            void                Load(const String& name);
-            void                SaveLogicalCLUT(String path = "", String name = "");
-            void                LoadLogicalCLUT(String path = "", String name = "");
+                void            Load(const String& name);
+                void            SaveLogicalCLUT(String path = "", String name = "");
+                void            LoadLogicalCLUT(String path = "", String name = "");
                                 // Remap a logical color to a new palette color
-    void                        RemapColor(int paletteTableIndex, int colorTableIndex);
-    unsigned char               RemapPixels(unsigned char pixels) const;
-    void                        RestoreDefaultPalette();
-    const Palette&              Palette() const;
+                void            RemapColor(int paletteTableIndex, int colorTableIndex);
+                unsigned char   RemapPixels(unsigned char pixels) const;
+                void            RestoreDefaultPalette();
+    const       Palette&        Palette() const;
 
-    String          __property  Name = { read = m_Name };
-    unsigned int    __property  BitsPerPixel = { read = m_BitsPerPixel };
-    unsigned char   __property  PixelsHighPerAttribute = { read = m_PixelsHighPerAttribute };
-    unsigned int    __property  Width = { read = m_Width };
-    unsigned int    __property  Height = { read = m_Height };
-    float           __property  ScalarX = { read = m_ScalarX };
-    float           __property  ScalarY = { read = m_ScalarY };
-    BufferType      __property  TypeOfBuffer = { read = m_BufferType };
-    int             __property  FromLogicalColor[int index] = { read = GetColorFromLogicalIndex };          // get a palette table index from a logical index
-    int             __property  LogicalColors = { read = GetLogicalColors };
-    TColor          __property  LogicalColor[int index] = { read = GetLogicalColor };
-    bool            __property  SupportsLogicalColorRemapping = { read = m_SupportsRemapping };
-    ExportInfo      __property  ExportInformation[ImageTypes imageType] = { read = GetExportInformation };
+    __property  String          Name = { read = m_Name };
+    __property  unsigned int    BitsPerPixel = { read = m_BitsPerPixel };
+    __property  unsigned char   PixelsHighPerAttribute = { read = m_PixelsHighPerAttribute };
+    __property  unsigned int    Width = { read = m_Width };
+    __property  unsigned int    Height = { read = m_Height };
+    __property  float           ScalarX = { read = m_ScalarX };
+    __property  float           ScalarY = { read = m_ScalarY };
+    __property  BufferType      TypeOfBuffer = { read = m_BufferType };
+    __property  int             FromLogicalColor[int index] = { read = GetColorFromLogicalIndex };          // get a palette table index from a logical index
+    __property  int             LogicalColors = { read = GetLogicalColors };
+    __property  TColor          LogicalColor[int index] = { read = GetLogicalColor };
+    __property  bool            SupportsLogicalColorRemapping = { read = m_SupportsRemapping };
+    __property  ExportInfo      ExportInformation[ImageTypes imageType] = { read = GetExportInformation };
 };
 //---------------------------------------------------------------------------
 //class GraphicsModeWriter : public GraphicsMode

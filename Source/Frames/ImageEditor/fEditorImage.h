@@ -227,7 +227,7 @@ public:        // User declarations
                     __fastcall  TfrmEditorImage(TComponent* Owner);
                     __fastcall ~TfrmEditorImage();
 
-     static  TFrame* __fastcall Create(Project::Document* document, TComponent* owner)
+     static  TFrame*            Create(Project::Document* document, TComponent* owner)
                                 {
                                     auto editor = new TfrmEditorImage(owner);
                                     editor->SetDocument(document);

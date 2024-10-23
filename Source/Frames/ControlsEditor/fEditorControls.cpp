@@ -16,7 +16,7 @@ __fastcall TfrmEditorControls::TfrmEditorControls(TComponent* Owner)
     m_Registrar.Subscribe<ThemeChangedEvent>(OnThemeChangedEvent);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorControls::SetDocument(Project::Document* document)
+void TfrmEditorControls::SetDocument(Project::Document* document)
 {
     m_Document = dynamic_cast<Project::ControlsDocument*>(document);
 	kcLeft->KeyCode = m_Document->GetAsciiCode(Project::keyLeft);
@@ -63,12 +63,17 @@ void __fastcall TfrmEditorControls::OnKeyChanged(TObject* Sender)
     else if (Sender == kcOption4) m_Document->SetAsciiCode(Project::keyOption4, kcOption4->KeyCode);
 }
 //---------------------------------------------------------------------------
-bool __fastcall TfrmEditorControls::IsActive() const
+void __fastcall TfrmEditorControls::OnThemeChangedEvent(const ThemeChangedEvent& event)
+{
+    UpdateColors();
+}
+//---------------------------------------------------------------------------
+bool TfrmEditorControls::IsActive() const
 {
     return theEditorManager.IsActive(this);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorControls::ShowKeysHelp()
+void TfrmEditorControls::ShowKeysHelp()
 {
     const String help = "Enter the character for the key or an ASCII code from 1 - 127.\r\nDelete the character to unset it.";
     HelpKeysMessage(help);
@@ -81,7 +86,7 @@ void __fastcall TfrmEditorControls::FrameMouseActivate(TObject *Sender, TMouseBu
     theEditorManager.SetActive(this);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorControls::UpdateColors()
+void TfrmEditorControls::UpdateColors()
 {
     Line1->Brush->Color = ThemeManager::Highlight;
     Line1->Pen->Color = ThemeManager::Highlight;
@@ -89,11 +94,6 @@ void __fastcall TfrmEditorControls::UpdateColors()
     Line2->Pen->Color = ThemeManager::Highlight;
     Line3->Brush->Color = ThemeManager::Highlight;
     Line3->Pen->Color = ThemeManager::Highlight;
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorControls::OnThemeChangedEvent(const ThemeChangedEvent& event)
-{
-    UpdateColors();
 }
 //---------------------------------------------------------------------------
 

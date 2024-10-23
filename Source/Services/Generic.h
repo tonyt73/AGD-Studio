@@ -8,7 +8,7 @@ namespace Services
 class Generic
 {
 private:
-    typedef StringMap std::map<String, String>;
+    typedef std::map<String, String> StringMap;
     String      m_Object;
     StringMap   m_Objects;
 

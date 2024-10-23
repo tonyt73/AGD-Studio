@@ -8,7 +8,7 @@
 class MapTool : public Tool
 {
 private:
-    TSize                       m_TileSize;     // the size in pixels of a tile
+    TSize             m_TileSize;     // the size in pixels of a tile
 
 protected:
                                 // draw functions
@@ -18,7 +18,7 @@ protected:
     virtual void      Apply(Project::MapEntityList& list, Project::MapEntity entity) = 0;
             void      Set(Project::MapEntityList& list, const Project::MapEntity& entity);
 
-    __property  TSize           TileSize = { read = m_TileSize };
+    __property  TSize TileSize = { read = m_TileSize };
 
 public:
                       MapTool();

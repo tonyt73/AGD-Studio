@@ -19,17 +19,17 @@ std::unique_ptr<TLMDStarterExt> m_Shell;
             bool                m_ShellDone;
             bool                m_Errored;
 
-			void     OnOutputEvent(System::TObject* ASender, const System::UnicodeString ANewLine);
-			void     OnErrorEvent(System::TObject* ASender);
-            void     OnTerminatedEvent(System::TObject* ASender);
+			void     __fastcall OnOutputEvent(System::TObject* ASender, const System::UnicodeString ANewLine);
+			void     __fastcall OnErrorEvent(System::TObject* ASender);
+            void     __fastcall OnTerminatedEvent(System::TObject* ASender);
 
 protected:
-            bool     ShellExecute(const String& path, const String& cmdline, const String& parameters, bool wait = true, int timeOut = 0);
+            bool                ShellExecute(const String& path, const String& cmdline, const String& parameters, bool wait = true, int timeOut = 0);
 
 
 public:
-                     ShellProcess(BuildMessages& buildMessages, BuildMessageType type, const String& description);
-    virtual         ~ShellProcess();
+                                ShellProcess(BuildMessages& buildMessages, BuildMessageType type, const String& description);
+    virtual                    ~ShellProcess();
 };
 //---------------------------------------------------------------------------
 } // Build namespace

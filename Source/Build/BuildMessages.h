@@ -12,29 +12,29 @@ enum BuildMessageType { bmOk = 0, bmFailed, bmChecking, bmBuild, bmRun, bmProgre
 class BuildMessages
 {
 private:
-    TElXTree*                   m_TreeView;
-    TElXTreeItem*               m_GroupNode;
-    TElXTreeItem*               m_MsgNode;
-    BuildMessageType            m_GroupType;
+            TElXTree*           m_TreeView;
+            TElXTreeItem*       m_GroupNode;
+            TElXTreeItem*       m_MsgNode;
+            BuildMessageType    m_GroupType;
 
 public:
-                     BuildMessages();
-    virtual         ~BuildMessages();
+                                BuildMessages();
+    virtual                    ~BuildMessages();
 
                                 // clear the tree view
-        void         Clear();
+                void            Clear();
                                 // push a new group/folder node
-        void         Push(BuildMessageType type, const String& group);
+                void            Push(BuildMessageType type, const String& group);
                                 // pop the last node
-        void         Pop(bool result);
+                void            Pop(bool result);
                                 // post a message in the current group node
-        void         Message(BuildMessageType type, const String& message);
+                void            Message(BuildMessageType type, const String& message);
                                 // post a message in the current group node
-        void         Message(const String& message);
+                void            Message(const String& message);
                                 // update the last message with a success/fail icon
-        void         Message(BuildMessageType type);
+                void            Message(BuildMessageType type);
                                 // log a build time
-        void         Time(int time);
+                void            Time(int time);
 
     __property  TElXTree*       TreeView = { write = m_TreeView };
 };

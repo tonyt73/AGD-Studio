@@ -13,18 +13,18 @@ class BuildManager
 {
 private:
     typedef std::list<std::unique_ptr<BuildProcess>> BuildProcesses;
-    BuildProcesses              m_BuildProcesses;
-    BuildMessages               m_BuildMessages;
+    BuildProcesses          m_BuildProcesses;
+    BuildMessages           m_BuildMessages;
 
-    void             SetTreeView(TElXTree* treeView);
+    void                    SetTreeView(TElXTree* treeView);
 
 public:
-                     BuildManager();
-    virtual         ~BuildManager();
+                            BuildManager();
+    virtual                ~BuildManager();
 
-    bool             Execute();
+                bool        Execute();
 
-    __property  TElXTree*       TreeView = { write = SetTreeView };
+    __property  TElXTree*   TreeView = { write = SetTreeView };
 };
 //---------------------------------------------------------------------------
 } // Build namespace

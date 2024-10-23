@@ -163,26 +163,26 @@ public:
     void                        Paste();
 
     // properties
-    __property  TEMode          Mode                = { read = m_Mode, write = SetMode                          };
-    __property  TSize           Rooms               = { write = SetRooms                                        };
-    __property  float           Scale               = { read = m_ScaleFactor, write = SetScale                  };
-    __property  bool            GridTile            = { read = m_ShowGridTile, write = SetGridTile              };
-    __property  bool            GridRoom            = { read = m_ShowGridRoom, write = SetGridRoom              };
-    __property  unsigned int    Tile0Id             = { read = m_Tile0Id, write = SetTile0Id                    };
-    __property  unsigned int    ToolEntity          = { read = GetToolEntity, write = SetToolEntity             };
-    __property  bool            ReadOnly            = { read = m_ReadOnly, write = SetReadOnly                  };
-    __property  TSize           SelectedRoom        = { read = m_SelectedRoom                                   };
-    __property  TPoint          StartRoom           = { read = m_StartRoom, write = SetStartRoomCoords          };
-    __property  bool            ShowSelectedRoom    = { read = m_ShowSelectedRoom, write = SetShowSelectedRoom  };
-    __property  bool            ShowStartRoom       = { read = m_ShowStartRoom, write = SetShowStartRoom        };
-    __property  bool            ShowRoomNumbers     = { read = m_ShowRoomNumbers, write = SetShowRoomNumbers    };
-    __property  bool            ShowTileTypes       = { read = m_ShowTileTypes, write = SetShowTileTypes        };
-    __property  bool            ShowSpriteTypes     = { read = m_ShowSpriteTypes, write = SetShowSpriteTypes    };
-    __property  TImage*         LockIcon            = { write = SetLockIcon                                     };
+    __property  TEMode          Mode                = { read = m_Mode            , write = SetMode            };
+    __property  TSize           Rooms               = { write = SetRooms                                      };
+    __property  float           Scale               = { read = m_ScaleFactor     , write = SetScale           };
+    __property  bool            GridTile            = { read = m_ShowGridTile    , write = SetGridTile        };
+    __property  bool            GridRoom            = { read = m_ShowGridRoom    , write = SetGridRoom        };
+    __property  unsigned int    Tile0Id             = { read = m_Tile0Id         , write = SetTile0Id         };
+    __property  unsigned int    ToolEntity          = { read = GetToolEntity     , write = SetToolEntity      };
+    __property  bool            ReadOnly            = { read = m_ReadOnly        , write = SetReadOnly        };
+    __property  TSize           SelectedRoom        = { read = m_SelectedRoom                                 };
+    __property  TPoint          StartRoom           = { read = m_StartRoom       , write = SetStartRoomCoords };
+    __property  bool            ShowSelectedRoom    = { read = m_ShowSelectedRoom, write = SetShowSelectedRoom};
+    __property  bool            ShowStartRoom       = { read = m_ShowStartRoom   , write = SetShowStartRoom   };
+    __property  bool            ShowRoomNumbers     = { read = m_ShowRoomNumbers , write = SetShowRoomNumbers };
+    __property  bool            ShowTileTypes       = { read = m_ShowTileTypes   , write = SetShowTileTypes   };
+    __property  bool            ShowSpriteTypes     = { read = m_ShowSpriteTypes , write = SetShowSpriteTypes };
+    __property  TImage*         LockIcon            = { write = SetLockIcon                                   };
 
     // event handlers
-    __property TNotifyOnEntityClick OnEntitySelected= { read = FOnEntitySelected, write = FOnEntitySelected     };
-    __property TRetrieveRoomIndex  RetrieveRoomIndex= { read = FRetrieveRoomIndex, write = FRetrieveRoomIndex   };
+    __property TNotifyOnEntityClick OnEntitySelected= { read = FOnEntitySelected , write = FOnEntitySelected  };
+    __property TRetrieveRoomIndex  RetrieveRoomIndex= { read = FRetrieveRoomIndex, write = FRetrieveRoomIndex };
 };
 //---------------------------------------------------------------------------
 #endif

@@ -33,7 +33,7 @@ private:    // User declarations
 public:        // User declarations
             __fastcall  TfrmBlockTypes(TComponent* Owner);
 
-    char    __property  BlockType = { read = m_BlockType, write = SetBlockType };
+    __property  char    BlockType = { read = m_BlockType, write = SetBlockType };
 };
 //---------------------------------------------------------------------------
 #endif

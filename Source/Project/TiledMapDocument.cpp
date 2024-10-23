@@ -252,7 +252,7 @@ void TiledMapDocument::SetStartRoomCoords(const TPoint& coords)
     }
 }
 //---------------------------------------------------------------------------
-int TiledMapDocument::GetStartRoomCoords(int index) const
+int __fastcall TiledMapDocument::GetStartRoomCoords(int index) const
 {
     return index ? m_StartRoomCoords.Y : m_StartRoomCoords.X;
 }
@@ -402,7 +402,7 @@ const TRect& TiledMapDocument::GetWindow() const
     return TRect();
 }
 //---------------------------------------------------------------------------
-int TiledMapDocument::GetNumberOfRooms()
+int __fastcall TiledMapDocument::GetNumberOfRooms()
 {
     int count = 0;
     for (auto room : m_RoomMapping) {
@@ -411,7 +411,7 @@ int TiledMapDocument::GetNumberOfRooms()
     return count;
 }
 //---------------------------------------------------------------------------
-int TiledMapDocument::GetMaxRooms(int index)
+int __fastcall TiledMapDocument::GetMaxRooms(int index)
 {
     return index ? g_MaxMapRoomsDown : g_MaxMapRoomsAcross;
 }

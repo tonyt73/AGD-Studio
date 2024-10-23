@@ -49,19 +49,19 @@ public:        // User declarations
             __fastcall  TSelectionPanelFrame(TComponent* Owner);
             __fastcall ~TSelectionPanelFrame();
 
-    void     __fastcall UpdateControl();
-    void     __fastcall Tick();
+    void    __fastcall  UpdateControl();
+    void    __fastcall  Tick();
 
-    String  __property  Name = { read = m_Name, write = SetName };
-    String  __property  Path = { read = m_Path, write = SetPath };
-    String  __property  Machine = { read = m_Machine, write = SetMachine };
-    bool    __property  Selected = { read = m_Selected, write = SetSelected };
-    bool    __property  Highlighted = { read = m_Highlighted, write = SetHighlighted };
-    bool    __property  Loading = { write = SetLoading };
+    __property  String  Name = { read = m_Name, write = SetName };
+    __property  String  Path = { read = m_Path, write = SetPath };
+    __property  String  Machine = { read = m_Machine, write = SetMachine };
+    __property  bool    Selected = { read = m_Selected, write = SetSelected };
+    __property  bool    Highlighted = { read = m_Highlighted, write = SetHighlighted };
+    __property  bool    Loading = { write = SetLoading };
 
             // click events
-            __property  TNotifyEvent OnSelectedClick = { read = FOnClick      , write = FOnClick       };
-            __property  TNotifyEvent OnRemoveClick   = { read = FOnRemoveClick, write = FOnRemoveClick };
+    __property  TNotifyEvent OnSelectedClick = { read = FOnClick      , write = FOnClick       };
+    __property  TNotifyEvent OnRemoveClick   = { read = FOnRemoveClick, write = FOnRemoveClick };
 };
 //---------------------------------------------------------------------------
 #endif

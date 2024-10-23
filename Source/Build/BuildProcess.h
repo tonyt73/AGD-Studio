@@ -20,13 +20,13 @@ protected:
     BuildMessages&              m_BuildMessages;
 
 public:
-                     BuildProcess(BuildMessages& buildMessages, BuildMessageType type, const String& description);
-    virtual         ~BuildProcess();
+                                BuildProcess(BuildMessages& buildMessages, BuildMessageType type, const String& description);
+    virtual                    ~BuildProcess();
 
-    virtual bool     Execute() = 0;
+    virtual    bool             Execute() = 0;
 
-            String  __property  Description = { read = m_Description };
-  BuildMessageType  __property  Type = { read = m_Type };
+    __property String           Description = { read = m_Description };
+    __property BuildMessageType Type = { read = m_Type };
 };
 //---------------------------------------------------------------------------
 } // Build namespace

@@ -7,6 +7,7 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 using namespace Project;
+//---------------------------------------------------------------------------
 ControlsDocument::ControlsDocument(const String& name)
 : Document(name)
 {
@@ -44,7 +45,7 @@ void ControlsDocument::DoSave()
     ArrayEnd();  // Keys
 }
 //---------------------------------------------------------------------------
-String ControlsDocument::Get(int index)
+String __fastcall ControlsDocument::Get(int index)
 {
     auto key = m_Keys[index];
     if (32 < key && key <= 127)

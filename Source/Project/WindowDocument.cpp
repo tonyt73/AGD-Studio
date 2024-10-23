@@ -82,7 +82,7 @@ void WindowDocument::OnLoaded()
     }
 }
 //---------------------------------------------------------------------------
-int WindowDocument::Get(int index)
+int __fastcall WindowDocument::Get(int index)
 {
     switch (index)
     {

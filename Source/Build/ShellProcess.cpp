@@ -70,7 +70,7 @@ bool ShellProcess::ShellExecute(const String& path, const String& cmdline, const
     return result;
 }
 //---------------------------------------------------------------------------
-void ShellProcess::OnOutputEvent(System::TObject* ASender, const System::UnicodeString ANewLine)
+void __fastcall ShellProcess::OnOutputEvent(System::TObject* ASender, const System::UnicodeString ANewLine)
 {
     if (ANewLine.LowerCase().Pos("error"))
     {
@@ -87,7 +87,7 @@ void ShellProcess::OnOutputEvent(System::TObject* ASender, const System::Unicode
     }
 }
 //---------------------------------------------------------------------------
-void ShellProcess::OnErrorEvent(System::TObject* ASender)
+void __fastcall ShellProcess::OnErrorEvent(System::TObject* ASender)
 {
 	m_Shell->TerminateProcess();
 	m_ShellDone = true;
@@ -95,7 +95,7 @@ void ShellProcess::OnErrorEvent(System::TObject* ASender)
 	BUILD_LINE(bmFailed, "SHELL ERROR");// + m_Shell->LastError);
 }
 //---------------------------------------------------------------------------
-void ShellProcess::OnTerminatedEvent(System::TObject* ASender)
+void __fastcall ShellProcess::OnTerminatedEvent(System::TObject* ASender)
 {
     m_ShellDone = true;
 }

@@ -68,12 +68,12 @@ __fastcall TfrmEditorCode::~TfrmEditorCode()
     m_Registrar.Unsubscribe();
 }
 //---------------------------------------------------------------------------
-bool __fastcall TfrmEditorCode::IsActive() const
+bool TfrmEditorCode::IsActive() const
 {
     return theEditorManager.IsActive(this);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::SetDocument(Project::Document* document)
+void TfrmEditorCode::SetDocument(Project::Document* document)
 {
     theEditorManager.SetActive(this);
     m_ActionMap["zoom.in"] = actZoomIn;
@@ -103,7 +103,7 @@ void __fastcall TfrmEditorCode::SetDocument(Project::Document* document)
     Color = ThemeManager::Background;
 }
 //---------------------------------------------------------------------------
-String __fastcall TfrmEditorCode::GetSyntaxScByExt(const String& extension)
+String TfrmEditorCode::GetSyntaxScByExt(const String& extension)
 {
     for (auto i = 0; i < SCHEMES_EXTS_COUNT; i++)
     {
@@ -324,7 +324,7 @@ void __fastcall TfrmEditorCode::actUndoUpdate(TObject *Sender)
     UpdateStatus();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::UpdateStatus()
+void TfrmEditorCode::UpdateStatus()
 {
     // code taken from the LMD demo projects :-(
     int i, NewW, Ph, LinesCount, CharsCount, PhScr;
@@ -466,7 +466,7 @@ void __fastcall TfrmEditorCode::evEditorStatusChanged(TLMDCustomEditView *AView,
     UpdateStatus();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::OnEvent(const Event& event)
+void TfrmEditorCode::OnEvent(const Event& event)
 {
     if (evEditor != nullptr && IsActive() && m_ActionMap.count(event.Id) == 1)
     {

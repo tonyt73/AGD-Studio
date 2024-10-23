@@ -29,12 +29,12 @@ private:
      FileList                       m_Files;        // a list of files the project uses
 
      String                         GetFile() const;
-     void                           SetName(String name);
+     void   __fastcall              SetName(String name);
      void                           OnChangeString(const OnChange<String>& event);
      void                           OnEndObject(const String& object);
      void                           DoSave();
-     String                         GetGraphicsMode() const;
-     int                            GetScreenSize(int index) const;
+     String __fastcall              GetGraphicsMode() const;
+     int    __fastcall              GetScreenSize(int index) const;
 
 public:
                                     ProjectDocument(const String& name, const String& machine);
@@ -51,14 +51,14 @@ public:
 
 __published:
     // Project settings
-    __property  String Name         = { read = m_Name       , write = SetName       };
-    __property  String Version      = { read = m_Version    , write = m_Version     };
-    __property  String Author       = { read = m_Author     , write = m_Author      };
-    __property  String Description  = { read = m_Description, write = m_Description };
-    __property  String Machine      = { read = m_MachineName                        };
-    __property  String GraphicsMode = { read = GetGraphicsMode                      };
-    __property  int    ScreenWidth  = { read = GetScreenSize, index = 0             };
-    __property  int    ScreenHeight = { read = GetScreenSize, index = 1             };
+    __property  String              Name         = { read = m_Name       , write = SetName       };
+    __property  String              Version      = { read = m_Version    , write = m_Version     };
+    __property  String              Author       = { read = m_Author     , write = m_Author      };
+    __property  String              Description  = { read = m_Description, write = m_Description };
+    __property  String              Machine      = { read = m_MachineName                        };
+    __property  String              GraphicsMode = { read = GetGraphicsMode                      };
+    __property  int                 ScreenWidth  = { read = GetScreenSize, index = 0             };
+    __property  int                 ScreenHeight = { read = GetScreenSize, index = 1             };
 };
 //---------------------------------------------------------------------------
 } // Project namespace

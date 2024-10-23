@@ -14,10 +14,10 @@ public:
     static  void                ReapplyStyle();
     static  TStringDynArray     GetStyles();
 
-            TColor  __property  Highlight       = { read = GetColor, index = 0 };
-            TColor  __property  Background      = { read = GetColor, index = 1 };
-            TColor  __property  Foreground      = { read = GetColor, index = 2 };
-            TColor  __property  Shadow          = { read = GetColor, index = 3 };
+    __property  TColor          Highlight  = { read = GetColor, index = 0 };
+    __property  TColor          Background = { read = GetColor, index = 1 };
+    __property  TColor          Foreground = { read = GetColor, index = 2 };
+    __property  TColor          Shadow     = { read = GetColor, index = 3 };
 };
 //---------------------------------------------------------------------------
 #endif

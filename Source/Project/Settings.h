@@ -42,17 +42,17 @@ public:
                                 Settings();
                                ~Settings();
 
-    TWindowState    __property  WindowState             = { read = m_WindowState            , write = SetWindowState        };
-    TPoint          __property  WindowPosition          = { read = m_WindowPosition         , write = SetWindowPosition     };
-    TSize           __property  WindowSize              = { read = m_WindowSize             , write = SetWindowSize         };
-    TPoint          __property  WelcomePosition         = { read = m_WelcomePosition        , write = SetWelcomePosition    };
-    bool            __property  WelcomeSkipOnStartup    = { read = m_WelcomeSkipOnStartup   , write = SetBool, index = 0    };
-    bool            __property  WelcomeSkipOnClose      = { read = m_WelcomeSkipOnClose     , write = SetBool, index = 1    };
-    bool            __property  LoadLastProject         = { read = m_LoadLastProject        , write = SetBool, index = 2    };
-    String          __property  ActiveStyle             = { read = m_ActiveStyle            , write = SetString, index = 0  };
-    String          __property  LastProject             = { read = m_LastProject            , write = SetString, index = 1  };
-    String          __property  Developer               = { read = m_Developer              , write = SetString, index = 2  };
-    String          __property  DefaultMachine          = { read = m_DefaultMachine         , write = SetString, index = 3  };
+    __property  TWindowState    WindowState             = { read = m_WindowState            , write = SetWindowState                };
+    __property  TPoint          WindowPosition          = { read = m_WindowPosition         , write = SetWindowPosition             };
+    __property  TSize           WindowSize              = { read = m_WindowSize             , write = SetWindowSize                 };
+    __property  TPoint          WelcomePosition         = { read = m_WelcomePosition        , write = SetWelcomePosition            };
+    __property  bool            WelcomeSkipOnStartup    = { read = m_WelcomeSkipOnStartup   , write = SetBool           , index = 0 };
+    __property  bool            WelcomeSkipOnClose      = { read = m_WelcomeSkipOnClose     , write = SetBool           , index = 1 };
+    __property  bool            LoadLastProject         = { read = m_LoadLastProject        , write = SetBool           , index = 2 };
+    __property  String          ActiveStyle             = { read = m_ActiveStyle            , write = SetString         , index = 0 };
+    __property  String          LastProject             = { read = m_LastProject            , write = SetString         , index = 1 };
+    __property  String          Developer               = { read = m_Developer              , write = SetString         , index = 2 };
+    __property  String          DefaultMachine          = { read = m_DefaultMachine         , write = SetString         , index = 3 };
 };
 //---------------------------------------------------------------------------
 } // Project namespace
