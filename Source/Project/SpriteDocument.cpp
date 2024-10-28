@@ -7,7 +7,7 @@
 //---------------------------------------------------------------------------
 using namespace Project;
 //---------------------------------------------------------------------------
- SpriteDocument::SpriteDocument(const String& name, const String& extra)
+__fastcall SpriteDocument::SpriteDocument(const String& name, const String& extra)
 : ImageDocument(name)
 {
     m_ImageType = Visuals::itSprite;

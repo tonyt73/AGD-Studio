@@ -1,4 +1,4 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{D0C2ACDB-659A-4891-B603-0D187CA01644}</ProjectGuid>
         <ProjectVersion>20.2</ProjectVersion>
@@ -6,7 +6,7 @@
         <AppType>Application</AppType>
         <MainSource>AGD Studio.cpp</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <Platform Condition="'$(Platform)'==''">Win64</Platform>
         <TargetedPlatforms>1048579</TargetedPlatforms>
         <ProjectName Condition="'$(ProjectName)'==''">AGD Studio</ProjectName>
@@ -106,7 +106,7 @@
         <VerInfo_AutoGenVersion>true</VerInfo_AutoGenVersion>
         <VerInfo_Build>80</VerInfo_Build>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=0.14.6663.80;InternalName=AGD Studio;LegalCopyright=2022-2024 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=0.14.3;Comments=Programmed by Tony Thompson;SpecialBuild=BETA</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=0.14.6663.80;InternalName=AGD Studio;LegalCopyright=2022-2024 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=0.15.0;Comments=Programmed by Tony Thompson;SpecialBuild=BETA</VerInfo_Keys>
         <VerInfo_Locale>3081</VerInfo_Locale>
         <VerInfo_MajorVer>0</VerInfo_MajorVer>
         <VerInfo_MinorVer>14</VerInfo_MinorVer>
@@ -115,8 +115,8 @@
         <VerInfo_Special>true</VerInfo_Special>
         <RunBCCOutOfProcess>true</RunBCCOutOfProcess>
         <BCC_EnableLSPIndexing>false</BCC_EnableLSPIndexing>
-        <IncludePath>.\;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>.\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>Frames\Editors\;Frames\Editors\Map\;Frames\Editors\Images\;Frames\Editors\Code\;.\;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>Frames\Editors\;Frames\Editors\Map\;Frames\Editors\Images\;Frames\ImageEditor\;Frames\CodeEditor\;.\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <BCC_AutoDepCheck>false</BCC_AutoDepCheck>
         <ILINK_LinkwithSQL>false</ILINK_LinkwithSQL>
         <ILINK_TSAware_lld>false</ILINK_TSAware_lld>
@@ -127,6 +127,7 @@
         <ILINK_LinkwithRegEx>false</ILINK_LinkwithRegEx>
         <ILINK_LinkwithSQLite>false</ILINK_LinkwithSQLite>
         <ILINK_LinkwithZLib>false</ILINK_LinkwithZLib>
+        <SubProcessesNumber>16</SubProcessesNumber>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <AppEnableHighDPI>true</AppEnableHighDPI>
@@ -143,6 +144,7 @@
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <BCC_DisableOptimizations>true</BCC_DisableOptimizations>
         <UsePackages>false</UsePackages>
+        <UsingDelphiRTL>true</UsingDelphiRTL>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <AppEnableHighDPI>true</AppEnableHighDPI>
@@ -155,14 +157,12 @@
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64x)'!=''">
-        <AppEnableHighDPI>true</AppEnableHighDPI>
+        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
         <BT_BuildType>Debug</BT_BuildType>
-        <DCC_Namespace>Winapi;System.Win;$(DCC_Namespace)</DCC_Namespace>
-        <Icon_MainIcon>icon.ico</Icon_MainIcon>
-        <IncludePath>$(BDSINCLUDE)\windows\vcl;$(IncludePath)</IncludePath>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.1.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <PackageImports>bindcomp;bindcompvcl;bindengine;lmdrtbar;lmdrtchart;lmdrtchartdb;lmdrtcore;lmdrtdesign;lmdrtdialog;lmdrtdocking;lmdrtelcore;lmdrteldb;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtrtf;lmdrtrtfdb;lmdrtrtlx;lmdrtscript;lmdrtscriptimp;lmdrtsearch;lmdrtsearchdb;lmdrtshell;lmdrtstorage;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;lmdrttxtdb;lmdrtweb;rtl;vcl;vclactnband;vcldb;vclimg;vclwinx;vclx;$(PackageImports)</PackageImports>
-        <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
+        <BCC_PCHName_Clang>AgdStudio.pch.h</BCC_PCHName_Clang>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <BCC_DebugLineNumbers>true</BCC_DebugLineNumbers>
@@ -200,12 +200,7 @@
         <UsingDelphiRTL>true</UsingDelphiRTL>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64x)'!=''">
-        <AppEnableHighDPI>true</AppEnableHighDPI>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
-        <Icon_MainIcon>Icon.ico</Icon_MainIcon>
-        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;VclSmp.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtprint.bpi;lmdrtelpro.bpi;xmlrtl.bpi;bindengine.bpi;DbxCommonDriver.bpi;dbrtl.bpi;lmdrtshell.bpi</LinkPackageImports>
-        <ILINK_DisableIncrementalLinking>true</ILINK_DisableIncrementalLinking>
-        <UsingDelphiRTL>true</UsingDelphiRTL>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>
@@ -214,8 +209,7 @@
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <AppEnableHighDPI>true</AppEnableHighDPI>
         <Icon_MainIcon>icon.ico</Icon_MainIcon>
-        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;bindengine.bpi;lmdrtshell.bpi</LinkPackageImports>
-        <LinkPackageStatics>VclSmp.lib;lmdrtprint.lib;xmlrtl.lib;DbxCommonDriver.lib;dbrtl.lib</LinkPackageStatics>
+        <LinkPackageStatics>rtl.lib;vcl.lib;vclimg.lib;vclactnband.lib;vclx.lib;lmdrtrtlx.lib;lmdrtl.lib;lmdrtinspector.lib;lmdrtdocking.lib;lmdrtelcore.lib;lmdrtsyntax.lib;VclSmp.lib;lmdrtcore.lib;vclwinx.lib;lmdrtprint.lib;lmdrtelpro.lib;xmlrtl.lib;bindengine.lib;DbxCommonDriver.lib;dbrtl.lib;lmdrtshell.lib</LinkPackageStatics>
         <BCC_OptimizeMaximum>true</BCC_OptimizeMaximum>
         <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
     </PropertyGroup>
@@ -229,12 +223,8 @@
         <BCC_EnableLSPIndexing>false</BCC_EnableLSPIndexing>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64x)'!=''">
-        <AppEnableHighDPI>true</AppEnableHighDPI>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
-        <Icon_MainIcon>Icon.ico</Icon_MainIcon>
         <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;VclSmp.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtprint.bpi;lmdrtelpro.bpi;xmlrtl.bpi;bindengine.bpi;DbxCommonDriver.bpi;dbrtl.bpi;lmdrtshell.bpi</LinkPackageImports>
-        <BCC_OptimizeMaximum>true</BCC_OptimizeMaximum>
-        <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
     </PropertyGroup>
     <ItemGroup>
         <CppCompile Include="AGD Studio.cpp">
@@ -246,55 +236,55 @@
         </PCHCompile>
         <CppCompile Include="Build\AgdSection\ControlsBuilder.cpp">
             <DependentOn>Build\AgdSection\ControlsBuilder.h</DependentOn>
-            <BuildOrder>99</BuildOrder>
+            <BuildOrder>92</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\AgdSection\EventsBuilder.cpp">
             <DependentOn>Build\AgdSection\EventsBuilder.h</DependentOn>
-            <BuildOrder>100</BuildOrder>
+            <BuildOrder>93</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\AgdSection\FontBuilder.cpp">
             <DependentOn>Build\AgdSection\FontBuilder.h</DependentOn>
-            <BuildOrder>101</BuildOrder>
+            <BuildOrder>94</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\AgdSection\JumpTableBuilder.cpp">
             <DependentOn>Build\AgdSection\JumpTableBuilder.h</DependentOn>
-            <BuildOrder>102</BuildOrder>
+            <BuildOrder>95</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\AgdSection\MapBuilder.cpp">
             <DependentOn>Build\AgdSection\MapBuilder.h</DependentOn>
-            <BuildOrder>103</BuildOrder>
+            <BuildOrder>96</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\AgdSection\MessagesBuilder.cpp">
             <DependentOn>Build\AgdSection\MessagesBuilder.h</DependentOn>
-            <BuildOrder>104</BuildOrder>
+            <BuildOrder>97</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\AgdSection\ObjectsBuilder.cpp">
             <DependentOn>Build\AgdSection\ObjectsBuilder.h</DependentOn>
-            <BuildOrder>105</BuildOrder>
+            <BuildOrder>98</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\AgdSection\ProjectBuilder.cpp">
             <DependentOn>Build\AgdSection\ProjectBuilder.h</DependentOn>
-            <BuildOrder>106</BuildOrder>
+            <BuildOrder>99</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\AgdSection\ScreensBuilder.cpp">
             <DependentOn>Build\AgdSection\ScreensBuilder.h</DependentOn>
-            <BuildOrder>107</BuildOrder>
+            <BuildOrder>99</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\AgdSection\SectionBuilder.cpp">
             <DependentOn>Build\AgdSection\SectionBuilder.h</DependentOn>
-            <BuildOrder>108</BuildOrder>
+            <BuildOrder>100</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\AgdSection\SpritesBuilder.cpp">
             <DependentOn>Build\AgdSection\SpritesBuilder.h</DependentOn>
-            <BuildOrder>109</BuildOrder>
+            <BuildOrder>101</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\AgdSection\TilesBuilder.cpp">
             <DependentOn>Build\AgdSection\TilesBuilder.h</DependentOn>
-            <BuildOrder>110</BuildOrder>
+            <BuildOrder>102</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\AgdSection\WindowBuilder.cpp">
             <DependentOn>Build\AgdSection\WindowBuilder.h</DependentOn>
-            <BuildOrder>111</BuildOrder>
+            <BuildOrder>103</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\Assembly.cpp">
             <DependentOn>Build\Assembly.h</DependentOn>
@@ -370,30 +360,204 @@
             <DependentOn>Forms\fSettings.h</DependentOn>
             <BuildOrder>28</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Frames\CodeEditor\fEditorCode.cpp">
+        <CppCompile Include="Frames\Editors\Code\fEditorCode.cpp">
             <Form>frmEditorCode</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\CodeEditor\fEditorCode.h</DependentOn>
-            <BuildOrder>34</BuildOrder>
+            <DependentOn>Frames\Editors\Code\fEditorCode.h</DependentOn>
+            <BuildOrder>74</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Frames\ControlsEditor\fEditorControls.cpp">
+        <CppCompile Include="Frames\Editors\Controls\fEditorControls.cpp">
             <Form>frmEditorControls</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\ControlsEditor\fEditorControls.h</DependentOn>
-            <BuildOrder>35</BuildOrder>
+            <DependentOn>Frames\Editors\Controls\fEditorControls.h</DependentOn>
+            <BuildOrder>75</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Frames\ControlsEditor\fKeyCapture.cpp">
+        <CppCompile Include="Frames\Editors\Controls\fKeyCapture.cpp">
             <Form>frmKeyCode</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\ControlsEditor\fKeyCapture.h</DependentOn>
-            <BuildOrder>36</BuildOrder>
+            <DependentOn>Frames\Editors\Controls\fKeyCapture.h</DependentOn>
+            <BuildOrder>76</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Frames\EditorManager.cpp">
-            <DependentOn>Frames\EditorManager.h</DependentOn>
+        <CppCompile Include="Frames\Editors\EditorManager.cpp">
+            <DependentOn>Frames\Editors\EditorManager.h</DependentOn>
             <BuildOrder>30</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\fEditor.cpp">
+            <Form>frmEditor</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\fEditor.h</DependentOn>
+            <BuildOrder>104</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\BlockTypeTool.cpp">
+            <DependentOn>Frames\Editors\Images\BlockTypeTool.h</DependentOn>
+            <BuildOrder>77</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\CanvasLineTool.cpp">
+            <DependentOn>Frames\Editors\Images\CanvasLineTool.h</DependentOn>
+            <BuildOrder>78</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\CanvasPencilTool.cpp">
+            <DependentOn>Frames\Editors\Images\CanvasPencilTool.h</DependentOn>
+            <BuildOrder>79</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\CanvasShapeTool.cpp">
+            <DependentOn>Frames\Editors\Images\CanvasShapeTool.h</DependentOn>
+            <BuildOrder>80</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\CanvasTool.cpp">
+            <DependentOn>Frames\Editors\Images\CanvasTool.h</DependentOn>
+            <BuildOrder>81</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\fBlockTypes.cpp">
+            <Form>frmBlockTypes</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Images\fBlockTypes.h</DependentOn>
+            <BuildOrder>82</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\fEditorImage.cpp">
+            <Form>frmEditorImage</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Images\fEditorImage.h</DependentOn>
+            <BuildOrder>83</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\fMultiImageView.cpp">
+            <Form>MultiImageViewFrame</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Images\fMultiImageView.h</DependentOn>
+            <BuildOrder>84</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\fPaletteAttribute.cpp">
+            <Form>frmPaletteAttribute</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Images\fPaletteAttribute.h</DependentOn>
+            <BuildOrder>85</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\fPaletteBitmap.cpp">
+            <Form>frmPaletteBitmap</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Images\fPaletteBitmap.h</DependentOn>
+            <BuildOrder>86</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\fPaletteMonoAttribute.cpp">
+            <Form>frmPaletteMonoAttribute</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Images\fPaletteMonoAttribute.h</DependentOn>
+            <BuildOrder>87</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\fSelectionImage.cpp">
+            <Form>SelectionImageFrame</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Images\fSelectionImage.h</DependentOn>
+            <BuildOrder>88</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\fToolbar.cpp">
+            <Form>frmToolbar</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Images\fToolbar.h</DependentOn>
+            <BuildOrder>89</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\fToolbarShape.cpp">
+            <Form>frmToolbarShape</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Images\fToolbarShape.h</DependentOn>
+            <BuildOrder>90</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\fULAplusBitmap.cpp">
+            <Form>frmULAplusBitmap</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Images\fULAplusBitmap.h</DependentOn>
+            <BuildOrder>91</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\JumpTable\fEditorJumpTable.cpp">
+            <Form>frmEditorJumpTable</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\JumpTable\fEditorJumpTable.h</DependentOn>
+            <BuildOrder>92</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Map\fAssetSelection.cpp">
+            <Form>frmAssetSelection</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Map\fAssetSelection.h</DependentOn>
+            <BuildOrder>93</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Map\fEditorMap.cpp">
+            <Form>frmEditorMap</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Map\fEditorMap.h</DependentOn>
+            <BuildOrder>94</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Map\fLabelledImage.cpp">
+            <Form>frmLabelledImage</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Map\fLabelledImage.h</DependentOn>
+            <BuildOrder>95</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Map\MapLineTool.cpp">
+            <DependentOn>Frames\Editors\Map\MapLineTool.h</DependentOn>
+            <BuildOrder>96</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Map\MapPencilTool.cpp">
+            <DependentOn>Frames\Editors\Map\MapPencilTool.h</DependentOn>
+            <BuildOrder>97</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Map\MapRectTool.cpp">
+            <DependentOn>Frames\Editors\Map\MapRectTool.h</DependentOn>
+            <BuildOrder>98</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Map\MapTool.cpp">
+            <DependentOn>Frames\Editors\Map\MapTool.h</DependentOn>
+            <BuildOrder>99</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Map\TileEditor.cpp">
+            <DependentOn>Frames\Editors\Map\TileEditor.h</DependentOn>
+            <BuildOrder>100</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Messages\fEditorMessages.cpp">
+            <Form>frmEditorMessages</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Messages\fEditorMessages.h</DependentOn>
+            <BuildOrder>101</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\MouseState.cpp">
+            <DependentOn>Frames\Editors\MouseState.h</DependentOn>
+            <BuildOrder>103</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Music\fEditorMusic.cpp">
+            <Form>frmEditorMusic</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Music\fEditorMusic.h</DependentOn>
+            <BuildOrder>102</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Tool.cpp">
+            <DependentOn>Frames\Editors\Tool.h</DependentOn>
+            <BuildOrder>32</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Window\fEditorWindow.cpp">
+            <Form>frmEditorWindow</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Window\fEditorWindow.h</DependentOn>
+            <BuildOrder>103</BuildOrder>
         </CppCompile>
         <CppCompile Include="Frames\IDE\fIDE.cpp">
             <Form>frmIDE</Form>
@@ -401,169 +565,6 @@
             <DesignClass>TFrame</DesignClass>
             <DependentOn>Frames\IDE\fIDE.h</DependentOn>
             <BuildOrder>37</BuildOrder>
-        </CppCompile>
-        <None Include="Frames\ImageEditor\BlockColors.h">
-            <BuildOrder>58</BuildOrder>
-        </None>
-        <CppCompile Include="Frames\ImageEditor\BlockTypeTool.cpp">
-            <DependentOn>Frames\ImageEditor\BlockTypeTool.h</DependentOn>
-            <BuildOrder>38</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\ImageEditor\CanvasLineTool.cpp">
-            <DependentOn>Frames\ImageEditor\CanvasLineTool.h</DependentOn>
-            <BuildOrder>39</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\ImageEditor\CanvasPencilTool.cpp">
-            <DependentOn>Frames\ImageEditor\CanvasPencilTool.h</DependentOn>
-            <BuildOrder>40</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\ImageEditor\CanvasShapeTool.cpp">
-            <DependentOn>Frames\ImageEditor\CanvasShapeTool.h</DependentOn>
-            <BuildOrder>41</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\ImageEditor\CanvasTool.cpp">
-            <DependentOn>Frames\ImageEditor\CanvasTool.h</DependentOn>
-            <BuildOrder>42</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\ImageEditor\fBlockTypes.cpp">
-            <Form>frmBlockTypes</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\ImageEditor\fBlockTypes.h</DependentOn>
-            <BuildOrder>43</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\ImageEditor\fEditorImage.cpp">
-            <Form>frmEditorImage</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\ImageEditor\fEditorImage.h</DependentOn>
-            <BuildOrder>44</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\ImageEditor\fMultiImageView.cpp">
-            <Form>MultiImageViewFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\ImageEditor\fMultiImageView.h</DependentOn>
-            <BuildOrder>45</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\ImageEditor\fPaletteAttribute.cpp">
-            <Form>frmPaletteAttribute</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\ImageEditor\fPaletteAttribute.h</DependentOn>
-            <BuildOrder>46</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\ImageEditor\fPaletteBitmap.cpp">
-            <Form>frmPaletteBitmap</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\ImageEditor\fPaletteBitmap.h</DependentOn>
-            <BuildOrder>47</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\ImageEditor\fPaletteMonoAttribute.cpp">
-            <Form>frmPaletteMonoAttribute</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\ImageEditor\fPaletteMonoAttribute.h</DependentOn>
-            <BuildOrder>52</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\ImageEditor\fSelectionImage.cpp">
-            <Form>SelectionImageFrame</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\ImageEditor\fSelectionImage.h</DependentOn>
-            <BuildOrder>48</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\ImageEditor\fToolbar.cpp">
-            <Form>frmToolbar</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\ImageEditor\fToolbar.h</DependentOn>
-            <BuildOrder>49</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\ImageEditor\fToolbarShape.cpp">
-            <Form>frmToolbarShape</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\ImageEditor\fToolbarShape.h</DependentOn>
-            <BuildOrder>50</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\ImageEditor\fULAplusBitmap.cpp">
-            <Form>frmULAplusBitmap</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\ImageEditor\fULAplusBitmap.h</DependentOn>
-            <BuildOrder>51</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\JumpEditor\fEditorJumpTable.cpp">
-            <Form>frmEditorJump</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\JumpEditor\fEditorJumpTable.h</DependentOn>
-            <BuildOrder>53</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\MapEditor\fAssetSelection.cpp">
-            <Form>frmAssetSelection</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\MapEditor\fAssetSelection.h</DependentOn>
-            <BuildOrder>55</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\MapEditor\fEditorMap.cpp">
-            <Form>frmEditorMap</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\MapEditor\fEditorMap.h</DependentOn>
-            <BuildOrder>54</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\MapEditor\fLabelledImage.cpp">
-            <Form>frmLabelledImage</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\MapEditor\fLabelledImage.h</DependentOn>
-            <BuildOrder>104</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\MapEditor\MapLineTool.cpp">
-            <DependentOn>Frames\MapEditor\MapLineTool.h</DependentOn>
-            <BuildOrder>58</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\MapEditor\MapPencilTool.cpp">
-            <DependentOn>Frames\MapEditor\MapPencilTool.h</DependentOn>
-            <BuildOrder>59</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\MapEditor\MapRectTool.cpp">
-            <DependentOn>Frames\MapEditor\MapRectTool.h</DependentOn>
-            <BuildOrder>60</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\MapEditor\MapTool.cpp">
-            <DependentOn>Frames\MapEditor\MapTool.h</DependentOn>
-            <BuildOrder>61</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\MapEditor\TileEditor.cpp">
-            <DependentOn>Frames\MapEditor\TileEditor.h</DependentOn>
-            <BuildOrder>56</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\MessagesEditor\fEditorMessages.cpp">
-            <Form>frmEditorMessage</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\MessagesEditor\fEditorMessages.h</DependentOn>
-            <BuildOrder>62</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\MouseState.cpp">
-            <DependentOn>Frames\MouseState.h</DependentOn>
-            <BuildOrder>31</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\MusicEditor\fEditorMusic.cpp">
-            <Form>frmEditorMusic</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\MusicEditor\fEditorMusic.h</DependentOn>
-            <BuildOrder>63</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\Tool.cpp">
-            <DependentOn>Frames\Tool.h</DependentOn>
-            <BuildOrder>32</BuildOrder>
         </CppCompile>
         <CppCompile Include="Frames\WelcomeDialog\fSelectionPanel.cpp">
             <Form>SelectionPanelFrame</Form>
@@ -578,13 +579,6 @@
             <DesignClass>TFrame</DesignClass>
             <DependentOn>Frames\WelcomeDialog\fWelcomeDialog.h</DependentOn>
             <BuildOrder>65</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\WindowEditor\fEditorWindow.cpp">
-            <Form>frmEditorWindow</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-            <DependentOn>Frames\WindowEditor\fEditorWindow.h</DependentOn>
-            <BuildOrder>66</BuildOrder>
         </CppCompile>
         <CppCompile Include="Frames\WndProcHandlers.cpp">
             <DependentOn>Frames\WndProcHandlers.h</DependentOn>
@@ -653,7 +647,7 @@
         <None Include="Project\README.md"/>
         <CppCompile Include="Project\Settings.cpp">
             <DependentOn>Project\Settings.h</DependentOn>
-            <BuildOrder>104</BuildOrder>
+            <BuildOrder>103</BuildOrder>
         </CppCompile>
         <CppCompile Include="Project\SpriteDocument.cpp">
             <DependentOn>Project\SpriteDocument.h</DependentOn>
@@ -677,23 +671,23 @@
         </CppCompile>
         <CppCompile Include="Services\File.cpp">
             <DependentOn>Services\File.h</DependentOn>
-            <BuildOrder>100</BuildOrder>
+            <BuildOrder>99</BuildOrder>
         </CppCompile>
         <CppCompile Include="Services\Folders.cpp">
             <DependentOn>Services\Folders.h</DependentOn>
-            <BuildOrder>101</BuildOrder>
+            <BuildOrder>100</BuildOrder>
         </CppCompile>
         <CppCompile Include="Services\Generic.cpp">
             <DependentOn>Services\Generic.h</DependentOn>
-            <BuildOrder>102</BuildOrder>
+            <BuildOrder>101</BuildOrder>
         </CppCompile>
         <CppCompile Include="Services\Guard.cpp">
             <DependentOn>Services\Guard.h</DependentOn>
-            <BuildOrder>103</BuildOrder>
+            <BuildOrder>102</BuildOrder>
         </CppCompile>
         <CppCompile Include="Services\JsonFile.cpp">
             <DependentOn>Services\JsonFile.h</DependentOn>
-            <BuildOrder>104</BuildOrder>
+            <BuildOrder>103</BuildOrder>
         </CppCompile>
         <CppCompile Include="Settings\ThemeManager.cpp">
             <DependentOn>Settings\ThemeManager.h</DependentOn>
@@ -701,63 +695,61 @@
         </CppCompile>
         <CppCompile Include="Visuals\AttributeGraphicsBuffer.cpp">
             <DependentOn>Visuals\AttributeGraphicsBuffer.h</DependentOn>
-            <BuildOrder>97</BuildOrder>
+            <BuildOrder>104</BuildOrder>
         </CppCompile>
         <CppCompile Include="Visuals\BitmapGraphicsBuffer.cpp">
             <DependentOn>Visuals\BitmapGraphicsBuffer.h</DependentOn>
-            <BuildOrder>98</BuildOrder>
+            <BuildOrder>105</BuildOrder>
         </CppCompile>
         <CppCompile Include="Visuals\GraphicsBuffer.cpp">
             <DependentOn>Visuals\GraphicsBuffer.h</DependentOn>
-            <BuildOrder>99</BuildOrder>
+            <BuildOrder>106</BuildOrder>
         </CppCompile>
         <CppCompile Include="Visuals\GraphicsMode.cpp">
             <DependentOn>Visuals\GraphicsMode.h</DependentOn>
-            <BuildOrder>100</BuildOrder>
+            <BuildOrder>107</BuildOrder>
         </CppCompile>
-        <None Include="Visuals\GraphicsTypes.h">
-            <BuildOrder>104</BuildOrder>
-        </None>
         <CppCompile Include="Visuals\Image.cpp">
             <DependentOn>Visuals\Image.h</DependentOn>
-            <BuildOrder>101</BuildOrder>
+            <BuildOrder>108</BuildOrder>
         </CppCompile>
         <CppCompile Include="Visuals\Palette.cpp">
             <DependentOn>Visuals\Palette.h</DependentOn>
-            <BuildOrder>102</BuildOrder>
+            <BuildOrder>109</BuildOrder>
         </CppCompile>
         <CppCompile Include="Visuals\ULAPlusGraphicsBuffer.cpp">
             <DependentOn>Visuals\ULAPlusGraphicsBuffer.h</DependentOn>
-            <BuildOrder>103</BuildOrder>
+            <BuildOrder>110</BuildOrder>
         </CppCompile>
-        <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
-        <FormResources Include="Frames\WindowEditor\fEditorWindow.dfm"/>
-        <FormResources Include="Frames\MapEditor\fAssetSelection.dfm"/>
-        <FormResources Include="Frames\MapEditor\fEditorMap.dfm"/>
-        <FormResources Include="Frames\MapEditor\fLabelledImage.dfm"/>
-        <FormResources Include="Frames\MusicEditor\fEditorMusic.dfm"/>
+        <FormResources Include="Frames\IDE\fIDE.dfm"/>
         <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
-        <FormResources Include="Frames\MessagesEditor\fEditorMessages.dfm"/>
-        <FormResources Include="Frames\JumpEditor\fEditorJumpTable.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fBlockTypes.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fEditorImage.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fMultiImageView.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fPaletteAttribute.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fToolbar.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fToolbarShape.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fULAplusBitmap.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fPaletteBitmap.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fPaletteMonoAttribute.dfm"/>
-        <FormResources Include="Frames\ImageEditor\fSelectionImage.dfm"/>
+        <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fAssetSelection.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fEditorMap.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fLabelledImage.dfm"/>
+        <FormResources Include="Frames\Editors\Music\fEditorMusic.dfm"/>
+        <FormResources Include="Frames\Editors\Window\fEditorWindow.dfm"/>
+        <FormResources Include="Frames\Editors\Messages\fEditorMessages.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fEditorImage.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fMultiImageView.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fPaletteAttribute.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fBlockTypes.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fPaletteBitmap.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fToolbarShape.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fULAplusBitmap.dfm"/>
+        <FormResources Include="Frames\Editors\JumpTable\fEditorJumpTable.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fPaletteMonoAttribute.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fSelectionImage.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fToolbar.dfm"/>
         <FormResources Include="Forms\fNewImage.dfm"/>
         <FormResources Include="Forms\fSettings.dfm"/>
-        <FormResources Include="Frames\CodeEditor\fEditorCode.dfm"/>
+        <FormResources Include="Frames\Editors\Code\fEditorCode.dfm"/>
         <FormResources Include="Forms\fAbout.dfm"/>
         <FormResources Include="Forms\fAdvancedSettings.dfm"/>
         <FormResources Include="Forms\fMain.dfm"/>
-        <FormResources Include="Frames\ControlsEditor\fEditorControls.dfm"/>
-        <FormResources Include="Frames\ControlsEditor\fKeyCapture.dfm"/>
-        <FormResources Include="Frames\IDE\fIDE.dfm"/>
+        <FormResources Include="Frames\Editors\Controls\fEditorControls.dfm"/>
+        <FormResources Include="Frames\Editors\Controls\fKeyCapture.dfm"/>
+        <FormResources Include="Frames\Editors\fEditor.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -787,7 +779,7 @@
                     <ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
                     <ProjectProperties Name="IndexFiles">False</ProjectProperties>
                     <ProjectProperties Name="ManagePaths">False</ProjectProperties>
-                    <ProjectProperties Name="VerifyPackages">False</ProjectProperties>
+                    <ProjectProperties Name="VerifyPackages">True</ProjectProperties>
                 </ProjectProperties>
                 <Source>
                     <Source Name="MainSource">AGD Studio.cpp</Source>
@@ -812,6 +804,8 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin64\cc64280.dll" Class="DependencyModule"/>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin64\cc64280.dll" Class="DependencyModule"/>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin64\cc64280mt.dll" Class="DependencyModule"/>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin64\cc64280mt.dll" Class="DependencyModule"/>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin64\cc64290.dll" Class="DependencyModule">
                     <Platform Name="Win64">
@@ -829,6 +823,8 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32280.dll" Class="DependencyModule"/>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32280.dll" Class="DependencyModule"/>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32280mt.dll" Class="DependencyModule"/>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32280mt.dll" Class="DependencyModule"/>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32290.dll" Class="DependencyModule">
                     <Platform Name="Win32">
@@ -841,6 +837,8 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32c280.dll" Class="DependencyModule"/>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32c280.dll" Class="DependencyModule"/>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32c280mt.dll" Class="DependencyModule"/>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32c280mt.dll" Class="DependencyModule"/>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32c290.dll" Class="DependencyModule">
                     <Platform Name="Win32">
@@ -852,36 +850,17 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName=".\Binaries\Win32\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput"/>
+                <DeployFile LocalName=".\Binaries\Win32\Debug\AGD Studio.tds" Configuration="Debug" Class="DebugSymbols"/>
                 <DeployFile LocalName=".\Binaries\Win32\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput"/>
-                <DeployFile LocalName=".\Binaries\Win64\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win64">
-                        <RemoteName>AGD Studio.exe</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName=".\Binaries\Win64\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput">
-                    <Platform Name="Win64">
-                        <RemoteName>AGD Studio.exe</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
+                <DeployFile LocalName=".\Binaries\Win64\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput"/>
+                <DeployFile LocalName=".\Binaries\Win64\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Win32\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Win32\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Win64\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Win64\Release\AGD_Studio.exe" Configuration="Release" Class="ProjectOutput"/>
-                <DeployFile LocalName="Project\README.md" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win64">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
+                <DeployFile LocalName="Project\README.md" Configuration="Debug" Class="ProjectFile"/>
                 <DeployFile LocalName="Project\README.md" Configuration="Release" Class="ProjectFile"/>
-                <DeployFile LocalName="Project\README.md" Configuration="Release" Class="ProjectFile">
-                    <Platform Name="Win64">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="README.md" Configuration="Debug" Class="ProjectFile"/>
                 <DeployClass Name="AdditionalDebugSymbols">
                     <Platform Name="iOSSimulator">

@@ -10,10 +10,10 @@ namespace Build
 class ScreensBuilder : public SectionBuilder
 {
 protected:
-    void     Execute() final;
+    void    __fastcall  Execute() final;
 public:
-             ScreensBuilder();
-    virtual ~ScreensBuilder();
+            __fastcall  ScreensBuilder();
+    virtual __fastcall ~ScreensBuilder();
 };
 //---------------------------------------------------------------------------
 } // Build namespace

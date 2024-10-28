@@ -8,16 +8,16 @@
 //---------------------------------------------------------------------------
 using namespace Visuals;
 //---------------------------------------------------------------------------
-std::unique_ptr<TBitmap> Image::m_Overlay = nullptr;
+std::unique_ptr<TBitmap> __fastcall Image::m_Overlay = nullptr;
 //---------------------------------------------------------------------------
-Image::Image(unsigned int width, unsigned int height, const GraphicsMode& graphicsMode)
+__fastcall Image::Image(unsigned int width, unsigned int height, const GraphicsMode& graphicsMode)
 : m_Image(nullptr)
 , m_IsMonochrome(false)
 {
     GraphicsBuffer::Make(width, height, graphicsMode, m_Canvas);
 }
 //---------------------------------------------------------------------------
-Image::Image(Project::ImageDocument const * const image, const Visuals::GraphicsMode& graphicsMode)
+__fastcall Image::Image(Project::ImageDocument const * const image, const Visuals::GraphicsMode& graphicsMode)
 : m_Image(image)
 , m_IsMonochrome(false)
 {
@@ -37,17 +37,17 @@ Image::Image(Project::ImageDocument const * const image, const Visuals::Graphics
     }
 }
 //---------------------------------------------------------------------------
-GraphicsBuffer& Image::Canvas() const
+GraphicsBuffer& __fastcall Image::Canvas() const
 {
     return *(m_Canvas.get());
 }
 //---------------------------------------------------------------------------
-void Image::ChangeFrame(int frame)
+void __fastcall Image::ChangeFrame(int frame)
 {
     Canvas().Set(m_Image->Frame[frame]);
 }
 //---------------------------------------------------------------------------
-void Image::Draw(const TPoint& pt, TBitmap* canvas, TColor overlayColor)
+void __fastcall Image::Draw(const TPoint& pt, TBitmap* canvas, TColor overlayColor)
 {
     if (overlayColor == clBlack)
     {
@@ -79,7 +79,7 @@ void Image::Draw(const TPoint& pt, TBitmap* canvas, TColor overlayColor)
     }
 }
 //---------------------------------------------------------------------------
-std::vector<unsigned char> Image::GetExportNativeFormat() const
+std::vector<unsigned char> __fastcall Image::GetExportNativeFormat() const
 {
     return m_Canvas->GetNative(m_Image->ImageType);
 }

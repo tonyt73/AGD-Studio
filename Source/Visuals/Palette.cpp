@@ -9,7 +9,7 @@
 //---------------------------------------------------------------------------
 using namespace Visuals;
 //---------------------------------------------------------------------------
-Palette::Palette()
+__fastcall Palette::Palette()
 : JsonFile()
 , m_Name("unknown")
 {
@@ -18,13 +18,13 @@ Palette::Palette()
     m_PropertyMap["ColorTable[]"] = &m_Color;
 }
 //---------------------------------------------------------------------------
-Palette::Palette(const String& name)
+__fastcall Palette::Palette(const String& name)
 : Palette()
 {
     m_Name = name;
 }
 //---------------------------------------------------------------------------
-Palette::Palette(const Palette& other)
+__fastcall Palette::Palette(const Palette& other)
 : Palette()
 {
     m_Name = other.m_Name;
@@ -32,7 +32,7 @@ Palette::Palette(const Palette& other)
     m_ColorTable.assign(other.m_ColorTable.begin(), other.m_ColorTable.end());
 }
 //---------------------------------------------------------------------------
-Palette& Palette::operator=(const Palette& other)
+Palette& __fastcall Palette::operator=(const Palette& other)
 {
     m_Name = other.m_Name;
     m_ColorTable.clear();
@@ -40,7 +40,7 @@ Palette& Palette::operator=(const Palette& other)
     return *this;
 }
 //---------------------------------------------------------------------------
-TColor Palette::GetTableColor(int index) const
+TColor __fastcall Palette::GetTableColor(int index) const
 {
     if (0 <= index && index < m_ColorTable.size())
     {
@@ -49,7 +49,7 @@ TColor Palette::GetTableColor(int index) const
     return m_ColorTable[1];
 }
 //---------------------------------------------------------------------------
-TColor Palette::GetGreyscale(int index) const
+TColor __fastcall Palette::GetGreyscale(int index) const
 {
     auto color = GetTableColor(index);
     unsigned char r = (color & 0x000000FF);
@@ -60,17 +60,17 @@ TColor Palette::GetGreyscale(int index) const
     return color;
 }
 //---------------------------------------------------------------------------
-int Palette::GetTotalColors() const
+int __fastcall Palette::GetTotalColors() const
 {
     return m_ColorTable.size();
 }
 //---------------------------------------------------------------------------
-TColor Palette::GetFontColorOf(int index) const
+TColor __fastcall Palette::GetFontColorOf(int index) const
 {
     return (LuminanceOf(GetTableColor(index)) < 128) ? clWhite : clBlack;
 }
 //---------------------------------------------------------------------------
-DWORD Palette::LuminanceOf(TColor Color)
+DWORD __fastcall Palette::LuminanceOf(TColor Color)
 {
     // get the luminance of the color
     DWORD dwRed       = (Color & 0x000000FF) >>  0;
@@ -80,7 +80,7 @@ DWORD Palette::LuminanceOf(TColor Color)
     return dwLuminance;
 }
 //---------------------------------------------------------------------------
-void Palette::OnEndObject(const String& object)
+void __fastcall Palette::OnEndObject(const String& object)
 {
     if (object == "ColorTable[]")
     {
@@ -88,13 +88,13 @@ void Palette::OnEndObject(const String& object)
     }
 }
 //---------------------------------------------------------------------------
-void Palette::Load(const String& name)
+void __fastcall Palette::Load(const String& name)
 {
     m_ColorTable.clear();
     Services::JsonFile::Load(Services::File::Combine(Services::Folders::Application, "Palettes" + Services::Folders::Separator + name + ".json"));
 }
 //---------------------------------------------------------------------------
-void Palette::Save()
+void __fastcall Palette::Save()
 {
 //    // {
 //    Open(Services::File::Combine(Services::Folders::Application, "Palettes" + Services::Folders::Separator + m_Name + ".json"));

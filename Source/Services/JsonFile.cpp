@@ -8,18 +8,18 @@
 //---------------------------------------------------------------------------
 using namespace Services;
 //---------------------------------------------------------------------------
-JsonFile::JsonFile()
+__fastcall JsonFile::JsonFile()
 : TPersistent()
 , m_StringWriter(nullptr)
 , m_JsonWriter(nullptr)
 {
 }
 //---------------------------------------------------------------------------
-JsonFile::~JsonFile()
+__fastcall JsonFile::~JsonFile()
 {
 }
 //---------------------------------------------------------------------------
-void JsonFile::Open(const String& file)
+void __fastcall JsonFile::Open(const String& file)
 {
     m_File = file;
     m_StringWriter = new TStringWriter();
@@ -28,7 +28,7 @@ void JsonFile::Open(const String& file)
     m_JsonWriter->WriteStartObject();
 }
 //---------------------------------------------------------------------------
-void JsonFile::Close()
+void __fastcall JsonFile::Close()
 {
     if (m_StringWriter != nullptr && m_JsonWriter != nullptr)
     {
@@ -41,90 +41,90 @@ void JsonFile::Close()
     }
 }
 //---------------------------------------------------------------------------
-void JsonFile::StartObject() const
+void __fastcall JsonFile::StartObject() const
 {
     m_JsonWriter->WriteStartObject();
 }
 //---------------------------------------------------------------------------
-void JsonFile::EndObject() const
+void __fastcall JsonFile::EndObject() const
 {
     m_JsonWriter->WriteEndObject();
 }
 //---------------------------------------------------------------------------
-void JsonFile::Push(const String& section) const
+void __fastcall JsonFile::Push(const String& section) const
 {
     m_JsonWriter->WritePropertyName(section);
     m_JsonWriter->WriteStartObject();
 }
 //---------------------------------------------------------------------------
-void JsonFile::Pop() const
+void __fastcall JsonFile::Pop() const
 {
     m_JsonWriter->WriteEndObject();
 }
 //---------------------------------------------------------------------------
-void JsonFile::ArrayStart(const String& property) const
+void __fastcall JsonFile::ArrayStart(const String& property) const
 {
     m_JsonWriter->WritePropertyName(property);
     m_JsonWriter->WriteStartArray();
 }
 //---------------------------------------------------------------------------
-void JsonFile::ArrayEnd() const
+void __fastcall JsonFile::ArrayEnd() const
 {
     m_JsonWriter->WriteEndArray();
 }
 //---------------------------------------------------------------------------
-void JsonFile::Write(const String& value) const
+void __fastcall JsonFile::Write(const String& value) const
 {
     m_JsonWriter->WriteValue(value);
 }
 //---------------------------------------------------------------------------
-void JsonFile::Write(const int& value) const
+void __fastcall JsonFile::Write(const int& value) const
 {
     m_JsonWriter->WriteValue(value);
 }
 //---------------------------------------------------------------------------
-void JsonFile::Write(const long& value) const
+void __fastcall JsonFile::Write(const long& value) const
 {
     m_JsonWriter->WriteValue((int)value);
 }
 //---------------------------------------------------------------------------
-void JsonFile::Write(const String& property, const String& value) const
+void __fastcall JsonFile::Write(const String& property, const String& value) const
 {
     m_JsonWriter->WritePropertyName(property);
     m_JsonWriter->WriteValue(value);
 }
 //---------------------------------------------------------------------------
-void JsonFile::Write(const String& property, const int& value) const
+void __fastcall JsonFile::Write(const String& property, const int& value) const
 {
     m_JsonWriter->WritePropertyName(property);
     m_JsonWriter->WriteValue(value);
 }
 //---------------------------------------------------------------------------
-void JsonFile::Write(const String& property, const unsigned int& value) const
+void __fastcall JsonFile::Write(const String& property, const unsigned int& value) const
 {
     m_JsonWriter->WritePropertyName(property);
     m_JsonWriter->WriteValue(value);
 }
 //---------------------------------------------------------------------------
-void JsonFile::Write(const String& property, const long& value) const
+void __fastcall JsonFile::Write(const String& property, const long& value) const
 {
     m_JsonWriter->WritePropertyName(property);
     m_JsonWriter->WriteValue((int)value);
 }
 //---------------------------------------------------------------------------
-void JsonFile::Write(const String& property, const float& value) const
+void __fastcall JsonFile::Write(const String& property, const float& value) const
 {
     m_JsonWriter->WritePropertyName(property);
     m_JsonWriter->WriteValue(value);
 }
 //---------------------------------------------------------------------------
-void JsonFile::Write(const String& property, const bool& value) const
+void __fastcall JsonFile::Write(const String& property, const bool& value) const
 {
     m_JsonWriter->WritePropertyName(property);
     m_JsonWriter->WriteValue(value);
 }
 //---------------------------------------------------------------------------
-void JsonFile::Set(const String& property, const String& value)
+void __fastcall JsonFile::Set(const String& property, const String& value)
 {
     auto size = m_PropertyMap.size();
     if (m_PropertyMap.count(property) != 0)
@@ -133,7 +133,7 @@ void JsonFile::Set(const String& property, const String& value)
     }
 }
 //---------------------------------------------------------------------------
-void JsonFile::Set(const String& property, const int& value)
+void __fastcall JsonFile::Set(const String& property, const int& value)
 {
     if (m_PropertyMap.count(property) != 0)
     {
@@ -141,7 +141,7 @@ void JsonFile::Set(const String& property, const int& value)
     }
 }
 //---------------------------------------------------------------------------
-void JsonFile::Set(const String& property, const unsigned int& value)
+void __fastcall JsonFile::Set(const String& property, const unsigned int& value)
 {
     if (m_PropertyMap.count(property) != 0)
     {
@@ -149,7 +149,7 @@ void JsonFile::Set(const String& property, const unsigned int& value)
     }
 }
 //---------------------------------------------------------------------------
-void JsonFile::Set(const String& property, const long& value)
+void __fastcall JsonFile::Set(const String& property, const long& value)
 {
     if (m_PropertyMap.count(property) != 0)
     {
@@ -157,7 +157,7 @@ void JsonFile::Set(const String& property, const long& value)
     }
 }
 //---------------------------------------------------------------------------
-void JsonFile::Set(const String& property, const float& value)
+void __fastcall JsonFile::Set(const String& property, const float& value)
 {
     if (m_PropertyMap.count(property) != 0)
     {
@@ -165,7 +165,7 @@ void JsonFile::Set(const String& property, const float& value)
     }
 }
 //---------------------------------------------------------------------------
-void JsonFile::Set(const String& property, const bool& value)
+void __fastcall JsonFile::Set(const String& property, const bool& value)
 {
     if (m_PropertyMap.count(property) != 0)
     {
@@ -173,7 +173,7 @@ void JsonFile::Set(const String& property, const bool& value)
     }
 }
 //---------------------------------------------------------------------------
-String JsonFile::ProcessPath(const String& path) const
+String __fastcall JsonFile::ProcessPath(const String& path) const
 {
     String newPath = "";
     auto skip = false;
@@ -197,7 +197,7 @@ String JsonFile::ProcessPath(const String& path) const
     return newPath;
 }
 //---------------------------------------------------------------------------
-void JsonFile::Load(const String& file)
+void __fastcall JsonFile::Load(const String& file)
 {
     if (File::File::Exists(file))
     {
@@ -247,22 +247,22 @@ void JsonFile::Load(const String& file)
     }
 }
 //---------------------------------------------------------------------------
-void JsonFile::OnStartObject(const String& object)
+void __fastcall JsonFile::OnStartObject(const String& object)
 {
     // do nothing; should be overridden
 }
 //---------------------------------------------------------------------------
-void JsonFile::OnEndObject(const String& object)
+void __fastcall JsonFile::OnEndObject(const String& object)
 {
     // do nothing; should be overridden
 }
 //---------------------------------------------------------------------------
-void JsonFile::OnLoading()
+void __fastcall JsonFile::OnLoading()
 {
     // do nothing; should be overridden
 }
 //---------------------------------------------------------------------------
-void JsonFile::OnLoaded()
+void __fastcall JsonFile::OnLoaded()
 {
     // do nothing; should be overridden
 }

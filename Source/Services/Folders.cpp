@@ -36,11 +36,11 @@ String Folders::GetFolder(const Location location, const String& subFolder)
 //---------------------------------------------------------------------------
 void Folders::GetFolders(Location location, const String& subFolder, TStringDynArray& folders)
 {
-	auto folder = GetFolder(location, subFolder);
-	if (System::Ioutils::TDirectory::Exists(folder))
-	{
-		folders = System::Ioutils::TDirectory::GetDirectories(folder);
-	}
+    auto folder = GetFolder(location, subFolder);
+    if (System::Ioutils::TDirectory::Exists(folder))
+    {
+        folders = System::Ioutils::TDirectory::GetDirectories(folder);
+    }
 }
 //---------------------------------------------------------------------------
 String Folders::GetFolderRelativeTo(const Location location, const String& path)
@@ -61,10 +61,10 @@ String Folders::GetActiveProjectFolder()
 //---------------------------------------------------------------------------
 TStringDynArray Folders::GetFiles(const String& folder, const String& filter)
 {
-	if (System::Ioutils::TDirectory::Exists(folder))
-	{
-		return System::Ioutils::TDirectory::GetFiles(folder, filter);
-	}
+    if (System::Ioutils::TDirectory::Exists(folder))
+    {
+        return System::Ioutils::TDirectory::GetFiles(folder, filter);
+    }
     return TStringDynArray();
 }
 //---------------------------------------------------------------------------
@@ -82,6 +82,18 @@ String Folders::Create(Location location, const String& subFolder)
         System::Ioutils::TDirectory::CreateDirectory(folder);
     }
     return folder;
+}
+//---------------------------------------------------------------------------
+String Folders::CleanseSeparators(const String& path)
+{
+    auto lpath = path;
+    auto npath = path;
+    do {
+        lpath = npath;
+        npath = StringReplace(npath, "\\", m_Separator, TReplaceFlags());
+        npath = StringReplace(npath, "/", m_Separator, TReplaceFlags());
+    } while (npath != lpath);
+    return npath;
 }
 //---------------------------------------------------------------------------
 bool Folders::Exists(const String& path)

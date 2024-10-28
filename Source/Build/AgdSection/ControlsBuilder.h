@@ -2,7 +2,7 @@
 #ifndef ControlsBuilderH
 #define ControlsBuilderH
 //---------------------------------------------------------------------------
-#include "SectionBuilder.h"
+#include "Build/AgdSection/SectionBuilder.h"
 //---------------------------------------------------------------------------
 namespace Build
 {
@@ -10,10 +10,10 @@ namespace Build
 class ControlsBuilder : public SectionBuilder
 {
 protected:
-    void     Execute() final;
+    void    __fastcall  Execute() final;
 public:
-             ControlsBuilder();
-    virtual ~ControlsBuilder();
+            __fastcall  ControlsBuilder();
+    virtual __fastcall ~ControlsBuilder();
 };
 //---------------------------------------------------------------------------
 } // Build namespace

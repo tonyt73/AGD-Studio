@@ -2,7 +2,7 @@
 #ifndef MapBuilderH
 #define MapBuilderH
 //---------------------------------------------------------------------------
-#include "SectionBuilder.h"
+#include "Build/AgdSection/SectionBuilder.h"
 //---------------------------------------------------------------------------
 namespace Build
 {
@@ -10,10 +10,10 @@ namespace Build
 class MapBuilder : public SectionBuilder
 {
 protected:
-    void     Execute() final;
+    void    __fastcall  Execute() final;
 public:
-             MapBuilder();
-    virtual ~MapBuilder();
+            __fastcall  MapBuilder();
+    virtual __fastcall ~MapBuilder();
 };
 //---------------------------------------------------------------------------
 } // Build namespace

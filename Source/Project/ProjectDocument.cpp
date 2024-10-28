@@ -13,7 +13,7 @@
 //---------------------------------------------------------------------------
 using namespace Project;
 //---------------------------------------------------------------------------
-ProjectDocument::ProjectDocument(const String& name, const String& machine)
+__fastcall ProjectDocument::ProjectDocument(const String& name, const String& machine)
 : Document(name)
 , m_MachineName(machine)
 , m_MachineConfig(nullptr)
@@ -21,7 +21,7 @@ ProjectDocument::ProjectDocument(const String& name, const String& machine)
 , m_Description("")
 , m_Author("Anonymous")
 {
-    m_Extension = "agdx";
+    m_Extension = "agds";
     m_Type = "Game";
     m_SubType = "Configuration";
     m_Folder = "Game\\Configuration";
@@ -55,12 +55,12 @@ ProjectDocument::ProjectDocument(const String& name, const String& machine)
     }
 }
 //---------------------------------------------------------------------------
-ProjectDocument::~ProjectDocument()
+__fastcall ProjectDocument::~ProjectDocument()
 {
     m_Registrar.Unsubscribe();
 }
 //---------------------------------------------------------------------------
-void ProjectDocument::OnEndObject(const String& object)
+void __fastcall ProjectDocument::OnEndObject(const String& object)
 {
     if (object == "Files[]")
     {
@@ -68,28 +68,27 @@ void ProjectDocument::OnEndObject(const String& object)
     }
 }
 //---------------------------------------------------------------------------
-const MachineConfig& ProjectDocument::MachineConfiguration() const
+const MachineConfig& __fastcall ProjectDocument::MachineConfiguration() const
 {
     return *m_MachineConfig;
 }
 //---------------------------------------------------------------------------
-MachineConfig& ProjectDocument::WriteableMachineConfiguration() const
-{
-    return *m_MachineConfig;
-}
-//---------------------------------------------------------------------------
-String ProjectDocument::GetGraphicsMode() const
+String __fastcall ProjectDocument::GetGraphicsMode() const
 {
     return m_MachineConfig->GraphicsMode()->Name;
 }
 //---------------------------------------------------------------------------
-int ProjectDocument::GetScreenSize(int index) const
+int __fastcall ProjectDocument::GetScreenSize(int index) const
 {
     return index ? m_MachineConfig->GraphicsMode()->Height : m_MachineConfig->GraphicsMode()->Width;
 }
 //---------------------------------------------------------------------------
+MachineConfig& __fastcall ProjectDocument::WritableMachineConfiguration() const
+{
+    return *m_MachineConfig;
+}
 //---------------------------------------------------------------------------
-void ProjectDocument::DoSave()
+void __fastcall ProjectDocument::DoSave()
 {
     Push("Project");
         Write("Version", m_Version);
@@ -109,7 +108,7 @@ void ProjectDocument::DoSave()
     ArrayEnd(); // Files
 }
 //---------------------------------------------------------------------------
-bool ProjectDocument::Load()
+bool __fastcall ProjectDocument::Load()
 {
     m_File = GetFile();
     auto result = Document::Load();
@@ -118,23 +117,23 @@ bool ProjectDocument::Load()
     return result;
 }
 //---------------------------------------------------------------------------
-void ProjectDocument::ClearFiles()
+void __fastcall ProjectDocument::ClearFiles()
 {
     m_Files.clear();
 }
 //---------------------------------------------------------------------------
-void ProjectDocument::AddFile(const String& file, const String& type, const String& subType)
+void __fastcall ProjectDocument::AddFile(const String& file, const String& type, const String& subType)
 {
     FileInfo fi { file, type, subType };
     m_Files.push_back(fi);
 }
 //---------------------------------------------------------------------------
-const FileList& ProjectDocument::Files() const
+const FileList& __fastcall ProjectDocument::Files() const
 {
     return m_Files;
 }
 //---------------------------------------------------------------------------
-void ProjectDocument::OnChangeString(const OnChange<String>& event)
+void __fastcall ProjectDocument::OnChangeString(const OnChange<String>& event)
 {
          if (event.Id == "project.version"      ) m_Version     = event.Value;
     else if (event.Id == "project.author"       ) m_Author      = event.Value;
@@ -142,18 +141,18 @@ void ProjectDocument::OnChangeString(const OnChange<String>& event)
          if (event.Id == "project.name"         ) Name          = event.Value;
 }
 //---------------------------------------------------------------------------
-String ProjectDocument::GetFile() const
+String __fastcall ProjectDocument::GetFile() const
 {
     // Documents/{project name}
     auto file = Services::File::Combine(Services::Folders::Projects, Services::Folders::ProjectName);
     // Documents/{project name}/{project name}
     file = Services::File::Combine(file, Services::Folders::ProjectName);
-    // Documents/{project name}/{project name}.agdx
+    // Documents/{project name}/{project name}.{m_Extension}
     file = Services::File::ChangeExtension(file, m_Extension);
     return file;
 }
 //---------------------------------------------------------------------------
-void ProjectDocument::SetName(String name)
+void __fastcall ProjectDocument::SetName(String name)
 {
     if (name.Trim().LowerCase() != m_Name.Trim().LowerCase() && !Services::Folders::Exists(Services::Folders::lpProjects, name))
     {

@@ -41,7 +41,7 @@ object frmIDE: TfrmIDE
       3D2250414E454C222069643D224C4D44446F636B50616E656C32222076697369
       626C653D2266616C7365222F3E0D0A20202020202020203C2F7A6F6E653E0D0A
       20202020202020203C7A6F6E65206B696E643D22544142532220616374697665
-      7461623D2231222073697A653D2232303422206473697A653D22302E32363633
+      7461623D2230222073697A653D2232303422206473697A653D22302E32363633
       3138353337383539303038223E0D0A202020202020202020203C7A6F6E65206B
       696E643D2250414E454C222069643D226470456469746F724B65797322207669
       7369626C653D2274727565222F3E0D0A202020202020202020203C7A6F6E6520
@@ -84,7 +84,7 @@ object frmIDE: TfrmIDE
         ActiveBorderType = fbtFlat
         Align = alClient
         AutoExpand = True
-        Style.FontSize = 7
+        Style.FontSize = 8
         Style.FontStyles = [fsBold]
         Style.FontName = 'Tahoma'
         CustomPlusMinus = True
@@ -101,7 +101,7 @@ object frmIDE: TfrmIDE
         HeaderSections.Cells = {0000000001000000010000000000}
         HideFocusRect = True
         HideHintOnMove = False
-        HorzScrollBarStyles.Width = 19
+        HorzScrollBarStyles.Width = 17
         Images = imgBuildNodes
         ItemIndent = 18
         LineHeight = 18
@@ -138,7 +138,7 @@ object frmIDE: TfrmIDE
         HotTrack = False
         UnderlineTracked = False
         VertScrollBarStyles.ShowTrackHint = True
-        VertScrollBarStyles.Width = 19
+        VertScrollBarStyles.Width = 17
         UseSystemHintColors = True
         BackGroundColor = clBtnFace
         FixedTopRowNum = 0
@@ -307,7 +307,7 @@ object frmIDE: TfrmIDE
           Align = alClient
           Style.ParentColors = False
           Style.TextColor = 3355443
-          Style.FontSize = 8
+          Style.FontSize = 9
           Style.FontStyles = []
           Style.FontName = 'Segoe UI'
           CustomPlusMinus = True
@@ -327,7 +327,7 @@ object frmIDE: TfrmIDE
             0000000000000000000000000000000000000000020000000000020000000000
             0000000000000000}
           HeaderSections.Cells = {0000000001000000010000000000}
-          HorzScrollBarStyles.Width = 19
+          HorzScrollBarStyles.Width = 17
           HorzScrollBarStyles.ThemeGlobalMode = True
           Images = imgProjectNodes
           ItemIndent = 18
@@ -360,7 +360,7 @@ object frmIDE: TfrmIDE
           TabStop = True
           UseCustomScrollBars = False
           VertScrollBarStyles.ShowTrackHint = True
-          VertScrollBarStyles.Width = 19
+          VertScrollBarStyles.Width = 17
           VertScrollBarStyles.ThemeGlobalMode = True
           ParentThemeMode = False
           ThemeGlobalMode = True

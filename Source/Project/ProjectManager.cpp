@@ -5,8 +5,8 @@
 #include "ProjectDocument.h"
 #include "FileDefinitions.h"
 #include "Settings.h"
-#include "Frames/CodeEditor/fEditorCode.h"
-#include "Frames/ImageEditor/fEditorImage.h"
+#include "Frames/Editors/Code/fEditorCode.h"
+#include "Frames/Editors/Images/fEditorImage.h"
 #include "Messaging/Event.h"
 #include "Services/File.h"
 #include "Services/Folders.h"
@@ -15,25 +15,25 @@
 //---------------------------------------------------------------------------
 using namespace Project;
 //---------------------------------------------------------------------------
-ProjectManager& ProjectManager::get()
+__fastcall ProjectManager& ProjectManager::get()
 {
     static ProjectManager instance;
     return instance;
 }
 //---------------------------------------------------------------------------
-ProjectManager::ProjectManager()
+__fastcall ProjectManager::ProjectManager()
 : m_TreeView(nullptr)
 , m_MostRecentUsedList(nullptr)
 , m_IsOpen(false)
 {
 }
 //---------------------------------------------------------------------------
-void ProjectManager::Initialise(Elxtree::TElXTree* treeView)
+void __fastcall ProjectManager::Initialise(Elxtree::TElXTree* treeView)
 {
     m_TreeView = treeView;
 }
 //---------------------------------------------------------------------------
-cMRUList ProjectManager::GetMostRecentlyUsedList()
+cMRUList __fastcall ProjectManager::GetMostRecentlyUsedList()
 {
     if (m_MostRecentUsedList == nullptr)
     {
@@ -42,12 +42,12 @@ cMRUList ProjectManager::GetMostRecentlyUsedList()
     return m_MostRecentUsedList->GetList();
 }
 //---------------------------------------------------------------------------
-void ProjectManager::RemoveMostRecentlyUsedItem(const String& name, const String& path)
+void __fastcall ProjectManager::RemoveMostRecentlyUsedItem(const String& name, const String& path)
 {
     m_MostRecentUsedList->Remove(name, path);
 }
 //---------------------------------------------------------------------------
-void ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* node) const
+void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* node) const
 {
     auto caption = node->Text.LowerCase();
     node->ImageIndex = tiFolderClosed;
@@ -107,7 +107,7 @@ void ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* node) const
     node->ImageIndex = index;
 }
 //---------------------------------------------------------------------------
-void ProjectManager::New(const String& name, const String& machine)
+void __fastcall ProjectManager::New(const String& name, const String& machine)
 {
     ClearMessage("[ProjectManager] Creating new Project: '" + name + "' for machine '" + machine + ";");
     InformationMessage("[ProjectManager] Project Saved");
@@ -146,7 +146,7 @@ void ProjectManager::New(const String& name, const String& machine)
     m_IsOpen = true;
 }
 //---------------------------------------------------------------------------
-void ProjectManager::Open(const String& file)
+void __fastcall ProjectManager::Open(const String& file)
 {
     Close();
     ClearMessage("[ProjectManager] Loading Project: " + file);
@@ -165,7 +165,7 @@ void ProjectManager::Open(const String& file)
     m_MostRecentUsedList->Add(name, file, config->Machine);
 }
 //---------------------------------------------------------------------------
-void ProjectManager::Save()
+void __fastcall ProjectManager::Save()
 {
     if (m_IsOpen)
     {
@@ -174,7 +174,7 @@ void ProjectManager::Save()
     }
 }
 //---------------------------------------------------------------------------
-void ProjectManager::Close()
+void __fastcall ProjectManager::Close()
 {
     if (m_IsOpen)
     {
@@ -184,7 +184,7 @@ void ProjectManager::Close()
     }
 }
 //---------------------------------------------------------------------------
-void ProjectManager::ClearTree(const String& rootName)
+void __fastcall ProjectManager::ClearTree(const String& rootName)
 {
     m_TreeLeafNodes.clear();
     m_TreeView->Items->Clear();
@@ -222,7 +222,7 @@ void ProjectManager::ClearTree(const String& rootName)
     }
 }
 //---------------------------------------------------------------------------
-Document* ProjectManager::AddToTreeView(Document* document)
+Document* __fastcall ProjectManager::AddToTreeView(Document* document)
 {
     if (document != nullptr)
     {
@@ -237,22 +237,22 @@ Document* ProjectManager::AddToTreeView(Document* document)
     return document;
 }
 //---------------------------------------------------------------------------
-Document* ProjectManager::Add(const String& type, const String& subType, const String& name, const String& extra)
+Document* __fastcall ProjectManager::Add(const String& type, const String& subType, const String& name, const String& extra)
 {
     return theDocumentManager.Add(type, subType, theDocumentManager.NextName(name), extra);
 }
 //---------------------------------------------------------------------------
-Document* ProjectManager::Add(const String& type, const String& subType, const String& extra)
+Document* __fastcall ProjectManager::Add(const String& type, const String& subType, const String& extra)
 {
     return theDocumentManager.Add(type, subType, theDocumentManager.NextName(type, subType), extra);
 }
 //---------------------------------------------------------------------------
-bool ProjectManager::Remove(const String& type, const String& name)
+bool __fastcall ProjectManager::Remove(const String& type, const String& name)
 {
     return theDocumentManager.Remove(type, name);
 }
 //---------------------------------------------------------------------------
-void ProjectManager::OnDocumentChange(Document* doc)
+void __fastcall ProjectManager::OnDocumentChange(Document* doc)
 {
     // TODO: update the document properties
     // theProjectManager.AddToTreeView(document);

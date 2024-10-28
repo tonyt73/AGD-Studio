@@ -50,7 +50,7 @@ protected:
                 unsigned int    m_TranparentColor;          // the index into the palette that represents the transparent pixel color
                 float           m_ScalarX;                  // scaling factor for width
                 float           m_ScalarY;                  // scaling factor for height
-    std::unique_ptr<Palette> 	m_Palette;                  // the palette table for the graphics mode
+    std::unique_ptr<Palette>    m_Palette;                  // the palette table for the graphics mode
                 BufferType      m_BufferType;               // the type of graphics buffer we are
                 Table           m_LogicalColors;            // palette table LOGICAL color indexes into the Total Colors table
                 Table           m_DefaultLogicalColors;     // default palette table LOGICAL color indexes into the Total Colors table
@@ -61,25 +61,25 @@ protected:
             PixelRemapping      m_PixelRemappingLoader;     // used to load the pixel remapping list
                 RemapData       m_RemapDataLoader;          // used to load the remap data into the m_PixelRemappingLoader
 
-                int             GetLogicalColors() const;
-                TColor          GetLogicalColor(int index) const;
-                int             GetColorFromLogicalIndex(int index) const;
-    const       ExportInfo&     GetExportInformation(ImageTypes imageType) const;
-                void            OnEndObject(const String& object);
-                void            Save();
+                int             __fastcall  GetLogicalColors() const;
+                TColor          __fastcall  GetLogicalColor(int index) const;
+                int             __fastcall  GetColorFromLogicalIndex(int index) const;
+    const       ExportInfo&     __fastcall  GetExportInformation(ImageTypes imageType) const;
+                void            __fastcall  OnEndObject(const String& object);
+                void            __fastcall  Save();
 
 public:
-                                GraphicsMode();
-                                GraphicsMode(const GraphicsMode& other);
+                                __fastcall  GraphicsMode();
+                                __fastcall  GraphicsMode(const GraphicsMode& other);
 
-                void            Load(const String& name);
-                void            SaveLogicalCLUT(String path = "", String name = "");
-                void            LoadLogicalCLUT(String path = "", String name = "");
+                void            __fastcall  Load(const String& name);
+                void            __fastcall  SaveLogicalCLUT(String path = "", String name = "");
+                void            __fastcall  LoadLogicalCLUT(String path = "", String name = "");
                                 // Remap a logical color to a new palette color
-                void            RemapColor(int paletteTableIndex, int colorTableIndex);
-                unsigned char   RemapPixels(unsigned char pixels) const;
-                void            RestoreDefaultPalette();
-    const       Palette&        Palette() const;
+                void            __fastcall  RemapColor(int paletteTableIndex, int colorTableIndex);
+                unsigned char   __fastcall  RemapPixels(unsigned char pixels) const;
+                void            __fastcall  RestoreDefaultPalette();
+    const       Palette&        __fastcall  Palette() const;
 
     __property  String          Name = { read = m_Name };
     __property  unsigned int    BitsPerPixel = { read = m_BitsPerPixel };

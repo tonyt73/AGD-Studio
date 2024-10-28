@@ -10,46 +10,46 @@ namespace Messaging
 class Event
 {
 private:
-    String      m_Id;
+                String      m_Id;
 public:
-                Event(const String& id) : m_Id(id) {}
+    __fastcall              Event(const String& id);
 
-    __property  String  Id = { read = m_Id };
+    __property  String      Id = { read = m_Id };
 };
 //---------------------------------------------------------------------------
 template <class T>
 class OnChange : public Event
 {
 private:
-    T m_NewValue;
-    T m_OldValue;
+    T                       m_NewValue;
+    T                       m_OldValue;
 public:
-    OnChange(const String& id, const T& newValue, const T& oldValue = T())
-    : Event(id)
-    , m_NewValue(newValue)
-    , m_OldValue(oldValue)
-    {
-    }
+    __fastcall              OnChange(const String& id, const T& newValue, const T& oldValue = T())
+                            : Event(id)
+                            , m_NewValue(newValue)
+                            , m_OldValue(oldValue)
+                            {
+                            }
 
-    __property  T Value    = { read = m_NewValue };
-    __property  T OldValue = { read = m_OldValue };
+    __property  T           Value    = { read = m_NewValue };
+    __property  T           OldValue = { read = m_OldValue };
 };
 //---------------------------------------------------------------------------
 template <class T>
 class DocumentChange : public Event
 {
 private:
-    const Project::Document* m_Document;
-    T m_Value;
+   const Project::Document* m_Document;
+    T                       m_Value;
 public:
-    DocumentChange(const String& id, const Project::Document* document, const T& value = T())
-    : Event(id)
-    , m_Document(document)
-    , m_Value(value)
-    {
-    }
+    __fastcall              DocumentChange(const String& id, const Project::Document* document, const T& value = T())
+                            : Event(id)
+                            , m_Document(document)
+                            , m_Value(value)
+                            {
+                            }
 
-    __property  T                        Value    = { read = m_Value    };
+    __property  T            Value    = { read = m_Value    };
     __property  const Project::Document* document = { read = m_Document };
 };
 //---------------------------------------------------------------------------
@@ -57,13 +57,9 @@ enum MessageType { etInformation, etWarning, etError, etDebug, etClear, etHelpKe
 class MessageEvent : public Event
 {
 protected:
-    MessageType m_MessageType;
+    MessageType             m_MessageType;
 public:
-    MessageEvent(const String& message, MessageType type)
-    : Event(message)
-    , m_MessageType(type)
-    {
-    }
+    __fastcall              MessageEvent(const String& message, MessageType type);
 
     __property  String      Message = { read = m_Id };
     __property  MessageType Type    = { read = m_MessageType };
@@ -72,74 +68,53 @@ public:
 class RoomSelected : public Event
 {
 private:
-    TSize   m_Room;
+    TSize                   m_Room;
 public:
-    RoomSelected(TSize room)
-    : Event("room.selected")
-    , m_Room(room)
-    {
-    }
+    __fastcall              RoomSelected(TSize room);
 
-    __property  TSize Room = { read = m_Room };
+    __property  TSize       Room = { read = m_Room };
 };
 //---------------------------------------------------------------------------
 class SetStartRoom : public Event
 {
 private:
-    TPoint  m_Room;
+    TPoint                  m_Room;
 public:
-    SetStartRoom(TPoint room)
-    : Event("set.start.room")
-    , m_Room(room)
-    {
-    }
+    __fastcall              SetStartRoom(TPoint room);
 
-    __property  TPoint Room = { read = m_Room };
+    __property  TPoint      Room = { read = m_Room };
 };
 //---------------------------------------------------------------------------
 class StartRoomChanged : public Event
 {
 private:
-    TPoint  m_Room;
+    TPoint                  m_Room;
 public:
-    StartRoomChanged(TPoint room)
-    : Event("start.room.changed")
-    , m_Room(room)
-    {
-    }
+    __fastcall              StartRoomChanged(TPoint room);
 
-    __property  TPoint Room = { read = m_Room };
+    __property  TPoint      Room = { read = m_Room };
 };
 //---------------------------------------------------------------------------
 class UpdateProperties : public Event
 {
 public:
-    UpdateProperties()
-    : Event("update.properties")
-    {
-    }
+    __fastcall              UpdateProperties();
 };
 //---------------------------------------------------------------------------
 class WindowChangedEvent : public Event
 {
 private:
-    const TRect&    m_Window;
+    const TRect&            m_Window;
 public:
-    WindowChangedEvent(const TRect& window)
-    : Event("window.changed")
-    , m_Window(window)
-    {
-    }
-    __property  const TRect& Window = { read = m_Window };
+    __fastcall              WindowChangedEvent(const TRect& window);
+
+    __property const TRect& Window = { read = m_Window };
 };
 //---------------------------------------------------------------------------
 class ThemeChangedEvent : public Event
 {
 public:
-    ThemeChangedEvent()
-    : Event("theme.changed")
-    {
-    }
+    __fastcall              ThemeChangedEvent();
 };
 //---------------------------------------------------------------------------
 } // Messaging namespace

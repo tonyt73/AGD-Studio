@@ -10,7 +10,7 @@
 //---------------------------------------------------------------------------
 using namespace Project;
 //---------------------------------------------------------------------------
- TextDocument::TextDocument(const String& name)
+__fastcall TextDocument::TextDocument(const String& name)
 : Document(name)
 {
     m_Type = "Text";
@@ -25,20 +25,20 @@ using namespace Project;
     m_File = GetFile();
 }
 //---------------------------------------------------------------------------
-void TextDocument::DoSave()
+void __fastcall TextDocument::DoSave()
 {
 }
 //---------------------------------------------------------------------------
-void TextDocument::Save()
+void __fastcall TextDocument::Save()
 {
 }
 //---------------------------------------------------------------------------
-bool TextDocument::Load()
+bool __fastcall TextDocument::Load()
 {
     return true;
 }
 //---------------------------------------------------------------------------
-void TextDocument::Add(const String& lines)
+void __fastcall TextDocument::Add(const String& lines)
 {
     if (Services::File::Exists(m_File))
     {
@@ -49,7 +49,7 @@ void TextDocument::Add(const String& lines)
     }
 }
 //---------------------------------------------------------------------------
-EventDocument::EventDocument(const String& name)
+__fastcall EventDocument::EventDocument(const String& name)
 : TextDocument(name)
 {
     m_SubType = "Event";
@@ -67,7 +67,7 @@ EventDocument::EventDocument(const String& name)
     m_File = file;
 }
 //---------------------------------------------------------------------------
-MessageDocument::MessageDocument(const String& name)
+__fastcall MessageDocument::MessageDocument(const String& name)
 : TextDocument(name)
 {
     m_SubType = "Messages";
@@ -85,7 +85,7 @@ MessageDocument::MessageDocument(const String& name)
     m_File = file;
 }
 //---------------------------------------------------------------------------
-SfxDocument::SfxDocument(const String& name)
+__fastcall SfxDocument::SfxDocument(const String& name)
 : TextDocument(name)
 {
     m_SubType = "SoundFx";
@@ -103,7 +103,7 @@ SfxDocument::SfxDocument(const String& name)
     m_File = file;
 }
 //---------------------------------------------------------------------------
-AGDDocument::AGDDocument(const String& name)
+__fastcall AGDDocument::AGDDocument(const String& name)
 : TextDocument(name)
 {
     m_SubType = "AGD";
@@ -118,7 +118,7 @@ AGDDocument::AGDDocument(const String& name)
     }
 }
 //---------------------------------------------------------------------------
-AssemblyDocument::AssemblyDocument(const String& name)
+__fastcall AssemblyDocument::AssemblyDocument(const String& name)
 : TextDocument(name)
 {
     m_SubType = "Assembly";

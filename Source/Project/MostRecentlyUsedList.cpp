@@ -11,7 +11,7 @@
 //---------------------------------------------------------------------------
 using namespace Project;
 //---------------------------------------------------------------------------
- MostRecentlyUsedList::MostRecentlyUsedList()
+__fastcall MostRecentlyUsedList::MostRecentlyUsedList()
 : JsonFile()
 {
     m_PropertyMap["List[].Name"] = &m_Loader.Name;
@@ -20,12 +20,12 @@ using namespace Project;
     Load();
 }
 //---------------------------------------------------------------------------
-MostRecentlyUsedList::~MostRecentlyUsedList()
+__fastcall MostRecentlyUsedList::~MostRecentlyUsedList()
 {
     Save();
 }
 //---------------------------------------------------------------------------
-void MostRecentlyUsedList::Load()
+void __fastcall MostRecentlyUsedList::Load()
 {
     auto file = Services::File::Combine(Services::Folders::Common, "Mru.json");
     if (Services::File::Exists(file))
@@ -35,7 +35,7 @@ void MostRecentlyUsedList::Load()
     }
 }
 //---------------------------------------------------------------------------
-void MostRecentlyUsedList::Save()
+void __fastcall MostRecentlyUsedList::Save()
 {
     if (m_Loading) return;
     auto file = Services::Folders::Common + "Mru.json";
@@ -53,7 +53,7 @@ void MostRecentlyUsedList::Save()
     Close(); // }
 }
 //---------------------------------------------------------------------------
-void MostRecentlyUsedList::OnEndObject(const String& object)
+void __fastcall MostRecentlyUsedList::OnEndObject(const String& object)
 {
     if (object == "List[]")
     {
@@ -61,7 +61,7 @@ void MostRecentlyUsedList::OnEndObject(const String& object)
     }
 }
 //---------------------------------------------------------------------------
-void MostRecentlyUsedList::Add(const String& name, const String& path, const String& machine, bool addToFront)
+void __fastcall MostRecentlyUsedList::Add(const String& name, const String& path, const String& machine, bool addToFront)
 {
     if (m_MostRecentlyUsedList.size() > 4)
     {
@@ -75,7 +75,7 @@ void MostRecentlyUsedList::Add(const String& name, const String& path, const Str
     Save();
 }
 //---------------------------------------------------------------------------
-void MostRecentlyUsedList::Remove(const String& name, const String& path)
+void __fastcall MostRecentlyUsedList::Remove(const String& name, const String& path)
 {
     auto relativePath = Services::Folders::GetFolderRelativeTo(Services::Folders::lpDocuments, path);
     auto pos = relativePath.Pos('&');
@@ -90,7 +90,7 @@ void MostRecentlyUsedList::Remove(const String& name, const String& path)
     Save();
 }
 //---------------------------------------------------------------------------
-cMRUList MostRecentlyUsedList::GetList() const
+cMRUList __fastcall MostRecentlyUsedList::GetList() const
 {
     return m_MostRecentlyUsedList;
 }

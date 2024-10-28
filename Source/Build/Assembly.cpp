@@ -8,16 +8,16 @@
 //---------------------------------------------------------------------------
 using namespace Build;
 //---------------------------------------------------------------------------
-Assembly::Assembly(BuildMessages& buildMessages)
+__fastcall Assembly::Assembly(BuildMessages& buildMessages)
 : ShellProcess(buildMessages, bmBuild, "Assemble Game+Engine (Assembly File to Emulator File)")
 {
 }
 //---------------------------------------------------------------------------
-Assembly::~Assembly()
+__fastcall Assembly::~Assembly()
 {
 }
 //---------------------------------------------------------------------------
-bool Assembly::Execute()
+bool __fastcall Assembly::Execute()
 {
     const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
     auto asmFile = Services::File::Combine(Services::Folders::Project, Services::Folders::ProjectName + ".asm");
@@ -29,7 +29,7 @@ bool Assembly::Execute()
     Services::File::AppendText(asmFile, mc.Assembler.Append);
 
     BUILD_LINE(bmBuild, "Execute Assembler");
-	return ShellExecute(Services::File::PathOf(asmFile), assembler, parameters);
+    return ShellExecute(Services::File::PathOf(asmFile), assembler, parameters);
 }
 //---------------------------------------------------------------------------
 

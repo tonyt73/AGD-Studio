@@ -3,9 +3,18 @@
 #define fSettingsH
 //---------------------------------------------------------------------------
 #include <System.Classes.hpp>
+#include <System.Actions.hpp>
+#include <System.ImageList.hpp>
+#include <Vcl.ActnList.hpp>
+#include <Vcl.ImgList.hpp>
+#include <Vcl.Buttons.hpp>
+#include <Vcl.ComCtrls.hpp>
+#include <Vcl.Dialogs.hpp>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
+#include <Vcl.ExtCtrls.hpp>
+#include <Vcl.ButtonGroup.hpp>
 #include "LMDControl.hpp"
 #include "LMDCustomBevelPanel.hpp"
 #include "LMDCustomControl.hpp"
@@ -14,15 +23,6 @@
 #include "LMDCustomParentPanel.hpp"
 #include "LMDCustomSheetControl.hpp"
 #include "LMDPageControl.hpp"
-#include <Vcl.ExtCtrls.hpp>
-#include <Vcl.ButtonGroup.hpp>
-#include <System.Actions.hpp>
-#include <System.ImageList.hpp>
-#include <Vcl.ActnList.hpp>
-#include <Vcl.ImgList.hpp>
-#include <Vcl.Buttons.hpp>
-#include <Vcl.ComCtrls.hpp>
-#include <Vcl.Dialogs.hpp>
 //---------------------------------------------------------------------------
 class TfrmSettings : public TForm
 {

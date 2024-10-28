@@ -7,26 +7,21 @@
 //---------------------------------------------------------------------------
 using namespace Build;
 //---------------------------------------------------------------------------
-ShellProcess::ShellProcess(BuildMessages& buildMessages, BuildMessageType type, const String& description)
+__fastcall ShellProcess::ShellProcess(BuildMessages& buildMessages, BuildMessageType type, const String& description)
 : BuildProcess(buildMessages, type, description)
 {
-	m_Shell = std::make_unique<TLMDStarterExt>(nullptr);
-	m_Shell->AutoStart = false;
-	m_Shell->StartOperation = smOpen;
-	m_Shell->StartOption = soSW_HIDE;
-	m_Shell->ExtStartOptions = TLMDStarterExtendedOptions() << soxUseCreateProcess << soxRedirectOutput;
-	m_Shell->Wait = true;
-	m_Shell->OnOutput = OnOutputEvent;
-	m_Shell->OnError = OnErrorEvent;
+    m_Shell = std::make_unique<TLMDStarterExt>(nullptr);
+    m_Shell->AutoStart = false;
+    m_Shell->StartOperation = smOpen;
+    m_Shell->StartOption = soSW_HIDE;
+    m_Shell->ExtStartOptions = TLMDStarterExtendedOptions() << soxUseCreateProcess;
+    m_Shell->Wait = true;
+    m_Shell->OnOutput = OnOutputEvent;
+    m_Shell->OnError = OnErrorEvent;
     m_Shell->OnFinished = OnTerminatedEvent;
 }
 //---------------------------------------------------------------------------
-ShellProcess::~ShellProcess()
-{
-    m_Shell->TerminateProcess();
-}
-//---------------------------------------------------------------------------
-bool ShellProcess::ShellExecute(const String& path, const String& cmdline, const String& parameters, bool wait, int timeOut)
+bool __fastcall ShellProcess::ShellExecute(const String& path, const String& cmdline, const String& parameters, bool wait)
 {
     m_Errored = false;
     bool result = true;
@@ -34,17 +29,17 @@ bool ShellProcess::ShellExecute(const String& path, const String& cmdline, const
     {
         try
         {
-			if (!m_ShellDone)
-			{
-				m_Shell->TerminateProcess();
+            if (!m_ShellDone)
+            {
+                m_Shell->TerminateProcess();
             }
             ChDir(path);
-			m_Shell->DefaultDir = path;
+            m_Shell->DefaultDir = path;
+            m_Shell->Wait = wait;
             BUILD_LINE(bmRun, cmdline + " " + parameters);
-			m_Shell->Command = cmdline;
-			m_Shell->Parameters = parameters;
-			//m_Shell->MaxTimeAfterBeginning = timeOut;
-			m_Shell->Execute();
+            m_Shell->Command = cmdline;
+            m_Shell->Parameters = parameters;
+            m_Shell->Execute();
             m_ShellDone = false;
             while (wait && !m_ShellDone)
             {
@@ -61,7 +56,7 @@ bool ShellProcess::ShellExecute(const String& path, const String& cmdline, const
     {
         if (wait)
         {
-			m_Shell->TerminateProcess();
+            m_Shell->TerminateProcess();
             m_ShellDone = true;
         }
     }
@@ -89,10 +84,10 @@ void __fastcall ShellProcess::OnOutputEvent(System::TObject* ASender, const Syst
 //---------------------------------------------------------------------------
 void __fastcall ShellProcess::OnErrorEvent(System::TObject* ASender)
 {
-	m_Shell->TerminateProcess();
-	m_ShellDone = true;
-	m_Errored = true;
-	BUILD_LINE(bmFailed, "SHELL ERROR");// + m_Shell->LastError);
+    m_Shell->TerminateProcess();
+    m_ShellDone = true;
+    m_Errored = true;
+    BUILD_LINE(bmFailed, "SHELL ERROR");// + m_Shell->LastError);
 }
 //---------------------------------------------------------------------------
 void __fastcall ShellProcess::OnTerminatedEvent(System::TObject* ASender)

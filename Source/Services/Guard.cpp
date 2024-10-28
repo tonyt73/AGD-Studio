@@ -10,12 +10,12 @@ using namespace Services;
 Guard::Guard(bool& flag)
 : m_Flag(flag)
 {
-	m_Flag = true;
+    m_Flag = true;
 }
 //---------------------------------------------------------------------------
 Guard::~Guard()
 {
-	m_Flag = false;
+    m_Flag = false;
 }
 //---------------------------------------------------------------------------
 

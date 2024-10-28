@@ -22,26 +22,26 @@ struct Result
 class SectionBuilder
 {
 private:
-                Result          m_Result;
-                String          m_Description;
+    Result                      m_Result;
+    String                      m_Description;
 
-                void            Clear();
+    void            __fastcall  Clear();
 
 protected:
-                void            AddLine(String line);
-                void            LineBreak();
-                void            Success();
-                void            Failure(String reason);
+    void            __fastcall  AddLine(String line);
+    void            __fastcall  LineBreak();
+    void            __fastcall  Success();
+    void            __fastcall  Failure(String reason);
 
-    virtual     void            Execute() = 0;
+    virtual void    __fastcall  Execute() = 0;
 
 public:
-                                SectionBuilder(const String& description);
-    virtual                    ~SectionBuilder();
+                    __fastcall  SectionBuilder(const String& description);
+    virtual         __fastcall ~SectionBuilder();
 
-                const Result&   Build();
+    const Result&   __fastcall  Build();
 
-    __property  String          Description = { read = m_Description };
+            String  __property  Description = { read = m_Description };
 };
 //---------------------------------------------------------------------------
 } // Build namespace

@@ -10,22 +10,22 @@
 namespace Build
 {
 //---------------------------------------------------------------------------
-ControlsBuilder::ControlsBuilder()
-: SectionBuilder("ControlsBuilder")
+__fastcall ControlsBuilder::ControlsBuilder()
+: SectionBuilder("Controls")
 {
 }
 //---------------------------------------------------------------------------
-ControlsBuilder::~ControlsBuilder()
+__fastcall ControlsBuilder::~ControlsBuilder()
 {
 }
 //---------------------------------------------------------------------------
-void ControlsBuilder::Execute()
+void __fastcall ControlsBuilder::Execute()
 {
-    const auto& Keys = (Project::ControlsDocument*)theDocumentManager.Get("ControlsBuilder", "List", "ControlsBuilder");
+    const auto& Keys = (Project::ControlsDocument*)theDocumentManager.Get("Controls", "List", "Controls");
     String line = "DEFINECONTROLS  ";
-	for (const auto key : Project::AgdKeys)
-	{
-		auto keyCode = Keys->GetAsciiCode(key);
+    for (const auto key : Project::AgdKeys)
+    {
+        auto keyCode = Keys->GetAsciiCode(key);
         if (keyCode <= 32 && keyCode <= 126)
         {
             line += "'" + UnicodeString::StringOfChar(keyCode, 1) + "' ";

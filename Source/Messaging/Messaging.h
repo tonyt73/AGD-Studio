@@ -115,15 +115,15 @@ private:
     std::list<unsigned int> m_SubscriptionIds;
 
 public:
-             Registrar();
-            ~Registrar();
+            __fastcall  Registrar();
+            __fastcall ~Registrar();
 
     template <class T>
-    void     Subscribe(std::function<void (const T&)> handler)
+    void    __fastcall  Subscribe(std::function<void (const T&)> handler)
     {
-        m_SubscriptionIds.push_back(Bus::Subscribe(handler));
+        m_SubscriptionIds.push_back(::Messaging::Bus::Subscribe(handler));
     }
-    void     Unsubscribe();
+    void    __fastcall  Unsubscribe();
 };
 //---------------------------------------------------------------------------
 } // namespace Messaging

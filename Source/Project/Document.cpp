@@ -16,7 +16,7 @@ using namespace Project;
 //---------------------------------------------------------------------------
 unsigned int Document::s_NextRefId = 0;
 //---------------------------------------------------------------------------
-Document::Document(const String& name)
+__fastcall Document::Document(const String& name)
 : JsonFile()
 , m_Name(Services::File::NameWithoutExtension(name))
 , m_Type("No Type")
@@ -39,23 +39,23 @@ Document::Document(const String& name)
     m_File = GetFile();
 }
 //---------------------------------------------------------------------------
-Document::~Document()
+__fastcall Document::~Document()
 {
     m_Name = Unnamed;
     Close();
 }
 //----------------------------------------------------------------------------
-void Document::RegisterProperty(const String& property, const String& category, const String& info)
+void __fastcall Document::RegisterProperty(const String& property, const String& category, const String& info)
 {
     m_PropertyInfo[property] = { category, info };
 }
 //---------------------------------------------------------------------------
-const Document::TPropertyInfoMap& Document::GetPropertyInfo() const
+const Document::TPropertyInfoMap& __fastcall Document::GetPropertyInfo() const
 {
     return m_PropertyInfo;
 }
 //---------------------------------------------------------------------------
-String Document::GetPropertyInfo(const String& property) const
+String __fastcall Document::GetPropertyInfo(const String& property) const
 {
     auto info = m_PropertyInfo.find(property);
     if (info != m_PropertyInfo.end())
@@ -65,7 +65,7 @@ String Document::GetPropertyInfo(const String& property) const
     return "Invalid property";
 }
 //---------------------------------------------------------------------------
-void Document::AssignId()
+void __fastcall Document::AssignId()
 {
     if (m_SaveRefId && m_RefId == InvalidDocumentId)
     {
@@ -73,7 +73,7 @@ void Document::AssignId()
     }
 }
 //---------------------------------------------------------------------------
-void Document::Close()
+void __fastcall Document::Close()
 {
     Save();
     if (m_DockPanel != nullptr)
@@ -87,7 +87,7 @@ void Document::Close()
     }
 }
 //---------------------------------------------------------------------------
-void Document::SetName(String name)
+void __fastcall Document::SetName(String name)
 {
     auto oldName = m_Name;
     auto oldFile = GetFile(m_Name);
@@ -111,13 +111,13 @@ void Document::SetName(String name)
     m_File = GetFile();
 }
 //---------------------------------------------------------------------------
-void Document::SetShowFileExtension(bool value)
+void __fastcall Document::SetShowFileExtension(bool value)
 {
     m_ShowFileExtension = value;
     m_Name = Services::File::NameWithoutExtension(m_Name) + (!value ? String() : String("." + m_Extension));
 }
 //---------------------------------------------------------------------------
-String Document::GetFile(String name)
+String __fastcall Document::GetFile(String name)
 {
     if (name == "")
     {
@@ -132,17 +132,17 @@ String Document::GetFile(String name)
     return file;
 }
 //---------------------------------------------------------------------------
-bool Document::IsValid() const
+bool __fastcall Document::IsValid() const
 {
     return IsValid(m_File);
 }
 //---------------------------------------------------------------------------
-bool Document::IsValid(const String& name) const
+bool __fastcall Document::IsValid(const String& name) const
 {
     return name.Pos(Unnamed) == 0;
 }
 //---------------------------------------------------------------------------
-void Document::Save()
+void __fastcall Document::Save()
 {
     m_File = GetFile();
     if (IsValid()) {
@@ -158,7 +158,7 @@ void Document::Save()
     }
 }
 //---------------------------------------------------------------------------
-bool Document::Load()
+bool __fastcall Document::Load()
 {
     m_RefId = InvalidDocumentId;
     if (m_File.Trim() == "")

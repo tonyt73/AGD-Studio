@@ -14,24 +14,24 @@ protected:
     String              m_Color;            // json loader
     std::vector<TColor> m_ColorTable;       // the table of Total Palette Colors
 
-    TColor              GetTableColor(int index) const;
-    TColor              GetGreyscale(int index) const;
-    int                 GetTotalColors() const;
+    TColor              __fastcall  GetTableColor(int index) const;
+    TColor              __fastcall  GetGreyscale(int index) const;
+    int                 __fastcall  GetTotalColors() const;
 
-    TColor              GetFontColorOf(int index) const;
+    TColor              __fastcall  GetFontColorOf(int index) const;
 
-    void                OnEndObject(const String& object);
-    void                Save();
+    void                __fastcall  OnEndObject(const String& object);
+    void                __fastcall  Save();
 
 public:
-                        Palette();
-                        Palette(const String& name);
-                        Palette(const Palette& other);
-    Palette&            operator=(const Palette& other);
+                        __fastcall  Palette();
+                        __fastcall  Palette(const String& name);
+                        __fastcall  Palette(const Palette& other);
+    Palette&            __fastcall  operator=(const Palette& other);
 
-    void                Load(const String& name);
+    void                __fastcall  Load(const String& name);
 
-    static DWORD        LuminanceOf(TColor Color);
+    static DWORD        __fastcall  LuminanceOf(TColor Color);
 
     __property  String  Name                    = { read = m_Name         };
     __property  TColor  Greyscale[int index]    = { read = GetGreyscale   };

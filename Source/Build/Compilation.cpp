@@ -8,16 +8,16 @@
 //---------------------------------------------------------------------------
 using namespace Build;
 //---------------------------------------------------------------------------
-Compilation::Compilation(BuildMessages& buildMessages)
+__fastcall Compilation::Compilation(BuildMessages& buildMessages)
 : ShellProcess(buildMessages, bmBuild, "Compile Game File (AGD File to Assembly File)")
 {
 }
 //---------------------------------------------------------------------------
-Compilation::~Compilation()
+__fastcall Compilation::~Compilation()
 {
 }
 //---------------------------------------------------------------------------
-bool Compilation::Execute()
+bool __fastcall Compilation::Execute()
 {
     const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
     auto agdFile = Services::File::Combine(Services::Folders::Project, Services::Folders::ProjectName + ".agd");
@@ -36,7 +36,7 @@ bool Compilation::Execute()
     BUILD_LINE(bmBuild, "Execute AGD Compiler");
     auto parameters = Parameter::ization(mc.Compiler.Parameters);
     auto cmdLine = Services::File::NameWithExtension(compilerDst);
-	auto result = ShellExecute(path, cmdLine, parameters, true, 20);
+    auto result = ShellExecute(path, cmdLine, parameters);
     BUILD_LINE(bmCopy, "Removing compiler from project folder");
     Services::File::Delete(compilerDst);
     BUILD_LINE(bmCopy, "Removing AGD Engine file from project folder");

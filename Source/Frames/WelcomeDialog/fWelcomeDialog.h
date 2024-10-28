@@ -20,41 +20,41 @@
 class TfrmWelcomeDialog : public TFrame
 {
 __published:    // IDE-managed Components
-    TPanel *panMain;
-    TLabel *lblStartNewProject;
-    TImage *imgStartNewProject;
-    TImage *imgLogo;
-    TPanel *panRecentProjects;
-    TOpenTextFileDialog *dlgOpen;
-    TPanel *panButtons;
-    TLabel *lblOpenExistingProject;
-    TImage *imgOpenExistingProject;
-    TComboBox *cmbThemes;
-    TLabel *lblChangeTheme;
-    TImage *imgChangeTheme;
-    TPanel *panStartNew;
     TButton *btnCancel;
     TButton *btnCreate;
     TComboBox *cmbMachines;
-    TLabel *lblMachines;
-    TLabel *Label1;
+    TComboBox *cmbThemes;
     TEdit *edtName;
+    TImage *imgChangeTheme;
+    TImage *imgLogo;
+    TImage *imgOpenExistingProject;
+    TImage *imgStartNewProject;
+    TLabel *Label1;
+    TLabel *lblChangeTheme;
     TLabel *lblFile;
-    TPopupMenu *popConfigure;
-    TMenuItem *Settings1;
+    TLabel *lblMachines;
+    TLabel *lblOpenExistingProject;
+    TLabel *lblStartNewProject;
     TMenuItem *CheckforUpdates1;
+    TMenuItem *Settings1;
+    TOpenTextFileDialog *dlgOpen;
+    TPanel *panButtons;
     TPanel *Panel1;
+    TPanel *panMain;
+    TPanel *panRecentProjects;
+    TPanel *panStartNew;
+    TPopupMenu *popConfigure;
     TTaskDialog *dlgInvalidProject;
-    void __fastcall lblStartNewProjectMouseEnter(TObject *Sender);
-    void __fastcall lblStartNewProjectMouseLeave(TObject *Sender);
-    void __fastcall cmbThemesChange(TObject *Sender);
-    void __fastcall lblStartNewProjectClick(TObject *Sender);
-    void __fastcall lblOpenExistingProjectClick(TObject *Sender);
-    void __fastcall lblChangeThemeClick(TObject *Sender);
     void __fastcall btnCreateClick(TObject *Sender);
+    void __fastcall cmbThemesChange(TObject *Sender);
+    void __fastcall dlgInvalidProjectButtonClicked(TObject *Sender, TModalResult ModalResult, bool &CanClose);
     void __fastcall edtNameChange(TObject *Sender);
     void __fastcall edtNameKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
-    void __fastcall dlgInvalidProjectButtonClicked(TObject *Sender, TModalResult ModalResult, bool &CanClose);
+    void __fastcall lblChangeThemeClick(TObject *Sender);
+    void __fastcall lblOpenExistingProjectClick(TObject *Sender);
+    void __fastcall lblStartNewProjectClick(TObject *Sender);
+    void __fastcall lblStartNewProjectMouseEnter(TObject *Sender);
+    void __fastcall lblStartNewProjectMouseLeave(TObject *Sender);
 
 private:    // Function declarations
     void     __fastcall     SelectionPanelOnClick(TObject *Sender);

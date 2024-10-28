@@ -7,10 +7,9 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-namespace Factories
-{
+using namespace Factories;
 //---------------------------------------------------------------------------
-void DocumentEditorFactory::Register(const String& documentFolder, CreateDocumentEditorFn pfnCreate)
+void __fastcall DocumentEditorFactory::Register(const String& documentFolder, CreateDocumentEditorFn pfnCreate)
 {
     if (m_Editors.count(documentFolder) == 0)
     {
@@ -22,7 +21,7 @@ void DocumentEditorFactory::Register(const String& documentFolder, CreateDocumen
     }
 }
 //---------------------------------------------------------------------------
-TFrame* DocumentEditorFactory::Create(Project::Document* document, TComponent* owner)
+TFrame* __fastcall DocumentEditorFactory::Create(Project::Document* document, TComponent* owner)
 {
     auto dp = dynamic_cast<TLMDDockPanel*>(owner);
     auto it = m_Editors.find(document->Type + "." + document->SubType);
@@ -43,4 +42,3 @@ TFrame* DocumentEditorFactory::Create(Project::Document* document, TComponent* o
     return nullptr;
 }
 //---------------------------------------------------------------------------
-}

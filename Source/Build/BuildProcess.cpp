@@ -7,14 +7,14 @@
 //---------------------------------------------------------------------------
 using namespace Build;
 //---------------------------------------------------------------------------
-BuildProcess::BuildProcess(BuildMessages& buildMessages, BuildMessageType type, const String& description)
+__fastcall BuildProcess::BuildProcess(BuildMessages& buildMessages, BuildMessageType type, const String& description)
 : m_BuildMessages(buildMessages)
 , m_Type(type)
 , m_Description(description)
 {
 }
 //---------------------------------------------------------------------------
-BuildProcess::~BuildProcess()
+__fastcall BuildProcess::~BuildProcess()
 {
 }
 //---------------------------------------------------------------------------

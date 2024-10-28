@@ -14,7 +14,7 @@ const unsigned char g_PaletteMask = 0xC0; // palette bits from attribute byte
 const unsigned char g_PaperShift  =    3; // bits to shift paper color
 const unsigned char g_PaletteShift=    6; // bits to shift palette index
 //---------------------------------------------------------------------------
-ULAPlusGraphicsBuffer::ULAPlusGraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode)
+__fastcall ULAPlusGraphicsBuffer::ULAPlusGraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode)
 : GraphicsBuffer(width, height, mode)
 {
     assert(mode.BitsPerPixel == 1);
@@ -32,12 +32,12 @@ ULAPlusGraphicsBuffer::ULAPlusGraphicsBuffer(unsigned int width, unsigned int he
     m_Registrar.Subscribe<Event>(OnEvent);
 }
 //---------------------------------------------------------------------------
-ULAPlusGraphicsBuffer::~ULAPlusGraphicsBuffer()
+__fastcall ULAPlusGraphicsBuffer::~ULAPlusGraphicsBuffer()
 {
     m_Registrar.Unsubscribe();
 }
 //---------------------------------------------------------------------------
-void ULAPlusGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y, bool set)
+void __fastcall ULAPlusGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y, bool set)
 {
     if (X < m_Width && Y < m_Height)
     {
@@ -66,7 +66,7 @@ void ULAPlusGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y, bool set)
     }
 }
 //---------------------------------------------------------------------------
-void ULAPlusGraphicsBuffer::GetColor(unsigned int X, unsigned int Y, unsigned char colorIndex)
+void __fastcall ULAPlusGraphicsBuffer::GetColor(unsigned int X, unsigned int Y, unsigned char colorIndex)
 {
     if (X < m_Width && Y < m_Height)
     {
@@ -83,7 +83,7 @@ void ULAPlusGraphicsBuffer::GetColor(unsigned int X, unsigned int Y, unsigned ch
     }
 }
 //---------------------------------------------------------------------------
-void ULAPlusGraphicsBuffer::Render() const
+void __fastcall ULAPlusGraphicsBuffer::Render() const
 {
     if (m_Drawing) return;
     for (auto y = 0; y < m_Height; y += m_GraphicsMode.PixelsHighPerAttribute)
@@ -116,7 +116,7 @@ void ULAPlusGraphicsBuffer::Render() const
     }
 }
 //---------------------------------------------------------------------------
-void ULAPlusGraphicsBuffer::Set(const String& data)
+void __fastcall ULAPlusGraphicsBuffer::Set(const String& data)
 {
     auto size = data.Length() / 2;
     if (size == (SizeOfBuffer[0] + SizeOfBuffer[1]))
@@ -137,7 +137,7 @@ void ULAPlusGraphicsBuffer::Set(const String& data)
     Render();
 }
 //---------------------------------------------------------------------------
-void ULAPlusGraphicsBuffer::OnEvent(const Event& event)
+void __fastcall ULAPlusGraphicsBuffer::OnEvent(const Event& event)
 {
     if (event.Id == "palette.remapped")
     {

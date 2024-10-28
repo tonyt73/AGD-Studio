@@ -12,7 +12,7 @@
 //---------------------------------------------------------------------------
 using namespace Visuals;
 //---------------------------------------------------------------------------
-GraphicsMode::GraphicsMode()
+__fastcall GraphicsMode::GraphicsMode()
 : JsonFile()
 , m_Name("unknown")
 , m_BitsPerPixel(0)
@@ -47,7 +47,7 @@ GraphicsMode::GraphicsMode()
     m_Palette = std::make_unique<::Palette>();
 }
 //---------------------------------------------------------------------------
-GraphicsMode::GraphicsMode(const GraphicsMode& other)
+__fastcall GraphicsMode::GraphicsMode(const GraphicsMode& other)
 {
     m_Name = other.m_Name;
     m_PaletteName = other.m_PaletteName;
@@ -66,7 +66,7 @@ GraphicsMode::GraphicsMode(const GraphicsMode& other)
     m_DefaultLogicalColors.assign(other.m_DefaultLogicalColors.begin(), other.m_DefaultLogicalColors.end());
 }
 //---------------------------------------------------------------------------
-void GraphicsMode::OnEndObject(const String& object)
+void __fastcall GraphicsMode::OnEndObject(const String& object)
 {
     if (object == "LogicalColors[]")
     {
@@ -82,7 +82,7 @@ void GraphicsMode::OnEndObject(const String& object)
     }
 }
 //---------------------------------------------------------------------------
-void GraphicsMode::RemapColor(int logicalIndex, int paletteIndex)
+void __fastcall GraphicsMode::RemapColor(int logicalIndex, int paletteIndex)
 {
     if (0 <= logicalIndex && logicalIndex < m_LogicalColors.size() && 0 <= paletteIndex && paletteIndex < m_Palette->Colors)
     {
@@ -91,7 +91,7 @@ void GraphicsMode::RemapColor(int logicalIndex, int paletteIndex)
     }
 }
 //---------------------------------------------------------------------------
-unsigned char GraphicsMode::RemapPixels(unsigned char pixels) const
+unsigned char __fastcall GraphicsMode::RemapPixels(unsigned char pixels) const
 {
     if (m_PixelRemapping.size() == 0)
         return pixels;
@@ -109,23 +109,23 @@ unsigned char GraphicsMode::RemapPixels(unsigned char pixels) const
     return mangledByte;
 }
 //---------------------------------------------------------------------------
-void GraphicsMode::RestoreDefaultPalette()
+void __fastcall GraphicsMode::RestoreDefaultPalette()
 {
     m_LogicalColors = m_DefaultLogicalColors;
     Bus::Publish<Event>(Event("palette.remapped"));
 }
 //---------------------------------------------------------------------------
-const Palette& GraphicsMode::Palette() const
+const Palette& __fastcall GraphicsMode::Palette() const
 {
     return *m_Palette;
 }
 //---------------------------------------------------------------------------
-int GraphicsMode::GetLogicalColors() const
+int __fastcall GraphicsMode::GetLogicalColors() const
 {
     return m_LogicalColors.size();
 }
 //---------------------------------------------------------------------------
-TColor GraphicsMode::GetLogicalColor(int index) const
+TColor __fastcall GraphicsMode::GetLogicalColor(int index) const
 {
     if (0 <= index && index < m_LogicalColors.size())
     {
@@ -134,7 +134,7 @@ TColor GraphicsMode::GetLogicalColor(int index) const
     return clFuchsia;
 }
 //---------------------------------------------------------------------------
-int GraphicsMode::GetColorFromLogicalIndex(int index) const
+int __fastcall GraphicsMode::GetColorFromLogicalIndex(int index) const
 {
     if (0 <= index && index < m_LogicalColors.size())
     {
@@ -143,12 +143,12 @@ int GraphicsMode::GetColorFromLogicalIndex(int index) const
     return 0;
 }
 //---------------------------------------------------------------------------
-const GraphicsMode::ExportInfo& GraphicsMode::GetExportInformation(ImageTypes imageType) const
+const __fastcall GraphicsMode::ExportInfo& __fastcall GraphicsMode::GetExportInformation(ImageTypes imageType) const
 {
     return m_ExportInfo[imageType];
 }
 //---------------------------------------------------------------------------
-void GraphicsMode::Load(const String& name)
+void __fastcall GraphicsMode::Load(const String& name)
 {
     m_LogicalColors.clear();
     Services::JsonFile::Load(Services::File::Combine(Services::Folders::Application, "Graphics Modes" + Services::Folders::Separator + name + ".json"));
@@ -161,7 +161,7 @@ void GraphicsMode::Load(const String& name)
     m_DefaultLogicalColors = m_LogicalColors;
 }
 //---------------------------------------------------------------------------
-void GraphicsMode::Save()
+void __fastcall GraphicsMode::Save()
 {
     // {
     Open(Services::File::Combine(Services::Folders::Application, "Graphics Modes" + Services::Folders::Separator + m_Name + ".json"));
@@ -208,7 +208,7 @@ void GraphicsMode::Save()
     Close();
 }
 //---------------------------------------------------------------------------
-void GraphicsMode::SaveLogicalCLUT(String path, String name)
+void __fastcall GraphicsMode::SaveLogicalCLUT(String path, String name)
 {
     if (m_SupportsRemapping)
     {
@@ -237,7 +237,7 @@ void GraphicsMode::SaveLogicalCLUT(String path, String name)
     }
 }
 //---------------------------------------------------------------------------
-void GraphicsMode::LoadLogicalCLUT(String path, String name)
+void __fastcall GraphicsMode::LoadLogicalCLUT(String path, String name)
 {
     if (m_SupportsRemapping)
     {
@@ -250,7 +250,7 @@ void GraphicsMode::LoadLogicalCLUT(String path, String name)
             path = Services::Folders::Project;
         }
         auto file = Services::File::Combine(path, name);
-		if (Services::File::Exists(file))
+        if (Services::File::Exists(file))
         {
             auto oldLogicalCount = m_LogicalColors.size();
             auto oldLogicalColors = m_LogicalColors;

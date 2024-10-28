@@ -168,11 +168,11 @@ void __fastcall TfrmSettings::GetBuildOptions()
 //---------------------------------------------------------------------------
 void __fastcall TfrmSettings::SaveMachineConfig()
 {
-	auto& cfg     = theDocumentManager.ProjectConfig()->WriteableMachineConfiguration();
-    cfg.Compiler  = Project::MachineConfig::ToolInfo(edtCompilerExe->Text, edtCompilerParams->Text);
-	cfg.Engine    = Project::MachineConfig::ToolInfo(edtEngineFile->Text, "");
-	cfg.Assembler = Project::MachineConfig::ToolInfoExt(edtAssemblerExe->Text, edtAssemblerParams->Text, edtAssemblerPrepend->Text, edtAssemblerAppend->Text);
-    cfg.Emulator  = Project::MachineConfig::ToolInfo(edtEmulatorExe->Text, edtEmulatorParams->Text);
+    auto& cfg = theDocumentManager.ProjectConfig()->WritableMachineConfiguration();
+    cfg.Compiler = Project::MachineConfig::ToolInfo(edtCompilerExe->Text, edtCompilerParams->Text);
+    cfg.Engine = Project::MachineConfig::ToolInfo(edtEngineFile->Text, "");
+    cfg.Assembler = Project::MachineConfig::ToolInfoExt(edtAssemblerExe->Text, edtAssemblerParams->Text, edtAssemblerPrepend->Text, edtAssemblerAppend->Text);
+    cfg.Emulator = Project::MachineConfig::ToolInfo(edtEmulatorExe->Text, edtEmulatorParams->Text);
 }
 //---------------------------------------------------------------------------
 

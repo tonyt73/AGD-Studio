@@ -3,7 +3,7 @@ object frmAdvancedSettings: TfrmAdvancedSettings
   Top = 0
   BorderStyle = bsDialog
   Caption = 'Settings'
-  ClientHeight = 455
+  ClientHeight = 457
   ClientWidth = 794
   Color = clBtnFace
   Constraints.MinHeight = 400
@@ -22,21 +22,22 @@ object frmAdvancedSettings: TfrmAdvancedSettings
   object splSplitter: TSplitter
     Left = 273
     Top = 0
-    Height = 407
+    Height = 409
     ExplicitLeft = 144
     ExplicitTop = 320
     ExplicitHeight = 100
   end
   object panButtons: TPanel
     Left = 0
-    Top = 407
+    Top = 409
     Width = 794
     Height = 48
     Align = alBottom
     BevelOuter = bvNone
     ShowCaption = False
     TabOrder = 0
-    ExplicitTop = 409
+    ExplicitTop = 408
+    ExplicitWidth = 790
     DesignSize = (
       794
       48)
@@ -49,6 +50,7 @@ object frmAdvancedSettings: TfrmAdvancedSettings
       Caption = 'Save'
       ModalResult = 1
       TabOrder = 0
+      ExplicitLeft = 588
     end
     object Button2: TButton
       Left = 689
@@ -66,7 +68,7 @@ object frmAdvancedSettings: TfrmAdvancedSettings
     Left = 276
     Top = 0
     Width = 518
-    Height = 407
+    Height = 409
     Align = alClient
     ActiveCard = Card1
     BevelOuter = bvNone
@@ -98,7 +100,7 @@ object frmAdvancedSettings: TfrmAdvancedSettings
     Left = 0
     Top = 0
     Width = 273
-    Height = 407
+    Height = 409
     Hint = ''
     PlusPosition = vaMiddle
     BorderColorWindow = clWindow
@@ -117,7 +119,7 @@ object frmAdvancedSettings: TfrmAdvancedSettings
       0000000000000000000000000000000000000000020000000000020000000000
       0000000000000000}
     HeaderSections.Cells = {0000000001000000010000000000}
-    HorzScrollBarStyles.Width = 19
+    HorzScrollBarStyles.Width = 17
     ItemIndent = 18
     Items.Data = {
       EFFFFFFF0000000010000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF82861002
@@ -252,12 +254,12 @@ object frmAdvancedSettings: TfrmAdvancedSettings
     TabOrder = 2
     TabStop = True
     VertScrollBarStyles.ShowTrackHint = True
-    VertScrollBarStyles.Width = 19
+    VertScrollBarStyles.Width = 17
     FixedTopRowNum = 0
     FixedBottomRowNum = 0
     FixedColNum = 1
     GutterWidth = 0
-    ExplicitHeight = 409
+    ExplicitHeight = 408
   end
   object ImageList1: TImageList
     Left = 556

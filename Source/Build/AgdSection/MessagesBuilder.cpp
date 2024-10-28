@@ -11,19 +11,19 @@
 namespace Build
 {
 //---------------------------------------------------------------------------
-MessagesBuilder::MessagesBuilder()
-: SectionBuilder("MessagesBuilder")
+__fastcall MessagesBuilder::MessagesBuilder()
+: SectionBuilder("Messages")
 {
 }
 //---------------------------------------------------------------------------
-MessagesBuilder::~MessagesBuilder()
+__fastcall MessagesBuilder::~MessagesBuilder()
 {
 }
 //---------------------------------------------------------------------------
-void MessagesBuilder::Execute()
+void __fastcall MessagesBuilder::Execute()
 {
     const auto& dm = theDocumentManager;
-    auto msgs = dm.Get("Text", "MessagesBuilder", "MessagesBuilder");
+    auto msgs = dm.Get("Text", "Messages", "Messages");
     if (msgs != nullptr)
     {
         auto file = msgs->File;

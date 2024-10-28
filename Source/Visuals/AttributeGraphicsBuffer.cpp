@@ -18,7 +18,7 @@ const unsigned char g_PaperShift  =    3; // bits to shift paper color
 const unsigned char g_BrightShift =    6; // bits to shift paper color
 const unsigned char g_FlashShift  =    7; // bits to shift paper color
 //---------------------------------------------------------------------------
-AttributeGraphicsBuffer::AttributeGraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode)
+__fastcall AttributeGraphicsBuffer::AttributeGraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode)
 : GraphicsBuffer(width, height, mode)
 {
     assert(mode.BitsPerPixel == 1);
@@ -35,11 +35,11 @@ AttributeGraphicsBuffer::AttributeGraphicsBuffer(unsigned int width, unsigned in
     m_SetColors.push_back(0);  // flash
 }
 //---------------------------------------------------------------------------
-AttributeGraphicsBuffer::~AttributeGraphicsBuffer()
+__fastcall AttributeGraphicsBuffer::~AttributeGraphicsBuffer()
 {
 }
 //---------------------------------------------------------------------------
-void AttributeGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y, bool set)
+void __fastcall AttributeGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y, bool set)
 {
     if (X < m_Width && Y < m_Height)
     {
@@ -72,7 +72,7 @@ void AttributeGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y, bool set)
     }
 }
 //---------------------------------------------------------------------------
-void AttributeGraphicsBuffer::GetColor(unsigned int X, unsigned int Y, unsigned char colorIndex)
+void __fastcall AttributeGraphicsBuffer::GetColor(unsigned int X, unsigned int Y, unsigned char colorIndex)
 {
     if (X < m_Width && Y < m_Height)
     {
@@ -84,7 +84,7 @@ void AttributeGraphicsBuffer::GetColor(unsigned int X, unsigned int Y, unsigned 
     }
 }
 //---------------------------------------------------------------------------
-void AttributeGraphicsBuffer::Render() const
+void __fastcall AttributeGraphicsBuffer::Render() const
 {
     if (m_Drawing) return;
     for (auto y = 0; y < m_Height; y += m_GraphicsMode.PixelsHighPerAttribute)
@@ -115,7 +115,7 @@ void AttributeGraphicsBuffer::Render() const
     }
 }
 //---------------------------------------------------------------------------
-void AttributeGraphicsBuffer::Set(const String& data)
+void __fastcall AttributeGraphicsBuffer::Set(const String& data)
 {
     auto size = data.Length() / 2;
     if (size == (SizeOfBuffer[0] + SizeOfBuffer[1]))

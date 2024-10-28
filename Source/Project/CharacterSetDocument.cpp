@@ -1,13 +1,14 @@
 ﻿//---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
+#include <System.hpp>
 #include "CharacterSetDocument.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 using namespace Project;
 //---------------------------------------------------------------------------
-CharacterSetDocument::CharacterSetDocument(const String& name, const String& extra)
+__fastcall CharacterSetDocument::CharacterSetDocument(const String& name, const String& extra)
 : ImageDocument(name)
 {
     m_SaveRefId = false;

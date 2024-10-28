@@ -9,20 +9,20 @@
 //---------------------------------------------------------------------------
 using namespace Build;
 //---------------------------------------------------------------------------
-MapBuilder::MapBuilder()
-: SectionBuilder("MapBuilder")
+__fastcall MapBuilder::MapBuilder()
+: SectionBuilder("Map")
 {
 }
 //---------------------------------------------------------------------------
-MapBuilder::~MapBuilder()
+__fastcall MapBuilder::~MapBuilder()
 {
 }
 //---------------------------------------------------------------------------
-void MapBuilder::Execute()
+void __fastcall MapBuilder::Execute()
 {
     const auto& dm = theDocumentManager;
     // get the objects in the map
-    auto mapDoc = dynamic_cast<Project::TiledMapDocument*>(dm.Get("MapBuilder", "Tiled", "Tile MapBuilder"));
+    auto mapDoc = dynamic_cast<Project::TiledMapDocument*>(dm.Get("Map", "Tiled", "Tile Map"));
     assert(mapDoc != nullptr);
 
     const auto& mapSize = mapDoc->GetMinimalMapSize();

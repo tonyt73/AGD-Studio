@@ -14,16 +14,16 @@
 //---------------------------------------------------------------------------
 using namespace Build;
 //---------------------------------------------------------------------------
-EventsBuilder::EventsBuilder()
-: SectionBuilder("EventsBuilder")
+__fastcall EventsBuilder::EventsBuilder()
+: SectionBuilder("Events")
 {
 }
 //---------------------------------------------------------------------------
-EventsBuilder::~EventsBuilder()
+__fastcall EventsBuilder::~EventsBuilder()
 {
 }
 //---------------------------------------------------------------------------
-void EventsBuilder::Execute()
+void __fastcall EventsBuilder::Execute()
 {
     const auto& dm = theDocumentManager;
     // get the objects in the map

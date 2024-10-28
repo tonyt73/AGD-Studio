@@ -35,7 +35,7 @@ ControlsDocument::ControlsDocument(const String& name)
     }
 }
 //---------------------------------------------------------------------------
-void ControlsDocument::DoSave()
+void __fastcall ControlsDocument::DoSave()
 {
     ArrayStart("Keys");
         for (auto key : m_Keys)
@@ -72,7 +72,7 @@ String __fastcall ControlsDocument::Get(int index)
     return IntToStr(key);
 }
 //---------------------------------------------------------------------------
-void ControlsDocument::OnEndObject(const String& object)
+void __fastcall ControlsDocument::OnEndObject(const String& object)
 {
     if (object == "Keys[]")
     {
@@ -80,17 +80,17 @@ void ControlsDocument::OnEndObject(const String& object)
     }
 }
 //---------------------------------------------------------------------------
-void ControlsDocument::OnLoading()
+void __fastcall ControlsDocument::OnLoading()
 {
     m_Keys.clear();
 }
 //---------------------------------------------------------------------------
-void ControlsDocument::OnLoaded()
+void __fastcall ControlsDocument::OnLoaded()
 {
     DefaultKeys();
 }
 //---------------------------------------------------------------------------
-unsigned char ControlsDocument::GetAsciiCode(eAgdKey key)
+unsigned char __fastcall ControlsDocument::GetAsciiCode(eAgdKey key)
 {
     if (0 <= key && key < m_Keys.size())
     {
@@ -99,7 +99,7 @@ unsigned char ControlsDocument::GetAsciiCode(eAgdKey key)
     return 0;
 }
 //---------------------------------------------------------------------------
-void ControlsDocument::SetAsciiCode(eAgdKey key, unsigned char keyCode)
+void __fastcall ControlsDocument::SetAsciiCode(eAgdKey key, unsigned char keyCode)
 {
     if (0 <= key && key < m_Keys.size())
     {
@@ -107,7 +107,7 @@ void ControlsDocument::SetAsciiCode(eAgdKey key, unsigned char keyCode)
     }
 }
 //---------------------------------------------------------------------------
-void ControlsDocument::DefaultKeys()
+void __fastcall ControlsDocument::DefaultKeys()
 {
     while (m_Keys.size() < 11)
     {

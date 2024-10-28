@@ -10,18 +10,18 @@
 namespace Build
 {
 //---------------------------------------------------------------------------
-JumpTableBuilder::JumpTableBuilder()
+__fastcall JumpTableBuilder::JumpTableBuilder()
 : SectionBuilder("Jump Table")
 {
 }
 //---------------------------------------------------------------------------
-JumpTableBuilder::~JumpTableBuilder()
+__fastcall JumpTableBuilder::~JumpTableBuilder()
 {
 }
 //---------------------------------------------------------------------------
-void JumpTableBuilder::Execute()
+void __fastcall JumpTableBuilder::Execute()
 {
-    const auto& JumpTableBuilder = (Project::JumpTableDocument*)theDocumentManager.Get("Jump", "Table", "JumpTableBuilder");
+    const auto& JumpTableBuilder = (Project::JumpTableDocument*)theDocumentManager.Get("Jump", "Table", "JumpTable");
 
     String def = "DEFINEJUMP ";
     for (auto i = 0; i < JumpTableBuilder->Count; i++)

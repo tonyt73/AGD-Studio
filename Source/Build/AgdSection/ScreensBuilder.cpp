@@ -11,16 +11,16 @@
 //---------------------------------------------------------------------------
 using namespace Build;
 //---------------------------------------------------------------------------
-ScreensBuilder::ScreensBuilder()
-: SectionBuilder("ScreensBuilder")
+__fastcall ScreensBuilder::ScreensBuilder()
+: SectionBuilder("Screens")
 {
 }
 //---------------------------------------------------------------------------
-ScreensBuilder::~ScreensBuilder()
+__fastcall ScreensBuilder::~ScreensBuilder()
 {
 }
 //---------------------------------------------------------------------------
-void ScreensBuilder::Execute()
+void __fastcall ScreensBuilder::Execute()
 {
     const auto& dm = theDocumentManager;
     // get the objects in the map

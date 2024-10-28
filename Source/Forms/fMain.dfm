@@ -2,19 +2,21 @@ object frmMain: TfrmMain
   Left = 0
   Top = 0
   Caption = 'LEAVE THIS FORM BLANK! FRAMES ARE DOCKED INTO THIS!'
-  ClientHeight = 647
-  ClientWidth = 932
+  ClientHeight = 565
+  ClientWidth = 860
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
+  Font.Height = -12
   Font.Name = 'Tahoma'
   Font.Style = []
+  Scaled = False
   OnActivate = FormActivate
   OnAfterMonitorDpiChanged = FormAfterMonitorDpiChanged
   OnBeforeMonitorDpiChanged = FormBeforeMonitorDpiChanged
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  TextHeight = 13
+  PixelsPerInch = 106
+  TextHeight = 14
 end

@@ -12,29 +12,29 @@ enum BuildMessageType { bmOk = 0, bmFailed, bmChecking, bmBuild, bmRun, bmProgre
 class BuildMessages
 {
 private:
-            TElXTree*           m_TreeView;
-            TElXTreeItem*       m_GroupNode;
-            TElXTreeItem*       m_MsgNode;
-            BuildMessageType    m_GroupType;
+    TElXTree*                   m_TreeView;
+    TElXTreeItem*               m_GroupNode;
+    TElXTreeItem*               m_MsgNode;
+    BuildMessageType            m_GroupType;
 
 public:
-                                BuildMessages();
-    virtual                    ~BuildMessages();
+                    __fastcall  BuildMessages();
+    virtual         __fastcall ~BuildMessages();
 
                                 // clear the tree view
-                void            Clear();
+        void        __fastcall  Clear();
                                 // push a new group/folder node
-                void            Push(BuildMessageType type, const String& group);
+        void        __fastcall  Push(BuildMessageType type, const String& group);
                                 // pop the last node
-                void            Pop(bool result);
+        void        __fastcall  Pop(bool result);
                                 // post a message in the current group node
-                void            Message(BuildMessageType type, const String& message);
+        void        __fastcall  Message(BuildMessageType type, const String& message);
                                 // post a message in the current group node
-                void            Message(const String& message);
+        void        __fastcall  Message(const String& message);
                                 // update the last message with a success/fail icon
-                void            Message(BuildMessageType type);
+        void        __fastcall  Message(BuildMessageType type);
                                 // log a build time
-                void            Time(int time);
+        void        __fastcall  Time(int time);
 
     __property  TElXTree*       TreeView = { write = m_TreeView };
 };

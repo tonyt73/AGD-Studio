@@ -11,7 +11,7 @@ namespace Project
 class Settings : public Services::JsonFile
 {
 public:
-    static Settings&  get();
+    static Settings&  __fastcall get();
     Settings(Settings const&) = delete;
     void operator=(Settings const&) = delete;
 
@@ -28,19 +28,19 @@ private:
     String                      m_Developer;
     String                      m_DefaultMachine;
 
-    void                        SetActiveStyle(const String& style);
-    void                        SetWelcomePosition(const TPoint& position);
-    void                        SetWindowPosition(const TPoint& position);
-    void                        SetWindowState(const TWindowState& state);
-    void                        SetWindowSize(const TSize& size);
-    void                        SetBool(int index, bool value);
-    void                        SetString(int index, String value);
+    void            __fastcall  SetActiveStyle(const String& style);
+    void            __fastcall  SetWelcomePosition(const TPoint& position);
+    void            __fastcall  SetWindowPosition(const TPoint& position);
+    void            __fastcall  SetWindowState(const TWindowState& state);
+    void            __fastcall  SetWindowSize(const TSize& size);
+    void            __fastcall  SetBool(int index, bool value);
+    void            __fastcall  SetString(int index, String value);
 
-    void                        Save();
+    void            __fastcall  Save();
 
 public:
-                                Settings();
-                               ~Settings();
+                    __fastcall  Settings();
+                    __fastcall ~Settings();
 
     __property  TWindowState    WindowState             = { read = m_WindowState            , write = SetWindowState                };
     __property  TPoint          WindowPosition          = { read = m_WindowPosition         , write = SetWindowPosition             };

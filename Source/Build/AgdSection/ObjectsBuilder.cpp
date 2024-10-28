@@ -13,16 +13,16 @@
 //---------------------------------------------------------------------------
 using namespace Build;
 //---------------------------------------------------------------------------
-ObjectsBuilder::ObjectsBuilder()
+__fastcall ObjectsBuilder::ObjectsBuilder()
 : SectionBuilder("ObjectsBuilder")
 {
 }
 //---------------------------------------------------------------------------
-ObjectsBuilder::~ObjectsBuilder()
+__fastcall ObjectsBuilder::~ObjectsBuilder()
 {
 }
 //---------------------------------------------------------------------------
-void ObjectsBuilder::Execute()
+void __fastcall ObjectsBuilder::Execute()
 {
     const auto& dm = theDocumentManager;
     // get the objects in the map

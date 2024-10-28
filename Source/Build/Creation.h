@@ -17,10 +17,10 @@ private:
     SectionBuilderList           m_AgdBuilders;
 
 public:
-                     Creation(BuildMessages& buildMessages);
-    virtual         ~Creation();
+                    __fastcall  Creation(BuildMessages& buildMessages);
+    virtual         __fastcall ~Creation();
 
-            bool     Execute() final;
+            bool    __fastcall  Execute() final;
 };
 //---------------------------------------------------------------------------
 } // Build namespace

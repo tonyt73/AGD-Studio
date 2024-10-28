@@ -8,16 +8,16 @@
 //---------------------------------------------------------------------------
 using namespace Build;
 //---------------------------------------------------------------------------
- Emulation::Emulation(BuildMessages& buildMessages)
+__fastcall Emulation::Emulation(BuildMessages& buildMessages)
 : ShellProcess(buildMessages, bmRun, "Run Game")
 {
 }
 //---------------------------------------------------------------------------
-Emulation::~Emulation()
+__fastcall Emulation::~Emulation()
 {
 }
 //---------------------------------------------------------------------------
-bool Emulation::Execute()
+bool __fastcall Emulation::Execute()
 {
     const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
     auto gameFile = Services::File::Combine(Services::Folders::Project, Services::Folders::ProjectName);
@@ -26,9 +26,9 @@ bool Emulation::Execute()
     auto emulator = Services::File::Resolve(Services::Folders::Application, mc.Emulator.Path);
     auto parameters = Parameter::ization(mc.Emulator.Parameters);
 
-    auto path = Services::File::PathOf(emulator);
-    auto cmdline = emulator + " " + parameters;
-    return ShellExecute(path, cmdline, false);
+    auto path = Services::Folders::CleanseSeparators(Services::File::PathOf(emulator));
+    auto exe = Services::File::NameWithExtension(emulator);
+    return ShellExecute(path, exe, parameters, false);
 }
 //---------------------------------------------------------------------------
 

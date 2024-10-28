@@ -23,13 +23,13 @@
 //---------------------------------------------------------------------------
 using namespace Project;
 //---------------------------------------------------------------------------
-DocumentManager& DocumentManager::get()
+DocumentManager& __fastcall DocumentManager::get()
 {
     static DocumentManager instance;
     return instance;
 }
 //---------------------------------------------------------------------------
-DocumentManager::DocumentManager()
+__fastcall DocumentManager::DocumentManager()
 {
     Register("Game", "Configuration", &ProjectDocument::Create);
     Register("Image", "Character Set", &CharacterSetDocument::Create);
@@ -48,12 +48,12 @@ DocumentManager::DocumentManager()
     Register("Controls", "List", &ControlsDocument::Create);
 }
 //---------------------------------------------------------------------------
-void DocumentManager::Register(const String& type, const String& subType, CreateDocumentFn pfnCreate)
+void __fastcall DocumentManager::Register(const String& type, const String& subType, CreateDocumentFn pfnCreate)
 {
     m_FactoryMap[type + '.' + subType] = pfnCreate;
 }
 //---------------------------------------------------------------------------
-Document* DocumentManager::Add(const String& type, const String& subType, const String& name, const String& extra)
+Document* __fastcall DocumentManager::Add(const String& type, const String& subType, const String& name, const String& extra)
 {
     auto it = m_FactoryMap.find(type + '.' + subType);
     if (it != m_FactoryMap.end()) {
@@ -85,7 +85,7 @@ Document* DocumentManager::Add(const String& type, const String& subType, const 
     return nullptr;
 }
 //---------------------------------------------------------------------------
-bool DocumentManager::Remove(const String& type, const String& name)
+bool __fastcall DocumentManager::Remove(const String& type, const String& name)
 {
     auto dit = m_Documents.find(type);
     if (dit != m_Documents.end()) {
@@ -105,7 +105,7 @@ bool DocumentManager::Remove(const String& type, const String& name)
     return false;
 }
 //---------------------------------------------------------------------------
-void DocumentManager::DocumentFolders(std::vector<String>& folders) const
+void __fastcall DocumentManager::DocumentFolders(std::vector<String>& folders) const
 {
     for (auto it : m_FactoryMap) {
         auto doc = std::unique_ptr<Document>(it.second(Unnamed, ""));
@@ -116,7 +116,7 @@ void DocumentManager::DocumentFolders(std::vector<String>& folders) const
     }
 }
 //---------------------------------------------------------------------------
-ProjectDocument* DocumentManager::ProjectConfig() const
+ProjectDocument* __fastcall DocumentManager::ProjectConfig() const
 {
     const auto file = Services::Folders::ProjectName;
     auto doc = Get("Game", "Configuration", file);
@@ -125,7 +125,7 @@ ProjectDocument* DocumentManager::ProjectConfig() const
     return nullptr;
 }
 //---------------------------------------------------------------------------
-Document* DocumentManager::Get(const String& type, const String& subType, const String& name) const
+Document* __fastcall DocumentManager::Get(const String& type, const String& subType, const String& name) const
 {
     auto it = m_Documents.find(type);
     if (it != m_Documents.end()) {
@@ -138,7 +138,7 @@ Document* DocumentManager::Get(const String& type, const String& subType, const 
     return nullptr;
 }
 //---------------------------------------------------------------------------
-Document* DocumentManager::Get(unsigned int id) const
+Document* __fastcall DocumentManager::Get(unsigned int id) const
 {
     if (id != InvalidDocumentId) {
         for (const auto& docTypes : m_Documents) {
@@ -151,7 +151,7 @@ Document* DocumentManager::Get(unsigned int id) const
     return nullptr;
 }
 //---------------------------------------------------------------------------
-int DocumentManager::GetAsIndex(unsigned int id) const
+int __fastcall DocumentManager::GetAsIndex(unsigned int id) const
 {
     const auto& document = Get(id);
     if (document != nullptr) {
@@ -170,7 +170,7 @@ int DocumentManager::GetAsIndex(unsigned int id) const
     return -1;
 }
 //---------------------------------------------------------------------------
-void DocumentManager::Clear()
+void __fastcall DocumentManager::Clear()
 {
     Save();
     for (auto documentType : m_Documents) {
@@ -182,7 +182,7 @@ void DocumentManager::Clear()
     m_Documents.clear();
 }
 //---------------------------------------------------------------------------
-void DocumentManager::Save()
+void __fastcall DocumentManager::Save()
 {
     auto projectDocument = dynamic_cast<ProjectDocument*>(Get("Game", "Configuration", Services::Folders::ProjectName));
     if (projectDocument) {
@@ -206,7 +206,7 @@ void DocumentManager::Save()
     }
 }
 //---------------------------------------------------------------------------
-void DocumentManager::Load(const String& name)
+void __fastcall DocumentManager::Load(const String& name)
 {
     auto start = TDateTime::CurrentTime();
     InformationMessage("[DocumentManager] Loading Project '" + name + "'");
@@ -223,7 +223,7 @@ void DocumentManager::Load(const String& name)
     theAppSettings.LastProject = name;
 }
 //---------------------------------------------------------------------------
-String DocumentManager::NextName(const String& type, const String& subType) const
+String __fastcall DocumentManager::NextName(const String& type, const String& subType) const
 {
     auto i = 1;
     String name = subType + " " + IntToStr(i);
@@ -241,7 +241,7 @@ String DocumentManager::NextName(const String& type, const String& subType) cons
     return name;
 }
 //---------------------------------------------------------------------------
-bool DocumentManager::DoesNameExist(const String& name) const
+bool __fastcall DocumentManager::DoesNameExist(const String& name) const
 {
     for (const auto& docsOfType : m_Documents) {
         for (const auto& doc : docsOfType.second) {
@@ -253,7 +253,7 @@ bool DocumentManager::DoesNameExist(const String& name) const
     return false;
 }
 //---------------------------------------------------------------------------
-String DocumentManager::NextName(const String& name) const
+String __fastcall DocumentManager::NextName(const String& name) const
 {
     if (!DoesNameExist(name)) {
         return name;
@@ -266,7 +266,7 @@ String DocumentManager::NextName(const String& name) const
     return nextName;
 }
 //---------------------------------------------------------------------------
-void DocumentManager::GetAllOfType(const String& type, DocumentList& list) const
+void __fastcall DocumentManager::GetAllOfType(const String& type, DocumentList& list) const
 {
     auto dit = m_Documents.find(type);
     if (dit != m_Documents.end()) {
@@ -274,7 +274,7 @@ void DocumentManager::GetAllOfType(const String& type, DocumentList& list) const
     }
 }
 //---------------------------------------------------------------------------
-bool DocumentManager::IsFirstOfType(const Document* document) const
+bool __fastcall DocumentManager::IsFirstOfType(const Document* document) const
 {
     auto dit = m_Documents.find(document->Type);
     if (dit != m_Documents.end()) {

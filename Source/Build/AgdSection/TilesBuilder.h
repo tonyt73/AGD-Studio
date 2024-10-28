@@ -10,10 +10,10 @@ namespace Build
 class TilesBuilder : public SectionBuilder
 {
 protected:
-    void     Execute() final;
+    void    __fastcall  Execute() final;
 public:
-             TilesBuilder();
-    virtual ~TilesBuilder();
+            __fastcall  TilesBuilder();
+    virtual __fastcall ~TilesBuilder();
 };
 //---------------------------------------------------------------------------
 } // Build namespace

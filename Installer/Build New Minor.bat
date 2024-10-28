@@ -8,6 +8,6 @@
 @title "Build New Minor Release"
 
 @rem Update the Version
-@Versioner.ps1 -File "..\Source\AGD Studio.cbproj" -minor
+@pwsh.exe -executionpolicy bypass -Command "& '.\Versioner.ps1' -File '..\Source\AGD Studio.cbproj' -minor"
 
 @call Build.bat

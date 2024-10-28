@@ -7,7 +7,7 @@
 //---------------------------------------------------------------------------
 using namespace Project;
 //---------------------------------------------------------------------------
- ObjectDocument::ObjectDocument(const String& name, const String& extra)
+__fastcall ObjectDocument::ObjectDocument(const String& name, const String& extra)
 : ImageDocument(name)
 , m_State(Visuals::osDisabled)
 {
@@ -42,7 +42,7 @@ void __fastcall ObjectDocument::SetRoomIndex(int value)
     }
 }
 //---------------------------------------------------------------------------
-void ObjectDocument::DoSaveExtra()
+void __fastcall ObjectDocument::DoSaveExtra()
 {
     Write("RoomIndex", m_RoomIndex);
     Write("State", m_State);

@@ -13,19 +13,20 @@
 class TSelectionPanelFrame : public TFrame
 {
 __published:// IDE-managed Components
-    TPanel *panProjectInfo;
-    TPanel *panRemove;
-    TLabel *lblProjectName;
-    TLabel *lblProjectPath;
-    TImage *imgRemove;
-    TLabel *lblMachine;
-    TProgressBar *prgLoading;
     TImage *imgLogo;
     TImage *imgOpenProjectFolder;
-    void __fastcall panProjectInfoMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
-    void __fastcall lblProjectNameClick(TObject *Sender);
-    void __fastcall imgRemoveClick(TObject *Sender);
+    TImage *imgRemove;
+    TLabel *lblMachine;
+    TLabel *lblProjectName;
+    TLabel *lblProjectPath;
+    TPanel *panProjectInfo;
+    TPanel *panRemove;
+    TProgressBar *prgLoading;
     void __fastcall imgOpenProjectFolderClick(TObject *Sender);
+    void __fastcall imgRemoveClick(TObject *Sender);
+    void __fastcall lblProjectNameClick(TObject *Sender);
+    void __fastcall panProjectInfoMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
+
 private:    // User declarations
             // properties
     String              m_Name;
@@ -49,19 +50,19 @@ public:        // User declarations
             __fastcall  TSelectionPanelFrame(TComponent* Owner);
             __fastcall ~TSelectionPanelFrame();
 
-    void    __fastcall  UpdateControl();
-    void    __fastcall  Tick();
+    void     __fastcall UpdateControl();
+    void     __fastcall Tick();
 
-    __property  String  Name = { read = m_Name, write = SetName };
-    __property  String  Path = { read = m_Path, write = SetPath };
-    __property  String  Machine = { read = m_Machine, write = SetMachine };
-    __property  bool    Selected = { read = m_Selected, write = SetSelected };
-    __property  bool    Highlighted = { read = m_Highlighted, write = SetHighlighted };
-    __property  bool    Loading = { write = SetLoading };
+    String  __property  Name = { read = m_Name, write = SetName };
+    String  __property  Path = { read = m_Path, write = SetPath };
+    String  __property  Machine = { read = m_Machine, write = SetMachine };
+    bool    __property  Selected = { read = m_Selected, write = SetSelected };
+    bool    __property  Highlighted = { read = m_Highlighted, write = SetHighlighted };
+    bool    __property  Loading = { write = SetLoading };
 
             // click events
-    __property  TNotifyEvent OnSelectedClick = { read = FOnClick      , write = FOnClick       };
-    __property  TNotifyEvent OnRemoveClick   = { read = FOnRemoveClick, write = FOnRemoveClick };
+            __property  TNotifyEvent OnSelectedClick = { read = FOnClick, write = FOnClick };
+            __property  TNotifyEvent OnRemoveClick = { read = FOnRemoveClick, write = FOnRemoveClick };
 };
 //---------------------------------------------------------------------------
 #endif

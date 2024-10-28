@@ -150,6 +150,7 @@ void __fastcall TSelectionPanelFrame::imgOpenProjectFolderClick(TObject *Sender)
 {
     auto folder = Services::File::Combine(Services::Folders::Projects, m_Name);
     ShellExecute(NULL, L"open", NULL, NULL, folder.c_str(), SW_SHOWNORMAL);
+
 }
 //---------------------------------------------------------------------------
 

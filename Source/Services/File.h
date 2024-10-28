@@ -8,7 +8,7 @@ namespace Services
 class File
 {
 public:
-    typedef ::System::TStringDynArray StrLines;
+    typedef System::TStringDynArray StrLines;
     static  bool      Exists(const String& file);
     static  String    NameWithoutExtension(const String& file);
     static  String    NameWithExtension(const String& file);

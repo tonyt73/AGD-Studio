@@ -8,7 +8,7 @@
 //---------------------------------------------------------------------------
 using namespace Visuals;
 //---------------------------------------------------------------------------
-BitmapGraphicsBuffer::BitmapGraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode)
+__fastcall BitmapGraphicsBuffer::BitmapGraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode)
 : GraphicsBuffer(width, height, mode)
 {
     assert(mode.BitsPerPixel == 1 || mode.BitsPerPixel == 2 || mode.BitsPerPixel == 4 || mode.BitsPerPixel == 8);
@@ -21,12 +21,12 @@ BitmapGraphicsBuffer::BitmapGraphicsBuffer(unsigned int width, unsigned int heig
     m_Registrar.Subscribe<Event>(OnEvent);
 }
 //---------------------------------------------------------------------------
-BitmapGraphicsBuffer::~BitmapGraphicsBuffer()
+__fastcall BitmapGraphicsBuffer::~BitmapGraphicsBuffer()
 {
     m_Registrar.Unsubscribe();
 }
 //---------------------------------------------------------------------------
-void BitmapGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y, bool set)
+void __fastcall BitmapGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y, bool set)
 {
     if (X < m_Width && Y < m_Height)
     {
@@ -42,7 +42,7 @@ void BitmapGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y, bool set)
     }
 }
 //---------------------------------------------------------------------------
-void BitmapGraphicsBuffer::GetColor(unsigned int X, unsigned int Y, unsigned char colorIndex)
+void __fastcall BitmapGraphicsBuffer::GetColor(unsigned int X, unsigned int Y, unsigned char colorIndex)
 {
     if (X < m_Width && Y < m_Height)
     {
@@ -57,7 +57,7 @@ void BitmapGraphicsBuffer::GetColor(unsigned int X, unsigned int Y, unsigned cha
     }
 }
 //---------------------------------------------------------------------------
-void BitmapGraphicsBuffer::Render() const
+void __fastcall BitmapGraphicsBuffer::Render() const
 {
     if (m_Drawing) return;
     for (auto y = 0; y < m_Height; y++)
@@ -76,7 +76,7 @@ void BitmapGraphicsBuffer::Render() const
     }
 }
 //---------------------------------------------------------------------------
-void BitmapGraphicsBuffer::Set(const String& data)
+void __fastcall BitmapGraphicsBuffer::Set(const String& data)
 {
     if (data.Length() / 2 == SizeOfBuffer[0])
     {
@@ -90,7 +90,7 @@ void BitmapGraphicsBuffer::Set(const String& data)
     }
 }
 //---------------------------------------------------------------------------
-void BitmapGraphicsBuffer::OnEvent(const Event& event)
+void __fastcall BitmapGraphicsBuffer::OnEvent(const Event& event)
 {
     if (event.Id == "palette.remapped")
     {

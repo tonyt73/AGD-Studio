@@ -10,10 +10,10 @@ namespace Build
 class EventsBuilder : public SectionBuilder
 {
 protected:
-    void     Execute() final;
+    void    __fastcall  Execute() final;
 public:
-             EventsBuilder();
-    virtual ~EventsBuilder();
+            __fastcall  EventsBuilder();
+    virtual __fastcall ~EventsBuilder();
 };
 //---------------------------------------------------------------------------
 } // Build namespace

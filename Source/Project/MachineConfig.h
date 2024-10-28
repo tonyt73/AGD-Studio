@@ -47,39 +47,39 @@ protected:
                 ToolInfoExt                 m_Assembler;
                 ToolInfo                    m_Emulator;
 
-                const Visuals::ImageSizing& GetImageSizing(Visuals::ImageTypes type) const;
-                void                        SetCompiler(const ToolInfo& info);
-                void                        SetEngine(const ToolInfo& info);
-                void                        SetAssembler(const ToolInfoExt& info);
-                void                        SetEmulator(const ToolInfo& info);
+const Visuals::ImageSizing& __fastcall  GetImageSizing(Visuals::ImageTypes type) const;
+    void                    __fastcall  SetCompiler(const ToolInfo& info);
+    void                    __fastcall  SetEngine(const ToolInfo& info);
+    void                    __fastcall  SetAssembler(const ToolInfoExt& info);
+    void                    __fastcall  SetEmulator(const ToolInfo& info);
 
-                                            MachineConfig();
-                void                        Save();
+                            __fastcall  MachineConfig();
+    void                    __fastcall  Save();
 
 public:
-                                            MachineConfig(const String& name);
-    virtual                                ~MachineConfig();
+                            __fastcall  MachineConfig(const String& name);
+    virtual                 __fastcall ~MachineConfig();
 
-                Visuals::GraphicsMode*      GraphicsMode() const;
-    static      void                        GetMachinesList(std::vector<String>& list);
+    Visuals::GraphicsMode*  __fastcall  GraphicsMode() const;
+    static void             __fastcall  GetMachinesList(std::vector<String>& list);
 
-                void                        Load(const String& name);
+    void                    __fastcall  Load(const String& name);
 
-    __property  String                      Name                                  = { read = m_Name                               };
-    __property  String                      Keyboard                              = { read = m_Keyboard                           };
-    __property  String                      Image                                 = { read = m_Image                              };
-    __property  const Visuals::ImageSizing  ImageSizing[Visuals::ImageTypes type] = { read = GetImageSizing                       };
-    __property  const ToolInfo&             Compiler                              = { read = m_Compiler    , write = SetCompiler  };
-    __property  const ToolInfo&             Engine                                = { read = m_Engine      , write = SetEngine    };
-    __property  const ToolInfoExt&          Assembler                             = { read = m_Assembler   , write = SetAssembler };
-    __property  const ToolInfo&             Emulator                              = { read = m_Emulator    , write = SetEmulator  };
+    String                  __property  Name      = { read = m_Name                            };
+    String                  __property  Keyboard  = { read = m_Keyboard                        };
+    String                  __property  Image     = { read = m_Image                           };
+    __property  const ToolInfo&         Compiler  = { read = m_Compiler , write = SetCompiler  };
+    __property  const ToolInfo&         Engine    = { read = m_Engine   , write = SetEngine    };
+    __property  const ToolInfoExt&      Assembler = { read = m_Assembler, write = SetAssembler };
+    __property  const ToolInfo&         Emulator  = { read = m_Emulator , write = SetEmulator  };
+ const Visuals::ImageSizing __property  ImageSizing[Visuals::ImageTypes type] = { read = GetImageSizing };
 };
 
 //---------------------------------------------------------------------------
 //class MachineConfigWriter : public MachineConfig
 //{
 //public:
-//   MachineConfigWriter();
+//                        __fastcall MachineConfigWriter();
 //};
 //---------------------------------------------------------------------------
 } // namespace Project

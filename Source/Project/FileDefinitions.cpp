@@ -9,7 +9,7 @@
 //---------------------------------------------------------------------------
 using namespace Project;
 //---------------------------------------------------------------------------
-FileDefinitions::FileDefinitions()
+__fastcall FileDefinitions::FileDefinitions()
 {
     m_PropertyMap["Files[].Filename"] = &m_DefinitionLoader.Filename;
     m_PropertyMap["Files[].Section"] = &m_DefinitionLoader.Section;
@@ -17,7 +17,7 @@ FileDefinitions::FileDefinitions()
     Load();
 }
 //---------------------------------------------------------------------------
-void FileDefinitions::Load()
+void __fastcall FileDefinitions::Load()
 {
     auto file = Services::File::Combine(Services::Folders::Common, "File Definitions.json");
     if (Services::File::Exists(file))
@@ -27,7 +27,7 @@ void FileDefinitions::Load()
     }
 }
 //---------------------------------------------------------------------------
-void FileDefinitions::OnEndObject(const String& object)
+void __fastcall FileDefinitions::OnEndObject(const String& object)
 {
     if (object == "Files[]")
     {
@@ -35,7 +35,7 @@ void FileDefinitions::OnEndObject(const String& object)
     }
 }
 //---------------------------------------------------------------------------
-const FileDefinitions::DefinitionList& FileDefinitions::GetDefinitions() const
+const FileDefinitions::DefinitionList& __fastcall FileDefinitions::GetDefinitions() const
 {
     return m_Definitions;
 }

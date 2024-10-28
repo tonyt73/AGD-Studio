@@ -8,7 +8,7 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-void ThemeManager::SetStyle(const String& styleName)
+void __fastcall ThemeManager::SetStyle(const String& styleName)
 {
     auto styleFile = Services::File::Combine(Services::Folders::GetFolder(Services::Folders::lpApplication, "Styles"), styleName + ".vsf");
     auto styleNameNoSpaces = StringReplace(styleName, " ", "", TReplaceFlags(rfReplaceAll || rfIgnoreCase)).LowerCase();
@@ -32,7 +32,7 @@ void ThemeManager::SetStyle(const String& styleName)
     }
 }
 //---------------------------------------------------------------------------
-void ThemeManager::LoadStyles(TComboBox* combo)
+void __fastcall ThemeManager::LoadStyles(TComboBox* combo)
 {
     combo->Items->Clear();
     auto sl = std::make_unique<TStringList>();
@@ -61,7 +61,7 @@ void ThemeManager::LoadStyles(TComboBox* combo)
     }
 }
 //---------------------------------------------------------------------------
-void ThemeManager::ReapplyStyle()
+void __fastcall ThemeManager::ReapplyStyle()
 {
     // force a change back to the current style to reapply it for a hidden form on activation
     auto style = TStyleManager::ActiveStyle->Name;
@@ -69,12 +69,12 @@ void ThemeManager::ReapplyStyle()
     TStyleManager::SetStyle(style);
 }
 //---------------------------------------------------------------------------
-TStringDynArray ThemeManager::GetStyles()
+TStringDynArray __fastcall ThemeManager::GetStyles()
 {
     return Services::Folders::GetFiles(Services::Folders::lpApplication, "*.vsf", "Styles");
 }
 //---------------------------------------------------------------------------
-TColor ThemeManager::GetColor(int index)
+TColor __fastcall ThemeManager::GetColor(int index)
 {
     switch (index)
     {

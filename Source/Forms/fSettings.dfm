@@ -3,8 +3,8 @@ object frmSettings: TfrmSettings
   Top = 0
   BorderStyle = bsDialog
   Caption = 'Settings'
-  ClientHeight = 376
-  ClientWidth = 557
+  ClientHeight = 375
+  ClientWidth = 553
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -316,8 +316,8 @@ object frmSettings: TfrmSettings
   object pgcSettings: TPageControl
     Left = 0
     Top = 0
-    Width = 557
-    Height = 331
+    Width = 553
+    Height = 330
     ActivePage = tabProfile
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
@@ -330,6 +330,8 @@ object frmSettings: TfrmSettings
     TabHeight = 38
     TabOrder = 1
     TabWidth = 128
+    ExplicitWidth = 561
+    ExplicitHeight = 331
     object tabProfile: TTabSheet
       Caption = 'Profile'
       Font.Charset = DEFAULT_CHARSET
@@ -339,8 +341,8 @@ object frmSettings: TfrmSettings
       Font.Style = []
       ParentFont = False
       DesignSize = (
-        549
-        283)
+        545
+        282)
       object Label1: TLabel
         Left = 59
         Top = 19
@@ -370,7 +372,7 @@ object frmSettings: TfrmSettings
       object edtDeveloper: TEdit
         Left = 144
         Top = 16
-        Width = 375
+        Width = 367
         Height = 23
         Anchors = [akLeft, akTop, akRight]
         Font.Charset = DEFAULT_CHARSET
@@ -381,11 +383,12 @@ object frmSettings: TfrmSettings
         ParentFont = False
         TabOrder = 0
         Text = 'Anonymous'
+        ExplicitWidth = 375
       end
       object cmbMachines: TComboBox
         Left = 144
         Top = 54
-        Width = 375
+        Width = 367
         Height = 23
         Style = csDropDownList
         Anchors = [akLeft, akTop, akRight]
@@ -408,8 +411,8 @@ object frmSettings: TfrmSettings
       Caption = 'Interface'
       ImageIndex = 1
       DesignSize = (
-        549
-        283)
+        545
+        282)
       object Label5: TLabel
         Left = 71
         Top = 19
@@ -452,7 +455,7 @@ object frmSettings: TfrmSettings
       object cmbThemes: TComboBox
         Left = 144
         Top = 16
-        Width = 375
+        Width = 367
         Height = 23
         Style = csDropDownList
         Anchors = [akLeft, akTop, akRight]
@@ -508,8 +511,8 @@ object frmSettings: TfrmSettings
       Caption = 'Build'
       ImageIndex = 3
       DesignSize = (
-        549
-        283)
+        545
+        282)
       object Label6: TLabel
         Left = 73
         Top = 18
@@ -526,8 +529,8 @@ object frmSettings: TfrmSettings
       object pgcBuild: TPageControl
         Left = 17
         Top = 60
-        Width = 502
-        Height = 216
+        Width = 494
+        Height = 215
         ActivePage = tabCompiler
         Anchors = [akLeft, akTop, akRight, akBottom]
         Font.Charset = DEFAULT_CHARSET
@@ -539,11 +542,13 @@ object frmSettings: TfrmSettings
         ParentFont = False
         TabHeight = 32
         TabOrder = 1
+        ExplicitWidth = 502
+        ExplicitHeight = 216
         object tabCompiler: TTabSheet
           Caption = 'Compiler'
           DesignSize = (
-            494
-            174)
+            486
+            173)
           object Label13: TLabel
             Left = 8
             Top = 16
@@ -586,8 +591,8 @@ object frmSettings: TfrmSettings
           object Label19: TLabel
             AlignWithMargins = True
             Left = 8
-            Top = 136
-            Width = 478
+            Top = 135
+            Width = 470
             Height = 35
             Margins.Left = 8
             Margins.Right = 8
@@ -610,7 +615,7 @@ object frmSettings: TfrmSettings
           object edtCompilerExe: TEdit
             Left = 84
             Top = 13
-            Width = 375
+            Width = 367
             Height = 24
             Hint = 'The location of the AGD Compiler executable file'
             Anchors = [akLeft, akTop, akRight]
@@ -628,7 +633,7 @@ object frmSettings: TfrmSettings
           object edtCompilerParams: TEdit
             Left = 84
             Top = 43
-            Width = 375
+            Width = 367
             Height = 24
             Hint = 'Parameters to pass to the AGD Compiler'
             Anchors = [akLeft, akTop, akRight]
@@ -644,7 +649,7 @@ object frmSettings: TfrmSettings
             ExplicitWidth = 371
           end
           object btnCompilerFind: TButton
-            Left = 465
+            Left = 457
             Top = 13
             Width = 26
             Height = 24
@@ -663,7 +668,7 @@ object frmSettings: TfrmSettings
           object edtEngineFile: TEdit
             Left = 84
             Top = 73
-            Width = 375
+            Width = 367
             Height = 24
             Hint = 'The AGD Engine file for the machine'
             Anchors = [akLeft, akTop, akRight]
@@ -679,7 +684,7 @@ object frmSettings: TfrmSettings
             ExplicitWidth = 371
           end
           object btnEngineFind: TButton
-            Left = 465
+            Left = 457
             Top = 73
             Width = 26
             Height = 24
@@ -699,8 +704,8 @@ object frmSettings: TfrmSettings
         object tabAssembler: TTabSheet
           Caption = 'Assembler'
           DesignSize = (
-            494
-            174)
+            486
+            173)
           object Label7: TLabel
             Left = 8
             Top = 16
@@ -756,8 +761,8 @@ object frmSettings: TfrmSettings
           object Label20: TLabel
             AlignWithMargins = True
             Left = 8
-            Top = 136
-            Width = 478
+            Top = 135
+            Width = 470
             Height = 35
             Margins.Left = 8
             Margins.Right = 8
@@ -779,7 +784,7 @@ object frmSettings: TfrmSettings
           object edtAssemblerExe: TEdit
             Left = 84
             Top = 13
-            Width = 375
+            Width = 367
             Height = 24
             Hint = 'The location of the Assembler executable file'
             Anchors = [akLeft, akTop, akRight]
@@ -797,7 +802,7 @@ object frmSettings: TfrmSettings
           object edtAssemblerParams: TEdit
             Left = 84
             Top = 43
-            Width = 375
+            Width = 367
             Height = 24
             Hint = 'Parameters to pass to the Assembler'
             Anchors = [akLeft, akTop, akRight]
@@ -815,7 +820,7 @@ object frmSettings: TfrmSettings
           object edtAssemblerPrepend: TEdit
             Left = 84
             Top = 73
-            Width = 375
+            Width = 367
             Height = 24
             Hint = 'Text to prepend to the beginning of the generated assembly file.'
             Anchors = [akLeft, akTop, akRight]
@@ -831,7 +836,7 @@ object frmSettings: TfrmSettings
             ExplicitWidth = 379
           end
           object btnAssemblerFind: TButton
-            Left = 465
+            Left = 457
             Top = 13
             Width = 26
             Height = 24
@@ -844,7 +849,7 @@ object frmSettings: TfrmSettings
           object edtAssemblerAppend: TEdit
             Left = 84
             Top = 103
-            Width = 375
+            Width = 367
             Height = 24
             Hint = 'Text to append to the end of the generated assembly file.'
             Anchors = [akLeft, akTop, akRight]
@@ -864,8 +869,8 @@ object frmSettings: TfrmSettings
           Caption = 'Emulator'
           ImageIndex = 1
           DesignSize = (
-            494
-            174)
+            486
+            173)
           object Label11: TLabel
             Left = 8
             Top = 16
@@ -895,8 +900,8 @@ object frmSettings: TfrmSettings
           object Label21: TLabel
             AlignWithMargins = True
             Left = 8
-            Top = 136
-            Width = 478
+            Top = 135
+            Width = 470
             Height = 35
             Margins.Left = 8
             Margins.Right = 8
@@ -915,7 +920,7 @@ object frmSettings: TfrmSettings
           object edtEmulatorExe: TEdit
             Left = 84
             Top = 13
-            Width = 375
+            Width = 367
             Height = 24
             Hint = 'The location of the Emulator executable file'
             Anchors = [akLeft, akTop, akRight]
@@ -933,7 +938,7 @@ object frmSettings: TfrmSettings
           object edtEmulatorParams: TEdit
             Left = 84
             Top = 43
-            Width = 375
+            Width = 367
             Height = 24
             Hint = 'Parameters to pass to the Emulator'
             Anchors = [akLeft, akTop, akRight]
@@ -949,7 +954,7 @@ object frmSettings: TfrmSettings
             ExplicitWidth = 379
           end
           object btnEmulatorFind: TButton
-            Left = 465
+            Left = 457
             Top = 13
             Width = 26
             Height = 24
@@ -1007,7 +1012,7 @@ object frmSettings: TfrmSettings
       object edtBuildMachine: TEdit
         Left = 144
         Top = 16
-        Width = 375
+        Width = 367
         Height = 24
         Anchors = [akLeft, akTop, akRight]
         Enabled = False
@@ -1030,19 +1035,18 @@ object frmSettings: TfrmSettings
   end
   object Panel1: TPanel
     Left = 0
-    Top = 331
-    Width = 557
+    Top = 330
+    Width = 553
     Height = 45
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 0
     ExplicitTop = 328
-    ExplicitWidth = 553
     DesignSize = (
-      557
+      553
       45)
     object btnCancel: TButton
-      Left = 443
+      Left = 435
       Top = 8
       Width = 80
       Height = 28
@@ -1054,7 +1058,7 @@ object frmSettings: TfrmSettings
       ExplicitLeft = 439
     end
     object btnOk: TButton
-      Left = 357
+      Left = 349
       Top = 8
       Width = 80
       Height = 28

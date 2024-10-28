@@ -20,19 +20,19 @@
 class TfrmMain : public TForm
 {
 __published:    // IDE-managed Components
-    void 				__fastcall FormCreate(TObject *Sender);
-    void 				__fastcall FormDestroy(TObject *Sender);
-    void 				__fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
-    void 				__fastcall FormActivate(TObject *Sender);
-    void 				__fastcall FormBeforeMonitorDpiChanged(TObject *Sender, int OldDPI, int NewDPI);
-    void 				__fastcall FormAfterMonitorDpiChanged(TObject *Sender, int OldDPI, int NewDPI);
+    void __fastcall FormCreate(TObject *Sender);
+    void __fastcall FormDestroy(TObject *Sender);
+    void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
+    void __fastcall FormActivate(TObject *Sender);
+    void __fastcall FormBeforeMonitorDpiChanged(TObject *Sender, int OldDPI, int NewDPI);
+    void __fastcall FormAfterMonitorDpiChanged(TObject *Sender, int OldDPI, int NewDPI);
 
 private:    // User declarations
-    void 				__fastcall OnIDEClose(TObject *Sender);
-    void 				__fastcall OnWelcomeDone(TObject *Sender);
-    void 				__fastcall ShowWelcomeDialog();
-    void 				__fastcall ShowIDE();
-    void 				__fastcall SaveSettings();
+    void                __fastcall OnIDEClose(TObject *Sender);
+    void                __fastcall OnWelcomeDone(TObject *Sender);
+    void                __fastcall ShowWelcomeDialog();
+    void                __fastcall ShowIDE();
+    void                __fastcall SaveSettings();
 
     TfrmWelcomeDialog*  __fastcall  GetWelcome();
     TfrmIDE*            __fastcall  GetIDE();
@@ -56,7 +56,7 @@ private:
     __property      TFrame*             Active  = { read = GetActiveForm };
 
 public:        // User declaration
-    __fastcall                          TfrmMain(TComponent* Owner);
+                        __fastcall TfrmMain(TComponent* Owner);
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfrmMain *frmMain;

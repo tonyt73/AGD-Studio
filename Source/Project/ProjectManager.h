@@ -13,7 +13,7 @@ namespace Project
 class ProjectManager
 {
 public: // singleton
-    static ProjectManager& get();
+    static ProjectManager& __fastcall get();
     ProjectManager(ProjectManager const&) = delete;
     void operator=(ProjectManager const&) = delete;
 
@@ -34,30 +34,30 @@ private:
     Elxtree::TElXTree*              m_TreeView;
     bool                            m_IsOpen;
 
-    void                            SetTreeIcon(const String& parent, TElXTreeItem* node) const;
+    void        __fastcall  SetTreeIcon(const String& parent, TElXTreeItem* node) const;
 
 protected:
-    friend                          DocumentManager;
-    void                            OnDocumentChange(Document* doc);
-    void                            ClearTree(const String& rootName);
-    Document*                       AddToTreeView(Document* document);
+                  friend    DocumentManager;
+    void        __fastcall  OnDocumentChange(Document* doc);
+    void        __fastcall  ClearTree(const String& rootName);
+    Document*   __fastcall  AddToTreeView(Document* document);
 
 public:
 
-                                    ProjectManager();
+                __fastcall  ProjectManager();
 
-    void                            Initialise(Elxtree::TElXTree* treeView);
-    void                            New(const String& name, const String& machine);
-    void                            Open(const String& file);
-    void                            Close();
-    void                            Save();
+    void        __fastcall  Initialise(Elxtree::TElXTree* treeView);
+    void        __fastcall  New(const String& name, const String& machine);
+    void        __fastcall  Open(const String& file);
+    void        __fastcall  Close();
+    void        __fastcall  Save();
 
-    Document*                       Add(const String& type, const String& subType, const String& name, const String& extra);
-    Document*                       Add(const String& type, const String& subType, const String& extra);
-    bool                            Remove(const String& type, const String& name);
+    Document*   __fastcall  Add(const String& type, const String& subType, const String& name, const String& extra);
+    Document*   __fastcall  Add(const String& type, const String& subType, const String& extra);
+    bool        __fastcall  Remove(const String& type, const String& name);
 
-    void                            RemoveMostRecentlyUsedItem(const String& name, const String& path);
-    cMRUList                        GetMostRecentlyUsedList();
+    void        __fastcall  RemoveMostRecentlyUsedItem(const String& name, const String& path);
+    cMRUList    __fastcall  GetMostRecentlyUsedList();
 };
 //---------------------------------------------------------------------------
 } // Project namespace

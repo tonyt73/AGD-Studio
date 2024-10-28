@@ -9,16 +9,16 @@
 namespace Build
 {
 //---------------------------------------------------------------------------
-ProjectBuilder::ProjectBuilder()
+__fastcall ProjectBuilder::ProjectBuilder()
 : SectionBuilder("Project Header")
 {
 }
 //---------------------------------------------------------------------------
-ProjectBuilder::~ProjectBuilder()
+__fastcall ProjectBuilder::~ProjectBuilder()
 {
 }
 //---------------------------------------------------------------------------
-void ProjectBuilder::Execute()
+void __fastcall ProjectBuilder::Execute()
 {
     const auto& project = ::theDocumentManager.ProjectConfig();
     AddLine(";");

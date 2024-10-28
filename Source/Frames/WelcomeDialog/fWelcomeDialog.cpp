@@ -81,7 +81,7 @@ void __fastcall TfrmWelcomeDialog::lblOpenExistingProjectClick(TObject *Sender)
     dlgOpen->InitialDir = Services::Folders::Projects;
     if (dlgOpen->Execute())
     {
-        if (Services::File::Extension(dlgOpen->FileName) == ".agdx")
+        if (Services::File::Extension(dlgOpen->FileName) == ".agds")
         {
             theProjectManager.Open(dlgOpen->FileName);
             if (FOnDone) FOnDone(this);
@@ -212,7 +212,7 @@ void __fastcall TfrmWelcomeDialog::dlgInvalidProjectButtonClicked(TObject *Sende
         // launch the agd converter
         auto dir = Services::File::PathOf(Application->ExeName);
         auto app =  Services::File::Combine(dir, "AGD Converter.exe");
-		if (Services::File::Exists(app))
+        if (Services::File::Exists(app))
         {
             ShellExecute(NULL, L"open", app.c_str(), NULL, dir.c_str(), SW_SHOWNORMAL);
         }

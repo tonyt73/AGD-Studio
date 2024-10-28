@@ -1,17 +1,16 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
-//---------------------------------------------------------------------------
 #include "Forms/fAbout.h"
 #include "Forms/fNewImage.h"
 #include "Forms/fSettings.h"
 #include "Frames/IDE/fIDE.h"
-#include "Frames/ImageEditor/fEditorImage.h"
-#include "Frames/CodeEditor/fEditorCode.h"
-#include "Frames/MapEditor/fEditorMap.h"
-#include "Frames/WindowEditor/fEditorWindow.h"
-#include "Frames/JumpEditor/fEditorJumpTable.h"
-#include "Frames/ControlsEditor/fEditorControls.h"
-#include "Frames/MessagesEditor/fEditorMessages.h"
+#include "Frames/Editors/Code/fEditorCode.h"
+#include "Frames/Editors/Controls/fEditorControls.h"
+#include "Frames/Editors/Images/fEditorImage.h"
+#include "Frames/Editors/JumpTable/fEditorJumpTable.h"
+#include "Frames/Editors/Map/fEditorMap.h"
+#include "Frames/Editors/Messages/fEditorMessages.h"
+#include "Frames/Editors/Window/fEditorWindow.h"
 #include "Project/ProjectManager.h"
 #include "Settings/ThemeManager.h"
 #include "Messaging/Messaging.h"
@@ -443,7 +442,7 @@ void __fastcall TfrmIDE::actViewMessagesExecute(TObject *Sender)
     dpMessages->PanelVisible = actViewMessages->Checked;
 }
 //---------------------------------------------------------------------------
-void TfrmIDE::actGameRunExecute(TObject *Sender)
+void __fastcall TfrmIDE::actGameRunExecute(TObject *Sender)
 {
     m_Builder.Execute();
 }

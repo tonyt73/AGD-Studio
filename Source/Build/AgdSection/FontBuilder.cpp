@@ -11,19 +11,19 @@
 //---------------------------------------------------------------------------
 using namespace Build;
 //---------------------------------------------------------------------------
-FontBuilder::FontBuilder()
-: SectionBuilder("FontBuilder")
+__fastcall FontBuilder::FontBuilder()
+: SectionBuilder("Font")
 {
 }
 //---------------------------------------------------------------------------
-FontBuilder::~FontBuilder()
+__fastcall FontBuilder::~FontBuilder()
 {
 }
 //---------------------------------------------------------------------------
-void FontBuilder::Execute()
+void __fastcall FontBuilder::Execute()
 {
     const auto& dm = theDocumentManager;
-    auto FontBuilder = dynamic_cast<Project::CharacterSetDocument*>(dm.Get("Image", "Character Set", "Game FontBuilder"));
+    auto FontBuilder = dynamic_cast<Project::CharacterSetDocument*>(dm.Get("Image", "Character Set", "Game Font"));
     if (FontBuilder != nullptr)
     {
         if (FontBuilder->Frames == 96)

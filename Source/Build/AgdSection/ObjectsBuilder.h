@@ -10,10 +10,10 @@ namespace Build
 class ObjectsBuilder : public SectionBuilder
 {
 protected:
-    void     Execute() final;
+    void    __fastcall  Execute() final;
 public:
-             ObjectsBuilder();
-    virtual ~ObjectsBuilder();
+            __fastcall  ObjectsBuilder();
+    virtual __fastcall ~ObjectsBuilder();
 };
 //---------------------------------------------------------------------------
 } // Build namespace

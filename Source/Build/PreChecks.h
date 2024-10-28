@@ -11,10 +11,10 @@ class PreChecks : public BuildProcess
 {
 private:
 public:
-                     PreChecks(BuildMessages& buildMessages);
-    virtual         ~PreChecks();
+                    __fastcall  PreChecks(BuildMessages& buildMessages);
+    virtual         __fastcall ~PreChecks();
 
-            bool     Execute() final;
+            bool    __fastcall  Execute() final;
 };
 //---------------------------------------------------------------------------
 } // Build namespace

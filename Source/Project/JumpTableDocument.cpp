@@ -8,7 +8,7 @@
 //---------------------------------------------------------------------------
 using namespace Project;
 //---------------------------------------------------------------------------
-JumpTableDocument::JumpTableDocument(const String& name)
+__fastcall JumpTableDocument::JumpTableDocument(const String& name)
 : Document(name)
 {
     m_Type = "Jump";
@@ -24,7 +24,7 @@ JumpTableDocument::JumpTableDocument(const String& name)
     }
 }
 //---------------------------------------------------------------------------
-void JumpTableDocument::DoSave()
+void __fastcall JumpTableDocument::DoSave()
 {
     ArrayStart("Steps");
         for (auto step : m_Steps)
@@ -34,7 +34,7 @@ void JumpTableDocument::DoSave()
     ArrayEnd();  // Steps
 }
 //---------------------------------------------------------------------------
-void JumpTableDocument::OnEndObject(const String& object)
+void __fastcall JumpTableDocument::OnEndObject(const String& object)
 {
     if (object == "Steps[]")
     {
@@ -42,18 +42,18 @@ void JumpTableDocument::OnEndObject(const String& object)
     }
 }
 //---------------------------------------------------------------------------
-void JumpTableDocument::OnLoading()
+void __fastcall JumpTableDocument::OnLoading()
 {
     m_Steps.clear();
 }
 //---------------------------------------------------------------------------
-void JumpTableDocument::OnLoaded()
+void __fastcall JumpTableDocument::OnLoaded()
 {
     // set the default table if we loaded nothing
     DefaultJumpTable();
 }
 //---------------------------------------------------------------------------
-unsigned char JumpTableDocument::RawStep(int index) const
+unsigned char __fastcall JumpTableDocument::RawStep(int index) const
 {
     if (0 <= index && index < m_Steps.size() - 1)
     {
@@ -62,7 +62,7 @@ unsigned char JumpTableDocument::RawStep(int index) const
     return 0;
 }
 //---------------------------------------------------------------------------
-int JumpTableDocument::GetStep(int index) const
+int __fastcall JumpTableDocument::GetStep(int index) const
 {
     if (0 <= index && index < m_Steps.size() - 1)
     {
@@ -72,7 +72,7 @@ int JumpTableDocument::GetStep(int index) const
     return 0;
 }
 //---------------------------------------------------------------------------
-void JumpTableDocument::SetStep(int index, int value)
+void __fastcall JumpTableDocument::SetStep(int index, int value)
 {
     if (0 <= index && index < m_Steps.size() - 1)
     {
@@ -81,12 +81,12 @@ void JumpTableDocument::SetStep(int index, int value)
     }
 }
 //---------------------------------------------------------------------------
-int JumpTableDocument::GetStepCount() const
+int __fastcall JumpTableDocument::GetStepCount() const
 {
     return m_Steps.size() - 1;
 }
 //---------------------------------------------------------------------------
-void JumpTableDocument::DefaultJumpTable()
+void __fastcall JumpTableDocument::DefaultJumpTable()
 {
     if (m_Steps.size() == 0)
     {

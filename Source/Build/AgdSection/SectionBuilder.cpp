@@ -7,45 +7,45 @@
 //---------------------------------------------------------------------------
 using namespace Build;
 //---------------------------------------------------------------------------
-SectionBuilder::SectionBuilder(const String& description)
+__fastcall SectionBuilder::SectionBuilder(const String& description)
 : m_Description(description)
 {
 }
 //---------------------------------------------------------------------------
-SectionBuilder::~SectionBuilder()
+__fastcall SectionBuilder::~SectionBuilder()
 {
 }
 //---------------------------------------------------------------------------
-void SectionBuilder::Clear()
+void __fastcall SectionBuilder::Clear()
 {
     m_Result.Success = false;
     m_Result.Reason = "Not Implemented";
     m_Result.Content = "";
 }
 //---------------------------------------------------------------------------
-void SectionBuilder::AddLine(String line)
+void __fastcall SectionBuilder::AddLine(String line)
 {
     m_Result.Content += line + "\r\n";
 }
 //---------------------------------------------------------------------------
-void SectionBuilder::LineBreak()
+void __fastcall SectionBuilder::LineBreak()
 {
     m_Result.Content += "\r\n";
 }
 //---------------------------------------------------------------------------
-void SectionBuilder::Success()
+void __fastcall SectionBuilder::Success()
 {
     m_Result.Success = true;
     m_Result.Reason = "Ok";
 }
 //---------------------------------------------------------------------------
-void SectionBuilder::Failure(String reason)
+void __fastcall SectionBuilder::Failure(String reason)
 {
     m_Result.Success = false;
     m_Result.Reason = reason;
 }
 //---------------------------------------------------------------------------
-const Result& SectionBuilder::Build()
+const Result& __fastcall SectionBuilder::Build()
 {
     Clear();
     Execute();

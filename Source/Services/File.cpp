@@ -31,7 +31,7 @@ String File::Extension(const String& file)
 //---------------------------------------------------------------------------
 String File::PathOf(const String& file)
 {
-    return System::Ioutils::TPath::GetDirectoryName(file);
+    return Cleanse(System::Ioutils::TPath::GetDirectoryName(file));
 }
 //---------------------------------------------------------------------------
 String File::ChangeExtension(const String& filename, const String& extension)

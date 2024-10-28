@@ -13,10 +13,10 @@ private:
     // TODO: put this into an editor
     int                 m_Steps[22];
 protected:
-    void     Execute() final;
+    void    __fastcall  Execute() final;
 public:
-             JumpTableBuilder();
-    virtual ~JumpTableBuilder();
+            __fastcall  JumpTableBuilder();
+    virtual __fastcall ~JumpTableBuilder();
 };
 //---------------------------------------------------------------------------
 } // Build namespace

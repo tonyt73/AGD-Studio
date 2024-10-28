@@ -10,10 +10,10 @@ namespace Build
 class MessagesBuilder : public SectionBuilder
 {
 protected:
-    void     Execute() final;
+    void    __fastcall  Execute() final;
 public:
-             MessagesBuilder();
-    virtual ~MessagesBuilder();
+            __fastcall  MessagesBuilder();
+    virtual __fastcall ~MessagesBuilder();
 };
 //---------------------------------------------------------------------------
 } // Build namespace

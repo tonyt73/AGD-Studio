@@ -20,16 +20,17 @@ public:
 
 private:
 
-    void                    Load();
-    void                    OnEndObject(const String& object);
+
+    void        __fastcall  Load();
+    void        __fastcall  OnEndObject(const String& object);
 
     DefinitionList          m_Definitions;
     Definition              m_DefinitionLoader;
 
 public:
-                            FileDefinitions();
+                            __fastcall  FileDefinitions();
 
-    const DefinitionList&   GetDefinitions() const;
+    const DefinitionList&   __fastcall  GetDefinitions() const;
 };
 //---------------------------------------------------------------------------
 } // Project namespace

@@ -26,43 +26,42 @@ protected:
                 bool                m_RoomLocked;   // the sprite is locked to the room
                 unsigned int        m_RoomIndex;    // the index of the room we are locked to
 
-
-                void                SetPoint(const TPoint& pt);
-                TPoint              GetPoint() const;
-                void                SetDragPoint(const TPoint& pt);
-                TPoint              GetDragPoint() const;
-               ImageDocument* const GetDocument() const;
-                unsigned int        GetId() const;
-                bool                GetIsSprite() const;
-                void                SetId(unsigned int id);
-                void                SetSelected(bool state);
-                void                SetDirty(bool state);
-                void                SetSpriteType(int type);
-                void                SetRoomIndex(unsigned int index);
-                void                SetRoomLocked(bool lock);
+    void                __fastcall  SetPoint(const TPoint& pt);
+    TPoint              __fastcall  GetPoint() const;
+    void                __fastcall  SetDragPoint(const TPoint& pt);
+    TPoint              __fastcall  GetDragPoint() const;
+   ImageDocument* const __fastcall  GetDocument() const;
+    unsigned int        __fastcall  GetId() const;
+    bool                __fastcall  GetIsSprite() const;
+    void                __fastcall  SetId(unsigned int id);
+    void                __fastcall  SetSelected(bool state);
+    void                __fastcall  SetDirty(bool state);
+    void                __fastcall  SetSpriteType(int type);
+    void                __fastcall  SetRoomIndex(unsigned int index);
+    void                __fastcall  SetRoomLocked(bool lock);
 
 public:
-                                    MapEntity();
-                                    MapEntity(const MapEntity& other);
-                                   ~MapEntity();
+                        __fastcall  MapEntity();
+                        __fastcall  MapEntity(const MapEntity& other);
+                        __fastcall ~MapEntity();
 
-                MapEntity&          operator=(const MapEntity& other);
-                bool                operator==(const MapEntity& other);
+    MapEntity&          __fastcall  operator=(const MapEntity& other);
+    bool                __fastcall  operator==(const MapEntity& other);
 
-                void                Clear();
-                void                Clean();
+    void                __fastcall  Clear();
+    void                __fastcall  Clean();
 
-    __property  unsigned int        Id          = { read = GetId       , write = SetId         };
-    __property ImageDocument* const Image       = { read = GetDocument                         };
-    __property  TPoint              Pt          = { read = GetPoint    , write = SetPoint      };
-    __property  TPoint              DragPt      = { read = GetDragPoint, write = SetDragPoint  };
-    __property  bool                Dirty       = { read = m_Dirty     , write = SetDirty      };
-    __property  bool                Selected    = { read = m_Selected  , write = SetSelected   };
-    __property  bool                IsSprite    = { read = GetIsSprite                         };
-    __property  int                 SpriteType  = { read = m_SpriteType, write = SetSpriteType };
-    __property  Visuals::ImageTypes Type        = { read = m_ImageType                         };
-    __property  bool                RoomLocked  = { read = m_RoomLocked, write = SetRoomLocked };
-    __property  unsigned int        RoomIndex   = { read = m_RoomIndex , write = SetRoomIndex  };
+    __property  unsigned int        Id          = { read = GetId, write = SetId                 };
+    __property ImageDocument* const Image       = { read = GetDocument                          };
+    __property  TPoint              Pt          = { read = GetPoint, write = SetPoint           };
+    __property  TPoint              DragPt      = { read = GetDragPoint, write = SetDragPoint   };
+    __property  bool                Dirty       = { read = m_Dirty, write = SetDirty            };
+    __property  bool                Selected    = { read = m_Selected, write = SetSelected      };
+    __property  bool                IsSprite    = { read = GetIsSprite                          };
+    __property  int                 SpriteType  = { read = m_SpriteType, write = SetSpriteType  };
+    __property  Visuals::ImageTypes Type        = { read = m_ImageType                          };
+    __property  bool                RoomLocked  = { read = m_RoomLocked, write = SetRoomLocked  };
+    __property  unsigned int        RoomIndex   = { read = m_RoomIndex, write = SetRoomIndex    };
 };
 //---------------------------------------------------------------------------
 typedef std::vector<MapEntity>      MapEntityList;

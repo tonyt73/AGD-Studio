@@ -22,5 +22,5 @@ copy Binaries\Win64\Release\*.exe ..\Installer\Binaries\Win64\
 
 chdir ..\Installer
 
-@call "Build Installers.bat"
+@call "Build Installer.bat"
 pause

@@ -8,6 +8,6 @@
 @title "Build New Major Release"
 
 @rem Update the Version
-@Versioner.ps1 -File "..\Source\AGD Studio.cbproj" -major
+@pwsh.exe -executionpolicy bypass -Command "& '.\Versioner.ps1' -File '..\Source\AGD Studio.cbproj' -major"
 
 @call Build.cmd

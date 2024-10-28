@@ -9,7 +9,7 @@
 //---------------------------------------------------------------------------
 using namespace Project;
 //---------------------------------------------------------------------------
- MachineConfig::MachineConfig(const String& name)
+__fastcall MachineConfig::MachineConfig(const String& name)
 : JsonFile()
 , m_Name(name)
 {
@@ -54,11 +54,11 @@ using namespace Project;
     m_GraphicsMode = std::make_unique<Visuals::GraphicsMode>();
 }
 //---------------------------------------------------------------------------
-MachineConfig::~MachineConfig()
+__fastcall MachineConfig::~MachineConfig()
 {
 }
 //---------------------------------------------------------------------------
-const Visuals::ImageSizing& MachineConfig::GetImageSizing(Visuals::ImageTypes type) const
+const Visuals::ImageSizing& __fastcall MachineConfig::GetImageSizing(Visuals::ImageTypes type) const
 {
     if (Visuals::itStart <= type && type < Visuals::itEnd)
     {
@@ -68,7 +68,7 @@ const Visuals::ImageSizing& MachineConfig::GetImageSizing(Visuals::ImageTypes ty
     return m_ImageSizing[Visuals::itCharacterSet];
 }
 //---------------------------------------------------------------------------
-void MachineConfig::Load(const String& name)
+void __fastcall MachineConfig::Load(const String& name)
 {
     // Load our configuration
     Services::JsonFile::Load(Services::File::Combine(Services::Folders::Application, "Machines" + Services::Folders::Separator + name + ".json"));
@@ -76,12 +76,12 @@ void MachineConfig::Load(const String& name)
     m_GraphicsMode->Load(m_GraphicsModeName);
 }
 //---------------------------------------------------------------------------
-Visuals::GraphicsMode* MachineConfig::GraphicsMode() const
+Visuals::GraphicsMode* __fastcall MachineConfig::GraphicsMode() const
 {
     return m_GraphicsMode.get();
 }
 //---------------------------------------------------------------------------
-void MachineConfig::GetMachinesList(std::vector<String>& list)
+void __fastcall MachineConfig::GetMachinesList(std::vector<String>& list)
 {
     list.clear();
     auto files = Services::Folders::GetFiles(Services::Folders::lpApplication, "*.json", "Machines");
@@ -91,31 +91,31 @@ void MachineConfig::GetMachinesList(std::vector<String>& list)
     }
 }
 //---------------------------------------------------------------------------
-void MachineConfig::SetCompiler(const ToolInfo& info)
+void __fastcall MachineConfig::SetCompiler(const ToolInfo& info)
 {
     m_Compiler = info;
     Save();
 }
 //---------------------------------------------------------------------------
-void MachineConfig::SetEngine(const ToolInfo& info)
+void __fastcall MachineConfig::SetEngine(const ToolInfo& info)
 {
     m_Engine = info;
     Save();
 }
 //---------------------------------------------------------------------------
-void MachineConfig::SetAssembler(const ToolInfoExt& info)
+void __fastcall MachineConfig::SetAssembler(const ToolInfoExt& info)
 {
     m_Assembler = info;
     Save();
 }
 //---------------------------------------------------------------------------
-void MachineConfig::SetEmulator(const ToolInfo& info)
+void __fastcall MachineConfig::SetEmulator(const ToolInfo& info)
 {
     m_Emulator = info;
     Save();
 }
 //---------------------------------------------------------------------------
-void MachineConfig::Save()
+void __fastcall MachineConfig::Save()
 {
     // {
     Open(Services::File::Combine(Services::Folders::Application, "Machines" + Services::Folders::Separator + m_Name + ".json"));
@@ -206,7 +206,7 @@ void MachineConfig::Save()
 //---------------------------------------------------------------------------
 
 
-//MachineConfigWriter::MachineConfigWriter()
+//__fastcall MachineConfigWriter::MachineConfigWriter()
 //: MachineConfig()
 //{
 //    m_Name = "ZX Spectrum 256x192 16 Colour";
@@ -240,7 +240,7 @@ void MachineConfig::Save()
 //
 //    Save();
 //}
-//MachineConfigWriter::MachineConfigWriter()
+//__fastcall MachineConfigWriter::MachineConfigWriter()
 //: MachineConfig()
 //{
 //    m_Name = "Amstrad CPC 160x200 16 Colour";
@@ -274,7 +274,7 @@ void MachineConfig::Save()
 //
 //    Save();
 //}
-//MachineConfigWriter::MachineConfigWriter()
+//__fastcall MachineConfigWriter::MachineConfigWriter()
 //: MachineConfig()
 //{
 //    m_Name = "Acorn Atom 256x192 Monochrome";
