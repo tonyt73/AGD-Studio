@@ -10,9 +10,9 @@ namespace Visuals
 class Palette : public Services::JsonFile
 {
 protected:
-    String              m_Name;
-    String              m_Color;            // json loader
-    std::vector<TColor> m_ColorTable;       // the table of Total Palette Colors
+    String                          m_Name;
+    String                          m_Color;            // json loader
+    std::vector<TColor>             m_ColorTable;       // the table of Total Palette Colors
 
     TColor              __fastcall  GetTableColor(int index) const;
     TColor              __fastcall  GetGreyscale(int index) const;
@@ -27,17 +27,17 @@ public:
                         __fastcall  Palette();
                         __fastcall  Palette(const String& name);
                         __fastcall  Palette(const Palette& other);
-    Palette&            __fastcall  operator=(const Palette& other);
+            Palette&    __fastcall  operator=(const Palette& other);
 
-    void                __fastcall  Load(const String& name);
+            void        __fastcall  Load(const String& name);
 
-    static DWORD        __fastcall  LuminanceOf(TColor Color);
+    static  DWORD       __fastcall  LuminanceOf(TColor Color);
 
-    __property  String  Name                    = { read = m_Name         };
-    __property  TColor  Greyscale[int index]    = { read = GetGreyscale   };
-    __property  TColor  Color[int index]        = { read = GetTableColor  };
-    __property  int     Colors                  = { read = GetTotalColors };
-    __property  TColor  FontColorOf[int index]  = { read = GetFontColorOf };
+            String      __property  Name                    = { read = m_Name         };
+            TColor      __property  Greyscale[int index]    = { read = GetGreyscale   };
+            TColor      __property  Color[int index]        = { read = GetTableColor  };
+            int         __property  Colors                  = { read = GetTotalColors };
+            TColor      __property  FontColorOf[int index]  = { read = GetFontColorOf };
 };
 //---------------------------------------------------------------------------
 //class PaletteWriter : public Palette
