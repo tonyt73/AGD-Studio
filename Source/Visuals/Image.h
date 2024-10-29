@@ -15,11 +15,11 @@ namespace Visuals
 class Image
 {
 private:
-    std::unique_ptr<GraphicsBuffer>     m_Canvas;
-    Project::ImageDocument const* const m_Image;
-    std::unique_ptr<TBitmap>            m_Bitmap;
-    static std::unique_ptr<TBitmap>     m_Overlay;
-    bool                                m_IsMonochrome;
+    std::unique_ptr<GraphicsBuffer>         m_Canvas;
+    Project::ImageDocument const* const     m_Image;
+    std::unique_ptr<TBitmap>                m_Bitmap;
+    static std::unique_ptr<TBitmap>         m_Overlay;
+    bool                                    m_IsMonochrome;
 
 public:
                                 __fastcall  Image(unsigned int width, unsigned int height, const Visuals::GraphicsMode& graphicsMode);

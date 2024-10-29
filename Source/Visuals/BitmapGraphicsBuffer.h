@@ -16,6 +16,7 @@ class BitmapGraphicsBuffer : public GraphicsBuffer
 private:
     Registrar           m_Registrar;
     void    __fastcall  OnEvent(const Event& event);
+
 public:
             __fastcall  BitmapGraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode);
             __fastcall ~BitmapGraphicsBuffer();

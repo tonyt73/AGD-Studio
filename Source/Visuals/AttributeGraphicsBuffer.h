@@ -18,7 +18,6 @@ namespace Visuals
 //---------------------------------------------------------------------------
 class AttributeGraphicsBuffer : public GraphicsBuffer
 {
-private:
 public:
             __fastcall  AttributeGraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode);
             __fastcall ~AttributeGraphicsBuffer();
