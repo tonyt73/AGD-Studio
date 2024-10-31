@@ -1,4 +1,4 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{D0C2ACDB-659A-4891-B603-0D187CA01644}</ProjectGuid>
         <ProjectVersion>20.2</ProjectVersion>
@@ -6,7 +6,7 @@
         <AppType>Application</AppType>
         <MainSource>AGD Studio.cpp</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win64x</Platform>
         <TargetedPlatforms>1048579</TargetedPlatforms>
         <ProjectName Condition="'$(ProjectName)'==''">AGD Studio</ProjectName>
@@ -46,12 +46,6 @@
         <Cfg_1>true</Cfg_1>
         <Base>true</Base>
     </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Win64x' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win64x)'!=''">
-        <Cfg_1_Win64x>true</Cfg_1_Win64x>
-        <CfgParent>Cfg_1</CfgParent>
-        <Cfg_1>true</Cfg_1>
-        <Base>true</Base>
-    </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
         <Cfg_2>true</Cfg_2>
         <CfgParent>Base</CfgParent>
@@ -69,36 +63,49 @@
         <Cfg_2>true</Cfg_2>
         <Base>true</Base>
     </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Win64x' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win64x)'!=''">
-        <Cfg_2_Win64x>true</Cfg_2_Win64x>
-        <CfgParent>Cfg_2</CfgParent>
-        <Cfg_2>true</Cfg_2>
-        <Base>true</Base>
-    </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
         <_TCHARMapping>wchar_t</_TCHARMapping>
+        <AppEnableHighDPI>true</AppEnableHighDPI>
+        <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <AllPackageLibs>rtl.lib;vcl.lib;vclimg.lib;vclactnband.lib;vclx.lib;lmdrtrtlx.lib;lmdrtl.lib;lmdrtinspector.lib;lmdrtdocking.lib;lmdrtelcore.lib;lmdrtsyntax.lib;VclSmp.lib;lmdrtcore.lib;vclwinx.lib;lmdrtprint.lib;lmdrtelpro.lib;xmlrtl.lib;bindengine.lib;DbxCommonDriver.lib;dbrtl.lib;lmdrtshell.lib</AllPackageLibs>
+        <BCC_AutoDepCheck>false</BCC_AutoDepCheck>
         <BCC_CallingConvention>fastcall</BCC_CallingConvention>
+        <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <BCC_DisableWarnings>true</BCC_DisableWarnings>
         <BCC_EnableBatchCompilation>true</BCC_EnableBatchCompilation>
+        <BCC_EnableLSPIndexing>false</BCC_EnableLSPIndexing>
         <BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
         <BCC_InstructionSet>6</BCC_InstructionSet>
+        <DCC_Namespace>System;Vcl;Vcl.Imaging;Vcl.Shell;Winapi;System.Win;$(DCC_Namespace)</DCC_Namespace>
         <BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
+        <BCC_PCHName_Clang>AgdStudio.pch.h</BCC_PCHName_Clang>
         <BCC_PCHInject>AgdStudio.pch.h</BCC_PCHInject>
         <BCC_SelectedWarnings>false</BCC_SelectedWarnings>
         <BCC_StopPCHAfter>AgdStudio.pch.h</BCC_StopPCHAfter>
         <BCC_UseClassicCompiler>false</BCC_UseClassicCompiler>
         <BCC_wpar>false</BCC_wpar>
-        <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
-        <DCC_Namespace>System;Vcl;Vcl.Imaging;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
         <DynamicRTL>true</DynamicRTL>
         <FinalOutputDir>.\Binaries\$(Platform)\$(Config)</FinalOutputDir>
-        <Icon_MainIcon>$(BDS)\bin\cbuilder_PROJECTICON.ico</Icon_MainIcon>
+        <Icon_MainIcon>icon.ico</Icon_MainIcon>
         <ILINK_DisplayTime>true</ILINK_DisplayTime>
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\release\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
+        <ILINK_LibraryPath>Frames\Editors\;Frames\Editors\Map\;Frames\Editors\Images\;Frames\ImageEditor\;Frames\CodeEditor\;.\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <ILINK_LinkwithSQL>false</ILINK_LinkwithSQL>
+        <ILINK_TSAware_lld>false</ILINK_TSAware_lld>
+        <ILINK_LinkwithIndy>false</ILINK_LinkwithIndy>
+        <ILINK_LinkwithIntebaseTogo>false</ILINK_LinkwithIntebaseTogo>
+        <ILINK_LinkwithMidas>false</ILINK_LinkwithMidas>
+        <ILINK_LinkwithPThread>false</ILINK_LinkwithPThread>
+        <ILINK_LinkwithRegEx>false</ILINK_LinkwithRegEx>
+        <ILINK_LinkwithSQLite>false</ILINK_LinkwithSQLite>
+        <ILINK_LinkwithZLib>false</ILINK_LinkwithZLib>
+        <IncludePath>$(BDSINCLUDE)\windows\vcl;Frames\Editors\;Frames\Editors\Map\;Frames\Editors\Images\;Frames\Editors\Code\;.\;$(IncludePath)</IncludePath>
         <IntermediateOutputDir>.\Binaries\$(Platform)\$(Config)</IntermediateOutputDir>
+        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;VclSmp.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtprint.bpi;lmdrtelpro.bpi;xmlrtl.bpi;bindengine.bpi;DbxCommonDriver.bpi;dbrtl.bpi;lmdrtshell.bpi</LinkPackageImports>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <Multithreaded>true</Multithreaded>
         <ProjectType>CppVCLApplication</ProjectType>
+        <RunBCCOutOfProcess>true</RunBCCOutOfProcess>
         <SanitizedProjectName>AGD_Studio</SanitizedProjectName>
         <UsePackages>true</UsePackages>
         <UWP_CppLogo150>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_150.png</UWP_CppLogo150>
@@ -113,53 +120,25 @@
         <VerInfo_PreRelease>true</VerInfo_PreRelease>
         <VerInfo_Release>6663</VerInfo_Release>
         <VerInfo_Special>true</VerInfo_Special>
-        <RunBCCOutOfProcess>true</RunBCCOutOfProcess>
-        <BCC_EnableLSPIndexing>false</BCC_EnableLSPIndexing>
-        <IncludePath>Frames\Editors\;Frames\Editors\Map\;Frames\Editors\Images\;Frames\Editors\Code\;.\;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>Frames\Editors\;Frames\Editors\Map\;Frames\Editors\Images\;Frames\ImageEditor\;Frames\CodeEditor\;.\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-        <BCC_AutoDepCheck>false</BCC_AutoDepCheck>
-        <ILINK_LinkwithSQL>false</ILINK_LinkwithSQL>
-        <ILINK_TSAware_lld>false</ILINK_TSAware_lld>
-        <ILINK_LinkwithIndy>false</ILINK_LinkwithIndy>
-        <ILINK_LinkwithIntebaseTogo>false</ILINK_LinkwithIntebaseTogo>
-        <ILINK_LinkwithMidas>false</ILINK_LinkwithMidas>
-        <ILINK_LinkwithPThread>false</ILINK_LinkwithPThread>
-        <ILINK_LinkwithRegEx>false</ILINK_LinkwithRegEx>
-        <ILINK_LinkwithSQLite>false</ILINK_LinkwithSQLite>
-        <ILINK_LinkwithZLib>false</ILINK_LinkwithZLib>
         <SubProcessesNumber>16</SubProcessesNumber>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
-        <AppEnableHighDPI>true</AppEnableHighDPI>
         <BCC_CallingConvention>fastcall</BCC_CallingConvention>
+        <BCC_DisableOptimizations>true</BCC_DisableOptimizations>
         <BCC_InstructionSet>6</BCC_InstructionSet>
         <BCC_IntegerTypeEnums>true</BCC_IntegerTypeEnums>
-        <BT_BuildType>Debug</BT_BuildType>
-        <DCC_Namespace>Winapi;System.Win;$(DCC_Namespace)</DCC_Namespace>
-        <Icon_MainIcon>icon.ico</Icon_MainIcon>
-        <IncludePath>$(BDSINCLUDE)\windows\vcl;$(IncludePath)</IncludePath>
-        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <PackageImports>bindcompvcl;bindengine;lmdrtbar;lmdrtchart;lmdrtchartdb;lmdrtcore;lmdrtdesign;lmdrtdialog;lmdrtdocking;lmdrtelcore;lmdrteldb;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtrtf;lmdrtrtfdb;lmdrtrtlx;lmdrtscript;lmdrtscriptimp;lmdrtsearch;lmdrtsearchdb;lmdrtshell;lmdrtstorage;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;lmdrttxtdb;lmdrtweb;rtl;vcl;vclactnband;vcldb;vclimg;vclwinx;vclx;$(PackageImports)</PackageImports>
         <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
-        <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
-        <BCC_DisableOptimizations>true</BCC_DisableOptimizations>
+        <BT_BuildType>Debug</BT_BuildType>
+        <PackageImports>bindcompvcl;bindengine;lmdrtbar;lmdrtchart;lmdrtchartdb;lmdrtcore;lmdrtdesign;lmdrtdialog;lmdrtdocking;lmdrtelcore;lmdrteldb;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtrtf;lmdrtrtfdb;lmdrtrtlx;lmdrtscript;lmdrtscriptimp;lmdrtsearch;lmdrtsearchdb;lmdrtshell;lmdrtstorage;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;lmdrttxtdb;lmdrtweb;rtl;vcl;vclactnband;vcldb;vclimg;vclwinx;vclx;$(PackageImports)</PackageImports>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
-        <AppEnableHighDPI>true</AppEnableHighDPI>
         <BT_BuildType>Debug</BT_BuildType>
-        <DCC_Namespace>Winapi;System.Win;$(DCC_Namespace)</DCC_Namespace>
-        <Icon_MainIcon>icon.ico</Icon_MainIcon>
-        <IncludePath>$(BDSINCLUDE)\windows\vcl;$(IncludePath)</IncludePath>
-        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <PackageImports>bindcomp;bindcompvcl;bindengine;lmdrtbar;lmdrtchart;lmdrtchartdb;lmdrtcore;lmdrtdesign;lmdrtdialog;lmdrtdocking;lmdrtelcore;lmdrteldb;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtrtf;lmdrtrtfdb;lmdrtrtlx;lmdrtscript;lmdrtscriptimp;lmdrtsearch;lmdrtsearchdb;lmdrtshell;lmdrtstorage;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;lmdrttxtdb;lmdrtweb;rtl;vcl;vclactnband;vcldb;vclimg;vclwinx;vclx;$(PackageImports)</PackageImports>
-        <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64x)'!=''">
-        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
         <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.1.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <BCC_DebugLineNumbers>true</BCC_DebugLineNumbers>
@@ -184,21 +163,14 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <AppEnableHighDPI>true</AppEnableHighDPI>
-        <Icon_MainIcon>icon.ico</Icon_MainIcon>
-        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;bindengine.bpi</LinkPackageImports>
-        <LinkPackageStatics>VclSmp.lib;lmdrtprint.lib;xmlrtl.lib;DbxCommonDriver.lib;dbrtl.lib</LinkPackageStatics>
         <ILINK_DisableIncrementalLinking>true</ILINK_DisableIncrementalLinking>
         <ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)$(CC_SUFFIX)\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <LinkPackageStatics>VclSmp.lib;lmdrtprint.lib;xmlrtl.lib;DbxCommonDriver.lib;dbrtl.lib</LinkPackageStatics>
+        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;bindengine.bpi;lmdrtshell.bpi</LinkPackageImports>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppEnableHighDPI>true</AppEnableHighDPI>
-        <Icon_MainIcon>Icon.ico</Icon_MainIcon>
-        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;VclSmp.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtprint.bpi;lmdrtelpro.bpi;xmlrtl.bpi;bindengine.bpi;DbxCommonDriver.bpi;dbrtl.bpi;lmdrtshell.bpi</LinkPackageImports>
         <ILINK_DisableIncrementalLinking>true</ILINK_DisableIncrementalLinking>
-        <UsingDelphiRTL>true</UsingDelphiRTL>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Cfg_1_Win64x)'!=''">
-        <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>
@@ -206,24 +178,16 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <AppEnableHighDPI>true</AppEnableHighDPI>
-        <Icon_MainIcon>icon.ico</Icon_MainIcon>
-        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;bindengine.bpi;lmdrtshell.bpi</LinkPackageImports>
         <LinkPackageStatics>VclSmp.lib;lmdrtprint.lib;xmlrtl.lib;DbxCommonDriver.lib;dbrtl.lib</LinkPackageStatics>
         <BCC_OptimizeMaximum>true</BCC_OptimizeMaximum>
         <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
+        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;bindengine.bpi;lmdrtshell.bpi</LinkPackageImports>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
         <AppEnableHighDPI>true</AppEnableHighDPI>
-        <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
-        <Icon_MainIcon>Icon.ico</Icon_MainIcon>
-        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;VclSmp.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtprint.bpi;lmdrtelpro.bpi;xmlrtl.bpi;bindengine.bpi;DbxCommonDriver.bpi;dbrtl.bpi;lmdrtshell.bpi</LinkPackageImports>
         <BCC_OptimizeMaximum>true</BCC_OptimizeMaximum>
         <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
         <BCC_EnableLSPIndexing>false</BCC_EnableLSPIndexing>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Cfg_2_Win64x)'!=''">
-        <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
-        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;VclSmp.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtprint.bpi;lmdrtelpro.bpi;xmlrtl.bpi;bindengine.bpi;DbxCommonDriver.bpi;dbrtl.bpi;lmdrtshell.bpi</LinkPackageImports>
     </PropertyGroup>
     <ItemGroup>
         <CppCompile Include="AGD Studio.cpp">
@@ -391,6 +355,9 @@
             <DependentOn>Frames\Editors\fEditor.h</DependentOn>
             <BuildOrder>104</BuildOrder>
         </CppCompile>
+        <None Include="Frames\Editors\Images\BlockColors.h">
+            <BuildOrder>105</BuildOrder>
+        </None>
         <CppCompile Include="Frames\Editors\Images\BlockTypeTool.cpp">
             <DependentOn>Frames\Editors\Images\BlockTypeTool.h</DependentOn>
             <BuildOrder>77</BuildOrder>
@@ -708,6 +675,9 @@
             <DependentOn>Visuals\GraphicsMode.h</DependentOn>
             <BuildOrder>107</BuildOrder>
         </CppCompile>
+        <None Include="Visuals\GraphicsTypes.h">
+            <BuildOrder>104</BuildOrder>
+        </None>
         <CppCompile Include="Visuals\Image.cpp">
             <DependentOn>Visuals\Image.h</DependentOn>
             <BuildOrder>108</BuildOrder>
@@ -720,35 +690,35 @@
             <DependentOn>Visuals\ULAPlusGraphicsBuffer.h</DependentOn>
             <BuildOrder>110</BuildOrder>
         </CppCompile>
-        <FormResources Include="Frames\IDE\fIDE.dfm"/>
-        <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
-        <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
-        <FormResources Include="Frames\Editors\Map\fAssetSelection.dfm"/>
-        <FormResources Include="Frames\Editors\Map\fEditorMap.dfm"/>
-        <FormResources Include="Frames\Editors\Map\fLabelledImage.dfm"/>
-        <FormResources Include="Frames\Editors\Music\fEditorMusic.dfm"/>
-        <FormResources Include="Frames\Editors\Window\fEditorWindow.dfm"/>
-        <FormResources Include="Frames\Editors\Messages\fEditorMessages.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fEditorImage.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fMultiImageView.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fPaletteAttribute.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fBlockTypes.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fPaletteBitmap.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fToolbarShape.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fULAplusBitmap.dfm"/>
-        <FormResources Include="Frames\Editors\JumpTable\fEditorJumpTable.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fPaletteMonoAttribute.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fSelectionImage.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fToolbar.dfm"/>
-        <FormResources Include="Forms\fNewImage.dfm"/>
-        <FormResources Include="Forms\fSettings.dfm"/>
-        <FormResources Include="Frames\Editors\Code\fEditorCode.dfm"/>
         <FormResources Include="Forms\fAbout.dfm"/>
         <FormResources Include="Forms\fAdvancedSettings.dfm"/>
         <FormResources Include="Forms\fMain.dfm"/>
+        <FormResources Include="Forms\fNewImage.dfm"/>
+        <FormResources Include="Forms\fSettings.dfm"/>
+        <FormResources Include="Frames\Editors\Code\fEditorCode.dfm"/>
         <FormResources Include="Frames\Editors\Controls\fEditorControls.dfm"/>
         <FormResources Include="Frames\Editors\Controls\fKeyCapture.dfm"/>
         <FormResources Include="Frames\Editors\fEditor.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fBlockTypes.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fEditorImage.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fMultiImageView.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fPaletteAttribute.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fPaletteBitmap.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fPaletteMonoAttribute.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fSelectionImage.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fToolbar.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fToolbarShape.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fULAplusBitmap.dfm"/>
+        <FormResources Include="Frames\Editors\JumpTable\fEditorJumpTable.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fAssetSelection.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fEditorMap.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fLabelledImage.dfm"/>
+        <FormResources Include="Frames\Editors\Messages\fEditorMessages.dfm"/>
+        <FormResources Include="Frames\Editors\Music\fEditorMusic.dfm"/>
+        <FormResources Include="Frames\Editors\Window\fEditorWindow.dfm"/>
+        <FormResources Include="Frames\IDE\fIDE.dfm"/>
+        <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
+        <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -844,16 +814,27 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName=".\Binaries\Win32\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput"/>
-                <DeployFile LocalName=".\Binaries\Win32\Debug\AGD Studio.tds" Configuration="Debug" Class="DebugSymbols"/>
                 <DeployFile LocalName=".\Binaries\Win32\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Binaries\Win64\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Binaries\Win64\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput"/>
+                <DeployFile LocalName=".\Binaries\Win64x\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput">
+                    <Platform Name="Win64x">
+                        <RemoteName>AGD Studio.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName=".\Win32\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Win32\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Win64\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Win64\Release\AGD_Studio.exe" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName="Project\README.md" Configuration="Debug" Class="ProjectFile"/>
                 <DeployFile LocalName="Project\README.md" Configuration="Release" Class="ProjectFile"/>
+                <DeployFile LocalName="Project\README.md" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Win64x">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="README.md" Configuration="Debug" Class="ProjectFile"/>
                 <DeployClass Name="AdditionalDebugSymbols">
                     <Platform Name="iOSSimulator">
