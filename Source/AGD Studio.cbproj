@@ -143,8 +143,6 @@
         <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <BCC_DisableOptimizations>true</BCC_DisableOptimizations>
-        <UsePackages>false</UsePackages>
-        <UsingDelphiRTL>true</UsingDelphiRTL>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <AppEnableHighDPI>true</AppEnableHighDPI>
@@ -162,7 +160,6 @@
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.1.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <BCC_PCHName_Clang>AgdStudio.pch.h</BCC_PCHName_Clang>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <BCC_DebugLineNumbers>true</BCC_DebugLineNumbers>
@@ -188,7 +185,8 @@
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <AppEnableHighDPI>true</AppEnableHighDPI>
         <Icon_MainIcon>icon.ico</Icon_MainIcon>
-        <LinkPackageStatics>rtl.lib;vcl.lib;vclimg.lib;vclactnband.lib;vclx.lib;lmdrtrtlx.lib;lmdrtl.lib;lmdrtinspector.lib;lmdrtdocking.lib;lmdrtelcore.lib;lmdrtsyntax.lib;VclSmp.lib;lmdrtcore.lib;vclwinx.lib;lmdrtprint.lib;lmdrtelpro.lib;xmlrtl.lib;bindengine.lib;DbxCommonDriver.lib;dbrtl.lib;lmdrtshell.lib</LinkPackageStatics>
+        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;bindengine.bpi</LinkPackageImports>
+        <LinkPackageStatics>VclSmp.lib;lmdrtprint.lib;xmlrtl.lib;DbxCommonDriver.lib;dbrtl.lib</LinkPackageStatics>
         <ILINK_DisableIncrementalLinking>true</ILINK_DisableIncrementalLinking>
         <ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)$(CC_SUFFIX)\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
     </PropertyGroup>
@@ -209,7 +207,8 @@
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <AppEnableHighDPI>true</AppEnableHighDPI>
         <Icon_MainIcon>icon.ico</Icon_MainIcon>
-        <LinkPackageStatics>rtl.lib;vcl.lib;vclimg.lib;vclactnband.lib;vclx.lib;lmdrtrtlx.lib;lmdrtl.lib;lmdrtinspector.lib;lmdrtdocking.lib;lmdrtelcore.lib;lmdrtsyntax.lib;VclSmp.lib;lmdrtcore.lib;vclwinx.lib;lmdrtprint.lib;lmdrtelpro.lib;xmlrtl.lib;bindengine.lib;DbxCommonDriver.lib;dbrtl.lib;lmdrtshell.lib</LinkPackageStatics>
+        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;bindengine.bpi;lmdrtshell.bpi</LinkPackageImports>
+        <LinkPackageStatics>VclSmp.lib;lmdrtprint.lib;xmlrtl.lib;DbxCommonDriver.lib;dbrtl.lib</LinkPackageStatics>
         <BCC_OptimizeMaximum>true</BCC_OptimizeMaximum>
         <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
     </PropertyGroup>
