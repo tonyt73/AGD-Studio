@@ -2,7 +2,7 @@
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
 #include "Messaging/Messaging.h"
-#include "Project/Settings.h"
+#include "Project/Documents/Settings.h"
 #include "Settings/ThemeManager.h"
 //---------------------------------------------------------------------------
 #include <assert.h>
