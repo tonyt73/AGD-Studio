@@ -156,12 +156,7 @@ void __fastcall TfrmIDE::actFileProjectSaveExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileProjectCloseExecute(TObject *Sender)
 {
-    theProjectManager.Close();
-    if (FOnFormClose)
-    {
-        Application->MainForm->Menu = nullptr;
-        FOnFormClose(this);
-    }
+    FOnFormClose(this);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actHelpAboutExecute(TObject *Sender)

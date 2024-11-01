@@ -37,7 +37,7 @@
 #include "Frames/WndProcHandlers.h"
 #include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
-#include "Project/Document.h"
+#include "Project/Documents/Document.h"
 //---------------------------------------------------------------------------
 class TfrmIDE : public TFrame
 {

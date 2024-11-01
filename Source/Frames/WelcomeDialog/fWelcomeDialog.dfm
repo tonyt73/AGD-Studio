@@ -13,8 +13,6 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     BevelOuter = bvNone
     TabOrder = 0
     StyleElements = [seFont, seBorder]
-    ExplicitLeft = 414
-    ExplicitHeight = 419
     object imgLogo: TImage
       Left = 0
       Top = 0
@@ -6214,7 +6212,6 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       Caption = 'Panel1'
       ShowCaption = False
       TabOrder = 0
-      ExplicitHeight = 169
       object imgStartNewProject: TImage
         Left = 104
         Top = 22
@@ -6525,8 +6522,6 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     ParentFont = False
     TabOrder = 1
     StyleElements = [seFont, seBorder]
-    ExplicitWidth = 414
-    ExplicitHeight = 419
   end
   object dlgOpen: TOpenTextFileDialog
     DefaultExt = 'agdx'

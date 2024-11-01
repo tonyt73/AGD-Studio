@@ -5,8 +5,8 @@
 #include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
 #include "Project/ProjectManager.h"
-#include "Project/MachineConfig.h"
-#include "Project/Settings.h"
+#include "Project/Documents/MachineConfig.h"
+#include "Project/Documents/Settings.h"
 #include "Settings/ThemeManager.h"
 #include "Services/File.h"
 #include "Services/Folders.h"
@@ -81,10 +81,16 @@ void __fastcall TfrmWelcomeDialog::lblOpenExistingProjectClick(TObject *Sender)
     dlgOpen->InitialDir = Services::Folders::Projects;
     if (dlgOpen->Execute())
     {
-        if (Services::File::Extension(dlgOpen->FileName) == ".agds")
+        auto ext = Services::File::Extension(dlgOpen->FileName);
+
+        if (ext == ".agds")
         {
             theProjectManager.Open(dlgOpen->FileName);
             if (FOnDone) FOnDone(this);
+        }
+        else if (ext == ".agd")
+        {
+            // import the agd file
         }
         else
         {
