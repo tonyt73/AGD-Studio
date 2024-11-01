@@ -3,7 +3,7 @@
 //---------------------------------------------------------------------------
 #include <Vcl.Imaging.pngimage.hpp>
 #include "fSelectionPanel.h"
-#include "Project/MachineConfig.h"
+#include "Project/Documents/MachineConfig.h"
 #include "Settings/ThemeManager.h"
 #include "Services/File.h"
 #include "Services/Folders.h"

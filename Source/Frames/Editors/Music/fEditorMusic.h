@@ -9,7 +9,7 @@
 #include "LMDDckSite.hpp"
 //---------------------------------------------------------------------------
 #include "fEditor.h"
-#include "Project/Document.h"
+#include "Project/Documents/Document.h"
 //---------------------------------------------------------------------------
 class TfrmEditorMusic : public TfrmEditor
 {

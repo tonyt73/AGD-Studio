@@ -5,8 +5,8 @@
 #include "Frames/Editors/Images/BlockColors.h"
 #include "../MouseState.h"
 #include "Messaging/Messaging.h"
-#include "Project/DocumentManager.h"
-#include "Project/WindowDocument.h"
+#include "Project/Documents/DocumentManager.h"
+#include "Project/Documents/Window.h"
 #include "Settings/ThemeManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

@@ -30,7 +30,7 @@
 #include "../fEditor.h"
 #include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
-#include "Project/Document.h"
+#include "Project/Documents/Document.h"
 #include "fEditor.h"
 //---------------------------------------------------------------------------
 class TfrmEditorCode : public TfrmEditor

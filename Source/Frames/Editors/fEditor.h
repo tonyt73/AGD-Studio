@@ -9,7 +9,7 @@
 //---------------------------------------------------------------------------
 #include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
-#include "Project/Document.h"
+#include "Project/Documents/Document.h"
 //---------------------------------------------------------------------------
 class TfrmEditor : public TFrame
 {

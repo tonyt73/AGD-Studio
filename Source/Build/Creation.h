@@ -4,7 +4,7 @@
 //---------------------------------------------------------------------------
 #include <list>
 #include "BuildProcess.h"
-#include "AgdSection/SectionBuilder.h"
+#include "Section/Section.h"
 //---------------------------------------------------------------------------
 namespace Build
 {
@@ -12,15 +12,15 @@ namespace Build
 class Creation : public BuildProcess
 {
 private:
-    typedef std::list<std::unique_ptr<SectionBuilder>> SectionBuilderList;
+    typedef std::list<std::unique_ptr<Section>> SectionList;
 
-    SectionBuilderList           m_AgdBuilders;
+    SectionList         m_AgdSections;
 
 public:
-                    __fastcall  Creation(BuildMessages& buildMessages);
-    virtual         __fastcall ~Creation();
+            __fastcall  Creation(BuildMessages& buildMessages);
+    virtual __fastcall ~Creation();
 
-            bool    __fastcall  Execute() final;
+    bool    __fastcall  Execute() final;
 };
 //---------------------------------------------------------------------------
 } // Build namespace

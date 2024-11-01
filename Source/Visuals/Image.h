@@ -3,7 +3,7 @@
 #define ImageH
 //---------------------------------------------------------------------------
 #include "GraphicsBuffer.h"
-#include "Project/ImageDocument.h"
+#include "Project/Documents/Images.h"
 //---------------------------------------------------------------------------
 namespace Visuals
 {

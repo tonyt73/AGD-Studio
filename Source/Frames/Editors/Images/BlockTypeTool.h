@@ -2,7 +2,7 @@
 #ifndef BlockTypeToolH
 #define BlockTypeToolH
 //---------------------------------------------------------------------------
-#include "Project/ImageDocument.h"
+#include "Project/Documents/Images.h"
 #include "Visuals/GraphicsBuffer.h"
 //---------------------------------------------------------------------------
 class BlockTypeTool

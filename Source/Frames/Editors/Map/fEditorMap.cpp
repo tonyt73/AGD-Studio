@@ -5,7 +5,7 @@
 #include "../EditorManager.h"
 #include "Messaging/Messaging.h"
 #include "Messaging/Event.h"
-#include "Project/DocumentManager.h"
+#include "Project/Documents/DocumentManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "fAssetSelection"

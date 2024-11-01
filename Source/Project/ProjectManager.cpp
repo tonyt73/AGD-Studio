@@ -2,9 +2,9 @@
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
 #include "ProjectManager.h"
-#include "ProjectDocument.h"
-#include "FileDefinitions.h"
-#include "Settings.h"
+#include "Documents/Project.h"
+#include "Documents/FileDefinitions.h"
+#include "Documents/Settings.h"
 #include "Frames/Editors/Code/fEditorCode.h"
 #include "Frames/Editors/Images/fEditorImage.h"
 #include "Messaging/Event.h"

@@ -3,7 +3,7 @@
 #define DocumentEditorFactoryH
 //---------------------------------------------------------------------------
 #include <Vcl.h>
-#include "Project/Document.h"
+#include "Project/Documents/Document.h"
 //---------------------------------------------------------------------------
 namespace Factories
 {

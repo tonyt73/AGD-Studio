@@ -8,7 +8,7 @@
 #include <Vcl.Forms.hpp>
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Menus.hpp>
-#include "Project/ImageDocument.h"
+#include "Project/Documents/Images.h"
 //---------------------------------------------------------------------------
 class TfrmAssetSelection : public TFrame
 {

@@ -4,8 +4,8 @@
 //---------------------------------------------------------------------------
 #include "ElXTree.hpp"
 //---------------------------------------------------------------------------
-#include "DocumentManager.h"
-#include "MostRecentlyUsedList.h"
+#include "Documents/DocumentManager.h"
+#include "Documents/MostRecentlyUsedList.h"
 //---------------------------------------------------------------------------
 namespace Project
 {

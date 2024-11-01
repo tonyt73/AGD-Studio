@@ -3,7 +3,7 @@
 //---------------------------------------------------------------------------
 #include "fLabelledImage.h"
 #include "Frames/Editors/Images/BlockColors.h"
-#include "Project/DocumentManager.h"
+#include "Project/Documents/DocumentManager.h"
 #include "Settings/ThemeManager.h"
 #include "Visuals/Image.h"
 //---------------------------------------------------------------------------

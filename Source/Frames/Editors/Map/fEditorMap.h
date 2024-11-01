@@ -30,8 +30,8 @@
 #include "../../WndProcHandlers.h"
 #include "TileEditor.h"
 #include "fAssetSelection.h"
-#include "Project/Document.h"
-#include "Project/TiledMapDocument.h"
+#include "Project/Documents/Document.h"
+#include "Project/Documents/TiledMap.h"
 #include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 class TfrmEditorMap : public TfrmEditor

@@ -2,7 +2,7 @@
 #ifndef EventH
 #define EventH
 //---------------------------------------------------------------------------
-#include "Project/Document.h"
+#include "Project/Documents/Document.h"
 //---------------------------------------------------------------------------
 namespace Messaging
 {

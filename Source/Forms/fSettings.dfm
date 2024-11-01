@@ -330,8 +330,6 @@ object frmSettings: TfrmSettings
     TabHeight = 38
     TabOrder = 1
     TabWidth = 128
-    ExplicitWidth = 561
-    ExplicitHeight = 331
     object tabProfile: TTabSheet
       Caption = 'Profile'
       Font.Charset = DEFAULT_CHARSET
@@ -542,8 +540,6 @@ object frmSettings: TfrmSettings
         ParentFont = False
         TabHeight = 32
         TabOrder = 1
-        ExplicitWidth = 502
-        ExplicitHeight = 216
         object tabCompiler: TTabSheet
           Caption = 'Compiler'
           DesignSize = (

@@ -5,7 +5,7 @@
 #include "MapPencilTool.h"
 #include "MapLineTool.h"
 #include "MapRectTool.h"
-#include "Project/TiledMapDocument.h"
+#include "Project/Documents/TiledMap.h"
 #include "Messaging/Messaging.h"
 #include "Messaging/Event.h"
 #include "Visuals/Image.h"

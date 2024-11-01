@@ -2,7 +2,7 @@
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
 #include "Parameterizer.h"
-#include "Project/DocumentManager.h"
+#include "Project/Documents/DocumentManager.h"
 #include "Services/Folders.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

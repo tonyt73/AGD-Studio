@@ -3,7 +3,7 @@
 #define MapToolH
 //---------------------------------------------------------------------------
 #include "../Tool.h"
-#include "Project/TiledMapDocument.h"
+#include "Project/Documents/TiledMap.h"
 //---------------------------------------------------------------------------
 class MapTool : public Tool
 {
