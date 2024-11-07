@@ -126,8 +126,8 @@ void __fastcall TileEditor::Clear()
 void __fastcall TileEditor::ValidatePosition()
 {
     auto window = TSize(m_View->Width / m_Scale.x, m_View->Height / m_Scale.y);
-    m_MapOffsetMS.X = max(0, min((int)((m_BorderScaled.x * 2) + m_ContentSize.cx - window.cx), (int)m_MapOffsetMS.X));
-    m_MapOffsetMS.Y = max(0, min((int)((m_BorderScaled.y * 2) + m_ContentSize.cy - window.cy), (int)m_MapOffsetMS.Y));
+    m_MapOffsetMS.X = std::max(0, std::min((int)((m_BorderScaled.x * 2) + m_ContentSize.cx - window.cx), (int)m_MapOffsetMS.X));
+    m_MapOffsetMS.Y = std::max(0, std::min((int)((m_BorderScaled.y * 2) + m_ContentSize.cy - window.cy), (int)m_MapOffsetMS.Y));
 }
 //---------------------------------------------------------------------------
 TPoint __fastcall TileEditor::MapToView(const TPoint& pt) const
@@ -313,10 +313,10 @@ void __fastcall TileEditor::OnMouseMoveSelectMode(TShiftState Shift, int X, int 
                     m_GroupSelectEndMS = ViewToMap(X, Y);
                     m_GroupSelectEndMS.X = Snap(m_GroupSelectEndMS.X, m_TileSize.cx) + m_TileSize.cx;
                     m_GroupSelectEndMS.Y = Snap(m_GroupSelectEndMS.Y, m_TileSize.cy) + m_TileSize.cy;
-                    auto minX = min(m_GroupSelectSrtMS.X, m_GroupSelectEndMS.X);
-                    auto maxX = max(m_GroupSelectSrtMS.X, m_GroupSelectEndMS.X);
-                    auto minY = min(m_GroupSelectSrtMS.Y, m_GroupSelectEndMS.Y);
-                    auto maxY = max(m_GroupSelectSrtMS.Y, m_GroupSelectEndMS.Y);
+                    auto minX = std::min(m_GroupSelectSrtMS.X, m_GroupSelectEndMS.X);
+                    auto maxX = std::max(m_GroupSelectSrtMS.X, m_GroupSelectEndMS.X);
+                    auto minY = std::min(m_GroupSelectSrtMS.Y, m_GroupSelectEndMS.Y);
+                    auto maxY = std::max(m_GroupSelectSrtMS.Y, m_GroupSelectEndMS.Y);
                     if (minX != maxX && minY != maxY)
                     {
                         UnselectAll(false);

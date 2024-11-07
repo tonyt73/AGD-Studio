@@ -83,7 +83,7 @@ void __fastcall TfrmKeyCode::SetKeyCode(unsigned char keyCode)
     }
 }
 //---------------------------------------------------------------------------
-const String& __fastcall TfrmKeyCode::GetCaption()
+const String __fastcall TfrmKeyCode::GetCaption()
 {
     return panCaption->Caption;
 }

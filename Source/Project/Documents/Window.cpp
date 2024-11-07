@@ -97,6 +97,7 @@ int __fastcall WindowDocument::Get(int index)
         case 8: return m_SizeInPixels.cx; break;
         case 9: return m_SizeInPixels.cy; break;
     }
+    return 0;
 }
 //---------------------------------------------------------------------------
 void __fastcall WindowDocument::Set(const TRect& rect)

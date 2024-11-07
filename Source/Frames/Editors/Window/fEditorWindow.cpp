@@ -19,7 +19,7 @@ __fastcall TfrmEditorWindow::TfrmEditorWindow(TComponent* Owner)
 
     const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
     const auto& gm = *(mc.GraphicsMode());
-    m_View = make_unique<TBitmap>();
+    m_View = std::make_unique<TBitmap>();
     m_View->PixelFormat = pf32bit;
     m_View->Width = gm.Width / mc.ImageSizing[Visuals::itCharacterSet].Minimum.Width;
     m_View->Height = gm.Height / mc.ImageSizing[Visuals::itCharacterSet].Minimum.Height;

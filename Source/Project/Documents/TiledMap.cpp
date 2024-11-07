@@ -395,11 +395,12 @@ void __fastcall TiledMapDocument::OnLoaded()
 //---------------------------------------------------------------------------
 const TRect& __fastcall TiledMapDocument::GetWindow() const
 {
+    static TRect emptyRect = TRect(0,0,0,0);
     auto wi = (WindowDocument*)theDocumentManager.Get("Window", "Definition", "Window");
     if (wi != nullptr) {
         return wi->Rect;
     }
-    return TRect();
+    return emptyRect;
 }
 //---------------------------------------------------------------------------
 int __fastcall TiledMapDocument::GetNumberOfRooms()

@@ -241,6 +241,9 @@ void __fastcall JsonFile::Load(const String& file)
                     Set(path, jr->Value.AsBoolean());
                     if (inArray) OnEndObject(path);
                     break;
+                default:
+                    // ignore the other token types
+                    break;
             }
         }
         OnLoaded();

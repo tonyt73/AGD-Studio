@@ -20,7 +20,6 @@
 #pragma link "LMDInsPropInsp"
 #pragma link "LMDInsPropPage"
 #pragma link "ElTreeInplaceEditors"
-#pragma link "ElXPThemedControl"
 #pragma link "ElXTree"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
@@ -445,6 +444,12 @@ void __fastcall TfrmIDE::actGameRunExecute(TObject *Sender)
 void __fastcall TfrmIDE::OnClose()
 {
     theProjectManager.Close();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TfrmIDE::DockManagerReadAppInfo(TObject *Sender, Xml::Xmlintf::IXMLDocument * const Xml)
+{
+    int a= 0;
 }
 //---------------------------------------------------------------------------
 

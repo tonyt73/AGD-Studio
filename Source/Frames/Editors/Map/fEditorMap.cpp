@@ -562,6 +562,9 @@ void __fastcall TfrmEditorMap::OnWorkspaceEntitySelected(const Project::MapEntit
             pgcAssets->ActivePage = tabTiles;
             assetsTiles->Select(entity.Image);
             break;
+        default:
+            // ignore the other enum values
+            break;
     }
 }
 //---------------------------------------------------------------------------

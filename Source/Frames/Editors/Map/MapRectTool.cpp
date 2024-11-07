@@ -25,7 +25,7 @@ void __fastcall MapRectTool::DrawRect(Project::MapEntityList& list, Project::Map
     SnapToTileGrid(Rect);
     if (MS.Ctrl)
     {
-        auto size = max(abs(Rect.Width()), abs(Rect.Height()));
+        auto size = std::max(abs(Rect.Width()), abs(Rect.Height()));
         (Rect.Left < Rect.Right ) ? (Rect.Right  = Rect.Left + size) : (Rect.Right  = Rect.Left - size);
         (Rect.Top  < Rect.Bottom) ? (Rect.Bottom = Rect.Top  + size) : (Rect.Bottom = Rect.Top  - size);
     }

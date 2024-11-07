@@ -12,7 +12,6 @@
 #include <typeinfo>
 #include <type_traits>
 //---------------------------------------------------------------------------
-using namespace std;
 namespace Messaging
 {
 class Bus
@@ -28,8 +27,8 @@ private:
         unsigned int            m_SubscriptionId;
 
     public:
-                                Subscription_(unsigned int id) : m_SubscriptionId(id) {};
-        virtual                ~Subscription_() {};
+                                Subscription_(unsigned int id) : m_SubscriptionId(id) {}
+        virtual                ~Subscription_() {}
 
         __property unsigned int SubscriptionId = { read = m_SubscriptionId };
     };
@@ -79,12 +78,12 @@ protected:
         if (subscriptions == nullptr)
         {
             // add a new subscriptions list to the type handlers list
-            subscriptions = make_unique<Subscriptions>();
+            subscriptions = std::make_unique<Subscriptions>();
             (*s_Handlers)[typeid(T)] = std::move(subscriptions);
         }
 
         // add the handler to the subscriptions list for the type and assign a new id
-        auto subscription = make_unique<Subscription<T>>(handler, ++s_NextId);
+        auto subscription = std::make_unique<Subscription<T> >(handler, ++s_NextId);
         subscriptions->push_back(std::move(subscription));
         return s_NextId;
     }

@@ -17,7 +17,7 @@ __fastcall TfrmEditorJumpTable::TfrmEditorJumpTable(TComponent* Owner)
         "Left/Right Cursor Keys : Move Active Step\r\n"
         "Up/Down Cursor Keys    : Adjust Step Value\r\n";
 
-    m_View = make_unique<TBitmap>();
+    m_View = std::make_unique<TBitmap>();
     m_View->PixelFormat = pf32bit;
     m_View->Width = 256;
     m_View->Height = 192;

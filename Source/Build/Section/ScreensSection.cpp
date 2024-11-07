@@ -83,7 +83,7 @@ void __fastcall ScreensSection::Execute()
                         {
                             if (entity.IsSprite)
                             {
-                                auto type = max(0, entity.SpriteType);
+                                auto type = std::max(0, entity.SpriteType);
                                 // get sprite id as sprite index
                                 auto index = dm.GetAsIndex(entity.Id);
                                 line = "SPRITEPOSITION " + IntToStr(type) + " " + IntToStr(index) + " " + IntToStr((int)(wPt.y + entity.Pt.y)) + " " + IntToStr((int)(wPt.x + entity.Pt.x));
