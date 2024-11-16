@@ -7,10 +7,9 @@
         <MainSource>AGD Studio.12.cpp</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <Platform Condition="'$(Platform)'==''">Win64</Platform>
         <TargetedPlatforms>1048579</TargetedPlatforms>
         <ProjectName Condition="'$(ProjectName)'==''">AGD Studio.12</ProjectName>
-        <CC_Suffix Condition="'$(CC_Suffix)'==''">c</CC_Suffix>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -560,6 +559,18 @@
             <DependentOn>Frames\WndProcHandlers.h</DependentOn>
             <BuildOrder>33</BuildOrder>
         </CppCompile>
+        <CppCompile Include="Importer\AgdImporter.cpp">
+            <DependentOn>Importer\AgdImporter.h</DependentOn>
+            <BuildOrder>112</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Importer\ImportMap.cpp">
+            <DependentOn>Importer\ImportMap.h</DependentOn>
+            <BuildOrder>108</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Importer\ImportRoom.cpp">
+            <DependentOn>Importer\ImportRoom.h</DependentOn>
+            <BuildOrder>110</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Messaging\Event.cpp">
             <DependentOn>Messaging\Event.h</DependentOn>
             <BuildOrder>74</BuildOrder>
@@ -700,27 +711,27 @@
             <DependentOn>Visuals\ULAPlusGraphicsBuffer.h</DependentOn>
             <BuildOrder>110</BuildOrder>
         </CppCompile>
+        <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fLabelledImage.dfm"/>
+        <FormResources Include="Frames\Editors\Messages\fEditorMessages.dfm"/>
+        <FormResources Include="Frames\Editors\Window\fEditorWindow.dfm"/>
         <FormResources Include="Frames\IDE\fIDE.dfm"/>
         <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
-        <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
-        <FormResources Include="Frames\Editors\Map\fAssetSelection.dfm"/>
-        <FormResources Include="Frames\Editors\Map\fEditorMap.dfm"/>
-        <FormResources Include="Frames\Editors\Map\fLabelledImage.dfm"/>
         <FormResources Include="Frames\Editors\Music\fEditorMusic.dfm"/>
-        <FormResources Include="Frames\Editors\Window\fEditorWindow.dfm"/>
-        <FormResources Include="Frames\Editors\Messages\fEditorMessages.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fEditorMap.dfm"/>
         <FormResources Include="Forms\fAbout.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fEditorImage.dfm"/>
         <FormResources Include="Frames\Editors\Images\fMultiImageView.dfm"/>
         <FormResources Include="Frames\Editors\Images\fPaletteAttribute.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fBlockTypes.dfm"/>
         <FormResources Include="Frames\Editors\Images\fPaletteBitmap.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fToolbarShape.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fBlockTypes.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fEditorImage.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fPaletteMonoAttribute.dfm"/>
         <FormResources Include="Frames\Editors\Images\fULAplusBitmap.dfm"/>
         <FormResources Include="Frames\Editors\JumpTable\fEditorJumpTable.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fPaletteMonoAttribute.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fAssetSelection.dfm"/>
         <FormResources Include="Frames\Editors\Images\fSelectionImage.dfm"/>
         <FormResources Include="Frames\Editors\Images\fToolbar.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fToolbarShape.dfm"/>
         <FormResources Include="Forms\fSettings.dfm"/>
         <FormResources Include="Frames\Editors\Code\fEditorCode.dfm"/>
         <FormResources Include="Frames\Editors\Controls\fEditorControls.dfm"/>
@@ -829,17 +840,17 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName=".\Binaries\Win32\Debug\AGD Studio.12.tds" Configuration="Debug" Class="DebugSymbols">
-                    <Platform Name="Win32">
-                        <RemoteName>AGD Studio.12.tds</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName=".\Binaries\Win32\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Binaries\Win32\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Binaries\Win32\Release\AGD_Studio_12.exe" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>AGD_Studio_12.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName=".\Binaries\Win64\Debug\AGD Studio.12.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win64">
+                        <RemoteName>AGD Studio.12.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -853,6 +864,12 @@
                 <DeployFile LocalName="Project\README.md" Configuration="Debug" Class="ProjectFile"/>
                 <DeployFile LocalName="Project\README.md" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Project\README.md" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win64">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>

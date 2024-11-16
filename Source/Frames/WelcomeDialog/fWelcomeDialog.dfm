@@ -2,13 +2,13 @@ object frmWelcomeDialog: TfrmWelcomeDialog
   Left = 0
   Top = 0
   Width = 902
-  Height = 418
+  Height = 429
   TabOrder = 0
   object panMain: TPanel
     Left = 402
     Top = 0
     Width = 500
-    Height = 418
+    Height = 429
     Align = alRight
     BevelOuter = bvNone
     TabOrder = 0
@@ -6207,7 +6207,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       Left = 0
       Top = 250
       Width = 500
-      Height = 168
+      Height = 179
       Align = alClient
       Caption = 'Panel1'
       ShowCaption = False
@@ -6509,7 +6509,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     Left = 0
     Top = 0
     Width = 402
-    Height = 418
+    Height = 429
     Align = alClient
     BevelOuter = bvNone
     Color = clBtnShadow
@@ -6524,19 +6524,21 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     StyleElements = [seFont, seBorder]
   end
   object dlgOpen: TOpenTextFileDialog
-    DefaultExt = 'agdx'
-    Filter = 'AGDX Project|*.agdx|All Files|*.*'
+    DefaultExt = 'agds'
+    Filter = 
+      'AGD Studio Project|*.agds|AGD Snapshot|*.sna|AGD File|*.agd|All ' +
+      'Files|*.*'
     Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
-    Title = 'Open an Existing AGDX Project'
-    Left = 308
-    Top = 132
+    Title = 'Open an Existing AGD Studio Project'
+    Left = 40
+    Top = 28
   end
   object popConfigure: TPopupMenu
     AutoHotkeys = maManual
     AutoLineReduction = maManual
     TrackButton = tbLeftButton
-    Left = 365
-    Top = 132
+    Left = 149
+    Top = 28
     object Settings1: TMenuItem
       Caption = 'Settings'
     end
@@ -6545,24 +6547,16 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     end
   end
   object dlgInvalidProject: TTaskDialog
-    Buttons = <
-      item
-        Caption = 'Launch the AGD Converter application'
-        ModalResult = 100
-      end>
+    Buttons = <>
     Caption = 'Open an existing Project'
     CommonButtons = [tcbClose]
-    Flags = [tfAllowDialogCancellation, tfUseCommandLinks, tfSizeToContent]
+    Flags = [tfAllowDialogCancellation, tfSizeToContent]
     MainIcon = 1
     RadioButtons = <>
-    Text = 
-      'AGDx Studio cannot open the specified file.'#13#10'If you want to use ' +
-      'a ZX Spectrum AGD Snapshot file (*.sna) or an AGD file (*.agd) t' +
-      'hen;'#13#10'Launch the AGD Converter application to convert your file ' +
-      'to into an AGDx Studio project.'
-    Title = 'Invalid AGDx Studio Project File'
+    Text = 'AGD Studio cannot open or import the specified file.'#13#10
+    Title = 'Invalid AGD Studio Project File'
     OnButtonClicked = dlgInvalidProjectButtonClicked
-    Left = 224
-    Top = 304
+    Left = 40
+    Top = 104
   end
 end

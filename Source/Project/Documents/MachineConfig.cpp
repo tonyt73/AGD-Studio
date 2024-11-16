@@ -17,6 +17,12 @@ __fastcall MachineConfig::MachineConfig(const String& name)
     m_PropertyMap["Keyboard"] = &m_Keyboard;
     m_PropertyMap["Image"] = &m_Image;
     m_PropertyMap["GraphicsMode"] = &m_GraphicsModeName;
+    m_PropertyMap["Window.Width"] = &m_Window.Width;
+    m_PropertyMap["Window.Height"] = &m_Window.Height;
+    m_PropertyMap["Controls.Directions"] = &m_Controls.Directions;
+    m_PropertyMap["Controls.Fires"] = &m_Controls.Fires;
+    m_PropertyMap["Controls.Options"] = &m_Controls.Options;
+    m_PropertyMap["Controls.Defaults"] = &m_Controls.Defaults;
     m_PropertyMap["ImageSizing.Object.Minimum.Width"] = &m_ImageSizing[Visuals::itObject].Minimum.cx;
     m_PropertyMap["ImageSizing.Object.Minimum.Height"] = &m_ImageSizing[Visuals::itObject].Minimum.cy;
     m_PropertyMap["ImageSizing.Object.Maximum.Width"] = &m_ImageSizing[Visuals::itObject].Maximum.cx;
@@ -89,6 +95,12 @@ void __fastcall MachineConfig::GetMachinesList(std::vector<String>& list)
     {
         list.push_back(Services::File::NameWithoutExtension(file));
     }
+}
+//---------------------------------------------------------------------------
+void __fastcall MachineConfig::SetControls(const AgdControls& controls)
+{
+    m_Controls = controls;
+    Save();
 }
 //---------------------------------------------------------------------------
 void __fastcall MachineConfig::SetCompiler(const ToolInfo& info)

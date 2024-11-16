@@ -87,15 +87,18 @@ void __fastcall TfrmWelcomeDialog::lblOpenExistingProjectClick(TObject *Sender)
         {
             theProjectManager.Open(dlgOpen->FileName);
             if (FOnDone) FOnDone(this);
-        }
-        else if (ext == ".agd")
-        {
-            // import the agd file
+            return;
         }
         else
         {
-            dlgInvalidProject->Execute();
+            // try to import the file
+            if (theProjectManager.Import(dlgOpen->FileName))
+            {
+                if (FOnDone) FOnDone(this);
+                return;
+            }
         }
+        dlgInvalidProject->Execute();
     }
 }
 //---------------------------------------------------------------------------

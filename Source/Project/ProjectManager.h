@@ -48,6 +48,7 @@ public:
 
     void        __fastcall  Initialise(Elxtree::TElXTree* treeView);
     void        __fastcall  New(const String& name, const String& machine);
+    bool        __fastcall  Import(const String& file);
     void        __fastcall  Open(const String& file);
     void        __fastcall  Close();
     void        __fastcall  Save();

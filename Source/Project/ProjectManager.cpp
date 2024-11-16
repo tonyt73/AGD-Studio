@@ -7,6 +7,7 @@
 #include "Documents/Settings.h"
 #include "Frames/Editors/Code/fEditorCode.h"
 #include "Frames/Editors/Images/fEditorImage.h"
+#include "Importer/AgdImporter.h"
 #include "Messaging/Event.h"
 #include "Services/File.h"
 #include "Services/Folders.h"
@@ -144,6 +145,34 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
         m_MostRecentUsedList->Add(name, config->Path, config->Machine);
     }
     m_IsOpen = true;
+}
+//---------------------------------------------------------------------------
+bool __fastcall ProjectManager::Import(const String& file)
+{
+    ClearMessage("[ProjectManager] Importing file : '" + file + ";");
+    InformationMessage("[ProjectManager] Importing file");
+
+    auto imported = false;
+    // TODO: Check the project doesn't already exist
+    auto name = Services::File::NameWithoutExtension(file);
+    auto agdImporter = std::make_unique<AgdImporter>();
+    if (agdImporter != nullptr && agdImporter->CanConvert(file))
+    {
+        auto machine = agdImporter->GetMachine(file);
+        // TODO: Put in the machine select dialog for the discovered machine.
+        New(name, machine);
+        imported = agdImporter->Convert(file);
+        if (imported)
+        {
+            auto name = Services::File::NameWithoutExtension(file);
+            // TODO: Save imported properties
+
+
+            return true;
+        }
+    }
+
+    return false;
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::Open(const String& file)

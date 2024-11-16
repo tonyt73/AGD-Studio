@@ -24,7 +24,7 @@ public:
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new WindowDocument(name); };
             void        __fastcall  Set(const TRect& rect);
 
-           __property  const TRect& Rect    = { read = m_Rect         };
+           __property  const TRect& Rect        = { read = m_Rect         };
 
 __published:
             int         __property  Left        = { read = Get, index = 0 };

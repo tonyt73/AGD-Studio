@@ -202,51 +202,61 @@ void __fastcall JsonFile::Load(const String& file)
     if (File::File::Exists(file))
     {
         OnLoading();
-        auto json = File::File::ReadText(file);
-        auto sr = std::make_unique<TStringReader>(json);
-        auto jr = std::make_unique<TJsonTextReader>(sr.get());
-        auto inArray = false;
-        while (jr->Read())
+        try
         {
-            auto path = ProcessPath(jr->Path);
-            switch (jr->TokenType)
+            auto json = File::File::ReadText(file);
+            auto sr = std::make_unique<TStringReader>(json);
+            auto jr = std::make_unique<TJsonTextReader>(sr.get());
+            auto inArray = false;
+            while (jr->Read())
             {
-                case TJsonToken::StartObject:
-                    OnStartObject(path);
-                    break;
-                case TJsonToken::EndObject:
-                    OnEndObject(path);
-                    break;
-                case TJsonToken::StartArray:
-                    inArray = true;
-                    break;
-                case TJsonToken::EndArray:
-                    inArray = false;
-                    break;
-                case TJsonToken::PropertyName:
-                    break;
-                case TJsonToken::String:
-                    Set(path, jr->Value.AsString());
-                    if (inArray) OnEndObject(path);
-                    break;
-                case TJsonToken::Integer:
-                    Set(path, jr->Value.AsInteger());
-                    if (inArray) OnEndObject(path);
-                    break;
-                case TJsonToken::Float:
-                    Set(path, (float)jr->Value.AsExtended());
-                    if (inArray) OnEndObject(path);
-                    break;
-                case TJsonToken::Boolean:
-                    Set(path, jr->Value.AsBoolean());
-                    if (inArray) OnEndObject(path);
-                    break;
-                default:
-                    // ignore the other token types
-                    break;
+                auto path = ProcessPath(jr->Path);
+                switch (jr->TokenType)
+                {
+                    case TJsonToken::StartObject:
+                        OnStartObject(path);
+                        break;
+                    case TJsonToken::EndObject:
+                        OnEndObject(path);
+                        break;
+                    case TJsonToken::StartArray:
+                        inArray = true;
+                        break;
+                    case TJsonToken::EndArray:
+                        inArray = false;
+                        break;
+                    case TJsonToken::PropertyName:
+                        break;
+                    case TJsonToken::String:
+                        Set(path, jr->Value.AsString());
+                        if (inArray) OnEndObject(path);
+                        break;
+                    case TJsonToken::Integer:
+                        Set(path, jr->Value.AsInteger());
+                        if (inArray) OnEndObject(path);
+                        break;
+                    case TJsonToken::Float:
+                        Set(path, (float)jr->Value.AsExtended());
+                        if (inArray) OnEndObject(path);
+                        break;
+                    case TJsonToken::Boolean:
+                        Set(path, jr->Value.AsBoolean());
+                        if (inArray) OnEndObject(path);
+                        break;
+                    default:
+                        // ignore the other token types
+                        break;
+                }
             }
+            OnLoaded();
         }
-        OnLoaded();
+        catch (...)
+        {
+            int a = 0;
+            // Error loading the JSON file
+            // jr->path
+            // auto path = ProcessPath(jr->Path);
+        }
     }
 }
 //---------------------------------------------------------------------------

@@ -109,6 +109,7 @@ void __fastcall ControlsDocument::SetAsciiCode(eAgdKey key, unsigned char keyCod
 //---------------------------------------------------------------------------
 void __fastcall ControlsDocument::DefaultKeys()
 {
+    // TODO: use the machine config defaults
     while (m_Keys.size() < 11)
     {
         m_Keys.push_back(0);
