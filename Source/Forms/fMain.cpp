@@ -156,10 +156,10 @@ void __fastcall TfrmMain::ShowWelcomeDialog()
 //---------------------------------------------------------------------------
 void __fastcall TfrmMain::ShowIDE()
 {
-    m_FormView = fvNone;
     theAppSettings.WelcomePosition = TPoint(Left, Top);
     Welcome->OnActivate(nullptr);
     IDE->OnActivate(this);
+    m_FormView = fvNone;
     AutoSize = false;
     BorderIcons = TBorderIcons() << biMaximize << biMinimize << biSystemMenu;
     BorderStyle = bsSizeable;
@@ -170,7 +170,6 @@ void __fastcall TfrmMain::ShowIDE()
     Top         = theAppSettings.WindowPosition.Y;
     Width       = theAppSettings.WindowSize.Width;
     Height      = theAppSettings.WindowSize.Height;
-    Application->ProcessMessages();
     WindowState = theAppSettings.WindowState;
     m_FormView  = fvGameIDE;
 }

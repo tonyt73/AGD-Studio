@@ -447,9 +447,3 @@ void __fastcall TfrmIDE::OnClose()
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TfrmIDE::DockManagerReadAppInfo(TObject *Sender, Xml::Xmlintf::IXMLDocument * const Xml)
-{
-    int a= 0;
-}
-//---------------------------------------------------------------------------
-

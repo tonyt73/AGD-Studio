@@ -1,8 +1,8 @@
 object frmIDE: TfrmIDE
   Left = 0
   Top = 0
-  Width = 1103
-  Height = 817
+  Width = 1060
+  Height = 855
   Align = alClient
   Constraints.MinHeight = 600
   Constraints.MinWidth = 800
@@ -16,11 +16,9 @@ object frmIDE: TfrmIDE
   object dsIDE: TLMDDockSite
     Left = 0
     Top = 33
-    Width = 1103
-    Height = 784
+    Width = 1060
+    Height = 822
     Manager = DockManager
-    LockMode = [dlmDockIn]
-    LoadDesignLayout = False
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -31,53 +29,55 @@ object frmIDE: TfrmIDE
     Constraints.MinHeight = 567
     Constraints.MinWidth = 800
     TabOrder = 0
+    ExplicitWidth = 800
+    ExplicitHeight = 784
     Layout = {
       3C3F786D6C2076657273696F6E3D22312E30223F3E0D0A3C736974656C697374
       3E0D0A20203C73697465206470693D223936222069643D2253454C465F534954
       45223E0D0A202020203C7A6F6E65206B696E643D22484F525A223E0D0A202020
-      2020203C7A6F6E65206B696E643D2256455254222073697A653D223839312220
-      6473697A653D22302E3831303733373033333636363937223E0D0A2020202020
-      2020203C7A6F6E65206B696E643D2254414253222073697A653D223537362220
-      6473697A653D22302E3733383436313533383436313533392220697373706163
-      653D2274727565223E0D0A202020202020202020203C7A6F6E65206B696E643D
-      2250414E454C222069643D224C4D44446F636B50616E656C3222207669736962
-      6C653D2266616C7365222F3E0D0A20202020202020203C2F7A6F6E653E0D0A20
-      202020202020203C7A6F6E65206B696E643D2254414253222061637469766574
-      61623D2230222073697A653D2232303422206473697A653D22302E3236313533
-      38343631353338343631223E0D0A202020202020202020203C7A6F6E65206B69
-      6E643D2250414E454C222069643D226470456469746F724B6579732220766973
-      69626C653D2274727565222F3E0D0A202020202020202020203C7A6F6E65206B
-      696E643D2250414E454C222069643D2264704275696C64222076697369626C65
+      2020203C7A6F6E65206B696E643D2256455254222073697A653D223833342220
+      6473697A653D22302E383030333833383737313539333039223E0D0A20202020
+      202020203C7A6F6E65206B696E643D2254414253222073697A653D2236303022
+      206473697A653D22302E37343632363836353637313634313822206973737061
+      63653D2274727565223E0D0A202020202020202020203C7A6F6E65206B696E64
+      3D2250414E454C222069643D224C4D44446F636B50616E656C32222076697369
+      626C653D2266616C7365222F3E0D0A20202020202020203C2F7A6F6E653E0D0A
+      20202020202020203C7A6F6E65206B696E643D22544142532220616374697665
+      7461623D2231222073697A653D2232303422206473697A653D22302E32353337
+      3331333433323833353832223E0D0A202020202020202020203C7A6F6E65206B
+      696E643D2250414E454C222069643D226470456469746F724B65797322207669
+      7369626C653D2274727565222F3E0D0A202020202020202020203C7A6F6E6520
+      6B696E643D2250414E454C222069643D2264704275696C64222076697369626C
+      653D2274727565222F3E0D0A202020202020202020203C7A6F6E65206B696E64
+      3D2250414E454C222069643D2264704D65737361676573222076697369626C65
       3D2274727565222F3E0D0A202020202020202020203C7A6F6E65206B696E643D
-      2250414E454C222069643D2264704D65737361676573222076697369626C653D
-      2274727565222F3E0D0A202020202020202020203C7A6F6E65206B696E643D22
-      50414E454C222069643D226470536561726368526573756C7473222076697369
-      626C653D2274727565222F3E0D0A202020202020202020203C7A6F6E65206B69
-      6E643D2250414E454C222069643D226470546F646F222076697369626C653D22
-      74727565222F3E0D0A20202020202020203C2F7A6F6E653E0D0A202020202020
-      3C2F7A6F6E653E0D0A2020202020203C7A6F6E65206B696E643D225645525422
-      2073697A653D2232303822206473697A653D22302E3138393236323936363333
-      333033223E0D0A20202020202020203C7A6F6E65206B696E643D2250414E454C
-      222069643D22647050726F6A656374222076697369626C653D22747275652220
-      73697A653D2233383822206473697A653D22302E343937373930383638393234
-      3839222F3E0D0A20202020202020203C7A6F6E65206B696E643D2250414E454C
-      222069643D22647050726F70657274696573222076697369626C653D22747275
-      65222073697A653D2233393222206473697A653D22302E353032323039313331
-      3037353131222F3E0D0A2020202020203C2F7A6F6E653E0D0A202020203C2F7A
-      6F6E653E0D0A20203C2F736974653E0D0A3C2F736974656C6973743E0D0A}
+      2250414E454C222069643D226470536561726368526573756C74732220766973
+      69626C653D2274727565222F3E0D0A202020202020202020203C7A6F6E65206B
+      696E643D2250414E454C222069643D226470546F646F222076697369626C653D
+      2274727565222F3E0D0A20202020202020203C2F7A6F6E653E0D0A2020202020
+      203C2F7A6F6E653E0D0A2020202020203C7A6F6E65206B696E643D2256455254
+      222073697A653D2232303822206473697A653D22302E31393936313631323238
+      3430363931223E0D0A20202020202020203C7A6F6E65206B696E643D2250414E
+      454C222069643D22647050726F6A656374222076697369626C653D2274727565
+      222073697A653D2234303022206473697A653D22302E34393737393038363839
+      32343839222F3E0D0A20202020202020203C7A6F6E65206B696E643D2250414E
+      454C222069643D22647050726F70657274696573222076697369626C653D2274
+      727565222073697A653D2234303422206473697A653D22302E35303232303931
+      33313037353131222F3E0D0A2020202020203C2F7A6F6E653E0D0A202020203C
+      2F7A6F6E653E0D0A20203C2F736974653E0D0A3C2F736974656C6973743E0D0A}
     object dpBuild: TLMDDockPanel
-      Left = 1
-      Top = 581
-      Width = 889
-      Height = 178
+      Left = 6
+      Top = 612
+      Width = 834
+      Height = 183
       ParentBackground = False
       TabOrder = 8
       Caption = 'BUILD'
       object tvBuild: TElXTree
         Left = 0
-        Top = 17
-        Width = 889
-        Height = 161
+        Top = 21
+        Width = 834
+        Height = 162
         Cursor = crArrow
         Hint = ''
         PlusPosition = vaMiddle
@@ -147,21 +147,22 @@ object frmIDE: TfrmIDE
         FixedBottomRowNum = 0
         FixedColNum = 1
         GutterWidth = 0
+        ExplicitWidth = 574
       end
     end
     object dpEditorKeys: TLMDDockPanel
-      Left = 1
-      Top = 581
-      Width = 889
-      Height = 178
+      Left = 6
+      Top = 612
+      Width = 834
+      Height = 183
       ParentBackground = False
       TabOrder = 11
       Caption = 'EDITOR KEYS'
       object mbKeys: TMemo
         Left = 0
-        Top = 17
-        Width = 889
-        Height = 161
+        Top = 21
+        Width = 834
+        Height = 162
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -179,18 +180,18 @@ object frmIDE: TfrmIDE
       end
     end
     object dpMessages: TLMDDockPanel
-      Left = 1
-      Top = 581
-      Width = 889
-      Height = 178
+      Left = 6
+      Top = 612
+      Width = 834
+      Height = 183
       ParentBackground = False
       TabOrder = 5
       Caption = 'MESSAGES'
       object memMessages: TMemo
         Left = 0
-        Top = 17
-        Width = 889
-        Height = 161
+        Top = 21
+        Width = 834
+        Height = 162
         Align = alClient
         Lines.Strings = (
           '')
@@ -199,19 +200,19 @@ object frmIDE: TfrmIDE
       end
     end
     object dpProject: TLMDDockPanel
-      Left = 896
-      Top = 1
-      Width = 206
-      Height = 386
+      Left = 846
+      Top = 6
+      Width = 208
+      Height = 400
       Buttons = [pbPin, pbMaximize]
       ParentBackground = False
       TabOrder = 6
       Caption = 'PROJECT'
       object Panel1: TPanel
         Left = 0
-        Top = 17
-        Width = 206
-        Height = 369
+        Top = 21
+        Width = 208
+        Height = 379
         Align = alClient
         BevelOuter = bvNone
         Padding.Left = 1
@@ -219,10 +220,11 @@ object frmIDE: TfrmIDE
         Padding.Right = 1
         Padding.Bottom = 1
         TabOrder = 0
+        ExplicitHeight = 360
         object tbrProject: TToolBar
           Left = 1
           Top = 1
-          Width = 204
+          Width = 206
           Height = 26
           AutoSize = True
           ButtonHeight = 24
@@ -300,8 +302,8 @@ object frmIDE: TfrmIDE
         object tvProject: TElXTree
           Left = 1
           Top = 27
-          Width = 204
-          Height = 341
+          Width = 206
+          Height = 351
           Hint = ''
           PlusPosition = vaMiddle
           BorderColorWindow = clWindow
@@ -373,22 +375,23 @@ object frmIDE: TfrmIDE
           FixedBottomRowNum = 0
           FixedColNum = 1
           GutterWidth = 0
+          ExplicitHeight = 332
         end
       end
     end
     object dpProperties: TLMDDockPanel
-      Left = 896
-      Top = 393
-      Width = 206
-      Height = 390
+      Left = 846
+      Top = 412
+      Width = 208
+      Height = 404
       Buttons = [pbPin, pbMaximize]
       ParentBackground = False
       TabOrder = 10
       Caption = 'PROPERTIES'
       object Splitter1: TSplitter
         Left = 0
-        Top = 347
-        Width = 206
+        Top = 361
+        Width = 208
         Height = 3
         Cursor = crVSplit
         Align = alBottom
@@ -400,9 +403,9 @@ object frmIDE: TfrmIDE
       end
       object lmdProperties: TLMDSimplePropInspector
         Left = 0
-        Top = 17
-        Width = 206
-        Height = 330
+        Top = 21
+        Width = 208
+        Height = 340
         PropKinds = [pkProperties, pkReadOnly]
         SortType = stNone
         ArrangeKind = akByCategory
@@ -421,11 +424,12 @@ object frmIDE: TfrmIDE
         Constraints.MinWidth = 200
         TabOrder = 0
         OnClick = lmdPropertiesClick
+        ExplicitHeight = 321
       end
       object Panel2: TPanel
         Left = 0
-        Top = 350
-        Width = 206
+        Top = 364
+        Width = 208
         Height = 40
         Align = alBottom
         BevelOuter = bvNone
@@ -436,10 +440,11 @@ object frmIDE: TfrmIDE
         Padding.Bottom = 3
         ParentBackground = False
         TabOrder = 1
+        ExplicitTop = 345
         object lblPropertyInfo: TLabel
           Left = 3
           Top = 3
-          Width = 200
+          Width = 202
           Height = 34
           Align = alClient
           Caption = 'Property information'
@@ -457,28 +462,28 @@ object frmIDE: TfrmIDE
       end
     end
     object dpSearchResults: TLMDDockPanel
-      Left = 1
-      Top = 581
-      Width = 889
-      Height = 178
+      Left = 6
+      Top = 612
+      Width = 834
+      Height = 183
       ParentBackground = False
       TabOrder = 7
       Caption = 'SEARCH RESULTS'
     end
     object dpTodo: TLMDDockPanel
-      Left = 1
-      Top = 581
-      Width = 889
-      Height = 178
+      Left = 6
+      Top = 612
+      Width = 834
+      Height = 183
       ParentBackground = False
       TabOrder = 9
       Caption = 'TODO'
     end
     object LMDDockPanel2: TLMDDockPanel
-      Left = 1
-      Top = 1
-      Width = 889
-      Height = 574
+      Left = 6
+      Top = 6
+      Width = 834
+      Height = 600
       PanelVisible = False
       ParentBackground = False
       TabOrder = 4
@@ -488,11 +493,12 @@ object frmIDE: TfrmIDE
   object Panel3: TPanel
     Left = 0
     Top = 0
-    Width = 1103
+    Width = 1060
     Height = 33
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitWidth = 800
     object tbrMain: TToolBar
       Left = 0
       Top = 0
@@ -624,7 +630,7 @@ object frmIDE: TfrmIDE
       end
     end
     object tbrSettings: TToolBar
-      Left = 1031
+      Left = 988
       Top = 0
       Width = 72
       Height = 33
@@ -634,6 +640,7 @@ object frmIDE: TfrmIDE
       ButtonWidth = 32
       Images = vilToolbar
       TabOrder = 1
+      ExplicitLeft = 728
       object btnEditorHelp: TToolButton
         Left = 0
         Top = 0
@@ -665,8 +672,8 @@ object frmIDE: TfrmIDE
   object actActions: TActionList
     Images = vilToolbar
     State = asSuspended
-    Left = 32
-    Top = 176
+    Left = 88
+    Top = 88
     object actFileProjectSave: TAction
       Category = 'File'
       Caption = '&Save'
@@ -916,8 +923,8 @@ object frmIDE: TfrmIDE
     end
   end
   object mnuMain: TMainMenu
-    Left = 32
-    Top = 48
+    Left = 28
+    Top = 88
     object mnuFile: TMenuItem
       Caption = '&Project'
       object mnuFileNewAsset: TMenuItem
@@ -1041,15 +1048,14 @@ object frmIDE: TfrmIDE
     end
   end
   object DockManager: TLMDDockManager
-    StyleName = 'VS2005'
-    OnReadAppInfo = DockManagerReadAppInfo
-    Left = 168
-    Top = 236
+    StyleName = 'VCLStyle'
+    Left = 154
+    Top = 88
   end
   object imgProjectNodes: TImageList
     ColorDepth = cd32Bit
-    Left = 168
-    Top = 176
+    Left = 94
+    Top = 200
     Bitmap = {
       494C01011C003000040010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
@@ -2119,13 +2125,13 @@ object frmIDE: TfrmIDE
     Filter = 'AGDX Project|*.agdx|All Files|*.*'
     Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
     Title = 'Open an Existing AGDX Project'
-    Left = 32
-    Top = 236
+    Left = 28
+    Top = 156
   end
   object popProject: TPopupMenu
     OnPopup = popProjectPopup
-    Left = 32
-    Top = 112
+    Left = 224
+    Top = 88
     object mnuNewAsset: TMenuItem
       Action = actNewAsset
     end
@@ -2138,8 +2144,8 @@ object frmIDE: TfrmIDE
   end
   object imgBuildNodes: TImageList
     ColorDepth = cd32Bit
-    Left = 280
-    Top = 176
+    Left = 38
+    Top = 304
     Bitmap = {
       494C01010D001800040010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
@@ -3679,8 +3685,8 @@ object frmIDE: TfrmIDE
               FE23C00088E455F7315A1B6D0000000049454E44AE426082}
           end>
       end>
-    Left = 280
-    Top = 48
+    Left = 360
+    Top = 192
   end
   object vilToolbar: TVirtualImageList
     Images = <
@@ -3770,8 +3776,8 @@ object frmIDE: TfrmIDE
         Name = 'cog'
       end>
     ImageCollection = icToolbar
-    Left = 168
-    Top = 48
+    Left = 360
+    Top = 248
   end
   object icProject: TImageCollection
     Images = <
@@ -3860,7 +3866,7 @@ object frmIDE: TfrmIDE
       end>
     InterpolationMode = icIMModeNearestNeighbor
     Left = 280
-    Top = 112
+    Top = 192
   end
   object vilProject: TVirtualImageList
     Images = <
@@ -3890,7 +3896,7 @@ object frmIDE: TfrmIDE
         Name = 'tv showfolders'
       end>
     ImageCollection = icProject
-    Left = 168
-    Top = 112
+    Left = 280
+    Top = 264
   end
 end

@@ -10,7 +10,7 @@ using namespace Build;
 __fastcall ShellProcess::ShellProcess(BuildMessages& buildMessages, BuildMessageType type, const String& description)
 : BuildProcess(buildMessages, type, description)
 {
-    m_Shell = std::make_unique<TLMDStarterExt>(nullptr);
+    m_Shell = std::make_unique<TLMDStarterExt>(Application->MainForm);
     m_Shell->AutoStart = false;
     m_Shell->StartOperation = smOpen;
     m_Shell->StartOption = soSW_HIDE;
@@ -29,34 +29,29 @@ bool __fastcall ShellProcess::ShellExecute(const String& path, const String& cmd
     {
         try
         {
-            if (!m_ShellDone)
-            {
-                m_Shell->TerminateProcess();
-            }
-            ChDir(path);
-            m_Shell->DefaultDir = path;
-            m_Shell->Wait = wait;
-            BUILD_LINE(bmRun, cmdline + " " + parameters);
-            m_Shell->Command = cmdline;
-            m_Shell->Parameters = parameters;
-            m_Shell->Execute();
-            m_ShellDone = false;
-            while (wait && !m_ShellDone)
-            {
-                Application->ProcessMessages();
-                Sleep(100);
-            }
-        }
-        catch(Exception&)
-        {
-            result = false;
-        }
-    }
-    __finally
-    {
-        if (wait)
-        {
-            m_Shell->TerminateProcess();
+			ChDir(path);
+			m_Shell->DefaultDir = path;
+			m_Shell->Wait = wait;
+			BUILD_LINE(bmRun, cmdline + " " + parameters);
+			m_Shell->Command = cmdline;
+			m_Shell->Parameters = parameters;
+			m_Shell->Execute();
+			m_ShellDone = false;
+			while (wait && !m_ShellDone)
+			{
+				Application->ProcessMessages();
+				Sleep(100);
+			}
+		}
+		catch(Exception&)
+		{
+			result = false;
+		}
+	}
+	__finally
+	{
+		if (wait)
+		{
             m_ShellDone = true;
         }
     }
@@ -84,7 +79,6 @@ void __fastcall ShellProcess::OnOutputEvent(System::TObject* ASender, const Syst
 //---------------------------------------------------------------------------
 void __fastcall ShellProcess::OnErrorEvent(System::TObject* ASender)
 {
-    m_Shell->TerminateProcess();
     m_ShellDone = true;
     m_Errored = true;
     BUILD_LINE(bmFailed, "SHELL ERROR");// + m_Shell->LastError);
