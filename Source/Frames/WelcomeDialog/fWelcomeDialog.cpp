@@ -24,13 +24,19 @@ __fastcall TfrmWelcomeDialog::TfrmWelcomeDialog(TComponent* Owner)
     cmbMachines->Items->Clear();
     std::vector<String> machines;
     Project::MachineConfig::GetMachinesList(machines);
+    auto defaultMachine = theAppSettings.DefaultMachine.LowerCase().Trim();
+    cmbMachines->ItemIndex = -1;
     for (const auto& machine : machines)
     {
         cmbMachines->Items->Add(machine);
-        if (machine.Pos("ZX Spectrum") > 0)
+        if (machine.LowerCase().Trim() == defaultMachine)
         {
             cmbMachines->ItemIndex = cmbMachines->Items->Count - 1;
         }
+    }
+    if (cmbMachines->ItemIndex == -1)
+    {
+        cmbMachines->ItemIndex = 0;
     }
 }
 //---------------------------------------------------------------------------

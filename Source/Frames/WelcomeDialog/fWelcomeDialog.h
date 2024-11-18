@@ -35,15 +35,12 @@ __published:    // IDE-managed Components
     TLabel *lblMachines;
     TLabel *lblOpenExistingProject;
     TLabel *lblStartNewProject;
-    TMenuItem *CheckforUpdates1;
-    TMenuItem *Settings1;
     TOpenTextFileDialog *dlgOpen;
     TPanel *panButtons;
     TPanel *Panel1;
     TPanel *panMain;
     TPanel *panRecentProjects;
     TPanel *panStartNew;
-    TPopupMenu *popConfigure;
     TTaskDialog *dlgInvalidProject;
     void __fastcall btnCreateClick(TObject *Sender);
     void __fastcall cmbThemesChange(TObject *Sender);

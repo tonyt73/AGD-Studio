@@ -1,18 +1,20 @@
 object frmWelcomeDialog: TfrmWelcomeDialog
   Left = 0
   Top = 0
-  Width = 902
-  Height = 429
+  Width = 822
+  Height = 397
   TabOrder = 0
   object panMain: TPanel
-    Left = 402
+    Left = 322
     Top = 0
     Width = 500
-    Height = 429
+    Height = 397
     Align = alRight
     BevelOuter = bvNone
     TabOrder = 0
     StyleElements = [seFont, seBorder]
+    ExplicitLeft = 402
+    ExplicitHeight = 429
     object imgLogo: TImage
       Left = 0
       Top = 0
@@ -6207,11 +6209,12 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       Left = 0
       Top = 250
       Width = 500
-      Height = 179
+      Height = 147
       Align = alClient
       Caption = 'Panel1'
       ShowCaption = False
       TabOrder = 0
+      ExplicitHeight = 179
       object imgStartNewProject: TImage
         Left = 104
         Top = 22
@@ -6381,7 +6384,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         Left = 104
         Top = 47
         Width = 379
-        Height = 135
+        Height = 123
         BevelOuter = bvNone
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -6508,8 +6511,8 @@ object frmWelcomeDialog: TfrmWelcomeDialog
   object panRecentProjects: TPanel
     Left = 0
     Top = 0
-    Width = 402
-    Height = 429
+    Width = 322
+    Height = 397
     Align = alClient
     BevelOuter = bvNone
     Color = clBtnShadow
@@ -6522,6 +6525,8 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     ParentFont = False
     TabOrder = 1
     StyleElements = [seFont, seBorder]
+    ExplicitWidth = 338
+    ExplicitHeight = 436
   end
   object dlgOpen: TOpenTextFileDialog
     DefaultExt = 'agds'
@@ -6532,19 +6537,6 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     Title = 'Open an Existing AGD Studio Project'
     Left = 40
     Top = 28
-  end
-  object popConfigure: TPopupMenu
-    AutoHotkeys = maManual
-    AutoLineReduction = maManual
-    TrackButton = tbLeftButton
-    Left = 149
-    Top = 28
-    object Settings1: TMenuItem
-      Caption = 'Settings'
-    end
-    object CheckforUpdates1: TMenuItem
-      Caption = 'Check for Updates'
-    end
   end
   object dlgInvalidProject: TTaskDialog
     Buttons = <>
