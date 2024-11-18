@@ -60,7 +60,8 @@ void __fastcall ShellProcess::OnOutputEvent(System::TObject* ASender, const Syst
 void __fastcall ShellProcess::OnErrorEvent(System::TObject* ASender)
 {
     m_Errored = true;
-    BUILD_LINE(bmFailed, "SHELL ERROR");
+    auto shell = dynamic_cast<TLMDStarterExt*>(ASender);
+    BUILD_LINE(bmFailed, "SHELL ERROR: 0x" + IntToHex(shell->LastError, 8));
 }
 //---------------------------------------------------------------------------
 
