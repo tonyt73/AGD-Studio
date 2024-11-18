@@ -15,16 +15,10 @@ using namespace Build;
 //---------------------------------------------------------------------------
 __fastcall BuildManager::BuildManager()
 {
-    m_BuildProcesses.push_back(std::move(std::make_unique<PreChecks>(m_BuildMessages)));
-    m_BuildProcesses.push_back(std::move(std::make_unique<Creation>(m_BuildMessages)));
-    m_BuildProcesses.push_back(std::move(std::make_unique<Compilation>(m_BuildMessages)));
-    m_BuildProcesses.push_back(std::move(std::make_unique<Assembly>(m_BuildMessages)));
-    m_BuildProcesses.push_back(std::move(std::make_unique<Emulation>(m_BuildMessages)));
 }
 //---------------------------------------------------------------------------
 __fastcall BuildManager::~BuildManager()
 {
-
 }
 //---------------------------------------------------------------------------
 void __fastcall BuildManager::SetTreeView(TElXTree* treeView)
@@ -34,6 +28,15 @@ void __fastcall BuildManager::SetTreeView(TElXTree* treeView)
 //---------------------------------------------------------------------------
 bool __fastcall BuildManager::Execute()
 {
+    if (m_BuildProcesses.size() == 0)
+    {
+        m_BuildProcesses.push_back(std::move(std::make_unique<PreChecks>(m_BuildMessages)));
+        m_BuildProcesses.push_back(std::move(std::make_unique<Creation>(m_BuildMessages)));
+        m_BuildProcesses.push_back(std::move(std::make_unique<Compilation>(m_BuildMessages)));
+        m_BuildProcesses.push_back(std::move(std::make_unique<Assembly>(m_BuildMessages)));
+        m_BuildProcesses.push_back(std::move(std::make_unique<Emulation>(m_BuildMessages)));
+    }
+
     auto start = GetTickCount();
     BUILD_MSG_CLEAR;
     for (auto& process : m_BuildProcesses)

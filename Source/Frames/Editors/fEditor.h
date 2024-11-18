@@ -26,7 +26,7 @@ protected:      // User declarations
 
     void            __fastcall  SetDocument(Project::Document* document);
 
-public:		    // User declarations
+public:         // User declarations
                     __fastcall  TfrmEditor(TComponent* Owner);
                     __fastcall ~TfrmEditor();
 
