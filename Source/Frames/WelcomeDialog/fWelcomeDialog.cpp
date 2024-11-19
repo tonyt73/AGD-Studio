@@ -98,9 +98,9 @@ void __fastcall TfrmWelcomeDialog::lblOpenExistingProjectClick(TObject *Sender)
         else
         {
             // try to import the file
+            if (FOnDone) FOnDone(this);
             if (theProjectManager.Import(dlgOpen->FileName))
             {
-                if (FOnDone) FOnDone(this);
                 return;
             }
         }

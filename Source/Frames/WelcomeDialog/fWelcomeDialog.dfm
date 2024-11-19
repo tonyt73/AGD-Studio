@@ -1,14 +1,16 @@
 object frmWelcomeDialog: TfrmWelcomeDialog
   Left = 0
   Top = 0
-  Width = 822
-  Height = 397
+  Width = 900
+  Height = 440
+  Constraints.MinHeight = 440
+  Constraints.MinWidth = 900
   TabOrder = 0
   object panMain: TPanel
-    Left = 322
+    Left = 400
     Top = 0
     Width = 500
-    Height = 397
+    Height = 440
     Align = alRight
     BevelOuter = bvNone
     TabOrder = 0
@@ -6209,7 +6211,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       Left = 0
       Top = 250
       Width = 500
-      Height = 147
+      Height = 190
       Align = alClient
       Caption = 'Panel1'
       ShowCaption = False
@@ -6511,8 +6513,8 @@ object frmWelcomeDialog: TfrmWelcomeDialog
   object panRecentProjects: TPanel
     Left = 0
     Top = 0
-    Width = 322
-    Height = 397
+    Width = 400
+    Height = 440
     Align = alClient
     BevelOuter = bvNone
     Color = clBtnShadow
@@ -6525,8 +6527,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     ParentFont = False
     TabOrder = 1
     StyleElements = [seFont, seBorder]
-    ExplicitWidth = 338
-    ExplicitHeight = 436
+    ExplicitWidth = 290
   end
   object dlgOpen: TOpenTextFileDialog
     DefaultExt = 'agds'
