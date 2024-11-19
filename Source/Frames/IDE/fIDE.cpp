@@ -155,6 +155,7 @@ void __fastcall TfrmIDE::actFileProjectSaveExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileProjectCloseExecute(TObject *Sender)
 {
+    theProjectManager.Close();
     FOnFormClose(this);
 }
 //---------------------------------------------------------------------------
