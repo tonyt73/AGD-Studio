@@ -164,7 +164,6 @@ bool __fastcall ProjectManager::Import(const String& file)
         imported = agdImporter->Convert(file);
         if (imported)
         {
-            auto name = Services::File::NameWithoutExtension(file);
             // TODO: Save imported properties
 
 
