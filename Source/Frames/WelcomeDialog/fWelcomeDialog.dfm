@@ -5,6 +5,12 @@ object frmWelcomeDialog: TfrmWelcomeDialog
   Height = 440
   Constraints.MinHeight = 440
   Constraints.MinWidth = 900
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -19
+  Font.Name = 'Roboto'
+  Font.Style = []
+  ParentFont = False
   TabOrder = 0
   object panMain: TPanel
     Left = 400
@@ -15,8 +21,6 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     BevelOuter = bvNone
     TabOrder = 0
     StyleElements = [seFont, seBorder]
-    ExplicitLeft = 402
-    ExplicitHeight = 429
     object imgLogo: TImage
       Left = 0
       Top = 0
@@ -6214,9 +6218,14 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       Height = 190
       Align = alClient
       Caption = 'Panel1'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Roboto'
+      Font.Style = []
+      ParentFont = False
       ShowCaption = False
       TabOrder = 0
-      ExplicitHeight = 179
       object imgStartNewProject: TImage
         Left = 104
         Top = 22
@@ -6263,12 +6272,6 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         Height = 23
         Cursor = crHandPoint
         Caption = '      Start a new project'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -19
-        Font.Name = 'Roboto'
-        Font.Style = []
-        ParentFont = False
         StyleElements = [seClient, seBorder]
         OnClick = lblStartNewProjectClick
         OnMouseEnter = lblStartNewProjectMouseEnter
@@ -6287,28 +6290,16 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         object lblMachines: TLabel
           Left = 27
           Top = 48
-          Width = 55
-          Height = 20
+          Width = 74
+          Height = 23
           Caption = 'Machine'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Segoe UI Semilight'
-          Font.Style = []
-          ParentFont = False
         end
         object Label1: TLabel
           Left = 27
           Top = 9
-          Width = 40
-          Height = 20
+          Width = 50
+          Height = 23
           Caption = 'Name'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Segoe UI Semilight'
-          Font.Style = []
-          ParentFont = False
         end
         object lblFile: TLabel
           Left = 27
@@ -6318,12 +6309,6 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Anchors = [akLeft, akTop, akRight]
           AutoSize = False
           EllipsisPosition = epPathEllipsis
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Comfortaa'
-          Font.Style = []
-          ParentFont = False
           ExplicitWidth = 326
         end
         object btnCancel: TButton
@@ -6351,14 +6336,8 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Left = 101
           Top = 45
           Width = 260
-          Height = 28
+          Height = 31
           Style = csDropDownList
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Segoe UI Semilight'
-          Font.Style = []
-          ParentFont = False
           TabOrder = 1
           Items.Strings = (
             'Acorn Atom 256x192 Monochrome'
@@ -6371,12 +6350,6 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Width = 260
           Height = 31
           Anchors = [akLeft, akTop, akRight]
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Comfortaa'
-          Font.Style = []
-          ParentFont = False
           TabOrder = 0
           OnChange = edtNameChange
           OnKeyDown = edtNameKeyDown
@@ -6388,13 +6361,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         Width = 379
         Height = 123
         BevelOuter = bvNone
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
         ParentColor = True
-        ParentFont = False
         TabOrder = 0
         object lblOpenExistingProject: TLabel
           Left = 0
@@ -6403,12 +6370,6 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Height = 23
           Cursor = crHandPoint
           Caption = '      Open an existing project'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -19
-          Font.Name = 'Roboto'
-          Font.Style = []
-          ParentFont = False
           StyleElements = [seClient, seBorder]
           OnClick = lblOpenExistingProjectClick
           OnMouseEnter = lblStartNewProjectMouseEnter
@@ -6451,12 +6412,6 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Height = 23
           Cursor = crHandPoint
           Caption = '      Theme'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -19
-          Font.Name = 'Roboto'
-          Font.Style = []
-          ParentFont = False
           StyleElements = [seClient, seBorder]
           OnClick = lblChangeThemeClick
           OnMouseEnter = lblStartNewProjectMouseEnter
@@ -6518,16 +6473,9 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     Align = alClient
     BevelOuter = bvNone
     Color = clBtnShadow
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Roboto'
-    Font.Style = []
     ParentBackground = False
-    ParentFont = False
     TabOrder = 1
     StyleElements = [seFont, seBorder]
-    ExplicitWidth = 290
   end
   object dlgOpen: TOpenTextFileDialog
     DefaultExt = 'agds'

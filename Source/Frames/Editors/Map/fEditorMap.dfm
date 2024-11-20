@@ -1,12 +1,16 @@
 inherited frmEditorMap: TfrmEditorMap
+  Width = 1468
+  Height = 904
   Margins.Left = 5
   Margins.Top = 5
   Margins.Right = 5
   Margins.Bottom = 5
-  Font.Height = -7
-  Font.Name = 'Tahoma'
+  Font.Height = -11
+  Font.Name = 'Roboto'
   Font.Style = [fsBold]
   ParentFont = False
+  ExplicitWidth = 1468
+  ExplicitHeight = 904
   object imgLock: TImage
     Left = 56
     Top = 293
@@ -45,57 +49,53 @@ inherited frmEditorMap: TfrmEditorMap
   object dpTileMap: TLMDDockSite
     Left = 0
     Top = 0
-    Width = 640
-    Height = 480
+    Width = 1468
+    Height = 904
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -7
-    Font.Name = 'Tahoma'
+    Font.Height = -12
+    Font.Name = 'Roboto'
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 1207
-    ExplicitHeight = 600
+    ExplicitWidth = 624
+    ExplicitHeight = 441
     Layout = {
       3C3F786D6C2076657273696F6E3D22312E30223F3E0D0A3C736974656C697374
       3E0D0A20203C73697465206470693D223936222069643D2253454C465F534954
       45223E0D0A202020203C7A6F6E65206B696E643D2256455254223E0D0A202020
-      2020203C7A6F6E65206B696E643D22484F525A222073697A653D223234352220
-      6473697A653D22302E3533303330333033303330333033223E0D0A2020202020
-      2020203C7A6F6E65206B696E643D225441425322206163746976657461623D22
-      30222073697A653D2232343722206473697A653D22302E333937313036313039
-      3332343735392220697373706163653D2274727565223E0D0A20202020202020
-      2020203C7A6F6E65206B696E643D2250414E454C222069643D226470576F726B
-      7370616365222076697369626C653D2274727565222F3E0D0A20202020202020
-      203C2F7A6F6E653E0D0A20202020202020203C7A6F6E65206B696E643D225645
-      5254222073697A653D2233373522206473697A653D22302E3630323839333839
-      30363735323431223E0D0A202020202020202020203C7A6F6E65206B696E643D
-      2250414E454C222069643D22647053637261746368506164222076697369626C
-      653D2274727565222073697A653D2231313322206473697A653D22302E343734
-      3237323933303634383737222F3E0D0A202020202020202020203C7A6F6E6520
-      6B696E643D2250414E454C222069643D22647041737365747322207669736962
-      6C653D2274727565222073697A653D2231323622206473697A653D22302E3532
-      353732373036393335313233222F3E0D0A20202020202020203C2F7A6F6E653E
-      0D0A2020202020203C2F7A6F6E653E0D0A2020202020203C7A6F6E65206B696E
-      643D2250414E454C222069643D226470526F6F6D53656C6563746F7222207669
-      7369626C653D2274727565222073697A653D2232313722206473697A653D2230
-      2E3436393639363936393639363937222F3E0D0A202020203C2F7A6F6E653E0D
-      0A20203C2F736974653E0D0A3C2F736974656C6973743E0D0A}
+      2020203C7A6F6E65206B696E643D22484F525A222073697A653D223636392220
+      6473697A653D22302E373535303739303036373732303039223E0D0A20202020
+      202020203C7A6F6E65206B696E643D225441425322206163746976657461623D
+      2230222073697A653D223130373522206473697A653D22302E37343133373933
+      31303334343832382220697373706163653D2274727565223E0D0A2020202020
+      20202020203C7A6F6E65206B696E643D2250414E454C222069643D226470576F
+      726B7370616365222076697369626C653D2274727565222F3E0D0A2020202020
+      2020203C2F7A6F6E653E0D0A20202020202020203C7A6F6E65206B696E643D22
+      56455254222073697A653D2233373522206473697A653D22302E323538363230
+      363839363535313732223E0D0A202020202020202020203C7A6F6E65206B696E
+      643D2250414E454C222069643D22647053637261746368506164222076697369
+      626C653D2274727565222073697A653D2233313422206473697A653D22302E34
+      37343237323933303634383737222F3E0D0A202020202020202020203C7A6F6E
+      65206B696E643D2250414E454C222069643D2264704173736574732220766973
+      69626C653D2274727565222073697A653D2233343922206473697A653D22302E
+      3532353732373036393335313233222F3E0D0A20202020202020203C2F7A6F6E
+      653E0D0A2020202020203C2F7A6F6E653E0D0A2020202020203C7A6F6E65206B
+      696E643D2250414E454C222069643D226470526F6F6D53656C6563746F722220
+      76697369626C653D2274727565222073697A653D2232313722206473697A653D
+      22302E323434393230393933323237393931222F3E0D0A202020203C2F7A6F6E
+      653E0D0A20203C2F736974653E0D0A3C2F736974656C6973743E0D0A}
     object dpAssets: TLMDDockPanel
       Tag = 100
-      Left = 259
-      Top = 125
+      Left = 1087
+      Top = 326
       Width = 375
-      Height = 126
+      Height = 349
       Buttons = [pbPin, pbMaximize]
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = 3355443
-      Font.Height = -7
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
+      ParentColor = True
+      DefaultColor = False
       ParentBackground = False
-      ParentFont = False
       TabOrder = 6
       Caption = 'ASSETS'
       OnCloseQuery = dpToolsCloseQuery
@@ -103,49 +103,42 @@ inherited frmEditorMap: TfrmEditorMap
         Left = 0
         Top = 21
         Width = 375
-        Height = 172
-        ActivePage = tabTiles
+        Height = 328
+        ActivePage = tabObjects
         Align = alClient
-        Constraints.MinHeight = 172
+        Constraints.MinHeight = 84
         Constraints.MinWidth = 243
         MultiLine = True
         TabHeight = 16
         TabOrder = 0
-        TabWidth = 53
+        TabWidth = 64
         OnChange = pgcAssetsChange
         OnMouseEnter = imgWorkspaceMouseEnter
         OnResize = pgcAssetsResize
-        ExplicitHeight = 168
         object tabTiles: TTabSheet
           Caption = 'TILES'
           inline assetsTiles: TfrmAssetSelection
             Left = 0
             Top = 0
             Width = 367
-            Height = 146
+            Height = 302
             Margins.Left = 8
             Margins.Top = 8
             Margins.Right = 8
             Margins.Bottom = 8
             Align = alClient
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = 3355443
-            Font.Height = -12
-            Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
-            ParentFont = False
             TabOrder = 0
             ExplicitWidth = 367
-            ExplicitHeight = 146
+            ExplicitHeight = 302
             inherited sbxList: TScrollBox
               Width = 367
-              Height = 146
+              Height = 302
               Margins.Left = 8
               Margins.Top = 8
               Margins.Right = 8
               Margins.Bottom = 8
               ExplicitWidth = 367
-              ExplicitHeight = 312
+              ExplicitHeight = 58
               inherited panList: TFlowPanel
                 Width = 350
                 Height = 464
@@ -171,7 +164,7 @@ inherited frmEditorMap: TfrmEditorMap
             Left = 0
             Top = 0
             Width = 367
-            Height = 146
+            Height = 302
             Margins.Left = 8
             Margins.Top = 8
             Margins.Right = 8
@@ -180,21 +173,21 @@ inherited frmEditorMap: TfrmEditorMap
             Font.Charset = DEFAULT_CHARSET
             Font.Color = 3355443
             Font.Height = -12
-            Font.Name = 'Tahoma'
+            Font.Name = 'Roboto'
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 0
             ExplicitWidth = 367
-            ExplicitHeight = 146
+            ExplicitHeight = 302
             inherited sbxList: TScrollBox
               Width = 367
-              Height = 146
+              Height = 302
               Margins.Left = 8
               Margins.Top = 8
               Margins.Right = 8
               Margins.Bottom = 8
               ExplicitWidth = 367
-              ExplicitHeight = 312
+              ExplicitHeight = 302
               inherited panList: TFlowPanel
                 Width = 350
                 Height = 464
@@ -213,8 +206,8 @@ inherited frmEditorMap: TfrmEditorMap
           Caption = 'OBJECTS'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
+          Font.Height = -12
+          Font.Name = 'Roboto'
           Font.Style = []
           ImageIndex = 2
           ParentFont = False
@@ -222,7 +215,7 @@ inherited frmEditorMap: TfrmEditorMap
             Left = 0
             Top = 0
             Width = 367
-            Height = 146
+            Height = 302
             Margins.Left = 8
             Margins.Top = 8
             Margins.Right = 8
@@ -231,21 +224,21 @@ inherited frmEditorMap: TfrmEditorMap
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -12
-            Font.Name = 'Tahoma'
+            Font.Name = 'Roboto'
             Font.Style = []
             ParentFont = False
             TabOrder = 0
             ExplicitWidth = 367
-            ExplicitHeight = 146
+            ExplicitHeight = 302
             inherited sbxList: TScrollBox
               Width = 367
-              Height = 146
+              Height = 302
               Margins.Left = 8
               Margins.Top = 8
               Margins.Right = 8
               Margins.Bottom = 8
               ExplicitWidth = 367
-              ExplicitHeight = 312
+              ExplicitHeight = 302
               inherited panList: TFlowPanel
                 Width = 350
                 Height = 464
@@ -253,10 +246,11 @@ inherited frmEditorMap: TfrmEditorMap
                 Margins.Top = 8
                 Margins.Right = 8
                 Margins.Bottom = 8
-                Font.Name = 'Tahoma'
+                Font.Name = 'Roboto'
                 Font.Style = [fsBold]
                 ParentFont = False
                 StyleElements = [seFont, seClient, seBorder]
+                ExplicitLeft = 1
                 ExplicitWidth = 350
                 ExplicitHeight = 464
               end
@@ -267,23 +261,17 @@ inherited frmEditorMap: TfrmEditorMap
     end
     object dpRoomSelector: TLMDDockPanel
       Left = 6
-      Top = 257
-      Width = 628
+      Top = 681
+      Width = 1456
       Height = 217
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = 3355443
-      Font.Height = -7
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
       ParentBackground = False
-      ParentFont = False
       TabOrder = 7
       Caption = 'ROOM SELECTION'
       object imgRoomSelector: TImage
         Left = 0
         Top = 21
-        Width = 628
-        Height = 177
+        Width = 1456
+        Height = 176
         Align = alClient
         OnMouseDown = imgRoomSelectorMouseDown
         OnMouseEnter = imgWorkspaceMouseEnter
@@ -295,9 +283,14 @@ inherited frmEditorMap: TfrmEditorMap
       end
       object sbrRoomSelection: TStatusBar
         Left = 0
-        Top = 198
-        Width = 628
-        Height = 19
+        Top = 197
+        Width = 1456
+        Height = 20
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 3355443
+        Font.Height = -12
+        Font.Name = 'Roboto'
+        Font.Style = [fsBold]
         Panels = <
           item
             Text = 'Screen Location: X, Y'
@@ -306,25 +299,20 @@ inherited frmEditorMap: TfrmEditorMap
           item
             Width = 50
           end>
-        ParentFont = True
         UseSystemFont = False
-        ExplicitWidth = 1203
+        ExplicitTop = 198
       end
     end
     object dpScratchPad: TLMDDockPanel
       Tag = 100
-      Left = 259
+      Left = 1087
       Top = 6
       Width = 375
-      Height = 113
+      Height = 314
       Buttons = [pbPin, pbMaximize]
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = 3355443
-      Font.Height = -7
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
+      ParentColor = True
+      DefaultColor = False
       ParentBackground = False
-      ParentFont = False
       TabOrder = 4
       Caption = 'SCRATCH PAD'
       OnCloseQuery = dpToolsCloseQuery
@@ -332,21 +320,20 @@ inherited frmEditorMap: TfrmEditorMap
         Left = 0
         Top = 21
         Width = 375
-        Height = 92
+        Height = 293
         Align = alClient
         BevelOuter = bvNone
-        Constraints.MinHeight = 154
+        Constraints.MinHeight = 74
         Constraints.MinWidth = 243
         ShowCaption = False
         TabOrder = 0
         OnResize = panScratchPadViewResize
-        ExplicitTop = 19
-        ExplicitHeight = 155
+        ExplicitHeight = 74
         object imgScratchPad: TImage
           Left = 0
           Top = 22
           Width = 375
-          Height = 114
+          Height = 251
           Align = alClient
           PopupMenu = popScratchPad
           OnMouseDown = imgScratchPadMouseDown
@@ -366,7 +353,6 @@ inherited frmEditorMap: TfrmEditorMap
           Caption = 'tbrScratchPad'
           Images = imgSmallIcons
           TabOrder = 0
-          ExplicitWidth = 250
           object btnScratchCopyFrom: TToolButton
             Left = 0
             Top = 0
@@ -426,14 +412,14 @@ inherited frmEditorMap: TfrmEditorMap
         end
         object StatusBar1: TStatusBar
           Left = 0
-          Top = 136
+          Top = 273
           Width = 375
-          Height = 18
+          Height = 20
           Font.Charset = DEFAULT_CHARSET
           Font.Color = 3355443
-          Font.Height = -9
+          Font.Height = -12
           Font.Name = 'Roboto'
-          Font.Style = []
+          Font.Style = [fsBold]
           Panels = <
             item
               Alignment = taCenter
@@ -443,10 +429,10 @@ inherited frmEditorMap: TfrmEditorMap
             item
               Width = 50
             end>
+          ParentColor = True
           UseSystemFont = False
           Visible = False
-          ExplicitTop = 189
-          ExplicitWidth = 250
+          ExplicitTop = 275
         end
       end
     end
@@ -454,8 +440,8 @@ inherited frmEditorMap: TfrmEditorMap
       Tag = 100
       Left = 6
       Top = 28
-      Width = 247
-      Height = 223
+      Width = 1075
+      Height = 647
       ClientKind = dkDocument
       Buttons = [pbMaximize]
       ParentBackground = False
@@ -465,52 +451,59 @@ inherited frmEditorMap: TfrmEditorMap
       object panToolbars: TPanel
         Left = 0
         Top = 0
-        Width = 56
-        Height = 223
+        Width = 80
+        Height = 647
         Align = alLeft
         AutoSize = True
         BevelOuter = bvNone
-        Constraints.MaxWidth = 56
-        Constraints.MinWidth = 56
+        Constraints.MaxWidth = 80
+        Constraints.MinWidth = 80
         TabOrder = 0
         OnMouseEnter = imgWorkspaceMouseEnter
-        ExplicitHeight = 351
         object lblTools: TLabel
           Left = 0
           Top = 0
-          Width = 56
+          Width = 80
           Height = 20
           Align = alTop
           Alignment = taCenter
           AutoSize = False
           Caption = 'TOOLS'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = 3355443
+          Font.Height = -12
+          Font.Name = 'Roboto'
+          Font.Style = [fsBold]
+          ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 56
         end
         object tbrTools: TToolBar
           Left = 0
           Top = 20
-          Width = 56
-          Height = 152
+          Width = 80
+          Height = 76
           AutoSize = True
           ButtonHeight = 38
           ButtonWidth = 39
           DisabledImages = tbrImagesDisabled
           Images = tbrImagesEnabled
           TabOrder = 1
+          ExplicitWidth = 56
+          ExplicitHeight = 152
           object btnSelect: TToolButton
             Left = 0
             Top = 0
             Action = actSelect
             Grouped = True
             ParentShowHint = False
-            Wrap = True
             ShowHint = True
             Style = tbsCheck
           end
           object btnPencil: TToolButton
             Tag = 2
-            Left = 0
-            Top = 38
+            Left = 39
+            Top = 0
             Action = actPencil
             Grouped = True
             ParentShowHint = False
@@ -521,18 +514,17 @@ inherited frmEditorMap: TfrmEditorMap
           object btnLine: TToolButton
             Tag = 4
             Left = 0
-            Top = 76
+            Top = 38
             Action = actLine
             Grouped = True
             ParentShowHint = False
-            Wrap = True
             ShowHint = True
             Style = tbsCheck
           end
           object btnRect: TToolButton
             Tag = 5
-            Left = 0
-            Top = 114
+            Left = 39
+            Top = 38
             Action = actRect
             Grouped = True
             ParentShowHint = False
@@ -542,15 +534,17 @@ inherited frmEditorMap: TfrmEditorMap
         end
         object tbrGrids: TToolBar
           Left = 0
-          Top = 296
-          Width = 56
-          Height = 76
+          Top = 182
+          Width = 80
+          Height = 38
           AutoSize = True
           ButtonHeight = 38
           ButtonWidth = 39
           Images = tbrImagesEnabled
           TabOrder = 0
-          ExplicitTop = 144
+          ExplicitTop = 296
+          ExplicitWidth = 56
+          ExplicitHeight = 76
           object btnWSGridRoom: TToolButton
             Left = 0
             Top = 0
@@ -558,14 +552,13 @@ inherited frmEditorMap: TfrmEditorMap
             Down = True
             ImageIndex = 5
             ParentShowHint = False
-            Wrap = True
             ShowHint = True
             Style = tbsCheck
             OnClick = btnWSGridRoomClick
           end
           object btnWSGridTile: TToolButton
-            Left = 0
-            Top = 38
+            Left = 39
+            Top = 0
             Hint = 'Tile Grid Toggle (Ctrl+Shift+G)'
             ImageIndex = 4
             ParentShowHint = False
@@ -576,38 +569,40 @@ inherited frmEditorMap: TfrmEditorMap
         end
         object panSplitter4: TPanel
           Left = 0
-          Top = 686
-          Width = 56
+          Top = 420
+          Width = 80
           Height = 4
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 2
-          ExplicitTop = 319
+          ExplicitTop = 686
+          ExplicitWidth = 56
         end
         object tbrModes: TToolBar
           Left = 0
-          Top = 196
-          Width = 56
-          Height = 76
+          Top = 120
+          Width = 80
+          Height = 38
           AutoSize = True
           ButtonHeight = 38
           ButtonWidth = 39
           DisabledImages = tbrImagesDisabled
           Images = tbrImagesEnabled
           TabOrder = 3
-          ExplicitTop = 95
+          ExplicitTop = 196
+          ExplicitWidth = 56
+          ExplicitHeight = 76
           object btnEditModeMultiple: TToolButton
             Left = 0
             Top = 0
             Action = actEditModeFullMap
             Grouped = True
             ParentShowHint = False
-            Wrap = True
             ShowHint = True
           end
           object btnEditModeSingle: TToolButton
-            Left = 0
-            Top = 38
+            Left = 39
+            Top = 0
             Action = actEditModeSingleScreen
             Grouped = True
             ParentShowHint = False
@@ -616,60 +611,82 @@ inherited frmEditorMap: TfrmEditorMap
         end
         object panGrids: TPanel
           Left = 0
-          Top = 272
-          Width = 56
+          Top = 158
+          Width = 80
           Height = 24
           Align = alTop
           BevelOuter = bvNone
           Caption = 'GRIDS'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = 3355443
+          Font.Height = -12
+          Font.Name = 'Roboto'
+          Font.Style = [fsBold]
+          ParentFont = False
           TabOrder = 4
-          ExplicitTop = 120
+          ExplicitTop = 272
+          ExplicitWidth = 56
         end
         object panModes: TPanel
           Left = 0
-          Top = 172
-          Width = 56
+          Top = 96
+          Width = 80
           Height = 24
           Align = alTop
           BevelOuter = bvNone
           Caption = 'MODES'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = 3355443
+          Font.Height = -12
+          Font.Name = 'Roboto'
+          Font.Style = [fsBold]
+          ParentFont = False
           TabOrder = 5
-          ExplicitTop = 71
+          ExplicitTop = 172
+          ExplicitWidth = 56
         end
         object panVisuals: TPanel
           Left = 0
-          Top = 372
-          Width = 56
+          Top = 220
+          Width = 80
           Height = 24
           Align = alTop
           BevelOuter = bvNone
           Caption = 'VISUALS'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = 3355443
+          Font.Height = -12
+          Font.Name = 'Roboto'
+          Font.Style = [fsBold]
+          ParentFont = False
           TabOrder = 6
-          ExplicitTop = 169
+          ExplicitTop = 372
+          ExplicitWidth = 56
         end
         object ToolBar1: TToolBar
           Left = 0
-          Top = 396
-          Width = 56
-          Height = 190
+          Top = 244
+          Width = 80
+          Height = 114
           AutoSize = True
           ButtonHeight = 38
           ButtonWidth = 39
           Images = tbrImagesEnabled
           TabOrder = 7
-          ExplicitTop = 193
+          ExplicitTop = 396
+          ExplicitWidth = 56
+          ExplicitHeight = 190
           object btnToggleDisplayStart: TToolButton
             Left = 0
             Top = 0
             Action = actToggleStartRoom
             ParentShowHint = False
-            Wrap = True
             ShowHint = True
             Style = tbsCheck
           end
           object btnToggleDisplayRoomNumbers: TToolButton
-            Left = 0
-            Top = 38
+            Left = 39
+            Top = 0
             Action = actToggleRoomNumbers
             ParentShowHint = False
             Wrap = True
@@ -678,16 +695,15 @@ inherited frmEditorMap: TfrmEditorMap
           end
           object btnToggleDisplayLocks: TToolButton
             Left = 0
-            Top = 76
+            Top = 38
             Action = actToggleShowLocks
             ParentShowHint = False
-            Wrap = True
             ShowHint = True
             Style = tbsCheck
           end
           object btnToggleTileTypes: TToolButton
-            Left = 0
-            Top = 114
+            Left = 39
+            Top = 38
             Action = actToggleTileTypes
             ParentShowHint = False
             Wrap = True
@@ -696,7 +712,7 @@ inherited frmEditorMap: TfrmEditorMap
           end
           object btnToggleSpriteTypes: TToolButton
             Left = 0
-            Top = 152
+            Top = 76
             Hint = 'Toggle the Display of Sprite Types'
             Action = actShowSpriteTypes
             ParentShowHint = False
@@ -705,38 +721,46 @@ inherited frmEditorMap: TfrmEditorMap
         end
         object Panel1: TPanel
           Left = 0
-          Top = 586
-          Width = 56
+          Top = 358
+          Width = 80
           Height = 24
           Align = alTop
           BevelOuter = bvNone
           Caption = 'SPRITES'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = 3355443
+          Font.Height = -12
+          Font.Name = 'Roboto'
+          Font.Style = [fsBold]
+          ParentFont = False
           TabOrder = 8
-          ExplicitTop = 269
+          ExplicitTop = 586
+          ExplicitWidth = 56
         end
         object ToolBar2: TToolBar
           Left = 0
-          Top = 610
-          Width = 56
-          Height = 76
+          Top = 382
+          Width = 80
+          Height = 38
           AutoSize = True
           ButtonHeight = 38
           ButtonWidth = 39
           Images = tbrImagesEnabled
           TabOrder = 9
-          ExplicitTop = 293
+          ExplicitTop = 610
+          ExplicitWidth = 56
+          ExplicitHeight = 76
           object btnToggleSpriteLocks: TToolButton
             Left = 0
             Top = 0
             Hint = 'Toggles the locked to room state of all selected Sprites'
             Action = actToggleSpriteLocks
             ParentShowHint = False
-            Wrap = True
             ShowHint = True
           end
           object btnSpriteType0: TToolButton
-            Left = 0
-            Top = 38
+            Left = 39
+            Top = 0
             Action = actSpriteType0
             ParentShowHint = False
             ShowHint = True
@@ -744,11 +768,11 @@ inherited frmEditorMap: TfrmEditorMap
         end
         object ToolBar3: TToolBar
           Left = 0
-          Top = 690
-          Width = 56
+          Top = 424
+          Width = 80
           Height = 70
-          ButtonHeight = 35
-          ButtonWidth = 21
+          ButtonHeight = 25
+          ButtonWidth = 16
           Font.Charset = DEFAULT_CHARSET
           Font.Color = 3355443
           Font.Height = -15
@@ -760,7 +784,8 @@ inherited frmEditorMap: TfrmEditorMap
           ShowHint = False
           TabOrder = 10
           Transparent = False
-          ExplicitTop = 323
+          ExplicitTop = 690
+          ExplicitWidth = 56
           object btnSpriteType1: TToolButton
             Tag = 1
             Left = 0
@@ -770,24 +795,23 @@ inherited frmEditorMap: TfrmEditorMap
             ShowHint = True
           end
           object btnSpriteType2: TToolButton
-            Left = 21
+            Left = 16
             Top = 0
             Action = actSpriteType2
             ParentShowHint = False
-            Wrap = True
             ShowHint = True
           end
           object btnSpriteType3: TToolButton
             Tag = 3
-            Left = 0
-            Top = 35
+            Left = 32
+            Top = 0
             Action = actSpriteType3
             ParentShowHint = False
             ShowHint = True
           end
           object btnSpriteType4: TToolButton
-            Left = 21
-            Top = 35
+            Left = 48
+            Top = 0
             Action = actSpriteType4
             ParentShowHint = False
             Wrap = True
@@ -796,31 +820,30 @@ inherited frmEditorMap: TfrmEditorMap
           object btnSpriteType5: TToolButton
             Tag = 5
             Left = 0
-            Top = 70
+            Top = 25
             Action = actSpriteType5
             ParentShowHint = False
             ShowHint = True
           end
           object btnSpriteType6: TToolButton
-            Left = 21
-            Top = 70
+            Left = 16
+            Top = 25
             Action = actSpriteType6
             ParentShowHint = False
-            Wrap = True
             ShowHint = True
           end
           object btnSpriteType7: TToolButton
             Tag = 7
-            Left = 0
-            Top = 105
+            Left = 32
+            Top = 25
             Action = actSpriteType7
             ParentShowHint = False
             ShowHint = True
           end
           object btnSpriteType8: TToolButton
             Tag = 8
-            Left = 21
-            Top = 105
+            Left = 48
+            Top = 25
             Action = actSpriteType8
             ParentShowHint = False
             ShowHint = True
@@ -828,33 +851,34 @@ inherited frmEditorMap: TfrmEditorMap
         end
       end
       object sbxWorkspace: TScrollBox
-        Left = 56
+        Left = 80
         Top = 0
-        Width = 191
-        Height = 223
+        Width = 995
+        Height = 647
         Align = alClient
         BorderStyle = bsNone
         TabOrder = 1
         OnMouseWheel = sbxWorkspaceMouseWheel
-        ExplicitWidth = 769
-        ExplicitHeight = 351
+        ExplicitLeft = 56
+        ExplicitWidth = 175
+        ExplicitHeight = 184
         object panWorkspaceView: TPanel
           Left = 0
           Top = 0
-          Width = 766
-          Height = 344
+          Width = 995
+          Height = 647
           Align = alClient
           BevelOuter = bvNone
           ShowCaption = False
           TabOrder = 0
           OnResize = panWorkspaceViewResize
-          ExplicitWidth = 904
-          ExplicitHeight = 455
+          ExplicitWidth = 175
+          ExplicitHeight = 184
           object imgWorkspace: TImage
             Left = 0
             Top = 22
-            Width = 766
-            Height = 303
+            Width = 995
+            Height = 605
             Align = alClient
             PopupMenu = popWorkspace
             OnMouseActivate = imgWorkspaceMouseActivate
@@ -869,12 +893,12 @@ inherited frmEditorMap: TfrmEditorMap
           object tbrWorkspace: TToolBar
             Left = 0
             Top = 0
-            Width = 766
+            Width = 995
             Height = 22
             AutoSize = True
             Images = imgSmallIcons
             TabOrder = 0
-            ExplicitWidth = 904
+            ExplicitWidth = 175
             object btnScratchCopyTo: TToolButton
               Left = 0
               Top = 0
@@ -944,9 +968,14 @@ inherited frmEditorMap: TfrmEditorMap
           end
           object sbrWorkspace: TStatusBar
             Left = 0
-            Top = 325
-            Width = 766
-            Height = 19
+            Top = 627
+            Width = 995
+            Height = 20
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = 3355443
+            Font.Height = -12
+            Font.Name = 'Roboto'
+            Font.Style = [fsBold]
             Panels = <
               item
                 Alignment = taCenter
@@ -959,16 +988,14 @@ inherited frmEditorMap: TfrmEditorMap
               end
               item
                 Text = 'Screen Index: 255'
-                Width = 100
+                Width = 150
               end
               item
                 Width = 50
               end>
-            ParentFont = True
             UseSystemFont = False
             Visible = False
-            ExplicitTop = 436
-            ExplicitWidth = 904
+            ExplicitTop = 628
           end
         end
       end

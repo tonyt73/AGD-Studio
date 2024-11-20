@@ -9,8 +9,8 @@ object frmPaletteMonoAttribute: TfrmPaletteMonoAttribute
   Constraints.MinWidth = 176
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Height = -12
+  Font.Name = 'Roboto'
   Font.Style = [fsBold]
   Padding.Left = 8
   Padding.Top = 8
@@ -71,8 +71,8 @@ object frmPaletteMonoAttribute: TfrmPaletteMonoAttribute
   object Label1: TLabel
     Left = 12
     Top = 7
-    Width = 19
-    Height = 13
+    Width = 20
+    Height = 14
     Caption = 'INK'
   end
 end

@@ -10,7 +10,7 @@ object frmAbout: TfrmAbout
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -15
-  Font.Name = 'Tahoma'
+  Font.Name = 'Roboto'
   Font.Style = []
   FormStyle = fsStayOnTop
   GlassFrame.Bottom = 84
@@ -4171,8 +4171,8 @@ object frmAbout: TfrmAbout
     Caption = 'AGD is copyright Jonathan Cauldwell'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'Tahoma'
+    Font.Height = -15
+    Font.Name = 'Roboto'
     Font.Style = [fsBold]
     GlowSize = 2
     ParentFont = False

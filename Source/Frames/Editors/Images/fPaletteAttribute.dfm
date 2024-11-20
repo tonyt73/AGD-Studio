@@ -9,8 +9,8 @@ object frmPaletteAttribute: TfrmPaletteAttribute
   Constraints.MinWidth = 176
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Height = -12
+  Font.Name = 'Roboto'
   Font.Style = [fsBold]
   Padding.Left = 8
   Padding.Top = 8
@@ -28,8 +28,8 @@ object frmPaletteAttribute: TfrmPaletteAttribute
   object lblPalettePaper: TLabel
     Left = 12
     Top = 94
-    Width = 36
-    Height = 13
+    Width = 39
+    Height = 14
     Caption = 'PAPER'
   end
   object spdInkBlack: TSpeedButton
@@ -225,11 +225,6 @@ object frmPaletteAttribute: TfrmPaletteAttribute
     Hint = 'Transparent - attribute will remain unchanged'
     GroupIndex = 1
     Flat = True
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = []
     Glyph.Data = {
       66030000424D6603000000000000360000002800000010000000110000000100
       18000000000030030000C40E0000C40E00000000000000000000FF00FFFF00FF
@@ -259,7 +254,6 @@ object frmPaletteAttribute: TfrmPaletteAttribute
       00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
       FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
       FFFF00FFFF00FFFF00FF}
-    ParentFont = False
     ParentShowHint = False
     ShowHint = True
     OnClick = spdInkBlackClick
@@ -746,14 +740,14 @@ object frmPaletteAttribute: TfrmPaletteAttribute
     Left = 11
     Top = 181
     Width = 43
-    Height = 13
+    Height = 14
     Caption = 'BRIGHT'
   end
   object lblPaletteFlash: TLabel
     Left = 12
     Top = 245
-    Width = 35
-    Height = 13
+    Width = 37
+    Height = 14
     Caption = 'FLASH'
   end
   object imgPaletteTransparent: TImage
@@ -796,8 +790,8 @@ object frmPaletteAttribute: TfrmPaletteAttribute
   object lblPaletteTransparent: TLabel
     Left = 33
     Top = 315
-    Width = 82
-    Height = 13
+    Width = 76
+    Height = 14
     Caption = 'is Transparent'
   end
   object Bevel2: TBevel
@@ -824,8 +818,8 @@ object frmPaletteAttribute: TfrmPaletteAttribute
   object Label1: TLabel
     Left = 12
     Top = 7
-    Width = 19
-    Height = 13
+    Width = 20
+    Height = 14
     Caption = 'INK'
   end
 end

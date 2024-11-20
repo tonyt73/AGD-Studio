@@ -1,5 +1,9 @@
 inherited frmEditorJumpTable: TfrmEditorJumpTable
+  Width = 939
+  Height = 725
   OnResize = FrameResize
+  ExplicitWidth = 939
+  ExplicitHeight = 725
   object imgView: TImage
     Left = 71
     Top = 71

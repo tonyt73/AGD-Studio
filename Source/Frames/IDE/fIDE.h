@@ -141,7 +141,7 @@ __published:    // IDE-managed Components
     TOpenTextFileDialog *dlgOpen;
     TPanel *Panel1;
     TPanel *Panel2;
-    TPanel *Panel3;
+	TPanel *panToolbar;
     TPopupMenu *popProject;
     TSplitter *Splitter1;
     TToolBar *tbrMain;

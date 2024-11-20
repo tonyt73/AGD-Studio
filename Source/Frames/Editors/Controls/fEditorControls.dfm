@@ -1,5 +1,7 @@
 inherited frmEditorControls: TfrmEditorControls
   AlignWithMargins = True
+  Width = 745
+  Height = 625
   Font.Height = -16
   Font.Name = 'Roboto'
   Font.Style = [fsBold]
@@ -8,15 +10,23 @@ inherited frmEditorControls: TfrmEditorControls
   Padding.Right = 16
   Padding.Bottom = 16
   ParentFont = False
+  ExplicitWidth = 745
+  ExplicitHeight = 625
   DesignSize = (
-    640
-    480)
+    745
+    625)
   object Label1: TLabel
     Left = 31
     Top = 7
     Width = 89
     Height = 19
     Caption = ' DIRECTION '
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Roboto'
+    Font.Style = [fsBold]
+    ParentFont = False
     Transparent = True
   end
   object Label2: TLabel
@@ -39,34 +49,43 @@ inherited frmEditorControls: TfrmEditorControls
     Width = 65
     Height = 19
     Caption = ' OPTION '
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Roboto'
+    Font.Style = [fsBold]
+    ParentFont = False
     Transparent = True
   end
   object Line1: TShape
     Left = 16
     Top = 24
-    Width = 1320
+    Width = 1441
     Height = 3
     Anchors = [akLeft, akTop, akRight]
     Brush.Color = clBackground
     Pen.Color = clBackground
+    ExplicitWidth = 1320
   end
   object Line2: TShape
     Left = 16
     Top = 200
-    Width = 1320
+    Width = 1441
     Height = 3
     Anchors = [akLeft, akTop, akRight]
     Brush.Color = clBackground
     Pen.Color = clBackground
+    ExplicitWidth = 1320
   end
   object Line3: TShape
     Left = 16
     Top = 376
-    Width = 1320
+    Width = 1441
     Height = 3
     Anchors = [akLeft, akTop, akRight]
     Brush.Color = clBackground
     Pen.Color = clBackground
+    ExplicitWidth = 1320
   end
   inline kcLeft: TfrmKeyCode
     Left = 31
@@ -163,7 +182,7 @@ inherited frmEditorControls: TfrmEditorControls
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
-    Font.Name = 'Tahoma'
+    Font.Name = 'Roboto'
     Font.Style = []
     Padding.Left = 7
     Padding.Top = 7
@@ -192,7 +211,7 @@ inherited frmEditorControls: TfrmEditorControls
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
-    Font.Name = 'Tahoma'
+    Font.Name = 'Roboto'
     Font.Style = []
     Padding.Left = 7
     Padding.Top = 7
@@ -221,7 +240,7 @@ inherited frmEditorControls: TfrmEditorControls
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
-    Font.Name = 'Tahoma'
+    Font.Name = 'Roboto'
     Font.Style = []
     Padding.Left = 7
     Padding.Top = 7
@@ -250,7 +269,7 @@ inherited frmEditorControls: TfrmEditorControls
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
-    Font.Name = 'Tahoma'
+    Font.Name = 'Roboto'
     Font.Style = []
     Padding.Left = 7
     Padding.Top = 7

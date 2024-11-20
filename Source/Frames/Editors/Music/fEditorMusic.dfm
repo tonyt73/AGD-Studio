@@ -1,5 +1,4 @@
 inherited frmEditorMusic: TfrmEditorMusic
-  Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Name = 'Roboto'
   ParentFont = False
 end
