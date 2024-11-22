@@ -6366,10 +6366,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         object lblOpenExistingProject: TLabel
           Left = 0
           Top = 4
-          Width = 239
+          Width = 304
           Height = 23
           Cursor = crHandPoint
-          Caption = '      Open an existing project'
+          Caption = '      Open/Import an existing project'
           StyleElements = [seClient, seBorder]
           OnClick = lblOpenExistingProjectClick
           OnMouseEnter = lblStartNewProjectMouseEnter
@@ -6480,8 +6480,8 @@ object frmWelcomeDialog: TfrmWelcomeDialog
   object dlgOpen: TOpenTextFileDialog
     DefaultExt = 'agds'
     Filter = 
-      'AGD Studio Project|*.agds|AGD Snapshot|*.sna|AGD File|*.agd|All ' +
-      'Files|*.*'
+      'All AGD Files|*.agds;*.agd;*mpagd|AGD Studio Project|*.agds|MPAG' +
+      'D File|*.mpagd|AGD File|*.agd|All Files|*.*'
     Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
     Title = 'Open an Existing AGD Studio Project'
     Left = 40
