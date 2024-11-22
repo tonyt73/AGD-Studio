@@ -88,10 +88,13 @@ void __fastcall JsonFile::Write(const long& value) const
     m_JsonWriter->WriteValue((int)value);
 }
 //---------------------------------------------------------------------------
-void __fastcall JsonFile::Write(const String& property, const String& value) const
+void __fastcall JsonFile::Write(const String& property, const String& value, bool skipEmpty) const
 {
-    m_JsonWriter->WritePropertyName(property);
-    m_JsonWriter->WriteValue(value);
+    if (!skipEmpty || (skipEmpty && value.Trim() != ""))
+    {
+        m_JsonWriter->WritePropertyName(property);
+        m_JsonWriter->WriteValue(value);
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::Write(const String& property, const int& value) const
