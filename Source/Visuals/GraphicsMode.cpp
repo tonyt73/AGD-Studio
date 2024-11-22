@@ -271,6 +271,16 @@ void __fastcall GraphicsMode::LoadLogicalCLUT(String path, String name)
     }
 }
 //---------------------------------------------------------------------------
+int __fastcall GraphicsMode::GetSizeOfPixels(int width, int height) const
+{
+    return (width / (8 / m_BitsPerPixel)) * height;
+}
+//---------------------------------------------------------------------------
+int __fastcall GraphicsMode::GetSizeOfAttributes(int width, int height) const
+{
+    return (width / 8) * (height / PixelsHighPerAttribute);
+}
+//---------------------------------------------------------------------------
 
 
 //---------------------------------------------------------------------------

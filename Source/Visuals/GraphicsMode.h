@@ -75,11 +75,14 @@ public:
     void            __fastcall  Load(const String& name);
     void            __fastcall  SaveLogicalCLUT(String path = "", String name = "");
     void            __fastcall  LoadLogicalCLUT(String path = "", String name = "");
-                    // Remap a logical color to a new palette color
+                                // Remap a logical color to a new palette color
     void            __fastcall  RemapColor(int paletteTableIndex, int colorTableIndex);
     unsigned char   __fastcall  RemapPixels(unsigned char pixels) const;
     void            __fastcall  RestoreDefaultPalette();
     const Palette&  __fastcall  Palette() const;
+                                // Get the number of bytes for the size of image
+    int             __fastcall  GetSizeOfPixels(int width, int height) const;
+    int             __fastcall  GetSizeOfAttributes(int width, int height) const;
 
     String          __property  Name                                    = { read = m_Name                   };
     unsigned int    __property  BitsPerPixel                            = { read = m_BitsPerPixel           };
