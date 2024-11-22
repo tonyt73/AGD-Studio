@@ -70,7 +70,6 @@ const Visuals::ImageSizing& __fastcall  GetImageSizing(Visuals::ImageTypes type)
 
 public:
                             __fastcall  MachineConfig(const String& name);
-    virtual                 __fastcall ~MachineConfig();
 
     Visuals::GraphicsMode*  __fastcall  GraphicsMode() const;
     static void             __fastcall  GetMachinesList(std::vector<String>& list);

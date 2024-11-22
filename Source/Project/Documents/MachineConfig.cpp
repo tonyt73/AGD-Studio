@@ -60,10 +60,6 @@ __fastcall MachineConfig::MachineConfig(const String& name)
     m_GraphicsMode = std::make_unique<Visuals::GraphicsMode>();
 }
 //---------------------------------------------------------------------------
-__fastcall MachineConfig::~MachineConfig()
-{
-}
-//---------------------------------------------------------------------------
 const Visuals::ImageSizing& __fastcall MachineConfig::GetImageSizing(Visuals::ImageTypes type) const
 {
     if (Visuals::itStart <= type && type < Visuals::itEnd)
