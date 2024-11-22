@@ -31,21 +31,21 @@ DocumentManager& __fastcall DocumentManager::get()
 //---------------------------------------------------------------------------
 __fastcall DocumentManager::DocumentManager()
 {
-    Register("Game", "Configuration", &ProjectDocument::Create);
-    Register("Image", "Character Set", &CharacterSetDocument::Create);
-    Register("Image", "Object", &ObjectDocument::Create);
-    Register("Image", "Sprite", &SpriteDocument::Create);
-    Register("Image", "Tile", &TileDocument::Create);
-    Register("Map", "Tiled", &TiledMapDocument::Create);
-    Register("Text", "AGD", &AGDDocument::Create);
-    Register("Text", "Assembly", &AssemblyDocument::Create);
-    Register("Text", "Event", &EventDocument::Create);
-    Register("Text", "Plain", &TextDocument::Create);
-    Register("Text", "SoundFx", &SfxDocument::Create);
-    Register("Text", "Messages", &MessageDocument::Create);
-    Register("Window", "Definition", &WindowDocument::Create);
-    Register("Jump", "Table", &JumpTableDocument::Create);
-    Register("Controls", "List", &ControlsDocument::Create);
+    Register("Game"    , "Configuration", &ProjectDocument::Create     );
+    Register("Image"   , "Character Set", &CharacterSetDocument::Create);
+    Register("Image"   , "Object"       , &ObjectDocument::Create      );
+    Register("Image"   , "Sprite"       , &SpriteDocument::Create      );
+    Register("Image"   , "Tile"         , &TileDocument::Create        );
+    Register("Map"     , "Tiled"        , &TiledMapDocument::Create    );
+    Register("Text"    , "AGD"          , &AGDDocument::Create         );
+    Register("Text"    , "Assembly"     , &AssemblyDocument::Create    );
+    Register("Text"    , "Event"        , &EventDocument::Create       );
+    Register("Text"    , "Plain"        , &TextDocument::Create        );
+    Register("Text"    , "SoundFx"      , &SfxDocument::Create         );
+    Register("Text"    , "Messages"     , &MessageDocument::Create     );
+    Register("Window"  , "Definition"   , &WindowDocument::Create      );
+    Register("Jump"    , "Table"        , &JumpTableDocument::Create   );
+    Register("Controls", "List"         , &ControlsDocument::Create    );
 }
 //---------------------------------------------------------------------------
 void __fastcall DocumentManager::Register(const String& type, const String& subType, CreateDocumentFn pfnCreate)
