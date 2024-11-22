@@ -3,6 +3,7 @@
 //---------------------------------------------------------------------------
 #include "ProjectManager.h"
 #include "Documents/Project.h"
+#include "Documents/Window.h"
 #include "Documents/FileDefinitions.h"
 #include "Documents/Settings.h"
 #include "Frames/Editors/Code/fEditorCode.h"
@@ -118,10 +119,10 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
     {
         ClearTree(name);
         // create a new project file, but load the file if it exists
-        auto config = dynamic_cast<ProjectDocument*>(Add("Game", "Configuration", name, machine));
-        assert(config != nullptr);
-        config->Author = theAppSettings.Developer;
-        if (config->Files().size() == 0)
+        auto project = dynamic_cast<ProjectDocument*>(Add("Game", "Configuration", name, machine));
+        assert(project != nullptr);
+        project->Author = theAppSettings.Developer;
+        if (project->Files().size() == 0)
         {
             // create the event files
             auto definitions = std::make_unique<FileDefinitions>();
@@ -131,18 +132,22 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
             }
             // create the map, controls, jump table and window documents
             // TODO: Change the interface to take the class type and name
-            theDocumentManager.Add("Map", "Tiled", "Tile Map", "");
-            theDocumentManager.Add("Controls", "List", "Controls", "");
-            theDocumentManager.Add("Jump", "Table", "JumpTable", "");
-            theDocumentManager.Add("Window", "Definition", "Window", "");
-            theDocumentManager.Add("Text", "Messages", "Messages", "");
+            theDocumentManager.Add("Map"     , "Tiled"      , "Tile Map", "");
+            theDocumentManager.Add("Controls", "List"      , "Controls" , "");
+            theDocumentManager.Add("Jump"    , "Table"     , "JumpTable", "");
+            theDocumentManager.Add("Text"    , "Messages"  , "Messages" , "");
+            // Set window to full size
+            auto winDoc = dynamic_cast<WindowDocument*>(theDocumentManager.Add("Window", "Definition", "Window", ""));
+            const auto wc = project->MachineConfiguration().Window;
+            TRect rect(0, 0, wc.Width, wc.Height);
+            winDoc->Set(rect);
         }
         else
         {
             theDocumentManager.Load(name);
         }
-        m_MostRecentUsedList->Remove(name, config->Path);
-        m_MostRecentUsedList->Add(name, config->Path, config->Machine);
+        m_MostRecentUsedList->Remove(name, project->Path);
+        m_MostRecentUsedList->Add(name, project->Path, project->Machine);
     }
     m_IsOpen = true;
 }
@@ -155,7 +160,7 @@ bool __fastcall ProjectManager::Import(const String& file)
     auto imported = false;
     // TODO: Check the project doesn't already exist
     auto name = Services::File::NameWithoutExtension(file);
-    auto agdImporter = std::make_unique<AgdImporter>();
+    auto agdImporter = std::make_unique<Importer::AgdImporter>();
     if (agdImporter != nullptr && agdImporter->CanConvert(file))
     {
         auto machine = agdImporter->GetMachine(file);
