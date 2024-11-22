@@ -106,7 +106,7 @@ void __fastcall TfrmIDE::OnMessageEvent(const MessageEvent& message)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::OnUpdateProperties(const UpdateProperties& event)
 {
-    if (event.Id == "update.properties")
+    if (event.Id == "update.properties" && tvProject && tvProject && tvProject->Selected)
     {
         auto doc = (Project::Document*)((NativeInt)tvProject->Selected->Tag);
         UpdateDocumentProperties(doc);
