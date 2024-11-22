@@ -7,8 +7,8 @@
 //---------------------------------------------------------------------------
 using namespace Services;
 //---------------------------------------------------------------------------
-const String tokenObj = "|";
-const String tokenSep = "^";
+const String g_TokenObj = "|";
+const String g_TokenSep = "^";
 //---------------------------------------------------------------------------
 Generic::Generic()
 {
@@ -28,11 +28,12 @@ void Generic::Process()
 {
     if (m_Objects.size() == 0 && m_Object.Length() > 0)
     {
-        // split the string by the token obj
-        auto objects = System::Strutils::SplitString(m_Object, tokenObj);
+        // split the string by the object token
+        auto objects = System::Strutils::SplitString(m_Object, g_TokenObj);
         for (auto object : objects)
         {
-            auto tokens = System::Strutils::SplitString(object, tokenSep);
+            // split the objects by the separator token
+            auto tokens = System::Strutils::SplitString(object, g_TokenSep);
             if (tokens.Length == 2)
             {
                 m_Objects[tokens[0]] = tokens[1];
@@ -43,22 +44,23 @@ void Generic::Process()
 //---------------------------------------------------------------------------
 void Generic::Add(const String& name, const String& value)
 {
-    m_Object += tokenObj + name + tokenSep + "string:"  + value;
+    m_Object += g_TokenObj + name + g_TokenSep + "string:"  + value;
 }
 //---------------------------------------------------------------------------
 void Generic::Add(const String& name, const bool& value)
 {
-    m_Object += tokenObj + name + tokenSep + "bool:" + String(value ? "true" : "false");
+    // |<name>^bool:<value>
+    m_Object += g_TokenObj + name + g_TokenSep + "bool:" + String(value ? "true" : "false");
 }
 //---------------------------------------------------------------------------
 void Generic::Add(const String& name, const int& value)
 {
-    m_Object += tokenObj + name + tokenSep + "int:" + IntToStr(value);
+    m_Object += g_TokenObj + name + g_TokenSep + "int:" + IntToStr(value);
 }
 //---------------------------------------------------------------------------
 void Generic::Add(const String& name, const float& value)
 {
-    m_Object += tokenObj + name + tokenSep + "float:" + FloatToStrF(value, ffFixed, 6, 2);
+    m_Object += g_TokenObj + name + g_TokenSep + "float:" + FloatToStrF(value, ffFixed, 6, 2);
 }
 //---------------------------------------------------------------------------
 bool Generic::Get(const String& name, String& value)
