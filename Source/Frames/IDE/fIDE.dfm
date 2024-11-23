@@ -35,7 +35,7 @@ object frmIDE: TfrmIDE
       3D2250414E454C222069643D224C4D44446F636B50616E656C32222076697369
       626C653D2266616C7365222F3E0D0A20202020202020203C2F7A6F6E653E0D0A
       20202020202020203C7A6F6E65206B696E643D22544142532220616374697665
-      7461623D2234222073697A653D2232303422206473697A653D22302E33333439
+      7461623D2232222073697A653D2232303422206473697A653D22302E33333439
       3735333639343538313238223E0D0A202020202020202020203C7A6F6E65206B
       696E643D2250414E454C222069643D226470456469746F724B65797322207669
       7369626C653D2274727565222F3E0D0A202020202020202020203C7A6F6E6520
@@ -190,8 +190,15 @@ object frmIDE: TfrmIDE
         Width = 754
         Height = 162
         Align = alClient
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Consolas'
+        Font.Style = [fsBold]
         Lines.Strings = (
           '')
+        ParentFont = False
+        ReadOnly = True
         ScrollBars = ssBoth
         TabOrder = 0
       end
@@ -437,8 +444,8 @@ object frmIDE: TfrmIDE
         object lblPropertyInfo: TLabel
           Left = 3
           Top = 3
-          Width = 112
-          Height = 14
+          Width = 202
+          Height = 34
           Align = alClient
           Caption = 'Property information'
           Font.Charset = DEFAULT_CHARSET
@@ -449,6 +456,8 @@ object frmIDE: TfrmIDE
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExplicitWidth = 112
+          ExplicitHeight = 14
         end
       end
     end
