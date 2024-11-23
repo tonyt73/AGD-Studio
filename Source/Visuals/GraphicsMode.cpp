@@ -148,17 +148,20 @@ const __fastcall GraphicsMode::ExportInfo& __fastcall GraphicsMode::GetExportInf
     return m_ExportInfo[imageType];
 }
 //---------------------------------------------------------------------------
-void __fastcall GraphicsMode::Load(const String& name)
+bool __fastcall GraphicsMode::Load(const String& name)
 {
     m_LogicalColors.clear();
-    Services::JsonFile::Load(Services::File::Combine(Services::Folders::Application, "Graphics Modes" + Services::Folders::Separator + name + ".json"));
-    m_Palette->Load(m_PaletteName);
-    auto path = Services::File::Combine("Saved Palettes", Name);
-    path = Services::Folders::Create(Services::Folders::lpCommon, path);
-    SaveLogicalCLUT(path, "Default");
-    LoadLogicalCLUT();
-    m_DefaultLogicalColors.clear();
-    m_DefaultLogicalColors = m_LogicalColors;
+    auto loaded = Services::JsonFile::Load(Services::File::Combine(Services::Folders::Application, "Graphics Modes" + Services::Folders::Separator + name + ".json"));
+    if (loaded) {
+        loaded = m_Palette->Load(m_PaletteName);
+        auto path = Services::File::Combine("Saved Palettes", Name);
+        path = Services::Folders::Create(Services::Folders::lpCommon, path);
+        SaveLogicalCLUT(path, "Default");
+        LoadLogicalCLUT();
+        m_DefaultLogicalColors.clear();
+        m_DefaultLogicalColors = m_LogicalColors;
+    }
+    return loaded;
 }
 //---------------------------------------------------------------------------
 void __fastcall GraphicsMode::Save()

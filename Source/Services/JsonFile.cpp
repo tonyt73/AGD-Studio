@@ -200,7 +200,7 @@ String __fastcall JsonFile::ProcessPath(const String& path) const
     return newPath;
 }
 //---------------------------------------------------------------------------
-void __fastcall JsonFile::Load(const String& file)
+bool __fastcall JsonFile::Load(const String& file)
 {
     if (File::File::Exists(file))
     {
@@ -252,6 +252,7 @@ void __fastcall JsonFile::Load(const String& file)
                 }
             }
             OnLoaded();
+            return true;
         }
         catch (...)
         {
@@ -261,6 +262,7 @@ void __fastcall JsonFile::Load(const String& file)
             // auto path = ProcessPath(jr->Path);
         }
     }
+    return false;
 }
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::OnStartObject(const String& object)

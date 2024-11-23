@@ -70,12 +70,15 @@ const Visuals::ImageSizing& __fastcall MachineConfig::GetImageSizing(Visuals::Im
     return m_ImageSizing[Visuals::itCharacterSet];
 }
 //---------------------------------------------------------------------------
-void __fastcall MachineConfig::Load(const String& name)
+bool __fastcall MachineConfig::Load(const String& name)
 {
     // Load our configuration
-    Services::JsonFile::Load(Services::File::Combine(Services::Folders::Application, "Machines" + Services::Folders::Separator + name + ".json"));
-    // Now load the graphics mode configuration; which in turn will load the palette of colors
-    m_GraphicsMode->Load(m_GraphicsModeName);
+    auto loaded = Services::JsonFile::Load(Services::File::Combine(Services::Folders::Application, "Machines" + Services::Folders::Separator + name + ".json"));
+    if (loaded) {
+        // Now load the graphics mode configuration; which in turn will load the palette of colors
+        loaded = m_GraphicsMode->Load(m_GraphicsModeName);
+    }
+    return loaded;
 }
 //---------------------------------------------------------------------------
 Visuals::GraphicsMode* __fastcall MachineConfig::GraphicsMode() const

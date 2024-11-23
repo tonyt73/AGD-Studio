@@ -72,7 +72,7 @@ public:
                     __fastcall  GraphicsMode();
                     __fastcall  GraphicsMode(const GraphicsMode& other);
 
-    void            __fastcall  Load(const String& name);
+    bool            __fastcall  Load(const String& name);
     void            __fastcall  SaveLogicalCLUT(String path = "", String name = "");
     void            __fastcall  LoadLogicalCLUT(String path = "", String name = "");
                                 // Remap a logical color to a new palette color

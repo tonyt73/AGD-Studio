@@ -88,10 +88,10 @@ void __fastcall Palette::OnEndObject(const String& object)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall Palette::Load(const String& name)
+bool __fastcall Palette::Load(const String& name)
 {
     m_ColorTable.clear();
-    Services::JsonFile::Load(Services::File::Combine(Services::Folders::Application, "Palettes" + Services::Folders::Separator + name + ".json"));
+    return Services::JsonFile::Load(Services::File::Combine(Services::Folders::Application, "Palettes" + Services::Folders::Separator + name + ".json"));
 }
 //---------------------------------------------------------------------------
 void __fastcall Palette::Save()
