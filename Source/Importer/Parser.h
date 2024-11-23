@@ -48,17 +48,21 @@ private:
 
     enum    fsm { fsmSectionName, fsmSection, fsmValueElement, fsmList } m_ParserState;
 
-
-
-    void        CreateMatchSets(const String& machine);
-    void        AddMatchSection(ImportDefinition::Matcher& match);
+    bool        CreateMatchSets(const String& machine);
+    bool        AddMatchSection(const String& variable, ImportDefinition::Matcher& match);
     Tokens      Tokenize(const String& line, const String& separator) const;
 
     bool        ParseToken(const Token& token);
     bool        ProcessSection(const Token& token);
     bool        ProcessValue(const Token& token);
-    bool        ProcessLine(const String& line, const Token& token);
-    void        UpdateParameters();
+    Tokens      ProcessLine(const String& line);
+    Token       ReplaceVariableReferencesWithValues(Token token);
+    void        ParseError(const String& message, Token token);
+    void        ParseError(const String& message, Token lineToken, Token sectionToken);
+    void        PopSection();
+    String      SanitizeName(const String& name);
+
+    void        SetVariable(const String& var, const String& value);
 
 public:
 

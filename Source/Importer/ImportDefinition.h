@@ -22,17 +22,18 @@ public:
     struct SectionList
     {
         Matcher Window;
-        Matcher Controls;
+        Matcher ControlSet;
         Matcher Objects;
         Matcher Sprites;
         Matcher Blocks;
-        Matcher Screens;
         Matcher Map;
         Matcher Font;
         Matcher Palette;
         Matcher Events;
         Matcher Messages;
         Matcher JumpTable;
+        Matcher Screens;
+        Matcher SpritePosition;
     };
 
 
@@ -47,7 +48,7 @@ public:
 
             __fastcall  ImportDefinition(const String& name);
 
-    void    __fastcall  Load(const String& name);
+    bool    __fastcall  Load(const String& name);
 };
 //---------------------------------------------------------------------------
 } // namespace Importer

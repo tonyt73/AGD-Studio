@@ -30,7 +30,10 @@ bool __fastcall Token::ize(const String& part, bool first)
             Value = part;
         } else if (part.Length() == 3 && part[1] == '\'' && part[3] == '\'') {
             Type = ttAscii;
-            Value = part[2];
+            Value = part;
+        } else if (part[1] == '"') {
+            Type = ttString;
+            Value = part;
         } else {
             bool isAlpha = true;
             for (auto chr : part) {
@@ -39,10 +42,9 @@ bool __fastcall Token::ize(const String& part, bool first)
             if (isAlpha) {
                 if (first) {
                     Type = ttSection;
-                } else {
-                    Type = ttWord;
                 }
-                Value = part;
+                Type |= ttWord;
+                Value = part.LowerCase();
             } else if (part.Pos("<") == 1 && part.Pos(">") >= part.Length() - 2) {
                 // is a variable definition
                 m_Type = ttVariable;
@@ -54,15 +56,16 @@ bool __fastcall Token::ize(const String& part, bool first)
                     } else if (vartype == "number") {
                         m_Type |= ttNumber;
                     } else if (vartype == "string") {
+                        m_Type |= ttString;
+                    } else if (vartype == "lines") {
                         m_Type |= ttLine;
                     } else if (vartype == "word") {
                         m_Type |= ttWord;
                     }
                 }
                 // set variable name
-                auto name = varparts[1];
-                Value = name;
-                if (name.Pos("[") > 0 && name.Pos("]") > name.Pos("[")) {
+                Value = varparts[1];
+                if (Value.Pos("[") > 0 && Value.Pos("]") > Value.Pos("[")) {
                     // is also an array
                     Type |= ttArray;
                 }
@@ -71,10 +74,6 @@ bool __fastcall Token::ize(const String& part, bool first)
                 Value = part;
             }
         }
-        return true;
-    } else {
-        Type = ttEmpty;
-        Value = part;
     }
     return Type != ttEmpty;
 }
@@ -82,5 +81,28 @@ bool __fastcall Token::ize(const String& part, bool first)
 bool __fastcall Token::isa(int type) const
 {
     return (m_Type & type) != 0;
+}
+//---------------------------------------------------------------------------
+bool __fastcall Token::isEmpty() const
+{
+    return Type == ttEmpty;
+}
+//---------------------------------------------------------------------------
+String __fastcall Token::toStr() const
+{
+    String type = "";
+    if (Type & ttSection) type += "ttSection ";
+    if (Type & ttNumber ) type += "ttNumber ";
+    if (Type & ttAscii  ) type += "ttAscii ";
+    if (Type & ttWord   ) type += "ttWord ";
+    if (Type & ttString ) type += "ttString ";
+    if (Type & ttLine   ) type += "ttLine ";
+    if (Type & ttArray  ) type += "ttArray ";
+    if (Type & ttLoop   ) type += "ttLoop ";
+    if (Type & ttInvalid) type += "ttInvalid ";
+
+    type = StringReplace(type.Trim(), " ", "|", TReplaceFlags() << rfReplaceAll);
+    String value = ", Value: " + Value;
+    return "Type: " + type + value;
 }
 //---------------------------------------------------------------------------
