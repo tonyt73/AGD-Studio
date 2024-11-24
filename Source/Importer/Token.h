@@ -11,7 +11,7 @@ private:
 
 
 public:
-    enum    TokenType    { ttEmpty = 0, ttSection = 1, ttNumber = 2, ttAscii = 4, ttWord = 8, ttString = 16, ttLine = 32, ttVariable = 64, ttArray = 128, ttLoop = 256, ttInvalid = 512 };
+    enum    TokenType    { ttEmpty = 0, ttSection = 1, ttNumber = 2, ttAscii = 4, ttWord = 8, ttString = 16, ttLine = 32, ttVariable = 64, ttArray = 128, ttInvalid = 256 };
 
 private:
     int         m_Type;

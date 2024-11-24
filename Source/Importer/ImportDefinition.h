@@ -14,11 +14,11 @@ public:
     struct Matcher
     {
         String  Pattern;
-        String  Strip;
         Tokens  Tokens;
         String  Variable;
     };
 
+private:
     struct SectionList
     {
         Matcher Window;
@@ -36,8 +36,6 @@ public:
         Matcher SpritePosition;
     };
 
-
-private:
     String              m_Name;
     String              m_Format;
     SectionList         m_Sections;
