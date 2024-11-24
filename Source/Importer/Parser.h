@@ -45,6 +45,7 @@ private:
     std::map<String, int>                                   m_VariableCounts;
     std::map<String, std::map<String, std::list<String>>>   m_Variables;
     std::map<String, std::map<String, int>>                 m_ArrayCounts;
+    ImportDefinition::Matcher                               m_CurrentMatcher;
 
     enum    fsm { fsmSectionName, fsmSection, fsmValueElement, fsmList } m_ParserState;
 
@@ -59,7 +60,7 @@ private:
     Token       ReplaceVariableReferencesWithValues(Token token);
     void        ParseError(const String& message, Token token);
     void        ParseError(const String& message, Token lineToken, Token sectionToken);
-    void        PopSection();
+    void        PopSectionToken();
     String      SanitizeName(const String& name);
 
     void        SetVariable(const String& var, const String& value);

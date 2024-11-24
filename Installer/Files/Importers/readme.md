@@ -66,6 +66,7 @@ The match pattern after the initial section name, is a set of value matches defi
 		  - `"Screens": = {screens}`
      - Retrieves the count of sections captured with the name so far.
   - Arrays can use `-1` to indicate that size is unknown and all data of the array type is to be added to the array.
+  - **Internally** all variables are arrays. Variables without dimensions are just defined as `[1]`.
 - **Matching is case-insensitive**
 
 ### Explanation of some patterns
@@ -90,10 +91,6 @@ The match pattern after the initial section name, is a set of value matches defi
 	- `spriteposition` captures the `SPRITEPOSITION` word at the start of the line.
 	- `<number:screen{screens}.spriteposition.type[1]>` captures a single number value and adds it to an internal variable of type array.
 	   - `{screens}` makes the variable name `screen1.spriteposition.type`
-	   - `[1]` is used to trick the parser to think it is processing arrays, since they capture multiple values as a list of values and not a single value. 
-	   - This is important because with the `[1]` the parser would only store a single value for `screen1.spriteposition.type` and so each new line of `SPRITEPOSITION` would overwrite the previous lines value.
-	   - So each new line of `SPRITEPOSITION` will add each new value to each of the variable names defined as such as `screen1.spriteposition.type`.
-	   - This is repeated for all the `SPRITEPOSITION` parameters, `index`, `y` and `x`.
    
 
 ## How do I define AGD importing for a new machine.

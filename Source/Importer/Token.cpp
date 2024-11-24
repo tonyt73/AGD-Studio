@@ -44,7 +44,7 @@ bool __fastcall Token::ize(const String& part, bool first, bool incVars)
                 Value = part.LowerCase();
             } else if (incVars && part[1] == '<' && part[part.Length()] == '>' ) {
                 // is a variable definition (from the parser definition file)
-                m_Type = ttVariable;
+                m_Type = ttVariable | ttArray;
                 auto varparts = SplitString(part.SubString(2, part.Pos(">") - 2), ":");
                 auto vartypes = SplitString(varparts[0], ",");
                 for (auto vartype : vartypes) {
@@ -62,10 +62,6 @@ bool __fastcall Token::ize(const String& part, bool first, bool incVars)
                 }
                 // set variable name
                 Value = varparts[1];
-                if (Value.Pos("[") > 0 && Value.Pos("]") > Value.Pos("[")) {
-                    // is also an array
-                    Type |= ttArray;
-                }
             } else {
                 Type = ttInvalid;
                 Value = part;

@@ -59,7 +59,6 @@ bool Parser::AddMatchSection(const String& variable, ImportDefinition::Matcher& 
             break;
         }
     }
-
     if (sectionName != "") {
         // tokenize the matcher patterns for use during parsing
         matcher.Tokens = Tokenize(lcp, " ", true);
@@ -102,20 +101,31 @@ bool Parser::Parse(const String& file, const String& machine)
         // parse the lines
         auto lc = 1;
         for (auto line : lines) {
-            auto lineTokens = ProcessLine(line);
-            // no, tokenise the current line tokens against the current section tokens
-            while (!lineTokens.empty()) {
-                // parse the current token
-                if (ParseToken(lineTokens.front())) {
-                    // if parsed successfully, move to the next one
-                    lineTokens.pop_front();
-                } else {
-                    ErrorMessage("[Importer] Failed to parse line in file: " + file);
-                    ErrorMessage("[Importer] Line: " + IntToStr(lc) + ": " + line);
-                    return false;
+            try {
+                auto lineTokens = ProcessLine(line);
+                // no, tokenise the current line tokens against the current section tokens
+                while (!lineTokens.empty()) {
+                    // parse the current token
+                    if (ParseToken(lineTokens.front())) {
+                        // if parsed successfully, move to the next one
+                        lineTokens.pop_front();
+                    } else {
+                        ErrorMessage("[Importer] Failed to parse line in file: " + file);
+                        ErrorMessage("[Importer] Line: " + IntToStr(lc) + ": " + line);
+                        return false;
+                    }
                 }
+                lc++;
+            } catch (Exception &exception) {
+                ErrorMessage("[Importer] Section: " + m_CurrentMatcher.Variable + ", Pattern Match: " + m_CurrentMatcher.Pattern);
+                ErrorMessage("[Importer] Exception: " + exception.Message);
+                if (exception.InnerException) {
+                    ErrorMessage("[Importer] Inner Exception: " + exception.InnerException->Message);
+                }
+                ErrorMessage("[Importer] Failed to parse line in file: " + file);
+                ErrorMessage("[Importer] Line: " + IntToStr(lc) + ": " + line);
+                return false;
             }
-            lc++;
         }
         InformationMessage("[Importer] Import completed successfully");
         return true;
@@ -140,7 +150,7 @@ bool Parser::ProcessSection(const Token& token)
     auto name = token.Value.LowerCase();
     if (m_SectionTokens.size() > 0 && m_SectionTokens.front().isa(Token::ttArray)) {
         // we stop processing arrays here.
-        PopSection();
+        PopSectionToken();
         // keep processing if more tokens exists
         if (m_SectionTokens.size() > 0) {
             // false means we'll fall through to processing value tokens
@@ -155,6 +165,7 @@ bool Parser::ProcessSection(const Token& token)
         // are the compatible?
         if (m_SectionTokens.front().isa(token.Type)) {
             auto varname = m_MatchSections[name].Variable;
+            m_CurrentMatcher = m_MatchSections[name];
             // variable names with an 's' indicate an array (multiple sections named SPRITE or BLOCK etc)
             if (varname[varname.Length()] == 's') {
                 // so we set an array counter for the variable
@@ -168,7 +179,7 @@ bool Parser::ProcessSection(const Token& token)
             // change to the new variable
             m_CurrentVariable = varname.LowerCase();
             // pop the section token
-            PopSection();
+            PopSectionToken();
             InformationMessage("[Importer] Starting Section: " + varname);
             return true;
         } else {
@@ -193,44 +204,33 @@ bool Parser::ProcessValue(const Token& token)
         if (sectionToken.isa(Token::ttVariable)) {
             // set(single)/add(array) value from line token to the section variable
             SetVariable(secVar, token.Value);
-            // are we processing an array?
-            if (sectionToken.isa(Token::ttArray)) {
-                // yes, then we keep the section token until all array elements are read
-                if (m_ArrayCounts.count(m_CurrentVariable) == 0 || m_ArrayCounts[m_CurrentVariable].count(secVar) == 0) {
-                    // validate the number of items
-                    int count = 0;
-                    // find the size of the array
-                    auto bl = sectionToken.Value.Pos('[');
-                    auto br = sectionToken.Value.Pos(']');
-                    if (br > bl) {
-                        count = 1;
-                        auto size = sectionToken.Value.SubString(bl + 1, br - bl - 1);
-                        auto sizes = SplitString(size, ",");
-                        for (auto s : sizes) {
-                            count *= StrToInt(s);
-                        }
-                    } else {
-                        ParseError("Mismatched array brackets in match pattern.", sectionToken);
-                        return false;
-                    }
-                    m_ArrayCounts[m_CurrentVariable][secVar] = count;
+            // yes, then we keep the section token until all array elements are read
+            if (m_ArrayCounts.count(m_CurrentVariable) == 0 || m_ArrayCounts[m_CurrentVariable].count(secVar) == 0) {
+                // validate the number of items (by default all variables have 1 array element
+                int count = 1;
+                // find the size of the array
+                auto bl = sectionToken.Value.Pos('[');
+                auto br = sectionToken.Value.Pos(']');
+                if (br > bl) {
+                    auto sizes = SplitString(sectionToken.Value.SubString(bl + 1, br - bl - 1), ",");
+                    for (auto s : sizes) count *= StrToInt(s);
                 }
-                // do we have all the array elements required?
-                auto curcount = m_Variables[m_CurrentVariable][secVar].size();
-                auto reqcount = m_ArrayCounts[m_CurrentVariable][secVar];
-                if (m_ArrayCounts[m_CurrentVariable][secVar] > 0 && (curcount == reqcount || reqcount == 1)) {
-                    // yes, move to the next section token
-                    PopSection();
+                m_ArrayCounts[m_CurrentVariable][secVar] = count;
+            }
+            // do we have all the array elements required?
+            auto curcount = m_Variables[m_CurrentVariable][secVar].size();
+            auto reqcount = m_ArrayCounts[m_CurrentVariable][secVar];
+            if (m_ArrayCounts[m_CurrentVariable][secVar] > 0 && (curcount == reqcount || reqcount == 1)) {
+                if (reqcount == 1) {
+                    InformationMessage("[Importer] Variable set: " + secVar + " = " + token.Value);
                 }
-            } else {
-                // no, single variable, move to the next section token
-                InformationMessage("[Importer] Variable set: " + secVar + " = " + token.Value);
-                PopSection();
+                // yes, move to the next section token
+                PopSectionToken();
             }
         } else {
             // consume a word instead of a section at the start of a line
             if (token.isa(Token::ttWord) && token.Value.LowerCase() == secVar) {
-                PopSection();
+                PopSectionToken();
                 return true;
             }
             ParseError("Expected a Word token", token, sectionToken);
@@ -239,7 +239,7 @@ bool Parser::ProcessValue(const Token& token)
         return true;
     }
     if (sectionToken.isa(Token::ttLine)) {
-        // any other tokens, while in line capture mode
+        // any other tokens, while in line capture mode can still be processed
         return true;
     }
     ParseError("Tokens mismatch. ", token, sectionToken);
@@ -309,38 +309,32 @@ void Parser::ParseError(const String& message, Token lineToken, Token sectionTok
     ErrorMessage("[Importer] Parser token  : " + sectionToken.toStr());
 }
 //---------------------------------------------------------------------------
-void Parser::PopSection()
+// Remove the current section pattern token we are matching to the incoming line token
+void Parser::PopSectionToken()
 {
     auto sectionToken = m_SectionTokens.front();
     if (sectionToken.isa(Token::ttArray)) {
-        // replace var= with their respective values
+        // get the variable name and display array information
         sectionToken = ReplaceVariableReferencesWithValues(sectionToken);
-        // check it is a variable and excepts the same type as the line token
         auto secVar = SanitizeName(sectionToken.Value);
         int curcount = m_Variables[m_CurrentVariable][secVar].size();
-        String type = " bytes";
-        if (m_SectionTokens.front().isa(Token::ttString|Token::ttLine)) {
-            type = " lines";
+        if (curcount > 1) {
+            String type = m_SectionTokens.front().isa(Token::ttString|Token::ttLine) ? " lines" : " bytes";
+            InformationMessage("[Importer] Array '" + secVar + "' is " + IntToStr(curcount) + type);
         }
-        InformationMessage("[Importer] Array '" + secVar + "' is " + IntToStr(curcount) + type);
     }
+    // finished processing section
     m_SectionTokens.pop_front();
     if (m_SectionTokens.size() == 0) {
+        // finished the entire match pattern
         InformationMessage("[Importer] Finished Section: " + m_CurrentVariable);
     }
 }
 //---------------------------------------------------------------------------
 String Parser::SanitizeName(const String& name)
 {
-    // variable names are lower case
-    auto newName = name.LowerCase();
-    // remove the array dimensions
-    auto pos = name.Pos("[");
-    if (pos > 1) {
-        newName = name.SubString(1, pos - 1);
-    }
-    // sanitized
-    return newName;
+    // variable names are lower case and we remove the array dimensions
+    return  (name.Pos("[") > 1) ? name.LowerCase().SubString(1, name.Pos("[") - 1) : name.LowerCase();
 }
 //---------------------------------------------------------------------------
 void Parser::SetVariable(const String& var, const String& value)
