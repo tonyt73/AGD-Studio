@@ -62,7 +62,7 @@ bool Parser::AddMatchSection(const String& variable, ImportDefinition::Matcher& 
 
     if (sectionName != "") {
         // tokenize the matcher patterns for use during parsing
-        matcher.Tokens = Tokenize(lcp, "^");
+        matcher.Tokens = Tokenize(lcp, " ");
         matcher.Variable = variable.LowerCase();
         m_MatchSections[sectionName] = matcher;
     } else {
@@ -72,7 +72,7 @@ bool Parser::AddMatchSection(const String& variable, ImportDefinition::Matcher& 
     return true;
 }
 //---------------------------------------------------------------------------
-Tokens Parser::Tokenize(const String& line, const String& separator) const
+Tokens Parser::Tokenize(const String& line, const String& separator, bool firstOnly) const
 {
     Tokens tokens;
     bool first = line.Length() > 1 && isalpha(line[1]);
@@ -83,6 +83,9 @@ Tokens Parser::Tokenize(const String& line, const String& separator) const
             tokens.push_back(token);
         }
         first = false;
+        if (firstOnly) {
+            return tokens;
+        }
     }
     return tokens;
 }
@@ -96,9 +99,19 @@ bool Parser::Parse(const String& file, const String& machine)
         auto lines = Services::File::ReadLines(file);
         // parse the lines
         auto lc = 1;
+        bool odbg = false;
         for (auto line : lines) {
             // tokenize the line
+            if (line.Pos("BEEP 50")) {
+                odbg = true;
+            }
             auto lineTokens = ProcessLine(line);
+#if defined(_DEBUG)
+            if (odbg) {
+                OutputDebugString(line.c_str());
+                OutputDebugString(("tokens: " + IntToStr((int)lineTokens.size())).c_str());
+            }
+#endif
             // no, tokenise the current line tokens against the current section tokens
             while (!lineTokens.empty()) {
                 // parse the current token
@@ -136,7 +149,9 @@ bool Parser::ProcessSection(const Token& token)
     auto name = token.Value.LowerCase();
     if (m_SectionTokens.size() > 0 && m_SectionTokens.front().isa(Token::ttArray)) {
         PopSection();
-        if (m_SectionTokens.size() > 0) return false;
+        // keep processing if more tokens exists
+        if (m_SectionTokens.size() > 0)
+            return false;
     }
     // do we have a token matcher for the token value (name)?
     if (m_MatchSections.count(name) == 1) {
@@ -147,7 +162,7 @@ bool Parser::ProcessSection(const Token& token)
             auto varname = m_MatchSections[name].Variable;
             // variable names with an 's' indicate an array (multiple sections named SPRITE or BLOCK etc)
             if (varname[varname.Length()] == 's') {
-                // so we set an array counter for the variabl
+                // so we set an array counter for the variable
                 if (m_VariableCounts.count(varname) == 0) {
                     m_VariableCounts[varname] = 0;
                 }
@@ -162,16 +177,9 @@ bool Parser::ProcessSection(const Token& token)
             InformationMessage("[Importer] Starting Section: " + varname);
             return true;
         } else {
-            ParseError("Invalid token type found.", token, m_SectionTokens.front());
+            ParseError("Invalid token type found in section match pattern.", token, m_SectionTokens.front());
             return false;
         }
-    } else {
-        //PopSection();
-        if (token.isa(Token::ttWord)) {
-            return true;
-        }
-        ParseError("Expected a Word token", token);
-        return false;
     }
     ParseError("Invalid section name.", token);
     return false;
@@ -182,7 +190,7 @@ bool Parser::ProcessValue(const Token& token)
     if (m_SectionTokens.size() == 0) return true;
     // get the current section token
     auto sectionToken = m_SectionTokens.front();
-    // replace var= with their respective values
+    // replace variable references with their respective values
     sectionToken = ReplaceVariableReferencesWithValues(sectionToken);
     // check it is a variable and excepts the same type as the line token
     auto secVar = SanitizeName(sectionToken.Value);
@@ -226,7 +234,7 @@ bool Parser::ProcessValue(const Token& token)
             }
         } else {
             // consume a word instead of a section at the start of a line
-            if (token.Type == Token::ttWord && token.Value.LowerCase() == secVar) {
+            if (token.isa(Token::ttWord) && token.Value.LowerCase() == secVar) {
                 PopSection();
                 return true;
             }
@@ -235,29 +243,35 @@ bool Parser::ProcessValue(const Token& token)
         }
         return true;
     }
+    if (sectionToken.isa(Token::ttLine)) {
+        // any other tokens, while in line capture mode
+        return true;
+    }
     ParseError("Tokens mismatch. ", token, sectionToken);
     return false;
 }
 //---------------------------------------------------------------------------
 Tokens Parser::ProcessLine(const String& line)
 {
-    Tokens tokens;
-    if (line.Trim() == "") {
-        if (m_SectionTokens.size() && m_SectionTokens.front().isa(Token::ttArray)) {
-            SetVariable(m_SectionTokens.front().Value, line);
+    // tokenize the line
+    Tokens tokens = Tokenize(line, " ",  true);
+    // any tokens?
+    if (tokens.size()) {
+        // yes, is the first one a section token, thats matches a handler?
+        auto token = tokens.front();
+        if (m_MatchSections.count(token.Value) == 1) {
+            // first token is a section, so get all the tokens
+            Tokens tokens = Tokenize(line, " ");
+            // yes, so return the tokens list
+            return tokens;
         }
-    } else {
-        tokens = Tokenize(line, " ");
-        if (tokens.size()) {
-            auto token = tokens.front();
-            // check that the current line does not contain a section pattern
-            if (m_MatchSections.count(token.Value) == 0) {
-                if (m_SectionTokens.size() > 0) {
-                    // no, so add the line to current variable
-                    SetVariable(m_SectionTokens.front().Value, line);
-                    tokens.clear();
-                }
-            }
+    }
+
+    if (m_SectionTokens.size() && m_SectionTokens.front().isa(Token::ttArray)) {
+        // a line comsumes all the remaining tokens
+        SetVariable(m_SectionTokens.front().Value, line);
+        if (m_SectionTokens.front().isa(Token::ttLine)) {
+            tokens.clear();
         }
     }
     return tokens;
@@ -267,15 +281,16 @@ Token Parser::ReplaceVariableReferencesWithValues(Token token)
 {
     bool replaced = true;
     auto secVar = token.Value.LowerCase();
-    while (secVar.Pos("var=") > 0 && replaced) {
+    //while (secVar.Pos("var=") > 0 && replaced) {
+    while (replaced) {
         replaced = false;
         // look for the variable name in the list of known variables so far
         for (auto vars = m_Variables.begin(); vars != m_Variables.end(); vars++ ) {
             for (auto var = vars->second.begin(); var != vars->second.end(); var++) {
                 // if our current section variable contains a known variable, then we can replace the reference with the variables actual value
                 if (secVar.Pos(var->first) > 0) {
-                    // replace "var=var.name", with the value "var.value"
-                    token.Value = StringReplace(token.Value, "var="+var->first, var->second.front(), TReplaceFlags());
+                    // replace "var.name", with the value "var.value"
+                    token.Value = StringReplace(token.Value, var->first, var->second.front(), TReplaceFlags());
                     secVar = token.Value.LowerCase();
                     replaced = true;
                 }

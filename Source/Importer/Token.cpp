@@ -36,17 +36,14 @@ bool __fastcall Token::ize(const String& part, bool first)
             Value = part;
         } else {
             bool isAlpha = true;
-            for (auto chr : part) {
-                isAlpha = isAlpha && isalpha(chr);
-            }
+            // check all characters are alphanumeric
+            for (auto chr : part) isAlpha = isAlpha && (isalpha(chr) || isdigit(chr));
             if (isAlpha) {
-                if (first) {
-                    Type = ttSection;
-                }
+                if (first) Type = ttSection;
                 Type |= ttWord;
                 Value = part.LowerCase();
-            } else if (part.Pos("<") == 1 && part.Pos(">") >= part.Length() - 2) {
-                // is a variable definition
+            } else if (part.Pos("<") == 1 && part.Pos(">") > 0 && part.Pos(">") >= part.Length() - 2) {
+                // is a variable definition (from the parser definition file)
                 m_Type = ttVariable;
                 auto varparts = SplitString(part.SubString(2, part.Pos(">") - 2), ":");
                 auto vartypes = SplitString(varparts[0], ",");
@@ -57,7 +54,7 @@ bool __fastcall Token::ize(const String& part, bool first)
                         m_Type |= ttNumber;
                     } else if (vartype == "string") {
                         m_Type |= ttString;
-                    } else if (vartype == "lines") {
+                    } else if (vartype == "line") {
                         m_Type |= ttLine;
                     } else if (vartype == "word") {
                         m_Type |= ttWord;
@@ -91,15 +88,14 @@ bool __fastcall Token::isEmpty() const
 String __fastcall Token::toStr() const
 {
     String type = "";
-    if (Type & ttSection) type += "ttSection ";
-    if (Type & ttNumber ) type += "ttNumber ";
-    if (Type & ttAscii  ) type += "ttAscii ";
-    if (Type & ttWord   ) type += "ttWord ";
-    if (Type & ttString ) type += "ttString ";
-    if (Type & ttLine   ) type += "ttLine ";
-    if (Type & ttArray  ) type += "ttArray ";
-    if (Type & ttLoop   ) type += "ttLoop ";
-    if (Type & ttInvalid) type += "ttInvalid ";
+    if (Type & ttSection) type += "ttSection "; // the first word of a line
+    if (Type & ttNumber ) type += "ttNumber ";  // decimal or hexidecimal number
+    if (Type & ttAscii  ) type += "ttAscii ";   // An ascii character within single quotes '<code>'
+    if (Type & ttWord   ) type += "ttWord ";    // an alphanumeric single word
+    if (Type & ttString ) type += "ttString ";  // text within double quotes "this is a string"
+    if (Type & ttLine   ) type += "ttLine ";    // an entire line of text
+    if (Type & ttArray  ) type += "ttArray ";   // array of the above types
+    if (Type & ttInvalid) type += "ttInvalid "; // unknown token type
 
     type = StringReplace(type.Trim(), " ", "|", TReplaceFlags() << rfReplaceAll);
     String value = ", Value: " + Value;
