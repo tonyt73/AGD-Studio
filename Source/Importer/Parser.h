@@ -50,7 +50,7 @@ private:
 
     bool        CreateMatchSets(const String& machine);
     bool        AddMatchSection(const String& variable, ImportDefinition::Matcher& match);
-    Tokens      Tokenize(const String& line, const String& separator, bool firstOnly = false) const;
+    Tokens      Tokenize(const String& line, const String& separator, bool incVars = false) const;
 
     bool        ParseToken(const Token& token);
     bool        ProcessSection(const Token& token);

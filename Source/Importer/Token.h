@@ -25,7 +25,7 @@ public:
                 __fastcall  Token();
                 __fastcall  Token(const Token& other);
 
-    bool        __fastcall  ize(const String& part, bool first);
+    bool        __fastcall  ize(const String& part, bool first = false, bool incVars = false);
     bool        __fastcall  isa(int type) const;
     bool        __fastcall  isEmpty() const;
     String      __fastcall  toStr() const;

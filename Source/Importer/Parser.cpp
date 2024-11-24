@@ -62,7 +62,7 @@ bool Parser::AddMatchSection(const String& variable, ImportDefinition::Matcher& 
 
     if (sectionName != "") {
         // tokenize the matcher patterns for use during parsing
-        matcher.Tokens = Tokenize(lcp, " ");
+        matcher.Tokens = Tokenize(lcp, " ", true);
         matcher.Variable = variable.LowerCase();
         m_MatchSections[sectionName] = matcher;
     } else {
@@ -72,20 +72,22 @@ bool Parser::AddMatchSection(const String& variable, ImportDefinition::Matcher& 
     return true;
 }
 //---------------------------------------------------------------------------
-Tokens Parser::Tokenize(const String& line, const String& separator, bool firstOnly) const
+Tokens Parser::Tokenize(const String& line, const String& separator, bool incVars) const
 {
     Tokens tokens;
-    bool first = line.Length() > 1 && isalpha(line[1]);
+    // section names must start on pos 1 and be an alpha character only
+    bool couldBeSectionName = line.Length() > 1 && isalpha(line[1]);
     auto parts = SplitString(line.Trim(), separator);
     Token token;
     for (auto part : parts) {
-        if (token.ize(part, first)) {
+        if (token.ize(part, couldBeSectionName, incVars)) {
             tokens.push_back(token);
         }
-        first = false;
-        if (firstOnly) {
-            return tokens;
+        if (incVars && token.isa(Token::ttInvalid)) {
+            ErrorMessage("Importer definition match pattern is invalid");
+            ErrorMessage("[Importer] Line: " + line);
         }
+        couldBeSectionName = false;
     }
     return tokens;
 }
@@ -99,19 +101,8 @@ bool Parser::Parse(const String& file, const String& machine)
         auto lines = Services::File::ReadLines(file);
         // parse the lines
         auto lc = 1;
-        bool odbg = false;
         for (auto line : lines) {
-            // tokenize the line
-            if (line.Pos("BEEP 50")) {
-                odbg = true;
-            }
             auto lineTokens = ProcessLine(line);
-#if defined(_DEBUG)
-            if (odbg) {
-                OutputDebugString(line.c_str());
-                OutputDebugString(("tokens: " + IntToStr((int)lineTokens.size())).c_str());
-            }
-#endif
             // no, tokenise the current line tokens against the current section tokens
             while (!lineTokens.empty()) {
                 // parse the current token
@@ -148,10 +139,14 @@ bool Parser::ProcessSection(const Token& token)
 {
     auto name = token.Value.LowerCase();
     if (m_SectionTokens.size() > 0 && m_SectionTokens.front().isa(Token::ttArray)) {
+        // we stop processing arrays here.
         PopSection();
         // keep processing if more tokens exists
-        if (m_SectionTokens.size() > 0)
+        if (m_SectionTokens.size() > 0) {
+            // false means we'll fall through to processing value tokens
+            // the occurence of this for now is the ENDMAP word match
             return false;
+        }
     }
     // do we have a token matcher for the token value (name)?
     if (m_MatchSections.count(name) == 1) {
@@ -254,26 +249,15 @@ bool Parser::ProcessValue(const Token& token)
 Tokens Parser::ProcessLine(const String& line)
 {
     // tokenize the line
-    Tokens tokens = Tokenize(line, " ",  true);
-    // any tokens?
-    if (tokens.size()) {
-        // yes, is the first one a section token, thats matches a handler?
-        auto token = tokens.front();
-        if (m_MatchSections.count(token.Value) == 1) {
-            // first token is a section, so get all the tokens
-            Tokens tokens = Tokenize(line, " ");
-            // yes, so return the tokens list
-            return tokens;
-        }
-    }
-
-    if (m_SectionTokens.size() && m_SectionTokens.front().isa(Token::ttArray)) {
-        // a line comsumes all the remaining tokens
+    Tokens tokens = Tokenize(line, " ");
+    // is the first token is not a section match and we are processing lines
+    if (tokens.size() && m_MatchSections.count(tokens.front().Value) == 0 && m_SectionTokens.front().isa(Token::ttLine)) {
+        // then add to the line array
         SetVariable(m_SectionTokens.front().Value, line);
-        if (m_SectionTokens.front().isa(Token::ttLine)) {
-            tokens.clear();
-        }
+        // a line comsumes all the remaining tokens
+        tokens.clear();
     }
+    // return our line tokens
     return tokens;
 }
 //---------------------------------------------------------------------------
@@ -281,16 +265,15 @@ Token Parser::ReplaceVariableReferencesWithValues(Token token)
 {
     bool replaced = true;
     auto secVar = token.Value.LowerCase();
-    //while (secVar.Pos("var=") > 0 && replaced) {
-    while (replaced) {
+    while (secVar.Pos("var=") > 0 && replaced) {
         replaced = false;
         // look for the variable name in the list of known variables so far
         for (auto vars = m_Variables.begin(); vars != m_Variables.end(); vars++ ) {
             for (auto var = vars->second.begin(); var != vars->second.end(); var++) {
                 // if our current section variable contains a known variable, then we can replace the reference with the variables actual value
                 if (secVar.Pos(var->first) > 0) {
-                    // replace "var.name", with the value "var.value"
-                    token.Value = StringReplace(token.Value, var->first, var->second.front(), TReplaceFlags());
+                    // replace "var=var.name", with the value "var.value"
+                    token.Value = StringReplace(token.Value, "var="+var->first, var->second.front(), TReplaceFlags());
                     secVar = token.Value.LowerCase();
                     replaced = true;
                 }
@@ -301,6 +284,7 @@ Token Parser::ReplaceVariableReferencesWithValues(Token token)
             break;
         }
     }
+    // substitute in the variable list counts {'var name'}
     if (token.Value.Pos("}") > token.Value.Pos("{")) {
         auto hp = token.Value.Pos("{");
         auto dp = token.Value.Pos("}");
@@ -308,6 +292,7 @@ Token Parser::ReplaceVariableReferencesWithValues(Token token)
         auto number = IntToStr(m_VariableCounts[varName]);
         token.Value = StringReplace(token.Value, "{" + varName + "}", number, TReplaceFlags());
     }
+    // return the processed token
     return token;
 }
 //---------------------------------------------------------------------------
@@ -347,18 +332,20 @@ void Parser::PopSection()
 //---------------------------------------------------------------------------
 String Parser::SanitizeName(const String& name)
 {
+    // variable names are lower case
     auto newName = name.LowerCase();
+    // remove the array dimensions
     auto pos = name.Pos("[");
     if (pos > 1) {
         newName = name.SubString(1, pos - 1);
     }
+    // sanitized
     return newName;
 }
 //---------------------------------------------------------------------------
 void Parser::SetVariable(const String& var, const String& value)
 {
-    auto name = SanitizeName(var);
-    m_Variables[m_CurrentVariable][name].push_back(value);
+    m_Variables[m_CurrentVariable][SanitizeName(var)].push_back(value);
 }
 //---------------------------------------------------------------------------
 

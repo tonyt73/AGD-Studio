@@ -18,7 +18,7 @@ __fastcall Token::Token(const Token& other)
 {
 }
 //---------------------------------------------------------------------------
-bool __fastcall Token::ize(const String& part, bool first)
+bool __fastcall Token::ize(const String& part, bool first, bool incVars)
 {
     Type = ttEmpty;
     Value = "";
@@ -42,7 +42,7 @@ bool __fastcall Token::ize(const String& part, bool first)
                 if (first) Type = ttSection;
                 Type |= ttWord;
                 Value = part.LowerCase();
-            } else if (part.Pos("<") == 1 && part.Pos(">") > 0 && part.Pos(">") >= part.Length() - 2) {
+            } else if (incVars && part[1] == '<' && part[part.Length()] == '>' ) {
                 // is a variable definition (from the parser definition file)
                 m_Type = ttVariable;
                 auto varparts = SplitString(part.SubString(2, part.Pos(">") - 2), ":");
@@ -95,7 +95,7 @@ String __fastcall Token::toStr() const
     if (Type & ttString ) type += "ttString ";  // text within double quotes "this is a string"
     if (Type & ttLine   ) type += "ttLine ";    // an entire line of text
     if (Type & ttArray  ) type += "ttArray ";   // array of the above types
-    if (Type & ttInvalid) type += "ttInvalid "; // unknown token type
+    if (Type & ttInvalid) type += "ttInvalid "; // invalid token type
 
     type = StringReplace(type.Trim(), " ", "|", TReplaceFlags() << rfReplaceAll);
     String value = ", Value: " + Value;
