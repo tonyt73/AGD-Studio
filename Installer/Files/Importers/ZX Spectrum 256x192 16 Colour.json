@@ -1,0 +1,43 @@
+{
+    "Name": "ZX Spectrum 256x192 16 Colour",
+	"Format": "agd",
+	"Window": {
+		"Match": "definewindow <number:window.y> <number:window.x> <number:window.height> <number:window.width>"
+	},
+	"JumpTable": {
+		"Match": "definejump <number:jump.table[22]>"
+	},
+	"ControlSet": {
+		"Match": "definecontrols <ascii,number:key.up> <ascii,number:key.down> <ascii,number:key.left> <ascii,number:key.right> <ascii,number:key.fire1> <ascii,number:key.fire2> <ascii,number:key.fire3> <ascii,number:key.option1> <ascii,number:key.option2> <ascii,number:key.option3> <ascii,number:key.option4>",
+	},
+	"Objects": {
+		"Match": "defineobject <number:object.colour> <number:object.room> <number:object.x> <number:object.y> <number:object.imagedata[32]>"
+	},
+	"Sprites": {
+		"Match": "definesprite <number:sprite.frames> <number:sprite.image[32,sprite.frames]>"
+	},
+	"Blocks": {
+		"Match": "defineblock <word:block.type> <number:block.image[9]>"
+	},
+	"Font": {
+		"Match": "definefont <number:font.images[8,96]>"
+	},
+	"Palette": {
+		"Match": "definepalette <number:palette.table[4,16]>"
+	},
+	"Events": {
+		"Match": "event <word:event.name> <line:event.lines[-1]>"
+	},
+	"MessageList": {
+		"Match": "definemessages <string:message[-1]>"
+	},
+	"Screens" : {
+		"Match": "definescreen <number:screen[window.width,window.height]>]"
+	},
+	"SpritePosition" : {
+		"Match": "spriteposition <number:screen{screens}.spriteposition.type[1]> <number:screen{screens}.spriteposition.index[1]> <number:screen{screens}.spriteposition.y[1]> <number:screen{screens}.spritepositions.x[1]>"
+	},
+	"Map": {
+		"Match": "map width <number:map.width> startscreen <number:map.startscreen> <number:map.data[map.width,-1]> endmap"
+	}
+}
