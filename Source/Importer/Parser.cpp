@@ -13,13 +13,7 @@
 using namespace Importer;
 //---------------------------------------------------------------------------
 Parser::Parser()
-: m_ParserState(fsmSectionName)
-, m_CollectingLines(false)
-, m_CurrentVariable("")
-{
-}
-//---------------------------------------------------------------------------
-Parser::~Parser()
+: m_CurrentVariable("")
 {
 }
 //---------------------------------------------------------------------------
@@ -77,8 +71,8 @@ Tokens Parser::Tokenize(const String& line, const String& separator, bool incVar
     // section names must start on pos 1 and be an alpha character only
     bool couldBeSectionName = line.Length() > 1 && isalpha(line[1]);
     auto parts = SplitString(line.Trim(), separator);
-    Token token;
     for (auto part : parts) {
+        Token token;
         if (token.ize(part, couldBeSectionName, incVars)) {
             tokens.push_back(token);
         }
@@ -135,13 +129,9 @@ bool Parser::Parse(const String& file, const String& machine)
 //---------------------------------------------------------------------------
 bool Parser::ParseToken(const Token& token)
 {
-    if (token.isa(Token::ttSection) && ProcessSection(token)) {
-        return true;
-    }
-    if (ProcessValue(token)) {
-        return true;
-    }
-    ParseError("Invalid token type found in AGD file.", token);
+    if (token.isa(Token::ttSection) && ProcessSection(token)) return true;
+    if (ProcessValue(token)) return true;
+    ParseError("Invalid token type found in import file.", token);
     return false;
 }
 //---------------------------------------------------------------------------
@@ -154,11 +144,11 @@ bool Parser::ProcessSection(const Token& token)
         // keep processing if more tokens exists
         if (m_SectionTokens.size() > 0) {
             // false means we'll fall through to processing value tokens
-            // the occurence of this for now is the ENDMAP word match
+            // the only occurence of this for now is the ENDMAP word match
             return false;
         }
     }
-    // do we have a token matcher for the token value (name)?
+    // do we have a section token match for the token value (section name)?
     if (m_MatchSections.count(name) == 1) {
         // get the tokens to match for the new section
         m_SectionTokens = m_MatchSections[name].Tokens;
@@ -193,7 +183,9 @@ bool Parser::ProcessSection(const Token& token)
 //---------------------------------------------------------------------------
 bool Parser::ProcessValue(const Token& token)
 {
-    if (m_SectionTokens.size() == 0) return true;
+    // if no section tokens to match, then skip token processing
+    if (m_SectionTokens.size() == 0)
+        return true;
     // get the current section token
     auto sectionToken = m_SectionTokens.front();
     // replace variable references with their respective values
@@ -289,20 +281,20 @@ Token Parser::ReplaceVariableReferencesWithValues(Token token)
         auto hp = token.Value.Pos("{");
         auto dp = token.Value.Pos("}");
         auto varName = SanitizeName(token.Value.SubString(hp + 1, dp - hp - 1));
-        auto number = IntToStr(m_VariableCounts[varName]);
+        auto number = IntToStr((const int)m_VariableCounts[varName]);
         token.Value = StringReplace(token.Value, "{" + varName + "}", number, TReplaceFlags());
     }
     // return the processed token
     return token;
 }
 //---------------------------------------------------------------------------
-void Parser::ParseError(const String& message, Token token)
+void Parser::ParseError(const String& message, Token token) const
 {
     ErrorMessage("[Importer] " + message);
     ErrorMessage("[Importer] token: " + token.toStr());
 }
 //---------------------------------------------------------------------------
-void Parser::ParseError(const String& message, Token lineToken, Token sectionToken)
+void Parser::ParseError(const String& message, Token lineToken, Token sectionToken) const
 {
     ErrorMessage("[Importer] " + message);
     ErrorMessage("[Importer] AGD file token: " + lineToken.toStr());
@@ -331,7 +323,7 @@ void Parser::PopSectionToken()
     }
 }
 //---------------------------------------------------------------------------
-String Parser::SanitizeName(const String& name)
+String Parser::SanitizeName(const String& name) const
 {
     // variable names are lower case and we remove the array dimensions
     return  (name.Pos("[") > 1) ? name.LowerCase().SubString(1, name.Pos("[") - 1) : name.LowerCase();
