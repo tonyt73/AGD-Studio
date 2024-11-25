@@ -23,19 +23,19 @@ bool Parser::CreateMatchSets(const String& machine)
     auto id = std::make_unique<ImportDefinition>(machine);
     bool result = id->Load(machine);
     if (result) {
-        result &= AddMatchSection("window"         , id->Sections.Window         );
-        result &= AddMatchSection("jumptable"      , id->Sections.JumpTable      );
-        result &= AddMatchSection("controlset"     , id->Sections.ControlSet     );
-        result &= AddMatchSection("objects"        , id->Sections.Objects        );
-        result &= AddMatchSection("sprites"        , id->Sections.Sprites        );
-        result &= AddMatchSection("blocks"         , id->Sections.Blocks         );
-        result &= AddMatchSection("font"           , id->Sections.Font           );
-        result &= AddMatchSection("palette"        , id->Sections.Palette        );
-        result &= AddMatchSection("events"         , id->Sections.Events         );
-        result &= AddMatchSection("messagelist"    , id->Sections.Messages       );
-        result &= AddMatchSection("screens"        , id->Sections.Screens        );
-        result &= AddMatchSection("spriteposition" , id->Sections.SpritePosition);
-        result &= AddMatchSection("map"            , id->Sections.Map            );
+        result &= AddMatchSection("window"        , id->Sections.Window        );
+        result &= AddMatchSection("jumptable"     , id->Sections.JumpTable     );
+        result &= AddMatchSection("controlset"    , id->Sections.ControlSet    );
+        result &= AddMatchSection("objects"       , id->Sections.Objects       );
+        result &= AddMatchSection("sprites"       , id->Sections.Sprites       );
+        result &= AddMatchSection("blocks"        , id->Sections.Blocks        );
+        result &= AddMatchSection("font"          , id->Sections.Font          );
+        result &= AddMatchSection("palette"       , id->Sections.Palette       );
+        result &= AddMatchSection("events"        , id->Sections.Events        );
+        result &= AddMatchSection("messagelist"   , id->Sections.Messages      );
+        result &= AddMatchSection("screens"       , id->Sections.Screens       );
+        result &= AddMatchSection("spriteposition", id->Sections.SpritePosition);
+        result &= AddMatchSection("map"           , id->Sections.Map           );
     } else {
         ErrorMessage("[Importer] Failed to load a file parser definition for machine. " + machine);
     }
@@ -59,7 +59,7 @@ bool Parser::AddMatchSection(const String& variable, ImportDefinition::Matcher& 
         matcher.Variable = variable.LowerCase();
         m_MatchSections[sectionName] = matcher;
     } else {
-        ErrorMessage("[Importer] Section '" + variable + "' match pattern in parser definition file is invalid.");
+        ErrorMessage("[Importer] Section '" + variable + "' match pattern in parser definition file is not recognised.");
         return false;
     }
     return true;
@@ -77,7 +77,7 @@ Tokens Parser::Tokenize(const String& line, const String& separator, bool incVar
             tokens.push_back(token);
         }
         if (incVars && token.isa(Token::ttInvalid)) {
-            ErrorMessage("Importer definition match pattern is invalid");
+            ErrorMessage("Importer definition match pattern format is invalid");
             ErrorMessage("[Importer] Line: " + line);
         }
         couldBeSectionName = false;
@@ -181,9 +181,6 @@ bool Parser::ProcessSection(const Token& token)
 //---------------------------------------------------------------------------
 bool Parser::ProcessValue(const Token& token)
 {
-    // if no section tokens to match, then skip token processing
-    if (m_SectionTokens.size() == 0)
-        return true;
     // get the current section token
     auto sectionToken = m_SectionTokens.front();
     // replace variable references with their respective values
@@ -253,6 +250,7 @@ Tokens Parser::ProcessLine(const String& line)
 //---------------------------------------------------------------------------
 Token Parser::ReplaceVariableReferencesWithValues(Token token)
 {
+    // variable value substitution
     bool replaced = true;
     auto secVar = token.Value.LowerCase();
     while (secVar.Pos("var=") > 0 && replaced) {
@@ -270,7 +268,7 @@ Token Parser::ReplaceVariableReferencesWithValues(Token token)
             }
         }
         if (!replaced) {
-            ParseError("Variable in Parser match pattern, not found or set.", token);
+            ParseError("Variable in Importer definition match pattern was not found or set. Is the section with the variable defined later in the file?", token);
             break;
         }
     }
@@ -295,8 +293,8 @@ void Parser::ParseError(const String& message, Token token) const
 void Parser::ParseError(const String& message, Token lineToken, Token sectionToken) const
 {
     ErrorMessage("[Importer] " + message);
-    ErrorMessage("[Importer] AGD file token: " + lineToken.toStr());
-    ErrorMessage("[Importer] Parser token  : " + sectionToken.toStr());
+    ErrorMessage("[Importer] Import token: " + lineToken.toStr());
+    ErrorMessage("[Importer] Parser token: " + sectionToken.toStr());
 }
 //---------------------------------------------------------------------------
 // Remove the current section pattern token we are matching to the incoming line token
