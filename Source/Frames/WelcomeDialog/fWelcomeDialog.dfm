@@ -2,8 +2,8 @@ object frmWelcomeDialog: TfrmWelcomeDialog
   Left = 0
   Top = 0
   Width = 900
-  Height = 440
-  Constraints.MinHeight = 440
+  Height = 500
+  Constraints.MinHeight = 500
   Constraints.MinWidth = 900
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,7 +16,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     Left = 400
     Top = 0
     Width = 500
-    Height = 440
+    Height = 500
     Align = alRight
     BevelOuter = bvNone
     TabOrder = 0
@@ -6211,13 +6211,13 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         07B7961DAFC38E3D9A000DDA8CAB8E475CDB4180B3D2C85CB71DA295B521FD7F
         5E12A1370E53FE260000000049454E44AE426082}
     end
-    object Panel1: TPanel
+    object panOptions: TPanel
       Left = 0
       Top = 250
       Width = 500
-      Height = 190
+      Height = 250
       Align = alClient
-      Caption = 'Panel1'
+      Caption = 'panOptions'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -19
@@ -6226,8 +6226,23 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       ParentFont = False
       ShowCaption = False
       TabOrder = 0
+      DesignSize = (
+        500
+        250)
+      object lblStartNewProject: TLabel
+        Left = 62
+        Top = 18
+        Width = 191
+        Height = 23
+        Cursor = crHandPoint
+        Caption = '      Start a new project'
+        StyleElements = [seClient, seBorder]
+        OnClick = lblStartNewProjectClick
+        OnMouseEnter = lblStartNewProjectMouseEnter
+        OnMouseLeave = lblStartNewProjectMouseLeave
+      end
       object imgStartNewProject: TImage
-        Left = 104
+        Left = 62
         Top = 22
         Width = 16
         Height = 16
@@ -6265,111 +6280,67 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           7FA5A8D6A3D3A1F9A35F9E9B1BA2799945022C3581A289C24EF19422F6F29E8A
           01CB28148A27C5BFF72AE17FFDDA6E3B583A4E520000000049454E44AE426082}
       end
-      object lblStartNewProject: TLabel
-        Left = 104
-        Top = 18
-        Width = 191
+      object lblImportAGD: TLabel
+        Left = 62
+        Top = 47
+        Width = 221
         Height = 23
         Cursor = crHandPoint
-        Caption = '      Start a new project'
+        Caption = '      Import an AGD project'
         StyleElements = [seClient, seBorder]
-        OnClick = lblStartNewProjectClick
+        OnClick = lblImportAGDClick
         OnMouseEnter = lblStartNewProjectMouseEnter
         OnMouseLeave = lblStartNewProjectMouseLeave
       end
-      object panStartNew: TPanel
-        Left = 104
-        Top = 47
-        Width = 379
-        Height = 135
-        BevelOuter = bvNone
-        TabOrder = 1
-        DesignSize = (
-          379
-          135)
-        object lblMachines: TLabel
-          Left = 27
-          Top = 48
-          Width = 74
-          Height = 23
-          Caption = 'Machine'
-        end
-        object Label1: TLabel
-          Left = 27
-          Top = 9
-          Width = 50
-          Height = 23
-          Caption = 'Name'
-        end
-        object lblFile: TLabel
-          Left = 27
-          Top = 129
-          Width = 334
-          Height = 17
-          Anchors = [akLeft, akTop, akRight]
-          AutoSize = False
-          EllipsisPosition = epPathEllipsis
-          ExplicitWidth = 326
-        end
-        object btnCancel: TButton
-          Left = 270
-          Top = 91
-          Width = 91
-          Height = 32
-          Cancel = True
-          Caption = 'Cancel'
-          TabOrder = 2
-          OnClick = btnCreateClick
-        end
-        object btnCreate: TButton
-          Left = 173
-          Top = 91
-          Width = 91
-          Height = 32
-          Caption = 'Create'
-          Enabled = False
-          ModalResult = 1
-          TabOrder = 3
-          OnClick = btnCreateClick
-        end
-        object cmbMachines: TComboBox
-          Left = 101
-          Top = 45
-          Width = 260
-          Height = 31
-          Style = csDropDownList
-          TabOrder = 1
-          Items.Strings = (
-            'Acorn Atom 256x192 Monochrome'
-            'Amstrad CPC 160x200 16 Colour'
-            'ZX Spectrum 256x192 16 Colour')
-        end
-        object edtName: TEdit
-          Left = 101
-          Top = 3
-          Width = 260
-          Height = 31
-          Anchors = [akLeft, akTop, akRight]
-          TabOrder = 0
-          OnChange = edtNameChange
-          OnKeyDown = edtNameKeyDown
-        end
+      object imgImportAGD: TImage
+        Left = 62
+        Top = 50
+        Width = 16
+        Height = 16
+        Cursor = crHandPoint
+        AutoSize = True
+        Picture.Data = {
+          0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
+          001008060000001FF3FF610000001974455874536F6674776172650041646F62
+          6520496D616765526561647971C9653C0000026A4944415478DA75935B681351
+          1086FFDDECA6C9C6A220A8F5828AFA222A62D1940AB514544AA0B998540D34F8
+          2654F045859A14948A52C437419FF4A59854C86D63924611B5B4B10183481F0D
+          A2528B35557B93C48464D77356D324641D58F69CDD996FFE336786916519D422
+          D1E842A95C5E274B12FE7EA146570C588601C330F3368B65036A8CC632154030
+          1C968903FE67D96C1613C9A4CF6EB33955018150483E65B5E2E3A7CF4AD68A82
+          9D3BB663C4EB459FD3896F7373984CA546ED56EBD906809F00C80FCC7C99A572
+          57336CDBBA058F7C3EF43A1CE0394E51929C9A0A10B5F67A4030281379F84AB2
+          5400922C61F3A616BC49A7F13E93217B5951428E0BA296510564B3F3AB006A06
+          830182A0AFAB87283E81C5D2A30EF8FE6301345EC36AA0E5B4E0589E54A40AE4
+          0516CFE32F71DCD4A50E585C5A5214E8783D86C51B88BF8B919AB2B4208A1FCB
+          B2D06B75109A84C7D1AB89330D8095955FE4DE591874028C83ADB8E5EA43B154
+          44592A2B4A380D4F8209DC1F41CC9D601A00B95C5E91DFA4D3C2387018EE5E13
+          CC87AED7D5606C7A187723AF101F5401140A0505C0F11C011CC1859E56B8DAEF
+          2B3E0F26FAF13AE345F781F378F8741A71CF18D3D00765D2CAF408B4906D0346
+          B8BA77A1FF981723A9CBE86BBB83C0DB212C1766E07F318B98275E05044551B6
+          99CD75528F7ADA71FAE4465CEC08E14A683F3AF79C8369DF25DC9B7420369E23
+          805815108E449625496AA6CD428747E00CB89DBE09EB89B5C817F374A4C84548
+          4A7BAF6F6E81F8EC2722EE681540AEEE2079696A15745DEB1815B46B764366FE
+          CD87ACCC274B96A5DFA5F1F850A2B316A036847BC9A387BA2D92D80F7F008BBD
+          3FF00328AC1D0000000049454E44AE426082}
+        Stretch = True
       end
       object panButtons: TPanel
-        Left = 104
-        Top = 47
-        Width = 379
-        Height = 123
+        Left = 62
+        Top = 76
+        Width = 421
+        Height = 165
+        Anchors = [akLeft, akTop, akRight, akBottom]
         BevelOuter = bvNone
         ParentColor = True
         TabOrder = 0
         object lblOpenExistingProject: TLabel
           Left = 0
-          Top = 4
-          Width = 304
+          Top = 1
+          Width = 239
           Height = 23
           Cursor = crHandPoint
-          Caption = '      Open/Import an existing project'
+          Caption = '      Open an existing project'
           StyleElements = [seClient, seBorder]
           OnClick = lblOpenExistingProjectClick
           OnMouseEnter = lblStartNewProjectMouseEnter
@@ -6377,7 +6348,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         end
         object imgOpenExistingProject: TImage
           Left = 0
-          Top = 8
+          Top = 5
           Width = 16
           Height = 16
           Cursor = crHandPoint
@@ -6407,7 +6378,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         end
         object lblChangeTheme: TLabel
           Left = 0
-          Top = 79
+          Top = 127
           Width = 89
           Height = 23
           Cursor = crHandPoint
@@ -6419,7 +6390,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         end
         object imgChangeTheme: TImage
           Left = 0
-          Top = 83
+          Top = 131
           Width = 16
           Height = 16
           AutoSize = True
@@ -6449,8 +6420,8 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         end
         object cmbThemes: TComboBox
           Left = 104
-          Top = 79
-          Width = 275
+          Top = 127
+          Width = 302
           Height = 27
           Style = csDropDownList
           Font.Charset = DEFAULT_CHARSET
@@ -6463,13 +6434,357 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           OnChange = cmbThemesChange
         end
       end
+      object panStartNew: TPanel
+        Left = 62
+        Top = 76
+        Width = 421
+        Height = 163
+        BevelOuter = bvNone
+        TabOrder = 1
+        Visible = False
+        DesignSize = (
+          421
+          163)
+        object lblMachines: TLabel
+          Left = 37
+          Top = 43
+          Width = 59
+          Height = 18
+          Alignment = taRightJustify
+          Caption = 'Machine'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Roboto'
+          Font.Style = []
+          ParentFont = False
+        end
+        object lblName: TLabel
+          Left = 56
+          Top = 6
+          Width = 40
+          Height = 18
+          Alignment = taRightJustify
+          Caption = 'Name'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Roboto'
+          Font.Style = []
+          ParentFont = False
+        end
+        object lblFile: TLabel
+          Left = 22
+          Top = 107
+          Width = 376
+          Height = 17
+          Alignment = taRightJustify
+          Anchors = [akLeft, akTop, akRight]
+          AutoSize = False
+          Caption = '...'
+          EllipsisPosition = epPathEllipsis
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Roboto'
+          Font.Style = []
+          ParentFont = False
+          Visible = False
+        end
+        object lblImportFile: TLabel
+          Left = 72
+          Top = 77
+          Width = 24
+          Height = 18
+          Alignment = taRightJustify
+          Caption = 'File'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Roboto'
+          Font.Style = []
+          ParentFont = False
+          Visible = False
+        end
+        object imgImportFileCross: TImage
+          Left = 0
+          Top = 79
+          Width = 16
+          Height = 16
+          Cursor = crArrow
+          Hint = 'AGD file does not exist.'
+          AutoSize = True
+          ParentShowHint = False
+          Picture.Data = {
+            0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
+            001008060000001FF3FF610000001974455874536F6674776172650041646F62
+            6520496D616765526561647971C9653C000001604944415478DA63FCFFFF3F03
+            23232303081C7130F80FA26D0E5C8008A0017479B05E98012049A3E62EB0C273
+            B56518866093871B70D4D1F0BF617503C387BE5AB00281A26686F3AD0D704340
+            9AB1C95BEF3FCF8830A0B89CE1D3AC6EB88D7C69A50CE77B3BC16C5C72700380
+            5E3006DA72C6203B8FE1DBB29970855C51E9601A5DECC2D44920D79900F59E65
+            440A44B02186C9E90CDF372DC516860C9C7ED10CE7E7CE046B0672CFA2042214
+            400C898D67F8B967138A6676173F86F38B17C23563C4024A68874530FC3ABE0F
+            C500364B278673AB56A0C40E860160CD81410C7F2F9CC4EA056603738673EBD7
+            E14E07C63EDE0CFF6E5E816B6052D701D3E86267B76CC54C0726EE6E0CFF1FDD
+            832B6494536238B37317988D4B0E251D98393932FC7FF302A2404482E1D4BEFD
+            B00003B9EE0C36798C74606167035670E2D01194D086C50EBA3CD67400CD2CC8
+            9A51A218591E6B3A80D2E89AB1CAC30DA004000057550FF07637089B00000000
+            49454E44AE426082}
+          ShowHint = True
+          Stretch = True
+          Visible = False
+        end
+        object imgImportFileTick: TImage
+          Left = 0
+          Top = 79
+          Width = 16
+          Height = 16
+          Cursor = crArrow
+          Hint = 'AGD file exists.'
+          AutoSize = True
+          ParentShowHint = False
+          Picture.Data = {
+            0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
+            001008060000001FF3FF610000001974455874536F6674776172650041646F62
+            6520496D616765526561647971C9653C000001864944415478DA63FCFFFF3F03
+            258091540D6E9D0C601B779543F4926480631BC3FFB54513C1ECE0BE7C86FD55
+            0C8C441B00D2BC38AF9961DBBE5A30DFDBB99121714A3D712E8069DE7EA49601
+            1464204D8EB6F90C595327220C7087FA6D6739AAA14E40CD33738B18F69FEC03
+            2B6002CA9A9BC633144C59C8B0AF8AC18411A668524E1C3848F2201210F15686
+            FF137212184E5E5800B19909A8D92001A87901583350C9594690CD6DE97E0CE7
+            AE6D620059A1AFE5CF50366523D8F6AE1C7F868BD7378235836C06C9954FDB08
+            D70C8E050FA0013569360CD76F1D61F807B205A85059C1066CC0DD0747C08682
+            6C5657B163689C7188612F926658341ABBB4319C294DD56578FCE432C3BF7F0C
+            0CB0B405328C09A859564697A16BF6650CCDC8E9006C484EB22CC3DB578F19FE
+            FE83083203350B8BC9324C99FB98610F16CDE809096C486A2237C3978F5FC102
+            3CFCDC0CB3E77FC5A9195B4A3476051A9296CC0DE6CC9AFB9561371ECDD80C00
+            1BE2D9C97006C4D85E8E5F332E03C0864069BC9AC106509A9D012EB092DA9E21
+            41710000000049454E44AE426082}
+          ShowHint = True
+          Stretch = True
+          Visible = False
+        end
+        object imgProjectNameCross: TImage
+          Left = 0
+          Top = 7
+          Width = 16
+          Height = 16
+          Cursor = crArrow
+          Hint = 'Project name is already in use.'
+          AutoSize = True
+          ParentShowHint = False
+          Picture.Data = {
+            0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
+            001008060000001FF3FF610000001974455874536F6674776172650041646F62
+            6520496D616765526561647971C9653C000001604944415478DA63FCFFFF3F03
+            23232303081C7130F80FA26D0E5C8008A0017479B05E98012049A3E62EB0C273
+            B56518866093871B70D4D1F0BF617503C387BE5AB00281A26686F3AD0D704340
+            9AB1C95BEF3FCF8830A0B89CE1D3AC6EB88D7C69A50CE77B3BC16C5C72700380
+            5E3006DA72C6203B8FE1DBB29970855C51E9601A5DECC2D44920D79900F59E65
+            440A44B02186C9E90CDF372DC516860C9C7ED10CE7E7CE046B0672CFA2042214
+            400C898D67F8B967138A6676173F86F38B17C23563C4024A68874530FC3ABE0F
+            C500364B278673AB56A0C40E860160CD81410C7F2F9CC4EA056603738673EBD7
+            E14E07C63EDE0CFF6E5E816B6052D701D3E86267B76CC54C0726EE6E0CFF1FDD
+            832B6494536238B37317988D4B0E251D98393932FC7FF302A2404482E1D4BEFD
+            B00003B9EE0C36798C74606167035670E2D01194D086C50EBA3CD67400CD2CC8
+            9A51A218591E6B3A80D2E89AB1CAC30DA004000057550FF07637089B00000000
+            49454E44AE426082}
+          ShowHint = True
+          Stretch = True
+          Visible = False
+        end
+        object imgProjectNameTick: TImage
+          Left = 0
+          Top = 7
+          Width = 16
+          Height = 16
+          Cursor = crArrow
+          Hint = 'Project name is available.'
+          AutoSize = True
+          ParentShowHint = False
+          Picture.Data = {
+            0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
+            001008060000001FF3FF610000001974455874536F6674776172650041646F62
+            6520496D616765526561647971C9653C000001864944415478DA63FCFFFF3F03
+            258091540D6E9D0C601B779543F4926480631BC3FFB54513C1ECE0BE7C86FD55
+            0C8C441B00D2BC38AF9961DBBE5A30DFDBB99121714A3D712E8069DE7EA49601
+            1464204D8EB6F90C595327220C7087FA6D6739AAA14E40CD33738B18F69FEC03
+            2B6002CA9A9BC633144C59C8B0AF8AC18411A668524E1C3848F2201210F15686
+            FF137212184E5E5800B19909A8D92001A87901583350C9594690CD6DE97E0CE7
+            AE6D620059A1AFE5CF50366523D8F6AE1C7F868BD7378235836C06C9954FDB08
+            D70C8E050FA0013569360CD76F1D61F807B205A85059C1066CC0DD0747C08682
+            6C5657B163689C7188612F926658341ABBB4319C294DD56578FCE432C3BF7F0C
+            0CB0B405328C09A859564697A16BF6650CCDC8E9006C484EB22CC3DB578F19FE
+            FE83083203350B8BC9324C99FB98610F16CDE809096C486A2237C3978F5FC102
+            3CFCDC0CB3E77FC5A9195B4A3476051A9296CC0DE6CC9AFB9561371ECDD80C00
+            1BE2D9C97006C4D85E8E5F332E03C0864069BC9AC106509A9D012EB092DA9E21
+            41710000000049454E44AE426082}
+          ShowHint = True
+          Stretch = True
+          Visible = False
+        end
+        object imgMachineCross: TImage
+          Left = 0
+          Top = 42
+          Width = 16
+          Height = 16
+          Cursor = crHandPoint
+          Hint = 
+            'Machine does not support AGD file importing.  \rPlease define an' +
+            ' Import Definition file in the AGD Studio/Importers folder.\r\rC' +
+            'lick to open Importers folder.'
+          AutoSize = True
+          ParentShowHint = False
+          Picture.Data = {
+            0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
+            001008060000001FF3FF610000001974455874536F6674776172650041646F62
+            6520496D616765526561647971C9653C000001604944415478DA63FCFFFF3F03
+            23232303081C7130F80FA26D0E5C8008A0017479B05E98012049A3E62EB0C273
+            B56518866093871B70D4D1F0BF617503C387BE5AB00281A26686F3AD0D704340
+            9AB1C95BEF3FCF8830A0B89CE1D3AC6EB88D7C69A50CE77B3BC16C5C72700380
+            5E3006DA72C6203B8FE1DBB29970855C51E9601A5DECC2D44920D79900F59E65
+            440A44B02186C9E90CDF372DC516860C9C7ED10CE7E7CE046B0672CFA2042214
+            400C898D67F8B967138A6676173F86F38B17C23563C4024A68874530FC3ABE0F
+            C500364B278673AB56A0C40E860160CD81410C7F2F9CC4EA056603738673EBD7
+            E14E07C63EDE0CFF6E5E816B6052D701D3E86267B76CC54C0726EE6E0CFF1FDD
+            832B6494536238B37317988D4B0E251D98393932FC7FF302A2404482E1D4BEFD
+            B00003B9EE0C36798C74606167035670E2D01194D086C50EBA3CD67400CD2CC8
+            9A51A218591E6B3A80D2E89AB1CAC30DA004000057550FF07637089B00000000
+            49454E44AE426082}
+          ShowHint = True
+          Stretch = True
+          Visible = False
+          OnClick = imgMachineCrossClick
+        end
+        object imgMachineTick: TImage
+          Left = 0
+          Top = 42
+          Width = 16
+          Height = 16
+          Cursor = crArrow
+          Hint = 'Machine supports AGD file importing.'
+          AutoSize = True
+          ParentShowHint = False
+          Picture.Data = {
+            0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
+            001008060000001FF3FF610000001974455874536F6674776172650041646F62
+            6520496D616765526561647971C9653C000001864944415478DA63FCFFFF3F03
+            258091540D6E9D0C601B779543F4926480631BC3FFB54513C1ECE0BE7C86FD55
+            0C8C441B00D2BC38AF9961DBBE5A30DFDBB99121714A3D712E8069DE7EA49601
+            1464204D8EB6F90C595327220C7087FA6D6739AAA14E40CD33738B18F69FEC03
+            2B6002CA9A9BC633144C59C8B0AF8AC18411A668524E1C3848F2201210F15686
+            FF137212184E5E5800B19909A8D92001A87901583350C9594690CD6DE97E0CE7
+            AE6D620059A1AFE5CF50366523D8F6AE1C7F868BD7378235836C06C9954FDB08
+            D70C8E050FA0013569360CD76F1D61F807B205A85059C1066CC0DD0747C08682
+            6C5657B163689C7188612F926658341ABBB4319C294DD56578FCE432C3BF7F0C
+            0CB0B405328C09A859564697A16BF6650CCDC8E9006C484EB22CC3DB578F19FE
+            FE83083203350B8BC9324C99FB98610F16CDE809096C486A2237C3978F5FC102
+            3CFCDC0CB3E77FC5A9195B4A3476051A9296CC0DE6CC9AFB9561371ECDD80C00
+            1BE2D9C97006C4D85E8E5F332E03C0864069BC9AC106509A9D012EB092DA9E21
+            41710000000049454E44AE426082}
+          ShowHint = True
+          Stretch = True
+          Visible = False
+        end
+        object btnCancel: TButton
+          Left = 313
+          Top = 130
+          Width = 91
+          Height = 32
+          Anchors = [akRight, akBottom]
+          Cancel = True
+          Caption = 'Cancel'
+          TabOrder = 2
+          OnClick = btnCreateClick
+        end
+        object btnCreate: TButton
+          Left = 216
+          Top = 130
+          Width = 91
+          Height = 32
+          Anchors = [akRight, akBottom]
+          Caption = 'Create'
+          Enabled = False
+          ModalResult = 1
+          TabOrder = 3
+          OnClick = btnCreateClick
+        end
+        object cmbMachines: TComboBox
+          Left = 101
+          Top = 37
+          Width = 302
+          Height = 26
+          Style = csDropDownList
+          Anchors = [akLeft, akTop, akRight]
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Roboto'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 1
+          OnChange = cmbMachinesChange
+          Items.Strings = (
+            'Acorn Atom 256x192 Monochrome'
+            'Amstrad CPC 160x200 16 Colour'
+            'ZX Spectrum 256x192 16 Colour')
+        end
+        object edtName: TEdit
+          Left = 101
+          Top = 3
+          Width = 302
+          Height = 26
+          Anchors = [akLeft, akTop, akRight]
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Roboto'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+          OnChange = edtNameChange
+          OnKeyDown = edtNameKeyDown
+        end
+        object edtImportFile: TEdit
+          Left = 101
+          Top = 74
+          Width = 267
+          Height = 26
+          Anchors = [akLeft, akTop, akRight]
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Roboto'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 4
+          Visible = False
+          OnChange = edtImportFileChange
+          OnKeyDown = edtNameKeyDown
+        end
+        object btnImportFile: TButton
+          Left = 371
+          Top = 74
+          Width = 32
+          Height = 26
+          Anchors = [akTop, akRight]
+          Caption = '...'
+          Constraints.MaxHeight = 26
+          Constraints.MaxWidth = 32
+          Constraints.MinHeight = 26
+          TabOrder = 5
+          Visible = False
+          OnClick = btnImportFileClick
+        end
+      end
     end
   end
   object panRecentProjects: TPanel
     Left = 0
     Top = 0
     Width = 400
-    Height = 440
+    Height = 500
     Align = alClient
     BevelOuter = bvNone
     Color = clBtnShadow
@@ -6477,27 +6792,22 @@ object frmWelcomeDialog: TfrmWelcomeDialog
     TabOrder = 1
     StyleElements = [seFont, seBorder]
   end
-  object dlgOpen: TOpenTextFileDialog
+  object dlgOpenAGDS: TOpenTextFileDialog
     DefaultExt = 'agds'
-    Filter = 
-      'All AGD Files|*.agds;*.agd;*mpagd|AGD Studio Project|*.agds|MPAG' +
-      'D File|*.mpagd|AGD File|*.agd|All Files|*.*'
+    Filter = 'AGD Studio Project|*.agds|All Files|*.*'
     Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
-    Title = 'Open an Existing AGD Studio Project'
+    Title = 'Open an existing AGD Studio project'
     Left = 40
     Top = 28
   end
-  object dlgInvalidProject: TTaskDialog
-    Buttons = <>
-    Caption = 'Open an existing Project'
-    CommonButtons = [tcbClose]
-    Flags = [tfAllowDialogCancellation, tfSizeToContent]
-    MainIcon = 1
-    RadioButtons = <>
-    Text = 'AGD Studio cannot open or import the specified file.'#13#10
-    Title = 'Invalid AGD Studio Project File'
-    OnButtonClicked = dlgInvalidProjectButtonClicked
-    Left = 40
-    Top = 104
+  object dlgImportAGD: TOpenTextFileDialog
+    DefaultExt = 'agd'
+    Filter = 
+      'All AGD Files|*.agd;*mpagd|AGD File|*.agd|MPAGD File|*.mpagd|All' +
+      ' Files|*.*'
+    Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
+    Title = 'Import an AGD File'
+    Left = 176
+    Top = 28
   end
 end

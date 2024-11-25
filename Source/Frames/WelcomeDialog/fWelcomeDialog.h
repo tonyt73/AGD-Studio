@@ -29,22 +29,32 @@ __published:    // IDE-managed Components
     TImage *imgLogo;
     TImage *imgOpenExistingProject;
     TImage *imgStartNewProject;
-    TLabel *Label1;
+    TLabel *lblName;
     TLabel *lblChangeTheme;
     TLabel *lblFile;
     TLabel *lblMachines;
     TLabel *lblOpenExistingProject;
     TLabel *lblStartNewProject;
-    TOpenTextFileDialog *dlgOpen;
+    TOpenTextFileDialog *dlgOpenAGDS;
     TPanel *panButtons;
-    TPanel *Panel1;
+    TPanel *panOptions;
     TPanel *panMain;
     TPanel *panRecentProjects;
     TPanel *panStartNew;
-    TTaskDialog *dlgInvalidProject;
+    TLabel *lblImportAGD;
+    TImage *imgImportAGD;
+    TLabel *lblImportFile;
+    TEdit *edtImportFile;
+    TButton *btnImportFile;
+    TOpenTextFileDialog *dlgImportAGD;
+    TImage *imgImportFileCross;
+    TImage *imgImportFileTick;
+    TImage *imgProjectNameCross;
+    TImage *imgProjectNameTick;
+    TImage *imgMachineCross;
+    TImage *imgMachineTick;
     void __fastcall btnCreateClick(TObject *Sender);
     void __fastcall cmbThemesChange(TObject *Sender);
-    void __fastcall dlgInvalidProjectButtonClicked(TObject *Sender, TModalResult ModalResult, bool &CanClose);
     void __fastcall edtNameChange(TObject *Sender);
     void __fastcall edtNameKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall lblChangeThemeClick(TObject *Sender);
@@ -52,6 +62,11 @@ __published:    // IDE-managed Components
     void __fastcall lblStartNewProjectClick(TObject *Sender);
     void __fastcall lblStartNewProjectMouseEnter(TObject *Sender);
     void __fastcall lblStartNewProjectMouseLeave(TObject *Sender);
+    void __fastcall lblImportAGDClick(TObject *Sender);
+    void __fastcall btnImportFileClick(TObject *Sender);
+    void __fastcall edtImportFileChange(TObject *Sender);
+    void __fastcall cmbMachinesChange(TObject *Sender);
+    void __fastcall imgMachineCrossClick(TObject *Sender);
 
 private:    // Function declarations
     void     __fastcall     SelectionPanelOnClick(TObject *Sender);
@@ -60,6 +75,7 @@ private:    // Function declarations
     void     __fastcall     RefreshMRUList();
     void     __fastcall     NewMostRecentlyUsedItem(const String& name, const String& path, const String& machine);
     void     __fastcall     OnEvent(const Event& event);
+    void     __fastcall     UpdateUI(bool updateMachine = false);
 
 private:    // Member declarations
     Registrar                                           m_Registrar;

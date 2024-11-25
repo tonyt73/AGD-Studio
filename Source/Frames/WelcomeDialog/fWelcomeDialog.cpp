@@ -38,6 +38,7 @@ __fastcall TfrmWelcomeDialog::TfrmWelcomeDialog(TComponent* Owner)
     {
         cmbMachines->ItemIndex = 0;
     }
+    imgMachineCross->Hint = StringReplace(imgMachineCross->Hint, "\\r", char(13), TReplaceFlags() << rfReplaceAll);
 }
 //---------------------------------------------------------------------------
 __fastcall TfrmWelcomeDialog::~TfrmWelcomeDialog()
@@ -55,23 +56,35 @@ void __fastcall TfrmWelcomeDialog::OnEvent(const Event& event)
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::lblStartNewProjectClick(TObject *Sender)
 {
-    panStartNew->Color = panButtons->Color;
+    lblImportAGD->Visible = false;
+    imgImportAGD->Visible = false;
     panStartNew->Visible = true;
-    panButtons->Visible = false;
     edtName->Text = "";
     edtName->SetFocus();
-    for (int i = 0; i < cmbMachines->Items->Count; i++)
-    {
-        if (cmbMachines->Items->Strings[i] == theAppSettings.DefaultMachine)
-        {
-            cmbMachines->ItemIndex = i;
-            break;
-        }
-    }
+    btnCreate->Caption = "Create";
+    UpdateUI(true);
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmWelcomeDialog::lblImportAGDClick(TObject *Sender)
+{
+    lblStartNewProject->Visible = false;
+    imgStartNewProject->Visible = false;
+    lblImportFile->Visible = true;
+    edtImportFile->Visible = true;
+    btnImportFile->Visible = true;
+    panStartNew->Visible = true;
+    edtName->Text = "";
+    edtName->SetFocus();
+    btnCreate->Caption = "Import";
+    UpdateUI(true);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::btnCreateClick(TObject *Sender)
 {
+    lblImportAGD->Visible = true;
+    imgImportAGD->Visible = true;
+    lblStartNewProject->Visible = true;
+    imgStartNewProject->Visible = true;
     panButtons->Visible = true;
     panStartNew->Visible = false;
     auto button = dynamic_cast<TButton*>(Sender);
@@ -79,33 +92,25 @@ void __fastcall TfrmWelcomeDialog::btnCreateClick(TObject *Sender)
     {
         theProjectManager.New(edtName->Text, cmbMachines->Items->Strings[cmbMachines->ItemIndex]);
         if (FOnDone) FOnDone(this);
+        if (edtImportFile->Visible) {
+            Application->ProcessMessages();
+            theProjectManager.Import(edtImportFile->Text);
+        }
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::lblOpenExistingProjectClick(TObject *Sender)
 {
-    dlgOpen->InitialDir = Services::Folders::Projects;
-    if (dlgOpen->Execute())
+    dlgOpenAGDS->InitialDir = Services::Folders::Projects;
+    if (dlgOpenAGDS->Execute())
     {
-        auto ext = Services::File::Extension(dlgOpen->FileName);
+        auto ext = Services::File::Extension(dlgOpenAGDS->FileName);
 
         if (ext == ".agds")
         {
-            theProjectManager.Open(dlgOpen->FileName);
+            theProjectManager.Open(dlgOpenAGDS->FileName);
             if (FOnDone) FOnDone(this);
-            return;
         }
-        else
-        {
-            // try to import the file
-            if (FOnDone) FOnDone(this);
-            Application->ProcessMessages();
-            if (theProjectManager.Import(dlgOpen->FileName))
-            {
-                return;
-            }
-        }
-        dlgInvalidProject->Execute();
     }
 }
 //---------------------------------------------------------------------------
@@ -153,6 +158,7 @@ void __fastcall TfrmWelcomeDialog::UpdateColors()
     panRecentProjects->Color = ThemeManager::Shadow;
     lblStartNewProject->Font->Color = ThemeManager::Foreground;
     lblOpenExistingProject->Font->Color = ThemeManager::Foreground;
+    lblImportAGD->Font->Color = ThemeManager::Foreground;
     lblChangeTheme->Font->Color = ThemeManager::Foreground;
     for (auto panel : m_MostRecentlyUsedItems) panel->UpdateControl();
 }
@@ -185,12 +191,14 @@ void __fastcall TfrmWelcomeDialog::NewMostRecentlyUsedItem(const String& name, c
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::edtNameChange(TObject *Sender)
 {
-    auto isEmpty = edtName->Text.Trim() == "";
-    auto file = ApplicationName + Services::Folders::Separator + edtName->Text;
-    auto projectExists = Services::File::Exists(file);
-    lblFile->Caption = file;
-    lblFile->Visible = !isEmpty;
-    btnCreate->Enabled = !isEmpty && !projectExists;
+    UpdateUI();
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmWelcomeDialog::edtImportFileChange(TObject *Sender)
+{
+    auto name = Services::File::NameWithoutExtension(edtImportFile->Text);
+    edtName->Text = edtName->Text.Trim() != "" ? name : edtName->Text.Trim();
+    UpdateUI();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::edtNameKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
@@ -221,22 +229,75 @@ void __fastcall TfrmWelcomeDialog::OnActivate(TWinControl* parent)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmWelcomeDialog::dlgInvalidProjectButtonClicked(TObject *Sender, TModalResult ModalResult, bool &CanClose)
+void __fastcall TfrmWelcomeDialog::btnImportFileClick(TObject *Sender)
 {
-    if (ModalResult != mrClose)
+    dlgImportAGD->InitialDir = Services::Folders::Projects;
+    if (dlgImportAGD->Execute())
     {
-        // launch the agd converter
-        auto dir = Services::File::PathOf(Application->ExeName);
-        auto app =  Services::File::Combine(dir, "AGD Converter.exe");
-        if (Services::File::Exists(app))
+        auto name = Services::File::NameWithoutExtension(dlgImportAGD->FileName);
+        edtName->Text = name;
+        edtImportFile->Text = dlgImportAGD->FileName;
+        UpdateUI();
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmWelcomeDialog::cmbMachinesChange(TObject *Sender)
+{
+    UpdateUI();
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmWelcomeDialog::UpdateUI(bool updateMachine)
+{
+    panStartNew->Color = panButtons->Color;
+    panStartNew->Visible = true;
+    panButtons->Visible = false;
+    if (updateMachine) {
+        for (int i = 0; i < cmbMachines->Items->Count; i++)
         {
-            ShellExecute(NULL, L"open", app.c_str(), NULL, dir.c_str(), SW_SHOWNORMAL);
-        }
-        else
-        {
-            MessageDlg("The 'AGD Converter' application was not found\r\nPlease reinstall AGD Studio", mtError, TMsgDlgButtons() << mbOK, 0);
+            if (cmbMachines->Items->Strings[i] == theAppSettings.DefaultMachine)
+            {
+                cmbMachines->ItemIndex = i;
+                break;
+            }
         }
     }
+
+    auto name = edtName->Text.Trim();
+    auto isProjectEmpty = name == "";
+    auto path = Services::Folders::GetFolder(Services::Folders::lpApplication, "Projects" + Services::Folders::Separator + name);
+    auto projectExists = Services::Folders::Exists(path);
+    lblFile->Caption = Services::Folders::GetFolderRelativeTo(Services::Folders::lpDocuments, path);
+    lblFile->Visible = !isProjectEmpty;
+
+    if (lblStartNewProject->Visible) {
+        // new project
+        lblImportFile->Visible = false;
+        edtImportFile->Visible = false;
+        btnImportFile->Visible = false;
+        imgMachineTick->Visible = false;
+        imgMachineCross->Visible = false;
+        imgImportFileTick->Visible = false;
+        imgImportFileCross->Visible = false;
+        btnCreate->Enabled = !isProjectEmpty && !projectExists;
+    } else {
+        // import agd file
+        auto importFile = edtImportFile->Text.Trim();
+        auto isImportEmpty = importFile == "";
+        auto importerExists = Services::File::Exists(Services::Folders::GetFolder(Services::Folders::lpApplication, "Importers" + Services::Folders::Separator + cmbMachines->Text + ".json"));
+        imgImportFileTick->Visible = !isImportEmpty && Services::File::Exists(importFile);
+        imgImportFileCross->Visible = !isImportEmpty && !Services::File::Exists(importFile);
+        imgMachineTick->Visible = importerExists;
+        imgMachineCross->Visible = !imgMachineTick->Visible;
+        btnCreate->Enabled = !isProjectEmpty && !projectExists && importerExists;
+    }
+    imgProjectNameTick->Visible = !isProjectEmpty && btnCreate->Enabled;
+    imgProjectNameCross->Visible = !isProjectEmpty && !btnCreate->Enabled;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmWelcomeDialog::imgMachineCrossClick(TObject *Sender)
+{
+    auto folder = Services::Folders::GetFolder(Services::Folders::lpApplication, "Importers");
+    ShellExecute(NULL, L"open", L"", NULL, folder.c_str(), SW_SHOWNORMAL);
 }
 //---------------------------------------------------------------------------
 
