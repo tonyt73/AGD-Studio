@@ -6,19 +6,19 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 using namespace Importer;
-__fastcall Token::Token()
+Token::Token()
 : m_Type(ttEmpty)
 , m_Value("")
 {
 }
 //---------------------------------------------------------------------------
-__fastcall Token::Token(const Token& other)
+Token::Token(const Token& other)
 : m_Type(other.Type)
 , m_Value(other.Value)
 {
 }
 //---------------------------------------------------------------------------
-bool __fastcall Token::ize(const String& part, bool first, bool incVars)
+bool Token::ize(const String& part, bool first, bool incVars)
 {
     if (part.Trim() != "") {
         Value = part;
@@ -35,7 +35,8 @@ bool __fastcall Token::ize(const String& part, bool first, bool incVars)
             // check all characters are alphanumeric
             for (auto chr : part) isAlpha = isAlpha && (isalpha(chr) || isdigit(chr));
             if (isAlpha) {
-                m_Type |= first ? ttWord | ttSection : ttWord;
+                m_Type = ttWord;
+                m_Type |= first ? ttSection : 0;
                 Value = part.LowerCase();
             } else if (incVars && part[1] == '<' && part[part.Length()] == '>' ) {
                 // is a variable definition (from the parser definition file)
@@ -63,17 +64,17 @@ bool __fastcall Token::ize(const String& part, bool first, bool incVars)
     return m_Type != ttEmpty;
 }
 //---------------------------------------------------------------------------
-bool __fastcall Token::isa(int type) const
+bool Token::isa(int type) const
 {
     return (m_Type & type) != 0;
 }
 //---------------------------------------------------------------------------
-bool __fastcall Token::isEmpty() const
+bool Token::isEmpty() const
 {
     return m_Type == ttEmpty;
 }
 //---------------------------------------------------------------------------
-String __fastcall Token::toStr() const
+String Token::toStr() const
 {
     String type = "";
     if (m_Type & ttSection) type += "ttSection "; // the first word of a line
