@@ -55,9 +55,9 @@ void __fastcall DocumentManager::Register(const String& type, const String& subT
 //---------------------------------------------------------------------------
 Document* __fastcall DocumentManager::Add(const String& type, const String& subType, const String& name, const String& extra)
 {
-    auto it = m_FactoryMap.find(type + '.' + subType);
-    if (it != m_FactoryMap.end()) {
-        auto document = it->second(name, extra);
+    auto docCreate = m_FactoryMap.find(type + '.' + subType);
+    if (docCreate != m_FactoryMap.end()) {
+        auto document = docCreate->second(name, extra);
         if (document != nullptr) {
             auto dit = m_Documents.find(document->Type);
             if (dit != m_Documents.end()) {

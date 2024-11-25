@@ -341,4 +341,14 @@ bool Parser::hasVariable(const String& variable)
     return m_Variables.count(variable) != 0;
 }
 //---------------------------------------------------------------------------
+int Parser::GetVarCount(const String& variable)
+{
+    return m_VariableCounts[variable];
+}
+//---------------------------------------------------------------------------
+int Parser::GetArrayCount(const String& variable, const String& array)
+{
+    return m_ArrayCounts[variable][array];
+}
+//---------------------------------------------------------------------------
 

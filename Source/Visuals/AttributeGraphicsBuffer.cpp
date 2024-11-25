@@ -142,7 +142,7 @@ void __fastcall AttributeGraphicsBuffer::Set(const String& data)
         // set default attributes (bright white on black)
         for (auto i = 0; i < SizeOfBuffer[1]; i++)
         {
-            m_Buffers[1][i] = 47;
+            m_Buffers[1][i] = 0x47;
         }
     }
     Render();

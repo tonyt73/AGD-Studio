@@ -142,7 +142,7 @@ void __fastcall ULAPlusGraphicsBuffer::Set(const String& data)
         // set default attributes (white in palette 0)
         for (auto i = 0; i < SizeOfBuffer[1]; i++)
         {
-            m_Buffers[1][i] = 7;
+            m_Buffers[1][i] = 0x07;
         }
     }
     Render();

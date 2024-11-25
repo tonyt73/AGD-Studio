@@ -3,7 +3,7 @@
 //---------------------------------------------------------------------------
 #include "ScreensSection.h"
 #include "Project/Documents/DocumentManager.h"
-#include "Project/Documents/Images.h"
+#include "Project/Documents/BaseImage.h"
 #include "Project/Documents/TiledMap.h"
 #include "Project/Documents/Window.h"
 //---------------------------------------------------------------------------

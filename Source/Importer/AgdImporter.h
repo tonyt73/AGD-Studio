@@ -19,7 +19,11 @@ private:
     void    UpdateControls();
     void    UpdateJumpTable();
     void    UpdateFont();
-    void    UpdateObjects();
+    void    AddImages(const String& name, const String& imgType);
+    void    AddScreens();
+    void    AddMap();
+    void    AddMessages();
+    void    AddEvents();
 
 public:
             AgdImporter();
