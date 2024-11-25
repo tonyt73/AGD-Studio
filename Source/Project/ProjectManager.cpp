@@ -157,26 +157,15 @@ bool __fastcall ProjectManager::Import(const String& file)
     ClearMessage("[ProjectManager] Importing file : '" + file + ";");
     InformationMessage("[ProjectManager] Importing file");
 
-    auto imported = false;
-    // TODO: Check the project doesn't already exist
     auto name = Services::File::NameWithoutExtension(file);
-    auto agdImporter = std::make_unique<Importer::AgdImporter>();
-    if (agdImporter != nullptr && agdImporter->CanConvert(file))
+    Importer::AgdImporter importer;
+    if (!importer.Convert(file))
     {
-        auto machine = agdImporter->GetMachine(file);
-        // TODO: Put in the machine select dialog for the discovered machine.
-        New(name, machine);
-        imported = agdImporter->Convert(file);
-        if (imported)
-        {
-            // TODO: Save imported properties
-
-
-            return true;
-        }
+        ErrorMessage("[ProjectManager] Failed to import file: " + file);
+        return false;
     }
-
-    return false;
+    InformationMessage("[ProjectManager] Importing file was successful");
+    return true;
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::Open(const String& file)

@@ -36,7 +36,7 @@
 #include "fULAplusBitmap.h"
 #include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
-#include "Project/Documents/Images.h"
+#include "Project/Documents/BaseImage.h"
 #include "Visuals/Image.h"
 #include "Visuals/GraphicsMode.h"
 //---------------------------------------------------------------------------

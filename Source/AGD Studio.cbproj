@@ -1,4 +1,4 @@
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{D0C2ACDB-659A-4891-B603-0D187CA01644}</ProjectGuid>
         <ProjectVersion>20.1</ProjectVersion>
@@ -7,10 +7,9 @@
         <MainSource>AGD Studio.cpp</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <Platform Condition="'$(Platform)'==''">Win64</Platform>
         <TargetedPlatforms>1048579</TargetedPlatforms>
         <ProjectName Condition="'$(ProjectName)'==''">AGD Studio</ProjectName>
-        <CC_Suffix Condition="'$(CC_Suffix)'==''">c</CC_Suffix>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -577,15 +576,7 @@
         </CppCompile>
         <CppCompile Include="Importer\ImportDefinition.cpp">
             <DependentOn>Importer\ImportDefinition.h</DependentOn>
-            <BuildOrder>110</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Importer\ImportMap.cpp">
-            <DependentOn>Importer\ImportMap.h</DependentOn>
-            <BuildOrder>108</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Importer\ImportRoom.cpp">
-            <DependentOn>Importer\ImportRoom.h</DependentOn>
-            <BuildOrder>110</BuildOrder>
+            <BuildOrder>109</BuildOrder>
         </CppCompile>
         <CppCompile Include="Importer\Parser.cpp">
             <DependentOn>Importer\Parser.h</DependentOn>
@@ -602,6 +593,10 @@
         <CppCompile Include="Messaging\Messaging.cpp">
             <DependentOn>Messaging\Messaging.h</DependentOn>
             <BuildOrder>75</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\BaseImage.cpp">
+            <DependentOn>Project\Documents\BaseImage.h</DependentOn>
+            <BuildOrder>94</BuildOrder>
         </CppCompile>
         <CppCompile Include="Project\Documents\CharacterSet.cpp">
             <DependentOn>Project\Documents\CharacterSet.h</DependentOn>
@@ -622,10 +617,6 @@
         <CppCompile Include="Project\Documents\FileDefinitions.cpp">
             <DependentOn>Project\Documents\FileDefinitions.h</DependentOn>
             <BuildOrder>93</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Project\Documents\Images.cpp">
-            <DependentOn>Project\Documents\Images.h</DependentOn>
-            <BuildOrder>94</BuildOrder>
         </CppCompile>
         <CppCompile Include="Project\Documents\JumpTable.cpp">
             <DependentOn>Project\Documents\JumpTable.h</DependentOn>
@@ -736,35 +727,35 @@
             <DependentOn>Visuals\ULAPlusGraphicsBuffer.h</DependentOn>
             <BuildOrder>110</BuildOrder>
         </CppCompile>
-        <FormResources Include="Forms\fAbout.dfm"/>
-        <FormResources Include="Forms\fAdvancedSettings.dfm"/>
-        <FormResources Include="Forms\fMain.dfm"/>
-        <FormResources Include="Forms\fNewImage.dfm"/>
-        <FormResources Include="Forms\fSettings.dfm"/>
-        <FormResources Include="Frames\Editors\Code\fEditorCode.dfm"/>
-        <FormResources Include="Frames\Editors\Controls\fEditorControls.dfm"/>
-        <FormResources Include="Frames\Editors\Controls\fKeyCapture.dfm"/>
-        <FormResources Include="Frames\Editors\fEditor.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fBlockTypes.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fEditorImage.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fMultiImageView.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fPaletteAttribute.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fPaletteBitmap.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fPaletteMonoAttribute.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fSelectionImage.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fToolbar.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fToolbarShape.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fULAplusBitmap.dfm"/>
-        <FormResources Include="Frames\Editors\JumpTable\fEditorJumpTable.dfm"/>
-        <FormResources Include="Frames\Editors\Map\fAssetSelection.dfm"/>
-        <FormResources Include="Frames\Editors\Map\fEditorMap.dfm"/>
+        <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
         <FormResources Include="Frames\Editors\Map\fLabelledImage.dfm"/>
         <FormResources Include="Frames\Editors\Messages\fEditorMessages.dfm"/>
-        <FormResources Include="Frames\Editors\Music\fEditorMusic.dfm"/>
         <FormResources Include="Frames\Editors\Window\fEditorWindow.dfm"/>
         <FormResources Include="Frames\IDE\fIDE.dfm"/>
         <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
-        <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
+        <FormResources Include="Frames\Editors\Music\fEditorMusic.dfm"/>
+        <FormResources Include="Forms\fAbout.dfm"/>
+        <FormResources Include="Forms\fAdvancedSettings.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fPaletteAttribute.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fPaletteBitmap.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fPaletteMonoAttribute.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fBlockTypes.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fEditorImage.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fMultiImageView.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fSelectionImage.dfm"/>
+        <FormResources Include="Frames\Editors\JumpTable\fEditorJumpTable.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fAssetSelection.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fEditorMap.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fToolbar.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fToolbarShape.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fULAplusBitmap.dfm"/>
+        <FormResources Include="Frames\Editors\Code\fEditorCode.dfm"/>
+        <FormResources Include="Frames\Editors\Controls\fEditorControls.dfm"/>
+        <FormResources Include="Frames\Editors\Controls\fKeyCapture.dfm"/>
+        <FormResources Include="Forms\fMain.dfm"/>
+        <FormResources Include="Forms\fNewImage.dfm"/>
+        <FormResources Include="Forms\fSettings.dfm"/>
+        <FormResources Include="Frames\Editors\fEditor.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

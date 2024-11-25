@@ -17,7 +17,6 @@ inherited frmEditorImage: TfrmEditorImage
     AutoSize = True
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 624
     object btnTool: TButton
       Left = 0
       Top = 0
@@ -40,7 +39,6 @@ inherited frmEditorImage: TfrmEditorImage
       ShowCaption = False
       TabOrder = 1
       OnMouseActivate = imgEditorMouseActivate
-      ExplicitWidth = 567
       inline toolbarShape: TfrmToolbarShape
         Left = 0
         Top = 0
@@ -492,8 +490,6 @@ inherited frmEditorImage: TfrmEditorImage
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 3
-    ExplicitWidth = 368
-    ExplicitHeight = 380
     object sbxView: TScrollBox
       Left = 0
       Top = 0
@@ -585,8 +581,6 @@ inherited frmEditorImage: TfrmEditorImage
       DoubleBuffered = False
       ParentDoubleBuffered = False
       TabOrder = 1
-      ExplicitTop = 280
-      ExplicitWidth = 368
       inline fFrameView: TMultiImageViewFrame
         Left = 0
         Top = 0
@@ -611,7 +605,7 @@ inherited frmEditorImage: TfrmEditorImage
         ParentDoubleBuffered = False
         ParentFont = False
         TabOrder = 0
-        ExplicitWidth = 368
+        ExplicitWidth = 909
         ExplicitHeight = 100
         inherited panImages: TPanel
           StyleElements = [seFont, seClient, seBorder]
@@ -634,8 +628,6 @@ inherited frmEditorImage: TfrmEditorImage
     ShowCaption = False
     TabOrder = 4
     OnMouseActivate = imgEditorMouseActivate
-    ExplicitLeft = 448
-    ExplicitHeight = 380
     object Label2: TLabel
       Left = 0
       Top = 0
@@ -667,7 +659,6 @@ inherited frmEditorImage: TfrmEditorImage
       Caption = 'Panel3'
       ShowCaption = False
       TabOrder = 0
-      ExplicitHeight = 356
       inline palAttribute: TfrmPaletteAttribute
         Left = 0
         Top = 0

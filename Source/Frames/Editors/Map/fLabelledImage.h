@@ -7,7 +7,7 @@
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
 #include <Vcl.ExtCtrls.hpp>
-#include "Project/Documents/Images.h"
+#include "Project/Documents/BaseImage.h"
 #include "Visuals/GraphicsMode.h"
 //---------------------------------------------------------------------------
 class TfrmLabelledImage : public TFrame

@@ -90,7 +90,7 @@ void __fastcall TfrmWelcomeDialog::btnCreateClick(TObject *Sender)
     auto button = dynamic_cast<TButton*>(Sender);
     if (button && button->ModalResult == mrOk)
     {
-        theProjectManager.New(edtName->Text, cmbMachines->Items->Strings[cmbMachines->ItemIndex]);
+        theProjectManager.New(edtName->Text, cmbMachines->Text);
         if (FOnDone) FOnDone(this);
         if (edtImportFile->Visible) {
             Application->ProcessMessages();

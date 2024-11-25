@@ -162,7 +162,7 @@ bool Parser::ProcessSection(const Token& token)
                 }
                 m_VariableCounts[varname] = m_VariableCounts[varname] + 1;
                 // add the instance count to the variables name (ie. SPRITE1, SPRITE2 etc)
-                varname += IntToStr(m_VariableCounts[varname]);
+                varname += PadNum(IntToStr(m_VariableCounts[varname]));
             }
             // change to the new variable
             m_CurrentVariable = varname.LowerCase();
@@ -277,7 +277,7 @@ Token Parser::ReplaceVariableReferencesWithValues(Token token)
         auto hp = token.Value.Pos("{");
         auto dp = token.Value.Pos("}");
         auto varName = SanitizeName(token.Value.SubString(hp + 1, dp - hp - 1));
-        auto number = IntToStr((const int)m_VariableCounts[varName]);
+        auto number = PadNum(IntToStr((const int)m_VariableCounts[varName]));
         token.Value = StringReplace(token.Value, "{" + varName + "}", number, TReplaceFlags());
     }
     // return the processed token
@@ -328,6 +328,17 @@ String Parser::SanitizeName(const String& name) const
 void Parser::SetVariable(const String& var, const String& value)
 {
     m_Variables[m_CurrentVariable][SanitizeName(var)].push_back(value);
+}
+//---------------------------------------------------------------------------
+String Parser::PadNum(const String& string) const
+{
+    auto padded = "000" + string;
+    return "." + padded.SubString(padded.Length() - 2, 3);
+}
+//---------------------------------------------------------------------------
+bool Parser::hasVariable(const String& variable)
+{
+    return m_Variables.count(variable) != 0;
 }
 //---------------------------------------------------------------------------
 

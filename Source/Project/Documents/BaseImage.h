@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------------
-#ifndef ImagesH
-#define ImagesH
+#ifndef BaseImageH
+#define BaseImageH
 //---------------------------------------------------------------------------
 #include "Document.h"
 #include "Visuals/GraphicsTypes.h"

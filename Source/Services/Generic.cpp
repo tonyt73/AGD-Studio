@@ -29,11 +29,11 @@ void Generic::Process()
     if (m_Objects.size() == 0 && m_Object.Length() > 0)
     {
         // split the string by the object token
-        auto objects = System::Strutils::SplitString(m_Object, g_TokenObj);
+        auto objects = SplitString(m_Object, g_TokenObj);
         for (auto object : objects)
         {
             // split the objects by the separator token
-            auto tokens = System::Strutils::SplitString(object, g_TokenSep);
+            auto tokens = SplitString(object, g_TokenSep);
             if (tokens.Length == 2)
             {
                 m_Objects[tokens[0]] = tokens[1];
@@ -70,7 +70,7 @@ bool Generic::Get(const String& name, String& value)
     {
         // parse string to string
         auto def = m_Objects[name];
-        auto tokens = System::Strutils::SplitString(def, ":");
+        auto tokens = SplitString(def, ":");
         value = tokens[1];
         return true;
     }
@@ -84,7 +84,7 @@ bool Generic::Get(const String& name, bool& value)
     {
         // parse string to bool
         auto def = m_Objects[name];
-        auto tokens = System::Strutils::SplitString(def, ":");
+        auto tokens = SplitString(def, ":");
         value = tokens[1] == "true";
         return true;
     }
@@ -98,7 +98,7 @@ bool Generic::Get(const String& name, int& value)
     {
         // parse string to int
         auto def = m_Objects[name];
-        auto tokens = System::Strutils::SplitString(def, ":");
+        auto tokens = SplitString(def, ":");
         value = StrToInt(tokens[1]);
         return true;
     }
@@ -112,7 +112,7 @@ bool Generic::Get(const String& name, float& value)
     {
         // parse string to float
         auto def = m_Objects[name];
-        auto tokens = System::Strutils::SplitString(def, ":");
+        auto tokens = SplitString(def, ":");
         value = StrToFloat(tokens[1]);
         return true;
     }

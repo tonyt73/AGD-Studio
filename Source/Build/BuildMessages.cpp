@@ -43,7 +43,7 @@ void __fastcall BuildMessages::Pop(bool result)
 //---------------------------------------------------------------------------
 void __fastcall BuildMessages::Message(BuildMessageType type, const String& message)
 {
-    auto lines = System::Strutils::SplitString(message, "\n");
+    auto lines = SplitString(message, "\n");
     for (auto line : lines) {
         auto node = m_TreeView->Items->AddChild(m_GroupNode, line);
         node->ImageIndex = type;

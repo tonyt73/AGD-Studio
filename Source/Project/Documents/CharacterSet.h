@@ -2,7 +2,7 @@
 #ifndef CharacterSetH
 #define CharacterSetH
 //---------------------------------------------------------------------------
-#include "Images.h"
+#include "BaseImage.h"
 //---------------------------------------------------------------------------
 namespace Project
 {

@@ -2,6 +2,7 @@
 #ifndef AgdImporterH
 #define AgdImporterH
 //---------------------------------------------------------------------------
+#include "Parser.h"
 #include "Project/Documents/MachineConfig.h"
 #include "Visuals/GraphicsTypes.h"
 //---------------------------------------------------------------------------
@@ -11,13 +12,19 @@ namespace Importer
 class AgdImporter
 {
 private:
+    Parser  m_Parser;
+
+    int     GetNum(const String& var, const String& subVar, int index = 0);
+    void    UpdateWindow();
+    void    UpdateControls();
+    void    UpdateJumpTable();
+    void    UpdateFont();
+    void    UpdateObjects();
 
 public:
-            __fastcall  AgdImporter();
+            AgdImporter();
 
-    bool    __fastcall  Convert(const String& file);
-    bool    __fastcall  CanConvert(const String& file);
-    String  __fastcall  GetMachine(const String& file);
+    bool    Convert(const String& file);
 };
 //---------------------------------------------------------------------------
 } // namespace Importer

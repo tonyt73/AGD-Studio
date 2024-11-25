@@ -2,7 +2,7 @@
 #ifndef MapEntityH
 #define MapEntityH
 //---------------------------------------------------------------------------
-#include "Images.h"
+#include "BaseImage.h"
 //---------------------------------------------------------------------------
 namespace Project
 {
