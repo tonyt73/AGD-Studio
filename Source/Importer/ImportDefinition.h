@@ -36,17 +36,15 @@ private:
         Matcher SpritePosition;
     };
 
-    String              m_Name;
-    String              m_Format;
-    SectionList         m_Sections;
+    String              m_Name;         // name of the JSON section
+    String              m_Format;       // format the importer supports (for future use, maybe!)
+    SectionList         m_Sections;     // the JSON sections the importer uses
 
 public:
+                        __fastcall  ImportDefinition(const String& name);
+    bool                __fastcall  Load(const String& name);
 
-    __property  const SectionList& Sections = { read = m_Sections    };
-
-            __fastcall  ImportDefinition(const String& name);
-
-    bool    __fastcall  Load(const String& name);
+    __property  const SectionList&  Sections = { read = m_Sections    };
 };
 //---------------------------------------------------------------------------
 } // namespace Importer
