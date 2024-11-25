@@ -20,27 +20,22 @@ __fastcall Token::Token(const Token& other)
 //---------------------------------------------------------------------------
 bool __fastcall Token::ize(const String& part, bool first, bool incVars)
 {
-    Type = ttEmpty;
-    Value = "";
-
     if (part.Trim() != "") {
+        Value = part;
+        m_Type = ttInvalid;
         auto number = StrToIntDef(part, -1);
         if (number != -1) {
-            Type = ttNumber;
-            Value = part;
+            m_Type = ttNumber;
         } else if (part.Length() == 3 && part[1] == '\'' && part[3] == '\'') {
-            Type = ttAscii;
-            Value = part;
+            m_Type = ttAscii;
         } else if (part[1] == '"') {
-            Type = ttString;
-            Value = part;
+            m_Type = ttString;
         } else {
             bool isAlpha = true;
             // check all characters are alphanumeric
             for (auto chr : part) isAlpha = isAlpha && (isalpha(chr) || isdigit(chr));
             if (isAlpha) {
-                if (first) Type = ttSection;
-                Type |= ttWord;
+                m_Type |= first ? ttWord | ttSection : ttWord;
                 Value = part.LowerCase();
             } else if (incVars && part[1] == '<' && part[part.Length()] == '>' ) {
                 // is a variable definition (from the parser definition file)
@@ -62,13 +57,10 @@ bool __fastcall Token::ize(const String& part, bool first, bool incVars)
                 }
                 // set variable name
                 Value = varparts[1];
-            } else {
-                Type = ttInvalid;
-                Value = part;
             }
         }
     }
-    return Type != ttEmpty;
+    return m_Type != ttEmpty;
 }
 //---------------------------------------------------------------------------
 bool __fastcall Token::isa(int type) const
@@ -78,20 +70,20 @@ bool __fastcall Token::isa(int type) const
 //---------------------------------------------------------------------------
 bool __fastcall Token::isEmpty() const
 {
-    return Type == ttEmpty;
+    return m_Type == ttEmpty;
 }
 //---------------------------------------------------------------------------
 String __fastcall Token::toStr() const
 {
     String type = "";
-    if (Type & ttSection) type += "ttSection "; // the first word of a line
-    if (Type & ttNumber ) type += "ttNumber ";  // decimal or hexidecimal number
-    if (Type & ttAscii  ) type += "ttAscii ";   // An ascii character within single quotes '<code>'
-    if (Type & ttWord   ) type += "ttWord ";    // an alphanumeric single word
-    if (Type & ttString ) type += "ttString ";  // text within double quotes "this is a string"
-    if (Type & ttLine   ) type += "ttLine ";    // an entire line of text
-    if (Type & ttArray  ) type += "ttArray ";   // array of the above types
-    if (Type & ttInvalid) type += "ttInvalid "; // invalid token type
+    if (m_Type & ttSection) type += "ttSection "; // the first word of a line
+    if (m_Type & ttNumber ) type += "ttNumber ";  // decimal or hexidecimal number
+    if (m_Type & ttAscii  ) type += "ttAscii ";   // An ascii character within single quotes '<code>'
+    if (m_Type & ttWord   ) type += "ttWord ";    // an alphanumeric single word
+    if (m_Type & ttString ) type += "ttString ";  // text within double quotes "this is a string"
+    if (m_Type & ttLine   ) type += "ttLine ";    // an entire line of text
+    if (m_Type & ttArray  ) type += "ttArray ";   // array of the above types
+    if (m_Type & ttInvalid) type += "ttInvalid "; // invalid token type
 
     type = StringReplace(type.Trim(), " ", "|", TReplaceFlags() << rfReplaceAll);
     String value = ", Value: " + Value;
