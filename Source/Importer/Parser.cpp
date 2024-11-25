@@ -93,7 +93,7 @@ bool Parser::Parse(const String& file, const String& machine)
         InformationMessage("[Importer] Import Machine: " + machine);
         auto lines = Services::File::ReadLines(file);
         // parse the lines
-        auto lc = 1;
+        auto lineCount = 1;
         for (auto line : lines) {
             try {
                 auto lineTokens = ProcessLine(line);
@@ -105,19 +105,17 @@ bool Parser::Parse(const String& file, const String& machine)
                         lineTokens.pop_front();
                     } else {
                         ErrorMessage("[Importer] Failed to parse line in file: " + file);
-                        ErrorMessage("[Importer] Line: " + IntToStr(lc) + ": " + line);
+                        ErrorMessage("[Importer] Line: " + IntToStr(lineCount) + ": " + line);
                         return false;
                     }
                 }
-                lc++;
+                lineCount++;
             } catch (Exception &exception) {
                 ErrorMessage("[Importer] Section: " + m_CurrentMatcher.Variable + ", Pattern Match: " + m_CurrentMatcher.Pattern);
                 ErrorMessage("[Importer] Exception: " + exception.Message);
-                if (exception.InnerException) {
-                    ErrorMessage("[Importer] Inner Exception: " + exception.InnerException->Message);
-                }
+                if (exception.InnerException) ErrorMessage("[Importer] Inner Exception: " + exception.InnerException->Message);
                 ErrorMessage("[Importer] Failed to parse line in file: " + file);
-                ErrorMessage("[Importer] Line: " + IntToStr(lc) + ": " + line);
+                ErrorMessage("[Importer] Line: " + IntToStr(lineCount) + ": " + line);
                 return false;
             }
         }
