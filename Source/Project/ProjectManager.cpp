@@ -165,6 +165,7 @@ bool __fastcall ProjectManager::Import(const String& file)
         return false;
     }
     InformationMessage("[ProjectManager] Importing file was successful");
+    Save();
     return true;
 }
 //---------------------------------------------------------------------------
