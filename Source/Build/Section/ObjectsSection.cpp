@@ -48,7 +48,8 @@ void __fastcall ObjectsSection::Execute()
             auto image = std::make_unique<Visuals::Image>(object, gm);
             image->ChangeFrame(0);
             auto data = image->GetExportNativeFormat();
-            if (mc.Name.Pos("ZX Spectrum") != 0)
+            // TODO: Use the importer definition of the machine to determine if an object.colour parameter is needed
+            if (gm.TypeOfBuffer == Visuals::BufferType::btAttribute) // && importer.contains("Objects", "object.colour")
             {
                 // extract the image colour and remove the last 4 bytes (attributes) from the data
                 line += IntToStr(data.back()) + " ";
