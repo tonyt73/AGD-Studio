@@ -15,15 +15,15 @@ private:
     Parser  m_Parser;
 
     int     GetNum(const String& var, const String& subVar, int index = 0);
-    void    UpdateWindow();
-    void    UpdateControls();
-    void    UpdateJumpTable();
-    void    UpdateFont();
-    void    AddImages(const String& name, const String& imgType);
-    void    AddScreens();
-    void    AddMap();
-    void    AddMessages();
-    void    AddEvents();
+    bool    UpdateWindow();
+    bool    UpdateControls();
+    bool    UpdateJumpTable();
+    bool    UpdateFont();
+    bool    AddImages(const String& name, const String& imgType);
+    bool    AddMessages();
+    bool    AddEvents();
+    bool    AddScreens();
+    bool    AddMap();
 
 public:
             AgdImporter();

@@ -45,25 +45,25 @@ int AgdImporter::GetNum(const String& var, const String& subVar, int index)
 //---------------------------------------------------------------------------
 bool AgdImporter::Convert(const String& file)
 {
+    bool result = false;
     if (m_Parser.Parse(file, theDocumentManager.ProjectConfig()->MachineConfiguration().Name)) {
-        // convert contents to AGD Studio documents
-        UpdateWindow();
-        UpdateControls();
-        UpdateJumpTable();
-        UpdateFont();
-        AddImages("blocks" , "Tile"  );
-        AddImages("objects", "Object");
-        AddImages("sprites", "Sprite");
-        AddScreens();
-        AddMap();
-        AddMessages();
-        AddEvents();
-        return true;
+        // convert import contents to AGD Studio documents
+        result  = UpdateWindow();
+        result &= UpdateControls();
+        result &= UpdateJumpTable();
+        result &= UpdateFont();
+        result &= AddImages("blocks" , "Tile"  );
+        result &= AddImages("objects", "Object");
+        result &= AddImages("sprites", "Sprite");
+        result &= AddMessages();
+        result &= AddEvents();
+        result &= AddScreens();
+        result &= AddMap();
     }
-    return false;
+    return result;
  }
 //---------------------------------------------------------------------------
-void AgdImporter::UpdateWindow()
+bool AgdImporter::UpdateWindow()
 {
     if (m_Parser.hasVariable("window")) {
         auto doc = dynamic_cast<Project::WindowDocument*>(theDocumentManager.Get("Window", "Definition", "Window"));
@@ -74,9 +74,10 @@ void AgdImporter::UpdateWindow()
         TRect rect(x, y, x + w, y + h);
         doc->Set(rect);
     }
+    return true;
 }
 //---------------------------------------------------------------------------
-void AgdImporter::UpdateControls()
+bool AgdImporter::UpdateControls()
 {
     if (m_Parser.hasVariable("controlset")) {
         auto doc = dynamic_cast<Project::ControlsDocument*>(theDocumentManager.Get("Controls", "List", "Controls"));
@@ -91,10 +92,13 @@ void AgdImporter::UpdateControls()
         doc->SetAsciiCode(Project::keyOption2, GetNum("controlset", "key.option2"));
         doc->SetAsciiCode(Project::keyOption3, GetNum("controlset", "key.option3"));
         doc->SetAsciiCode(Project::keyOption4, GetNum("controlset", "key.option4"));
+    } else {
+        WarningMessage("No Controls found during the import process");
     }
+    return true;
 }
 //---------------------------------------------------------------------------
-void AgdImporter::UpdateJumpTable()
+bool AgdImporter::UpdateJumpTable()
 {
     if (m_Parser.hasVariable("jumptable")) {
         auto doc = dynamic_cast<Project::JumpTableDocument*>(theDocumentManager.Add("Jump", "Table", "JumpTable"));
@@ -102,9 +106,10 @@ void AgdImporter::UpdateJumpTable()
             doc->SetStep(step, GetNum("jumptable", "jump.table", step));
         }
     }
+    return true;
 }
 //---------------------------------------------------------------------------
-void AgdImporter::UpdateFont()
+bool AgdImporter::UpdateFont()
 {
     if (m_Parser.hasVariable("font")) {
         auto doc = dynamic_cast<Project::CharacterSetDocument*>(theDocumentManager.Add("Image", "Character Set", "Game Font"));
@@ -125,25 +130,29 @@ void AgdImporter::UpdateFont()
             }
         } else {
             ErrorMessage("[Importer] Incorrect number of font bytes found. Require " + IntToStr(bytesRequired) + "bytes, but got " + IntToStr(bytes) + " bytes.");
+            return false;
         }
     }
+    return true;
 }
 //---------------------------------------------------------------------------
-void AgdImporter::AddImages(const String& name, const String& imgType)
+bool AgdImporter::AddImages(const String& name, const String& imgType)
 {
     int vars = m_Parser.GetVarCount(name);
     if (vars > 0) {
-        int bpp = theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()->BitsPerPixel;
+        auto gm = theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode();
+        int bpp = gm->BitsPerPixel;
         for (auto obj = 1; obj <= vars; obj++) {
             auto objName = imgType + " " + IntToStr(obj);
             auto varName = name + m_Parser.PadNum(obj);
             auto doc = dynamic_cast<Project::ImageDocument*>(theDocumentManager.Add("Image", imgType, objName));
             int bytesPerFrame = (doc->Width * doc->Height) / (8 * bpp);
             int bytes = m_Parser.Variables[varName]["image"].size();
+            String frame = "";
             if (bytes >= bytesPerFrame) {
                 for (auto f = 0; f < doc->Frames; f++) {
+                    frame = "";
                     // get bytes for each frame
-                    String frame = "";
                     for (auto i = 0; i < bytes; i++) {
                         frame += IntToHex(GetNum(varName, "image", bytesPerFrame * f + i), 2);
                     }
@@ -151,20 +160,39 @@ void AgdImporter::AddImages(const String& name, const String& imgType)
                 }
             } else {
                 ErrorMessage("[Importer] Incorrect number of " + imgType + " bytes found. Require " + IntToStr(bytesPerFrame) + "bytes, but got " + IntToStr(bytes) + " bytes.");
+                return false;
+            }
+            if (imgType == "Tile") {
+                // process block type
+                dynamic_cast<Project::TileDocument*>(doc)->SetType(m_Parser.Variables[varName]["block.type"].front());
+            } else if (imgType == "Object") {
+                // process room info
+                auto obj = dynamic_cast<Project::ObjectDocument*>(doc);
+                obj->RoomIndex = StrToInt(m_Parser.Variables[varName]["object.room"].front());
+                obj->Position = TPoint(StrToInt(m_Parser.Variables[varName]["object.x"].front()), StrToInt(m_Parser.Variables[varName]["object.y"].front()));
+                if (m_Parser.Variables[varName].count("object.colour") == 1) {
+                    // change the colour of the object
+                    if (gm->TypeOfBuffer == Visuals::BufferType::btAttribute) {
+                        String colour = "";
+                        for (int x = 0; x < doc->Width / (8 / bpp); x++) {
+                            for (int y = 0; y < doc->Height / (8 / bpp); y++) {
+                                colour += IntToHex(StrToInt(m_Parser.Variables[varName]["object.colour"].front()), 2);
+                            }
+                        }
+                        frame = doc->Frame[0];
+                        frame = frame.SubString(1, bytesPerFrame * 2) + colour;
+                         doc->Frame[0] = frame;
+                    } else {
+                        WarningMessage("[Importer] The 'object.colour' property was found during the import process, but the graphics mode (" + gm->Name + ") does not support attributes.");
+                    }
+                }
             }
         }
     }
+    return true;
 }
 //---------------------------------------------------------------------------
-void AgdImporter::AddScreens()
-{
-}
-//---------------------------------------------------------------------------
-void AgdImporter::AddMap()
-{
-}
-//---------------------------------------------------------------------------
-void AgdImporter::AddMessages()
+bool AgdImporter::AddMessages()
 {
     int vars = m_Parser.GetVarCount("messagelist");
     if (vars > 0) {
@@ -176,9 +204,10 @@ void AgdImporter::AddMessages()
             }
         }
     }
+    return true;
 }
 //---------------------------------------------------------------------------
-void AgdImporter::AddEvents()
+bool AgdImporter::AddEvents()
 {
     int vars = m_Parser.GetVarCount("events");
     if (vars > 0) {
@@ -203,7 +232,23 @@ void AgdImporter::AddEvents()
                 }
             }
         }
+    } else {
+        ErrorMessage("No game events found during the import process");
+        return false;
     }
+    return true;
+}
+//---------------------------------------------------------------------------
+bool AgdImporter::AddScreens()
+{
+    return true;
+}
+//---------------------------------------------------------------------------
+bool AgdImporter::AddMap()
+{
+    // define map with screens/rooms including sprite positions
+    // adds objects to map
+    return true;
 }
 //---------------------------------------------------------------------------
 
