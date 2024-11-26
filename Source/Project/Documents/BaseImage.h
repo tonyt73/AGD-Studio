@@ -20,8 +20,8 @@ namespace Project
 class ImageDocument : public Document
 {
 private:
-    typedef std::vector<String>     FramesList;
-    typedef std::map<String, String>LayerMap;
+   typedef std::vector<String>      FramesList;
+   typedef std::map<String, String> LayerMap;
 
             int         __fastcall  CountFrames() const;
             int         __fastcall  CountImagesPerFrame() const;
