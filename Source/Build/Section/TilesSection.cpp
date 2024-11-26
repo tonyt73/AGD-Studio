@@ -4,14 +4,13 @@
 #include "TilesSection.h"
 #include "Project/Documents/DocumentManager.h"
 #include "Project/Documents/Tile.h"
+#include "Visuals/BlockTypes.h"
 #include "Visuals/GraphicsMode.h"
 #include "Visuals/Image.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 using namespace Build;
-//---------------------------------------------------------------------------
-const String BlockTypes[] = { "EMPTYBLOCK", "PLATFORMBLOCK", "WALLBLOCK", "LADDERBLOCK", "FODDERBLOCK", "DEADLYBLOCK", "CUSTOMBLOCK" };
 //---------------------------------------------------------------------------
 __fastcall TilesSection::TilesSection()
 : Section("Tiles")
@@ -34,7 +33,7 @@ void __fastcall TilesSection::Execute()
         if (tile != nullptr)
         {
             String line = "DEFINEBLOCK ";
-            line += BlockTypes[StrToInt(tile->GetLayer("blocktype"))];
+            line += g_BlockTypes[StrToInt(tile->GetLayer("blocktype"))];
             AddLine(line);
             const auto& gm = (*(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()));
             // make an image canvas

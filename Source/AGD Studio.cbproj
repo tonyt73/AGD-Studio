@@ -375,9 +375,6 @@
             <DependentOn>Frames\Editors\fEditor.h</DependentOn>
             <BuildOrder>104</BuildOrder>
         </CppCompile>
-        <None Include="Frames\Editors\Images\BlockColors.h">
-            <BuildOrder>105</BuildOrder>
-        </None>
         <CppCompile Include="Frames\Editors\Images\BlockTypeTool.cpp">
             <DependentOn>Frames\Editors\Images\BlockTypeTool.h</DependentOn>
             <BuildOrder>77</BuildOrder>
@@ -703,6 +700,9 @@
             <DependentOn>Visuals\BitmapGraphicsBuffer.h</DependentOn>
             <BuildOrder>105</BuildOrder>
         </CppCompile>
+        <None Include="Visuals\BlockTypes.h">
+            <BuildOrder>105</BuildOrder>
+        </None>
         <CppCompile Include="Visuals\GraphicsBuffer.cpp">
             <DependentOn>Visuals\GraphicsBuffer.h</DependentOn>
             <BuildOrder>106</BuildOrder>

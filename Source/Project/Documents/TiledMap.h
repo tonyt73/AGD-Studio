@@ -26,7 +26,7 @@ protected:
     int                             m_ScreenCount;
     MapEntity                       m_EntityLoader;
     TSize                           m_ActiveRoom;
-    std::vector<int>                m_RoomMapping; // a mapping from Studio to .AGD screen indexes
+    std::vector<int>                m_RoomMapping;          // a mapping from Studio to .AGD screen indexes
     int                             m_RoomMappingWidth;
     int                             m_RoomMappingHeight;
     int                             m_RoomMappingIndex;

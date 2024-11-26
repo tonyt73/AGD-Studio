@@ -2,7 +2,7 @@
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
 #include "BlockTypeTool.h"
-#include "BlockColors.h"
+#include "Visuals/BlockTypes.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -53,7 +53,7 @@ char __fastcall BlockTypeTool::Move(const TPoint& pt, const TShiftState& buttons
     auto offset = bpt.Y * m_BlocksAcross + bpt.X;
     if (buttons.Contains(ssLeft) || buttons.Contains(ssRight))
     {
-        m_Blocks[offset+1] = buttons.Contains(ssLeft) ? '0' + m_BlockType : '0';
+        m_Blocks[offset+1] = buttons.Contains(ssLeft) ? m_BlockType : '0';
         Apply();
     }
     return m_Blocks[offset+1];
@@ -79,7 +79,7 @@ void __fastcall BlockTypeTool::Apply()
         for (auto a = 0; a < m_BlocksAcross; a++)
         {
             auto index = d * m_BlocksAcross + a;
-            auto type = m_Blocks[index+1]- '0';
+            auto type = m_Blocks[index+1] - '0';
             if (type)
             {
                 auto mC = g_BlockColors[type];       // mask color
@@ -93,7 +93,7 @@ void __fastcall BlockTypeTool::Apply()
                     auto x = a * m_BlockWidth;
                     for (auto w = 0; w < m_BlockWidth; w++)
                     {
-                        auto cc = ColorToRGB(m_BlendedBitmap->Canvas->Pixels[x+w][y+h]);    // canvas color
+                        auto cc = m_BlendedBitmap->Canvas->Pixels[x+w][y+h];    // canvas color
                         auto pR = (float)((cc & 0x000000FF)      ) * alpha;
                         auto pG = (float)((cc & 0x0000FF00) >>  8) * alpha;
                         auto pB = (float)((cc & 0x00FF0000) >> 16) * alpha;

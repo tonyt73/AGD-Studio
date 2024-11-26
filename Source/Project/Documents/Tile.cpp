@@ -2,6 +2,7 @@
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
 #include "Tile.h"
+#include "Visuals/BlockTypes.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -25,9 +26,8 @@ __fastcall TileDocument::TileDocument(const String& name, const String& extra)
 //---------------------------------------------------------------------------
 void __fastcall TileDocument::SetType(const String& type)
 {
-    const String BlockTypes[] = { "EMPTYBLOCK", "PLATFORMBLOCK", "WALLBLOCK", "LADDERBLOCK", "FODDERBLOCK", "DEADLYBLOCK", "CUSTOMBLOCK" };
     for (int i = 0; i < 7; i++) {
-        if (type.UpperCase() == BlockTypes[i]) {
+        if (type.UpperCase() == g_BlockTypes[i]) {
             SetLayer("blocktype", IntToStr(i));
             break;
         }

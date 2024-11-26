@@ -94,8 +94,6 @@ inherited frmEditorImage: TfrmEditorImage
       end>
     ParentFont = True
     UseSystemFont = False
-    ExplicitTop = 422
-    ExplicitWidth = 624
   end
   object panToolbar: TPanel
     Left = 0
@@ -111,7 +109,6 @@ inherited frmEditorImage: TfrmEditorImage
     TabOrder = 2
     OnClick = panEditorContainerClick
     OnMouseActivate = imgEditorMouseActivate
-    ExplicitHeight = 380
     object lblTools: TLabel
       Left = 0
       Top = 0
@@ -508,8 +505,6 @@ inherited frmEditorImage: TfrmEditorImage
       TabOrder = 0
       OnMouseWheel = sbxViewMouseWheel
       OnResize = sbxViewResize
-      ExplicitWidth = 368
-      ExplicitHeight = 280
       object panEditorContainer: TPanel
         Left = 0
         Top = 0
@@ -529,8 +524,6 @@ inherited frmEditorImage: TfrmEditorImage
         StyleElements = [seClient, seBorder]
         OnClick = panEditorContainerClick
         OnMouseActivate = imgEditorMouseActivate
-        ExplicitWidth = 368
-        ExplicitHeight = 280
         object panViewFrame: TPanel
           Left = 128
           Top = 128
@@ -548,8 +541,6 @@ inherited frmEditorImage: TfrmEditorImage
           ParentDoubleBuffered = False
           TabOrder = 0
           StyleElements = []
-          ExplicitWidth = 112
-          ExplicitHeight = 24
           object imgEditor: TImage
             Left = 1
             Top = 1
@@ -611,7 +602,7 @@ inherited frmEditorImage: TfrmEditorImage
           StyleElements = [seFont, seClient, seBorder]
         end
         inherited Timer1: TTimer
-          Left = 216
+          Left = 128
           Top = 65528
         end
       end
