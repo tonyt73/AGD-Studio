@@ -91,7 +91,7 @@ class SetStartRoom : public Event
 private:
     TPoint                  m_Room;
 public:
-    __fastcall              SetStartRoom(TPoint room)
+    __fastcall              SetStartRoom(const TPoint& room)
                             : Event("set.start.room")
                             , m_Room(room)
                             {
@@ -105,7 +105,7 @@ class StartRoomChanged : public Event
 private:
     TPoint                  m_Room;
 public:
-    __fastcall              StartRoomChanged(TPoint room)
+    __fastcall              StartRoomChanged(const TPoint& room)
                             : Event("start.room.changed")
                             , m_Room(room)
                             {

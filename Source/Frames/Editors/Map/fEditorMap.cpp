@@ -57,7 +57,10 @@ __fastcall TfrmEditorMap::TfrmEditorMap(TComponent* Owner)
         "Alt + R               : Toggle start room edit mode\r\n\r\n"
         "Sprite Types\r\n"
         "0                     : Set selected sprite(s) as Player sprite\r\n"
-        "Shift + (1 - 8)       : Set selected sprite(s) as Sprite Type {no.}\r\n";
+        "Shift + (1 - 8)       : Set selected sprite(s) as Sprite Type {no.}\r\n\r\n"
+        "Change Start Room     : o Use Single Room Edit Mode\r\n"
+        "                        o Select the room, using left click\r\n"
+        "                        o Right click the select room to make it the Start room\r\n";
 
     m_Registrar.Subscribe<Event>(OnEvent);
     m_Registrar.Subscribe<RoomSelected>(OnRoomSelected);
@@ -230,6 +233,10 @@ void __fastcall TfrmEditorMap::imgWorkspaceMouseUp(TObject *Sender, TMouseButton
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::imgRoomSelectorMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
 {
+    if (Button == mbRight && actEditModeSingleScreen->Checked) {
+        // select screen as start screen
+        Bus::Publish<SetStartRoom>(SetStartRoom(TPoint(m_RoomSelector->SelectedRoom.cx, m_RoomSelector->SelectedRoom.cy)));
+    }
     m_RoomSelector->OnMouseDown(Button, Shift, X, Y);
 }
 //---------------------------------------------------------------------------
@@ -336,6 +343,9 @@ void __fastcall TfrmEditorMap::OnEvent(const Event& event)
     {
         RefreshAssets();
     }
+    assetsTiles->sbxListResize(nullptr);
+    assetsSprites->sbxListResize(nullptr);
+    assetsObjects->sbxListResize(nullptr);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::OnRoomSelected(const RoomSelected& event)
@@ -796,14 +806,4 @@ void __fastcall TfrmEditorMap::actShowSpriteTypesExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
 

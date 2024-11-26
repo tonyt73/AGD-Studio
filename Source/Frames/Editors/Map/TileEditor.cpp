@@ -2,7 +2,7 @@
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
 #include "TileEditor.h"
-#include "Frames/Editors/Images/BlockColors.h"
+#include "Visuals/BlockTypes.h"
 #include "../MouseState.h"
 #include "Messaging/Messaging.h"
 #include "Project/Documents/DocumentManager.h"
@@ -51,6 +51,7 @@ __fastcall TileEditor::TileEditor(TImage* const view, Visuals::ImageMap& imageMa
     Scale = m_ScaleFactor;
 
     m_Registrar.Subscribe<WindowChangedEvent>(OnWindowChanged);
+    m_Registrar.Subscribe<StartRoomChanged>(OnStartRoomChanged);
 
     m_View->Picture->Bitmap->Canvas->Font->Style = TFontStyles() << fsBold;
     CreateViewBitmap();
@@ -69,6 +70,13 @@ void __fastcall TileEditor::OnWindowChanged(const WindowChangedEvent& event)
         Clear();
         Refresh();
     }
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::OnStartRoomChanged(const StartRoomChanged& event)
+{
+    m_StartRoom = event.Room;
+    UpdateMap();
+    Refresh();
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::CreateViewBitmap()
@@ -601,8 +609,8 @@ void __fastcall TileEditor::SetStartRoomCoords(TPoint location)
     if ((location.x != m_StartRoom.x || location.y != m_StartRoom.y) && 0 <= location.x && location.y < m_Rooms.cx && 0 <= location.y && location.y < m_Rooms.cy)
     {
         m_StartRoom = location;
-        UpdateMap();
     }
+    UpdateMap();
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::SetLockIcon(TImage* icon)
@@ -829,7 +837,8 @@ void __fastcall TileEditor::DrawEntities(int filters, Visuals::ImageTypes type)
             pt.x = Snap(pt.x, m_TileSize.cx);
             pt.y = Snap(pt.y, m_TileSize.cy);
             pt += m_BorderScaled;
-            auto tileType = StrToIntDef(entity.Image->GetLayer("blocktype"), -1);
+            auto bt = entity.Image->GetLayer("blocktype");
+            auto tileType = StrToIntDef(bt, 0);
             auto overlayColor = (entity.Selected ? c_ColorEntitySelected : (m_ShowTileTypes && tileType != -1 ? g_BlockColors[tileType] : clBlack));
             m_ImageMap[entity.Id]->Draw(pt, m_Content.get(), overlayColor);
             entity.Clean();

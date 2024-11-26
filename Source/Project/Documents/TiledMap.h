@@ -11,7 +11,7 @@ namespace Project
 {
 //---------------------------------------------------------------------------
 enum MapEntityType { meMap, meRoom, meScratchPad };
-const int g_MaxMapRoomsAcross = 16;
+const int g_MaxMapRoomsAcross = 24;
 const int g_MaxMapRoomsDown   = 16;
 //---------------------------------------------------------------------------
 class TiledMapDocument : public Document

@@ -6220,7 +6220,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       Caption = 'panOptions'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -19
+      Font.Height = -17
       Font.Name = 'Roboto'
       Font.Style = []
       ParentFont = False
@@ -6232,8 +6232,8 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       object lblStartNewProject: TLabel
         Left = 62
         Top = 18
-        Width = 191
-        Height = 23
+        Width = 168
+        Height = 20
         Cursor = crHandPoint
         Caption = '      Start a new project'
         StyleElements = [seClient, seBorder]
@@ -6283,8 +6283,8 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       object lblImportAGD: TLabel
         Left = 62
         Top = 47
-        Width = 221
-        Height = 23
+        Width = 196
+        Height = 20
         Cursor = crHandPoint
         Caption = '      Import an AGD project'
         StyleElements = [seClient, seBorder]
@@ -6337,8 +6337,8 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         object lblOpenExistingProject: TLabel
           Left = 0
           Top = 1
-          Width = 239
-          Height = 23
+          Width = 211
+          Height = 20
           Cursor = crHandPoint
           Caption = '      Open an existing project'
           StyleElements = [seClient, seBorder]
@@ -6379,8 +6379,8 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         object lblChangeTheme: TLabel
           Left = 0
           Top = 127
-          Width = 89
-          Height = 23
+          Width = 77
+          Height = 20
           Cursor = crHandPoint
           Caption = '      Theme'
           StyleElements = [seClient, seBorder]
@@ -6478,14 +6478,13 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Top = 107
           Width = 376
           Height = 17
-          Alignment = taRightJustify
           Anchors = [akLeft, akTop, akRight]
           AutoSize = False
           Caption = '...'
           EllipsisPosition = epPathEllipsis
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -15
+          Font.Height = -13
           Font.Name = 'Roboto'
           Font.Style = []
           ParentFont = False

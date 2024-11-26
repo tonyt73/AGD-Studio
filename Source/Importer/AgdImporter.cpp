@@ -10,10 +10,12 @@
 #include "Project/Documents/Controls.h"
 #include "Project/Documents/FileDefinitions.h"
 #include "Project/Documents/JumpTable.h"
+#include "Project/Documents/MapEntity.h"
 #include "Project/Documents/Object.h"
 #include "Project/Documents/Sprite.h"
 #include "Project/Documents/Text.h"
 #include "Project/Documents/Tile.h"
+#include "Project/Documents/TiledMap.h"
 #include "Project/Documents/Window.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -72,6 +74,8 @@ bool AgdImporter::UpdateWindow()
         auto w = GetNum("window", "window.width");
         auto h = GetNum("window", "window.height");
         TRect rect(x, y, x + w, y + h);
+        m_Window.cx = rect.Width();
+        m_Window.cy = rect.Height();
         doc->Set(rect);
     }
     return true;
@@ -246,7 +250,87 @@ bool AgdImporter::AddScreens()
 //---------------------------------------------------------------------------
 bool AgdImporter::AddMap()
 {
-    // define map with screens/rooms including sprite positions
+    // read the map layout to calc room.x, room.y
+
+    // upset an empty map
+    std::map<TPoint, int> mapPtToIndex;
+    std::map<int, TPoint> mapIndexToPt;
+
+    // read in the map indexes
+    int mapWidth = StrToIntDef(m_Parser.Variables["map"]["map.width"].front(), -1);
+    int mapSize = m_Parser.Variables["map"]["map.data"].size();
+    int mapHeight = mapSize / mapWidth;
+    TPoint scrPos;
+    auto ssi = StrToIntDef(m_Parser.Variables["map"]["map.startscreen"].front(), -1);
+    auto numScreens = 0;
+    if (mapSize > 0 && mapSize < 255) {
+        // set up the map indexes
+        int mi = 0;
+        for (auto value : m_Parser.Variables["map"]["map.data"]) {
+            auto si = StrToIntDef(value, -1);
+            if (si != -1 && si != 255) {
+                auto sx = mi % mapWidth;
+                auto sy = mi / mapWidth;
+                //mapPtToIndex[TPoint(sx,sy)] = si;
+                mapIndexToPt[si] = TPoint(sx,sy);
+                if (si == ssi) {
+                    scrPos.x = sx;
+                    scrPos.y = sy;
+                }
+                numScreens++;
+            }
+            mi++;
+        }
+        // now read the screens and convert the tile positions into map entity positions
+        Project::MapEntityList entities;
+        auto is = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile];
+        auto tx = is.Step.cx;
+        auto ty = is.Step.cy;
+        for (auto i = 0; i < numScreens; i++) {
+            // add screen (si) tile entities to the map
+            auto varName = "screens" + m_Parser.PadNum(i+1);
+            auto screen = m_Parser.Variables[varName]["screen"];
+            std::vector<int> screenTiles;
+            for (auto tidx : screen) {
+                screenTiles.push_back(StrToInt(tidx));
+            }
+            // get the screens map.x and map.y positions
+            auto scrCoords = mapIndexToPt[i];
+            scrCoords.x *= m_Window.Width  * tx;
+            scrCoords.y *= m_Window.Height * ty;
+            for (auto sy = 0; sy < m_Window.Height; sy++) {
+                for (auto sx = 0; sx < m_Window.Width; sx++) {
+                    Project::MapEntity me;
+                    auto ti = screenTiles[sy * m_Window.Width + sx];
+                    // get the tile document
+                    auto tileDoc = dynamic_cast<Project::TileDocument*>(theDocumentManager.Get("Image", "Tile", "Tile " + IntToStr(ti+1)));
+                    if (tileDoc) {
+                        me.Id = tileDoc->Id;
+                        me.RoomIndex = i;
+                        me.Pt = TPoint(scrCoords.x + (sx * tx), scrCoords.y + (sy * ty));
+                        entities.push_back(me);
+                    } else {
+                        WarningMessage("[Importer] Tile document for index[" + IntToStr(ti) + "] not found");
+                    }
+                }
+            }
+        }
+
+        // get the map document
+        auto doc = dynamic_cast<Project::TiledMapDocument*>(theDocumentManager.Get("Map", "Tiled", "Tile Map"));
+        // set all the tile entities
+        doc->Set(Project::meMap, entities);
+        // set the start screen
+        Bus::Publish<SetStartRoom>(SetStartRoom(scrPos));
+        // loop over the objects/spritepositions and add them to each room's entity list
+    } else {
+        ErrorMessage("Map size is invalid: " + IntToStr(mapWidth) + "x" + IntToStr(mapHeight) + " (" + IntToStr(mapSize) + ", is not >= 1 and < 255.");
+        return false;
+    }
+
+
+
+    // create an entity list of all the tiles for each screen
     // adds objects to map
     return true;
 }

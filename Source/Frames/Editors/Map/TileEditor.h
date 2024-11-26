@@ -79,6 +79,7 @@ private:
     MapTool*                    m_ActiveMapTool;    // the active tool (from 1 of 3 above)
 
     void                __fastcall  OnWindowChanged(const WindowChangedEvent& event);
+    void                __fastcall  OnStartRoomChanged(const StartRoomChanged& event);
     void                __fastcall  CreateViewBitmap();
     void                __fastcall  Clear();
     void                __fastcall  SelectRoom(TSize room);

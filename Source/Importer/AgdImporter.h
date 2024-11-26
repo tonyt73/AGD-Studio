@@ -13,6 +13,7 @@ class AgdImporter
 {
 private:
     Parser  m_Parser;
+    TSize   m_Window;
 
     int     GetNum(const String& var, const String& subVar, int index = 0);
     bool    UpdateWindow();

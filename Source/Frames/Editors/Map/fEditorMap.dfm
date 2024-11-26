@@ -59,8 +59,6 @@ inherited frmEditorMap: TfrmEditorMap
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 624
-    ExplicitHeight = 441
     Layout = {
       3C3F786D6C2076657273696F6E3D22312E30223F3E0D0A3C736974656C697374
       3E0D0A20203C73697465206470693D223936222069643D2253454C465F534954
@@ -104,7 +102,7 @@ inherited frmEditorMap: TfrmEditorMap
         Top = 21
         Width = 375
         Height = 328
-        ActivePage = tabObjects
+        ActivePage = tabTiles
         Align = alClient
         Constraints.MinHeight = 84
         Constraints.MinWidth = 243
@@ -138,16 +136,16 @@ inherited frmEditorMap: TfrmEditorMap
               Margins.Right = 8
               Margins.Bottom = 8
               ExplicitWidth = 367
-              ExplicitHeight = 58
+              ExplicitHeight = 302
               inherited panList: TFlowPanel
-                Width = 350
+                Width = 367
                 Height = 464
                 Margins.Left = 8
                 Margins.Top = 8
                 Margins.Right = 8
                 Margins.Bottom = 8
-                StyleElements = [seFont, seClient, seBorder]
-                ExplicitWidth = 350
+                ExplicitLeft = 1
+                ExplicitWidth = 367
                 ExplicitHeight = 464
               end
             end
@@ -189,13 +187,12 @@ inherited frmEditorMap: TfrmEditorMap
               ExplicitWidth = 367
               ExplicitHeight = 302
               inherited panList: TFlowPanel
-                Width = 350
+                Width = 367
                 Height = 464
                 Margins.Left = 8
                 Margins.Top = 8
                 Margins.Right = 8
                 Margins.Bottom = 8
-                StyleElements = [seFont, seClient, seBorder]
                 ExplicitWidth = 350
                 ExplicitHeight = 464
               end
@@ -249,8 +246,6 @@ inherited frmEditorMap: TfrmEditorMap
                 Font.Name = 'Roboto'
                 Font.Style = [fsBold]
                 ParentFont = False
-                StyleElements = [seFont, seClient, seBorder]
-                ExplicitLeft = 1
                 ExplicitWidth = 350
                 ExplicitHeight = 464
               end
@@ -300,7 +295,6 @@ inherited frmEditorMap: TfrmEditorMap
             Width = 50
           end>
         UseSystemFont = False
-        ExplicitTop = 198
       end
     end
     object dpScratchPad: TLMDDockPanel
@@ -328,7 +322,6 @@ inherited frmEditorMap: TfrmEditorMap
         ShowCaption = False
         TabOrder = 0
         OnResize = panScratchPadViewResize
-        ExplicitHeight = 74
         object imgScratchPad: TImage
           Left = 0
           Top = 22
@@ -432,7 +425,6 @@ inherited frmEditorMap: TfrmEditorMap
           ParentColor = True
           UseSystemFont = False
           Visible = False
-          ExplicitTop = 275
         end
       end
     end
@@ -489,8 +481,6 @@ inherited frmEditorMap: TfrmEditorMap
           DisabledImages = tbrImagesDisabled
           Images = tbrImagesEnabled
           TabOrder = 1
-          ExplicitWidth = 56
-          ExplicitHeight = 152
           object btnSelect: TToolButton
             Left = 0
             Top = 0
@@ -542,9 +532,6 @@ inherited frmEditorMap: TfrmEditorMap
           ButtonWidth = 39
           Images = tbrImagesEnabled
           TabOrder = 0
-          ExplicitTop = 296
-          ExplicitWidth = 56
-          ExplicitHeight = 76
           object btnWSGridRoom: TToolButton
             Left = 0
             Top = 0
@@ -575,8 +562,6 @@ inherited frmEditorMap: TfrmEditorMap
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 2
-          ExplicitTop = 686
-          ExplicitWidth = 56
         end
         object tbrModes: TToolBar
           Left = 0
@@ -589,9 +574,6 @@ inherited frmEditorMap: TfrmEditorMap
           DisabledImages = tbrImagesDisabled
           Images = tbrImagesEnabled
           TabOrder = 3
-          ExplicitTop = 196
-          ExplicitWidth = 56
-          ExplicitHeight = 76
           object btnEditModeMultiple: TToolButton
             Left = 0
             Top = 0
@@ -624,8 +606,6 @@ inherited frmEditorMap: TfrmEditorMap
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 4
-          ExplicitTop = 272
-          ExplicitWidth = 56
         end
         object panModes: TPanel
           Left = 0
@@ -642,8 +622,6 @@ inherited frmEditorMap: TfrmEditorMap
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 5
-          ExplicitTop = 172
-          ExplicitWidth = 56
         end
         object panVisuals: TPanel
           Left = 0
@@ -660,8 +638,6 @@ inherited frmEditorMap: TfrmEditorMap
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 6
-          ExplicitTop = 372
-          ExplicitWidth = 56
         end
         object ToolBar1: TToolBar
           Left = 0
@@ -673,9 +649,6 @@ inherited frmEditorMap: TfrmEditorMap
           ButtonWidth = 39
           Images = tbrImagesEnabled
           TabOrder = 7
-          ExplicitTop = 396
-          ExplicitWidth = 56
-          ExplicitHeight = 190
           object btnToggleDisplayStart: TToolButton
             Left = 0
             Top = 0
@@ -734,8 +707,6 @@ inherited frmEditorMap: TfrmEditorMap
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 8
-          ExplicitTop = 586
-          ExplicitWidth = 56
         end
         object ToolBar2: TToolBar
           Left = 0
@@ -747,9 +718,6 @@ inherited frmEditorMap: TfrmEditorMap
           ButtonWidth = 39
           Images = tbrImagesEnabled
           TabOrder = 9
-          ExplicitTop = 610
-          ExplicitWidth = 56
-          ExplicitHeight = 76
           object btnToggleSpriteLocks: TToolButton
             Left = 0
             Top = 0
@@ -784,8 +752,6 @@ inherited frmEditorMap: TfrmEditorMap
           ShowHint = False
           TabOrder = 10
           Transparent = False
-          ExplicitTop = 690
-          ExplicitWidth = 56
           object btnSpriteType1: TToolButton
             Tag = 1
             Left = 0
@@ -859,9 +825,6 @@ inherited frmEditorMap: TfrmEditorMap
         BorderStyle = bsNone
         TabOrder = 1
         OnMouseWheel = sbxWorkspaceMouseWheel
-        ExplicitLeft = 56
-        ExplicitWidth = 175
-        ExplicitHeight = 184
         object panWorkspaceView: TPanel
           Left = 0
           Top = 0
@@ -872,8 +835,6 @@ inherited frmEditorMap: TfrmEditorMap
           ShowCaption = False
           TabOrder = 0
           OnResize = panWorkspaceViewResize
-          ExplicitWidth = 175
-          ExplicitHeight = 184
           object imgWorkspace: TImage
             Left = 0
             Top = 22
@@ -898,7 +859,6 @@ inherited frmEditorMap: TfrmEditorMap
             AutoSize = True
             Images = imgSmallIcons
             TabOrder = 0
-            ExplicitWidth = 175
             object btnScratchCopyTo: TToolButton
               Left = 0
               Top = 0
@@ -995,7 +955,6 @@ inherited frmEditorMap: TfrmEditorMap
               end>
             UseSystemFont = False
             Visible = False
-            ExplicitTop = 628
           end
         end
       end

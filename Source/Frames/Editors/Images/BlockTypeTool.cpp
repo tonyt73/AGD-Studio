@@ -93,7 +93,7 @@ void __fastcall BlockTypeTool::Apply()
                     auto x = a * m_BlockWidth;
                     for (auto w = 0; w < m_BlockWidth; w++)
                     {
-                        auto cc = m_BlendedBitmap->Canvas->Pixels[x+w][y+h];    // canvas color
+                        auto cc = ColorToRGB(m_BlendedBitmap->Canvas->Pixels[x+w][y+h]);    // canvas color
                         auto pR = (float)((cc & 0x000000FF)      ) * alpha;
                         auto pG = (float)((cc & 0x0000FF00) >>  8) * alpha;
                         auto pB = (float)((cc & 0x00FF0000) >> 16) * alpha;

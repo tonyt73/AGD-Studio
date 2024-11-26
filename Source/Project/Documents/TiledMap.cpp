@@ -202,7 +202,7 @@ void __fastcall TiledMapDocument::Set(MapEntityType type, const MapEntityList& e
 
         // remove the old room items
         m_Map.erase(std::remove_if(m_Map.begin(), m_Map.end(),
-                        [&](const MapEntity& entity) { return (minx <= entity.Pt.x && entity.Pt.x < maxx && miny <= entity.Pt.y && entity.Pt.y < maxy); }),
+            [&](const MapEntity& entity) { return (minx <= entity.Pt.x && entity.Pt.x < maxx && miny <= entity.Pt.y && entity.Pt.y < maxy); }),
             m_Map.end());
 
         // add the new room items adjusted for room location
@@ -309,12 +309,11 @@ bool __fastcall TiledMapDocument::IsRoomIndexUsed(const int roomIndex) const
     assert(roomIndex != 255);
     auto maxRooms = m_RoomMappingWidth * m_RoomMappingHeight;
     assert(0 <= roomIndex && roomIndex < maxRooms);
-    for (auto i = 0; i < maxRooms; i++) {
-        if (m_RoomMapping[i] == roomIndex) {
-            return true;
-        }
+    bool inUse = false;
+    for (auto i = 0; i < maxRooms && !inUse; i++) {
+        inUse = m_RoomMapping[i] == roomIndex;
     }
-    return false;
+    return inUse;
 }
 //---------------------------------------------------------------------------
 TRect __fastcall TiledMapDocument::GetMinimalMapSize()
@@ -334,14 +333,14 @@ TRect __fastcall TiledMapDocument::GetMinimalMapSize()
         }
     }
     rect.Left = std::max((int)(rect.Left - 1), 0);
-    rect.Right = std::min((int)(rect.Right + 1), 16);
+    rect.Right = std::min((int)(rect.Right + 1), g_MaxMapRoomsAcross-1);
     return rect;
 }
 //---------------------------------------------------------------------------
 int __fastcall TiledMapDocument::GetRoomIndex(const TPoint& room, bool newIdForUndefinedRoom)
 {
-    assert(0 <= room.X && room.X < m_RoomMappingWidth);
-    assert(0 <= room.Y && room.Y < m_RoomMappingHeight);
+    //assert(0 <= room.X && room.X < m_RoomMappingWidth);
+    //assert(0 <= room.Y && room.Y < m_RoomMappingHeight);
     // get either the existing room index or make a new one if required
     auto ri = m_RoomMapping[room.Y * m_RoomMappingWidth + room.X];
     if (ri == 255 && newIdForUndefinedRoom) {

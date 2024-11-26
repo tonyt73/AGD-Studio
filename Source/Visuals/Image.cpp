@@ -1,6 +1,7 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
+#include <System.UIConsts.hpp>
 #include "Image.h"
 #include "GraphicsBuffer.h"
 //---------------------------------------------------------------------------
@@ -74,7 +75,11 @@ void __fastcall Image::Draw(const TPoint& pt, TBitmap* canvas, TColor overlayCol
         bfn.BlendFlags = 0;
         bfn.SourceConstantAlpha = 128;
         bfn.AlphaFormat = 0;
-        ((TColor*)m_Overlay->ScanLine[0])[0] = overlayColor;
+//        unsigned int r = (overlayColor & 0x000000FF) << 16;
+//        unsigned int g = overlayColor & 0x0000FF00;
+//        unsigned int b = (overlayColor & 0x00FF0000) >> 16;
+//        unsigned int rgb = r | g | b;
+        ((TColor*)m_Overlay->ScanLine[0])[0] = (TColor)RGBtoBGR(overlayColor);
         AlphaBlend(canvas->Canvas->Handle, pt.x, pt.y, m_Image->Width, m_Image->Height, m_Overlay->Canvas->Handle, 0, 0, 1, 1, bfn);
     }
 }

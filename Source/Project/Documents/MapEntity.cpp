@@ -70,10 +70,7 @@ void __fastcall MapEntity::SetPoint(const TPoint& pt)
 //---------------------------------------------------------------------------
 TPoint __fastcall MapEntity::GetPoint() const
 {
-    if (m_Selected) {
-        return m_Pt + m_DragPt;
-    }
-    return m_Pt;
+    return m_Selected ? m_Pt + m_DragPt : m_Pt;
 }
 //---------------------------------------------------------------------------
 void __fastcall MapEntity::SetDragPoint(const TPoint& pt)
@@ -84,10 +81,7 @@ void __fastcall MapEntity::SetDragPoint(const TPoint& pt)
 //---------------------------------------------------------------------------
 TPoint __fastcall MapEntity::GetDragPoint() const
 {
-    if (m_Selected) {
-        return m_DragPt;
-    }
-    return TPoint();
+    return m_Selected ? m_DragPt : TPoint();
 }
 //---------------------------------------------------------------------------
 void __fastcall MapEntity::Clear()
