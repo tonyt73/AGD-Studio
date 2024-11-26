@@ -84,15 +84,13 @@ The match pattern after the initial section name, is a set of value matches defi
        - Captures all other number values in a group of `window.width`.
     - `endmap` captures the `ENDMAP` word last.
     - Parsing is complete.
-- `spriteposition <number:screen{screens}.spriteposition.type[1]> <number:screen{screens}.spriteposition.index[1]> <number:screen{screens}.spriteposition.y[1]> <number:screen{screens}.spritepositions.x[1]>`
+- `spriteposition <number:screen{screens}.spriteposition.type> <number:screen{screens}.spriteposition.index> <number:screen{screens}.spriteposition.y> <number:screen{screens}.spritepositions.x>`
 	- This one is special in that it uses a value from a previous section capture to assign names for internal variables, using the `{screen}` attribute.
 	- `{screen}` references the count of `DEFINESCREENS` captured so far.
 	  - `{screens}` actually references the import matcher name **"Screens":**
 	- `spriteposition` captures the `SPRITEPOSITION` word at the start of the line.
-	- `<number:screen{screens}.spriteposition.type[1]>` captures a single number value and adds it to an internal variable of type array.
-	   - `{screens}` makes the variable name `screen1.spriteposition.type`
+	- `<number:screen{screens}.spriteposition.type/index/y/x>` captures each single value.
    
-
 ## How do I define AGD importing for a new machine.
 - Copy the `"ZX Spectrum 256x192 16 Colour"` json file in the `importers/` folder and rename it to your machine.
    - The machine name MUST match the one used in the `machines/` folder.
