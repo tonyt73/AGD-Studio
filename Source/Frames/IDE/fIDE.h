@@ -210,7 +210,7 @@ __published:    // IDE-managed Components
     void __fastcall tvProjectDblClick(TObject *Sender);
     void __fastcall tvProjectItemSelectedChange(TObject *Sender, TElXTreeItem *Item);
 
-private:    // User declarations
+private:                // User declarations
     ::Messaging::Registrar              m_Registrar;
     Factories::DocumentEditorFactory    m_DocumentEditorFactory;
     Build::BuildManager                 m_Builder;
@@ -218,16 +218,19 @@ private:    // User declarations
     std::map<String,bool>               m_RegisteredCategories;
 
     void    __fastcall  UpdateDocumentProperties(Project::Document* document);
+    void    __fastcall  DoOpenDocument(Project::Document* document);
     void    __fastcall  OnDocumentClose(TObject *Sender, TLMDockPanelCloseAction& action);
     void    __fastcall  RegisterDocumentEditors();
     void    __fastcall  RefreshMruList();
     void    __fastcall  mruOnClick(TObject *Sender);
+                        // message event handlers
     void    __fastcall  OnMessageEvent(const MessageEvent& message);
     void    __fastcall  OnUpdateProperties(const UpdateProperties& event);
+    void    __fastcall  OnOpenDocument(const OpenDocument& event);
 
     TNotifyEvent        FOnFormClose;
 
-public:        // User declarations
+public:                 // User declarations
             __fastcall  TfrmIDE(TComponent* Owner);
             __fastcall ~TfrmIDE();
 

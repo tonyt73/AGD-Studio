@@ -220,15 +220,15 @@ void __fastcall TiledMapDocument::Set(MapEntityType type, const MapEntityList& e
 //---------------------------------------------------------------------------
 void __fastcall TiledMapDocument::OnDocumentChanged(const DocumentChange<String>& message)
 {
-    if (message.document != nullptr && message.document->Type != "Image") {
+    if (message.Document != nullptr && message.Document->Type != "Image") {
         return;
     }
-    if (message.Id == "document.renamed" && message.document != nullptr) {
+    if (message.Id == "document.renamed" && message.Document != nullptr) {
         // TODO: find all the references and change them
-    } else if (message.Id == "document.removing" && message.document != nullptr) {
-        m_Map.erase(std::remove_if(m_Map.begin(), m_Map.end(), [&](const MapEntity& entity) { return entity.Id == message.document->Id; }), m_Map.end());
-        m_ScratchPad.erase(std::remove_if(m_ScratchPad.begin(), m_ScratchPad.end(), [&](const MapEntity& entity) { return entity.Id == message.document->Id; }), m_ScratchPad.end());
-        m_Room.erase(std::remove_if(m_Room.begin(), m_Room.end(), [&](const MapEntity& entity) { return entity.Id == message.document->Id; }), m_Room.end());
+    } else if (message.Id == "document.removing" && message.Document != nullptr) {
+        m_Map.erase(std::remove_if(m_Map.begin(), m_Map.end(), [&](const MapEntity& entity) { return entity.Id == message.Document->Id; }), m_Map.end());
+        m_ScratchPad.erase(std::remove_if(m_ScratchPad.begin(), m_ScratchPad.end(), [&](const MapEntity& entity) { return entity.Id == message.Document->Id; }), m_ScratchPad.end());
+        m_Room.erase(std::remove_if(m_Room.begin(), m_Room.end(), [&](const MapEntity& entity) { return entity.Id == message.Document->Id; }), m_Room.end());
         UpdateEntityRooms();
     }
 }
@@ -332,8 +332,8 @@ TRect __fastcall TiledMapDocument::GetMinimalMapSize()
             }
         }
     }
-    rect.Left = std::max((int)(rect.Left - 1), 0);
-    rect.Right = std::min((int)(rect.Right + 1), g_MaxMapRoomsAcross-1);
+    //rect.Left = std::max((int)(rect.Left - 1), 0);
+    //rect.Right = std::min((int)(rect.Right + 1), g_MaxMapRoomsAcross-1);
     return rect;
 }
 //---------------------------------------------------------------------------

@@ -30,6 +30,7 @@ private:
                          tiWindow, tiKeyboard, tiText, tiFileAgd, tiFileFont
                        };
 
+    ::Messaging::Registrar          m_Registrar;
     std::map<String, TElXTreeItem*> m_TreeLeafNodes;
     Elxtree::TElXTree*              m_TreeView;
     bool                            m_IsOpen;
@@ -38,7 +39,7 @@ private:
 
 protected:
                   friend    DocumentManager;
-    void        __fastcall  OnDocumentChange(Document* doc);
+    void        __fastcall  OnDocumentChanged(const DocumentChange<String>& message);
     void        __fastcall  ClearTree(const String& rootName);
     Document*   __fastcall  AddToTreeView(Document* document);
 

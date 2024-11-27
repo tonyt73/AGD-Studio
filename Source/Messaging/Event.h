@@ -52,8 +52,22 @@ public:
                             {
                             }
 
-    __property  T            Value    = { read = m_Value    };
-    __property  const Project::Document* document = { read = m_Document };
+    __property  T                        Value    = { read = m_Value    };
+    __property  const Project::Document* Document = { read = m_Document };
+};
+//---------------------------------------------------------------------------
+class OpenDocument : public Event
+{
+private:
+   Project::Document*       m_Document;
+public:
+    __fastcall              OpenDocument(Project::Document* document)
+                            : Event("open.document")
+                            , m_Document(document)
+                            {
+                            }
+
+    __property Project::Document* Document = { read = m_Document };
 };
 //---------------------------------------------------------------------------
 enum MessageType { etInformation, etWarning, etError, etDebug, etClear, etHelpKeys };

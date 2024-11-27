@@ -3,6 +3,8 @@
 //---------------------------------------------------------------------------
 #include "fAssetSelection.h"
 #include "fLabelledImage.h"
+#include "Messaging/Event.h"
+#include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -35,6 +37,7 @@ void __fastcall TfrmAssetSelection::Add(Project::ImageDocument* image, bool enab
     control->Image = image;
     control->Enabled = enabled;
     control->OnSelectedClick = OnImageClick;
+    control->OnDoubleClick = OnOpenDocument;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmAssetSelection::Select(const Project::ImageDocument* image)
@@ -72,6 +75,14 @@ void __fastcall __fastcall TfrmAssetSelection::OnImageClick(TObject* Sender)
     if (image != nullptr && FOnImageClick != nullptr)
     {
         FOnImageClick(image->Image);
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall __fastcall TfrmAssetSelection::OnOpenDocument(TObject* Sender)
+{
+    auto image = dynamic_cast<TfrmLabelledImage*>(Sender);
+    if (image != nullptr) {
+        Bus::Publish<OpenDocument>(OpenDocument(image->Image));
     }
 }
 //---------------------------------------------------------------------------

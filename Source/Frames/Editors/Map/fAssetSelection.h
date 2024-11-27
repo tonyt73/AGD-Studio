@@ -23,6 +23,7 @@ __published:    // IDE-managed Components
 
 private:    // User declarations
     void __fastcall OnImageClick(TObject* Sender);
+    void __fastcall OnOpenDocument(TObject* Sender);
     int  __fastcall FindSelected();
 
     typedef void __fastcall (__closure *TNotifyImageOnSelectionEvent)(Project::ImageDocument* document);

@@ -36,6 +36,7 @@ object frmLabelledImage: TfrmLabelledImage
       Center = True
       Stretch = True
       OnClick = imgImageClick
+      OnDblClick = imgImageDblClick
       ExplicitHeight = 89
     end
     object lblCaption: TLabel
@@ -65,8 +66,6 @@ object frmLabelledImage: TfrmLabelledImage
       TabOrder = 0
       StyleElements = [seFont]
       OnClick = imgImageClick
-      ExplicitLeft = 8
-      ExplicitTop = 97
     end
   end
 end

@@ -386,9 +386,9 @@ void __fastcall TfrmEditorMap::OnDocumentChanged(const DocumentChange<String>& m
     else if ("document.changed")
     {
         const auto& gm = *(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode());
-        auto image = dynamic_cast<const Project::ImageDocument*>(message.document);
-        m_ImageMap[message.document->Id] = std::make_unique<Visuals::Image>(image, gm);
-        if (message.document->Id == m_Workspace->Tile0Id)
+        auto image = dynamic_cast<const Project::ImageDocument*>(message.Document);
+        m_ImageMap[message.Document->Id] = std::make_unique<Visuals::Image>(image, gm);
+        if (message.Document->Id == m_Workspace->Tile0Id)
         {
             m_Workspace->Tile0Id = image->Id;
             m_RoomSelector->Tile0Id = image->Id;

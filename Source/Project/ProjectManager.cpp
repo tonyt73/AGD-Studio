@@ -28,6 +28,7 @@ __fastcall ProjectManager::ProjectManager()
 , m_MostRecentUsedList(nullptr)
 , m_IsOpen(false)
 {
+    m_Registrar.Subscribe<DocumentChange<String>>(OnDocumentChanged);
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::Initialise(Elxtree::TElXTree* treeView)
@@ -275,7 +276,7 @@ bool __fastcall ProjectManager::Remove(const String& type, const String& name)
     return theDocumentManager.Remove(type, name);
 }
 //---------------------------------------------------------------------------
-void __fastcall ProjectManager::OnDocumentChange(Document* doc)
+void __fastcall ProjectManager::OnDocumentChanged(const DocumentChange<String>& message)
 {
     // TODO: update the document properties
     // theProjectManager.AddToTreeView(document);

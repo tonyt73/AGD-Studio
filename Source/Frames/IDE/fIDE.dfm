@@ -444,8 +444,8 @@ object frmIDE: TfrmIDE
         object lblPropertyInfo: TLabel
           Left = 3
           Top = 3
-          Width = 202
-          Height = 34
+          Width = 112
+          Height = 14
           Align = alClient
           Caption = 'Property information'
           Font.Charset = DEFAULT_CHARSET
@@ -456,8 +456,6 @@ object frmIDE: TfrmIDE
           ParentFont = False
           Transparent = True
           WordWrap = True
-          ExplicitWidth = 112
-          ExplicitHeight = 14
         end
       end
     end
