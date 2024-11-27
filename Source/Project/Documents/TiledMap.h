@@ -13,6 +13,8 @@ namespace Project
 enum MapEntityType { meMap, meRoom, meScratchPad };
 const int g_MaxMapRoomsAcross = 24;
 const int g_MaxMapRoomsDown   = 16;
+const int g_MaxRooms          = 254;
+const int g_EmptyRoom         = 255;
 //---------------------------------------------------------------------------
 class TiledMapDocument : public Document
 {
@@ -26,10 +28,11 @@ protected:
     int                             m_ScreenCount;
     MapEntity                       m_EntityLoader;
     TSize                           m_ActiveRoom;
-    std::vector<int>                m_RoomMapping;          // a mapping from Studio to .AGD screen indexes
+    int                             m_RoomMapping[g_MaxMapRoomsAcross][g_MaxMapRoomsDown];          // a mapping from Studio to .AGD screen indexes
+    int                             m_RoomMappingIndex;
+    int                             m_MappingIndexLoadCount;
     int                             m_RoomMappingWidth;
     int                             m_RoomMappingHeight;
-    int                             m_RoomMappingIndex;
 
     void                __fastcall  OnEndObject(const String& object);
     void                __fastcall  OnDocumentChanged(const DocumentChange<String>& message);
@@ -56,7 +59,7 @@ public:
    const MapEntityList& __fastcall  Get(MapEntityType type, TSize room = TSize(0,0));
     void                __fastcall  Set(MapEntityType type, const MapEntityList& entities);
 
-    TRect               __fastcall  GetMinimalMapSize();
+    void                __fastcall  SetMinimalMapSize();
     int                 __fastcall  GetRoomIndex(const TPoint& room, bool newIdForUndefinedRoom = false);
     bool                __fastcall  IsRoomEmpty(int x, int y);
     bool                __fastcall  IsRoomIndexUsed(const int roomIndex) const;
@@ -70,6 +73,8 @@ __published:
     int                 __property  NumberOfRooms   = { read = GetNumberOfRooms                 };
     int                 __property  MaxRoomsAcross  = { read = GetMaxRooms, index = 0           };
     int                 __property  MaxRoomsDown    = { read = GetMaxRooms, index = 1           };
+    int                 __property  Width           = { read = m_RoomMappingWidth               };
+    int                 __property  Height          = { read = m_RoomMappingHeight              };
 };
 //---------------------------------------------------------------------------
 } // Project namespace

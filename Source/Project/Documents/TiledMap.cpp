@@ -15,6 +15,7 @@ _fastcall TiledMapDocument::TiledMapDocument(const String& name)
 , m_StartRoomIndex(0)
 , m_RoomMappingWidth(g_MaxMapRoomsAcross)
 , m_RoomMappingHeight(g_MaxMapRoomsDown)
+, m_MappingIndexLoadCount(0)
 {
     m_Type = "Map";
     m_SubType = "Tiled";
@@ -42,7 +43,7 @@ _fastcall TiledMapDocument::TiledMapDocument(const String& name)
         m_PropertyMap["Map.ScratchPad[].Y"] = &m_EntityLoader.m_Pt.y;
         m_PropertyMap["Map.ScratchPad[].RefId"] = &m_EntityLoader.m_LoadId;
         m_PropertyMap["Map.ScratchPad[].SpriteType"] = &m_EntityLoader.m_SpriteType;
-        m_PropertyMap["Map.RoomMapping.Width"] = &m_RoomMappingWidth;
+        m_PropertyMap["Map.RoomMapping.Width"] = &m_RoomMappingWidth;               // the size of the map we are loading
         m_PropertyMap["Map.RoomMapping.Height"] = &m_RoomMappingHeight;
         m_PropertyMap["Map.RoomMapping.Indexes[]"] = &m_RoomMappingIndex;
         m_File = GetFile();
@@ -50,8 +51,12 @@ _fastcall TiledMapDocument::TiledMapDocument(const String& name)
         // message subscriptions
         m_Registrar.Subscribe<DocumentChange<String>>(OnDocumentChanged);
         m_Registrar.Subscribe<SetStartRoom>(OnSetStartRoom);
-        for (auto i = 0; i < m_RoomMappingWidth * m_RoomMappingHeight; i++) {
-            m_RoomMapping.push_back(255);
+
+        // reset the map
+        for (auto y = 0; y < g_MaxMapRoomsDown; y++) {
+            for (auto x = 0; x < g_MaxMapRoomsAcross; x++) {
+                m_RoomMapping[x][y] = g_EmptyRoom;
+            }
         }
     }
 }
@@ -69,8 +74,10 @@ void __fastcall TiledMapDocument::DoSave()
     Write("Width", m_RoomMappingWidth);
     Write("Height", m_RoomMappingHeight);
     ArrayStart("Indexes");
-    for (auto index : m_RoomMapping) {
-        Write(index);
+    for (auto y = 0; y < m_RoomMappingHeight; y++) {
+        for (auto x = 0; x < m_RoomMappingWidth; x++) {
+            Write(m_RoomMapping[x][y]);
+        }
     }
     ArrayEnd(); // indexes
     Pop();
@@ -134,7 +141,9 @@ void __fastcall TiledMapDocument::OnEndObject(const String& object)
             ErrorMessage("[TiledMap] Encountered an invalid map entity while loading scratch pad JSON object");
         }
     } else if (object == "Map.RoomMapping.Indexes[]") {
-        m_RoomMapping.push_back(m_RoomMappingIndex);
+
+        m_RoomMapping[m_MappingIndexLoadCount % m_RoomMappingWidth][m_MappingIndexLoadCount / m_RoomMappingWidth] = m_RoomMappingIndex;
+        m_MappingIndexLoadCount++;
     }
 }
 //---------------------------------------------------------------------------
@@ -241,7 +250,7 @@ void __fastcall TiledMapDocument::OnSetStartRoom(const SetStartRoom& event)
 void __fastcall TiledMapDocument::SetStartRoomCoords(const TPoint& coords)
 {
     auto ri = GetRoomIndex(coords);
-    if (ri != 255) {
+    if (ri != g_EmptyRoom) {
         m_StartRoomIndex = ri;
         m_StartRoomCoords = coords;
         Bus::Publish<StartRoomChanged>(coords);
@@ -264,9 +273,9 @@ void __fastcall TiledMapDocument::UpdateEntityRooms()
     // remove room mappings for empty rooms
     for (auto y = 0; y < g_MaxMapRoomsDown; y++) {
         for (auto x = 0; x < g_MaxMapRoomsAcross; x++) {
-            auto ri = m_RoomMapping[y * g_MaxMapRoomsAcross + x];
-            if (ri != 255 && IsRoomEmpty(x, y)) {
-                m_RoomMapping[y * g_MaxMapRoomsAcross + x] = 255;
+            auto ri = m_RoomMapping[x][y];
+            if (ri != g_EmptyRoom && IsRoomEmpty(x, y)) {
+                m_RoomMapping[x][y] = g_EmptyRoom;
             }
         }
     }
@@ -285,7 +294,7 @@ void __fastcall TiledMapDocument::UpdateEntityRooms()
         if (entity.Image->ImageType == Visuals::itObject) {
             assert(object != nullptr);
 
-            if (object->State == Visuals::osRoom && object->RoomIndex < 254) {
+            if (object->State == Visuals::osRoom && object->RoomIndex <= g_MaxRooms) {
                 object->Position = TPoint(std::max(0, (int)(entity.Pt.X - (roomPt.X * roomSize.cx))), std::min(255, (int)(entity.Pt.Y - (roomPt.Y * roomSize.cy))));
             } else {
                 // remove any objects from the map that are not assigned to a room
@@ -306,58 +315,52 @@ bool __fastcall TiledMapDocument::IsRoomEmpty(int x, int y)
 //---------------------------------------------------------------------------
 bool __fastcall TiledMapDocument::IsRoomIndexUsed(const int roomIndex) const
 {
-    assert(roomIndex != 255);
-    auto maxRooms = m_RoomMappingWidth * m_RoomMappingHeight;
-    assert(0 <= roomIndex && roomIndex < maxRooms);
+    assert(0 <= roomIndex && roomIndex <= g_MaxRooms);
     bool inUse = false;
-    for (auto i = 0; i < maxRooms && !inUse; i++) {
-        inUse = m_RoomMapping[i] == roomIndex;
+    for (auto y = 0; y < g_MaxMapRoomsDown && !inUse; y++) {
+        for (auto x = 0; x < g_MaxMapRoomsAcross && !inUse; x++) {
+            inUse = m_RoomMapping[x][y] == roomIndex;
+        }
     }
     return inUse;
 }
 //---------------------------------------------------------------------------
-TRect __fastcall TiledMapDocument::GetMinimalMapSize()
+void __fastcall TiledMapDocument::SetMinimalMapSize()
 {
     m_ScreenCount = 0;
-    TRect rect(g_MaxMapRoomsAcross, g_MaxMapRoomsDown, 0, 0);
+    TRect rect(0, 0, 0, 0);
     for (auto y = 0; y < g_MaxMapRoomsDown; y++) {
         for (auto x = 0; x < g_MaxMapRoomsAcross; x++) {
-            auto ri = m_RoomMapping[y * g_MaxMapRoomsAcross + x];
-            if (ri != 255) {
-                rect.Left   = std::min(x, (int)rect.Left  );
+            if (m_RoomMapping[x][y] != g_EmptyRoom) {
                 rect.Right  = std::max(x, (int)rect.Right );
-                rect.Top    = std::min(y, (int)rect.Top   );
                 rect.Bottom = std::max(y, (int)rect.Bottom);
                 m_ScreenCount++;
             }
         }
     }
-    //rect.Left = std::max((int)(rect.Left - 1), 0);
-    //rect.Right = std::min((int)(rect.Right + 1), g_MaxMapRoomsAcross-1);
-    return rect;
+    rect.Right = std::min((int)(rect.Right + 1), g_MaxMapRoomsAcross - 1);
+    rect.Bottom = std::min((int)(rect.Bottom + 1), g_MaxMapRoomsDown - 1);
+    m_RoomMappingWidth  = rect.Width() + 1;
+    m_RoomMappingHeight = rect.Height();
 }
 //---------------------------------------------------------------------------
 int __fastcall TiledMapDocument::GetRoomIndex(const TPoint& room, bool newIdForUndefinedRoom)
 {
-    //assert(0 <= room.X && room.X < m_RoomMappingWidth);
-    //assert(0 <= room.Y && room.Y < m_RoomMappingHeight);
     // get either the existing room index or make a new one if required
-    auto ri = m_RoomMapping[room.Y * m_RoomMappingWidth + room.X];
-    if (ri == 255 && newIdForUndefinedRoom) {
+    auto ri = m_RoomMapping[room.X][room.Y];
+    if (ri == g_EmptyRoom && newIdForUndefinedRoom) {
         // find the lowest unused room index
-        auto maxRooms = m_RoomMappingWidth * m_RoomMappingHeight;
-        for (auto ri = 0; ri < maxRooms; ri++) {
+        for (ri = 0; ri <= g_MaxRooms; ri++) {
             // does this ri exist in the list of rooms
             if (!IsRoomIndexUsed(ri)) {
                 // no, so assign it to the room
+                m_RoomMapping[room.X][room.Y]  = ri;
                 break;
             }
         }
-        if (ri != 255) {
-            m_RoomMapping[room.Y * m_RoomMappingWidth + room.X] = ri;
-        } else {
+        if (ri == g_EmptyRoom) {
             // no rooms left
-            // TODO: Show an error dialog
+            ErrorMessage("[TiledMap] There are no rooms available! All 254 rooms are assigned a location.");
         }
     }
     return ri;
@@ -379,15 +382,15 @@ void __fastcall TiledMapDocument::UpdateScreenCoords()
 //---------------------------------------------------------------------------
 void __fastcall TiledMapDocument::OnLoading()
 {
-    m_RoomMapping.clear();
+    // reset the map
+    for (auto y = 0; y < g_MaxMapRoomsDown; y++)
+        for (auto x = 0; x < g_MaxMapRoomsAcross; x++)
+            m_RoomMapping[x][y] = g_EmptyRoom;
 }
 //---------------------------------------------------------------------------
 void __fastcall TiledMapDocument::OnLoaded()
 {
-    if (m_RoomMapping.size() != m_RoomMappingWidth * m_RoomMappingHeight) {
-        ErrorMessage("[TiledMap] The Room Mapping object in the TileMap.json file has " + IntToStr((int)m_RoomMapping.size()) + " indexes when it should have " + IntToStr(m_RoomMappingWidth * m_RoomMappingHeight));
-    }
-    GetMinimalMapSize();
+    SetMinimalMapSize();
     UpdateScreenCoords();
     //UpdateEntityRooms();
 }
@@ -405,8 +408,10 @@ const TRect& __fastcall TiledMapDocument::GetWindow() const
 int __fastcall TiledMapDocument::GetNumberOfRooms()
 {
     int count = 0;
-    for (auto room : m_RoomMapping) {
-        count += room == 255 ? 0 : 1;
+    for (auto y = 0; y < g_MaxMapRoomsDown; y++) {
+        for (auto x = 0; x < g_MaxMapRoomsAcross; x++) {
+            count += m_RoomMapping[x][y] == g_EmptyRoom ? 0 : 1;
+        }
     }
     return count;
 }
