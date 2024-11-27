@@ -125,12 +125,6 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
         project->Author = theAppSettings.Developer;
         if (project->Files().size() == 0)
         {
-            // create the event files
-            auto definitions = std::make_unique<FileDefinitions>();
-            for (const auto& definition : definitions->GetDefinitions())
-            {
-                theDocumentManager.Add("Text", definition.Type, definition.Filename, "");
-            }
             // create the map, controls, jump table and window documents
             // TODO: Change the interface to take the class type and name
             theDocumentManager.Add("Map"     , "Tiled"     , "Tile Map" , "");
@@ -142,6 +136,12 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
             const auto wc = project->MachineConfiguration().Window;
             TRect rect(0, 0, wc.Width, wc.Height);
             winDoc->Set(rect);
+            // create the event files
+            auto definitions = std::make_unique<FileDefinitions>();
+            for (const auto& definition : definitions->GetDefinitions())
+            {
+                theDocumentManager.Add("Text", definition.Type, definition.Filename, "");
+            }
         }
         else
         {
@@ -170,7 +170,7 @@ bool __fastcall ProjectManager::Import(const String& file)
     return true;
 }
 //---------------------------------------------------------------------------
-void __fastcall ProjectManager::Open(const String& file)
+void __fastcall ProjectManager::Open(const String& file, const String& machine)
 {
     Close();
     ClearMessage("[ProjectManager] Loading Project: " + file);
@@ -181,7 +181,7 @@ void __fastcall ProjectManager::Open(const String& file)
     ClearTree(name);
     theDocumentManager.Clear();
     // create a new project file and load the file
-    auto config = dynamic_cast<ProjectDocument*>(Add("Game", "Configuration", name, ""));
+    auto config = dynamic_cast<ProjectDocument*>(Add("Game", "Configuration", name, machine));
     assert(config != nullptr);
     // get the document manager to load all the files from the project file
     theDocumentManager.Load(name);
@@ -191,8 +191,7 @@ void __fastcall ProjectManager::Open(const String& file)
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::Save()
 {
-    if (m_IsOpen)
-    {
+    if (m_IsOpen) {
         InformationMessage("[ProjectManager] Project Saved");
         theDocumentManager.Save();
     }
@@ -200,8 +199,7 @@ void __fastcall ProjectManager::Save()
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::Close()
 {
-    if (m_IsOpen)
-    {
+    if (m_IsOpen) {
         InformationMessage("[ProjectManager] Project Closed");
         theDocumentManager.Clear();
         m_IsOpen = false;

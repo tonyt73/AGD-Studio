@@ -112,8 +112,6 @@ bool __fastcall ProjectDocument::Load()
 {
     m_File = GetFile();
     auto result = Document::Load();
-    // Load the machine
-    m_MachineConfig->Load(m_MachineName);
     return result;
 }
 //---------------------------------------------------------------------------

@@ -118,7 +118,7 @@ void __fastcall TfrmWelcomeDialog::SelectionPanelOnClick(TObject *Sender)
 {
     m_LoadingPanel = (TSelectionPanelFrame*)Sender;
     m_LoadingPanel->Loading = true;
-    theProjectManager.Open(m_LoadingPanel->Path);
+    theProjectManager.Open(m_LoadingPanel->Path, m_LoadingPanel->Machine);
     m_LoadingPanel->Loading = false;
     m_LoadingPanel = nullptr;
     if (FOnDone) FOnDone(this);
