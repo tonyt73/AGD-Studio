@@ -6694,6 +6694,12 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Anchors = [akRight, akBottom]
           Cancel = True
           Caption = 'Cancel'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Roboto'
+          Font.Style = []
+          ParentFont = False
           TabOrder = 2
           OnClick = btnCreateClick
         end
@@ -6705,7 +6711,13 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Anchors = [akRight, akBottom]
           Caption = 'Create'
           Enabled = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Roboto'
+          Font.Style = []
           ModalResult = 1
+          ParentFont = False
           TabOrder = 3
           OnClick = btnCreateClick
         end

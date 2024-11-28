@@ -74,8 +74,8 @@ void __fastcall TfrmWelcomeDialog::lblImportAGDClick(TObject *Sender)
     btnImportFile->Visible = true;
     panStartNew->Visible = true;
     edtName->Text = "";
-    edtName->SetFocus();
     btnCreate->Caption = "Import";
+    btnImportFile->SetFocus();
     UpdateUI(true);
 }
 //---------------------------------------------------------------------------

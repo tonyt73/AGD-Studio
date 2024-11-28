@@ -452,6 +452,7 @@ void __fastcall TfrmIDE::actViewMessagesExecute(TObject *Sender)
 void __fastcall TfrmIDE::actGameRunExecute(TObject *Sender)
 {
     m_Builder.Execute();
+    dpBuild->Show();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::OnClose()
