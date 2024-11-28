@@ -178,10 +178,10 @@ void __fastcall ProjectManager::Open(const String& file, const String& machine)
     m_IsOpen = true;
     auto name = Services::File::NameWithoutExtension(file);
     Services::Folders::ProjectName = name;
-    ClearTree(name);
-    theDocumentManager.Clear();
     // create a new project file and load the file
+    theDocumentManager.Clear();
     auto config = dynamic_cast<ProjectDocument*>(Add("Game", "Configuration", name, machine));
+    ClearTree(name);
     assert(config != nullptr);
     // get the document manager to load all the files from the project file
     theDocumentManager.Load(name);
