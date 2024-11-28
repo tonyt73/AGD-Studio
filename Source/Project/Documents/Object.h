@@ -10,7 +10,6 @@ namespace Project
 class ObjectDocument : public ImageDocument
 {
 private:
-    // note: for the IDE property editor to work on there properties, they must be new'd for TPersisent to work
                 int                 m_RoomIndex;
                 TPoint              m_Position;
                Visuals::ObjectState m_State;
