@@ -37,7 +37,7 @@ bool Parser::CreateMatchSets(const String& machine)
         result &= AddMatchSection("spriteposition", id->Sections.SpritePosition);
         result &= AddMatchSection("map"           , id->Sections.Map           );
     } else {
-        ErrorMessage("[Importer] Failed to load a file parser definition for machine. " + machine);
+        ErrorMessage("[Import Parser] Failed to load a file parser definition for machine. " + machine);
     }
     return result;
 }
@@ -59,7 +59,7 @@ bool Parser::AddMatchSection(const String& variable, ImportDefinition::Matcher& 
         matcher.Variable = variable.LowerCase();
         m_MatchSections[sectionName] = matcher;
     } else {
-        ErrorMessage("[Importer] Section '" + variable + "' match pattern in parser definition file is not recognised.");
+        ErrorMessage("[Import Parser] Section '" + variable + "' match pattern in parser definition file is not recognised.");
         return false;
     }
     return true;
@@ -77,8 +77,8 @@ Tokens Parser::Tokenize(const String& line, const String& separator, bool incVar
             tokens.push_back(token);
         }
         if (incVars && token.isa(Token::ttInvalid)) {
-            ErrorMessage("Importer definition match pattern format is invalid");
-            ErrorMessage("[Importer] Line: " + line);
+            ErrorMessage("[Import Parser] Importer definition match pattern format is invalid");
+            ErrorMessage("[Import Parser] Line: " + line);
         }
         couldBeSectionName = false;
     }
@@ -89,8 +89,8 @@ bool Parser::Parse(const String& file, const String& machine)
 {
     if (CreateMatchSets(machine)) {
         // Load the file
-        InformationMessage("[Importer] Importing AGD : " + file);
-        InformationMessage("[Importer] Import Machine: " + machine);
+        InformationMessage("[Import Parser] Parsing AGD   : " + file);
+        InformationMessage("[Import Parser] Import Machine: " + machine);
         auto lines = Services::File::ReadLines(file);
         // parse the lines
         auto lineCount = 1;
@@ -104,22 +104,22 @@ bool Parser::Parse(const String& file, const String& machine)
                         // if parsed successfully, move to the next one
                         lineTokens.pop_front();
                     } else {
-                        ErrorMessage("[Importer] Failed to parse line in file: " + file);
-                        ErrorMessage("[Importer] Line: " + IntToStr(lineCount) + ": " + line);
+                        ErrorMessage("[Import Parser] Failed to parse line in file: " + file);
+                        ErrorMessage("[Import Parser] Line: " + IntToStr(lineCount) + ": " + line);
                         return false;
                     }
                 }
                 lineCount++;
             } catch (Exception &exception) {
-                ErrorMessage("[Importer] Section: " + m_CurrentMatcher.Variable + ", Pattern Match: " + m_CurrentMatcher.Pattern);
-                ErrorMessage("[Importer] Exception: " + exception.Message);
-                if (exception.InnerException) ErrorMessage("[Importer] Inner Exception: " + exception.InnerException->Message);
-                ErrorMessage("[Importer] Failed to parse line in file: " + file);
-                ErrorMessage("[Importer] Line: " + IntToStr(lineCount) + ": " + line);
+                ErrorMessage("[Import Parser] Section: " + m_CurrentMatcher.Variable + ", Pattern Match: " + m_CurrentMatcher.Pattern);
+                ErrorMessage("[Import Parser] Exception: " + exception.Message);
+                if (exception.InnerException) ErrorMessage("[Import Parser] Inner Exception: " + exception.InnerException->Message);
+                ErrorMessage("[Import Parser] Failed to parse line in file: " + file);
+                ErrorMessage("[Import Parser] Line: " + IntToStr(lineCount) + ": " + line);
                 return false;
             }
         }
-        InformationMessage("[Importer] Import completed successfully");
+        InformationMessage("[Import Parser] Parsing completed successfully");
         return true;
     }
     return false;
@@ -168,7 +168,7 @@ bool Parser::ProcessSection(const Token& token)
             m_CurrentVariable = varname.LowerCase();
             // pop the section token
             PopSectionToken();
-            InformationMessage("[Importer] Starting Section: " + varname);
+            InformationMessage("[Import Parser] Starting Section: " + varname);
             return true;
         } else {
             ParseError("Invalid token type found in section match pattern.", token, m_SectionTokens.front());
@@ -209,7 +209,7 @@ bool Parser::ProcessValue(const Token& token)
             auto reqcount = m_ArrayCounts[m_CurrentVariable][secVar];
             if (m_ArrayCounts[m_CurrentVariable][secVar] > 0 && (curcount == reqcount || reqcount == 1)) {
                 if (reqcount == 1) {
-                    InformationMessage("[Importer] Variable set: " + secVar + " = " + token.Value);
+                    InformationMessage("[Import Parser] Variable set: " + secVar + " = " + token.Value);
                 }
                 // yes, move to the next section token
                 PopSectionToken();
@@ -286,15 +286,15 @@ Token Parser::ReplaceVariableReferencesWithValues(Token token)
 //---------------------------------------------------------------------------
 void Parser::ParseError(const String& message, Token token) const
 {
-    ErrorMessage("[Importer] " + message);
-    ErrorMessage("[Importer] token: " + token.toStr());
+    ErrorMessage("[Import Parser] " + message);
+    ErrorMessage("[Import Parser] token: " + token.toStr());
 }
 //---------------------------------------------------------------------------
 void Parser::ParseError(const String& message, Token lineToken, Token sectionToken) const
 {
-    ErrorMessage("[Importer] " + message);
-    ErrorMessage("[Importer] Import token: " + lineToken.toStr());
-    ErrorMessage("[Importer] Parser token: " + sectionToken.toStr());
+    ErrorMessage("[Import Parser] " + message);
+    ErrorMessage("[Import Parser] Import token: " + lineToken.toStr());
+    ErrorMessage("[Import Parser] Parser token: " + sectionToken.toStr());
 }
 //---------------------------------------------------------------------------
 // Remove the current section pattern token we are matching to the incoming line token
@@ -308,14 +308,14 @@ void Parser::PopSectionToken()
         int curcount = m_Variables[m_CurrentVariable][secVar].size();
         if (curcount > 1) {
             String type = m_SectionTokens.front().isa(Token::ttString|Token::ttLine) ? " lines" : " bytes";
-            InformationMessage("[Importer] Array '" + secVar + "' is " + IntToStr(curcount) + type);
+            InformationMessage("[Import Parser] Array '" + secVar + "' is " + IntToStr(curcount) + type);
         }
     }
     // finished processing section
     m_SectionTokens.pop_front();
     if (m_SectionTokens.size() == 0) {
         // finished the entire match pattern
-        InformationMessage("[Importer] Finished Section: " + m_CurrentVariable);
+        InformationMessage("[Import Parser] Finished Section: " + m_CurrentVariable);
     }
 }
 //---------------------------------------------------------------------------

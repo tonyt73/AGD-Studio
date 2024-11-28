@@ -26,7 +26,7 @@ AgdImporter::AgdImporter()
 {
 }
 //---------------------------------------------------------------------------
-int AgdImporter::GetNum(const String& var, const String& subVar, int index)
+unsigned char AgdImporter::GetNum(const String& var, const String& subVar, int index)
 {
     auto it = m_Parser.Variables[var][subVar].begin();
     auto end = m_Parser.Variables[var][subVar].end();
@@ -48,7 +48,14 @@ int AgdImporter::GetNum(const String& var, const String& subVar, int index)
 bool AgdImporter::Convert(const String& file)
 {
     bool result = false;
+    auto start = TDateTime::CurrentTime();
+    InformationMessage("[AGD Importer] Parsing import file.");
     if (m_Parser.Parse(file, theDocumentManager.ProjectConfig()->MachineConfiguration().Name)) {
+        auto name = Services::File::NameWithoutExtension(file);
+        auto end = TDateTime::CurrentTime();
+        auto ms = (end - start).FormatString("zzz");
+        InformationMessage("[AGD Importer] Parsed '" + name + "' in " + ms + "ms");
+        start = TDateTime::CurrentTime();
         // convert import contents to AGD Studio documents
         result  = UpdateWindow();
         result &= UpdateControls();
@@ -59,8 +66,15 @@ bool AgdImporter::Convert(const String& file)
         result &= AddImages("sprites", "Sprite");
         result &= AddMessages();
         result &= AddEvents();
-        result &= AddScreens();
         result &= AddMap();
+        end = TDateTime::CurrentTime();
+        ms = (end - start).FormatString("zzzz");
+        InformationMessage("[AGD Importer] Parsed content conversion to documents took " + ms + "ms");
+    }
+    if (result) {
+        InformationMessage("[AGD Importer] Import processed completed.");
+    } else {
+        ErrorMessage("[AGD Importer] Import processed failed.");
     }
     return result;
  }
@@ -97,7 +111,7 @@ bool AgdImporter::UpdateControls()
         doc->SetAsciiCode(Project::keyOption3, GetNum("controlset", "key.option3"));
         doc->SetAsciiCode(Project::keyOption4, GetNum("controlset", "key.option4"));
     } else {
-        WarningMessage("No Controls found during the import process");
+        WarningMessage("[AGD Importer] No Controls found during the import process");
     }
     return true;
 }
@@ -133,7 +147,7 @@ bool AgdImporter::UpdateFont()
                 doc->Frame[f] = frame;
             }
         } else {
-            ErrorMessage("[Importer] Incorrect number of font bytes found. Require " + IntToStr(bytesRequired) + "bytes, but got " + IntToStr(bytes) + " bytes.");
+            ErrorMessage("[AGD Importer] Incorrect number of font bytes found. Require " + IntToStr(bytesRequired) + "bytes, but got " + IntToStr(bytes) + " bytes.");
             return false;
         }
     }
@@ -153,8 +167,12 @@ bool AgdImporter::AddImages(const String& name, const String& imgType)
             int bytesPerFrame = (doc->Width * doc->Height) / (8 * bpp);
             int bytes = m_Parser.Variables[varName]["image"].size();
             String frame = "";
+            if (imgType == "Sprite") {
+                int a = 0;
+            }
+            int frameCount = bytes / bytesPerFrame;
             if (bytes >= bytesPerFrame) {
-                for (auto f = 0; f < doc->Frames; f++) {
+                for (auto f = 0; f < frameCount; f++) {
                     frame = "";
                     // get bytes for each frame
                     for (auto i = 0; i < bytes; i++) {
@@ -163,7 +181,7 @@ bool AgdImporter::AddImages(const String& name, const String& imgType)
                     doc->Frame[f] = frame;
                 }
             } else {
-                ErrorMessage("[Importer] Incorrect number of " + imgType + " bytes found. Require " + IntToStr(bytesPerFrame) + "bytes, but got " + IntToStr(bytes) + " bytes.");
+                ErrorMessage("[AGD Importer] Incorrect number of " + imgType + " bytes found. Require " + IntToStr(bytesPerFrame) + "bytes, but got " + IntToStr(bytes) + " bytes.");
                 return false;
             }
             if (imgType == "Tile") {
@@ -171,23 +189,23 @@ bool AgdImporter::AddImages(const String& name, const String& imgType)
                 dynamic_cast<Project::TileDocument*>(doc)->SetType(m_Parser.Variables[varName]["block.type"].front());
             } else if (imgType == "Object") {
                 // process room info
-                auto obj = dynamic_cast<Project::ObjectDocument*>(doc);
-                obj->RoomIndex = StrToInt(m_Parser.Variables[varName]["object.room"].front());
-                obj->Position = TPoint(StrToInt(m_Parser.Variables[varName]["object.x"].front()), StrToInt(m_Parser.Variables[varName]["object.y"].front()));
+                auto objDoc = dynamic_cast<Project::ObjectDocument*>(doc);
+                objDoc->RoomIndex = StrToInt(m_Parser.Variables[varName]["object.room"].front());
+                objDoc->Position = TPoint(StrToInt(m_Parser.Variables[varName]["object.x"].front()), StrToInt(m_Parser.Variables[varName]["object.y"].front()));
                 if (m_Parser.Variables[varName].count("object.colour") == 1) {
                     // change the colour of the object
                     if (gm->TypeOfBuffer == Visuals::BufferType::btAttribute) {
                         String colour = "";
-                        for (int x = 0; x < doc->Width / (8 / bpp); x++) {
-                            for (int y = 0; y < doc->Height / (8 / bpp); y++) {
+                        for (int x = 0; x < objDoc->Width / (8 / bpp); x++) {
+                            for (int y = 0; y < objDoc->Height / (8 / bpp); y++) {
                                 colour += IntToHex(StrToInt(m_Parser.Variables[varName]["object.colour"].front()), 2);
                             }
                         }
-                        frame = doc->Frame[0];
+                        frame = objDoc->Frame[0];
                         frame = frame.SubString(1, bytesPerFrame * 2) + colour;
-                         doc->Frame[0] = frame;
+                        objDoc->Frame[0] = frame;
                     } else {
-                        WarningMessage("[Importer] The 'object.colour' property was found during the import process, but the graphics mode (" + gm->Name + ") does not support attributes.");
+                        WarningMessage("[AGD Importer] The 'object.colour' property was found during the import process, but the graphics mode (" + gm->Name + ") does not support attributes.");
                     }
                 }
             }
@@ -224,12 +242,13 @@ bool AgdImporter::AddEvents()
                 for (auto event = 1; event <= vars; event++) {
                     auto varName = "events" + m_Parser.PadNum(event);
                     auto eventName = m_Parser.Variables[varName]["event.name"].front().LowerCase();
-                    if (section.Pos(eventName) > 0) {
+                    if (section.Pos(" " + eventName) > 0) {
                         // add the event lines into the event document
                         auto doc = dynamic_cast<Project::EventDocument*>(theDocumentManager.Get("Text", "Event", definition.Filename));
                         doc->Add("\r\n");
                         doc->Add("\r\n");
-                        for (auto line : m_Parser.Variables[varName]["event.lines"]) {
+                        auto lines = m_Parser.Variables[varName]["event.lines"];
+                        for (auto line : lines) {
                             doc->Add(line + "\r\n");
                         }
                     }
@@ -237,25 +256,16 @@ bool AgdImporter::AddEvents()
             }
         }
     } else {
-        ErrorMessage("No game events found during the import process");
+        ErrorMessage("[AGD Importer] No game events found during the import process.");
         return false;
     }
     return true;
 }
 //---------------------------------------------------------------------------
-bool AgdImporter::AddScreens()
-{
-    return true;
-}
-//---------------------------------------------------------------------------
 bool AgdImporter::AddMap()
 {
-    // read the map layout to calc room.x, room.y
-
     // upset an empty map
-    std::map<TPoint, int> mapPtToIndex;
     std::map<int, TPoint> mapIndexToPt;
-
     // read in the map indexes
     int mapWidth = StrToIntDef(m_Parser.Variables["map"]["map.width"].front(), -1);
     int mapSize = m_Parser.Variables["map"]["map.data"].size();
@@ -263,15 +273,16 @@ bool AgdImporter::AddMap()
     TPoint scrPos;
     auto ssi = StrToIntDef(m_Parser.Variables["map"]["map.startscreen"].front(), -1);
     auto numScreens = 0;
-    if (mapSize > 0 && mapSize < 255) {
+    bool result = false;
+    if (0 < mapSize && mapSize <= Project::g_MaxRooms) {
+        result = true;
         // set up the map indexes
         int mi = 0;
         for (auto value : m_Parser.Variables["map"]["map.data"]) {
             auto si = StrToIntDef(value, -1);
-            if (si != -1 && si != 255) {
+            if (si != -1 && si != Project::g_EmptyRoom) {
                 auto sx = mi % mapWidth;
                 auto sy = mi / mapWidth;
-                //mapPtToIndex[TPoint(sx,sy)] = si;
                 mapIndexToPt[si] = TPoint(sx,sy);
                 if (si == ssi) {
                     scrPos.x = sx;
@@ -310,9 +321,50 @@ bool AgdImporter::AddMap()
                         me.Pt = TPoint(scrCoords.x + (sx * tx), scrCoords.y + (sy * ty));
                         entities.push_back(me);
                     } else {
-                        WarningMessage("[Importer] Tile document for index[" + IntToStr(ti) + "] not found");
+                        WarningMessage("[AGD Importer] Tile document for index[" + IntToStr(ti) + "] not found during Map import process.");
                     }
                 }
+            }
+            // get the spritepositions for the screen(room)
+            auto screenName = "screen" + m_Parser.PadNum(i+1);
+            auto spc = m_Parser.Variables["spriteposition"][screenName + ".type"].size();
+            for (auto sp = 0; sp < spc; sp++) {
+                auto spt = StrToInt(m_Parser.Variables["spriteposition"][screenName + ".type"].front());
+                auto spi = StrToInt(m_Parser.Variables["spriteposition"][screenName + ".index"].front());
+                auto spx = StrToInt(m_Parser.Variables["spriteposition"][screenName + ".x"].front());
+                auto spy = StrToInt(m_Parser.Variables["spriteposition"][screenName + ".y"].front());
+                Project::MapEntity me;
+                auto spriteDoc = dynamic_cast<Project::SpriteDocument*>(theDocumentManager.Get("Image", "Sprite", "Sprite " + IntToStr(spi+1)));
+                if (spriteDoc) {
+                    me.Id = spriteDoc->Id;
+                    me.RoomIndex = i;
+                    me.SpriteType = spt;
+                    me.Pt = TPoint(scrCoords.x +spx, scrCoords.y + spy);
+                    entities.push_back(me);
+                } else {
+                    WarningMessage("[AGD Importer] Sprite document for index[" + IntToStr(spi) + "] not found during SpritePositions import process for Room: " + IntToStr(i) + ", Spriteposition: " + IntToStr(sp) + ".");
+                }
+                m_Parser.Variables["spriteposition"][screenName + ".type"].pop_front();
+                m_Parser.Variables["spriteposition"][screenName + ".index"].pop_front();
+                m_Parser.Variables["spriteposition"][screenName + ".x"].pop_front();
+                m_Parser.Variables["spriteposition"][screenName + ".y"].pop_front();
+            }
+        }
+        // add objects to the map entities list
+        Project::DocumentList imageDocs;
+        theDocumentManager.GetAllOfType("Image", imageDocs);
+        for (auto imgDoc : imageDocs) {
+            auto objDoc = dynamic_cast<Project::ObjectDocument*>(imgDoc);
+            if (objDoc != nullptr) {
+                auto scrCoords = mapIndexToPt[objDoc->RoomIndex];
+                scrCoords.x *= m_Window.Width  * tx;
+                scrCoords.y *= m_Window.Height * ty;
+
+                Project::MapEntity me;
+                me.Id = objDoc->Id;
+                me.Pt = TPoint(scrCoords.x + objDoc->X, scrCoords.y + objDoc->Y);
+                me.RoomIndex = objDoc->RoomIndex;
+                entities.push_back(me);
             }
         }
 
@@ -325,14 +377,9 @@ bool AgdImporter::AddMap()
         // loop over the objects/spritepositions and add them to each room's entity list
     } else {
         ErrorMessage("Map size is invalid: " + IntToStr(mapWidth) + "x" + IntToStr(mapHeight) + " (" + IntToStr(mapSize) + ", is not >= 1 and < 255.");
-        return false;
     }
 
-
-
-    // create an entity list of all the tiles for each screen
-    // adds objects to map
-    return true;
+    return result;
 }
 //---------------------------------------------------------------------------
 
