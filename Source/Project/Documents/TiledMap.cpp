@@ -30,6 +30,8 @@ _fastcall TiledMapDocument::TiledMapDocument(const String& name)
         RegisterProperty("NumberOfRooms", "Map Details", "The number of rooms defined");
         RegisterProperty("MaxRoomsAcross", "Map Details", "The maximum number of rooms across that you can define");
         RegisterProperty("MaxRoomsDown", "Map Details", "The maximum number of rooms down that you can define");
+        RegisterProperty("Width", "Map Details", "Minimum Width of the game map");
+        RegisterProperty("Height", "Map Details", "Minimum Height of the AGD file game map");
 
         // json loading properties
         m_PropertyMap["Map.StartLocation"] = &StartRoomIndex;
@@ -325,23 +327,28 @@ bool __fastcall TiledMapDocument::IsRoomIndexUsed(const int roomIndex) const
     return inUse;
 }
 //---------------------------------------------------------------------------
-void __fastcall TiledMapDocument::SetMinimalMapSize()
+const TRect __fastcall TiledMapDocument::SetMinimalMapSize()
 {
+    UpdateEntityRooms();
     m_ScreenCount = 0;
-    TRect rect(0, 0, 0, 0);
+    TRect rect(g_MaxMapRoomsAcross, g_MaxMapRoomsDown, 0, 0);
     for (auto y = 0; y < g_MaxMapRoomsDown; y++) {
         for (auto x = 0; x < g_MaxMapRoomsAcross; x++) {
             if (m_RoomMapping[x][y] != g_EmptyRoom) {
+                rect.Left   = std::min(x, (int)rect.Left  );
+                rect.Top    = std::min(y, (int)rect.Top   );
                 rect.Right  = std::max(x, (int)rect.Right );
                 rect.Bottom = std::max(y, (int)rect.Bottom);
                 m_ScreenCount++;
             }
         }
     }
-    rect.Right = std::min((int)(rect.Right + 1), g_MaxMapRoomsAcross - 1);
-    rect.Bottom = std::min((int)(rect.Bottom + 1), g_MaxMapRoomsDown - 1);
-    m_RoomMappingWidth  = rect.Width() + 1;
-    m_RoomMappingHeight = rect.Height();
+    //rect.Right = std::min((int)(rect.Right + 1), g_MaxMapRoomsAcross - 1);
+    //rect.Bottom = std::min((int)(rect.Bottom + 1), g_MaxMapRoomsDown - 1);
+    rect.Inflate(1,0,1,0);
+    m_RoomMappingWidth  = rect.Right;
+    m_RoomMappingHeight = rect.Bottom;
+    return rect;
 }
 //---------------------------------------------------------------------------
 int __fastcall TiledMapDocument::GetRoomIndex(const TPoint& room, bool newIdForUndefinedRoom)
@@ -392,7 +399,6 @@ void __fastcall TiledMapDocument::OnLoaded()
 {
     SetMinimalMapSize();
     UpdateScreenCoords();
-    //UpdateEntityRooms();
 }
 //---------------------------------------------------------------------------
 const TRect& __fastcall TiledMapDocument::GetWindow() const

@@ -59,7 +59,7 @@ public:
    const MapEntityList& __fastcall  Get(MapEntityType type, TSize room = TSize(0,0));
     void                __fastcall  Set(MapEntityType type, const MapEntityList& entities);
 
-    void                __fastcall  SetMinimalMapSize();
+    const TRect         __fastcall  SetMinimalMapSize();
     int                 __fastcall  GetRoomIndex(const TPoint& room, bool newIdForUndefinedRoom = false);
     bool                __fastcall  IsRoomEmpty(int x, int y);
     bool                __fastcall  IsRoomIndexUsed(const int roomIndex) const;
