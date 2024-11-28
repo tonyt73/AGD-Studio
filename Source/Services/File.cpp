@@ -11,7 +11,7 @@ namespace Services
 //---------------------------------------------------------------------------
 bool File::Exists(const String& file)
 {
-    return System::Ioutils::TFile::Exists(file);
+    return System::Ioutils::TFile::Exists(Cleanse(file));
 }
 //---------------------------------------------------------------------------
 String File::NameWithoutExtension(const String& file)
