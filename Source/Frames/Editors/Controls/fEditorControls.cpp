@@ -3,7 +3,7 @@
 //---------------------------------------------------------------------------
 #include "fEditorControls.h"
 #include "../EditorManager.h"
-#include "Project/DocumentManager.h"
+#include "Project/Documents/DocumentManager.h"
 #include "Settings/ThemeManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

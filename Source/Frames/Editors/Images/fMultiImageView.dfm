@@ -15,8 +15,8 @@ object MultiImageViewFrame: TMultiImageViewFrame
   Ctl3D = False
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Height = -12
+  Font.Name = 'Roboto'
   Font.Style = []
   ParentCtl3D = False
   ParentDoubleBuffered = False

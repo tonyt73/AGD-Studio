@@ -5,7 +5,7 @@
 #include "../EditorManager.h"
 #include "Messaging/Messaging.h"
 #include "Messaging/Event.h"
-#include "Project/DocumentManager.h"
+#include "Project/Documents/DocumentManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "fAssetSelection"
@@ -57,7 +57,10 @@ __fastcall TfrmEditorMap::TfrmEditorMap(TComponent* Owner)
         "Alt + R               : Toggle start room edit mode\r\n\r\n"
         "Sprite Types\r\n"
         "0                     : Set selected sprite(s) as Player sprite\r\n"
-        "Shift + (1 - 8)       : Set selected sprite(s) as Sprite Type {no.}\r\n";
+        "Shift + (1 - 8)       : Set selected sprite(s) as Sprite Type {no.}\r\n\r\n"
+        "Change Start Room     : o Use Single Room Edit Mode\r\n"
+        "                        o Select the room, using left click\r\n"
+        "                        o Right click the select room to make it the Start room\r\n";
 
     m_Registrar.Subscribe<Event>(OnEvent);
     m_Registrar.Subscribe<RoomSelected>(OnRoomSelected);
@@ -230,6 +233,10 @@ void __fastcall TfrmEditorMap::imgWorkspaceMouseUp(TObject *Sender, TMouseButton
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::imgRoomSelectorMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
 {
+    if (Button == mbRight && actEditModeSingleScreen->Checked) {
+        // select screen as start screen
+        Bus::Publish<SetStartRoom>(SetStartRoom(TPoint(m_RoomSelector->SelectedRoom.cx, m_RoomSelector->SelectedRoom.cy)));
+    }
     m_RoomSelector->OnMouseDown(Button, Shift, X, Y);
 }
 //---------------------------------------------------------------------------
@@ -336,6 +343,9 @@ void __fastcall TfrmEditorMap::OnEvent(const Event& event)
     {
         RefreshAssets();
     }
+    assetsTiles->sbxListResize(nullptr);
+    assetsSprites->sbxListResize(nullptr);
+    assetsObjects->sbxListResize(nullptr);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::OnRoomSelected(const RoomSelected& event)
@@ -376,9 +386,9 @@ void __fastcall TfrmEditorMap::OnDocumentChanged(const DocumentChange<String>& m
     else if ("document.changed")
     {
         const auto& gm = *(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode());
-        auto image = dynamic_cast<const Project::ImageDocument*>(message.document);
-        m_ImageMap[message.document->Id] = std::make_unique<Visuals::Image>(image, gm);
-        if (message.document->Id == m_Workspace->Tile0Id)
+        auto image = dynamic_cast<const Project::ImageDocument*>(message.Document);
+        m_ImageMap[message.Document->Id] = std::make_unique<Visuals::Image>(image, gm);
+        if (message.Document->Id == m_Workspace->Tile0Id)
         {
             m_Workspace->Tile0Id = image->Id;
             m_RoomSelector->Tile0Id = image->Id;
@@ -561,6 +571,9 @@ void __fastcall TfrmEditorMap::OnWorkspaceEntitySelected(const Project::MapEntit
         case Visuals::itTile:
             pgcAssets->ActivePage = tabTiles;
             assetsTiles->Select(entity.Image);
+            break;
+        default:
+            // ignore the other enum values
             break;
     }
 }
@@ -793,14 +806,4 @@ void __fastcall TfrmEditorMap::actShowSpriteTypesExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
 

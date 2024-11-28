@@ -29,7 +29,7 @@ class TfrmSettings : public TForm
 __published:    // IDE-managed Components
     TButton *btnOk;
     TButton *btnCancel;
-    TPanel *Panel1;
+	TPanel *panOkCancel;
     TPageControl *pgcSettings;
     TTabSheet *tabProfile;
     TTabSheet *tabInterface;

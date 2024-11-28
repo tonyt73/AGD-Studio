@@ -118,7 +118,8 @@ void __fastcall AttributeGraphicsBuffer::Render() const
 void __fastcall AttributeGraphicsBuffer::Set(const String& data)
 {
     auto size = data.Length() / 2;
-    if (size == (SizeOfBuffer[0] + SizeOfBuffer[1]))
+    // read in pixels
+    if (size >= SizeOfBuffer[0])
     {
         // convert hex to byte
         for (auto i = 0; i < SizeOfBuffer[0]; i++)
@@ -126,11 +127,22 @@ void __fastcall AttributeGraphicsBuffer::Set(const String& data)
             auto byte = (unsigned char)StrToInt("0x" + data.SubString(1 + i * 2, 2));
             m_Buffers[0][i] = byte;
         }
+    }
+
+    // read attributes if it has any
+    if (size == SizeOfBuffer[0] + SizeOfBuffer[1])
+    {
         // convert hex to byte
         auto attrOffset = (SizeOfBuffer[0] * 2) + 1;
         for (auto i = 0; i < SizeOfBuffer[1]; i++)
         {
             m_Buffers[1][i] = (unsigned char)StrToInt("0x" + data.SubString(attrOffset + (i * 2), 2));
+        }
+    } else {
+        // set default attributes (bright white on black)
+        for (auto i = 0; i < SizeOfBuffer[1]; i++)
+        {
+            m_Buffers[1][i] = 0x47;
         }
     }
     Render();

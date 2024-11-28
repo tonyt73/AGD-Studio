@@ -3,8 +3,8 @@
 //---------------------------------------------------------------------------
 #include "Forms/fMain.h"
 #include "Project/ProjectManager.h"
-#include "Project/MachineConfig.h"
-#include "Project/Settings.h"
+#include "Project/Documents/MachineConfig.h"
+#include "Project/Documents/Settings.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -132,25 +132,26 @@ void __fastcall TfrmMain::OnWelcomeDone(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmMain::ShowWelcomeDialog()
 {
+    m_FormView = fvNone;
     Welcome->OnDone  = OnWelcomeDone;
     Welcome->OnActivate(this);
-    m_FormView  = fvWelcomeDialog;
     BorderIcons = TBorderIcons() << biMinimize << biSystemMenu;
     AutoSize = true;
     BorderStyle = bsSingle;
     Menu = nullptr;
-    TPoint pt = theAppSettings.WelcomePosition;
-    Left   = pt.X;
-    Top    = pt.Y;
-    Width  = Welcome->Width;
-    Height = Welcome->Height;
     WindowState = wsNormal;
+    // let the above setting be applied
+    Application->ProcessMessages();
+    // then we can change the position
+    Left = theAppSettings.WelcomePosition.X;
+    Top  = theAppSettings.WelcomePosition.Y;
     if (Left == 0 && Top == 0)
     {
         Position = poScreenCenter;
     }
     IDE->OnFormClose = OnIDEClose;
     IDE->OnActivate(nullptr);
+    m_FormView  = fvWelcomeDialog;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmMain::ShowIDE()
@@ -189,6 +190,7 @@ void __fastcall TfrmMain::SaveSettings()
         TPoint pt(Left, Top);
         theAppSettings.WelcomePosition = pt;
     }
+    theAppSettings.Save();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmMain::FormBeforeMonitorDpiChanged(TObject *Sender, int OldDPI, int NewDPI)
@@ -201,6 +203,16 @@ void __fastcall TfrmMain::FormAfterMonitorDpiChanged(TObject *Sender, int OldDPI
 {
     // show the DPI resize changes
     SendMessage(Handle, WM_SETREDRAW, 1, 0);
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmMain::FormCanResize(TObject *Sender, int &NewWidth, int &NewHeight, bool &Resize)
+{
+    if (m_FormView == fvGameIDE && WindowState == wsNormal)
+    {
+        theAppSettings.WindowPosition = TPoint(Left, Top);
+        theAppSettings.WindowSize     = TSize(Width, Height);
+    }
+    Resize = true;
 }
 //---------------------------------------------------------------------------
 

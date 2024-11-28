@@ -1,6 +1,5 @@
 inherited frmEditorWindow: TfrmEditorWindow
-  Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Name = 'Roboto'
   ParentFont = False
   OnResize = FrameResize
   object imgView: TImage
@@ -12,8 +11,8 @@ inherited frmEditorWindow: TfrmEditorWindow
   end
   object sbrWindow: TStatusBar
     Left = 0
-    Top = 460
-    Width = 640
+    Top = 421
+    Width = 624
     Height = 20
     Panels = <
       item

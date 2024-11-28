@@ -26,13 +26,14 @@ __published:    // IDE-managed Components
     void __fastcall FormActivate(TObject *Sender);
     void __fastcall FormBeforeMonitorDpiChanged(TObject *Sender, int OldDPI, int NewDPI);
     void __fastcall FormAfterMonitorDpiChanged(TObject *Sender, int OldDPI, int NewDPI);
+    void __fastcall FormCanResize(TObject *Sender, int &NewWidth, int &NewHeight, bool &Resize);
 
 private:    // User declarations
-    void                __fastcall OnIDEClose(TObject *Sender);
-    void                __fastcall OnWelcomeDone(TObject *Sender);
-    void                __fastcall ShowWelcomeDialog();
-    void                __fastcall ShowIDE();
-    void                __fastcall SaveSettings();
+    void                __fastcall  OnIDEClose(TObject *Sender);
+    void                __fastcall  OnWelcomeDone(TObject *Sender);
+    void                __fastcall  ShowWelcomeDialog();
+    void                __fastcall  ShowIDE();
+    void                __fastcall  SaveSettings();
 
     TfrmWelcomeDialog*  __fastcall  GetWelcome();
     TfrmIDE*            __fastcall  GetIDE();

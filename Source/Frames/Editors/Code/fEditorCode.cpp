@@ -24,6 +24,7 @@
 #pragma link "LMDCustomToolBar"
 #pragma link "LMDToolBar"
 #pragma link "fEditor"
+#pragma link "fEditor"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 const int SCHEMES_EXTS_COUNT = 28;

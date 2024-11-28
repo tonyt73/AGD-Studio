@@ -6,7 +6,7 @@
 #include <Vcl.Graphics.hpp>
 #include <Vcl.Themes.hpp>
 #include <Vcl.Styles.hpp>
-
+#include <Xml.Win.msxmldom.hpp>
 // System
 #include <System.hpp>
 #include <System.Classes.hpp>
@@ -16,7 +16,7 @@
 #include <System.Math.hpp>
 #include <System.IOUtils.hpp>
 #include <System.JSON.hpp>
-#include <System.Json.Types.hpp>
+#include <System.JSON.Types.hpp>
 #include <System.JSON.Readers.hpp>
 #include <System.JSON.Writers.hpp>
 
@@ -32,7 +32,9 @@
 //---------------------------------------------------------------------------
 #pragma hdrstop
 
-const String const ApplicationName = "AGD Studio";
+const String ApplicationName = "AGD Studio";
+
+#pragma clang diagnostic ignored "-Wignored-attributes"
 
 #endif // pch_h
 

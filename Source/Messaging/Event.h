@@ -2,7 +2,7 @@
 #ifndef EventH
 #define EventH
 //---------------------------------------------------------------------------
-#include "Project/Document.h"
+#include "Project/Documents/Document.h"
 //---------------------------------------------------------------------------
 namespace Messaging
 {
@@ -52,8 +52,22 @@ public:
                             {
                             }
 
-    __property  T            Value    = { read = m_Value    };
-    __property  const Project::Document* document = { read = m_Document };
+    __property  T                        Value    = { read = m_Value    };
+    __property  const Project::Document* Document = { read = m_Document };
+};
+//---------------------------------------------------------------------------
+class OpenDocument : public Event
+{
+private:
+   Project::Document*       m_Document;
+public:
+    __fastcall              OpenDocument(Project::Document* document)
+                            : Event("open.document")
+                            , m_Document(document)
+                            {
+                            }
+
+    __property Project::Document* Document = { read = m_Document };
 };
 //---------------------------------------------------------------------------
 enum MessageType { etInformation, etWarning, etError, etDebug, etClear, etHelpKeys };
@@ -91,7 +105,7 @@ class SetStartRoom : public Event
 private:
     TPoint                  m_Room;
 public:
-    __fastcall              SetStartRoom(TPoint room)
+    __fastcall              SetStartRoom(const TPoint& room)
                             : Event("set.start.room")
                             , m_Room(room)
                             {
@@ -105,7 +119,7 @@ class StartRoomChanged : public Event
 private:
     TPoint                  m_Room;
 public:
-    __fastcall              StartRoomChanged(TPoint room)
+    __fastcall              StartRoomChanged(const TPoint& room)
                             : Event("start.room.changed")
                             , m_Room(room)
                             {

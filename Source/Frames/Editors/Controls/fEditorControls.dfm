@@ -1,5 +1,7 @@
 inherited frmEditorControls: TfrmEditorControls
   AlignWithMargins = True
+  Width = 745
+  Height = 625
   Font.Height = -16
   Font.Name = 'Roboto'
   Font.Style = [fsBold]
@@ -8,15 +10,23 @@ inherited frmEditorControls: TfrmEditorControls
   Padding.Right = 16
   Padding.Bottom = 16
   ParentFont = False
+  ExplicitWidth = 745
+  ExplicitHeight = 625
   DesignSize = (
-    640
-    480)
+    745
+    625)
   object Label1: TLabel
     Left = 31
     Top = 7
     Width = 89
     Height = 19
     Caption = ' DIRECTION '
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Roboto'
+    Font.Style = [fsBold]
+    ParentFont = False
     Transparent = True
   end
   object Label2: TLabel
@@ -39,34 +49,43 @@ inherited frmEditorControls: TfrmEditorControls
     Width = 65
     Height = 19
     Caption = ' OPTION '
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Roboto'
+    Font.Style = [fsBold]
+    ParentFont = False
     Transparent = True
   end
   object Line1: TShape
     Left = 16
     Top = 24
-    Width = 1320
+    Width = 1441
     Height = 3
     Anchors = [akLeft, akTop, akRight]
     Brush.Color = clBackground
     Pen.Color = clBackground
+    ExplicitWidth = 1320
   end
   object Line2: TShape
     Left = 16
     Top = 200
-    Width = 1320
+    Width = 1441
     Height = 3
     Anchors = [akLeft, akTop, akRight]
     Brush.Color = clBackground
     Pen.Color = clBackground
+    ExplicitWidth = 1320
   end
   object Line3: TShape
     Left = 16
     Top = 376
-    Width = 1320
+    Width = 1441
     Height = 3
     Anchors = [akLeft, akTop, akRight]
     Brush.Color = clBackground
     Pen.Color = clBackground
+    ExplicitWidth = 1320
   end
   inline kcLeft: TfrmKeyCode
     Left = 31
@@ -86,8 +105,15 @@ inherited frmEditorControls: TfrmEditorControls
     TabOrder = 0
     ExplicitLeft = 31
     ExplicitTop = 35
+    inherited lblKey: TLabel
+      StyleElements = [seFont, seClient, seBorder]
+    end
     inherited panCaption: TPanel
       Caption = 'LEFT'
+      StyleElements = [seFont, seClient, seBorder]
+    end
+    inherited edtKey: TEdit
+      StyleElements = [seFont, seClient, seBorder]
     end
   end
   inline kcRight: TfrmKeyCode
@@ -108,8 +134,15 @@ inherited frmEditorControls: TfrmEditorControls
     TabOrder = 1
     ExplicitLeft = 172
     ExplicitTop = 35
+    inherited lblKey: TLabel
+      StyleElements = [seFont, seClient, seBorder]
+    end
     inherited panCaption: TPanel
       Caption = 'RIGHT'
+      StyleElements = [seFont, seClient, seBorder]
+    end
+    inherited edtKey: TEdit
+      StyleElements = [seFont, seClient, seBorder]
     end
   end
   inline kcUp: TfrmKeyCode
@@ -130,8 +163,15 @@ inherited frmEditorControls: TfrmEditorControls
     TabOrder = 2
     ExplicitLeft = 313
     ExplicitTop = 35
+    inherited lblKey: TLabel
+      StyleElements = [seFont, seClient, seBorder]
+    end
     inherited panCaption: TPanel
       Caption = 'UP'
+      StyleElements = [seFont, seClient, seBorder]
+    end
+    inherited edtKey: TEdit
+      StyleElements = [seFont, seClient, seBorder]
     end
   end
   inline kcDown: TfrmKeyCode
@@ -142,7 +182,7 @@ inherited frmEditorControls: TfrmEditorControls
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
-    Font.Name = 'Tahoma'
+    Font.Name = 'Roboto'
     Font.Style = []
     Padding.Left = 7
     Padding.Top = 7
@@ -152,8 +192,15 @@ inherited frmEditorControls: TfrmEditorControls
     TabOrder = 3
     ExplicitLeft = 454
     ExplicitTop = 35
+    inherited lblKey: TLabel
+      StyleElements = [seFont, seClient, seBorder]
+    end
     inherited panCaption: TPanel
       Caption = 'DOWN'
+      StyleElements = [seFont, seClient, seBorder]
+    end
+    inherited edtKey: TEdit
+      StyleElements = [seFont, seClient, seBorder]
     end
   end
   inline kcFire1: TfrmKeyCode
@@ -164,7 +211,7 @@ inherited frmEditorControls: TfrmEditorControls
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
-    Font.Name = 'Tahoma'
+    Font.Name = 'Roboto'
     Font.Style = []
     Padding.Left = 7
     Padding.Top = 7
@@ -174,8 +221,15 @@ inherited frmEditorControls: TfrmEditorControls
     TabOrder = 4
     ExplicitLeft = 31
     ExplicitTop = 210
+    inherited lblKey: TLabel
+      StyleElements = [seFont, seClient, seBorder]
+    end
     inherited panCaption: TPanel
       Caption = '1'
+      StyleElements = [seFont, seClient, seBorder]
+    end
+    inherited edtKey: TEdit
+      StyleElements = [seFont, seClient, seBorder]
     end
   end
   inline kcFire2: TfrmKeyCode
@@ -186,7 +240,7 @@ inherited frmEditorControls: TfrmEditorControls
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
-    Font.Name = 'Tahoma'
+    Font.Name = 'Roboto'
     Font.Style = []
     Padding.Left = 7
     Padding.Top = 7
@@ -196,8 +250,15 @@ inherited frmEditorControls: TfrmEditorControls
     TabOrder = 5
     ExplicitLeft = 172
     ExplicitTop = 210
+    inherited lblKey: TLabel
+      StyleElements = [seFont, seClient, seBorder]
+    end
     inherited panCaption: TPanel
       Caption = '2'
+      StyleElements = [seFont, seClient, seBorder]
+    end
+    inherited edtKey: TEdit
+      StyleElements = [seFont, seClient, seBorder]
     end
   end
   inline kcFire3: TfrmKeyCode
@@ -208,7 +269,7 @@ inherited frmEditorControls: TfrmEditorControls
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
-    Font.Name = 'Tahoma'
+    Font.Name = 'Roboto'
     Font.Style = []
     Padding.Left = 7
     Padding.Top = 7
@@ -218,8 +279,15 @@ inherited frmEditorControls: TfrmEditorControls
     TabOrder = 6
     ExplicitLeft = 313
     ExplicitTop = 210
+    inherited lblKey: TLabel
+      StyleElements = [seFont, seClient, seBorder]
+    end
     inherited panCaption: TPanel
       Caption = '3'
+      StyleElements = [seFont, seClient, seBorder]
+    end
+    inherited edtKey: TEdit
+      StyleElements = [seFont, seClient, seBorder]
     end
   end
   inline kcOption1: TfrmKeyCode
@@ -240,8 +308,15 @@ inherited frmEditorControls: TfrmEditorControls
     TabOrder = 7
     ExplicitLeft = 31
     ExplicitTop = 387
+    inherited lblKey: TLabel
+      StyleElements = [seFont, seClient, seBorder]
+    end
     inherited panCaption: TPanel
       Caption = '1'
+      StyleElements = [seFont, seClient, seBorder]
+    end
+    inherited edtKey: TEdit
+      StyleElements = [seFont, seClient, seBorder]
     end
   end
   inline kcOption2: TfrmKeyCode
@@ -262,8 +337,15 @@ inherited frmEditorControls: TfrmEditorControls
     TabOrder = 8
     ExplicitLeft = 172
     ExplicitTop = 387
+    inherited lblKey: TLabel
+      StyleElements = [seFont, seClient, seBorder]
+    end
     inherited panCaption: TPanel
       Caption = '2'
+      StyleElements = [seFont, seClient, seBorder]
+    end
+    inherited edtKey: TEdit
+      StyleElements = [seFont, seClient, seBorder]
     end
   end
   inline kcOption3: TfrmKeyCode
@@ -284,8 +366,15 @@ inherited frmEditorControls: TfrmEditorControls
     TabOrder = 9
     ExplicitLeft = 313
     ExplicitTop = 387
+    inherited lblKey: TLabel
+      StyleElements = [seFont, seClient, seBorder]
+    end
     inherited panCaption: TPanel
       Caption = '3'
+      StyleElements = [seFont, seClient, seBorder]
+    end
+    inherited edtKey: TEdit
+      StyleElements = [seFont, seClient, seBorder]
     end
   end
   inline kcOption4: TfrmKeyCode
@@ -306,8 +395,15 @@ inherited frmEditorControls: TfrmEditorControls
     TabOrder = 10
     ExplicitLeft = 454
     ExplicitTop = 387
+    inherited lblKey: TLabel
+      StyleElements = [seFont, seClient, seBorder]
+    end
     inherited panCaption: TPanel
       Caption = '4'
+      StyleElements = [seFont, seClient, seBorder]
+    end
+    inherited edtKey: TEdit
+      StyleElements = [seFont, seClient, seBorder]
     end
   end
 end

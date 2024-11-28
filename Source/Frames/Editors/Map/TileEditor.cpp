@@ -2,11 +2,11 @@
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
 #include "TileEditor.h"
-#include "Frames/Editors/Images/BlockColors.h"
+#include "Visuals/BlockTypes.h"
 #include "../MouseState.h"
 #include "Messaging/Messaging.h"
-#include "Project/DocumentManager.h"
-#include "Project/WindowDocument.h"
+#include "Project/Documents/DocumentManager.h"
+#include "Project/Documents/Window.h"
 #include "Settings/ThemeManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -51,6 +51,7 @@ __fastcall TileEditor::TileEditor(TImage* const view, Visuals::ImageMap& imageMa
     Scale = m_ScaleFactor;
 
     m_Registrar.Subscribe<WindowChangedEvent>(OnWindowChanged);
+    m_Registrar.Subscribe<StartRoomChanged>(OnStartRoomChanged);
 
     m_View->Picture->Bitmap->Canvas->Font->Style = TFontStyles() << fsBold;
     CreateViewBitmap();
@@ -69,6 +70,13 @@ void __fastcall TileEditor::OnWindowChanged(const WindowChangedEvent& event)
         Clear();
         Refresh();
     }
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::OnStartRoomChanged(const StartRoomChanged& event)
+{
+    m_StartRoom = event.Room;
+    UpdateMap();
+    Refresh();
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::CreateViewBitmap()
@@ -126,8 +134,8 @@ void __fastcall TileEditor::Clear()
 void __fastcall TileEditor::ValidatePosition()
 {
     auto window = TSize(m_View->Width / m_Scale.x, m_View->Height / m_Scale.y);
-    m_MapOffsetMS.X = max(0, min((int)((m_BorderScaled.x * 2) + m_ContentSize.cx - window.cx), (int)m_MapOffsetMS.X));
-    m_MapOffsetMS.Y = max(0, min((int)((m_BorderScaled.y * 2) + m_ContentSize.cy - window.cy), (int)m_MapOffsetMS.Y));
+    m_MapOffsetMS.X = std::max(0, std::min((int)((m_BorderScaled.x * 2) + m_ContentSize.cx - window.cx), (int)m_MapOffsetMS.X));
+    m_MapOffsetMS.Y = std::max(0, std::min((int)((m_BorderScaled.y * 2) + m_ContentSize.cy - window.cy), (int)m_MapOffsetMS.Y));
 }
 //---------------------------------------------------------------------------
 TPoint __fastcall TileEditor::MapToView(const TPoint& pt) const
@@ -313,10 +321,10 @@ void __fastcall TileEditor::OnMouseMoveSelectMode(TShiftState Shift, int X, int 
                     m_GroupSelectEndMS = ViewToMap(X, Y);
                     m_GroupSelectEndMS.X = Snap(m_GroupSelectEndMS.X, m_TileSize.cx) + m_TileSize.cx;
                     m_GroupSelectEndMS.Y = Snap(m_GroupSelectEndMS.Y, m_TileSize.cy) + m_TileSize.cy;
-                    auto minX = min(m_GroupSelectSrtMS.X, m_GroupSelectEndMS.X);
-                    auto maxX = max(m_GroupSelectSrtMS.X, m_GroupSelectEndMS.X);
-                    auto minY = min(m_GroupSelectSrtMS.Y, m_GroupSelectEndMS.Y);
-                    auto maxY = max(m_GroupSelectSrtMS.Y, m_GroupSelectEndMS.Y);
+                    auto minX = std::min(m_GroupSelectSrtMS.X, m_GroupSelectEndMS.X);
+                    auto maxX = std::max(m_GroupSelectSrtMS.X, m_GroupSelectEndMS.X);
+                    auto minY = std::min(m_GroupSelectSrtMS.Y, m_GroupSelectEndMS.Y);
+                    auto maxY = std::max(m_GroupSelectSrtMS.Y, m_GroupSelectEndMS.Y);
                     if (minX != maxX && minY != maxY)
                     {
                         UnselectAll(false);
@@ -601,8 +609,8 @@ void __fastcall TileEditor::SetStartRoomCoords(TPoint location)
     if ((location.x != m_StartRoom.x || location.y != m_StartRoom.y) && 0 <= location.x && location.y < m_Rooms.cx && 0 <= location.y && location.y < m_Rooms.cy)
     {
         m_StartRoom = location;
-        UpdateMap();
     }
+    UpdateMap();
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::SetLockIcon(TImage* icon)
@@ -829,7 +837,8 @@ void __fastcall TileEditor::DrawEntities(int filters, Visuals::ImageTypes type)
             pt.x = Snap(pt.x, m_TileSize.cx);
             pt.y = Snap(pt.y, m_TileSize.cy);
             pt += m_BorderScaled;
-            auto tileType = StrToIntDef(entity.Image->GetLayer("blocktype"), -1);
+            auto bt = entity.Image->GetLayer("blocktype");
+            auto tileType = StrToIntDef(bt, 0);
             auto overlayColor = (entity.Selected ? c_ColorEntitySelected : (m_ShowTileTypes && tileType != -1 ? g_BlockColors[tileType] : clBlack));
             m_ImageMap[entity.Id]->Draw(pt, m_Content.get(), overlayColor);
             entity.Clean();

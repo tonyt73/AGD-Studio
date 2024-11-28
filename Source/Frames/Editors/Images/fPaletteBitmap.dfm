@@ -10,8 +10,8 @@ object frmPaletteBitmap: TfrmPaletteBitmap
   DoubleBuffered = False
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Height = -12
+  Font.Name = 'Roboto'
   Font.Style = [fsBold]
   Padding.Left = 8
   Padding.Top = 8
@@ -30,8 +30,8 @@ object frmPaletteBitmap: TfrmPaletteBitmap
     Color = clRed
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -16
-    Font.Name = 'Tahoma'
+    Font.Height = -20
+    Font.Name = 'Roboto'
     Font.Style = [fsBold]
     ParentBackground = False
     ParentFont = False
@@ -48,8 +48,8 @@ object frmPaletteBitmap: TfrmPaletteBitmap
     Color = clBlue
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -16
-    Font.Name = 'Tahoma'
+    Font.Height = -20
+    Font.Name = 'Roboto'
     Font.Style = [fsBold]
     ParentBackground = False
     ParentFont = False

@@ -2,11 +2,13 @@
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
 #include "ProjectManager.h"
-#include "ProjectDocument.h"
-#include "FileDefinitions.h"
-#include "Settings.h"
+#include "Documents/Project.h"
+#include "Documents/Window.h"
+#include "Documents/FileDefinitions.h"
+#include "Documents/Settings.h"
 #include "Frames/Editors/Code/fEditorCode.h"
 #include "Frames/Editors/Images/fEditorImage.h"
+#include "Importer/AgdImporter.h"
 #include "Messaging/Event.h"
 #include "Services/File.h"
 #include "Services/Folders.h"
@@ -26,6 +28,7 @@ __fastcall ProjectManager::ProjectManager()
 , m_MostRecentUsedList(nullptr)
 , m_IsOpen(false)
 {
+    m_Registrar.Subscribe<DocumentChange<String>>(OnDocumentChanged);
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::Initialise(Elxtree::TElXTree* treeView)
@@ -117,36 +120,57 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
     {
         ClearTree(name);
         // create a new project file, but load the file if it exists
-        auto config = dynamic_cast<ProjectDocument*>(Add("Game", "Configuration", name, machine));
-        assert(config != nullptr);
-        config->Author = theAppSettings.Developer;
-        if (config->Files().size() == 0)
+        auto project = dynamic_cast<ProjectDocument*>(Add("Game", "Configuration", name, machine));
+        assert(project != nullptr);
+        project->Author = theAppSettings.Developer;
+        if (project->Files().size() == 0)
         {
+            // create the map, controls, jump table and window documents
+            // TODO: Change the interface to take the class type and name
+            theDocumentManager.Add("Map"     , "Tiled"     , "Tile Map" , "");
+            theDocumentManager.Add("Controls", "List"      , "Controls" , "");
+            theDocumentManager.Add("Jump"    , "Table"     , "JumpTable", "");
+            theDocumentManager.Add("Text"    , "Messages"  , "Messages" , "");
+            // Set window to full size
+            auto winDoc = dynamic_cast<WindowDocument*>(theDocumentManager.Add("Window", "Definition", "Window", ""));
+            const auto wc = project->MachineConfiguration().Window;
+            TRect rect(0, 0, wc.Width, wc.Height);
+            winDoc->Set(rect);
             // create the event files
             auto definitions = std::make_unique<FileDefinitions>();
             for (const auto& definition : definitions->GetDefinitions())
             {
                 theDocumentManager.Add("Text", definition.Type, definition.Filename, "");
             }
-            // create the map, controls, jump table and window documents
-            // TODO: Change the interface to take the class type and name
-            theDocumentManager.Add("Map", "Tiled", "Tile Map", "");
-            theDocumentManager.Add("Controls", "List", "Controls", "");
-            theDocumentManager.Add("Jump", "Table", "JumpTable", "");
-            theDocumentManager.Add("Window", "Definition", "Window", "");
-            theDocumentManager.Add("Text", "Messages", "Messages", "");
         }
         else
         {
             theDocumentManager.Load(name);
         }
-        m_MostRecentUsedList->Remove(name, config->Path);
-        m_MostRecentUsedList->Add(name, config->Path, config->Machine);
+        m_MostRecentUsedList->Remove(name, project->Path);
+        m_MostRecentUsedList->Add(name, project->Path, project->Machine);
     }
     m_IsOpen = true;
 }
 //---------------------------------------------------------------------------
-void __fastcall ProjectManager::Open(const String& file)
+bool __fastcall ProjectManager::Import(const String& file)
+{
+    ClearMessage("[ProjectManager] Importing file : '" + file + ";");
+    InformationMessage("[ProjectManager] Importing file");
+
+    auto name = Services::File::NameWithoutExtension(file);
+    Importer::AgdImporter importer;
+    if (!importer.Convert(file))
+    {
+        ErrorMessage("[ProjectManager] Failed to import file: " + file);
+        return false;
+    }
+    InformationMessage("[ProjectManager] Importing file was successful");
+    Save();
+    return true;
+}
+//---------------------------------------------------------------------------
+void __fastcall ProjectManager::Open(const String& file, const String& machine)
 {
     Close();
     ClearMessage("[ProjectManager] Loading Project: " + file);
@@ -154,10 +178,10 @@ void __fastcall ProjectManager::Open(const String& file)
     m_IsOpen = true;
     auto name = Services::File::NameWithoutExtension(file);
     Services::Folders::ProjectName = name;
-    ClearTree(name);
-    theDocumentManager.Clear();
     // create a new project file and load the file
-    auto config = dynamic_cast<ProjectDocument*>(Add("Game", "Configuration", name, ""));
+    theDocumentManager.Clear();
+    auto config = dynamic_cast<ProjectDocument*>(Add("Game", "Configuration", name, machine));
+    ClearTree(name);
     assert(config != nullptr);
     // get the document manager to load all the files from the project file
     theDocumentManager.Load(name);
@@ -167,8 +191,7 @@ void __fastcall ProjectManager::Open(const String& file)
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::Save()
 {
-    if (m_IsOpen)
-    {
+    if (m_IsOpen) {
         InformationMessage("[ProjectManager] Project Saved");
         theDocumentManager.Save();
     }
@@ -176,8 +199,7 @@ void __fastcall ProjectManager::Save()
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::Close()
 {
-    if (m_IsOpen)
-    {
+    if (m_IsOpen) {
         InformationMessage("[ProjectManager] Project Closed");
         theDocumentManager.Clear();
         m_IsOpen = false;
@@ -252,7 +274,7 @@ bool __fastcall ProjectManager::Remove(const String& type, const String& name)
     return theDocumentManager.Remove(type, name);
 }
 //---------------------------------------------------------------------------
-void __fastcall ProjectManager::OnDocumentChange(Document* doc)
+void __fastcall ProjectManager::OnDocumentChanged(const DocumentChange<String>& message)
 {
     // TODO: update the document properties
     // theProjectManager.AddToTreeView(document);

@@ -29,7 +29,7 @@ public:
                         __fastcall  Palette(const Palette& other);
             Palette&    __fastcall  operator=(const Palette& other);
 
-            void        __fastcall  Load(const String& name);
+            bool        __fastcall  Load(const String& name);
 
     static  DWORD       __fastcall  LuminanceOf(TColor Color);
 

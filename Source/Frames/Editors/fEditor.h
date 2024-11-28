@@ -9,7 +9,7 @@
 //---------------------------------------------------------------------------
 #include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
-#include "Project/Document.h"
+#include "Project/Documents/Document.h"
 //---------------------------------------------------------------------------
 class TfrmEditor : public TFrame
 {
@@ -26,7 +26,7 @@ protected:      // User declarations
 
     void            __fastcall  SetDocument(Project::Document* document);
 
-public:		    // User declarations
+public:         // User declarations
                     __fastcall  TfrmEditor(TComponent* Owner);
                     __fastcall ~TfrmEditor();
 

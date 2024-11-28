@@ -28,7 +28,7 @@ private:    // User declarations
 
     void            __fastcall  UpdateKeyInfo();
     void            __fastcall  SetKeyCode(unsigned char keyCode);
-    const String&   __fastcall  GetCaption();
+    const String    __fastcall  GetCaption();
     void            __fastcall  SetCaption(const String& caption);
     TNotifyEvent                FOnChanged;
 

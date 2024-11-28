@@ -30,7 +30,7 @@ object frmULAplusBitmap: TfrmULAplusBitmap
     Color = clRed
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -19
+    Font.Height = -20
     Font.Name = 'Roboto'
     Font.Style = [fsBold]
     ParentBackground = False
@@ -48,7 +48,7 @@ object frmULAplusBitmap: TfrmULAplusBitmap
     Color = clBlue
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -19
+    Font.Height = -20
     Font.Name = 'Roboto'
     Font.Style = [fsBold]
     ParentBackground = False
@@ -90,8 +90,8 @@ object frmULAplusBitmap: TfrmULAplusBitmap
         Caption = 'PALETTES 0-3'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
+        Font.Height = -12
+        Font.Name = 'Roboto'
         Font.Style = [fsBold]
         ParentFont = False
         ExplicitTop = 18
@@ -132,8 +132,8 @@ object frmULAplusBitmap: TfrmULAplusBitmap
         Caption = 'SYSTEM COLOURS'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
+        Font.Height = -12
+        Font.Name = 'Roboto'
         Font.Style = [fsBold]
         ParentFont = False
         Layout = tlCenter

@@ -8,7 +8,7 @@
 #include <Vcl.Forms.hpp>
 #include <Vcl.ExtCtrls.hpp>
 #include "LMDDckSite.hpp"
-#include "Project/ControlsDocument.h"
+#include "Project/Documents/Controls.h"
 #include "Messaging/Messaging.h"
 #include "Messaging/Event.h"
 #include "fKeyCapture.h"

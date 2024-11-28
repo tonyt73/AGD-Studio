@@ -1,12 +1,16 @@
 inherited frmEditorCode: TfrmEditorCode
+  Width = 978
+  Height = 611
   Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Name = 'Roboto'
   ParentFont = False
+  ExplicitWidth = 978
+  ExplicitHeight = 611
   object evEditor: TLMDEditView
     Left = 0
     Top = 33
-    Width = 640
-    Height = 428
+    Width = 978
+    Height = 559
     Align = alClient
     BevelEdges = []
     BevelInner = bvNone
@@ -28,16 +32,20 @@ inherited frmEditorCode: TfrmEditorCode
     CompletionSettings.ItemHeight = 13
     OnStatusChanged = evEditorStatusChanged
     OnEnter = evEditorEnter
-    ExplicitTop = 0
-    ExplicitWidth = 880
-    ExplicitHeight = 674
+    ExplicitWidth = 624
+    ExplicitHeight = 389
     GutterBarsEmpty = False
   end
   object sbStatus: TStatusBar
     Left = 0
-    Top = 461
-    Width = 640
+    Top = 592
+    Width = 978
     Height = 19
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Roboto'
+    Font.Style = []
     Panels = <
       item
         Width = 50
@@ -63,22 +71,21 @@ inherited frmEditorCode: TfrmEditorCode
       item
         Width = 50
       end>
-    ParentFont = True
     UseSystemFont = False
-    ExplicitTop = 674
-    ExplicitWidth = 880
+    ExplicitTop = 422
+    ExplicitWidth = 624
   end
   object LMDToolBar1: TLMDToolBar
     Left = 0
     Top = 0
-    Width = 640
+    Width = 978
     Height = 33
     Buttons = <
       item
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = 'Segoe UI'
+        Font.Name = 'Roboto'
         Font.Style = []
         Index = 0
         DisplayName = 'TLMDToolButton'
@@ -91,6 +98,7 @@ inherited frmEditorCode: TfrmEditorCode
     Align = alTop
     Visible = False
     TabOrder = 2
+    ExplicitWidth = 624
   end
   object lmdDocument: TLMDEditDocument
     Lines.Strings = (
@@ -3953,8 +3961,8 @@ inherited frmEditorCode: TfrmEditorCode
   object FontDialog: TFontDialog
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
+    Font.Height = -12
+    Font.Name = 'Roboto'
     Font.Style = []
     Left = 280
     Top = 50

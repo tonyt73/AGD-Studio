@@ -2,9 +2,10 @@
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
 #include "fLabelledImage.h"
-#include "Frames/Editors/Images/BlockColors.h"
-#include "Project/DocumentManager.h"
+#include "Visuals/BlockTypes.h"
+#include "Project/Documents/DocumentManager.h"
 #include "Settings/ThemeManager.h"
+#include "Visuals/BlockTypes.h"
 #include "Visuals/Image.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -22,6 +23,12 @@ void __fastcall TfrmLabelledImage::imgImageClick(TObject* Sender)
 {
     SetSelected(true);
     if (FOnClick != nullptr) FOnClick(this);
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmLabelledImage::imgImageDblClick(TObject *Sender)
+{
+    SetSelected(true);
+    if (FOnDblClick != nullptr) FOnDblClick(this);
 }
 //---------------------------------------------------------------------------
 //TStyleColor
@@ -56,8 +63,6 @@ void __fastcall TfrmLabelledImage::SetShowCaption(bool state)
 //---------------------------------------------------------------------------
 void __fastcall TfrmLabelledImage::SetImage(Project::ImageDocument* document)
 {
-    const String BlockTypes[] = { "Empty", "Platform", "Wall", "Ladder", "Fodder", "Deadly", "Custom" };
-    const TColor BlockColor[] = { clGray, clBlue, (TColor)0x00006AFF, clLime, clFuchsia, clRed, clYellow };
     m_Document                = document;
     lblCaption->Caption       = m_Document->Name.UpperCase();
     panTileType->Visible      = false;
@@ -65,8 +70,8 @@ void __fastcall TfrmLabelledImage::SetImage(Project::ImageDocument* document)
     if (document->ImageType  == Visuals::itTile) {
         auto st               = document->GetLayer("blocktype");
         auto bt               = StrToInt(st);
-        panTileType->Caption  = BlockTypes[bt].UpperCase();
-        panTileType->Color    = BlockColor[bt];
+        panTileType->Caption  = g_BlockTypes[bt].UpperCase();
+        panTileType->Color    = g_BlockColors[bt];
         panTileType->Visible  = true;
     }
     Update();

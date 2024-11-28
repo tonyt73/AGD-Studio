@@ -2,9 +2,9 @@
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
 #include "fSettings.h"
-#include "Project/DocumentManager.h"
-#include "Project/MachineConfig.h"
-#include "Project/Settings.h"
+#include "Project/Documents/DocumentManager.h"
+#include "Project/Documents/MachineConfig.h"
+#include "Project/Documents/Settings.h"
 #include "Settings/ThemeManager.h"
 #include "Services/File.h"
 #include "Services/Folders.h"

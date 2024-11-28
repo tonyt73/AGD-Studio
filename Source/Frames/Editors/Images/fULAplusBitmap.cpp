@@ -2,7 +2,7 @@
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
 #include "fULAplusBitmap.h"
-#include "Project/DocumentManager.h"
+#include "Project/Documents/DocumentManager.h"
 #include "Services/File.h"
 #include "Services/Folders.h"
 //---------------------------------------------------------------------------

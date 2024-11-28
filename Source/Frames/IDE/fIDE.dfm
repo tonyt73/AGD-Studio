@@ -1,31 +1,25 @@
 object frmIDE: TfrmIDE
   Left = 0
   Top = 0
-  Width = 800
-  Height = 817
+  Width = 980
+  Height = 660
   Align = alClient
   Constraints.MinHeight = 600
   Constraints.MinWidth = 800
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Height = -12
+  Font.Name = 'Roboto'
   Font.Style = [fsBold]
   ParentFont = False
   TabOrder = 0
   object dsIDE: TLMDDockSite
     Left = 0
     Top = 33
-    Width = 800
-    Height = 784
+    Width = 980
+    Height = 627
     Manager = DockManager
     Align = alClient
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = [fsBold]
-    ParentFont = False
     Constraints.MinHeight = 567
     Constraints.MinWidth = 800
     TabOrder = 0
@@ -33,40 +27,40 @@ object frmIDE: TfrmIDE
       3C3F786D6C2076657273696F6E3D22312E30223F3E0D0A3C736974656C697374
       3E0D0A20203C73697465206470693D223936222069643D2253454C465F534954
       45223E0D0A202020203C7A6F6E65206B696E643D22484F525A223E0D0A202020
-      2020203C7A6F6E65206B696E643D2256455254222073697A653D223537342220
-      6473697A653D22302E373334303135333435323638353432223E0D0A20202020
-      202020203C7A6F6E65206B696E643D2254414253222073697A653D2235363222
-      206473697A653D22302E37333336383134363231343039393222206973737061
+      2020203C7A6F6E65206B696E643D2256455254222073697A653D223735342220
+      6473697A653D22302E373833373833373833373833373834223E0D0A20202020
+      202020203C7A6F6E65206B696E643D2254414253222073697A653D2234303522
+      206473697A653D22302E36363530323436333035343138373222206973737061
       63653D2274727565223E0D0A202020202020202020203C7A6F6E65206B696E64
       3D2250414E454C222069643D224C4D44446F636B50616E656C32222076697369
       626C653D2266616C7365222F3E0D0A20202020202020203C2F7A6F6E653E0D0A
       20202020202020203C7A6F6E65206B696E643D22544142532220616374697665
-      7461623D2230222073697A653D2232303422206473697A653D22302E32363633
-      3138353337383539303038223E0D0A202020202020202020203C7A6F6E65206B
-      696E643D2250414E454C222069643D226470456469746F724B65797322207669
-      7369626C653D2274727565222F3E0D0A202020202020202020203C7A6F6E6520
-      6B696E643D2250414E454C222069643D2264704275696C64222076697369626C
-      653D2274727565222F3E0D0A202020202020202020203C7A6F6E65206B696E64
-      3D2250414E454C222069643D2264704D65737361676573222076697369626C65
+      7461623D2232222073697A653D2232303422206473697A653D22302E33333439
+      3735333639343538313238223E0D0A202020202020202020203C7A6F6E65206B
+      696E643D2250414E454C222069643D2264704D65737361676573222076697369
+      626C653D2274727565222F3E0D0A202020202020202020203C7A6F6E65206B69
+      6E643D2250414E454C222069643D226470456469746F724B6579732220766973
+      69626C653D2274727565222F3E0D0A202020202020202020203C7A6F6E65206B
+      696E643D2250414E454C222069643D2264704275696C64222076697369626C65
       3D2274727565222F3E0D0A202020202020202020203C7A6F6E65206B696E643D
       2250414E454C222069643D226470536561726368526573756C74732220766973
       69626C653D2274727565222F3E0D0A202020202020202020203C7A6F6E65206B
       696E643D2250414E454C222069643D226470546F646F222076697369626C653D
       2274727565222F3E0D0A20202020202020203C2F7A6F6E653E0D0A2020202020
       203C2F7A6F6E653E0D0A2020202020203C7A6F6E65206B696E643D2256455254
-      222073697A653D2232303822206473697A653D22302E32363539383436353437
-      3331343538223E0D0A20202020202020203C7A6F6E65206B696E643D2250414E
+      222073697A653D2232303822206473697A653D22302E32313632313632313632
+      3136323136223E0D0A20202020202020203C7A6F6E65206B696E643D2250414E
       454C222069643D22647050726F6A656374222076697369626C653D2274727565
-      222073697A653D2233383122206473697A653D22302E34393737393038363839
+      222073697A653D2233303322206473697A653D22302E34393737393038363839
       32343839222F3E0D0A20202020202020203C7A6F6E65206B696E643D2250414E
       454C222069643D22647050726F70657274696573222076697369626C653D2274
-      727565222073697A653D2233383522206473697A653D22302E35303232303931
+      727565222073697A653D2233303622206473697A653D22302E35303232303931
       33313037353131222F3E0D0A2020202020203C2F7A6F6E653E0D0A202020203C
       2F7A6F6E653E0D0A20203C2F736974653E0D0A3C2F736974656C6973743E0D0A}
     object dpBuild: TLMDDockPanel
       Left = 6
-      Top = 574
-      Width = 574
+      Top = 417
+      Width = 754
       Height = 183
       ParentBackground = False
       TabOrder = 8
@@ -74,7 +68,7 @@ object frmIDE: TfrmIDE
       object tvBuild: TElXTree
         Left = 0
         Top = 21
-        Width = 574
+        Width = 754
         Height = 162
         Cursor = crArrow
         Hint = ''
@@ -84,11 +78,16 @@ object frmIDE: TfrmIDE
         ActiveBorderType = fbtFlat
         Align = alClient
         AutoExpand = True
-        Style.FontSize = 8
+        Style.FontSize = 9
         Style.FontStyles = [fsBold]
-        Style.FontName = 'Tahoma'
+        Style.FontName = 'Roboto'
         CustomPlusMinus = True
         DoInplaceEdit = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Roboto'
+        Font.Style = [fsBold]
         FullRowSelect = False
         HeaderHeight = 19
         HeaderSections.Data = {
@@ -116,6 +115,7 @@ object frmIDE: TfrmIDE
           1100012211000112210001211000001121000111000000011100000000000000
           000000000000000000000000000000000000}
         MultiSelect = False
+        ParentFont = False
         ParentShowHint = False
         PlusMinusTransparent = True
         PlusPicture.Data = {
@@ -149,8 +149,8 @@ object frmIDE: TfrmIDE
     end
     object dpEditorKeys: TLMDDockPanel
       Left = 6
-      Top = 574
-      Width = 574
+      Top = 417
+      Width = 754
       Height = 183
       ParentBackground = False
       TabOrder = 11
@@ -158,7 +158,7 @@ object frmIDE: TfrmIDE
       object mbKeys: TMemo
         Left = 0
         Top = 21
-        Width = 574
+        Width = 754
         Height = 162
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
@@ -178,8 +178,8 @@ object frmIDE: TfrmIDE
     end
     object dpMessages: TLMDDockPanel
       Left = 6
-      Top = 574
-      Width = 574
+      Top = 417
+      Width = 754
       Height = 183
       ParentBackground = False
       TabOrder = 5
@@ -187,20 +187,27 @@ object frmIDE: TfrmIDE
       object memMessages: TMemo
         Left = 0
         Top = 21
-        Width = 574
+        Width = 754
         Height = 162
         Align = alClient
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Consolas'
+        Font.Style = [fsBold]
         Lines.Strings = (
           '')
+        ParentFont = False
+        ReadOnly = True
         ScrollBars = ssBoth
         TabOrder = 0
       end
     end
     object dpProject: TLMDDockPanel
-      Left = 586
+      Left = 766
       Top = 6
       Width = 208
-      Height = 381
+      Height = 303
       Buttons = [pbPin, pbMaximize]
       ParentBackground = False
       TabOrder = 6
@@ -209,7 +216,7 @@ object frmIDE: TfrmIDE
         Left = 0
         Top = 21
         Width = 208
-        Height = 360
+        Height = 282
         Align = alClient
         BevelOuter = bvNone
         Padding.Left = 1
@@ -299,7 +306,7 @@ object frmIDE: TfrmIDE
           Left = 1
           Top = 27
           Width = 206
-          Height = 332
+          Height = 254
           Hint = ''
           PlusPosition = vaMiddle
           BorderColorWindow = clWindow
@@ -309,14 +316,14 @@ object frmIDE: TfrmIDE
           Style.TextColor = 3355443
           Style.FontSize = 9
           Style.FontStyles = []
-          Style.FontName = 'Segoe UI'
+          Style.FontName = 'Roboto'
           CustomPlusMinus = True
           DoInplaceEdit = False
           Flat = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = 3355443
           Font.Height = -12
-          Font.Name = 'Segoe UI'
+          Font.Name = 'Roboto'
           Font.Style = []
           HeaderHeight = 19
           HeaderSections.Data = {
@@ -331,7 +338,7 @@ object frmIDE: TfrmIDE
           HorzScrollBarStyles.ThemeGlobalMode = True
           Images = imgProjectNodes
           ItemIndent = 18
-          LineHeight = 19
+          LineHeight = 18
           MinusPicture.Data = {
             EE000000424DEE0000000000000076000000280000000F0000000F0000000100
             04000000000078000000C40E0000C40E00001000000010000000000000004040
@@ -375,17 +382,17 @@ object frmIDE: TfrmIDE
       end
     end
     object dpProperties: TLMDDockPanel
-      Left = 586
-      Top = 393
+      Left = 766
+      Top = 315
       Width = 208
-      Height = 385
+      Height = 306
       Buttons = [pbPin, pbMaximize]
       ParentBackground = False
       TabOrder = 10
       Caption = 'PROPERTIES'
       object Splitter1: TSplitter
         Left = 0
-        Top = 342
+        Top = 263
         Width = 208
         Height = 3
         Cursor = crVSplit
@@ -400,7 +407,7 @@ object frmIDE: TfrmIDE
         Left = 0
         Top = 21
         Width = 208
-        Height = 321
+        Height = 242
         PropKinds = [pkProperties, pkReadOnly]
         SortType = stNone
         ArrangeKind = akByCategory
@@ -410,8 +417,8 @@ object frmIDE: TfrmIDE
         SelectionStyle = ssFlat
         CategoryFont.Charset = DEFAULT_CHARSET
         CategoryFont.Color = clHighlightText
-        CategoryFont.Height = -11
-        CategoryFont.Name = 'Tahoma'
+        CategoryFont.Height = -12
+        CategoryFont.Name = 'Roboto'
         CategoryFont.Style = [fsBold]
         Splitter = 84
         Align = alClient
@@ -422,7 +429,7 @@ object frmIDE: TfrmIDE
       end
       object Panel2: TPanel
         Left = 0
-        Top = 345
+        Top = 266
         Width = 208
         Height = 40
         Align = alBottom
@@ -437,25 +444,27 @@ object frmIDE: TfrmIDE
         object lblPropertyInfo: TLabel
           Left = 3
           Top = 3
-          Width = 99
-          Height = 13
+          Width = 202
+          Height = 34
           Align = alClient
           Caption = 'Property information'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
+          Font.Height = -12
+          Font.Name = 'Roboto'
           Font.Style = []
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExplicitWidth = 112
+          ExplicitHeight = 14
         end
       end
     end
     object dpSearchResults: TLMDDockPanel
       Left = 6
-      Top = 574
-      Width = 574
+      Top = 417
+      Width = 754
       Height = 183
       ParentBackground = False
       TabOrder = 7
@@ -463,8 +472,8 @@ object frmIDE: TfrmIDE
     end
     object dpTodo: TLMDDockPanel
       Left = 6
-      Top = 574
-      Width = 574
+      Top = 417
+      Width = 754
       Height = 183
       ParentBackground = False
       TabOrder = 9
@@ -473,18 +482,18 @@ object frmIDE: TfrmIDE
     object LMDDockPanel2: TLMDDockPanel
       Left = 6
       Top = 6
-      Width = 574
-      Height = 562
+      Width = 754
+      Height = 405
       PanelVisible = False
       ParentBackground = False
       TabOrder = 4
       Caption = 'dpEditors'
     end
   end
-  object Panel3: TPanel
+  object panToolbar: TPanel
     Left = 0
     Top = 0
-    Width = 800
+    Width = 980
     Height = 33
     Align = alTop
     BevelOuter = bvNone
@@ -620,7 +629,7 @@ object frmIDE: TfrmIDE
       end
     end
     object tbrSettings: TToolBar
-      Left = 728
+      Left = 908
       Top = 0
       Width = 72
       Height = 33

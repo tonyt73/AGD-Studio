@@ -8,8 +8,8 @@ object SelectionImageFrame: TSelectionImageFrame
   Ctl3D = True
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -32
-  Font.Name = 'Tahoma'
+  Font.Height = -36
+  Font.Name = 'Roboto'
   Font.Style = [fsBold]
   Padding.Left = 4
   Padding.Top = 4

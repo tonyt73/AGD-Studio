@@ -119,7 +119,8 @@ void __fastcall ULAPlusGraphicsBuffer::Render() const
 void __fastcall ULAPlusGraphicsBuffer::Set(const String& data)
 {
     auto size = data.Length() / 2;
-    if (size == (SizeOfBuffer[0] + SizeOfBuffer[1]))
+    // read in pixels
+    if (size >= SizeOfBuffer[0])
     {
         // convert hex to byte
         for (auto i = 0; i < SizeOfBuffer[0]; i++)
@@ -127,11 +128,21 @@ void __fastcall ULAPlusGraphicsBuffer::Set(const String& data)
             auto byte = (unsigned char)StrToInt("0x" + data.SubString(1 + i * 2, 2));
             m_Buffers[0][i] = byte;
         }
+    }
+    // read attributes if it has any
+    if (size == SizeOfBuffer[0] + SizeOfBuffer[1])
+    {
         // convert hex to byte
         auto attrOffset = (SizeOfBuffer[0] * 2) + 1;
         for (auto i = 0; i < SizeOfBuffer[1]; i++)
         {
             m_Buffers[1][i] = (unsigned char)StrToInt("0x" + data.SubString(attrOffset + (i * 2), 2));
+        }
+    } else {
+        // set default attributes (white in palette 0)
+        for (auto i = 0; i < SizeOfBuffer[1]; i++)
+        {
+            m_Buffers[1][i] = 0x07;
         }
     }
     Render();

@@ -2,19 +2,19 @@
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
 #include "Creation.h"
-#include "AgdSection/ControlsBuilder.h"
-#include "AgdSection/EventsBuilder.h"
-#include "AgdSection/FontBuilder.h"
-#include "AgdSection/JumpTableBuilder.h"
-#include "AgdSection/MapBuilder.h"
-#include "AgdSection/MessagesBuilder.h"
-#include "AgdSection/ObjectsBuilder.h"
-#include "AgdSection/ProjectBuilder.h"
-#include "AgdSection/SpritesBuilder.h"
-#include "AgdSection/TilesBuilder.h"
-#include "AgdSection/ScreensBuilder.h"
-#include "AgdSection/WindowBuilder.h"
-#include "Project/DocumentManager.h"
+#include "Project/Documents/DocumentManager.h"
+#include "Section/ControlsSection.h"
+#include "Section/EventsSection.h"
+#include "Section/FontSection.h"
+#include "Section/JumpTableSection.h"
+#include "Section/MapSection.h"
+#include "Section/MessagesSection.h"
+#include "Section/ObjectsSection.h"
+#include "Section/ProjectSection.h"
+#include "Section/SpritesSection.h"
+#include "Section/TilesSection.h"
+#include "Section/ScreensSection.h"
+#include "Section/WindowSection.h"
 #include "Services/File.h"
 #include "Services/Folders.h"
 //---------------------------------------------------------------------------
@@ -25,18 +25,18 @@ using namespace Build;
 __fastcall Creation::Creation(BuildMessages& buildMessages)
 : BuildProcess(buildMessages, bmBuild, "Generate Game File (Project to AGD File)")
 {
-    m_AgdBuilders.push_back(std::move(std::make_unique<ProjectBuilder>()));
-    m_AgdBuilders.push_back(std::move(std::make_unique<WindowBuilder>()));
-    m_AgdBuilders.push_back(std::move(std::make_unique<ControlsBuilder>()));
-    m_AgdBuilders.push_back(std::move(std::make_unique<MessagesBuilder>()));
-    m_AgdBuilders.push_back(std::move(std::make_unique<FontBuilder>()));
-    m_AgdBuilders.push_back(std::move(std::make_unique<JumpTableBuilder>()));
-    m_AgdBuilders.push_back(std::move(std::make_unique<TilesBuilder>()));
-    m_AgdBuilders.push_back(std::move(std::make_unique<SpritesBuilder>()));
-    m_AgdBuilders.push_back(std::move(std::make_unique<ScreensBuilder>()));
-    m_AgdBuilders.push_back(std::move(std::make_unique<ObjectsBuilder>()));
-    m_AgdBuilders.push_back(std::move(std::make_unique<MapBuilder>()));
-    m_AgdBuilders.push_back(std::move(std::make_unique<EventsBuilder>()));
+    m_AgdSections.push_back(std::move(std::make_unique<ProjectSection>()));
+    m_AgdSections.push_back(std::move(std::make_unique<WindowSection>()));
+    m_AgdSections.push_back(std::move(std::make_unique<ControlsSection>()));
+    m_AgdSections.push_back(std::move(std::make_unique<MessagesSection>()));
+    m_AgdSections.push_back(std::move(std::make_unique<FontSection>()));
+    m_AgdSections.push_back(std::move(std::make_unique<JumpTableSection>()));
+    m_AgdSections.push_back(std::move(std::make_unique<TilesSection>()));
+    m_AgdSections.push_back(std::move(std::make_unique<ObjectsSection>()));
+    m_AgdSections.push_back(std::move(std::make_unique<SpritesSection>()));
+    m_AgdSections.push_back(std::move(std::make_unique<ScreensSection>()));
+    m_AgdSections.push_back(std::move(std::make_unique<MapSection>()));
+    m_AgdSections.push_back(std::move(std::make_unique<EventsSection>()));
 }
 //---------------------------------------------------------------------------
 __fastcall Creation::~Creation()
@@ -49,7 +49,7 @@ bool __fastcall Creation::Execute()
     Project::DocumentManager::get().Add("Text", "AGD", Services::Folders::ProjectName + ".agd");
     String agdContent;
     BUILD_MSG("Building " + agdFile);
-    for (auto& builder : m_AgdBuilders)
+    for (auto& builder : m_AgdSections)
     {
         auto [success, reason, content] = builder->Build();
         if (success)

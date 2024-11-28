@@ -10,8 +10,8 @@ object SelectionPanelFrame: TSelectionPanelFrame
   Align = alTop
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Height = -12
+  Font.Name = 'Roboto'
   Font.Style = []
   Font.Quality = fqAntialiased
   ParentFont = False
@@ -31,8 +31,6 @@ object SelectionPanelFrame: TSelectionPanelFrame
     StyleElements = [seFont, seBorder]
     OnClick = lblProjectNameClick
     OnMouseMove = panProjectInfoMouseMove
-    ExplicitWidth = 431
-    ExplicitHeight = 87
     DesignSize = (
       419
       85)
@@ -45,9 +43,9 @@ object SelectionPanelFrame: TSelectionPanelFrame
       AutoSize = False
       Caption = 'Documents\AGD Studio\Demo'
       EllipsisPosition = epPathEllipsis
-      Font.Charset = ANSI_CHARSET
+      Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -11
+      Font.Height = -12
       Font.Name = 'Roboto'
       Font.Style = []
       Font.Quality = fqAntialiased
@@ -65,9 +63,9 @@ object SelectionPanelFrame: TSelectionPanelFrame
       Anchors = [akLeft, akTop, akRight]
       AutoSize = False
       Caption = 'Big Sprite Demo 2'
-      Font.Charset = ANSI_CHARSET
+      Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -20
+      Font.Height = 20
       Font.Name = 'Roboto'
       Font.Style = [fsBold]
       Font.Quality = fqAntialiased
@@ -85,9 +83,9 @@ object SelectionPanelFrame: TSelectionPanelFrame
       AutoSize = False
       Caption = 'Documents\AGD Studio\Demo'
       EllipsisPosition = epPathEllipsis
-      Font.Charset = ANSI_CHARSET
+      Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -11
+      Font.Height = -12
       Font.Name = 'Roboto'
       Font.Style = [fsBold]
       Font.Quality = fqAntialiased
@@ -121,7 +119,6 @@ object SelectionPanelFrame: TSelectionPanelFrame
       TabOrder = 0
       Visible = False
       StyleElements = []
-      ExplicitWidth = 406
     end
   end
   object panRemove: TPanel
@@ -136,8 +133,6 @@ object SelectionPanelFrame: TSelectionPanelFrame
     StyleElements = [seFont, seBorder]
     OnClick = lblProjectNameClick
     OnMouseMove = panProjectInfoMouseMove
-    ExplicitLeft = 431
-    ExplicitHeight = 87
     object imgRemove: TImage
       Left = 0
       Top = 6

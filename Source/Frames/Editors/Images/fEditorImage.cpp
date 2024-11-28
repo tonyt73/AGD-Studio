@@ -1,14 +1,14 @@
 //---------------------------------------------------------------------------
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
-#include "fEditorImage.h"
 #include "../EditorManager.h"
+#include "fEditorImage.h"
 #include "fSelectionImage.h"
 #include "CanvasPencilTool.h"
 #include "CanvasLineTool.h"
 #include "CanvasShapeTool.h"
-#include "Project/DocumentManager.h"
 #include "Settings/ThemeManager.h"
+#include "Project/Documents/DocumentManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "LMDDckSite"

@@ -3,7 +3,7 @@
 //---------------------------------------------------------------------------
 #include "fEditorMessages.h"
 #include "EditorManager.h"
-#include "Project/DocumentManager.h"
+#include "Project/Documents/DocumentManager.h"
 #include "Messaging/Messaging.h"
 #include "Settings/ThemeManager.h"
 //---------------------------------------------------------------------------

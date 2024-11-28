@@ -1,15 +1,16 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{D0C2ACDB-659A-4891-B603-0D187CA01644}</ProjectGuid>
-        <ProjectVersion>20.2</ProjectVersion>
+        <ProjectVersion>20.1</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <AppType>Application</AppType>
         <MainSource>AGD Studio.cpp</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
-        <Platform Condition="'$(Platform)'==''">Win64</Platform>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1048579</TargetedPlatforms>
         <ProjectName Condition="'$(ProjectName)'==''">AGD Studio</ProjectName>
+        <CC_Suffix Condition="'$(CC_Suffix)'==''">c</CC_Suffix>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -46,6 +47,12 @@
         <Cfg_1>true</Cfg_1>
         <Base>true</Base>
     </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64x' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win64x)'!=''">
+        <Cfg_1_Win64x>true</Cfg_1_Win64x>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
         <Cfg_2>true</Cfg_2>
         <CfgParent>Base</CfgParent>
@@ -68,7 +75,6 @@
         <AppEnableHighDPI>true</AppEnableHighDPI>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <AllPackageLibs>rtl.lib;vcl.lib;vclimg.lib;vclactnband.lib;vclx.lib;lmdrtrtlx.lib;lmdrtl.lib;lmdrtinspector.lib;lmdrtdocking.lib;lmdrtelcore.lib;lmdrtsyntax.lib;VclSmp.lib;lmdrtcore.lib;vclwinx.lib;lmdrtprint.lib;lmdrtelpro.lib;xmlrtl.lib;bindengine.lib;DbxCommonDriver.lib;dbrtl.lib;lmdrtshell.lib</AllPackageLibs>
-        <BCC_AutoDepCheck>false</BCC_AutoDepCheck>
         <BCC_CallingConvention>fastcall</BCC_CallingConvention>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <BCC_DisableWarnings>true</BCC_DisableWarnings>
@@ -84,9 +90,9 @@
         <BCC_StopPCHAfter>AgdStudio.pch.h</BCC_StopPCHAfter>
         <BCC_UseClassicCompiler>false</BCC_UseClassicCompiler>
         <BCC_wpar>false</BCC_wpar>
+        <BCC_PCHCache>true</BCC_PCHCache>
         <DynamicRTL>true</DynamicRTL>
-        <FinalOutputDir>.\Binaries\$(Platform)\$(Config)</FinalOutputDir>
-        <Icon_MainIcon>icon.ico</Icon_MainIcon>
+        <Icon_MainIcon>$(BDS)\bin\cbuilder_PROJECTICON.ico</Icon_MainIcon>
         <ILINK_DisplayTime>true</ILINK_DisplayTime>
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\release\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
         <ILINK_LibraryPath>Frames\Editors\;Frames\Editors\Map\;Frames\Editors\Images\;Frames\ImageEditor\;Frames\CodeEditor\;.\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
@@ -124,21 +130,30 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <BCC_CallingConvention>fastcall</BCC_CallingConvention>
-        <BCC_DisableOptimizations>true</BCC_DisableOptimizations>
         <BCC_InstructionSet>6</BCC_InstructionSet>
         <BCC_IntegerTypeEnums>true</BCC_IntegerTypeEnums>
-        <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
         <BT_BuildType>Debug</BT_BuildType>
-        <PackageImports>bindcompvcl;bindengine;lmdrtbar;lmdrtchart;lmdrtchartdb;lmdrtcore;lmdrtdesign;lmdrtdialog;lmdrtdocking;lmdrtelcore;lmdrteldb;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtrtf;lmdrtrtfdb;lmdrtrtlx;lmdrtscript;lmdrtscriptimp;lmdrtsearch;lmdrtsearchdb;lmdrtshell;lmdrtstorage;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;lmdrttxtdb;lmdrtweb;rtl;vcl;vclactnband;vcldb;vclimg;vclwinx;vclx;$(PackageImports)</PackageImports>
+        <Icon_MainIcon>icon.ico</Icon_MainIcon>
+        <PackageImports>lmdrtcore;lmdrtdocking;lmdrtelcore;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtrtlx;lmdrtshell;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;rtl;vcl;vclactnband;vclimg;VclSmp;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
+        <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
+        <BCC_DisableOptimizations>true</BCC_DisableOptimizations>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <BT_BuildType>Debug</BT_BuildType>
-        <PackageImports>bindcomp;bindcompvcl;bindengine;lmdrtbar;lmdrtchart;lmdrtchartdb;lmdrtcore;lmdrtdesign;lmdrtdialog;lmdrtdocking;lmdrtelcore;lmdrteldb;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtrtf;lmdrtrtfdb;lmdrtrtlx;lmdrtscript;lmdrtscriptimp;lmdrtsearch;lmdrtsearchdb;lmdrtshell;lmdrtstorage;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;lmdrttxtdb;lmdrtweb;rtl;vcl;vclactnband;vcldb;vclimg;vclwinx;vclx;$(PackageImports)</PackageImports>
+        <PackageImports>lmdrtcore;lmdrtdocking;lmdrtelcore;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtrtlx;lmdrtshell;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;rtl;vcl;vclactnband;vclimg;VclSmp;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
+        <Icon_MainIcon>icon.ico</Icon_MainIcon>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64x)'!=''">
+        <DCC_Namespace>Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
         <BT_BuildType>Debug</BT_BuildType>
-        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.1.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_MajorVer>1</VerInfo_MajorVer>
+        <VerInfo_MinorVer>0</VerInfo_MinorVer>
+        <VerInfo_Release>0</VerInfo_Release>
+        <VerInfo_Build>0</VerInfo_Build>
+        <PackageImports>lmdrtcore;lmdrtdocking;lmdrtelcore;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtrtlx;lmdrtshell;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;rtl;vcl;vclactnband;vclimg;VclSmp;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
+        <Icon_MainIcon>icon.ico</Icon_MainIcon>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <BCC_DebugLineNumbers>true</BCC_DebugLineNumbers>
@@ -163,14 +178,19 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <AppEnableHighDPI>true</AppEnableHighDPI>
+        <Icon_MainIcon>icon.ico</Icon_MainIcon>
         <ILINK_DisableIncrementalLinking>true</ILINK_DisableIncrementalLinking>
         <ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)$(CC_SUFFIX)\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-        <LinkPackageStatics>VclSmp.lib;lmdrtprint.lib;xmlrtl.lib;DbxCommonDriver.lib;dbrtl.lib</LinkPackageStatics>
-        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;bindengine.bpi;lmdrtshell.bpi</LinkPackageImports>
+        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;VclSmp.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;xmlrtl.bpi;lmdrtshell.bpi</LinkPackageImports>
+        <LinkPackageStatics>lmdrtprint.lib;bindengine.lib;DbxCommonDriver.lib;dbrtl.lib</LinkPackageStatics>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppEnableHighDPI>true</AppEnableHighDPI>
         <ILINK_DisableIncrementalLinking>true</ILINK_DisableIncrementalLinking>
+        <Icon_MainIcon>icon.ico</Icon_MainIcon>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win64x)'!=''">
+        <LinkPackageStatics>rtl.lib;vcl.lib;vclimg.lib;vclactnband.lib;vclx.lib;lmdrtrtlx.lib;lmdrtl.lib;lmdrtinspector.lib;lmdrtdocking.lib;lmdrtelcore.lib;lmdrtsyntax.lib;VclSmp.lib;lmdrtcore.lib;vclwinx.lib;lmdrtprint.lib;lmdrtelpro.lib;xmlrtl.lib;bindengine.lib;DbxCommonDriver.lib;dbrtl.lib;lmdrtshell.lib</LinkPackageStatics>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>
@@ -178,10 +198,11 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <AppEnableHighDPI>true</AppEnableHighDPI>
-        <LinkPackageStatics>VclSmp.lib;lmdrtprint.lib;xmlrtl.lib;DbxCommonDriver.lib;dbrtl.lib</LinkPackageStatics>
         <BCC_OptimizeMaximum>true</BCC_OptimizeMaximum>
         <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
-        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;bindengine.bpi;lmdrtshell.bpi</LinkPackageImports>
+        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;xmlrtl.bpi;lmdrtshell.bpi</LinkPackageImports>
+        <LinkPackageStatics>VclSmp.lib;lmdrtprint.lib;bindengine.lib;DbxCommonDriver.lib;dbrtl.lib</LinkPackageStatics>
+        <Icon_MainIcon>icon.ico</Icon_MainIcon>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
         <AppEnableHighDPI>true</AppEnableHighDPI>
@@ -197,58 +218,6 @@
             <BuildOrder>14</BuildOrder>
             <PCH>true</PCH>
         </PCHCompile>
-        <CppCompile Include="Build\AgdSection\ControlsBuilder.cpp">
-            <DependentOn>Build\AgdSection\ControlsBuilder.h</DependentOn>
-            <BuildOrder>92</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Build\AgdSection\EventsBuilder.cpp">
-            <DependentOn>Build\AgdSection\EventsBuilder.h</DependentOn>
-            <BuildOrder>93</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Build\AgdSection\FontBuilder.cpp">
-            <DependentOn>Build\AgdSection\FontBuilder.h</DependentOn>
-            <BuildOrder>94</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Build\AgdSection\JumpTableBuilder.cpp">
-            <DependentOn>Build\AgdSection\JumpTableBuilder.h</DependentOn>
-            <BuildOrder>95</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Build\AgdSection\MapBuilder.cpp">
-            <DependentOn>Build\AgdSection\MapBuilder.h</DependentOn>
-            <BuildOrder>96</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Build\AgdSection\MessagesBuilder.cpp">
-            <DependentOn>Build\AgdSection\MessagesBuilder.h</DependentOn>
-            <BuildOrder>97</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Build\AgdSection\ObjectsBuilder.cpp">
-            <DependentOn>Build\AgdSection\ObjectsBuilder.h</DependentOn>
-            <BuildOrder>98</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Build\AgdSection\ProjectBuilder.cpp">
-            <DependentOn>Build\AgdSection\ProjectBuilder.h</DependentOn>
-            <BuildOrder>99</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Build\AgdSection\ScreensBuilder.cpp">
-            <DependentOn>Build\AgdSection\ScreensBuilder.h</DependentOn>
-            <BuildOrder>99</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Build\AgdSection\SectionBuilder.cpp">
-            <DependentOn>Build\AgdSection\SectionBuilder.h</DependentOn>
-            <BuildOrder>100</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Build\AgdSection\SpritesBuilder.cpp">
-            <DependentOn>Build\AgdSection\SpritesBuilder.h</DependentOn>
-            <BuildOrder>101</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Build\AgdSection\TilesBuilder.cpp">
-            <DependentOn>Build\AgdSection\TilesBuilder.h</DependentOn>
-            <BuildOrder>102</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Build\AgdSection\WindowBuilder.cpp">
-            <DependentOn>Build\AgdSection\WindowBuilder.h</DependentOn>
-            <BuildOrder>103</BuildOrder>
-        </CppCompile>
         <CppCompile Include="Build\Assembly.cpp">
             <DependentOn>Build\Assembly.h</DependentOn>
             <BuildOrder>5</BuildOrder>
@@ -284,6 +253,58 @@
         <CppCompile Include="Build\PreChecks.cpp">
             <DependentOn>Build\PreChecks.h</DependentOn>
             <BuildOrder>7</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\ControlsSection.cpp">
+            <DependentOn>Build\Section\ControlsSection.h</DependentOn>
+            <BuildOrder>93</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\EventsSection.cpp">
+            <DependentOn>Build\Section\EventsSection.h</DependentOn>
+            <BuildOrder>94</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\FontSection.cpp">
+            <DependentOn>Build\Section\FontSection.h</DependentOn>
+            <BuildOrder>95</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\JumpTableSection.cpp">
+            <DependentOn>Build\Section\JumpTableSection.h</DependentOn>
+            <BuildOrder>96</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\MapSection.cpp">
+            <DependentOn>Build\Section\MapSection.h</DependentOn>
+            <BuildOrder>97</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\MessagesSection.cpp">
+            <DependentOn>Build\Section\MessagesSection.h</DependentOn>
+            <BuildOrder>98</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\ObjectsSection.cpp">
+            <DependentOn>Build\Section\ObjectsSection.h</DependentOn>
+            <BuildOrder>99</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\ProjectSection.cpp">
+            <DependentOn>Build\Section\ProjectSection.h</DependentOn>
+            <BuildOrder>100</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\ScreensSection.cpp">
+            <DependentOn>Build\Section\ScreensSection.h</DependentOn>
+            <BuildOrder>101</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\Section.cpp">
+            <DependentOn>Build\Section\Section.h</DependentOn>
+            <BuildOrder>102</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\SpritesSection.cpp">
+            <DependentOn>Build\Section\SpritesSection.h</DependentOn>
+            <BuildOrder>103</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\TilesSection.cpp">
+            <DependentOn>Build\Section\TilesSection.h</DependentOn>
+            <BuildOrder>104</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\WindowSection.cpp">
+            <DependentOn>Build\Section\WindowSection.h</DependentOn>
+            <BuildOrder>105</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\ShellProcess.cpp">
             <DependentOn>Build\ShellProcess.h</DependentOn>
@@ -355,9 +376,6 @@
             <DependentOn>Frames\Editors\fEditor.h</DependentOn>
             <BuildOrder>104</BuildOrder>
         </CppCompile>
-        <None Include="Frames\Editors\Images\BlockColors.h">
-            <BuildOrder>105</BuildOrder>
-        </None>
         <CppCompile Include="Frames\Editors\Images\BlockTypeTool.cpp">
             <DependentOn>Frames\Editors\Images\BlockTypeTool.h</DependentOn>
             <BuildOrder>77</BuildOrder>
@@ -550,6 +568,22 @@
             <DependentOn>Frames\WndProcHandlers.h</DependentOn>
             <BuildOrder>33</BuildOrder>
         </CppCompile>
+        <CppCompile Include="Importer\AgdImporter.cpp">
+            <DependentOn>Importer\AgdImporter.h</DependentOn>
+            <BuildOrder>112</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Importer\ImportDefinition.cpp">
+            <DependentOn>Importer\ImportDefinition.h</DependentOn>
+            <BuildOrder>109</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Importer\Parser.cpp">
+            <DependentOn>Importer\Parser.h</DependentOn>
+            <BuildOrder>109</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Importer\Token.cpp">
+            <DependentOn>Importer\Token.h</DependentOn>
+            <BuildOrder>111</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Messaging\Event.cpp">
             <DependentOn>Messaging\Event.h</DependentOn>
             <BuildOrder>74</BuildOrder>
@@ -558,83 +592,83 @@
             <DependentOn>Messaging\Messaging.h</DependentOn>
             <BuildOrder>75</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Project\CharacterSetDocument.cpp">
-            <DependentOn>Project\CharacterSetDocument.h</DependentOn>
-            <BuildOrder>89</BuildOrder>
+        <CppCompile Include="Project\Documents\BaseImage.cpp">
+            <DependentOn>Project\Documents\BaseImage.h</DependentOn>
+            <BuildOrder>94</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Project\ControlsDocument.cpp">
-            <DependentOn>Project\ControlsDocument.h</DependentOn>
-            <BuildOrder>88</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Project\Document.cpp">
-            <DependentOn>Project\Document.h</DependentOn>
-            <BuildOrder>76</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Project\DocumentManager.cpp">
-            <DependentOn>Project\DocumentManager.h</DependentOn>
-            <BuildOrder>77</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Project\FileDefinitions.cpp">
-            <DependentOn>Project\FileDefinitions.h</DependentOn>
-            <BuildOrder>78</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Project\ImageDocument.cpp">
-            <DependentOn>Project\ImageDocument.h</DependentOn>
-            <BuildOrder>79</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Project\JumpTableDocument.cpp">
-            <DependentOn>Project\JumpTableDocument.h</DependentOn>
-            <BuildOrder>87</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Project\MachineConfig.cpp">
-            <DependentOn>Project\MachineConfig.h</DependentOn>
-            <BuildOrder>80</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Project\MapEntity.cpp">
-            <DependentOn>Project\MapEntity.h</DependentOn>
-            <BuildOrder>93</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Project\MostRecentlyUsedList.cpp">
-            <DependentOn>Project\MostRecentlyUsedList.h</DependentOn>
-            <BuildOrder>82</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Project\ObjectDocument.cpp">
-            <DependentOn>Project\ObjectDocument.h</DependentOn>
+        <CppCompile Include="Project\Documents\CharacterSet.cpp">
+            <DependentOn>Project\Documents\CharacterSet.h</DependentOn>
             <BuildOrder>90</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Project\ProjectDocument.cpp">
-            <DependentOn>Project\ProjectDocument.h</DependentOn>
-            <BuildOrder>84</BuildOrder>
+        <CppCompile Include="Project\Documents\Controls.cpp">
+            <DependentOn>Project\Documents\Controls.h</DependentOn>
+            <BuildOrder>91</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\Document.cpp">
+            <DependentOn>Project\Documents\Document.h</DependentOn>
+            <BuildOrder>105</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\DocumentManager.cpp">
+            <DependentOn>Project\Documents\DocumentManager.h</DependentOn>
+            <BuildOrder>77</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\FileDefinitions.cpp">
+            <DependentOn>Project\Documents\FileDefinitions.h</DependentOn>
+            <BuildOrder>93</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\JumpTable.cpp">
+            <DependentOn>Project\Documents\JumpTable.h</DependentOn>
+            <BuildOrder>95</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\MachineConfig.cpp">
+            <DependentOn>Project\Documents\MachineConfig.h</DependentOn>
+            <BuildOrder>96</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\MapEntity.cpp">
+            <DependentOn>Project\Documents\MapEntity.h</DependentOn>
+            <BuildOrder>97</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\MostRecentlyUsedList.cpp">
+            <DependentOn>Project\Documents\MostRecentlyUsedList.h</DependentOn>
+            <BuildOrder>82</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\Object.cpp">
+            <DependentOn>Project\Documents\Object.h</DependentOn>
+            <BuildOrder>98</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\Project.cpp">
+            <DependentOn>Project\Documents\Project.h</DependentOn>
+            <BuildOrder>99</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\Settings.cpp">
+            <DependentOn>Project\Documents\Settings.h</DependentOn>
+            <BuildOrder>100</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\Sprite.cpp">
+            <DependentOn>Project\Documents\Sprite.h</DependentOn>
+            <BuildOrder>101</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\Text.cpp">
+            <DependentOn>Project\Documents\Text.h</DependentOn>
+            <BuildOrder>102</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\Tile.cpp">
+            <DependentOn>Project\Documents\Tile.h</DependentOn>
+            <BuildOrder>103</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\TiledMap.cpp">
+            <DependentOn>Project\Documents\TiledMap.h</DependentOn>
+            <BuildOrder>104</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\Window.cpp">
+            <DependentOn>Project\Documents\Window.h</DependentOn>
+            <BuildOrder>105</BuildOrder>
         </CppCompile>
         <CppCompile Include="Project\ProjectManager.cpp">
             <DependentOn>Project\ProjectManager.h</DependentOn>
             <BuildOrder>83</BuildOrder>
         </CppCompile>
         <None Include="Project\README.md"/>
-        <CppCompile Include="Project\Settings.cpp">
-            <DependentOn>Project\Settings.h</DependentOn>
-            <BuildOrder>103</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Project\SpriteDocument.cpp">
-            <DependentOn>Project\SpriteDocument.h</DependentOn>
-            <BuildOrder>91</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Project\TextDocuments.cpp">
-            <DependentOn>Project\TextDocuments.h</DependentOn>
-            <BuildOrder>85</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Project\TiledMapDocument.cpp">
-            <DependentOn>Project\TiledMapDocument.h</DependentOn>
-            <BuildOrder>81</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Project\TileDocument.cpp">
-            <DependentOn>Project\TileDocument.h</DependentOn>
-            <BuildOrder>92</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Project\WindowDocument.cpp">
-            <DependentOn>Project\WindowDocument.h</DependentOn>
-            <BuildOrder>86</BuildOrder>
-        </CppCompile>
         <CppCompile Include="Services\File.cpp">
             <DependentOn>Services\File.h</DependentOn>
             <BuildOrder>99</BuildOrder>
@@ -667,6 +701,9 @@
             <DependentOn>Visuals\BitmapGraphicsBuffer.h</DependentOn>
             <BuildOrder>105</BuildOrder>
         </CppCompile>
+        <None Include="Visuals\BlockTypes.h">
+            <BuildOrder>105</BuildOrder>
+        </None>
         <CppCompile Include="Visuals\GraphicsBuffer.cpp">
             <DependentOn>Visuals\GraphicsBuffer.h</DependentOn>
             <BuildOrder>106</BuildOrder>
@@ -675,9 +712,10 @@
             <DependentOn>Visuals\GraphicsMode.h</DependentOn>
             <BuildOrder>107</BuildOrder>
         </CppCompile>
-        <None Include="Visuals\GraphicsTypes.h">
-            <BuildOrder>104</BuildOrder>
-        </None>
+        <CppCompile Include="Visuals\GraphicsTypes.cpp">
+            <DependentOn>Visuals\GraphicsTypes.h</DependentOn>
+            <BuildOrder>109</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Visuals\Image.cpp">
             <DependentOn>Visuals\Image.h</DependentOn>
             <BuildOrder>108</BuildOrder>
@@ -690,34 +728,34 @@
             <DependentOn>Visuals\ULAPlusGraphicsBuffer.h</DependentOn>
             <BuildOrder>110</BuildOrder>
         </CppCompile>
+        <FormResources Include="Frames\Editors\Messages\fEditorMessages.dfm"/>
         <FormResources Include="Frames\IDE\fIDE.dfm"/>
         <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
         <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
-        <FormResources Include="Frames\Editors\Map\fAssetSelection.dfm"/>
-        <FormResources Include="Frames\Editors\Map\fEditorMap.dfm"/>
-        <FormResources Include="Frames\Editors\Map\fLabelledImage.dfm"/>
         <FormResources Include="Frames\Editors\Music\fEditorMusic.dfm"/>
         <FormResources Include="Frames\Editors\Window\fEditorWindow.dfm"/>
-        <FormResources Include="Frames\Editors\Messages\fEditorMessages.dfm"/>
         <FormResources Include="Forms\fAbout.dfm"/>
+        <FormResources Include="Forms\fAdvancedSettings.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fPaletteBitmap.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fPaletteMonoAttribute.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fSelectionImage.dfm"/>
         <FormResources Include="Frames\Editors\Images\fEditorImage.dfm"/>
         <FormResources Include="Frames\Editors\Images\fMultiImageView.dfm"/>
         <FormResources Include="Frames\Editors\Images\fPaletteAttribute.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fBlockTypes.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fPaletteBitmap.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fToolbar.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fAssetSelection.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fEditorMap.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fLabelledImage.dfm"/>
         <FormResources Include="Frames\Editors\Images\fToolbarShape.dfm"/>
         <FormResources Include="Frames\Editors\Images\fULAplusBitmap.dfm"/>
         <FormResources Include="Frames\Editors\JumpTable\fEditorJumpTable.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fPaletteMonoAttribute.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fSelectionImage.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fToolbar.dfm"/>
-        <FormResources Include="Forms\fSettings.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fBlockTypes.dfm"/>
         <FormResources Include="Frames\Editors\Code\fEditorCode.dfm"/>
         <FormResources Include="Frames\Editors\Controls\fEditorControls.dfm"/>
-        <FormResources Include="Forms\fAdvancedSettings.dfm"/>
+        <FormResources Include="Frames\Editors\Controls\fKeyCapture.dfm"/>
         <FormResources Include="Forms\fMain.dfm"/>
         <FormResources Include="Forms\fNewImage.dfm"/>
-        <FormResources Include="Frames\Editors\Controls\fKeyCapture.dfm"/>
+        <FormResources Include="Forms\fSettings.dfm"/>
         <FormResources Include="Frames\Editors\fEditor.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
@@ -737,12 +775,65 @@
         <BorlandProject>
             <CPlusPlusBuilder.Personality>
                 <Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\svnui290.bpl">User interface code for subversion integration</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\svn290.bpl">Subversion integration</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclbindcomp290.bpl">Embarcadero LiveBindings Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\ExpertsUI290.bpl">Embarcadero Experts UI Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcldb290.bpl">Embarcadero Database Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclmid290.bpl">Embarcadero MyBase DataAccess Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclnet290.bpl">Embarcadero Internet Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\ExpertsCreators290.bpl">Embarcadero Experts Creators Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\DataExplorerService290.bpl">Data Explorer Reusable Services</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclDBXDrivers290.bpl">Embarcadero Driver Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclDBXDriversInt290.bpl">Embarcadero Intro Driver Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclRESTComponents290.bpl">Embarcadero REST-Library Components (Designtime)</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcldbx290.bpl">Embarcadero dbExpress Components</Excluded_Packages>
+                    <Excluded_Packages Name="dclFireDAC290.bpl">Embarcadero FireDAC Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclfmxstd290.bpl">Embarcadero FMX Standard Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclIndyCore290.bpl">Indy 10 Core Design Time</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\DataExplorerDBXPluginInt290.bpl">DBExpress InterBase Data Explorer Integration</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclsoap290.bpl">Embarcadero SOAP Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\gitide290.bpl">Embarcadero Git Integration</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\hgide290.bpl">Embarcadero Mercurial Integration</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\svnide290.bpl">Embarcadero Subversion Integration</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclbindcompfmx290.bpl">Embarcadero LiveBindings Components FireMonkey</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcltethering290.bpl">Embarcadero - Tethering Component Editors</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclemacsedit290.bpl">Embarcadero Editor Emacs Enhancements</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclmlwiz290.bpl">Embarcadero Markup Language Wizards</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclshare290.bpl">Embarcadero ShareContract Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\applet290.bpl">Embarcadero Control Panel Applet Package</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclappanalytics290.bpl">Embarcadero Usertility Analytics Component</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclbindcompvcl290.bpl">Embarcadero LiveBindings Components VCL</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclnetwiz290.bpl">Embarcadero Internet Server Wizards</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclvcldb290.bpl">Embarcadero VCL Database Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcl31w290.bpl">Delphi 1.0 Compatibility Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclsmp290.bpl">Embarcadero Sample Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclsmpedit290.bpl">Embarcadero Editor Script Enhancements</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcltouch290.bpl">Embarcadero Touch Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\bcbie290.bpl">Embarcadero C++Builder Internet Explorer Components Package</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\MobileWizardExpert290.bpl">Embarcadero Mobile Wizard Help</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclIPIndyImpl290.bpl">IP Abstraction Indy Implementation Design Time</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclRESTBackendComponents290.bpl">Embarcadero REST-Backend Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcldbxcds290.bpl">Embarcadero SimpleDataset Component (DBX)</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclCloudService290.bpl">Embarcadero Cloud management components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\DataExplorerFireDACPlugin290.bpl">FireDAC Data Explorer Integration</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclBindCompFireDAC290.bpl">LiveBinding Expression Components FireDac</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclFMXFireDAC290.bpl">Embarcadero FMX FireDAC Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclVclFireDAC290.bpl">Embarcadero VCL FireDAC Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\fmxstyledesigner290.bpl">Embarcadero Style Designer Package</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclIndyProtocols290.bpl">Indy 10 Protocols Design Time</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcledge290.bpl">Edge WebView2 Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclie290.bpl">Internet Explorer Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\DataExplorerDBXPlugin290.bpl">DBExpress Data Explorer Integration</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclbindcompdbx290.bpl">LiveBindings Expression Components DbExpress</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclmcn290.bpl">Embarcadero DataSnap Connection Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclsoapmidas290.bpl">Embarcadero SOAP Midas Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclsoapserver290.bpl">Embarcadero SOAP Server Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclnetdb290.bpl">Embarcadero Internet DB Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclado290.bpl">Embarcadero ADO DB Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\23.0\Bpl\dcllmdtoolsdb290.bpl">LMD 2024 - LMD-Tools Main Database Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k290.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp290.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k290.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp290.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
                 </Excluded_Packages>
                 <ProjectProperties>
                     <ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
@@ -754,7 +845,7 @@
                     <Source Name="MainSource">AGD Studio.cpp</Source>
                 </Source>
             </CPlusPlusBuilder.Personality>
-            <Deployment Version="5">
+            <Deployment Version="4">
                 <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx32\libcgcrtl.dylib" Class="DependencyModule">
                     <Platform Name="OSX32">
                         <Overwrite>true</Overwrite>
@@ -816,25 +907,25 @@
                 <DeployFile LocalName=".\Binaries\Win32\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Binaries\Win32\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Binaries\Win64\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput"/>
-                <DeployFile LocalName=".\Binaries\Win64\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput"/>
-                <DeployFile LocalName=".\Binaries\Win64x\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput">
-                    <Platform Name="Win64x">
+                <DeployFile LocalName=".\Binaries\Win64\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win64">
                         <RemoteName>AGD Studio.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName=".\Binaries\Win64\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Win32\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Win32\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Win64\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Win64\Release\AGD_Studio.exe" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName="Project\README.md" Configuration="Debug" Class="ProjectFile"/>
-                <DeployFile LocalName="Project\README.md" Configuration="Release" Class="ProjectFile"/>
-                <DeployFile LocalName="Project\README.md" Configuration="Release" Class="ProjectFile">
-                    <Platform Name="Win64x">
+                <DeployFile LocalName="Project\README.md" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win64">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="Project\README.md" Configuration="Release" Class="ProjectFile"/>
                 <DeployFile LocalName="README.md" Configuration="Debug" Class="ProjectFile"/>
                 <DeployClass Name="AdditionalDebugSymbols">
                     <Platform Name="iOSSimulator">
@@ -846,6 +937,16 @@
                     </Platform>
                     <Platform Name="Win32">
                         <Operation>0</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidClasses">
+                    <Platform Name="Android">
+                        <RemoteDir>classes</RemoteDir>
+                        <Operation>64</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>classes</RemoteDir>
+                        <Operation>64</Operation>
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="AndroidFileProvider">

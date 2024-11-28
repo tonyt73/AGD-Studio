@@ -13,7 +13,7 @@
 #include "LMDDckSite.hpp"
 //---------------------------------------------------------------------------
 #include "fEditor.h"
-#include "Project/JumpTableDocument.h"
+#include "Project/Documents/JumpTable.h"
 //---------------------------------------------------------------------------
 class TfrmEditorJumpTable : public TfrmEditor
 {

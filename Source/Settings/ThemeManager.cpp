@@ -2,7 +2,7 @@
 #include "AgdStudio.pch.h"
 //---------------------------------------------------------------------------
 #include "ThemeManager.h"
-#include "Project/Settings.h"
+#include "Project/Documents/Settings.h"
 #include "Services/File.h"
 #include "Services/Folders.h"
 //---------------------------------------------------------------------------
@@ -79,14 +79,17 @@ TColor __fastcall ThemeManager::GetColor(int index)
     switch (index)
     {
         // button highlight
-        case 0: return StyleServices()->GetSystemColor(clHighlight); break;
+        case 0: break;
         // button background
         case 1: return StyleServices()->GetSystemColor(clBtnFace); break;
-        // button text
-        case 2: return StyleServices()->GetSystemColor(clBtnText); break;
         // button shadow
         case 3: return StyleServices()->GetSystemColor(clBtnShadow); break;
+        // button text
+        case 2:
+        default:
+                return StyleServices()->GetSystemColor(clBtnText); break;
     }
+    return StyleServices()->GetSystemColor(clHighlight);
 }
 //---------------------------------------------------------------------------
 

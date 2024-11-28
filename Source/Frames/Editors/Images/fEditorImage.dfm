@@ -1,14 +1,17 @@
 inherited frmEditorImage: TfrmEditorImage
-  Font.Height = -11
-  Font.Name = 'Tahoma'
+  Width = 1165
+  Height = 900
+  Font.Name = 'Roboto'
   Font.Style = [fsBold]
   ParentFont = False
   OnEndDock = FrameEndDock
   OnMouseActivate = imgEditorMouseActivate
+  ExplicitWidth = 1165
+  ExplicitHeight = 900
   object panToolOptions: TPanel
     Left = 0
     Top = 0
-    Width = 640
+    Width = 1165
     Height = 42
     Align = alTop
     AutoSize = True
@@ -29,7 +32,7 @@ inherited frmEditorImage: TfrmEditorImage
     object Panel2: TPanel
       Left = 57
       Top = 0
-      Width = 583
+      Width = 1108
       Height = 42
       Align = alClient
       BevelOuter = bvNone
@@ -45,8 +48,8 @@ inherited frmEditorImage: TfrmEditorImage
         AutoSize = True
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
+        Font.Height = -12
+        Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
         TabOrder = 0
@@ -65,8 +68,8 @@ inherited frmEditorImage: TfrmEditorImage
   end
   object barStatus: TStatusBar
     Left = 0
-    Top = 461
-    Width = 640
+    Top = 881
+    Width = 1165
     Height = 19
     Panels = <
       item
@@ -96,7 +99,7 @@ inherited frmEditorImage: TfrmEditorImage
     Left = 0
     Top = 42
     Width = 80
-    Height = 419
+    Height = 839
     Align = alLeft
     AutoSize = True
     BevelOuter = bvNone
@@ -289,8 +292,8 @@ inherited frmEditorImage: TfrmEditorImage
       Caption = 'GRIDS'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
+      Font.Height = -12
+      Font.Name = 'Roboto'
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 3
@@ -306,8 +309,8 @@ inherited frmEditorImage: TfrmEditorImage
       Caption = 'COLOUR'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
+      Font.Height = -12
+      Font.Name = 'Roboto'
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 4
@@ -357,8 +360,8 @@ inherited frmEditorImage: TfrmEditorImage
       Caption = 'ANIMATION'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
+      Font.Height = -12
+      Font.Name = 'Roboto'
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 6
@@ -469,8 +472,8 @@ inherited frmEditorImage: TfrmEditorImage
       Caption = 'MODES'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
+      Font.Height = -12
+      Font.Name = 'Roboto'
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 10
@@ -479,16 +482,16 @@ inherited frmEditorImage: TfrmEditorImage
   object panContainer: TPanel
     Left = 80
     Top = 42
-    Width = 384
-    Height = 419
+    Width = 909
+    Height = 839
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 3
     object sbxView: TScrollBox
       Left = 0
       Top = 0
-      Width = 384
-      Height = 319
+      Width = 909
+      Height = 739
       HorzScrollBar.Smooth = True
       HorzScrollBar.Tracking = True
       VertScrollBar.Smooth = True
@@ -505,8 +508,8 @@ inherited frmEditorImage: TfrmEditorImage
       object panEditorContainer: TPanel
         Left = 0
         Top = 0
-        Width = 384
-        Height = 319
+        Width = 909
+        Height = 739
         Align = alClient
         BevelOuter = bvNone
         DoubleBuffered = False
@@ -524,8 +527,8 @@ inherited frmEditorImage: TfrmEditorImage
         object panViewFrame: TPanel
           Left = 128
           Top = 128
-          Width = 128
-          Height = 63
+          Width = 653
+          Height = 483
           Align = alClient
           BevelOuter = bvNone
           Color = clWhite
@@ -541,8 +544,8 @@ inherited frmEditorImage: TfrmEditorImage
           object imgEditor: TImage
             Left = 1
             Top = 1
-            Width = 126
-            Height = 61
+            Width = 651
+            Height = 481
             Align = alClient
             Stretch = True
             OnClick = panEditorContainerClick
@@ -560,8 +563,8 @@ inherited frmEditorImage: TfrmEditorImage
     end
     object panFrameView: TPanel
       Left = 0
-      Top = 319
-      Width = 384
+      Top = 739
+      Width = 909
       Height = 100
       Align = alBottom
       AutoSize = True
@@ -572,7 +575,7 @@ inherited frmEditorImage: TfrmEditorImage
       inline fFrameView: TMultiImageViewFrame
         Left = 0
         Top = 0
-        Width = 384
+        Width = 909
         Height = 100
         HorzScrollBar.ParentColor = False
         HorzScrollBar.Smooth = True
@@ -593,20 +596,23 @@ inherited frmEditorImage: TfrmEditorImage
         ParentDoubleBuffered = False
         ParentFont = False
         TabOrder = 0
-        ExplicitWidth = 384
+        ExplicitWidth = 909
         ExplicitHeight = 100
+        inherited panImages: TPanel
+          StyleElements = [seFont, seClient, seBorder]
+        end
         inherited Timer1: TTimer
-          Left = 216
+          Left = 128
           Top = 65528
         end
       end
     end
   end
   object Panel1: TPanel
-    Left = 464
+    Left = 989
     Top = 42
     Width = 176
-    Height = 419
+    Height = 839
     Align = alRight
     BevelOuter = bvNone
     Caption = 'Panel1'
@@ -626,8 +632,8 @@ inherited frmEditorImage: TfrmEditorImage
       Constraints.MinHeight = 24
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
+      Font.Height = -12
+      Font.Name = 'Roboto'
       Font.Style = [fsBold]
       ParentFont = False
       Layout = tlCenter
@@ -638,7 +644,7 @@ inherited frmEditorImage: TfrmEditorImage
       Left = 0
       Top = 24
       Width = 176
-      Height = 395
+      Height = 815
       Align = alClient
       BevelOuter = bvNone
       Caption = 'Panel3'
@@ -656,8 +662,8 @@ inherited frmEditorImage: TfrmEditorImage
         Constraints.MinWidth = 176
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
+        Font.Height = -12
+        Font.Name = 'Roboto'
         Font.Style = [fsBold]
         Padding.Left = 8
         Padding.Top = 8
@@ -666,6 +672,21 @@ inherited frmEditorImage: TfrmEditorImage
         ParentFont = False
         TabOrder = 0
         OnMouseActivate = imgEditorMouseActivate
+        inherited lblPalettePaper: TLabel
+          StyleElements = [seFont, seClient, seBorder]
+        end
+        inherited lblPaletteBright: TLabel
+          StyleElements = [seFont, seClient, seBorder]
+        end
+        inherited lblPaletteFlash: TLabel
+          StyleElements = [seFont, seClient, seBorder]
+        end
+        inherited lblPaletteTransparent: TLabel
+          StyleElements = [seFont, seClient, seBorder]
+        end
+        inherited Label1: TLabel
+          StyleElements = [seFont, seClient, seBorder]
+        end
       end
       inline palBitmap: TfrmPaletteBitmap
         Left = 0
@@ -680,8 +701,8 @@ inherited frmEditorImage: TfrmEditorImage
         DoubleBuffered = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
+        Font.Height = -12
+        Font.Name = 'Roboto'
         Font.Style = [fsBold]
         Padding.Left = 8
         Padding.Top = 8
@@ -692,6 +713,21 @@ inherited frmEditorImage: TfrmEditorImage
         TabOrder = 1
         OnMouseActivate = imgEditorMouseActivate
         ExplicitTop = 1202
+        inherited Panel3: TPanel
+          StyleElements = [seFont, seClient, seBorder]
+          inherited panLogicalColorPicker: TPanel
+            StyleElements = [seFont, seClient, seBorder]
+            inherited lblLogicalColor: TLabel
+              StyleElements = [seFont, seClient, seBorder]
+            end
+          end
+          inherited panSystemColorPicker: TPanel
+            StyleElements = [seFont, seClient, seBorder]
+            inherited lblSystemColor: TLabel
+              StyleElements = [seFont, seClient, seBorder]
+            end
+          end
+        end
         inherited ImageList1: TImageList
           Bitmap = {
             494C010103000800040020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
@@ -1256,6 +1292,21 @@ inherited frmEditorImage: TfrmEditorImage
         Visible = False
         OnMouseActivate = imgEditorMouseActivate
         ExplicitTop = 702
+        inherited Panel3: TPanel
+          StyleElements = [seFont, seClient, seBorder]
+          inherited panPalettePicker: TPanel
+            StyleElements = [seFont, seClient, seBorder]
+            inherited lblLogicalColor: TLabel
+              StyleElements = [seFont, seClient, seBorder]
+            end
+          end
+          inherited panSystemColorPicker: TPanel
+            StyleElements = [seFont, seClient, seBorder]
+            inherited lblSystemColor: TLabel
+              StyleElements = [seFont, seClient, seBorder]
+            end
+          end
+        end
       end
       inline palBlocks: TfrmBlockTypes
         Left = 0
@@ -1275,6 +1326,9 @@ inherited frmEditorImage: TfrmEditorImage
         inherited panBlock: TPanel
           Hint = 'Left Mouse Button applies the Block type to the chacter position'
         end
+        inherited panEmpty: TPanel
+          StyleElements = [seFont, seClient, seBorder]
+        end
       end
       inline palMonoAttribute: TfrmPaletteMonoAttribute
         Left = 0
@@ -1289,8 +1343,8 @@ inherited frmEditorImage: TfrmEditorImage
         Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
+        Font.Height = -12
+        Font.Name = 'Roboto'
         Font.Style = [fsBold]
         Padding.Left = 8
         Padding.Top = 8
@@ -1301,6 +1355,9 @@ inherited frmEditorImage: TfrmEditorImage
         ExplicitTop = 336
         inherited spdInkGreen: TSpeedButton
           Down = True
+        end
+        inherited Label1: TLabel
+          StyleElements = [seFont, seClient, seBorder]
         end
       end
     end

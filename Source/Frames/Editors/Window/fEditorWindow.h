@@ -13,7 +13,7 @@
 #include "LMDDckSite.hpp"
 //---------------------------------------------------------------------------
 #include "fEditor.h"
-#include "Project/WindowDocument.h"
+#include "Project/Documents/Window.h"
 #include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------

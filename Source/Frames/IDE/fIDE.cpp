@@ -20,7 +20,6 @@
 #pragma link "LMDInsPropInsp"
 #pragma link "LMDInsPropPage"
 #pragma link "ElTreeInplaceEditors"
-#pragma link "ElXPThemedControl"
 #pragma link "ElXTree"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
@@ -30,6 +29,7 @@ __fastcall TfrmIDE::TfrmIDE(TComponent* Owner)
     RegisterDocumentEditors();
     m_Registrar.Subscribe<MessageEvent>(OnMessageEvent);
     m_Registrar.Subscribe<UpdateProperties>(OnUpdateProperties);
+    m_Registrar.Subscribe<OpenDocument>(OnOpenDocument);
     tvBuild->Items->Clear();
 }
 //---------------------------------------------------------------------------
@@ -107,11 +107,17 @@ void __fastcall TfrmIDE::OnMessageEvent(const MessageEvent& message)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::OnUpdateProperties(const UpdateProperties& event)
 {
-    if (event.Id == "update.properties")
+    assert(event.Id == "update.properties");
+    if (tvProject && tvProject && tvProject->Selected)
     {
         auto doc = (Project::Document*)((NativeInt)tvProject->Selected->Tag);
         UpdateDocumentProperties(doc);
     }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::OnOpenDocument(const OpenDocument& event)
+{
+    DoOpenDocument(event.Document);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actEditCopyExecute(TObject *Sender)
@@ -157,11 +163,7 @@ void __fastcall TfrmIDE::actFileProjectSaveExecute(TObject *Sender)
 void __fastcall TfrmIDE::actFileProjectCloseExecute(TObject *Sender)
 {
     theProjectManager.Close();
-    if (FOnFormClose)
-    {
-        Application->MainForm->Menu = nullptr;
-        FOnFormClose(this);
-    }
+    FOnFormClose(this);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actHelpAboutExecute(TObject *Sender)
@@ -192,6 +194,35 @@ void __fastcall TfrmIDE::actEditZoomOutExecute(TObject *Sender)
 void __fastcall TfrmIDE::actEditZoomResetExecute(TObject *Sender)
 {
     Bus::Publish<Event>(Event("zoom.reset"));
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::DoOpenDocument(Project::Document* document)
+{
+    if (document && document->DockPanel == nullptr)
+    {
+        InformationMessage("[IDE] Opening Document: " + document->Name);
+        auto dp = new TLMDDockPanel(this);
+        if (m_DocumentEditorFactory.Create(document, dp))
+        {
+            dp->Caption = document->Name.UpperCase();
+            dp->Tag = (NativeInt)document;
+            document->DockPanel = dp;
+            UpdateDocumentProperties(document);
+            dp->ClientKind = dkDocument;
+            dsIDE->DockControl(dp, dsIDE->SpaceZone);
+            dp->OnClose = OnDocumentClose;
+            dp->Activate();
+            dp->Show();
+            dp->SetFocus();
+            dp->Refresh();
+            Bus::Publish<Event>(Event("editor.show"));
+        }
+        else
+        {
+            ErrorMessage("[IDE] Failed to create editor for Document: " + document->Name);
+            delete dp;
+        }
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::UpdateDocumentProperties(Project::Document* document)
@@ -293,31 +324,7 @@ void __fastcall TfrmIDE::tvProjectDblClick(TObject *Sender)
     if (tvProject->Selected)
     {
         auto doc = (Project::Document*)((NativeInt)tvProject->Selected->Tag);
-        if (doc && doc->DockPanel == nullptr)
-        {
-            InformationMessage("[IDE] Opening Document: " + doc->Name);
-            auto dp = new TLMDDockPanel(this);
-            if (m_DocumentEditorFactory.Create(doc, dp))
-            {
-                dp->Caption = doc->Name.UpperCase();
-                dp->Tag = (NativeInt)doc;
-                doc->DockPanel = dp;
-                UpdateDocumentProperties(doc);
-                dp->ClientKind = dkDocument;
-                dsIDE->DockControl(dp, dsIDE->SpaceZone);
-                dp->OnClose = OnDocumentClose;
-                dp->Activate();
-                dp->Show();
-                dp->SetFocus();
-                dp->Refresh();
-                Bus::Publish<Event>(Event("editor.show"));
-            }
-            else
-            {
-                ErrorMessage("[IDE] Failed to create editor for Document: " + doc->Name);
-                delete dp;
-            }
-        }
+        DoOpenDocument(doc);
     }
 }
 //---------------------------------------------------------------------------
@@ -445,6 +452,7 @@ void __fastcall TfrmIDE::actViewMessagesExecute(TObject *Sender)
 void __fastcall TfrmIDE::actGameRunExecute(TObject *Sender)
 {
     m_Builder.Execute();
+    dpBuild->Show();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::OnClose()

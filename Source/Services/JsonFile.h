@@ -17,15 +17,15 @@ namespace Services
 class JsonFile : public TPersistent
 {
 private:
-    TStringWriter*          m_StringWriter;
-    TJsonTextWriter*        m_JsonWriter;
-    String                  m_File;
+    TStringWriter*              m_StringWriter;
+    TJsonTextWriter*            m_JsonWriter;
+    String                      m_File;
 
 protected:
     // map member variables to property names
     // the loader will set the value based on the property type
     // TODO: Can we improve this to include the desired data type for safer conversion
-    std::map<String, void*> m_PropertyMap;
+    std::map<String, void*>     m_PropertyMap;
 
 protected:
     void            __fastcall  Open(const String& file);
@@ -40,7 +40,7 @@ protected:
     void            __fastcall  Write(const String& value) const;
     void            __fastcall  Write(const int& value) const;
     void            __fastcall  Write(const long& value) const;
-    void            __fastcall  Write(const String& property, const String& value) const;
+    void            __fastcall  Write(const String& property, const String& value, bool skipEmpty = false) const;
     void            __fastcall  Write(const String& property, const int& value) const;
     void            __fastcall  Write(const String& property, const unsigned int& value) const;
     void            __fastcall  Write(const String& property, const long& value) const;
@@ -55,7 +55,7 @@ protected:
     virtual void    __fastcall  Set(const String& property, const bool& value);
 
             String  __fastcall  ProcessPath(const String& path) const;
-    virtual void    __fastcall  Load(const String& file);
+    virtual bool    __fastcall  Load(const String& file);
 
     virtual void    __fastcall  OnStartObject(const String& object);
     virtual void    __fastcall  OnEndObject(const String& object);

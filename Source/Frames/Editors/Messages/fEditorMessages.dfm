@@ -44,6 +44,7 @@ inherited frmEditorMessages: TfrmEditorMessages
       inherited panImages: TPanel
         Width = 225
         Height = 50
+        StyleElements = [seFont, seClient, seBorder]
         ExplicitWidth = 225
         ExplicitHeight = 50
       end
@@ -81,8 +82,8 @@ inherited frmEditorMessages: TfrmEditorMessages
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
+        Font.Height = -12
+        Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
         TabOrder = 0
@@ -93,7 +94,6 @@ inherited frmEditorMessages: TfrmEditorMessages
           Width = 521
           Height = 711
           OnStatusChanged = OnStatusChanged
-          ExplicitTop = 33
           ExplicitWidth = 521
           ExplicitHeight = 711
           GutterBarsEmpty = False

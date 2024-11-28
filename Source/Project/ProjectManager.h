@@ -4,8 +4,8 @@
 //---------------------------------------------------------------------------
 #include "ElXTree.hpp"
 //---------------------------------------------------------------------------
-#include "DocumentManager.h"
-#include "MostRecentlyUsedList.h"
+#include "Documents/DocumentManager.h"
+#include "Documents/MostRecentlyUsedList.h"
 //---------------------------------------------------------------------------
 namespace Project
 {
@@ -30,6 +30,7 @@ private:
                          tiWindow, tiKeyboard, tiText, tiFileAgd, tiFileFont
                        };
 
+    ::Messaging::Registrar          m_Registrar;
     std::map<String, TElXTreeItem*> m_TreeLeafNodes;
     Elxtree::TElXTree*              m_TreeView;
     bool                            m_IsOpen;
@@ -38,7 +39,7 @@ private:
 
 protected:
                   friend    DocumentManager;
-    void        __fastcall  OnDocumentChange(Document* doc);
+    void        __fastcall  OnDocumentChanged(const DocumentChange<String>& message);
     void        __fastcall  ClearTree(const String& rootName);
     Document*   __fastcall  AddToTreeView(Document* document);
 
@@ -48,7 +49,8 @@ public:
 
     void        __fastcall  Initialise(Elxtree::TElXTree* treeView);
     void        __fastcall  New(const String& name, const String& machine);
-    void        __fastcall  Open(const String& file);
+    bool        __fastcall  Import(const String& file);
+    void        __fastcall  Open(const String& file, const String& machine = "");
     void        __fastcall  Close();
     void        __fastcall  Save();
 
