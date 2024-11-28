@@ -127,6 +127,9 @@ String __fastcall ImageDocument::GetFrame(int frame) const
 //---------------------------------------------------------------------------
 void __fastcall ImageDocument::SetFrame(int frame, const String& data)
 {
+    if (frame == m_Frames.size()) {
+        AddFrame();
+    }
     if (0 <= frame && frame < m_Frames.size()) {
         m_Frames[frame] = data;
     }
@@ -149,7 +152,7 @@ bool __fastcall ImageDocument::AddFrame(int index, const String& hint)
         } else {
             m_Frames.insert(m_Frames.begin() + index, "");
             m_Hints.insert(m_Hints.begin() + index, hint);
-        }
+        } 
         return true;
     }
     return false;
