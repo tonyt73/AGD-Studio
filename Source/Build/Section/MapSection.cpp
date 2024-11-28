@@ -25,8 +25,8 @@ void __fastcall MapSection::Execute()
     auto mapDoc = dynamic_cast<Project::TiledMapDocument*>(dm.Get("Map", "Tiled", "Tile Map"));
     assert(mapDoc != nullptr);
 
-    const auto& mapSize = TRect(0, 0, mapDoc->Width, mapDoc->Height);
-    AddLine("MAP WIDTH " + IntToStr((int)mapSize.Width() + 1));
+    const auto mapSize = mapDoc->SetMinimalMapSize();
+    AddLine("MAP WIDTH " + IntToStr((int)mapSize.Width()+1));
     AddLine("    STARTSCREEN " + IntToStr(mapDoc->StartRoomIndex));
     for (auto y = mapSize.Top; y <= mapSize.Bottom; y++)
     {

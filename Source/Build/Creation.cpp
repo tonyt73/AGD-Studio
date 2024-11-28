@@ -32,9 +32,9 @@ __fastcall Creation::Creation(BuildMessages& buildMessages)
     m_AgdSections.push_back(std::move(std::make_unique<FontSection>()));
     m_AgdSections.push_back(std::move(std::make_unique<JumpTableSection>()));
     m_AgdSections.push_back(std::move(std::make_unique<TilesSection>()));
+    m_AgdSections.push_back(std::move(std::make_unique<ObjectsSection>()));
     m_AgdSections.push_back(std::move(std::make_unique<SpritesSection>()));
     m_AgdSections.push_back(std::move(std::make_unique<ScreensSection>()));
-    m_AgdSections.push_back(std::move(std::make_unique<ObjectsSection>()));
     m_AgdSections.push_back(std::move(std::make_unique<MapSection>()));
     m_AgdSections.push_back(std::move(std::make_unique<EventsSection>()));
 }

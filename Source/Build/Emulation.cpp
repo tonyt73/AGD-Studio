@@ -20,15 +20,19 @@ __fastcall Emulation::~Emulation()
 bool __fastcall Emulation::Execute()
 {
     const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
-    auto gameFile = Services::File::Combine(Services::Folders::Project, Services::Folders::ProjectName);
-    BUILD_MSG("Launching Game " + gameFile);
+    auto game = Services::Folders::Project;
+    BUILD_MSG("Launching Game " + game);
 
     auto emulator = Services::File::Resolve(Services::Folders::Application, mc.Emulator.Path);
-    auto parameters = Parameter::ization(mc.Emulator.Parameters);
+    auto parameters = Services::Folders::CleanseSeparators(Parameter::ization(mc.Emulator.Parameters));
 
-    auto path = Services::Folders::CleanseSeparators(Services::File::PathOf(emulator));
-    auto exe = Services::File::NameWithExtension(emulator);
-    return ShellExecute(path, exe, parameters, false);
+    if (Services::File::Exists(parameters)) {
+        auto path = Services::Folders::CleanseSeparators(Services::File::PathOf(emulator));
+        auto exe = Services::File::NameWithExtension(emulator);
+        return ShellExecute(path, exe, parameters, false);
+    }
+    BUILD_LINE(bmFailed, "Failed to find the emulator file to run: " + parameters);
+    return false;
 }
 //---------------------------------------------------------------------------
 

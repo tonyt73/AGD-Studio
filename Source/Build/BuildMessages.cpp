@@ -27,7 +27,7 @@ void __fastcall BuildMessages::Clear()
 void __fastcall BuildMessages::Push(BuildMessageType type, const String& group)
 {
     m_GroupType = type;
-    m_GroupNode = m_TreeView->Items->Add(nullptr, group);
+    m_GroupNode = m_TreeView->Items->AddChild(m_GroupNode, group);
     m_GroupNode->ImageIndex = bmProgress;
     m_TreeView->Update();
 }
@@ -35,10 +35,11 @@ void __fastcall BuildMessages::Push(BuildMessageType type, const String& group)
 void __fastcall BuildMessages::Pop(bool result)
 {
     m_GroupNode->ImageIndex = result ? m_GroupType : bmFailed;
-    if (!result)
+    if (!result) {
         m_GroupNode->Expand(false);
+    }
     m_TreeView->Update();
-    m_GroupNode = nullptr;
+    m_GroupNode = m_GroupNode->Parent;
 }
 //---------------------------------------------------------------------------
 void __fastcall BuildMessages::Message(BuildMessageType type, const String& message)

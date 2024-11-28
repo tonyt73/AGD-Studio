@@ -23,15 +23,12 @@ void __fastcall ControlsSection::Execute()
 {
     const auto& Keys = (Project::ControlsDocument*)theDocumentManager.Get("Controls", "List", "Controls");
     String line = "DEFINECONTROLS  ";
-    for (const auto key : Project::AgdKeys)
-    {
+    for (const auto key : Project::AgdKeys) {
         auto keyCode = Keys->GetAsciiCode(key);
-        if (keyCode <= 32 && keyCode <= 126)
-        {
+        if (32 <= keyCode && keyCode <= 126) {
             line += "'" + UnicodeString::StringOfChar(keyCode, 1) + "' ";
         }
-        else
-        {
+        else if (keyCode) {
             line += IntToStr(keyCode) + " ";
         }
     }
