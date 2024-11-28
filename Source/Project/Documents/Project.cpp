@@ -45,14 +45,6 @@ __fastcall ProjectDocument::ProjectDocument(const String& name, const String& ma
     m_PropertyMap["Files[].SubType"] = &m_FileInfo.SubType;
 
     m_Registrar.Subscribe<OnChange<String>>(OnChangeString);
-
-    // load the machine configuration
-    m_MachineConfig = std::make_unique<MachineConfig>(machine);
-    if (machine != "")
-    {
-        // Load the machine
-        m_MachineConfig->Load(m_MachineName);
-    }
 }
 //---------------------------------------------------------------------------
 __fastcall ProjectDocument::~ProjectDocument()
@@ -68,8 +60,14 @@ void __fastcall ProjectDocument::OnEndObject(const String& object)
     }
 }
 //---------------------------------------------------------------------------
-const MachineConfig& __fastcall ProjectDocument::MachineConfiguration() const
+const MachineConfig& __fastcall ProjectDocument::MachineConfiguration()
 {
+    if (m_MachineName != "" && m_MachineConfig == nullptr) {
+        // load the machine configuration
+        m_MachineConfig = std::make_unique<MachineConfig>(m_MachineName);
+        // Load the machine
+        m_MachineConfig->Load(m_MachineName);
+    }
     return *m_MachineConfig;
 }
 //---------------------------------------------------------------------------

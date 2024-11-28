@@ -41,7 +41,7 @@ public:
                         __fastcall ~ProjectDocument();
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ProjectDocument(name, extra); };
 
-   const MachineConfig& __fastcall  MachineConfiguration() const;
+   const MachineConfig& __fastcall  MachineConfiguration();
          MachineConfig& __fastcall  WritableMachineConfiguration() const;
             bool        __fastcall  Load();
 
