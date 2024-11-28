@@ -343,8 +343,6 @@ const TRect __fastcall TiledMapDocument::SetMinimalMapSize()
             }
         }
     }
-    //rect.Right = std::min((int)(rect.Right + 1), g_MaxMapRoomsAcross - 1);
-    //rect.Bottom = std::min((int)(rect.Bottom + 1), g_MaxMapRoomsDown - 1);
     rect.Inflate(1,0,1,0);
     m_RoomMappingWidth  = rect.Right;
     m_RoomMappingHeight = rect.Bottom;
@@ -397,7 +395,6 @@ void __fastcall TiledMapDocument::OnLoading()
 //---------------------------------------------------------------------------
 void __fastcall TiledMapDocument::OnLoaded()
 {
-    SetMinimalMapSize();
     UpdateScreenCoords();
 }
 //---------------------------------------------------------------------------
