@@ -134,7 +134,7 @@ void __fastcall ProjectDocument::OnChangeString(const OnChange<String>& event)
          if (event.Id == "project.version"      ) m_Version     = event.Value;
     else if (event.Id == "project.author"       ) m_Author      = event.Value;
     else if (event.Id == "project.description"  ) m_Description = event.Value;
-         if (event.Id == "project.name"         ) Name          = event.Value;
+    else if (event.Id == "project.name"         ) Name          = event.Value;
 }
 //---------------------------------------------------------------------------
 String __fastcall ProjectDocument::GetFile() const
