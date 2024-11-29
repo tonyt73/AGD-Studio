@@ -38,6 +38,8 @@ __fastcall Settings::Settings()
     m_PropertyMap["MainWindow.Size.Width"    ] = &m_WindowSize.Width;
     m_PropertyMap["MainWindow.Size.Height"   ] = &m_WindowSize.Height;
     m_PropertyMap["MainWindow.WindowState"   ] = &m_WindowState;
+    m_PropertyMap["CodeEditor.Font"          ] = &m_CodeEditorFont;
+    m_PropertyMap["CodeEditor.LineWrap"      ] = &m_CodeEditorLineWrap;
 
     Load(Services::File::Combine(Services::Folders::Common, "Settings.json"));
 }
@@ -74,6 +76,7 @@ void __fastcall Settings::SetBool(int index, bool value)
         case 0: m_WelcomeSkipOnStartup = value; break;
         case 1: m_WelcomeSkipOnClose = value; break;
         case 2: m_LoadLastProject = value; break;
+        case 3: m_CodeEditorLineWrap = value; break;
     }
 }
 //---------------------------------------------------------------------------
@@ -85,6 +88,7 @@ void __fastcall Settings::SetString(int index, String value)
         case 1: m_LastProject = value; break;
         case 2: m_Developer = value; break;
         case 3: m_DefaultMachine = value; break;
+        case 4: m_CodeEditorFont = value; break;
     }
 }
 //---------------------------------------------------------------------------
@@ -119,6 +123,10 @@ void __fastcall Settings::Save()
             Write("Height", WindowSize.Height);
         Pop(); // }
         Write("WindowState", (int)WindowState);
+    Pop(); // }
+    Push("CodeEditor"); // {
+        Write("Font", m_CodeEditorFont);
+        Write("LineWrap", m_CodeEditorLineWrap);
     Pop(); // }
     // }
     Close();
