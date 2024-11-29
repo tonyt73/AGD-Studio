@@ -116,17 +116,17 @@
         <UsePackages>true</UsePackages>
         <UWP_CppLogo150>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_150.png</UWP_CppLogo150>
         <UWP_CppLogo44>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_44.png</UWP_CppLogo44>
-        <VerInfo_AutoGenVersion>true</VerInfo_AutoGenVersion>
-        <VerInfo_Build>80</VerInfo_Build>
+        <VerInfo_Build>11738</VerInfo_Build>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=0.14.6663.80;InternalName=AGD Studio;LegalCopyright=2022-2024 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=0.15.0;Comments=Programmed by Tony Thompson;SpecialBuild=BETA</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=0.15.0.11738;InternalName=AGD Studio;LegalCopyright=2022-2024 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=0.16.0;Comments=Programmed by Tony Thompson;SpecialBuild=BETA</VerInfo_Keys>
         <VerInfo_Locale>3081</VerInfo_Locale>
         <VerInfo_MajorVer>0</VerInfo_MajorVer>
         <VerInfo_MinorVer>14</VerInfo_MinorVer>
         <VerInfo_PreRelease>true</VerInfo_PreRelease>
-        <VerInfo_Release>6663</VerInfo_Release>
+        <VerInfo_Release>1</VerInfo_Release>
         <VerInfo_Special>true</VerInfo_Special>
-        <SubProcessesNumber>16</SubProcessesNumber>
+        <SubProcessesNumber>24</SubProcessesNumber>
+        <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <BCC_CallingConvention>fastcall</BCC_CallingConvention>
@@ -146,7 +146,7 @@
     <PropertyGroup Condition="'$(Base_Win64x)'!=''">
         <DCC_Namespace>Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
         <BT_BuildType>Debug</BT_BuildType>
-        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.1.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.1.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_MajorVer>1</VerInfo_MajorVer>
         <VerInfo_MinorVer>0</VerInfo_MinorVer>
@@ -183,6 +183,8 @@
         <ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)$(CC_SUFFIX)\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;VclSmp.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;xmlrtl.bpi;lmdrtshell.bpi</LinkPackageImports>
         <LinkPackageStatics>lmdrtprint.lib;bindengine.lib;DbxCommonDriver.lib;dbrtl.lib</LinkPackageStatics>
+        <VerInfo_MinorVer>15</VerInfo_MinorVer>
+        <VerInfo_Release>0</VerInfo_Release>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppEnableHighDPI>true</AppEnableHighDPI>
@@ -203,12 +205,16 @@
         <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;xmlrtl.bpi;lmdrtshell.bpi</LinkPackageImports>
         <LinkPackageStatics>VclSmp.lib;lmdrtprint.lib;bindengine.lib;DbxCommonDriver.lib;dbrtl.lib</LinkPackageStatics>
         <Icon_MainIcon>icon.ico</Icon_MainIcon>
+        <VerInfo_Build>5</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=AGD Studio;FileVersion=0.15.0.5;InternalName=AGD Studio;LegalCopyright=2022-2024 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.AGD Studio;ProductName=AGD Studio;ProductVersion=0.16.0;Comments=Programmed by Tony Thompson;SpecialBuild=BETA</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
         <AppEnableHighDPI>true</AppEnableHighDPI>
         <BCC_OptimizeMaximum>true</BCC_OptimizeMaximum>
         <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
         <BCC_EnableLSPIndexing>false</BCC_EnableLSPIndexing>
+        <VerInfo_Build>5</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=AGD Studio;FileVersion=0.15.0.5;InternalName=AGD Studio;LegalCopyright=2022-2024 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.AGD Studio;ProductName=AGD Studio;ProductVersion=0.16.0;Comments=Programmed by Tony Thompson;SpecialBuild=BETA</VerInfo_Keys>
     </PropertyGroup>
     <ItemGroup>
         <CppCompile Include="AGD Studio.cpp">
@@ -775,23 +781,6 @@
         <BorlandProject>
             <CPlusPlusBuilder.Personality>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\svnui290.bpl">User interface code for subversion integration</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\svn290.bpl">Subversion integration</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclbindcomp290.bpl">Embarcadero LiveBindings Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\ExpertsUI290.bpl">Embarcadero Experts UI Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcldb290.bpl">Embarcadero Database Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclmid290.bpl">Embarcadero MyBase DataAccess Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclnet290.bpl">Embarcadero Internet Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\ExpertsCreators290.bpl">Embarcadero Experts Creators Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\DataExplorerService290.bpl">Data Explorer Reusable Services</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclDBXDrivers290.bpl">Embarcadero Driver Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclDBXDriversInt290.bpl">Embarcadero Intro Driver Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclRESTComponents290.bpl">Embarcadero REST-Library Components (Designtime)</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcldbx290.bpl">Embarcadero dbExpress Components</Excluded_Packages>
-                    <Excluded_Packages Name="dclFireDAC290.bpl">Embarcadero FireDAC Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclfmxstd290.bpl">Embarcadero FMX Standard Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclIndyCore290.bpl">Indy 10 Core Design Time</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\DataExplorerDBXPluginInt290.bpl">DBExpress InterBase Data Explorer Integration</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclsoap290.bpl">Embarcadero SOAP Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\gitide290.bpl">Embarcadero Git Integration</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\hgide290.bpl">Embarcadero Mercurial Integration</Excluded_Packages>
