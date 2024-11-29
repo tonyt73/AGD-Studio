@@ -4,6 +4,7 @@ object frmIDE: TfrmIDE
   Width = 980
   Height = 660
   Align = alClient
+  AutoSize = True
   Constraints.MinHeight = 600
   Constraints.MinWidth = 800
   Font.Charset = DEFAULT_CHARSET
@@ -15,28 +16,30 @@ object frmIDE: TfrmIDE
   TabOrder = 0
   object dsIDE: TLMDDockSite
     Left = 0
-    Top = 33
+    Top = 41
     Width = 980
-    Height = 627
+    Height = 619
     Manager = DockManager
     Align = alClient
     Constraints.MinHeight = 567
     Constraints.MinWidth = 800
     TabOrder = 0
+    ExplicitTop = 33
+    ExplicitHeight = 627
     Layout = {
       3C3F786D6C2076657273696F6E3D22312E30223F3E0D0A3C736974656C697374
       3E0D0A20203C73697465206470693D223936222069643D2253454C465F534954
       45223E0D0A202020203C7A6F6E65206B696E643D22484F525A223E0D0A202020
       2020203C7A6F6E65206B696E643D2256455254222073697A653D223735342220
       6473697A653D22302E373833373833373833373833373834223E0D0A20202020
-      202020203C7A6F6E65206B696E643D2254414253222073697A653D2234303522
-      206473697A653D22302E36363530323436333035343138373222206973737061
+      202020203C7A6F6E65206B696E643D2254414253222073697A653D2233393722
+      206473697A653D22302E36363035363537323337393336373722206973737061
       63653D2274727565223E0D0A202020202020202020203C7A6F6E65206B696E64
       3D2250414E454C222069643D224C4D44446F636B50616E656C32222076697369
       626C653D2266616C7365222F3E0D0A20202020202020203C2F7A6F6E653E0D0A
       20202020202020203C7A6F6E65206B696E643D22544142532220616374697665
-      7461623D2232222073697A653D2232303422206473697A653D22302E33333439
-      3735333639343538313238223E0D0A202020202020202020203C7A6F6E65206B
+      7461623D2232222073697A653D2232303422206473697A653D22302E33333934
+      3334323736323036333233223E0D0A202020202020202020203C7A6F6E65206B
       696E643D2250414E454C222069643D2264704D65737361676573222076697369
       626C653D2274727565222F3E0D0A202020202020202020203C7A6F6E65206B69
       6E643D2250414E454C222069643D226470456469746F724B6579732220766973
@@ -51,15 +54,15 @@ object frmIDE: TfrmIDE
       222073697A653D2232303822206473697A653D22302E32313632313632313632
       3136323136223E0D0A20202020202020203C7A6F6E65206B696E643D2250414E
       454C222069643D22647050726F6A656374222076697369626C653D2274727565
-      222073697A653D2233303322206473697A653D22302E34393737393038363839
+      222073697A653D2232393922206473697A653D22302E34393737393038363839
       32343839222F3E0D0A20202020202020203C7A6F6E65206B696E643D2250414E
       454C222069643D22647050726F70657274696573222076697369626C653D2274
-      727565222073697A653D2233303622206473697A653D22302E35303232303931
+      727565222073697A653D2233303222206473697A653D22302E35303232303931
       33313037353131222F3E0D0A2020202020203C2F7A6F6E653E0D0A202020203C
       2F7A6F6E653E0D0A20203C2F736974653E0D0A3C2F736974656C6973743E0D0A}
     object dpBuild: TLMDDockPanel
       Left = 6
-      Top = 417
+      Top = 409
       Width = 754
       Height = 183
       ParentBackground = False
@@ -149,7 +152,7 @@ object frmIDE: TfrmIDE
     end
     object dpEditorKeys: TLMDDockPanel
       Left = 6
-      Top = 417
+      Top = 409
       Width = 754
       Height = 183
       ParentBackground = False
@@ -178,7 +181,7 @@ object frmIDE: TfrmIDE
     end
     object dpMessages: TLMDDockPanel
       Left = 6
-      Top = 417
+      Top = 409
       Width = 754
       Height = 183
       ParentBackground = False
@@ -207,7 +210,7 @@ object frmIDE: TfrmIDE
       Left = 766
       Top = 6
       Width = 208
-      Height = 303
+      Height = 299
       Buttons = [pbPin, pbMaximize]
       ParentBackground = False
       TabOrder = 6
@@ -216,7 +219,7 @@ object frmIDE: TfrmIDE
         Left = 0
         Top = 21
         Width = 208
-        Height = 282
+        Height = 278
         Align = alClient
         BevelOuter = bvNone
         Padding.Left = 1
@@ -306,7 +309,7 @@ object frmIDE: TfrmIDE
           Left = 1
           Top = 27
           Width = 206
-          Height = 254
+          Height = 250
           Hint = ''
           PlusPosition = vaMiddle
           BorderColorWindow = clWindow
@@ -383,16 +386,16 @@ object frmIDE: TfrmIDE
     end
     object dpProperties: TLMDDockPanel
       Left = 766
-      Top = 315
+      Top = 311
       Width = 208
-      Height = 306
+      Height = 302
       Buttons = [pbPin, pbMaximize]
       ParentBackground = False
       TabOrder = 10
       Caption = 'PROPERTIES'
       object Splitter1: TSplitter
         Left = 0
-        Top = 263
+        Top = 259
         Width = 208
         Height = 3
         Cursor = crVSplit
@@ -407,7 +410,7 @@ object frmIDE: TfrmIDE
         Left = 0
         Top = 21
         Width = 208
-        Height = 242
+        Height = 238
         PropKinds = [pkProperties, pkReadOnly]
         SortType = stNone
         ArrangeKind = akByCategory
@@ -426,10 +429,11 @@ object frmIDE: TfrmIDE
         Constraints.MinWidth = 200
         TabOrder = 0
         OnClick = lmdPropertiesClick
+        ExplicitHeight = 242
       end
       object Panel2: TPanel
         Left = 0
-        Top = 266
+        Top = 262
         Width = 208
         Height = 40
         Align = alBottom
@@ -441,11 +445,12 @@ object frmIDE: TfrmIDE
         Padding.Bottom = 3
         ParentBackground = False
         TabOrder = 1
+        ExplicitTop = 266
         object lblPropertyInfo: TLabel
           Left = 3
           Top = 3
-          Width = 202
-          Height = 34
+          Width = 112
+          Height = 14
           Align = alClient
           Caption = 'Property information'
           Font.Charset = DEFAULT_CHARSET
@@ -456,14 +461,12 @@ object frmIDE: TfrmIDE
           ParentFont = False
           Transparent = True
           WordWrap = True
-          ExplicitWidth = 112
-          ExplicitHeight = 14
         end
       end
     end
     object dpSearchResults: TLMDDockPanel
       Left = 6
-      Top = 417
+      Top = 409
       Width = 754
       Height = 183
       ParentBackground = False
@@ -472,7 +475,7 @@ object frmIDE: TfrmIDE
     end
     object dpTodo: TLMDDockPanel
       Left = 6
-      Top = 417
+      Top = 409
       Width = 754
       Height = 183
       ParentBackground = False
@@ -483,7 +486,7 @@ object frmIDE: TfrmIDE
       Left = 6
       Top = 6
       Width = 754
-      Height = 405
+      Height = 397
       PanelVisible = False
       ParentBackground = False
       TabOrder = 4
@@ -494,19 +497,20 @@ object frmIDE: TfrmIDE
     Left = 0
     Top = 0
     Width = 980
-    Height = 33
+    Height = 41
     Align = alTop
+    AutoSize = True
     BevelOuter = bvNone
     TabOrder = 1
     object tbrMain: TToolBar
       Left = 0
       Top = 0
-      Width = 384
-      Height = 33
+      Width = 472
+      Height = 41
       Align = alLeft
       AutoSize = True
-      ButtonHeight = 32
-      ButtonWidth = 32
+      ButtonHeight = 40
+      ButtonWidth = 40
       EdgeInner = esNone
       EdgeOuter = esNone
       Flat = False
@@ -523,14 +527,14 @@ object frmIDE: TfrmIDE
         ShowHint = True
       end
       object ToolButton3: TToolButton
-        Left = 32
+        Left = 40
         Top = 0
         Action = actFileProjectSave
         ParentShowHint = False
         ShowHint = True
       end
       object ToolButton1: TToolButton
-        Left = 64
+        Left = 80
         Top = 0
         Width = 8
         Caption = 'ToolButton1'
@@ -539,21 +543,21 @@ object frmIDE: TfrmIDE
         Style = tbsSeparator
       end
       object ToolButton4: TToolButton
-        Left = 72
+        Left = 88
         Top = 0
         Action = actEditUndo
         ParentShowHint = False
         ShowHint = True
       end
       object ToolButton5: TToolButton
-        Left = 104
+        Left = 128
         Top = 0
         Action = actEditRedo
         ParentShowHint = False
         ShowHint = True
       end
       object ToolButton6: TToolButton
-        Left = 136
+        Left = 168
         Top = 0
         Width = 8
         Caption = 'ToolButton6'
@@ -562,28 +566,28 @@ object frmIDE: TfrmIDE
         Style = tbsSeparator
       end
       object btnEditCopy: TToolButton
-        Left = 144
+        Left = 176
         Top = 0
         Action = actEditCopy
         ParentShowHint = False
         ShowHint = True
       end
       object btnEditCut: TToolButton
-        Left = 176
+        Left = 216
         Top = 0
         Action = actEditCut
         ParentShowHint = False
         ShowHint = True
       end
       object btnEditPaste: TToolButton
-        Left = 208
+        Left = 256
         Top = 0
         Action = actEditPaste
         ParentShowHint = False
         ShowHint = True
       end
       object ToolButton11: TToolButton
-        Left = 240
+        Left = 296
         Top = 0
         Width = 8
         Caption = 'ToolButton11'
@@ -592,28 +596,28 @@ object frmIDE: TfrmIDE
         Style = tbsSeparator
       end
       object ToolButton10: TToolButton
-        Left = 248
+        Left = 304
         Top = 0
         Action = actEditZoomIn
         ParentShowHint = False
         ShowHint = True
       end
       object ToolButton12: TToolButton
-        Left = 280
+        Left = 344
         Top = 0
         Action = actEditZoomOut
         ParentShowHint = False
         ShowHint = True
       end
       object ToolButton13: TToolButton
-        Left = 312
+        Left = 384
         Top = 0
         Action = actEditZoomReset
         ParentShowHint = False
         ShowHint = True
       end
       object ToolButton2: TToolButton
-        Left = 344
+        Left = 424
         Top = 0
         Width = 8
         Caption = 'ToolButton2'
@@ -621,7 +625,7 @@ object frmIDE: TfrmIDE
         Style = tbsSeparator
       end
       object btnBuildRun: TToolButton
-        Left = 352
+        Left = 432
         Top = 0
         Action = actGameRun
         ParentShowHint = False
@@ -629,14 +633,14 @@ object frmIDE: TfrmIDE
       end
     end
     object tbrSettings: TToolBar
-      Left = 908
+      Left = 892
       Top = 0
-      Width = 72
-      Height = 33
+      Width = 88
+      Height = 41
       Align = alRight
       AutoSize = True
-      ButtonHeight = 32
-      ButtonWidth = 32
+      ButtonHeight = 40
+      ButtonWidth = 40
       Images = vilToolbar
       TabOrder = 1
       object btnEditorHelp: TToolButton
@@ -648,7 +652,7 @@ object frmIDE: TfrmIDE
         Visible = False
       end
       object ToolButton14: TToolButton
-        Left = 32
+        Left = 40
         Top = 0
         Width = 8
         Caption = 'ToolButton14'
@@ -658,7 +662,7 @@ object frmIDE: TfrmIDE
         Visible = False
       end
       object btnSettings: TToolButton
-        Left = 40
+        Left = 48
         Top = 0
         Hint = 'Application Settings'
         Action = actSettings
@@ -921,6 +925,7 @@ object frmIDE: TfrmIDE
     end
   end
   object mnuMain: TMainMenu
+    Images = vilToolbar
     Left = 28
     Top = 88
     object mnuFile: TMenuItem
@@ -3774,6 +3779,8 @@ object frmIDE: TfrmIDE
         Name = 'cog'
       end>
     ImageCollection = icToolbar
+    Width = 24
+    Height = 24
     Left = 360
     Top = 248
   end

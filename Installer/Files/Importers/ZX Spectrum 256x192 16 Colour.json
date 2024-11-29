@@ -5,39 +5,39 @@
 		"Match": "definewindow <number:window.y> <number:window.x> <number:window.height> <number:window.width>"
 	},
 	"JumpTable": {
-		"Match": "definejump <number:jump.table[22]>"
+		"Match": "definejump <number:table[22]>"
 	},
 	"ControlSet": {
 		"Match": "definecontrols <ascii,number:key.up> <ascii,number:key.down> <ascii,number:key.left> <ascii,number:key.right> <ascii,number:key.fire1> <ascii,number:key.fire2> <ascii,number:key.fire3> <ascii,number:key.option1> <ascii,number:key.option2> <ascii,number:key.option3> <ascii,number:key.option4>",
 	},
 	"Objects": {
-		"Match": "defineobject <number:object.colour> <number:object.room> <number:object.x> <number:object.y> <number:object.imagedata[32]>"
+		"Match": "defineobject <number:colour> <number:room> <number:y> <number:x> <number:image[32]>"
 	},
 	"Sprites": {
-		"Match": "definesprite <number:sprite.frames> <number:sprite.image[32,sprite.frames]>"
+		"Match": "definesprite <number:frames> <number:image[32,var=frames]>"
 	},
 	"Blocks": {
-		"Match": "defineblock <word:block.type> <number:block.image[9]>"
+		"Match": "defineblock <word:type> <number:image[9]>"
 	},
 	"Font": {
-		"Match": "definefont <number:font.images[8,96]>"
+		"Match": "definefont <number:characters[8,96]>"
 	},
 	"Palette": {
-		"Match": "definepalette <number:palette.table[4,16]>"
+		"Match": "definepalette <number:table[4,16]>"
 	},
 	"Events": {
-		"Match": "event <word:event.name> <line:event.lines[-1]>"
+		"Match": "event <word:name> <line:lines[-1]>"
 	},
 	"MessageList": {
 		"Match": "definemessages <string:message[-1]>"
 	},
 	"Screens" : {
-		"Match": "definescreen <number:screen[window.width,window.height]>]"
+		"Match": "definescreen <number:screen[var=window.width,var=window.height]>"
 	},
 	"SpritePosition" : {
-		"Match": "spriteposition <number:screen{screens}.spriteposition.type[1]> <number:screen{screens}.spriteposition.index[1]> <number:screen{screens}.spriteposition.y[1]> <number:screen{screens}.spritepositions.x[1]>"
+		"Match": "spriteposition <number:screen{screens}.type> <number:screen{screens}.index> <number:screen{screens}.y> <number:screen{screens}.x>"
 	},
 	"Map": {
-		"Match": "map width <number:map.width> startscreen <number:map.startscreen> <number:map.data[map.width,-1]> endmap"
+		"Match": "map width <number:width> startscreen <number:startscreen> <number:table[var=width,-1]> endmap"
 	}
 }

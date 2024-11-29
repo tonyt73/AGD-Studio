@@ -7,6 +7,7 @@
 #include <Vcl.Themes.hpp>
 #include <Vcl.Styles.hpp>
 #include <Xml.Win.msxmldom.hpp>
+//---------------------------------------------------------------------------
 // System
 #include <System.hpp>
 #include <System.Classes.hpp>
@@ -19,7 +20,6 @@
 #include <System.JSON.Types.hpp>
 #include <System.JSON.Readers.hpp>
 #include <System.JSON.Writers.hpp>
-
 //---------------------------------------------------------------------------
 // STL
 #include <algorithm>

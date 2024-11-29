@@ -71,8 +71,8 @@ Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64\rtl290.bpl"; DestD
 Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64\vcl290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64\vclactnband290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64\vclimg290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
-;Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64\vclsmp290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
-;Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64\vclwinx290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64\vclsmp290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64\vclwinx290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64\vclx290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64\xmlrtl290.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\win64\lmdrtcore290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
@@ -82,7 +82,6 @@ Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\win64\lmdrtelpro2
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\win64\lmdrtinspector290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\win64\lmdrtl290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\win64\lmdrtlog290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
-;Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\win64\lmdrtprint290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\win64\lmdrtrtlx290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\win64\lmdrtsyntax290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\win64\lmdrtshell290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
@@ -98,8 +97,8 @@ Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin\rtl290.bpl"; DestDir
 Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin\vcl290.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin\vclactnband290.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin\vclimg290.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
-;Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin\vclsmp290.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
-;Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin\vclwinx290.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin\vclsmp290.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin\vclwinx290.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin\vclx290.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin\xmlrtl290.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\lmdrtcore290.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
@@ -109,7 +108,6 @@ Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\lmdrtelpro290.bpl
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\lmdrtinspector290.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\lmdrtl290.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\lmdrtlog290.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
-;Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\lmdrtprint290.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\lmdrtrtlx290.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\lmdrtsyntax290.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\lmdrtshell290.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
@@ -128,6 +126,7 @@ Source: "Files\Compilers\ZX Spectrum\Spin\*.*"; DestDir: "{commondocs}\AGD Studi
 Source: "Files\Fonts\*.TTF"; DestDir: "{commonfonts}"; FontInstall: "Comfortaa (Open Type)"; Flags: onlyifdoesntexist uninsneveruninstall fontisnttruetype
 Source: "Files\Graphics Modes\*.json"; DestDir: "{commondocs}\AGD Studio\Graphics Modes" 
 Source: "Files\Images\*.png"; DestDir: "{commondocs}\AGD Studio\Images" 
+Source: "Files\Importers\*.*"; DestDir: "{commondocs}\AGD Studio\Importers" 
 Source: "Files\Keyboards\*.png"; DestDir: "{commondocs}\AGD Studio\Keyboards" 
 Source: "Files\Machines\*.json"; DestDir: "{commondocs}\AGD Studio\Machines" 
 Source: "Files\Palettes\*.json"; DestDir: "{commondocs}\AGD Studio\Palettes" 

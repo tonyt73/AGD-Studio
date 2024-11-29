@@ -38,6 +38,8 @@ __fastcall Settings::Settings()
     m_PropertyMap["MainWindow.Size.Width"    ] = &m_WindowSize.Width;
     m_PropertyMap["MainWindow.Size.Height"   ] = &m_WindowSize.Height;
     m_PropertyMap["MainWindow.WindowState"   ] = &m_WindowState;
+    m_PropertyMap["CodeEditor.Font.Name"     ] = &m_CodeEditorFontName;
+    m_PropertyMap["CodeEditor.Font.Height"   ] = &m_CodeEditorFontHeight;
 
     Load(Services::File::Combine(Services::Folders::Common, "Settings.json"));
 }
@@ -85,6 +87,7 @@ void __fastcall Settings::SetString(int index, String value)
         case 1: m_LastProject = value; break;
         case 2: m_Developer = value; break;
         case 3: m_DefaultMachine = value; break;
+        case 4: m_CodeEditorFontName = value; break;
     }
 }
 //---------------------------------------------------------------------------
@@ -119,6 +122,12 @@ void __fastcall Settings::Save()
             Write("Height", WindowSize.Height);
         Pop(); // }
         Write("WindowState", (int)WindowState);
+    Pop(); // }
+    Push("CodeEditor"); // {
+        Push("Font"); // {
+            Write("Name", m_CodeEditorFontName);
+            Write("Height", m_CodeEditorFontHeight);
+        Pop(); // }
     Pop(); // }
     // }
     Close();

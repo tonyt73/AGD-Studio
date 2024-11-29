@@ -4,7 +4,7 @@
 
 @rem Build Executables
 
-@call "C:\Program Files (x86)\Embarcadero\Studio\22.0\bin\rsvars.bat"
+@call "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin\rsvars.bat"
 
 chdir ..\Source
 msbuild "AGD Studio.cbproj" /t:build /p:config="Release" /p:platform=Win64

@@ -5,7 +5,7 @@
     "Project": {
         "Developer": "Anonymous",
         "DefaultMachine": "ZX Spectrum 256x192 16 Colour",
-        "LastLoaded": "",
+        "LastLoaded": "Foggy",
         "LoadLastOnStartup": false
     },
     "Welcome": {
@@ -25,6 +25,6 @@
             "Width": 1024,
             "Height": 768
         },
-        "WindowState": 0
+        "WindowState": 2
     }
 }
