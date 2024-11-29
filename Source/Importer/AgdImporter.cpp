@@ -53,8 +53,8 @@ bool AgdImporter::Convert(const String& file)
     if (m_Parser.Parse(file, theDocumentManager.ProjectConfig()->MachineConfiguration().Name)) {
         auto name = Services::File::NameWithoutExtension(file);
         auto end = TDateTime::CurrentTime();
-        auto ms = (end - start).FormatString("zzz");
-        InformationMessage("[AGD Importer] Parsed '" + name + "' in " + ms + "ms");
+        auto ms = end - start;
+        InformationMessage("[AGD Importer] Parsed '" + name + "' in " + IntToStr((int)ms) + "ms");
         start = TDateTime::CurrentTime();
         // convert import contents to AGD Studio documents
         result  = UpdateWindow();
@@ -68,8 +68,8 @@ bool AgdImporter::Convert(const String& file)
         result &= AddEvents();
         result &= AddMap();
         end = TDateTime::CurrentTime();
-        ms = (end - start).FormatString("zzzz");
-        InformationMessage("[AGD Importer] Parsed content conversion to documents took " + ms + "ms");
+        ms = end - start;
+        InformationMessage("[AGD Importer] Parsed content conversion to documents took " + IntToStr((int)ms) + "ms");
     }
     if (result) {
         InformationMessage("[AGD Importer] Import processed completed.");
@@ -121,7 +121,7 @@ bool AgdImporter::UpdateJumpTable()
     if (m_Parser.hasVariable("jumptable")) {
         auto doc = dynamic_cast<Project::JumpTableDocument*>(theDocumentManager.Add("Jump", "Table", "JumpTable"));
         for (int step = 0; step < doc->Count; step++) {
-            doc->SetStep(step, GetNum("jumptable", "jump.table", step));
+            doc->SetStep(step, GetNum("jumptable", "table", step));
         }
     }
     return true;
@@ -186,19 +186,19 @@ bool AgdImporter::AddImages(const String& name, const String& imgType)
             }
             if (imgType == "Tile") {
                 // process block type
-                dynamic_cast<Project::TileDocument*>(doc)->SetType(m_Parser.Variables[varName]["block.type"].front());
+                dynamic_cast<Project::TileDocument*>(doc)->SetType(m_Parser.Variables[varName]["type"].front());
             } else if (imgType == "Object") {
                 // process room info
                 auto objDoc = dynamic_cast<Project::ObjectDocument*>(doc);
-                objDoc->RoomIndex = StrToInt(m_Parser.Variables[varName]["object.room"].front());
-                objDoc->Position = TPoint(StrToInt(m_Parser.Variables[varName]["object.x"].front()), StrToInt(m_Parser.Variables[varName]["object.y"].front()));
-                if (m_Parser.Variables[varName].count("object.colour") == 1) {
+                objDoc->RoomIndex = StrToInt(m_Parser.Variables[varName]["room"].front());
+                objDoc->Position = TPoint(StrToInt(m_Parser.Variables[varName]["x"].front()), StrToInt(m_Parser.Variables[varName]["y"].front()));
+                if (m_Parser.Variables[varName].count("colour") == 1) {
                     // change the colour of the object
                     if (gm->TypeOfBuffer == Visuals::BufferType::btAttribute) {
                         String colour = "";
                         for (int x = 0; x < objDoc->Width / (8 / bpp); x++) {
                             for (int y = 0; y < objDoc->Height / (8 / bpp); y++) {
-                                colour += IntToHex(StrToInt(m_Parser.Variables[varName]["object.colour"].front()), 2);
+                                colour += IntToHex(StrToInt(m_Parser.Variables[varName]["colour"].front()), 2);
                             }
                         }
                         frame = objDoc->Frame[0];
@@ -241,13 +241,13 @@ bool AgdImporter::AddEvents()
                 // the event that matches this section
                 for (auto event = 1; event <= vars; event++) {
                     auto varName = "events" + m_Parser.PadNum(event);
-                    auto eventName = m_Parser.Variables[varName]["event.name"].front().LowerCase();
+                    auto eventName = m_Parser.Variables[varName]["name"].front().LowerCase();
                     if (section.Pos(" " + eventName) > 0) {
                         // add the event lines into the event document
                         auto doc = dynamic_cast<Project::EventDocument*>(theDocumentManager.Get("Text", "Event", definition.Filename));
                         doc->Add("\r\n");
                         doc->Add("\r\n");
-                        auto lines = m_Parser.Variables[varName]["event.lines"];
+                        auto lines = m_Parser.Variables[varName]["lines"];
                         for (auto line : lines) {
                             doc->Add(line + "\r\n");
                         }
@@ -267,18 +267,18 @@ bool AgdImporter::AddMap()
     // upset an empty map
     std::map<int, TPoint> mapIndexToPt;
     // read in the map indexes
-    int mapWidth = StrToIntDef(m_Parser.Variables["map"]["map.width"].front(), -1);
-    int mapSize = m_Parser.Variables["map"]["map.data"].size();
+    int mapWidth = StrToIntDef(m_Parser.Variables["map"]["width"].front(), -1);
+    int mapSize = m_Parser.Variables["map"]["table"].size();
     int mapHeight = mapSize / mapWidth;
     TPoint scrPos;
-    auto ssi = StrToIntDef(m_Parser.Variables["map"]["map.startscreen"].front(), -1);
+    auto ssi = StrToIntDef(m_Parser.Variables["map"]["startscreen"].front(), -1);
     auto numScreens = 0;
     bool result = false;
     if (0 < mapSize && mapSize <= Project::g_MaxRooms) {
         result = true;
         // set up the map indexes
         int mi = 0;
-        for (auto value : m_Parser.Variables["map"]["map.data"]) {
+        for (auto value : m_Parser.Variables["map"]["table"]) {
             auto si = StrToIntDef(value, -1);
             if (si != -1 && si != Project::g_EmptyRoom) {
                 auto sx = mi % mapWidth;
