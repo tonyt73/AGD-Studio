@@ -32,6 +32,9 @@
 #include "Messaging/Messaging.h"
 #include "Project/Documents/Document.h"
 #include "fEditor.h"
+#include <Vcl.VirtualImageList.hpp>
+#include <Vcl.BaseImageCollection.hpp>
+#include <Vcl.ImageCollection.hpp>
 //---------------------------------------------------------------------------
 class TfrmEditorCode : public TfrmEditor
 {
@@ -68,9 +71,7 @@ __published:    // IDE-managed Components
     TAction *actFoldTopsInCurrent;
     TAction *actFont;
     TAction *actGoToLine;
-    TAction *Action1;
-    TAction *actKeybindings;
-    TAction *actNoWrap;
+    TAction *actVariableEditor;
     TAction *actPaste;
     TAction *actRefreshSchemes;
     TAction *actReplace;
@@ -78,36 +79,33 @@ __published:    // IDE-managed Components
     TAction *actSearch;
     TAction *actSearchNext;
     TAction *actSearchPrevious;
-    TAction *actToggleAutoIndent;
-    TAction *actToggleCursorBound;
-    TAction *actToggleShowLineEnds;
-    TAction *actToggleShowRuler;
-    TAction *actToggleShowSpaces;
-    TAction *actToggleShowTabs;
-    TAction *actToggleUseTabs;
+    TAction *actToggleLineWrap;
     TAction *actUnfoldAll;
     TAction *actUnfoldAllInCurrent;
     TAction *actUnfoldTops;
     TAction *actUnfoldTopsInCurrent;
-    TAction *actWrapToRuler;
-    TAction *actWrapToWindow;
-    TAction *actZoomIn;
-    TAction *actZoomOut;
-    TAction *actZoomReset;
     TActionList *Actions;
     TEditUndo *actRedo;
     TEditUndo *actUndo;
     TFontDialog *FontDialog;
     TLMDEditDocument *lmdDocument;
     TLMDEditView *evEditor;
-    TLMDToolBar *LMDToolBar1;
     TStatusBar *sbStatus;
+    TVirtualImageList *vilToolbar;
+    TImageCollection *icToolbar;
+    TAction *actFormat;
+    TAction *actZoomIn;
+    TAction *actZoomOut;
+    TAction *actZoomReset;
+    TToolBar *ToolBar1;
+    TToolButton *tbrFormatCode;
+    TToolButton *ToolButton1;
+    TToolButton *btnChangeFont;
+    TToolButton *ToolButton5;
     void __fastcall actCopyExecute(TObject *Sender);
     void __fastcall actCutExecute(TObject *Sender);
     void __fastcall actFontExecute(TObject *Sender);
     void __fastcall actGoToLineExecute(TObject *Sender);
-    void __fastcall actKeybindingsExecute(TObject *Sender);
-    void __fastcall actNoWrapExecute(TObject *Sender);
     void __fastcall actPasteExecute(TObject *Sender);
     void __fastcall actRedoExecute(TObject *Sender);
     void __fastcall actReplaceExecute(TObject *Sender);
@@ -115,10 +113,6 @@ __published:    // IDE-managed Components
     void __fastcall actSearchExecute(TObject *Sender);
     void __fastcall actSearchNextExecute(TObject *Sender);
     void __fastcall actSearchPreviousExecute(TObject *Sender);
-    void __fastcall actToggleAutoIndentExecute(TObject *Sender);
-    void __fastcall actToggleCursorBoundExecute(TObject *Sender);
-    void __fastcall actToggleShowRulerExecute(TObject *Sender);
-    void __fastcall actToggleShowSpacesExecute(TObject *Sender);
     void __fastcall actUndoExecute(TObject *Sender);
     void __fastcall actUndoUpdate(TObject *Sender);
     void __fastcall actZoomInExecute(TObject *Sender);
@@ -126,12 +120,17 @@ __published:    // IDE-managed Components
     void __fastcall actZoomResetExecute(TObject *Sender);
     void __fastcall evEditorEnter(TObject *Sender);
     void __fastcall evEditorStatusChanged(TLMDCustomEditView *AView, TLMDViewStatusChanges AChanges);
+    void __fastcall actFormatExecute(TObject *Sender);
+    void __fastcall evEditorKeyUp(TObject *Sender, WORD &Key, TShiftState Shift);
+    void __fastcall FontDialogApply(TObject *Sender, HWND Wnd);
 
 private:    // User declarations
     TLMDEditView*               m_ActiveEdit;
     TLMDEditSearchDlgOptions    m_SearchOptions;
     std::map<String, TAction*>  m_ActionMap;
 
+    void            __fastcall  OnChangeString(const OnChange<String>& event);
+    void            __fastcall  OnChangeBool(const OnChange<bool>& event);
     String          __fastcall  GetSyntaxScByExt(const String& extension);
     void            __fastcall  OnEvent(const Event& event);
 

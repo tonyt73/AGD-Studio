@@ -27,8 +27,8 @@ private:
     String                      m_LastProject;
     String                      m_Developer;
     String                      m_DefaultMachine;
-    String                      m_CodeEditorFont;
-    bool                        m_CodeEditorLineWrap;
+    String                      m_CodeEditorFontName;
+    int                         m_CodeEditorFontHeight;
 
     void            __fastcall  SetActiveStyle(const String& style);
     void            __fastcall  SetWelcomePosition(const TPoint& position);
@@ -50,12 +50,12 @@ public:
     __property  bool            WelcomeSkipOnStartup    = { read = m_WelcomeSkipOnStartup   , write = SetBool           , index = 0 };
     __property  bool            WelcomeSkipOnClose      = { read = m_WelcomeSkipOnClose     , write = SetBool           , index = 1 };
     __property  bool            LoadLastProject         = { read = m_LoadLastProject        , write = SetBool           , index = 2 };
-    __property  bool            CodeEditorLineWrap      = { read = m_CodeEditorLineWrap     , write = SetBool           , index = 3 };
     __property  String          ActiveStyle             = { read = m_ActiveStyle            , write = SetString         , index = 0 };
     __property  String          LastProject             = { read = m_LastProject            , write = SetString         , index = 1 };
     __property  String          Developer               = { read = m_Developer              , write = SetString         , index = 2 };
     __property  String          DefaultMachine          = { read = m_DefaultMachine         , write = SetString         , index = 3 };
-    __property  String          CodeEditorFont          = { read = m_CodeEditorFont         , write = SetString         , index = 4 };
+    __property  String          CodeEditorFontName      = { read = m_CodeEditorFontName     , write = SetString         , index = 4 };
+    __property  String          CodeEditorFontHeight    = { read = m_CodeEditorFontHeight   , write = m_CodeEditorFontHeight        };
 };
 //---------------------------------------------------------------------------
 } // Project namespace
