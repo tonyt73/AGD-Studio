@@ -440,4 +440,9 @@ void __fastcall TfrmEditorCode::evEditorKeyUp(TObject *Sender, WORD &Key, TShift
     }
 }
 //---------------------------------------------------------------------------
+void __fastcall TfrmEditorCode::evEditorNotFound(TObject *Sender, TLMDEditNotFoundAction &Action)
+{
+    Action = saGoStartEnd;
+}
+//---------------------------------------------------------------------------
 

@@ -34,6 +34,7 @@ inherited frmEditorCode: TfrmEditorCode
     CustomKeyBindings = <>
     CompletionSettings.ItemHeight = 13
     OnStatusChanged = evEditorStatusChanged
+    OnNotFound = evEditorNotFound
     OnKeyUp = evEditorKeyUp
     OnEnter = evEditorEnter
     GutterBarsEmpty = False

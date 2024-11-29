@@ -123,6 +123,7 @@ __published:    // IDE-managed Components
     void __fastcall actFormatExecute(TObject *Sender);
     void __fastcall evEditorKeyUp(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall FontDialogApply(TObject *Sender, HWND Wnd);
+    void __fastcall evEditorNotFound(TObject *Sender, TLMDEditNotFoundAction &Action);
 
 private:    // User declarations
     TLMDEditView*               m_ActiveEdit;
