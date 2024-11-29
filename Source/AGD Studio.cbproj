@@ -70,6 +70,12 @@
         <Cfg_2>true</Cfg_2>
         <Base>true</Base>
     </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64x' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win64x)'!=''">
+        <Cfg_2_Win64x>true</Cfg_2_Win64x>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
         <_TCHARMapping>wchar_t</_TCHARMapping>
         <AppEnableHighDPI>true</AppEnableHighDPI>
@@ -118,10 +124,10 @@
         <UWP_CppLogo44>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_44.png</UWP_CppLogo44>
         <VerInfo_Build>11738</VerInfo_Build>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=0.15.0.11738;InternalName=AGD Studio;LegalCopyright=2022-2024 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=0.16.0;Comments=Programmed by Tony Thompson;SpecialBuild=BETA</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=0.15.1.11738;InternalName=AGD Studio;LegalCopyright=2022-2024 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=0.16.1;Comments=Programmed by Tony Thompson;SpecialBuild=BETA</VerInfo_Keys>
         <VerInfo_Locale>3081</VerInfo_Locale>
         <VerInfo_MajorVer>0</VerInfo_MajorVer>
-        <VerInfo_MinorVer>14</VerInfo_MinorVer>
+        <VerInfo_MinorVer>15</VerInfo_MinorVer>
         <VerInfo_PreRelease>true</VerInfo_PreRelease>
         <VerInfo_Release>1</VerInfo_Release>
         <VerInfo_Special>true</VerInfo_Special>
@@ -146,10 +152,10 @@
     <PropertyGroup Condition="'$(Base_Win64x)'!=''">
         <DCC_Namespace>Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
         <BT_BuildType>Debug</BT_BuildType>
-        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.1.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.1.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.1.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.1.1.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_MajorVer>1</VerInfo_MajorVer>
-        <VerInfo_MinorVer>0</VerInfo_MinorVer>
+        <VerInfo_MinorVer>1</VerInfo_MinorVer>
         <VerInfo_Release>0</VerInfo_Release>
         <VerInfo_Build>0</VerInfo_Build>
         <PackageImports>lmdrtcore;lmdrtdocking;lmdrtelcore;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtrtlx;lmdrtshell;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;rtl;vcl;vclactnband;vclimg;VclSmp;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
@@ -183,8 +189,6 @@
         <ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)$(CC_SUFFIX)\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;VclSmp.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;xmlrtl.bpi;lmdrtshell.bpi</LinkPackageImports>
         <LinkPackageStatics>lmdrtprint.lib;bindengine.lib;DbxCommonDriver.lib;dbrtl.lib</LinkPackageStatics>
-        <VerInfo_MinorVer>15</VerInfo_MinorVer>
-        <VerInfo_Release>0</VerInfo_Release>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppEnableHighDPI>true</AppEnableHighDPI>
@@ -205,16 +209,28 @@
         <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;xmlrtl.bpi;lmdrtshell.bpi</LinkPackageImports>
         <LinkPackageStatics>VclSmp.lib;lmdrtprint.lib;bindengine.lib;DbxCommonDriver.lib;dbrtl.lib</LinkPackageStatics>
         <Icon_MainIcon>icon.ico</Icon_MainIcon>
-        <VerInfo_Build>5</VerInfo_Build>
-        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=AGD Studio;FileVersion=0.15.0.5;InternalName=AGD Studio;LegalCopyright=2022-2024 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.AGD Studio;ProductName=AGD Studio;ProductVersion=0.16.0;Comments=Programmed by Tony Thompson;SpecialBuild=BETA</VerInfo_Keys>
+        <VerInfo_Build>8</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=AGD Studio;FileVersion=0.15.0.8;InternalName=AGD Studio;LegalCopyright=2022-2024 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.AGD Studio;ProductName=AGD Studio;ProductVersion=0.16.1;Comments=Programmed by Tony Thompson;SpecialBuild=BETA</VerInfo_Keys>
+        <VerInfo_Release>0</VerInfo_Release>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
         <AppEnableHighDPI>true</AppEnableHighDPI>
         <BCC_OptimizeMaximum>true</BCC_OptimizeMaximum>
         <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
         <BCC_EnableLSPIndexing>false</BCC_EnableLSPIndexing>
-        <VerInfo_Build>5</VerInfo_Build>
-        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=AGD Studio;FileVersion=0.15.0.5;InternalName=AGD Studio;LegalCopyright=2022-2024 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.AGD Studio;ProductName=AGD Studio;ProductVersion=0.16.0;Comments=Programmed by Tony Thompson;SpecialBuild=BETA</VerInfo_Keys>
+        <VerInfo_Build>8</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=AGD Studio;FileVersion=0.15.0.8;InternalName=AGD Studio;LegalCopyright=2022-2024 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.AGD Studio;ProductName=AGD Studio;ProductVersion=0.16.1;Comments=Programmed by Tony Thompson;SpecialBuild=BETA</VerInfo_Keys>
+        <VerInfo_Release>0</VerInfo_Release>
+        <Icon_MainIcon>icon.ico</Icon_MainIcon>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win64x)'!=''">
+        <VerInfo_MajorVer>1</VerInfo_MajorVer>
+        <VerInfo_MinorVer>1</VerInfo_MinorVer>
+        <VerInfo_Release>0</VerInfo_Release>
+        <VerInfo_Build>0</VerInfo_Build>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.1.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.1.1.0;Comments=</VerInfo_Keys>
+        <Icon_MainIcon>icon.ico</Icon_MainIcon>
     </PropertyGroup>
     <ItemGroup>
         <CppCompile Include="AGD Studio.cpp">

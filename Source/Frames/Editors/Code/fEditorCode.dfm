@@ -850,7 +850,9 @@ inherited frmEditorCode: TfrmEditorCode
     Font.Height = -12
     Font.Name = 'Roboto'
     Font.Style = []
-    Options = [fdFixedPitchOnly, fdApplyButton]
+    MinFontSize = 10
+    MaxFontSize = 24
+    Options = [fdAnsiOnly, fdTrueTypeOnly, fdFixedPitchOnly, fdForceFontExist, fdNoOEMFonts, fdNoSimulations, fdNoVectorFonts, fdLimitSize, fdScalableOnly, fdApplyButton]
     OnApply = FontDialogApply
     Left = 176
     Top = 50
