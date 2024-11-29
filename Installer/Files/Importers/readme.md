@@ -84,7 +84,7 @@ The match pattern after the initial section name, is a set of value matches defi
        - Captures all other number values in a group of `window.width`.
     - `endmap` captures the `ENDMAP` word last.
     - Parsing is complete.
-- `spriteposition <number:screen{screens}.spriteposition.type> <number:screen{screens}.spriteposition.index> <number:screen{screens}.spriteposition.y> <number:screen{screens}.spritepositions.x>`
+- `spriteposition <number:screen{screens}.type> <number:screen{screens}.index> <number:screen{screens}.y> <number:screen{screens}.x>`
 	- This one is special in that it uses a value from a previous section capture to assign names for internal variables, using the `{screen}` attribute.
 	- `{screen}` references the count of `DEFINESCREENS` captured so far.
 	  - `{screens}` actually references the import matcher name **"Screens":**
@@ -102,13 +102,13 @@ The match pattern after the initial section name, is a set of value matches defi
 	  - Remove any keys not required. ie. The Amstrad CPC does not have a 3rd fire button (key.fire3)
    - `Objects` 
 	 - Remove `<number:object.colour>` if your machine is not attribute based.
-	 - Change `<number:object.imagedata[32]>` to the number of bytes that define an object bitmap.
+	 - Change `<number:imagedata[32]>` to the number of bytes that define an object bitmap.
    - `Sprites`
-     - Change `<number:sprite.image[32,sprite.frames]>` to the number of bytes that define a sprite bitmap.
+     - Change `<number:image[32,sprite.frames]>` to the number of bytes that define a sprite bitmap.
    - `Blocks`
-	 - Change `<number:block.image[9]>` to the number of bytes that define a block bitmap.
+	 - Change `<number:image[9]>` to the number of bytes that define a block bitmap.
    - `Font`
-     - Change `<number:font.images[8,96]>` to the number of bytes that define a full character set.
+     - Change `<number:characters[8,96]>` to the number of bytes that define a full character set.
 	 - Most likely you'll only need to change the `8` to the width of your character bitmap.
    - `Palette`
      - Change `<number:palette.table[4,16]>` to size of your graphics palette.
