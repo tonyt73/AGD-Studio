@@ -1073,7 +1073,7 @@ void __fastcall TileEditor::SelectRoom(TSize room)
 {
     m_SelectedRoom = room;
     UnselectAll(false);
-    ::Messaging::Bus::Publish<RoomSelected>(RoomSelected(room));
+    Bus::Publish<RoomSelected>(RoomSelected(room));
     UpdateMap();
 }
 //---------------------------------------------------------------------------

@@ -364,7 +364,7 @@ void __fastcall TfrmEditorMap::OnStartRoomChanged(const StartRoomChanged& event)
     {
         m_Workspace->StartRoom = event.Room;
         m_RoomSelector->StartRoom = event.Room;
-        ::Messaging::Bus::Publish<Event>(Event("update.properties"));
+        Bus::Publish<Event>(Event("update.properties"));
     }
 }
 //---------------------------------------------------------------------------

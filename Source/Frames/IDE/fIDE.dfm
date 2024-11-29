@@ -227,7 +227,6 @@ object frmIDE: TfrmIDE
         Padding.Right = 1
         Padding.Bottom = 1
         TabOrder = 0
-        ExplicitHeight = 282
         object tbrProject: TToolBar
           Left = 1
           Top = 1
@@ -382,7 +381,6 @@ object frmIDE: TfrmIDE
           FixedBottomRowNum = 0
           FixedColNum = 1
           GutterWidth = 0
-          ExplicitHeight = 254
         end
       end
     end
@@ -451,8 +449,8 @@ object frmIDE: TfrmIDE
         object lblPropertyInfo: TLabel
           Left = 3
           Top = 3
-          Width = 202
-          Height = 34
+          Width = 112
+          Height = 14
           Align = alClient
           Caption = 'Property information'
           Font.Charset = DEFAULT_CHARSET
@@ -463,8 +461,6 @@ object frmIDE: TfrmIDE
           ParentFont = False
           Transparent = True
           WordWrap = True
-          ExplicitWidth = 112
-          ExplicitHeight = 14
         end
       end
     end
@@ -523,7 +519,6 @@ object frmIDE: TfrmIDE
       Transparent = False
       StyleElements = [seFont, seClient]
       Wrapable = False
-      ExplicitHeight = 33
       object ToolButton15: TToolButton
         Left = 0
         Top = 0
@@ -648,7 +643,6 @@ object frmIDE: TfrmIDE
       ButtonWidth = 40
       Images = vilToolbar
       TabOrder = 1
-      ExplicitLeft = 908
       object btnEditorHelp: TToolButton
         Left = 0
         Top = 0
