@@ -7,7 +7,7 @@
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorMusic::TfrmEditorMusic(TComponent* Owner)
-: TfrmEditor(Owner)
+: TfrmEditor(Owner, "Music Editor")
 {
 }
 //---------------------------------------------------------------------------

@@ -39,8 +39,30 @@ const String SCHEMES_SYN[SCHEMES_EXTS_COUNT] =
 };
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorCode::TfrmEditorCode(TComponent* Owner)
-: TfrmEditor(Owner)
+: TfrmEditor(Owner, "Code Editor")
 {
+    m_KeysHelp =
+    "Edit\r\n"
+    " Ctrl+C       : Copy selected text\r\n"
+    " Ctrl+X       : Cut selected text\r\n"
+    " Ctrl+V       : Paste selected text\r\n"
+    " Ctrl+Z       : Undo changes\r\n"
+    " Ctrl+Shift+Z : Redo changes\r\n"
+    "Search\r\n"
+    " Ctrl+F       : Search dialog\r\n"
+    " F3           : Find next\r\n"
+    " Shift+F3     : Find previous\r\n"
+    " Ctrl+H       : Find/Replace dialog\r\n\r\n"
+    "Navigation\r\n"
+    " Ctrl+G       : Goto line number\r\n\r\n"
+    "Settings\r\n"
+    " Alt+F        : Change Font dialog\r\n"
+    " Ctrl+=       : Increase font size\r\n"
+    " Ctrl+-       : Decrease font size\r\n"
+    " Ctrl+0       : Reset font size\r\n\r\n"
+    "File\r\n"
+    " Ctrl+S       : Save changes\r\n";
+
     m_SearchOptions.Searches.set_length(0);
     m_SearchOptions.Options.Clear();
     m_SearchOptions.Options << soConfirmReplace;
@@ -49,7 +71,6 @@ __fastcall TfrmEditorCode::TfrmEditorCode(TComponent* Owner)
     m_SearchOptions.Start = ssCursor;
 
     m_Registrar.Subscribe<OnChange<String>>(OnChangeString);
-    m_Registrar.Subscribe<OnChange<bool>>(OnChangeBool);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorCode::OnChangeString(const OnChange<String>& event)
@@ -58,14 +79,6 @@ void __fastcall TfrmEditorCode::OnChangeString(const OnChange<String>& event)
         auto font = SplitString(event.Value, ":");
         evEditor->Font->Name = font[0];
         evEditor->Font->Height = StrToIntDef(font[1], -13);
-    }
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::OnChangeBool(const OnChange<bool>& event)
-{
-    if (event.Id == "code.editor.linewrap" && event.Value != actToggleLineWrap->Checked) {
-        actToggleLineWrap->Checked = event.Value;
-        evEditor->ViewSettings = actToggleLineWrap->Checked ? evEditor->ViewSettings << vsShowWrapRuler : evEditor->ViewSettings >> vsShowWrapRuler;
     }
 }
 //---------------------------------------------------------------------------
@@ -161,7 +174,8 @@ void __fastcall TfrmEditorCode::actGoToLineExecute(TObject *Sender)
 void __fastcall TfrmEditorCode::actSearchExecute(TObject *Sender)
 {
     if (IsActive() && LMDEditExecFindDialog("Search text", evEditor, m_SearchOptions) == srNotFound) {
-        //ShowSearchNotFound();
+        WarningMessage("[Code Editor] Search text (" + evEditor->SearchLastArgs.Search +  ") not found.");
+        Beep();
     }
 }
 //---------------------------------------------------------------------------
@@ -445,4 +459,5 @@ void __fastcall TfrmEditorCode::evEditorNotFound(TObject *Sender, TLMDEditNotFou
     Action = saGoStartEnd;
 }
 //---------------------------------------------------------------------------
+
 

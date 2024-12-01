@@ -4,5 +4,5 @@ object frmEditor: TfrmEditor
   Width = 624
   Height = 441
   TabOrder = 0
-  OnMouseActivate = FrameMouseActivate
+  OnEnter = FrameEnter
 end

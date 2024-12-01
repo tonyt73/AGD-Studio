@@ -79,7 +79,6 @@ __published:    // IDE-managed Components
     TAction *actSearch;
     TAction *actSearchNext;
     TAction *actSearchPrevious;
-    TAction *actToggleLineWrap;
     TAction *actUnfoldAll;
     TAction *actUnfoldAllInCurrent;
     TAction *actUnfoldTops;
@@ -131,7 +130,6 @@ private:    // User declarations
     std::map<String, TAction*>  m_ActionMap;
 
     void            __fastcall  OnChangeString(const OnChange<String>& event);
-    void            __fastcall  OnChangeBool(const OnChange<bool>& event);
     String          __fastcall  GetSyntaxScByExt(const String& extension);
     void            __fastcall  OnEvent(const Event& event);
 

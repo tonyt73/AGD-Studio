@@ -87,15 +87,15 @@ inherited frmEditorMessages: TfrmEditorMessages
         Font.Style = []
         ParentFont = False
         TabOrder = 0
-        OnMouseActivate = FrameMouseActivate
+        OnEnter = FrameEnter
         ExplicitWidth = 521
         ExplicitHeight = 763
         inherited evEditor: TLMDEditView
           Width = 521
-          Height = 711
+          Height = 704
           OnStatusChanged = OnStatusChanged
           ExplicitWidth = 521
-          ExplicitHeight = 711
+          ExplicitHeight = 704
           GutterBarsEmpty = False
         end
         inherited sbStatus: TStatusBar
@@ -104,7 +104,7 @@ inherited frmEditorMessages: TfrmEditorMessages
           ExplicitTop = 744
           ExplicitWidth = 521
         end
-        inherited LMDToolBar1: TLMDToolBar
+        inherited ToolBar1: TToolBar
           Width = 521
           ExplicitWidth = 521
         end

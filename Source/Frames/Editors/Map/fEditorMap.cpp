@@ -24,7 +24,7 @@
 const float g_Scales[] = { 0.33f, 0.5f, 1.0f, 2.0f, 3.0f, 4.0f, 6.0f, 8.0f, 16.f };
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorMap::TfrmEditorMap(TComponent* Owner)
-: TfrmEditor(Owner)
+: TfrmEditor(Owner, "Map Editor")
 , m_ActivePanel(nullptr)
 , m_LastSelectedId(-1)
 , m_Scale(2)

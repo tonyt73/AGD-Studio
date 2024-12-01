@@ -33,7 +33,6 @@ __published:// IDE-managed Components
     TScrollBox *sbxView;
     TSplitter *Splitter1;
     TTimer *tmrRefreshView;
-    void __fastcall FrameMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate);
     void __fastcall FrameResize(TObject *Sender);
     void __fastcall OnStatusChanged(TLMDCustomEditView *AView, TLMDViewStatusChanges AChanges);
     void __fastcall sbxViewMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled);

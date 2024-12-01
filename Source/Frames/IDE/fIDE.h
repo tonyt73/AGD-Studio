@@ -209,6 +209,7 @@ __published:    // IDE-managed Components
     void __fastcall tbnProjectShowLinesClick(TObject *Sender);
     void __fastcall tvProjectDblClick(TObject *Sender);
     void __fastcall tvProjectItemSelectedChange(TObject *Sender, TElXTreeItem *Item);
+    void __fastcall dsIDEChange(TObject *Sender);
 
 private:                // User declarations
     ::Messaging::Registrar              m_Registrar;

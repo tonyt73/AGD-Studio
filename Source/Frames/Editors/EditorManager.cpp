@@ -19,7 +19,7 @@ __fastcall EditorManager::EditorManager()
 void __fastcall EditorManager::SetActive(TfrmEditor* editor)
 {
     m_ActiveEditor = editor;
-    editor->OnEvent(Event("show.helpkeys"));
+    editor->OnEvent(Event("editor.help"));
 }
 //---------------------------------------------------------------------------
 bool __fastcall EditorManager::IsActive(const TfrmEditor* editor) const

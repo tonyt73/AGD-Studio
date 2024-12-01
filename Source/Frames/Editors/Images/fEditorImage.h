@@ -181,7 +181,6 @@ __published:    // IDE-managed Components
     void __fastcall actZoomOutExecute(TObject *Sender);
     void __fastcall actZoomResetExecute(TObject *Sender);
     void __fastcall FrameEndDock(TObject *Sender, TObject *Target, int X, int Y);
-    void __fastcall imgEditorMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate);
     void __fastcall imgEditorMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
     void __fastcall imgEditorMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
     void __fastcall imgEditorMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);

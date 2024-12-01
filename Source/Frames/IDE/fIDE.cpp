@@ -100,8 +100,12 @@ void __fastcall TfrmIDE::OnMessageEvent(const MessageEvent& message)
     }
     else if (message.Type == etHelpKeys)
     {
+        dpEditorKeys->Caption = "HELP FOR " + message.Extra.UpperCase();
         mbKeys->Lines->Clear();
         mbKeys->Lines->Add(message.Message);
+        mbKeys->SelLength = 1;
+        mbKeys->SelStart = 0;
+        mbKeys->SelLength = 0;
     }
 }
 //---------------------------------------------------------------------------
@@ -458,6 +462,15 @@ void __fastcall TfrmIDE::actGameRunExecute(TObject *Sender)
 void __fastcall TfrmIDE::OnClose()
 {
     theProjectManager.Close();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TfrmIDE::dsIDEChange(TObject *Sender)
+{
+    auto ds = dynamic_cast<TLMDDockSite*>(Sender);
+    if (ds) {
+        Bus::Publish<Event>(Event("editor.help"));
+    }
 }
 //---------------------------------------------------------------------------
 
