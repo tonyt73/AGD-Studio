@@ -4,7 +4,7 @@
 
 [Setup]
 AppName=AGD Studio
-AppVersion=0.15.1
+AppVersion=0.15.2
 DefaultDirName={commonpf}\AGD Studio
 DefaultGroupName=AGD Studio
 UninstallDisplayIcon={app}\AGD Studio.exe
