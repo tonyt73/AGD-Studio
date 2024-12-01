@@ -75,14 +75,17 @@ class MessageEvent : public Event
 {
 protected:
     MessageType             m_MessageType;
+    String                  m_Extra;
 public:
-    __fastcall              MessageEvent(const String& message, MessageType type)
+    __fastcall              MessageEvent(const String& message, MessageType type, String extra = "")
                             : Event(message)
                             , m_MessageType(type)
+                            , m_Extra(extra)
                             {
                             }
 
-    __property  String      Message = { read = m_Id };
+    __property  String      Message = { read = m_Id          };
+    __property  String      Extra   = { read = m_Extra       };
     __property  MessageType Type    = { read = m_MessageType };
 };
 //---------------------------------------------------------------------------
@@ -161,11 +164,12 @@ public:
 };
 //---------------------------------------------------------------------------
 } // Messaging namespace
-#define ClearMessage(a)         Bus::Publish<MessageEvent>(MessageEvent((a), etClear      ))
-#define ErrorMessage(a)         Bus::Publish<MessageEvent>(MessageEvent((a), etError      ))
-#define WarningMessage(a)       Bus::Publish<MessageEvent>(MessageEvent((a), etWarning    ))
-#define InformationMessage(a)   Bus::Publish<MessageEvent>(MessageEvent((a), etInformation))
-#define DebugMessage(a)         Bus::Publish<MessageEvent>(MessageEvent((a), etDebug      ))
-#define HelpKeysMessage(a)      Bus::Publish<MessageEvent>(MessageEvent((a), etHelpKeys   ))
+#define ClearMessage(a)          Bus::Publish<MessageEvent>(MessageEvent((a), etClear      ))
+#define ErrorMessage(a)          Bus::Publish<MessageEvent>(MessageEvent((a), etError      ))
+#define WarningMessage(a)        Bus::Publish<MessageEvent>(MessageEvent((a), etWarning    ))
+#define InformationMessage(a)    Bus::Publish<MessageEvent>(MessageEvent((a), etInformation))
+#define DebugMessage(a)          Bus::Publish<MessageEvent>(MessageEvent((a), etDebug      ))
+#define HelpKeysMessage(a)       Bus::Publish<MessageEvent>(MessageEvent((a), etHelpKeys   ))
+#define HelpKeysNameMessage(a,b) Bus::Publish<MessageEvent>(MessageEvent((a), etHelpKeys, b))
 //---------------------------------------------------------------------------
 #endif

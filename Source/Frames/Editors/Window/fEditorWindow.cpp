@@ -11,7 +11,7 @@
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorWindow::TfrmEditorWindow(TComponent* Owner)
-: TfrmEditor(Owner)
+: TfrmEditor(Owner, "Window Editor")
 {
     m_KeysHelp =
         "Cursor Keys       : Move Window\r\n"

@@ -14,7 +14,7 @@
 TfrmEditorMessages *frmEditorMessages;
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorMessages::TfrmEditorMessages(TComponent* Owner)
-: TfrmEditor(Owner)
+: TfrmEditor(Owner, "Messages Editor")
 , m_GraphicsMode(*(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()))
 {
     m_Tile = std::make_unique<TImage>(nullptr);
@@ -57,12 +57,6 @@ void __fastcall TfrmEditorMessages::SetDocument(Project::Document* document)
 bool __fastcall TfrmEditorMessages::IsActive() const
 {
     return theEditorManager.IsActive(ecMessageEditor);
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorMessages::FrameMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate)
-{
-    theEditorManager.SetActive(ecMessageEditor);
-    TfrmEditor::FrameMouseActivate(Sender, Button, Shift, X, Y, HitTest, MouseActivate);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMessages::FrameResize(TObject *Sender)

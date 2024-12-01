@@ -5,7 +5,6 @@ inherited frmEditorImage: TfrmEditorImage
   Font.Style = [fsBold]
   ParentFont = False
   OnEndDock = FrameEndDock
-  OnMouseActivate = imgEditorMouseActivate
   ExplicitWidth = 1165
   ExplicitHeight = 900
   object panToolOptions: TPanel
@@ -38,7 +37,6 @@ inherited frmEditorImage: TfrmEditorImage
       BevelOuter = bvNone
       ShowCaption = False
       TabOrder = 1
-      OnMouseActivate = imgEditorMouseActivate
       inline toolbarShape: TfrmToolbarShape
         Left = 0
         Top = 0
@@ -108,7 +106,6 @@ inherited frmEditorImage: TfrmEditorImage
     Locked = True
     TabOrder = 2
     OnClick = panEditorContainerClick
-    OnMouseActivate = imgEditorMouseActivate
     object lblTools: TLabel
       Left = 0
       Top = 0
@@ -523,7 +520,6 @@ inherited frmEditorImage: TfrmEditorImage
         TabOrder = 0
         StyleElements = [seClient, seBorder]
         OnClick = panEditorContainerClick
-        OnMouseActivate = imgEditorMouseActivate
         object panViewFrame: TPanel
           Left = 128
           Top = 128
@@ -549,7 +545,6 @@ inherited frmEditorImage: TfrmEditorImage
             Align = alClient
             Stretch = True
             OnClick = panEditorContainerClick
-            OnMouseActivate = imgEditorMouseActivate
             OnMouseDown = imgEditorMouseDown
             OnMouseMove = imgEditorMouseMove
             OnMouseUp = imgEditorMouseUp
@@ -618,7 +613,6 @@ inherited frmEditorImage: TfrmEditorImage
     Caption = 'Panel1'
     ShowCaption = False
     TabOrder = 4
-    OnMouseActivate = imgEditorMouseActivate
     object Label2: TLabel
       Left = 0
       Top = 0
@@ -671,7 +665,6 @@ inherited frmEditorImage: TfrmEditorImage
         Padding.Bottom = 8
         ParentFont = False
         TabOrder = 0
-        OnMouseActivate = imgEditorMouseActivate
         inherited lblPalettePaper: TLabel
           StyleElements = [seFont, seClient, seBorder]
         end
@@ -711,7 +704,6 @@ inherited frmEditorImage: TfrmEditorImage
         ParentDoubleBuffered = False
         ParentFont = False
         TabOrder = 1
-        OnMouseActivate = imgEditorMouseActivate
         ExplicitTop = 1202
         inherited Panel3: TPanel
           StyleElements = [seFont, seClient, seBorder]
@@ -1290,7 +1282,6 @@ inherited frmEditorImage: TfrmEditorImage
         ParentFont = False
         TabOrder = 2
         Visible = False
-        OnMouseActivate = imgEditorMouseActivate
         ExplicitTop = 702
         inherited Panel3: TPanel
           StyleElements = [seFont, seClient, seBorder]
@@ -1321,7 +1312,6 @@ inherited frmEditorImage: TfrmEditorImage
         Font.Style = []
         ParentFont = False
         TabOrder = 3
-        OnMouseActivate = imgEditorMouseActivate
         ExplicitTop = 396
         inherited panBlock: TPanel
           Hint = 'Left Mouse Button applies the Block type to the chacter position'

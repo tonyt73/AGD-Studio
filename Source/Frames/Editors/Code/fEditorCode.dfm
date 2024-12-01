@@ -781,21 +781,12 @@ inherited frmEditorCode: TfrmEditorCode
       ShortCut = 114
       OnExecute = actSearchNextExecute
     end
-    object actToggleLineWrap: TAction
-      Category = 'Settings'
-      AutoCheck = True
-      Caption = 'Toggle Line Wrap'
-      Checked = True
-      Hint = 'Toggle Line Wrap'
-      ImageIndex = 28
-      ImageName = 'vrule'
-      ShortCut = 16471
-    end
     object actFont: TAction
       Category = 'Settings'
       Hint = 'Change editor font'
       ImageIndex = 29
       ImageName = 'font'
+      ShortCut = 32838
       OnExecute = actFontExecute
     end
     object actSearchPrevious: TAction
@@ -825,6 +816,7 @@ inherited frmEditorCode: TfrmEditorCode
       Hint = 'Zoom into document'
       ImageIndex = 11
       ImageName = 'zoom_in'
+      ShortCut = 16571
       OnExecute = actZoomInExecute
     end
     object actZoomOut: TAction
@@ -833,6 +825,7 @@ inherited frmEditorCode: TfrmEditorCode
       Hint = 'Zoom out of document'
       ImageIndex = 12
       ImageName = 'zoom_out'
+      ShortCut = 16573
       OnExecute = actZoomOutExecute
     end
     object actZoomReset: TAction
@@ -841,6 +834,7 @@ inherited frmEditorCode: TfrmEditorCode
       Hint = 'Reset document zoom'
       ImageIndex = 13
       ImageName = 'zoom_actual'
+      ShortCut = 16432
       OnExecute = actZoomResetExecute
     end
   end

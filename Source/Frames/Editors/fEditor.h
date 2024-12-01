@@ -14,7 +14,7 @@
 class TfrmEditor : public TFrame
 {
 __published:    // IDE-managed Components
-    void __fastcall FrameMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate);
+    void __fastcall FrameEnter(TObject *Sender);
 
 private:        // User declarations
     void            __fastcall  ShowKeysHelp();
@@ -22,12 +22,13 @@ private:        // User declarations
 protected:      // User declarations
     ::Messaging::Registrar      m_Registrar;
     Project::Document*          m_Document;
+    String                      m_Name;
     String                      m_KeysHelp;
 
     void            __fastcall  SetDocument(Project::Document* document);
 
 public:         // User declarations
-                    __fastcall  TfrmEditor(TComponent* Owner);
+                    __fastcall  TfrmEditor(TComponent* Owner, const String& Name);
                     __fastcall ~TfrmEditor();
 
             bool    __fastcall  IsActive() const;

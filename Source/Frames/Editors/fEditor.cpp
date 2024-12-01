@@ -3,27 +3,22 @@
 //---------------------------------------------------------------------------
 #include "fEditor.h"
 #include "EditorManager.h"
+#include "LMDDckSite.hpp"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
-__fastcall TfrmEditor::TfrmEditor(TComponent* Owner)
+__fastcall TfrmEditor::TfrmEditor(TComponent* Owner, const String& Name)
 : TFrame(Owner)
 , m_KeysHelp("")
+, m_Name(Name)
 {
-    OnMouseActivate = FrameMouseActivate;
     m_Registrar.Subscribe<Event>(OnEvent);
 }
 //---------------------------------------------------------------------------
 __fastcall TfrmEditor::~TfrmEditor()
 {
     m_Registrar.Unsubscribe();
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditor::FrameMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate)
-{
-    ShowKeysHelp();
-    theEditorManager.SetActive(this);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditor::SetDocument(Project::Document* document)
@@ -33,7 +28,7 @@ void __fastcall TfrmEditor::SetDocument(Project::Document* document)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditor::ShowKeysHelp()
 {
-    HelpKeysMessage(m_KeysHelp);
+    HelpKeysNameMessage(m_KeysHelp, m_Name);
 }
 //---------------------------------------------------------------------------
 bool __fastcall TfrmEditor::IsActive() const
@@ -43,9 +38,15 @@ bool __fastcall TfrmEditor::IsActive() const
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditor::OnEvent(const Event& event)
 {
-    if (IsActive())
+    if (IsActive() && event.Id == "editor.help")
     {
         ShowKeysHelp();
     }
 }
 //---------------------------------------------------------------------------
+void __fastcall TfrmEditor::FrameEnter(TObject *Sender)
+{
+    theEditorManager.SetActive(this);
+}
+//---------------------------------------------------------------------------
+

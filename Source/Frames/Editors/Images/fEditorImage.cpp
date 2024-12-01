@@ -31,7 +31,7 @@
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorImage::TfrmEditorImage(TComponent* Owner)
-: TfrmEditor(Owner)
+: TfrmEditor(Owner, "Image Editor")
 , m_Magnification(8.f)
 , m_SelectedFrame(0)
 , m_ImageDocument(nullptr)
@@ -43,7 +43,7 @@ __fastcall TfrmEditorImage::TfrmEditorImage(TComponent* Owner)
         "Left Mouse Button         : Use current tool\r\n"
         "                            Hold button and drag mouse to expand, release button to finalise\r\n"
         "Right Mouse Button        : Unset\r\n"
-        "Ctrl + Mouse Wheel        : Zoom the window in/out"
+        "Ctrl + Mouse Wheel        : Zoom the window in/out\r\n"
         "                            Hold Shift for faster zoom";
         //"Shift + Left Mouse Button : Pan the window\r\n"
 }
@@ -759,11 +759,6 @@ void __fastcall TfrmEditorImage::actModeBlockExecute(TObject *Sender)
         m_BlockTypeTool.Begin(m_Frames[m_SelectedFrame]->Canvas());
         RefreshView(true);
     }
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::imgEditorMouseActivate(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate)
-{
-    TfrmEditor::FrameMouseActivate(Sender, Button, Shift, X, Y, HitTest, MouseActivate);
 }
 //---------------------------------------------------------------------------
 

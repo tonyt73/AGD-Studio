@@ -10,7 +10,7 @@
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorJumpTable::TfrmEditorJumpTable(TComponent* Owner)
-: TfrmEditor(Owner)
+: TfrmEditor(Owner, "Jump Table Editor")
 , m_ActiveStep(0)
 {
     m_KeysHelp =
