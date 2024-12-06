@@ -100,7 +100,7 @@ int __fastcall ImageDocument::CountImagesPerFrame() const
         auto sx = mc.ImageSizing[m_ImageType].Step.cx;
         auto sy = mc.ImageSizing[m_ImageType].Step.cy;
         if (sx != 0 && sy != 0) {
-            auto w = Width / sx;
+            auto w = Width  / sx;
             auto h = Height / sy;
             return w * h;
         }
