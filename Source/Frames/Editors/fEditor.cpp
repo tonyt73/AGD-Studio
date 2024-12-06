@@ -38,8 +38,7 @@ bool __fastcall TfrmEditor::IsActive() const
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditor::OnEvent(const Event& event)
 {
-    if (IsActive() && event.Id == "editor.help")
-    {
+    if (IsActive() && event.Id == "editor.help") {
         ShowKeysHelp();
     }
 }
