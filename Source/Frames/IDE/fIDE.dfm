@@ -155,7 +155,6 @@ object frmIDE: TfrmIDE
         FixedBottomRowNum = 0
         FixedColNum = 1
         GutterWidth = 0
-        ExplicitWidth = 462
       end
     end
     object dpEditorKeys: TLMDDockPanel
@@ -188,8 +187,6 @@ object frmIDE: TfrmIDE
         ScrollBars = ssBoth
         ShowHint = False
         TabOrder = 0
-        ExplicitWidth = 754
-        ExplicitHeight = 162
       end
     end
     object dpMessages: TLMDDockPanel
@@ -220,7 +217,6 @@ object frmIDE: TfrmIDE
         ReadOnly = True
         ScrollBars = ssBoth
         TabOrder = 0
-        ExplicitWidth = 754
       end
     end
     object dpProject: TLMDDockPanel
@@ -247,7 +243,6 @@ object frmIDE: TfrmIDE
         Padding.Right = 1
         Padding.Bottom = 1
         TabOrder = 0
-        ExplicitHeight = 278
         object tbrProject: TToolBar
           Left = 1
           Top = 1
@@ -402,7 +397,6 @@ object frmIDE: TfrmIDE
           FixedBottomRowNum = 0
           FixedColNum = 1
           GutterWidth = 0
-          ExplicitHeight = 250
         end
       end
     end
@@ -454,7 +448,6 @@ object frmIDE: TfrmIDE
         Constraints.MinWidth = 200
         TabOrder = 0
         OnClick = lmdPropertiesClick
-        ExplicitHeight = 238
       end
       object Panel2: TPanel
         Left = 0
@@ -470,7 +463,6 @@ object frmIDE: TfrmIDE
         Padding.Bottom = 3
         ParentBackground = False
         TabOrder = 1
-        ExplicitTop = 262
         object lblPropertyInfo: TLabel
           Left = 3
           Top = 3
@@ -708,7 +700,7 @@ object frmIDE: TfrmIDE
   object actActions: TActionList
     Images = vilToolbar
     State = asSuspended
-    Left = 88
+    Left = 216
     Top = 88
     object actFileProjectSave: TAction
       Category = 'File'
@@ -1089,13 +1081,13 @@ object frmIDE: TfrmIDE
   end
   object DockManager: TLMDDockManager
     StyleName = 'VCLStyle'
-    Left = 154
+    Left = 314
     Top = 88
   end
   object imgProjectNodes: TImageList
     ColorDepth = cd32Bit
-    Left = 102
-    Top = 264
+    Left = 118
+    Top = 184
     Bitmap = {
       494C01011D003000040010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
@@ -2165,12 +2157,12 @@ object frmIDE: TfrmIDE
     Filter = 'AGDX Project|*.agdx|All Files|*.*'
     Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
     Title = 'Open an Existing AGDX Project'
-    Left = 28
-    Top = 156
+    Left = 420
+    Top = 88
   end
   object popProject: TPopupMenu
     OnPopup = popProjectPopup
-    Left = 224
+    Left = 120
     Top = 88
     object mnuNewAsset: TMenuItem
       Action = actNewAsset
@@ -2184,8 +2176,8 @@ object frmIDE: TfrmIDE
   end
   object imgBuildNodes: TImageList
     ColorDepth = cd32Bit
-    Left = 102
-    Top = 328
+    Left = 118
+    Top = 256
     Bitmap = {
       494C01010D001800040010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
@@ -3726,7 +3718,7 @@ object frmIDE: TfrmIDE
           end>
       end>
     Left = 360
-    Top = 192
+    Top = 184
   end
   object vilToolbar: TVirtualImageList
     Images = <
@@ -3819,7 +3811,7 @@ object frmIDE: TfrmIDE
     Width = 24
     Height = 24
     Left = 360
-    Top = 248
+    Top = 256
   end
   object icProject: TImageCollection
     Images = <
@@ -3907,8 +3899,8 @@ object frmIDE: TfrmIDE
           end>
       end>
     InterpolationMode = icIMModeNearestNeighbor
-    Left = 280
-    Top = 192
+    Left = 256
+    Top = 184
   end
   object vilProject: TVirtualImageList
     Images = <
@@ -3938,7 +3930,7 @@ object frmIDE: TfrmIDE
         Name = 'tv showfolders'
       end>
     ImageCollection = icProject
-    Left = 280
-    Top = 264
+    Left = 256
+    Top = 256
   end
 end
