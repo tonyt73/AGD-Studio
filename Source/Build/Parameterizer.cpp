@@ -16,8 +16,8 @@ String Parameter::ization(const String& parameters)
     auto gameName = Services::Folders::ProjectName;
     auto gamePath = Services::Folders::Project;
 
-    subbedParameters = StringReplace(subbedParameters, "%GamePath%", gamePath, TReplaceFlags(rfReplaceAll || rfIgnoreCase));
-    subbedParameters = StringReplace(subbedParameters, "%GameName%", gameName, TReplaceFlags(rfReplaceAll || rfIgnoreCase));
+    subbedParameters = StringReplace(subbedParameters, "%GamePath%", gamePath, TReplaceFlags(rfReplaceAll | rfIgnoreCase));
+    subbedParameters = StringReplace(subbedParameters, "%GameName%", gameName, TReplaceFlags(rfReplaceAll | rfIgnoreCase));
 
     return subbedParameters;
 }

@@ -42,18 +42,13 @@ private:
     public:
         Subscription(const std::function<void (const T&)>& handler, unsigned int subscriptionId)
         : Subscription_(subscriptionId)
-        , m_Handler(handler)
-        {
-        }
+        , m_Handler(handler) { }
 
         void Execute(const T& message)
         {
-            if (m_Handler)
-            {
+            if (m_Handler) {
                 m_Handler(message);
-            }
-            else
-            {
+            } else {
                 assert("Handler is invalid");
             }
         }
@@ -69,14 +64,12 @@ protected:
     template <class T>
     static unsigned int Subscribe(const std::function<void (const T&)>& handler)
     {
-        if (s_Handlers == nullptr)
-        {
+        if (s_Handlers == nullptr) {
             s_Handlers = new SubscriptionsMap();
         }
 
         auto& subscriptions = (*s_Handlers)[typeid(T)];
-        if (subscriptions == nullptr)
-        {
+        if (subscriptions == nullptr) {
             // add a new subscriptions list to the type handlers list
             subscriptions = std::make_unique<Subscriptions>();
             (*s_Handlers)[typeid(T)] = std::move(subscriptions);
@@ -95,14 +88,12 @@ public:
     template <class T>
     static void Publish(const T& message)
     {
-        if (s_Handlers == nullptr)
-            return;
+        if (s_Handlers) {
         auto& subscriptions = (*s_Handlers)[typeid(T)];
-        if (subscriptions != nullptr)
-        {
-            for (const auto& subscription : *subscriptions)
-            {
-                ((Subscription<T>*)(subscription.get()))->Execute(message);
+            if (subscriptions != nullptr) {
+                for (const auto& subscription : *subscriptions) {
+                    (reinterpret_cast<Subscription<T>*>(subscription.get()))->Execute(message);
+                }
             }
         }
     }
@@ -114,15 +105,14 @@ private:
     std::list<unsigned int> m_SubscriptionIds;
 
 public:
-            __fastcall  Registrar();
-            __fastcall ~Registrar();
+                            Registrar();
+                           ~Registrar();
 
     template <class T>
-    void    __fastcall  Subscribe(std::function<void (const T&)> handler)
-    {
+    void Subscribe(std::function<void (const T&)> handler) {
         m_SubscriptionIds.push_back(::Messaging::Bus::Subscribe(handler));
     }
-    void    __fastcall  Unsubscribe();
+    void Unsubscribe();
 };
 //---------------------------------------------------------------------------
 } // namespace Messaging

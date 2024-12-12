@@ -11,10 +11,10 @@
 void __fastcall ThemeManager::SetStyle(const String& styleName)
 {
     auto styleFile = Services::File::Combine(Services::Folders::GetFolder(Services::Folders::lpApplication, "Styles"), styleName + ".vsf");
-    auto styleNameNoSpaces = StringReplace(styleName, " ", "", TReplaceFlags(rfReplaceAll || rfIgnoreCase)).LowerCase();
+    auto styleNameNoSpaces = StringReplace(styleName, " ", "", TReplaceFlags(rfReplaceAll | rfIgnoreCase)).LowerCase();
     for (auto name : TStyleManager::StyleNames)
     {
-        auto nameWithoutSpaces = StringReplace(name, " ", "", TReplaceFlags(rfReplaceAll || rfIgnoreCase)).LowerCase();
+        auto nameWithoutSpaces = StringReplace(name, " ", "", TReplaceFlags(rfReplaceAll | rfIgnoreCase)).LowerCase();
         if (styleNameNoSpaces == nameWithoutSpaces)
         {
             auto style = TStyleManager::Style[name];

@@ -6,8 +6,6 @@
 #include "Documents/Window.h"
 #include "Documents/FileDefinitions.h"
 #include "Documents/Settings.h"
-#include "Frames/Editors/Code/fEditorCode.h"
-#include "Frames/Editors/Images/fEditorImage.h"
 #include "Importer/AgdImporter.h"
 #include "Messaging/Event.h"
 #include "Services/File.h"
