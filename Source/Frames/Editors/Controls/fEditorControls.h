@@ -40,19 +40,11 @@ private:    // User declarations
 
     void            __fastcall  OnKeyChanged(TObject* Sender);
     void            __fastcall  OnThemeChangedEvent(const ThemeChangedEvent& event);
-    void            __fastcall  SetDocument(Project::Document* document);
     void            __fastcall  UpdateColors();
+    void            __fastcall  OnDocumentSet();
 
-public:        // User declarations
+public:     // User declarations
                     __fastcall  TfrmEditorControls(TComponent* Owner);
-
-    static  TFrame* __fastcall  Create(Project::Document* document, TComponent* owner)
-                                {
-                                    auto editor = new TfrmEditorControls(owner);
-                                    editor->SetDocument(document);
-                                    document->DockPanel = dynamic_cast<TLMDDockPanel*>(owner);
-                                    return editor;
-                                }
 };
 //---------------------------------------------------------------------------
 #endif

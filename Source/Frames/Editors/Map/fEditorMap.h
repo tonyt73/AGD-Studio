@@ -237,8 +237,8 @@ private:    // User declarations
     int                         m_LastSelectedId;   // last selected document id
     int                         m_Scale;
 
-            void    __fastcall  Initialise();
             void    __fastcall  RefreshAssets();
+            void    __fastcall  OnInitialise();
             void    __fastcall  OnEvent(const Event& event);
             void    __fastcall  OnRoomSelected(const RoomSelected& event);
             void    __fastcall  OnStartRoomChanged(const StartRoomChanged& event);
@@ -247,20 +247,9 @@ private:    // User declarations
             void    __fastcall  OnWorkspaceEntitySelected(const Project::MapEntity& entity);
             int     __fastcall  OnRetrieveRoomIndex(const TPoint& pt, bool newIndex = false);
 
-public:        // User declarations
+public:     // User declarations
                     __fastcall  TfrmEditorMap(TComponent* Owner);
                     __fastcall ~TfrmEditorMap();
-
-    static  TFrame* __fastcall  Create(Project::Document* document, TComponent* owner)
-                                {
-                                    auto editor = new TfrmEditorMap(owner);
-                                    editor->Document = dynamic_cast<Project::TiledMapDocument*>(document);
-                                    document->DockPanel = dynamic_cast<TLMDDockPanel*>(owner);
-                                    editor->Initialise();
-                                    return editor;
-                                }
-
-  __property Project::Document* Document = { read = m_Document, write = m_Document };
 };
 //---------------------------------------------------------------------------
 #endif

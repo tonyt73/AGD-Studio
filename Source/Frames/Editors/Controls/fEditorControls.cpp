@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "fEditorControls.h"
 #include "../EditorManager.h"
@@ -18,10 +18,9 @@ __fastcall TfrmEditorControls::TfrmEditorControls(TComponent* Owner)
     m_Registrar.Subscribe<ThemeChangedEvent>(OnThemeChangedEvent);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorControls::SetDocument(Project::Document* document)
+void __fastcall TfrmEditorControls::OnDocumentSet()
 {
-    TfrmEditor::SetDocument(document);
-    auto doc = dynamic_cast<Project::ControlsDocument*>(document);
+    auto doc = dynamic_cast<Project::ControlsDocument*>(Document);
     kcLeft->KeyCode = doc->GetAsciiCode(Project::keyLeft);
     kcRight->KeyCode = doc->GetAsciiCode(Project::keyRight);
     kcUp->KeyCode = doc->GetAsciiCode(Project::keyUp);

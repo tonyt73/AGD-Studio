@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "fEditorMap.h"
 #include "../EditorManager.h"
@@ -73,7 +73,7 @@ __fastcall TfrmEditorMap::~TfrmEditorMap()
     m_Registrar.Unsubscribe();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::Initialise()
+void __fastcall TfrmEditorMap::OnInitialise()
 {
     m_ActionMap["zoom.in"] = actZoomIn;
     m_ActionMap["zoom.out"] = actZoomOut;

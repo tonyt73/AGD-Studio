@@ -6,6 +6,7 @@
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
+#include "LMDDckSite.hpp"
 //---------------------------------------------------------------------------
 #include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
@@ -18,6 +19,7 @@ __published:    // IDE-managed Components
 
 private:        // User declarations
     void            __fastcall  ShowKeysHelp();
+    void            __fastcall  SetDocument(Project::Document* document);
 
 protected:      // User declarations
     ::Messaging::Registrar      m_Registrar;
@@ -25,14 +27,26 @@ protected:      // User declarations
     String                      m_Name;
     String                      m_KeysHelp;
 
-    void            __fastcall  SetDocument(Project::Document* document);
+    virtual void    __fastcall  OnDocumentSet();
 
 public:         // User declarations
                     __fastcall  TfrmEditor(TComponent* Owner, const String& Name);
                     __fastcall ~TfrmEditor();
 
+    template <class T>
+    static  TFrame* __fastcall  Create(Project::Document* document, TComponent* owner)
+                                {
+                                    auto editor = new T(owner);
+                                    editor->SetDocument(document);
+                                    document->DockPanel = dynamic_cast<TLMDDockPanel*>(owner);
+                                    return editor;
+                                }
+
             bool    __fastcall  IsActive() const;
     virtual void    __fastcall  OnEvent(const Event& event);
+    virtual void    __fastcall  OnInitialise();
+
+  __property Project::Document* Document = { read = m_Document, write = SetDocument };
 };
 //---------------------------------------------------------------------------
 #endif

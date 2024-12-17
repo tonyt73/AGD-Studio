@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "fEditor.h"
 #include "EditorManager.h"
@@ -24,6 +24,15 @@ __fastcall TfrmEditor::~TfrmEditor()
 void __fastcall TfrmEditor::SetDocument(Project::Document* document)
 {
     m_Document = document;
+    OnDocumentSet();
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditor::OnDocumentSet()
+{
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditor::OnInitialise()
+{
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditor::ShowKeysHelp()

@@ -1,9 +1,10 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 #include "Forms/fAbout.h"
 #include "Forms/fNewImage.h"
 #include "Forms/fSettings.h"
 #include "Frames/IDE/fIDE.h"
+#include "Frames/Editors/fEditor.h"
 #include "Frames/Editors/Code/fEditorCode.h"
 #include "Frames/Editors/Controls/fEditorControls.h"
 #include "Frames/Editors/Images/fEditorImage.h"
@@ -49,13 +50,13 @@ void __fastcall TfrmIDE::RegisterDocumentEditors()
 {
     m_EraseHandlers.push_back(std::make_unique<TWinControlHandler>(Panel2));
     // map document type (and sub type if required) to an editor
-    m_DocumentEditorFactory.Register("Controls"     , &TfrmEditorControls::Create);
-    m_DocumentEditorFactory.Register("Jump"         , &TfrmEditorJumpTable::Create);
-    m_DocumentEditorFactory.Register("Window"       , &TfrmEditorWindow::Create);
-    m_DocumentEditorFactory.Register("Map"          , &TfrmEditorMap::Create);
-    m_DocumentEditorFactory.Register("Image"        , &TfrmEditorImage::Create);
-    m_DocumentEditorFactory.Register("Text.Messages", &TfrmEditorMessages::Create);
-    m_DocumentEditorFactory.Register("Text"         , &TfrmEditorCode::Create);
+    m_DocumentEditorFactory.Register("Controls"     , &TfrmEditor::Create<TfrmEditorControls>);
+    m_DocumentEditorFactory.Register("Jump"         , &TfrmEditor::Create<TfrmEditorJumpTable>);
+    m_DocumentEditorFactory.Register("Window"       , &TfrmEditor::Create<TfrmEditorWindow>);
+    m_DocumentEditorFactory.Register("Map"          , &TfrmEditor::Create<TfrmEditorMap>);
+    m_DocumentEditorFactory.Register("Image"        , &TfrmEditor::Create<TfrmEditorImage>);
+    m_DocumentEditorFactory.Register("Text.Messages", &TfrmEditor::Create<TfrmEditorMessages>);
+    m_DocumentEditorFactory.Register("Text"         , &TfrmEditor::Create<TfrmEditorCode>);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::OnActivate(TWinControl* parent)
@@ -206,11 +207,13 @@ void __fastcall TfrmIDE::DoOpenDocument(Project::Document* document)
     {
         InformationMessage("[IDE] Opening Document: " + document->Name);
         auto dp = new TLMDDockPanel(this);
-        if (m_DocumentEditorFactory.Create(document, dp))
+        auto editor = dynamic_cast<TfrmEditor*>(m_DocumentEditorFactory.Create(document, dp));
+        if (editor)
         {
             dp->Caption = document->Name.UpperCase();
             dp->Tag = (NativeInt)document;
             document->DockPanel = dp;
+            editor->OnInitialise();
             UpdateDocumentProperties(document);
             dp->ClientKind = dkDocument;
             dsIDE->DockControl(dp, dsIDE->SpaceZone);

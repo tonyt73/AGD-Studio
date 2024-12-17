@@ -132,21 +132,15 @@ private:    // User declarations
     void            __fastcall  OnChangeString(const OnChange<String>& event);
     String          __fastcall  GetSyntaxScByExt(const String& extension);
     void            __fastcall  OnEvent(const Event& event);
+    void            __fastcall  OnDocumentSet();
 
     __property TLMDEditView*    ActiveEdit = { read = m_ActiveEdit };
 
-public:        // User declarations
+public:     // User declarations
                     __fastcall  TfrmEditorCode(TComponent* Owner);
 
-    void            __fastcall  SetDocument(Project::Document* document);
+//    void            __fastcall  SetDocument(Project::Document* document);
     void            __fastcall  UpdateStatus();
-    static  TFrame* __fastcall  Create(Project::Document* document, TComponent* owner)
-                                {
-                                    auto editor = new TfrmEditorCode(owner);
-                                    editor->SetDocument(document);
-                                    document->DockPanel = dynamic_cast<TLMDDockPanel*>(owner);
-                                    return editor;
-                                }
 };
 //---------------------------------------------------------------------------
 #endif

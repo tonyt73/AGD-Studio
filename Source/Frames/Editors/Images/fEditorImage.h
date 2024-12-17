@@ -211,7 +211,7 @@ private:    // User declarations
     BlockTypeTool               m_BlockTypeTool;
     String                      m_LastModeString;   //
 
-    void            __fastcall  SetDocument(Project::Document* document);
+    void            __fastcall  OnDocumentSet();
     void            __fastcall  OnEvent(const Event& event);
     void            __fastcall  DrawGrids();
     void            __fastcall  RefreshView(bool redraw = false);
@@ -223,14 +223,6 @@ private:    // User declarations
 
 public:        // User declarations
                     __fastcall  TfrmEditorImage(TComponent* Owner);
-
-     static  TFrame* __fastcall Create(Project::Document* document, TComponent* owner)
-                                {
-                                    auto editor = new TfrmEditorImage(owner);
-                                    editor->SetDocument(document);
-                                    document->DockPanel = dynamic_cast<TLMDDockPanel*>(owner);
-                                    return editor;
-                                }
 
     __property Project::ImageDocument*  Image = { read = m_ImageDocument, write = m_ImageDocument };
 };

@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include <LMDSedGotoLineDialog.hpp>
 #include <LMDSedColorSchemeDialog.hpp>
@@ -82,7 +82,7 @@ void __fastcall TfrmEditorCode::OnChangeString(const OnChange<String>& event)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::SetDocument(Project::Document* document)
+void __fastcall TfrmEditorCode::OnDocumentSet()
 {
     m_ActionMap["zoom.in"       ] = actZoomIn;
     m_ActionMap["zoom.out"      ] = actZoomOut;
@@ -99,14 +99,13 @@ void __fastcall TfrmEditorCode::SetDocument(Project::Document* document)
     m_ActionMap["project.save"  ] = actSaveFile;
 
     theEditorManager.SetActive(this);
-    m_Document = document;
     lmdDocument->ClearNoUndo();
-    if (Services::File::Exists(document->Path)) {
-        lmdDocument->LoadFromFile(document->Path, CP_ACP, true);
-        auto extension = Services::File::Extension(document->Path).SubString(2, 32);
+    if (Services::File::Exists(Document->Path)) {
+        lmdDocument->LoadFromFile(Document->Path, CP_ACP, true);
+        auto extension = Services::File::Extension(Document->Path).SubString(2, 32);
         auto sc = GetSyntaxScByExt(extension);
         lmdDocument->ActiveSyntaxScheme = sc;
-        lmdDocument->ReadOnly = document->IsReadOnly;
+        lmdDocument->ReadOnly = Document->IsReadOnly;
     }
     Color = ThemeManager::Background;
     evEditor->ViewSettings = evEditor->ViewSettings << vsAutoIndent;

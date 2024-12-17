@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "../EditorManager.h"
 #include "fEditorImage.h"
@@ -61,9 +61,8 @@ void __fastcall TfrmEditorImage::OnEvent(const Event& event)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::SetDocument(Project::Document* document)
+void __fastcall TfrmEditorImage::OnDocumentSet()
 {
-    TfrmEditor::SetDocument(document);
     m_EraseHandlerView = std::make_unique<TWinControlHandler>(panViewFrame);
     m_ActionMap["zoom.in"   ] = actZoomIn;
     m_ActionMap["zoom.out"  ] = actZoomOut;
@@ -92,7 +91,7 @@ void __fastcall TfrmEditorImage::SetDocument(Project::Document* document)
 //    m_CanvasToolMap[btnRotateLeft90->Tag] = std::make_unique<CanvasRotateLeft90Tool>();
 //    m_CanvasToolMap[btnRotateRight90->Tag] = std::make_unique<CanvasRotateRight90Tool>();
 
-    m_ImageDocument = dynamic_cast<Project::ImageDocument*>(document);
+    m_ImageDocument = dynamic_cast<Project::ImageDocument*>(Document);
     panEditorContainer->Color = ThemeManager::Background;
     m_BlockTypeTool.Document = m_ImageDocument;
 

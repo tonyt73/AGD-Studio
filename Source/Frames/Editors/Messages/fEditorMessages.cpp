@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "fEditorMessages.h"
 #include "EditorManager.h"
@@ -24,12 +24,11 @@ __fastcall TfrmEditorMessages::TfrmEditorMessages(TComponent* Owner)
     m_Tile->Picture->Bitmap->Height = 8;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMessages::SetDocument(Project::Document* document)
+void __fastcall TfrmEditorMessages::OnDocumentSet()
 {
     fFramesView->Timer1->Enabled = false;
     Color = ThemeManager::Background;
-    m_Document = document;
-    ecMessageEditor->SetDocument(document);
+    ecMessageEditor->Document = Document;
 
     Project::DocumentList images;
     // TODO: Should take a subtype as well
