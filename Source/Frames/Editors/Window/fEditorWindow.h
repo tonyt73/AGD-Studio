@@ -46,16 +46,8 @@ private:    // User declarations
 
     void            __fastcall  DrawView();
 
-public:        // User declarations
+public:     // User declarations
                     __fastcall  TfrmEditorWindow(TComponent* Owner);
-
-    static  TFrame* __fastcall  Create(Project::Document* document, TComponent* owner)
-                                {
-                                    auto editor = new TfrmEditorWindow(owner);
-                                    editor->SetDocument(document);
-                                    document->DockPanel = dynamic_cast<TLMDDockPanel*>(owner);
-                                    return editor;
-                                }
 };
 //---------------------------------------------------------------------------
 #endif

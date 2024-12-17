@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "TilesSection.h"
 #include "Project/Documents/DocumentManager.h"
@@ -24,6 +24,7 @@ __fastcall TilesSection::~TilesSection()
 void __fastcall TilesSection::Execute()
 {
     const auto& dm = theDocumentManager;
+    auto imgSize = dm.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile].Minimum;
     Project::DocumentList images;
     dm.GetAllOfType("Image", images);
     for (auto image : images)
@@ -46,7 +47,7 @@ void __fastcall TilesSection::Execute()
             for (auto byte : data)
             {
                 line += IntToStr(byte) + " ";
-                if (++i == 8)
+                if (++i == imgSize.Width)
                 {
                     line += "\r\n            ";
                 }

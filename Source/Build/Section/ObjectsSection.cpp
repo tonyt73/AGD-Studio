@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "ObjectsSection.h"
 #include "Project/Documents/DocumentManager.h"
@@ -29,8 +29,8 @@ void __fastcall ObjectsSection::Execute()
     auto mapDoc = dynamic_cast<Project::TiledMapDocument*>(dm.Get("Map", "Tiled", "Tile Map"));
     assert(mapDoc != nullptr);
     const auto& wi = (Project::WindowDocument*)theDocumentManager.Get("Window", "Definition", "Window");
-    auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile].Minimum;
-    auto wPt = TPoint(wi->Rect.Left * tileSize.cx, wi->Rect.Top * tileSize.cy);
+    auto imgSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile].Minimum;
+    auto wPt = TPoint(wi->Rect.Left * imgSize.cx, wi->Rect.Top * imgSize.cy);
     auto objectsInMap = mapDoc->Get(Visuals::itObject);
     // get the list of object images
     Project::DocumentList images;
@@ -71,7 +71,7 @@ void __fastcall ObjectsSection::Execute()
             for (auto byte : data)
             {
                 line += IntToStr(byte) + " ";
-                if (++x == 16)
+                if (++x == imgSize.Width)
                 {
                     x = 0;
                     AddLine(line);

@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "SpritesSection.h"
 #include "Project/Documents/DocumentManager.h"
@@ -23,6 +23,7 @@ __fastcall SpritesSection::~SpritesSection()
 void __fastcall SpritesSection::Execute()
 {
     const auto& dm = theDocumentManager;
+    auto imgSize = dm.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile].Minimum;
     Project::DocumentList images;
     dm.GetAllOfType("Image", images);
     for (auto image : images)
@@ -45,7 +46,7 @@ void __fastcall SpritesSection::Execute()
                 for (auto byte : data)
                 {
                     line += IntToStr(byte) + " ";
-                    if (++w % 16 == 0)
+                    if (++w % imgSize.Width == 0)
                     {
                         line += "\r\n             ";
                     }
@@ -56,7 +57,7 @@ void __fastcall SpritesSection::Execute()
         }
     }
 
-    // no sprites is ok
+    // No sprites is ok? Is it really? Shouldn't we have at least 1 sprite?
     Success();
 }
 //---------------------------------------------------------------------------

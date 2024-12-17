@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "TileEditor.h"
 #include "Visuals/BlockTypes.h"
@@ -268,7 +268,7 @@ void __fastcall TileEditor::OnMouseMoveSelectMode(TShiftState Shift, int X, int 
                 auto pt = e.Pt - e.DragPt + dPt;
                 if (pt.x < 0 || pt.y < 0 || (pt.x + m_TileSize.cx) >= m_ContentSize.cx || (pt.y + m_TileSize.cy) >= m_ContentSize.cy)
                 {
-                    // yes, then we leave where they are
+                    // yes, then we leave them where they are and stop moving the selection
                     // TODO: Snap the selection to the bounds
                     outOfBounds = true;
                     break;

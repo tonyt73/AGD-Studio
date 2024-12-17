@@ -6436,7 +6436,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       end
       object panStartNew: TPanel
         Left = 62
-        Top = 76
+        Top = 73
         Width = 421
         Height = 163
         BevelOuter = bvNone

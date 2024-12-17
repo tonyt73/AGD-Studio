@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include <Vcl.Imaging.pngimage.hpp>
 #include "fSelectionPanel.h"
