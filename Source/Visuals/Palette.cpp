@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "Palette.h"
 #include "Services/File.h"
@@ -78,6 +78,22 @@ DWORD __fastcall Palette::LuminanceOf(TColor Color)
     DWORD dwBlue      = (Color & 0x00FF0000) >> 16;
     DWORD dwLuminance = (0.299f * (double)dwRed + 0.587f * (double)dwGreen + 0.114f * (double)dwBlue);
     return dwLuminance;
+}
+//---------------------------------------------------------------------------
+bool __fastcall Palette::IsGrey(TColor Color)
+{
+    int dwRed       = (Color & 0x000000FF) >>  0;
+    int dwGreen     = (Color & 0x0000FF00) >>  8;
+    int dwBlue      = (Color & 0x00FF0000) >> 16;
+    return (std::abs(dwRed - dwGreen) < 8) && (std::abs(dwRed - dwBlue) < 8) && (std::abs(dwBlue - dwGreen) < 8);
+}
+//---------------------------------------------------------------------------
+int __fastcall Palette::Diff(TColor Color)
+{
+    int dwRed       = (Color & 0x000000FF) >>  0;
+    int dwGreen     = (Color & 0x0000FF00) >>  8;
+    int dwBlue      = (Color & 0x00FF0000) >> 16;
+    return std::abs(dwRed - dwGreen) + std::abs(dwRed - dwBlue) + std::abs(dwBlue - dwGreen);
 }
 //---------------------------------------------------------------------------
 void __fastcall Palette::OnEndObject(const String& object)

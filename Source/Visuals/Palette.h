@@ -32,6 +32,8 @@ public:
             bool        __fastcall  Load(const String& name);
 
     static  DWORD       __fastcall  LuminanceOf(TColor Color);
+    static  bool        __fastcall  IsGrey(TColor Color);
+    static  int         __fastcall  Diff(TColor Color);
 
             String      __property  Name                    = { read = m_Name         };
             TColor      __property  Greyscale[int index]    = { read = GetGreyscale   };
