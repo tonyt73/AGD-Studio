@@ -16,27 +16,23 @@ __fastcall CanvasTool::~CanvasTool()
 //---------------------------------------------------------------------------
 void __fastcall CanvasTool::DrawLine(Visuals::GraphicsBuffer& canvas, const TRect& Rect, bool set, eSavePoints savePoints)
 {
-    // setOrUpdate - true = set (push) the value in to the list, false = update list
     if (savePoints == spLeft) {
+        // we always draw the left edge and then the right edge, so clear the list of left
         m_LinePositions.clear();
     }
 
-    auto dx = 1;
-    auto dy = 1;
+    // Save points are Left to Right only. Function calls MUST start with spLeft, then spRight!
+    assert(!(savePoints == spRight && m_LinePositions.size() == 0));
+
     auto px = Rect.Left;
+    auto xDiff = Rect.Right  - Rect.Left;
+    auto dx = xDiff >= 0 ? 1 : -1;
+    xDiff = std::abs(xDiff);
+
     auto py = Rect.Top;
-
     auto yDiff = Rect.Bottom - Rect.Top;
-    if (yDiff < 0) {
-        yDiff = -yDiff;
-        dy = -1;
-    }
-
-    auto xDiff = Rect.Right - Rect.Left;
-    if (xDiff < 0) {
-        xDiff = -xDiff;
-        dx = -1;
-    }
+    auto dy = yDiff >= 0 ? 1 : -1;
+    yDiff = std::abs(yDiff);
 
     auto error = 0;
     if (xDiff > yDiff) {
@@ -58,9 +54,7 @@ void __fastcall CanvasTool::DrawLine(Visuals::GraphicsBuffer& canvas, const TRec
                 py += dy;
             }
         }
-    }
-    else
-    {
+    } else {
         // inc y by 1, x by dx
         for (auto i = 0; i <= yDiff; ++i) {
             auto pt = TPoint(px, py);
