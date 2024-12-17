@@ -24,7 +24,7 @@ private:
 protected:
     // map member variables to property names
     // the loader will set the value based on the property type
-    // TODO: Can we improve this to include the desired data type for safer conversion
+    // TODO -cImprovement: Can we improve this to include the desired data type for safer conversion
     std::map<String, void*>     m_PropertyMap;
 
 protected:

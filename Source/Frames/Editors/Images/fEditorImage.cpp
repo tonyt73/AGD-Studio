@@ -70,7 +70,8 @@ void __fastcall TfrmEditorImage::OnDocumentSet()
     m_ActionMap["edit.undo" ] = actUndo;
     m_ActionMap["edit.redo" ] = actRedo;
 
-    // TODO: Finish the image editor tool set
+    // TODO -cDrawing: Finish the image editor tool set
+
 //    m_CanvasToolMap[btnSelect->Tag] = std::make_unique<ImageSelectTool>();
 //    m_CanvasToolMap[btnText->Tag] = std::make_unique<CanvasTextTool>();
     m_CanvasToolMap[btnPencil->Tag] = std::make_unique<CanvasPencilTool>();

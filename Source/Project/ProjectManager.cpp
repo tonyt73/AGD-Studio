@@ -124,7 +124,7 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
         if (project->Files().size() == 0)
         {
             // create the map, controls, jump table and window documents
-            // TODO: Change the interface to take the class type and name
+            // TODO -cImprovement: Change the interface to take the class type and name
             theDocumentManager.Add("Map"     , "Tiled"     , "Tile Map" , "");
             theDocumentManager.Add("Controls", "List"      , "Controls" , "");
             theDocumentManager.Add("Jump"    , "Table"     , "JumpTable", "");

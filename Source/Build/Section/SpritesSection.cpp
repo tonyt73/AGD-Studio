@@ -28,7 +28,7 @@ void __fastcall SpritesSection::Execute()
     dm.GetAllOfType("Image", images);
     for (auto image : images)
     {
-        // TODO: Add support for big images
+        // TODO -cBuild: Add support for big images
         auto sprite = dynamic_cast<Project::SpriteDocument*>(image);
         if (sprite != nullptr)
         {
