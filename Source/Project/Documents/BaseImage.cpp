@@ -129,7 +129,9 @@ String __fastcall ImageDocument::GetFrame(int frame) const
 String __fastcall ImageDocument::GetFrameIndexed(int frame, int index) const
 {
     if (0 <= frame && frame < m_Frames.size() && 0 <= index && index < ImagesPerFrame) {
-        return m_Frames[frame];
+        auto fullFrame = m_Frames[frame];
+        auto sizePerSubImage = fullFrame.Length() / ImagesPerFrame;
+        return fullFrame.SubString(index * sizePerSubImage, sizePerSubImage);
     }
     return "";
 }
