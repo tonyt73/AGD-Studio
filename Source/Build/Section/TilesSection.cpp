@@ -27,12 +27,10 @@ void __fastcall TilesSection::Execute()
     auto imgSize = dm.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile].Minimum;
     Project::DocumentList images;
     dm.GetAllOfType("Image", images);
-    for (auto image : images)
-    {
-        // TODO -cBuild: Add support for big images
+    for (auto image : images) {
+        //TODO 1 -cBuild: Add support for big images
         auto tile = dynamic_cast<Project::TileDocument*>(image);
-        if (tile != nullptr)
-        {
+        if (tile != nullptr) {
             String line = "DEFINEBLOCK ";
             line += g_BlockTypes[StrToInt(tile->GetLayer("blocktype"))];
             AddLine(line);
@@ -43,12 +41,9 @@ void __fastcall TilesSection::Execute()
             auto data = image->GetExportNativeFormat();
             line = "            ";
             // export the machine graphics data
-            auto i = 0;
-            for (auto byte : data)
-            {
-                line += IntToStr(byte) + " ";
-                if (++i == imgSize.Width)
-                {
+            for (auto byte : enumerate(data)) {
+                line += IntToStr(byte.item) + " ";
+                if (byte.index % imgSize.Width == 0) {
                     line += "\r\n            ";
                 }
             }

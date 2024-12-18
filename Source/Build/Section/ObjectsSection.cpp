@@ -37,7 +37,7 @@ void __fastcall ObjectsSection::Execute()
     dm.GetAllOfType("Image", images);
     for (auto image : images)
     {
-        // TODO -cBuild: Add support for big images
+        //TODO 1 -cBuild: Add support for big images
         auto object = dynamic_cast<Project::ObjectDocument*>(image);
         if (object != nullptr)
         {
@@ -48,7 +48,7 @@ void __fastcall ObjectsSection::Execute()
             auto image = std::make_unique<Visuals::Image>(object, gm);
             image->ChangeFrame(0);
             auto data = image->GetExportNativeFormat();
-            // TODO: Use the importer definition of the machine to determine if an object.colour parameter is needed
+            // TODO -cImprovement: Use the importer definition of the machine to determine if an object.colour parameter is needed
             if (gm.TypeOfBuffer == Visuals::BufferType::btAttribute) // && importer.contains("Objects", "object.colour")
             {
                 // extract the image colour and remove the last 4 bytes (attributes) from the data
@@ -67,13 +67,11 @@ void __fastcall ObjectsSection::Execute()
             AddLine(line);
             // export the machine graphics data
             line = "             ";
-            auto x = 0;
-            for (auto byte : data)
+            for (auto byte : enumerate(data))
             {
-                line += IntToStr(byte) + " ";
-                if (++x == imgSize.Width)
+                line += IntToStr(byte.item) + " ";
+                if (byte.index % imgSize.Width == 0)
                 {
-                    x = 0;
                     AddLine(line);
                     line = "             ";
                 }

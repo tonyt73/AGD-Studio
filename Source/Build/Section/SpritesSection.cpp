@@ -26,28 +26,22 @@ void __fastcall SpritesSection::Execute()
     auto imgSize = dm.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile].Minimum;
     Project::DocumentList images;
     dm.GetAllOfType("Image", images);
-    for (auto image : images)
-    {
-        // TODO -cBuild: Add support for big images
+    for (auto image : images) {
+        //TODO 1 -cBuild: Add support for big images
         auto sprite = dynamic_cast<Project::SpriteDocument*>(image);
-        if (sprite != nullptr)
-        {
+        if (sprite != nullptr) {
             String line = "DEFINESPRITE " + IntToStr(sprite->Frames) + " ";
             AddLine(line);
             const auto& gm = (*(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()));
             auto image = std::make_unique<Visuals::Image>(sprite, gm);
-            for (auto i = 0; i < sprite->Frames; i++)
-            {
+            for (auto fi = 0; fi < sprite->Frames; fi++) {
                 line = "             ";
-                image->ChangeFrame(i);
+                image->ChangeFrame(fi);
                 auto data = image->GetExportNativeFormat();
                 // export the machine graphics data
-                auto w = 0;
-                for (auto byte : data)
-                {
-                    line += IntToStr(byte) + " ";
-                    if (++w % imgSize.Width == 0)
-                    {
+                for (auto byte : enumerate(data)) {
+                    line += IntToStr(byte.item) + " ";
+                    if (byte.index % imgSize.Width == 0) {
                         line += "\r\n             ";
                     }
                 }

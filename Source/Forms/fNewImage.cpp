@@ -18,14 +18,7 @@ __fastcall TfrmNewImage::TfrmNewImage(TComponent* Owner)
 //---------------------------------------------------------------------------
 void __fastcall TfrmNewImage::FormCreate(TObject *Sender)
 {
-    // do not allow multiple character sets
-    if (dynamic_cast<Project::Document*>(theDocumentManager.Get("Image", "Character Set", "Game Font")) != nullptr) {
-        // remove font as an image option
-        tbcImageTypes->Tabs->Delete(3);
-        tbcImageTypes->TabWidth = (tbcImageTypes->Width / 3) - 1;
-    }
-
-    // check current type values
+    // set up the controls for the current image type
     tbcImageTypesChange(nullptr);
 }
 //---------------------------------------------------------------------------
@@ -44,49 +37,53 @@ String __fastcall TfrmNewImage::GetType() const
     switch (tbcImageTypes->TabIndex) {
         case 0: return "Object";
         case 1: return "Sprite";
+        default:
         case 2: return "Tile";
-        default: return "Character Set";
-    }
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmNewImage::edtWidthExit(TObject *Sender)
-{
-    if (edtWidth->Enabled && (int)edtWidth->Value % (int)edtWidth->Increment != 0) {
-        edtWidth->Value = ((int)((edtWidth->Value + edtWidth->Increment / 2) / edtWidth->Increment)) * edtWidth->Increment;
-    }
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmNewImage::edtHeightExit(TObject *Sender)
-{
-    if (edtHeight->Enabled && (int)edtHeight->Value % (int)edtHeight->Increment != 0) {
-        edtHeight->Value = ((int)((edtHeight->Value + edtHeight->Increment / 2) / edtHeight->Increment)) * edtHeight->Increment;
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmNewImage::tbcImageTypesDrawTab(TCustomTabControl *Control, int TabIndex, const TRect &Rect, bool Active)
 {
+    // clear the rect
     Control->Canvas->Brush->Color = ThemeManager::Background;
     Control->Canvas->FillRect(Rect);
 
+    // get the bottom 8 pixels as a rect
     auto rect = Rect.SplitRect(srBottom, 8);
-    Control->Canvas->Brush->Color = Active ? ThemeManager::Highlight : ThemeManager::Shadow;
-    auto dy = Active ? 2 : -1;
-    rect.Inflate(-2, dy, -1, dy);
-    Control->Canvas->FillRect(rect);
+    // is active?
+    if (Active) {
+        // yes, change the brush color to highlight
+        Control->Canvas->Brush->Color = ThemeManager::Highlight;
+        // draw the bottom rect in the current brush color
+        rect.Inflate(-2, 2, -1, 2);
+        Control->Canvas->FillRect(rect);
+        Control->Canvas->Font->Style <<= fsBold;
+    } else {
+        // no, draw a rectangle (not filled rect) at the bottom in the highlight color
+        rect.Inflate(-2, 0, -1, 0);
+        Control->Canvas->Pen->Color = ThemeManager::Highlight;
+        Control->Canvas->Rectangle(rect);
+        Control->Canvas->Font->Style >>= fsBold;
+    }
 
     // draw the caption
     auto tab = dynamic_cast<TTabControl*>(Control);
     auto caption = tab->Tabs->Strings[TabIndex];
     auto tr = Control->Canvas->TextExtent(caption);
     Control->Canvas->Brush->Color = ThemeManager::Background;
-    tab->Font->Color = ThemeManager::Foreground;
+    Control->Canvas->Font->Color = ThemeManager::Foreground;
     Control->Canvas->TextOut(Rect.Left + ((Rect.Width() - tr.cx) / 2), Rect.Top + ((Rect.Height() - tr.cy) / 2) - 3, caption);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmNewImage::tbcImageTypesChange(TObject *Sender)
 {
+    // get the type of image
     auto type = (Visuals::ImageTypes)tbcImageTypes->TabIndex;
+    // and its configuration
     const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
+    // enabled the edit controls, based on it config
+
+    // width
     edtWidth->Enabled = mc.ImageSizing[type].Step.cx != 0;
     lblWidth->Enabled = mc.ImageSizing[type].Step.cx != 0;
     edtWidth->MinValue = mc.ImageSizing[type].Minimum.cx;
@@ -94,6 +91,7 @@ void __fastcall TfrmNewImage::tbcImageTypesChange(TObject *Sender)
     edtWidth->Increment = mc.ImageSizing[type].Step.cx;
     edtWidth->Value = mc.ImageSizing[type].Minimum.cx;
 
+    // and height
     edtHeight->Enabled = mc.ImageSizing[type].Step.cy != 0;
     lblHeight->Enabled = mc.ImageSizing[type].Step.cy != 0;
     edtHeight->MaxValue = mc.ImageSizing[type].Maximum.cy;

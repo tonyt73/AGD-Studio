@@ -24,8 +24,6 @@ __published:    // IDE-managed Components
     TElSpinEdit *edtWidth;
     TElSpinEdit *edtHeight;
     TTabControl *tbcImageTypes;
-    void __fastcall edtWidthExit(TObject *Sender);
-    void __fastcall edtHeightExit(TObject *Sender);
     void __fastcall FormCreate(TObject *Sender);
     void __fastcall tbcImageTypesDrawTab(TCustomTabControl *Control, int TabIndex,
           const TRect &Rect, bool Active);

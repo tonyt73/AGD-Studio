@@ -4,7 +4,7 @@ object frmNewImage: TfrmNewImage
   BorderStyle = bsDialog
   Caption = 'New Image'
   ClientHeight = 142
-  ClientWidth = 348
+  ClientWidth = 343
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,7 +15,7 @@ object frmNewImage: TfrmNewImage
   ScreenSnap = True
   OnCreate = FormCreate
   DesignSize = (
-    348
+    343
     142)
   TextHeight = 15
   object lblWidth: TLabel
@@ -33,7 +33,7 @@ object frmNewImage: TfrmNewImage
     ParentFont = False
   end
   object lblHeight: TLabel
-    Left = 210
+    Left = 205
     Top = 64
     Width = 42
     Height = 17
@@ -51,18 +51,17 @@ object frmNewImage: TfrmNewImage
   object Panel1: TPanel
     Left = 0
     Top = 102
-    Width = 348
+    Width = 343
     Height = 40
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 0
     TabStop = True
-    ExplicitWidth = 349
     DesignSize = (
-      348
+      343
       40)
     object btnOk: TButton
-      Left = 177
+      Left = 172
       Top = 10
       Width = 75
       Height = 25
@@ -71,10 +70,10 @@ object frmNewImage: TfrmNewImage
       Default = True
       ModalResult = 1
       TabOrder = 0
-      ExplicitLeft = 178
+      ExplicitLeft = 177
     end
     object btnCancel: TButton
-      Left = 261
+      Left = 256
       Top = 10
       Width = 75
       Height = 25
@@ -83,7 +82,7 @@ object frmNewImage: TfrmNewImage
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 1
-      ExplicitLeft = 262
+      ExplicitLeft = 261
     end
   end
   object edtWidth: TElSpinEdit
@@ -102,7 +101,6 @@ object frmNewImage: TfrmNewImage
     Flat = True
     ParentFont = False
     TabOrder = 1
-    OnExit = edtWidthExit
   end
   object edtHeight: TElSpinEdit
     Left = 259
@@ -122,12 +120,11 @@ object frmNewImage: TfrmNewImage
     Flat = True
     ParentFont = False
     TabOrder = 2
-    OnExit = edtHeightExit
   end
   object tbcImageTypes: TTabControl
     Left = 0
     Top = 0
-    Width = 348
+    Width = 343
     Height = 40
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
@@ -138,15 +135,14 @@ object frmNewImage: TfrmNewImage
     HotTrack = True
     OwnerDraw = True
     ParentFont = False
-    TabHeight = 40
+    TabHeight = 38
     TabOrder = 3
     Tabs.Strings = (
       'OBJECT'
       'SPRITE'
-      'TILE'
-      'CHAR SET')
+      'TILE')
     TabIndex = 0
-    TabWidth = 86
+    TabWidth = 113
     StyleElements = [seFont, seClient]
     OnChange = tbcImageTypesChange
     OnDrawTab = tbcImageTypesDrawTab
