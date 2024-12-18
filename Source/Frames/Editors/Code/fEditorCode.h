@@ -19,6 +19,7 @@
 //---------------------------------------------------------------------------
 #include "LMDSedDocument.hpp"
 #include "LMDSedView.hpp"
+#include "LMDSedFindDialog.hpp"
 //---------------------------------------------------------------------------
 #include "../fEditor.h"
 #include "Messaging/Event.h"
