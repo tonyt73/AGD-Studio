@@ -23,7 +23,7 @@ public:
                     __fastcall  CanvasTool();
     virtual         __fastcall ~CanvasTool();
 
-                                // TODO -cDrawing: Set selection rect
+                                //TODO -cDrawing: Set selection rect
 
                                 // return undo string
             String  __fastcall  Begin(Visuals::GraphicsBuffer& canvas, const TPoint& pt, const TShiftState& buttons);

@@ -15,14 +15,6 @@
 #include <Vcl.Forms.hpp>
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.ButtonGroup.hpp>
-#include "LMDControl.hpp"
-#include "LMDCustomBevelPanel.hpp"
-#include "LMDCustomControl.hpp"
-#include "LMDCustomPanel.hpp"
-#include "LMDCustomPanelFill.hpp"
-#include "LMDCustomParentPanel.hpp"
-#include "LMDCustomSheetControl.hpp"
-#include "LMDPageControl.hpp"
 //---------------------------------------------------------------------------
 class TfrmSettings : public TForm
 {

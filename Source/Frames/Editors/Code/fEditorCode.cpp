@@ -13,19 +13,9 @@
 #include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
+#pragma link "fEditor"
 #pragma link "LMDSedDocument"
 #pragma link "LMDSedView"
-#pragma link "LMDButtonPanel"
-#pragma link "LMDControl"
-#pragma link "LMDCustomBevelPanel"
-#pragma link "LMDCustomControl"
-#pragma link "LMDCustomPanel"
-#pragma link "LMDCustomPanelFill"
-#pragma link "LMDCustomParentPanel"
-#pragma link "LMDCustomToolBar"
-#pragma link "LMDToolBar"
-#pragma link "fEditor"
-#pragma link "fEditor"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 const int SCHEMES_EXTS_COUNT = 5;

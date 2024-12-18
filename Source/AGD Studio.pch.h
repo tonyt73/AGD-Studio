@@ -29,6 +29,10 @@
 #include <vector>
 #include <map>
 #include <stack>
+#include <iterator>
+//---------------------------------------------------------------------------
+// Templates
+#include "Templates/enumerate.h"
 //---------------------------------------------------------------------------
 #pragma hdrstop
 

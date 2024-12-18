@@ -10,14 +10,6 @@
 #include "Services/Folders.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-#pragma link "LMDControl"
-#pragma link "LMDCustomBevelPanel"
-#pragma link "LMDCustomControl"
-#pragma link "LMDCustomPanel"
-#pragma link "LMDCustomPanelFill"
-#pragma link "LMDCustomParentPanel"
-#pragma link "LMDCustomSheetControl"
-#pragma link "LMDPageControl"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 __fastcall TfrmSettings::TfrmSettings(TComponent* Owner)

@@ -1,4 +1,4 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{D0C2ACDB-659A-4891-B603-0D187CA01644}</ProjectGuid>
         <ProjectVersion>20.2</ProjectVersion>
@@ -7,10 +7,9 @@
         <MainSource>AGD Studio.cpp</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <Platform Condition="'$(Platform)'==''">Win64</Platform>
         <TargetedPlatforms>1048579</TargetedPlatforms>
         <ProjectName Condition="'$(ProjectName)'==''">AGD Studio</ProjectName>
-        <CC_Suffix Condition="'$(CC_Suffix)'==''">c</CC_Suffix>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -74,7 +73,7 @@
         <_TCHARMapping>wchar_t</_TCHARMapping>
         <AppEnableHighDPI>true</AppEnableHighDPI>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
-        <AllPackageLibs>rtl.lib;vcl.lib;vclimg.lib;vclactnband.lib;vclx.lib;lmdrtrtlx.lib;lmdrtl.lib;lmdrtinspector.lib;lmdrtdocking.lib;lmdrtelcore.lib;lmdrtsyntax.lib;VclSmp.lib;lmdrtcore.lib;vclwinx.lib;lmdrtprint.lib;lmdrtelpro.lib;xmlrtl.lib;bindengine.lib;DbxCommonDriver.lib;dbrtl.lib;lmdrtshell.lib;bcbsmp.lib</AllPackageLibs>
+        <AllPackageLibs>rtl.lib;vcl.lib;vclimg.lib;vclactnband.lib;vclx.lib;lmdrtrtlx.lib;lmdrtl.lib;lmdrtinspector.lib;lmdrtdocking.lib;lmdrtelcore.lib;lmdrtsyntax.lib;lmdrtcore.lib;vclwinx.lib;lmdrtelpro.lib;xmlrtl.lib;lmdrtshell.lib;DbxCommonDriver.lib;dbrtl.lib;bindengine.lib;lmdrtprint.lib</AllPackageLibs>
         <BCC_CallingConvention>fastcall</BCC_CallingConvention>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <BCC_DisableWarnings>true</BCC_DisableWarnings>
@@ -184,14 +183,14 @@
         <Icon_MainIcon>icon.ico</Icon_MainIcon>
         <ILINK_DisableIncrementalLinking>true</ILINK_DisableIncrementalLinking>
         <ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)$(CC_SUFFIX)\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;VclSmp.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;xmlrtl.bpi;bindengine.bpi;lmdrtshell.bpi</LinkPackageImports>
-        <LinkPackageStatics>lmdrtprint.lib;DbxCommonDriver.lib;dbrtl.lib;bcbsmp.lib</LinkPackageStatics>
+        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;xmlrtl.bpi;lmdrtshell.bpi;bindengine.bpi</LinkPackageImports>
+        <LinkPackageStatics>DbxCommonDriver.lib;dbrtl.lib;lmdrtprint.lib</LinkPackageStatics>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppEnableHighDPI>true</AppEnableHighDPI>
         <ILINK_DisableIncrementalLinking>true</ILINK_DisableIncrementalLinking>
         <Icon_MainIcon>icon.ico</Icon_MainIcon>
-        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;VclSmp.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtprint.bpi;lmdrtelpro.bpi;xmlrtl.bpi;bindengine.bpi;DbxCommonDriver.bpi;dbrtl.bpi;lmdrtshell.bpi;bcbsmp.bpi</LinkPackageImports>
+        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;xmlrtl.bpi;lmdrtshell.bpi;DbxCommonDriver.bpi;dbrtl.bpi;bindengine.bpi;lmdrtprint.bpi</LinkPackageImports>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>
@@ -710,6 +709,9 @@
             <DependentOn>Settings\ThemeManager.h</DependentOn>
             <BuildOrder>95</BuildOrder>
         </CppCompile>
+        <None Include="Templates\enumerate.h">
+            <BuildOrder>110</BuildOrder>
+        </None>
         <CppCompile Include="Visuals\AttributeGraphicsBuffer.cpp">
             <DependentOn>Visuals\AttributeGraphicsBuffer.h</DependentOn>
             <BuildOrder>104</BuildOrder>
@@ -745,35 +747,35 @@
             <DependentOn>Visuals\ULAPlusGraphicsBuffer.h</DependentOn>
             <BuildOrder>110</BuildOrder>
         </CppCompile>
-        <FormResources Include="Frames\Editors\Messages\fEditorMessages.dfm"/>
-        <FormResources Include="Frames\IDE\fIDE.dfm"/>
-        <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
-        <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
-        <FormResources Include="Frames\Editors\Music\fEditorMusic.dfm"/>
-        <FormResources Include="Frames\Editors\Window\fEditorWindow.dfm"/>
         <FormResources Include="Forms\fAbout.dfm"/>
         <FormResources Include="Forms\fAdvancedSettings.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fPaletteBitmap.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fPaletteMonoAttribute.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fSelectionImage.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fEditorImage.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fMultiImageView.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fPaletteAttribute.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fToolbar.dfm"/>
-        <FormResources Include="Frames\Editors\Map\fAssetSelection.dfm"/>
-        <FormResources Include="Frames\Editors\Map\fEditorMap.dfm"/>
-        <FormResources Include="Frames\Editors\Map\fLabelledImage.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fToolbarShape.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fULAplusBitmap.dfm"/>
-        <FormResources Include="Frames\Editors\JumpTable\fEditorJumpTable.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fBlockTypes.dfm"/>
-        <FormResources Include="Frames\Editors\Code\fEditorCode.dfm"/>
-        <FormResources Include="Frames\Editors\Controls\fEditorControls.dfm"/>
-        <FormResources Include="Frames\Editors\Controls\fKeyCapture.dfm"/>
         <FormResources Include="Forms\fMain.dfm"/>
         <FormResources Include="Forms\fNewImage.dfm"/>
         <FormResources Include="Forms\fSettings.dfm"/>
+        <FormResources Include="Frames\Editors\Code\fEditorCode.dfm"/>
+        <FormResources Include="Frames\Editors\Controls\fEditorControls.dfm"/>
+        <FormResources Include="Frames\Editors\Controls\fKeyCapture.dfm"/>
         <FormResources Include="Frames\Editors\fEditor.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fBlockTypes.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fEditorImage.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fMultiImageView.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fPaletteAttribute.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fPaletteBitmap.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fPaletteMonoAttribute.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fSelectionImage.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fToolbar.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fToolbarShape.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fULAplusBitmap.dfm"/>
+        <FormResources Include="Frames\Editors\JumpTable\fEditorJumpTable.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fAssetSelection.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fEditorMap.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fLabelledImage.dfm"/>
+        <FormResources Include="Frames\Editors\Messages\fEditorMessages.dfm"/>
+        <FormResources Include="Frames\Editors\Music\fEditorMusic.dfm"/>
+        <FormResources Include="Frames\Editors\Window\fEditorWindow.dfm"/>
+        <FormResources Include="Frames\IDE\fIDE.dfm"/>
+        <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
+        <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -825,11 +827,13 @@
                 </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin64\cc64280.dll" Class="DependencyModule"/>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin64\cc64280mt.dll" Class="DependencyModule"/>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin64\cc64290.dll" Class="DependencyModule"/>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin64\cc64290.dll" Class="DependencyModule">
                     <Platform Name="Win64">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin64\cc64290mt.dll" Class="DependencyModule"/>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin64\cc64290mt.dll" Class="DependencyModule">
                     <Platform Name="Win64">
                         <Overwrite>true</Overwrite>
@@ -842,11 +846,13 @@
                 </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32280.dll" Class="DependencyModule"/>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32280mt.dll" Class="DependencyModule"/>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32290.dll" Class="DependencyModule"/>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32290.dll" Class="DependencyModule">
                     <Platform Name="Win32">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32290mt.dll" Class="DependencyModule"/>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32290mt.dll" Class="DependencyModule">
                     <Platform Name="Win32">
                         <Overwrite>true</Overwrite>
@@ -854,11 +860,13 @@
                 </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32c280.dll" Class="DependencyModule"/>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32c280mt.dll" Class="DependencyModule"/>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32c290.dll" Class="DependencyModule"/>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32c290.dll" Class="DependencyModule">
                     <Platform Name="Win32">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32c290mt.dll" Class="DependencyModule"/>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32c290mt.dll" Class="DependencyModule">
                     <Platform Name="Win32">
                         <Overwrite>true</Overwrite>
@@ -867,12 +875,24 @@
                 <DeployFile LocalName=".\Binaries\Win32\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Binaries\Win32\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Binaries\Win64\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput"/>
+                <DeployFile LocalName=".\Binaries\Win64\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win64">
+                        <RemoteName>AGD Studio.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName=".\Binaries\Win64\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Win32\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Win32\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Win64\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Win64\Release\AGD_Studio.exe" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName="Project\README.md" Configuration="Debug" Class="ProjectFile"/>
+                <DeployFile LocalName="Project\README.md" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win64">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Project\README.md" Configuration="Release" Class="ProjectFile"/>
                 <DeployFile LocalName="README.md" Configuration="Debug" Class="ProjectFile"/>
                 <DeployClass Name="AdditionalDebugSymbols">

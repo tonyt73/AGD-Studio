@@ -9,16 +9,8 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "fAssetSelection"
-#pragma link "LMDButtonPanel"
-#pragma link "LMDControl"
-#pragma link "LMDCustomBevelPanel"
-#pragma link "LMDCustomControl"
-#pragma link "LMDCustomPanel"
-#pragma link "LMDCustomPanelFill"
-#pragma link "LMDCustomParentPanel"
-#pragma link "LMDCustomToolBar"
-#pragma link "LMDToolBar"
 #pragma link "fAssetSelection"
+#pragma link "LMDDckSite"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 const float g_Scales[] = { 0.33f, 0.5f, 1.0f, 2.0f, 3.0f, 4.0f, 6.0f, 8.0f, 16.f };
@@ -84,11 +76,12 @@ void __fastcall TfrmEditorMap::OnInitialise()
     m_ActionMap["edit.cut"] = actCut;
     m_ActionMap["edit.paste"] = actPaste;
 
+    m_TiledDocument = dynamic_cast<Project::TiledMapDocument*>(Document);
+
     // create the tile editors
-    // TODO: change the size to ???
     m_Workspace = std::make_unique<TileEditor>(imgWorkspace, m_ImageMap, TSize(Project::g_MaxMapRoomsAcross, Project::g_MaxMapRoomsDown), true, true, 144, false);
     m_Workspace->Mode = TileEditor::temSelect;
-    m_Workspace->StartRoom = TPoint(m_Document->StartRoomX, m_Document->StartRoomY);
+    m_Workspace->StartRoom = TPoint(m_TiledDocument->StartRoomX, m_TiledDocument->StartRoomY);
     m_Workspace->LockIcon = imgLock;
     m_Workspace->RetrieveRoomIndex = OnRetrieveRoomIndex;
 
@@ -103,13 +96,13 @@ void __fastcall TfrmEditorMap::OnInitialise()
     m_RoomSelector->GridRoom = true;
     m_RoomSelector->ShowStartRoom = true;
     m_RoomSelector->ShowSelectedRoom = true;
-    m_RoomSelector->StartRoom = TPoint(m_Document->StartRoomX, m_Document->StartRoomY);
+    m_RoomSelector->StartRoom = TPoint(m_TiledDocument->StartRoomX, m_TiledDocument->StartRoomY);
     m_RoomSelector->Scale = 0.5f;
     m_RoomSelector->RetrieveRoomIndex = OnRetrieveRoomIndex;
     // and set their tile sets
-    m_Workspace->SetEntities(m_Document->Get(Project::meMap));
-    m_ScratchPad->SetEntities(m_Document->Get(Project::meScratchPad));
-    m_RoomSelector->SetEntities(m_Document->Get(Project::meMap));
+    m_Workspace->SetEntities(m_TiledDocument->Get(Project::meMap));
+    m_ScratchPad->SetEntities(m_TiledDocument->Get(Project::meScratchPad));
+    m_RoomSelector->SetEntities(m_TiledDocument->Get(Project::meMap));
     // On MapEntity Select handler
     m_Workspace->OnEntitySelected = OnWorkspaceEntitySelected;
 
@@ -228,7 +221,7 @@ void __fastcall TfrmEditorMap::imgWorkspaceMouseUp(TObject *Sender, TMouseButton
 {
     m_Workspace->OnMouseUp(Button,Shift, X, Y);
     // copy the workspace to the map document
-    m_Document->Set(actEditModeSingleScreen->Checked ? Project::meRoom : Project::meMap, m_Workspace->GetEntities());
+    m_TiledDocument->Set(actEditModeSingleScreen->Checked ? Project::meRoom : Project::meMap, m_Workspace->GetEntities());
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::imgRoomSelectorMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
@@ -264,7 +257,7 @@ void __fastcall TfrmEditorMap::imgScratchPadMouseUp(TObject *Sender, TMouseButto
 {
     m_ScratchPad->OnMouseUp(Button,Shift, X, Y);
     // copy the scratch pad to the map document
-    m_Document->Set(Project::meScratchPad, m_ScratchPad->GetEntities());
+    m_TiledDocument->Set(Project::meScratchPad, m_ScratchPad->GetEntities());
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::RefreshAssets()
@@ -336,7 +329,7 @@ void __fastcall TfrmEditorMap::OnEvent(const Event& event)
     }
     else if (event.Id == "map.updated")
     {
-        m_RoomSelector->SetEntities(m_Document->Get(Project::meMap));
+        m_RoomSelector->SetEntities(m_TiledDocument->Get(Project::meMap));
         m_RoomSelector->UpdateMap();
     }
     else if (event.Id == "document.added")
@@ -352,7 +345,7 @@ void __fastcall TfrmEditorMap::OnRoomSelected(const RoomSelected& event)
 {
     if (event.Id == "room.selected")
     {
-        m_Workspace->SetEntities(m_Document->Get(Project::meRoom, event.Room));
+        m_Workspace->SetEntities(m_TiledDocument->Get(Project::meRoom, event.Room));
         m_Workspace->UpdateMap();
         Bus::Publish<Event>(Event("update.properties"));
     }
@@ -372,9 +365,9 @@ void __fastcall TfrmEditorMap::OnDocumentChanged(const DocumentChange<String>& m
 {
     if (message.Id == "document.removing")
     {
-        m_Workspace->SetEntities(m_Document->Get(actEditModeSingleScreen->Checked ? Project::meRoom : Project::meMap, m_RoomSelector->SelectedRoom));
-        m_ScratchPad->SetEntities(m_Document->Get(Project::meScratchPad));
-        m_RoomSelector->SetEntities(m_Document->Get(Project::meMap));
+        m_Workspace->SetEntities(m_TiledDocument->Get(actEditModeSingleScreen->Checked ? Project::meRoom : Project::meMap, m_RoomSelector->SelectedRoom));
+        m_ScratchPad->SetEntities(m_TiledDocument->Get(Project::meScratchPad));
+        m_RoomSelector->SetEntities(m_TiledDocument->Get(Project::meMap));
         m_Workspace->UpdateMap();
         m_ScratchPad->UpdateMap();
         m_RoomSelector->UpdateMap();
@@ -518,12 +511,12 @@ void __fastcall TfrmEditorMap::actDeleteExecute(TObject *Sender)
         if (dpWorkspace == m_ActivePanel)
         {
             m_Workspace->DeleteSelection();
-            m_Document->Set(actEditModeSingleScreen->Checked ? Project::meRoom : Project::meMap, m_Workspace->GetEntities());
+            m_TiledDocument->Set(actEditModeSingleScreen->Checked ? Project::meRoom : Project::meMap, m_Workspace->GetEntities());
         }
         else if (dpScratchPad == m_ActivePanel)
         {
             m_ScratchPad->DeleteSelection();
-            m_Document->Set(Project::meScratchPad, m_ScratchPad->GetEntities());
+            m_TiledDocument->Set(Project::meScratchPad, m_ScratchPad->GetEntities());
         }
     }
 }
@@ -590,7 +583,6 @@ void __fastcall TfrmEditorMap::btnWSGridTileClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::btnSPGridTileClick(TObject *Sender)
 {
-    //btnSPGridTile->Down = !btnSPGridTile->Down;
     m_ScratchPad->GridTile = btnSPGridTile->Down;
 }
 //---------------------------------------------------------------------------
@@ -640,7 +632,7 @@ void __fastcall TfrmEditorMap::actEditModeFullMapExecute(TObject *Sender)
         dpRoomSelector->PanelVisible = actEditModeSingleScreen->Checked;
         dpRoomSelector->Zone->Height = std::max(dpRoomSelector->Zone->Height, 256);
         m_Workspace->Rooms = actEditModeSingleScreen->Checked ? TSize(1, 1) : TSize(Project::g_MaxMapRoomsAcross, Project::g_MaxMapRoomsDown);
-        m_Workspace->SetEntities(m_Document->Get(actEditModeSingleScreen->Checked ? Project::meRoom : Project::meMap, m_RoomSelector->SelectedRoom));
+        m_Workspace->SetEntities(m_TiledDocument->Get(actEditModeSingleScreen->Checked ? Project::meRoom : Project::meMap, m_RoomSelector->SelectedRoom));
         m_Workspace->ShowStartRoom = !actEditModeSingleScreen->Checked && actToggleStartRoom->Checked;
         m_Workspace->UpdateMap();
         m_RoomSelector->UpdateMap();
@@ -770,7 +762,7 @@ void __fastcall TfrmEditorMap::actToggleRoomNumbersExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 int __fastcall TfrmEditorMap::OnRetrieveRoomIndex(const TPoint& pt, bool newIndex)
 {
-    return m_Document->GetRoomIndex(pt, newIndex);
+    return m_TiledDocument->GetRoomIndex(pt, newIndex);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actToggleShowLocksExecute(TObject *Sender)

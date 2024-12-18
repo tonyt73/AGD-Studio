@@ -47,7 +47,7 @@ void __fastcall TfrmMain::FormCreate(TObject *Sender)
         auto project = Services::File::NameWithExtension(ParamStr(1));
         theProjectManager.Open(Services::File::Combine(path, project));
     }
-    // TODO: Remove: Used to generate initial JSON config files
+    // TODO -cConfig Setup: Remove: Used to generate initial JSON config files
     //auto pw = std::make_unique<PaletteWriter>();
     //auto pw = std::make_unique<GraphicsModeWriter>();
     //auto pw = std::make_unique<MachineConfigWriter>();

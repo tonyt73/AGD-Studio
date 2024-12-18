@@ -24,14 +24,12 @@
 #include <Vcl.ImageCollection.hpp>
 #include <Vcl.VirtualImageList.hpp>
 #include <Xml.XMLIntf.hpp>
-#include "ElMenus.hpp"
 #include "ElTreeInplaceEditors.hpp"
 #include "ElXPThemedControl.hpp"
 #include "ElXTree.hpp"
+#include "LMDDckSite.hpp"
 #include "LMDInsPropInsp.hpp"
 #include "LMDInsPropPage.hpp"
-#include "LMDDckSite.hpp"
-#include "LMDPNGImageList.hpp"
 //---------------------------------------------------------------------------
 #include "Build/BuildManager.h"
 #include "Factories/DocumentEditorFactory.h"

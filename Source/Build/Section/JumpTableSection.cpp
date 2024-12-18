@@ -24,8 +24,7 @@ void __fastcall JumpTableSection::Execute()
     const auto& JumpTable = (Project::JumpTableDocument*)theDocumentManager.Get("Jump", "Table", "JumpTable");
 
     String def = "DEFINEJUMP ";
-    for (auto i = 0; i < JumpTable->Count; i++)
-    {
+    for (auto i = 0; i < JumpTable->Count; i++) {
         def += IntToStr(JumpTable->RawStep(i));
         def += " ";
     }

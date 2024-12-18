@@ -1,3 +1,9 @@
+#pragma link "ElTreeInplaceEditors"
+#pragma link "ElXPThemedControl"
+#pragma link "ElXTree"
+#pragma link "LMDDckSite"
+#pragma link "LMDInsPropInsp"
+#pragma link "LMDInsPropPage"
 //---------------------------------------------------------------------------
 #include "AGD Studio.pch.h"
 #include "Forms/fAbout.h"

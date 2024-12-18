@@ -2,7 +2,6 @@
 #include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "AgdImporter.h"
-#include <iterator>
 #include "Services/File.h"
 #include "Project/Documents/DocumentManager.h"
 #include "Project/Documents/BaseImage.h"

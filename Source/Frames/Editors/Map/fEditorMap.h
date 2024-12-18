@@ -16,15 +16,6 @@
 #include <Vcl.ToolWin.hpp>
 #include <Vcl.Menus.hpp>
 #include "LMDDckSite.hpp"
-#include "LMDButtonPanel.hpp"
-#include "LMDControl.hpp"
-#include "LMDCustomBevelPanel.hpp"
-#include "LMDCustomControl.hpp"
-#include "LMDCustomPanel.hpp"
-#include "LMDCustomPanelFill.hpp"
-#include "LMDCustomParentPanel.hpp"
-#include "LMDCustomToolBar.hpp"
-#include "LMDToolBar.hpp"
 #include "fAssetSelection.h"
 #include "fEditor.h"
 #include "../../WndProcHandlers.h"
@@ -226,7 +217,7 @@ __published:    // IDE-managed Components
 
 private:    // User declarations
     Registrar                   m_Registrar;        // the messaging registrar
-    Project::TiledMapDocument*  m_Document;         // the map document we are editiing
+    Project::TiledMapDocument*  m_TiledDocument;    // the map document we are editiing
     std::unique_ptr<TileEditor> m_Workspace;        // the main workspace editor
     std::unique_ptr<TileEditor> m_ScratchPad;       // the scratch pad editor
     std::unique_ptr<TileEditor> m_RoomSelector;     // the room selection editor

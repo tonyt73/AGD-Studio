@@ -4,13 +4,11 @@
 //---------------------------------------------------------------------------
 #include <System.Classes.hpp>
 #include <Vcl.Controls.hpp>
-#include <Vcl.ExtCtrls.hpp>
-#include <Vcl.Imaging.pngimage.hpp>
-#include <Vcl.Menus.hpp>
-#include <Vcl.StdCtrls.hpp>
 #include <Vcl.Dialogs.hpp>
+#include <Vcl.ExtCtrls.hpp>
 #include <Vcl.ExtDlgs.hpp>
-#include <Vcl.Buttons.hpp>
+#include <Vcl.Imaging.pngimage.hpp>
+#include <Vcl.StdCtrls.hpp>
 //---------------------------------------------------------------------------
 #include "fSelectionPanel.h"
 #include "Messaging/Event.h"

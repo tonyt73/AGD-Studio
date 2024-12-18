@@ -60,7 +60,7 @@ String __fastcall ControlsDocument::Get(int index)
     {
         return "Enter";
     }
-    // TODO: Add a machine key codes to key names files
+    // TODO -cConfig Setup: Add a machine key codes to key names files
     if (key == '~')
     {
         return "Left Shift";
@@ -109,7 +109,7 @@ void __fastcall ControlsDocument::SetAsciiCode(eAgdKey key, unsigned char keyCod
 //---------------------------------------------------------------------------
 void __fastcall ControlsDocument::DefaultKeys()
 {
-    // TODO: use the machine config defaults
+    // TODO -cConfig Setup: use the machine config defaults
     while (m_Keys.size() < 11)
     {
         m_Keys.push_back(0);
