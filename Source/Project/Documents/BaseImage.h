@@ -24,11 +24,12 @@ private:
    typedef std::map<String, String> LayerMap;
 
             int         __fastcall  CountFrames() const;
-            int         __fastcall  CountImagesPerFrame() const;
-            void        __fastcall  SetFrames(int frames);
-            String      __fastcall  GetFrame(int frame) const;
-            void        __fastcall  SetFrame(int frame, const String& data);
-            String      __fastcall  GetHint(int frame) const;
+            int         __fastcall  CountImagesPerFrame() const;                                // the number of minimum image sized frames, for oversized images. ie. tile 16x8 is 2 images per frame
+            void        __fastcall  SetFrames(int frames);                                      // set the number of frames for the image
+            String      __fastcall  GetFrame(int frame) const;                                  // get the full frame (if oversized)
+            void        __fastcall  SetFrame(int frame, const String& data);                    // set the full frame (if oversized)
+            //void        __fastcall  SetFrameIndexed(int frame, int index, const String& data);  // set a single minimum sized frame for an oversized image, by its index
+            String      __fastcall  GetHint(int frame) const;                                   // used by the character set (font) images
 
 protected:
                 bool                m_MultiFrame;       // flag: supports multiple frames
@@ -60,28 +61,30 @@ protected:
 public:
                         __fastcall  ImageDocument(const String& name);
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ImageDocument(name); };
+            uint32_t    __fastcall  Crc32c(int frame, int index = -1);
 
             bool        __fastcall  AddFrame(int index = -1, const String& hint = "");
             bool        __fastcall  DeleteFrame(int index);
+            String      __fastcall  GetFrameIndexed(int frame, int index) const;                // get a single minimum sized frame from an oversized image, by its index
             String      __fastcall  GetLayer(const String& name);
-            void        __fastcall  SetLayer(const String& name, const String& value);
+            void        __fastcall  SetLayer(const String& name, const String& value);      // set the name of a layer - ie. tiles use block type
             bool        __fastcall  LayerExists(const String& name) const;
             bool        __fastcall  IsFirstOfType() const;
 
-            bool        __property  MultiFrame      = { read = m_MultiFrame                 };
-            bool        __property  CanModifyFrames = { read = m_CanModifyFrames            };
-            bool        __property  CanBeLocked     = { read = m_CanBeLocked                };
-            String      __property  Frame[int index]= { read = GetFrame, write = SetFrame   };
-            String      __property  Hint[int index] = { read = GetHint                      };
-            int         __property  Layers          = { read = GetLayerCount                };
-   Visuals::ImageTypes  __property  ImageType       = { read = m_ImageType                  };
+            bool        __property  MultiFrame                = { read = m_MultiFrame               };
+            bool        __property  CanModifyFrames           = { read = m_CanModifyFrames          };
+            bool        __property  CanBeLocked               = { read = m_CanBeLocked              };
+            String      __property  Frame[int index]          = { read = GetFrame, write = SetFrame };
+            String      __property  Hint[int index]           = { read = GetHint                    };
+            int         __property  Layers                    = { read = GetLayerCount              };
+   Visuals::ImageTypes  __property  ImageType                 = { read = m_ImageType                };
 
 __published:
-            int         __property  Width           = { read = m_Width                      };
-            int         __property  Height          = { read = m_Height                     };
-            int         __property  Frames          = { read = CountFrames                  };
-            int         __property  ImagesPerFrame  = { read = CountImagesPerFrame          };
-            int         __property  Index           = { read = GetIndex                     };
+            int         __property  Width                     = { read = m_Width                    };
+            int         __property  Height                    = { read = m_Height                   };
+            int         __property  Frames                    = { read = CountFrames                };
+            int         __property  ImagesPerFrame            = { read = CountImagesPerFrame        };
+            int         __property  Index                     = { read = GetIndex                   };
 };
 //---------------------------------------------------------------------------
 } // Project namespace

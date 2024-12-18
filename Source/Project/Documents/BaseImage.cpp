@@ -4,6 +4,7 @@
 #include "BaseImage.h"
 #include "DocumentManager.h"
 #include "Visuals/GraphicsTypes.h"
+#include "Templates/crc32c.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -125,6 +126,14 @@ String __fastcall ImageDocument::GetFrame(int frame) const
     return "";
 }
 //---------------------------------------------------------------------------
+String __fastcall ImageDocument::GetFrameIndexed(int frame, int index) const
+{
+    if (0 <= frame && frame < m_Frames.size() && 0 <= index && index < ImagesPerFrame) {
+        return m_Frames[frame];
+    }
+    return "";
+}
+//---------------------------------------------------------------------------
 void __fastcall ImageDocument::SetFrame(int frame, const String& data)
 {
     if (frame == m_Frames.size()) {
@@ -222,6 +231,19 @@ bool __fastcall ImageDocument::LayerExists(const String& name) const
 bool __fastcall ImageDocument::IsFirstOfType() const
 {
     return theDocumentManager.IsFirstOfType(this);
+}
+//---------------------------------------------------------------------------
+uint32_t __fastcall ImageDocument::Crc32c(int frame, int index)
+{
+    String data;
+    if (index == -1) {
+        // get the full frame crc
+        data = Frame[frame];
+    } else {
+        // get the minimum image (i.e 8x8 tiles, 16x16 objects etc), indexed in to the full frame
+        data = Frame[frame, index];
+    }
+    return crc32c::calc(data.c_str(), data.Length());
 }
 //---------------------------------------------------------------------------
 
