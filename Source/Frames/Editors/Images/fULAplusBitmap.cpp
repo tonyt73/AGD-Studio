@@ -271,19 +271,15 @@ void __fastcall TfrmULAplusBitmap::imgSystemColorsMouseLeave(TObject *Sender)
 //---------------------------------------------------------------------------
 int __fastcall TfrmULAplusBitmap::GetInk(int index, int ink) const
 {
-    if (ink == -1)
-        ink = m_Ink;
-    if (index == -1)
-        index = m_Index;
+    if (ink   == -1) ink = m_Ink;
+    if (index == -1) index = m_Index;
     return (index * 16) + ink;
 }
 //---------------------------------------------------------------------------
 int __fastcall TfrmULAplusBitmap::GetPaper(int index, int paper) const
 {
-    if (paper == -1)
-        paper = m_Paper;
-    if (index == -1)
-        index = m_Index;
+    if (paper == -1) paper = m_Paper;
+    if (index == -1) index = m_Index;
     return (index * 16) + 8 + paper;
 }
 //---------------------------------------------------------------------------
