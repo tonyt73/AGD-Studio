@@ -28,7 +28,6 @@ private:
             void        __fastcall  SetFrames(int frames);                                      // set the number of frames for the image
             String      __fastcall  GetFrame(int frame) const;                                  // get the full frame (if oversized)
             void        __fastcall  SetFrame(int frame, const String& data);                    // set the full frame (if oversized)
-            //void        __fastcall  SetFrameIndexed(int frame, int index, const String& data);  // set a single minimum sized frame for an oversized image, by its index
             String      __fastcall  GetHint(int frame) const;                                   // used by the character set (font) images
 
 protected:
@@ -65,7 +64,6 @@ public:
 
             bool        __fastcall  AddFrame(int index = -1, const String& hint = "");
             bool        __fastcall  DeleteFrame(int index);
-            String      __fastcall  GetFrameIndexed(int frame, int index) const;                // get a single minimum sized frame from an oversized image, by its index
             String      __fastcall  GetLayer(const String& name);
             void        __fastcall  SetLayer(const String& name, const String& value);      // set the name of a layer - ie. tiles use block type
             bool        __fastcall  LayerExists(const String& name) const;
