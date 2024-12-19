@@ -1,23 +1,23 @@
 //---------------------------------------------------------------------------
 #include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
-#include "Assembly.h"
+#include "Assemble.h"
 #include "Project/Documents/DocumentManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 using namespace Build;
 //---------------------------------------------------------------------------
-__fastcall Assembly::Assembly(BuildMessages& buildMessages)
+__fastcall Assemble::Assemble(BuildMessages& buildMessages)
 : ShellProcess(buildMessages, bmBuild, "Assemble Game+Engine (Assembly File to Emulator File)")
 {
 }
 //---------------------------------------------------------------------------
-__fastcall Assembly::~Assembly()
+__fastcall Assemble::~Assemble()
 {
 }
 //---------------------------------------------------------------------------
-bool __fastcall Assembly::Execute()
+bool __fastcall Assemble::Execute()
 {
     const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
     auto path = Services::Folders::Project;

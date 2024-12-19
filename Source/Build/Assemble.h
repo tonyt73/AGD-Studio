@@ -1,17 +1,17 @@
 //---------------------------------------------------------------------------
-#ifndef AssemblyH
-#define AssemblyH
+#ifndef AssembleH
+#define AssembleH
 //---------------------------------------------------------------------------
 #include "ShellProcess.h"
 //---------------------------------------------------------------------------
 namespace Build
 {
 //---------------------------------------------------------------------------
-class Assembly : public ShellProcess
+class Assemble : public ShellProcess
 {
 public:
-                    __fastcall  Assembly(BuildMessages& buildMessages);
-    virtual         __fastcall ~Assembly();
+                    __fastcall  Assemble(BuildMessages& buildMessages);
+    virtual         __fastcall ~Assemble();
 
             bool    __fastcall  Execute() final;
 };
