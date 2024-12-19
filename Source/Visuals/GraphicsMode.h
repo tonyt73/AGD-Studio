@@ -52,6 +52,7 @@ protected:
     float                       m_ScalarY;                  // scaling factor for height
     std::unique_ptr<Palette>    m_Palette;                  // the palette table for the graphics mode
     BufferType                  m_BufferType;               // the type of graphics buffer we are
+    String                      m_BufferTypeName;           // the name of graphics buffer (used for loading)
     Table                       m_LogicalColors;            // palette table LOGICAL color indexes into the Total Colors table
     Table                       m_DefaultLogicalColors;     // default palette table LOGICAL color indexes into the Total Colors table
     int                         m_LogicalIndex;             // json loader

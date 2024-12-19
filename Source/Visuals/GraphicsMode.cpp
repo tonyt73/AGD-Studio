@@ -35,7 +35,7 @@ __fastcall GraphicsMode::GraphicsMode()
     m_PropertyMap["ScalarY"] = &m_ScalarY;
     m_PropertyMap["TranparentColor"] = &m_TranparentColor;
     m_PropertyMap["SupportsLogicalColorRemapping"] = &m_SupportsRemapping;
-    m_PropertyMap["BufferType"] = &m_BufferType;
+    m_PropertyMap["BufferType"] = &m_BufferTypeName;
     m_PropertyMap["LogicalColors[]"] = &m_LogicalIndex;
     m_PropertyMap["PixelBitRemapping[].Remap[].Mask"] = &m_RemapDataLoader.Mask;
     m_PropertyMap["PixelBitRemapping[].Remap[].Shift"] = &m_RemapDataLoader.Shift;
@@ -153,6 +153,7 @@ bool __fastcall GraphicsMode::Load(const String& name)
     m_LogicalColors.clear();
     auto loaded = Services::JsonFile::Load(Services::File::Combine(Services::Folders::Application, "Graphics Modes" + Services::Folders::Separator + name + ".json"));
     if (loaded) {
+        m_BufferType = BufferTypeByName(m_BufferTypeName);
         loaded = m_Palette->Load(m_PaletteName);
         auto path = Services::File::Combine("Saved Palettes", Name);
         path = Services::Folders::Create(Services::Folders::lpCommon, path);
@@ -170,7 +171,7 @@ void __fastcall GraphicsMode::Save()
     Open(Services::File::Combine(Services::Folders::Application, "Graphics Modes" + Services::Folders::Separator + m_Name + ".json"));
     Write("Name", m_Name);
     Write("Palette", m_PaletteName);
-    Write("BufferType", m_BufferType);
+    Write("BufferType", BufferTypeName(m_BufferType));
     Write("Width", m_Width);
     Write("Height", m_Height);
     Write("ScalarX", m_ScalarX);

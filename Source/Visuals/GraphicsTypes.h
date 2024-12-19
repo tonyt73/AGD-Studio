@@ -32,7 +32,9 @@ struct TRGBA
     unsigned char A;
 };
 //---------------------------------------------------------------------------
-String __fastcall ImageTypeName(ImageTypes type);
+String     __fastcall ImageTypeName(ImageTypes type);
+String     __fastcall BufferTypeName(BufferType type);
+BufferType __fastcall BufferTypeByName(String name);
 //---------------------------------------------------------------------------
 } // Visuals namespace
 //---------------------------------------------------------------------------
