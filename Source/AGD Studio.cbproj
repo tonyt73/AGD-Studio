@@ -234,8 +234,8 @@
             <BuildOrder>14</BuildOrder>
             <PCH>true</PCH>
         </PCHCompile>
-        <CppCompile Include="Build\Assembly.cpp">
-            <DependentOn>Build\Assembly.h</DependentOn>
+        <CppCompile Include="Build\Assemble.cpp">
+            <DependentOn>Build\Assemble.h</DependentOn>
             <BuildOrder>5</BuildOrder>
         </CppCompile>
         <CppCompile Include="Build\BuildManager.cpp">
