@@ -48,11 +48,8 @@ void __fastcall AttributeGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y
         auto pixelPos = X % m_PixelsPerByte;
         // reset pixel
         auto pixel = m_Buffers[0][pixelOffset] & ~g_PixelMasks[m_GraphicsMode.BitsPerPixel][pixelPos];
-        if (set)
-        {
-            // set pixel
-            pixel |= g_PixelMasks[m_GraphicsMode.BitsPerPixel][pixelPos];
-        }
+        // set pixel
+        pixel |= set ? g_PixelMasks[m_GraphicsMode.BitsPerPixel][pixelPos] : 0;
         m_Buffers[0][pixelOffset] = pixel;
         // set attribute
         ix = X >> 3;
