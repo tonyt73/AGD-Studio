@@ -11,7 +11,8 @@
 //---------------------------------------------------------------------------
 class crc32c {
 public:
-    static uint32_t calc(const wchar_t *buf, size_t len, uint32_t crc = 0);
+    static uint32_t calc(const wchar_t* buffer, size_t length, uint32_t crc = 0);
+    static uint32_t calc(const std::vector<unsigned char> buffer, uint32_t crc = 0);
 };
 //---------------------------------------------------------------------------
 #endif

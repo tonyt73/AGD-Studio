@@ -3,7 +3,7 @@
 //---------------------------------------------------------------------------
 #include "TilesSection.h"
 #include "Project/Documents/DocumentManager.h"
-#include "Project/Documents/Tile.h"
+#include "Project/Documents/BaseImage.h"
 #include "Visuals/BlockTypes.h"
 #include "Visuals/GraphicsMode.h"
 #include "Visuals/Image.h"
@@ -23,32 +23,38 @@ __fastcall TilesSection::~TilesSection()
 //---------------------------------------------------------------------------
 void __fastcall TilesSection::Execute()
 {
-    const auto& dm = theDocumentManager;
-    auto imgSize = dm.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile].Minimum;
     Project::DocumentList images;
-    dm.GetAllOfType("Image", images);
+    theDocumentManager.GetAllOfType("Image", images);
     for (auto image : images) {
-        //TODO 1 -cBuild: Add support for big images
-        auto tile = dynamic_cast<Project::TileDocument*>(image);
-        if (tile != nullptr) {
-            String line = "DEFINEBLOCK ";
-            line += g_BlockTypes[StrToInt(tile->GetLayer("blocktype"))];
-            AddLine(line);
-            const auto& gm = (*(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()));
+        // TODO 5 -cBuild: Add support for big images
+        const auto imgDoc = static_cast<Project::ImageDocument*>(image);
+        if (imgDoc->ImageType == Visuals::itTile) {
             // make an image canvas
-            auto image = std::make_unique<Visuals::Image>(tile, gm);
-            image->ChangeFrame(0);
-            auto data = image->GetExportNativeFormat();
-            line = "            ";
-            // export the machine graphics data
-            for (auto byte : enumerate(data)) {
-                line += IntToStr(byte.item) + " ";
-                if (byte.index % imgSize.Width == 0) {
-                    line += "\r\n            ";
+            const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
+            const auto& gm = *mc.GraphicsMode();
+            auto visualImage = std::make_unique<Visuals::Image>(imgDoc, gm);
+            visualImage->ChangeFrame(0);
+            const auto& is = mc.ImageSizing[imgDoc->ImageType].Minimum;
+            // if tile is oversized, then break it into normal tile sizes. Happily this works for normal size tiles as well.
+            for (int y = 0; y < imgDoc->Width / is.cy; y++) {
+                for (int x = 0; x < imgDoc->Height / is.cx; x++) {
+                    auto data = visualImage->GetExportNativeFormat(TRect(x, y, is.cx, is.cy));
+                    // we'll need to keep track of the tiles made to remove duplicates (screen data will also need to do this)
+                    String line = "DEFINEBLOCK ";
+                    line += g_BlockTypes[StrToInt(imgDoc->GetLayer("blocktype"))];
+                    AddLine(line);
+                    line = "            ";
+                    // export the machine graphics data
+                    for (auto byte : enumerate(data)) {
+                        line += IntToStr(byte.item) + " ";
+                        if (byte.index % is.cx == 0) {
+                            line += "\r\n            ";
+                        }
+                    }
+                    AddLine(line);
+                    LineBreak();
                 }
             }
-            AddLine(line);
-            LineBreak();
         }
     }
 

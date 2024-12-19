@@ -16,6 +16,10 @@ namespace Visuals
 // Defines the common attributes of a graphics buffer.
 // A graphics buffer is made up of 1 or more data buffers.
 // Data buffers are generally used for pixel, attribute (color info) or character map data.
+//  ALWAYS put the pixel buffer first!
+//
+// This class is the final representation of a computers display output.
+// It converts all the machine independant image data into machine specific graphic images.
 //---------------------------------------------------------------------------
 class GraphicsBuffer
 {
@@ -23,7 +27,7 @@ private:
                                     GraphicsBuffer() = delete;
 
 protected:
-    typedef std::vector<ByteBuffer> Buffers;
+    typedef std::vector<ByteBuffer> Buffers;            // a list of buffers
 
         const GraphicsMode&         m_GraphicsMode;     // the graphic mode definition
         unsigned int                m_Width;            // the width of the buffer in pixels
@@ -35,7 +39,7 @@ protected:
         unsigned int                m_NumberOfBuffers;  // the number of data buffers using by this buffer type
         Buffers                     m_Buffers;          // the list of buffers
         BufferType                  m_BufferType;       // the type of graphics buffer this is
-        std::vector<unsigned char>  m_SetColors;        // the list of color choices and their logical color index (i.e. pen/brush or ink/paper/flash/bright)
+        ByteBuffer                  m_SetColors;        // the list of color choices and their logical color index (i.e. pen/brush or ink/paper/flash/bright)
         std::unique_ptr<TBitmap>    m_Bitmap;           // the Windows bitmap we render to
         bool                        m_RenderInGreyscale;// flag: Indicates we render in greyscale
         bool                        m_Drawing;          // flag: Indicates we are drawing pixels; don't render immediately
@@ -62,8 +66,8 @@ public:
                                     // Retrieves the specified buffer index from the graphics buffer
             void        __fastcall  GetBuffer(int index, ByteBuffer& buffer) const;
 
-std::vector<unsigned char>          // Get the native byte data for the buffer
-                        __fastcall  GetNative(ImageTypes type) const;
+                                    // Get the native byte data for the buffer
+            ByteBuffer  __fastcall  GetNative(ImageTypes type, TRect rect) const;
                                     // Get the hex data of the image
             String      __fastcall  Get() const;
                                     // Set the bitmap data from the hex data

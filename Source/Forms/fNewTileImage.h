@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------------
-#ifndef fNewImageH
-#define fNewImageH
+#ifndef fNewTileImageH
+#define fNewTileImageH
 //---------------------------------------------------------------------------
 #include <System.Classes.hpp>
 #include <Vcl.Forms.hpp>
@@ -12,8 +12,12 @@
 #include "ElEdits.hpp"
 #include "ElSpin.hpp"
 #include "ElXPThemedControl.hpp"
+#include "LMDBaseControl.hpp"
+#include "LMDBaseGraphicControl.hpp"
+#include "LMDGraphicControl.hpp"
+#include "LMDHTMLLabel.hpp"
 //---------------------------------------------------------------------------
-class TfrmNewImage : public TForm
+class TfrmNewTileImage : public TForm
 {
 __published:    // IDE-managed Components
     TButton *btnOk;
@@ -23,23 +27,20 @@ __published:    // IDE-managed Components
     TLabel *lblHeight;
     TElSpinEdit *edtWidth;
     TElSpinEdit *edtHeight;
-    TTabControl *tbcImageTypes;
+    TLMDHTMLLabel *LMDHTMLLabel1;
+    TLabel *lblTiles;
     void __fastcall FormCreate(TObject *Sender);
     void __fastcall tbcImageTypesDrawTab(TCustomTabControl *Control, int TabIndex,
           const TRect &Rect, bool Active);
-    void __fastcall tbcImageTypesChange(TObject *Sender);
+    void __fastcall edtWidthChange(TObject *Sender);
 private:    // User declarations
     int     __fastcall  GetWidth() const;
     int     __fastcall  GetHeight() const;
-    String  __fastcall  GetType() const;
-
-    bool                m_FontEnabled;
 public:    // User declarations
-    __fastcall          TfrmNewImage(TComponent* Owner);
+    __fastcall          TfrmNewTileImage(TComponent* Owner);
 
     __property  int     Width  = { read = GetWidth  };
     __property  int     Height = { read = GetHeight };
-    __property  String  Type   = { read = GetType   };
 };
 //---------------------------------------------------------------------------
 #endif

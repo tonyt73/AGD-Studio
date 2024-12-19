@@ -348,10 +348,10 @@
             <DependentOn>Forms\fMain.h</DependentOn>
             <BuildOrder>26</BuildOrder>
         </CppCompile>
-        <CppCompile Include="Forms\fNewImage.cpp">
-            <Form>frmNewImage</Form>
+        <CppCompile Include="Forms\fNewTileImage.cpp">
+            <Form>frmNewTileImage</Form>
             <FormType>dfm</FormType>
-            <DependentOn>Forms\fNewImage.h</DependentOn>
+            <DependentOn>Forms\fNewTileImage.h</DependentOn>
             <BuildOrder>27</BuildOrder>
         </CppCompile>
         <CppCompile Include="Forms\fSettings.cpp">
@@ -776,7 +776,7 @@
         <FormResources Include="Frames\Editors\Controls\fKeyCapture.dfm"/>
         <FormResources Include="Frames\Editors\Code\fEditorCode.dfm"/>
         <FormResources Include="Forms\fMain.dfm"/>
-        <FormResources Include="Forms\fNewImage.dfm"/>
+        <FormResources Include="Forms\fNewTileImage.dfm"/>
         <FormResources Include="Forms\fSettings.dfm"/>
         <FormResources Include="Frames\Editors\Images\fBlockTypes.dfm"/>
         <FormResources Include="Frames\Editors\fEditor.dfm"/>

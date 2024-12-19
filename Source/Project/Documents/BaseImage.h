@@ -60,7 +60,6 @@ protected:
 public:
                         __fastcall  ImageDocument(const String& name);
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ImageDocument(name); };
-            uint32_t    __fastcall  Crc32c(int frame, int index = -1);
 
             bool        __fastcall  AddFrame(int index = -1, const String& hint = "");
             bool        __fastcall  DeleteFrame(int index);

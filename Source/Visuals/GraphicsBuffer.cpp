@@ -111,18 +111,23 @@ void GraphicsBuffer::GetBuffer(int index, ByteBuffer& buffer) const
     }
 }
 //---------------------------------------------------------------------------
-std::vector<unsigned char> GraphicsBuffer::GetNative(ImageTypes type) const
+ByteBuffer GraphicsBuffer::GetNative(ImageTypes type, TRect rect) const
 {
-    std::vector<unsigned char> data;
-    for (auto buffer = 0; buffer < m_Buffers.size(); buffer++)
-    {
-        if ((buffer == 0 && m_GraphicsMode.ExportInformation[type].BitmapDataOnly) || !m_GraphicsMode.ExportInformation[type].BitmapDataOnly)
+    ByteBuffer data;
+    if (rect.Width() == 0 || rect.Height() == 0) {
+        // get the entire set of buffers as required by the graphics mode configuration
+        for (auto buffer = 0; buffer < m_Buffers.size(); buffer++)
         {
-            for (const auto& byte : m_Buffers[buffer])
+            if ((buffer == 0 && m_GraphicsMode.ExportInformation[type].BitmapDataOnly) || !m_GraphicsMode.ExportInformation[type].BitmapDataOnly)
             {
-                data.push_back(m_GraphicsMode.RemapPixels(byte));
+                for (const auto& byte : m_Buffers[buffer])
+                {
+                    data.push_back(m_GraphicsMode.RemapPixels(byte));
+                }
             }
         }
+    } else {
+
     }
     return data;
 }

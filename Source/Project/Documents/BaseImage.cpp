@@ -225,17 +225,4 @@ bool __fastcall ImageDocument::IsFirstOfType() const
     return theDocumentManager.IsFirstOfType(this);
 }
 //---------------------------------------------------------------------------
-uint32_t __fastcall ImageDocument::Crc32c(int frame, int index)
-{
-    String data;
-    if (index == -1) {
-        // get the full frame crc
-        data = Frame[frame];
-    } else {
-        // get the minimum image (i.e 8x8 tiles, 16x16 objects etc), indexed in to the full frame
-        data = Frame[frame, index];
-    }
-    return crc32c::calc(data.c_str(), data.Length());
-}
-//---------------------------------------------------------------------------
 
