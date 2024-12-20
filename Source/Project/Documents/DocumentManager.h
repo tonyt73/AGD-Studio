@@ -64,6 +64,7 @@ private:
         , m_Dx(0)
         , m_Dy(0)
         {
+            // crc is a fast way to compare the buffer contents
             m_Crc32c = crc32c::calc(buffer);
         }
 
@@ -94,7 +95,7 @@ private:
     };
 
     typedef std::map<unsigned int, std::vector<MappedTile>> MappedTiles;
-    MappedTiles             m_MappedTiles;
+    MappedTiles                 m_MappedTiles;
 
     void            __fastcall  Register(const String& type, const String& subType, CreateDocumentFn pfnCreate);
 
@@ -110,7 +111,7 @@ public:
     Document*       __fastcall  Get(const String& type, const String& subType, const String& name) const;
     Document*       __fastcall  Get(unsigned int id) const;
     int             __fastcall  GetAsIndex(unsigned int id) const;
-    int             __fastcall  GetAsIndex(unsigned int id, int dx, int dy) const;
+    int             __fastcall  GetAsIndex(unsigned int id, int dx, int dy);
  const UniqueTiles& __fastcall  MapUniqueTileIndexes();
 
     int             __fastcall  FindSameTile(const MappedTile& newTile);

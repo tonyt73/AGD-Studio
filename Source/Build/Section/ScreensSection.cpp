@@ -22,7 +22,7 @@ __fastcall ScreensSection::~ScreensSection()
 //---------------------------------------------------------------------------
 void __fastcall ScreensSection::Execute()
 {
-    const auto& dm = theDocumentManager;
+    auto& dm = theDocumentManager;
     // get the objects in the map
     auto mapDoc = dynamic_cast<Project::TiledMapDocument*>(dm.Get("Map", "Tiled", "Tile Map"));
     assert(mapDoc != nullptr);

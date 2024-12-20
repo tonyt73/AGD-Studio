@@ -172,22 +172,23 @@ int __fastcall DocumentManager::GetAsIndex(unsigned int id) const
     return -1;
 }
 //---------------------------------------------------------------------------
-int __fastcall DocumentManager::GetAsIndex(unsigned int id, int dx, int dy) const
+// Used by oversized Tiles.
+int __fastcall DocumentManager::GetAsIndex(unsigned int id, int dx, int dy)
 {
-    const auto& document = Get(id);
-    if (document != nullptr) {
-        auto type = document->Type;
-        auto subType = document->SubType;
-        int i = 0;
-        auto it = m_Documents.find(type);
-        if (it != m_Documents.end())
-            for (const auto& doc : it->second) {
-                if (doc->Id == id) {
-                    return i;
-                }
-                 i += (doc->SubType == subType) ? 1 : 0;
-            }
+    // ensure the MapUniqueTileIndexes() has been called and we have a list of mapped tiles
+    if (m_MappedTiles.count(id) > 0) {
+        // find the tile at the offset (dx,dy) required
+        auto mappedTile = std::find_if(m_MappedTiles[id].begin(), m_MappedTiles[id].end(), [&](const DocumentManager::MappedTile& mt) { return (mt.m_Dx == dx && mt.m_Dy == dy); });
+        if (mappedTile != m_MappedTiles[id].end()) {
+            // unique tile found for the doc RefId and the offset
+            return mappedTile->m_TileIndex;
+        }
+        // Document found, but no reference to the offset
+        WarningMessage("Document ID: " + IntToStr((int)id) + " was found in the Mapped Tiles list, but no reference to the offset (" + IntToStr(dx) + ", " + IntToStr(dy) + " was found in the Mapped Tiles entity list.");
+        return -1;
     }
+    // document, not found in the mapped tiles list.
+    WarningMessage("Document ID: " + IntToStr((int)id) + " was not found in the Mapped Tiles list.");
     return -1;
 }
 //---------------------------------------------------------------------------
@@ -251,22 +252,29 @@ int __fastcall DocumentManager::FindSameTile(const MappedTile& tile)
             // create a possible new unique tile
             auto bt = imgDoc->GetLayer("blocktype");
             assert(bt.Length() > 0);
+            // start with a blank unique tiles list
             m_MappedTiles[imgDoc->Id] = {};
+            // loop over the height and width of the tile set
             for (int y = 0; y < imgDoc->Height; y += ts.cy) {
                 for (int x = 0; x < imgDoc->Width; x += ts.cx) {
+                    // calculate the block type index, there should be a block type per single tile block. so 2x2 is 4 block types.
                     int bti = (x / ts.cx) + ((y / ts.cy) * (imgDoc->Width / ts.cx));
+                    // sometimes, the block type might be only 1 block, in which case apply it to all blocks in the tile set.
                     bti = std::min(bt.Length(), bti);
+                    // create a mapped tile with the block type and the section of the tile set at (x,y,w,h)
                     auto mappedTile = MappedTile(bt[bti+1] - '0', visualImage->GetExportNativeFormat(TRect(x, y, x + ts.cx, y + ts.cy)), x, y);
+                    // is it the same as an existing unique tile?
                     auto sameAsTileIndex = FindSameTile(mappedTile);
                     if (sameAsTileIndex == -1) {
-                        // tile is unique, assign it a new tile index
+                        // no, tile is unique, assign it a new tile index
                         mappedTile.m_TileIndex = m_UniqueTiles.size();
                         // and add it to our unqiue tiles map
                         m_UniqueTiles.push_back(UniqueTile(mappedTile.m_BlockType, mappedTile.m_Data));
                     } else {
-                        // copy the index of the tile we are the same as
+                        // yes, copy the index of the tile we are the same as
                         mappedTile.m_TileIndex = sameAsTileIndex;
                     }
+                    // add the newly mapped tile to the list
                     m_MappedTiles[imgDoc->Id].push_back(mappedTile);
                 }
             }
