@@ -466,8 +466,8 @@ object frmIDE: TfrmIDE
         object lblPropertyInfo: TLabel
           Left = 3
           Top = 3
-          Width = 202
-          Height = 34
+          Width = 112
+          Height = 14
           Align = alClient
           Caption = 'Property information'
           Font.Charset = DEFAULT_CHARSET
@@ -478,8 +478,6 @@ object frmIDE: TfrmIDE
           ParentFont = False
           Transparent = True
           WordWrap = True
-          ExplicitWidth = 112
-          ExplicitHeight = 14
         end
       end
     end
@@ -994,6 +992,13 @@ object frmIDE: TfrmIDE
       ImageName = 'sprite_add'
       ShortCut = 24659
       OnExecute = actFileNewSpriteExecute
+    end
+    object actEditDuplicateImage: TAction
+      Category = 'Edit'
+      Caption = 'Duplicate Image'
+      ImageIndex = 5
+      ImageName = 'page_white_copy'
+      OnExecute = actEditDuplicateImageExecute
     end
   end
   object mnuMain: TMainMenu
@@ -2226,6 +2231,9 @@ object frmIDE: TfrmIDE
     object mnuNewAsset: TMenuItem
       Action = actFileNewImageDefault
       ImageName = 'asterisk_orange'
+    end
+    object DuplicateImage1: TMenuItem
+      Action = actEditDuplicateImage
     end
     object DeleteAsset1: TMenuItem
       Action = actDeleteAsset

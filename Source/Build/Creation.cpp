@@ -46,19 +46,15 @@ __fastcall Creation::~Creation()
 bool __fastcall Creation::Execute()
 {
     auto agdFile = Services::File::Combine(Services::Folders::Project, Services::Folders::ProjectName + ".agd");
-    Project::DocumentManager::get().Add("Text", "AGD", Services::Folders::ProjectName + ".agd");
+    theDocumentManager.Add("Text", "AGD", Services::Folders::ProjectName + ".agd");
     String agdContent;
     BUILD_MSG("Building " + agdFile);
-    for (auto& builder : m_AgdSections)
-    {
+    for (auto& builder : m_AgdSections) {
         auto [success, reason, content] = builder->Build();
-        if (success)
-        {
+        if (success) {
             agdContent += content;
             BUILD_LINE(bmOk, "Added AGD Section: " + builder->Description);
-        }
-        else
-        {
+        } else {
             // log an error
             BUILD_LINE(bmFailed, "Failed to add AGD Section: " + builder->Description);
             BUILD_LINE(bmFailed, reason);
@@ -67,13 +63,10 @@ bool __fastcall Creation::Execute()
         }
     }
 
-    try
-    {
+    try {
         Services::File::WriteText(agdFile, agdContent);
         BUILD_LINE(bmOk, "Successfully wrote AGD file: " + agdFile);
-    }
-    catch(...)
-    {
+    } catch(...) {
         BUILD_LINE(bmFailed, "Failed to write AGD file: " + agdFile);
         BUILD_MSG(bmFailed);
         return false;

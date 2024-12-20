@@ -379,8 +379,10 @@ void __fastcall TfrmIDE::popProjectPopup(TObject *Sender)
 {
     actDeleteAsset->Enabled = false;
     actFileNewImageDefault->Enabled = false;
+    actEditDuplicateImage->Enabled = false;
     if (tvProject->Selected && tvProject->Selected->Parent) {
         actDeleteAsset->Enabled = !tvProject->Selected->HasChildren && tvProject->Selected->Parent->Parent->Text == "Images";
+        actEditDuplicateImage->Enabled = !tvProject->Selected->HasChildren && tvProject->Selected->Parent->Parent->Text == "Images";
         actFileNewImageDefault->Enabled = tvProject->Selected->Parent->Text == "Images";
     }
 }
@@ -389,6 +391,7 @@ void __fastcall TfrmIDE::popProjectClose(TObject *Sender)
 {
     actDeleteAsset->Enabled = true;
     actFileNewImageDefault->Enabled = true;
+    actEditDuplicateImage->Enabled = true;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actSettingsExecute(TObject *Sender)
@@ -447,17 +450,38 @@ void __fastcall TfrmIDE::dsIDEChange(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileNewTileExecute(TObject *Sender)
 {
-    DoOpenDocument(theProjectManager.Add("Image", "Tile", ""));
+    auto doc = theProjectManager.Add("Image", "Tile", "");
+    DoOpenDocument(doc);
+    UpdateDocumentProperties(doc);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileNewObjectExecute(TObject *Sender)
 {
-    DoOpenDocument(theProjectManager.Add("Image", "Object", ""));
+    auto doc = theProjectManager.Add("Image", "Object", "");
+    DoOpenDocument(doc);
+    UpdateDocumentProperties(doc);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actFileNewSpriteExecute(TObject *Sender)
 {
-    DoOpenDocument(theProjectManager.Add("Image", "Sprite", ""));
+    auto doc = theProjectManager.Add("Image", "Sprite", "");
+    DoOpenDocument(doc);
+    UpdateDocumentProperties(doc);
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actEditDuplicateImageExecute(TObject *Sender)
+{
+    if (tvProject->Selected) {
+        auto type = tvProject->Selected->Parent->Text;
+        type = type[type.Length()] == 's' ? type.SubString(1, type.Length() - 1) : type;
+        auto newDoc = theProjectManager.Add("Image", type, "");
+        auto oldDoc = theDocumentManager.Get("Image", type, tvProject->Selected->Text);
+        InformationMessage("[IDE] Duplicating Document: " + oldDoc->Name + " into " + newDoc->Name);
+        newDoc->Copy(oldDoc);
+        DoOpenDocument(newDoc);
+        tvProject->Refresh();
+        UpdateDocumentProperties(newDoc);
+     }
 }
 //---------------------------------------------------------------------------
 

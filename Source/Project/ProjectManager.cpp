@@ -27,6 +27,8 @@ __fastcall ProjectManager::ProjectManager()
 , m_IsOpen(false)
 {
     m_Registrar.Subscribe<DocumentChange<String>>(OnDocumentChanged);
+    m_Registrar.Subscribe<DocumentAdded>(OnDocumentAdded);
+
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::Initialise(Elxtree::TElXTree* treeView)
@@ -276,6 +278,11 @@ void __fastcall ProjectManager::OnDocumentChanged(const DocumentChange<String>& 
 {
     // TODO: update the document properties
     // theProjectManager.AddToTreeView(document);
+}
+//---------------------------------------------------------------------------
+void __fastcall ProjectManager::OnDocumentAdded(const DocumentAdded& message)
+{
+    AddToTreeView(message.Document);
 }
 //---------------------------------------------------------------------------
 

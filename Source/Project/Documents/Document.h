@@ -76,6 +76,7 @@ public:
     virtual             __fastcall ~Document();
 
     static  Document*   __fastcall  Create(const String& name, const String& extra)      { throw "Don't create this class";    }
+    virtual Document*   __fastcall  Copy(const Document* document);
 
 const TPropertyInfoMap& __fastcall  GetPropertyInfo() const;
             String      __fastcall  GetPropertyInfo(const String& property) const;

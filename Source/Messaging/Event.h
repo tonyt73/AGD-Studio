@@ -70,6 +70,20 @@ public:
     __property Project::Document* Document = { read = m_Document };
 };
 //---------------------------------------------------------------------------
+class DocumentAdded : public Event
+{
+private:
+   Project::Document*       m_Document;
+public:
+    __fastcall              DocumentAdded(Project::Document* document)
+                            : Event("document.added")
+                            , m_Document(document)
+                            {
+                            }
+
+    __property Project::Document* Document = { read = m_Document };
+};
+//---------------------------------------------------------------------------
 enum MessageType { etInformation, etWarning, etError, etDebug, etClear, etHelpKeys };
 class MessageEvent : public Event
 {

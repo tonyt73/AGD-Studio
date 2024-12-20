@@ -40,6 +40,26 @@ __fastcall ImageDocument::ImageDocument(const String& name)
     m_File = GetFile();
 }
 //---------------------------------------------------------------------------
+Document* __fastcall ImageDocument::Copy(const Document* document)
+{
+    Document::Copy(document);
+    auto image = dynamic_cast<const ImageDocument*>(document);
+    if (image != nullptr) {
+        m_MultiFrame = image->m_MultiFrame;
+        m_CanModifyFrames = image->m_CanModifyFrames;
+        m_CanBeLocked = image->m_CanBeLocked;
+        m_Width = image->m_Width;
+        m_Height = image->m_Height;
+        m_NumOfFrames = image->m_NumOfFrames;
+        m_ImageType = image->m_ImageType;
+        m_Frames = image->m_Frames;
+        m_Hints = image->m_Hints;
+        m_Hint = image->m_Hint;
+        m_Layers = image->m_Layers;
+    }
+    return this;
+}
+//---------------------------------------------------------------------------
 void __fastcall ImageDocument::DoSave()
 {
     Push("Image");

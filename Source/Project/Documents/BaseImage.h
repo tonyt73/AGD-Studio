@@ -60,6 +60,8 @@ protected:
 public:
                         __fastcall  ImageDocument(const String& name);
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ImageDocument(name); };
+            Document*   __fastcall  Copy(const Document* document);
+
 
             bool        __fastcall  AddFrame(int index = -1, const String& hint = "");
             bool        __fastcall  DeleteFrame(int index);

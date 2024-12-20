@@ -179,6 +179,8 @@ __published:    // IDE-managed Components
     TMenuItem *NewObjectDefaultSize1;
     TMenuItem *NewSpriteDefaultSize1;
     TMenuItem *NewTileDefaultSize1;
+    TAction *actEditDuplicateImage;
+    TMenuItem *DuplicateImage1;
     void __fastcall actDeleteAssetExecute(TObject *Sender);
     void __fastcall actEditCopyExecute(TObject *Sender);
     void __fastcall actEditCutExecute(TObject *Sender);
@@ -220,6 +222,7 @@ __published:    // IDE-managed Components
     void __fastcall actFileNewTileExecute(TObject *Sender);
     void __fastcall actFileNewObjectExecute(TObject *Sender);
     void __fastcall actFileNewSpriteExecute(TObject *Sender);
+    void __fastcall actEditDuplicateImageExecute(TObject *Sender);
 
 private:                // User declarations
     ::Messaging::Registrar              m_Registrar;

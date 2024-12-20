@@ -1,7 +1,6 @@
 //---------------------------------------------------------------------------
 #include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
-#include "../ProjectManager.h"
 #include "DocumentManager.h"
 #include "CharacterSet.h"
 #include "Controls.h"
@@ -18,6 +17,7 @@
 #include "Messaging/Messaging.h"
 #include "Services/File.h"
 #include "Services/Folders.h"
+#include "Visuals/Image.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -73,12 +73,11 @@ Document* __fastcall DocumentManager::Add(const String& type, const String& subT
                 documents.push_back(document);
                 m_Documents.emplace(std::make_pair(document->Type, documents));
             }
-            Bus::Publish<Event>(Event("document.added"));
+            Bus::Publish<DocumentAdded>(DocumentAdded(document));
         }
         document->Load();
         // assign an id if we don't have one, but need one
         document->AssignId();
-        theProjectManager.AddToTreeView(document);
         InformationMessage("[DocumentManager] Added Document '" + document->Name + "' to Project");
         return document;
     }
@@ -91,11 +90,14 @@ bool __fastcall DocumentManager::Remove(const String& type, const String& name)
     if (dit != m_Documents.end()) {
         for (auto it = dit->second.begin(); it != dit->second.end(); it++) {
             if ((*it)->Name == name) {
+                auto file = (*it)->File;
                 Bus::Publish<DocumentChange<String>>(DocumentChange<String>("document.removing", (*it), name));
                 delete (*it);
                 dit->second.erase(it);
                 InformationMessage("[DocumentManager] Removed Document '" + (*it)->Name + "' from Project");
                 Bus::Publish<DocumentChange<String>>(DocumentChange<String>("document.removed", nullptr, name));
+                Services::File::Delete(file);
+                InformationMessage("[DocumentManager] Deleted Document file '" + (*it)->File + "' from Project folder");
                 return true;
             }
         }
@@ -130,7 +132,7 @@ Document* __fastcall DocumentManager::Get(const String& type, const String& subT
     auto it = m_Documents.find(type);
     if (it != m_Documents.end()) {
         for (const auto& document : it->second) {
-            if (document->SubType == subType && document->Name == name) {
+            if (document->SubType == subType&& document->Name == name) {
                 return document;
             }
         }
@@ -168,6 +170,88 @@ int __fastcall DocumentManager::GetAsIndex(unsigned int id) const
             }
     }
     return -1;
+}
+//---------------------------------------------------------------------------
+int __fastcall DocumentManager::GetAsIndex(unsigned int id, int dx, int dy) const
+{
+    const auto& document = Get(id);
+    if (document != nullptr) {
+        auto type = document->Type;
+        auto subType = document->SubType;
+        int i = 0;
+        auto it = m_Documents.find(type);
+        if (it != m_Documents.end())
+            for (const auto& doc : it->second) {
+                if (doc->Id == id) {
+                    return i;
+                }
+                 i += (doc->SubType == subType) ? 1 : 0;
+            }
+    }
+    return -1;
+}
+//---------------------------------------------------------------------------
+int __fastcall DocumentManager::FindSameTile(const MappedTile& tile)
+{
+    for (auto const& [refId, list] : m_MappedTiles) {
+        auto existingTile = std::find(list.begin(), list.end(), tile);
+        if (existingTile != list.end()) {
+            return refId;
+        }
+    }
+    return -1;
+}
+//---------------------------------------------------------------------------
+ const DocumentManager::UniqueTiles& __fastcall DocumentManager::MapUniqueTileIndexes()
+{
+    // clear the tile index map
+    m_UniqueTiles.clear();
+    m_MappedTiles.clear();
+    // create the tile mappings
+    //
+    // get all the images
+    DocumentList images;
+    GetAllOfType("Image", images);
+    // get the normal tile size
+    const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
+    const auto& gm = *mc.GraphicsMode();
+    auto ts = mc.ImageSizing[Visuals::itTile].Minimum;
+    // map all the normal tiles first. Mapping RefId to Unique tile instances
+    for (auto image : images) {
+        auto imgDoc = dynamic_cast<ImageDocument*>(image);
+        if (imgDoc->ImageType == Visuals::itTile && imgDoc->Width == ts.cx && imgDoc->Height == ts.cy) {
+            auto visualImage = std::make_unique<Visuals::Image>(imgDoc, gm);
+            visualImage->ChangeFrame(0);
+            // create a possible new unique tile
+            auto bt = imgDoc->GetLayer("blocktype");
+            assert(bt.Length() > 0);
+            auto mappedTile = MappedTile(bt[1] - '0', visualImage->GetExportNativeFormat());
+            // check it is unique
+            auto sameAsRefId = FindSameTile(mappedTile);
+            if (sameAsRefId == -1) {
+                // tile is unique, assign it a new tile index
+                mappedTile.m_TileIndex = m_UniqueTiles.size();
+                // and add it to our unqiue tiles map
+                m_UniqueTiles.push_back(UniqueTile(mappedTile.m_BlockType, mappedTile.m_Data));
+            } else {
+                // copy the index of the tile we are the same as
+                mappedTile.m_TileIndex = sameAsRefId;
+            }
+            // map refId's to a tile
+            m_MappedTiles[imgDoc->Id] = { mappedTile };
+        }
+    }
+
+    // now convert the oversized tiles to single tiles, replacing the duplicate instances with the existing single ones
+    for (auto image : images) {
+        auto imgDoc = dynamic_cast<ImageDocument*>(image);
+        if (imgDoc->ImageType == Visuals::itTile && (imgDoc->Width > ts.cx || imgDoc->Height > ts.cy)) {
+            int a = 0;
+        }
+    }
+    //InformationMessage("[DocumentManager] Found " + IntToStr((int)m_MappedTiles.size()) + " defined tiles and " + IntToStr((int)m_UniqueTiles.size()) + " are unique.");
+
+    return m_UniqueTiles;
 }
 //---------------------------------------------------------------------------
 void __fastcall DocumentManager::Clear()

@@ -40,6 +40,7 @@ private:
 protected:
                   friend    DocumentManager;
     void        __fastcall  OnDocumentChanged(const DocumentChange<String>& message);
+    void        __fastcall  OnDocumentAdded(const DocumentAdded& message);
     void        __fastcall  ClearTree(const String& rootName);
     Document*   __fastcall  AddToTreeView(Document* document);
 

@@ -87,6 +87,16 @@ void __fastcall Document::Close()
     }
 }
 //---------------------------------------------------------------------------
+Document* __fastcall Document::Copy(const Document* document)
+{
+    m_Type = document->m_Type;
+    m_SubType = document->m_SubType;
+    m_Folder = document->m_Folder;
+    m_ShowFileExtension = document->m_ShowFileExtension;
+    m_ReadOnly = document->m_ReadOnly;
+    return this;
+}
+//---------------------------------------------------------------------------
 void __fastcall Document::SetName(String name)
 {
     auto oldName = m_Name;
