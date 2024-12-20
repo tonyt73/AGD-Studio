@@ -67,7 +67,7 @@ public:
             void        __fastcall  GetBuffer(int index, ByteBuffer& buffer) const;
 
                                     // Get the native byte data for the buffer
-            ByteBuffer  __fastcall  GetNative(ImageTypes type, TRect rect) const;
+            ByteBuffer  __fastcall  GetNative(ImageTypes type, const TRect& rect) const;
                                     // Get the hex data of the image
             String      __fastcall  Get() const;
                                     // Set the bitmap data from the hex data

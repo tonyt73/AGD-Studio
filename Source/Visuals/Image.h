@@ -28,7 +28,7 @@ public:
     void                        __fastcall  ChangeFrame(int frame);
     GraphicsBuffer&             __fastcall  Canvas() const;
     void                        __fastcall  Draw(const TPoint& pt, TBitmap* canvas, TColor overlayColor = clBlack);
-    ByteBuffer                  __fastcall  GetExportNativeFormat(TRect rect = TRect()) const;
+    ByteBuffer                  __fastcall  GetExportNativeFormat(const TRect& rect = TRect(0,0,0,0)) const;
 };
 //---------------------------------------------------------------------------
 typedef std::vector<std::unique_ptr<Image>> ImageList;

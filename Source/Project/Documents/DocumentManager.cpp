@@ -196,7 +196,7 @@ int __fastcall DocumentManager::FindSameTile(const MappedTile& tile)
     for (auto const& [refId, list] : m_MappedTiles) {
         auto existingTile = std::find(list.begin(), list.end(), tile);
         if (existingTile != list.end()) {
-            return refId;
+            return existingTile->m_TileIndex;
         }
     }
     return -1;
@@ -227,17 +227,17 @@ int __fastcall DocumentManager::FindSameTile(const MappedTile& tile)
             assert(bt.Length() > 0);
             auto mappedTile = MappedTile(bt[1] - '0', visualImage->GetExportNativeFormat());
             // check it is unique
-            auto sameAsRefId = FindSameTile(mappedTile);
-            if (sameAsRefId == -1) {
+            auto sameAsTileIndex = FindSameTile(mappedTile);
+            if (sameAsTileIndex == -1) {
                 // tile is unique, assign it a new tile index
                 mappedTile.m_TileIndex = m_UniqueTiles.size();
                 // and add it to our unqiue tiles map
                 m_UniqueTiles.push_back(UniqueTile(mappedTile.m_BlockType, mappedTile.m_Data));
             } else {
                 // copy the index of the tile we are the same as
-                mappedTile.m_TileIndex = sameAsRefId;
+                mappedTile.m_TileIndex = sameAsTileIndex;
             }
-            // map refId's to a tile
+            // map refId's to a tile (only ever 1 item in the list)
             m_MappedTiles[imgDoc->Id] = { mappedTile };
         }
     }
@@ -246,10 +246,33 @@ int __fastcall DocumentManager::FindSameTile(const MappedTile& tile)
     for (auto image : images) {
         auto imgDoc = dynamic_cast<ImageDocument*>(image);
         if (imgDoc->ImageType == Visuals::itTile && (imgDoc->Width > ts.cx || imgDoc->Height > ts.cy)) {
-            int a = 0;
+            auto visualImage = std::make_unique<Visuals::Image>(imgDoc, gm);
+            visualImage->ChangeFrame(0);
+            // create a possible new unique tile
+            auto bt = imgDoc->GetLayer("blocktype");
+            assert(bt.Length() > 0);
+            m_MappedTiles[imgDoc->Id] = {};
+            for (int y = 0; y < imgDoc->Height; y += ts.cy) {
+                for (int x = 0; x < imgDoc->Width; x += ts.cx) {
+                    int bti = (x / ts.cx) + ((y / ts.cy) * (imgDoc->Width / ts.cx));
+                    bti = std::min(bt.Length(), bti);
+                    auto mappedTile = MappedTile(bt[bti+1] - '0', visualImage->GetExportNativeFormat(TRect(x, y, x + ts.cx, y + ts.cy)), x, y);
+                    auto sameAsTileIndex = FindSameTile(mappedTile);
+                    if (sameAsTileIndex == -1) {
+                        // tile is unique, assign it a new tile index
+                        mappedTile.m_TileIndex = m_UniqueTiles.size();
+                        // and add it to our unqiue tiles map
+                        m_UniqueTiles.push_back(UniqueTile(mappedTile.m_BlockType, mappedTile.m_Data));
+                    } else {
+                        // copy the index of the tile we are the same as
+                        mappedTile.m_TileIndex = sameAsTileIndex;
+                    }
+                    m_MappedTiles[imgDoc->Id].push_back(mappedTile);
+                }
+            }
         }
     }
-    //InformationMessage("[DocumentManager] Found " + IntToStr((int)m_MappedTiles.size()) + " defined tiles and " + IntToStr((int)m_UniqueTiles.size()) + " are unique.");
+    InformationMessage("[DocumentManager] Found " + IntToStr((int)m_MappedTiles.size()) + " defined tiles and " + IntToStr((int)m_UniqueTiles.size()) + " are unique.");
 
     return m_UniqueTiles;
 }

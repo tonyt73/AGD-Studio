@@ -84,7 +84,7 @@ void __fastcall Image::Draw(const TPoint& pt, TBitmap* canvas, TColor overlayCol
     }
 }
 //---------------------------------------------------------------------------
-ByteBuffer __fastcall Image::GetExportNativeFormat(TRect rect) const
+ByteBuffer __fastcall Image::GetExportNativeFormat(const TRect& rect) const
 {
     return m_Canvas->GetNative(m_Image->ImageType, rect);
 }

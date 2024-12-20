@@ -380,10 +380,18 @@ void __fastcall TfrmIDE::popProjectPopup(TObject *Sender)
     actDeleteAsset->Enabled = false;
     actFileNewImageDefault->Enabled = false;
     actEditDuplicateImage->Enabled = false;
+    actEditSplitIntoTiles->Enabled = false;
     if (tvProject->Selected && tvProject->Selected->Parent) {
         actDeleteAsset->Enabled = !tvProject->Selected->HasChildren && tvProject->Selected->Parent->Parent->Text == "Images";
         actEditDuplicateImage->Enabled = !tvProject->Selected->HasChildren && tvProject->Selected->Parent->Parent->Text == "Images";
         actFileNewImageDefault->Enabled = tvProject->Selected->Parent->Text == "Images";
+
+        auto type = tvProject->Selected->Parent->Text;
+        if (type == "Tiles") {
+            type = type[type.Length()] == 's' ? type.SubString(1, type.Length() - 1) : type;
+            auto doc = dynamic_cast<Project::ImageDocument*>(theDocumentManager.Get("Image", type, tvProject->Selected->Text));
+            actEditSplitIntoTiles->Enabled = (doc != nullptr && doc->ImagesPerFrame > 1);
+        }
     }
 }
 //---------------------------------------------------------------------------
@@ -392,6 +400,7 @@ void __fastcall TfrmIDE::popProjectClose(TObject *Sender)
     actDeleteAsset->Enabled = true;
     actFileNewImageDefault->Enabled = true;
     actEditDuplicateImage->Enabled = true;
+    actEditSplitIntoTiles->Enabled = true;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::actSettingsExecute(TObject *Sender)
@@ -482,6 +491,19 @@ void __fastcall TfrmIDE::actEditDuplicateImageExecute(TObject *Sender)
         tvProject->Refresh();
         UpdateDocumentProperties(newDoc);
      }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actEditSplitIntoTilesExecute(TObject *Sender)
+{
+    if (tvProject->Selected) {
+        // close the document
+
+        // split it into singles
+
+        // update the map
+
+        // remove the original doc
+    }
 }
 //---------------------------------------------------------------------------
 

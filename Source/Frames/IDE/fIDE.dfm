@@ -1000,6 +1000,14 @@ object frmIDE: TfrmIDE
       ImageName = 'page_white_copy'
       OnExecute = actEditDuplicateImageExecute
     end
+    object actEditSplitIntoTiles: TAction
+      Category = 'Edit'
+      Caption = 'Split into Single Tiles'
+      Hint = 'Split the tile into separate single tiles.'
+      ImageIndex = 20
+      ImageName = 'tile_add'
+      OnExecute = actEditSplitIntoTilesExecute
+    end
   end
   object mnuMain: TMainMenu
     Images = vilToolbar
@@ -2237,6 +2245,9 @@ object frmIDE: TfrmIDE
     end
     object DeleteAsset1: TMenuItem
       Action = actDeleteAsset
+    end
+    object Replace1: TMenuItem
+      Action = actEditSplitIntoTiles
     end
   end
   object imgBuildNodes: TImageList

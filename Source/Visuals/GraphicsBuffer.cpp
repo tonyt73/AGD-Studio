@@ -111,7 +111,7 @@ void GraphicsBuffer::GetBuffer(int index, ByteBuffer& buffer) const
     }
 }
 //---------------------------------------------------------------------------
-ByteBuffer GraphicsBuffer::GetNative(ImageTypes type, TRect rect) const
+ByteBuffer GraphicsBuffer::GetNative(ImageTypes type, const TRect& rect) const
 {
     ByteBuffer data;
     if (rect.Width() == 0 || rect.Height() == 0) {
@@ -127,7 +127,24 @@ ByteBuffer GraphicsBuffer::GetNative(ImageTypes type, TRect rect) const
             }
         }
     } else {
-
+        // extract a section of the graphics pixel buffer
+        for (int y = rect.Top; y < rect.Bottom; y++) {
+            for (int x = rect.Left; x < rect.Right; x += m_PixelsPerByte) {
+                auto offset = (x / m_PixelsPerByte) + ((y * m_Width) / m_PixelsPerByte);
+                auto byte = m_Buffers[0][offset];
+                data.push_back(m_GraphicsMode.RemapPixels(byte));
+            }
+        }
+        // if required, extract part of the attribute buffer
+        if (m_Buffers.size() > 1 && m_BufferType == btAttribute && !m_GraphicsMode.ExportInformation[type].BitmapDataOnly) {
+            for (int y = rect.Top; y < rect.Bottom; y += m_GraphicsMode.PixelsHighPerAttribute) {
+                for (int x = rect.Left; x < rect.Right; x += m_PixelsPerByte) {
+                    auto offset = (x / m_PixelsPerByte) + ((y * m_Width) / m_PixelsPerByte / m_GraphicsMode.PixelsHighPerAttribute);
+                    auto byte = m_Buffers[1][offset];
+                    data.push_back(byte);
+                }
+            }
+        }
     }
     return data;
 }

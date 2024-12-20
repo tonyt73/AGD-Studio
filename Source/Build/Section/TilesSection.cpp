@@ -36,7 +36,7 @@ void __fastcall TilesSection::Execute()
             // export the machine graphics data
             for (auto byte : enumerate(tile.Data)) {
                 line += IntToStr(byte.item) + " ";
-                if (byte.index % is.cx == 0) {
+                if ((byte.index + 1) % is.cx == 0) {
                     line += "\r\n            ";
                 }
             }

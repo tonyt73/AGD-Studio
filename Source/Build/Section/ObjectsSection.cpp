@@ -37,7 +37,6 @@ void __fastcall ObjectsSection::Execute()
     dm.GetAllOfType("Image", images);
     for (auto image : images)
     {
-        //TODO 5 -cBuild: Add support for big images
         auto object = dynamic_cast<Project::ObjectDocument*>(image);
         if (object != nullptr)
         {

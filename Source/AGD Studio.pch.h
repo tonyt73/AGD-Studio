@@ -28,6 +28,7 @@
 #include <list>
 #include <vector>
 #include <map>
+#include <math.h>
 #include <stack>
 #include <iterator>
 //---------------------------------------------------------------------------
