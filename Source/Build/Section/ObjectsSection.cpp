@@ -28,8 +28,8 @@ void __fastcall ObjectsSection::Execute()
     // get the objects in the map
     auto mapDoc = dynamic_cast<Project::TiledMapDocument*>(dm.Get("Map", "Tiled", "Tile Map"));
     assert(mapDoc != nullptr);
-    const auto& wi = (Project::WindowDocument*)theDocumentManager.Get("Window", "Definition", "Window");
     auto imgSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile].Minimum;
+    const auto& wi = (Project::WindowDocument*)theDocumentManager.Get("Window", "Definition", "Window");
     auto wPt = TPoint(wi->Rect.Left * imgSize.cx, wi->Rect.Top * imgSize.cy);
     auto objectsInMap = mapDoc->Get(Visuals::itObject);
     // get the list of object images
@@ -48,6 +48,7 @@ void __fastcall ObjectsSection::Execute()
             image->ChangeFrame(0);
             auto data = image->GetExportNativeFormat();
             // TODO -cImprovement: Use the importer definition of the machine to determine if an object.colour parameter is needed
+            //                   : This is a bug for Sam Coupe etc, because of the assumption that there are only 4 attributes to an object
             if (gm.TypeOfBuffer == Visuals::BufferType::btAttribute) // && importer.contains("Objects", "object.colour")
             {
                 // extract the image colour and remove the last 4 bytes (attributes) from the data
@@ -61,8 +62,8 @@ void __fastcall ObjectsSection::Execute()
             // add the room
             auto roomIndex = object->State == Visuals::osRoom ? ((Project::ObjectDocument*)object)->RoomIndex : (object->State == Visuals::osDisabled ? 254 : 255);
             line += IntToStr((int)roomIndex) + " ";
-            line += IntToStr(object->Y) + " " + IntToStr(object->X) + " ";
-            //line += IntToStr((int)(wPt.Y + object->Y)) + " " + IntToStr((int)(wPt.X + object->X)) + " ";
+            //line += IntToStr(object->Y) + " " + IntToStr(object->X) + " ";
+            line += IntToStr((int)(wPt.Y + object->Y)) + " " + IntToStr((int)(wPt.X + object->X)) + " ";
             AddLine(line);
             // export the machine graphics data
             line = "             ";

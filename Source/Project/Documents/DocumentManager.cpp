@@ -173,7 +173,7 @@ int __fastcall DocumentManager::GetAsIndex(unsigned int id) const
 }
 //---------------------------------------------------------------------------
 // Used by oversized Tiles.
-int __fastcall DocumentManager::GetAsIndex(unsigned int id, int dx, int dy)
+int __fastcall DocumentManager::GetIndexFor(unsigned int id, int dx, int dy)
 {
     // ensure the MapUniqueTileIndexes() has been called and we have a list of mapped tiles
     if (m_MappedTiles.count(id) > 0) {

@@ -27,9 +27,11 @@ void __fastcall ScreensSection::Execute()
     auto mapDoc = dynamic_cast<Project::TiledMapDocument*>(dm.Get("Map", "Tiled", "Tile Map"));
     assert(mapDoc != nullptr);
 
-    const auto& wi = (Project::WindowDocument*)theDocumentManager.Get("Window", "Definition", "Window");
+    auto imgSize = dm.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itSprite].Minimum;
+    const auto& wi = (Project::WindowDocument*)dm.Get("Window", "Definition", "Window");
+    auto wPt = TPoint(wi->Rect.Left * imgSize.cx, wi->Rect.Top * imgSize.cy);
     if (wi) {
-        auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile].Minimum;
+        auto tileSize = dm.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile].Minimum;
         auto wPt = TPoint(wi->Rect.Left * tileSize.cx, wi->Rect.Top * tileSize.cy);
         auto ri = 0;
         for (auto ri = 0; ri < 255; ri++) {
@@ -47,15 +49,15 @@ void __fastcall ScreensSection::Execute()
                                 auto ty = y * tileSize.cy;
                                 // find the tile (oversized or not) that intersects with the single tile position
                                 auto entity = find_if(roomEntities.begin(), roomEntities.end(), [&](const Project::MapEntity& e) {
-                                    return ((e.Image->ImageType == Visuals::itTile) && (tx <= e.Pt.x && e.Pt.x < tx + e.Image->Width) && (ty<= e.Pt.y && e.Pt.y < ty + e.Image->Height));
+                                    return ((e.Image->ImageType == Visuals::itTile) && (e.Pt.x <= tx && tx < e.Pt.x + e.Image->Width) && (e.Pt.y <= ty && ty < e.Pt.y + e.Image->Height));
                                 } );
                                 if (entity != roomEntities.end()) {
                                     // get offset into tile (0,0 for a single tile)
                                     //                      (n, m for a big tile)
-                                    auto txo = entity->Pt.x - tx;
-                                    auto tyo = entity->Pt.y - ty;
+                                    auto txo = tx - entity->Pt.x;
+                                    auto tyo = ty - entity->Pt.y;
                                     // get the game index of the tile object
-                                    auto index = dm.GetAsIndex(entity->Id, txo, tyo);
+                                    auto index = dm.GetIndexFor(entity->Id, txo, tyo);
                                     if (index != -1) {
                                         auto number = "   " + IntToStr(index);
                                         line += number.SubString(number.Length() - 2, 3) + " ";
@@ -78,7 +80,7 @@ void __fastcall ScreensSection::Execute()
                                 auto type = std::max(0, entity.SpriteType);
                                 // get sprite id as sprite index
                                 auto index = dm.GetAsIndex(entity.Id);
-                                line = "SPRITEPOSITION " + IntToStr(type) + " " + IntToStr(index) + " " + IntToStr((int)(entity.Pt.y)) + " " + IntToStr((int)(entity.Pt.x));
+                                line = "SPRITEPOSITION " + IntToStr(type) + " " + IntToStr(index) + " " + IntToStr((int)(wPt.y + entity.Pt.y)) + " " + IntToStr((int)(wPt.x + entity.Pt.x));
                                 AddLine(line);
                             }
                         }

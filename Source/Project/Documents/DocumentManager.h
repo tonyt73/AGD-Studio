@@ -111,7 +111,7 @@ public:
     Document*       __fastcall  Get(const String& type, const String& subType, const String& name) const;
     Document*       __fastcall  Get(unsigned int id) const;
     int             __fastcall  GetAsIndex(unsigned int id) const;
-    int             __fastcall  GetAsIndex(unsigned int id, int dx, int dy);
+    int             __fastcall  GetIndexFor(unsigned int id, int dx, int dy);
  const UniqueTiles& __fastcall  MapUniqueTileIndexes();
 
     int             __fastcall  FindSameTile(const MappedTile& newTile);
