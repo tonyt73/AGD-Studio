@@ -159,7 +159,7 @@ void __fastcall ProjectDocument::SetName(String name)
         Services::Folders::Rename(Services::Folders::lpProjects, fromName, toName);
         if (m_TreeNode)
         {
-            auto node = ((TElXTreeItem*)m_TreeNode);
+            auto node = static_cast<TElXTreeItem*>(m_TreeNode);
             // TODO: Use messaging to get the UI to update this
             // Rename the root node that has the project name
             node->Parent->Parent->Parent->Text = name;

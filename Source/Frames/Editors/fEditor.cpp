@@ -10,8 +10,8 @@
 //---------------------------------------------------------------------------
 __fastcall TfrmEditor::TfrmEditor(TComponent* Owner, const String& Name)
 : TFrame(Owner)
-, m_KeysHelp("")
 , m_Name(Name)
+, m_KeysHelp("")
 {
     m_Registrar.Subscribe<Event>(_FnBind(TfrmEditor::OnEvent));
 }

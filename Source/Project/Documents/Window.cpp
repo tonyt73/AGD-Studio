@@ -39,10 +39,10 @@ __fastcall WindowDocument::WindowDocument(const String& name)
         if (theDocumentManager.ProjectConfig() != nullptr)
         {
             const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
-            m_SizeInCharacters.cx = mc.GraphicsMode()->Width  / mc.ImageSizing[Visuals::itTile].Minimum.cx;
-            m_SizeInCharacters.cy = mc.GraphicsMode()->Height / mc.ImageSizing[Visuals::itTile].Minimum.cy;
-            m_SizeInPixels.cx = mc.GraphicsMode()->Width;
-            m_SizeInPixels.cy = mc.GraphicsMode()->Height;
+            m_SizeInPixels.cx = static_cast<LONG>(mc.GraphicsMode()->Width);
+            m_SizeInPixels.cy = static_cast<LONG>(mc.GraphicsMode()->Height);
+            m_SizeInCharacters.cx = m_SizeInPixels.cx / mc.ImageSizing[Visuals::itTile].Minimum.cx;
+            m_SizeInCharacters.cy = m_SizeInPixels.cy / mc.ImageSizing[Visuals::itTile].Minimum.cy;
             m_Rect.Left = 0;
             m_Rect.Top = 0;
             m_Rect.Right = m_SizeInCharacters.cx - 1;
@@ -65,10 +65,10 @@ void __fastcall WindowDocument::OnLoaded()
 {
     const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
 
-    m_SizeInCharacters.cx = mc.GraphicsMode()->Width  / mc.ImageSizing[Visuals::itTile].Minimum.cx;
-    m_SizeInCharacters.cy = mc.GraphicsMode()->Height / mc.ImageSizing[Visuals::itTile].Minimum.cy;
-    m_SizeInPixels.cx = mc.GraphicsMode()->Width;
-    m_SizeInPixels.cy = mc.GraphicsMode()->Height;
+    m_SizeInPixels.cx = static_cast<LONG>(mc.GraphicsMode()->Width);
+    m_SizeInPixels.cy = static_cast<LONG>(mc.GraphicsMode()->Height);
+    m_SizeInCharacters.cx = m_SizeInPixels.cx / mc.ImageSizing[Visuals::itTile].Minimum.cx;
+    m_SizeInCharacters.cy = m_SizeInPixels.cx / mc.ImageSizing[Visuals::itTile].Minimum.cy;
 
     if (m_Rect.Width() <= 1)
     {
@@ -86,21 +86,21 @@ int __fastcall WindowDocument::Get(int index)
 {
     switch (index)
     {
-        case 0: return m_Rect.Left; break;
-        case 1: return m_Rect.Top; break;
-        case 2: return m_Rect.Right; break;
-        case 3: return m_Rect.Bottom; break;
-        case 4: return m_Rect.Width() + 1; break;
-        case 5: return m_Rect.Height() + 1; break;
-        case 6: return m_SizeInCharacters.cx; break;
-        case 7: return m_SizeInCharacters.cy; break;
-        case 8: return m_SizeInPixels.cx; break;
-        case 9: return m_SizeInPixels.cy; break;
+        case 0: return m_Rect.Left;
+        case 1: return m_Rect.Top;
+        case 2: return m_Rect.Right;
+        case 3: return m_Rect.Bottom;
+        case 4: return m_Rect.Width() + 1;
+        case 5: return m_Rect.Height() + 1;
+        case 6: return m_SizeInCharacters.cx;
+        case 7: return m_SizeInCharacters.cy;
+        case 8: return m_SizeInPixels.cx;
+        case 9: return m_SizeInPixels.cy;
     }
     return 0;
 }
 //---------------------------------------------------------------------------
-void __fastcall WindowDocument::Set(const TRect& rect)
+void __fastcall WindowDocument::SetRect(const TRect& rect)
 {
     if (rect.Width() > 8 && rect.Height() > 4)
     {

@@ -10,11 +10,10 @@
 #include <Vcl.Imaging.pngimage.hpp>
 #include <Vcl.StdCtrls.hpp>
 //---------------------------------------------------------------------------
+#include "../AppFrame.h"
 #include "fSelectionPanel.h"
-#include "Messaging/Event.h"
-#include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
-class TfrmWelcomeDialog : public TFrame
+class TfrmWelcomeDialog : public TAppFrame
 {
 __published:    // IDE-managed Components
     TButton *btnCancel;
@@ -75,20 +74,15 @@ private:    // Function declarations
     void     __fastcall     UpdateUI(bool updateMachine = false);
 
 private:    // Member declarations
-    Registrar                                           m_Registrar;
-    std::list<std::shared_ptr<TSelectionPanelFrame>>    m_MostRecentlyUsedItems;
-    TSelectionPanelFrame*                               m_LoadingPanel;
-
-private:    // Events
-    TNotifyEvent            FOnDone;
+    typedef std::list<std::shared_ptr<TSelectionPanelFrame>> MRUList;
+    MRUList                 m_MostRecentlyUsedItems;
+    TSelectionPanelFrame*   m_LoadingPanel;
 
 public:        // User declarations
             __fastcall      TfrmWelcomeDialog(TComponent* Owner) override;
             __fastcall     ~TfrmWelcomeDialog() override;
 
-    void    __fastcall      OnActivate(TWinControl* parent);
-
-    __property TNotifyEvent OnDone = { read = FOnDone, write = FOnDone };
+    void    __fastcall      OnActivate(TWinControl* parent) override;
 };
 //---------------------------------------------------------------------------
 #endif

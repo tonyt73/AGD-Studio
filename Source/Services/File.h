@@ -22,7 +22,7 @@ public:
     static  void      PrependText(const String& file, const String& content);
     static  void      AppendText(const String& file, const String& content);
     static  String    ReadText(const String& file);
-    static  void      ReadBytes(const String& file, std::vector<unsigned char>& contents);
+    static  void      ReadBytes(const String& file, std::vector<wchar_t>& contents);
     static  StrLines  ReadLines(const String& file);
     static  void      Copy(const String& source, const String& destination, bool overwrite = false);
     static  void      Delete(const String& file);

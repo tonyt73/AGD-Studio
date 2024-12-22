@@ -68,32 +68,29 @@ void GraphicsBuffer::PushBuffer(unsigned int size)
 //---------------------------------------------------------------------------
 unsigned int GraphicsBuffer::GetNumberOfBuffers() const
 {
-    return m_Buffers.size();
+    return static_cast<unsigned int>(m_Buffers.size());
 }
 //---------------------------------------------------------------------------
-unsigned int GraphicsBuffer::GetSizeOfBuffer(unsigned int index) const
+unsigned int GraphicsBuffer::GetSizeOfBuffer(unsigned char index) const
 {
     auto size = 0;
-    if (index < m_Buffers.size())
-    {
-        size = m_Buffers[index].size();
+    if (index < m_Buffers.size()) {
+        size = static_cast<unsigned int>(m_Buffers[index].size());
     }
     return size;
 }
 //---------------------------------------------------------------------------
 unsigned char GraphicsBuffer::GetColorIndex(unsigned char index) const
 {
-    if (index < m_SetColors.size())
-    {
+    if (index < m_SetColors.size()) {
         return m_SetColors[index];
     }
     return 0;
 }
 //---------------------------------------------------------------------------
-void GraphicsBuffer::SetColorIndex(unsigned char index, int logicalIndex)
+void GraphicsBuffer::SetColorIndex(unsigned char index, unsigned char logicalIndex)
 {
-    if (0 <= index && index < m_SetColors.size() && 0 <= logicalIndex && logicalIndex < m_GraphicsMode.LogicalColors)
-    {
+    if (index < m_SetColors.size() && logicalIndex < m_GraphicsMode.LogicalColors) {
         m_SetColors[index] = logicalIndex;
     }
 }
@@ -104,10 +101,9 @@ void GraphicsBuffer::SetRenderInGreyscale(bool value)
     Render();
 }
 //---------------------------------------------------------------------------
-void GraphicsBuffer::GetBuffer(int index, ByteBuffer& buffer) const
+void GraphicsBuffer::GetBuffer(unsigned char index, ByteBuffer& buffer) const
 {
-    if (0 <= index && index < m_Buffers.size())
-    {
+    if (index < m_Buffers.size()) {
         buffer.assign(m_Buffers[index].begin(), m_Buffers[index].end());
     }
 }
@@ -117,20 +113,17 @@ ByteBuffer GraphicsBuffer::GetNative(ImageTypes type, const TRect& rect) const
     ByteBuffer data;
     if (rect.Width() == 0 || rect.Height() == 0) {
         // get the entire set of buffers as required by the graphics mode configuration
-        for (auto buffer = 0; buffer < m_Buffers.size(); buffer++)
-        {
-            if ((buffer == 0 && m_GraphicsMode.ExportInformation[type].BitmapDataOnly) || !m_GraphicsMode.ExportInformation[type].BitmapDataOnly)
-            {
-                for (const auto& byte : m_Buffers[buffer])
-                {
+        for (auto buffer = 0; buffer < m_Buffers.size(); buffer++) {
+            if ((buffer == 0 && m_GraphicsMode.ExportInformation[type].BitmapDataOnly) || !m_GraphicsMode.ExportInformation[type].BitmapDataOnly) {
+                for (const auto& byte : m_Buffers[buffer]) {
                     data.push_back(m_GraphicsMode.RemapPixels(byte));
                 }
             }
         }
     } else {
         // extract a section of the graphics pixel buffer
-        for (int y = rect.Top; y < rect.Bottom; y++) {
-            for (int x = rect.Left; x < rect.Right; x += m_PixelsPerByte) {
+        for (auto y = rect.Top; y < rect.Bottom; y++) {
+            for (auto x = rect.Left; x < rect.Right; x += m_PixelsPerByte) {
                 auto offset = (x / m_PixelsPerByte) + ((y * m_Width) / m_PixelsPerByte);
                 auto byte = m_Buffers[0][offset];
                 data.push_back(m_GraphicsMode.RemapPixels(byte));
@@ -153,10 +146,8 @@ ByteBuffer GraphicsBuffer::GetNative(ImageTypes type, const TRect& rect) const
 String GraphicsBuffer::Get() const
 {
     String data;
-    for (const auto& buffer : m_Buffers)
-    {
-        for (const auto& byte : buffer)
-        {
+    for (const auto& buffer : m_Buffers) {
+        for (const auto& byte : buffer) {
             data += IntToHex(byte, 2);
         }
     }
@@ -166,14 +157,11 @@ String GraphicsBuffer::Get() const
 void GraphicsBuffer::Draw(TBitmap* bitmap, bool inMonochrome) const
 {
     StretchBlt(bitmap->Canvas->Handle, 0, 0, bitmap->Width, bitmap->Height, m_Bitmap->Canvas->Handle, 0, 0, Width, Height, SRCCOPY);
-    if (inMonochrome)
-    {
-        for (auto y = 0; y < bitmap->Height; y++)
-        {
-            auto sl = (TRGBA*)bitmap->ScanLine[y];
-            for (auto x = 0; x < bitmap->Width; x++)
-            {
-                auto gray = (int)((0.299 * sl[x].R) + (0.587 * sl[x].G) + (0.114 * sl[x].B));
+    if (inMonochrome) {
+        for (auto y = 0; y < bitmap->Height; y++) {
+            auto sl = static_cast<TRGBA*>(bitmap->ScanLine[y]);
+            for (auto x = 0; x < bitmap->Width; x++) {
+                auto gray = static_cast<unsigned char>((0.299 * sl[x].R) + (0.587 * sl[x].G) + (0.114 * sl[x].B));
                 sl[x].R = gray;
                 sl[x].G = gray;
                 sl[x].B = gray;

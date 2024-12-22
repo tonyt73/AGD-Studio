@@ -43,7 +43,7 @@ Visuals::BufferType __fastcall Visuals::BufferTypeByName(String name)
     if (name.LowerCase() == "btattribute"    ) return btAttribute;
     if (name.LowerCase() == "btulaplus"      ) return btULAplus;
     if (name.LowerCase() == "btcharactermmap") return btCharacterMap;
-                                               return btInvalid;
+    return btInvalid;
 }
 //---------------------------------------------------------------------------
 

@@ -79,7 +79,7 @@ void __fastcall Image::Draw(const TPoint& pt, TBitmap* canvas, TColor overlayCol
 //        unsigned int g = overlayColor & 0x0000FF00;
 //        unsigned int b = (overlayColor & 0x00FF0000) >> 16;
 //        unsigned int rgb = r | g | b;
-        ((TColor*)m_Overlay->ScanLine[0])[0] = (TColor)RGBtoBGR(overlayColor);
+        static_cast<TColor*>(m_Overlay->ScanLine[0])[0] = static_cast<TColor>(RGBtoBGR(overlayColor));
         AlphaBlend(canvas->Canvas->Handle, pt.x, pt.y, m_Image->Width, m_Image->Height, m_Overlay->Canvas->Handle, 0, 0, 1, 1, bfn);
     }
 }

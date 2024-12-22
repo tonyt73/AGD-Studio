@@ -16,7 +16,7 @@ protected:
 
     TColor              __fastcall  GetTableColor(int index) const;
     TColor              __fastcall  GetGreyscale(int index) const;
-    int                 __fastcall  GetTotalColors() const;
+    unsigned int        __fastcall  GetTotalColors() const;
 
     TColor              __fastcall  GetFontColorOf(int index) const;
 

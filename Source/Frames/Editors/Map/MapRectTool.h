@@ -11,6 +11,7 @@ private:
             void    __fastcall  DrawRect(Project::MapEntityList& list, Project::MapEntity entity, TRect Rect);
 public:
                     __fastcall  MapRectTool();
+                    __fastcall ~MapRectTool() override;
 };
 //---------------------------------------------------------------------------
 #endif

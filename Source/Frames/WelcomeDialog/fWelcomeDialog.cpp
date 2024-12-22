@@ -15,7 +15,7 @@
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 __fastcall TfrmWelcomeDialog::TfrmWelcomeDialog(TComponent* Owner)
-: TFrame(Owner)
+: TAppFrame(Owner)
 , m_LoadingPanel(nullptr)
 {
     // load the themes

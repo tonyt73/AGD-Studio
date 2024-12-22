@@ -46,7 +46,7 @@ void __fastcall TilesSection::Execute()
         // no Tiles is ok
         Success();
     } else {
-        Failure("The number of unique tiles (" + IntToStr((int)uniqueTiles.size()) + ") exceeds 256.");
+        Failure("The number of unique tiles (" + UIntToStr(uniqueTiles.size()) + ") exceeds 256.");
     }
 }
 //---------------------------------------------------------------------------

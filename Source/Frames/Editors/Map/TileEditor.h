@@ -44,13 +44,13 @@ private:
     Visuals::ImageMap&          m_ImageMap;         // a map of all images as bitmaps
     float                       m_ScaleFactor;      // the scale factor of the content view on to the overlays view
     TFPoint                     m_Scale;            // the applied scale factor for both x and y axes
-    bool                        m_UsesGridTile;     // flag: uses a tile grid
-    bool                        m_UsesGridRoom;     // flag: uses a room grid
+    bool                        m_ForceMapDraw;     // flag: force a full redraw of the map
+    bool                        m_MousePanning;     // flag: panning the window with the mouse
     bool                        m_ShowGridTile;     // flag: show tile grid
     bool                        m_ShowGridRoom;     // flag: show room grid
-    bool                        m_MousePanning;     // flag: panning the window with the mouse
     bool                        m_SelectionMove;    // flag: moving the entity selections
-    bool                        m_ForceMapDraw;     // flag: force a full redraw of the map
+    bool                        m_UsesGridTile;     // flag: uses a tile grid
+    bool                        m_UsesGridRoom;     // flag: uses a room grid
     TPoint                      m_MapOffsetMS;      // offset into the map to render to the workspace (Coords in Map Space)
     TRect                       m_Window;           // the number of tiles across and down of the window area
     TSize                       m_TileSize;         // the size in pixels of a tile

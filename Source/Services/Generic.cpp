@@ -19,23 +19,15 @@ Generic::Generic(const String& object)
 {
 }
 //---------------------------------------------------------------------------
-Generic::Generic(const Generic& other)
-: m_Object(other.m_Object)
-{
-}
-//---------------------------------------------------------------------------
 void Generic::Process()
 {
-    if (m_Objects.size() == 0 && m_Object.Length() > 0)
-    {
+    if (m_Objects.size() == 0 && m_Object.Length() > 0) {
         // split the string by the object token
         auto objects = SplitString(m_Object, g_TokenObj);
-        for (auto object : objects)
-        {
+        for (auto object : objects) {
             // split the objects by the separator token
             auto tokens = SplitString(object, g_TokenSep);
-            if (tokens.Length == 2)
-            {
+            if (tokens.Length == 2) {
                 m_Objects[tokens[0]] = tokens[1];
             }
         }
@@ -60,14 +52,13 @@ void Generic::Add(const String& name, const int& value)
 //---------------------------------------------------------------------------
 void Generic::Add(const String& name, const float& value)
 {
-    m_Object += g_TokenObj + name + g_TokenSep + "float:" + FloatToStrF(value, ffFixed, 6, 2);
+    m_Object += g_TokenObj + name + g_TokenSep + "float:" + FloatToStrF(static_cast<System::Extended>(value), ffFixed, 6, 2);
 }
 //---------------------------------------------------------------------------
 bool Generic::Get(const String& name, String& value)
 {
     Process();
-    if (m_Objects.count(name) == 1)
-    {
+    if (m_Objects.count(name) == 1) {
         // parse string to string
         auto def = m_Objects[name];
         auto tokens = SplitString(def, ":");
@@ -80,8 +71,7 @@ bool Generic::Get(const String& name, String& value)
 bool Generic::Get(const String& name, bool& value)
 {
     Process();
-    if (m_Objects.count(name) == 1)
-    {
+    if (m_Objects.count(name) == 1) {
         // parse string to bool
         auto def = m_Objects[name];
         auto tokens = SplitString(def, ":");
@@ -94,8 +84,7 @@ bool Generic::Get(const String& name, bool& value)
 bool Generic::Get(const String& name, int& value)
 {
     Process();
-    if (m_Objects.count(name) == 1)
-    {
+    if (m_Objects.count(name) == 1) {
         // parse string to int
         auto def = m_Objects[name];
         auto tokens = SplitString(def, ":");
@@ -108,12 +97,11 @@ bool Generic::Get(const String& name, int& value)
 bool Generic::Get(const String& name, float& value)
 {
     Process();
-    if (m_Objects.count(name) == 1)
-    {
+    if (m_Objects.count(name) == 1) {
         // parse string to float
         auto def = m_Objects[name];
         auto tokens = SplitString(def, ":");
-        value = StrToFloat(tokens[1]);
+        value = static_cast<float>(StrToFloat(tokens[1]));
         return true;
     }
     return false;

@@ -21,13 +21,13 @@ __published:    // IDE-managed Components
     void __fastcall edtKeyChange(TObject *Sender);
     void __fastcall FrameMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
 private:    // User declarations
-    std::map<unsigned char, String> m_KeyMap;
+    std::map<wchar_t, String>   m_KeyMap;
 
-    unsigned char               m_KeyCode;
+    wchar_t                     m_KeyCode;
     bool                        m_NotSet;
 
     void            __fastcall  UpdateKeyInfo();
-    void            __fastcall  SetKeyCode(unsigned char keyCode);
+    void            __fastcall  SetKeyCode(wchar_t keyCode);
     const String    __fastcall  GetCaption();
     void            __fastcall  SetCaption(const String& caption);
     TNotifyEvent                FOnChanged;
@@ -36,7 +36,7 @@ public:        // User declarations
                     __fastcall  TfrmKeyCode(TComponent* Owner) override;
 __published:
     String          __property  Caption = { read = GetCaption, write = SetCaption };
-    unsigned char   __property  KeyCode = { read = m_KeyCode, write = SetKeyCode };
+    wchar_t         __property  KeyCode = { read = m_KeyCode, write = SetKeyCode };
 
             // events
     __property  TNotifyEvent    OnChanged = { read = FOnChanged, write = FOnChanged };

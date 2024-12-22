@@ -25,18 +25,18 @@ using namespace Build;
 __fastcall Creation::Creation(BuildMessages& buildMessages)
 : BuildProcess(buildMessages, bmBuild, "Generate Game File (Project to AGD File)")
 {
-    m_AgdSections.push_back(std::move(std::make_unique<ProjectSection>()));
-    m_AgdSections.push_back(std::move(std::make_unique<WindowSection>()));
-    m_AgdSections.push_back(std::move(std::make_unique<ControlsSection>()));
-    m_AgdSections.push_back(std::move(std::make_unique<MessagesSection>()));
-    m_AgdSections.push_back(std::move(std::make_unique<FontSection>()));
-    m_AgdSections.push_back(std::move(std::make_unique<JumpTableSection>()));
-    m_AgdSections.push_back(std::move(std::make_unique<TilesSection>()));
-    m_AgdSections.push_back(std::move(std::make_unique<ObjectsSection>()));
-    m_AgdSections.push_back(std::move(std::make_unique<SpritesSection>()));
-    m_AgdSections.push_back(std::move(std::make_unique<ScreensSection>()));
-    m_AgdSections.push_back(std::move(std::make_unique<MapSection>()));
-    m_AgdSections.push_back(std::move(std::make_unique<EventsSection>()));
+    m_AgdSections.push_back(std::make_unique<ProjectSection>());
+    m_AgdSections.push_back(std::make_unique<WindowSection>());
+    m_AgdSections.push_back(std::make_unique<ControlsSection>());
+    m_AgdSections.push_back(std::make_unique<MessagesSection>());
+    m_AgdSections.push_back(std::make_unique<FontSection>());
+    m_AgdSections.push_back(std::make_unique<JumpTableSection>());
+    m_AgdSections.push_back(std::make_unique<TilesSection>());
+    m_AgdSections.push_back(std::make_unique<ObjectsSection>());
+    m_AgdSections.push_back(std::make_unique<SpritesSection>());
+    m_AgdSections.push_back(std::make_unique<ScreensSection>());
+    m_AgdSections.push_back(std::make_unique<MapSection>());
+    m_AgdSections.push_back(std::make_unique<EventsSection>());
 }
 //---------------------------------------------------------------------------
 __fastcall Creation::~Creation()

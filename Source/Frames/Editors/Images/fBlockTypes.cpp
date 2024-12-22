@@ -20,11 +20,11 @@ void __fastcall TfrmBlockTypes::btnPlatformClick(TObject *Sender)
     {
         panBlock->Caption = button->Caption[1];
         panBlock->Color = g_BlockColors[button->Tag];
-        m_BlockType = '0' + button->Tag;
+        m_BlockType = static_cast<wchar_t>('0' + button->Tag);
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmBlockTypes::SetBlockType(char type)
+void __fastcall TfrmBlockTypes::SetBlockType(wchar_t type)
 {
     btnPlatform->Down = type == '1';
     btnWall->Down     = type == '2';

@@ -10,14 +10,9 @@
 //---------------------------------------------------------------------------
 using namespace Project;
 //---------------------------------------------------------------------------
-Settings* instance = nullptr;
 Settings& __fastcall Settings::get()
 {
-    if (instance == nullptr)
-    {
-        Services::Folders::Init();
-        instance = new Settings();
-    }
+    static Settings* instance = new Settings();
     return *instance;
 }
 //---------------------------------------------------------------------------
@@ -121,7 +116,7 @@ void __fastcall Settings::Save()
             Write("Width", WindowSize.Width);
             Write("Height", WindowSize.Height);
         Pop(); // }
-        Write("WindowState", (int)WindowState);
+        Write("WindowState", static_cast<int>(WindowState));
     Pop(); // }
     Push("CodeEditor"); // {
         Push("Font"); // {

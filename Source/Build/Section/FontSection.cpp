@@ -49,7 +49,7 @@ void __fastcall FontSection::Execute()
         }
         else
         {
-            Failure("Character set does not have the correct number of characters (frames). It has " + IntToStr(Font->Frames) + " when it needs 96");
+            Failure("Character set does not have the correct number of characters (frames). It has " + UIntToStr(Font->Frames) + " when it needs 96");
             return;
         }
     }

@@ -7,11 +7,11 @@
 namespace Build
 {
 //---------------------------------------------------------------------------
-class Compilation : public ShellProcess
+class Compilation final : public ShellProcess
 {
 public:
                     __fastcall  Compilation(BuildMessages& buildMessages);
-    virtual         __fastcall ~Compilation();
+                    __fastcall ~Compilation() final;
 
             bool    __fastcall  Execute() final;
 };

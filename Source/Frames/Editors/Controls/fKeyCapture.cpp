@@ -42,7 +42,7 @@ void __fastcall TfrmKeyCode::edtKeyKeyPress(TObject *Sender, System::WideChar &K
             }
             else
             {
-                m_KeyCode = std::min(127, StrToIntDef(edtKey->Text, 0));
+                m_KeyCode = static_cast<wchar_t>(std::min(127, StrToIntDef(edtKey->Text, 0)));
                 edtKey->Text = IntToStr(m_KeyCode);
             }
         }
@@ -70,9 +70,9 @@ void __fastcall TfrmKeyCode::UpdateKeyInfo()
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmKeyCode::SetKeyCode(unsigned char keyCode)
+void __fastcall TfrmKeyCode::SetKeyCode(wchar_t keyCode)
 {
-    if (0 <= keyCode and keyCode < 128)
+    if (keyCode < 128)
     {
         m_KeyCode = keyCode;
         m_NotSet = keyCode == 0;

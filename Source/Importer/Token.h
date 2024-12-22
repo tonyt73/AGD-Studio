@@ -16,7 +16,7 @@ public:
     enum        TokenType   { ttEmpty = 0, ttSection = 1, ttNumber = 2, ttAscii = 4, ttWord = 8, ttString = 16, ttLine = 32, ttVariable = 64, ttArray = 128, ttInvalid = 256 };
 
                 Token();
-                Token(const Token& other);
+                //Token(const Token& other);
 
     bool        ize(const String& part, bool first = false, bool incVars = false);
     bool        isa(int type) const;

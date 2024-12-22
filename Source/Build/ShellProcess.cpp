@@ -12,6 +12,10 @@ __fastcall ShellProcess::ShellProcess(BuildMessages& buildMessages, BuildMessage
 {
 }
 //---------------------------------------------------------------------------
+__fastcall ShellProcess::~ShellProcess()
+{
+}
+//---------------------------------------------------------------------------
 bool __fastcall ShellProcess::ShellExecute(const String& path, const String& cmdline, const String& parameters, bool wait)
 {
     auto shell = std::make_unique<TLMDStarterExt>(nullptr);

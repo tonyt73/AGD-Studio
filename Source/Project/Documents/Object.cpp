@@ -47,8 +47,8 @@ void __fastcall ObjectDocument::DoSaveExtra()
     Write("RoomIndex", m_RoomIndex);
     Write("State", m_State);
     Push("Position");
-        Write("X", (int)m_Position.X);
-        Write("Y", (int)m_Position.Y);
+        Write("X", m_Position.X);
+        Write("Y", m_Position.Y);
     Pop();
 }
 //---------------------------------------------------------------------------

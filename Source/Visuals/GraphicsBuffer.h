@@ -50,9 +50,9 @@ protected:
                         __fastcall  GraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode);
         void            __fastcall  PushBuffer(unsigned int size);
         unsigned int    __fastcall  GetNumberOfBuffers() const;
-        unsigned int    __fastcall  GetSizeOfBuffer(unsigned int index) const;
+        unsigned int    __fastcall  GetSizeOfBuffer(unsigned char index) const;
 virtual unsigned char   __fastcall  GetColorIndex(unsigned char index) const;
-virtual void            __fastcall  SetColorIndex(unsigned char index, int logicalIndex);
+virtual void            __fastcall  SetColorIndex(unsigned char index, unsigned char logicalIndex);
         void            __fastcall  SetRenderInGreyscale(bool value);
         unsigned char   __fastcall  RemapPixel(unsigned char pixel) const;
 virtual void            __fastcall  Render() const = 0;
@@ -66,7 +66,7 @@ public:
                                     // retrieves the pixel color at the position specified
     virtual void        __fastcall  GetColor(unsigned int X, unsigned int Y, unsigned char colorIndex = 0) = 0;
                                     // Retrieves the specified buffer index from the graphics buffer
-            void        __fastcall  GetBuffer(int index, ByteBuffer& buffer) const;
+            void        __fastcall  GetBuffer(unsigned char index, ByteBuffer& buffer) const;
 
                                     // Get the native byte data for the buffer
             ByteBuffer  __fastcall  GetNative(ImageTypes type, const TRect& rect) const;

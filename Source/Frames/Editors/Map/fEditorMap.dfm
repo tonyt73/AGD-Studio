@@ -144,6 +144,7 @@ inherited frmEditorMap: TfrmEditorMap
                 Margins.Top = 8
                 Margins.Right = 8
                 Margins.Bottom = 8
+                StyleElements = [seFont, seClient, seBorder]
                 ExplicitLeft = 1
                 ExplicitWidth = 367
                 ExplicitHeight = 464
@@ -193,6 +194,7 @@ inherited frmEditorMap: TfrmEditorMap
                 Margins.Top = 8
                 Margins.Right = 8
                 Margins.Bottom = 8
+                StyleElements = [seFont, seClient, seBorder]
                 ExplicitWidth = 350
                 ExplicitHeight = 464
               end
@@ -246,6 +248,7 @@ inherited frmEditorMap: TfrmEditorMap
                 Font.Name = 'Roboto'
                 Font.Style = [fsBold]
                 ParentFont = False
+                StyleElements = [seFont, seClient, seBorder]
                 ExplicitWidth = 350
                 ExplicitHeight = 464
               end

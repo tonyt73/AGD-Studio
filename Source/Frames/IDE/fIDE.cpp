@@ -1,5 +1,6 @@
 //---------------------------------------------------------------------------
 #include "AGD Studio.pch.h"
+//---------------------------------------------------------------------------
 #include "Forms/fAbout.h"
 #include "Forms/fNewTileImage.h"
 #include "Forms/fSettings.h"
@@ -26,7 +27,7 @@
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 __fastcall TfrmIDE::TfrmIDE(TComponent* Owner)
-: TFrame(Owner)
+: TAppFrame(Owner)
 {
     RegisterDocumentEditors();
     m_Registrar.Subscribe<MessageEvent>(_FnBind(TfrmIDE::OnMessageEvent));
@@ -106,7 +107,7 @@ void __fastcall TfrmIDE::OnUpdateProperties(const UpdateProperties& event)
 {
     assert(event.Id == "update.properties");
     if (tvProject && tvProject && tvProject->Selected) {
-        auto doc = (Project::Document*)((NativeInt)tvProject->Selected->Tag);
+        auto doc = reinterpret_cast<Project::Document*>(tvProject->Selected->Tag);
         UpdateDocumentProperties(doc);
     }
 }
@@ -200,7 +201,7 @@ void __fastcall TfrmIDE::DoOpenDocument(Project::Document* document)
         auto editor = dynamic_cast<TfrmEditor*>(m_DocumentEditorFactory.Create(document, dp));
         if (editor) {
             dp->Caption = document->Name.UpperCase();
-            dp->Tag = (NativeInt)document;
+            dp->Tag = reinterpret_cast<NativeInt>(document);
             document->DockPanel = dp;
             editor->OnInitialise();
             UpdateDocumentProperties(document);
@@ -279,7 +280,7 @@ void __fastcall TfrmIDE::lmdPropertiesClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::tvProjectItemSelectedChange(TObject *Sender, TElXTreeItem *Item)
 {
-    auto doc = reinterpret_cast<Project::Document*>((TObject*)Item->Tag);
+    auto doc = reinterpret_cast<Project::Document*>(Item->Tag);
     if (doc != nullptr) {
         UpdateDocumentProperties(doc);
         auto dockPanel = static_cast<TLMDDockPanel*>(doc->DockPanel);
@@ -295,7 +296,7 @@ void __fastcall TfrmIDE::OnDocumentClose(TObject *Sender, TLMDockPanelCloseActio
 {
     auto dockPanel = dynamic_cast<TLMDDockPanel*>(Sender);
     if (dockPanel) {
-        auto doc = (Project::Document*)dockPanel->Tag;
+        auto doc = reinterpret_cast<Project::Document*>(dockPanel->Tag);
         InformationMessage("[IDE] Closing Document: " + doc->Name);
         doc->Close();
     }
@@ -304,7 +305,7 @@ void __fastcall TfrmIDE::OnDocumentClose(TObject *Sender, TLMDockPanelCloseActio
 void __fastcall TfrmIDE::tvProjectDblClick(TObject *Sender)
 {
     if (tvProject->Selected) {
-        auto doc = (Project::Document*)((NativeInt)tvProject->Selected->Tag);
+        auto doc = reinterpret_cast<Project::Document*>(tvProject->Selected->Tag);
         DoOpenDocument(doc);
     }
 }

@@ -31,11 +31,15 @@ __fastcall CharacterSetDocument::CharacterSetDocument(const String& name, const 
                 AddFrame(-1, "©");
                 break;
             default:
-                AddFrame(-1, StringOfChar((char)(32 + i), 1));
+                AddFrame(-1, StringOfChar(static_cast<wchar_t>(32 + i), 1));
                 break;
             }
         }
     }
     m_CanModifyFrames = false; // no for the editor
+}
+//---------------------------------------------------------------------------
+__fastcall CharacterSetDocument::~CharacterSetDocument()
+{
 }
 //---------------------------------------------------------------------------

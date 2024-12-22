@@ -49,7 +49,7 @@ String __fastcall BlockTypeTool::Begin(Visuals::GraphicsBuffer& canvas)
     return m_Blocks;
 }
 //---------------------------------------------------------------------------
-char __fastcall BlockTypeTool::Move(const TPoint& pt, const TShiftState& buttons)
+wchar_t __fastcall BlockTypeTool::Move(const TPoint& pt, const TShiftState& buttons)
 {
     auto bpt = PtToBlock(pt);
     auto offset = bpt.Y * m_BlocksAcross + bpt.X;

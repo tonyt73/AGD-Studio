@@ -31,14 +31,13 @@
 #include "LMDInsPropInsp.hpp"
 #include "LMDInsPropPage.hpp"
 //---------------------------------------------------------------------------
+#include "../AppFrame.h"
 #include "Build/BuildManager.h"
 #include "Factories/DocumentEditorFactory.h"
 #include "Frames/WndProcHandlers.h"
-#include "Messaging/Event.h"
-#include "Messaging/Messaging.h"
 #include "Project/Documents/Document.h"
 //---------------------------------------------------------------------------
-class TfrmIDE : public TFrame
+class TfrmIDE : public TAppFrame
 {
 __published:    // IDE-managed Components
     TAction *actDeleteAsset;
@@ -228,7 +227,6 @@ __published:    // IDE-managed Components
     void __fastcall actEditSplitIntoTilesExecute(TObject *Sender);
 
 private:                // User declarations
-    Registrar                           m_Registrar;
     Factories::DocumentEditorFactory    m_DocumentEditorFactory;
     Build::BuildManager                 m_Builder;
     std::list<EraseHandler>             m_EraseHandlers;    // stops flicking
@@ -245,16 +243,12 @@ private:                // User declarations
     void    __fastcall  OnUpdateProperties(const UpdateProperties& event);
     void    __fastcall  OnOpenDocument(const OpenDocument& event);
 
-    TNotifyEvent        FOnFormClose;
-
 public:                 // User declarations
             __fastcall  TfrmIDE(TComponent* Owner) override;
             __fastcall ~TfrmIDE() override;
 
-    void    __fastcall  OnActivate(TWinControl* parent);
-    void    __fastcall  OnClose();
-
-            __property  TNotifyEvent OnFormClose = { read = FOnFormClose, write = FOnFormClose };
+    void    __fastcall  OnActivate(TWinControl* parent) final;
+    void    __fastcall  OnClose() final;
 };
 //---------------------------------------------------------------------------
 #endif

@@ -200,8 +200,8 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64x)'!=''">
         <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;xmlrtl.bpi;lmdrtshell.bpi;DbxCommonDriver.bpi;dbrtl.bpi;bindengine.bpi;lmdrtprint.bpi</LinkPackageImports>
-        <VerInfo_Build>4</VerInfo_Build>
-        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.1.0.4;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.1.1.0;Comments=</VerInfo_Keys>
+        <VerInfo_Build>35</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.1.0.35;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.1.1.0;Comments=</VerInfo_Keys>
         <BCC_EnableLSPIndexingOnChange>false</BCC_EnableLSPIndexingOnChange>
         <BCC_AllWarnings>true</BCC_AllWarnings>
         <BCC_DisableWarnings>false</BCC_DisableWarnings>
@@ -378,6 +378,10 @@
             <FormType>dfm</FormType>
             <DependentOn>Forms\fSettings.h</DependentOn>
             <BuildOrder>28</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\AppFrame.cpp">
+            <DependentOn>Frames\AppFrame.h</DependentOn>
+            <BuildOrder>112</BuildOrder>
         </CppCompile>
         <CppCompile Include="Frames\Editors\Code\fEditorCode.cpp">
             <Form>frmEditorCode</Form>

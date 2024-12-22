@@ -25,4 +25,8 @@ __fastcall SpriteDocument::SpriteDocument(const String& name, const String& extr
     }
 }
 //---------------------------------------------------------------------------
+__fastcall SpriteDocument::~SpriteDocument()
+{
+}
+//---------------------------------------------------------------------------
 

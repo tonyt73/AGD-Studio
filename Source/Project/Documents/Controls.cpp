@@ -90,18 +90,18 @@ void __fastcall ControlsDocument::OnLoaded()
     DefaultKeys();
 }
 //---------------------------------------------------------------------------
-unsigned char __fastcall ControlsDocument::GetAsciiCode(eAgdKey key)
+wchar_t __fastcall ControlsDocument::GetAsciiCode(eAgdKey key)
 {
-    if (0 <= key && key < m_Keys.size())
+    if (key < m_Keys.size())
     {
         return m_Keys[key];
     }
     return 0;
 }
 //---------------------------------------------------------------------------
-void __fastcall ControlsDocument::SetAsciiCode(eAgdKey key, unsigned char keyCode)
+void __fastcall ControlsDocument::SetAsciiCode(eAgdKey key, wchar_t keyCode)
 {
-    if (0 <= key && key < m_Keys.size())
+    if (key < m_Keys.size())
     {
         m_Keys[key] = keyCode;
     }

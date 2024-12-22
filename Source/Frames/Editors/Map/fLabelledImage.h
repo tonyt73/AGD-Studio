@@ -32,9 +32,9 @@ private:        // User declarations
                 void        __fastcall  SetImage(Project::ImageDocument* document);
 
 public:        // User declarations
-                                        TfrmLabelledImage(TComponent* Owner);
+                                        TfrmLabelledImage(TComponent* Owner) override;
 
-                void        __fastcall  Update();
+                void        __fastcall  Update() override;
 
     __property  bool                    Selected        = { read = m_Selected , write = SetSelected };
     __property  Project::ImageDocument* Image           = { read = m_Document , write = SetImage    };

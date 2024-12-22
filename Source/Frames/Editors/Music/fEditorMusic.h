@@ -16,7 +16,7 @@ class TfrmEditorMusic : public TfrmEditor
 __published:    // IDE-managed Components
 private:        // User declarations
 public:         // User declarations
-                    __fastcall  TfrmEditorMusic(TComponent* Owner);
+                    __fastcall  TfrmEditorMusic(TComponent* Owner) override;
 
     static  TFrame* __fastcall  Create(Project::Document* document, TComponent* owner)
                                 {

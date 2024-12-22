@@ -52,8 +52,7 @@ void __fastcall TfrmULAplusBitmap::DrawPhysicalColors() const
     auto cols = imgSystemColors->Width / p_box;
     auto rows = totalColors / cols;
     // setup the picker image
-    if (m_PhysicalPicker->Width == 0)
-    {
+    if (m_PhysicalPicker->Width == 0) {
         // work out the size of the picker control
         auto hh = lblSystemColor->Height + ((rows + 1) * p_box);
         panSystemColorPicker->Height = hh;
@@ -64,19 +63,17 @@ void __fastcall TfrmULAplusBitmap::DrawPhysicalColors() const
         imgSystemColors->Picture->Bitmap->Height = m_PhysicalPicker->Height;
     }
     // clear the bitmap
-    m_PhysicalPicker->Canvas->Brush->Color = TColor(0xFF000000);;
+    m_PhysicalPicker->Canvas->Brush->Color = TColor(0xFF000000);
     m_PhysicalPicker->Canvas->FillRect(TRect(0, 0, m_PhysicalPicker->Width, m_PhysicalPicker->Height));
     // draw the physical colours
-    for (auto i = 0; i < totalColors; i++)
-    {
+    for (auto i = 0; i < totalColors; i++) {
         auto c = i % cols;
         auto r = i / cols;
         auto x = c * p_box;
         auto y = r * p_box;
         m_PhysicalPicker->Canvas->Brush->Color = m_Palette.Color[i];
         m_PhysicalPicker->Canvas->FillRect(TRect(x, y, x + p_box, y + p_box));
-        if (i == m_CursorPhysical)
-        {
+        if (i == m_CursorPhysical) {
             auto xs = x;
             auto ys = y;
             auto xe = xs + p_box;
@@ -91,14 +88,11 @@ void __fastcall TfrmULAplusBitmap::DrawPhysicalColors() const
 void __fastcall TfrmULAplusBitmap::DrawPalettesColors() const
 {
     // draw the logical colours
-    // setup the colour pickers
-    const auto totalColors = m_GraphicsMode.LogicalColors;
     // calculate the number of rows
     const auto bx = 20;  // width of the logical colour picker boxes
     const auto by = 20;  // width of the logical colour picker boxes
     // setup the picker image
-    if (m_PalettePicker->Width == 0)
-    {
+    if (m_PalettePicker->Width == 0) {
         auto hh = 8 + (4 * ((by * 2) + 2));
         panPalettePicker->Height = hh + lblLogicalColor->Height;
         m_PalettePicker->Width = imgLogicalColors->Width;
@@ -111,13 +105,11 @@ void __fastcall TfrmULAplusBitmap::DrawPalettesColors() const
     m_PalettePicker->Canvas->Brush->Color = clBlack;
     m_PalettePicker->Canvas->FillRect(TRect(0, 0, m_PalettePicker->Width, m_PalettePicker->Height));
     // draw the physical colours
-    for (auto pi = 0; pi < 4; pi++)
-    {
-        for (auto ci = 0; ci < 8; ci++)
-        {
+    for (auto pi = 0; pi < 4; pi++) {
+        for (auto ci = 0; ci < 8; ci++) {
             // draw ink
-            auto ink = GetInk(pi, ci);
-            auto paper = GetPaper(pi, ci);
+            unsigned char ink = GetInk(pi, ci);
+            unsigned char paper = GetPaper(pi, ci);
             auto x = 2 + (ci * bx);
             auto y = 2 + (pi * ((by + 2) * 2));
             auto xs = x;
@@ -129,10 +121,8 @@ void __fastcall TfrmULAplusBitmap::DrawPalettesColors() const
             // draw paper
             m_PalettePicker->Canvas->Brush->Color = m_GraphicsMode.LogicalColor[paper];
             m_PalettePicker->Canvas->FillRect(TRect(xs, ys + by, xe, ye + by));
-            if (m_Index == pi)
-            {
-                if (m_Ink == ci)
-                {
+            if (m_Index == pi) {
+                if (m_Ink == ci) {
                     // draw L
                     auto size = imgLogicalColors->Picture->Bitmap->Canvas->TextExtent("L");
                     auto tx = xs + ((bx - size.cx) >> 1);
@@ -141,8 +131,7 @@ void __fastcall TfrmULAplusBitmap::DrawPalettesColors() const
                     m_PalettePicker->Canvas->Brush->Color = m_GraphicsMode.LogicalColor[ink];
                     m_PalettePicker->Canvas->TextOut(tx, ty, "L");
                 }
-                if (m_Paper == ci)
-                {
+                if (m_Paper == ci) {
                     // draw R
                     auto size = imgLogicalColors->Picture->Bitmap->Canvas->TextExtent("R");
                     auto tx = xs + ((bx - size.cx) >> 1);
@@ -152,10 +141,8 @@ void __fastcall TfrmULAplusBitmap::DrawPalettesColors() const
                     m_PalettePicker->Canvas->TextOut(tx, ty, "R");
                 }
             }
-            if (pi == m_CursorIndex)
-            {
-                if (ci == m_Cursor)
-                {
+            if (pi == m_CursorIndex) {
+                if (ci == m_Cursor) {
                     // draw a double height cursor for selecting ink(L) or paper(R)
                     DrawSelectionBox(m_PalettePicker.get(), xs, ys, xe, ye + by);
                 }
@@ -193,12 +180,10 @@ void __fastcall TfrmULAplusBitmap::Set(Visuals::GraphicsBuffer& canvas)
 void __fastcall TfrmULAplusBitmap::imgLogicalColorsMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
 {
     m_Index = m_CursorIndex;
-    if (Button == mbLeft || Button == mbMiddle)
-    {
+    if (Button == mbLeft || Button == mbMiddle) {
         m_Ink = m_Cursor;
     }
-    if (Button == mbRight || Button == mbMiddle)
-    {
+    if (Button == mbRight || Button == mbMiddle) {
         m_Paper = m_Cursor;
     }
     Update();
@@ -214,10 +199,9 @@ void __fastcall TfrmULAplusBitmap::imgLogicalColorsMouseMove(TObject *Sender, TS
     auto lc = m_Cursor;
     auto li = m_CursorIndex;
     // set colour (left)
-    m_Cursor = X / bx;
-    m_CursorIndex = Y / by;
-    if (lc != m_Cursor || li != m_CursorIndex)
-    {
+    m_Cursor = static_cast<unsigned char>(X / bx);
+    m_CursorIndex = static_cast<unsigned char>(Y / by);
+    if (lc != m_Cursor || li != m_CursorIndex) {
         DrawPalettesColors();
     }
 }
@@ -232,13 +216,10 @@ void __fastcall TfrmULAplusBitmap::imgLogicalColorsMouseLeave(TObject *Sender)
 void __fastcall TfrmULAplusBitmap::imgSystemColorsMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
 {
     // remap a logical colour to a new physical colour
-    if (Button == mbLeft)
-    {
-        m_GraphicsMode.RemapColor(GetInk(), m_CursorPhysical);
-    }
-    else if (Button == mbRight)
-    {
-        m_GraphicsMode.RemapColor(GetPaper(), m_CursorPhysical);
+    if (Button == mbLeft) {
+        m_GraphicsMode.RemapColor(GetInk(), static_cast<unsigned char>(m_CursorPhysical));
+    } else if (Button == mbRight) {
+        m_GraphicsMode.RemapColor(GetPaper(), static_cast<unsigned char>(m_CursorPhysical));
     }
     Update();
 }
@@ -253,12 +234,10 @@ void __fastcall TfrmULAplusBitmap::imgSystemColorsMouseMove(TObject *Sender, TSh
     auto row = Y / p_box;
     auto cols = imgSystemColors->Width / p_box;
     auto pc = (row * cols) + col;
-    if (0 <= pc && pc <= m_Palette.Colors)
-    {
+    if (0 <= pc && pc <= m_Palette.Colors) {
         m_CursorPhysical = pc;
     }
-    if (lpc != m_CursorPhysical)
-    {
+    if (lpc != m_CursorPhysical) {
         DrawPhysicalColors();
     }
 }
@@ -269,18 +248,18 @@ void __fastcall TfrmULAplusBitmap::imgSystemColorsMouseLeave(TObject *Sender)
     DrawPhysicalColors();
 }
 //---------------------------------------------------------------------------
-int __fastcall TfrmULAplusBitmap::GetInk(int index, int ink) const
+unsigned char __fastcall TfrmULAplusBitmap::GetInk(int index, int ink) const
 {
-    if (ink   == -1) ink = m_Ink;
+    if (ink   == -1) ink   = m_Ink;
     if (index == -1) index = m_Index;
-    return (index * 16) + ink;
+    return static_cast<unsigned char>((index * 16) + ink);
 }
 //---------------------------------------------------------------------------
-int __fastcall TfrmULAplusBitmap::GetPaper(int index, int paper) const
+unsigned char __fastcall TfrmULAplusBitmap::GetPaper(int index, int paper) const
 {
     if (paper == -1) paper = m_Paper;
     if (index == -1) index = m_Index;
-    return (index * 16) + 8 + paper;
+    return static_cast<unsigned char>((index * 16) + 8 + paper);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmULAplusBitmap::btnPaletteSaveClick(TObject *Sender)
@@ -288,8 +267,7 @@ void __fastcall TfrmULAplusBitmap::btnPaletteSaveClick(TObject *Sender)
     auto path = Services::File::Combine("Saved Palettes", m_GraphicsMode.Name);
     path = Services::Folders::Create(Services::Folders::lpCommon, path);
     dlgSave->InitialDir = path;
-    if (dlgSave->Execute())
-    {
+    if (dlgSave->Execute()) {
         m_GraphicsMode.SaveLogicalCLUT(path, Services::File::NameWithoutExtension(dlgSave->FileName));
     }
 }
@@ -299,26 +277,20 @@ void __fastcall TfrmULAplusBitmap::btnPaletteLoadClick(TObject *Sender)
     auto path = Services::File::Combine("Saved Palettes", m_GraphicsMode.Name);
     path = Services::Folders::Create(Services::Folders::lpCommon, path);
     dlgOpen->InitialDir = path;
-    if (dlgOpen->Execute())
-    {
+    if (dlgOpen->Execute()) {
         auto ext = Services::File::Extension(dlgOpen->FileName);
-        if (ext != ".tap")
-        {
+        if (ext != ".tap") {
             m_GraphicsMode.LoadLogicalCLUT(path, Services::File::NameWithExtension(dlgOpen->FileName));
-        }
-        else
-        {
+        } else {
             // convert the tap
-            auto tap = std::vector<unsigned char>();
+            auto tap = std::vector<wchar_t>();
             Services::File::ReadBytes(dlgOpen->FileName, tap);
-            if (tap.size() > 64)
-            {
+            if (tap.size() > 64) {
                 tap.pop_back();
                 tap.pop_back();
                 auto clut = std::vector<unsigned char>();
-                for (auto i = 63; i >= 0; i--)
-                {
-                    m_GraphicsMode.RemapColor(i, tap.back());
+                for (auto i = 63; i >= 0; i--) {
+                    m_GraphicsMode.RemapColor(static_cast<unsigned char>(i), static_cast<unsigned char>(tap.back()));
                     tap.pop_back();
                 }
             }

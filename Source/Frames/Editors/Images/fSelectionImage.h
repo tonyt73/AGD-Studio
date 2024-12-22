@@ -31,7 +31,7 @@ private:    // User declarations
 public:     // User declarations
             __fastcall          TSelectionImageFrame(TComponent* Owner, const Visuals::GraphicsBuffer& image, const String& hint = "");
 
-    void    __fastcall          Update();
+    void    __fastcall          Update() override;
 
     bool    __property          Selected        = { read = m_Selected, write = SetSelected };
     int     __property          Scale           = { read = m_Scale   , write = SetScale    };

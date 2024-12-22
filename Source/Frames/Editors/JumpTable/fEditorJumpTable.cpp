@@ -27,12 +27,10 @@ void __fastcall TfrmEditorJumpTable::FrameResize(TObject *Sender)
 {
     Color = ThemeManager::Background;
     auto s = 2;
-    for (; s <= 128; s++)
-    {
+    for (; s <= 128; s++) {
         auto w = m_View->Width  * s;
         auto h = m_View->Height * s;
-        if (w + 32 >= Width || h + 32 > Height)
-        {
+        if (w + 32 >= Width || h + 32 > Height) {
             s--;
             break;
         }
@@ -62,12 +60,10 @@ void __fastcall TfrmEditorJumpTable::DrawView()
         auto y = 80;
         m_View->Canvas->Pen->Color = ThemeManager::Foreground;
         m_View->Canvas->Brush->Color = ThemeManager::Highlight;
-        for (auto i = -1; i < doc->Count; i++)
-        {
+        for (unsigned char i = -1; i < doc->Count; i++) {
             y += doc->GetStep(i);
 
-            if (i == m_ActiveStep)
-            {
+            if (i == m_ActiveStep) {
                 m_View->Canvas->FillRect(TRect(x, 0, x + 8, 192));
             }
 
@@ -83,9 +79,8 @@ void __fastcall TfrmEditorJumpTable::DrawView()
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorJumpTable::actLeftExecute(TObject *Sender)
 {
-    if (IsActive())
-    {
-        m_ActiveStep = std::max(0, m_ActiveStep - 1);
+    if (IsActive()) {
+        m_ActiveStep = static_cast<unsigned char>(std::max(0, m_ActiveStep - 1));
         DrawView();
     }
 }
@@ -93,9 +88,8 @@ void __fastcall TfrmEditorJumpTable::actLeftExecute(TObject *Sender)
 void __fastcall TfrmEditorJumpTable::actRightExecute(TObject *Sender)
 {
     auto doc = dynamic_cast<Project::JumpTableDocument*>(m_Document);
-    if (doc != nullptr && IsActive())
-    {
-        m_ActiveStep = std::min(doc->Count - 1, m_ActiveStep + 1);
+    if (doc != nullptr && IsActive()) {
+        m_ActiveStep = static_cast<unsigned char>(std::min(doc->Count - 1, m_ActiveStep + 1));
         DrawView();
     }
 }
@@ -103,8 +97,7 @@ void __fastcall TfrmEditorJumpTable::actRightExecute(TObject *Sender)
 void __fastcall TfrmEditorJumpTable::actUpExecute(TObject *Sender)
 {
     auto doc = dynamic_cast<Project::JumpTableDocument*>(m_Document);
-    if (doc != nullptr && IsActive())
-    {
+    if (doc != nullptr && IsActive()) {
         doc->SetStep(m_ActiveStep, doc->GetStep(m_ActiveStep) - 1);
         DrawView();
     }
@@ -113,8 +106,7 @@ void __fastcall TfrmEditorJumpTable::actUpExecute(TObject *Sender)
 void __fastcall TfrmEditorJumpTable::actDownExecute(TObject *Sender)
 {
     auto doc = dynamic_cast<Project::JumpTableDocument*>(m_Document);
-    if (doc != nullptr && IsActive())
-    {
+    if (doc != nullptr && IsActive()) {
         doc->SetStep(m_ActiveStep, doc->GetStep(m_ActiveStep) + 1);
         DrawView();
     }

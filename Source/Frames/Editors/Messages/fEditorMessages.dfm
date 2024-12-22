@@ -44,6 +44,7 @@ inherited frmEditorMessages: TfrmEditorMessages
       inherited panImages: TPanel
         Width = 225
         Height = 50
+        StyleElements = [seFont, seClient, seBorder]
         ExplicitWidth = 225
         ExplicitHeight = 50
       end

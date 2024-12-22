@@ -20,16 +20,16 @@ public: // singleton
     typedef std::vector<unsigned char>          ByteBuffer;
     class UniqueTile {
     private:
-        unsigned char   m_BlockType;
-        ByteBuffer      m_Data;
+        wchar_t     m_BlockType;
+        ByteBuffer  m_Data;
     public:
-        UniqueTile(unsigned char type, ByteBuffer& buffer)
+        UniqueTile(wchar_t type, ByteBuffer& buffer)
         : m_BlockType(type)
         , m_Data(buffer)
         {}
 
-        __property unsigned char    BlockType = { read = m_BlockType };
-        __property ByteBuffer       Data      = { read = m_Data      };
+        __property wchar_t      BlockType = { read = m_BlockType };
+        __property ByteBuffer   Data      = { read = m_Data      };
     };
     typedef std::vector<UniqueTile>             UniqueTiles;
 
@@ -49,14 +49,14 @@ private:
     class MappedTile
     {
     public:
-        int             m_TileIndex;
+        unsigned int    m_TileIndex;
         unsigned int    m_Crc32c;
-        unsigned char   m_BlockType;
+        wchar_t         m_BlockType;
         ByteBuffer      m_Data;
         int             m_Dx;
         int             m_Dy;
 
-        MappedTile(unsigned char type, const ByteBuffer& buffer)
+        MappedTile(wchar_t type, const ByteBuffer& buffer)
         : m_TileIndex(-1)
         , m_Crc32c(0)
         , m_BlockType(type)
@@ -68,7 +68,7 @@ private:
             m_Crc32c = crc32c::calc(buffer);
         }
 
-        MappedTile(unsigned char type, const ByteBuffer& buffer, int dx, int dy)
+        MappedTile(wchar_t type, const ByteBuffer& buffer, int dx, int dy)
         : m_TileIndex(-1)
         , m_Crc32c(0)
         , m_BlockType(type)
@@ -82,15 +82,6 @@ private:
         bool operator==(const MappedTile& other) const
         {
             return m_Crc32c == other.m_Crc32c && m_BlockType == other.m_BlockType;
-        }
-
-        MappedTile& operator=(const MappedTile& other)
-        {
-            m_TileIndex = other.m_TileIndex;
-            m_Crc32c = other.m_Crc32c;
-            m_BlockType = other.m_BlockType;
-            m_Data = other.m_Data;
-            return (*this);
         }
     };
 

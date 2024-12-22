@@ -32,7 +32,7 @@ __published:    // IDE-managed Components
     TImageList *ImageList1;
 private:    // User declarations
 public:        // User declarations
-    __fastcall TfrmAdvancedSettings(TComponent* Owner);
+    __fastcall TfrmAdvancedSettings(TComponent* Owner) override;
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfrmAdvancedSettings *frmAdvancedSettings;

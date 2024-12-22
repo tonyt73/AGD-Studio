@@ -32,7 +32,7 @@ __published:// IDE-managed Components
 
 private:    // User declarations
     std::unique_ptr<TBitmap>    m_View;
-    int                         m_ActiveStep;
+    unsigned char               m_ActiveStep;
     int                         m_Scalar;
 
     void            __fastcall  DrawView();

@@ -44,7 +44,7 @@ public:
 #define BUILD_MSG(a) m_BuildMessages.Message(a)
 #define BUILD_LINE(a, b) m_BuildMessages.Message(a, b)
 #define BUILD_MSG_POP(result) m_BuildMessages.Pop(result)
-#define BUILD_TIME(time) m_BuildMessages.Time(time)
+#define BUILD_TIME(time) m_BuildMessages.Time(static_cast<int>(time))
 //---------------------------------------------------------------------------
 } // Build namespace
 //---------------------------------------------------------------------------

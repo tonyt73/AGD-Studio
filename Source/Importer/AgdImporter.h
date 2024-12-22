@@ -12,23 +12,23 @@ namespace Importer
 class AgdImporter
 {
 private:
-    Parser          m_Parser;
-    TSize           m_Window;
+    Parser m_Parser;
+    TSize  m_Window;
 
-    unsigned char   GetNum(const String& var, const String& subVar, int index = 0);
-    bool            UpdateWindow();
-    bool            UpdateControls();
-    bool            UpdateJumpTable();
-    bool            UpdateFont();
-    bool            AddImages(const String& name, const String& imgType);
-    bool            AddMessages();
-    bool            AddEvents();
-    bool            AddMap();
+    int    GetNum(const String& var, const String& subVar, int index = 0);
+    bool   UpdateWindow();
+    bool   UpdateControls();
+    bool   UpdateJumpTable();
+    bool   UpdateFont();
+    bool   AddImages(const String& name, const String& imgType);
+    bool   AddMessages();
+    bool   AddEvents();
+    bool   AddMap();
 
 public:
-                    AgdImporter();
+           AgdImporter();
 
-    bool            Convert(const String& file);
+    bool   Convert(const String& file);
 };
 //---------------------------------------------------------------------------
 } // namespace Importer

@@ -13,7 +13,7 @@ protected:
     void    __fastcall  Execute() final;
 public:
             __fastcall  EventsSection();
-    virtual __fastcall ~EventsSection();
+    virtual __fastcall ~EventsSection() override;
 };
 //---------------------------------------------------------------------------
 } // Build namespace

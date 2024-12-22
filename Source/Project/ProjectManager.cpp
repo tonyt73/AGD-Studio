@@ -133,8 +133,7 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
             // Set window to full size
             auto winDoc = dynamic_cast<WindowDocument*>(theDocumentManager.Add("Window", "Definition", "Window", ""));
             const auto wc = project->MachineConfiguration().Window;
-            TRect rect(0, 0, wc.Width, wc.Height);
-            winDoc->Set(rect);
+            winDoc->SetRect(TRect(0, 0, wc.Width, wc.Height));
             // create the event files
             auto definitions = std::make_unique<FileDefinitions>();
             for (const auto& definition : definitions->GetDefinitions())
@@ -252,7 +251,7 @@ Document* __fastcall ProjectManager::AddToTreeView(Document* document)
         auto childFolder = folder.SubString(folder.Pos("\\")+1, folder.Length());
         SetTreeIcon(childFolder, node);
         document->TreeNode = node;
-        node->Tag = (NativeInt)(document);
+        node->Tag = reinterpret_cast<NativeInt>(document);
         node->MakeVisible();
     }
     return document;

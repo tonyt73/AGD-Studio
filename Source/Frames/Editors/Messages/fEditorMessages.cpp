@@ -146,9 +146,9 @@ void __fastcall TfrmEditorMessages::RefreshCharacterSet()
 void __fastcall TfrmEditorMessages::sbxViewMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled)
 {
     if (WheelDelta > 0) {
-        sbxView->Perform(WM_VSCROLL, SB_LINEUP, (int)0);
+        sbxView->Perform(WM_VSCROLL, SB_LINEUP, 0LL);
     } else {
-        sbxView->Perform(WM_VSCROLL, SB_LINEDOWN, (int)0);
+        sbxView->Perform(WM_VSCROLL, SB_LINEDOWN, 0LL);
     }
 }
 //---------------------------------------------------------------------------

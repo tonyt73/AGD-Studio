@@ -35,12 +35,9 @@ void __fastcall EventsSection::Execute()
             if (Services::File::Exists(file)) {
                 auto lines = Services::File::ReadLines(file);
                 AddLine(definition.Section);
-                auto lc = 0;
                 for (auto line : lines) {
-                    lc++;
                     if (line.Trim().UpperCase().Pos(definition.Section) == 0) {
                         // TODO -cBuild: replace AGDx keywords with there AGD original
-                        line = line;
                         AddLine(line);
                     }
                 }

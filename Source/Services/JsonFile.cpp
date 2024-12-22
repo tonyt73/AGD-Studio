@@ -99,7 +99,7 @@ void __fastcall JsonFile::Write(const int& value) const
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::Write(const long& value) const
 {
-    m_JsonWriter->WriteValue((int)value);
+    m_JsonWriter->WriteValue(static_cast<int>(value));
 }
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::Write(const String& property, const String& value, bool skipEmpty) const
@@ -131,7 +131,7 @@ void __fastcall JsonFile::Write(const String& property, const long& value) const
     // write a long int value
     // "<property>": <long value>
     m_JsonWriter->WritePropertyName(property);
-    m_JsonWriter->WriteValue((int)value);
+    m_JsonWriter->WriteValue(static_cast<int>(value));
 }
 //---------------------------------------------------------------------------
 void __fastcall JsonFile::Write(const String& property, const float& value) const
@@ -255,7 +255,7 @@ bool __fastcall JsonFile::LoadFile(const String& file)
                         if (inArray) OnEndObject(path);
                         break;
                     case TJsonToken::Float:
-                        Set(path, (float)jr->Value.AsExtended());
+                        Set(path, static_cast<float>(jr->Value.AsExtended()));
                         if (inArray) OnEndObject(path);
                         break;
                     case TJsonToken::Boolean:
@@ -272,7 +272,7 @@ bool __fastcall JsonFile::LoadFile(const String& file)
         }
         catch (...)
         {
-            int a = 0;
+            //int a = 0;
             // Error loading the JSON file
             // jr->path
             // auto path = ProcessPath(jr->Path);

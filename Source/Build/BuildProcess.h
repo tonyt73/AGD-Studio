@@ -13,8 +13,8 @@ namespace Build
 class BuildProcess
 {
 private:
-    String                      m_Description;
     BuildMessageType            m_Type;
+    String                      m_Description;
 
 protected:
     BuildMessages&              m_BuildMessages;

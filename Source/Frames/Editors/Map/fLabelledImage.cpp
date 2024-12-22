@@ -83,7 +83,7 @@ void __fastcall TfrmLabelledImage::SetImage(Project::ImageDocument* document)
                 }
                 counts[chr-'0']++;
             }
-            auto bt = 0;
+            bt = 0;
             auto max = -1;
             for (const auto& [key, count] : counts) {
                 if (max < count) {
@@ -101,21 +101,22 @@ void __fastcall TfrmLabelledImage::SetImage(Project::ImageDocument* document)
 //---------------------------------------------------------------------------
 void __fastcall TfrmLabelledImage::Update()
 {
-    auto iw    = m_Document->Width;
-    auto ih    = m_Document->Height;
+    // TODO: Debug this function as it seems to not do anything
     auto image = std::make_unique<Visuals::Image>(m_Document, m_GraphicsMode);
-    auto sx    = image->Canvas().ScalarX;
-    auto sy    = image->Canvas().ScalarY;
-
-    // resize the component based on the size of the image
-    for (auto i = 3; i >= 1; i--) {
-        auto size = pow(2, i);
-        if (size * m_Document->Width <= 32 && size * m_Document->Height <= 32) {
-            iw = size * m_Document->Width * sx;
-            ih = size * m_Document->Height * sy;
-            break;
-        }
-    }
+//    auto iw    = m_Document->Width;
+//    auto ih    = m_Document->Height;
+//    auto sx    = image->Canvas().ScalarX;
+//    auto sy    = image->Canvas().ScalarY;
+//
+//    // resize the component based on the size of the image
+//    for (auto i = 3; i >= 1; i--) {
+//        auto size = pow(2, i);
+//        if (size * m_Document->Width <= 32 && size * m_Document->Height <= 32) {
+//            iw = size * m_Document->Width  * sx;
+//            ih = size * m_Document->Height * sy;
+//            break;
+//        }
+//    }
 
     // Draw the image
     image->Canvas().Assign(imgImage->Picture->Bitmap);

@@ -22,6 +22,7 @@ protected:
 
 public:
                     __fastcall  MapTool();
+    virtual         __fastcall ~MapTool() override;
 
                                 // return undo string
             String  __fastcall  Begin(Project::MapEntityList& list, Project::MapEntity entity, const TPoint& pt, const TShiftState& buttons);

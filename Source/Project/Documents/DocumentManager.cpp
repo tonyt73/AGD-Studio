@@ -61,7 +61,7 @@ Document* __fastcall DocumentManager::Add(const String& type, const String& subT
         if (document != nullptr) {
             auto dit = m_Documents.find(document->Type);
             if (dit != m_Documents.end()) {
-                auto docIt = std::find_if(dit->second.begin(), dit->second.end(), [&](const Document* document) { return document->Name == name; });
+                auto docIt = std::find_if(dit->second.begin(), dit->second.end(), [&](const Document* doc) { return doc->Name == name; });
                 if (docIt != dit->second.end()) {
                     return *docIt;
                 }
@@ -184,11 +184,11 @@ int __fastcall DocumentManager::GetIndexFor(unsigned int id, int dx, int dy)
             return mappedTile->m_TileIndex;
         }
         // Document found, but no reference to the offset
-        WarningMessage("Document ID: " + IntToStr((int)id) + " was found in the Mapped Tiles list, but no reference to the offset (" + IntToStr(dx) + ", " + IntToStr(dy) + " was found in the Mapped Tiles entity list.");
+        WarningMessage("Document ID: " + UIntToStr(id) + " was found in the Mapped Tiles list, but no reference to the offset (" + IntToStr(dx) + ", " + IntToStr(dy) + " was found in the Mapped Tiles entity list.");
         return -1;
     }
     // document, not found in the mapped tiles list.
-    WarningMessage("Document ID: " + IntToStr((int)id) + " was not found in the Mapped Tiles list.");
+    WarningMessage("Document ID: " + UIntToStr(id) + " was not found in the Mapped Tiles list.");
     return -1;
 }
 //---------------------------------------------------------------------------
@@ -226,12 +226,12 @@ int __fastcall DocumentManager::FindSameTile(const MappedTile& tile)
             // create a possible new unique tile
             auto bt = imgDoc->GetLayer("blocktype");
             assert(bt.Length() > 0);
-            auto mappedTile = MappedTile(bt[1] - '0', visualImage->GetExportNativeFormat());
+            auto mappedTile = MappedTile(static_cast<wchar_t>(bt[1] - '0'), visualImage->GetExportNativeFormat());
             // check it is unique
             auto sameAsTileIndex = FindSameTile(mappedTile);
             if (sameAsTileIndex == -1) {
                 // tile is unique, assign it a new tile index
-                mappedTile.m_TileIndex = m_UniqueTiles.size();
+                mappedTile.m_TileIndex = static_cast<unsigned int>(m_UniqueTiles.size());
                 // and add it to our unqiue tiles map
                 m_UniqueTiles.push_back(UniqueTile(mappedTile.m_BlockType, mappedTile.m_Data));
             } else {
@@ -262,12 +262,12 @@ int __fastcall DocumentManager::FindSameTile(const MappedTile& tile)
                     // sometimes, the block type might be only 1 block, in which case apply it to all blocks in the tile set.
                     bti = std::min(bt.Length(), bti);
                     // create a mapped tile with the block type and the section of the tile set at (x,y,w,h)
-                    auto mappedTile = MappedTile(bt[bti+1] - '0', visualImage->GetExportNativeFormat(TRect(x, y, x + ts.cx, y + ts.cy)), x, y);
+                    auto mappedTile = MappedTile(static_cast<wchar_t>(bt[bti+1] - '0'), visualImage->GetExportNativeFormat(TRect(x, y, x + ts.cx, y + ts.cy)), x, y);
                     // is it the same as an existing unique tile?
                     auto sameAsTileIndex = FindSameTile(mappedTile);
                     if (sameAsTileIndex == -1) {
                         // no, tile is unique, assign it a new tile index
-                        mappedTile.m_TileIndex = m_UniqueTiles.size();
+                        mappedTile.m_TileIndex = static_cast<unsigned int>(m_UniqueTiles.size());
                         // and add it to our unqiue tiles map
                         m_UniqueTiles.push_back(UniqueTile(mappedTile.m_BlockType, mappedTile.m_Data));
                     } else {
@@ -280,7 +280,7 @@ int __fastcall DocumentManager::FindSameTile(const MappedTile& tile)
             }
         }
     }
-    InformationMessage("[DocumentManager] Found " + IntToStr((int)m_MappedTiles.size()) + " defined tiles and " + IntToStr((int)m_UniqueTiles.size()) + " are unique.");
+    InformationMessage("[DocumentManager] Found " + UIntToStr(m_MappedTiles.size()) + " defined tiles and " + UIntToStr(m_UniqueTiles.size()) + " are unique.");
 
     return m_UniqueTiles;
 }

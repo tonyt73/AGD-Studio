@@ -29,18 +29,18 @@ void __fastcall SpritesSection::Execute()
     for (auto image : images) {
         auto sprite = dynamic_cast<Project::SpriteDocument*>(image);
         if (sprite != nullptr) {
-            String line = "DEFINESPRITE " + IntToStr(sprite->Frames) + " ";
+            String line = "DEFINESPRITE " + UIntToStr(sprite->Frames) + " ";
             AddLine(line);
             const auto& gm = (*(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()));
-            auto image = std::make_unique<Visuals::Image>(sprite, gm);
+            auto gfx = std::make_unique<Visuals::Image>(sprite, gm);
             for (auto fi = 0; fi < sprite->Frames; fi++) {
                 line = "             ";
-                image->ChangeFrame(fi);
-                auto data = image->GetExportNativeFormat();
+                gfx->ChangeFrame(fi);
+                auto data = gfx->GetExportNativeFormat();
                 // export the machine graphics data
                 for (auto byte : enumerate(data)) {
                     line += IntToStr(byte.item) + " ";
-                    if (byte.index % imgSize.Width == 0) {
+                    if (static_cast<long>(byte.index) % imgSize.Width == 0) {
                         line += "\r\n             ";
                     }
                 }

@@ -67,6 +67,10 @@ __fastcall EventDocument::EventDocument(const String& name)
     m_File = file;
 }
 //---------------------------------------------------------------------------
+__fastcall EventDocument::~EventDocument()
+{
+}
+//---------------------------------------------------------------------------
 __fastcall MessageDocument::MessageDocument(const String& name)
 : TextDocument(name)
 {
@@ -83,6 +87,10 @@ __fastcall MessageDocument::MessageDocument(const String& name)
         Services::File::WriteText(file, header);
     }
     m_File = file;
+}
+//---------------------------------------------------------------------------
+__fastcall MessageDocument::~MessageDocument()
+{
 }
 //---------------------------------------------------------------------------
 __fastcall SfxDocument::SfxDocument(const String& name)
@@ -103,6 +111,10 @@ __fastcall SfxDocument::SfxDocument(const String& name)
     m_File = file;
 }
 //---------------------------------------------------------------------------
+__fastcall SfxDocument::~SfxDocument()
+{
+}
+//---------------------------------------------------------------------------
 __fastcall AGDDocument::AGDDocument(const String& name)
 : TextDocument(name)
 {
@@ -118,6 +130,10 @@ __fastcall AGDDocument::AGDDocument(const String& name)
     }
 }
 //---------------------------------------------------------------------------
+__fastcall AGDDocument::~AGDDocument()
+{
+}
+//---------------------------------------------------------------------------
 __fastcall AssemblyDocument::AssemblyDocument(const String& name)
 : TextDocument(name)
 {
@@ -128,5 +144,9 @@ __fastcall AssemblyDocument::AssemblyDocument(const String& name)
     m_ReadOnly = true;
     RegisterProperty("Name", "Details", "The name of the Assembly source code file");
     m_File = GetFile();
+}
+//---------------------------------------------------------------------------
+__fastcall AssemblyDocument::~AssemblyDocument()
+{
 }
 //---------------------------------------------------------------------------

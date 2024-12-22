@@ -24,6 +24,10 @@ __fastcall TileDocument::TileDocument(const String& name, const String& extra)
     }
 }
 //---------------------------------------------------------------------------
+__fastcall TileDocument::~TileDocument()
+{
+}
+//---------------------------------------------------------------------------
 void __fastcall TileDocument::SetType(const String& type)
 {
     for (int i = 0; i < 7; i++) {

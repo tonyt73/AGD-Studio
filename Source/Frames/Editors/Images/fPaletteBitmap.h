@@ -45,8 +45,8 @@ __published:// IDE-managed Components
     void __fastcall imgSystemColorsMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
 
 private:    // User declarations
-    int                         m_Pen;              // logical pen color
-    int                         m_Brush;            // logical brush color
+    unsigned char               m_Pen;              // logical pen color
+    unsigned char               m_Brush;            // logical brush color
     int                         m_CursorLogical;    // mouse cursor on the logical colour picker
     int                         m_CursorPhysical;   // mouse cursor on the physical colour picker
     std::unique_ptr<TBitmap>    m_LogicalPicker;    // the picker images double buffer

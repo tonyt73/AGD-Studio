@@ -12,9 +12,7 @@
 #include <Vcl.ActnMan.hpp>
 //- STL ---------------------------------------------------------------------
 #include <memory>
-//- APP ---------------------------------------------------------------------
-#include "Frames/WelcomeDialog/fWelcomeDialog.h"
-#include "Frames/IDE/fIDE.h"
+#include <Frames/AppFrame.h>
 //---------------------------------------------------------------------------
 class TfrmMain : public TForm
 {
@@ -34,9 +32,9 @@ private:    // User declarations
     void                __fastcall  ShowIDE();
     void                __fastcall  SaveSettings();
 
-    TfrmWelcomeDialog*  __fastcall  GetWelcome();
-    TfrmIDE*            __fastcall  GetIDE();
-    TFrame*             __fastcall  GetActiveForm();
+    TAppFrame*          __fastcall  GetWelcome();
+    TAppFrame*          __fastcall  GetIDE();
+    TAppFrame*          __fastcall  GetActiveForm();
 
 private:
 
@@ -48,12 +46,12 @@ private:
     };
 
     TFormView                           m_FormView;
-    std::unique_ptr<TfrmWelcomeDialog>  m_WelcomeFrame;
-    std::unique_ptr<TfrmIDE>            m_IDEFrame;
+    std::unique_ptr<TAppFrame>          m_WelcomeFrame;
+    std::unique_ptr<TAppFrame>          m_IDEFrame;
 
-    __property      TfrmWelcomeDialog*  Welcome = { read = GetWelcome    };
-    __property      TfrmIDE*            IDE     = { read = GetIDE        };
-    __property      TFrame*             Active  = { read = GetActiveForm };
+    __property      TAppFrame*          Welcome = { read = GetWelcome    };
+    __property      TAppFrame*          IDE     = { read = GetIDE        };
+    __property      TAppFrame*          Active  = { read = GetActiveForm };
 
 public:        // User declaration
                         __fastcall TfrmMain(TComponent* Owner) override;

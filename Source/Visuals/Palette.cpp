@@ -52,17 +52,17 @@ TColor __fastcall Palette::GetTableColor(int index) const
 TColor __fastcall Palette::GetGreyscale(int index) const
 {
     auto color = GetTableColor(index);
-    unsigned char r = (color & 0x000000FF);
-    unsigned char g = (color & 0x0000FF00) >>  8;
-    unsigned char b = (color & 0x00FF0000) >> 16;
-    auto linearIntensity = (unsigned int)(0.2126f * r + 0.7512f * g + 0.0722 * b) & 0x000000FF;
-    color = (TColor)(linearIntensity | (linearIntensity << 8) | (linearIntensity << 16));
+    float r = (color & 0x000000FF);
+    float g = (color & 0x0000FF00) >>  8;
+    float b = (color & 0x00FF0000) >> 16;
+    auto linearIntensity = static_cast<unsigned int>(0.2126f * r + 0.7512f * g + 0.0722f * b) & 0x000000FF;
+    color = static_cast<TColor>(linearIntensity | (linearIntensity << 8) | (linearIntensity << 16));
     return color;
 }
 //---------------------------------------------------------------------------
-int __fastcall Palette::GetTotalColors() const
+unsigned int __fastcall Palette::GetTotalColors() const
 {
-    return m_ColorTable.size();
+    return static_cast<unsigned int>(m_ColorTable.size());
 }
 //---------------------------------------------------------------------------
 TColor __fastcall Palette::GetFontColorOf(int index) const
@@ -73,10 +73,10 @@ TColor __fastcall Palette::GetFontColorOf(int index) const
 DWORD __fastcall Palette::LuminanceOf(TColor Color)
 {
     // get the luminance of the color
-    DWORD dwRed       = (Color & 0x000000FF) >>  0;
-    DWORD dwGreen     = (Color & 0x0000FF00) >>  8;
-    DWORD dwBlue      = (Color & 0x00FF0000) >> 16;
-    DWORD dwLuminance = (0.299f * (double)dwRed + 0.587f * (double)dwGreen + 0.114f * (double)dwBlue);
+    float dwRed       = (Color & 0x000000FF) >>  0;
+    float dwGreen     = (Color & 0x0000FF00) >>  8;
+    float dwBlue      = (Color & 0x00FF0000) >> 16;
+    DWORD dwLuminance = static_cast<DWORD>(0.299f * (dwRed + 0.587f) * (dwGreen + 0.114f) * dwBlue);
     return dwLuminance;
 }
 //---------------------------------------------------------------------------
@@ -100,7 +100,7 @@ void __fastcall Palette::OnEndObject(const String& object)
 {
     if (object == "ColorTable[]")
     {
-        m_ColorTable.push_back((TColor)(StrToInt(m_Color)));
+        m_ColorTable.push_back(static_cast<TColor>(StrToInt(m_Color)));
     }
 }
 //---------------------------------------------------------------------------

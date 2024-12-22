@@ -17,7 +17,7 @@ protected:
     void    __fastcall  Execute() final;
 public:
             __fastcall  JumpTableSection();
-    virtual __fastcall ~JumpTableSection();
+    virtual __fastcall ~JumpTableSection() override;
 };
 //---------------------------------------------------------------------------
 } // Build namespace

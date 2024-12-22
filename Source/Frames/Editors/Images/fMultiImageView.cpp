@@ -95,7 +95,7 @@ void __fastcall TMultiImageViewFrame::Timer1Timer(TObject *Sender)
         auto control = panImages->Controls[i];
         if (control->ClassNameIs("TSelectionImageFrame"))
         {
-            auto image = ((TSelectionImageFrame*)control);
+            auto image = static_cast<TSelectionImageFrame*>(control);
             image->Update();
         }
     }

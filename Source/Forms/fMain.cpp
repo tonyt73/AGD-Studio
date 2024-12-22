@@ -5,6 +5,8 @@
 #include "Project/ProjectManager.h"
 #include "Project/Documents/MachineConfig.h"
 #include "Project/Documents/Settings.h"
+#include "Frames/WelcomeDialog/fWelcomeDialog.h"
+#include "Frames/IDE/fIDE.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -22,15 +24,11 @@ __fastcall TfrmMain::TfrmMain(TComponent* Owner)
 void __fastcall TfrmMain::FormCreate(TObject *Sender)
 {
     // check command line parameters
-    if (!Services::File::Exists(ParamStr(1)))
-    {
+    if (!Services::File::Exists(ParamStr(1))) {
         // create the welcome screen
-        if (!theAppSettings.WelcomeSkipOnStartup)
-        {
+        if (!theAppSettings.WelcomeSkipOnStartup) {
             ShowWelcomeDialog();
-        }
-        else
-        {
+        } else {
             Caption = ApplicationName;
             ShowIDE();
             if (theAppSettings.LoadLastProject && theAppSettings.LastProject.Trim() != "")
@@ -38,9 +36,7 @@ void __fastcall TfrmMain::FormCreate(TObject *Sender)
                 theProjectManager.Open(theAppSettings.LastProject);
             }
         }
-    }
-    else
-    {
+    } else {
         Caption = ApplicationName;
         ShowIDE();
         auto path = TDirectory::GetCurrentDirectory();
@@ -56,8 +52,7 @@ void __fastcall TfrmMain::FormCreate(TObject *Sender)
 void __fastcall TfrmMain::FormActivate(TObject *Sender)
 {
     static bool atStartup = true;
-    if (atStartup && theAppSettings.WelcomeSkipOnStartup)
-    {
+    if (atStartup && theAppSettings.WelcomeSkipOnStartup) {
         // We skipped the Welcome dialog; so finish off the main form setup
         IDE->OnActivate(this);
     }
@@ -72,9 +67,7 @@ void __fastcall TfrmMain::FormCloseQuery(TObject *Sender, bool &CanClose)
         IDE->OnClose();
         OnIDEClose(Sender);
         CanClose = theAppSettings.WelcomeSkipOnClose;
-    }
-    else
-    {
+    } else {
         CanClose = true;
     }
 }
@@ -88,34 +81,31 @@ void __fastcall TfrmMain::FormDestroy(TObject *Sender)
     m_WelcomeFrame = nullptr;
 }
 //---------------------------------------------------------------------------
-TfrmWelcomeDialog* __fastcall TfrmMain::GetWelcome()
+TAppFrame* __fastcall TfrmMain::GetWelcome()
 {
-    if (m_WelcomeFrame == nullptr)
-    {
+    if (m_WelcomeFrame == nullptr) {
         m_WelcomeFrame = std::make_unique<TfrmWelcomeDialog>(this);
     }
     return m_WelcomeFrame.get();
 }
 //---------------------------------------------------------------------------
-TfrmIDE* __fastcall TfrmMain::GetIDE()
+TAppFrame* __fastcall TfrmMain::GetIDE()
 {
-    if (m_IDEFrame == nullptr)
-    {
+    if (m_IDEFrame == nullptr) {
         m_IDEFrame = std::make_unique<TfrmIDE>(this);
-        theProjectManager.Initialise(m_IDEFrame->tvProject);
+        //theProjectManager.Initialise(m_IDEFrame->tvProject);
     }
     return m_IDEFrame.get();
 }
 //---------------------------------------------------------------------------
-TFrame* __fastcall TfrmMain::GetActiveForm()
+TAppFrame* __fastcall TfrmMain::GetActiveForm()
 {
-    return m_FormView == fvGameIDE ? (TFrame*)GetIDE() : (TFrame*)GetWelcome();
+    return m_FormView == fvGameIDE ? GetIDE() : GetWelcome();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmMain::OnIDEClose(TObject *Sender)
 {
-    if (!theAppSettings.WelcomeSkipOnClose)
-    {
+    if (!theAppSettings.WelcomeSkipOnClose) {
         // show the welcome screen
         ShowWelcomeDialog();
     }
@@ -124,8 +114,7 @@ void __fastcall TfrmMain::OnIDEClose(TObject *Sender)
 void __fastcall TfrmMain::OnWelcomeDone(TObject *Sender)
 {
     // show the IDE
-    if (Sender)
-    {
+    if (Sender) {
         ShowIDE();
     }
 }
@@ -145,8 +134,7 @@ void __fastcall TfrmMain::ShowWelcomeDialog()
     // then we can change the position
     Left = theAppSettings.WelcomePosition.X;
     Top  = theAppSettings.WelcomePosition.Y;
-    if (Left == 0 && Top == 0)
-    {
+    if (Left == 0 && Top == 0) {
         Position = poScreenCenter;
     }
     IDE->OnFormClose = OnIDEClose;
@@ -207,8 +195,7 @@ void __fastcall TfrmMain::FormAfterMonitorDpiChanged(TObject *Sender, int OldDPI
 //---------------------------------------------------------------------------
 void __fastcall TfrmMain::FormCanResize(TObject *Sender, int &NewWidth, int &NewHeight, bool &Resize)
 {
-    if (m_FormView == fvGameIDE && WindowState == wsNormal)
-    {
+    if (m_FormView == fvGameIDE && WindowState == wsNormal) {
         theAppSettings.WindowPosition = TPoint(Left, Top);
         theAppSettings.WindowSize     = TSize(Width, Height);
     }

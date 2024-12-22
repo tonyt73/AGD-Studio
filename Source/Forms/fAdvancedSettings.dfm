@@ -36,8 +36,6 @@ object frmAdvancedSettings: TfrmAdvancedSettings
     BevelOuter = bvNone
     ShowCaption = False
     TabOrder = 0
-    ExplicitTop = 408
-    ExplicitWidth = 790
     DesignSize = (
       794
       48)
@@ -50,7 +48,6 @@ object frmAdvancedSettings: TfrmAdvancedSettings
       Caption = 'Save'
       ModalResult = 1
       TabOrder = 0
-      ExplicitLeft = 588
     end
     object Button2: TButton
       Left = 689
@@ -259,7 +256,6 @@ object frmAdvancedSettings: TfrmAdvancedSettings
     FixedBottomRowNum = 0
     FixedColNum = 1
     GutterWidth = 0
-    ExplicitHeight = 408
   end
   object ImageList1: TImageList
     Left = 556

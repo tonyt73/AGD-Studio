@@ -11,6 +11,10 @@ __fastcall MapRectTool::MapRectTool()
     Flags = resetOnMove | modifies;
 }
 //---------------------------------------------------------------------------
+__fastcall MapRectTool::~MapRectTool()
+{
+}
+//---------------------------------------------------------------------------
 void __fastcall MapRectTool::Apply(Project::MapEntityList& list, Project::MapEntity entity)
 {
     DrawRect(list, entity, TRect(StartPt.x, StartPt.y, LastPt.x, LastPt.y));

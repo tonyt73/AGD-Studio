@@ -27,8 +27,7 @@ void __fastcall ScreensSection::Execute()
     auto mapDoc = dynamic_cast<Project::TiledMapDocument*>(dm.Get("Map", "Tiled", "Tile Map"));
     assert(mapDoc != nullptr);
 
-    auto imgSize = dm.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itSprite].Minimum;
-    const auto& wi = (Project::WindowDocument*)dm.Get("Window", "Definition", "Window");
+    const auto& wi = static_cast<Project::WindowDocument*>(dm.Get("Window", "Definition", "Window"));
     if (wi) {
         auto tileSize = dm.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile].Minimum;
         auto wPt = TPoint(wi->Rect.Left * tileSize.cx, wi->Rect.Top * tileSize.cy);
@@ -36,7 +35,7 @@ void __fastcall ScreensSection::Execute()
             for (auto ry = 0; ry < Project::g_MaxMapRoomsDown; ry++ ) {
                 for (auto rx = 0; rx < Project::g_MaxMapRoomsAcross; rx++) {
                     if (mapDoc->GetRoomIndex(TPoint(rx, ry)) == ri) {
-                        auto roomEntities = mapDoc->Get(Project::meRoom, TSize(rx, ry));
+                        auto roomEntities = mapDoc->GetEntities(Project::meRoom, TSize(rx, ry));
                         // resolve big tiles and expand roomEntities
                         auto roomPt = TPoint(rx * tileSize.cx * wi->Rect.Width(), ry * tileSize.cy * wi->Rect.Height());
                         String line = "DEFINESCREEN ";
@@ -61,7 +60,7 @@ void __fastcall ScreensSection::Execute()
                                         line += number.SubString(number.Length() - 2, 3) + " ";
                                     } else {
                                         // badly referenced tile
-                                        Failure("Tile Id: " + IntToStr((int)entity->Id) + ", in map was not found in the document manager.");
+                                        Failure("Tile Id: " + UIntToStr(entity->Id) + ", in map was not found in the document manager.");
                                         return;
                                     }
                                 } else {
@@ -78,7 +77,7 @@ void __fastcall ScreensSection::Execute()
                                 auto type = std::max(0, entity.SpriteType);
                                 // get sprite id as sprite index
                                 auto index = dm.GetAsIndex(entity.Id);
-                                line = "SPRITEPOSITION " + IntToStr(type) + " " + IntToStr(index) + " " + IntToStr((int)(wPt.y + entity.Pt.y)) + " " + IntToStr((int)(wPt.x + entity.Pt.x));
+                                line = "SPRITEPOSITION " + IntToStr(type) + " " + IntToStr(index) + " " + IntToStr(static_cast<int>(wPt.y + entity.Pt.y)) + " " + IntToStr(static_cast<int>(wPt.x + entity.Pt.x));
                                 AddLine(line);
                             }
                         }

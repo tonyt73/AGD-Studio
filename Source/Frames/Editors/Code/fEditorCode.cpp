@@ -8,9 +8,10 @@
 #include "fEditorCode.h"
 #include "../EditorManager.h"
 #include "Forms/fMain.h"
-#include "Project/Documents/Settings.h"
-#include "Settings/ThemeManager.h"
 #include "Messaging/Messaging.h"
+#include "Project/Documents/Settings.h"
+#include "Services/File.h"
+#include "Settings/ThemeManager.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "fEditor"

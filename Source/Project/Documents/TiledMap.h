@@ -55,8 +55,8 @@ public:
     static  Document*   __fastcall  Create(const String& name, const String& extra) { return new TiledMapDocument(name); }
 
     MapEntityList       __fastcall  Get(Visuals::ImageTypes type) const;
-   const MapEntityList& __fastcall  Get(MapEntityType type, TSize room = TSize(0,0)) const;
-    void                __fastcall  Set(MapEntityType type, const MapEntityList& entities);
+   const MapEntityList& __fastcall  GetEntities(MapEntityType type, TSize room = TSize(0,0)) const;
+    void                __fastcall  SetEntities(MapEntityType type, const MapEntityList& entities);
 
     const TRect         __fastcall  SetMinimalMapSize();
     int                 __fastcall  GetRoomIndex(const TPoint& room, bool newIdForUndefinedRoom = false) const;

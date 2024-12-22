@@ -107,9 +107,9 @@ void __fastcall Document::SetName(String name)
         m_Name = name;
         if (m_TreeNode)
         {
-            ((TElXTreeItem*)m_TreeNode)->Text = name;
+            static_cast<TElXTreeItem*>(m_TreeNode)->Text = name;
         }
-        auto newFile = GetFile();
+        newFile = GetFile();
         Services::File::Rename(oldFile, newFile);
         InformationMessage("[Document] Renamed document from [" + oldFile + "] to [" + newFile + "]");
         Bus::Publish<DocumentChange<String>>(DocumentChange<String>("document.renamed", this, oldName));
