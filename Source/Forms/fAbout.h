@@ -24,7 +24,7 @@ private:    // User declarations
     void    __fastcall  GetBuildVersion(int& major, int& minor, int& date, int& time, int& patch) const;
 
 public:        // User declarations
-            __fastcall  TfrmAbout(TComponent* Owner);
+            __fastcall  TfrmAbout(TComponent* Owner) override;
 };
 //---------------------------------------------------------------------------
 #endif

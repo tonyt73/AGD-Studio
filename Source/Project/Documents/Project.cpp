@@ -15,11 +15,11 @@ using namespace Project;
 //---------------------------------------------------------------------------
 __fastcall ProjectDocument::ProjectDocument(const String& name, const String& machine)
 : Document(name)
+, m_Version("0.1")
+, m_Author("Anonymous")
+, m_Description("")
 , m_MachineName(machine)
 , m_MachineConfig(nullptr)
-, m_Version("0.1")
-, m_Description("")
-, m_Author("Anonymous")
 {
     m_Extension = "agds";
     m_Type = "Game";
@@ -44,7 +44,7 @@ __fastcall ProjectDocument::ProjectDocument(const String& name, const String& ma
     m_PropertyMap["Files[].Type"] = &m_FileInfo.Type;
     m_PropertyMap["Files[].SubType"] = &m_FileInfo.SubType;
 
-    m_Registrar.Subscribe<OnChange<String>>(OnChangeString);
+    m_Registrar.Subscribe<OnChange<String>>(_FnBind(ProjectDocument::OnChangeString));
 }
 //---------------------------------------------------------------------------
 __fastcall ProjectDocument::~ProjectDocument()
@@ -66,7 +66,7 @@ const MachineConfig& __fastcall ProjectDocument::MachineConfiguration()
         // load the machine configuration
         m_MachineConfig = std::make_unique<MachineConfig>(m_MachineName);
         // Load the machine
-        m_MachineConfig->Load(m_MachineName);
+        m_MachineConfig->LoadFile(m_MachineName);
     }
     return *m_MachineConfig;
 }

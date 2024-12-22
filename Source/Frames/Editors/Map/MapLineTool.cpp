@@ -11,10 +11,6 @@ __fastcall MapLineTool::MapLineTool()
     Flags = resetOnMove | modifies;
 }
 //---------------------------------------------------------------------------
-__fastcall MapLineTool::~MapLineTool()
-{
-}
-//---------------------------------------------------------------------------
 void __fastcall MapLineTool::Apply(Project::MapEntityList& list, Project::MapEntity entity)
 {
     auto rect = TRect(StartPt.x, StartPt.y, LastPt.x, LastPt.y);

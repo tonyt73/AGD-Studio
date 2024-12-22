@@ -122,13 +122,13 @@ private:    // User declarations
 
     void            __fastcall  OnChangeString(const OnChange<String>& event);
     String          __fastcall  GetSyntaxScByExt(const String& extension);
-    void            __fastcall  OnEvent(const Event& event);
-    void            __fastcall  OnDocumentSet();
+    virtual void    __fastcall  OnEvent(const Event& event) override;
+    void            __fastcall  OnDocumentSet() override;
 
     __property TLMDEditView*    ActiveEdit = { read = m_ActiveEdit };
 
 public:     // User declarations
-                    __fastcall  TfrmEditorCode(TComponent* Owner);
+                    __fastcall  TfrmEditorCode(TComponent* Owner) override;
 
 //    void            __fastcall  SetDocument(Project::Document* document);
     void            __fastcall  UpdateStatus();

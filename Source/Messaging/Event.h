@@ -4,7 +4,7 @@
 //---------------------------------------------------------------------------
 #include "Project/Documents/Document.h"
 //---------------------------------------------------------------------------
-namespace Messaging
+namespace MsgBus
 {
 //---------------------------------------------------------------------------
 class Event
@@ -177,7 +177,8 @@ public:
                             }
 };
 //---------------------------------------------------------------------------
-} // Messaging namespace
+} // MsgBus namespace
+//---------------------------------------------------------------------------
 #define ClearMessage(a)          Bus::Publish<MessageEvent>(MessageEvent((a), etClear      ))
 #define ErrorMessage(a)          Bus::Publish<MessageEvent>(MessageEvent((a), etError      ))
 #define WarningMessage(a)        Bus::Publish<MessageEvent>(MessageEvent((a), etWarning    ))

@@ -21,7 +21,7 @@ __published:    // IDE-managed Components
 
 private:    // User declarations
 public:     // User declarations
-            __fastcall  TfrmPaletteMonoAttribute(TComponent* Owner);
+            __fastcall  TfrmPaletteMonoAttribute(TComponent* Owner) override;
 
     void    __fastcall  Set(Visuals::GraphicsBuffer& canvas);
 };

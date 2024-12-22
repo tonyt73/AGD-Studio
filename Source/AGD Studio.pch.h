@@ -1,6 +1,25 @@
 #ifndef pch_H
 #define pch_H
 //---------------------------------------------------------------------------
+// Ignore Compiler Warnings
+// Annoyances
+#pragma clang diagnostic ignored "-Wpadded"
+#pragma clang diagnostic ignored "-Wswitch-enum"
+#pragma clang diagnostic ignored "-Wunused-parameter"
+#pragma clang diagnostic ignored "-Wignored-attributes"
+#pragma clang diagnostic ignored "-Wshadow-field-in-constructor"
+#pragma clang diagnostic ignored "-Wnonportable-system-include-path"
+#pragma clang diagnostic ignored "-Wexit-time-destructors"
+#pragma clang diagnostic ignored "-Wglobal-constructors"
+// VCL language extensions
+#pragma clang diagnostic ignored "-Wlanguage-extension-token"   // __property
+#pragma clang diagnostic ignored "-Wunused-private-field"       // appears when using property read/writes
+// Older languages
+#pragma clang diagnostic ignored "-Wc++98-compat"
+#pragma clang diagnostic ignored "-Wc++98-compat-extra-semi"
+#pragma clang diagnostic ignored "-Wborland-ignored-pragmas"
+
+//---------------------------------------------------------------------------
 // VCL
 #include <vcl.h>
 #include <Vcl.Graphics.hpp>
@@ -38,8 +57,6 @@
 #pragma hdrstop
 
 const String ApplicationName = "AGD Studio";
-
-#pragma clang diagnostic ignored "-Wignored-attributes"
 
 #endif // pch_h
 

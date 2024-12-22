@@ -12,10 +12,6 @@ __fastcall MapTool::MapTool()
 {
 }
 //---------------------------------------------------------------------------
-__fastcall MapTool::~MapTool()
-{
-}
-//---------------------------------------------------------------------------
 int __fastcall MapTool::Snap(int value, int range) const
 {
     return ((int)(value / range)) * range;

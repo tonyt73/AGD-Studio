@@ -35,7 +35,7 @@ private:    // User declarations
     bool                m_Selected;
     bool                m_Highlighted;
 
-    void    __fastcall  SetName(String name);
+    void    __fastcall  SetName(String name) override;
     void    __fastcall  SetPath(String path);
     void    __fastcall  SetMachine(String machine);
     void    __fastcall  SetSelected(bool state);
@@ -47,8 +47,8 @@ private:    // User declarations
     TNotifyEvent        FOnRemoveClick;
 
 public:        // User declarations
-            __fastcall  TSelectionPanelFrame(TComponent* Owner);
-            __fastcall ~TSelectionPanelFrame();
+            __fastcall  TSelectionPanelFrame(TComponent* Owner) override;
+            __fastcall ~TSelectionPanelFrame() override;
 
     void     __fastcall UpdateControl();
     void     __fastcall Tick();

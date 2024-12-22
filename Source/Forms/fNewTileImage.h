@@ -37,7 +37,7 @@ private:    // User declarations
     int     __fastcall  GetWidth() const;
     int     __fastcall  GetHeight() const;
 public:    // User declarations
-    __fastcall          TfrmNewTileImage(TComponent* Owner);
+    __fastcall          TfrmNewTileImage(TComponent* Owner) override;
 
     __property  int     Width  = { read = GetWidth  };
     __property  int     Height = { read = GetHeight };

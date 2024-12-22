@@ -116,7 +116,7 @@ void __fastcall TfrmWelcomeDialog::lblOpenExistingProjectClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::SelectionPanelOnClick(TObject *Sender)
 {
-    m_LoadingPanel = (TSelectionPanelFrame*)Sender;
+    m_LoadingPanel = static_cast<TSelectionPanelFrame*>(Sender);
     m_LoadingPanel->Loading = true;
     theProjectManager.Open(m_LoadingPanel->Path, m_LoadingPanel->Machine);
     m_LoadingPanel->Loading = false;
@@ -126,19 +126,19 @@ void __fastcall TfrmWelcomeDialog::SelectionPanelOnClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::SelectionPanelOnRemoveClick(TObject *Sender)
 {
-    TSelectionPanelFrame* panel = (TSelectionPanelFrame*)Sender;
+    TSelectionPanelFrame* panel = static_cast<TSelectionPanelFrame*>(Sender);
     theProjectManager.RemoveMostRecentlyUsedItem(panel->Name, panel->Path);
     RefreshMRUList();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::lblStartNewProjectMouseEnter(TObject *Sender)
 {
-    ((TLabel*)Sender)->Font->Color = ThemeManager::Highlight;
+    static_cast<TLabel*>(Sender)->Font->Color = ThemeManager::Highlight;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::lblStartNewProjectMouseLeave(TObject *Sender)
 {
-    ((TLabel*)Sender)->Font->Color = ThemeManager::Foreground;
+    static_cast<TLabel*>(Sender)->Font->Color = ThemeManager::Foreground;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::cmbThemesChange(TObject *Sender)
@@ -219,7 +219,7 @@ void __fastcall TfrmWelcomeDialog::OnActivate(TWinControl* parent)
         dynamic_cast<TForm*>(Parent)->Caption = "Welcome to " + ApplicationName;
         RefreshMRUList();
         UpdateColors();
-        m_Registrar.Subscribe<Event>(OnEvent);
+        m_Registrar.Subscribe<Event>(_FnBind(TfrmWelcomeDialog::OnEvent));
     }
     else
     {
@@ -297,7 +297,7 @@ void __fastcall TfrmWelcomeDialog::UpdateUI(bool updateMachine)
 void __fastcall TfrmWelcomeDialog::imgMachineCrossClick(TObject *Sender)
 {
     auto folder = Services::Folders::GetFolder(Services::Folders::lpApplication, "Importers");
-    ShellExecute(NULL, L"open", L"", NULL, folder.c_str(), SW_SHOWNORMAL);
+    ShellExecute(nullptr, L"open", L"", nullptr, folder.c_str(), SW_SHOWNORMAL);
 }
 //---------------------------------------------------------------------------
 

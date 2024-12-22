@@ -22,7 +22,7 @@ private:        // User declarations
     void            __fastcall  SetDocument(Project::Document* document);
 
 protected:      // User declarations
-    ::Messaging::Registrar      m_Registrar;
+    Registrar                   m_Registrar;
     Project::Document*          m_Document;
     String                      m_Name;
     String                      m_KeysHelp;
@@ -31,7 +31,7 @@ protected:      // User declarations
 
 public:         // User declarations
                     __fastcall  TfrmEditor(TComponent* Owner, const String& Name);
-                    __fastcall ~TfrmEditor();
+                    __fastcall ~TfrmEditor() override;
 
     template <class T>
     static  TFrame* __fastcall  Create(Project::Document* document, TComponent* owner)

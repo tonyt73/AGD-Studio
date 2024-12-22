@@ -11,10 +11,6 @@ __fastcall CanvasLineTool::CanvasLineTool()
     Flags = usesUndo | modifies | resetOnMove;
 }
 //---------------------------------------------------------------------------
-__fastcall CanvasLineTool::~CanvasLineTool()
-{
-}
-//---------------------------------------------------------------------------
 void __fastcall CanvasLineTool::Apply(Visuals::GraphicsBuffer& canvas, const TPoint& pt)
 {
     if (MS.Left)

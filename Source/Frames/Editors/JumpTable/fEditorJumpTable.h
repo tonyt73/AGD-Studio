@@ -38,7 +38,7 @@ private:    // User declarations
     void            __fastcall  DrawView();
 
 public:     // User declarations
-                    __fastcall  TfrmEditorJumpTable(TComponent* Owner);
+                    __fastcall  TfrmEditorJumpTable(TComponent* Owner) override;
 };
 //---------------------------------------------------------------------------
 #endif

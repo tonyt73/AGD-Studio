@@ -18,7 +18,7 @@ private:
 
 public:
             __fastcall  Creation(BuildMessages& buildMessages);
-    virtual __fastcall ~Creation();
+    virtual __fastcall ~Creation() override;
 
     bool    __fastcall  Execute() final;
 };

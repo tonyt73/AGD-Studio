@@ -15,7 +15,7 @@ __fastcall TfrmEditorControls::TfrmEditorControls(TComponent* Owner)
 : TfrmEditor(Owner, "Controls Editor")
 {
     m_KeysHelp = "Enter the character for the key or an ASCII code from 1 - 127.\r\nDelete the character to unset it.";
-    m_Registrar.Subscribe<ThemeChangedEvent>(OnThemeChangedEvent);
+    m_Registrar.Subscribe<ThemeChangedEvent>(_FnBind(TfrmEditorControls::OnThemeChangedEvent));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorControls::OnDocumentSet()

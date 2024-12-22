@@ -47,7 +47,7 @@ private:    // User declarations
     void            __fastcall  DrawView();
 
 public:     // User declarations
-                    __fastcall  TfrmEditorWindow(TComponent* Owner);
+                    __fastcall  TfrmEditorWindow(TComponent* Owner) override;
 };
 //---------------------------------------------------------------------------
 #endif

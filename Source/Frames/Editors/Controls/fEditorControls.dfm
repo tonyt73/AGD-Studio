@@ -105,15 +105,8 @@ inherited frmEditorControls: TfrmEditorControls
     TabOrder = 0
     ExplicitLeft = 31
     ExplicitTop = 35
-    inherited lblKey: TLabel
-      StyleElements = [seFont, seClient, seBorder]
-    end
     inherited panCaption: TPanel
       Caption = 'LEFT'
-      StyleElements = [seFont, seClient, seBorder]
-    end
-    inherited edtKey: TEdit
-      StyleElements = [seFont, seClient, seBorder]
     end
   end
   inline kcRight: TfrmKeyCode
@@ -134,15 +127,8 @@ inherited frmEditorControls: TfrmEditorControls
     TabOrder = 1
     ExplicitLeft = 172
     ExplicitTop = 35
-    inherited lblKey: TLabel
-      StyleElements = [seFont, seClient, seBorder]
-    end
     inherited panCaption: TPanel
       Caption = 'RIGHT'
-      StyleElements = [seFont, seClient, seBorder]
-    end
-    inherited edtKey: TEdit
-      StyleElements = [seFont, seClient, seBorder]
     end
   end
   inline kcUp: TfrmKeyCode
@@ -163,15 +149,8 @@ inherited frmEditorControls: TfrmEditorControls
     TabOrder = 2
     ExplicitLeft = 313
     ExplicitTop = 35
-    inherited lblKey: TLabel
-      StyleElements = [seFont, seClient, seBorder]
-    end
     inherited panCaption: TPanel
       Caption = 'UP'
-      StyleElements = [seFont, seClient, seBorder]
-    end
-    inherited edtKey: TEdit
-      StyleElements = [seFont, seClient, seBorder]
     end
   end
   inline kcDown: TfrmKeyCode
@@ -192,15 +171,8 @@ inherited frmEditorControls: TfrmEditorControls
     TabOrder = 3
     ExplicitLeft = 454
     ExplicitTop = 35
-    inherited lblKey: TLabel
-      StyleElements = [seFont, seClient, seBorder]
-    end
     inherited panCaption: TPanel
       Caption = 'DOWN'
-      StyleElements = [seFont, seClient, seBorder]
-    end
-    inherited edtKey: TEdit
-      StyleElements = [seFont, seClient, seBorder]
     end
   end
   inline kcFire1: TfrmKeyCode
@@ -221,15 +193,8 @@ inherited frmEditorControls: TfrmEditorControls
     TabOrder = 4
     ExplicitLeft = 31
     ExplicitTop = 210
-    inherited lblKey: TLabel
-      StyleElements = [seFont, seClient, seBorder]
-    end
     inherited panCaption: TPanel
       Caption = '1'
-      StyleElements = [seFont, seClient, seBorder]
-    end
-    inherited edtKey: TEdit
-      StyleElements = [seFont, seClient, seBorder]
     end
   end
   inline kcFire2: TfrmKeyCode
@@ -250,15 +215,8 @@ inherited frmEditorControls: TfrmEditorControls
     TabOrder = 5
     ExplicitLeft = 172
     ExplicitTop = 210
-    inherited lblKey: TLabel
-      StyleElements = [seFont, seClient, seBorder]
-    end
     inherited panCaption: TPanel
       Caption = '2'
-      StyleElements = [seFont, seClient, seBorder]
-    end
-    inherited edtKey: TEdit
-      StyleElements = [seFont, seClient, seBorder]
     end
   end
   inline kcFire3: TfrmKeyCode
@@ -279,15 +237,8 @@ inherited frmEditorControls: TfrmEditorControls
     TabOrder = 6
     ExplicitLeft = 313
     ExplicitTop = 210
-    inherited lblKey: TLabel
-      StyleElements = [seFont, seClient, seBorder]
-    end
     inherited panCaption: TPanel
       Caption = '3'
-      StyleElements = [seFont, seClient, seBorder]
-    end
-    inherited edtKey: TEdit
-      StyleElements = [seFont, seClient, seBorder]
     end
   end
   inline kcOption1: TfrmKeyCode
@@ -308,15 +259,8 @@ inherited frmEditorControls: TfrmEditorControls
     TabOrder = 7
     ExplicitLeft = 31
     ExplicitTop = 387
-    inherited lblKey: TLabel
-      StyleElements = [seFont, seClient, seBorder]
-    end
     inherited panCaption: TPanel
       Caption = '1'
-      StyleElements = [seFont, seClient, seBorder]
-    end
-    inherited edtKey: TEdit
-      StyleElements = [seFont, seClient, seBorder]
     end
   end
   inline kcOption2: TfrmKeyCode
@@ -337,15 +281,8 @@ inherited frmEditorControls: TfrmEditorControls
     TabOrder = 8
     ExplicitLeft = 172
     ExplicitTop = 387
-    inherited lblKey: TLabel
-      StyleElements = [seFont, seClient, seBorder]
-    end
     inherited panCaption: TPanel
       Caption = '2'
-      StyleElements = [seFont, seClient, seBorder]
-    end
-    inherited edtKey: TEdit
-      StyleElements = [seFont, seClient, seBorder]
     end
   end
   inline kcOption3: TfrmKeyCode
@@ -366,15 +303,8 @@ inherited frmEditorControls: TfrmEditorControls
     TabOrder = 9
     ExplicitLeft = 313
     ExplicitTop = 387
-    inherited lblKey: TLabel
-      StyleElements = [seFont, seClient, seBorder]
-    end
     inherited panCaption: TPanel
       Caption = '3'
-      StyleElements = [seFont, seClient, seBorder]
-    end
-    inherited edtKey: TEdit
-      StyleElements = [seFont, seClient, seBorder]
     end
   end
   inline kcOption4: TfrmKeyCode
@@ -395,15 +325,8 @@ inherited frmEditorControls: TfrmEditorControls
     TabOrder = 10
     ExplicitLeft = 454
     ExplicitTop = 387
-    inherited lblKey: TLabel
-      StyleElements = [seFont, seClient, seBorder]
-    end
     inherited panCaption: TPanel
       Caption = '4'
-      StyleElements = [seFont, seClient, seBorder]
-    end
-    inherited edtKey: TEdit
-      StyleElements = [seFont, seClient, seBorder]
     end
   end
 end

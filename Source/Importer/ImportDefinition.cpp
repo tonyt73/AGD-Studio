@@ -30,12 +30,12 @@ __fastcall ImportDefinition::ImportDefinition(const String& name)
     m_PropertyMap["Map.Match"] = &m_Sections.Map.Pattern;
 }
 //---------------------------------------------------------------------------
-bool __fastcall ImportDefinition::Load(const String& name)
+bool __fastcall ImportDefinition::LoadFile(const String& name)
 {
     // Load our import definition
     auto file = Services::File::Combine(Services::Folders::Application, "Importers" + Services::Folders::Separator + name + ".json");
     if (Services::File::Exists(file)) {
-        Services::JsonFile::Load(Services::File::Combine(Services::Folders::Application, "Importers" + Services::Folders::Separator + name + ".json"));
+        Services::JsonFile::LoadFile(Services::File::Combine(Services::Folders::Application, "Importers" + Services::Folders::Separator + name + ".json"));
         return true;
     }
     return false;

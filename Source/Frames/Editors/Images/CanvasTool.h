@@ -21,7 +21,7 @@ protected:
 
 public:
                     __fastcall  CanvasTool();
-    virtual         __fastcall ~CanvasTool();
+    virtual         __fastcall ~CanvasTool() override;
 
                                 //TODO -cDrawing: Set selection rect
 

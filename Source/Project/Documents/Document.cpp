@@ -21,10 +21,10 @@ __fastcall Document::Document(const String& name)
 , m_Name(Services::File::NameWithoutExtension(name))
 , m_Type("No Type")
 , m_SubType("No SubType")
+, m_Folder("Misc\\Files")
 , m_Extension("json")
 , m_ShowFileExtension(false)
 , m_ReadOnly(false)
-, m_Folder("Misc\\Files")
 , m_TreeNode(nullptr)
 , m_DockPanel(nullptr)
 , m_RefId(InvalidDocumentId)
@@ -179,7 +179,7 @@ bool __fastcall Document::Load()
     if (Services::File::Exists(m_File))
     {
         // yes, load it
-        JsonFile::Load(m_File);
+        JsonFile::LoadFile(m_File);
         // make sure the next ref id is up to date
         s_NextRefId = std::max(s_NextRefId, m_RefId);
         return true;

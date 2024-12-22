@@ -20,18 +20,18 @@ const unsigned char g_PixelShft4[2] = { 4, 0 };
 const unsigned char g_PixelShft2[4] = { 6, 4, 2, 0 };
 const unsigned char g_PixelShft1[8] = { 7, 6, 5, 4, 3, 2, 1, 0 };
 // Pixel Masks for 1, 2, 4 and 8 pixels per byte
-const unsigned char* g_PixelMasks[9] = { NULL, g_PixelMask1, g_PixelMask2, NULL, g_PixelMask4, NULL, NULL, NULL, g_PixelMask8 };
-const unsigned char* g_PixelShfts[9] = { NULL, g_PixelShft1, g_PixelShft2, NULL, g_PixelShft4, NULL, NULL, NULL, g_PixelShft8 };
+const unsigned char* g_PixelMasks[9] = { nullptr, g_PixelMask1, g_PixelMask2, nullptr, g_PixelMask4, nullptr, nullptr, nullptr, g_PixelMask8 };
+const unsigned char* g_PixelShfts[9] = { nullptr, g_PixelShft1, g_PixelShft2, nullptr, g_PixelShft4, nullptr, nullptr, nullptr, g_PixelShft8 };
 //---------------------------------------------------------------------------
 GraphicsBuffer::GraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode)
 : m_GraphicsMode(mode)
-, m_BufferType(mode.TypeOfBuffer)
 , m_Width(width)
 , m_Height(height)
 , m_ScalarX(mode.ScalarX)
 , m_ScalarY(mode.ScalarY)
 , m_Stride(width / (8 / mode.BitsPerPixel))
 , m_PixelsPerByte(8 / mode.BitsPerPixel)
+, m_BufferType(mode.TypeOfBuffer)
 , m_RenderInGreyscale(false)
 , m_Drawing(false)
 {
@@ -46,6 +46,7 @@ GraphicsBuffer::GraphicsBuffer(unsigned int width, unsigned int height, const Gr
 //---------------------------------------------------------------------------
 GraphicsBuffer::~GraphicsBuffer()
 {
+    m_Registrar.Unsubscribe();
 }
 //---------------------------------------------------------------------------
 void GraphicsBuffer::Make(unsigned int width, unsigned int height, const GraphicsMode& mode, std::unique_ptr<GraphicsBuffer>& buffer)
@@ -70,10 +71,10 @@ unsigned int GraphicsBuffer::GetNumberOfBuffers() const
     return m_Buffers.size();
 }
 //---------------------------------------------------------------------------
-unsigned int GraphicsBuffer::GetSizeOfBuffer(int index) const
+unsigned int GraphicsBuffer::GetSizeOfBuffer(unsigned int index) const
 {
     auto size = 0;
-    if (0 <= index && index < m_Buffers.size())
+    if (index < m_Buffers.size())
     {
         size = m_Buffers[index].size();
     }
@@ -82,7 +83,7 @@ unsigned int GraphicsBuffer::GetSizeOfBuffer(int index) const
 //---------------------------------------------------------------------------
 unsigned char GraphicsBuffer::GetColorIndex(unsigned char index) const
 {
-    if (0 <= index && index < m_SetColors.size())
+    if (index < m_SetColors.size())
     {
         return m_SetColors[index];
     }

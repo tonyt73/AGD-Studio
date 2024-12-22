@@ -228,7 +228,7 @@ __published:    // IDE-managed Components
     void __fastcall actEditSplitIntoTilesExecute(TObject *Sender);
 
 private:                // User declarations
-    ::Messaging::Registrar              m_Registrar;
+    Registrar                           m_Registrar;
     Factories::DocumentEditorFactory    m_DocumentEditorFactory;
     Build::BuildManager                 m_Builder;
     std::list<EraseHandler>             m_EraseHandlers;    // stops flicking
@@ -248,8 +248,8 @@ private:                // User declarations
     TNotifyEvent        FOnFormClose;
 
 public:                 // User declarations
-            __fastcall  TfrmIDE(TComponent* Owner);
-            __fastcall ~TfrmIDE();
+            __fastcall  TfrmIDE(TComponent* Owner) override;
+            __fastcall ~TfrmIDE() override;
 
     void    __fastcall  OnActivate(TWinControl* parent);
     void    __fastcall  OnClose();

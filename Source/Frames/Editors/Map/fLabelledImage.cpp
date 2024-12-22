@@ -63,16 +63,38 @@ void __fastcall TfrmLabelledImage::SetShowCaption(bool state)
 //---------------------------------------------------------------------------
 void __fastcall TfrmLabelledImage::SetImage(Project::ImageDocument* document)
 {
-    m_Document                = document;
-    lblCaption->Caption       = m_Document->Name.UpperCase();
-    panTileType->Visible      = false;
+    m_Document           = document;
+    lblCaption->Caption  = m_Document->Name.UpperCase();
+    panTileType->Visible = false;
 
-    if (document->ImageType  == Visuals::itTile) {
-        auto st               = document->GetLayer("blocktype");
-        auto bt               = StrToInt(st);
-        panTileType->Caption  = g_BlockTypes[bt].UpperCase();
-        panTileType->Color    = g_BlockColors[bt];
-        panTileType->Visible  = true;
+    if (document->ImageType == Visuals::itTile) {
+        auto bt = -1;
+        auto st = document->GetLayer("blocktype");
+        if (st.Length() == 1) {
+            // single tile, proper caption and tile color
+            bt = StrToInt(st);
+            panTileType->Caption  = g_BlockTypes[bt].UpperCase();
+        } else {
+            // tile set, caption is the most used block type
+            std::map<int, int> counts;
+            for (auto chr : st) {
+                if (counts.count(chr-'0') == 0) {
+                    counts[chr-'0'] = 0;
+                }
+                counts[chr-'0']++;
+            }
+            auto bt = 0;
+            auto max = -1;
+            for (const auto& [key, count] : counts) {
+                if (max < count) {
+                    bt = key;
+                    max = count;
+                }
+            }
+            panTileType->Caption = g_BlockTypes[bt].UpperCase();
+        }
+        panTileType->Color   = g_BlockColors[bt];
+        panTileType->Visible = true;
     }
     Update();
 }

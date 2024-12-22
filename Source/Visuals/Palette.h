@@ -20,7 +20,7 @@ protected:
 
     TColor              __fastcall  GetFontColorOf(int index) const;
 
-    void                __fastcall  OnEndObject(const String& object);
+    void                __fastcall  OnEndObject(const String& object) override;
     void                __fastcall  Save();
 
 public:
@@ -29,7 +29,7 @@ public:
                         __fastcall  Palette(const Palette& other);
             Palette&    __fastcall  operator=(const Palette& other);
 
-            bool        __fastcall  Load(const String& name);
+            bool        __fastcall  LoadFile(const String& name) override;
 
     static  DWORD       __fastcall  LuminanceOf(TColor Color);
     static  bool        __fastcall  IsGrey(TColor Color);

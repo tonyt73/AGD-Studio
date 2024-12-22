@@ -11,10 +11,6 @@ __fastcall MapPencilTool::MapPencilTool()
     Flags = modifies;
 }
 //---------------------------------------------------------------------------
-__fastcall MapPencilTool::~MapPencilTool()
-{
-}
-//---------------------------------------------------------------------------
 void __fastcall MapPencilTool::Apply(Project::MapEntityList& list, Project::MapEntity entity)
 {
     SnapToTileGrid(LastPt);

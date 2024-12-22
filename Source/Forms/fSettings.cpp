@@ -51,7 +51,7 @@ void __fastcall TfrmSettings::FormCreate(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmSettings::btnProfileClick(TObject *Sender)
 {
-    pgcSettings->TabIndex = ((TControl*)Sender)->Tag;
+    pgcSettings->TabIndex = static_cast<TControl*>(Sender)->Tag;
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmSettings::btnOkClick(TObject *Sender)

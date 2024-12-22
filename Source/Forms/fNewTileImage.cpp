@@ -57,35 +57,35 @@ int __fastcall TfrmNewTileImage::GetHeight() const
 //---------------------------------------------------------------------------
 void __fastcall TfrmNewTileImage::tbcImageTypesDrawTab(TCustomTabControl *Control, int TabIndex, const TRect &Rect, bool Active)
 {
-//    // clear the rect
-//    Control->Canvas->Brush->Color = ThemeManager::Background;
-//    Control->Canvas->FillRect(Rect);
-//
-//    // get the bottom 8 pixels as a rect
-//    auto rect = Rect.SplitRect(srBottom, 8);
-//    // is active?
-//    if (Active) {
-//        // yes, change the brush color to highlight
-//        Control->Canvas->Brush->Color = ThemeManager::Highlight;
-//        // draw the bottom rect in the current brush color
-//        rect.Inflate(-2, 2, -1, 2);
-//        Control->Canvas->FillRect(rect);
-//        Control->Canvas->Font->Style <<= fsBold;
-//    } else {
-//        // no, draw a rectangle (not filled rect) at the bottom in the highlight color
-//        rect.Inflate(-2, 0, -1, 0);
-//        Control->Canvas->Pen->Color = ThemeManager::Highlight;
-//        Control->Canvas->Rectangle(rect);
-//        Control->Canvas->Font->Style >>= fsBold;
-//    }
-//
-//    // draw the caption
-//    auto tab = dynamic_cast<TTabControl*>(Control);
-//    auto caption = tab->Tabs->Strings[TabIndex];
-//    auto tr = Control->Canvas->TextExtent(caption);
-//    Control->Canvas->Brush->Color = ThemeManager::Background;
-//    Control->Canvas->Font->Color = ThemeManager::Foreground;
-//    Control->Canvas->TextOut(Rect.Left + ((Rect.Width() - tr.cx) / 2), Rect.Top + ((Rect.Height() - tr.cy) / 2) - 3, caption);
+    // clear the rect
+    Control->Canvas->Brush->Color = ThemeManager::Background;
+    Control->Canvas->FillRect(Rect);
+
+    // get the bottom 8 pixels as a rect
+    auto rect = Rect.SplitRect(srBottom, 8);
+    // is active?
+    if (Active) {
+        // yes, change the brush color to highlight
+        Control->Canvas->Brush->Color = ThemeManager::Highlight;
+        // draw the bottom rect in the current brush color
+        rect.Inflate(-2, 2, -1, 2);
+        Control->Canvas->FillRect(rect);
+        Control->Canvas->Font->Style <<= fsBold;
+    } else {
+        // no, draw a rectangle (not filled rect) at the bottom in the highlight color
+        rect.Inflate(-2, 0, -1, 0);
+        Control->Canvas->Pen->Color = ThemeManager::Highlight;
+        Control->Canvas->Rectangle(rect);
+        Control->Canvas->Font->Style >>= fsBold;
+    }
+
+    // draw the caption
+    auto tab = dynamic_cast<TTabControl*>(Control);
+    auto caption = tab->Tabs->Strings[TabIndex];
+    auto tr = Control->Canvas->TextExtent(caption);
+    Control->Canvas->Brush->Color = ThemeManager::Background;
+    Control->Canvas->Font->Color = ThemeManager::Foreground;
+    Control->Canvas->TextOut(Rect.Left + ((Rect.Width() - tr.cx) / 2), Rect.Top + ((Rect.Height() - tr.cy) / 2) - 3, caption);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmNewTileImage::edtWidthChange(TObject *Sender)

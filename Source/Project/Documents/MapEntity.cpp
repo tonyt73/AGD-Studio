@@ -101,7 +101,7 @@ void __fastcall MapEntity::Clean()
     m_Dirty = false;
 }
 //---------------------------------------------------------------------------
-ImageDocument* const __fastcall MapEntity::GetDocument() const
+ImageDocument* __fastcall MapEntity::GetDocument() const
 {
     return m_Document;
 }

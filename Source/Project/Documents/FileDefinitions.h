@@ -22,7 +22,7 @@ private:
 
 
     void        __fastcall  Load();
-    void        __fastcall  OnEndObject(const String& object);
+    void        __fastcall  OnEndObject(const String& object) override;
 
     DefinitionList          m_Definitions;
     Definition              m_DefinitionLoader;

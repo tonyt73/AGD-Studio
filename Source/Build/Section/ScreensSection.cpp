@@ -29,11 +29,9 @@ void __fastcall ScreensSection::Execute()
 
     auto imgSize = dm.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itSprite].Minimum;
     const auto& wi = (Project::WindowDocument*)dm.Get("Window", "Definition", "Window");
-    auto wPt = TPoint(wi->Rect.Left * imgSize.cx, wi->Rect.Top * imgSize.cy);
     if (wi) {
         auto tileSize = dm.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile].Minimum;
         auto wPt = TPoint(wi->Rect.Left * tileSize.cx, wi->Rect.Top * tileSize.cy);
-        auto ri = 0;
         for (auto ri = 0; ri < 255; ri++) {
             for (auto ry = 0; ry < Project::g_MaxMapRoomsDown; ry++ ) {
                 for (auto rx = 0; rx < Project::g_MaxMapRoomsAcross; rx++) {

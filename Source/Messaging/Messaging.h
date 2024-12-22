@@ -12,7 +12,7 @@
 #include <typeinfo>
 #include <type_traits>
 //---------------------------------------------------------------------------
-namespace Messaging
+namespace MsgBus
 {
 class Bus
 {
@@ -27,8 +27,8 @@ private:
         unsigned int            m_SubscriptionId;
 
     public:
-                                Subscription_(unsigned int id) : m_SubscriptionId(id) {}
-        virtual                ~Subscription_() {}
+                                Subscription_(unsigned int id);
+        virtual                ~Subscription_();
 
         __property unsigned int SubscriptionId = { read = m_SubscriptionId };
     };
@@ -38,18 +38,23 @@ private:
     class Subscription : public Subscription_
     {
     private:
-        std::function<void (const T&)>  m_Handler;
+        std::function<void (const T&)> m_Handler;
     public:
-        Subscription(const std::function<void (const T&)>& handler, unsigned int subscriptionId)
+        Subscription(std::function<void (const T&)> handler, unsigned int subscriptionId)
         : Subscription_(subscriptionId)
-        , m_Handler(handler) { }
+        , m_Handler(std::move(handler))
+        {
+        }
+
+        virtual ~Subscription() override {}
 
         void Execute(const T& message)
         {
             if (m_Handler) {
                 m_Handler(message);
             } else {
-                assert("Handler is invalid");
+                // Handler is invalid
+                assert(0);
             }
         }
     };
@@ -62,7 +67,7 @@ private:
 protected:
     // subscribe a handler to a templated message type
     template <class T>
-    static unsigned int Subscribe(const std::function<void (const T&)>& handler)
+    static unsigned int Subscribe(std::function<void (const T&)> handler)
     {
         if (s_Handlers == nullptr) {
             s_Handlers = new SubscriptionsMap();
@@ -76,7 +81,7 @@ protected:
         }
 
         // add the handler to the subscriptions list for the type and assign a new id
-        auto subscription = std::make_unique<Subscription<T> >(handler, ++s_NextId);
+        auto subscription = std::make_unique<Subscription<T>>(std::move(handler), ++s_NextId);
         subscriptions->push_back(std::move(subscription));
         return s_NextId;
     }
@@ -105,17 +110,24 @@ private:
     std::list<unsigned int> m_SubscriptionIds;
 
 public:
-                            Registrar();
-                           ~Registrar();
+    Registrar();
+   ~Registrar();
 
     template <class T>
     void Subscribe(std::function<void (const T&)> handler) {
-        m_SubscriptionIds.push_back(::Messaging::Bus::Subscribe(handler));
+        m_SubscriptionIds.push_back(Bus::Subscribe(handler));
     }
     void Unsubscribe();
 };
 //---------------------------------------------------------------------------
-} // namespace Messaging
+} // namespace MsgBus
 //---------------------------------------------------------------------------
-using namespace ::Messaging;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wheader-hygiene"
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+#pragma clang diagnostic ignored "-Wreserved-macro-identifier"
+using std::placeholders::_1;
+using namespace MsgBus;
+#define _FnBind(a) std::bind(&a, this, _1)
+#pragma clang diagnostic pop
 #endif

@@ -56,9 +56,9 @@ private:    // User declarations
 
     void            __fastcall  DrawPhysicalColors() const;
     void            __fastcall  DrawLogicalColors() const;
-    void            __fastcall  Update();
+    void            __fastcall  Update() override;
 public:     // User declarations
-                    __fastcall  TfrmPaletteBitmap(TComponent* Owner);
+                    __fastcall  TfrmPaletteBitmap(TComponent* Owner) override;
     void            __fastcall  Init();
     void            __fastcall  Set(Visuals::GraphicsBuffer& canvas);
 };

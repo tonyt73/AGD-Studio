@@ -48,24 +48,24 @@ protected:
                 String              m_LayerName;        // used to load layers into the above layers list
                 String              m_LayerData;        // used to load layers into the above layers list
 
-    virtual void        __fastcall  OnEndObject(const String& object);
+    virtual void        __fastcall  OnEndObject(const String& object) override;
             void        __fastcall  ExtractSize(const String& extra);
 
             int         __fastcall  GetIndex() const;
             int         __fastcall  GetLayerCount() const;
             void        __fastcall  AddLayer(const String& name, const String& value);
-    virtual void        __fastcall  DoSave();
+    virtual void        __fastcall  DoSave() override;
     virtual void        __fastcall  DoSaveExtra();
 
 public:
                         __fastcall  ImageDocument(const String& name);
-    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ImageDocument(name); };
-            Document*   __fastcall  Copy(const Document* document);
+    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ImageDocument(name); }
+            Document*   __fastcall  Copy(const Document* document) override;
 
 
             bool        __fastcall  AddFrame(int index = -1, const String& hint = "");
             bool        __fastcall  DeleteFrame(int index);
-            String      __fastcall  GetLayer(const String& name);
+            String      __fastcall  GetLayer(const String& name) const;
             void        __fastcall  SetLayer(const String& name, const String& value);      // set the name of a layer - ie. tiles use block type
             bool        __fastcall  LayerExists(const String& name) const;
             bool        __fastcall  IsFirstOfType() const;

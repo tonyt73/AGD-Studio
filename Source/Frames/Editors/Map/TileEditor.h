@@ -142,7 +142,6 @@ private:
 public:
 
                         __fastcall  TileEditor(TImage* const view, Visuals::ImageMap& imageMap, const TSize& rooms, bool usesGridTile, bool usesGridRoom, int border, bool readOnly = false);
-                        __fastcall ~TileEditor();
 
     void                __fastcall  OnMouseDown(TMouseButton Button, TShiftState Shift, int X, int Y);
     void                __fastcall  OnMouseMove(TShiftState Shift, int X, int Y);

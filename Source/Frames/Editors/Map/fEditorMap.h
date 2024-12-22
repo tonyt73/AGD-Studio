@@ -216,7 +216,6 @@ __published:    // IDE-managed Components
     void __fastcall sbxWorkspaceMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled);
 
 private:    // User declarations
-    Registrar                   m_Registrar;        // the messaging registrar
     Project::TiledMapDocument*  m_TiledDocument;    // the map document we are editiing
     std::unique_ptr<TileEditor> m_Workspace;        // the main workspace editor
     std::unique_ptr<TileEditor> m_ScratchPad;       // the scratch pad editor
@@ -229,8 +228,8 @@ private:    // User declarations
     int                         m_Scale;
 
             void    __fastcall  RefreshAssets();
-            void    __fastcall  OnInitialise();
-            void    __fastcall  OnEvent(const Event& event);
+            void    __fastcall  OnInitialise() override;
+            void    __fastcall  OnEvent(const Event& event) override;
             void    __fastcall  OnRoomSelected(const RoomSelected& event);
             void    __fastcall  OnStartRoomChanged(const StartRoomChanged& event);
             void    __fastcall  OnDocumentChanged(const DocumentChange<String>& message);
@@ -239,8 +238,7 @@ private:    // User declarations
             int     __fastcall  OnRetrieveRoomIndex(const TPoint& pt, bool newIndex = false);
 
 public:     // User declarations
-                    __fastcall  TfrmEditorMap(TComponent* Owner);
-                    __fastcall ~TfrmEditorMap();
+                    __fastcall  TfrmEditorMap(TComponent* Owner) override;
 };
 //---------------------------------------------------------------------------
 #endif

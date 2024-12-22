@@ -36,8 +36,8 @@ String __fastcall BlockTypeTool::Begin(Visuals::GraphicsBuffer& canvas)
     auto tile = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile].Minimum;
 
     m_Blocks = m_ImageDocument->GetLayer("blocktype");
-    m_BlockWidth  = tile.cx / canvas.ScalarX;
-    m_BlockHeight = tile.cy / canvas.ScalarY;
+    m_BlockWidth  = static_cast<int>(static_cast<float>(tile.cx) / canvas.ScalarX);
+    m_BlockHeight = static_cast<int>(static_cast<float>(tile.cy) / canvas.ScalarY);
     m_BlocksAcross = m_ImageDocument->Width / m_BlockWidth;
     m_BlocksDown   = m_ImageDocument->Height / m_BlockHeight;
 
@@ -81,22 +81,22 @@ void __fastcall BlockTypeTool::Apply()
             auto type = m_Blocks[index+1] - '0';
             if (type) {
                 auto mC = g_BlockColors[type];       // mask color
-                auto mR = (float)((mC & 0x000000FF)      ) * maskAlpha;
-                auto mG = (float)((mC & 0x0000FF00) >>  8) * maskAlpha;
-                auto mB = (float)((mC & 0x00FF0000) >> 16) * maskAlpha;
+                auto mR = static_cast<float>((mC & 0x000000FF)      ) * maskAlpha;
+                auto mG = static_cast<float>((mC & 0x0000FF00) >>  8) * maskAlpha;
+                auto mB = static_cast<float>((mC & 0x00FF0000) >> 16) * maskAlpha;
                 auto alpha = 1.f - maskAlpha;
                 auto y = d * m_BlockHeight;
                 for (auto h = 0; h < m_BlockHeight; h++) {
                     auto x = a * m_BlockWidth;
                     for (auto w = 0; w < m_BlockWidth; w++) {
                         auto cc = ColorToRGB(m_BlendedBitmap->Canvas->Pixels[x+w][y+h]);    // canvas color
-                        auto pR = (float)((cc & 0x000000FF)      ) * alpha;
-                        auto pG = (float)((cc & 0x0000FF00) >>  8) * alpha;
-                        auto pB = (float)((cc & 0x00FF0000) >> 16) * alpha;
-                        R = pR + mR;
-                        G = pG + mG;
-                        B = pB + mB;
-                        m_BlendedBitmap->Canvas->Pixels[x+w][y+h] = (TColor)(R + (G << 8) + (B << 16));
+                        auto pR = static_cast<float>((cc & 0x000000FF)      ) * alpha;
+                        auto pG = static_cast<float>((cc & 0x0000FF00) >>  8) * alpha;
+                        auto pB = static_cast<float>((cc & 0x00FF0000) >> 16) * alpha;
+                        R = static_cast<unsigned int>(pR + mR);
+                        G = static_cast<unsigned int>(pG + mG);
+                        B = static_cast<unsigned int>(pB + mB);
+                        m_BlendedBitmap->Canvas->Pixels[x+w][y+h] = static_cast<TColor>(R + (G << 8) + (B << 16));
                     }
                 }
             }

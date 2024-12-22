@@ -54,15 +54,10 @@ __fastcall TfrmEditorMap::TfrmEditorMap(TComponent* Owner)
         "                        o Select the room, using left click\r\n"
         "                        o Right click the select room to make it the Start room\r\n";
 
-    m_Registrar.Subscribe<Event>(OnEvent);
-    m_Registrar.Subscribe<RoomSelected>(OnRoomSelected);
-    m_Registrar.Subscribe<StartRoomChanged>(OnStartRoomChanged);
-    m_Registrar.Subscribe<DocumentChange<String>>(OnDocumentChanged);
-}
-//---------------------------------------------------------------------------
-__fastcall TfrmEditorMap::~TfrmEditorMap()
-{
-    m_Registrar.Unsubscribe();
+    m_Registrar.Subscribe<Event>(_FnBind(TfrmEditorMap::OnEvent));
+    m_Registrar.Subscribe<RoomSelected>(_FnBind(TfrmEditorMap::OnRoomSelected));
+    m_Registrar.Subscribe<StartRoomChanged>(_FnBind(TfrmEditorMap::OnStartRoomChanged));
+    m_Registrar.Subscribe<DocumentChange<String>>(_FnBind(TfrmEditorMap::OnDocumentChanged));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::OnInitialise()

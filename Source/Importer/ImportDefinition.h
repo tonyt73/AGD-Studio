@@ -42,7 +42,7 @@ private:
 
 public:
                         __fastcall  ImportDefinition(const String& name);
-    bool                __fastcall  Load(const String& name);
+    bool                __fastcall  LoadFile(const String& name) override;
 
     __property  const SectionList&  Sections = { read = m_Sections    };
 };

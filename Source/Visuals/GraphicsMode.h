@@ -66,14 +66,14 @@ protected:
     TColor          __fastcall  GetLogicalColor(int index) const;
     int             __fastcall  GetColorFromLogicalIndex(int index) const;
   const ExportInfo& __fastcall  GetExportInformation(ImageTypes imageType) const;
-    void            __fastcall  OnEndObject(const String& object);
+    void            __fastcall  OnEndObject(const String& object) override;
     void            __fastcall  Save();
 
 public:
                     __fastcall  GraphicsMode();
                     __fastcall  GraphicsMode(const GraphicsMode& other);
 
-    bool            __fastcall  Load(const String& name);
+    bool            __fastcall  LoadFile(const String& name) override;
     void            __fastcall  SaveLogicalCLUT(String path = "", String name = "");
     void            __fastcall  LoadLogicalCLUT(String path = "", String name = "");
                                 // Remap a logical color to a new palette color

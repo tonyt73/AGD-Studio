@@ -35,10 +35,6 @@ __fastcall AttributeGraphicsBuffer::AttributeGraphicsBuffer(unsigned int width, 
     m_SetColors.push_back(0);  // flash
 }
 //---------------------------------------------------------------------------
-__fastcall AttributeGraphicsBuffer::~AttributeGraphicsBuffer()
-{
-}
-//---------------------------------------------------------------------------
 void __fastcall AttributeGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y, bool set)
 {
     if (X < m_Width && Y < m_Height)

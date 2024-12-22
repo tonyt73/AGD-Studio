@@ -55,7 +55,7 @@ protected:
     virtual void    __fastcall  Set(const String& property, const bool& value);
 
             String  __fastcall  ProcessPath(const String& path) const;
-    virtual bool    __fastcall  Load(const String& file);
+    virtual bool    __fastcall  LoadFile(const String& file);
 
     virtual void    __fastcall  OnStartObject(const String& object);
     virtual void    __fastcall  OnEndObject(const String& object);
@@ -65,7 +65,7 @@ protected:
 
 public:
                     __fastcall  JsonFile();
-    virtual         __fastcall ~JsonFile();
+    virtual         __fastcall ~JsonFile() override;
 };
 //---------------------------------------------------------------------------
 } // namespace Services

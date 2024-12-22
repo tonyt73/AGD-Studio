@@ -12,7 +12,6 @@ using namespace Build;
 String Parameter::ization(const String& parameters)
 {
     auto subbedParameters = parameters;
-    const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
     auto gameName = Services::Folders::ProjectName;
     auto gamePath = Services::Folders::Project;
 

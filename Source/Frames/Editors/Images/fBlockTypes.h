@@ -32,7 +32,7 @@ private:    // User declarations
     char        m_BlockType;
     void    __fastcall  SetBlockType(char type);
 public:        // User declarations
-            __fastcall  TfrmBlockTypes(TComponent* Owner);
+            __fastcall  TfrmBlockTypes(TComponent* Owner) override;
 
     char    __property  BlockType = { read = m_BlockType, write = SetBlockType };
 };

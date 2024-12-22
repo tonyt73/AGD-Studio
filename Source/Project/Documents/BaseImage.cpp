@@ -219,11 +219,11 @@ void __fastcall ImageDocument::ExtractSize(const String& extra)
     }
 }
 //---------------------------------------------------------------------------
-String __fastcall ImageDocument::GetLayer(const String& name)
+String __fastcall ImageDocument::GetLayer(const String& name)  const
 {
     String value;
     if (LayerExists(name)) {
-        value = m_Layers[name];
+        value = m_Layers.at(name);
     }
     return value;
 }

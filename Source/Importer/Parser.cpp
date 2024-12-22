@@ -21,7 +21,7 @@ bool Parser::CreateMatchSets(const String& machine)
 {
     // Create the pattern match sets
     auto id = std::make_unique<ImportDefinition>(machine);
-    bool result = id->Load(machine);
+    bool result = id->LoadFile(machine);
     if (result) {
         result &= AddMatchSection("window"        , id->Sections.Window        );
         result &= AddMatchSection("jumptable"     , id->Sections.JumpTable     );

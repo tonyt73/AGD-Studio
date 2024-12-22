@@ -14,7 +14,7 @@ __published:// IDE-managed Components
 
 private:    // User declarations
 public:     // User declarations
-    __fastcall TfrmToolbar(TComponent* Owner);
+    __fastcall TfrmToolbar(TComponent* Owner) override;
 
     virtual Services::Generic __fastcall GetParameters() const = 0;
 };

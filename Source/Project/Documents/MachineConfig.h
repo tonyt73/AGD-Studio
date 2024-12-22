@@ -74,7 +74,7 @@ public:
     Visuals::GraphicsMode*  __fastcall  GraphicsMode() const;
     static void             __fastcall  GetMachinesList(std::vector<String>& list);
 
-    bool                    __fastcall  Load(const String& name);
+    bool                    __fastcall  LoadFile(const String& name) override;
 
     String                  __property  Name      = { read = m_Name                            };
     String                  __property  Keyboard  = { read = m_Keyboard                        };

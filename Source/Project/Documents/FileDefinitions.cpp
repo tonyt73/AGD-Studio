@@ -23,7 +23,7 @@ void __fastcall FileDefinitions::Load()
     if (Services::File::Exists(file))
     {
         // yes, load it
-        Services::JsonFile::Load(file);
+        Services::JsonFile::LoadFile(file);
     }
 }
 //---------------------------------------------------------------------------

@@ -11,10 +11,6 @@ __fastcall CanvasShapeTool::CanvasShapeTool()
     Flags = usesUndo | modifies | resetOnMove;
 }
 //---------------------------------------------------------------------------
-__fastcall CanvasShapeTool::~CanvasShapeTool()
-{
-}
-//---------------------------------------------------------------------------
 void __fastcall CanvasShapeTool::DrawRectangle(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill)
 {
     switch (fill) {

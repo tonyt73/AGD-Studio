@@ -13,9 +13,9 @@ using namespace Project;
 _fastcall TiledMapDocument::TiledMapDocument(const String& name)
 : Document(name)
 , m_StartRoomIndex(0)
+, m_MappingIndexLoadCount(0)
 , m_RoomMappingWidth(g_MaxMapRoomsAcross)
 , m_RoomMappingHeight(g_MaxMapRoomsDown)
-, m_MappingIndexLoadCount(0)
 {
     m_Type = "Map";
     m_SubType = "Tiled";
@@ -51,8 +51,8 @@ _fastcall TiledMapDocument::TiledMapDocument(const String& name)
         m_File = GetFile();
 
         // message subscriptions
-        m_Registrar.Subscribe<DocumentChange<String>>(OnDocumentChanged);
-        m_Registrar.Subscribe<SetStartRoom>(OnSetStartRoom);
+        m_Registrar.Subscribe<DocumentChange<String>>(_FnBind(TiledMapDocument::OnDocumentChanged));
+        m_Registrar.Subscribe<SetStartRoom>(_FnBind(TiledMapDocument::OnSetStartRoom));
 
         // reset the map
         for (auto y = 0; y < g_MaxMapRoomsDown; y++) {
@@ -160,7 +160,7 @@ MapEntityList __fastcall TiledMapDocument::Get(Visuals::ImageTypes type) const
     return list;
 }
 //---------------------------------------------------------------------------
-const MapEntityList& __fastcall TiledMapDocument::Get(MapEntityType type, TSize room)
+const MapEntityList& __fastcall TiledMapDocument::Get(MapEntityType type, TSize room) const
 {
     if (type == meMap) {
         return m_Map;
@@ -310,7 +310,7 @@ void __fastcall TiledMapDocument::UpdateEntityRooms()
     Bus::Publish<UpdateProperties>(UpdateProperties());
 }
 //---------------------------------------------------------------------------
-bool __fastcall TiledMapDocument::IsRoomEmpty(int x, int y)
+bool __fastcall TiledMapDocument::IsRoomEmpty(int x, int y) const
 {
     return (Get(meRoom, TSize(x, y)).size() == 0);
 }
@@ -349,7 +349,7 @@ const TRect __fastcall TiledMapDocument::SetMinimalMapSize()
     return rect;
 }
 //---------------------------------------------------------------------------
-int __fastcall TiledMapDocument::GetRoomIndex(const TPoint& room, bool newIdForUndefinedRoom)
+int __fastcall TiledMapDocument::GetRoomIndex(const TPoint& room, bool newIdForUndefinedRoom) const
 {
     // get either the existing room index or make a new one if required
     auto ri = m_RoomMapping[room.X][room.Y];
@@ -359,7 +359,7 @@ int __fastcall TiledMapDocument::GetRoomIndex(const TPoint& room, bool newIdForU
             // does this ri exist in the list of rooms
             if (!IsRoomIndexUsed(ri)) {
                 // no, so assign it to the room
-                m_RoomMapping[room.X][room.Y]  = ri;
+                m_RoomMapping[room.X][room.Y] = ri;
                 break;
             }
         }

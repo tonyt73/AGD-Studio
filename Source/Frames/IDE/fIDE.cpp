@@ -29,9 +29,9 @@ __fastcall TfrmIDE::TfrmIDE(TComponent* Owner)
 : TFrame(Owner)
 {
     RegisterDocumentEditors();
-    m_Registrar.Subscribe<MessageEvent>(OnMessageEvent);
-    m_Registrar.Subscribe<UpdateProperties>(OnUpdateProperties);
-    m_Registrar.Subscribe<OpenDocument>(OnOpenDocument);
+    m_Registrar.Subscribe<MessageEvent>(_FnBind(TfrmIDE::OnMessageEvent));
+    m_Registrar.Subscribe<UpdateProperties>(_FnBind(TfrmIDE::OnUpdateProperties));
+    m_Registrar.Subscribe<OpenDocument>(_FnBind(TfrmIDE::OnOpenDocument));
     tvBuild->Items->Clear();
 }
 //---------------------------------------------------------------------------

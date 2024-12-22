@@ -57,12 +57,12 @@ private:    // User declarations
     void            __fastcall  DrawSelectionBox(TBitmap* bitmap, int xs, int ys, int xe, int ye) const;
     void            __fastcall  DrawPhysicalColors() const;
     void            __fastcall  DrawPalettesColors() const;
-    void            __fastcall  Update();
+    void            __fastcall  Update() override;
 
     int             __fastcall  GetInk(int index = -1, int ink = -1) const;
     int             __fastcall  GetPaper(int index = -1, int paper = -1) const;
 public:        // User declarations
-                    __fastcall  TfrmULAplusBitmap(TComponent* Owner);
+                    __fastcall  TfrmULAplusBitmap(TComponent* Owner) override;
     void            __fastcall  Init();
     void            __fastcall  Set(Visuals::GraphicsBuffer& canvas);
 };

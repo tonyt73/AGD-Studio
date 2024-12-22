@@ -31,7 +31,7 @@ void __fastcall MostRecentlyUsedList::Load()
     if (Services::File::Exists(file))
     {
         GUARD(m_Loading);
-        Services::JsonFile::Load(file);
+        Services::JsonFile::LoadFile(file);
     }
 }
 //---------------------------------------------------------------------------

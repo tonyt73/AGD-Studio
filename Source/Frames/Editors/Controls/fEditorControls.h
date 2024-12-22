@@ -41,10 +41,10 @@ private:    // User declarations
     void            __fastcall  OnKeyChanged(TObject* Sender);
     void            __fastcall  OnThemeChangedEvent(const ThemeChangedEvent& event);
     void            __fastcall  UpdateColors();
-    void            __fastcall  OnDocumentSet();
+    void            __fastcall  OnDocumentSet() override;
 
 public:     // User declarations
-                    __fastcall  TfrmEditorControls(TComponent* Owner);
+                    __fastcall  TfrmEditorControls(TComponent* Owner) override;
 };
 //---------------------------------------------------------------------------
 #endif

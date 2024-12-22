@@ -13,7 +13,7 @@ protected:
     void    __fastcall  Execute() final;
 public:
             __fastcall  WindowSection();
-    virtual __fastcall ~WindowSection();
+    virtual __fastcall ~WindowSection() override;
 };
 //---------------------------------------------------------------------------
 } // Build namespace

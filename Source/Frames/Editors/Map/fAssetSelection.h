@@ -30,7 +30,7 @@ private:    // User declarations
     TNotifyImageOnSelectionEvent    FOnImageClick;
 
 public:    // User declarations
-            __fastcall TfrmAssetSelection(TComponent* Owner);
+            __fastcall TfrmAssetSelection(TComponent* Owner) override;
 
     void    __fastcall  Clear();
     void    __fastcall  Add(Project::ImageDocument* image, bool enabled = true);

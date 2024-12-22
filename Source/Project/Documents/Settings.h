@@ -40,7 +40,7 @@ private:
 
 public:
                     __fastcall  Settings();
-                    __fastcall ~Settings();
+                    __fastcall ~Settings() override;
     void            __fastcall  Save();
 
     __property  TWindowState    WindowState             = { read = m_WindowState            , write = SetWindowState                };

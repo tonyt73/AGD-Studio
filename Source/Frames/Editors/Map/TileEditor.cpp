@@ -50,16 +50,12 @@ __fastcall TileEditor::TileEditor(TImage* const view, Visuals::ImageMap& imageMa
     assert(view != nullptr);
     Scale = m_ScaleFactor;
 
-    m_Registrar.Subscribe<WindowChangedEvent>(OnWindowChanged);
-    m_Registrar.Subscribe<StartRoomChanged>(OnStartRoomChanged);
+    m_Registrar.Subscribe<WindowChangedEvent>(_FnBind(TileEditor::OnWindowChanged));
+    m_Registrar.Subscribe<StartRoomChanged>(_FnBind(TileEditor::OnStartRoomChanged));
 
     m_View->Picture->Bitmap->Canvas->Font->Style = TFontStyles() << fsBold;
     CreateViewBitmap();
     Clear();
-}
-//---------------------------------------------------------------------------
-__fastcall TileEditor::~TileEditor()
-{
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::OnWindowChanged(const WindowChangedEvent& event)

@@ -33,7 +33,7 @@ private:    // User declarations
     TNotifyEvent                FOnChanged;
 
 public:        // User declarations
-                    __fastcall  TfrmKeyCode(TComponent* Owner);
+                    __fastcall  TfrmKeyCode(TComponent* Owner) override;
 __published:
     String          __property  Caption = { read = GetCaption, write = SetCaption };
     unsigned char   __property  KeyCode = { read = m_KeyCode, write = SetKeyCode };

@@ -60,7 +60,7 @@ __fastcall TfrmEditorCode::TfrmEditorCode(TComponent* Owner)
     m_SearchOptions.ReplaceAllBounds = rbAllText;
     m_SearchOptions.Start = ssCursor;
 
-    m_Registrar.Subscribe<OnChange<String>>(OnChangeString);
+    m_Registrar.Subscribe<OnChange<String>>(_FnBind(TfrmEditorCode::OnChangeString));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorCode::OnChangeString(const OnChange<String>& event)
@@ -275,7 +275,7 @@ void __fastcall TfrmEditorCode::actUndoUpdate(TObject *Sender)
 void __fastcall TfrmEditorCode::UpdateStatus()
 {
     // code taken from the LMD demo projects :-(
-    int i, NewW, Ph, LinesCount, CharsCount, PhScr;
+    int i, NewW, Ph, LinesCount, CharsCount;
     TLMDMarkArray Books;
     _di_ILMDMarkers AllBooks;
     Integer AllBooksCount;
@@ -326,7 +326,7 @@ void __fastcall TfrmEditorCode::UpdateStatus()
         return;
 
     Ph = evEditor->ScrollToPhysical(evEditor->CursorPos.y);
-    PhScr = evEditor->PhysicalToScroll(Ph);
+    evEditor->PhysicalToScroll(Ph);
 
     if (evEditor->Document != nullptr) {
         LinesCount = evEditor->Document->LinesCount;
@@ -356,10 +356,10 @@ void __fastcall TfrmEditorCode::UpdateStatus()
     sbStatus->Panels->Items[7]->Text = Format("Encoding: %s", ARRAYOFCONST(( lmdDocument->CodePageName+Str )) );
     sbStatus->Canvas->Font = sbStatus->Font;
 
-    for (int i = 0; i<sbStatus->Panels->Count; i++) {
+    for (i = 0; i < sbStatus->Panels->Count; i++) {
         NewW = sbStatus->Canvas->TextWidth(sbStatus->Panels->Items[i]->Text) + 10;
         sbStatus->Panels->Items[i]->Width = Max(sbStatus->Panels->Items[i]->Width, NewW);
-    };
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorCode::evEditorStatusChanged(TLMDCustomEditView *AView, TLMDViewStatusChanges AChanges)

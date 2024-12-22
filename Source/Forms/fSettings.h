@@ -95,7 +95,7 @@ private:    // User declarations
     void    __fastcall  SaveMachineConfig();
 
 public:     // User declarations
-            __fastcall  TfrmSettings(TComponent* Owner);
+            __fastcall  TfrmSettings(TComponent* Owner) override;
 };
 //---------------------------------------------------------------------------
 #endif

@@ -29,12 +29,7 @@ __fastcall ULAPlusGraphicsBuffer::ULAPlusGraphicsBuffer(unsigned int width, unsi
     m_SetColors.push_back(7);   // paper
     m_SetColors.push_back(0);   // palette index
 
-    m_Registrar.Subscribe<Event>(OnEvent);
-}
-//---------------------------------------------------------------------------
-__fastcall ULAPlusGraphicsBuffer::~ULAPlusGraphicsBuffer()
-{
-    m_Registrar.Unsubscribe();
+    m_Registrar.Subscribe<Event>(_FnBind(ULAPlusGraphicsBuffer::OnEvent));
 }
 //---------------------------------------------------------------------------
 void __fastcall ULAPlusGraphicsBuffer::SetPixel(unsigned int X, unsigned int Y, bool set)

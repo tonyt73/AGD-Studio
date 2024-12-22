@@ -11,10 +11,6 @@ __fastcall CanvasPencilTool::CanvasPencilTool()
     Flags = usesUndo | modifies;
 }
 //---------------------------------------------------------------------------
-__fastcall CanvasPencilTool::~CanvasPencilTool()
-{
-}
-//---------------------------------------------------------------------------
 void __fastcall CanvasPencilTool::Apply(Visuals::GraphicsBuffer& canvas, const TPoint& pt)
 {
     if (MS.Left)

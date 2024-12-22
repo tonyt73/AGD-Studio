@@ -166,9 +166,6 @@ bool AgdImporter::AddImages(const String& name, const String& imgType)
             int bytesPerFrame = (doc->Width * doc->Height) / (8 * bpp);
             int bytes = m_Parser.Variables[varName]["image"].size();
             String frame = "";
-            if (imgType == "Sprite") {
-                int a = 0;
-            }
             int frameCount = bytes / bytesPerFrame;
             if (bytes >= bytesPerFrame) {
                 for (auto f = 0; f < frameCount; f++) {

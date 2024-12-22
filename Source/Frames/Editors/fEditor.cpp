@@ -13,7 +13,7 @@ __fastcall TfrmEditor::TfrmEditor(TComponent* Owner, const String& Name)
 , m_KeysHelp("")
 , m_Name(Name)
 {
-    m_Registrar.Subscribe<Event>(OnEvent);
+    m_Registrar.Subscribe<Event>(_FnBind(TfrmEditor::OnEvent));
 }
 //---------------------------------------------------------------------------
 __fastcall TfrmEditor::~TfrmEditor()
@@ -45,7 +45,7 @@ bool __fastcall TfrmEditor::IsActive() const
     return theEditorManager.IsActive(this);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditor::OnEvent(const Event& event)
+void TfrmEditor::OnEvent(const Event& event)
 {
     if (IsActive() && event.Id == "editor.help") {
         ShowKeysHelp();

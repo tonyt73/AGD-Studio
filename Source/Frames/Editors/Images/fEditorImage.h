@@ -211,8 +211,8 @@ private:    // User declarations
     BlockTypeTool               m_BlockTypeTool;
     String                      m_LastModeString;   //
 
-    void            __fastcall  OnDocumentSet();
-    void            __fastcall  OnEvent(const Event& event);
+    void            __fastcall  OnDocumentSet() override;
+    virtual void    __fastcall  OnEvent(const Event& event) override;
     void            __fastcall  DrawGrids();
     void            __fastcall  RefreshView(bool redraw = false);
     void            __fastcall  RefreshFramesView();
@@ -222,7 +222,7 @@ private:    // User declarations
     void            __fastcall  ChangeToolbar(TfrmToolbar* toolbar);
 
 public:        // User declarations
-                    __fastcall  TfrmEditorImage(TComponent* Owner);
+                    __fastcall  TfrmEditorImage(TComponent* Owner) override;
 
     __property Project::ImageDocument*  Image = { read = m_ImageDocument, write = m_ImageDocument };
 };

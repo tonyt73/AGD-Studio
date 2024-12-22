@@ -39,7 +39,7 @@ public:
     TPropertyInfoMap::iterator              TPropertyInfoMapIt;
 
 protected:
-            ::Messaging::Registrar  m_Registrar;
+            Registrar               m_Registrar;
             String                  m_Name;
             String                  m_Type;
             String                  m_SubType;
@@ -64,7 +64,7 @@ static      unsigned int            s_NextRefId;    // next unused ref id. Reset
             bool        __fastcall  IsValid() const;
             bool        __fastcall  IsValid(const String& name) const;
                                     // update the documents json content
-    virtual void        __fastcall  Update() {};//= 0;
+    virtual void        __fastcall  Update() {}
 
                                     // LMD property editor - property is item been edited, category is section and info is the hint description
             void        __fastcall  RegisterProperty(const String& property, const String& category, const String& info);
@@ -73,7 +73,7 @@ static      unsigned int            s_NextRefId;    // next unused ref id. Reset
 
 public:
                         __fastcall  Document(const String& name);
-    virtual             __fastcall ~Document();
+    virtual             __fastcall ~Document() override;
 
     static  Document*   __fastcall  Create(const String& name, const String& extra)      { throw "Don't create this class";    }
     virtual Document*   __fastcall  Copy(const Document* document);

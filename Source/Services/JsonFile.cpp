@@ -216,7 +216,7 @@ String __fastcall JsonFile::ProcessPath(const String& path) const
     return newPath;
 }
 //---------------------------------------------------------------------------
-bool __fastcall JsonFile::Load(const String& file)
+bool __fastcall JsonFile::LoadFile(const String& file)
 {
     if (File::File::Exists(file))
     {

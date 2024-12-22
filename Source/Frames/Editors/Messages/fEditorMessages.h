@@ -45,13 +45,13 @@ private:    // User declarations
     bool                            m_RefreshView;      // get the timer function to refresh the view
     std::unique_ptr<TImage>         m_Tile;
 
-    void                __fastcall  OnDocumentSet();
+    void                __fastcall  OnDocumentSet() override;
     bool                __fastcall  IsActive() const;
     void                __fastcall  RefreshView();
     void                __fastcall  RefreshCharacterSet();
 
 public:     // User declarations
-                        __fastcall  TfrmEditorMessages(TComponent* Owner);
+                        __fastcall  TfrmEditorMessages(TComponent* Owner) override;
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfrmEditorMessages *frmEditorMessages;

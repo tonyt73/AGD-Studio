@@ -4,6 +4,8 @@
 //---------------------------------------------------------------------------
 #include "GraphicsTypes.h"
 #include "GraphicsMode.h"
+#include "Messaging/Event.h"
+#include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 // Pixel Masks for 1, 2, 4 and 8 pixels per byte
 extern const unsigned char* g_PixelMasks[];
@@ -27,6 +29,7 @@ private:
                                     GraphicsBuffer() = delete;
 
 protected:
+        Registrar                   m_Registrar;
     typedef std::vector<ByteBuffer> Buffers;            // a list of buffers
 
         const GraphicsMode&         m_GraphicsMode;     // the graphic mode definition
@@ -47,7 +50,7 @@ protected:
                         __fastcall  GraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode);
         void            __fastcall  PushBuffer(unsigned int size);
         unsigned int    __fastcall  GetNumberOfBuffers() const;
-        unsigned int    __fastcall  GetSizeOfBuffer(int index) const;
+        unsigned int    __fastcall  GetSizeOfBuffer(unsigned int index) const;
 virtual unsigned char   __fastcall  GetColorIndex(unsigned char index) const;
 virtual void            __fastcall  SetColorIndex(unsigned char index, int logicalIndex);
         void            __fastcall  SetRenderInGreyscale(bool value);
@@ -55,8 +58,7 @@ virtual void            __fastcall  SetColorIndex(unsigned char index, int logic
 virtual void            __fastcall  Render() const = 0;
 
 public:
-    virtual             __fastcall ~GraphicsBuffer();
-
+    virtual                        ~GraphicsBuffer();
                                     // Make a suitable buffer for the buffer type
     static  void        __fastcall  Make(unsigned int width, unsigned int height, const Visuals::GraphicsMode& mode, std::unique_ptr<GraphicsBuffer>& buffer);
                                     // sets the pixel to the specified palette color index

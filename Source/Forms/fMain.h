@@ -10,7 +10,6 @@
 #include <Vcl.Menus.hpp>
 #include <Vcl.ActnList.hpp>
 #include <Vcl.ActnMan.hpp>
-#include <Vcl.PlatformDefaultStyleActnCtrls.hpp>
 //- STL ---------------------------------------------------------------------
 #include <memory>
 //- APP ---------------------------------------------------------------------
@@ -45,7 +44,7 @@ private:
     {
         fvNone,
         fvWelcomeDialog,
-        fvGameIDE,
+        fvGameIDE
     };
 
     TFormView                           m_FormView;
@@ -57,7 +56,7 @@ private:
     __property      TFrame*             Active  = { read = GetActiveForm };
 
 public:        // User declaration
-                        __fastcall TfrmMain(TComponent* Owner);
+                        __fastcall TfrmMain(TComponent* Owner) override;
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfrmMain *frmMain;

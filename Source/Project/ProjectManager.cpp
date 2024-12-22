@@ -22,13 +22,12 @@ __fastcall ProjectManager& ProjectManager::get()
 }
 //---------------------------------------------------------------------------
 __fastcall ProjectManager::ProjectManager()
-: m_TreeView(nullptr)
-, m_MostRecentUsedList(nullptr)
+: m_MostRecentUsedList(nullptr)
+, m_TreeView(nullptr)
 , m_IsOpen(false)
 {
-    m_Registrar.Subscribe<DocumentChange<String>>(OnDocumentChanged);
-    m_Registrar.Subscribe<DocumentAdded>(OnDocumentAdded);
-
+    m_Registrar.Subscribe<DocumentChange<String>>(_FnBind(ProjectManager::OnDocumentChanged));
+    m_Registrar.Subscribe<DocumentAdded>(_FnBind(ProjectManager::OnDocumentAdded));
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::Initialise(Elxtree::TElXTree* treeView)
@@ -102,11 +101,11 @@ void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* 
         else if (caption == "controls"     ) index = tiKeyboard;
         else if (caption == "jump table"   ) index = tiConfiguration;
     }
-    else
-    {
-        // debug, break point to catch new doc types.
-        int a = 0;
-    }
+//    else
+//    {
+//        // debug, break point to catch new doc types.
+//        int a = 0;
+//    }
     node->ImageIndex = index;
 }
 //---------------------------------------------------------------------------
@@ -211,7 +210,7 @@ void __fastcall ProjectManager::ClearTree(const String& rootName)
     m_TreeLeafNodes.clear();
     m_TreeView->Items->Clear();
     m_TreeView->Items->Delete(m_TreeView->Items->Item[0]);
-    m_TreeView->Items->Add(NULL, rootName);
+    m_TreeView->Items->Add(nullptr, rootName);
     auto rootNode = m_TreeView->Items->Item[0];
     std::map<String, TElXTreeItem*> childRootNodes;
     // get the list of document folders we support

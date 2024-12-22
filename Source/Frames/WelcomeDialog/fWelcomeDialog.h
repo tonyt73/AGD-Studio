@@ -83,8 +83,8 @@ private:    // Events
     TNotifyEvent            FOnDone;
 
 public:        // User declarations
-            __fastcall      TfrmWelcomeDialog(TComponent* Owner);
-            __fastcall     ~TfrmWelcomeDialog();
+            __fastcall      TfrmWelcomeDialog(TComponent* Owner) override;
+            __fastcall     ~TfrmWelcomeDialog() override;
 
     void    __fastcall      OnActivate(TWinControl* parent);
 

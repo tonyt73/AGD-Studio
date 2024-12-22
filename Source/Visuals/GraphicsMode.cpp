@@ -148,13 +148,13 @@ const __fastcall GraphicsMode::ExportInfo& __fastcall GraphicsMode::GetExportInf
     return m_ExportInfo[imageType];
 }
 //---------------------------------------------------------------------------
-bool __fastcall GraphicsMode::Load(const String& name)
+bool __fastcall GraphicsMode::LoadFile(const String& name)
 {
     m_LogicalColors.clear();
-    auto loaded = Services::JsonFile::Load(Services::File::Combine(Services::Folders::Application, "Graphics Modes" + Services::Folders::Separator + name + ".json"));
+    auto loaded = Services::JsonFile::LoadFile(Services::File::Combine(Services::Folders::Application, "Graphics Modes" + Services::Folders::Separator + name + ".json"));
     if (loaded) {
         m_BufferType = BufferTypeByName(m_BufferTypeName);
-        loaded = m_Palette->Load(m_PaletteName);
+        loaded = m_Palette->LoadFile(m_PaletteName);
         auto path = Services::File::Combine("Saved Palettes", Name);
         path = Services::Folders::Create(Services::Folders::lpCommon, path);
         SaveLogicalCLUT(path, "Default");
@@ -260,7 +260,7 @@ void __fastcall GraphicsMode::LoadLogicalCLUT(String path, String name)
             auto oldLogicalColors = m_LogicalColors;
             auto oldPaletteName = m_PaletteName;
             m_LogicalColors.clear();
-            JsonFile::Load(file);
+            JsonFile::LoadFile(file);
             if (oldPaletteName != m_PaletteName || oldLogicalCount != m_LogicalColors.size())
             {
                 // CLUT mismatch; can't use this CLUT for the palette.

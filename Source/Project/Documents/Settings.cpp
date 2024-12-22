@@ -41,7 +41,7 @@ __fastcall Settings::Settings()
     m_PropertyMap["CodeEditor.Font.Name"     ] = &m_CodeEditorFontName;
     m_PropertyMap["CodeEditor.Font.Height"   ] = &m_CodeEditorFontHeight;
 
-    Load(Services::File::Combine(Services::Folders::Common, "Settings.json"));
+    LoadFile(Services::File::Combine(Services::Folders::Common, "Settings.json"));
 }
 //---------------------------------------------------------------------------
 __fastcall Settings::~Settings()

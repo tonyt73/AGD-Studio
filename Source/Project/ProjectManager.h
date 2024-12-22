@@ -30,7 +30,7 @@ private:
                          tiWindow, tiKeyboard, tiText, tiFileAgd, tiFileFont
                        };
 
-    ::Messaging::Registrar          m_Registrar;
+    Registrar                       m_Registrar;
     std::map<String, TElXTreeItem*> m_TreeLeafNodes;
     Elxtree::TElXTree*              m_TreeView;
     bool                            m_IsOpen;

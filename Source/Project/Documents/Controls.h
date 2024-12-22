@@ -15,10 +15,10 @@ private:
         std::vector<unsigned char>  m_Keys;
             unsigned char           m_Key;
 
-            void        __fastcall  DoSave();
-            void        __fastcall  OnEndObject(const String& object);
-            void        __fastcall  OnLoading();
-            void        __fastcall  OnLoaded();
+            void        __fastcall  DoSave() override;
+            void        __fastcall  OnEndObject(const String& object) override;
+            void        __fastcall  OnLoading() override;
+            void        __fastcall  OnLoaded() override;
             String      __fastcall  Get(int index);
             bool        __fastcall  IsActive() const;
             void        __fastcall  DefaultKeys();
@@ -26,7 +26,7 @@ private:
 public:
                         __fastcall  ControlsDocument(const String& name);
 
-    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ControlsDocument(name); };
+    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ControlsDocument(name); }
 
         unsigned char   __fastcall  GetAsciiCode(eAgdKey key);
         void            __fastcall  SetAsciiCode(eAgdKey key, unsigned char keyCode);

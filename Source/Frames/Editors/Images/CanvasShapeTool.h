@@ -7,7 +7,7 @@
 class CanvasShapeTool : public CanvasTool
 {
 private:
-    virtual void    __fastcall  Apply(Visuals::GraphicsBuffer& canvas, const TPoint& pt);
+    virtual void    __fastcall  Apply(Visuals::GraphicsBuffer& canvas, const TPoint& pt) override;
 
             void    __fastcall  DrawRectangle(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill);
             void    __fastcall  DrawEllipse(Visuals::GraphicsBuffer& canvas, const TPoint& pt, bool set, int fill);
@@ -17,7 +17,6 @@ private:
 
 public:
                     __fastcall  CanvasShapeTool();
-    virtual         __fastcall ~CanvasShapeTool();
 };
 //---------------------------------------------------------------------------
 #endif

@@ -65,7 +65,7 @@ void __fastcall TSelectionPanelFrame::SetMachine(String machine)
     if (!imgLogo->Visible)
     {
         auto mc = std::make_unique<Project::MachineConfig>(machine);
-        mc->Load(machine);
+        mc->LoadFile(machine);
         if (mc->Image.Trim() != "")
         {
             auto file = Services::File::Combine(Services::Folders::Application, mc->Image);
@@ -149,8 +149,7 @@ void __fastcall TSelectionPanelFrame::imgRemoveClick(TObject *Sender)
 void __fastcall TSelectionPanelFrame::imgOpenProjectFolderClick(TObject *Sender)
 {
     auto folder = Services::File::Combine(Services::Folders::Projects, m_Name);
-    ShellExecute(NULL, L"open", NULL, NULL, folder.c_str(), SW_SHOWNORMAL);
-
+    ShellExecute(nullptr, L"open", nullptr, nullptr, folder.c_str(), SW_SHOWNORMAL);
 }
 //---------------------------------------------------------------------------
 
