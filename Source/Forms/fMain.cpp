@@ -7,6 +7,7 @@
 #include "Project/Documents/Settings.h"
 #include "Frames/WelcomeDialog/fWelcomeDialog.h"
 #include "Frames/IDE/fIDE.h"
+#include "Services/File.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -31,8 +32,7 @@ void __fastcall TfrmMain::FormCreate(TObject *Sender)
         } else {
             Caption = ApplicationName;
             ShowIDE();
-            if (theAppSettings.LoadLastProject && theAppSettings.LastProject.Trim() != "")
-            {
+            if (theAppSettings.LoadLastProject && theAppSettings.LastProject.Trim() != "") {
                 theProjectManager.Open(theAppSettings.LastProject);
             }
         }
@@ -85,6 +85,7 @@ TAppFrame* __fastcall TfrmMain::GetWelcome()
 {
     if (m_WelcomeFrame == nullptr) {
         m_WelcomeFrame = std::make_unique<TfrmWelcomeDialog>(this);
+        m_WelcomeFrame->OnCreate();
     }
     return m_WelcomeFrame.get();
 }
@@ -92,9 +93,8 @@ TAppFrame* __fastcall TfrmMain::GetWelcome()
 TAppFrame* __fastcall TfrmMain::GetIDE()
 {
     if (m_IDEFrame == nullptr) {
-        auto ide = std::make_unique<TfrmIDE>(this);
-        theProjectManager.Initialise(ide->tvProject);
-        m_IDEFrame = std::move(ide);
+        m_IDEFrame = std::make_unique<TfrmIDE>(this);
+        m_IDEFrame->OnCreate();
     }
     return m_IDEFrame.get();
 }
@@ -165,17 +165,13 @@ void __fastcall TfrmMain::ShowIDE()
 //---------------------------------------------------------------------------
 void __fastcall TfrmMain::SaveSettings()
 {
-    if (m_FormView == fvGameIDE)
-    {
+    if (m_FormView == fvGameIDE) {
         theAppSettings.WindowState = WindowState;
-        if (WindowState == wsNormal)
-        {
+        if (WindowState == wsNormal) {
             theAppSettings.WindowPosition = TPoint(Left, Top);
             theAppSettings.WindowSize     = TSize(Width, Height);
         }
-    }
-    else if (m_FormView == fvWelcomeDialog)
-    {
+    } else if (m_FormView == fvWelcomeDialog) {
         TPoint pt(Left, Top);
         theAppSettings.WelcomePosition = pt;
     }

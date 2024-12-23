@@ -153,7 +153,6 @@ inherited frmIDE: TfrmIDE
         FixedBottomRowNum = 0
         FixedColNum = 1
         GutterWidth = 0
-        ExplicitWidth = 408
       end
     end
     object dpEditorKeys: TLMDDockPanel
@@ -242,7 +241,6 @@ inherited frmIDE: TfrmIDE
         Padding.Right = 1
         Padding.Bottom = 1
         TabOrder = 0
-        ExplicitHeight = 258
         object tbrProject: TToolBar
           Left = 1
           Top = 1
@@ -397,7 +395,6 @@ inherited frmIDE: TfrmIDE
           FixedBottomRowNum = 0
           FixedColNum = 1
           GutterWidth = 0
-          ExplicitHeight = 230
         end
       end
     end
@@ -529,7 +526,6 @@ inherited frmIDE: TfrmIDE
     AutoSize = True
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 640
     object tbrMain: TToolBar
       Left = 0
       Top = 0
@@ -685,7 +681,6 @@ inherited frmIDE: TfrmIDE
       ButtonWidth = 40
       Images = vilToolbar
       TabOrder = 1
-      ExplicitLeft = 552
       object btnEditorHelp: TToolButton
         Left = 0
         Top = 0

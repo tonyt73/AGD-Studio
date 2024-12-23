@@ -249,6 +249,7 @@ public:                 // User declarations
 
     void    __fastcall  OnActivate(TWinControl* parent) final;
     void    __fastcall  OnClose() final;
+    void    __fastcall  OnCreate() final;
 };
 //---------------------------------------------------------------------------
 #endif

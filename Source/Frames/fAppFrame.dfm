@@ -1,4 +1,4 @@
-object frmAppFrame: TAppFrame
+object AppFrame: TAppFrame
   Left = 0
   Top = 0
   Width = 640

@@ -26,6 +26,7 @@ public:         // User declarations
 
     virtual void    __fastcall  OnActivate(TWinControl* parent);
     virtual void    __fastcall  OnClose();
+    virtual void    __fastcall  OnCreate();
 
     __property TNotifyEvent     OnDone      = { read = FOnDone     , write = FOnDone      };
     __property TNotifyEvent     OnFormClose = { read = FOnFormClose, write = FOnFormClose };

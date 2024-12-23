@@ -84,6 +84,11 @@ void __fastcall TfrmIDE::OnActivate(TWinControl* parent)
     }
 }
 //---------------------------------------------------------------------------
+void __fastcall TfrmIDE::OnCreate()
+{
+    theProjectManager.Initialise(tvProject);
+}
+//---------------------------------------------------------------------------
 void __fastcall TfrmIDE::OnMessageEvent(const MessageEvent& message)
 {
     if (message.Type < etHelpKeys) {
