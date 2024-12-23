@@ -1,9 +1,11 @@
 //---------------------------------------------------------------------------
 #include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
-#include "AppFrame.h"
+#include "fAppFrame.h"
+#include "LMDDckSite.hpp"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
+#pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 __fastcall TAppFrame::TAppFrame(TComponent* Owner)
 : TFrame(Owner)
@@ -12,6 +14,7 @@ __fastcall TAppFrame::TAppFrame(TComponent* Owner)
 //---------------------------------------------------------------------------
 __fastcall TAppFrame::~TAppFrame()
 {
+    m_Registrar.Unsubscribe();
 }
 //---------------------------------------------------------------------------
 void __fastcall TAppFrame::OnActivate(TWinControl* parent)

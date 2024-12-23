@@ -1,42 +1,40 @@
-object frmIDE: TfrmIDE
-  Left = 0
-  Top = 0
-  Width = 980
-  Height = 660
+inherited frmIDE: TfrmIDE
+  Width = 800
+  Height = 600
   Align = alClient
   AutoSize = True
   Constraints.MinHeight = 600
   Constraints.MinWidth = 800
-  Font.Charset = DEFAULT_CHARSET
-  Font.Color = clWindowText
-  Font.Height = -12
   Font.Name = 'Roboto'
   Font.Style = [fsBold]
   ParentFont = False
-  TabOrder = 0
+  ExplicitWidth = 800
+  ExplicitHeight = 600
   object dsIDE: TLMDDockSite
     Left = 0
     Top = 41
-    Width = 980
-    Height = 619
+    Width = 800
+    Height = 567
     Manager = DockManager
     OnChange = dsIDEChange
     Align = alClient
     Constraints.MinHeight = 567
     Constraints.MinWidth = 800
     TabOrder = 0
+    ExplicitWidth = 964
+    ExplicitHeight = 580
     Layout = {
       3C3F786D6C2076657273696F6E3D22312E30223F3E0D0A3C736974656C697374
       3E0D0A20203C73697465206470693D223936222069643D2253454C465F534954
       45223E0D0A202020203C7A6F6E65206B696E643D22484F525A223E0D0A202020
-      2020203C7A6F6E65206B696E643D2256455254222073697A653D223735342220
-      6473697A653D22302E373833373833373833373833373834223E0D0A20202020
-      202020203C7A6F6E65206B696E643D2250414E454C222073697A653D22333937
-      22206473697A653D22302E363630353635373233373933363737222069737370
+      2020203C7A6F6E65206B696E643D2256455254222073697A653D223537342220
+      6473697A653D22302E373334303135333435323638353432223E0D0A20202020
+      202020203C7A6F6E65206B696E643D2250414E454C222073697A653D22333435
+      22206473697A653D22302E363238343135333030353436343438222069737370
       6163653D2274727565222F3E0D0A20202020202020203C7A6F6E65206B696E64
-      3D22484F525A222073697A653D2232303422206473697A653D22302E33333934
-      3334323736323036333233223E0D0A202020202020202020203C7A6F6E65206B
-      696E643D225441425322206163746976657461623D2230222073697A653D2234
+      3D22484F525A222073697A653D2232303422206473697A653D22302E33373135
+      3834363939343533353532223E0D0A202020202020202020203C7A6F6E65206B
+      696E643D225441425322206163746976657461623D2230222073697A653D2233
       313722206473697A653D22302E353537343836363331303136303433223E0D0A
       2020202020202020202020203C7A6F6E65206B696E643D2250414E454C222069
       643D2264704D65737361676573222076697369626C653D2274727565222F3E0D
@@ -48,26 +46,26 @@ object frmIDE: TfrmIDE
       454C222069643D226470546F646F222076697369626C653D2274727565222F3E
       0D0A202020202020202020203C2F7A6F6E653E0D0A202020202020202020203C
       7A6F6E65206B696E643D2250414E454C222069643D226470456469746F724B65
-      7973222076697369626C653D2274727565222073697A653D2233333122206473
+      7973222076697369626C653D2274727565222073697A653D2232353122206473
       697A653D22302E343432353133333638393833393537222F3E0D0A2020202020
       2020203C2F7A6F6E653E0D0A2020202020203C2F7A6F6E653E0D0A2020202020
       203C7A6F6E65206B696E643D2250414E454C222069643D224C4D44446F636B50
       616E656C32222076697369626C653D2266616C7365222073697A653D22373534
       22206473697A653D2230222F3E0D0A2020202020203C7A6F6E65206B696E643D
-      2256455254222073697A653D2232303822206473697A653D22302E3231363231
-      36323136323136323136223E0D0A20202020202020203C7A6F6E65206B696E64
+      2256455254222073697A653D2232303822206473697A653D22302E3236353938
+      34363534373331343538223E0D0A20202020202020203C7A6F6E65206B696E64
       3D2250414E454C222069643D22647050726F6A656374222076697369626C653D
-      2274727565222073697A653D2232393822206473697A653D22302E3439353834
+      2274727565222073697A653D2232373222206473697A653D22302E3439353834
       30323636323232393632222F3E0D0A20202020202020203C7A6F6E65206B696E
       643D2250414E454C222069643D22647050726F70657274696573222076697369
-      626C653D2274727565222073697A653D2233303322206473697A653D22302E35
+      626C653D2274727565222073697A653D2232373722206473697A653D22302E35
       3034313539373333373737303338222F3E0D0A2020202020203C2F7A6F6E653E
       0D0A202020203C2F7A6F6E653E0D0A20203C2F736974653E0D0A3C2F73697465
       6C6973743E0D0A}
     object dpBuild: TLMDDockPanel
       Left = 6
-      Top = 409
-      Width = 417
+      Top = 357
+      Width = 317
       Height = 183
       Images = imgBuildNodes
       ImageIndex = 3
@@ -78,7 +76,7 @@ object frmIDE: TfrmIDE
       object tvBuild: TElXTree
         Left = 0
         Top = 21
-        Width = 417
+        Width = 317
         Height = 162
         Cursor = crArrow
         Hint = ''
@@ -155,12 +153,13 @@ object frmIDE: TfrmIDE
         FixedBottomRowNum = 0
         FixedColNum = 1
         GutterWidth = 0
+        ExplicitWidth = 408
       end
     end
     object dpEditorKeys: TLMDDockPanel
-      Left = 429
-      Top = 409
-      Width = 331
+      Left = 329
+      Top = 357
+      Width = 251
       Height = 204
       Images = imgProjectNodes
       ImageIndex = 24
@@ -171,7 +170,7 @@ object frmIDE: TfrmIDE
       object mbKeys: TMemo
         Left = 0
         Top = 21
-        Width = 331
+        Width = 251
         Height = 183
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
@@ -191,8 +190,8 @@ object frmIDE: TfrmIDE
     end
     object dpMessages: TLMDDockPanel
       Left = 6
-      Top = 409
-      Width = 417
+      Top = 357
+      Width = 317
       Height = 183
       Images = imgProjectNodes
       ImageIndex = 25
@@ -203,7 +202,7 @@ object frmIDE: TfrmIDE
       object memMessages: TMemo
         Left = 0
         Top = 21
-        Width = 417
+        Width = 317
         Height = 162
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
@@ -220,10 +219,10 @@ object frmIDE: TfrmIDE
       end
     end
     object dpProject: TLMDDockPanel
-      Left = 766
+      Left = 586
       Top = 6
       Width = 208
-      Height = 298
+      Height = 272
       Images = vilProject
       ImageIndex = 4
       Buttons = [pbPin, pbMaximize]
@@ -235,7 +234,7 @@ object frmIDE: TfrmIDE
         Left = 0
         Top = 21
         Width = 208
-        Height = 277
+        Height = 251
         Align = alClient
         BevelOuter = bvNone
         Padding.Left = 1
@@ -243,6 +242,7 @@ object frmIDE: TfrmIDE
         Padding.Right = 1
         Padding.Bottom = 1
         TabOrder = 0
+        ExplicitHeight = 258
         object tbrProject: TToolBar
           Left = 1
           Top = 1
@@ -325,7 +325,7 @@ object frmIDE: TfrmIDE
           Left = 1
           Top = 27
           Width = 206
-          Height = 249
+          Height = 223
           Hint = ''
           PlusPosition = vaMiddle
           BorderColorWindow = clWindow
@@ -397,14 +397,15 @@ object frmIDE: TfrmIDE
           FixedBottomRowNum = 0
           FixedColNum = 1
           GutterWidth = 0
+          ExplicitHeight = 230
         end
       end
     end
     object dpProperties: TLMDDockPanel
-      Left = 766
-      Top = 310
+      Left = 586
+      Top = 284
       Width = 208
-      Height = 303
+      Height = 277
       Images = imgBuildNodes
       ImageIndex = 9
       Buttons = [pbPin, pbMaximize]
@@ -414,7 +415,7 @@ object frmIDE: TfrmIDE
       Caption = 'PROPERTIES'
       object Splitter1: TSplitter
         Left = 0
-        Top = 260
+        Top = 234
         Width = 208
         Height = 3
         Cursor = crVSplit
@@ -429,7 +430,7 @@ object frmIDE: TfrmIDE
         Left = 0
         Top = 21
         Width = 208
-        Height = 239
+        Height = 213
         PropKinds = [pkProperties, pkReadOnly]
         SortType = stNone
         ArrangeKind = akByCategory
@@ -448,10 +449,11 @@ object frmIDE: TfrmIDE
         Constraints.MinWidth = 200
         TabOrder = 0
         OnClick = lmdPropertiesClick
+        ExplicitHeight = 219
       end
       object Panel2: TPanel
         Left = 0
-        Top = 263
+        Top = 237
         Width = 208
         Height = 40
         Align = alBottom
@@ -463,6 +465,7 @@ object frmIDE: TfrmIDE
         Padding.Bottom = 3
         ParentBackground = False
         TabOrder = 1
+        ExplicitTop = 243
         object lblPropertyInfo: TLabel
           Left = 3
           Top = 3
@@ -483,8 +486,8 @@ object frmIDE: TfrmIDE
     end
     object dpSearchResults: TLMDDockPanel
       Left = 6
-      Top = 409
-      Width = 417
+      Top = 357
+      Width = 317
       Height = 183
       Images = imgProjectNodes
       ImageIndex = 28
@@ -495,8 +498,8 @@ object frmIDE: TfrmIDE
     end
     object dpTodo: TLMDDockPanel
       Left = 6
-      Top = 409
-      Width = 417
+      Top = 357
+      Width = 317
       Height = 183
       Images = imgBuildNodes
       ImageIndex = 11
@@ -509,7 +512,7 @@ object frmIDE: TfrmIDE
       Left = 0
       Top = 0
       Width = 754
-      Height = 607
+      Height = 555
       PanelVisible = False
       Enabled = False
       ParentBackground = False
@@ -520,12 +523,13 @@ object frmIDE: TfrmIDE
   object panToolbar: TPanel
     Left = 0
     Top = 0
-    Width = 980
+    Width = 800
     Height = 41
     Align = alTop
     AutoSize = True
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitWidth = 640
     object tbrMain: TToolBar
       Left = 0
       Top = 0
@@ -671,7 +675,7 @@ object frmIDE: TfrmIDE
       end
     end
     object tbrSettings: TToolBar
-      Left = 892
+      Left = 712
       Top = 0
       Width = 88
       Height = 41
@@ -681,6 +685,7 @@ object frmIDE: TfrmIDE
       ButtonWidth = 40
       Images = vilToolbar
       TabOrder = 1
+      ExplicitLeft = 552
       object btnEditorHelp: TToolButton
         Left = 0
         Top = 0

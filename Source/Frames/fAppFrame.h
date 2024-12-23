@@ -1,18 +1,26 @@
 //---------------------------------------------------------------------------
-#ifndef AppFrameH
-#define AppFrameH
+#ifndef TAppFrameH
+#define TAppFrameH
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <Vcl.Controls.hpp>
+#include <Vcl.StdCtrls.hpp>
+#include <Vcl.Forms.hpp>
+#include "LMDDckSite.hpp"
 //---------------------------------------------------------------------------
 #include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 class TAppFrame : public TFrame
 {
+__published:    // IDE-managed Components
+private:        // User declarations
 protected:
     Registrar                   m_Registrar;
     TNotifyEvent                FOnDone;
     TNotifyEvent                FOnFormClose;
 
-public:
+public:         // User declarations
                     __fastcall  TAppFrame(TComponent* Owner) override;
                     __fastcall ~TAppFrame() override;
 

@@ -15,7 +15,7 @@
 class TfrmEditor : public TFrame
 {
 __published:    // IDE-managed Components
-    void __fastcall FrameEnter(TObject *Sender);
+    void            __fastcall FrameEnter(TObject *Sender);
 
 private:        // User declarations
     void            __fastcall  ShowKeysHelp();

@@ -26,16 +26,13 @@ __fastcall TfrmWelcomeDialog::TfrmWelcomeDialog(TComponent* Owner)
     Project::MachineConfig::GetMachinesList(machines);
     auto defaultMachine = theAppSettings.DefaultMachine.LowerCase().Trim();
     cmbMachines->ItemIndex = -1;
-    for (const auto& machine : machines)
-    {
+    for (const auto& machine : machines) {
         cmbMachines->Items->Add(machine);
-        if (machine.LowerCase().Trim() == defaultMachine)
-        {
+        if (machine.LowerCase().Trim() == defaultMachine) {
             cmbMachines->ItemIndex = cmbMachines->Items->Count - 1;
         }
     }
-    if (cmbMachines->ItemIndex == -1)
-    {
+    if (cmbMachines->ItemIndex == -1) {
         cmbMachines->ItemIndex = 0;
     }
     imgMachineCross->Hint = StringReplace(imgMachineCross->Hint, "\\r", char(13), TReplaceFlags() << rfReplaceAll);
@@ -48,8 +45,7 @@ __fastcall TfrmWelcomeDialog::~TfrmWelcomeDialog()
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::OnEvent(const Event& event)
 {
-    if (event.Id == "project.loading.tick" && m_LoadingPanel)
-    {
+    if (event.Id == "project.loading.tick" && m_LoadingPanel) {
         m_LoadingPanel->Tick();
     }
 }
@@ -88,8 +84,7 @@ void __fastcall TfrmWelcomeDialog::btnCreateClick(TObject *Sender)
     panButtons->Visible = true;
     panStartNew->Visible = false;
     auto button = dynamic_cast<TButton*>(Sender);
-    if (button && button->ModalResult == mrOk)
-    {
+    if (button && button->ModalResult == mrOk) {
         theProjectManager.New(edtName->Text, cmbMachines->Text);
         if (FOnDone) FOnDone(this);
         if (edtImportFile->Visible) {
@@ -102,12 +97,9 @@ void __fastcall TfrmWelcomeDialog::btnCreateClick(TObject *Sender)
 void __fastcall TfrmWelcomeDialog::lblOpenExistingProjectClick(TObject *Sender)
 {
     dlgOpenAGDS->InitialDir = Services::Folders::Projects;
-    if (dlgOpenAGDS->Execute())
-    {
+    if (dlgOpenAGDS->Execute()) {
         auto ext = Services::File::Extension(dlgOpenAGDS->FileName);
-
-        if (ext == ".agds")
-        {
+        if (ext == ".agds") {
             theProjectManager.Open(dlgOpenAGDS->FileName);
             if (FOnDone) FOnDone(this);
         }
@@ -166,11 +158,9 @@ void __fastcall TfrmWelcomeDialog::UpdateColors()
 void __fastcall TfrmWelcomeDialog::RefreshMRUList()
 {
     m_MostRecentlyUsedItems.clear();
-    for (const auto& item : theProjectManager.GetMostRecentlyUsedList())
-    {
+    for (const auto& item : theProjectManager.GetMostRecentlyUsedList()) {
         auto file = Services::File::Combine(Services::Folders::Documents, item.Path);
-        if (Services::File::Exists(file))
-        {
+        if (Services::File::Exists(file)) {
             NewMostRecentlyUsedItem(item.Name, item.Path, item.Machine);
         }
     }
@@ -203,16 +193,14 @@ void __fastcall TfrmWelcomeDialog::edtImportFileChange(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::edtNameKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
 {
-    if (Key == vkReturn && btnCreate->Enabled)
-    {
+    if (Key == vkReturn && btnCreate->Enabled) {
         btnCreateClick(btnCreate);
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmWelcomeDialog::OnActivate(TWinControl* parent)
 {
-    if (parent != nullptr)
-    {
+    if (parent != nullptr) {
         ThemeManager::LoadStyles(cmbThemes);
         Parent = parent;
         Visible = true;
@@ -220,9 +208,7 @@ void __fastcall TfrmWelcomeDialog::OnActivate(TWinControl* parent)
         RefreshMRUList();
         UpdateColors();
         m_Registrar.Subscribe<Event>(_FnBind(TfrmWelcomeDialog::OnEvent));
-    }
-    else
-    {
+    } else {
         Visible = false;
         Parent = nullptr;
         m_Registrar.Unsubscribe();
@@ -232,8 +218,7 @@ void __fastcall TfrmWelcomeDialog::OnActivate(TWinControl* parent)
 void __fastcall TfrmWelcomeDialog::btnImportFileClick(TObject *Sender)
 {
     dlgImportAGD->InitialDir = Services::Folders::Projects;
-    if (dlgImportAGD->Execute())
-    {
+    if (dlgImportAGD->Execute()) {
         auto name = Services::File::NameWithoutExtension(dlgImportAGD->FileName);
         edtName->Text = name;
         edtImportFile->Text = dlgImportAGD->FileName;
@@ -252,10 +237,8 @@ void __fastcall TfrmWelcomeDialog::UpdateUI(bool updateMachine)
     panStartNew->Visible = true;
     panButtons->Visible = false;
     if (updateMachine) {
-        for (int i = 0; i < cmbMachines->Items->Count; i++)
-        {
-            if (cmbMachines->Items->Strings[i] == theAppSettings.DefaultMachine)
-            {
+        for (int i = 0; i < cmbMachines->Items->Count; i++) {
+            if (cmbMachines->Items->Strings[i] == theAppSettings.DefaultMachine) {
                 cmbMachines->ItemIndex = i;
                 break;
             }

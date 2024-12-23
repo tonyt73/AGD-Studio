@@ -92,8 +92,9 @@ TAppFrame* __fastcall TfrmMain::GetWelcome()
 TAppFrame* __fastcall TfrmMain::GetIDE()
 {
     if (m_IDEFrame == nullptr) {
-        m_IDEFrame = std::make_unique<TfrmIDE>(this);
-        //theProjectManager.Initialise(m_IDEFrame->tvProject);
+        auto ide = std::make_unique<TfrmIDE>(this);
+        theProjectManager.Initialise(ide->tvProject);
+        m_IDEFrame = std::move(ide);
     }
     return m_IDEFrame.get();
 }

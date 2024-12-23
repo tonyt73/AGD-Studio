@@ -1,26 +1,24 @@
-object frmWelcomeDialog: TfrmWelcomeDialog
-  Left = 0
-  Top = 0
-  Width = 900
-  Height = 500
-  Constraints.MinHeight = 500
-  Constraints.MinWidth = 900
-  Font.Charset = DEFAULT_CHARSET
-  Font.Color = clWindowText
+inherited frmWelcomeDialog: TfrmWelcomeDialog
+  Width = 838
+  Height = 506
+  Constraints.MinHeight = 480
+  Constraints.MinWidth = 640
   Font.Height = -19
   Font.Name = 'Roboto'
-  Font.Style = []
   ParentFont = False
-  TabOrder = 0
+  ExplicitWidth = 838
+  ExplicitHeight = 506
   object panMain: TPanel
-    Left = 400
+    Left = 338
     Top = 0
     Width = 500
-    Height = 500
+    Height = 506
     Align = alRight
     BevelOuter = bvNone
     TabOrder = 0
     StyleElements = [seFont, seBorder]
+    ExplicitLeft = 140
+    ExplicitHeight = 480
     object imgLogo: TImage
       Left = 0
       Top = 0
@@ -6215,7 +6213,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       Left = 0
       Top = 250
       Width = 500
-      Height = 250
+      Height = 256
       Align = alClient
       Caption = 'panOptions'
       Font.Charset = DEFAULT_CHARSET
@@ -6226,9 +6224,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       ParentFont = False
       ShowCaption = False
       TabOrder = 0
+      ExplicitHeight = 230
       DesignSize = (
         500
-        250)
+        256)
       object lblStartNewProject: TLabel
         Left = 62
         Top = 18
@@ -6329,11 +6328,12 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         Left = 62
         Top = 76
         Width = 421
-        Height = 165
+        Height = 191
         Anchors = [akLeft, akTop, akRight, akBottom]
         BevelOuter = bvNone
         ParentColor = True
         TabOrder = 0
+        ExplicitHeight = 165
         object lblOpenExistingProject: TLabel
           Left = 0
           Top = 1
@@ -6436,7 +6436,7 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       end
       object panStartNew: TPanel
         Left = 62
-        Top = 73
+        Top = 79
         Width = 421
         Height = 163
         BevelOuter = bvNone
@@ -6794,14 +6794,16 @@ object frmWelcomeDialog: TfrmWelcomeDialog
   object panRecentProjects: TPanel
     Left = 0
     Top = 0
-    Width = 400
-    Height = 500
+    Width = 338
+    Height = 506
     Align = alClient
     BevelOuter = bvNone
     Color = clBtnShadow
     ParentBackground = False
     TabOrder = 1
     StyleElements = [seFont, seBorder]
+    ExplicitWidth = 140
+    ExplicitHeight = 480
   end
   object dlgOpenAGDS: TOpenTextFileDialog
     DefaultExt = 'agds'

@@ -1,4 +1,4 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{D0C2ACDB-659A-4891-B603-0D187CA01644}</ProjectGuid>
         <ProjectVersion>20.2</ProjectVersion>
@@ -7,7 +7,7 @@
         <MainSource>AGD Studio.cpp</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win64x</Platform>
+        <Platform Condition="'$(Platform)'==''">Win64</Platform>
         <TargetedPlatforms>1048579</TargetedPlatforms>
         <ProjectName Condition="'$(ProjectName)'==''">AGD Studio</ProjectName>
     </PropertyGroup>
@@ -98,7 +98,7 @@
         <Icon_MainIcon>$(BDS)\bin\cbuilder_PROJECTICON.ico</Icon_MainIcon>
         <ILINK_DisplayTime>true</ILINK_DisplayTime>
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\release\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
-        <ILINK_LibraryPath>Frames\Editors\;Frames\Editors\Map\;Frames\Editors\Images\;Frames\ImageEditor\;Frames\CodeEditor\;.\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <ILINK_LibraryPath>Frames\;Frames\Editors\;Frames\Editors\Map\;Frames\Editors\Images\;Frames\ImageEditor\;Frames\CodeEditor\;.\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <ILINK_LinkwithSQL>false</ILINK_LinkwithSQL>
         <ILINK_TSAware_lld>false</ILINK_TSAware_lld>
         <ILINK_LinkwithIndy>false</ILINK_LinkwithIndy>
@@ -108,7 +108,7 @@
         <ILINK_LinkwithRegEx>false</ILINK_LinkwithRegEx>
         <ILINK_LinkwithSQLite>false</ILINK_LinkwithSQLite>
         <ILINK_LinkwithZLib>false</ILINK_LinkwithZLib>
-        <IncludePath>Frames\Editors\;Frames\Editors\Map\;Frames\Editors\Images\;Frames\Editors\Code\;.\;$(IncludePath)</IncludePath>
+        <IncludePath>.\;Frames\;Frames\Editors\;Frames\Editors\Map\;Frames\Editors\Images\;Frames\Editors\Code\;$(IncludePath)</IncludePath>
         <IntermediateOutputDir>.\Binaries\$(Platform)\$(Config)</IntermediateOutputDir>
         <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;VclSmp.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtprint.bpi;lmdrtelpro.bpi;xmlrtl.bpi;bindengine.bpi;DbxCommonDriver.bpi;dbrtl.bpi;lmdrtshell.bpi</LinkPackageImports>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
@@ -200,8 +200,8 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64x)'!=''">
         <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;xmlrtl.bpi;lmdrtshell.bpi;DbxCommonDriver.bpi;dbrtl.bpi;bindengine.bpi;lmdrtprint.bpi</LinkPackageImports>
-        <VerInfo_Build>35</VerInfo_Build>
-        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.1.0.35;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.1.1.0;Comments=</VerInfo_Keys>
+        <VerInfo_Build>40</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.1.0.40;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.1.1.0;Comments=</VerInfo_Keys>
         <BCC_EnableLSPIndexingOnChange>false</BCC_EnableLSPIndexingOnChange>
         <BCC_AllWarnings>true</BCC_AllWarnings>
         <BCC_DisableWarnings>false</BCC_DisableWarnings>
@@ -378,10 +378,6 @@
             <FormType>dfm</FormType>
             <DependentOn>Forms\fSettings.h</DependentOn>
             <BuildOrder>28</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="Frames\AppFrame.cpp">
-            <DependentOn>Frames\AppFrame.h</DependentOn>
-            <BuildOrder>112</BuildOrder>
         </CppCompile>
         <CppCompile Include="Frames\Editors\Code\fEditorCode.cpp">
             <Form>frmEditorCode</Form>
@@ -582,6 +578,13 @@
             <DependentOn>Frames\Editors\Window\fEditorWindow.h</DependentOn>
             <BuildOrder>103</BuildOrder>
         </CppCompile>
+        <CppCompile Include="Frames\fAppFrame.cpp">
+            <Form>frmAppFrame</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\fAppFrame.h</DependentOn>
+            <BuildOrder>113</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Frames\IDE\fIDE.cpp">
             <Form>frmIDE</Form>
             <FormType>dfm</FormType>
@@ -774,35 +777,36 @@
             <DependentOn>Visuals\ULAPlusGraphicsBuffer.h</DependentOn>
             <BuildOrder>110</BuildOrder>
         </CppCompile>
-        <FormResources Include="Frames\Editors\Messages\fEditorMessages.dfm"/>
-        <FormResources Include="Frames\Editors\Music\fEditorMusic.dfm"/>
-        <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
-        <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
-        <FormResources Include="Frames\Editors\Window\fEditorWindow.dfm"/>
-        <FormResources Include="Frames\IDE\fIDE.dfm"/>
         <FormResources Include="Forms\fAbout.dfm"/>
         <FormResources Include="Forms\fAdvancedSettings.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fPaletteMonoAttribute.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fSelectionImage.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fToolbar.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fPaletteBitmap.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fEditorImage.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fMultiImageView.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fPaletteAttribute.dfm"/>
-        <FormResources Include="Frames\Editors\Map\fEditorMap.dfm"/>
-        <FormResources Include="Frames\Editors\Map\fLabelledImage.dfm"/>
-        <FormResources Include="Frames\Editors\Map\fAssetSelection.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fToolbarShape.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fULAplusBitmap.dfm"/>
-        <FormResources Include="Frames\Editors\JumpTable\fEditorJumpTable.dfm"/>
-        <FormResources Include="Frames\Editors\Controls\fEditorControls.dfm"/>
-        <FormResources Include="Frames\Editors\Controls\fKeyCapture.dfm"/>
-        <FormResources Include="Frames\Editors\Code\fEditorCode.dfm"/>
         <FormResources Include="Forms\fMain.dfm"/>
         <FormResources Include="Forms\fNewTileImage.dfm"/>
         <FormResources Include="Forms\fSettings.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fBlockTypes.dfm"/>
+        <FormResources Include="Frames\Editors\Code\fEditorCode.dfm"/>
+        <FormResources Include="Frames\Editors\Controls\fEditorControls.dfm"/>
+        <FormResources Include="Frames\Editors\Controls\fKeyCapture.dfm"/>
         <FormResources Include="Frames\Editors\fEditor.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fBlockTypes.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fEditorImage.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fMultiImageView.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fPaletteAttribute.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fPaletteBitmap.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fPaletteMonoAttribute.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fSelectionImage.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fToolbar.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fToolbarShape.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fULAplusBitmap.dfm"/>
+        <FormResources Include="Frames\Editors\JumpTable\fEditorJumpTable.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fAssetSelection.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fEditorMap.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fLabelledImage.dfm"/>
+        <FormResources Include="Frames\Editors\Messages\fEditorMessages.dfm"/>
+        <FormResources Include="Frames\Editors\Music\fEditorMusic.dfm"/>
+        <FormResources Include="Frames\Editors\Window\fEditorWindow.dfm"/>
+        <FormResources Include="Frames\fAppFrame.dfm"/>
+        <FormResources Include="Frames\IDE\fIDE.dfm"/>
+        <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
+        <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

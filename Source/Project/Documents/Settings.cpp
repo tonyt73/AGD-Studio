@@ -10,9 +10,13 @@
 //---------------------------------------------------------------------------
 using namespace Project;
 //---------------------------------------------------------------------------
+static Settings* instance = nullptr;
 Settings& __fastcall Settings::get()
 {
-    static Settings* instance = new Settings();
+    if (instance == nullptr) {
+        Services::Folders::Init();
+        instance = new Settings();
+    }
     return *instance;
 }
 //---------------------------------------------------------------------------

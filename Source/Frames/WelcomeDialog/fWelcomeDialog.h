@@ -10,7 +10,7 @@
 #include <Vcl.Imaging.pngimage.hpp>
 #include <Vcl.StdCtrls.hpp>
 //---------------------------------------------------------------------------
-#include "../AppFrame.h"
+#include "fAppFrame.h"
 #include "fSelectionPanel.h"
 //---------------------------------------------------------------------------
 class TfrmWelcomeDialog : public TAppFrame
