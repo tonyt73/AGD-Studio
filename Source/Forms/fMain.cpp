@@ -24,12 +24,14 @@ __fastcall TfrmMain::TfrmMain(TComponent* Owner)
 //---------------------------------------------------------------------------
 void __fastcall TfrmMain::FormCreate(TObject *Sender)
 {
-    // check command line parameters
+    // check command line parameters for a file
     if (!Services::File::Exists(ParamStr(1))) {
-        // create the welcome screen
+        // parameter as a file, doesn't exist so...
         if (!theAppSettings.WelcomeSkipOnStartup) {
+            // create the welcome screen
             ShowWelcomeDialog();
         } else {
+            // create the IDE to load the last project
             Caption = ApplicationName;
             ShowIDE();
             if (theAppSettings.LoadLastProject && theAppSettings.LastProject.Trim() != "") {
@@ -37,6 +39,7 @@ void __fastcall TfrmMain::FormCreate(TObject *Sender)
             }
         }
     } else {
+        // load the project file
         Caption = ApplicationName;
         ShowIDE();
         auto path = TDirectory::GetCurrentDirectory();

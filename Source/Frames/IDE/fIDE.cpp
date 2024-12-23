@@ -82,11 +82,11 @@ void __fastcall TfrmIDE::OnActivate(TWinControl* parent)
         Visible = false;
         Parent = nullptr;
     }
+    theProjectManager.Initialise(tvProject);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::OnCreate()
 {
-    theProjectManager.Initialise(tvProject);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::OnMessageEvent(const MessageEvent& message)
