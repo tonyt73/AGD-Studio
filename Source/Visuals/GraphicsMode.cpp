@@ -133,7 +133,7 @@ unsigned char __fastcall GraphicsMode::GetColorFromLogicalIndex(unsigned char in
     return 0;
 }
 //---------------------------------------------------------------------------
-const __fastcall GraphicsMode::ExportInfo& __fastcall GraphicsMode::GetExportInformation(ImageTypes imageType) const
+const GraphicsMode::ExportInfo& __fastcall GraphicsMode::GetExportInformation(ImageTypes imageType) const
 {
     return m_ExportInfo[imageType];
 }
