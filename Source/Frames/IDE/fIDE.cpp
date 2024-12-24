@@ -1,3 +1,4 @@
+#pragma link "fAppFrame"
 //---------------------------------------------------------------------------
 #include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
@@ -27,7 +28,7 @@
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 __fastcall TfrmIDE::TfrmIDE(TComponent* Owner)
-: TAppFrame(Owner)
+: TfrmAppFrame(Owner)
 {
     RegisterDocumentEditors();
     m_Registrar.Subscribe<MessageEvent>(_FnBind(TfrmIDE::OnMessageEvent));

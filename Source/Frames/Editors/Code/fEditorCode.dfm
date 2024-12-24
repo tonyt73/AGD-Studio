@@ -11,6 +11,10 @@ inherited frmEditorCode: TfrmEditorCode
     Top = 40
     Width = 978
     Height = 552
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Align = alClient
     BevelEdges = []
     BevelInner = bvNone
@@ -31,6 +35,31 @@ inherited frmEditorCode: TfrmEditorCode
     Gutter.BookmarksBarBg = clGrayText
     Gutter.LinesBarBg = clMaroon
     Gutter.FoldsBarBg = clGray
+    Gutter.Bars = <
+      item
+        Kind = gbBreakpointBar
+        Width = 18
+        LeftPadding = 3
+        RightPadding = 3
+      end
+      item
+        Kind = gbBookmarkBar
+        Width = 18
+        LeftPadding = 3
+        RightPadding = 3
+      end
+      item
+        Kind = gbLineNumberBar
+        Width = 18
+        LeftPadding = 3
+        RightPadding = 3
+      end
+      item
+        Kind = gbFoldBar
+        Width = 18
+        LeftPadding = 3
+        RightPadding = 3
+      end>
     CustomKeyBindings = <>
     CompletionSettings.ItemHeight = 13
     OnStatusChanged = evEditorStatusChanged
@@ -44,6 +73,10 @@ inherited frmEditorCode: TfrmEditorCode
     Top = 592
     Width = 978
     Height = 19
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
@@ -81,6 +114,10 @@ inherited frmEditorCode: TfrmEditorCode
     Top = 0
     Width = 978
     Height = 40
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     AutoSize = True
     ButtonHeight = 40
     ButtonWidth = 40
@@ -92,12 +129,20 @@ inherited frmEditorCode: TfrmEditorCode
     object tbrFormatCode: TToolButton
       Left = 0
       Top = 0
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Action = actGoToLine
     end
     object ToolButton1: TToolButton
       Left = 40
       Top = 0
       Width = 8
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Caption = 'ToolButton1'
       ImageIndex = 25
       ImageName = 'document_next'
@@ -106,6 +151,10 @@ inherited frmEditorCode: TfrmEditorCode
     object btnChangeFont: TToolButton
       Left = 48
       Top = 0
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Action = actFont
       ParentShowHint = False
       ShowHint = True
@@ -114,6 +163,10 @@ inherited frmEditorCode: TfrmEditorCode
       Left = 88
       Top = 0
       Width = 8
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Caption = 'ToolButton5'
       ImageIndex = 30
       Style = tbsSeparator

@@ -31,13 +31,14 @@
 #include "LMDInsPropInsp.hpp"
 #include "LMDInsPropPage.hpp"
 //---------------------------------------------------------------------------
-#include "fAppFrame.h"
+#include "../fAppFrame.h"
 #include "Build/BuildManager.h"
 #include "Factories/DocumentEditorFactory.h"
 #include "Frames/WndProcHandlers.h"
 #include "Project/Documents/Document.h"
+#include "fAppFrame.h"
 //---------------------------------------------------------------------------
-class TfrmIDE : public TAppFrame
+class TfrmIDE : public TfrmAppFrame
 {
 __published:    // IDE-managed Components
     TAction *actDeleteAsset;

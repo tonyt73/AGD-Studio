@@ -7,25 +7,25 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
-__fastcall TAppFrame::TAppFrame(TComponent* Owner)
+__fastcall TfrmAppFrame::TfrmAppFrame(TComponent* Owner)
 : TFrame(Owner)
 {
 }
 //---------------------------------------------------------------------------
-__fastcall TAppFrame::~TAppFrame()
+__fastcall TfrmAppFrame::~TfrmAppFrame()
 {
     m_Registrar.Unsubscribe();
 }
 //---------------------------------------------------------------------------
-void __fastcall TAppFrame::OnActivate(TWinControl* parent)
+void __fastcall TfrmAppFrame::OnActivate(TWinControl* parent)
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall TAppFrame::OnClose()
+void __fastcall TfrmAppFrame::OnClose()
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall TAppFrame::OnCreate()
+void __fastcall TfrmAppFrame::OnCreate()
 {
 }
 //---------------------------------------------------------------------------

@@ -28,6 +28,10 @@ object MultiImageViewFrame: TMultiImageViewFrame
     Top = 0
     Width = 185
     Height = 41
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     BevelOuter = bvNone
     DoubleBuffered = True
     ParentDoubleBuffered = False

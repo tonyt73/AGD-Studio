@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------------
-#ifndef TAppFrameH
-#define TAppFrameH
+#ifndef TfrmAppFrameH
+#define TfrmAppFrameH
 //---------------------------------------------------------------------------
 #include <System.Classes.hpp>
 #include <Vcl.Controls.hpp>
@@ -11,7 +11,7 @@
 #include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
-class TAppFrame : public TFrame
+class TfrmAppFrame : public TFrame
 {
 __published:    // IDE-managed Components
 private:        // User declarations
@@ -21,8 +21,8 @@ protected:
     TNotifyEvent                FOnFormClose;
 
 public:         // User declarations
-                    __fastcall  TAppFrame(TComponent* Owner) override;
-                    __fastcall ~TAppFrame() override;
+                    __fastcall  TfrmAppFrame(TComponent* Owner) override;
+                    __fastcall ~TfrmAppFrame() override;
 
     virtual void    __fastcall  OnActivate(TWinControl* parent);
     virtual void    __fastcall  OnClose();

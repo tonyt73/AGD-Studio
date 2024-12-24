@@ -12,10 +12,11 @@
 #include "Services/Folders.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
+#pragma link "fAppFrame"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 __fastcall TfrmWelcomeDialog::TfrmWelcomeDialog(TComponent* Owner)
-: TAppFrame(Owner)
+: TfrmAppFrame(Owner)
 , m_LoadingPanel(nullptr)
 {
     // load the themes

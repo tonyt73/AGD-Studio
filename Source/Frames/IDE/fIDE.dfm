@@ -5,6 +5,7 @@ inherited frmIDE: TfrmIDE
   AutoSize = True
   Constraints.MinHeight = 600
   Constraints.MinWidth = 800
+  Font.Height = -15
   Font.Name = 'Roboto'
   Font.Style = [fsBold]
   ParentFont = False
@@ -14,26 +15,28 @@ inherited frmIDE: TfrmIDE
     Left = 0
     Top = 41
     Width = 800
-    Height = 567
+    Height = 559
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Manager = DockManager
     OnChange = dsIDEChange
     Align = alClient
-    Constraints.MinHeight = 567
+    Constraints.MinHeight = 559
     Constraints.MinWidth = 800
     TabOrder = 0
-    ExplicitWidth = 964
-    ExplicitHeight = 580
     Layout = {
       3C3F786D6C2076657273696F6E3D22312E30223F3E0D0A3C736974656C697374
       3E0D0A20203C73697465206470693D223936222069643D2253454C465F534954
       45223E0D0A202020203C7A6F6E65206B696E643D22484F525A223E0D0A202020
       2020203C7A6F6E65206B696E643D2256455254222073697A653D223537342220
       6473697A653D22302E373334303135333435323638353432223E0D0A20202020
-      202020203C7A6F6E65206B696E643D2250414E454C222073697A653D22333435
-      22206473697A653D22302E363238343135333030353436343438222069737370
+      202020203C7A6F6E65206B696E643D2250414E454C222073697A653D22333337
+      22206473697A653D22302E363232393230353137353630303734222069737370
       6163653D2274727565222F3E0D0A20202020202020203C7A6F6E65206B696E64
-      3D22484F525A222073697A653D2232303422206473697A653D22302E33373135
-      3834363939343533353532223E0D0A202020202020202020203C7A6F6E65206B
+      3D22484F525A222073697A653D2232303422206473697A653D22302E33373730
+      3739343832343339393236223E0D0A202020202020202020203C7A6F6E65206B
       696E643D225441425322206163746976657461623D2230222073697A653D2233
       313722206473697A653D22302E353537343836363331303136303433223E0D0A
       2020202020202020202020203C7A6F6E65206B696E643D2250414E454C222069
@@ -55,18 +58,22 @@ inherited frmIDE: TfrmIDE
       2256455254222073697A653D2232303822206473697A653D22302E3236353938
       34363534373331343538223E0D0A20202020202020203C7A6F6E65206B696E64
       3D2250414E454C222069643D22647050726F6A656374222076697369626C653D
-      2274727565222073697A653D2232373222206473697A653D22302E3439353834
+      2274727565222073697A653D2232363822206473697A653D22302E3439353834
       30323636323232393632222F3E0D0A20202020202020203C7A6F6E65206B696E
       643D2250414E454C222069643D22647050726F70657274696573222076697369
-      626C653D2274727565222073697A653D2232373722206473697A653D22302E35
+      626C653D2274727565222073697A653D2232373322206473697A653D22302E35
       3034313539373333373737303338222F3E0D0A2020202020203C2F7A6F6E653E
       0D0A202020203C2F7A6F6E653E0D0A20203C2F736974653E0D0A3C2F73697465
       6C6973743E0D0A}
     object dpBuild: TLMDDockPanel
       Left = 6
-      Top = 357
+      Top = 349
       Width = 317
-      Height = 183
+      Height = 182
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Images = imgBuildNodes
       ImageIndex = 3
       ShowHeaderImage = hiShow
@@ -75,18 +82,22 @@ inherited frmIDE: TfrmIDE
       Caption = 'BUILD'
       object tvBuild: TElXTree
         Left = 0
-        Top = 21
+        Top = 23
         Width = 317
-        Height = 162
+        Height = 159
         Cursor = crArrow
         Hint = ''
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         PlusPosition = vaMiddle
         BorderColorWindow = clWindow
         UseThemeForSelection = True
         ActiveBorderType = fbtFlat
         Align = alClient
         AutoExpand = True
-        Style.FontSize = 9
+        Style.FontSize = 7
         Style.FontStyles = [fsBold]
         Style.FontName = 'Roboto'
         CustomPlusMinus = True
@@ -108,7 +119,7 @@ inherited frmIDE: TfrmIDE
         HeaderSections.Cells = {0000000001000000010000000000}
         HideFocusRect = True
         HideHintOnMove = False
-        HorzScrollBarStyles.Width = 17
+        HorzScrollBarStyles.Width = 21
         Images = imgBuildNodes
         ItemIndent = 18
         LineHeight = 18
@@ -146,20 +157,25 @@ inherited frmIDE: TfrmIDE
         HotTrack = False
         UnderlineTracked = False
         VertScrollBarStyles.ShowTrackHint = True
-        VertScrollBarStyles.Width = 17
+        VertScrollBarStyles.Width = 21
         UseSystemHintColors = True
         BackGroundColor = clBtnFace
         FixedTopRowNum = 0
         FixedBottomRowNum = 0
         FixedColNum = 1
         GutterWidth = 0
+        ExplicitHeight = 160
       end
     end
     object dpEditorKeys: TLMDDockPanel
       Left = 329
-      Top = 357
+      Top = 349
       Width = 251
       Height = 204
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Images = imgProjectNodes
       ImageIndex = 24
       ShowHeaderImage = hiShow
@@ -168,9 +184,13 @@ inherited frmIDE: TfrmIDE
       Caption = 'EDITOR KEYS'
       object mbKeys: TMemo
         Left = 0
-        Top = 21
+        Top = 23
         Width = 251
-        Height = 183
+        Height = 181
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -189,9 +209,13 @@ inherited frmIDE: TfrmIDE
     end
     object dpMessages: TLMDDockPanel
       Left = 6
-      Top = 357
+      Top = 349
       Width = 317
-      Height = 183
+      Height = 182
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Images = imgProjectNodes
       ImageIndex = 25
       ShowHeaderImage = hiShow
@@ -200,9 +224,13 @@ inherited frmIDE: TfrmIDE
       Caption = 'MESSAGES'
       object memMessages: TMemo
         Left = 0
-        Top = 21
+        Top = 23
         Width = 317
-        Height = 162
+        Height = 159
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -221,7 +249,11 @@ inherited frmIDE: TfrmIDE
       Left = 586
       Top = 6
       Width = 208
-      Height = 272
+      Height = 268
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Images = vilProject
       ImageIndex = 4
       Buttons = [pbPin, pbMaximize]
@@ -231,9 +263,13 @@ inherited frmIDE: TfrmIDE
       Caption = 'PROJECT'
       object Panel1: TPanel
         Left = 0
-        Top = 21
+        Top = 23
         Width = 208
-        Height = 251
+        Height = 245
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Align = alClient
         BevelOuter = bvNone
         Padding.Left = 1
@@ -246,6 +282,10 @@ inherited frmIDE: TfrmIDE
           Top = 1
           Width = 206
           Height = 26
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           AutoSize = True
           ButtonHeight = 24
           ButtonWidth = 24
@@ -258,6 +298,10 @@ inherited frmIDE: TfrmIDE
             Left = 0
             Top = 0
             Hint = 'Collapse All'
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
             Caption = 'tbnProjectCollapseAll'
             ImageIndex = 1
             ImageName = 'tv collapse'
@@ -269,6 +313,10 @@ inherited frmIDE: TfrmIDE
             Left = 24
             Top = 0
             Hint = 'Show Folders'
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
             ImageIndex = 4
             ImageName = 'tv showfolders'
             ParentShowHint = False
@@ -279,6 +327,10 @@ inherited frmIDE: TfrmIDE
             Left = 48
             Top = 0
             Hint = 'Expand All'
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
             ImageIndex = 0
             ImageName = 'tv expand'
             ParentShowHint = False
@@ -289,6 +341,10 @@ inherited frmIDE: TfrmIDE
             Left = 72
             Top = 0
             Width = 8
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
             Caption = 'tbnProjectZ1'
             ImageIndex = 2
             ImageName = 'tv showlines'
@@ -298,6 +354,10 @@ inherited frmIDE: TfrmIDE
             Left = 80
             Top = 0
             Hint = 'Show Lines'
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
             Grouped = True
             ImageIndex = 2
             ImageName = 'tv showlines'
@@ -310,6 +370,10 @@ inherited frmIDE: TfrmIDE
             Left = 104
             Top = 0
             Hint = 'Hide Lines'
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
             Grouped = True
             ImageIndex = 3
             ImageName = 'tv hidelines'
@@ -323,15 +387,19 @@ inherited frmIDE: TfrmIDE
           Left = 1
           Top = 27
           Width = 206
-          Height = 223
+          Height = 217
           Hint = ''
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           PlusPosition = vaMiddle
           BorderColorWindow = clWindow
           ActiveBorderType = fbtNone
           Align = alClient
           Style.ParentColors = False
           Style.TextColor = 3355443
-          Style.FontSize = 9
+          Style.FontSize = 7
           Style.FontStyles = []
           Style.FontName = 'Roboto'
           CustomPlusMinus = True
@@ -351,7 +419,7 @@ inherited frmIDE: TfrmIDE
             0000000000000000000000000000000000000000020000000000020000000000
             0000000000000000}
           HeaderSections.Cells = {0000000001000000010000000000}
-          HorzScrollBarStyles.Width = 17
+          HorzScrollBarStyles.Width = 21
           HorzScrollBarStyles.ThemeGlobalMode = True
           Images = imgProjectNodes
           ItemIndent = 18
@@ -384,7 +452,7 @@ inherited frmIDE: TfrmIDE
           TabStop = True
           UseCustomScrollBars = False
           VertScrollBarStyles.ShowTrackHint = True
-          VertScrollBarStyles.Width = 17
+          VertScrollBarStyles.Width = 21
           VertScrollBarStyles.ThemeGlobalMode = True
           ParentThemeMode = False
           ThemeGlobalMode = True
@@ -400,9 +468,13 @@ inherited frmIDE: TfrmIDE
     end
     object dpProperties: TLMDDockPanel
       Left = 586
-      Top = 284
+      Top = 280
       Width = 208
-      Height = 277
+      Height = 273
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Images = imgBuildNodes
       ImageIndex = 9
       Buttons = [pbPin, pbMaximize]
@@ -412,10 +484,14 @@ inherited frmIDE: TfrmIDE
       Caption = 'PROPERTIES'
       object Splitter1: TSplitter
         Left = 0
-        Top = 234
+        Top = 230
         Width = 208
         Height = 3
         Cursor = crVSplit
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Align = alBottom
         AutoSnap = False
         MinSize = 40
@@ -425,9 +501,13 @@ inherited frmIDE: TfrmIDE
       end
       object lmdProperties: TLMDSimplePropInspector
         Left = 0
-        Top = 21
+        Top = 23
         Width = 208
-        Height = 213
+        Height = 207
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         PropKinds = [pkProperties, pkReadOnly]
         SortType = stNone
         ArrangeKind = akByCategory
@@ -446,13 +526,16 @@ inherited frmIDE: TfrmIDE
         Constraints.MinWidth = 200
         TabOrder = 0
         OnClick = lmdPropertiesClick
-        ExplicitHeight = 219
       end
       object Panel2: TPanel
         Left = 0
-        Top = 237
+        Top = 233
         Width = 208
         Height = 40
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Align = alBottom
         BevelOuter = bvNone
         Constraints.MinHeight = 40
@@ -462,12 +545,15 @@ inherited frmIDE: TfrmIDE
         Padding.Bottom = 3
         ParentBackground = False
         TabOrder = 1
-        ExplicitTop = 243
         object lblPropertyInfo: TLabel
           Left = 3
           Top = 3
-          Width = 112
-          Height = 14
+          Width = 202
+          Height = 34
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Align = alClient
           Caption = 'Property information'
           Font.Charset = DEFAULT_CHARSET
@@ -478,14 +564,20 @@ inherited frmIDE: TfrmIDE
           ParentFont = False
           Transparent = True
           WordWrap = True
+          ExplicitWidth = 112
+          ExplicitHeight = 14
         end
       end
     end
     object dpSearchResults: TLMDDockPanel
       Left = 6
-      Top = 357
+      Top = 349
       Width = 317
-      Height = 183
+      Height = 182
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Images = imgProjectNodes
       ImageIndex = 28
       ShowHeaderImage = hiShow
@@ -495,9 +587,13 @@ inherited frmIDE: TfrmIDE
     end
     object dpTodo: TLMDDockPanel
       Left = 6
-      Top = 357
+      Top = 349
       Width = 317
-      Height = 183
+      Height = 182
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Images = imgBuildNodes
       ImageIndex = 11
       ShowHeaderImage = hiShow
@@ -509,7 +605,11 @@ inherited frmIDE: TfrmIDE
       Left = 0
       Top = 0
       Width = 754
-      Height = 555
+      Height = 547
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       PanelVisible = False
       Enabled = False
       ParentBackground = False
@@ -522,6 +622,10 @@ inherited frmIDE: TfrmIDE
     Top = 0
     Width = 800
     Height = 41
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Align = alTop
     AutoSize = True
     BevelOuter = bvNone
@@ -531,6 +635,10 @@ inherited frmIDE: TfrmIDE
       Top = 0
       Width = 552
       Height = 41
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Align = alLeft
       AutoSize = True
       ButtonHeight = 40
@@ -546,6 +654,10 @@ inherited frmIDE: TfrmIDE
       object ToolButton3: TToolButton
         Left = 0
         Top = 0
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Action = actFileNewSprite
         ParentShowHint = False
         ShowHint = True
@@ -553,6 +665,10 @@ inherited frmIDE: TfrmIDE
       object ToolButton7: TToolButton
         Left = 40
         Top = 0
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Action = actFileNewObject
         ParentShowHint = False
         ShowHint = True
@@ -560,6 +676,10 @@ inherited frmIDE: TfrmIDE
       object btnFileNewImage: TToolButton
         Left = 80
         Top = 0
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Action = actFileNewTile
         ParentShowHint = False
         ShowHint = True
@@ -567,6 +687,10 @@ inherited frmIDE: TfrmIDE
       object btnFileNewTileCustom: TToolButton
         Left = 120
         Top = 0
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Action = actFileNewTileCustom
         ParentShowHint = False
         ShowHint = True
@@ -575,6 +699,10 @@ inherited frmIDE: TfrmIDE
         Left = 160
         Top = 0
         Width = 8
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Caption = 'ToolButton1'
         ImageIndex = 7
         ImageName = 'paste_plain'
@@ -583,6 +711,10 @@ inherited frmIDE: TfrmIDE
       object ToolButton4: TToolButton
         Left = 168
         Top = 0
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Action = actEditUndo
         ParentShowHint = False
         ShowHint = True
@@ -590,6 +722,10 @@ inherited frmIDE: TfrmIDE
       object ToolButton5: TToolButton
         Left = 208
         Top = 0
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Action = actEditRedo
         ParentShowHint = False
         ShowHint = True
@@ -598,6 +734,10 @@ inherited frmIDE: TfrmIDE
         Left = 248
         Top = 0
         Width = 8
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Caption = 'ToolButton6'
         ImageIndex = 1
         ImageName = 'folder'
@@ -606,6 +746,10 @@ inherited frmIDE: TfrmIDE
       object btnEditCopy: TToolButton
         Left = 256
         Top = 0
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Action = actEditCopy
         ParentShowHint = False
         ShowHint = True
@@ -613,6 +757,10 @@ inherited frmIDE: TfrmIDE
       object btnEditCut: TToolButton
         Left = 296
         Top = 0
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Action = actEditCut
         ParentShowHint = False
         ShowHint = True
@@ -620,6 +768,10 @@ inherited frmIDE: TfrmIDE
       object btnEditPaste: TToolButton
         Left = 336
         Top = 0
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Action = actEditPaste
         ParentShowHint = False
         ShowHint = True
@@ -628,6 +780,10 @@ inherited frmIDE: TfrmIDE
         Left = 376
         Top = 0
         Width = 8
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Caption = 'ToolButton11'
         ImageIndex = 9
         ImageName = 'find'
@@ -636,6 +792,10 @@ inherited frmIDE: TfrmIDE
       object ToolButton10: TToolButton
         Left = 384
         Top = 0
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Action = actEditZoomIn
         ParentShowHint = False
         ShowHint = True
@@ -643,6 +803,10 @@ inherited frmIDE: TfrmIDE
       object ToolButton12: TToolButton
         Left = 424
         Top = 0
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Action = actEditZoomOut
         ParentShowHint = False
         ShowHint = True
@@ -650,6 +814,10 @@ inherited frmIDE: TfrmIDE
       object ToolButton13: TToolButton
         Left = 464
         Top = 0
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Action = actEditZoomReset
         ParentShowHint = False
         ShowHint = True
@@ -658,6 +826,10 @@ inherited frmIDE: TfrmIDE
         Left = 504
         Top = 0
         Width = 8
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Caption = 'ToolButton2'
         ImageName = 'resize_picture'
         Style = tbsSeparator
@@ -665,6 +837,10 @@ inherited frmIDE: TfrmIDE
       object btnBuildRun: TToolButton
         Left = 512
         Top = 0
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Action = actGameRun
         ParentShowHint = False
         ShowHint = True
@@ -675,15 +851,24 @@ inherited frmIDE: TfrmIDE
       Top = 0
       Width = 88
       Height = 41
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Align = alRight
       AutoSize = True
       ButtonHeight = 40
       ButtonWidth = 40
       Images = vilToolbar
       TabOrder = 1
+      ExplicitLeft = 692
       object btnEditorHelp: TToolButton
         Left = 0
         Top = 0
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Action = actEditorHelp
         ParentShowHint = False
         ShowHint = True
@@ -693,6 +878,10 @@ inherited frmIDE: TfrmIDE
         Left = 40
         Top = 0
         Width = 8
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Caption = 'ToolButton14'
         ImageIndex = 6
         ImageName = 'cut'
@@ -703,6 +892,10 @@ inherited frmIDE: TfrmIDE
         Left = 48
         Top = 0
         Hint = 'Application Settings'
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Action = actSettings
         ParentShowHint = False
         ShowHint = True

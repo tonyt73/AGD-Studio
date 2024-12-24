@@ -10,10 +10,11 @@
 #include <Vcl.Imaging.pngimage.hpp>
 #include <Vcl.StdCtrls.hpp>
 //---------------------------------------------------------------------------
-#include "fAppFrame.h"
+#include "../fAppFrame.h"
 #include "fSelectionPanel.h"
+#include "fAppFrame.h"
 //---------------------------------------------------------------------------
-class TfrmWelcomeDialog : public TAppFrame
+class TfrmWelcomeDialog : public TfrmAppFrame
 {
 __published:    // IDE-managed Components
     TButton *btnCancel;

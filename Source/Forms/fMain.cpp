@@ -84,7 +84,7 @@ void __fastcall TfrmMain::FormDestroy(TObject *Sender)
     m_WelcomeFrame = nullptr;
 }
 //---------------------------------------------------------------------------
-TAppFrame* __fastcall TfrmMain::GetWelcome()
+TfrmAppFrame* __fastcall TfrmMain::GetWelcome()
 {
     if (m_WelcomeFrame == nullptr) {
         m_WelcomeFrame = std::make_unique<TfrmWelcomeDialog>(this);
@@ -93,7 +93,7 @@ TAppFrame* __fastcall TfrmMain::GetWelcome()
     return m_WelcomeFrame.get();
 }
 //---------------------------------------------------------------------------
-TAppFrame* __fastcall TfrmMain::GetIDE()
+TfrmAppFrame* __fastcall TfrmMain::GetIDE()
 {
     if (m_IDEFrame == nullptr) {
         m_IDEFrame = std::make_unique<TfrmIDE>(this);
@@ -102,7 +102,7 @@ TAppFrame* __fastcall TfrmMain::GetIDE()
     return m_IDEFrame.get();
 }
 //---------------------------------------------------------------------------
-TAppFrame* __fastcall TfrmMain::GetActiveForm()
+TfrmAppFrame* __fastcall TfrmMain::GetActiveForm()
 {
     return m_FormView == fvGameIDE ? GetIDE() : GetWelcome();
 }
