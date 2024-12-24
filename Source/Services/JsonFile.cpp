@@ -3,6 +3,7 @@
 //---------------------------------------------------------------------------
 #include "JsonFile.h"
 #include "File.h"
+#include "Messaging/Event.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma clang diagnostic ignored "-Wswitch"
@@ -196,20 +197,14 @@ String __fastcall JsonFile::ProcessPath(const String& path) const
 {
     String newPath = "";
     auto skip = false;
-    for (auto i = 1; i <= path.Length(); i++)
-    {
-        if (path[i] == '[')
-        {
+    for (auto i = 1; i <= path.Length(); i++) {
+        if (path[i] == '[') {
             skip = true;
             newPath += path[i];
-        }
-        else if (skip && path[i] == ']')
-        {
+        } else if (skip && path[i] == ']') {
             skip = false;
             newPath += path[i];
-        }
-        else if (!skip)
-        {
+        } else if (!skip) {
             newPath += path[i];
         }
     }
@@ -218,18 +213,16 @@ String __fastcall JsonFile::ProcessPath(const String& path) const
 //---------------------------------------------------------------------------
 bool __fastcall JsonFile::LoadFile(const String& file)
 {
-    if (File::File::Exists(file))
-    {
+    if (File::File::Exists(file)) {
         OnLoading();
-        try
-        {
+        String path;
+        try {
             auto json = File::File::ReadText(file);
             auto sr = std::make_unique<TStringReader>(json);
             auto jr = std::make_unique<TJsonTextReader>(sr.get());
             auto inArray = false;
-            while (jr->Read())
-            {
-                auto path = ProcessPath(jr->Path);
+            while (jr->Read()) {
+                path = ProcessPath(jr->Path);
                 switch (jr->TokenType)
                 {
                     case TJsonToken::StartObject:
@@ -269,13 +262,9 @@ bool __fastcall JsonFile::LoadFile(const String& file)
             }
             OnLoaded();
             return true;
-        }
-        catch (...)
-        {
-            //int a = 0;
+        } catch (...) {
             // Error loading the JSON file
-            // jr->path
-            // auto path = ProcessPath(jr->Path);
+            ErrorMessage("Error loading JSON file: " + file + ", at path: " + path);
         }
     }
     return false;
