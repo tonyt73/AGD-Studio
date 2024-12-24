@@ -4,14 +4,14 @@
 // Ignore Compiler Warnings
 // Annoyances
 #pragma clang diagnostic ignored "-Wpadded"
-#pragma clang diagnostic ignored "-Wswitch-enum"
+//#pragma clang diagnostic ignored "-Wswitch-enum"
 #pragma clang diagnostic ignored "-Wsign-compare"
 #pragma clang diagnostic ignored "-Wsign-conversion"
-#pragma clang diagnostic ignored "-Wunused-parameter"
-#pragma clang diagnostic ignored "-Wignored-attributes"
-#pragma clang diagnostic ignored "-Wglobal-constructors"
-#pragma clang diagnostic ignored "-Wexit-time-destructors"
-#pragma clang diagnostic ignored "-Wshadow-field-in-constructor"
+//#pragma clang diagnostic ignored "-Wunused-parameter"
+//#pragma clang diagnostic ignored "-Wignored-attributes"
+//#pragma clang diagnostic ignored "-Wglobal-constructors"
+//#pragma clang diagnostic ignored "-Wexit-time-destructors"
+//#pragma clang diagnostic ignored "-Wshadow-field-in-constructor"
 #pragma clang diagnostic ignored "-Wnonportable-system-include-path"
 // VCL language extensions
 #pragma clang diagnostic ignored "-Wlanguage-extension-token"   // __property
@@ -59,7 +59,7 @@
 //---------------------------------------------------------------------------
 #pragma hdrstop
 
-const String ApplicationName = "AGD Studio";
+[[clang::no_destroy]] const String ApplicationName = "AGD Studio";
 
 #endif // pch_h
 

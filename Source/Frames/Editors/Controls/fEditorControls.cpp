@@ -65,7 +65,7 @@ void __fastcall TfrmEditorControls::OnKeyChanged(TObject* Sender)
     else if (Sender == kcOption4) doc->SetAsciiCode(Project::keyOption4, kcOption4->KeyCode);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorControls::OnThemeChangedEvent(const ThemeChangedEvent& event)
+void __fastcall TfrmEditorControls::OnThemeChangedEvent(const ThemeChangedEvent& /*event*/)
 {
     UpdateColors();
 }
@@ -73,11 +73,11 @@ void __fastcall TfrmEditorControls::OnThemeChangedEvent(const ThemeChangedEvent&
 void __fastcall TfrmEditorControls::UpdateColors()
 {
     Line1->Brush->Color = ThemeManager::Highlight;
-    Line1->Pen->Color = ThemeManager::Highlight;
+    Line1->Pen->Color   = ThemeManager::Highlight;
     Line2->Brush->Color = ThemeManager::Highlight;
-    Line2->Pen->Color = ThemeManager::Highlight;
+    Line2->Pen->Color   = ThemeManager::Highlight;
     Line3->Brush->Color = ThemeManager::Highlight;
-    Line3->Pen->Color = ThemeManager::Highlight;
+    Line3->Pen->Color   = ThemeManager::Highlight;
 }
 //---------------------------------------------------------------------------
 

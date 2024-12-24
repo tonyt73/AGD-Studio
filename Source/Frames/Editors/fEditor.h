@@ -15,7 +15,7 @@
 class TfrmEditor : public TFrame
 {
 __published:    // IDE-managed Components
-    void            __fastcall FrameEnter(TObject *Sender);
+    void            __fastcall  FrameEnter(TObject *Sender);
 
 private:        // User declarations
     void            __fastcall  ShowKeysHelp();
@@ -34,8 +34,7 @@ public:         // User declarations
                     __fastcall ~TfrmEditor() override;
 
     template <class T>
-    static  TFrame* __fastcall  Create(Project::Document* document, TComponent* owner)
-                                {
+    static  TFrame* __fastcall  Create(Project::Document* document, TComponent* owner) {
                                     auto editor = new T(owner);
                                     editor->SetDocument(document);
                                     document->DockPanel = dynamic_cast<TLMDDockPanel*>(owner);

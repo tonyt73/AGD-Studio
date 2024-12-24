@@ -79,13 +79,13 @@ void __fastcall __fastcall TfrmAssetSelection::OnOpenDocument(TObject* Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAssetSelection::sbxListMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled)
+void __fastcall TfrmAssetSelection::sbxListMouseWheel(TObject* /*Sender*/, TShiftState /*Shift*/, int WheelDelta, TPoint &/*MousePos*/, bool &Handled)
 {
     Handled = true;
     sbxList->VertScrollBar->Position -= WheelDelta;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAssetSelection::sbxListResize(TObject *Sender)
+void __fastcall TfrmAssetSelection::sbxListResize(TObject* /*Sender*/)
 {
     auto my = 0;
     for (auto c = 0; c < panList->ControlCount; c++) {
@@ -94,7 +94,7 @@ void __fastcall TfrmAssetSelection::sbxListResize(TObject *Sender)
     panList->Height = std::max(my, sbxList->Height);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAssetSelection::mnuToggleLabelsClick(TObject *Sender)
+void __fastcall TfrmAssetSelection::mnuToggleLabelsClick(TObject* /*Sender*/)
 {
     for (auto c = 0; c < panList->ControlCount; c++) {
         auto label = dynamic_cast<TfrmLabelledImage*>(panList->Controls[c]);

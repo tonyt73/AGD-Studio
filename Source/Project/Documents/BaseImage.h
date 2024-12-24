@@ -59,7 +59,7 @@ protected:
 
 public:
                         __fastcall  ImageDocument(const String& name);
-    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ImageDocument(name); }
+    static  Document*   __fastcall  Create(const String& name, const String&) { return new ImageDocument(name); }
             Document*   __fastcall  Copy(const Document* document) override;
 
 

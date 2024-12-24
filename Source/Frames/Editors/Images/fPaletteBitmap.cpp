@@ -181,7 +181,7 @@ void __fastcall TfrmPaletteBitmap::Set(Visuals::GraphicsBuffer& canvas)
     canvas.Color[1] = m_Brush;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmPaletteBitmap::imgLogicalColorsMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
+void __fastcall TfrmPaletteBitmap::imgLogicalColorsMouseDown(TObject* /*Sender*/, TMouseButton Button, TShiftState /*Shift*/, int /*X*/, int /*Y*/)
 {
     if (m_CursorLogical != -1) {
         if (Button == mbLeft) {
@@ -193,7 +193,7 @@ void __fastcall TfrmPaletteBitmap::imgLogicalColorsMouseDown(TObject *Sender, TM
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmPaletteBitmap::imgLogicalColorsMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
+void __fastcall TfrmPaletteBitmap::imgLogicalColorsMouseMove(TObject* /*Sender*/, TShiftState /*Shift*/, int X, int Y)
 {
     auto llc = m_CursorLogical;
     // change colour selection
@@ -211,13 +211,13 @@ void __fastcall TfrmPaletteBitmap::imgLogicalColorsMouseMove(TObject *Sender, TS
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmPaletteBitmap::imgLogicalColorsMouseLeave(TObject *Sender)
+void __fastcall TfrmPaletteBitmap::imgLogicalColorsMouseLeave(TObject* /*Sender*/)
 {
     m_CursorLogical = -1;
     DrawLogicalColors();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmPaletteBitmap::imgSystemColorsMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
+void __fastcall TfrmPaletteBitmap::imgSystemColorsMouseDown(TObject* /*Sender*/, TMouseButton Button, TShiftState /*Shift*/, int /*X*/, int /*Y*/)
 {
     // remap a logical colour to a new physical colour
     if (Button == mbLeft) {
@@ -228,7 +228,7 @@ void __fastcall TfrmPaletteBitmap::imgSystemColorsMouseDown(TObject *Sender, TMo
     Update();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmPaletteBitmap::imgSystemColorsMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
+void __fastcall TfrmPaletteBitmap::imgSystemColorsMouseMove(TObject* /*Sender*/, TShiftState /*Shift*/, int X, int Y)
 {
     auto lpc = m_CursorPhysical;
     // change colour selection
@@ -246,13 +246,13 @@ void __fastcall TfrmPaletteBitmap::imgSystemColorsMouseMove(TObject *Sender, TSh
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmPaletteBitmap::imgSystemColorsMouseLeave(TObject *Sender)
+void __fastcall TfrmPaletteBitmap::imgSystemColorsMouseLeave(TObject* /*Sender*/)
 {
     m_CursorPhysical = -1;
     DrawPhysicalColors();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmPaletteBitmap::btnSwapClick(TObject *Sender)
+void __fastcall TfrmPaletteBitmap::btnSwapClick(TObject* /*Sender*/)
 {
     auto op = m_Pen;
     m_Pen = m_Brush;
@@ -260,7 +260,7 @@ void __fastcall TfrmPaletteBitmap::btnSwapClick(TObject *Sender)
     Update();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmPaletteBitmap::btnPaletteLoadClick(TObject *Sender)
+void __fastcall TfrmPaletteBitmap::btnPaletteLoadClick(TObject* /*Sender*/)
 {
     auto path = Services::File::Combine("Saved Palettes", m_GraphicsMode.Name);
     path = Services::Folders::Create(Services::Folders::lpCommon, path);
@@ -271,7 +271,7 @@ void __fastcall TfrmPaletteBitmap::btnPaletteLoadClick(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmPaletteBitmap::btnPaletteSaveClick(TObject *Sender)
+void __fastcall TfrmPaletteBitmap::btnPaletteSaveClick(TObject* /*Sender*/)
 {
     auto path = Services::File::Combine("Saved Palettes", m_GraphicsMode.Name);
     path = Services::Folders::Create(Services::Folders::lpCommon, path);
@@ -281,7 +281,7 @@ void __fastcall TfrmPaletteBitmap::btnPaletteSaveClick(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmPaletteBitmap::btnPaletteRestoreClick(TObject *Sender)
+void __fastcall TfrmPaletteBitmap::btnPaletteRestoreClick(TObject* /*Sender*/)
 {
     m_GraphicsMode.RestoreDefaultPalette();
     Update();

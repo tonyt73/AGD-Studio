@@ -23,7 +23,7 @@ __fastcall TfrmEditorJumpTable::TfrmEditorJumpTable(TComponent* Owner)
     m_View->Height = 192;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorJumpTable::FrameResize(TObject *Sender)
+void __fastcall TfrmEditorJumpTable::FrameResize(TObject* /*Sender*/)
 {
     Color = ThemeManager::Background;
     auto s = 2;
@@ -62,22 +62,19 @@ void __fastcall TfrmEditorJumpTable::DrawView()
         m_View->Canvas->Brush->Color = ThemeManager::Highlight;
         for (unsigned char i = -1; i < doc->Count; i++) {
             y += doc->GetStep(i);
-
             if (i == m_ActiveStep) {
                 m_View->Canvas->FillRect(TRect(x, 0, x + 8, 192));
             }
-
             m_View->Canvas->MoveTo(x, y);
-            m_View->Canvas->LineTo(x + 8, y);
-
             x += 8;
+            m_View->Canvas->LineTo(x, y);
         }
         StretchBlt(imgView->Picture->Bitmap->Canvas->Handle, 0, 0, imgView->Width, imgView->Height, m_View->Canvas->Handle, 0, 0, m_View->Width, m_View->Height, SRCCOPY);
         imgView->Refresh();
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorJumpTable::actLeftExecute(TObject *Sender)
+void __fastcall TfrmEditorJumpTable::actLeftExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         m_ActiveStep = static_cast<unsigned char>(std::max(0, m_ActiveStep - 1));
@@ -85,7 +82,7 @@ void __fastcall TfrmEditorJumpTable::actLeftExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorJumpTable::actRightExecute(TObject *Sender)
+void __fastcall TfrmEditorJumpTable::actRightExecute(TObject* /*Sender*/)
 {
     auto doc = dynamic_cast<Project::JumpTableDocument*>(m_Document);
     if (doc != nullptr && IsActive()) {
@@ -94,7 +91,7 @@ void __fastcall TfrmEditorJumpTable::actRightExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorJumpTable::actUpExecute(TObject *Sender)
+void __fastcall TfrmEditorJumpTable::actUpExecute(TObject* /*Sender*/)
 {
     auto doc = dynamic_cast<Project::JumpTableDocument*>(m_Document);
     if (doc != nullptr && IsActive()) {
@@ -103,7 +100,7 @@ void __fastcall TfrmEditorJumpTable::actUpExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorJumpTable::actDownExecute(TObject *Sender)
+void __fastcall TfrmEditorJumpTable::actDownExecute(TObject* /*Sender*/)
 {
     auto doc = dynamic_cast<Project::JumpTableDocument*>(m_Document);
     if (doc != nullptr && IsActive()) {

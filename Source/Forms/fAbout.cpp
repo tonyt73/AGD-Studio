@@ -16,13 +16,13 @@ __fastcall TfrmAbout::TfrmAbout(TComponent* Owner)
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAbout::FormDeactivate(TObject *Sender)
+void __fastcall TfrmAbout::FormDeactivate(TObject* /*Sender*/)
 {
     Close();
     delete this;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAbout::FormCreate(TObject *Sender)
+void __fastcall TfrmAbout::FormCreate(TObject* /*Sender*/)
 {
     lblVersion->Font->Color = ThemeManager::Foreground;
     lblBuild->Font->Color = ThemeManager::Foreground;
@@ -59,13 +59,11 @@ void __fastcall TfrmAbout::GetBuildVersion(int& Major, int& Minor, int& Date, in
     Time  = 0;
     DWORD temp  = 0;
     DWORD infoLen = GetFileVersionInfoSize(Application->ExeName.c_str(), &temp);
-    if (infoLen > 0)
-    {
+    if (infoLen > 0) {
         VS_FIXEDFILEINFO* fileInfo;
         auto pBuf = static_cast<char*>(malloc(infoLen));
         GetFileVersionInfo(Application->ExeName.c_str(), 0, infoLen, pBuf);
-        if (VerQueryValue(static_cast<void*>(pBuf), L"\\", reinterpret_cast<LPVOID*>(&fileInfo), reinterpret_cast<unsigned int*>(&temp)))
-        {
+        if (VerQueryValue(static_cast<void*>(pBuf), L"\\", reinterpret_cast<LPVOID*>(&fileInfo), reinterpret_cast<unsigned int*>(&temp))) {
             Major = HIWORD(fileInfo->dwFileVersionMS);
             Minor = LOWORD(fileInfo->dwFileVersionMS);
             Date  = HIWORD(fileInfo->dwFileVersionLS);

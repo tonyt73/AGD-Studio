@@ -70,23 +70,21 @@ void __fastcall Settings::SetWindowSize(const TSize& size)
 //---------------------------------------------------------------------------
 void __fastcall Settings::SetBool(int index, bool value)
 {
-    switch (index)
-    {
-        case 0: m_WelcomeSkipOnStartup = value; break;
-        case 1: m_WelcomeSkipOnClose = value; break;
-        case 2: m_LoadLastProject = value; break;
+    switch (index) {
+    case 0: m_WelcomeSkipOnStartup = value; break;
+    case 1: m_WelcomeSkipOnClose = value; break;
+    case 2: m_LoadLastProject = value; break;
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall Settings::SetString(int index, String value)
 {
-    switch (index)
-    {
-        case 0: m_ActiveStyle = value; break;
-        case 1: m_LastProject = value; break;
-        case 2: m_Developer = value; break;
-        case 3: m_DefaultMachine = value; break;
-        case 4: m_CodeEditorFontName = value; break;
+    switch (index) {
+    case 0: m_ActiveStyle = value; break;
+    case 1: m_LastProject = value; break;
+    case 2: m_Developer = value; break;
+    case 3: m_DefaultMachine = value; break;
+    case 4: m_CodeEditorFontName = value; break;
     }
 }
 //---------------------------------------------------------------------------

@@ -20,11 +20,11 @@
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 const int SCHEMES_EXTS_COUNT = 5;
-const String SCHEMES_EXTS[SCHEMES_EXTS_COUNT] =
+[[clang::no_destroy]] const String SCHEMES_EXTS[SCHEMES_EXTS_COUNT] =
 {
     "txt", "log", "event", "agd", "sfx"
 };
-const String SCHEMES_SYN[SCHEMES_EXTS_COUNT] =
+[[clang::no_destroy]] const String SCHEMES_SYN[SCHEMES_EXTS_COUNT] =
 {
     "AGD", "AGD", "AGD", "AGD", "AGD"
 };
@@ -116,42 +116,42 @@ String __fastcall TfrmEditorCode::GetSyntaxScByExt(const String& extension)
     return "";
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::actUndoExecute(TObject *Sender)
+void __fastcall TfrmEditorCode::actUndoExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         evEditor->Undo();
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::actRedoExecute(TObject *Sender)
+void __fastcall TfrmEditorCode::actRedoExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         evEditor->Redo();
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::actZoomInExecute(TObject *Sender)
+void __fastcall TfrmEditorCode::actZoomInExecute(TObject* /*Sender*/)
 {
     if (IsActive() && evEditor->Font->Size <= 24) {
         evEditor->Font->Size++;
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::actZoomOutExecute(TObject *Sender)
+void __fastcall TfrmEditorCode::actZoomOutExecute(TObject* /*Sender*/)
 {
     if (IsActive() && evEditor->Font->Size >= 8) {
         evEditor->Font->Size--;
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::actZoomResetExecute(TObject *Sender)
+void __fastcall TfrmEditorCode::actZoomResetExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         evEditor->Font->Size = 10;
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::actGoToLineExecute(TObject *Sender)
+void __fastcall TfrmEditorCode::actGoToLineExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         int Line = -1;
@@ -161,7 +161,7 @@ void __fastcall TfrmEditorCode::actGoToLineExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::actSearchExecute(TObject *Sender)
+void __fastcall TfrmEditorCode::actSearchExecute(TObject* /*Sender*/)
 {
     if (IsActive() && LMDEditExecFindDialog("Search text", evEditor, m_SearchOptions) == srNotFound) {
         WarningMessage("[Code Editor] Search text (" + evEditor->SearchLastArgs.Search +  ") not found.");
@@ -169,7 +169,7 @@ void __fastcall TfrmEditorCode::actSearchExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::actReplaceExecute(TObject *Sender)
+void __fastcall TfrmEditorCode::actReplaceExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         m_SearchOptions.ReplaceAllBounds = evEditor->SelAvail ? rbSelection : rbAllText;
@@ -184,28 +184,28 @@ void __fastcall TfrmEditorCode::actReplaceExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::actCopyExecute(TObject *Sender)
+void __fastcall TfrmEditorCode::actCopyExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         evEditor->CopySelection();
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::actPasteExecute(TObject *Sender)
+void __fastcall TfrmEditorCode::actPasteExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         evEditor->Paste();
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::actCutExecute(TObject *Sender)
+void __fastcall TfrmEditorCode::actCutExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         evEditor->CutSelection();
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::actSearchNextExecute(TObject *Sender)
+void __fastcall TfrmEditorCode::actSearchNextExecute(TObject* Sender)
 {
     if (IsActive()) {
         if (evEditor->SearchLastArgs.Search == "" || m_SearchOptions.Direction != sdForward) {
@@ -217,17 +217,16 @@ void __fastcall TfrmEditorCode::actSearchNextExecute(TObject *Sender)
                 evEditor->SearchLastArgs.Direction = sdForward;
                 evEditor->SearchFirst(evEditor->SearchLastArgs);
             }
-            switch (evEditor->SearchState)
-            {
-                case stInSearch: evEditor->SearchNext(); break;
-                case stInReplace: evEditor->ReplaceNext(); break;
-                default: Beep();
+            switch (evEditor->SearchState) {
+            case stInSearch: evEditor->SearchNext(); break;
+            case stInReplace: evEditor->ReplaceNext(); break;
+            case stNothing: Beep();
             }
         }
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::actSearchPreviousExecute(TObject *Sender)
+void __fastcall TfrmEditorCode::actSearchPreviousExecute(TObject* Sender)
 {
     if (IsActive()) {
         if (evEditor->SearchLastArgs.Search == "") {
@@ -239,17 +238,16 @@ void __fastcall TfrmEditorCode::actSearchPreviousExecute(TObject *Sender)
                 evEditor->SearchLastArgs.Direction = sdBackward;
                 evEditor->SearchFirst(evEditor->SearchLastArgs);
             }
-            switch (evEditor->SearchState)
-            {
-                case stInSearch: evEditor->SearchNext(); break;
-                case stInReplace: evEditor->ReplaceNext(); break;
-                default: Beep();
+            switch (evEditor->SearchState) {
+            case stInSearch: evEditor->SearchNext(); break;
+            case stInReplace: evEditor->ReplaceNext(); break;
+            case stNothing: Beep();
             }
         }
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::actFontExecute(TObject *Sender)
+void __fastcall TfrmEditorCode::actFontExecute(TObject* /*Sender*/)
 {
     FontDialog->Font->Assign(evEditor->Font);
     if (FontDialog->Execute()) {
@@ -260,7 +258,7 @@ void __fastcall TfrmEditorCode::actFontExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::FontDialogApply(TObject *Sender, HWND Wnd)
+void __fastcall TfrmEditorCode::FontDialogApply(TObject* /*Sender*/, HWND /*Wnd*/)
 {
     evEditor->Font->Assign(FontDialog->Font);
     theAppSettings.CodeEditorFontName = FontDialog->Font->Name;
@@ -268,7 +266,7 @@ void __fastcall TfrmEditorCode::FontDialogApply(TObject *Sender, HWND Wnd)
     Bus::Publish<OnChange<String>>(OnChange<String>("code.editor.font", theAppSettings.CodeEditorFontName + ":" + theAppSettings.CodeEditorFontHeight));
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::actUndoUpdate(TObject *Sender)
+void __fastcall TfrmEditorCode::actUndoUpdate(TObject* /*Sender*/)
 {
     UpdateStatus();
 }
@@ -363,7 +361,7 @@ void __fastcall TfrmEditorCode::UpdateStatus()
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::evEditorStatusChanged(TLMDCustomEditView *AView, TLMDViewStatusChanges AChanges)
+void __fastcall TfrmEditorCode::evEditorStatusChanged(TLMDCustomEditView* /*AView*/, TLMDViewStatusChanges /*AChanges*/)
 {
     UpdateStatus();
 }
@@ -376,17 +374,17 @@ void __fastcall TfrmEditorCode::OnEvent(const Event& event)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::actSaveFileExecute(TObject *Sender)
+void __fastcall TfrmEditorCode::actSaveFileExecute(TObject* /*Sender*/)
 {
     lmdDocument->SaveToFile(m_Document->Path, lmdDocument->CodePage, lmdDocument->CodePageUsePreamble);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::evEditorEnter(TObject *Sender)
+void __fastcall TfrmEditorCode::evEditorEnter(TObject* /*Sender*/)
 {
     theEditorManager.SetActive(this);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::actFormatExecute(TObject *Sender)
+void __fastcall TfrmEditorCode::actFormatExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         lmdDocument->BeginCompoundEdit();
@@ -433,7 +431,7 @@ void __fastcall TfrmEditorCode::actFormatExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::evEditorKeyUp(TObject *Sender, WORD &Key, TShiftState Shift)
+void __fastcall TfrmEditorCode::evEditorKeyUp(TObject* /*Sender*/, WORD &Key, TShiftState /*Shift*/)
 {
     if (Key == vkReturn) {
         auto cp = evEditor->CursorPos;
@@ -444,7 +442,7 @@ void __fastcall TfrmEditorCode::evEditorKeyUp(TObject *Sender, WORD &Key, TShift
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::evEditorNotFound(TObject *Sender, TLMDEditNotFoundAction &Action)
+void __fastcall TfrmEditorCode::evEditorNotFound(TObject* /*Sender*/, TLMDEditNotFoundAction &Action)
 {
     Action = saGoStartEnd;
 }

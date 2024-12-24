@@ -25,7 +25,7 @@ __fastcall TfrmEditorWindow::TfrmEditorWindow(TComponent* Owner)
     m_View->Height = static_cast<LONG>(gm.Height) / mc.ImageSizing[Visuals::itCharacterSet].Minimum.Height;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::FrameResize(TObject *Sender)
+void __fastcall TfrmEditorWindow::FrameResize(TObject* /*Sender*/)
 {
     Color = ThemeManager::Background;
     auto s = 8;
@@ -94,12 +94,12 @@ void __fastcall TfrmEditorWindow::DrawView()
     sbrWindow->Panels->Items[5]->Text = "Height: " + IntToStr(doc->Height);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::imgViewMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
+void __fastcall TfrmEditorWindow::imgViewMouseMove(TObject* /*Sender*/, TShiftState, int, int)
 {
     //
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::actMoveLeftExecute(TObject *Sender)
+void __fastcall TfrmEditorWindow::actMoveLeftExecute(TObject* /*Sender*/)
 {
     auto doc = dynamic_cast<Project::WindowDocument*>(Document);
     if (doc != nullptr && IsActive() && doc->Left - 1 >= 0)
@@ -109,7 +109,7 @@ void __fastcall TfrmEditorWindow::actMoveLeftExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::actMoveRightExecute(TObject *Sender)
+void __fastcall TfrmEditorWindow::actMoveRightExecute(TObject* /*Sender*/)
 {
     auto doc = dynamic_cast<Project::WindowDocument*>(Document);
     if (doc != nullptr)
@@ -122,7 +122,7 @@ void __fastcall TfrmEditorWindow::actMoveRightExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::actMoveUpExecute(TObject *Sender)
+void __fastcall TfrmEditorWindow::actMoveUpExecute(TObject* /*Sender*/)
 {
     auto doc = dynamic_cast<Project::WindowDocument*>(Document);
     if (doc != nullptr && IsActive() && doc->Top - 1 >= 0)
@@ -132,7 +132,7 @@ void __fastcall TfrmEditorWindow::actMoveUpExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::actMoveDownExecute(TObject *Sender)
+void __fastcall TfrmEditorWindow::actMoveDownExecute(TObject* /*Sender*/)
 {
     auto doc = dynamic_cast<Project::WindowDocument*>(Document);
     if (doc != nullptr && IsActive() && doc->Top + doc->Height + 1 <= m_View->Height)
@@ -142,7 +142,7 @@ void __fastcall TfrmEditorWindow::actMoveDownExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::actWidthDecExecute(TObject *Sender)
+void __fastcall TfrmEditorWindow::actWidthDecExecute(TObject* /*Sender*/)
 {
     auto doc = dynamic_cast<Project::WindowDocument*>(Document);
     if (doc != nullptr && IsActive() && doc->Width > 8)
@@ -152,7 +152,7 @@ void __fastcall TfrmEditorWindow::actWidthDecExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::actWidthIncExecute(TObject *Sender)
+void __fastcall TfrmEditorWindow::actWidthIncExecute(TObject* /*Sender*/)
 {
     auto doc = dynamic_cast<Project::WindowDocument*>(Document);
     if (doc != nullptr && IsActive() && doc->Left + doc->Width + 1 <= m_View->Width)
@@ -162,7 +162,7 @@ void __fastcall TfrmEditorWindow::actWidthIncExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::actHeightDecExecute(TObject *Sender)
+void __fastcall TfrmEditorWindow::actHeightDecExecute(TObject* /*Sender*/)
 {
     auto doc = dynamic_cast<Project::WindowDocument*>(Document);
     if (doc != nullptr && IsActive() && doc->Height >= 8)
@@ -172,7 +172,7 @@ void __fastcall TfrmEditorWindow::actHeightDecExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::actHeightIncExecute(TObject *Sender)
+void __fastcall TfrmEditorWindow::actHeightIncExecute(TObject* /*Sender*/)
 {
     auto doc = dynamic_cast<Project::WindowDocument*>(Document);
     if (doc != nullptr && IsActive() && doc->Top + doc->Height + 1 <= m_View->Height)

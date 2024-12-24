@@ -84,18 +84,17 @@ void __fastcall WindowDocument::OnLoaded()
 //---------------------------------------------------------------------------
 int __fastcall WindowDocument::Get(int index)
 {
-    switch (index)
-    {
-        case 0: return m_Rect.Left;
-        case 1: return m_Rect.Top;
-        case 2: return m_Rect.Right;
-        case 3: return m_Rect.Bottom;
-        case 4: return m_Rect.Width() + 1;
-        case 5: return m_Rect.Height() + 1;
-        case 6: return m_SizeInCharacters.cx;
-        case 7: return m_SizeInCharacters.cy;
-        case 8: return m_SizeInPixels.cx;
-        case 9: return m_SizeInPixels.cy;
+    switch (index) {
+    case 0: return m_Rect.Left;
+    case 1: return m_Rect.Top;
+    case 2: return m_Rect.Right;
+    case 3: return m_Rect.Bottom;
+    case 4: return m_Rect.Width() + 1;
+    case 5: return m_Rect.Height() + 1;
+    case 6: return m_SizeInCharacters.cx;
+    case 7: return m_SizeInCharacters.cy;
+    case 8: return m_SizeInPixels.cx;
+    case 9: return m_SizeInPixels.cy;
     }
     return 0;
 }

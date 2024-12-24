@@ -93,12 +93,12 @@ void __fastcall MapEntity::Clear()
     m_RoomLocked = false;
     m_RoomIndex = 255;
     m_Document = nullptr;
-    m_Dirty = true;
+    m_Dirty = false;
 }
 //---------------------------------------------------------------------------
 void __fastcall MapEntity::Clean()
 {
-    m_Dirty = false;
+    Dirty = false;
 }
 //---------------------------------------------------------------------------
 ImageDocument* __fastcall MapEntity::GetDocument() const
@@ -136,7 +136,7 @@ void __fastcall MapEntity::SetSelected(bool state)
 //---------------------------------------------------------------------------
 void __fastcall MapEntity::SetDirty(bool state)
 {
-    m_Dirty = true;
+    m_Dirty = state;
 }
 //---------------------------------------------------------------------------
 bool __fastcall MapEntity::GetIsSprite() const

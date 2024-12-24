@@ -22,7 +22,7 @@ __fastcall TfrmMain::TfrmMain(TComponent* Owner)
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmMain::FormCreate(TObject *Sender)
+void __fastcall TfrmMain::FormCreate(TObject* /*Sender*/)
 {
     // check command line parameters for a file
     if (!Services::File::Exists(ParamStr(1))) {
@@ -52,7 +52,7 @@ void __fastcall TfrmMain::FormCreate(TObject *Sender)
     //auto pw = std::make_unique<MachineConfigWriter>();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmMain::FormActivate(TObject *Sender)
+void __fastcall TfrmMain::FormActivate(TObject* /*Sender*/)
 {
     static bool atStartup = true;
     if (atStartup && theAppSettings.WelcomeSkipOnStartup) {
@@ -62,7 +62,7 @@ void __fastcall TfrmMain::FormActivate(TObject *Sender)
     atStartup = false;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmMain::FormCloseQuery(TObject *Sender, bool &CanClose)
+void __fastcall TfrmMain::FormCloseQuery(TObject* Sender, bool &CanClose)
 {
     SaveSettings();
     if (m_FormView == fvGameIDE)
@@ -75,7 +75,7 @@ void __fastcall TfrmMain::FormCloseQuery(TObject *Sender, bool &CanClose)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmMain::FormDestroy(TObject *Sender)
+void __fastcall TfrmMain::FormDestroy(TObject* /*Sender*/)
 {
     Welcome->OnActivate(nullptr);
     IDE->OnActivate(nullptr);
@@ -107,7 +107,7 @@ TfrmAppFrame* __fastcall TfrmMain::GetActiveForm()
     return m_FormView == fvGameIDE ? GetIDE() : GetWelcome();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmMain::OnIDEClose(TObject *Sender)
+void __fastcall TfrmMain::OnIDEClose(TObject* /*Sender*/)
 {
     if (!theAppSettings.WelcomeSkipOnClose) {
         // show the welcome screen
@@ -115,7 +115,7 @@ void __fastcall TfrmMain::OnIDEClose(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmMain::OnWelcomeDone(TObject *Sender)
+void __fastcall TfrmMain::OnWelcomeDone(TObject* Sender)
 {
     // show the IDE
     if (Sender) {
@@ -181,19 +181,19 @@ void __fastcall TfrmMain::SaveSettings()
     theAppSettings.Save();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmMain::FormBeforeMonitorDpiChanged(TObject *Sender, int OldDPI, int NewDPI)
+void __fastcall TfrmMain::FormBeforeMonitorDpiChanged(TObject* /*Sender*/, int /*OldDPI*/, int /*NewDPI*/)
 {
     // don't show window updates while the forms and components are getting DPI resized
     SendMessage(Handle, WM_SETREDRAW, 0, 0);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmMain::FormAfterMonitorDpiChanged(TObject *Sender, int OldDPI, int NewDPI)
+void __fastcall TfrmMain::FormAfterMonitorDpiChanged(TObject* /*Sender*/, int /*OldDPI*/, int /*NewDPI*/)
 {
     // show the DPI resize changes
     SendMessage(Handle, WM_SETREDRAW, 1, 0);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmMain::FormCanResize(TObject *Sender, int &NewWidth, int &NewHeight, bool &Resize)
+void __fastcall TfrmMain::FormCanResize(TObject* /*Sender*/, int &/*NewWidth*/, int &/*NewHeight*/, bool &Resize)
 {
     if (m_FormView == fvGameIDE && WindowState == wsNormal) {
         theAppSettings.WindowPosition = TPoint(Left, Top);

@@ -9,7 +9,7 @@
 //---------------------------------------------------------------------------
 using namespace Visuals;
 //---------------------------------------------------------------------------
-std::unique_ptr<TBitmap> __fastcall Image::m_Overlay = nullptr;
+[[clang::no_destroy]] std::unique_ptr<TBitmap> Image::m_Overlay = nullptr;
 //---------------------------------------------------------------------------
 __fastcall Image::Image(unsigned int width, unsigned int height, const GraphicsMode& graphicsMode)
 : m_Image(nullptr)

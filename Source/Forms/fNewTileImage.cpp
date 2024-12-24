@@ -20,7 +20,7 @@ __fastcall TfrmNewTileImage::TfrmNewTileImage(TComponent* Owner)
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmNewTileImage::FormCreate(TObject *Sender)
+void __fastcall TfrmNewTileImage::FormCreate(TObject* /*Sender*/)
 {
     // get the type of image
     auto type = Visuals::itTile;
@@ -88,7 +88,7 @@ void __fastcall TfrmNewTileImage::tbcImageTypesDrawTab(TCustomTabControl *Contro
     Control->Canvas->TextOut(Rect.Left + ((Rect.Width() - tr.cx) / 2), Rect.Top + ((Rect.Height() - tr.cy) / 2) - 3, caption);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmNewTileImage::edtWidthChange(TObject *Sender)
+void __fastcall TfrmNewTileImage::edtWidthChange(TObject* /*Sender*/)
 {
     auto tx = edtWidth->Value  / edtWidth->MinValue;
     auto ty = edtHeight->Value / edtHeight->MinValue;

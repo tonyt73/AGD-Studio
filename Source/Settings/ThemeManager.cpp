@@ -69,33 +69,33 @@ TStringDynArray __fastcall ThemeManager::GetStyles()
 TColor __fastcall ThemeManager::GetColor(int index)
 {
     switch (index) {
-        // highlight
-        case 0: {
-            auto c1 = StyleServices()->GetSystemColor(clHighlight);
-            auto c2 = StyleServices()->GetSystemColor(clActiveCaption);
-            auto d1 = Visuals::Palette::Diff(c1);
-            auto d2 = Visuals::Palette::Diff(c2);
-            return d1 > d2 ? c1 : c2;
-        }
-        // background
-        case 1: {
-            auto c1 = StyleServices()->GetSystemColor(clBackground);
-            auto c2 = StyleServices()->GetSystemColor(clBtnFace);
-            auto d1 = Visuals::Palette::LuminanceOf(c1);
-            auto d2 = Visuals::Palette::LuminanceOf(c2);
-            return d1 > d2 ? c1 : c2;
-        }
-        // shadow
-        case 3: {
-            auto c1 = StyleServices()->GetSystemColor(clBtnShadow);
-            auto c2 = StyleServices()->GetSystemColor(clInactiveCaption);
-            auto d1 = Visuals::Palette::LuminanceOf(c1);
-            auto d2 = Visuals::Palette::LuminanceOf(c2);
-            return d1 > d2 ? c1 : c2;
-        }
-        // foreground
-        default:
-            return StyleServices()->GetSystemColor(clBtnText);
+    // highlight
+    case 0: {
+        auto c1 = StyleServices()->GetSystemColor(clHighlight);
+        auto c2 = StyleServices()->GetSystemColor(clActiveCaption);
+        auto d1 = Visuals::Palette::Diff(c1);
+        auto d2 = Visuals::Palette::Diff(c2);
+        return d1 > d2 ? c1 : c2;
+    }
+    // background
+    case 1: {
+        auto c1 = StyleServices()->GetSystemColor(clBackground);
+        auto c2 = StyleServices()->GetSystemColor(clBtnFace);
+        auto d1 = Visuals::Palette::LuminanceOf(c1);
+        auto d2 = Visuals::Palette::LuminanceOf(c2);
+        return d1 > d2 ? c1 : c2;
+    }
+    // shadow
+    case 3: {
+        auto c1 = StyleServices()->GetSystemColor(clBtnShadow);
+        auto c2 = StyleServices()->GetSystemColor(clInactiveCaption);
+        auto d1 = Visuals::Palette::LuminanceOf(c1);
+        auto d2 = Visuals::Palette::LuminanceOf(c2);
+        return d1 > d2 ? c1 : c2;
+    }
+    // foreground
+    default:
+        return StyleServices()->GetSystemColor(clBtnText);
     }
 }
 //---------------------------------------------------------------------------

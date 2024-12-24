@@ -52,12 +52,12 @@ GraphicsBuffer::~GraphicsBuffer()
 void GraphicsBuffer::Make(unsigned int width, unsigned int height, const GraphicsMode& mode, std::unique_ptr<GraphicsBuffer>& buffer)
 {
     buffer = nullptr;
-    switch (mode.TypeOfBuffer)
-    {
-        case btBitmap:      buffer = std::make_unique<BitmapGraphicsBuffer>(width, height, mode);   break;
-        case btAttribute:   buffer = std::make_unique<AttributeGraphicsBuffer>(width, height, mode);break;
-        case btULAplus:     buffer = std::make_unique<ULAPlusGraphicsBuffer>(width, height, mode);  break;
-        default: assert(0); break;
+    switch (mode.TypeOfBuffer) {
+    case btBitmap:      buffer = std::make_unique<BitmapGraphicsBuffer>(width, height, mode);   break;
+    case btAttribute:   buffer = std::make_unique<AttributeGraphicsBuffer>(width, height, mode);break;
+    case btULAplus:     buffer = std::make_unique<ULAPlusGraphicsBuffer>(width, height, mode);  break;
+    case btCharacterMap: break;
+    case btInvalid: assert(0); break;
     }
 }
 //---------------------------------------------------------------------------

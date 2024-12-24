@@ -51,7 +51,7 @@ void __fastcall TfrmWelcomeDialog::OnEvent(const Event& event)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmWelcomeDialog::lblStartNewProjectClick(TObject *Sender)
+void __fastcall TfrmWelcomeDialog::lblStartNewProjectClick(TObject* /*Sender*/)
 {
     lblImportAGD->Visible = false;
     imgImportAGD->Visible = false;
@@ -62,7 +62,7 @@ void __fastcall TfrmWelcomeDialog::lblStartNewProjectClick(TObject *Sender)
     UpdateUI(true);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmWelcomeDialog::lblImportAGDClick(TObject *Sender)
+void __fastcall TfrmWelcomeDialog::lblImportAGDClick(TObject* /*Sender*/)
 {
     lblStartNewProject->Visible = false;
     imgStartNewProject->Visible = false;
@@ -76,7 +76,7 @@ void __fastcall TfrmWelcomeDialog::lblImportAGDClick(TObject *Sender)
     UpdateUI(true);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmWelcomeDialog::btnCreateClick(TObject *Sender)
+void __fastcall TfrmWelcomeDialog::btnCreateClick(TObject* Sender)
 {
     lblImportAGD->Visible = true;
     imgImportAGD->Visible = true;
@@ -95,7 +95,7 @@ void __fastcall TfrmWelcomeDialog::btnCreateClick(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmWelcomeDialog::lblOpenExistingProjectClick(TObject *Sender)
+void __fastcall TfrmWelcomeDialog::lblOpenExistingProjectClick(TObject* /*Sender*/)
 {
     dlgOpenAGDS->InitialDir = Services::Folders::Projects;
     if (dlgOpenAGDS->Execute()) {
@@ -107,7 +107,7 @@ void __fastcall TfrmWelcomeDialog::lblOpenExistingProjectClick(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmWelcomeDialog::SelectionPanelOnClick(TObject *Sender)
+void __fastcall TfrmWelcomeDialog::SelectionPanelOnClick(TObject* Sender)
 {
     m_LoadingPanel = static_cast<TSelectionPanelFrame*>(Sender);
     m_LoadingPanel->Loading = true;
@@ -117,30 +117,30 @@ void __fastcall TfrmWelcomeDialog::SelectionPanelOnClick(TObject *Sender)
     if (FOnDone) FOnDone(this);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmWelcomeDialog::SelectionPanelOnRemoveClick(TObject *Sender)
+void __fastcall TfrmWelcomeDialog::SelectionPanelOnRemoveClick(TObject* Sender)
 {
     TSelectionPanelFrame* panel = static_cast<TSelectionPanelFrame*>(Sender);
     theProjectManager.RemoveMostRecentlyUsedItem(panel->Name, panel->Path);
     RefreshMRUList();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmWelcomeDialog::lblStartNewProjectMouseEnter(TObject *Sender)
+void __fastcall TfrmWelcomeDialog::lblStartNewProjectMouseEnter(TObject* Sender)
 {
     static_cast<TLabel*>(Sender)->Font->Color = ThemeManager::Highlight;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmWelcomeDialog::lblStartNewProjectMouseLeave(TObject *Sender)
+void __fastcall TfrmWelcomeDialog::lblStartNewProjectMouseLeave(TObject* Sender)
 {
     static_cast<TLabel*>(Sender)->Font->Color = ThemeManager::Foreground;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmWelcomeDialog::cmbThemesChange(TObject *Sender)
+void __fastcall TfrmWelcomeDialog::cmbThemesChange(TObject* /*Sender*/)
 {
     ThemeManager::SetStyle(cmbThemes->Text);
     UpdateColors();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmWelcomeDialog::lblChangeThemeClick(TObject *Sender)
+void __fastcall TfrmWelcomeDialog::lblChangeThemeClick(TObject* /*Sender*/)
 {
     cmbThemes->DroppedDown = true;
 }
@@ -180,19 +180,19 @@ void __fastcall TfrmWelcomeDialog::NewMostRecentlyUsedItem(const String& name, c
     spf->Top = 1000;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmWelcomeDialog::edtNameChange(TObject *Sender)
+void __fastcall TfrmWelcomeDialog::edtNameChange(TObject* /*Sender*/)
 {
     UpdateUI();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmWelcomeDialog::edtImportFileChange(TObject *Sender)
+void __fastcall TfrmWelcomeDialog::edtImportFileChange(TObject* /*Sender*/)
 {
     auto name = Services::File::NameWithoutExtension(edtImportFile->Text);
     edtName->Text = edtName->Text.Trim() != "" ? name : edtName->Text.Trim();
     UpdateUI();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmWelcomeDialog::edtNameKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
+void __fastcall TfrmWelcomeDialog::edtNameKeyDown(TObject* /*Sender*/, WORD &Key, TShiftState /*Shift*/)
 {
     if (Key == vkReturn && btnCreate->Enabled) {
         btnCreateClick(btnCreate);
@@ -216,7 +216,7 @@ void __fastcall TfrmWelcomeDialog::OnActivate(TWinControl* parent)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmWelcomeDialog::btnImportFileClick(TObject *Sender)
+void __fastcall TfrmWelcomeDialog::btnImportFileClick(TObject* /*Sender*/)
 {
     dlgImportAGD->InitialDir = Services::Folders::Projects;
     if (dlgImportAGD->Execute()) {
@@ -227,7 +227,7 @@ void __fastcall TfrmWelcomeDialog::btnImportFileClick(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmWelcomeDialog::cmbMachinesChange(TObject *Sender)
+void __fastcall TfrmWelcomeDialog::cmbMachinesChange(TObject* /*Sender*/)
 {
     UpdateUI();
 }
@@ -278,7 +278,7 @@ void __fastcall TfrmWelcomeDialog::UpdateUI(bool updateMachine)
     imgProjectNameCross->Visible = !isProjectEmpty && !btnCreate->Enabled;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmWelcomeDialog::imgMachineCrossClick(TObject *Sender)
+void __fastcall TfrmWelcomeDialog::imgMachineCrossClick(TObject* /*Sender*/)
 {
     auto folder = Services::Folders::GetFolder(Services::Folders::lpApplication, "Importers");
     ShellExecute(nullptr, L"open", L"", nullptr, folder.c_str(), SW_SHOWNORMAL);

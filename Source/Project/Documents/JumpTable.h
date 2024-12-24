@@ -23,7 +23,7 @@ private:
 public:
                         __fastcall  JumpTableDocument(const String& name);
 
-    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new JumpTableDocument(name); }
+    static  Document*   __fastcall  Create(const String& name, const String&) { return new JumpTableDocument(name); }
     unsigned char       __fastcall  RawStep(unsigned char index) const;
     int                 __fastcall  GetStep(unsigned char index) const;
     void                __fastcall  SetStep(unsigned char index, int value);

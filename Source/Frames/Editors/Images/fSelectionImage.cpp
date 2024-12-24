@@ -54,7 +54,7 @@ void __fastcall TSelectionImageFrame::SetScale(int scale)
     Color = m_Selected ? ThemeManager::Highlight : ThemeManager::Background;
 }
 //---------------------------------------------------------------------------
-void __fastcall TSelectionImageFrame::imgBitmapClick(TObject *Sender)
+void __fastcall TSelectionImageFrame::imgBitmapClick(TObject* /*Sender*/)
 {
     Selected = true;
     if (FOnClick != nullptr) FOnClick(this);

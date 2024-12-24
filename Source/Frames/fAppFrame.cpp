@@ -17,7 +17,7 @@ __fastcall TfrmAppFrame::~TfrmAppFrame()
     m_Registrar.Unsubscribe();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAppFrame::OnActivate(TWinControl* parent)
+void __fastcall TfrmAppFrame::OnActivate(TWinControl* /*Parent*/)
 {
 }
 //---------------------------------------------------------------------------

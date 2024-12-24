@@ -19,7 +19,7 @@ private:
     struct TFPoint
     {
         TFPoint() {}
-        TFPoint(float x, float y) : x(x), y(y) {}
+        TFPoint(float x_, float y_) : x(x_), y(y_) {}
         float x;
         float y;
     };
@@ -137,7 +137,7 @@ private:
     typedef void __fastcall (__closure *TNotifyOnEntityClick)(const Project::MapEntity& entity);
     TNotifyOnEntityClick            FOnEntitySelected;
     typedef int __fastcall (__closure *TRetrieveRoomIndex)(const TPoint& pt, bool newIndex) const;
-    TRetrieveRoomIndex   __fastcall FRetrieveRoomIndex;
+    TRetrieveRoomIndex              FRetrieveRoomIndex;
 
 public:
 

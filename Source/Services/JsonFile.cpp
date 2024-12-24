@@ -223,41 +223,54 @@ bool __fastcall JsonFile::LoadFile(const String& file)
             auto inArray = false;
             while (jr->Read()) {
                 path = ProcessPath(jr->Path);
-                switch (jr->TokenType)
-                {
-                    case TJsonToken::StartObject:
-                        OnStartObject(path);
-                        break;
-                    case TJsonToken::EndObject:
-                        OnEndObject(path);
-                        break;
-                    case TJsonToken::StartArray:
-                        inArray = true;
-                        break;
-                    case TJsonToken::EndArray:
-                        inArray = false;
-                        break;
-                    case TJsonToken::PropertyName:
-                        break;
-                    case TJsonToken::String:
-                        Set(path, jr->Value.AsString());
-                        if (inArray) OnEndObject(path);
-                        break;
-                    case TJsonToken::Integer:
-                        Set(path, jr->Value.AsInteger());
-                        if (inArray) OnEndObject(path);
-                        break;
-                    case TJsonToken::Float:
-                        Set(path, static_cast<float>(jr->Value.AsExtended()));
-                        if (inArray) OnEndObject(path);
-                        break;
-                    case TJsonToken::Boolean:
-                        Set(path, jr->Value.AsBoolean());
-                        if (inArray) OnEndObject(path);
-                        break;
-                    default:
-                        // ignore the other token types
-                        break;
+                switch (jr->TokenType) {
+                case TJsonToken::StartObject:
+                    OnStartObject(path);
+                    break;
+                case TJsonToken::EndObject:
+                    OnEndObject(path);
+                    break;
+                case TJsonToken::StartArray:
+                    inArray = true;
+                    break;
+                case TJsonToken::EndArray:
+                    inArray = false;
+                    break;
+                case TJsonToken::PropertyName:
+                    break;
+                case TJsonToken::String:
+                    Set(path, jr->Value.AsString());
+                    if (inArray) OnEndObject(path);
+                    break;
+                case TJsonToken::Integer:
+                    Set(path, jr->Value.AsInteger());
+                    if (inArray) OnEndObject(path);
+                    break;
+                case TJsonToken::Float:
+                    Set(path, static_cast<float>(jr->Value.AsExtended()));
+                    if (inArray) OnEndObject(path);
+                    break;
+                case TJsonToken::Boolean:
+                    Set(path, jr->Value.AsBoolean());
+                    if (inArray) OnEndObject(path);
+                    break;
+                case TJsonToken::Raw:
+                case TJsonToken::Null:
+                case TJsonToken::None:
+                case TJsonToken::StartConstructor:
+                case TJsonToken::EndConstructor:
+                case TJsonToken::Oid:
+                case TJsonToken::Bytes:
+                case TJsonToken::Decimal:
+                case TJsonToken::Date:
+                case TJsonToken::RegEx:
+                case TJsonToken::DBRef:
+                case TJsonToken::MinKey:
+                case TJsonToken::MaxKey:
+                case TJsonToken::CodeWScope:
+                case TJsonToken::Comment:
+                case TJsonToken::Undefined:
+                    break;
                 }
             }
             OnLoaded();
@@ -270,12 +283,12 @@ bool __fastcall JsonFile::LoadFile(const String& file)
     return false;
 }
 //---------------------------------------------------------------------------
-void __fastcall JsonFile::OnStartObject(const String& object)
+void __fastcall JsonFile::OnStartObject(const String&)
 {
     // do nothing; should be overridden
 }
 //---------------------------------------------------------------------------
-void __fastcall JsonFile::OnEndObject(const String& object)
+void __fastcall JsonFile::OnEndObject(const String&)
 {
     // do nothing; should be overridden
 }

@@ -19,13 +19,13 @@
     panImage->Color = ThemeManager::Background;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmLabelledImage::imgImageClick(TObject* Sender)
+void __fastcall TfrmLabelledImage::imgImageClick(TObject* /*Sender*/)
 {
     SetSelected(true);
     if (FOnClick != nullptr) FOnClick(this);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmLabelledImage::imgImageDblClick(TObject *Sender)
+void __fastcall TfrmLabelledImage::imgImageDblClick(TObject* /*Sender*/)
 {
     SetSelected(true);
     if (FOnDblClick != nullptr) FOnDblClick(this);

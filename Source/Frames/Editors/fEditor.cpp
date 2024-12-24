@@ -52,7 +52,7 @@ void TfrmEditor::OnEvent(const Event& event)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditor::FrameEnter(TObject *Sender)
+void __fastcall TfrmEditor::FrameEnter(TObject* /*Sender*/)
 {
     theEditorManager.SetActive(this);
 }

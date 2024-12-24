@@ -24,8 +24,8 @@ namespace Project
 // works out nicely as technically a JsonFile file is persistent; it's just
 // we aren't using Delphi's persistence.
 //---------------------------------------------------------------------------
-const unsigned int InvalidDocumentId = 0;
-const String       Unnamed = "unnamed";
+[[clang::no_destroy]] const unsigned int InvalidDocumentId = 0;
+[[clang::no_destroy]] const String       Unnamed = "unnamed";
 //---------------------------------------------------------------------------
 class Document : public Services::JsonFile
 {
@@ -75,7 +75,7 @@ public:
                         __fastcall  Document(const String& name);
     virtual             __fastcall ~Document() override;
 
-    static  Document*   __fastcall  Create(const String& name, const String& extra)      { throw "Don't create this class";    }
+    static  Document*   __fastcall  Create(const String& name, const String& extra)      { throw "Don't create this class"; name; extra; }
     virtual Document*   __fastcall  Copy(const Document* document);
 
 const TPropertyInfoMap& __fastcall  GetPropertyInfo() const;

@@ -2,7 +2,7 @@
 #ifndef BlockTypesH
 #define BlockTypesH
 //---------------------------------------------------------------------------
-static const String g_BlockTypes[] = {
+[[clang::no_destroy]] static const String g_BlockTypes[]  = {
     "EMPTYBLOCK",
     "PLATFORMBLOCK",
     "WALLBLOCK",

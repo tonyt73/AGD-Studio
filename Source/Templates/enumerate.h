@@ -29,7 +29,7 @@ public:
     // Custom iterator with minimal interface
     struct iterator
     {
-        iterator(typename T::iterator _it, size_t counter=0) : it(_it), counter(counter)
+        iterator(typename T::iterator _it, size_t _counter=0) : it(_it), counter(_counter)
         {}
 
         iterator operator++()

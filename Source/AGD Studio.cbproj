@@ -1,4 +1,4 @@
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{D0C2ACDB-659A-4891-B603-0D187CA01644}</ProjectGuid>
         <ProjectVersion>20.2</ProjectVersion>
@@ -139,14 +139,14 @@
         <BCC_IntegerTypeEnums>true</BCC_IntegerTypeEnums>
         <BT_BuildType>Debug</BT_BuildType>
         <Icon_MainIcon>icon.ico</Icon_MainIcon>
-        <PackageImports>bindcomp;bindcompfmx;bindcompvcl;bindcompvclsmp;bindcompvclwinx;bindengine;fmx;lmdrtcore;lmdrtdocking;lmdrtelcore;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtrtlx;lmdrtshell;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;rtl;vcl;vclactnband;vclimg;VclSmp;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
+        <PackageImports>lmdrtcore;lmdrtdocking;lmdrtelcore;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtrtlx;lmdrtshell;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;rtl;vcl;vclactnband;vclimg;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
         <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
         <BCC_DisableOptimizations>true</BCC_DisableOptimizations>
         <BCC_PCHName_Clang>AGD Studio.pch.h</BCC_PCHName_Clang>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <BT_BuildType>Debug</BT_BuildType>
-        <PackageImports>bindcomp;bindcompfmx;bindcompvcl;bindcompvclsmp;bindcompvclwinx;bindengine;fmx;lmdrtcore;lmdrtdocking;lmdrtelcore;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtrtlx;lmdrtshell;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;rtl;vcl;vclactnband;vclimg;VclSmp;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
+        <PackageImports>lmdrtcore;lmdrtdocking;lmdrtelcore;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtrtlx;lmdrtshell;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;rtl;vcl;vclactnband;vclimg;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
         <Icon_MainIcon>icon.ico</Icon_MainIcon>
         <BCC_PCHName_Clang>AGD Studio.pch.h</BCC_PCHName_Clang>
     </PropertyGroup>
@@ -159,7 +159,7 @@
         <VerInfo_MinorVer>1</VerInfo_MinorVer>
         <VerInfo_Release>0</VerInfo_Release>
         <VerInfo_Build>0</VerInfo_Build>
-        <PackageImports>bindcomp;bindcompfmx;bindcompvcl;bindcompvclsmp;bindcompvclwinx;bindengine;fmx;lmdrtcore;lmdrtdocking;lmdrtelcore;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtrtlx;lmdrtshell;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;rtl;vcl;vclactnband;vclimg;VclSmp;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
+        <PackageImports>lmdrtcore;lmdrtdocking;lmdrtelcore;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtrtlx;lmdrtshell;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;rtl;vcl;vclactnband;vclimg;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
         <Icon_MainIcon>icon.ico</Icon_MainIcon>
         <BCC_PCHName_Clang>AGD Studio.pch.h</BCC_PCHName_Clang>
     </PropertyGroup>
@@ -200,8 +200,8 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64x)'!=''">
         <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;xmlrtl.bpi;lmdrtshell.bpi;DbxCommonDriver.bpi;dbrtl.bpi;bindengine.bpi;lmdrtprint.bpi</LinkPackageImports>
-        <VerInfo_Build>46</VerInfo_Build>
-        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.1.0.46;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.1.1.0;Comments=</VerInfo_Keys>
+        <VerInfo_Build>69</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.1.0.69;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.1.1.0;Comments=</VerInfo_Keys>
         <BCC_EnableLSPIndexingOnChange>false</BCC_EnableLSPIndexingOnChange>
         <BCC_AllWarnings>true</BCC_AllWarnings>
         <BCC_DisableWarnings>false</BCC_DisableWarnings>
@@ -777,36 +777,36 @@
             <DependentOn>Visuals\ULAPlusGraphicsBuffer.h</DependentOn>
             <BuildOrder>110</BuildOrder>
         </CppCompile>
-        <FormResources Include="Forms\fAbout.dfm"/>
-        <FormResources Include="Forms\fAdvancedSettings.dfm"/>
-        <FormResources Include="Forms\fMain.dfm"/>
-        <FormResources Include="Forms\fNewTileImage.dfm"/>
-        <FormResources Include="Forms\fSettings.dfm"/>
-        <FormResources Include="Frames\Editors\Code\fEditorCode.dfm"/>
-        <FormResources Include="Frames\Editors\Controls\fEditorControls.dfm"/>
-        <FormResources Include="Frames\Editors\Controls\fKeyCapture.dfm"/>
-        <FormResources Include="Frames\Editors\fEditor.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fBlockTypes.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fEditorImage.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fMultiImageView.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fPaletteAttribute.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fPaletteBitmap.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fPaletteMonoAttribute.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fSelectionImage.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fToolbar.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fToolbarShape.dfm"/>
-        <FormResources Include="Frames\Editors\Images\fULAplusBitmap.dfm"/>
-        <FormResources Include="Frames\Editors\JumpTable\fEditorJumpTable.dfm"/>
-        <FormResources Include="Frames\Editors\Map\fAssetSelection.dfm"/>
-        <FormResources Include="Frames\Editors\Map\fEditorMap.dfm"/>
-        <FormResources Include="Frames\Editors\Map\fLabelledImage.dfm"/>
-        <FormResources Include="Frames\Editors\Messages\fEditorMessages.dfm"/>
         <FormResources Include="Frames\Editors\Music\fEditorMusic.dfm"/>
+        <FormResources Include="Frames\Editors\Messages\fEditorMessages.dfm"/>
+        <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
+        <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
         <FormResources Include="Frames\Editors\Window\fEditorWindow.dfm"/>
         <FormResources Include="Frames\fAppFrame.dfm"/>
         <FormResources Include="Frames\IDE\fIDE.dfm"/>
-        <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
-        <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
+        <FormResources Include="Forms\fAbout.dfm"/>
+        <FormResources Include="Forms\fAdvancedSettings.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fPaletteMonoAttribute.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fSelectionImage.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fToolbar.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fPaletteBitmap.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fEditorImage.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fMultiImageView.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fPaletteAttribute.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fEditorMap.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fLabelledImage.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fAssetSelection.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fToolbarShape.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fULAplusBitmap.dfm"/>
+        <FormResources Include="Frames\Editors\JumpTable\fEditorJumpTable.dfm"/>
+        <FormResources Include="Frames\Editors\Controls\fEditorControls.dfm"/>
+        <FormResources Include="Frames\Editors\Controls\fKeyCapture.dfm"/>
+        <FormResources Include="Frames\Editors\Code\fEditorCode.dfm"/>
+        <FormResources Include="Forms\fMain.dfm"/>
+        <FormResources Include="Forms\fNewTileImage.dfm"/>
+        <FormResources Include="Forms\fSettings.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fBlockTypes.dfm"/>
+        <FormResources Include="Frames\Editors\fEditor.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -825,8 +825,10 @@
         <BorlandProject>
             <CPlusPlusBuilder.Personality>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcboffice2k290.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcbofficexp290.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclvcldb290.bpl">Embarcadero VCL Database Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclsmp290.bpl">Embarcadero Sample Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclbcbsmp290.bpl">C++Builder Sample Components Package</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\23.0\Bpl\dcllmdtoolsdb290.bpl">LMD 2024 - LMD-Tools Main Database Components</Excluded_Packages>
                 </Excluded_Packages>
                 <ProjectProperties>
                     <ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
@@ -904,6 +906,12 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName=".\Binaries\Win32\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput"/>
+                <DeployFile LocalName=".\Binaries\Win32\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>AGD Studio.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName=".\Binaries\Win32\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Binaries\Win64\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Binaries\Win64\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput">
@@ -924,6 +932,12 @@
                 <DeployFile LocalName=".\Win64\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Win64\Release\AGD_Studio.exe" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName="Project\README.md" Configuration="Debug" Class="ProjectFile"/>
+                <DeployFile LocalName="Project\README.md" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Project\README.md" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win64">
                         <RemoteDir>.\</RemoteDir>

@@ -177,7 +177,7 @@ void __fastcall TfrmULAplusBitmap::Set(Visuals::GraphicsBuffer& canvas)
     canvas.Color[2] = m_Index;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmULAplusBitmap::imgLogicalColorsMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
+void __fastcall TfrmULAplusBitmap::imgLogicalColorsMouseDown(TObject* /*Sender*/, TMouseButton Button, TShiftState /*Shift*/, int /*X*/, int /*Y*/)
 {
     m_Index = m_CursorIndex;
     if (Button == mbLeft || Button == mbMiddle) {
@@ -189,7 +189,7 @@ void __fastcall TfrmULAplusBitmap::imgLogicalColorsMouseDown(TObject *Sender, TM
     Update();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmULAplusBitmap::imgLogicalColorsMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
+void __fastcall TfrmULAplusBitmap::imgLogicalColorsMouseMove(TObject* /*Sender*/, TShiftState /*Shift*/, int X, int Y)
 {
     const auto bx = 20;  // width of the logical colour picker boxes
     const auto by = 40;  // height of the logical colour picker boxes
@@ -206,14 +206,14 @@ void __fastcall TfrmULAplusBitmap::imgLogicalColorsMouseMove(TObject *Sender, TS
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmULAplusBitmap::imgLogicalColorsMouseLeave(TObject *Sender)
+void __fastcall TfrmULAplusBitmap::imgLogicalColorsMouseLeave(TObject* /*Sender*/)
 {
     m_Cursor = -1;
     m_CursorIndex = -1;
     DrawPalettesColors();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmULAplusBitmap::imgSystemColorsMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
+void __fastcall TfrmULAplusBitmap::imgSystemColorsMouseDown(TObject* /*Sender*/, TMouseButton Button, TShiftState /*Shift*/, int /*X*/, int /*Y*/)
 {
     // remap a logical colour to a new physical colour
     if (Button == mbLeft) {
@@ -224,7 +224,7 @@ void __fastcall TfrmULAplusBitmap::imgSystemColorsMouseDown(TObject *Sender, TMo
     Update();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmULAplusBitmap::imgSystemColorsMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
+void __fastcall TfrmULAplusBitmap::imgSystemColorsMouseMove(TObject* /*Sender*/, TShiftState /*Shift*/, int X, int Y)
 {
     auto lpc = m_CursorPhysical;
     // change colour selection
@@ -242,7 +242,7 @@ void __fastcall TfrmULAplusBitmap::imgSystemColorsMouseMove(TObject *Sender, TSh
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmULAplusBitmap::imgSystemColorsMouseLeave(TObject *Sender)
+void __fastcall TfrmULAplusBitmap::imgSystemColorsMouseLeave(TObject* /*Sender*/)
 {
     m_CursorPhysical = -1;
     DrawPhysicalColors();
@@ -262,7 +262,7 @@ unsigned char __fastcall TfrmULAplusBitmap::GetPaper(int index, int paper) const
     return static_cast<unsigned char>((index * 16) + 8 + paper);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmULAplusBitmap::btnPaletteSaveClick(TObject *Sender)
+void __fastcall TfrmULAplusBitmap::btnPaletteSaveClick(TObject* /*Sender*/)
 {
     auto path = Services::File::Combine("Saved Palettes", m_GraphicsMode.Name);
     path = Services::Folders::Create(Services::Folders::lpCommon, path);
@@ -272,7 +272,7 @@ void __fastcall TfrmULAplusBitmap::btnPaletteSaveClick(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmULAplusBitmap::btnPaletteLoadClick(TObject *Sender)
+void __fastcall TfrmULAplusBitmap::btnPaletteLoadClick(TObject* /*Sender*/)
 {
     auto path = Services::File::Combine("Saved Palettes", m_GraphicsMode.Name);
     path = Services::Folders::Create(Services::Folders::lpCommon, path);
@@ -299,7 +299,7 @@ void __fastcall TfrmULAplusBitmap::btnPaletteLoadClick(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmULAplusBitmap::btnPaletteRestoreClick(TObject *Sender)
+void __fastcall TfrmULAplusBitmap::btnPaletteRestoreClick(TObject* /*Sender*/)
 {
     m_GraphicsMode.RestoreDefaultPalette();
     Update();

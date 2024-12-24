@@ -26,7 +26,7 @@ private:
 public:
                         __fastcall  ControlsDocument(const String& name);
 
-    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ControlsDocument(name); }
+    static  Document*   __fastcall  Create(const String& name, const String&) { return new ControlsDocument(name); }
 
         wchar_t         __fastcall  GetAsciiCode(eAgdKey key);
         void            __fastcall  SetAsciiCode(eAgdKey key, wchar_t keyCode);

@@ -25,7 +25,7 @@ using namespace Project;
 //---------------------------------------------------------------------------
 DocumentManager& __fastcall DocumentManager::get()
 {
-    static DocumentManager instance;
+    [[clang::no_destroy]] static DocumentManager instance;
     return instance;
 }
 //---------------------------------------------------------------------------

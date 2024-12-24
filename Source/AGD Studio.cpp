@@ -40,7 +40,7 @@ USEFORM("Frames\IDE\fIDE.cpp", frmIDE); /* TFrame: File Type */
 USEFORM("Frames\WelcomeDialog\fSelectionPanel.cpp", SelectionPanelFrame); /* TFrame: File Type */
 USEFORM("Frames\WelcomeDialog\fWelcomeDialog.cpp", frmWelcomeDialog); /* TFrame: File Type */
 //---------------------------------------------------------------------------
-int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE, LPTSTR, int)
+int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {
     try {
          Application->Initialize();

@@ -214,16 +214,15 @@ void __fastcall TileEditor::OnMouseDown(TMouseButton Button, TShiftState Shift, 
         m_LastMouse.X = X;
         m_LastMouse.Y = Y;
     } else {
-        switch (m_Mode)
-        {
-            case temSelect:
-                OnMouseDownSelectMode(Button, Shift, X, Y);
-                break;
-            case temPencil:
-            case temLine:
-            case temRect:
-                OnMouseDownMapToolMode(Button, Shift, X, Y);
-                break;
+        switch (m_Mode) {
+        case temSelect:
+            OnMouseDownSelectMode(Button, Shift, X, Y);
+            break;
+        case temPencil:
+        case temLine:
+        case temRect:
+            OnMouseDownMapToolMode(Button, Shift, X, Y);
+            break;
         }
     }
 }
@@ -259,10 +258,8 @@ void __fastcall TileEditor::OnMouseMoveSelectMode(TShiftState Shift, int X, int 
     }
     else if (!m_ReadOnly) {
         // workspace/scratch pad mode
-        switch (m_MouseMode)
-        {
-            case mmTool:
-            {
+        switch (m_MouseMode) {
+            case mmTool: {
                 if (m_Mode == temSelect && !ms.Left && ms.NoModifiers) {
                     bool refresh = ClearHover();
                     // find an object that intersects the mouse
@@ -279,10 +276,9 @@ void __fastcall TileEditor::OnMouseMoveSelectMode(TShiftState Shift, int X, int 
                         Refresh();
                     }
                 }
+                break;
             }
-            break;
-            case mmGroupSelect:
-            {
+            case mmGroupSelect: {
                 // dragging the selection rect
                 m_GroupSelectEndMS = ViewToMap(X, Y);
                 m_GroupSelectEndMS.X = Snap(m_GroupSelectEndMS.X, m_TileSize.cx) + m_TileSize.cx;
@@ -303,8 +299,8 @@ void __fastcall TileEditor::OnMouseMoveSelectMode(TShiftState Shift, int X, int 
                     }
                     Refresh();
                 }
+                break;
             }
-            break;
         }
     }
 }
@@ -338,21 +334,20 @@ void __fastcall TileEditor::OnMouseMove(TShiftState Shift, int X, int Y)
         m_LastMouse.Y = Y;
         Refresh();
     } else {
-        switch (m_Mode)
-        {
-            case temSelect:
-                OnMouseMoveSelectMode(Shift, X, Y);
-                break;
-            case temPencil:
-            case temLine:
-            case temRect:
-                OnMouseMoveMapToolMode(Shift, X, Y);
-                break;
+        switch (m_Mode) {
+        case temSelect:
+            OnMouseMoveSelectMode(Shift, X, Y);
+            break;
+        case temPencil:
+        case temLine:
+        case temRect:
+            OnMouseMoveMapToolMode(Shift, X, Y);
+            break;
         }
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::OnMouseUpSelectMode(TMouseButton Button, TShiftState Shift, int X, int Y)
+void __fastcall TileEditor::OnMouseUpSelectMode(TMouseButton Button, TShiftState Shift, int, int)
 {
     MouseState ms(Button, Shift);
     if (!m_ReadOnly) {
@@ -407,7 +402,7 @@ void __fastcall TileEditor::OnMouseUpSelectMode(TMouseButton Button, TShiftState
     Refresh();
 }
 //---------------------------------------------------------------------------
-void __fastcall TileEditor::OnMouseUpMapToolMode(TMouseButton Button, TShiftState Shift, int X, int Y)
+void __fastcall TileEditor::OnMouseUpMapToolMode(TMouseButton, TShiftState, int X, int Y)
 {
     if (ToolEntity && m_ActiveMapTool) {
         m_ActiveMapTool->End(m_ToolEntities, m_ToolEntity, ViewToMap(X, Y));
@@ -422,16 +417,15 @@ void __fastcall TileEditor::OnMouseUp(TMouseButton Button, TShiftState Shift, in
     if (m_MousePanning) {
         m_MousePanning = false;
     } else {
-        switch (m_Mode)
-        {
-            case temSelect:
-                OnMouseUpSelectMode(Button, Shift, X, Y);
-                break;
-            case temPencil:
-            case temLine:
-            case temRect:
-                OnMouseUpMapToolMode(Button, Shift, X, Y);
-                break;
+        switch (m_Mode) {
+        case temSelect:
+            OnMouseUpSelectMode(Button, Shift, X, Y);
+            break;
+        case temPencil:
+        case temLine:
+        case temRect:
+            OnMouseUpMapToolMode(Button, Shift, X, Y);
+            break;
         }
     }
     Screen->Cursor =  crDefault;
@@ -490,7 +484,7 @@ void __fastcall TileEditor::SetScale(float scale)
     m_BorderScaled.x = static_cast<int>(static_cast<float>(m_Border) / m_Scale.x);
     m_BorderScaled.y = static_cast<int>(static_cast<float>(m_Border) / m_Scale.y);
     CreateViewBitmap();
-    m_View->Picture->Bitmap->Canvas->Font->Size = (-12 * 72 * std::max(1.f, m_Scale.y)) / m_View->Picture->Bitmap->Canvas->Font->PixelsPerInch;
+    m_View->Picture->Bitmap->Canvas->Font->Size = (-12 * 72 * static_cast<int>(std::max(1.f, m_Scale.y))) / m_View->Picture->Bitmap->Canvas->Font->PixelsPerInch;
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::SetMode(TEMode mode)
@@ -619,18 +613,18 @@ void __fastcall TileEditor::DrawGrids() const
     auto Canvas = m_View->Picture->Bitmap->Canvas;
     Canvas->Pen->Style = psSolid;
 
-    auto xs =  (m_BorderScaled.x - m_MapOffsetMS.X) * m_Scale.x;
-    auto xe = xs + (m_ContentSize.cx * m_Scale.x);
-    auto ys =  (m_BorderScaled.y - m_MapOffsetMS.Y) * m_Scale.y;
-    auto ye = ys + (m_ContentSize.cy * m_Scale.y);
+    auto xs = static_cast<int>(static_cast<float>(m_BorderScaled.x - m_MapOffsetMS.X) * m_Scale.x);
+    auto xe = xs + static_cast<int>(static_cast<float>(m_ContentSize.cx) * m_Scale.x);
+    auto ys =  static_cast<int>(static_cast<float>(m_BorderScaled.y - m_MapOffsetMS.Y) * m_Scale.y);
+    auto ye = ys + static_cast<int>(static_cast<float>(m_ContentSize.cy) * m_Scale.y);
     if (m_UsesGridTile && m_ShowGridTile) {
-        auto sx = m_TileSize.cx * m_Scale.x;
+        auto sx = static_cast<int>(static_cast<float>(m_TileSize.cx) * m_Scale.x);
         Canvas->Pen->Color = c_ColorTileGrid;
         for (auto x = xs; x <= xe; x += sx) {
             Canvas->MoveTo(x, ys);
             Canvas->LineTo(x, ye);
         }
-        auto sy = m_TileSize.cy * m_Scale.y;
+        auto sy = static_cast<int>(static_cast<float>(m_TileSize.cy) * m_Scale.y);
         for (auto y = ys; y <= ye; y += sy) {
             Canvas->MoveTo(xs, y);
             Canvas->LineTo(xe, y);
@@ -638,8 +632,8 @@ void __fastcall TileEditor::DrawGrids() const
     }
     if (m_UsesGridRoom && m_ShowGridRoom) {
         Canvas->Pen->Color = c_ColorRoomGrid;
-        auto rx = m_Window.Width()  * m_TileSize.cx * m_Scale.x;
-        auto ry = m_Window.Height() * m_TileSize.cy * m_Scale.y;
+        auto rx = static_cast<int>(static_cast<float>(m_Window.Width()  * m_TileSize.cx) * m_Scale.x);
+        auto ry = static_cast<int>(static_cast<float>(m_Window.Height() * m_TileSize.cy) * m_Scale.y);
         for (auto x = xs; x <= xe; x += rx) {
             Canvas->MoveTo(x, ys);
             Canvas->LineTo(x, ye);
@@ -658,10 +652,10 @@ void __fastcall TileEditor::DrawRoomNumbers() const
         Canvas->Font->Size = 10;
         Canvas->Font->Color = ThemeManager::Foreground;
         Canvas->Pen->Style = psSolid;
-        auto xs =  (m_BorderScaled.x - m_MapOffsetMS.X) * m_Scale.x;
-        auto ys =  (m_BorderScaled.y - m_MapOffsetMS.Y) * m_Scale.y;
-        auto rx = m_Window.Width()  * m_TileSize.cx * m_Scale.x;
-        auto ry = m_Window.Height() * m_TileSize.cy * m_Scale.y;
+        auto xs = static_cast<int>(static_cast<float>(m_BorderScaled.x  - m_MapOffsetMS.X) * m_Scale.x);
+        auto ys = static_cast<int>(static_cast<float>(m_BorderScaled.y  - m_MapOffsetMS.Y) * m_Scale.y);
+        auto rx = static_cast<int>(static_cast<float>(m_Window.Width()  * m_TileSize.cx  ) * m_Scale.x);
+        auto ry = static_cast<int>(static_cast<float>(m_Window.Height() * m_TileSize.cy  ) * m_Scale.y);
         auto ty = ys;
         for (auto y = 0; y < Project::g_MaxMapRoomsDown; y++) {
             auto tx = xs;
@@ -812,7 +806,7 @@ void __fastcall TileEditor::DrawSelectedRoom() const
         auto ww = m_TileSize.cx * m_Window.Width();
         auto wh = m_TileSize.cy * m_Window.Height();
         auto pt = MapToView(TPoint(m_SelectedRoom.cx * ww, m_SelectedRoom.cy * wh));
-        AlphaBlend(m_View->Picture->Bitmap->Canvas->Handle, pt.x, pt.y, ww * m_Scale.x + 1, wh * m_Scale.y + 1, shade->Canvas->Handle, 0, 0, 1, 1, bfn);
+        AlphaBlend(m_View->Picture->Bitmap->Canvas->Handle, pt.x, pt.y, static_cast<int>(static_cast<float>(ww) * m_Scale.x) + 1, static_cast<int>(static_cast<float>(wh) * m_Scale.y) + 1, shade->Canvas->Handle, 0, 0, 1, 1, bfn);
     }
 }
 //---------------------------------------------------------------------------
@@ -832,7 +826,7 @@ void __fastcall TileEditor::DrawStartRoom() const
         auto ww = m_TileSize.cx * m_Window.Width();
         auto wh = m_TileSize.cy * m_Window.Height();
         auto pt = MapToView(TPoint(m_StartRoom.x * ww, m_StartRoom.y * wh));
-        AlphaBlend(m_View->Picture->Bitmap->Canvas->Handle, pt.x, pt.y, ww * m_Scale.x + 1, wh * m_Scale.y + 1, shade->Canvas->Handle, 0, 0, 1, 1, bfn);
+        AlphaBlend(m_View->Picture->Bitmap->Canvas->Handle, pt.x, pt.y, static_cast<int>(static_cast<float>(ww) * m_Scale.x) + 1, static_cast<int>(static_cast<float>(wh) * m_Scale.y) + 1, shade->Canvas->Handle, 0, 0, 1, 1, bfn);
     }
 }
 //---------------------------------------------------------------------------

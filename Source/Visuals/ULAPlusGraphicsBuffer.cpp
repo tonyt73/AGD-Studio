@@ -64,11 +64,10 @@ void __fastcall ULAPlusGraphicsBuffer::GetColor(unsigned int X, unsigned int Y, 
         auto iy = Y / m_GraphicsMode.PixelsHighPerAttribute;
         auto attrOffset = (iy * m_Stride) + ix;
         auto color = m_Buffers[1][attrOffset];
-        switch (colorIndex)
-        {
-            case 0: m_SetColors[0] =  color & g_InkMask;                        break;
-            case 1: m_SetColors[1] = (color & g_PaperMask  ) >> g_PaperShift;   break;
-            case 2: m_SetColors[2] = (color & g_PaletteMask) >> g_PaletteShift; break;
+        switch (colorIndex) {
+        case 0: m_SetColors[0] =  color & g_InkMask;                        break;
+        case 1: m_SetColors[1] = (color & g_PaperMask  ) >> g_PaperShift;   break;
+        case 2: m_SetColors[2] = (color & g_PaletteMask) >> g_PaletteShift; break;
         }
     }
 }

@@ -31,7 +31,7 @@ __fastcall TSelectionPanelFrame::~TSelectionPanelFrame()
     Parent = nullptr;
 }
 //---------------------------------------------------------------------------
-void __fastcall TSelectionPanelFrame::panProjectInfoMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
+void __fastcall TSelectionPanelFrame::panProjectInfoMouseMove(TObject* /*Sender*/, TShiftState /*Shift*/, int /*X*/, int /*Y*/)
 {
     Highlighted = true;
 }
@@ -135,18 +135,18 @@ void __fastcall TSelectionPanelFrame::Tick()
     prgLoading->StepIt();
 }
 //---------------------------------------------------------------------------
-void __fastcall TSelectionPanelFrame::lblProjectNameClick(TObject *Sender)
+void __fastcall TSelectionPanelFrame::lblProjectNameClick(TObject* /*Sender*/)
 {
     Selected = true;
     if (FOnClick != nullptr) FOnClick(this);
 }
 //---------------------------------------------------------------------------
-void __fastcall TSelectionPanelFrame::imgRemoveClick(TObject *Sender)
+void __fastcall TSelectionPanelFrame::imgRemoveClick(TObject* /*Sender*/)
 {
     if (FOnRemoveClick != nullptr) FOnRemoveClick(this);
 }
 //---------------------------------------------------------------------------
-void __fastcall TSelectionPanelFrame::imgOpenProjectFolderClick(TObject *Sender)
+void __fastcall TSelectionPanelFrame::imgOpenProjectFolderClick(TObject* /*Sender*/)
 {
     auto folder = Services::File::Combine(Services::Folders::Projects, m_Name);
     ShellExecute(nullptr, L"open", nullptr, nullptr, folder.c_str(), SW_SHOWNORMAL);

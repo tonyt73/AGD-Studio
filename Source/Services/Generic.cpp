@@ -7,8 +7,8 @@
 //---------------------------------------------------------------------------
 using namespace Services;
 //---------------------------------------------------------------------------
-const String g_TokenObj = "|";
-const String g_TokenSep = "^";
+[[clang::no_destroy]] const String g_TokenObj = "|";
+[[clang::no_destroy]] const String g_TokenSep = "^";
 //---------------------------------------------------------------------------
 Generic::Generic()
 {

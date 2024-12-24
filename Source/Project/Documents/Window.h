@@ -21,7 +21,7 @@ private:
 public:
                         __fastcall  WindowDocument(const String& name);
 
-    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new WindowDocument(name); }
+    static  Document*   __fastcall  Create(const String& name, const String&) { return new WindowDocument(name); }
             void        __fastcall  SetRect(const TRect& rect);
 
            __property  const TRect& Rect        = { read = m_Rect         };

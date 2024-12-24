@@ -52,7 +52,7 @@ protected:
 public:
                         __fastcall  TiledMapDocument(const String& name);
                         __fastcall ~TiledMapDocument() override;
-    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new TiledMapDocument(name); }
+    static  Document*   __fastcall  Create(const String& name, const String&) { return new TiledMapDocument(name); }
 
     MapEntityList       __fastcall  Get(Visuals::ImageTypes type) const;
    const MapEntityList& __fastcall  GetEntities(MapEntityType type, TSize room = TSize(0,0)) const;

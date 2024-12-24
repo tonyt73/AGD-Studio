@@ -127,7 +127,7 @@ void __fastcall TfrmEditorImage::OnDocumentSet()
     barStatus->Panels->Items[3]->Text = "Graphics Mode: " + m_GraphicsMode.Name + ", Palette: " + m_GraphicsMode.Palette().Name;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::FrameEndDock(TObject *Sender, TObject *Target, int X, int Y)
+void __fastcall TfrmEditorImage::FrameEndDock(TObject* Sender, TObject* /*Target*/, int /*X*/, int /*Y*/)
 {
     TLMDDockPanel* dp = dynamic_cast<TLMDDockPanel*>(Sender);
     assert(dp != nullptr);
@@ -145,7 +145,7 @@ void __fastcall TfrmEditorImage::ChangeToolbar(TfrmToolbar* toolbar)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actSelectExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actSelectExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         ChangeToolbar(nullptr);
@@ -156,7 +156,7 @@ void __fastcall TfrmEditorImage::actSelectExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actPencilExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actPencilExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         ChangeToolbar(nullptr);
@@ -167,7 +167,7 @@ void __fastcall TfrmEditorImage::actPencilExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actBrushExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actBrushExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         ChangeToolbar(nullptr);
@@ -178,7 +178,7 @@ void __fastcall TfrmEditorImage::actBrushExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actFillExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actFillExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         ChangeToolbar(nullptr);
@@ -189,7 +189,7 @@ void __fastcall TfrmEditorImage::actFillExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actSprayBrushExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actSprayBrushExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         ChangeToolbar(nullptr);
@@ -200,7 +200,7 @@ void __fastcall TfrmEditorImage::actSprayBrushExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actLineExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actLineExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         ChangeToolbar(nullptr);
@@ -211,7 +211,7 @@ void __fastcall TfrmEditorImage::actLineExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actShapeExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actShapeExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         ChangeToolbar(toolbarShape);
@@ -222,7 +222,7 @@ void __fastcall TfrmEditorImage::actShapeExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actTextExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actTextExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         ChangeToolbar(nullptr);
@@ -233,62 +233,62 @@ void __fastcall TfrmEditorImage::actTextExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actGridPixelExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actGridPixelExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         RefreshView();
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actRotateLeftExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actRotateLeftExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actRotateRightExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actRotateRightExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actRotateUpExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actRotateUpExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actRotateDownExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actRotateDownExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actFlipVerticalExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actFlipVerticalExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actFlipHorizontalExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actFlipHorizontalExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actRotateLeft90Execute(TObject *Sender)
+void __fastcall TfrmEditorImage::actRotateLeft90Execute(TObject* /*Sender*/)
 {
     if (IsActive()) {
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actRotateRight90Execute(TObject *Sender)
+void __fastcall TfrmEditorImage::actRotateRight90Execute(TObject* /*Sender*/)
 {
     if (IsActive()) {
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actMonoOnExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actMonoOnExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         for (int i = 0; i < m_ImageDocument->Frames; i++) {
@@ -298,7 +298,7 @@ void __fastcall TfrmEditorImage::actMonoOnExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actMonoOffExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actMonoOffExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         for (int i = 0; i < m_ImageDocument->Frames; i++) {
@@ -308,12 +308,12 @@ void __fastcall TfrmEditorImage::actMonoOffExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::panEditorContainerClick(TObject *Sender)
+void __fastcall TfrmEditorImage::panEditorContainerClick(TObject* /*Sender*/)
 {
     SetFocus();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actZoomInExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actZoomInExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         sbxView->HorzScrollBar->Position = 0;
@@ -323,7 +323,7 @@ void __fastcall TfrmEditorImage::actZoomInExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actZoomOutExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actZoomOutExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         sbxView->HorzScrollBar->Position = 0;
@@ -333,7 +333,7 @@ void __fastcall TfrmEditorImage::actZoomOutExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actZoomResetExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actZoomResetExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         m_Magnification = 8.f;
@@ -341,7 +341,7 @@ void __fastcall TfrmEditorImage::actZoomResetExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::sbxViewResize(TObject *Sender)
+void __fastcall TfrmEditorImage::sbxViewResize(TObject* /*Sender*/)
 {
     if (theDocumentManager.ProjectConfig()) {
         const auto& gm = m_GraphicsMode;
@@ -446,7 +446,7 @@ void __fastcall TfrmEditorImage::RefreshFramesView()
     RefreshView();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::sbxViewMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled)
+void __fastcall TfrmEditorImage::sbxViewMouseWheel(TObject* /*Sender*/, TShiftState Shift, int WheelDelta, TPoint&, bool &Handled)
 {
     if (Shift.Contains(ssCtrl)) {
         Handled = true;
@@ -460,7 +460,7 @@ void __fastcall TfrmEditorImage::sbxViewMouseWheel(TObject *Sender, TShiftState 
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::OnFrameSelected(TObject *Sender)
+void __fastcall TfrmEditorImage::OnFrameSelected(TObject* Sender)
 {
     auto frame = dynamic_cast<TSelectionImageFrame*>(Sender);
     if (frame != nullptr) {
@@ -469,26 +469,26 @@ void __fastcall TfrmEditorImage::OnFrameSelected(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::popAddFrameClick(TObject *Sender)
+void __fastcall TfrmEditorImage::popAddFrameClick(TObject* /*Sender*/)
 {
     m_ImageDocument->AddFrame();
     RefreshFramesView();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::popInsertFrameClick(TObject *Sender)
+void __fastcall TfrmEditorImage::popInsertFrameClick(TObject* /*Sender*/)
 {
     m_ImageDocument->AddFrame(m_SelectedFrame);
     RefreshFramesView();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::popRemoveFrameClick(TObject *Sender)
+void __fastcall TfrmEditorImage::popRemoveFrameClick(TObject* /*Sender*/)
 {
     m_ImageDocument->DeleteFrame(m_SelectedFrame);
     m_SelectedFrame = 0;
     RefreshFramesView();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actAnimatePlayExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actAnimatePlayExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         btnAnimatePlay->Down = true;
@@ -499,7 +499,7 @@ void __fastcall TfrmEditorImage::actAnimatePlayExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actAnimateStopExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actAnimateStopExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         btnAnimateStop->Down = true;
@@ -510,7 +510,7 @@ void __fastcall TfrmEditorImage::actAnimateStopExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actToggleAnimationExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actToggleAnimationExecute(TObject* Sender)
 {
     if (IsActive()) {
         if (btnAnimatePlay->Down) {
@@ -521,19 +521,19 @@ void __fastcall TfrmEditorImage::actToggleAnimationExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::tmrAnimateTimer(TObject *Sender)
+void __fastcall TfrmEditorImage::tmrAnimateTimer(TObject* /*Sender*/)
 {
     m_SelectedFrame = (m_SelectedFrame + 1) % m_ImageDocument->Frames;
     RefreshView();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actUndoExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actUndoExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actRedoExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actRedoExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
     }
@@ -561,7 +561,7 @@ void __fastcall TfrmEditorImage::SetCanvasColors()
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::imgEditorMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
+void __fastcall TfrmEditorImage::imgEditorMouseDown(TObject* /*Sender*/, TMouseButton, TShiftState Shift, int X, int Y)
 {
     theEditorManager.SetActive(this);
     if (btnAnimateStop->Down) {
@@ -583,7 +583,7 @@ void __fastcall TfrmEditorImage::imgEditorMouseDown(TObject *Sender, TMouseButto
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::imgEditorMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
+void __fastcall TfrmEditorImage::imgEditorMouseMove(TObject* /*Sender*/, TShiftState Shift, int X, int Y)
 {
     auto w = static_cast<int>(8 / m_GraphicsMode.ScalarX);
     auto h = static_cast<int>(8 / m_GraphicsMode.ScalarY);
@@ -605,14 +605,13 @@ void __fastcall TfrmEditorImage::imgEditorMouseMove(TObject *Sender, TShiftState
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::imgEditorMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
+void __fastcall TfrmEditorImage::imgEditorMouseUp(TObject* /*Sender*/, TMouseButton, TShiftState, int X, int Y)
 {
     if (btnAnimateStop->Down) {
         SetCaptureControl(nullptr);
         if (btnModePaint->Down) {
             // pixel paint mode
-            if (m_CanvasToolMap.count(m_CanvasTool) == 1)
-            {
+            if (m_CanvasToolMap.count(m_CanvasTool) == 1) {
                 auto redo = m_CanvasToolMap[m_CanvasTool]->End(m_Frames[m_SelectedFrame]->Canvas(), ToImagePt(X,Y));
                 m_ImageDocument->Frame[m_SelectedFrame] = m_Frames[m_SelectedFrame]->Canvas().Get();
                 RefreshView();
@@ -626,7 +625,7 @@ void __fastcall TfrmEditorImage::imgEditorMouseUp(TObject *Sender, TMouseButton 
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actModePaintExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actModePaintExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         actPencil->Enabled = true;
@@ -650,7 +649,7 @@ void __fastcall TfrmEditorImage::actModePaintExecute(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorImage::actModeBlockExecute(TObject *Sender)
+void __fastcall TfrmEditorImage::actModeBlockExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         m_LastModeString = barStatus->Panels->Items[3]->Text;
