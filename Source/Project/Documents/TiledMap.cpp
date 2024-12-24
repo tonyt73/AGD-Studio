@@ -343,7 +343,7 @@ const TRect __fastcall TiledMapDocument::SetMinimalMapSize()
             }
         }
     }
-    rect.Inflate(1,0,1,0);
+    rect.Inflate(1,0,1,1);
     m_RoomMappingWidth  = rect.Right;
     m_RoomMappingHeight = rect.Bottom;
     return rect;
