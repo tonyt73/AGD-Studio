@@ -23,7 +23,7 @@ __fastcall SpritesSection::~SpritesSection()
 void __fastcall SpritesSection::Execute()
 {
     const auto& dm = theDocumentManager;
-    auto imgSize = dm.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile].Minimum;
+    auto imgSize = dm.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itSprite].Minimum;
     Project::DocumentList images;
     dm.GetAllOfType("Image", images);
     for (auto image : images) {
@@ -40,7 +40,7 @@ void __fastcall SpritesSection::Execute()
                 // export the machine graphics data
                 for (auto byte : enumerate(data)) {
                     line += IntToStr(byte.item) + " ";
-                    if (static_cast<long>(byte.index) % imgSize.Width == 0) {
+                    if (static_cast<long>(byte.index + 1) % imgSize.Width == 0) {
                         line += "\r\n             ";
                     }
                 }

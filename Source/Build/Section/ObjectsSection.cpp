@@ -28,9 +28,10 @@ void __fastcall ObjectsSection::Execute()
     // get the objects in the map
     auto mapDoc = dynamic_cast<Project::TiledMapDocument*>(dm.Get("Map", "Tiled", "Tile Map"));
     assert(mapDoc != nullptr);
-    auto imgSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile].Minimum;
     const auto& wi = static_cast<Project::WindowDocument*>(theDocumentManager.Get("Window", "Definition", "Window"));
-    auto wPt = TPoint(wi->Rect.Left * imgSize.cx, wi->Rect.Top * imgSize.cy);
+    auto tileSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile].Minimum;
+    auto imgSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itObject].Minimum;
+    auto wPt = TPoint(wi->Rect.Left * tileSize.cx, wi->Rect.Top * tileSize.cy);
     auto objectsInMap = mapDoc->Get(Visuals::itObject);
     // get the list of object images
     Project::DocumentList images;
@@ -62,7 +63,6 @@ void __fastcall ObjectsSection::Execute()
             // add the room
             auto roomIndex = object->State == Visuals::osRoom ? static_cast<Project::ObjectDocument*>(object)->RoomIndex : (object->State == Visuals::osDisabled ? 254 : 255);
             line += IntToStr(static_cast<int>(roomIndex)) + " ";
-            //line += IntToStr(object->Y) + " " + IntToStr(object->X) + " ";
             line += IntToStr(static_cast<int>(wPt.Y + object->Y)) + " " + IntToStr(static_cast<int>(wPt.X + object->X)) + " ";
             AddLine(line);
             // export the machine graphics data
@@ -70,7 +70,7 @@ void __fastcall ObjectsSection::Execute()
             for (auto byte : enumerate(data))
             {
                 line += IntToStr(byte.item) + " ";
-                if (static_cast<LONG>(byte.index) % imgSize.Width == 0)
+                if (static_cast<LONG>(byte.index + 1) % imgSize.Width == 0)
                 {
                     AddLine(line);
                     line = "             ";
