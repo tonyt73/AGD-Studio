@@ -32,9 +32,9 @@ private:    // User declarations
     void            __fastcall  ShowIDE();
     void            __fastcall  SaveSettings();
 
-    TfrmAppFrame*      __fastcall  GetWelcome();
-    TfrmAppFrame*      __fastcall  GetIDE();
-    TfrmAppFrame*      __fastcall  GetActiveForm();
+    TfrmAppFrame*   __fastcall  GetWelcome();
+    TfrmAppFrame*   __fastcall  GetIDE();
+    TfrmAppFrame*   __fastcall  GetActiveForm();
 
 private:
 
@@ -45,13 +45,13 @@ private:
         fvGameIDE
     };
 
-    TFormView                   m_FormView;
-    std::unique_ptr<TfrmAppFrame>  m_WelcomeFrame;
-    std::unique_ptr<TfrmAppFrame>  m_IDEFrame;
+    TFormView                       m_FormView;
+    std::unique_ptr<TfrmAppFrame>   m_WelcomeFrame;
+    std::unique_ptr<TfrmAppFrame>   m_IDEFrame;
 
-    __property      TfrmAppFrame*  Welcome = { read = GetWelcome    };
-    __property      TfrmAppFrame*  IDE     = { read = GetIDE        };
-    __property      TfrmAppFrame*  Active  = { read = GetActiveForm };
+    __property      TfrmAppFrame*   Welcome = { read = GetWelcome    };
+    __property      TfrmAppFrame*   IDE     = { read = GetIDE        };
+    __property      TfrmAppFrame*   Active  = { read = GetActiveForm };
 
 public:        // User declaration
                     __fastcall  TfrmMain(TComponent* Owner) override;
