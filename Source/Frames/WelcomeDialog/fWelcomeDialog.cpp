@@ -273,6 +273,7 @@ void __fastcall TfrmWelcomeDialog::UpdateUI(bool updateMachine)
         imgMachineTick->Visible = importerExists;
         imgMachineCross->Visible = !imgMachineTick->Visible;
         btnCreate->Enabled = !isProjectEmpty && !projectExists && importerExists;
+        if (btnCreate->Enabled) btnCreate->SetFocus();
     }
     imgProjectNameTick->Visible = !isProjectEmpty && btnCreate->Enabled;
     imgProjectNameCross->Visible = !isProjectEmpty && !btnCreate->Enabled;
