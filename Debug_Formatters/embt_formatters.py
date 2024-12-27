@@ -2,7 +2,6 @@ import lldb
 import lldb.formatters.Logger
 import datetime
 import re
-import inspect
 
 DBG_LOG=False
 
@@ -149,7 +148,8 @@ class DelphiDynArray_SynthProvider:
 			return 0
 		try:
 			return 1 + int(name.lstrip('[').rstrip(']'))
-		except:
+		except Exception as err:
+			logger >> "DelphiDynArray_SynthProvider:get_child_index exception: " + str(err)
 			return None
 
 	def get_child_at_index(self, index):
@@ -168,6 +168,7 @@ class DelphiDynArray_SynthProvider:
 			return self.Elements.CreateChildAtOffset(
 				'[' + str(index - 1) + ']', (index - 1) * self.elementType.size, self.elementType)
 		except Exception as err:
+			logger >> "DelphiDynArray_SynthProvider:get_child_index exception: " + str(err)
 			return '<DynArray[] exception: ' + str(err) + '>'
 
 	def has_children(self):
@@ -401,7 +402,7 @@ class stddeque_SynthProvider:
 
 	def __init__(self, valobj, d):
 		if DBG_LOG:
-			logger.write("init")
+			logger >> "stddeque_SynthProvider __init__"
 		self.valobj = valobj
 		self.pointer_size = self.valobj.GetProcess().GetAddressByteSize()
 		self.count = None
@@ -451,18 +452,21 @@ class stddeque_SynthProvider:
 			return -1
 
 	def get_child_at_index(self, index):
-#		 logger.write("DEQUE Fetching child " + str(index))
+		if DBG_LOG:
+			 logger.write("DEQUE Fetching child " + str(index))
 		if index < 0 or self.count is None:
 			return None
 		if index >= self.num_children():
 			return None
 		try:
 			i, j = divmod(self.start + index, self.block_size)
-#			 logger >> '(i,j) = ' + str(i) + ',' + str(j)
+			if DBG_LOG:
+				logger >> '(i,j) = ' + str(i) + ',' + str(j)
 			return self.first.CreateValueFromExpression(
 				'[' + str(index) + ']', '*(*(%s + %d) + %d)' %
 				(self.first.get_expr_path(), i, j))
-		except:
+		except Exception as err:
+			logger >> "stddeque_SynthProvider:get_child_index exception: " + str(err)
 			return None
 
 	def update(self):
@@ -476,7 +480,8 @@ class stddeque_SynthProvider:
 				self.count = None
 				return None
 			count = Myval2.GetChildMemberWithName('_Mysize').GetValueAsUnsigned(0)
-#			logger >> 'DEQUE count = ' + str(count)
+			if DBG_LOG:
+				logger >> 'DEQUE count = ' + str(count)
 			# we're going to limit the number displayed in any case but
 			# counts greater than a reasonable amount are more likely to
 			# be from uninitialized structures.
@@ -485,7 +490,8 @@ class stddeque_SynthProvider:
 				return None
 			# give up now if we can't access memory reliably
 			if self.block_size < 0:
-#				 logger.write("block_size < 0")
+				if DBG_LOG:
+					logger.write("block_size < 0")
 				return
 			count = min(count, 256)
 			map_ = Myval2.GetChildMemberWithName('_Map')
@@ -515,7 +521,7 @@ class COFF_stddeque_SynthProvider:
 			self.block_size = -1
 			self.element_size = -1
 		if DBG_LOG:
-		 logger.write("COFF_stddeque_SynthProvider block_size=%d, element_size=%d" %(self.block_size, self.element_size))
+			logger.write("COFF_stddeque_SynthProvider block_size=%d, element_size=%d" %(self.block_size, self.element_size))
 
 	def find_block_size(self):
 		# in order to use the deque we must have the block size
@@ -557,7 +563,7 @@ class COFF_stddeque_SynthProvider:
 
 	def get_child_at_index(self, index):
 		if DBG_LOG:
-			logger.write("COFF_stddeque_SynthProvider Fetching child " + str(index))
+			logger >> "COFF_stddeque_SynthProvider Fetching child " + str(index)
 		if index < 0 or self.count is None:
 			return None
 		if index >= self.num_children():
@@ -569,7 +575,8 @@ class COFF_stddeque_SynthProvider:
 				logger >> 'COFF_stddeque_SynthProvider (i,j) = ' + str(i) + ',' + str(j)
 				logger >> 'COFF_stddeque_SynthProvider expr = ' + expr
 			return self.first.CreateValueFromExpression('[' + str(index) + ']', expr)
-		except:
+		except Exeception as err:
+			logger >> "COFF_stddeque_SynthProvider:get_child_at_index exception: " + str(err)
 			return None
 
 	def update(self):
@@ -608,17 +615,18 @@ class syststringlist_SynthProvider:
 		self.base = None
 		if flist.IsValid():
 			self.base = flist.GetChildMemberWithName('Data')
-#		logger >> "Providing synthetic children for a TStringList named " + \
-#			str(valobj.GetName())
+		if DBG_LOG:
+			logger >> "Providing synthetic children for a TStringList named " + (valobj.GetName())
 			
 	def num_children(self):
 		fcount = self.valobj.GetChildMemberWithName('FCount')
-#		logger >> "num_children = " + \
-#				str(fcount.GetValueAsUnsigned(0))
+		if DBG_LOG:
+			logger >> "num_children = " + str(fcount.GetValueAsUnsigned(0))
 		return fcount.GetValueAsUnsigned(0)
 	
 	def get_child_index(self, name):
-#		logger >> "get_child_index = " + str(name)
+		if DBG_LOG:
+			logger >> "get_child_index = " + str(name)
 		try:
 			return int(name.lstrip('[').rstrip(']'))
 		except:
@@ -628,7 +636,8 @@ class syststringlist_SynthProvider:
 		if index < 0 or self.base is None:
 			return None
 		try:
-#			logger >> "get_child_at_index = " + str(index)
+			if DBG_LOG:
+				logger >> "get_child_at_index = " + str(index)
 			objType = self.base.GetType().GetPointeeType()
 			offs = self.base.GetValueAsUnsigned(0) + (index * objType.GetByteSize())
 			name = '[' + str(index) + ']'
@@ -636,7 +645,7 @@ class syststringlist_SynthProvider:
 			result = result.GetChildMemberWithName('FString')
 			return result.CreateValueFromData(name, result.GetData(), result.GetType())
 		except Exception as err:
-#			logger >> "<exception: " + str(err) + '>'
+			logger >> "syststringlist_SynthProvider:get_child_at_index exception: " + str(err)
 			return '<exception: ' + str(err) + '>'
 
 	def update(self):
@@ -696,12 +705,14 @@ class StdVector_SynthProvider:
 				else:
 					num_children = num_children // self.data_size
 				return num_children
-			except:
-#				logger >> "Return child# 0 (exception)"
+			except Exception as err:
+				if DBG_LOG:
+					logger >> "StdVector_SynthProvider:num_children_impl: " + str(err)
 				return 0
 
 		def get_child_at_index(self, index):
-#			logger >> "Retrieving child " + str(index)
+			if DBG_LOG:
+				logger >> "Retrieving child " + str(index)
 			if index < 0:
 				return None
 			if index >= self.num_children():
@@ -710,7 +721,8 @@ class StdVector_SynthProvider:
 				offset = index * self.data_size
 				return self.start.CreateChildAtOffset(
 					'[' + str(index) + ']', offset, self.data_type)
-			except:
+			except Exception as err:
+				logger >> "StdVector_SynthProvider:get_child_at_index exception: " + str(err)
 				return None
 
 		def update(self):
@@ -732,14 +744,16 @@ class StdVector_SynthProvider:
 					self.count = None
 				else:
 					self.count = 0
-			except:
+			except Exception as err:
+				logger >> "StdVector_SynthProvider:update exception: " + str(err)
 				pass
 			return None
 			
 	def __init__(self, valobj, dict):
 		first_template_arg_type = valobj.GetType().GetTemplateArgumentType(0)
 		self.impl = self.StdVectorImplementation(valobj)
-		logger >> "Providing synthetic children for a vector named " + str(valobj.GetName())
+		if DBG_LOG:
+			logger >> "Providing synthetic children for a vector named " + str(valobj.GetName())
 
 	def num_children(self):
 		return self.impl.num_children()
@@ -747,7 +761,8 @@ class StdVector_SynthProvider:
 	def get_child_index(self, name):
 		try:
 			return int(name.lstrip('[').rstrip(']'))
-		except:
+		except Exception as err:
+			logger >> "StdVector_SynthProvider:get_child_index exception: " + str(err)
 			return -1
 
 	def get_child_at_index(self, index):
@@ -811,15 +826,16 @@ class COFF_StdVector_SynthProvider:
 				else:
 					num_children = num_children // self.data_size
 				if DBG_LOG:
-					logger >> "COFF_Vector num_children_impl num_children " + str(num_children)
+					logger >> "COFF_StdVector_SynthProvider:num_children_impl num_children " + str(num_children)
 				return num_children
-			except:
+			except Exception as err:
 				if DBG_LOG:
-					logger >> "COFF_Vector num_children_impl exception"
+					logger >> "COFF_StdVector_SynthProvider:num_children_impl exception: " + str(err)
 				return 0
 
 		def get_child_at_index(self, index):
-#			logger >> "Retrieving child " + str(index)
+			if DBG_LOG:
+				logger >> "Retrieving child " + str(index)
 			if index < 0:
 				return None
 			if index >= self.num_children():
@@ -828,7 +844,9 @@ class COFF_StdVector_SynthProvider:
 				offset = index * self.data_size
 				return self.start.CreateChildAtOffset(
 					'[' + str(index) + ']', offset, self.data_type)
-			except:
+			except Exception as err:
+				if DBG_LOG:
+					logger >> "COFF_StdVector_SynthProvider:get_child_at_index: " + str(err)
 				return None
 
 		def update(self):
@@ -853,9 +871,8 @@ class COFF_StdVector_SynthProvider:
 					self.count = None
 				else:
 					self.count = 0
-			except:
-				if DBG_LOG:
-					logger >> "COFF_Vector update exception"
+			except Exception as err:
+				logger >> "COFF_StdVector_SynthProvider:update exception: " + str(err)
 				pass
 			return None
 			
@@ -955,9 +972,10 @@ class COFF_StdList_SynthProvider:
 				self.count = -1
 				return True
 			self.count = self.valobj.GetChildMemberWithName('__size_alloc_').GetChildMemberWithName('__value_').GetValueAsUnsigned(0)
-			logger >> "COFF_StdList_SynthProvider, update(self): self.count" + str(self.count);
+			if DBG_LOG:
+				logger >> "COFF_StdList_SynthProvider, update(self): self.count" + str(self.count);
 		except Exception as err:
-			logger >> "COFF_StdList_SynthProvider, update(self): exception " + str(err)
+			logger >> "COFF_StdList_SynthProvider:update: exception " + str(err)
 			self.count = -1
 			return True
 		if DBG_LOG:
@@ -966,24 +984,28 @@ class COFF_StdList_SynthProvider:
 
 	def num_children(self):
 		if self.count == -1:
-			logger >> "COFF_StdList_SynthProvider, num_children(self): 1"
+			if DBG_LOG:
+				logger >> "COFF_StdList_SynthProvider, num_children(self): 1"
 			return 1;
-		logger >> "COFF_StdList_SynthProvider, num_children(self): " + str(1 + self.count)
+		if DBG_LOG:
+			logger >> "COFF_StdList_SynthProvider, num_children(self): " + str(1 + self.count)
 		return 1 + self.count
 
 	def has_children(self):
-		logger >> "COFF_StdList_SynthProvider, has_children(self)"
+		if DBG_LOG:
+			logger >> "COFF_StdList_SynthProvider, has_children(self)"
 		return True
 
 	def get_child_index(self, name):
-		logger >> "COFF_StdList_SynthProvider, get_child_index: " + name
+		if DBG_LOG:
+			logger >> "COFF_StdList_SynthProvider, get_child_index: " + name
 		if name == "Count":
 			return 0
 		try:
 			return int(name.lstrip('[').rstrip(']'))
 		except:
 			if DBG_LOG:
-				logger >> "COFF_StdList_SynthProvider, get_child_index(self) exception: " + str(err)
+				logger >> "COFF_StdList_SynthProvider:get_child_index exception: " + str(err)
 			return -1
 		return -1
 
@@ -993,23 +1015,24 @@ class COFF_StdList_SynthProvider:
 		if index == 0:
 			try:
 				obj = self.valobj.GetChildMemberWithName('__size_alloc_').GetChildMemberWithName('__value_')
-				logger >> "get_child_at_index: " + str(obj.GetValueAsUnsigned(0))
+				if DBG_LOG:
+					logger >> "get_child_at_index: " + str(obj.GetValueAsUnsigned(0))
 				self.count = obj.GetValueAsUnsigned(0)
 				if self.count > 100000:
-					logger >> "get_child_at_index: self.count > 100000"
 					self.count = -1
 				rv = self.valobj.CreateValueFromData('Count', obj.GetData(), obj.GetType())
-				logger >> "get_child_at_index: rv: " + str(rv)
+				if DBG_LOG:
+					logger >> "get_child_at_index: rv: " + str(rv)
 				return rv
 			except Exception as err:
-				logger >> "Hit an exception: " + str(err)
+				logger >> "COFF_StdList_SynthProvider:get_child_at_index exception 1: " + str(err)
 				return '<exception: ' + str(err) + '>'
 		if index > 0:
 			try:
 				index = index - 1
-				logger >> "COFF_StdList_SynthProvider, get_child_at_index 2: " + str(index);
+				if DBG_LOG:
+					logger >> "COFF_StdList_SynthProvider, get_child_at_index > 0: " + str(index);
 				nm = '[' + str(index) + ']'
-				logger >> "n[]: " + nm
 				if index >= self.count:
 					return None;
 				Ptr = self.valobj.GetChildMemberWithName('__end_').GetChildMemberWithName('__next_')
@@ -1022,14 +1045,16 @@ class COFF_StdList_SynthProvider:
 					index = index - 1
 				Ptr = Ptr.Cast(self.valobj.GetType().GetBasicType(lldb.eBasicTypeChar).GetPointerType())
 				rv = self.valobj.CreateValueFromAddress(nm, Ptr.GetValueAsUnsigned() + 16, self.argType);
-				logger >> "COFF_StdList_SynthProvider, get_child_at_index: rv: " + str(rv);
+				if DBG_LOG:
+					logger >> "COFF_StdList_SynthProvider, get_child_at_index: rv: " + str(rv);
 				return rv
 			except Exception as err:
-				logger >> "Hit an exception: " + str(err)
+				logger >> "COFF_StdList_SynthProvider:get_child_at_index exception 2: " + str(err)
 				return '<exception: ' + str(err) + '>'
 
 def ansistring_SummaryProvider(valobj, dict):
-#	logger >> "Providing summary for a ansistring named " + str(valobj.GetName())
+	if DBG_LOG:
+		logger >> "Providing summary for a ansistring named " + str(valobj.GetName())
 	if valobj.GetValue() != 0:
 		s = '"'
 		i = 0
@@ -1037,7 +1062,8 @@ def ansistring_SummaryProvider(valobj, dict):
 		Ptr = valobj.GetChildMemberWithName('Data')
 		if not Ptr.IsValid():
 			return '<invalid>'
-#		logger >> "Ptr is " + str(Ptr)
+		if DBG_LOG:
+			logger >> "Ptr is " + str(Ptr)
 		error = lldb.SBError()
 		while newchar != 0:
 			# read next char character out of memory
@@ -1064,20 +1090,23 @@ def ansistringT_SummaryProvider(valobj, dict):
 		Ptr = valobj.GetChildMemberWithName('Data')
 		if not Ptr.IsValid():
 			return '<invalid>'
-#		logger >> "Ptr is " + str(Ptr)
+		if DBG_LOG:
+			logger >> "Ptr is " + str(Ptr)
 		error = lldb.SBError()
 		while newchar != 0:
 			# read next char character out of memory
 			data_val = Ptr.GetPointeeData(i, 1)
 			size = data_val.GetByteSize()
-#			logger >> "Size is " + str(size)
+			if DBG_LOG:
+				logger >> "Size is " + str(size)
 			newchar = data_val.GetUnsignedInt8(error, 0)
 			if error.Fail():
 				return '<error:' + error.GetCString() + '>'
 			i += 1
 			if i > 2048:
 				break		#? return 'too long' ?
-#		logger >> "length is " + str(i)
+		if DBG_LOG:
+			logger >> "length is " + str(i)
 		if i == 0:
 			return '""'
 		data_val = Ptr.GetPointeeData(0, i)
@@ -1097,20 +1126,23 @@ def shortstring_SummaryProvider(valobj, dict):
 		Ptr = valobj.GetChildMemberWithName('Data')
 		if not Ptr.IsValid():
 			return '<invalid>'
-#		logger >> "Ptr is " + str(Ptr)
+		if DBG_LOG:
+			logger >> "Ptr is " + str(Ptr)
 		error = lldb.SBError()
 		while newchar != 0:
 			# read next char character out of memory
 			data_val = Ptr.GetPointeeData(i, 1)
 			size = data_val.GetByteSize()
-#			logger >> "Size is " + str(size)
+			if DBG_LOG:
+				logger >> "Size is " + str(size)
 			newchar = data_val.GetUnsignedInt8(error, 0)
 			if error.Fail():
 				return '<error:' + error.GetCString() + '>'
 			i += 1
 			if i > 2048:
 				break		#? return 'too long' ?
-#		logger >> "length is " + str(i)
+		if DBG_LOG:
+			logger >> "length is " + str(i)
 		if i == 0:
 			return '""'
 		data_val = Ptr.GetPointeeData(0, i)
@@ -1163,7 +1195,8 @@ def widestring_SummaryProvider(valobj, dict):
 		Ptr = valobj.GetChildMemberWithName('Data')
 		if not Ptr.IsValid():
 			return '<invalid>'
-#		logger >> "Ptr is " + str(Ptr)
+		if DBG_LOG:
+			logger >> "Ptr is " + str(Ptr)
 		error = lldb.SBError()
 		while newchar != 0:
 			# read next wchar character out of memory
@@ -1206,7 +1239,7 @@ class stduniqueptr_SynthProvider:
 				obj = self.valobj.GetChildMemberWithName('_Mypair').GetChildMemberWithName('_Myval2')
 				return self.valobj.CreateValueFromData('_Ptr', obj.GetData(), obj.GetType())
 			except Exception as err:
-				logger >> "Hit an exception: " + str(err)
+				logger >> "stduniqueptr_SynthProvider:get_child_at_index exception: " + str(err)
 				return '<exception: ' + str(err) + '>'
 		return None
 	
@@ -1222,7 +1255,7 @@ def stduniqueptr_SummaryProvider(valobj, dict):
 			s = '{...}'
 		return s
 	except Exception as err:
-		logger >> "Hit an exception: " + str(err)
+		logger >> "stduniqueptr_SummaryProvider exception: " + str(err)
 		return "<exception: " + str(err) + '>'
 
 class COFF_stduniqueptr_SynthProvider:
@@ -1248,12 +1281,13 @@ class COFF_stduniqueptr_SynthProvider:
 				obj = self.valobj.GetChildMemberWithName('__ptr_').GetChildAtIndex(0).GetChildMemberWithName('__value_')
 				return self.valobj.CreateValueFromData('__ptr_', obj.GetData(), obj.GetType())
 			except Exception as err:
-				logger >> "Hit an exception: " + str(err)
+				logger >> "COFF_stduniqueptr_SynthProvider:get_child_at_index exception: " + str(err)
 				return '<exception: ' + str(err) + '>'
 		return None
 	
 def COFF_stduniqueptr_SummaryProvider(valobj, dict):
-	#logger >> "Providing summary for a uniquePtr named " + str(valobj.GetName())
+	if DBG_LOG:
+		logger >> "Providing summary for a uniquePtr named " + str(valobj.GetName())
 	try:
 		MyPtr = valobj
 		if not MyPtr.IsValid():
@@ -1263,11 +1297,13 @@ def COFF_stduniqueptr_SummaryProvider(valobj, dict):
 			s = '{...}'
 		return s
 	except Exception as err:
+		logger >> "COFF_stduniqueptr_SummaryProvider exception: " + str(err)
 		return "<exception: " + str(err) + '>'
 
 
 def stdsharedptr_SummaryProvider(valobj, dict):
-	logger >> "Providing summary for a sharedPtr named " + str(valobj.GetName())
+	if DBG_LOG:
+		logger >> "Providing summary for a sharedPtr named " + str(valobj.GetName())
 	try:
 		Ptr = valobj.GetChildMemberWithName('_Ptr')
 		if not Ptr.IsValid():
@@ -1281,7 +1317,7 @@ def stdsharedptr_SummaryProvider(valobj, dict):
 			return '<error _Weaks: ' + error.GetCString() + '>'
 		return str(Ptr.Dereference()) + " _Uses: " + str(Uses) + ", _Weaks: " + str(Weaks)
 	except Exception as err:
-		logger >> "Hit an exception: " + str(err)
+		logger >> "stdsharedptr_SummaryProvider exception: " + str(err)
 		return "<exception: " + str(err) + '>'
 	
 # override the provider in lldb source to get at the _Ptr member in dinkumware
@@ -1321,24 +1357,25 @@ def COFF_stdsharedptr_SummaryProvider(valobj, dict):
 		if not Ptr.IsValid():
 			return '<_Ptr: invalid>'
 		error = lldb.SBError()
+		# using an index here instead of GetChildMemberWithName means we aren't bound to the num_children limit (3)
+		# since we want the 4th child.
+		# see the COFF_stdsharedptr_SynthProvider class for more details.
 		cntrl = valobj.GetChildAtIndex(3)
+		# now we can use GetChildMemberWithName and get the correct index
 		Uses = cntrl.GetChildMemberWithName('__shared_owners_').GetData().GetUnsignedInt32(error, 0)
 		if error.Fail():
-			if DBG_LOG:
-				rv = '<error _Uses:' + error.GetCString() + '>'
-			logger >> rv
-			return rv
+			return '<error _Uses:' + error.GetCString() + '>'
 		Weaks = cntrl.GetChildMemberWithName('__shared_weak_owners_').GetData().GetUnsignedInt32(error, 0)
 		if error.Fail():
-			rv = '<error _Weaks: ' + error.GetCString() + '>'
-			if DBG_LOG:
-				logger >> rv
-			return rv
+			return '<error _Weaks: ' + error.GetCString() + '>'
+		# dereferencing the pointer causes a crash.
+		# also we want the pointer so debugger will format the object correctly
 		rv = str(Ptr) + " _Uses: " + str(Uses) + ", _Weaks: " + str(Weaks)
-		logger >> rv
+		if DBG_LOG:
+			logger >> rv
 		return rv
 	except Exception as err:
-		logger >> "Hit an exception: " + str(err)
+		logger >> "COFF_stdsharedptr_SummaryProvider exception: " + str(err)
 		return "<exception: " + str(err) + '>'
 	
 class COFF_stdsharedptr_SynthProvider:
@@ -1352,14 +1389,21 @@ class COFF_stdsharedptr_SynthProvider:
 		return True
 
 	def get_child_index(self, name):
-		logger >> "COFF_stdsharedptr_SynthProvider:: get_child_index: " + name
+		if DBG_LOG:
+			logger >> "COFF_stdsharedptr_SynthProvider:: get_child_index: " + name
 		if name == "__ptr_":
 			return 0
 		if name == "__shared_owners_":
 			return 1
 		if name == "__shared_weak_owners_":
 			return 2
-		return None
+		# calls to self.valobj.GetChildMemberWithName('__cntrl_').GetChildMemberWithName('__shared_owners_')
+		# will actually be broken into 2 GetChildMemberWithName calls. 
+		# note that there is no index for '__cntrl_', because it is sits along side of __ptr and its natural index is 1.
+		# but we have 2 sub elements under '__cntrl_' which we are indexing to a flat index structure, hence no '__cntrl_' value.
+		# this doesn't work for the child items, thus we use GetChildAtIndex(3) to obtain '__cntrl_' when requried. 
+		# see next function.
+		return -1
 
 	def get_child_at_index(self, index):
 		if index == 0:
@@ -1369,6 +1413,8 @@ class COFF_stdsharedptr_SynthProvider:
 		if index == 2:
 			return self.valobj.GetChildMemberWithName('__cntrl_').GetChildMemberWithName('__shared_weak_owners_')
 		if index == 3:
+			# since we don't have a get_child_index('__cntrl_') to return the correct index value of 1. 
+			# i've overloaded the meaning of 3 to get '__cntrl_' when the deugger python formatter is querying the pointer for a summary.
 			return self.valobj.GetChildMemberWithName('__cntrl_')
 		return None
 
@@ -1409,12 +1455,14 @@ class stdmap_iterator_node:
 class COFF_stdmap_iterator_node:
 
 	def _left_impl(self):
-		#logger >> "returning left: " + str(hex(self.node.GetValueAsUnsigned(0))) + "->" + str(hex(self.node.GetChildMemberWithName("__left_").GetValueAsUnsigned(0)))
+		if DBG_LOG:
+			logger >> "returning left: " + str(hex(self.node.GetValueAsUnsigned(0))) + "->" + str(hex(self.node.GetChildMemberWithName("__left_").GetValueAsUnsigned(0)))
 		return COFF_stdmap_iterator_node(
 			self.node.GetChildMemberWithName("__left_"))
 
 	def _right_impl(self):
-		#logger >> "returning right: " + str(hex(self.node.GetValueAsUnsigned(0))) + "->" + str(hex(self.node.GetChildMemberWithName("__right_").GetValueAsUnsigned(0)))
+		if DBG_LOG:
+			logger >> "returning right: " + str(hex(self.node.GetValueAsUnsigned(0))) + "->" + str(hex(self.node.GetChildMemberWithName("__right_").GetValueAsUnsigned(0)))
 		return COFF_stdmap_iterator_node(
 			self.node.GetChildMemberWithName("__right_"))
 
@@ -1422,7 +1470,8 @@ class COFF_stdmap_iterator_node:
 		# the parent loses the node type (it's just end_node) - is it safe to assume it's always the subclass?
 		p = self.node.GetChildMemberWithName("__parent_")
 		p = p.Cast(self.node.GetType());
-		#logger >> "returning parent: " + str(hex(self.node.GetValueAsUnsigned(0))) + "[[" + str(self.node) + "]]->" + str(hex(self.node.GetChildMemberWithName("__parent_").GetValueAsUnsigned(0)))
+		if DBG_LOG:
+			logger >> "returning parent: " + str(hex(self.node.GetValueAsUnsigned(0))) + "[[" + str(self.node) + "]]->" + str(hex(self.node.GetChildMemberWithName("__parent_").GetValueAsUnsigned(0)))
 		return COFF_stdmap_iterator_node(p)
 
 	def _value_impl(self):
@@ -1432,7 +1481,8 @@ class COFF_stdmap_iterator_node:
 		return self.node
 
 	def _null_impl(self):
-		#logger >> "returning isnull: " + str(self.node.GetValueAsUnsigned(0) == 0)
+		if DBG_LOG:
+			logger >> "returning isnull: " + str(self.node.GetValueAsUnsigned(0) == 0)
 		return self.node.GetValueAsUnsigned(0) == 0
 
 	def __init__(self, node):
@@ -1456,7 +1506,8 @@ class stdmap_iterator:
 			x = x.left
 			steps += 1
 			if steps > self.max_count:
-#				 logger >> "Returning None - we overflowed"
+				if DBG_LOG:
+					logger >> "Returning None - we overflowed"
 				return None
 		return x
 
@@ -1481,7 +1532,8 @@ class stdmap_iterator:
 		while (not self.tree_is_left_child(node)):
 			steps += 1
 			if steps > self.max_count:
-#				logger >> "Returning None - we overflowed"
+				if DBG_LOG:
+					logger >> "Returning None - we overflowed"
 				return None
 			node = node.parent
 		return node.parent
@@ -1525,7 +1577,8 @@ class COFF_stdmap_iterator:
 			x = x.left
 			steps += 1
 			if steps > self.max_count:
-#				 logger >> "Returning None - we overflowed"
+				if DBG_LOG:
+					logger >> "Returning None - we overflowed"
 				return None
 		return x
 
@@ -1550,7 +1603,8 @@ class COFF_stdmap_iterator:
 		while (not self.tree_is_left_child(node)):
 			steps += 1
 			if steps > self.max_count:
-#				logger >> "Returning None - we overflowed"
+				if DBG_LOG:
+					logger >> "Returning None - we overflowed"
 				return None
 			node = node.parent
 		return node.parent
@@ -1587,12 +1641,14 @@ class COFF_stdmap_iterator:
 class stdmap_SynthProvider:
 
 	def __init__(self, valobj, dict):
-#		 logger >> "__init__ stdmap_SynthProvider for " + str(valobj.GetName())
+		if DBG_LOG:
+			logger >> "__init__ stdmap_SynthProvider for " + str(valobj.GetName())
 		self.valobj = valobj
 		self.pointer_size = self.valobj.GetProcess().GetAddressByteSize()
 		p = self.valobj.GetValueForExpressionPath('_Mypair._Myval2._Myval2._Mysize')
 		self.count = p.GetValueAsUnsigned()
-#		 logger >> "__init__ num_children, count =	" + str(self.count)
+		if DBG_LOG:
+			logger >> "__init__ num_children, count =	" + str(self.count)
 
 	def update(self):
 		self.count = None
@@ -1682,10 +1738,11 @@ class stdmap_SynthProvider:
 					lldb.SBData.CreateDataFromUInt64Array(endian,ptr_size,[count]),\
 					self.valobj.GetType().GetBasicType(lldb.eBasicTypeInt))
 			except Exception as err:
-				logger >> "Hit an exception: " + str(err)
+				logger >> "stdmap_SynthProvider:get_child_at_index exception: " + str(err)
 				return '<exception: ' + str(err) + '>'				  
 		if self.garbage:
-#			 logger >> "Returning None since this tree is garbage"
+			if DBG_LOG:
+				logger >> "Returning None since this tree is garbage"
 			return None
 		try:
 			iterator = stdmap_iterator(self.root_node, max_count=self.num_children())
@@ -1697,7 +1754,8 @@ class stdmap_SynthProvider:
 			need_to_skip = (index > 0)
 			current = iterator.advance(index)
 			if current is None:
-#				logger >> "Tree is garbage - returning None"
+				if DBG_LOG:
+					logger >> "Tree is garbage - returning None"
 				self.garbage = True
 				return None
 			if self.get_data_type():
@@ -1725,17 +1783,18 @@ class stdmap_SynthProvider:
 					return current.CreateChildAtOffset(
 						'[' + str(index) + ']', self.skip_size, self.data_type)
 			else:
-#				 logger >> "Unable to infer data-type - returning None (should mark tree as garbage here?)"
+				if DBG_LOG:
+					logger >> "Unable to infer data-type - returning None (should mark tree as garbage here?)"
 				return None
 		except Exception as err:
-#			 logger >> "Hit an exception: " + str(err)
+			 logger >> "stdmap_SynthProvider:get_child_at_index exception: " + str(err)
 			 return '<exception: ' + str(err) + '>'
 
 def stdmap_SummaryProvider(valobj, dict):
-#		 logger >> "stdmap_SummaryProvider for " + str(valobj.GetName())
+	if DBG_LOG:
+		 logger >> "stdmap_SummaryProvider for " + str(valobj.GetName())
 	p = valobj.GetChildMemberWithName('_Mysize')
 	return 'size=' + str(p.GetValueAsUnsigned())
-#		 logger >> "Hit an exception: " + str(err)
 
 
 class COFF_stdmap_SynthProvider:
@@ -1848,11 +1907,11 @@ class COFF_stdmap_SynthProvider:
 				rv = self.valobj.CreateValueFromData("",\
 					lldb.SBData.CreateDataFromUInt64Array(endian,ptr_size,[count]),\
 					self.valobj.GetType().GetBasicType(lldb.eBasicTypeInt))
-				logger >> "map rv: " + str(rv)
+				if DBG_LOG:
+					logger >> "map rv: " + str(rv)
 				return rv
 			except Exception as err:
-				if DBG_LOG:
-					logger >> "1851 Hit an exception: " + str(err)
+				logger >> "Hit an exception: " + str(err)
 				return '<exception: ' + str(err) + '>'				  
 		if self.garbage:
 			if DBG_LOG:
@@ -1861,10 +1920,12 @@ class COFF_stdmap_SynthProvider:
 		try:
 			iterator = COFF_stdmap_iterator(self.root_node, max_count=self.num_children())
 			if DBG_LOG:
-				logger >> "iterator is: " + str(iterator.node.node)
+				logger >> "iterator is: "
+				logger >> str(iterator.node.node)
 			current = iterator.advance(index)
 			if current is None:
-				logger >> "current is garbage - returning None"
+				if DBG_LOG:
+					logger >> "current is garbage - returning None"
 				self.garbage = True
 				return None
 			if self.get_data_type():
@@ -1877,7 +1938,11 @@ class COFF_stdmap_SynthProvider:
 				# this causes a character encoding exception on wide chars
 				#Ptr = Ptr.Cast(self.valobj.GetType().GetBasicType(lldb.eBasicTypeChar).GetPointerType())
 				elem = self.valobj.CreateValueFromAddress(nm, Ptr.GetValueAsUnsigned() + self.skip_size, self.data_type)
+				# COFF maps encapsulate the key/value pairs in __cc.first/second members
+				# so we get the '__cc' object
 				cc = elem.GetChildMemberWithName('__cc')
+				# then convert that to a SBValue for the debugger, later the first/second members will be renamed to key/value
+				# using the COFF_MapPair_SynthProvider class
 				elem = self.valobj.CreateValueFromData(nm, cc.GetData(), cc.GetType())
 				if DBG_LOG:
 					logger >> "elem: " + str(elem)
@@ -1887,9 +1952,11 @@ class COFF_stdmap_SynthProvider:
 					logger >> "Unable to infer data-type - returning None (should mark tree as garbage here?)"
 				return None
 		except Exception as err:
-			logger >> "1879 Hit an exception: " + str(err)
+			logger >> "Hit an exception: " + str(err)
 			return '<exception: ' + str(err) + '>'
 
+# this sythentic is used to change the view of a std::map pair.
+# changing first/second to key/value
 class COFF_MapPair_SynthProvider:
 	def __init__(self, valobj, dict):
 		if DBG_LOG:
@@ -1928,7 +1995,7 @@ class COFF_MapPair_SynthProvider:
 			return rv
 		except Exception as err:
 			if DBG_LOG:
-				logger >> "1933 Hit an exception: " + str(err)
+				logger >> "Hit an exception: " + str(err)
 			return '<exception: ' + str(err) + '>'
 
 def __lldb_init_module(debugger, dict):
@@ -1964,13 +2031,18 @@ def __lldb_init_module(debugger, dict):
 	debugger.HandleCommand('type summary add -F embt_formatters.unicodestring_SummaryProvider "System::UnicodeString"  --category EMBT_FMT')
 	debugger.HandleCommand('type summary add -F embt_formatters.shortstring_SummaryProvider "System::ShortString"  --category EMBT_FMT')
 	debugger.HandleCommand('type summary add -F embt_formatters.widestring_SummaryProvider "System::WideString"  --category EMBT_FMT')
+	# fixed
 	debugger.HandleCommand('type synthetic add -l embt_formatters.stdsharedptr_SynthProvider -x "^std::shared_ptr<.+>(( )?&)?$"  --category EMBT_FMT')
 	debugger.HandleCommand('type summary add -F embt_formatters.stdsharedptr_SummaryProvider -x "^std::shared_ptr<.+>(( )?&)?$"  --category EMBT_FMT')
+	# fixed
 	debugger.HandleCommand('type synthetic add -l embt_formatters.COFF_stdsharedptr_SynthProvider -x "^std::__1::shared_ptr<.+>(( )?&)?$"  --category EMBT_FMT')
 	debugger.HandleCommand('type summary add -F embt_formatters.COFF_stdsharedptr_SummaryProvider -x "^std::__1::shared_ptr<.+>(( )?&)?$"  --category EMBT_FMT')
+	# fixed
 	debugger.HandleCommand('type synthetic add -l embt_formatters.stduniqueptr_SynthProvider -x "^std::unique_ptr<.+>(( )?&)?$"  --category EMBT_FMT')
 	debugger.HandleCommand('type summary add -F embt_formatters.stduniqueptr_SummaryProvider -x "^std::unique_ptr<.+>(( )?&)?$"  --category EMBT_FMT')
+	# fixed
 	debugger.HandleCommand('type synthetic add -l embt_formatters.COFF_stduniqueptr_SynthProvider -x "^std::__1::unique_ptr<.+>(( )?&)?$"  --category EMBT_FMT')
+	# fixed
 	debugger.HandleCommand('type summary add -F embt_formatters.COFF_stduniqueptr_SummaryProvider -x "^std::__1::unique_ptr<.+>(( )?&)?$"  --category EMBT_FMT')
 	debugger.HandleCommand('type synthetic add -l embt_formatters.StdVector_SynthProvider -x "^std::vector<.+>(( )?&)?$"  --category EMBT_FMT')
 	debugger.HandleCommand('type synthetic add -l embt_formatters.COFF_StdVector_SynthProvider -x "^std::__1::vector<.+>(( )?&)?$"  --category EMBT_FMT')
@@ -1979,10 +2051,14 @@ def __lldb_init_module(debugger, dict):
 #	debugger.HandleCommand('type summary add -F embt_formatters.stddeque_SummaryProvider ^std::deque<.+>(( )?&)?$"  --category EMBT_FMT')
 	debugger.HandleCommand('type synthetic add -l embt_formatters.stdmap_SynthProvider -x "^std::map<.+> >$"  --category EMBT_FMT')
 	debugger.HandleCommand('type summary add -F embt_formatters.stdmap_SummaryProvider -e -x "^std::map<.+> >$"  --category EMBT_FMT')
-	debugger.HandleCommand('type summary add --summary-string "${var.first}" -e -x "std::__1::pair<.+>" --category EMBT_FMT')
-	debugger.HandleCommand('type synthetic add -l embt_formatters.COFF_MapPair_SynthProvider -x "^std::__1::pair<.+>(( )?&)?$" --category EMBT_FMT')
+	# fixed/improved
 	debugger.HandleCommand('type synthetic add -l embt_formatters.COFF_stdmap_SynthProvider -x "^std::__1::map<.+>(( )?&)?$"  --category EMBT_FMT')
+	# fixed/improved
 	debugger.HandleCommand('type summary add -F embt_formatters.COFF_stdmap_SummaryProvider -e -x "^std::__1::map<.+>(( )?&)?$"  --category EMBT_FMT')
+	# new map pair summary
+	debugger.HandleCommand('type summary add --summary-string "key=${var.first}" -e -x "^std::__1::pair<.+>(( )?&)?$" --category EMBT_FMT')
+	# new map pair synthetic
+	debugger.HandleCommand('type synthetic add -l embt_formatters.COFF_MapPair_SynthProvider -x "^std::__1::pair<.+>(( )?&)?$" --category EMBT_FMT')
 	debugger.HandleCommand('type synthetic add -l embt_formatters.syststringlist_SynthProvider -x "System::Classes::TStringList"  --category EMBT_FMT')
 
 _map_capping_size = 255
