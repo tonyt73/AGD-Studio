@@ -1,7 +1,7 @@
 {
   "Name": "Dragon PMODE3",
   "Palette": "Dragon 4 Colour",
-  "BufferType": 0,
+  "BufferType": "btBitmap",
   "Width": 128,
   "Height": 192,
   "ScalarX": 2.0,

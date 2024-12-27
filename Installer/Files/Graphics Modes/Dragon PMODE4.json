@@ -1,7 +1,7 @@
 {
   "Name": "Dragon PMODE4",
   "Palette": "Dragon Monochrome",
-  "BufferType": 0,
+  "BufferType": "btBitmap",
   "Width": 256,
   "Height": 192,
   "ScalarX": 1.0,

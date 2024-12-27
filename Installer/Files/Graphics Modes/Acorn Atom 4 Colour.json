@@ -1,7 +1,7 @@
 {
   "Name": "Acorn Atom 4 Colour",
   "Palette": "Acorn Atom 4 Colour",
-  "BufferType": 0,
+  "BufferType": "btBitmap",
   "Width": 128,
   "Height": 192,
   "ScalarX": 2.0,

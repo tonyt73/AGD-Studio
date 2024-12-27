@@ -1,7 +1,7 @@
 {
   "Name": "Sam Coupe Mode 1",
   "Palette": "Sam Coupe Mode 1+2",
-  "BufferType": 1,
+  "BufferType":"btAttribute"1,
   "Width": 256,
   "Height": 192,
   "ScalarX": 1.0,

@@ -1,7 +1,7 @@
 {
   "Name": "Sinclair QL Mode 8",
   "Palette": "Sinclair QL 8 Colour",
-  "BufferType": 0,
+  "BufferType": "btBitmap",
   "Width": 256,
   "Height": 256,
   "ScalarX": 1.0,

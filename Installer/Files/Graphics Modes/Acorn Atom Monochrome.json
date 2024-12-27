@@ -1,7 +1,7 @@
 {
   "Name": "Acorn Atom Monochrome",
   "Palette": "Acorn Atom Monochrome",
-  "BufferType": 1,
+  "BufferType": "btAttribute",
   "Width": 256,
   "Height": 192,
   "ScalarX": 1.0,

@@ -1,7 +1,7 @@
 {
   "Name": "Enterprise Mode 0",
   "Palette": "Enterprise",
-  "BufferType": 0,
+  "BufferType": "btBitmap",
   "Width": 160,
   "Height": 256,
   "ScalarX": 2.0,
