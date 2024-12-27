@@ -32,8 +32,7 @@ Editors for:
 * Keys
 
 Automated build system:
-* Produces AGD compiler output on the fly
-* Automatic compiled output
+* Produces AGD compiler output very quickly
 
 Themes:
 * Multiple user selectable UI themes
@@ -50,8 +49,7 @@ https://github.com/tonyt73/AGD-Studio/releases
 * Download and Install the Embarcardero Rad-Studio C++ Community Edition
   * https://www.embarcadero.com/products/cbuilder/starter/free-download
   * Register if you need to (its free)
-  * Install the 32 bit and 64 bit Windows compilers (OSX, iOS & Android are optional)
-  * I personally use Rad Studio 11.2
+  * I personally use Rad Studio 12.0
 * Download the trial version of LMD Innovative components
   * http://files.lmd.de/downloads/
   * Unzip and run the Setup application
