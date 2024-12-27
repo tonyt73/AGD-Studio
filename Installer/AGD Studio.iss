@@ -4,7 +4,7 @@
 
 [Setup]
 AppName=AGD Studio
-AppVersion=0.15.2
+AppVersion=0.16.0
 DefaultDirName={commonpf}\AGD Studio
 DefaultGroupName=AGD Studio
 UninstallDisplayIcon={app}\AGD Studio.exe
@@ -34,6 +34,8 @@ ArchitecturesInstallIn64BitMode=x64compatible
 [UninstallDelete]
 Type: filesandordirs; Name: "{userappdata}\AGD Studio" 
 Type: filesandordirs; Name: "{commondocs}\AGD Studio" 
+Type: files; Name: "{app}\VclStylesinno.dll" 
+Type: dirifempty; Name: "{app}"
 
 [Dirs]
 Name: "{commondocs}\AGD Studio\Coding Templates"
