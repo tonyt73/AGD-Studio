@@ -45,21 +45,13 @@ private:    // User declarations
     bool                            m_RefreshView;      // get the timer function to refresh the view
     std::unique_ptr<TImage>         m_Tile;
 
-    void                __fastcall  SetDocument(Project::Document* document);
+    void                __fastcall  OnDocumentSet() override;
     bool                __fastcall  IsActive() const;
     void                __fastcall  RefreshView();
     void                __fastcall  RefreshCharacterSet();
 
 public:     // User declarations
-                        __fastcall  TfrmEditorMessages(TComponent* Owner);
-    static  TFrame*     __fastcall  Create(Project::Document* document, TComponent* owner)
-                                    {
-                                        auto editor = new TfrmEditorMessages(owner);
-                                        editor->SetDocument(document);
-                                        document->DockPanel = dynamic_cast<TLMDDockPanel*>(owner);
-                                        return editor;
-                                    }
-
+                        __fastcall  TfrmEditorMessages(TComponent* Owner) override;
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TfrmEditorMessages *frmEditorMessages;

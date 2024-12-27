@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "GraphicsMode.h"
 #include "GraphicsBuffer.h"
@@ -35,7 +35,7 @@ __fastcall GraphicsMode::GraphicsMode()
     m_PropertyMap["ScalarY"] = &m_ScalarY;
     m_PropertyMap["TranparentColor"] = &m_TranparentColor;
     m_PropertyMap["SupportsLogicalColorRemapping"] = &m_SupportsRemapping;
-    m_PropertyMap["BufferType"] = &m_BufferType;
+    m_PropertyMap["BufferType"] = &m_BufferTypeName;
     m_PropertyMap["LogicalColors[]"] = &m_LogicalIndex;
     m_PropertyMap["PixelBitRemapping[].Remap[].Mask"] = &m_RemapDataLoader.Mask;
     m_PropertyMap["PixelBitRemapping[].Remap[].Shift"] = &m_RemapDataLoader.Shift;
@@ -68,24 +68,18 @@ __fastcall GraphicsMode::GraphicsMode(const GraphicsMode& other)
 //---------------------------------------------------------------------------
 void __fastcall GraphicsMode::OnEndObject(const String& object)
 {
-    if (object == "LogicalColors[]")
-    {
+    if (object == "LogicalColors[]") {
         m_LogicalColors.push_back(m_LogicalIndex);
-    }
-    else if (object == "PixelBitRemapping[].Remap[]")
-    {
+    } else if (object == "PixelBitRemapping[].Remap[]") {
         m_PixelRemappingLoader.Remaps.push_back(m_RemapDataLoader);
-    }
-    else if (object == "PixelBitRemapping[]")
-    {
+    } else if (object == "PixelBitRemapping[]") {
         m_PixelRemapping.push_back(m_PixelRemappingLoader);
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall GraphicsMode::RemapColor(int logicalIndex, int paletteIndex)
+void __fastcall GraphicsMode::RemapColor(unsigned char logicalIndex, unsigned char paletteIndex)
 {
-    if (0 <= logicalIndex && logicalIndex < m_LogicalColors.size() && 0 <= paletteIndex && paletteIndex < m_Palette->Colors)
-    {
+    if (logicalIndex < m_LogicalColors.size() && paletteIndex < m_Palette->Colors) {
         m_LogicalColors[logicalIndex] = paletteIndex;
         Bus::Publish<Event>(Event("palette.remapped"));
     }
@@ -96,11 +90,9 @@ unsigned char __fastcall GraphicsMode::RemapPixels(unsigned char pixels) const
     if (m_PixelRemapping.size() == 0)
         return pixels;
     // mangle the pixel
-    unsigned char mangledByte;
-    for (const auto& remaps : m_PixelRemapping)
-    {
-        for (const auto& remap : remaps.Remaps)
-        {
+    unsigned char mangledByte = 0;
+    for (const auto& remaps : m_PixelRemapping) {
+        for (const auto& remap : remaps.Remaps)  {
             auto bit = pixels & remap.Mask;
             bit = remap.Shift >= 0 ? bit >> remap.Shift : bit << abs(remap.Shift);
             mangledByte |= bit;
@@ -120,40 +112,39 @@ const Palette& __fastcall GraphicsMode::Palette() const
     return *m_Palette;
 }
 //---------------------------------------------------------------------------
-int __fastcall GraphicsMode::GetLogicalColors() const
+unsigned char __fastcall GraphicsMode::GetLogicalColors() const
 {
-    return m_LogicalColors.size();
+    return static_cast<unsigned char>(m_LogicalColors.size());
 }
 //---------------------------------------------------------------------------
-TColor __fastcall GraphicsMode::GetLogicalColor(int index) const
+TColor __fastcall GraphicsMode::GetLogicalColor(unsigned char index) const
 {
-    if (0 <= index && index < m_LogicalColors.size())
-    {
+    if (index < m_LogicalColors.size()) {
         return m_Palette->Color[m_LogicalColors[index]];
     }
     return clFuchsia;
 }
 //---------------------------------------------------------------------------
-int __fastcall GraphicsMode::GetColorFromLogicalIndex(int index) const
+unsigned char __fastcall GraphicsMode::GetColorFromLogicalIndex(unsigned char index) const
 {
-    if (0 <= index && index < m_LogicalColors.size())
-    {
+    if (index < m_LogicalColors.size()) {
         return m_LogicalColors[index];
     }
     return 0;
 }
 //---------------------------------------------------------------------------
-const __fastcall GraphicsMode::ExportInfo& __fastcall GraphicsMode::GetExportInformation(ImageTypes imageType) const
+const GraphicsMode::ExportInfo& __fastcall GraphicsMode::GetExportInformation(ImageTypes imageType) const
 {
     return m_ExportInfo[imageType];
 }
 //---------------------------------------------------------------------------
-bool __fastcall GraphicsMode::Load(const String& name)
+bool __fastcall GraphicsMode::LoadFile(const String& name)
 {
     m_LogicalColors.clear();
-    auto loaded = Services::JsonFile::Load(Services::File::Combine(Services::Folders::Application, "Graphics Modes" + Services::Folders::Separator + name + ".json"));
+    auto loaded = Services::JsonFile::LoadFile(Services::File::Combine(Services::Folders::Application, "Graphics Modes" + Services::Folders::Separator + name + ".json"));
     if (loaded) {
-        loaded = m_Palette->Load(m_PaletteName);
+        m_BufferType = BufferTypeByName(m_BufferTypeName);
+        loaded = m_Palette->LoadFile(m_PaletteName);
         auto path = Services::File::Combine("Saved Palettes", Name);
         path = Services::Folders::Create(Services::Folders::lpCommon, path);
         SaveLogicalCLUT(path, "Default");
@@ -170,24 +161,20 @@ void __fastcall GraphicsMode::Save()
     Open(Services::File::Combine(Services::Folders::Application, "Graphics Modes" + Services::Folders::Separator + m_Name + ".json"));
     Write("Name", m_Name);
     Write("Palette", m_PaletteName);
-    Write("BufferType", m_BufferType);
+    Write("BufferType", BufferTypeName(m_BufferType));
     Write("Width", m_Width);
     Write("Height", m_Height);
     Write("ScalarX", m_ScalarX);
     Write("ScalarY", m_ScalarY);
     Write("BitsPerPixel", m_BitsPerPixel);
-    if (m_BufferType == btBitmap && BitsPerPixel > 1)
-    {
+    if (m_BufferType == btBitmap && BitsPerPixel > 1) {
         Write("TranparentColor", m_TranparentColor);
     }
-    if (m_BufferType == btBitmap && BitsPerPixel > 1 && m_PixelRemapping.size() > 0)
-    {
+    if (m_BufferType == btBitmap && BitsPerPixel > 1 && m_PixelRemapping.size() > 0) {
         ArrayStart("PixelBitRemapping");
-        for (const auto& pixels : m_PixelRemapping)
-        {
+        for (const auto& pixels : m_PixelRemapping) {
             ArrayStart("Pixel");
-            for (const auto& remap : pixels.Remaps)
-            {
+            for (const auto& remap : pixels.Remaps) {
                 StartObject();
                     Write("Mask", remap.Mask);
                     Write("Shift", remap.Shift);
@@ -197,13 +184,11 @@ void __fastcall GraphicsMode::Save()
         }
         ArrayEnd();
     }
-    if (m_BufferType == btAttribute)
-    {
+    if (m_BufferType == btAttribute) {
         Write("PixelsHighPerAttribute", m_PixelsHighPerAttribute);
     }
     ArrayStart("LogicalColors"); // [
-    for (auto index : m_LogicalColors)
-    {
+    for (auto index : m_LogicalColors) {
         Write(index);
     }
     ArrayEnd(); // ] LogicalColors
@@ -213,26 +198,21 @@ void __fastcall GraphicsMode::Save()
 //---------------------------------------------------------------------------
 void __fastcall GraphicsMode::SaveLogicalCLUT(String path, String name)
 {
-    if (m_SupportsRemapping)
-    {
-        if (name == "")
-        {
+    if (m_SupportsRemapping) {
+        if (name == "") {
             name = "Logical.clut.json";
         }
-        if (path == "")
-        {
+        if (path == "") {
             path = Services::Folders::Project;
         }
-        if (name.Pos(".clut.json") == 0)
-        {
+        if (name.Pos(".clut.json") == 0) {
             name += ".clut.json";
         }
         auto file = Services::File::Combine(path, name);
         Open(file);
         Write("Palette", m_PaletteName);
         ArrayStart("LogicalColors"); // [
-        for (auto index : m_LogicalColors)
-        {
+        for (auto index : m_LogicalColors) {
             Write(index);
         }
         ArrayEnd(); // ] LogicalColors
@@ -242,26 +222,21 @@ void __fastcall GraphicsMode::SaveLogicalCLUT(String path, String name)
 //---------------------------------------------------------------------------
 void __fastcall GraphicsMode::LoadLogicalCLUT(String path, String name)
 {
-    if (m_SupportsRemapping)
-    {
-        if (name == "")
-        {
+    if (m_SupportsRemapping) {
+        if (name == "") {
             name = "Logical.CLUT.json";
         }
-        if (path == "")
-        {
+        if (path == "") {
             path = Services::Folders::Project;
         }
         auto file = Services::File::Combine(path, name);
-        if (Services::File::Exists(file))
-        {
+        if (Services::File::Exists(file)) {
             auto oldLogicalCount = m_LogicalColors.size();
             auto oldLogicalColors = m_LogicalColors;
             auto oldPaletteName = m_PaletteName;
             m_LogicalColors.clear();
-            JsonFile::Load(file);
-            if (oldPaletteName != m_PaletteName || oldLogicalCount != m_LogicalColors.size())
-            {
+            JsonFile::LoadFile(file);
+            if (oldPaletteName != m_PaletteName || oldLogicalCount != m_LogicalColors.size()) {
                 // CLUT mismatch; can't use this CLUT for the palette.
                 m_LogicalColors = oldLogicalColors;
                 m_PaletteName = oldPaletteName;

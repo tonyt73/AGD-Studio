@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "Folders.h"
 //---------------------------------------------------------------------------
@@ -7,12 +7,12 @@
 //---------------------------------------------------------------------------
 using namespace Services;
 //---------------------------------------------------------------------------
-String Folders::m_Application;
-String Folders::m_Common;
-String Folders::m_Documents;
-String Folders::m_Projects;
-String Folders::m_ProjectName;
-String Folders::m_Separator;
+[[clang::no_destroy]] String Folders::m_Application;
+[[clang::no_destroy]] String Folders::m_Common;
+[[clang::no_destroy]] String Folders::m_Documents;
+[[clang::no_destroy]] String Folders::m_Projects;
+[[clang::no_destroy]] String Folders::m_ProjectName;
+[[clang::no_destroy]] String Folders::m_Separator;
 //---------------------------------------------------------------------------
 void Folders::Init()
 {

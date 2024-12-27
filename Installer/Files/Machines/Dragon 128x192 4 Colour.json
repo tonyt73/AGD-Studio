@@ -1,7 +1,7 @@
 {
   "Name": "Dragon 128x192 4 Colour",
   "GraphicsMode": "Dragon PMODE3",
-  "Image" : "Images/Dragon.png",
+  "Image" : "Images/Dragon32.png",
   "Tools": {
 	"Compiler" : {
 		"Path": "Compilers/Dragon/Compile.exe",

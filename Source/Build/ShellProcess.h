@@ -25,6 +25,7 @@ protected:
 
 public:
                     __fastcall  ShellProcess(BuildMessages& buildMessages, BuildMessageType type, const String& description);
+    virtual         __fastcall ~ShellProcess() override;
 };
 //---------------------------------------------------------------------------
 } // Build namespace

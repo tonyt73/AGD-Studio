@@ -1,8 +1,7 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "AgdImporter.h"
-#include <iterator>
 #include "Services/File.h"
 #include "Project/Documents/DocumentManager.h"
 #include "Project/Documents/BaseImage.h"
@@ -26,7 +25,7 @@ AgdImporter::AgdImporter()
 {
 }
 //---------------------------------------------------------------------------
-unsigned char AgdImporter::GetNum(const String& var, const String& subVar, int index)
+int AgdImporter::GetNum(const String& var, const String& subVar, int index)
 {
     auto it = m_Parser.Variables[var][subVar].begin();
     auto end = m_Parser.Variables[var][subVar].end();
@@ -54,7 +53,7 @@ bool AgdImporter::Convert(const String& file)
         auto name = Services::File::NameWithoutExtension(file);
         auto end = TDateTime::CurrentTime();
         auto ms = end - start;
-        InformationMessage("[AGD Importer] Parsed '" + name + "' in " + IntToStr((int)ms) + "ms");
+        InformationMessage("[AGD Importer] Parsed '" + name + "' in " + IntToStr(static_cast<int>(ms)) + "ms");
         start = TDateTime::CurrentTime();
         // convert import contents to AGD Studio documents
         result  = UpdateWindow();
@@ -69,7 +68,7 @@ bool AgdImporter::Convert(const String& file)
         result &= AddMap();
         end = TDateTime::CurrentTime();
         ms = end - start;
-        InformationMessage("[AGD Importer] Parsed content conversion to documents took " + IntToStr((int)ms) + "ms");
+        InformationMessage("[AGD Importer] Parsed content conversion to documents took " + IntToStr(static_cast<int>(ms)) + "ms");
     }
     if (result) {
         InformationMessage("[AGD Importer] Import processed completed.");
@@ -90,7 +89,7 @@ bool AgdImporter::UpdateWindow()
         TRect rect(x, y, x + w, y + h);
         m_Window.cx = rect.Width();
         m_Window.cy = rect.Height();
-        doc->Set(rect);
+        doc->SetRect(rect);
     }
     return true;
 }
@@ -99,17 +98,17 @@ bool AgdImporter::UpdateControls()
 {
     if (m_Parser.hasVariable("controlset")) {
         auto doc = dynamic_cast<Project::ControlsDocument*>(theDocumentManager.Get("Controls", "List", "Controls"));
-        doc->SetAsciiCode(Project::keyUp     , GetNum("controlset", "key.up"     ));
-        doc->SetAsciiCode(Project::keyDown   , GetNum("controlset", "key.down"   ));
-        doc->SetAsciiCode(Project::keyLeft   , GetNum("controlset", "key.left"   ));
-        doc->SetAsciiCode(Project::keyRight  , GetNum("controlset", "key.right"  ));
-        doc->SetAsciiCode(Project::keyFire1  , GetNum("controlset", "key.fire1"  ));
-        doc->SetAsciiCode(Project::keyFire2  , GetNum("controlset", "key.fire2"  ));
-        doc->SetAsciiCode(Project::keyFire3  , GetNum("controlset", "key.fire3"  ));
-        doc->SetAsciiCode(Project::keyOption1, GetNum("controlset", "key.option1"));
-        doc->SetAsciiCode(Project::keyOption2, GetNum("controlset", "key.option2"));
-        doc->SetAsciiCode(Project::keyOption3, GetNum("controlset", "key.option3"));
-        doc->SetAsciiCode(Project::keyOption4, GetNum("controlset", "key.option4"));
+        doc->SetAsciiCode(Project::keyUp     , static_cast<unsigned char>(GetNum("controlset", "key.up"     )));
+        doc->SetAsciiCode(Project::keyDown   , static_cast<unsigned char>(GetNum("controlset", "key.down"   )));
+        doc->SetAsciiCode(Project::keyLeft   , static_cast<unsigned char>(GetNum("controlset", "key.left"   )));
+        doc->SetAsciiCode(Project::keyRight  , static_cast<unsigned char>(GetNum("controlset", "key.right"  )));
+        doc->SetAsciiCode(Project::keyFire1  , static_cast<unsigned char>(GetNum("controlset", "key.fire1"  )));
+        doc->SetAsciiCode(Project::keyFire2  , static_cast<unsigned char>(GetNum("controlset", "key.fire2"  )));
+        doc->SetAsciiCode(Project::keyFire3  , static_cast<unsigned char>(GetNum("controlset", "key.fire3"  )));
+        doc->SetAsciiCode(Project::keyOption1, static_cast<unsigned char>(GetNum("controlset", "key.option1")));
+        doc->SetAsciiCode(Project::keyOption2, static_cast<unsigned char>(GetNum("controlset", "key.option2")));
+        doc->SetAsciiCode(Project::keyOption3, static_cast<unsigned char>(GetNum("controlset", "key.option3")));
+        doc->SetAsciiCode(Project::keyOption4, static_cast<unsigned char>(GetNum("controlset", "key.option4")));
     } else {
         WarningMessage("[AGD Importer] No Controls found during the import process");
     }
@@ -120,7 +119,7 @@ bool AgdImporter::UpdateJumpTable()
 {
     if (m_Parser.hasVariable("jumptable")) {
         auto doc = dynamic_cast<Project::JumpTableDocument*>(theDocumentManager.Add("Jump", "Table", "JumpTable"));
-        for (int step = 0; step < doc->Count; step++) {
+        for (unsigned char step = 0; step < doc->Count; step++) {
             doc->SetStep(step, GetNum("jumptable", "table", step));
         }
     }
@@ -133,10 +132,10 @@ bool AgdImporter::UpdateFont()
         auto doc = dynamic_cast<Project::CharacterSetDocument*>(theDocumentManager.Add("Image", "Character Set", "Game Font"));
         // check font size is the same as parsed
         // get the image byte values and convert to hex
-        int bpp = theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()->BitsPerPixel;
-        int bytesPerFrame = (doc->Width * doc->Height) / (8 * bpp);
-        int bytesRequired = bytesPerFrame * doc->Frames;
-        int bytes = m_Parser.Variables["font"]["characters"].size();
+        auto bpp = theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()->BitsPerPixel;
+        auto bytesPerFrame = static_cast<unsigned int>(doc->Width * doc->Height) / (8 * bpp);
+        auto bytesRequired = bytesPerFrame * doc->Frames;
+        auto bytes = m_Parser.Variables["font"]["characters"].size();
         if (bytesRequired == bytes) {
             for (auto f = 0; f < doc->Frames; f++) {
                 // get bytes for each frame
@@ -147,7 +146,7 @@ bool AgdImporter::UpdateFont()
                 doc->Frame[f] = frame;
             }
         } else {
-            ErrorMessage("[AGD Importer] Incorrect number of font bytes found. Require " + IntToStr(bytesRequired) + "bytes, but got " + IntToStr(bytes) + " bytes.");
+            ErrorMessage("[AGD Importer] Incorrect number of font bytes found. Require " + UIntToStr(bytesRequired) + "bytes, but got " + UIntToStr(bytes) + " bytes.");
             return false;
         }
     }
@@ -164,13 +163,10 @@ bool AgdImporter::AddImages(const String& name, const String& imgType)
             auto objName = imgType + " " + IntToStr(obj);
             auto varName = name + m_Parser.PadNum(obj);
             auto doc = dynamic_cast<Project::ImageDocument*>(theDocumentManager.Add("Image", imgType, objName));
-            int bytesPerFrame = (doc->Width * doc->Height) / (8 * bpp);
-            int bytes = m_Parser.Variables[varName]["image"].size();
+            auto bytesPerFrame = (doc->Width * doc->Height) / (8 * bpp);
+            auto bytes = m_Parser.Variables[varName]["image"].size();
             String frame = "";
-            if (imgType == "Sprite") {
-                int a = 0;
-            }
-            int frameCount = bytes / bytesPerFrame;
+            auto frameCount = bytes / bytesPerFrame;
             if (bytes >= bytesPerFrame) {
                 for (auto f = 0; f < frameCount; f++) {
                     frame = "";
@@ -181,7 +177,7 @@ bool AgdImporter::AddImages(const String& name, const String& imgType)
                     doc->Frame[f] = frame;
                 }
             } else {
-                ErrorMessage("[AGD Importer] Incorrect number of " + imgType + " bytes found. Require " + IntToStr(bytesPerFrame) + "bytes, but got " + IntToStr(bytes) + " bytes.");
+                ErrorMessage("[AGD Importer] Incorrect number of " + imgType + " bytes found. Require " + UIntToStr(bytesPerFrame) + "bytes, but got " + UIntToStr(bytes) + " bytes.");
                 return false;
             }
             if (imgType == "Tile") {
@@ -267,9 +263,9 @@ bool AgdImporter::AddMap()
     // upset an empty map
     std::map<int, TPoint> mapIndexToPt;
     // read in the map indexes
-    int mapWidth = StrToIntDef(m_Parser.Variables["map"]["width"].front(), -1);
-    int mapSize = m_Parser.Variables["map"]["table"].size();
-    int mapHeight = mapSize / mapWidth;
+    auto mapWidth = StrToIntDef(m_Parser.Variables["map"]["width"].front(), -1);
+    auto mapSize = m_Parser.Variables["map"]["table"].size();
+    auto mapHeight = mapSize / mapWidth;
     TPoint scrPos;
     auto ssi = StrToIntDef(m_Parser.Variables["map"]["startscreen"].front(), -1);
     auto numScreens = 0;
@@ -371,12 +367,12 @@ bool AgdImporter::AddMap()
         // get the map document
         auto doc = dynamic_cast<Project::TiledMapDocument*>(theDocumentManager.Get("Map", "Tiled", "Tile Map"));
         // set all the tile entities
-        doc->Set(Project::meMap, entities);
+        doc->SetEntities(Project::meMap, entities);
         // set the start screen
         Bus::Publish<SetStartRoom>(SetStartRoom(scrPos));
         // loop over the objects/spritepositions and add them to each room's entity list
     } else {
-        ErrorMessage("Map size is invalid: " + IntToStr(mapWidth) + "x" + IntToStr(mapHeight) + " (" + IntToStr(mapSize) + ", is not >= 1 and < 255.");
+        ErrorMessage("Map size is invalid: " + IntToStr(mapWidth) + "x" + UIntToStr(mapHeight) + " (" + UIntToStr(mapSize) + ", is not >= 1 and < 255.");
     }
 
     return result;

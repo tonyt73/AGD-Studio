@@ -12,7 +12,7 @@
 #include <typeinfo>
 #include <type_traits>
 //---------------------------------------------------------------------------
-namespace Messaging
+namespace MsgBus
 {
 class Bus
 {
@@ -27,8 +27,8 @@ private:
         unsigned int            m_SubscriptionId;
 
     public:
-                                Subscription_(unsigned int id) : m_SubscriptionId(id) {}
-        virtual                ~Subscription_() {}
+                                Subscription_(unsigned int id);
+        virtual                ~Subscription_();
 
         __property unsigned int SubscriptionId = { read = m_SubscriptionId };
     };
@@ -38,23 +38,23 @@ private:
     class Subscription : public Subscription_
     {
     private:
-        std::function<void (const T&)>  m_Handler;
+        std::function<void (const T&)> m_Handler;
     public:
-        Subscription(const std::function<void (const T&)>& handler, unsigned int subscriptionId)
+        Subscription(std::function<void (const T&)> handler, unsigned int subscriptionId)
         : Subscription_(subscriptionId)
-        , m_Handler(handler)
+        , m_Handler(std::move(handler))
         {
         }
 
+        virtual ~Subscription() override {}
+
         void Execute(const T& message)
         {
-            if (m_Handler)
-            {
+            if (m_Handler) {
                 m_Handler(message);
-            }
-            else
-            {
-                assert("Handler is invalid");
+            } else {
+                // Handler is invalid
+                assert(0);
             }
         }
     };
@@ -67,23 +67,21 @@ private:
 protected:
     // subscribe a handler to a templated message type
     template <class T>
-    static unsigned int Subscribe(const std::function<void (const T&)>& handler)
+    static unsigned int Subscribe(std::function<void (const T&)> handler)
     {
-        if (s_Handlers == nullptr)
-        {
+        if (s_Handlers == nullptr) {
             s_Handlers = new SubscriptionsMap();
         }
 
         auto& subscriptions = (*s_Handlers)[typeid(T)];
-        if (subscriptions == nullptr)
-        {
+        if (subscriptions == nullptr) {
             // add a new subscriptions list to the type handlers list
             subscriptions = std::make_unique<Subscriptions>();
             (*s_Handlers)[typeid(T)] = std::move(subscriptions);
         }
 
         // add the handler to the subscriptions list for the type and assign a new id
-        auto subscription = std::make_unique<Subscription<T> >(handler, ++s_NextId);
+        auto subscription = std::make_unique<Subscription<T>>(std::move(handler), ++s_NextId);
         subscriptions->push_back(std::move(subscription));
         return s_NextId;
     }
@@ -95,14 +93,12 @@ public:
     template <class T>
     static void Publish(const T& message)
     {
-        if (s_Handlers == nullptr)
-            return;
+        if (s_Handlers) {
         auto& subscriptions = (*s_Handlers)[typeid(T)];
-        if (subscriptions != nullptr)
-        {
-            for (const auto& subscription : *subscriptions)
-            {
-                ((Subscription<T>*)(subscription.get()))->Execute(message);
+            if (subscriptions != nullptr) {
+                for (const auto& subscription : *subscriptions) {
+                    (reinterpret_cast<Subscription<T>*>(subscription.get()))->Execute(message);
+                }
             }
         }
     }
@@ -114,18 +110,24 @@ private:
     std::list<unsigned int> m_SubscriptionIds;
 
 public:
-            __fastcall  Registrar();
-            __fastcall ~Registrar();
+    Registrar();
+   ~Registrar();
 
     template <class T>
-    void    __fastcall  Subscribe(std::function<void (const T&)> handler)
-    {
-        m_SubscriptionIds.push_back(::Messaging::Bus::Subscribe(handler));
+    void Subscribe(std::function<void (const T&)> handler) {
+        m_SubscriptionIds.push_back(Bus::Subscribe(handler));
     }
-    void    __fastcall  Unsubscribe();
+    void Unsubscribe();
 };
 //---------------------------------------------------------------------------
-} // namespace Messaging
+} // namespace MsgBus
 //---------------------------------------------------------------------------
-using namespace ::Messaging;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wheader-hygiene"
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+#pragma clang diagnostic ignored "-Wreserved-macro-identifier"
+using std::placeholders::_1;
+using namespace MsgBus;
+#define _FnBind(a) std::bind(&a, this, _1)
+#pragma clang diagnostic pop
 #endif

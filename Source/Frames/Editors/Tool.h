@@ -13,7 +13,7 @@ protected:
     // resetOnMove  : Requires the tool surface to be returned to the original start state
     // allowOnlyOne : Tool only supports one element/entity
     enum eFlags { usesUndo = 1, modifies = 2, resetOnMove = 4, allowOnlyOne = 8 };
-    typedef std::vector<TPoint>  LinePositions;
+    typedef std::vector<TRect>  LinePositions;
 
 private:
 

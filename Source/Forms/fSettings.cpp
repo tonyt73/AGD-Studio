@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "fSettings.h"
 #include "Project/Documents/DocumentManager.h"
@@ -10,14 +10,6 @@
 #include "Services/Folders.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-#pragma link "LMDControl"
-#pragma link "LMDCustomBevelPanel"
-#pragma link "LMDCustomControl"
-#pragma link "LMDCustomPanel"
-#pragma link "LMDCustomPanelFill"
-#pragma link "LMDCustomParentPanel"
-#pragma link "LMDCustomSheetControl"
-#pragma link "LMDPageControl"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 __fastcall TfrmSettings::TfrmSettings(TComponent* Owner)
@@ -25,7 +17,7 @@ __fastcall TfrmSettings::TfrmSettings(TComponent* Owner)
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmSettings::FormCreate(TObject *Sender)
+void __fastcall TfrmSettings::FormCreate(TObject* /*Sender*/)
 {
     if (theAppSettings.Developer.Trim() != "")
     {
@@ -57,12 +49,12 @@ void __fastcall TfrmSettings::FormCreate(TObject *Sender)
     GetBuildOptions();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmSettings::btnProfileClick(TObject *Sender)
+void __fastcall TfrmSettings::btnProfileClick(TObject* Sender)
 {
-    pgcSettings->TabIndex = ((TControl*)Sender)->Tag;
+    pgcSettings->TabIndex = static_cast<int>(static_cast<TControl*>(Sender)->Tag);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmSettings::btnOkClick(TObject *Sender)
+void __fastcall TfrmSettings::btnOkClick(TObject* /*Sender*/)
 {
     theAppSettings.WelcomeSkipOnStartup = chkWelcomeSkipOnStartup->Checked;
     theAppSettings.WelcomeSkipOnClose = chkWelcomeSkipOnClose->Checked;
@@ -72,12 +64,12 @@ void __fastcall TfrmSettings::btnOkClick(TObject *Sender)
     SaveMachineConfig();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmSettings::cmbThemesChange(TObject *Sender)
+void __fastcall TfrmSettings::cmbThemesChange(TObject* /*Sender*/)
 {
     ThemeManager::SetStyle(cmbThemes->Text);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmSettings::chkLoadLastProjectClick(TObject *Sender)
+void __fastcall TfrmSettings::chkLoadLastProjectClick(TObject* /*Sender*/)
 {
     if (chkLoadLastProject->Checked)
     {
@@ -90,7 +82,7 @@ void __fastcall TfrmSettings::chkLoadLastProjectClick(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmSettings::chkWelcomeSkipOnStartupClick(TObject *Sender)
+void __fastcall TfrmSettings::chkWelcomeSkipOnStartupClick(TObject* /*Sender*/)
 {
     if (chkWelcomeSkipOnStartup->Checked)
     {
@@ -129,24 +121,24 @@ String __fastcall TfrmSettings::FindExecutable(const String& title, const String
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmSettings::btnCompilerFindClick(TObject *Sender)
+void __fastcall TfrmSettings::btnCompilerFindClick(TObject* /*Sender*/)
 {
     edtCompilerExe->Text = FindExecutable("Locate AGD Compiler", edtCompilerExe->Text);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmSettings::btnEngineFindClick(TObject *Sender)
+void __fastcall TfrmSettings::btnEngineFindClick(TObject* /*Sender*/)
 {
     dlgOpen->FilterIndex = 1;
     edtEngineFile->Text = FindExecutable("Locate AGD Engine File", edtEngineFile->Text);
     dlgOpen->FilterIndex = 0;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmSettings::btnAssemblerFindClick(TObject *Sender)
+void __fastcall TfrmSettings::btnAssemblerFindClick(TObject* /*Sender*/)
 {
     edtAssemblerExe->Text = FindExecutable("Locate Assembler", edtAssemblerExe->Text);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmSettings::btnEmulatorFindClick(TObject *Sender)
+void __fastcall TfrmSettings::btnEmulatorFindClick(TObject* /*Sender*/)
 {
     edtEmulatorExe->Text = FindExecutable("Locate Emulator", edtEmulatorExe->Text);
 }

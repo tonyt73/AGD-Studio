@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "CanvasPencilTool.h"
 //---------------------------------------------------------------------------
@@ -9,10 +9,6 @@ __fastcall CanvasPencilTool::CanvasPencilTool()
 : CanvasTool()
 {
     Flags = usesUndo | modifies;
-}
-//---------------------------------------------------------------------------
-__fastcall CanvasPencilTool::~CanvasPencilTool()
-{
 }
 //---------------------------------------------------------------------------
 void __fastcall CanvasPencilTool::Apply(Visuals::GraphicsBuffer& canvas, const TPoint& pt)

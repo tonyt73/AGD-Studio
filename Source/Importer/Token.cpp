@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "Token.h"
 //---------------------------------------------------------------------------
@@ -12,11 +12,11 @@ Token::Token()
 {
 }
 //---------------------------------------------------------------------------
-Token::Token(const Token& other)
-: m_Type(other.Type)
-, m_Value(other.Value)
-{
-}
+//Token::Token(const Token& other)
+//: m_Type(other.Type)
+//, m_Value(other.Value)
+//{
+//}
 //---------------------------------------------------------------------------
 bool Token::ize(const String& part, bool first, bool incVars)
 {

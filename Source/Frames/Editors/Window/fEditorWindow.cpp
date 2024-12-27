@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "fEditorWindow.h"
 #include "EditorManager.h"
@@ -21,11 +21,11 @@ __fastcall TfrmEditorWindow::TfrmEditorWindow(TComponent* Owner)
     const auto& gm = *(mc.GraphicsMode());
     m_View = std::make_unique<TBitmap>();
     m_View->PixelFormat = pf32bit;
-    m_View->Width = gm.Width / mc.ImageSizing[Visuals::itCharacterSet].Minimum.Width;
-    m_View->Height = gm.Height / mc.ImageSizing[Visuals::itCharacterSet].Minimum.Height;
+    m_View->Width  = static_cast<LONG>(gm.Width ) / mc.ImageSizing[Visuals::itCharacterSet].Minimum.Width;
+    m_View->Height = static_cast<LONG>(gm.Height) / mc.ImageSizing[Visuals::itCharacterSet].Minimum.Height;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::FrameResize(TObject *Sender)
+void __fastcall TfrmEditorWindow::FrameResize(TObject* /*Sender*/)
 {
     Color = ThemeManager::Background;
     auto s = 8;
@@ -52,7 +52,7 @@ void __fastcall TfrmEditorWindow::FrameResize(TObject *Sender)
 void __fastcall TfrmEditorWindow::DrawView()
 {
     // draw the window area
-    auto doc = dynamic_cast<Project::WindowDocument*>(m_Document);
+    auto doc = dynamic_cast<Project::WindowDocument*>(Document);
     if (doc != nullptr && m_View != nullptr)
     {
         m_View->Canvas->Brush->Color = ThemeManager::Background;
@@ -94,92 +94,90 @@ void __fastcall TfrmEditorWindow::DrawView()
     sbrWindow->Panels->Items[5]->Text = "Height: " + IntToStr(doc->Height);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::imgViewMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
+void __fastcall TfrmEditorWindow::imgViewMouseMove(TObject* /*Sender*/, TShiftState, int, int)
 {
     //
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::actMoveLeftExecute(TObject *Sender)
+void __fastcall TfrmEditorWindow::actMoveLeftExecute(TObject* /*Sender*/)
 {
-    auto doc = dynamic_cast<Project::WindowDocument*>(m_Document);
+    auto doc = dynamic_cast<Project::WindowDocument*>(Document);
     if (doc != nullptr && IsActive() && doc->Left - 1 >= 0)
     {
-        doc->Set(TRect (doc->Left - 1, doc->Top, doc->Right - 1, doc->Bottom));
+        doc->SetRect(TRect (doc->Left - 1, doc->Top, doc->Right - 1, doc->Bottom));
         DrawView();
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::actMoveRightExecute(TObject *Sender)
+void __fastcall TfrmEditorWindow::actMoveRightExecute(TObject* /*Sender*/)
 {
-    auto doc = dynamic_cast<Project::WindowDocument*>(m_Document);
+    auto doc = dynamic_cast<Project::WindowDocument*>(Document);
     if (doc != nullptr)
     {
-        auto w = doc->Width;
-        auto doc = dynamic_cast<Project::WindowDocument*>(m_Document);
-        if (IsActive() && doc && doc->Left + w + 1 <= m_View->Width)
+        if (IsActive() && doc->Left + doc->Width + 1 <= m_View->Width)
         {
-            doc->Set(TRect (doc->Left + 1, doc->Top, doc->Right + 1, doc->Bottom));
+            doc->SetRect(TRect (doc->Left + 1, doc->Top, doc->Right + 1, doc->Bottom));
             DrawView();
         }
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::actMoveUpExecute(TObject *Sender)
+void __fastcall TfrmEditorWindow::actMoveUpExecute(TObject* /*Sender*/)
 {
-    auto doc = dynamic_cast<Project::WindowDocument*>(m_Document);
+    auto doc = dynamic_cast<Project::WindowDocument*>(Document);
     if (doc != nullptr && IsActive() && doc->Top - 1 >= 0)
     {
-        doc->Set(TRect (doc->Left, doc->Top - 1, doc->Right, doc->Bottom - 1));
+        doc->SetRect(TRect (doc->Left, doc->Top - 1, doc->Right, doc->Bottom - 1));
         DrawView();
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::actMoveDownExecute(TObject *Sender)
+void __fastcall TfrmEditorWindow::actMoveDownExecute(TObject* /*Sender*/)
 {
-    auto doc = dynamic_cast<Project::WindowDocument*>(m_Document);
+    auto doc = dynamic_cast<Project::WindowDocument*>(Document);
     if (doc != nullptr && IsActive() && doc->Top + doc->Height + 1 <= m_View->Height)
     {
-        doc->Set(TRect (doc->Left, doc->Top + 1, doc->Right, doc->Bottom + 1));
+        doc->SetRect(TRect (doc->Left, doc->Top + 1, doc->Right, doc->Bottom + 1));
         DrawView();
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::actWidthDecExecute(TObject *Sender)
+void __fastcall TfrmEditorWindow::actWidthDecExecute(TObject* /*Sender*/)
 {
-    auto doc = dynamic_cast<Project::WindowDocument*>(m_Document);
+    auto doc = dynamic_cast<Project::WindowDocument*>(Document);
     if (doc != nullptr && IsActive() && doc->Width > 8)
     {
-        doc->Set(TRect (doc->Left, doc->Top, doc->Right - 1, doc->Bottom));
+        doc->SetRect(TRect (doc->Left, doc->Top, doc->Right - 1, doc->Bottom));
         DrawView();
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::actWidthIncExecute(TObject *Sender)
+void __fastcall TfrmEditorWindow::actWidthIncExecute(TObject* /*Sender*/)
 {
-    auto doc = dynamic_cast<Project::WindowDocument*>(m_Document);
+    auto doc = dynamic_cast<Project::WindowDocument*>(Document);
     if (doc != nullptr && IsActive() && doc->Left + doc->Width + 1 <= m_View->Width)
     {
-        doc->Set(TRect (doc->Left, doc->Top, doc->Right + 1, doc->Bottom));
+        doc->SetRect(TRect (doc->Left, doc->Top, doc->Right + 1, doc->Bottom));
         DrawView();
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::actHeightDecExecute(TObject *Sender)
+void __fastcall TfrmEditorWindow::actHeightDecExecute(TObject* /*Sender*/)
 {
-    auto doc = dynamic_cast<Project::WindowDocument*>(m_Document);
+    auto doc = dynamic_cast<Project::WindowDocument*>(Document);
     if (doc != nullptr && IsActive() && doc->Height >= 8)
     {
-        doc->Set(TRect (doc->Left, doc->Top, doc->Right, doc->Bottom - 1));
+        doc->SetRect(TRect (doc->Left, doc->Top, doc->Right, doc->Bottom - 1));
         DrawView();
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorWindow::actHeightIncExecute(TObject *Sender)
+void __fastcall TfrmEditorWindow::actHeightIncExecute(TObject* /*Sender*/)
 {
-    auto doc = dynamic_cast<Project::WindowDocument*>(m_Document);
+    auto doc = dynamic_cast<Project::WindowDocument*>(Document);
     if (doc != nullptr && IsActive() && doc->Top + doc->Height + 1 <= m_View->Height)
     {
-        doc->Set(TRect (doc->Left, doc->Top, doc->Right, doc->Bottom + 1));
+        doc->SetRect(TRect (doc->Left, doc->Top, doc->Right, doc->Bottom + 1));
         DrawView();
     }
 }

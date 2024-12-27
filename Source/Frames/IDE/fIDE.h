@@ -24,23 +24,21 @@
 #include <Vcl.ImageCollection.hpp>
 #include <Vcl.VirtualImageList.hpp>
 #include <Xml.XMLIntf.hpp>
-#include "ElMenus.hpp"
 #include "ElTreeInplaceEditors.hpp"
 #include "ElXPThemedControl.hpp"
 #include "ElXTree.hpp"
+#include "LMDDckSite.hpp"
 #include "LMDInsPropInsp.hpp"
 #include "LMDInsPropPage.hpp"
-#include "LMDDckSite.hpp"
-#include "LMDPNGImageList.hpp"
 //---------------------------------------------------------------------------
+#include "../fAppFrame.h"
 #include "Build/BuildManager.h"
 #include "Factories/DocumentEditorFactory.h"
 #include "Frames/WndProcHandlers.h"
-#include "Messaging/Event.h"
-#include "Messaging/Messaging.h"
 #include "Project/Documents/Document.h"
+#include "fAppFrame.h"
 //---------------------------------------------------------------------------
-class TfrmIDE : public TFrame
+class TfrmIDE : public TfrmAppFrame
 {
 __published:    // IDE-managed Components
     TAction *actDeleteAsset;
@@ -57,7 +55,6 @@ __published:    // IDE-managed Components
     TAction *actEditZoomIn;
     TAction *actEditZoomOut;
     TAction *actEditZoomReset;
-    TAction *actFileNewAsset;
     TAction *actFileProjectClose;
     TAction *actFileProjectOpen;
     TAction *actFileProjectSave;
@@ -68,8 +65,8 @@ __published:    // IDE-managed Components
     TAction *actHelpGettingStarted;
     TAction *actHelpKeymapReference;
     TAction *actHelpTipOfTheDay;
-    TAction *actNewAsset;
-    TAction *actNewAssetCustom;
+    TAction *actFileNewImageDefault;
+    TAction *actFileNewTileCustom;
     TAction *actSettings;
     TAction *actViewBuildResults;
     TAction *actViewEditorKeys;
@@ -98,7 +95,6 @@ __published:    // IDE-managed Components
     TMainMenu *mnuMain;
     TMemo *mbKeys;
     TMemo *memMessages;
-    TMenuItem *btnNewImageCustom;
     TMenuItem *DeleteAsset1;
     TMenuItem *mnuEdit;
     TMenuItem *mnuEditCopy;
@@ -109,7 +105,6 @@ __published:    // IDE-managed Components
     TMenuItem *mnuFile;
     TMenuItem *mnuFileClose;
     TMenuItem *mnuFileMru;
-    TMenuItem *mnuFileNewAsset;
     TMenuItem *mnuFileOpenProject;
     TMenuItem *mnuFileSave;
     TMenuItem *mnuGame;
@@ -165,14 +160,29 @@ __published:    // IDE-managed Components
     TToolButton *ToolButton12;
     TToolButton *ToolButton13;
     TToolButton *ToolButton14;
-    TToolButton *ToolButton15;
+    TToolButton *btnFileNewTileCustom;
     TToolButton *ToolButton2;
-    TToolButton *ToolButton3;
     TToolButton *ToolButton4;
     TToolButton *ToolButton5;
     TToolButton *ToolButton6;
     TVirtualImageList *vilProject;
     TVirtualImageList *vilToolbar;
+    TMenuItem *NewTileImageCustomSize1;
+    TToolButton *btnFileNewImage;
+    TAction *actFileNewTile;
+    TMenuItem *New1;
+    TAction *actFileNewObject;
+    TAction *actFileNewSprite;
+    TToolButton *ToolButton3;
+    TToolButton *ToolButton7;
+    TMenuItem *N6;
+    TMenuItem *NewObjectDefaultSize1;
+    TMenuItem *NewSpriteDefaultSize1;
+    TMenuItem *NewTileDefaultSize1;
+    TAction *actEditDuplicateImage;
+    TMenuItem *DuplicateImage1;
+    TAction *actEditSplitIntoTiles;
+    TMenuItem *Replace1;
     void __fastcall actDeleteAssetExecute(TObject *Sender);
     void __fastcall actEditCopyExecute(TObject *Sender);
     void __fastcall actEditCutExecute(TObject *Sender);
@@ -187,13 +197,12 @@ __published:    // IDE-managed Components
     void __fastcall actEditZoomInExecute(TObject *Sender);
     void __fastcall actEditZoomOutExecute(TObject *Sender);
     void __fastcall actEditZoomResetExecute(TObject *Sender);
-    void __fastcall actFileNewAssetExecute(TObject *Sender);
     void __fastcall actFileProjectCloseExecute(TObject *Sender);
     void __fastcall actFileProjectOpenExecute(TObject *Sender);
     void __fastcall actFileProjectSaveExecute(TObject *Sender);
     void __fastcall actGameRunExecute(TObject *Sender);
     void __fastcall actHelpAboutExecute(TObject *Sender);
-    void __fastcall actNewAssetExecute(TObject *Sender);
+    void __fastcall actFileNewImageDefaultExecute(TObject *Sender);
     void __fastcall actSettingsExecute(TObject *Sender);
     void __fastcall actViewBuildResultsExecute(TObject *Sender);
     void __fastcall actViewEditorKeysExecute(TObject *Sender);
@@ -210,9 +219,15 @@ __published:    // IDE-managed Components
     void __fastcall tvProjectDblClick(TObject *Sender);
     void __fastcall tvProjectItemSelectedChange(TObject *Sender, TElXTreeItem *Item);
     void __fastcall dsIDEChange(TObject *Sender);
+    void __fastcall actFileNewTileCustomExecute(TObject *Sender);
+    void __fastcall popProjectClose(TObject *Sender);
+    void __fastcall actFileNewTileExecute(TObject *Sender);
+    void __fastcall actFileNewObjectExecute(TObject *Sender);
+    void __fastcall actFileNewSpriteExecute(TObject *Sender);
+    void __fastcall actEditDuplicateImageExecute(TObject *Sender);
+    void __fastcall actEditSplitIntoTilesExecute(TObject *Sender);
 
 private:                // User declarations
-    ::Messaging::Registrar              m_Registrar;
     Factories::DocumentEditorFactory    m_DocumentEditorFactory;
     Build::BuildManager                 m_Builder;
     std::list<EraseHandler>             m_EraseHandlers;    // stops flicking
@@ -229,16 +244,13 @@ private:                // User declarations
     void    __fastcall  OnUpdateProperties(const UpdateProperties& event);
     void    __fastcall  OnOpenDocument(const OpenDocument& event);
 
-    TNotifyEvent        FOnFormClose;
-
 public:                 // User declarations
-            __fastcall  TfrmIDE(TComponent* Owner);
-            __fastcall ~TfrmIDE();
+            __fastcall  TfrmIDE(TComponent* Owner) override;
+            __fastcall ~TfrmIDE() override;
 
-    void    __fastcall  OnActivate(TWinControl* parent);
-    void    __fastcall  OnClose();
-
-            __property  TNotifyEvent OnFormClose = { read = FOnFormClose, write = FOnFormClose };
+    void    __fastcall  OnActivate(TWinControl* parent) final;
+    void    __fastcall  OnClose() final;
+    void    __fastcall  OnCreate() final;
 };
 //---------------------------------------------------------------------------
 #endif

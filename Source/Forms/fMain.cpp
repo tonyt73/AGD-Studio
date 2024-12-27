@@ -1,10 +1,13 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "Forms/fMain.h"
 #include "Project/ProjectManager.h"
 #include "Project/Documents/MachineConfig.h"
 #include "Project/Documents/Settings.h"
+#include "Frames/WelcomeDialog/fWelcomeDialog.h"
+#include "Frames/IDE/fIDE.h"
+#include "Services/File.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -19,52 +22,47 @@ __fastcall TfrmMain::TfrmMain(TComponent* Owner)
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmMain::FormCreate(TObject *Sender)
+void __fastcall TfrmMain::FormCreate(TObject* /*Sender*/)
 {
-    // check command line parameters
-    if (!Services::File::Exists(ParamStr(1)))
-    {
-        // create the welcome screen
-        if (!theAppSettings.WelcomeSkipOnStartup)
-        {
+    // check command line parameters for a file
+    if (!Services::File::Exists(ParamStr(1))) {
+        // parameter as a file, doesn't exist so...
+        if (!theAppSettings.WelcomeSkipOnStartup) {
+            // create the welcome screen
             ShowWelcomeDialog();
-        }
-        else
-        {
+        } else {
+            // create the IDE to load the last project
             Caption = ApplicationName;
             ShowIDE();
-            if (theAppSettings.LoadLastProject && theAppSettings.LastProject.Trim() != "")
-            {
+            if (theAppSettings.LoadLastProject && theAppSettings.LastProject.Trim() != "") {
                 theProjectManager.Open(theAppSettings.LastProject);
             }
         }
-    }
-    else
-    {
+    } else {
+        // load the project file
         Caption = ApplicationName;
         ShowIDE();
         auto path = TDirectory::GetCurrentDirectory();
         auto project = Services::File::NameWithExtension(ParamStr(1));
         theProjectManager.Open(Services::File::Combine(path, project));
     }
-    // TODO: Remove: Used to generate initial JSON config files
+    // TODO -cConfig Setup: Remove: Used to generate initial JSON config files
     //auto pw = std::make_unique<PaletteWriter>();
     //auto pw = std::make_unique<GraphicsModeWriter>();
     //auto pw = std::make_unique<MachineConfigWriter>();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmMain::FormActivate(TObject *Sender)
+void __fastcall TfrmMain::FormActivate(TObject* /*Sender*/)
 {
     static bool atStartup = true;
-    if (atStartup && theAppSettings.WelcomeSkipOnStartup)
-    {
+    if (atStartup && theAppSettings.WelcomeSkipOnStartup) {
         // We skipped the Welcome dialog; so finish off the main form setup
         IDE->OnActivate(this);
     }
     atStartup = false;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmMain::FormCloseQuery(TObject *Sender, bool &CanClose)
+void __fastcall TfrmMain::FormCloseQuery(TObject* Sender, bool &CanClose)
 {
     SaveSettings();
     if (m_FormView == fvGameIDE)
@@ -72,14 +70,12 @@ void __fastcall TfrmMain::FormCloseQuery(TObject *Sender, bool &CanClose)
         IDE->OnClose();
         OnIDEClose(Sender);
         CanClose = theAppSettings.WelcomeSkipOnClose;
-    }
-    else
-    {
+    } else {
         CanClose = true;
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmMain::FormDestroy(TObject *Sender)
+void __fastcall TfrmMain::FormDestroy(TObject* /*Sender*/)
 {
     Welcome->OnActivate(nullptr);
     IDE->OnActivate(nullptr);
@@ -88,44 +84,41 @@ void __fastcall TfrmMain::FormDestroy(TObject *Sender)
     m_WelcomeFrame = nullptr;
 }
 //---------------------------------------------------------------------------
-TfrmWelcomeDialog* __fastcall TfrmMain::GetWelcome()
+TfrmAppFrame* __fastcall TfrmMain::GetWelcome()
 {
-    if (m_WelcomeFrame == nullptr)
-    {
+    if (m_WelcomeFrame == nullptr) {
         m_WelcomeFrame = std::make_unique<TfrmWelcomeDialog>(this);
+        m_WelcomeFrame->OnCreate();
     }
     return m_WelcomeFrame.get();
 }
 //---------------------------------------------------------------------------
-TfrmIDE* __fastcall TfrmMain::GetIDE()
+TfrmAppFrame* __fastcall TfrmMain::GetIDE()
 {
-    if (m_IDEFrame == nullptr)
-    {
+    if (m_IDEFrame == nullptr) {
         m_IDEFrame = std::make_unique<TfrmIDE>(this);
-        theProjectManager.Initialise(m_IDEFrame->tvProject);
+        m_IDEFrame->OnCreate();
     }
     return m_IDEFrame.get();
 }
 //---------------------------------------------------------------------------
-TFrame* __fastcall TfrmMain::GetActiveForm()
+TfrmAppFrame* __fastcall TfrmMain::GetActiveForm()
 {
-    return m_FormView == fvGameIDE ? (TFrame*)GetIDE() : (TFrame*)GetWelcome();
+    return m_FormView == fvGameIDE ? GetIDE() : GetWelcome();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmMain::OnIDEClose(TObject *Sender)
+void __fastcall TfrmMain::OnIDEClose(TObject* /*Sender*/)
 {
-    if (!theAppSettings.WelcomeSkipOnClose)
-    {
+    if (!theAppSettings.WelcomeSkipOnClose) {
         // show the welcome screen
         ShowWelcomeDialog();
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmMain::OnWelcomeDone(TObject *Sender)
+void __fastcall TfrmMain::OnWelcomeDone(TObject* Sender)
 {
     // show the IDE
-    if (Sender)
-    {
+    if (Sender) {
         ShowIDE();
     }
 }
@@ -145,8 +138,7 @@ void __fastcall TfrmMain::ShowWelcomeDialog()
     // then we can change the position
     Left = theAppSettings.WelcomePosition.X;
     Top  = theAppSettings.WelcomePosition.Y;
-    if (Left == 0 && Top == 0)
-    {
+    if (Left == 0 && Top == 0) {
         Position = poScreenCenter;
     }
     IDE->OnFormClose = OnIDEClose;
@@ -176,39 +168,34 @@ void __fastcall TfrmMain::ShowIDE()
 //---------------------------------------------------------------------------
 void __fastcall TfrmMain::SaveSettings()
 {
-    if (m_FormView == fvGameIDE)
-    {
+    if (m_FormView == fvGameIDE) {
         theAppSettings.WindowState = WindowState;
-        if (WindowState == wsNormal)
-        {
+        if (WindowState == wsNormal) {
             theAppSettings.WindowPosition = TPoint(Left, Top);
             theAppSettings.WindowSize     = TSize(Width, Height);
         }
-    }
-    else if (m_FormView == fvWelcomeDialog)
-    {
+    } else if (m_FormView == fvWelcomeDialog) {
         TPoint pt(Left, Top);
         theAppSettings.WelcomePosition = pt;
     }
     theAppSettings.Save();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmMain::FormBeforeMonitorDpiChanged(TObject *Sender, int OldDPI, int NewDPI)
+void __fastcall TfrmMain::FormBeforeMonitorDpiChanged(TObject* /*Sender*/, int /*OldDPI*/, int /*NewDPI*/)
 {
     // don't show window updates while the forms and components are getting DPI resized
     SendMessage(Handle, WM_SETREDRAW, 0, 0);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmMain::FormAfterMonitorDpiChanged(TObject *Sender, int OldDPI, int NewDPI)
+void __fastcall TfrmMain::FormAfterMonitorDpiChanged(TObject* /*Sender*/, int /*OldDPI*/, int /*NewDPI*/)
 {
     // show the DPI resize changes
     SendMessage(Handle, WM_SETREDRAW, 1, 0);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmMain::FormCanResize(TObject *Sender, int &NewWidth, int &NewHeight, bool &Resize)
+void __fastcall TfrmMain::FormCanResize(TObject* /*Sender*/, int &/*NewWidth*/, int &/*NewHeight*/, bool &Resize)
 {
-    if (m_FormView == fvGameIDE && WindowState == wsNormal)
-    {
+    if (m_FormView == fvGameIDE && WindowState == wsNormal) {
         theAppSettings.WindowPosition = TPoint(Left, Top);
         theAppSettings.WindowSize     = TSize(Width, Height);
     }

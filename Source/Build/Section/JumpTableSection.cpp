@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "JumpTableSection.h"
 #include "Project/Documents/DocumentManager.h"
@@ -21,11 +21,10 @@ __fastcall JumpTableSection::~JumpTableSection()
 //---------------------------------------------------------------------------
 void __fastcall JumpTableSection::Execute()
 {
-    const auto& JumpTable = (Project::JumpTableDocument*)theDocumentManager.Get("Jump", "Table", "JumpTable");
+    const auto& JumpTable = static_cast<Project::JumpTableDocument*>(theDocumentManager.Get("Jump", "Table", "JumpTable"));
 
     String def = "DEFINEJUMP ";
-    for (auto i = 0; i < JumpTable->Count; i++)
-    {
+    for (unsigned char i = 0; i < JumpTable->Count; i++) {
         def += IntToStr(JumpTable->RawStep(i));
         def += " ";
     }

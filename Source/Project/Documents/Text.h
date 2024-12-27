@@ -11,52 +11,61 @@ namespace Project
 class TextDocument : public Document
 {
 private:
-            void        __fastcall  DoSave();
+            void        __fastcall  DoSave() override;
 public:
                         __fastcall  TextDocument(const String& name);
+    virtual             __fastcall ~TextDocument() override {}
 
-    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new TextDocument(name); };
+    static  Document*   __fastcall  Create(const String& name, const String&) { return new TextDocument(name); }
             void        __fastcall  Add(const String& lines);
 
-            bool        __fastcall  Load();
-            void        __fastcall  Save();
+            bool        __fastcall  Load() override;
+            void        __fastcall  Save() override;
 };
 //---------------------------------------------------------------------------
-class EventDocument : public TextDocument
+class EventDocument final : public TextDocument
 {
 public:
                         __fastcall  EventDocument(const String& name);
+                        __fastcall ~EventDocument() final;
 
-    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new EventDocument(name); };
+    static  Document*   __fastcall  Create(const String& name, const String&) { return new EventDocument(name); }
 };
 //---------------------------------------------------------------------------
-class MessageDocument : public TextDocument
+class MessageDocument final : public TextDocument
 {
 public:
                         __fastcall  MessageDocument(const String& name);
+                        __fastcall ~MessageDocument() final;
 
-    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new MessageDocument(name); };
+    static  Document*   __fastcall  Create(const String& name, const String&) { return new MessageDocument(name); }
 };
 //---------------------------------------------------------------------------
-class SfxDocument : public TextDocument
+class SfxDocument final : public TextDocument
 {
 public:
                         __fastcall  SfxDocument(const String& name);
-    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new SfxDocument(name); };
+                        __fastcall ~SfxDocument() final;
+
+    static  Document*   __fastcall  Create(const String& name, const String&) { return new SfxDocument(name); }
 };
 //---------------------------------------------------------------------------
-class AGDDocument : public TextDocument
+class AGDDocument final : public TextDocument
 {
 public:
                         __fastcall  AGDDocument(const String& name);
-    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new AGDDocument(name); };
+                        __fastcall ~AGDDocument() final;
+
+    static  Document*   __fastcall  Create(const String& name, const String&) { return new AGDDocument(name); }
 };
 //---------------------------------------------------------------------------
-class AssemblyDocument : public TextDocument
+class AssemblyDocument final : public TextDocument
 {
 public:
                         __fastcall  AssemblyDocument(const String& name);
-    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new AssemblyDocument(name); };
+                        __fastcall ~AssemblyDocument() final;
+
+    static  Document*   __fastcall  Create(const String& name, const String&) { return new AssemblyDocument(name); }
 };
 //---------------------------------------------------------------------------
 } // Project namespace

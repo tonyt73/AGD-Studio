@@ -54,12 +54,12 @@ __published:    // IDE-managed Components
     void __fastcall spdPaperBlackClick(TObject *Sender);
 
 private:    // User declarations
-    int                 m_Ink;
-    int                 m_Paper;
-    int                 m_Bright;
-    int                 m_Flash;
+    unsigned char       m_Ink;
+    unsigned char       m_Paper;
+    unsigned char       m_Bright;
+    unsigned char       m_Flash;
 public:     // User declarations
-            __fastcall  TfrmPaletteAttribute(TComponent* Owner);
+            __fastcall  TfrmPaletteAttribute(TComponent* Owner) override;
 
     void    __fastcall  Set(Visuals::GraphicsBuffer& canvas);
 };

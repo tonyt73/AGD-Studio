@@ -1,7 +1,6 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
-#include "Messaging/Messaging.h"
 #include "Project/Documents/Settings.h"
 #include "Settings/ThemeManager.h"
 //---------------------------------------------------------------------------
@@ -13,7 +12,7 @@
 USEFORM("Forms\fAbout.cpp", frmAbout);
 USEFORM("Forms\fAdvancedSettings.cpp", frmAdvancedSettings);
 USEFORM("Forms\fMain.cpp", frmMain);
-USEFORM("Forms\fNewImage.cpp", frmNewImage);
+USEFORM("Forms\fNewTileImage.cpp", frmNewTileImage);
 USEFORM("Forms\fSettings.cpp", frmSettings);
 USEFORM("Frames\Editors\Code\fEditorCode.cpp", frmEditorCode); /* TFrame: File Type */
 USEFORM("Frames\Editors\Controls\fEditorControls.cpp", frmEditorControls); /* TFrame: File Type */
@@ -36,32 +35,25 @@ USEFORM("Frames\Editors\Map\fLabelledImage.cpp", frmLabelledImage); /* TFrame: F
 USEFORM("Frames\Editors\Messages\fEditorMessages.cpp", frmEditorMessages); /* TFrame: File Type */
 USEFORM("Frames\Editors\Music\fEditorMusic.cpp", frmEditorMusic); /* TFrame: File Type */
 USEFORM("Frames\Editors\Window\fEditorWindow.cpp", frmEditorWindow); /* TFrame: File Type */
+USEFORM("Frames\fAppFrame.cpp", frmAppFrame); /* TFrame: File Type */
 USEFORM("Frames\IDE\fIDE.cpp", frmIDE); /* TFrame: File Type */
 USEFORM("Frames\WelcomeDialog\fSelectionPanel.cpp", SelectionPanelFrame); /* TFrame: File Type */
 USEFORM("Frames\WelcomeDialog\fWelcomeDialog.cpp", frmWelcomeDialog); /* TFrame: File Type */
 //---------------------------------------------------------------------------
-int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE, LPTSTR, int)
+int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {
-    try
-    {
+    try {
          Application->Initialize();
          Application->MainFormOnTaskBar = true;
          ThemeManager::SetStyle(theAppSettings.ActiveStyle.Trim() != "" ? theAppSettings.ActiveStyle : "Windows 10 Black Pearl");
          Application->CreateForm(__classid(TfrmMain), &frmMain);
          Application->Run();
-    }
-    catch (Exception &exception)
-    {
+    } catch (Exception &exception) {
          Application->ShowException(&exception);
-    }
-    catch (...)
-    {
-         try
-         {
+    } catch (...) {
+         try {
              throw Exception("");
-         }
-         catch (Exception &exception)
-         {
+         } catch (Exception &exception) {
              Application->ShowException(&exception);
          }
     }

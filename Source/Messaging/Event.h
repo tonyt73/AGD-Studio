@@ -4,7 +4,7 @@
 //---------------------------------------------------------------------------
 #include "Project/Documents/Document.h"
 //---------------------------------------------------------------------------
-namespace Messaging
+namespace MsgBus
 {
 //---------------------------------------------------------------------------
 class Event
@@ -63,6 +63,20 @@ private:
 public:
     __fastcall              OpenDocument(Project::Document* document)
                             : Event("open.document")
+                            , m_Document(document)
+                            {
+                            }
+
+    __property Project::Document* Document = { read = m_Document };
+};
+//---------------------------------------------------------------------------
+class DocumentAdded : public Event
+{
+private:
+   Project::Document*       m_Document;
+public:
+    __fastcall              DocumentAdded(Project::Document* document)
+                            : Event("document.added")
                             , m_Document(document)
                             {
                             }
@@ -163,7 +177,8 @@ public:
                             }
 };
 //---------------------------------------------------------------------------
-} // Messaging namespace
+} // MsgBus namespace
+//---------------------------------------------------------------------------
 #define ClearMessage(a)          Bus::Publish<MessageEvent>(MessageEvent((a), etClear      ))
 #define ErrorMessage(a)          Bus::Publish<MessageEvent>(MessageEvent((a), etError      ))
 #define WarningMessage(a)        Bus::Publish<MessageEvent>(MessageEvent((a), etWarning    ))

@@ -32,21 +32,13 @@ __published:// IDE-managed Components
 
 private:    // User declarations
     std::unique_ptr<TBitmap>    m_View;
-    int                         m_ActiveStep;
+    unsigned char               m_ActiveStep;
     int                         m_Scalar;
 
     void            __fastcall  DrawView();
 
-public:        // User declarations
-                    __fastcall  TfrmEditorJumpTable(TComponent* Owner);
-
-    static  TFrame* __fastcall  Create(Project::Document* document, TComponent* owner)
-                                {
-                                    auto editor = new TfrmEditorJumpTable(owner);
-                                    editor->SetDocument(document);
-                                    document->DockPanel = dynamic_cast<TLMDDockPanel*>(owner);
-                                    return editor;
-                                }
+public:     // User declarations
+                    __fastcall  TfrmEditorJumpTable(TComponent* Owner) override;
 };
 //---------------------------------------------------------------------------
 #endif

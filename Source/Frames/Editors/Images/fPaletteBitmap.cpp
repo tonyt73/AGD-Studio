@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "fPaletteBitmap.h"
 #include "Project/Documents/DocumentManager.h"
@@ -43,8 +43,7 @@ void __fastcall TfrmPaletteBitmap::DrawPhysicalColors() const
     auto cols = imgSystemColors->Width / c_box;
     auto rows = totalColors / cols;
     // setup the picker image
-    if (m_PhysicalPicker->Width == 0)
-    {
+    if (m_PhysicalPicker->Width == 0) {
         // work out the size of the picker control
         auto hh = lblSystemColor->Height + ((rows + 1) * c_box);
         panSystemColorPicker->Height = hh;
@@ -58,16 +57,14 @@ void __fastcall TfrmPaletteBitmap::DrawPhysicalColors() const
     m_PhysicalPicker->Canvas->Brush->Color = TColor(0xFF000000);
     m_PhysicalPicker->Canvas->FillRect(TRect(0, 0, m_PhysicalPicker->Width, m_PhysicalPicker->Height));
     // draw the physical colours
-    for (auto i = 0; i < totalColors; i++)
-    {
+    for (auto i = 0; i < totalColors; i++) {
         auto c = i % cols;
         auto r = i / cols;
         auto x = c * c_box;
         auto y = r * c_box;
         m_PhysicalPicker->Canvas->Brush->Color = m_Palette.Color[i];
         m_PhysicalPicker->Canvas->FillRect(TRect(x, y, x + c_box, y + c_box));
-        if (i == m_CursorPhysical)
-        {
+        if (i == m_CursorPhysical) {
             auto xs = x;
             auto ys = y;
             auto xe = x + c_box - 1;
@@ -104,8 +101,7 @@ void __fastcall TfrmPaletteBitmap::DrawLogicalColors() const
     auto cols = imgLogicalColors->Width / c_box;
     auto rows = totalColors / cols;
     // setup the picker image
-    if (m_LogicalPicker->Width == 0)
-    {
+    if (m_LogicalPicker->Width == 0) {
         auto hh = lblLogicalColor->Height + ((rows + 1) * c_box);
         panLogicalColorPicker->Height = hh;
         m_LogicalPicker->Width = imgLogicalColors->Width;
@@ -118,16 +114,14 @@ void __fastcall TfrmPaletteBitmap::DrawLogicalColors() const
     m_LogicalPicker->Canvas->Brush->Color = TColor(0xFF000000);
     m_LogicalPicker->Canvas->FillRect(TRect(0, 0, m_LogicalPicker->Width, m_LogicalPicker->Height));
     // draw the physical colours
-    for (auto i = 0; i < totalColors; i++)
-    {
+    for (auto i = 0; i < totalColors; i++) {
         auto c = i % cols;
         auto r = i / cols;
         auto x = c * c_box;
         auto y = r * c_box;
-        m_LogicalPicker->Canvas->Brush->Color = m_GraphicsMode.LogicalColor[i];
+        m_LogicalPicker->Canvas->Brush->Color = m_GraphicsMode.LogicalColor[static_cast<unsigned char>(i)];
         m_LogicalPicker->Canvas->FillRect(TRect(x, y, x + c_box, y + c_box));
-        if (i == m_CursorLogical)
-        {
+        if (i == m_CursorLogical) {
             auto xs = x;
             auto ys = y;
             auto xe = x + c_box - 1;
@@ -150,22 +144,19 @@ void __fastcall TfrmPaletteBitmap::DrawLogicalColors() const
             m_LogicalPicker->Canvas->LineTo(xs, ye);
             m_LogicalPicker->Canvas->LineTo(xs, ys);
         }
-        if (m_Pen == i)
-        {
+        if (m_Pen == i) {
             // draw L
             auto size = imgLogicalColors->Picture->Bitmap->Canvas->TextExtent("L");
             auto tx = x + ((c_box - size.cx) >> 1);
             auto ty = y + ((c_box - size.cy) >> 1);
-            m_LogicalPicker->Canvas->Font->Color = m_Palette.FontColorOf[m_GraphicsMode.FromLogicalColor[i]];
+            m_LogicalPicker->Canvas->Font->Color = m_Palette.FontColorOf[m_GraphicsMode.FromLogicalColor[static_cast<unsigned char>(i)]];
             m_LogicalPicker->Canvas->TextOut(tx, ty, "L");
-        }
-        else if (m_Brush == i)
-        {
+        } else if (m_Brush == i) {
             // draw R
             auto size = imgLogicalColors->Picture->Bitmap->Canvas->TextExtent("R");
             auto tx = x + ((c_box - size.cx) >> 1);
             auto ty = y + ((c_box - size.cy) >> 1);
-            m_LogicalPicker->Canvas->Font->Color = m_Palette.FontColorOf[m_GraphicsMode.FromLogicalColor[i]];
+            m_LogicalPicker->Canvas->Font->Color = m_Palette.FontColorOf[m_GraphicsMode.FromLogicalColor[static_cast<unsigned char>(i)]];
             m_LogicalPicker->Canvas->TextOut(tx, ty, "R");
         }
     }
@@ -190,23 +181,19 @@ void __fastcall TfrmPaletteBitmap::Set(Visuals::GraphicsBuffer& canvas)
     canvas.Color[1] = m_Brush;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmPaletteBitmap::imgLogicalColorsMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
+void __fastcall TfrmPaletteBitmap::imgLogicalColorsMouseDown(TObject* /*Sender*/, TMouseButton Button, TShiftState /*Shift*/, int /*X*/, int /*Y*/)
 {
-    if (m_CursorLogical != -1)
-    {
-        if (Button == mbLeft)
-        {
-            m_Pen = m_CursorLogical;
-        }
-        else if (Button == mbRight)
-        {
-            m_Brush = m_CursorLogical;
+    if (m_CursorLogical != -1) {
+        if (Button == mbLeft) {
+            m_Pen = static_cast<unsigned char>(m_CursorLogical);
+        } else if (Button == mbRight) {
+            m_Brush = static_cast<unsigned char>(m_CursorLogical);
         }
         Update();
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmPaletteBitmap::imgLogicalColorsMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
+void __fastcall TfrmPaletteBitmap::imgLogicalColorsMouseMove(TObject* /*Sender*/, TShiftState /*Shift*/, int X, int Y)
 {
     auto llc = m_CursorLogical;
     // change colour selection
@@ -216,37 +203,32 @@ void __fastcall TfrmPaletteBitmap::imgLogicalColorsMouseMove(TObject *Sender, TS
     auto row = Y / c_box;
     auto cols = imgLogicalColors->Width / c_box;
     auto lc = (row * cols) + col;
-    if (0 <= lc && lc <= m_GraphicsMode.LogicalColors)
-    {
+    if (0 <= lc && lc <= m_GraphicsMode.LogicalColors) {
         m_CursorLogical = lc;
     }
-    if (llc != m_CursorLogical)
-    {
+    if (llc != m_CursorLogical) {
         DrawLogicalColors();
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmPaletteBitmap::imgLogicalColorsMouseLeave(TObject *Sender)
+void __fastcall TfrmPaletteBitmap::imgLogicalColorsMouseLeave(TObject* /*Sender*/)
 {
     m_CursorLogical = -1;
     DrawLogicalColors();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmPaletteBitmap::imgSystemColorsMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
+void __fastcall TfrmPaletteBitmap::imgSystemColorsMouseDown(TObject* /*Sender*/, TMouseButton Button, TShiftState /*Shift*/, int /*X*/, int /*Y*/)
 {
     // remap a logical colour to a new physical colour
-    if (Button == mbLeft)
-    {
-        m_GraphicsMode.RemapColor(m_Pen, m_CursorPhysical);
-    }
-    else if (Button == mbRight)
-    {
-        m_GraphicsMode.RemapColor(m_Brush, m_CursorPhysical);
+    if (Button == mbLeft) {
+        m_GraphicsMode.RemapColor(m_Pen, static_cast<unsigned char>(m_CursorPhysical));
+    } else if (Button == mbRight) {
+        m_GraphicsMode.RemapColor(m_Brush, static_cast<unsigned char>(m_CursorPhysical));
     }
     Update();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmPaletteBitmap::imgSystemColorsMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
+void __fastcall TfrmPaletteBitmap::imgSystemColorsMouseMove(TObject* /*Sender*/, TShiftState /*Shift*/, int X, int Y)
 {
     auto lpc = m_CursorPhysical;
     // change colour selection
@@ -256,23 +238,21 @@ void __fastcall TfrmPaletteBitmap::imgSystemColorsMouseMove(TObject *Sender, TSh
     auto row = Y / c_box;
     auto cols = imgSystemColors->Width / c_box;
     auto pc = (row * cols) + col;
-    if (0 <= pc && pc <= m_Palette.Colors)
-    {
+    if (0 <= pc && pc <= m_Palette.Colors) {
         m_CursorPhysical = pc;
     }
-    if (lpc != m_CursorPhysical)
-    {
+    if (lpc != m_CursorPhysical) {
         DrawPhysicalColors();
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmPaletteBitmap::imgSystemColorsMouseLeave(TObject *Sender)
+void __fastcall TfrmPaletteBitmap::imgSystemColorsMouseLeave(TObject* /*Sender*/)
 {
     m_CursorPhysical = -1;
     DrawPhysicalColors();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmPaletteBitmap::btnSwapClick(TObject *Sender)
+void __fastcall TfrmPaletteBitmap::btnSwapClick(TObject* /*Sender*/)
 {
     auto op = m_Pen;
     m_Pen = m_Brush;
@@ -280,30 +260,28 @@ void __fastcall TfrmPaletteBitmap::btnSwapClick(TObject *Sender)
     Update();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmPaletteBitmap::btnPaletteLoadClick(TObject *Sender)
+void __fastcall TfrmPaletteBitmap::btnPaletteLoadClick(TObject* /*Sender*/)
 {
     auto path = Services::File::Combine("Saved Palettes", m_GraphicsMode.Name);
     path = Services::Folders::Create(Services::Folders::lpCommon, path);
     dlgOpen->InitialDir = path;
-    if (dlgOpen->Execute())
-    {
+    if (dlgOpen->Execute()) {
         m_GraphicsMode.LoadLogicalCLUT(path, Services::File::NameWithExtension(dlgOpen->FileName));
         Update();
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmPaletteBitmap::btnPaletteSaveClick(TObject *Sender)
+void __fastcall TfrmPaletteBitmap::btnPaletteSaveClick(TObject* /*Sender*/)
 {
     auto path = Services::File::Combine("Saved Palettes", m_GraphicsMode.Name);
     path = Services::Folders::Create(Services::Folders::lpCommon, path);
     dlgSave->InitialDir = path;
-    if (dlgSave->Execute())
-    {
+    if (dlgSave->Execute()) {
         m_GraphicsMode.SaveLogicalCLUT(path, Services::File::NameWithoutExtension(dlgSave->FileName));
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmPaletteBitmap::btnPaletteRestoreClick(TObject *Sender)
+void __fastcall TfrmPaletteBitmap::btnPaletteRestoreClick(TObject* /*Sender*/)
 {
     m_GraphicsMode.RestoreDefaultPalette();
     Update();

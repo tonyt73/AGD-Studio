@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "fMultiImageView.h"
 #include "fSelectionImage.h"
@@ -70,7 +70,7 @@ void __fastcall TMultiImageViewFrame::Select(int index)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TMultiImageViewFrame::FrameMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled)
+void __fastcall TMultiImageViewFrame::FrameMouseWheel(TObject* /*Sender*/, TShiftState Shift, int WheelDelta, TPoint &/*MousePos*/, bool &Handled)
 {
     if (Shift.Contains(ssCtrl))
     {
@@ -88,20 +88,20 @@ void __fastcall TMultiImageViewFrame::FrameMouseWheel(TObject *Sender, TShiftSta
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TMultiImageViewFrame::Timer1Timer(TObject *Sender)
+void __fastcall TMultiImageViewFrame::Timer1Timer(TObject* /*Sender*/)
 {
     for (auto i = 0; i < panImages->ControlCount; i++)
     {
         auto control = panImages->Controls[i];
         if (control->ClassNameIs("TSelectionImageFrame"))
         {
-            auto image = ((TSelectionImageFrame*)control);
+            auto image = static_cast<TSelectionImageFrame*>(control);
             image->Update();
         }
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TMultiImageViewFrame::OnFrameClicked(TObject *Sender)
+void __fastcall TMultiImageViewFrame::OnFrameClicked(TObject* Sender)
 {
     if (FOnClick != nullptr) FOnClick(Sender);
 }

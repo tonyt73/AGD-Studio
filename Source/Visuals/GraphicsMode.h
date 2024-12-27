@@ -52,31 +52,32 @@ protected:
     float                       m_ScalarY;                  // scaling factor for height
     std::unique_ptr<Palette>    m_Palette;                  // the palette table for the graphics mode
     BufferType                  m_BufferType;               // the type of graphics buffer we are
+    String                      m_BufferTypeName;           // the name of graphics buffer (used for loading)
     Table                       m_LogicalColors;            // palette table LOGICAL color indexes into the Total Colors table
     Table                       m_DefaultLogicalColors;     // default palette table LOGICAL color indexes into the Total Colors table
-    int                         m_LogicalIndex;             // json loader
+    unsigned char               m_LogicalIndex;             // json loader
     bool                        m_SupportsRemapping;        // supports remapping of the logical colors to any of the palette colors
     ExportInfo                  m_ExportInfo[itEnd];        // flags for image data export
     PixelRemappingList          m_PixelRemapping;           // a list of  masks/shifts used to remap pixel bits into machine specific formats for certain graphics modes
     PixelRemapping              m_PixelRemappingLoader;     // used to load the pixel remapping list
     RemapData                   m_RemapDataLoader;          // used to load the remap data into the m_PixelRemappingLoader
 
-    int             __fastcall  GetLogicalColors() const;
-    TColor          __fastcall  GetLogicalColor(int index) const;
-    int             __fastcall  GetColorFromLogicalIndex(int index) const;
+    unsigned char   __fastcall  GetLogicalColors() const;
+    TColor          __fastcall  GetLogicalColor(unsigned char index) const;
+    unsigned char   __fastcall  GetColorFromLogicalIndex(unsigned char index) const;
   const ExportInfo& __fastcall  GetExportInformation(ImageTypes imageType) const;
-    void            __fastcall  OnEndObject(const String& object);
+    void            __fastcall  OnEndObject(const String& object) override;
     void            __fastcall  Save();
 
 public:
                     __fastcall  GraphicsMode();
                     __fastcall  GraphicsMode(const GraphicsMode& other);
 
-    bool            __fastcall  Load(const String& name);
+    bool            __fastcall  LoadFile(const String& name) override;
     void            __fastcall  SaveLogicalCLUT(String path = "", String name = "");
     void            __fastcall  LoadLogicalCLUT(String path = "", String name = "");
                                 // Remap a logical color to a new palette color
-    void            __fastcall  RemapColor(int paletteTableIndex, int colorTableIndex);
+    void            __fastcall  RemapColor(unsigned char paletteTableIndex, unsigned char colorTableIndex);
     unsigned char   __fastcall  RemapPixels(unsigned char pixels) const;
     void            __fastcall  RestoreDefaultPalette();
     const Palette&  __fastcall  Palette() const;
@@ -92,9 +93,9 @@ public:
     float           __property  ScalarX                                 = { read = m_ScalarX                };
     float           __property  ScalarY                                 = { read = m_ScalarY                };
     BufferType      __property  TypeOfBuffer                            = { read = m_BufferType             };
-    int             __property  FromLogicalColor[int index]             = { read = GetColorFromLogicalIndex };          // get a palette table index from a logical index
-    int             __property  LogicalColors                           = { read = GetLogicalColors         };
-    TColor          __property  LogicalColor[int index]                 = { read = GetLogicalColor          };
+    unsigned char   __property  FromLogicalColor[unsigned char index]   = { read = GetColorFromLogicalIndex };          // get a palette table index from a logical index
+    unsigned char   __property  LogicalColors                           = { read = GetLogicalColors         };
+    TColor          __property  LogicalColor[unsigned char index]       = { read = GetLogicalColor          };
     bool            __property  SupportsLogicalColorRemapping           = { read = m_SupportsRemapping      };
     ExportInfo      __property  ExportInformation[ImageTypes imageType] = { read = GetExportInformation     };
 };

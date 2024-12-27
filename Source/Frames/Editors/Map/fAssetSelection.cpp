@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "fAssetSelection.h"
 #include "fLabelledImage.h"
@@ -19,11 +19,9 @@ __fastcall TfrmAssetSelection::TfrmAssetSelection(TComponent* Owner)
 //---------------------------------------------------------------------------
 void __fastcall TfrmAssetSelection::Clear()
 {
-    for (auto c = panList->ControlCount - 1; c >= 0 ; c--)
-    {
+    for (auto c = panList->ControlCount - 1; c >= 0 ; c--) {
         auto cc = dynamic_cast<TfrmLabelledImage*>(panList->Controls[c]);
-        if (cc)
-        {
+        if (cc) {
             delete cc;
         }
     }
@@ -42,11 +40,9 @@ void __fastcall TfrmAssetSelection::Add(Project::ImageDocument* image, bool enab
 //---------------------------------------------------------------------------
 void __fastcall TfrmAssetSelection::Select(const Project::ImageDocument* image)
 {
-    for (auto i = 0; i < panList->ControlCount; i++)
-    {
+    for (auto i = 0; i < panList->ControlCount; i++) {
         auto control = dynamic_cast<TfrmLabelledImage*>(panList->Controls[i]);
-        if (control != nullptr && control->Image->Id == image->Id)
-        {
+        if (control != nullptr && control->Image->Id == image->Id) {
             control->Selected = true;
             control->Refresh();
             sbxList->VertScrollBar->Position = control->Top;
@@ -58,11 +54,9 @@ void __fastcall TfrmAssetSelection::Select(const Project::ImageDocument* image)
 //---------------------------------------------------------------------------
 void __fastcall TfrmAssetSelection::UpdateDocument(const Project::ImageDocument* image)
 {
-    for (auto i = 0; i < panList->ControlCount; i++)
-    {
+    for (auto i = 0; i < panList->ControlCount; i++) {
         auto control = dynamic_cast<TfrmLabelledImage*>(panList->Controls[i]);
-        if (control != nullptr && control->Image->Id == image->Id)
-        {
+        if (control != nullptr && control->Image->Id == image->Id) {
             control->Update();
             break;
         }
@@ -72,8 +66,7 @@ void __fastcall TfrmAssetSelection::UpdateDocument(const Project::ImageDocument*
 void __fastcall __fastcall TfrmAssetSelection::OnImageClick(TObject* Sender)
 {
     auto image = dynamic_cast<TfrmLabelledImage*>(Sender);
-    if (image != nullptr && FOnImageClick != nullptr)
-    {
+    if (image != nullptr && FOnImageClick != nullptr) {
         FOnImageClick(image->Image);
     }
 }
@@ -86,29 +79,26 @@ void __fastcall __fastcall TfrmAssetSelection::OnOpenDocument(TObject* Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAssetSelection::sbxListMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled)
+void __fastcall TfrmAssetSelection::sbxListMouseWheel(TObject* /*Sender*/, TShiftState /*Shift*/, int WheelDelta, TPoint &/*MousePos*/, bool &Handled)
 {
     Handled = true;
     sbxList->VertScrollBar->Position -= WheelDelta;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAssetSelection::sbxListResize(TObject *Sender)
+void __fastcall TfrmAssetSelection::sbxListResize(TObject* /*Sender*/)
 {
     auto my = 0;
-    for (auto c = 0; c < panList->ControlCount; c++)
-    {
+    for (auto c = 0; c < panList->ControlCount; c++) {
         my = std::max(my, panList->Controls[c]->Top + panList->Controls[c]->Height);
     }
     panList->Height = std::max(my, sbxList->Height);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAssetSelection::mnuToggleLabelsClick(TObject *Sender)
+void __fastcall TfrmAssetSelection::mnuToggleLabelsClick(TObject* /*Sender*/)
 {
-    for (auto c = 0; c < panList->ControlCount; c++)
-    {
+    for (auto c = 0; c < panList->ControlCount; c++) {
         auto label = dynamic_cast<TfrmLabelledImage*>(panList->Controls[c]);
-        if (label)
-        {
+        if (label) {
             label->ShowCaption = mnuToggleLabels->Checked;
         }
     }
@@ -117,11 +107,9 @@ void __fastcall TfrmAssetSelection::mnuToggleLabelsClick(TObject *Sender)
 //---------------------------------------------------------------------------
 int __fastcall TfrmAssetSelection::FindSelected()
 {
-    for (auto c = 0; c < panList->ControlCount; c++)
-    {
+    for (auto c = 0; c < panList->ControlCount; c++) {
         auto label = dynamic_cast<TfrmLabelledImage*>(panList->Controls[c]);
-        if (label && label->Selected)
-        {
+        if (label && label->Selected) {
             return c;
         }
     }
@@ -131,13 +119,11 @@ int __fastcall TfrmAssetSelection::FindSelected()
 void __fastcall TfrmAssetSelection::Next()
 {
     auto ci = FindSelected();
-    if (ci != -1)
-    {
+    if (ci != -1) {
         ci = (ci + 1) % panList->ControlCount;
         if (ci == 0) ci = 1;
         auto label = dynamic_cast<TfrmLabelledImage*>(panList->Controls[ci]);
-        if (label)
-        {
+        if (label) {
             label->Selected = true;
             Select(label->Image);
             OnImageClick(label);
@@ -148,13 +134,11 @@ void __fastcall TfrmAssetSelection::Next()
 void __fastcall TfrmAssetSelection::Prev()
 {
     auto ci = FindSelected();
-    if (ci != -1)
-    {
+    if (ci != -1) {
         ci = (panList->ControlCount + (ci - 1)) % panList->ControlCount;
         if (ci == 0) ci = panList->ControlCount - 1;
         auto label = dynamic_cast<TfrmLabelledImage*>(panList->Controls[ci]);
-        if (label)
-        {
+        if (label) {
             label->Selected = true;
             Select(label->Image);
             OnImageClick(label);

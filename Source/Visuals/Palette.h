@@ -16,11 +16,11 @@ protected:
 
     TColor              __fastcall  GetTableColor(int index) const;
     TColor              __fastcall  GetGreyscale(int index) const;
-    int                 __fastcall  GetTotalColors() const;
+    unsigned int        __fastcall  GetTotalColors() const;
 
     TColor              __fastcall  GetFontColorOf(int index) const;
 
-    void                __fastcall  OnEndObject(const String& object);
+    void                __fastcall  OnEndObject(const String& object) override;
     void                __fastcall  Save();
 
 public:
@@ -29,9 +29,11 @@ public:
                         __fastcall  Palette(const Palette& other);
             Palette&    __fastcall  operator=(const Palette& other);
 
-            bool        __fastcall  Load(const String& name);
+            bool        __fastcall  LoadFile(const String& name) override;
 
     static  DWORD       __fastcall  LuminanceOf(TColor Color);
+    static  bool        __fastcall  IsGrey(TColor Color);
+    static  int         __fastcall  Diff(TColor Color);
 
             String      __property  Name                    = { read = m_Name         };
             TColor      __property  Greyscale[int index]    = { read = GetGreyscale   };

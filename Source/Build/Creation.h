@@ -9,7 +9,7 @@
 namespace Build
 {
 //---------------------------------------------------------------------------
-class Creation : public BuildProcess
+class Creation final : public BuildProcess
 {
 private:
     typedef std::list<std::unique_ptr<Section>> SectionList;
@@ -18,7 +18,7 @@ private:
 
 public:
             __fastcall  Creation(BuildMessages& buildMessages);
-    virtual __fastcall ~Creation();
+            __fastcall ~Creation() final;
 
     bool    __fastcall  Execute() final;
 };

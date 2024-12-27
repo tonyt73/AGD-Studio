@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "ControlsSection.h"
 #include "Project/Documents/DocumentManager.h"
@@ -21,7 +21,7 @@ __fastcall ControlsSection::~ControlsSection()
 //---------------------------------------------------------------------------
 void __fastcall ControlsSection::Execute()
 {
-    const auto& Keys = (Project::ControlsDocument*)theDocumentManager.Get("Controls", "List", "Controls");
+    const auto& Keys = static_cast<Project::ControlsDocument*>(theDocumentManager.Get("Controls", "List", "Controls"));
     String line = "DEFINECONTROLS  ";
     for (const auto key : Project::AgdKeys) {
         auto keyCode = Keys->GetAsciiCode(key);

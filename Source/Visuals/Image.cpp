@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include <System.UIConsts.hpp>
 #include "Image.h"
@@ -9,7 +9,7 @@
 //---------------------------------------------------------------------------
 using namespace Visuals;
 //---------------------------------------------------------------------------
-std::unique_ptr<TBitmap> __fastcall Image::m_Overlay = nullptr;
+[[clang::no_destroy]] std::unique_ptr<TBitmap> Image::m_Overlay = nullptr;
 //---------------------------------------------------------------------------
 __fastcall Image::Image(unsigned int width, unsigned int height, const GraphicsMode& graphicsMode)
 : m_Image(nullptr)
@@ -79,14 +79,14 @@ void __fastcall Image::Draw(const TPoint& pt, TBitmap* canvas, TColor overlayCol
 //        unsigned int g = overlayColor & 0x0000FF00;
 //        unsigned int b = (overlayColor & 0x00FF0000) >> 16;
 //        unsigned int rgb = r | g | b;
-        ((TColor*)m_Overlay->ScanLine[0])[0] = (TColor)RGBtoBGR(overlayColor);
+        static_cast<TColor*>(m_Overlay->ScanLine[0])[0] = static_cast<TColor>(RGBtoBGR(overlayColor));
         AlphaBlend(canvas->Canvas->Handle, pt.x, pt.y, m_Image->Width, m_Image->Height, m_Overlay->Canvas->Handle, 0, 0, 1, 1, bfn);
     }
 }
 //---------------------------------------------------------------------------
-std::vector<unsigned char> __fastcall Image::GetExportNativeFormat() const
+ByteBuffer __fastcall Image::GetExportNativeFormat(const TRect& rect) const
 {
-    return m_Canvas->GetNative(m_Image->ImageType);
+    return m_Canvas->GetNative(m_Image->ImageType, rect);
 }
 //---------------------------------------------------------------------------
 

@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "MapLineTool.h"
 //---------------------------------------------------------------------------
@@ -9,10 +9,6 @@ __fastcall MapLineTool::MapLineTool()
 : MapTool()
 {
     Flags = resetOnMove | modifies;
-}
-//---------------------------------------------------------------------------
-__fastcall MapLineTool::~MapLineTool()
-{
 }
 //---------------------------------------------------------------------------
 void __fastcall MapLineTool::Apply(Project::MapEntityList& list, Project::MapEntity entity)

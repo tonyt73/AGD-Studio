@@ -1,7 +1,7 @@
 {
   "Name": "Amstrad CPC Mode 2",
   "Palette": "Amstrad CPC",
-  "BufferType": 0,
+  "BufferType": "btBitmap",
   "Width": 640,
   "Height": 200,
   "ScalarX": 1.0,

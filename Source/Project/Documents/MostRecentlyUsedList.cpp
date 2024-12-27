@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "MostRecentlyUsedList.h"
 #include "Services/File.h"
@@ -31,7 +31,7 @@ void __fastcall MostRecentlyUsedList::Load()
     if (Services::File::Exists(file))
     {
         GUARD(m_Loading);
-        Services::JsonFile::Load(file);
+        Services::JsonFile::LoadFile(file);
     }
 }
 //---------------------------------------------------------------------------

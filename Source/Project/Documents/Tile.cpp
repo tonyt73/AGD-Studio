@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "Tile.h"
 #include "Visuals/BlockTypes.h"
@@ -22,6 +22,10 @@ __fastcall TileDocument::TileDocument(const String& name, const String& extra)
         AddFrame();
         AddLayer("blocktype", "0");
     }
+}
+//---------------------------------------------------------------------------
+__fastcall TileDocument::~TileDocument()
+{
 }
 //---------------------------------------------------------------------------
 void __fastcall TileDocument::SetType(const String& type)

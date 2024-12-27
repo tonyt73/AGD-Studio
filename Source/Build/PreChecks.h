@@ -7,12 +7,12 @@
 namespace Build
 {
 //---------------------------------------------------------------------------
-class PreChecks : public BuildProcess
+class PreChecks final : public BuildProcess
 {
 private:
 public:
                     __fastcall  PreChecks(BuildMessages& buildMessages);
-    virtual         __fastcall ~PreChecks();
+    virtual         __fastcall ~PreChecks() final;
 
             bool    __fastcall  Execute() final;
 };

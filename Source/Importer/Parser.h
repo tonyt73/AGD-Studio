@@ -12,11 +12,11 @@ namespace Importer
 class Parser
 {
 public:
-    typedef std::map<String, ImportDefinition::Matcher> MatcherList;
-    typedef std::map<String, std::list<String>>         MapStringList;
-    typedef std::map<String, MapStringList>             VariablesList;
-    typedef std::map<String, int>                       VariableCounts;
-    typedef std::map<String, std::map<String, int>>     ArrayCounts;
+    typedef std::map<String, ImportDefinition::Matcher>         MatcherList;
+    typedef std::map<String, std::list<String>>                 MapStringList;
+    typedef std::map<String, MapStringList>                     VariablesList;
+    typedef std::map<String, unsigned int>                      VariableCounts;
+    typedef std::map<String, std::map<String, unsigned int>>    ArrayCounts;
 
 private:
     MatcherList                 m_MatchSections;        // the list of matches from the import definition json file

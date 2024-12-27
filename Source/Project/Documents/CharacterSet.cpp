@@ -1,5 +1,5 @@
 ﻿//---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include <System.hpp>
 #include "CharacterSet.h"
@@ -17,8 +17,7 @@ __fastcall CharacterSetDocument::CharacterSetDocument(const String& name, const 
     m_File = GetFile();
     m_SubType = "Character Set";
     m_Folder = "Images\\Character Set";
-    if (IsValid(name))
-    {
+    if (IsValid(name)) {
         RegisterProperty("Name", "Details", "The name of the character set");
         ExtractSize(extra);
         m_CanModifyFrames = true; // yes to get the default frames in
@@ -31,11 +30,15 @@ __fastcall CharacterSetDocument::CharacterSetDocument(const String& name, const 
                 AddFrame(-1, "©");
                 break;
             default:
-                AddFrame(-1, StringOfChar((char)(32 + i), 1));
+                AddFrame(-1, StringOfChar(static_cast<wchar_t>(32 + i), 1));
                 break;
             }
         }
     }
     m_CanModifyFrames = false; // no for the editor
+}
+//---------------------------------------------------------------------------
+__fastcall CharacterSetDocument::~CharacterSetDocument()
+{
 }
 //---------------------------------------------------------------------------

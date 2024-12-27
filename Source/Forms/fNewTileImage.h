@@ -1,42 +1,46 @@
 //---------------------------------------------------------------------------
-#ifndef fNewImageH
-#define fNewImageH
+#ifndef fNewTileImageH
+#define fNewTileImageH
 //---------------------------------------------------------------------------
 #include <System.Classes.hpp>
-#include <Vcl.Controls.hpp>
-#include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
+#include <Vcl.Controls.hpp>
+#include <Vcl.ComCtrls.hpp>
 #include <Vcl.ExtCtrls.hpp>
-#include <Vcl.Samples.Spin.hpp>
+#include <Vcl.StdCtrls.hpp>
+#include <Vcl.Tabs.hpp>
+#include "ElEdits.hpp"
+#include "ElSpin.hpp"
+#include "ElXPThemedControl.hpp"
+#include "LMDBaseControl.hpp"
+#include "LMDBaseGraphicControl.hpp"
+#include "LMDGraphicControl.hpp"
+#include "LMDHTMLLabel.hpp"
 //---------------------------------------------------------------------------
-class TfrmNewImage : public TForm
+class TfrmNewTileImage : public TForm
 {
 __published:    // IDE-managed Components
     TButton *btnOk;
     TButton *btnCancel;
     TPanel *Panel1;
-    TRadioButton *radObject;
-    TRadioButton *radSprite;
-    TRadioButton *radTile;
     TLabel *lblWidth;
-    TSpinEdit *edtWidth;
     TLabel *lblHeight;
-    TSpinEdit *edtHeight;
-    TRadioButton *radChrSet;
-    void __fastcall radObjectClick(TObject *Sender);
-    void __fastcall edtWidthExit(TObject *Sender);
-    void __fastcall edtHeightExit(TObject *Sender);
+    TElSpinEdit *edtWidth;
+    TElSpinEdit *edtHeight;
+    TLMDHTMLLabel *LMDHTMLLabel1;
+    TLabel *lblTiles;
     void __fastcall FormCreate(TObject *Sender);
+    void __fastcall tbcImageTypesDrawTab(TCustomTabControl *Control, int TabIndex,
+          const TRect &Rect, bool Active);
+    void __fastcall edtWidthChange(TObject *Sender);
 private:    // User declarations
     int     __fastcall  GetWidth() const;
     int     __fastcall  GetHeight() const;
-    String  __fastcall  GetType() const;
 public:    // User declarations
-    __fastcall          TfrmNewImage(TComponent* Owner);
+    __fastcall          TfrmNewTileImage(TComponent* Owner) override;
 
     __property  int     Width  = { read = GetWidth  };
     __property  int     Height = { read = GetHeight };
-    __property  String  Type   = { read = GetType   };
 };
 //---------------------------------------------------------------------------
 #endif

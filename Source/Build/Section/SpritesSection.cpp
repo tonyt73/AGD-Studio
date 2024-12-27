@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "SpritesSection.h"
 #include "Project/Documents/DocumentManager.h"
@@ -23,30 +23,24 @@ __fastcall SpritesSection::~SpritesSection()
 void __fastcall SpritesSection::Execute()
 {
     const auto& dm = theDocumentManager;
+    auto imgSize = dm.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itSprite].Minimum;
     Project::DocumentList images;
     dm.GetAllOfType("Image", images);
-    for (auto image : images)
-    {
-        // TODO: Add support for big images
+    for (auto image : images) {
         auto sprite = dynamic_cast<Project::SpriteDocument*>(image);
-        if (sprite != nullptr)
-        {
-            String line = "DEFINESPRITE " + IntToStr(sprite->Frames) + " ";
+        if (sprite != nullptr) {
+            String line = "DEFINESPRITE " + UIntToStr(sprite->Frames) + " ";
             AddLine(line);
             const auto& gm = (*(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()));
-            auto image = std::make_unique<Visuals::Image>(sprite, gm);
-            for (auto i = 0; i < sprite->Frames; i++)
-            {
+            auto gfx = std::make_unique<Visuals::Image>(sprite, gm);
+            for (auto fi = 0; fi < sprite->Frames; fi++) {
                 line = "             ";
-                image->ChangeFrame(i);
-                auto data = image->GetExportNativeFormat();
+                gfx->ChangeFrame(fi);
+                auto data = gfx->GetExportNativeFormat();
                 // export the machine graphics data
-                auto w = 0;
-                for (auto byte : data)
-                {
-                    line += IntToStr(byte) + " ";
-                    if (++w % 16 == 0)
-                    {
+                for (auto byte : enumerate(data)) {
+                    line += IntToStr(byte.item) + " ";
+                    if (static_cast<long>(byte.index + 1) % imgSize.Width == 0) {
                         line += "\r\n             ";
                     }
                 }
@@ -56,7 +50,7 @@ void __fastcall SpritesSection::Execute()
         }
     }
 
-    // no sprites is ok
+    // No sprites is ok? Is it really? Shouldn't we have at least 1 sprite?
     Success();
 }
 //---------------------------------------------------------------------------

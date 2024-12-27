@@ -15,14 +15,14 @@ private:
             TSize                   m_SizeInCharacters;
             TSize                   m_SizeInPixels;
 
-            void        __fastcall  DoSave();
-            void        __fastcall  OnLoaded();
+            void        __fastcall  DoSave() override;
+            void        __fastcall  OnLoaded() override;
             int         __fastcall  Get(int index);
 public:
                         __fastcall  WindowDocument(const String& name);
 
-    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new WindowDocument(name); };
-            void        __fastcall  Set(const TRect& rect);
+    static  Document*   __fastcall  Create(const String& name, const String&) { return new WindowDocument(name); }
+            void        __fastcall  SetRect(const TRect& rect);
 
            __property  const TRect& Rect        = { read = m_Rect         };
 

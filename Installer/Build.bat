@@ -7,12 +7,12 @@
 @call "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin\rsvars.bat"
 
 chdir ..\Source
-msbuild "AGD Studio.cbproj" /t:build /p:config="Release" /p:platform=Win64
+msbuild "AGD Studio.cbproj" /t:build /p:config="Release" /p:platform=Win64x
 @rem msbuild "AGDStudio.cbproj" /t:build /p:config="Release" /p:platform=Win64
-msbuild "AGD Studio.cbproj" /t:build /p:config="Release" /p:platform=Win32
+@rem msbuild "AGD Studio.cbproj" /t:build /p:config="Release" /p:platform=Win32
 @rem msbuild "AGDStudio.cbproj" /t:build /p:config="Release" /p:platform=Win32
-copy Binaries\Win32\Release\*.exe ..\Installer\Binaries\Win32\
-copy Binaries\Win64\Release\*.exe ..\Installer\Binaries\Win64\
+@rem copy Binaries\Win32\Release\*.exe ..\Installer\Binaries\Win32\
+copy Binaries\Win64x\Release\*.exe ..\Installer\Binaries\Win64x\
 
 @rem chdir ..\AGD-Viewer
 @rem msbuild "AGD Converter.cbproj" /t:build /p:config="Release" /p:platform=Win64

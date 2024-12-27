@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "JumpTable.h"
 #include "Messaging/Messaging.h"
@@ -16,10 +16,8 @@ __fastcall JumpTableDocument::JumpTableDocument(const String& name)
     m_Extension = "json";
     m_Folder = "Game\\Configuration";
     m_File = GetFile();
-    if (name != Unnamed)
-    {
+    if (name != Unnamed) {
         m_PropertyMap["Steps[]"] = &m_Step;
-
         DefaultJumpTable();
     }
 }
@@ -27,8 +25,7 @@ __fastcall JumpTableDocument::JumpTableDocument(const String& name)
 void __fastcall JumpTableDocument::DoSave()
 {
     ArrayStart("Steps");
-        for (auto step : m_Steps)
-        {
+        for (auto step : m_Steps) {
             Write(step);
         }
     ArrayEnd();  // Steps
@@ -36,8 +33,7 @@ void __fastcall JumpTableDocument::DoSave()
 //---------------------------------------------------------------------------
 void __fastcall JumpTableDocument::OnEndObject(const String& object)
 {
-    if (object == "Steps[]")
-    {
+    if (object == "Steps[]") {
         m_Steps.push_back(m_Step);
     }
 }
@@ -53,43 +49,40 @@ void __fastcall JumpTableDocument::OnLoaded()
     DefaultJumpTable();
 }
 //---------------------------------------------------------------------------
-unsigned char __fastcall JumpTableDocument::RawStep(int index) const
+unsigned char __fastcall JumpTableDocument::RawStep(unsigned char index) const
 {
-    if (0 <= index && index < m_Steps.size() - 1)
-    {
+    if (index < m_Steps.size() - 1) {
         return m_Steps[index];
     }
     return 0;
 }
 //---------------------------------------------------------------------------
-int __fastcall JumpTableDocument::GetStep(int index) const
+int __fastcall JumpTableDocument::GetStep(unsigned char index) const
 {
-    if (0 <= index && index < m_Steps.size() - 1)
-    {
+    if (index < m_Steps.size() - 1) {
         auto step = m_Steps[index];
         return step < 128 ? step : step - 256;
     }
     return 0;
 }
 //---------------------------------------------------------------------------
-void __fastcall JumpTableDocument::SetStep(int index, int value)
+void __fastcall JumpTableDocument::SetStep(unsigned char index, int value)
 {
-    if (0 <= index && index < m_Steps.size() - 1)
-    {
-        value = std::max(-15, std::min(16, value));
-        m_Steps[index] = value >= 0 ? value : value + 256;
+    int newValue = value;
+    if (index < m_Steps.size() - 1) {
+        newValue = std::max(-15, std::min(16, newValue));
+        m_Steps[index] = static_cast<unsigned char>(newValue >= 0 ? value : value + 256);
     }
 }
 //---------------------------------------------------------------------------
-int __fastcall JumpTableDocument::GetStepCount() const
+unsigned char __fastcall JumpTableDocument::GetStepCount() const
 {
-    return m_Steps.size() - 1;
+    return static_cast<unsigned char>(m_Steps.size() - 1);
 }
 //---------------------------------------------------------------------------
 void __fastcall JumpTableDocument::DefaultJumpTable()
 {
-    if (m_Steps.size() == 0)
-    {
+    if (m_Steps.size() == 0) {
         m_Steps.push_back(249);
         m_Steps.push_back(250);
         m_Steps.push_back(251);

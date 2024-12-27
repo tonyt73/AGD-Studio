@@ -13,7 +13,7 @@ protected:
     void    __fastcall  Execute() final;
 public:
             __fastcall  FontSection();
-    virtual __fastcall ~FontSection();
+    virtual __fastcall ~FontSection() override;
 };
 //---------------------------------------------------------------------------
 } // Build namespace

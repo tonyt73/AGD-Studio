@@ -3,8 +3,6 @@
 #define ULAPlusGraphicsBufferH
 //---------------------------------------------------------------------------
 #include "GraphicsBuffer.h"
-#include "Messaging/Event.h"
-#include "Messaging/Messaging.h"
 //---------------------------------------------------------------------------
 namespace Visuals
 {
@@ -25,16 +23,14 @@ namespace Visuals
 class ULAPlusGraphicsBuffer : public GraphicsBuffer
 {
 private:
-    Registrar               m_Registrar;
     void        __fastcall  OnEvent(const Event& event);
 public:
                 __fastcall  ULAPlusGraphicsBuffer(unsigned int width, unsigned int height, const GraphicsMode& mode);
-                __fastcall ~ULAPlusGraphicsBuffer();
 
-    void        __fastcall  SetPixel(unsigned int X, unsigned int Y, bool set);
-    void        __fastcall  GetColor(unsigned int X, unsigned int Y, unsigned char colorIndex = 0);
-    void        __fastcall  Render() const;
-    void        __fastcall  Set(const String& data);
+    void        __fastcall  SetPixel(unsigned int X, unsigned int Y, bool set) override;
+    void        __fastcall  GetColor(unsigned int X, unsigned int Y, unsigned char colorIndex = 0) override;
+    void        __fastcall  Render() const override;
+    void        __fastcall  Set(const String& data) override;
 
     bool        __fastcall  CanExport(int layer, ImageTypes ofType) const;
 };

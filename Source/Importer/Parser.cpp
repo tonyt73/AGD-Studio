@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include <AgdStudio.pch.h>
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include <cctype>
 #include "Parser.h"
@@ -21,7 +21,7 @@ bool Parser::CreateMatchSets(const String& machine)
 {
     // Create the pattern match sets
     auto id = std::make_unique<ImportDefinition>(machine);
-    bool result = id->Load(machine);
+    bool result = id->LoadFile(machine);
     if (result) {
         result &= AddMatchSection("window"        , id->Sections.Window        );
         result &= AddMatchSection("jumptable"     , id->Sections.JumpTable     );
@@ -162,7 +162,7 @@ bool Parser::ProcessSection(const Token& token)
                 }
                 m_VariableCounts[varname] = m_VariableCounts[varname] + 1;
                 // add the instance count to the variables name (ie. SPRITE1, SPRITE2 etc)
-                varname += PadNum(IntToStr(m_VariableCounts[varname]));
+                varname += PadNum(UIntToStr(m_VariableCounts[varname]));
             }
             // change to the new variable
             m_CurrentVariable = varname.LowerCase();
@@ -277,7 +277,7 @@ Token Parser::ReplaceVariableReferencesWithValues(Token token)
         auto hp = token.Value.Pos("{");
         auto dp = token.Value.Pos("}");
         auto varName = SanitizeName(token.Value.SubString(hp + 1, dp - hp - 1));
-        auto number = PadNum(IntToStr((const int)m_VariableCounts[varName]));
+        auto number = PadNum(UIntToStr(m_VariableCounts[varName]));
         token.Value = StringReplace(token.Value, "{" + varName + "}", number, TReplaceFlags());
     }
     // return the processed token
@@ -305,10 +305,10 @@ void Parser::PopSectionToken()
         // get the variable name and display array information
         sectionToken = ReplaceVariableReferencesWithValues(sectionToken);
         auto secVar = SanitizeName(sectionToken.Value);
-        int curcount = m_Variables[m_CurrentVariable][secVar].size();
+        auto curcount = m_Variables[m_CurrentVariable][secVar].size();
         if (curcount > 1) {
             String type = m_SectionTokens.front().isa(Token::ttString|Token::ttLine) ? " lines" : " bytes";
-            InformationMessage("[Import Parser] Array '" + secVar + "' is " + IntToStr(curcount) + type);
+            InformationMessage("[Import Parser] Array '" + secVar + "' is " + UIntToStr(curcount) + type);
         }
     }
     // finished processing section

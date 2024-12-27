@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "CanvasLineTool.h"
 //---------------------------------------------------------------------------
@@ -9,10 +9,6 @@ __fastcall CanvasLineTool::CanvasLineTool()
 : CanvasTool()
 {
     Flags = usesUndo | modifies | resetOnMove;
-}
-//---------------------------------------------------------------------------
-__fastcall CanvasLineTool::~CanvasLineTool()
-{
 }
 //---------------------------------------------------------------------------
 void __fastcall CanvasLineTool::Apply(Visuals::GraphicsBuffer& canvas, const TPoint& pt)

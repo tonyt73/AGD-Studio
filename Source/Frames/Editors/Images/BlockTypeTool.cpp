@@ -1,6 +1,7 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
+#include "Project/Documents/DocumentManager.h"
 #include "BlockTypeTool.h"
 #include "Visuals/BlockTypes.h"
 //---------------------------------------------------------------------------
@@ -32,14 +33,15 @@ String __fastcall BlockTypeTool::Begin(Visuals::GraphicsBuffer& canvas)
     m_BlendedBitmap->Height = m_ImageDocument->Height;
     canvas.Assign(m_CanvasBitmap.get());
 
-    m_Blocks = m_ImageDocument->GetLayer("blocktype");
-    m_BlockWidth = 8 / canvas.ScalarX;
-    m_BlockHeight = 8 / canvas.ScalarY;
-    m_BlocksAcross = m_ImageDocument->Width / m_BlockWidth;
-    m_BlocksDown = m_ImageDocument->Height / m_BlockHeight;
+    auto tile = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile].Minimum;
 
-    if (m_Blocks.Length() != m_BlocksAcross * m_BlocksDown)
-    {
+    m_Blocks = m_ImageDocument->GetLayer("blocktype");
+    m_BlockWidth  = static_cast<int>(static_cast<float>(tile.cx) / canvas.ScalarX);
+    m_BlockHeight = static_cast<int>(static_cast<float>(tile.cy) / canvas.ScalarY);
+    m_BlocksAcross = m_ImageDocument->Width / m_BlockWidth;
+    m_BlocksDown   = m_ImageDocument->Height / m_BlockHeight;
+
+    if (m_Blocks.Length() != m_BlocksAcross * m_BlocksDown) {
         m_Blocks = String::StringOfChar('0', m_BlocksAcross * m_BlocksDown);
     }
     Apply();
@@ -47,12 +49,11 @@ String __fastcall BlockTypeTool::Begin(Visuals::GraphicsBuffer& canvas)
     return m_Blocks;
 }
 //---------------------------------------------------------------------------
-char __fastcall BlockTypeTool::Move(const TPoint& pt, const TShiftState& buttons)
+wchar_t __fastcall BlockTypeTool::Move(const TPoint& pt, const TShiftState& buttons)
 {
     auto bpt = PtToBlock(pt);
     auto offset = bpt.Y * m_BlocksAcross + bpt.X;
-    if (buttons.Contains(ssLeft) || buttons.Contains(ssRight))
-    {
+    if (buttons.Contains(ssLeft) || buttons.Contains(ssRight)) {
         m_Blocks[offset+1] = buttons.Contains(ssLeft) ? m_BlockType : '0';
         Apply();
     }
@@ -74,33 +75,28 @@ void __fastcall BlockTypeTool::Apply()
     unsigned int R = 0;
     unsigned int G = 0;
     unsigned int B = 0;
-    for (auto d = 0; d < m_BlocksDown; d++)
-    {
-        for (auto a = 0; a < m_BlocksAcross; a++)
-        {
+    for (auto d = 0; d < m_BlocksDown; d++) {
+        for (auto a = 0; a < m_BlocksAcross; a++) {
             auto index = d * m_BlocksAcross + a;
             auto type = m_Blocks[index+1] - '0';
-            if (type)
-            {
+            if (type) {
                 auto mC = g_BlockColors[type];       // mask color
-                auto mR = (float)((mC & 0x000000FF)      ) * maskAlpha;
-                auto mG = (float)((mC & 0x0000FF00) >>  8) * maskAlpha;
-                auto mB = (float)((mC & 0x00FF0000) >> 16) * maskAlpha;
+                auto mR = static_cast<float>((mC & 0x000000FF)      ) * maskAlpha;
+                auto mG = static_cast<float>((mC & 0x0000FF00) >>  8) * maskAlpha;
+                auto mB = static_cast<float>((mC & 0x00FF0000) >> 16) * maskAlpha;
                 auto alpha = 1.f - maskAlpha;
                 auto y = d * m_BlockHeight;
-                for (auto h = 0; h < m_BlockHeight; h++)
-                {
+                for (auto h = 0; h < m_BlockHeight; h++) {
                     auto x = a * m_BlockWidth;
-                    for (auto w = 0; w < m_BlockWidth; w++)
-                    {
+                    for (auto w = 0; w < m_BlockWidth; w++) {
                         auto cc = ColorToRGB(m_BlendedBitmap->Canvas->Pixels[x+w][y+h]);    // canvas color
-                        auto pR = (float)((cc & 0x000000FF)      ) * alpha;
-                        auto pG = (float)((cc & 0x0000FF00) >>  8) * alpha;
-                        auto pB = (float)((cc & 0x00FF0000) >> 16) * alpha;
-                        R = pR + mR;
-                        G = pG + mG;
-                        B = pB + mB;
-                        m_BlendedBitmap->Canvas->Pixels[x+w][y+h] = (TColor)(R + (G << 8) + (B << 16));
+                        auto pR = static_cast<float>((cc & 0x000000FF)      ) * alpha;
+                        auto pG = static_cast<float>((cc & 0x0000FF00) >>  8) * alpha;
+                        auto pB = static_cast<float>((cc & 0x00FF0000) >> 16) * alpha;
+                        R = static_cast<unsigned int>(pR + mR);
+                        G = static_cast<unsigned int>(pG + mG);
+                        B = static_cast<unsigned int>(pB + mB);
+                        m_BlendedBitmap->Canvas->Pixels[x+w][y+h] = static_cast<TColor>(R + (G << 8) + (B << 16));
                     }
                 }
             }

@@ -1,31 +1,37 @@
-object frmWelcomeDialog: TfrmWelcomeDialog
-  Left = 0
-  Top = 0
-  Width = 900
-  Height = 500
-  Constraints.MinHeight = 500
-  Constraints.MinWidth = 900
-  Font.Charset = DEFAULT_CHARSET
-  Font.Color = clWindowText
+inherited frmWelcomeDialog: TfrmWelcomeDialog
+  Width = 876
+  Height = 505
+  Constraints.MinHeight = 480
+  Constraints.MinWidth = 640
   Font.Height = -19
   Font.Name = 'Roboto'
-  Font.Style = []
   ParentFont = False
-  TabOrder = 0
+  ExplicitWidth = 876
+  ExplicitHeight = 505
   object panMain: TPanel
-    Left = 400
+    Left = 376
     Top = 0
     Width = 500
-    Height = 500
+    Height = 505
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Align = alRight
     BevelOuter = bvNone
     TabOrder = 0
     StyleElements = [seFont, seBorder]
+    ExplicitLeft = 338
+    ExplicitHeight = 506
     object imgLogo: TImage
       Left = 0
       Top = 0
       Width = 500
       Height = 250
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Align = alTop
       AutoSize = True
       Center = True
@@ -6215,7 +6221,11 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       Left = 0
       Top = 250
       Width = 500
-      Height = 250
+      Height = 255
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Align = alClient
       Caption = 'panOptions'
       Font.Charset = DEFAULT_CHARSET
@@ -6226,15 +6236,20 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       ParentFont = False
       ShowCaption = False
       TabOrder = 0
+      ExplicitHeight = 256
       DesignSize = (
         500
-        250)
+        255)
       object lblStartNewProject: TLabel
         Left = 62
         Top = 18
         Width = 168
         Height = 20
         Cursor = crHandPoint
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Caption = '      Start a new project'
         StyleElements = [seClient, seBorder]
         OnClick = lblStartNewProjectClick
@@ -6247,6 +6262,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         Width = 16
         Height = 16
         Cursor = crHandPoint
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         AutoSize = True
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
@@ -6286,6 +6305,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         Width = 196
         Height = 20
         Cursor = crHandPoint
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Caption = '      Import an AGD project'
         StyleElements = [seClient, seBorder]
         OnClick = lblImportAGDClick
@@ -6298,6 +6321,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         Width = 16
         Height = 16
         Cursor = crHandPoint
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         AutoSize = True
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
@@ -6329,17 +6356,26 @@ object frmWelcomeDialog: TfrmWelcomeDialog
         Left = 62
         Top = 76
         Width = 421
-        Height = 165
+        Height = 190
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Anchors = [akLeft, akTop, akRight, akBottom]
         BevelOuter = bvNone
         ParentColor = True
         TabOrder = 0
+        ExplicitHeight = 191
         object lblOpenExistingProject: TLabel
           Left = 0
           Top = 1
           Width = 211
           Height = 20
           Cursor = crHandPoint
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Caption = '      Open an existing project'
           StyleElements = [seClient, seBorder]
           OnClick = lblOpenExistingProjectClick
@@ -6352,6 +6388,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Width = 16
           Height = 16
           Cursor = crHandPoint
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           AutoSize = True
           Picture.Data = {
             0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
@@ -6382,6 +6422,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Width = 77
           Height = 20
           Cursor = crHandPoint
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Caption = '      Theme'
           StyleElements = [seClient, seBorder]
           OnClick = lblChangeThemeClick
@@ -6393,6 +6437,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Top = 131
           Width = 16
           Height = 16
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           AutoSize = True
           Picture.Data = {
             0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
@@ -6423,6 +6471,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Top = 127
           Width = 302
           Height = 27
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Style = csDropDownList
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -6436,9 +6488,13 @@ object frmWelcomeDialog: TfrmWelcomeDialog
       end
       object panStartNew: TPanel
         Left = 62
-        Top = 76
+        Top = 79
         Width = 421
         Height = 163
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         BevelOuter = bvNone
         TabOrder = 1
         Visible = False
@@ -6450,6 +6506,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Top = 43
           Width = 59
           Height = 18
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Alignment = taRightJustify
           Caption = 'Machine'
           Font.Charset = DEFAULT_CHARSET
@@ -6464,6 +6524,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Top = 6
           Width = 40
           Height = 18
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Alignment = taRightJustify
           Caption = 'Name'
           Font.Charset = DEFAULT_CHARSET
@@ -6478,6 +6542,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Top = 107
           Width = 376
           Height = 17
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Anchors = [akLeft, akTop, akRight]
           AutoSize = False
           Caption = '...'
@@ -6495,6 +6563,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Top = 77
           Width = 24
           Height = 18
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Alignment = taRightJustify
           Caption = 'File'
           Font.Charset = DEFAULT_CHARSET
@@ -6512,6 +6584,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Height = 16
           Cursor = crArrow
           Hint = 'AGD file does not exist.'
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           AutoSize = True
           ParentShowHint = False
           Picture.Data = {
@@ -6541,6 +6617,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Height = 16
           Cursor = crArrow
           Hint = 'AGD file exists.'
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           AutoSize = True
           ParentShowHint = False
           Picture.Data = {
@@ -6571,6 +6651,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Height = 16
           Cursor = crArrow
           Hint = 'Project name is already in use.'
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           AutoSize = True
           ParentShowHint = False
           Picture.Data = {
@@ -6600,6 +6684,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Height = 16
           Cursor = crArrow
           Hint = 'Project name is available.'
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           AutoSize = True
           ParentShowHint = False
           Picture.Data = {
@@ -6633,6 +6721,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
             'Machine does not support AGD file importing.  \rPlease define an' +
             ' Import Definition file in the AGD Studio/Importers folder.\r\rC' +
             'lick to open Importers folder.'
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           AutoSize = True
           ParentShowHint = False
           Picture.Data = {
@@ -6663,6 +6755,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Height = 16
           Cursor = crArrow
           Hint = 'Machine supports AGD file importing.'
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           AutoSize = True
           ParentShowHint = False
           Picture.Data = {
@@ -6691,6 +6787,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Top = 130
           Width = 91
           Height = 32
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Anchors = [akRight, akBottom]
           Cancel = True
           Caption = 'Cancel'
@@ -6708,6 +6808,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Top = 130
           Width = 91
           Height = 32
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Anchors = [akRight, akBottom]
           Caption = 'Create'
           Enabled = False
@@ -6726,6 +6830,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Top = 37
           Width = 302
           Height = 26
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Style = csDropDownList
           Anchors = [akLeft, akTop, akRight]
           Font.Charset = DEFAULT_CHARSET
@@ -6746,6 +6854,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Top = 3
           Width = 302
           Height = 26
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Anchors = [akLeft, akTop, akRight]
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -6762,6 +6874,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Top = 74
           Width = 267
           Height = 26
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Anchors = [akLeft, akTop, akRight]
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -6779,6 +6895,10 @@ object frmWelcomeDialog: TfrmWelcomeDialog
           Top = 74
           Width = 32
           Height = 26
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Anchors = [akTop, akRight]
           Caption = '...'
           Constraints.MaxHeight = 26
@@ -6794,14 +6914,20 @@ object frmWelcomeDialog: TfrmWelcomeDialog
   object panRecentProjects: TPanel
     Left = 0
     Top = 0
-    Width = 400
-    Height = 500
+    Width = 376
+    Height = 505
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Align = alClient
     BevelOuter = bvNone
     Color = clBtnShadow
     ParentBackground = False
     TabOrder = 1
     StyleElements = [seFont, seBorder]
+    ExplicitWidth = 338
+    ExplicitHeight = 506
   end
   object dlgOpenAGDS: TOpenTextFileDialog
     DefaultExt = 'agds'

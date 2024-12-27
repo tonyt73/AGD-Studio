@@ -13,7 +13,7 @@ protected:
     void    __fastcall  Execute() final;
 public:
             __fastcall  ProjectSection();
-    virtual __fastcall ~ProjectSection();
+    virtual __fastcall ~ProjectSection() override;
 };
 //---------------------------------------------------------------------------
 } // Build namespace

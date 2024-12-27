@@ -1,7 +1,7 @@
 {
   "Name": "Sega Master System Mode 4",
   "Palette": "Sega Master System",
-  "BufferType": 0,
+  "BufferType": "btBitmap",
   "Width": 256,
   "Height": 192,
   "ScalarX": 1.0,

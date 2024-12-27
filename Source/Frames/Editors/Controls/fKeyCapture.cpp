@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "fKeyCapture.h"
 #include "Settings/ThemeManager.h"
@@ -22,7 +22,7 @@ __fastcall TfrmKeyCode::TfrmKeyCode(TComponent* Owner)
     m_KeyMap[27] = "Escape";
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmKeyCode::edtKeyKeyPress(TObject *Sender, System::WideChar &Key)
+void __fastcall TfrmKeyCode::edtKeyKeyPress(TObject* /*Sender*/, System::WideChar &Key)
 {
     if (Key == VK_RETURN)
     {
@@ -42,7 +42,7 @@ void __fastcall TfrmKeyCode::edtKeyKeyPress(TObject *Sender, System::WideChar &K
             }
             else
             {
-                m_KeyCode = std::min(127, StrToIntDef(edtKey->Text, 0));
+                m_KeyCode = static_cast<wchar_t>(std::min(127, StrToIntDef(edtKey->Text, 0)));
                 edtKey->Text = IntToStr(m_KeyCode);
             }
         }
@@ -70,9 +70,9 @@ void __fastcall TfrmKeyCode::UpdateKeyInfo()
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmKeyCode::SetKeyCode(unsigned char keyCode)
+void __fastcall TfrmKeyCode::SetKeyCode(wchar_t keyCode)
 {
-    if (0 <= keyCode and keyCode < 128)
+    if (keyCode < 128)
     {
         m_KeyCode = keyCode;
         m_NotSet = keyCode == 0;
@@ -93,14 +93,14 @@ void __fastcall TfrmKeyCode::SetCaption(const String& caption)
     panCaption->Caption = caption;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmKeyCode::edtKeyMouseEnter(TObject *Sender)
+void __fastcall TfrmKeyCode::edtKeyMouseEnter(TObject* /*Sender*/)
 {
     ParentBackground = false;
     ParentColor = false;
     Color = edtKey->Focused() ? ThemeManager::Highlight : ThemeManager::Background;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmKeyCode::edtKeyMouseLeave(TObject *Sender)
+void __fastcall TfrmKeyCode::edtKeyMouseLeave(TObject* Sender)
 {
     System::WideChar key = VK_RETURN;
     edtKeyKeyPress(Sender, key);
@@ -109,7 +109,7 @@ void __fastcall TfrmKeyCode::edtKeyMouseLeave(TObject *Sender)
     UpdateKeyInfo();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmKeyCode::edtKeyChange(TObject *Sender)
+void __fastcall TfrmKeyCode::edtKeyChange(TObject* /*Sender*/)
 {
     edtKey->Text = edtKey->Text.UpperCase();
     String text = edtKey->Text;
@@ -120,7 +120,7 @@ void __fastcall TfrmKeyCode::edtKeyChange(TObject *Sender)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmKeyCode::FrameMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y)
+void __fastcall TfrmKeyCode::FrameMouseDown(TObject* /*Sender*/, TMouseButton, TShiftState, int, int)
 {
     edtKey->SetFocus();
 }

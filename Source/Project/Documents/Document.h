@@ -24,8 +24,8 @@ namespace Project
 // works out nicely as technically a JsonFile file is persistent; it's just
 // we aren't using Delphi's persistence.
 //---------------------------------------------------------------------------
-const unsigned int InvalidDocumentId = 0;
-const String       Unnamed = "unnamed";
+[[clang::no_destroy]] const unsigned int InvalidDocumentId = 0;
+[[clang::no_destroy]] const String       Unnamed = "unnamed";
 //---------------------------------------------------------------------------
 class Document : public Services::JsonFile
 {
@@ -39,7 +39,7 @@ public:
     TPropertyInfoMap::iterator              TPropertyInfoMapIt;
 
 protected:
-            ::Messaging::Registrar  m_Registrar;
+            Registrar               m_Registrar;
             String                  m_Name;
             String                  m_Type;
             String                  m_SubType;
@@ -64,7 +64,7 @@ static      unsigned int            s_NextRefId;    // next unused ref id. Reset
             bool        __fastcall  IsValid() const;
             bool        __fastcall  IsValid(const String& name) const;
                                     // update the documents json content
-    virtual void        __fastcall  Update() {};//= 0;
+    virtual void        __fastcall  Update() {}
 
                                     // LMD property editor - property is item been edited, category is section and info is the hint description
             void        __fastcall  RegisterProperty(const String& property, const String& category, const String& info);
@@ -73,9 +73,10 @@ static      unsigned int            s_NextRefId;    // next unused ref id. Reset
 
 public:
                         __fastcall  Document(const String& name);
-    virtual             __fastcall ~Document();
+    virtual             __fastcall ~Document() override;
 
-    static  Document*   __fastcall  Create(const String& name, const String& extra)      { throw "Don't create this class";    }
+    static  Document*   __fastcall  Create(const String& name, const String& extra)      { throw "Don't create this class"; name; extra; }
+    virtual Document*   __fastcall  Copy(const Document* document);
 
 const TPropertyInfoMap& __fastcall  GetPropertyInfo() const;
             String      __fastcall  GetPropertyInfo(const String& property) const;

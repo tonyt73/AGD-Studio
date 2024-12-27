@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "Messaging.h"
 //---------------------------------------------------------------------------
@@ -9,45 +9,51 @@ unsigned int Bus::s_NextId = 0;
 Bus::SubscriptionsMap* Bus::s_Handlers = nullptr;
 //auto Bus::m_Handlers = new Bus::SubscriptionsMap();
 //---------------------------------------------------------------------------
-__fastcall ::Messaging::Registrar::Registrar()
+Registrar::Registrar()
 {
 }
 //---------------------------------------------------------------------------
-__fastcall ::Messaging::Registrar::~Registrar()
+Registrar::~Registrar()
 {
     Unsubscribe();
 }
 //---------------------------------------------------------------------------
-// unsubscribe a handler from a message type
-void ::Messaging::Bus::Unsubscribe(unsigned int subscriptionId)
+Bus::Subscription_::Subscription_(unsigned int id)
+: m_SubscriptionId(id)
 {
-    if (s_Handlers == nullptr)
-        return;
-
-    for (auto& subscriptions : *s_Handlers)
-    {
-        if (subscriptions.second != nullptr)
-        {
-            subscriptions.second->erase(std::remove_if(subscriptions.second->begin(), subscriptions.second->end(),
-                [&](const std::unique_ptr<Subscription_>& sub) { return (subscriptionId == sub->SubscriptionId); }), subscriptions.second->end());
-            if (subscriptions.second->size() == 0)
-            {
-                // remove the subscriptions from the handlers list
+}
+//---------------------------------------------------------------------------
+Bus::Subscription_::~Subscription_()
+{
+}
+//---------------------------------------------------------------------------
+// unsubscribe a handler from a message type
+void Bus::Unsubscribe(unsigned int subscriptionId)
+{
+    if (s_Handlers) {
+        for (auto& subscriptions : *s_Handlers) {
+            if (subscriptions.second) {
+                subscriptions.second->erase(std::remove_if(subscriptions.second->begin(), subscriptions.second->end(),
+                    [&](const std::unique_ptr<Subscription_>& sub) {
+                    return (subscriptionId == sub->SubscriptionId);
+                }), subscriptions.second->end());
+                if (subscriptions.second->size() == 0) {
+                    // remove the subscriptions from the handlers list
+                    s_Handlers->erase(subscriptions.first);
+                return;
+                }
+            } else {
                 s_Handlers->erase(subscriptions.first);
+                return;
             }
-        }
-        else
-        {
-            s_Handlers->erase(subscriptions.first);
         }
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall ::Messaging::Registrar::Unsubscribe()
+void Registrar::Unsubscribe()
 {
-    for (auto id : m_SubscriptionIds)
-    {
-        ::Messaging::Bus::Unsubscribe(id);
+    for (auto id : m_SubscriptionIds) {
+        Bus::Unsubscribe(id);
     }
     m_SubscriptionIds.clear();
 }

@@ -1,5 +1,6 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
+//---------------------------------------------------------------------------
 #include <ctime>
 #include <iomanip>
 #include <systdate.h>
@@ -15,13 +16,13 @@ __fastcall TfrmAbout::TfrmAbout(TComponent* Owner)
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAbout::FormDeactivate(TObject *Sender)
+void __fastcall TfrmAbout::FormDeactivate(TObject* /*Sender*/)
 {
     Close();
     delete this;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmAbout::FormCreate(TObject *Sender)
+void __fastcall TfrmAbout::FormCreate(TObject* /*Sender*/)
 {
     lblVersion->Font->Color = ThemeManager::Foreground;
     lblBuild->Font->Color = ThemeManager::Foreground;
@@ -43,7 +44,7 @@ void __fastcall TfrmAbout::FormCreate(TObject *Sender)
 //---------------------------------------------------------------------------
 String __fastcall TfrmAbout::DatePlusDays(int days) const
 {
-    struct tm date = {0, 0, 12, 1, 0, 2000 - 1900};
+    struct tm date = { 0, 0, 12, 1, 0, 2000 - 1900, 0, 0, 0 };
     char datestr[64];
     time_t date_seconds = mktime(&date) + (days * 24 * 60 * 60);
     strftime(datestr, 64, "%B %d, %Y", localtime(&date_seconds));
@@ -58,13 +59,11 @@ void __fastcall TfrmAbout::GetBuildVersion(int& Major, int& Minor, int& Date, in
     Time  = 0;
     DWORD temp  = 0;
     DWORD infoLen = GetFileVersionInfoSize(Application->ExeName.c_str(), &temp);
-    if (infoLen > 0)
-    {
+    if (infoLen > 0) {
         VS_FIXEDFILEINFO* fileInfo;
-        auto pBuf = (char*)malloc(infoLen);
-        auto res = GetFileVersionInfo(Application->ExeName.c_str(), 0, infoLen, pBuf);
-        if (VerQueryValue((void*)pBuf, L"\\", (LPVOID*)(&fileInfo), (unsigned int*)&temp))
-        {
+        auto pBuf = static_cast<char*>(malloc(infoLen));
+        GetFileVersionInfo(Application->ExeName.c_str(), 0, infoLen, pBuf);
+        if (VerQueryValue(static_cast<void*>(pBuf), L"\\", reinterpret_cast<LPVOID*>(&fileInfo), reinterpret_cast<unsigned int*>(&temp))) {
             Major = HIWORD(fileInfo->dwFileVersionMS);
             Minor = LOWORD(fileInfo->dwFileVersionMS);
             Date  = HIWORD(fileInfo->dwFileVersionLS);

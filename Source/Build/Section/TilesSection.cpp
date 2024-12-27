@@ -1,9 +1,9 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "TilesSection.h"
 #include "Project/Documents/DocumentManager.h"
-#include "Project/Documents/Tile.h"
+#include "Project/Documents/BaseImage.h"
 #include "Visuals/BlockTypes.h"
 #include "Visuals/GraphicsMode.h"
 #include "Visuals/Image.h"
@@ -23,41 +23,31 @@ __fastcall TilesSection::~TilesSection()
 //---------------------------------------------------------------------------
 void __fastcall TilesSection::Execute()
 {
-    const auto& dm = theDocumentManager;
-    Project::DocumentList images;
-    dm.GetAllOfType("Image", images);
-    for (auto image : images)
-    {
-        // TODO: Add support for big images
-        auto tile = dynamic_cast<Project::TileDocument*>(image);
-        if (tile != nullptr)
-        {
+    // get the number of unique tiles
+    auto uniqueTiles = theDocumentManager.MapUniqueTileIndexes();
+    if (uniqueTiles.size() < 256) {
+        const auto& is = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile].Minimum;
+        for (auto tile : uniqueTiles) {
+            // we'll need to keep track of the tiles made to remove duplicates (screen data will also need to do this)
             String line = "DEFINEBLOCK ";
-            line += g_BlockTypes[StrToInt(tile->GetLayer("blocktype"))];
+            line += g_BlockTypes[tile.BlockType];
             AddLine(line);
-            const auto& gm = (*(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()));
-            // make an image canvas
-            auto image = std::make_unique<Visuals::Image>(tile, gm);
-            image->ChangeFrame(0);
-            auto data = image->GetExportNativeFormat();
             line = "            ";
             // export the machine graphics data
-            auto i = 0;
-            for (auto byte : data)
-            {
-                line += IntToStr(byte) + " ";
-                if (++i == 8)
-                {
+            for (auto byte : enumerate(tile.Data)) {
+                line += IntToStr(byte.item) + " ";
+                if ((byte.index + 1) % is.cx == 0) {
                     line += "\r\n            ";
                 }
             }
             AddLine(line);
             LineBreak();
         }
+        // no Tiles is ok
+        Success();
+    } else {
+        Failure("The number of unique tiles (" + UIntToStr(uniqueTiles.size()) + ") exceeds 256.");
     }
-
-    // no Tiles is ok
-    Success();
 }
 //---------------------------------------------------------------------------
 

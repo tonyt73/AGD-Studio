@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "ElXTree.hpp"
 #include "LMDDckSite.hpp"
@@ -21,10 +21,10 @@ __fastcall Document::Document(const String& name)
 , m_Name(Services::File::NameWithoutExtension(name))
 , m_Type("No Type")
 , m_SubType("No SubType")
+, m_Folder("Misc\\Files")
 , m_Extension("json")
 , m_ShowFileExtension(false)
 , m_ReadOnly(false)
-, m_Folder("Misc\\Files")
 , m_TreeNode(nullptr)
 , m_DockPanel(nullptr)
 , m_RefId(InvalidDocumentId)
@@ -87,6 +87,16 @@ void __fastcall Document::Close()
     }
 }
 //---------------------------------------------------------------------------
+Document* __fastcall Document::Copy(const Document* document)
+{
+    m_Type = document->m_Type;
+    m_SubType = document->m_SubType;
+    m_Folder = document->m_Folder;
+    m_ShowFileExtension = document->m_ShowFileExtension;
+    m_ReadOnly = document->m_ReadOnly;
+    return this;
+}
+//---------------------------------------------------------------------------
 void __fastcall Document::SetName(String name)
 {
     auto oldName = m_Name;
@@ -97,9 +107,9 @@ void __fastcall Document::SetName(String name)
         m_Name = name;
         if (m_TreeNode)
         {
-            ((TElXTreeItem*)m_TreeNode)->Text = name;
+            static_cast<TElXTreeItem*>(m_TreeNode)->Text = name;
         }
-        auto newFile = GetFile();
+        newFile = GetFile();
         Services::File::Rename(oldFile, newFile);
         InformationMessage("[Document] Renamed document from [" + oldFile + "] to [" + newFile + "]");
         Bus::Publish<DocumentChange<String>>(DocumentChange<String>("document.renamed", this, oldName));
@@ -169,7 +179,7 @@ bool __fastcall Document::Load()
     if (Services::File::Exists(m_File))
     {
         // yes, load it
-        JsonFile::Load(m_File);
+        JsonFile::LoadFile(m_File);
         // make sure the next ref id is up to date
         s_NextRefId = std::max(s_NextRefId, m_RefId);
         return true;

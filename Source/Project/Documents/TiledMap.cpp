@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "TiledMap.h"
 #include "DocumentManager.h"
@@ -13,9 +13,9 @@ using namespace Project;
 _fastcall TiledMapDocument::TiledMapDocument(const String& name)
 : Document(name)
 , m_StartRoomIndex(0)
+, m_MappingIndexLoadCount(0)
 , m_RoomMappingWidth(g_MaxMapRoomsAcross)
 , m_RoomMappingHeight(g_MaxMapRoomsDown)
-, m_MappingIndexLoadCount(0)
 {
     m_Type = "Map";
     m_SubType = "Tiled";
@@ -51,8 +51,8 @@ _fastcall TiledMapDocument::TiledMapDocument(const String& name)
         m_File = GetFile();
 
         // message subscriptions
-        m_Registrar.Subscribe<DocumentChange<String>>(OnDocumentChanged);
-        m_Registrar.Subscribe<SetStartRoom>(OnSetStartRoom);
+        m_Registrar.Subscribe<DocumentChange<String>>(_FnBind(TiledMapDocument::OnDocumentChanged));
+        m_Registrar.Subscribe<SetStartRoom>(_FnBind(TiledMapDocument::OnSetStartRoom));
 
         // reset the map
         for (auto y = 0; y < g_MaxMapRoomsDown; y++) {
@@ -160,7 +160,7 @@ MapEntityList __fastcall TiledMapDocument::Get(Visuals::ImageTypes type) const
     return list;
 }
 //---------------------------------------------------------------------------
-const MapEntityList& __fastcall TiledMapDocument::Get(MapEntityType type, TSize room)
+const MapEntityList& __fastcall TiledMapDocument::GetEntities(MapEntityType type, TSize room) const
 {
     if (type == meMap) {
         return m_Map;
@@ -192,7 +192,7 @@ const MapEntityList& __fastcall TiledMapDocument::Get(MapEntityType type, TSize 
     return m_Room;
 }
 //---------------------------------------------------------------------------
-void __fastcall TiledMapDocument::Set(MapEntityType type, const MapEntityList& entities)
+void __fastcall TiledMapDocument::SetEntities(MapEntityType type, const MapEntityList& entities)
 {
     if (type == meMap) {
         m_Map.clear();
@@ -284,7 +284,7 @@ void __fastcall TiledMapDocument::UpdateEntityRooms()
     // update entity room indexes
     std::vector<unsigned int> objectsToRemove;
     for (auto entity : m_Map) {
-        auto roomPt = TPoint((int)(entity.Pt.X / roomSize.cx), (int)(entity.Pt.Y / roomSize.cy));
+        auto roomPt = TPoint(static_cast<int>(entity.Pt.X / roomSize.cx), static_cast<int>(entity.Pt.Y / roomSize.cy));
         // recalculate the entitys room based on its current position (currently only sprites/objects can be locked to rooms)
         auto object = dynamic_cast<ObjectDocument*>(entity.Image);
         entity.RoomIndex = GetRoomIndex(roomPt, true);
@@ -297,7 +297,7 @@ void __fastcall TiledMapDocument::UpdateEntityRooms()
             assert(object != nullptr);
 
             if (object->State == Visuals::osRoom && object->RoomIndex <= g_MaxRooms) {
-                object->Position = TPoint(std::max(0, (int)(entity.Pt.X - (roomPt.X * roomSize.cx))), std::min(255, (int)(entity.Pt.Y - (roomPt.Y * roomSize.cy))));
+                object->Position = TPoint(std::max(0, static_cast<int>(entity.Pt.X - (roomPt.X * roomSize.cx))), std::min(255, static_cast<int>(entity.Pt.Y - (roomPt.Y * roomSize.cy))));
             } else {
                 // remove any objects from the map that are not assigned to a room
                 objectsToRemove.push_back(entity.Id);
@@ -310,9 +310,9 @@ void __fastcall TiledMapDocument::UpdateEntityRooms()
     Bus::Publish<UpdateProperties>(UpdateProperties());
 }
 //---------------------------------------------------------------------------
-bool __fastcall TiledMapDocument::IsRoomEmpty(int x, int y)
+bool __fastcall TiledMapDocument::IsRoomEmpty(int x, int y) const
 {
-    return (Get(meRoom, TSize(x, y)).size() == 0);
+    return (GetEntities(meRoom, TSize(x, y)).size() == 0);
 }
 //---------------------------------------------------------------------------
 bool __fastcall TiledMapDocument::IsRoomIndexUsed(const int roomIndex) const
@@ -332,24 +332,24 @@ const TRect __fastcall TiledMapDocument::SetMinimalMapSize()
     UpdateEntityRooms();
     m_ScreenCount = 0;
     TRect rect(g_MaxMapRoomsAcross, g_MaxMapRoomsDown, 0, 0);
-    for (auto y = 0; y < g_MaxMapRoomsDown; y++) {
-        for (auto x = 0; x < g_MaxMapRoomsAcross; x++) {
+    for (LONG y = 0; y < g_MaxMapRoomsDown; y++) {
+        for (LONG x = 0; x < g_MaxMapRoomsAcross; x++) {
             if (m_RoomMapping[x][y] != g_EmptyRoom) {
-                rect.Left   = std::min(x, (int)rect.Left  );
-                rect.Top    = std::min(y, (int)rect.Top   );
-                rect.Right  = std::max(x, (int)rect.Right );
-                rect.Bottom = std::max(y, (int)rect.Bottom);
+                rect.Left   = std::min(x, rect.Left  );
+                rect.Top    = std::min(y, rect.Top   );
+                rect.Right  = std::max(x, rect.Right );
+                rect.Bottom = std::max(y, rect.Bottom);
                 m_ScreenCount++;
             }
         }
     }
-    rect.Inflate(1,0,1,0);
+    rect.Inflate(1,0,1,1);
     m_RoomMappingWidth  = rect.Right;
     m_RoomMappingHeight = rect.Bottom;
     return rect;
 }
 //---------------------------------------------------------------------------
-int __fastcall TiledMapDocument::GetRoomIndex(const TPoint& room, bool newIdForUndefinedRoom)
+int __fastcall TiledMapDocument::GetRoomIndex(const TPoint& room, bool newIdForUndefinedRoom) const
 {
     // get either the existing room index or make a new one if required
     auto ri = m_RoomMapping[room.X][room.Y];
@@ -359,7 +359,7 @@ int __fastcall TiledMapDocument::GetRoomIndex(const TPoint& room, bool newIdForU
             // does this ri exist in the list of rooms
             if (!IsRoomIndexUsed(ri)) {
                 // no, so assign it to the room
-                m_RoomMapping[room.X][room.Y]  = ri;
+                m_RoomMapping[room.X][room.Y] = ri;
                 break;
             }
         }
@@ -401,7 +401,7 @@ void __fastcall TiledMapDocument::OnLoaded()
 const TRect& __fastcall TiledMapDocument::GetWindow() const
 {
     static TRect emptyRect = TRect(0,0,0,0);
-    auto wi = (WindowDocument*)theDocumentManager.Get("Window", "Definition", "Window");
+    auto wi = dynamic_cast<WindowDocument*>(theDocumentManager.Get("Window", "Definition", "Window"));
     if (wi != nullptr) {
         return wi->Rect;
     }

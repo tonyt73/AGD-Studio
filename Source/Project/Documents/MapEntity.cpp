@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "MapEntity.h"
 #include "Project/Documents/DocumentManager.h"
@@ -93,15 +93,15 @@ void __fastcall MapEntity::Clear()
     m_RoomLocked = false;
     m_RoomIndex = 255;
     m_Document = nullptr;
-    m_Dirty = true;
+    m_Dirty = false;
 }
 //---------------------------------------------------------------------------
 void __fastcall MapEntity::Clean()
 {
-    m_Dirty = false;
+    Dirty = false;
 }
 //---------------------------------------------------------------------------
-ImageDocument* const __fastcall MapEntity::GetDocument() const
+ImageDocument* __fastcall MapEntity::GetDocument() const
 {
     return m_Document;
 }
@@ -136,7 +136,7 @@ void __fastcall MapEntity::SetSelected(bool state)
 //---------------------------------------------------------------------------
 void __fastcall MapEntity::SetDirty(bool state)
 {
-    m_Dirty = true;
+    m_Dirty = state;
 }
 //---------------------------------------------------------------------------
 bool __fastcall MapEntity::GetIsSprite() const

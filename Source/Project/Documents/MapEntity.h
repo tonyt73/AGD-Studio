@@ -30,7 +30,7 @@ protected:
     TPoint              __fastcall  GetPoint() const;
     void                __fastcall  SetDragPoint(const TPoint& pt);
     TPoint              __fastcall  GetDragPoint() const;
-   ImageDocument* const __fastcall  GetDocument() const;
+    ImageDocument*      __fastcall  GetDocument() const;
     unsigned int        __fastcall  GetId() const;
     bool                __fastcall  GetIsSprite() const;
     void                __fastcall  SetId(unsigned int id);
@@ -52,7 +52,7 @@ public:
     void                __fastcall  Clean();
 
     __property  unsigned int        Id          = { read = GetId, write = SetId                 };
-    __property ImageDocument* const Image       = { read = GetDocument                          };
+    __property  ImageDocument*      Image       = { read = GetDocument                          };
     __property  TPoint              Pt          = { read = GetPoint, write = SetPoint           };
     __property  TPoint              DragPt      = { read = GetDragPoint, write = SetDragPoint   };
     __property  bool                Dirty       = { read = m_Dirty, write = SetDirty            };

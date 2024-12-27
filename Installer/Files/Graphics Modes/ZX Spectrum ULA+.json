@@ -1,7 +1,7 @@
 {
   "Name": "ZX Spectrum ULA+",
   "Palette": "ZX Spectrum ULA+",
-  "BufferType": 2,
+  "BufferType": "btULAplus",
   "Width": 256,
   "Height": 192,
   "ScalarX": 1.0,

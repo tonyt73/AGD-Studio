@@ -12,6 +12,10 @@ inherited frmEditorMessages: TfrmEditorMessages
     Top = 0
     Width = 1204
     Height = 61
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Align = alTop
     AutoSize = True
     BevelOuter = bvNone
@@ -21,6 +25,10 @@ inherited frmEditorMessages: TfrmEditorMessages
       Top = 0
       Width = 1204
       Height = 61
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       HorzScrollBar.ParentColor = False
       HorzScrollBar.Smooth = True
       HorzScrollBar.Style = ssHotTrack
@@ -55,6 +63,10 @@ inherited frmEditorMessages: TfrmEditorMessages
     Top = 61
     Width = 1204
     Height = 763
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
@@ -63,6 +75,11 @@ inherited frmEditorMessages: TfrmEditorMessages
       Top = 0
       Width = 6
       Height = 763
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
+      MinSize = 38
       ResizeStyle = rsUpdate
     end
     object Panel1: TPanel
@@ -70,6 +87,10 @@ inherited frmEditorMessages: TfrmEditorMessages
       Top = 0
       Width = 521
       Height = 763
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Align = alLeft
       BevelOuter = bvNone
       Constraints.MinWidth = 200
@@ -79,6 +100,10 @@ inherited frmEditorMessages: TfrmEditorMessages
         Top = 0
         Width = 521
         Height = 763
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -108,6 +133,10 @@ inherited frmEditorMessages: TfrmEditorMessages
           Width = 521
           ExplicitWidth = 521
         end
+        inherited vilToolbar: TVirtualImageList
+          Width = 30
+          Height = 30
+        end
       end
     end
     object Panel2: TPanel
@@ -115,6 +144,10 @@ inherited frmEditorMessages: TfrmEditorMessages
       Top = 0
       Width = 677
       Height = 763
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Align = alClient
       AutoSize = True
       BevelOuter = bvNone
@@ -124,6 +157,10 @@ inherited frmEditorMessages: TfrmEditorMessages
         Top = 0
         Width = 677
         Height = 763
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         HorzScrollBar.Smooth = True
         HorzScrollBar.Tracking = True
         VertScrollBar.Smooth = True
@@ -144,6 +181,10 @@ inherited frmEditorMessages: TfrmEditorMessages
           Top = -2
           Width = 523
           Height = 555
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Stretch = True
         end
       end

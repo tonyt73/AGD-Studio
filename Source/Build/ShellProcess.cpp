@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "ShellProcess.h"
 //---------------------------------------------------------------------------
@@ -9,6 +9,10 @@ using namespace Build;
 //---------------------------------------------------------------------------
 __fastcall ShellProcess::ShellProcess(BuildMessages& buildMessages, BuildMessageType type, const String& description)
 : BuildProcess(buildMessages, type, description)
+{
+}
+//---------------------------------------------------------------------------
+__fastcall ShellProcess::~ShellProcess()
 {
 }
 //---------------------------------------------------------------------------
@@ -42,7 +46,7 @@ bool __fastcall ShellProcess::ShellExecute(const String& path, const String& cmd
     return result;
 }
 //---------------------------------------------------------------------------
-void __fastcall ShellProcess::OnOutputEvent(System::TObject* ASender, const System::UnicodeString ANewLine)
+void __fastcall ShellProcess::OnOutputEvent(System::TObject* /*Sender*/, const System::UnicodeString ANewLine)
 {
     if (ANewLine.LowerCase().Pos("error"))
     {

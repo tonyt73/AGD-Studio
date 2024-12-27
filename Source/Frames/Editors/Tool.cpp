@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "Tool.h"
 //---------------------------------------------------------------------------
@@ -38,7 +38,7 @@ void __fastcall Tool::Move(const TPoint& pt, const TShiftState& buttons)
     m_LastPt = pt;
 }
 //---------------------------------------------------------------------------
-void __fastcall Tool::End(const TPoint& pt)
+void __fastcall Tool::End(const TPoint&)
 {
     m_IsDrawing = false;
 }

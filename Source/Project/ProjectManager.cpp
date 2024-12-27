@@ -1,13 +1,11 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "ProjectManager.h"
 #include "Documents/Project.h"
 #include "Documents/Window.h"
 #include "Documents/FileDefinitions.h"
 #include "Documents/Settings.h"
-#include "Frames/Editors/Code/fEditorCode.h"
-#include "Frames/Editors/Images/fEditorImage.h"
 #include "Importer/AgdImporter.h"
 #include "Messaging/Event.h"
 #include "Services/File.h"
@@ -19,16 +17,17 @@ using namespace Project;
 //---------------------------------------------------------------------------
 __fastcall ProjectManager& ProjectManager::get()
 {
-    static ProjectManager instance;
+    [[clang::no_destroy]] static ProjectManager instance;
     return instance;
 }
 //---------------------------------------------------------------------------
 __fastcall ProjectManager::ProjectManager()
-: m_TreeView(nullptr)
-, m_MostRecentUsedList(nullptr)
+: m_MostRecentUsedList(nullptr)
+, m_TreeView(nullptr)
 , m_IsOpen(false)
 {
-    m_Registrar.Subscribe<DocumentChange<String>>(OnDocumentChanged);
+    m_Registrar.Subscribe<DocumentChange<String>>(_FnBind(ProjectManager::OnDocumentChanged));
+    m_Registrar.Subscribe<DocumentAdded>(_FnBind(ProjectManager::OnDocumentAdded));
 }
 //---------------------------------------------------------------------------
 void __fastcall ProjectManager::Initialise(Elxtree::TElXTree* treeView)
@@ -38,8 +37,7 @@ void __fastcall ProjectManager::Initialise(Elxtree::TElXTree* treeView)
 //---------------------------------------------------------------------------
 cMRUList __fastcall ProjectManager::GetMostRecentlyUsedList()
 {
-    if (m_MostRecentUsedList == nullptr)
-    {
+    if (m_MostRecentUsedList == nullptr) {
         m_MostRecentUsedList = std::make_unique<MostRecentlyUsedList>();
     }
     return m_MostRecentUsedList->GetList();
@@ -55,25 +53,16 @@ void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* 
     auto caption = node->Text.LowerCase();
     node->ImageIndex = tiFolderClosed;
     int index = tiFolderOpened;
-    if (parent.LowerCase() == "game")
-    {
-        if (caption == "map")
-            index = tiFolderMaps;
-        else
-            index = tiFolderFile;
-    }
-    else if (parent.LowerCase() == "files")
-    {
+    if (parent.LowerCase() == "game") {
+        if (caption == "map")                index = tiFolderMaps;
+        else                                 index = tiFolderFile;
+    } else if (parent.LowerCase() == "files") {
              if (caption == "messages"     ) index = tiConfiguration;
         else if (caption == "sound effects") index = tiAssetSfx;
-    }
-    else if (parent.LowerCase() == "output")
-    {
+    } else if (parent.LowerCase() == "output") {
              if (caption.Pos(".asm") > 0   ) index = tiFileAsm;
         else if (caption.Pos(".agd") > 0   ) index = tiFileAgd;
-    }
-    else if (parent.LowerCase() == "images")
-    {
+    } else if (parent.LowerCase() == "images") {
              if (caption == "sprites"      ) index = tiFolderSprites;
         else if (caption == "images"       ) index = tiFolderImages;
         else if (caption == "objects"      ) index = tiFolderImages;
@@ -82,9 +71,7 @@ void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* 
         else if (caption == "tiles"        ) index = tiFolderTileSets;
         else if (caption == "tile sets"    ) index = tiFolderTileSets;
         else if (caption == "map"          ) index = tiFolderMaps;
-    }
-    else if (node->Parent)
-    {
+    } else if (node->Parent) {
         caption = node->Parent->Text.LowerCase();
              if (caption == "sprites"      ) index = tiAssetSprite;
         else if (caption == "images"       ) index = tiAssetImage;
@@ -102,11 +89,11 @@ void __fastcall ProjectManager::SetTreeIcon(const String& parent, TElXTreeItem* 
         else if (caption == "controls"     ) index = tiKeyboard;
         else if (caption == "jump table"   ) index = tiConfiguration;
     }
-    else
-    {
-        // debug, break point to catch new doc types.
-        int a = 0;
-    }
+//    else
+//    {
+//        // debug, break point to catch new doc types.
+//        int a = 0;
+//    }
     node->ImageIndex = index;
 }
 //---------------------------------------------------------------------------
@@ -116,17 +103,15 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
     InformationMessage("[ProjectManager] Project Saved");
     Services::Folders::ProjectName = name;
     Close();
-    if (m_TreeView)
-    {
+    if (m_TreeView) {
         ClearTree(name);
         // create a new project file, but load the file if it exists
         auto project = dynamic_cast<ProjectDocument*>(Add("Game", "Configuration", name, machine));
         assert(project != nullptr);
         project->Author = theAppSettings.Developer;
-        if (project->Files().size() == 0)
-        {
+        if (project->Files().size() == 0) {
             // create the map, controls, jump table and window documents
-            // TODO: Change the interface to take the class type and name
+            // TODO -cImprovement: Change the interface to take the class type and name
             theDocumentManager.Add("Map"     , "Tiled"     , "Tile Map" , "");
             theDocumentManager.Add("Controls", "List"      , "Controls" , "");
             theDocumentManager.Add("Jump"    , "Table"     , "JumpTable", "");
@@ -134,17 +119,13 @@ void __fastcall ProjectManager::New(const String& name, const String& machine)
             // Set window to full size
             auto winDoc = dynamic_cast<WindowDocument*>(theDocumentManager.Add("Window", "Definition", "Window", ""));
             const auto wc = project->MachineConfiguration().Window;
-            TRect rect(0, 0, wc.Width, wc.Height);
-            winDoc->Set(rect);
+            winDoc->SetRect(TRect(0, 0, wc.Width, wc.Height));
             // create the event files
             auto definitions = std::make_unique<FileDefinitions>();
-            for (const auto& definition : definitions->GetDefinitions())
-            {
+            for (const auto& definition : definitions->GetDefinitions()) {
                 theDocumentManager.Add("Text", definition.Type, definition.Filename, "");
             }
-        }
-        else
-        {
+        } else {
             theDocumentManager.Load(name);
         }
         m_MostRecentUsedList->Remove(name, project->Path);
@@ -160,8 +141,7 @@ bool __fastcall ProjectManager::Import(const String& file)
 
     auto name = Services::File::NameWithoutExtension(file);
     Importer::AgdImporter importer;
-    if (!importer.Convert(file))
-    {
+    if (!importer.Convert(file)) {
         ErrorMessage("[ProjectManager] Failed to import file: " + file);
         return false;
     }
@@ -211,21 +191,19 @@ void __fastcall ProjectManager::ClearTree(const String& rootName)
     m_TreeLeafNodes.clear();
     m_TreeView->Items->Clear();
     m_TreeView->Items->Delete(m_TreeView->Items->Item[0]);
-    m_TreeView->Items->Add(NULL, rootName);
+    m_TreeView->Items->Add(nullptr, rootName);
     auto rootNode = m_TreeView->Items->Item[0];
     std::map<String, TElXTreeItem*> childRootNodes;
     // get the list of document folders we support
     std::vector<String> documentFolders;
     theDocumentManager.DocumentFolders(documentFolders);
     // now create them as a tree view hierarchy
-    for (auto it : documentFolders)
-    {
+    for (auto it : documentFolders) {
         auto folder = it;
         auto rootFolder = folder.SubString(0, folder.Pos("\\")-1);
         auto childFolder = folder.SubString(folder.Pos("\\")+1, folder.Length());
         auto nodeIt = childRootNodes.find(rootFolder);
-        if (nodeIt == childRootNodes.end())
-        {
+        if (nodeIt == childRootNodes.end()) {
             // add a new root node
             auto node = m_TreeView->Items->AddChild(rootNode, rootFolder);
             SetTreeIcon("root", node);
@@ -233,9 +211,7 @@ void __fastcall ProjectManager::ClearTree(const String& rootName)
             SetTreeIcon(rootFolder, childnode);
             childRootNodes[rootFolder] = node;
             m_TreeLeafNodes[folder] = childnode;
-        }
-        else
-        {
+        } else {
             // add to the root node
             auto childnode = m_TreeView->Items->AddChild(nodeIt->second, childFolder);
             SetTreeIcon(rootFolder, childnode);
@@ -246,14 +222,13 @@ void __fastcall ProjectManager::ClearTree(const String& rootName)
 //---------------------------------------------------------------------------
 Document* __fastcall ProjectManager::AddToTreeView(Document* document)
 {
-    if (document != nullptr)
-    {
+    if (document != nullptr) {
         auto folder = document->Classification;
         auto node = m_TreeView->Items->AddChild(m_TreeLeafNodes[folder], document->Name);
         auto childFolder = folder.SubString(folder.Pos("\\")+1, folder.Length());
         SetTreeIcon(childFolder, node);
         document->TreeNode = node;
-        node->Tag = (NativeInt)(document);
+        node->Tag = reinterpret_cast<NativeInt>(document);
         node->MakeVisible();
     }
     return document;
@@ -274,10 +249,15 @@ bool __fastcall ProjectManager::Remove(const String& type, const String& name)
     return theDocumentManager.Remove(type, name);
 }
 //---------------------------------------------------------------------------
-void __fastcall ProjectManager::OnDocumentChanged(const DocumentChange<String>& message)
+void __fastcall ProjectManager::OnDocumentChanged(const DocumentChange<String>&)
 {
     // TODO: update the document properties
     // theProjectManager.AddToTreeView(document);
+}
+//---------------------------------------------------------------------------
+void __fastcall ProjectManager::OnDocumentAdded(const DocumentAdded& message)
+{
+    AddToTreeView(message.Document);
 }
 //---------------------------------------------------------------------------
 

@@ -12,7 +12,7 @@ namespace Visuals
 // btAttribute      the buffer represents the color values for the bitmap of pixels. Usually in 8x8 or 8x1 grouping.
 // btCharacterMap   the buffer represents a character display similar to the MSX
 enum BufferType  { btBitmap = 0, btAttribute = 1, btULAplus = 2, btCharacterMap = 3, btInvalid = -1 };
-enum ImageTypes  { itStart = 0, itObject = 0, itSprite, itTile, itCharacterSet, itEnd, itInvalid    };
+enum ImageTypes  { itStart = 1, itObject = 1, itSprite, itTile, itCharacterSet, itEnd, itInvalid    };
 enum ObjectState { osRoom, osDisabled, osInventory                                                  };
 // a typical byte buffer
 typedef std::vector<unsigned char>  ByteBuffer;
@@ -32,7 +32,9 @@ struct TRGBA
     unsigned char A;
 };
 //---------------------------------------------------------------------------
-String __fastcall ImageTypeName(ImageTypes type);
+String     __fastcall ImageTypeName(ImageTypes type);
+String     __fastcall BufferTypeName(BufferType type);
+BufferType __fastcall BufferTypeByName(String name);
 //---------------------------------------------------------------------------
 } // Visuals namespace
 //---------------------------------------------------------------------------

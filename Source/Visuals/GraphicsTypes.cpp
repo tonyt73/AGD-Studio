@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "GraphicsTypes.h"
 //---------------------------------------------------------------------------
@@ -8,17 +8,43 @@
 String __fastcall Visuals::ImageTypeName(ImageTypes type)
 {
     switch (type) {
-        case itCharacterSet:
-            return "CharacterSet";
-        case itObject:
-            return "Object";
-        case itSprite:
-            return "Sprite";
-        case itTile:
-            return "Tile";
-        default:
-            return "Invalid";
+    case itCharacterSet:
+        return "CharacterSet";
+    case itObject:
+        return "Object";
+    case itSprite:
+        return "Sprite";
+    case itTile:
+        return "Tile";
+    case Visuals::itEnd:
+    case Visuals::itInvalid:
+        return "Invalid";
     }
+}
+//---------------------------------------------------------------------------
+String __fastcall Visuals::BufferTypeName(BufferType type)
+{
+    switch (type) {
+    case btBitmap:
+        return "btBitmap";
+    case btAttribute:
+        return "btAttribute";
+    case btULAplus:
+        return "btULAplus";
+    case btCharacterMap:
+        return "btCharacterMap";
+    case btInvalid:
+        return "btInvalid";
+    }
+}
+//---------------------------------------------------------------------------
+Visuals::BufferType __fastcall Visuals::BufferTypeByName(String name)
+{
+    if (name.LowerCase() == "btbitmap"       ) return btBitmap;
+    if (name.LowerCase() == "btattribute"    ) return btAttribute;
+    if (name.LowerCase() == "btulaplus"      ) return btULAplus;
+    if (name.LowerCase() == "btcharactermmap") return btCharacterMap;
+    return btInvalid;
 }
 //---------------------------------------------------------------------------
 

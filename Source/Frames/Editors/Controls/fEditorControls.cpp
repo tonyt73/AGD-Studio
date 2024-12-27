@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "fEditorControls.h"
 #include "../EditorManager.h"
@@ -15,13 +15,12 @@ __fastcall TfrmEditorControls::TfrmEditorControls(TComponent* Owner)
 : TfrmEditor(Owner, "Controls Editor")
 {
     m_KeysHelp = "Enter the character for the key or an ASCII code from 1 - 127.\r\nDelete the character to unset it.";
-    m_Registrar.Subscribe<ThemeChangedEvent>(OnThemeChangedEvent);
+    m_Registrar.Subscribe<ThemeChangedEvent>(_FnBind(TfrmEditorControls::OnThemeChangedEvent));
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorControls::SetDocument(Project::Document* document)
+void __fastcall TfrmEditorControls::OnDocumentSet()
 {
-    TfrmEditor::SetDocument(document);
-    auto doc = dynamic_cast<Project::ControlsDocument*>(document);
+    auto doc = dynamic_cast<Project::ControlsDocument*>(Document);
     kcLeft->KeyCode = doc->GetAsciiCode(Project::keyLeft);
     kcRight->KeyCode = doc->GetAsciiCode(Project::keyRight);
     kcUp->KeyCode = doc->GetAsciiCode(Project::keyUp);
@@ -66,7 +65,7 @@ void __fastcall TfrmEditorControls::OnKeyChanged(TObject* Sender)
     else if (Sender == kcOption4) doc->SetAsciiCode(Project::keyOption4, kcOption4->KeyCode);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorControls::OnThemeChangedEvent(const ThemeChangedEvent& event)
+void __fastcall TfrmEditorControls::OnThemeChangedEvent(const ThemeChangedEvent& /*event*/)
 {
     UpdateColors();
 }
@@ -74,11 +73,11 @@ void __fastcall TfrmEditorControls::OnThemeChangedEvent(const ThemeChangedEvent&
 void __fastcall TfrmEditorControls::UpdateColors()
 {
     Line1->Brush->Color = ThemeManager::Highlight;
-    Line1->Pen->Color = ThemeManager::Highlight;
+    Line1->Pen->Color   = ThemeManager::Highlight;
     Line2->Brush->Color = ThemeManager::Highlight;
-    Line2->Pen->Color = ThemeManager::Highlight;
+    Line2->Pen->Color   = ThemeManager::Highlight;
     Line3->Brush->Color = ThemeManager::Highlight;
-    Line3->Pen->Color = ThemeManager::Highlight;
+    Line3->Pen->Color   = ThemeManager::Highlight;
 }
 //---------------------------------------------------------------------------
 

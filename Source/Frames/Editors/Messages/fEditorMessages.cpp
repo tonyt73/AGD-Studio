@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "fEditorMessages.h"
 #include "EditorManager.h"
@@ -24,22 +24,19 @@ __fastcall TfrmEditorMessages::TfrmEditorMessages(TComponent* Owner)
     m_Tile->Picture->Bitmap->Height = 8;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMessages::SetDocument(Project::Document* document)
+void __fastcall TfrmEditorMessages::OnDocumentSet()
 {
     fFramesView->Timer1->Enabled = false;
     Color = ThemeManager::Background;
-    m_Document = document;
-    ecMessageEditor->SetDocument(document);
+    ecMessageEditor->Document = Document;
 
     Project::DocumentList images;
     // TODO: Should take a subtype as well
     theDocumentManager.GetAllOfType("Image", images);
     // find the character set document
-    for (auto image : images)
-    {
+    for (auto image : images) {
         auto charset = dynamic_cast<Project::CharacterSetDocument*>(image);
-        if (charset)
-        {
+        if (charset) {
             m_CharacterSet = charset;
             break;
         }
@@ -59,19 +56,19 @@ bool __fastcall TfrmEditorMessages::IsActive() const
     return theEditorManager.IsActive(ecMessageEditor);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMessages::FrameResize(TObject *Sender)
+void __fastcall TfrmEditorMessages::FrameResize(TObject* /*Sender*/)
 {
     Color = ThemeManager::Background;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMessages::OnStatusChanged(TLMDCustomEditView *AView, TLMDViewStatusChanges AChanges)
+void __fastcall TfrmEditorMessages::OnStatusChanged(TLMDCustomEditView* /*AView*/, TLMDViewStatusChanges /*AChanges*/)
 {
     ecMessageEditor->UpdateStatus();
     // refresh the view
     m_RefreshView = true;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMessages::tmrRefreshViewTimer(TObject *Sender)
+void __fastcall TfrmEditorMessages::tmrRefreshViewTimer(TObject* /*Sender*/)
 {
     // redraw the image view
     RefreshView();
@@ -98,23 +95,17 @@ void __fastcall TfrmEditorMessages::RefreshView()
     auto y = m_CharacterSet->Height;
     auto idx = 0;
     auto quote = true;
-    for (auto line = 0; line < doc->LinesCount; line++)
-    {
-        for (auto col = 0; col < doc->LineSegments[line].Count; col++)
-        {
+    for (auto line = 0; line < doc->LinesCount; line++) {
+        for (auto col = 0; col < doc->LineSegments[line].Count; col++) {
             auto seg = doc->LineSegments[line];
             auto chr = seg.Source->Chars[seg.Start + col];
-            if (chr == L'\"')
-            {
-                if (quote)
-                {
+            if (chr == L'\"') {
+                if (quote) {
                     // draw the message index
                     imgView->Canvas->TextOut(0, y - 2, IntToStr(idx++));
                 }
                 quote = !quote;
-            }
-            else if (chr >= 32 && chr < 128)
-            {
+            } else if (chr >= 32 && chr < 128) {
                 m_Frames[chr - 32]->Canvas().Assign(m_Tile->Picture->Bitmap);
                 imgView->Canvas->Draw(x, y, m_Tile->Picture->Bitmap);
                 x += m_CharacterSet->Width;
@@ -129,8 +120,7 @@ void __fastcall TfrmEditorMessages::RefreshCharacterSet()
 {
     fFramesView->Clear();
     const auto& gm = m_GraphicsMode;
-    for (auto i = 0; i < m_CharacterSet->Frames; i++)
-    {
+    for (auto i = 0; i < m_CharacterSet->Frames; i++) {
         if (m_Frames.size() < m_CharacterSet->Frames) {
             // make an image canvas
             auto image = std::make_unique<Visuals::Image>(m_CharacterSet->Width, m_CharacterSet->Height, gm);
@@ -144,13 +134,9 @@ void __fastcall TfrmEditorMessages::RefreshCharacterSet()
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMessages::sbxViewMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled)
+void __fastcall TfrmEditorMessages::sbxViewMouseWheel(TObject* /*Sender*/, TShiftState /*Shift*/, int WheelDelta, TPoint &/*MousePos*/, bool &/*Handled*/)
 {
-    if (WheelDelta > 0) {
-        sbxView->Perform(WM_VSCROLL, SB_LINEUP, (int)0);
-    } else {
-        sbxView->Perform(WM_VSCROLL, SB_LINEDOWN, (int)0);
-    }
+    sbxView->Perform(WM_VSCROLL, WheelDelta > 0 ? SB_LINEUP : SB_LINEDOWN, nullptr);
 }
 //---------------------------------------------------------------------------
 

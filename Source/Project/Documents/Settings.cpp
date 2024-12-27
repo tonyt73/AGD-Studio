@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "Settings.h"
 #include "Services/File.h"
@@ -10,11 +10,10 @@
 //---------------------------------------------------------------------------
 using namespace Project;
 //---------------------------------------------------------------------------
-Settings* instance = nullptr;
+static Settings* instance = nullptr;
 Settings& __fastcall Settings::get()
 {
-    if (instance == nullptr)
-    {
+    if (instance == nullptr) {
         Services::Folders::Init();
         instance = new Settings();
     }
@@ -41,7 +40,7 @@ __fastcall Settings::Settings()
     m_PropertyMap["CodeEditor.Font.Name"     ] = &m_CodeEditorFontName;
     m_PropertyMap["CodeEditor.Font.Height"   ] = &m_CodeEditorFontHeight;
 
-    Load(Services::File::Combine(Services::Folders::Common, "Settings.json"));
+    LoadFile(Services::File::Combine(Services::Folders::Common, "Settings.json"));
 }
 //---------------------------------------------------------------------------
 __fastcall Settings::~Settings()
@@ -71,23 +70,21 @@ void __fastcall Settings::SetWindowSize(const TSize& size)
 //---------------------------------------------------------------------------
 void __fastcall Settings::SetBool(int index, bool value)
 {
-    switch (index)
-    {
-        case 0: m_WelcomeSkipOnStartup = value; break;
-        case 1: m_WelcomeSkipOnClose = value; break;
-        case 2: m_LoadLastProject = value; break;
+    switch (index) {
+    case 0: m_WelcomeSkipOnStartup = value; break;
+    case 1: m_WelcomeSkipOnClose = value; break;
+    case 2: m_LoadLastProject = value; break;
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall Settings::SetString(int index, String value)
 {
-    switch (index)
-    {
-        case 0: m_ActiveStyle = value; break;
-        case 1: m_LastProject = value; break;
-        case 2: m_Developer = value; break;
-        case 3: m_DefaultMachine = value; break;
-        case 4: m_CodeEditorFontName = value; break;
+    switch (index) {
+    case 0: m_ActiveStyle = value; break;
+    case 1: m_LastProject = value; break;
+    case 2: m_Developer = value; break;
+    case 3: m_DefaultMachine = value; break;
+    case 4: m_CodeEditorFontName = value; break;
     }
 }
 //---------------------------------------------------------------------------
@@ -121,7 +118,7 @@ void __fastcall Settings::Save()
             Write("Width", WindowSize.Width);
             Write("Height", WindowSize.Height);
         Pop(); // }
-        Write("WindowState", (int)WindowState);
+        Write("WindowState", static_cast<int>(WindowState));
     Pop(); // }
     Push("CodeEditor"); // {
         Push("Font"); // {

@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "fEditor.h"
 #include "EditorManager.h"
@@ -10,10 +10,10 @@
 //---------------------------------------------------------------------------
 __fastcall TfrmEditor::TfrmEditor(TComponent* Owner, const String& Name)
 : TFrame(Owner)
-, m_KeysHelp("")
 , m_Name(Name)
+, m_KeysHelp("")
 {
-    m_Registrar.Subscribe<Event>(OnEvent);
+    m_Registrar.Subscribe<Event>(_FnBind(TfrmEditor::OnEvent));
 }
 //---------------------------------------------------------------------------
 __fastcall TfrmEditor::~TfrmEditor()
@@ -24,6 +24,15 @@ __fastcall TfrmEditor::~TfrmEditor()
 void __fastcall TfrmEditor::SetDocument(Project::Document* document)
 {
     m_Document = document;
+    OnDocumentSet();
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditor::OnDocumentSet()
+{
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditor::OnInitialise()
+{
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditor::ShowKeysHelp()
@@ -36,15 +45,14 @@ bool __fastcall TfrmEditor::IsActive() const
     return theEditorManager.IsActive(this);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditor::OnEvent(const Event& event)
+void TfrmEditor::OnEvent(const Event& event)
 {
-    if (IsActive() && event.Id == "editor.help")
-    {
+    if (IsActive() && event.Id == "editor.help") {
         ShowKeysHelp();
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditor::FrameEnter(TObject *Sender)
+void __fastcall TfrmEditor::FrameEnter(TObject* /*Sender*/)
 {
     theEditorManager.SetActive(this);
 }

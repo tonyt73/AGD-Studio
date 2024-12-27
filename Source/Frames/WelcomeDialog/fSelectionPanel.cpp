@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include <Vcl.Imaging.pngimage.hpp>
 #include "fSelectionPanel.h"
@@ -31,7 +31,7 @@ __fastcall TSelectionPanelFrame::~TSelectionPanelFrame()
     Parent = nullptr;
 }
 //---------------------------------------------------------------------------
-void __fastcall TSelectionPanelFrame::panProjectInfoMouseMove(TObject *Sender, TShiftState Shift, int X, int Y)
+void __fastcall TSelectionPanelFrame::panProjectInfoMouseMove(TObject* /*Sender*/, TShiftState /*Shift*/, int /*X*/, int /*Y*/)
 {
     Highlighted = true;
 }
@@ -65,7 +65,7 @@ void __fastcall TSelectionPanelFrame::SetMachine(String machine)
     if (!imgLogo->Visible)
     {
         auto mc = std::make_unique<Project::MachineConfig>(machine);
-        mc->Load(machine);
+        mc->LoadFile(machine);
         if (mc->Image.Trim() != "")
         {
             auto file = Services::File::Combine(Services::Folders::Application, mc->Image);
@@ -135,22 +135,21 @@ void __fastcall TSelectionPanelFrame::Tick()
     prgLoading->StepIt();
 }
 //---------------------------------------------------------------------------
-void __fastcall TSelectionPanelFrame::lblProjectNameClick(TObject *Sender)
+void __fastcall TSelectionPanelFrame::lblProjectNameClick(TObject* /*Sender*/)
 {
     Selected = true;
     if (FOnClick != nullptr) FOnClick(this);
 }
 //---------------------------------------------------------------------------
-void __fastcall TSelectionPanelFrame::imgRemoveClick(TObject *Sender)
+void __fastcall TSelectionPanelFrame::imgRemoveClick(TObject* /*Sender*/)
 {
     if (FOnRemoveClick != nullptr) FOnRemoveClick(this);
 }
 //---------------------------------------------------------------------------
-void __fastcall TSelectionPanelFrame::imgOpenProjectFolderClick(TObject *Sender)
+void __fastcall TSelectionPanelFrame::imgOpenProjectFolderClick(TObject* /*Sender*/)
 {
     auto folder = Services::File::Combine(Services::Folders::Projects, m_Name);
-    ShellExecute(NULL, L"open", NULL, NULL, folder.c_str(), SW_SHOWNORMAL);
-
+    ShellExecute(nullptr, L"open", nullptr, nullptr, folder.c_str(), SW_SHOWNORMAL);
 }
 //---------------------------------------------------------------------------
 

@@ -31,19 +31,19 @@ private:
             String      __fastcall  GetFile() const;
             void        __fastcall  SetName(String name);
             void        __fastcall  OnChangeString(const OnChange<String>& event);
-            void        __fastcall  OnEndObject(const String& object);
-            void        __fastcall  DoSave();
+            void        __fastcall  OnEndObject(const String& object) override;
+            void        __fastcall  DoSave() override;
             String      __fastcall  GetGraphicsMode() const;
             int         __fastcall  GetScreenSize(int index) const;
 
 public:
                         __fastcall  ProjectDocument(const String& name, const String& machine);
-                        __fastcall ~ProjectDocument();
-    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ProjectDocument(name, extra); };
+                        __fastcall ~ProjectDocument() override;
+    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ProjectDocument(name, extra); }
 
    const MachineConfig& __fastcall  MachineConfiguration();
          MachineConfig& __fastcall  WritableMachineConfiguration() const;
-            bool        __fastcall  Load();
+            bool        __fastcall  Load() override;
 
             void        __fastcall  ClearFiles();
             void        __fastcall  AddFile(const String& file, const String& type, const String& subType);

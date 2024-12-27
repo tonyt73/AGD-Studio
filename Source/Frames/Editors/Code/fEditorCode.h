@@ -2,6 +2,7 @@
 #ifndef fEditorCodeH
 #define fEditorCodeH
 //---------------------------------------------------------------------------
+#include <System.Actions.hpp>
 #include <System.Classes.hpp>
 #include <System.ImageList.hpp>
 #include <Vcl.ComCtrls.hpp>
@@ -12,29 +13,19 @@
 #include <Vcl.ActnList.hpp>
 #include <Vcl.StdActns.hpp>
 #include <Vcl.Dialogs.hpp>
-#include <System.Actions.hpp>
-#include <LMDDckSite.hpp>
-#include <LMDSedDocument.hpp>
-#include <LMDSedView.hpp>
-#include <LMDSedFindDialog.hpp>
-#include "LMDButtonPanel.hpp"
-#include "LMDControl.hpp"
-#include "LMDCustomBevelPanel.hpp"
-#include "LMDCustomControl.hpp"
-#include "LMDCustomPanel.hpp"
-#include "LMDCustomPanelFill.hpp"
-#include "LMDCustomParentPanel.hpp"
-#include "LMDCustomToolBar.hpp"
-#include "LMDToolBar.hpp"
+#include <Vcl.VirtualImageList.hpp>
+#include <Vcl.BaseImageCollection.hpp>
+#include <Vcl.ImageCollection.hpp>
+//---------------------------------------------------------------------------
+#include "LMDSedDocument.hpp"
+#include "LMDSedView.hpp"
+#include "LMDSedFindDialog.hpp"
 //---------------------------------------------------------------------------
 #include "../fEditor.h"
 #include "Messaging/Event.h"
 #include "Messaging/Messaging.h"
 #include "Project/Documents/Document.h"
 #include "fEditor.h"
-#include <Vcl.VirtualImageList.hpp>
-#include <Vcl.BaseImageCollection.hpp>
-#include <Vcl.ImageCollection.hpp>
 //---------------------------------------------------------------------------
 class TfrmEditorCode : public TfrmEditor
 {
@@ -131,22 +122,16 @@ private:    // User declarations
 
     void            __fastcall  OnChangeString(const OnChange<String>& event);
     String          __fastcall  GetSyntaxScByExt(const String& extension);
-    void            __fastcall  OnEvent(const Event& event);
+    virtual void    __fastcall  OnEvent(const Event& event) override;
+    void            __fastcall  OnDocumentSet() override;
 
     __property TLMDEditView*    ActiveEdit = { read = m_ActiveEdit };
 
-public:        // User declarations
-                    __fastcall  TfrmEditorCode(TComponent* Owner);
+public:     // User declarations
+                    __fastcall  TfrmEditorCode(TComponent* Owner) override;
 
-    void            __fastcall  SetDocument(Project::Document* document);
+//    void            __fastcall  SetDocument(Project::Document* document);
     void            __fastcall  UpdateStatus();
-    static  TFrame* __fastcall  Create(Project::Document* document, TComponent* owner)
-                                {
-                                    auto editor = new TfrmEditorCode(owner);
-                                    editor->SetDocument(document);
-                                    document->DockPanel = dynamic_cast<TLMDDockPanel*>(owner);
-                                    return editor;
-                                }
 };
 //---------------------------------------------------------------------------
 #endif

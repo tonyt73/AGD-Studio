@@ -1,7 +1,7 @@
 {
   "Name": "BBC Micro Mode 5",
   "Palette": "BBC Micro",
-  "BufferType": 0,
+  "BufferType": "btBitmap",
   "Width": 160,
   "Height": 256,
   "ScalarX": 2.0,

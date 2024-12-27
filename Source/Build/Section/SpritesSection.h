@@ -13,7 +13,7 @@ protected:
     void    __fastcall  Execute() final;
 public:
             __fastcall  SpritesSection();
-    virtual __fastcall ~SpritesSection();
+    virtual __fastcall ~SpritesSection() override;
 };
 //---------------------------------------------------------------------------
 } // Build namespace

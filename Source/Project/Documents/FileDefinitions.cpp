@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "FileDefinitions.h"
 #include "Services/File.h"
@@ -23,7 +23,7 @@ void __fastcall FileDefinitions::Load()
     if (Services::File::Exists(file))
     {
         // yes, load it
-        Services::JsonFile::Load(file);
+        Services::JsonFile::LoadFile(file);
     }
 }
 //---------------------------------------------------------------------------

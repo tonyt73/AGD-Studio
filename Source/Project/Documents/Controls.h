@@ -12,13 +12,13 @@ static const eAgdKey AgdKeys[] = { keyUp, keyDown, keyLeft, keyRight, keyFire1, 
 class ControlsDocument : public Document
 {
 private:
-        std::vector<unsigned char>  m_Keys;
-            unsigned char           m_Key;
+            std::vector<wchar_t>    m_Keys;
+            wchar_t                 m_Key;
 
-            void        __fastcall  DoSave();
-            void        __fastcall  OnEndObject(const String& object);
-            void        __fastcall  OnLoading();
-            void        __fastcall  OnLoaded();
+            void        __fastcall  DoSave() override;
+            void        __fastcall  OnEndObject(const String& object) override;
+            void        __fastcall  OnLoading() override;
+            void        __fastcall  OnLoaded() override;
             String      __fastcall  Get(int index);
             bool        __fastcall  IsActive() const;
             void        __fastcall  DefaultKeys();
@@ -26,19 +26,19 @@ private:
 public:
                         __fastcall  ControlsDocument(const String& name);
 
-    static  Document*   __fastcall  Create(const String& name, const String& extra) { return new ControlsDocument(name); };
+    static  Document*   __fastcall  Create(const String& name, const String&) { return new ControlsDocument(name); }
 
-        unsigned char   __fastcall  GetAsciiCode(eAgdKey key);
-        void            __fastcall  SetAsciiCode(eAgdKey key, unsigned char keyCode);
+        wchar_t         __fastcall  GetAsciiCode(eAgdKey key);
+        void            __fastcall  SetAsciiCode(eAgdKey key, wchar_t keyCode);
 
 __published:
-   __property  String           Left = { read = Get, index = keyLeft };
-   __property  String           Right = { read = Get, index = keyRight };
-   __property  String           Up = { read = Get, index = keyUp };
-   __property  String           Down = { read = Get, index = keyDown };
-   __property  String           Fire1 = { read = Get, index = keyFire1 };
-   __property  String           Fire2 = { read = Get, index = keyFire2 };
-   __property  String           Fire3 = { read = Get, index = keyFire3 };
+   __property  String           Left    = { read = Get, index = keyLeft    };
+   __property  String           Right   = { read = Get, index = keyRight   };
+   __property  String           Up      = { read = Get, index = keyUp      };
+   __property  String           Down    = { read = Get, index = keyDown    };
+   __property  String           Fire1   = { read = Get, index = keyFire1   };
+   __property  String           Fire2   = { read = Get, index = keyFire2   };
+   __property  String           Fire3   = { read = Get, index = keyFire3   };
    __property  String           Option1 = { read = Get, index = keyOption1 };
    __property  String           Option2 = { read = Get, index = keyOption2 };
    __property  String           Option3 = { read = Get, index = keyOption3 };

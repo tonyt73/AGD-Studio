@@ -19,7 +19,7 @@ private:
     struct TFPoint
     {
         TFPoint() {}
-        TFPoint(float x, float y) : x(x), y(y) {}
+        TFPoint(float x_, float y_) : x(x_), y(y_) {}
         float x;
         float y;
     };
@@ -44,13 +44,13 @@ private:
     Visuals::ImageMap&          m_ImageMap;         // a map of all images as bitmaps
     float                       m_ScaleFactor;      // the scale factor of the content view on to the overlays view
     TFPoint                     m_Scale;            // the applied scale factor for both x and y axes
-    bool                        m_UsesGridTile;     // flag: uses a tile grid
-    bool                        m_UsesGridRoom;     // flag: uses a room grid
+    bool                        m_ForceMapDraw;     // flag: force a full redraw of the map
+    bool                        m_MousePanning;     // flag: panning the window with the mouse
     bool                        m_ShowGridTile;     // flag: show tile grid
     bool                        m_ShowGridRoom;     // flag: show room grid
-    bool                        m_MousePanning;     // flag: panning the window with the mouse
     bool                        m_SelectionMove;    // flag: moving the entity selections
-    bool                        m_ForceMapDraw;     // flag: force a full redraw of the map
+    bool                        m_UsesGridTile;     // flag: uses a tile grid
+    bool                        m_UsesGridRoom;     // flag: uses a room grid
     TPoint                      m_MapOffsetMS;      // offset into the map to render to the workspace (Coords in Map Space)
     TRect                       m_Window;           // the number of tiles across and down of the window area
     TSize                       m_TileSize;         // the size in pixels of a tile
@@ -137,12 +137,11 @@ private:
     typedef void __fastcall (__closure *TNotifyOnEntityClick)(const Project::MapEntity& entity);
     TNotifyOnEntityClick            FOnEntitySelected;
     typedef int __fastcall (__closure *TRetrieveRoomIndex)(const TPoint& pt, bool newIndex) const;
-    TRetrieveRoomIndex   __fastcall FRetrieveRoomIndex;
+    TRetrieveRoomIndex              FRetrieveRoomIndex;
 
 public:
 
                         __fastcall  TileEditor(TImage* const view, Visuals::ImageMap& imageMap, const TSize& rooms, bool usesGridTile, bool usesGridRoom, int border, bool readOnly = false);
-                        __fastcall ~TileEditor();
 
     void                __fastcall  OnMouseDown(TMouseButton Button, TShiftState Shift, int X, int Y);
     void                __fastcall  OnMouseMove(TShiftState Shift, int X, int Y);

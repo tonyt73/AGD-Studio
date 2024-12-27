@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "MapSection.h"
 #include "Project/Documents/DocumentManager.h"
@@ -26,7 +26,7 @@ void __fastcall MapSection::Execute()
     assert(mapDoc != nullptr);
 
     const auto mapSize = mapDoc->SetMinimalMapSize();
-    AddLine("MAP WIDTH " + IntToStr((int)mapSize.Width()+1));
+    AddLine("MAP WIDTH " + IntToStr(reinterpret_cast<int>(mapSize.Width()+1)));
     AddLine("    STARTSCREEN " + IntToStr(mapDoc->StartRoomIndex));
     for (auto y = mapSize.Top; y <= mapSize.Bottom; y++)
     {

@@ -10,13 +10,14 @@ namespace Build
 class JumpTableSection : public Section
 {
 private:
-    // TODO: put this into an editor
-    int                 m_Steps[22];
+    // TODO -cImprovement: Put this into an editor
+    // TODO -cConfig Setup: Put this number in the machine config file (could be different for each machine)
+    //int                 m_Steps[22];
 protected:
     void    __fastcall  Execute() final;
 public:
             __fastcall  JumpTableSection();
-    virtual __fastcall ~JumpTableSection();
+    virtual __fastcall ~JumpTableSection() override;
 };
 //---------------------------------------------------------------------------
 } // Build namespace

@@ -16,15 +16,6 @@
 #include <Vcl.ToolWin.hpp>
 #include <Vcl.Menus.hpp>
 #include "LMDDckSite.hpp"
-#include "LMDButtonPanel.hpp"
-#include "LMDControl.hpp"
-#include "LMDCustomBevelPanel.hpp"
-#include "LMDCustomControl.hpp"
-#include "LMDCustomPanel.hpp"
-#include "LMDCustomPanelFill.hpp"
-#include "LMDCustomParentPanel.hpp"
-#include "LMDCustomToolBar.hpp"
-#include "LMDToolBar.hpp"
 #include "fAssetSelection.h"
 #include "fEditor.h"
 #include "../../WndProcHandlers.h"
@@ -225,8 +216,7 @@ __published:    // IDE-managed Components
     void __fastcall sbxWorkspaceMouseWheel(TObject *Sender, TShiftState Shift, int WheelDelta, TPoint &MousePos, bool &Handled);
 
 private:    // User declarations
-    Registrar                   m_Registrar;        // the messaging registrar
-    Project::TiledMapDocument*  m_Document;         // the map document we are editiing
+    Project::TiledMapDocument*  m_TiledDocument;    // the map document we are editiing
     std::unique_ptr<TileEditor> m_Workspace;        // the main workspace editor
     std::unique_ptr<TileEditor> m_ScratchPad;       // the scratch pad editor
     std::unique_ptr<TileEditor> m_RoomSelector;     // the room selection editor
@@ -237,9 +227,9 @@ private:    // User declarations
     int                         m_LastSelectedId;   // last selected document id
     int                         m_Scale;
 
-            void    __fastcall  Initialise();
             void    __fastcall  RefreshAssets();
-            void    __fastcall  OnEvent(const Event& event);
+            void    __fastcall  OnInitialise() override;
+            void    __fastcall  OnEvent(const Event& event) override;
             void    __fastcall  OnRoomSelected(const RoomSelected& event);
             void    __fastcall  OnStartRoomChanged(const StartRoomChanged& event);
             void    __fastcall  OnDocumentChanged(const DocumentChange<String>& message);
@@ -247,20 +237,8 @@ private:    // User declarations
             void    __fastcall  OnWorkspaceEntitySelected(const Project::MapEntity& entity);
             int     __fastcall  OnRetrieveRoomIndex(const TPoint& pt, bool newIndex = false);
 
-public:        // User declarations
-                    __fastcall  TfrmEditorMap(TComponent* Owner);
-                    __fastcall ~TfrmEditorMap();
-
-    static  TFrame* __fastcall  Create(Project::Document* document, TComponent* owner)
-                                {
-                                    auto editor = new TfrmEditorMap(owner);
-                                    editor->Document = dynamic_cast<Project::TiledMapDocument*>(document);
-                                    document->DockPanel = dynamic_cast<TLMDDockPanel*>(owner);
-                                    editor->Initialise();
-                                    return editor;
-                                }
-
-  __property Project::Document* Document = { read = m_Document, write = m_Document };
+public:     // User declarations
+                    __fastcall  TfrmEditorMap(TComponent* Owner) override;
 };
 //---------------------------------------------------------------------------
 #endif

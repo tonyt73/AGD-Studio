@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "BuildProcess.h"
 //---------------------------------------------------------------------------
@@ -8,9 +8,9 @@
 using namespace Build;
 //---------------------------------------------------------------------------
 __fastcall BuildProcess::BuildProcess(BuildMessages& buildMessages, BuildMessageType type, const String& description)
-: m_BuildMessages(buildMessages)
-, m_Type(type)
+: m_Type(type)
 , m_Description(description)
+, m_BuildMessages(buildMessages)
 {
 }
 //---------------------------------------------------------------------------

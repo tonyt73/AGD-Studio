@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "fLabelledImage.h"
 #include "Visuals/BlockTypes.h"
@@ -19,13 +19,13 @@
     panImage->Color = ThemeManager::Background;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmLabelledImage::imgImageClick(TObject* Sender)
+void __fastcall TfrmLabelledImage::imgImageClick(TObject* /*Sender*/)
 {
     SetSelected(true);
     if (FOnClick != nullptr) FOnClick(this);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmLabelledImage::imgImageDblClick(TObject *Sender)
+void __fastcall TfrmLabelledImage::imgImageDblClick(TObject* /*Sender*/)
 {
     SetSelected(true);
     if (FOnDblClick != nullptr) FOnDblClick(this);
@@ -63,37 +63,60 @@ void __fastcall TfrmLabelledImage::SetShowCaption(bool state)
 //---------------------------------------------------------------------------
 void __fastcall TfrmLabelledImage::SetImage(Project::ImageDocument* document)
 {
-    m_Document                = document;
-    lblCaption->Caption       = m_Document->Name.UpperCase();
-    panTileType->Visible      = false;
+    m_Document           = document;
+    lblCaption->Caption  = m_Document->Name.UpperCase();
+    panTileType->Visible = false;
 
-    if (document->ImageType  == Visuals::itTile) {
-        auto st               = document->GetLayer("blocktype");
-        auto bt               = StrToInt(st);
-        panTileType->Caption  = g_BlockTypes[bt].UpperCase();
-        panTileType->Color    = g_BlockColors[bt];
-        panTileType->Visible  = true;
+    if (document->ImageType == Visuals::itTile) {
+        auto bt = -1;
+        auto st = document->GetLayer("blocktype");
+        if (st.Length() == 1) {
+            // single tile, proper caption and tile color
+            bt = StrToInt(st);
+            panTileType->Caption  = g_BlockTypes[bt].UpperCase();
+        } else {
+            // tile set, caption is the most used block type
+            std::map<int, int> counts;
+            for (auto chr : st) {
+                if (counts.count(chr-'0') == 0) {
+                    counts[chr-'0'] = 0;
+                }
+                counts[chr-'0']++;
+            }
+            bt = 0;
+            auto max = -1;
+            for (const auto& [key, count] : counts) {
+                if (max < count) {
+                    bt = key;
+                    max = count;
+                }
+            }
+            panTileType->Caption = g_BlockTypes[bt].UpperCase();
+        }
+        panTileType->Color   = g_BlockColors[bt];
+        panTileType->Visible = true;
     }
     Update();
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmLabelledImage::Update()
 {
-    auto iw    = m_Document->Width;
-    auto ih    = m_Document->Height;
+    // TODO: Debug this function as it seems to not do anything
     auto image = std::make_unique<Visuals::Image>(m_Document, m_GraphicsMode);
-    auto sx    = image->Canvas().ScalarX;
-    auto sy    = image->Canvas().ScalarY;
-
-    // resize the component based on the size of the image
-    for (auto i = 3; i >= 1; i--) {
-        auto size = pow(2, i);
-        if (size * m_Document->Width <= 32 && size * m_Document->Height <= 32) {
-            iw = size * m_Document->Width * sx;
-            ih = size * m_Document->Height * sy;
-            break;
-        }
-    }
+//    auto iw    = m_Document->Width;
+//    auto ih    = m_Document->Height;
+//    auto sx    = image->Canvas().ScalarX;
+//    auto sy    = image->Canvas().ScalarY;
+//
+//    // resize the component based on the size of the image
+//    for (auto i = 3; i >= 1; i--) {
+//        auto size = pow(2, i);
+//        if (size * m_Document->Width <= 32 && size * m_Document->Height <= 32) {
+//            iw = size * m_Document->Width  * sx;
+//            ih = size * m_Document->Height * sy;
+//            break;
+//        }
+//    }
 
     // Draw the image
     image->Canvas().Assign(imgImage->Picture->Bitmap);

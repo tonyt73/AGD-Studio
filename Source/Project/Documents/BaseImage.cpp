@@ -1,9 +1,10 @@
 ﻿//---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "BaseImage.h"
 #include "DocumentManager.h"
 #include "Visuals/GraphicsTypes.h"
+#include "Templates/crc32c.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -37,6 +38,26 @@ __fastcall ImageDocument::ImageDocument(const String& name)
         m_PropertyMap["Image.Layers[].Data"] = &m_LayerData;
     }
     m_File = GetFile();
+}
+//---------------------------------------------------------------------------
+Document* __fastcall ImageDocument::Copy(const Document* document)
+{
+    Document::Copy(document);
+    auto image = dynamic_cast<const ImageDocument*>(document);
+    if (image != nullptr) {
+        m_MultiFrame = image->m_MultiFrame;
+        m_CanModifyFrames = image->m_CanModifyFrames;
+        m_CanBeLocked = image->m_CanBeLocked;
+        m_Width = image->m_Width;
+        m_Height = image->m_Height;
+        m_NumOfFrames = image->m_NumOfFrames;
+        m_ImageType = image->m_ImageType;
+        m_Frames = image->m_Frames;
+        m_Hints = image->m_Hints;
+        m_Hint = image->m_Hint;
+        m_Layers = image->m_Layers;
+    }
+    return this;
 }
 //---------------------------------------------------------------------------
 void __fastcall ImageDocument::DoSave()
@@ -82,17 +103,17 @@ void __fastcall ImageDocument::OnEndObject(const String& object)
     }
 }
 //---------------------------------------------------------------------------
-int __fastcall ImageDocument::GetIndex() const
+unsigned int __fastcall ImageDocument::GetIndex() const
 {
     return theDocumentManager.GetAsIndex(Id);
 }
 //---------------------------------------------------------------------------
-int __fastcall ImageDocument::CountFrames() const
+unsigned int __fastcall ImageDocument::CountFrames() const
 {
-    return m_Frames.size();
+    return static_cast<unsigned int>(m_Frames.size());
 }
 //---------------------------------------------------------------------------
-int __fastcall ImageDocument::CountImagesPerFrame() const
+unsigned int __fastcall ImageDocument::CountImagesPerFrame() const
 {
     const auto pc = theDocumentManager.ProjectConfig();
     if (pc) {
@@ -100,7 +121,7 @@ int __fastcall ImageDocument::CountImagesPerFrame() const
         auto sx = mc.ImageSizing[m_ImageType].Step.cx;
         auto sy = mc.ImageSizing[m_ImageType].Step.cy;
         if (sx != 0 && sy != 0) {
-            auto w = Width / sx;
+            auto w = Width  / sx;
             auto h = Height / sy;
             return w * h;
         }
@@ -108,36 +129,36 @@ int __fastcall ImageDocument::CountImagesPerFrame() const
     return 1;
 }
 //---------------------------------------------------------------------------
-void __fastcall ImageDocument::SetFrames(int frames)
+void __fastcall ImageDocument::SetFrames(unsigned int frames)
 {
     if (frames > 1 && frames != m_Frames.size()) {
         while (frames != m_Frames.size()) {
-            frames > m_Frames.size() ? AddFrame() : DeleteFrame(m_Frames.size() - 1);
+            frames > m_Frames.size() ? AddFrame() : DeleteFrame(static_cast<unsigned int>(m_Frames.size() - 1));
         }
     }
 }
 //---------------------------------------------------------------------------
-String __fastcall ImageDocument::GetFrame(int frame) const
+String __fastcall ImageDocument::GetFrame(unsigned int frame) const
 {
-    if (0 <= frame && frame < m_Frames.size()) {
+    if (frame < m_Frames.size()) {
         return m_Frames[frame];
     }
     return "";
 }
 //---------------------------------------------------------------------------
-void __fastcall ImageDocument::SetFrame(int frame, const String& data)
+void __fastcall ImageDocument::SetFrame(unsigned int frame, const String& data)
 {
     if (frame == m_Frames.size()) {
         AddFrame();
     }
-    if (0 <= frame && frame < m_Frames.size()) {
+    if (frame < m_Frames.size()) {
         m_Frames[frame] = data;
     }
 }
 //---------------------------------------------------------------------------
-String __fastcall ImageDocument::GetHint(int frame) const
+String __fastcall ImageDocument::GetHint(unsigned int frame) const
 {
-    if (0 <= frame && frame < m_Hints.size()) {
+    if (frame < m_Hints.size()) {
         return m_Hints[frame];
     }
     return "";
@@ -147,9 +168,11 @@ bool __fastcall ImageDocument::AddFrame(int index, const String& hint)
 {
     if (m_Frames.size() == 0 || (m_MultiFrame && m_CanModifyFrames)) {
         if (0 > index || index > m_Frames.size()) {
+            // -1 or larger than the list, add to the end
             m_Frames.push_back("");
             m_Hints.push_back(hint);
         } else {
+            // insert at index
             m_Frames.insert(m_Frames.begin() + index, "");
             m_Hints.insert(m_Hints.begin() + index, hint);
         } 
@@ -158,9 +181,9 @@ bool __fastcall ImageDocument::AddFrame(int index, const String& hint)
     return false;
 }
 //---------------------------------------------------------------------------
-bool __fastcall ImageDocument::DeleteFrame(int index)
+bool __fastcall ImageDocument::DeleteFrame(unsigned int index)
 {
-    if (m_Frames.size() > 1 && m_CanModifyFrames && 0 <= index && index < m_Frames.size()) {
+    if (m_Frames.size() > 1 && m_CanModifyFrames && index < m_Frames.size()) {
         // can only delete new frames; can't delete the first frame
         m_Frames.erase(m_Frames.begin() + index);
         return true;
@@ -168,9 +191,9 @@ bool __fastcall ImageDocument::DeleteFrame(int index)
     return false;
 }
 //---------------------------------------------------------------------------
-int __fastcall ImageDocument::GetLayerCount() const
+unsigned int __fastcall ImageDocument::GetLayerCount() const
 {
-    return m_Layers.size();
+    return static_cast<unsigned int>(m_Layers.size());
 }
 //---------------------------------------------------------------------------
 void __fastcall ImageDocument::AddLayer(const String& name, const String& value)
@@ -198,11 +221,11 @@ void __fastcall ImageDocument::ExtractSize(const String& extra)
     }
 }
 //---------------------------------------------------------------------------
-String __fastcall ImageDocument::GetLayer(const String& name)
+String __fastcall ImageDocument::GetLayer(const String& name)  const
 {
     String value;
     if (LayerExists(name)) {
-        value = m_Layers[name];
+        value = m_Layers.at(name);
     }
     return value;
 }

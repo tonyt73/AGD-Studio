@@ -24,7 +24,7 @@ private:
 protected:
     // map member variables to property names
     // the loader will set the value based on the property type
-    // TODO: Can we improve this to include the desired data type for safer conversion
+    // TODO -cImprovement: Can we improve this to include the desired data type for safer conversion
     std::map<String, void*>     m_PropertyMap;
 
 protected:
@@ -55,7 +55,7 @@ protected:
     virtual void    __fastcall  Set(const String& property, const bool& value);
 
             String  __fastcall  ProcessPath(const String& path) const;
-    virtual bool    __fastcall  Load(const String& file);
+    virtual bool    __fastcall  LoadFile(const String& file);
 
     virtual void    __fastcall  OnStartObject(const String& object);
     virtual void    __fastcall  OnEndObject(const String& object);
@@ -65,7 +65,7 @@ protected:
 
 public:
                     __fastcall  JsonFile();
-    virtual         __fastcall ~JsonFile();
+    virtual         __fastcall ~JsonFile() override;
 };
 //---------------------------------------------------------------------------
 } // namespace Services

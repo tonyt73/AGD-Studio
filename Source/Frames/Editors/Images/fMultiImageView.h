@@ -24,7 +24,7 @@ private:    // User declarations
     void    __fastcall  SetScale(int scale);
     void    __fastcall  OnFrameClicked(TObject *Sender);
 public:     // User declarations
-            __fastcall  TMultiImageViewFrame(TComponent* Owner);
+            __fastcall  TMultiImageViewFrame(TComponent* Owner) override;
 
     void    __fastcall  Clear();
     void    __fastcall  Add(const  Visuals::GraphicsBuffer& image, const String& hint);

@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "Controls.h"
 #include "Messaging/Messaging.h"
@@ -60,7 +60,7 @@ String __fastcall ControlsDocument::Get(int index)
     {
         return "Enter";
     }
-    // TODO: Add a machine key codes to key names files
+    // TODO -cConfig Setup: Add a machine key codes to key names files
     if (key == '~')
     {
         return "Left Shift";
@@ -90,18 +90,18 @@ void __fastcall ControlsDocument::OnLoaded()
     DefaultKeys();
 }
 //---------------------------------------------------------------------------
-unsigned char __fastcall ControlsDocument::GetAsciiCode(eAgdKey key)
+wchar_t __fastcall ControlsDocument::GetAsciiCode(eAgdKey key)
 {
-    if (0 <= key && key < m_Keys.size())
+    if (key < m_Keys.size())
     {
         return m_Keys[key];
     }
     return 0;
 }
 //---------------------------------------------------------------------------
-void __fastcall ControlsDocument::SetAsciiCode(eAgdKey key, unsigned char keyCode)
+void __fastcall ControlsDocument::SetAsciiCode(eAgdKey key, wchar_t keyCode)
 {
-    if (0 <= key && key < m_Keys.size())
+    if (key < m_Keys.size())
     {
         m_Keys[key] = keyCode;
     }
@@ -109,7 +109,7 @@ void __fastcall ControlsDocument::SetAsciiCode(eAgdKey key, unsigned char keyCod
 //---------------------------------------------------------------------------
 void __fastcall ControlsDocument::DefaultKeys()
 {
-    // TODO: use the machine config defaults
+    // TODO -cConfig Setup: use the machine config defaults
     while (m_Keys.size() < 11)
     {
         m_Keys.push_back(0);

@@ -56,7 +56,6 @@ public:
                             // The OS file system path separator
     __property  String      Separator = { read = m_Separator };
 };
-//#define _Folders auto& Folders = Folders::instance()
 //---------------------------------------------------------------------------
 } // Services namespace
 //---------------------------------------------------------------------------

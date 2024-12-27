@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "fPaletteAttribute.h"
 //---------------------------------------------------------------------------
@@ -26,22 +26,22 @@ void __fastcall TfrmPaletteAttribute::Set(Visuals::GraphicsBuffer& canvas)
 //---------------------------------------------------------------------------
 void __fastcall TfrmPaletteAttribute::spdInkBlackClick(TObject *Sender)
 {
-    m_Ink = ((TControl*)Sender)->Tag;
+    m_Ink = static_cast<unsigned char>(static_cast<TControl*>(Sender)->Tag);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmPaletteAttribute::spdPaperBlackClick(TObject *Sender)
 {
-    m_Paper = ((TControl*)Sender)->Tag;
+    m_Paper = static_cast<unsigned char>(static_cast<TControl*>(Sender)->Tag);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmPaletteAttribute::spdBrightOffClick(TObject *Sender)
 {
-    m_Bright = ((TControl*)Sender)->Tag;
+    m_Bright = static_cast<unsigned char>(static_cast<TControl*>(Sender)->Tag);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmPaletteAttribute::spdFlashOffClick(TObject *Sender)
 {
-    m_Flash = ((TControl*)Sender)->Tag;
+    m_Flash = static_cast<unsigned char>(static_cast<TControl*>(Sender)->Tag);
 }
 //---------------------------------------------------------------------------
 

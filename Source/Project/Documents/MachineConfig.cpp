@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "MachineConfig.h"
 #include "Services/File.h"
@@ -70,13 +70,13 @@ const Visuals::ImageSizing& __fastcall MachineConfig::GetImageSizing(Visuals::Im
     return m_ImageSizing[Visuals::itCharacterSet];
 }
 //---------------------------------------------------------------------------
-bool __fastcall MachineConfig::Load(const String& name)
+bool __fastcall MachineConfig::LoadFile(const String& name)
 {
     // Load our configuration
-    auto loaded = Services::JsonFile::Load(Services::File::Combine(Services::Folders::Application, "Machines" + Services::Folders::Separator + name + ".json"));
+    auto loaded = Services::JsonFile::LoadFile(Services::File::Combine(Services::Folders::Application, "Machines" + Services::Folders::Separator + name + ".json"));
     if (loaded) {
         // Now load the graphics mode configuration; which in turn will load the palette of colors
-        loaded = m_GraphicsMode->Load(m_GraphicsModeName);
+        loaded = m_GraphicsMode->LoadFile(m_GraphicsModeName);
     }
     return loaded;
 }
@@ -156,58 +156,58 @@ void __fastcall MachineConfig::Save()
     Push("ImageSizing");
         Push("Object");
             Push("Minimum");
-                Write("Width", (unsigned int)m_ImageSizing[Visuals::itObject].Minimum.cx);
-                Write("Height", (unsigned int)m_ImageSizing[Visuals::itObject].Minimum.cy);
+                Write("Width", static_cast<unsigned int>(m_ImageSizing[Visuals::itObject].Minimum.cx));
+                Write("Height", static_cast<unsigned int>(m_ImageSizing[Visuals::itObject].Minimum.cy));
             Pop();
             Push("Maximum");
-                Write("Width", (unsigned int)m_ImageSizing[Visuals::itObject].Maximum.cx);
-                Write("Height", (unsigned int)m_ImageSizing[Visuals::itObject].Maximum.cy);
+                Write("Width", static_cast<unsigned int>(m_ImageSizing[Visuals::itObject].Maximum.cx));
+                Write("Height", static_cast<unsigned int>(m_ImageSizing[Visuals::itObject].Maximum.cy));
             Pop();
             Push("Step");
-                Write("Width", (unsigned int)m_ImageSizing[Visuals::itObject].Step.cx);
-                Write("Height", (unsigned int)m_ImageSizing[Visuals::itObject].Step.cy);
+                Write("Width", static_cast<unsigned int>(m_ImageSizing[Visuals::itObject].Step.cx));
+                Write("Height", static_cast<unsigned int>(m_ImageSizing[Visuals::itObject].Step.cy));
             Pop();
         Pop();
         Push("Sprite");
             Push("Minimum");
-                Write("Width", (unsigned int)m_ImageSizing[Visuals::itSprite].Minimum.cx);
-                Write("Height", (unsigned int)m_ImageSizing[Visuals::itSprite].Minimum.cy);
+                Write("Width", static_cast<unsigned int>(m_ImageSizing[Visuals::itSprite].Minimum.cx));
+                Write("Height", static_cast<unsigned int>(m_ImageSizing[Visuals::itSprite].Minimum.cy));
             Pop();
             Push("Maximum");
-                Write("Width", (unsigned int)m_ImageSizing[Visuals::itSprite].Maximum.cx);
-                Write("Height", (unsigned int)m_ImageSizing[Visuals::itSprite].Maximum.cy);
+                Write("Width", static_cast<unsigned int>(m_ImageSizing[Visuals::itSprite].Maximum.cx));
+                Write("Height", static_cast<unsigned int>(m_ImageSizing[Visuals::itSprite].Maximum.cy));
             Pop();
             Push("Step");
-                Write("Width", (unsigned int)m_ImageSizing[Visuals::itSprite].Step.cx);
-                Write("Height", (unsigned int)m_ImageSizing[Visuals::itSprite].Step.cy);
+                Write("Width", static_cast<unsigned int>(m_ImageSizing[Visuals::itSprite].Step.cx));
+                Write("Height", static_cast<unsigned int>(m_ImageSizing[Visuals::itSprite].Step.cy));
             Pop();
         Pop();
         Push("Tile");
             Push("Minimum");
-                Write("Width", (unsigned int)m_ImageSizing[Visuals::itTile].Minimum.cx);
-                Write("Height", (unsigned int)m_ImageSizing[Visuals::itTile].Minimum.cy);
+                Write("Width", static_cast<unsigned int>(m_ImageSizing[Visuals::itTile].Minimum.cx));
+                Write("Height", static_cast<unsigned int>(m_ImageSizing[Visuals::itTile].Minimum.cy));
             Pop();
             Push("Maximum");
-                Write("Width", (unsigned int)m_ImageSizing[Visuals::itTile].Maximum.cx);
-                Write("Height", (unsigned int)m_ImageSizing[Visuals::itTile].Maximum.cy);
+                Write("Width", static_cast<unsigned int>(m_ImageSizing[Visuals::itTile].Maximum.cx));
+                Write("Height", static_cast<unsigned int>(m_ImageSizing[Visuals::itTile].Maximum.cy));
             Pop();
             Push("Step");
-                Write("Width", (unsigned int)m_ImageSizing[Visuals::itTile].Step.cx);
-                Write("Height", (unsigned int)m_ImageSizing[Visuals::itTile].Step.cy);
+                Write("Width", static_cast<unsigned int>(m_ImageSizing[Visuals::itTile].Step.cx));
+                Write("Height", static_cast<unsigned int>(m_ImageSizing[Visuals::itTile].Step.cy));
             Pop();
         Pop();
         Push("CharacterSet");
             Push("Minimum");
-                Write("Width", (unsigned int)m_ImageSizing[Visuals::itCharacterSet].Minimum.cx);
-                Write("Height", (unsigned int)m_ImageSizing[Visuals::itCharacterSet].Minimum.cy);
+                Write("Width", static_cast<unsigned int>(m_ImageSizing[Visuals::itCharacterSet].Minimum.cx));
+                Write("Height", static_cast<unsigned int>(m_ImageSizing[Visuals::itCharacterSet].Minimum.cy));
             Pop();
             Push("Maximum");
-                Write("Width", (unsigned int)m_ImageSizing[Visuals::itCharacterSet].Maximum.cx);
-                Write("Height", (unsigned int)m_ImageSizing[Visuals::itCharacterSet].Maximum.cy);
+                Write("Width", static_cast<unsigned int>(m_ImageSizing[Visuals::itCharacterSet].Maximum.cx));
+                Write("Height", static_cast<unsigned int>(m_ImageSizing[Visuals::itCharacterSet].Maximum.cy));
             Pop();
             Push("Step");
-                Write("Width", (unsigned int)m_ImageSizing[Visuals::itCharacterSet].Step.cx);
-                Write("Height", (unsigned int)m_ImageSizing[Visuals::itCharacterSet].Step.cy);
+                Write("Width", static_cast<unsigned int>(m_ImageSizing[Visuals::itCharacterSet].Step.cx));
+                Write("Height", static_cast<unsigned int>(m_ImageSizing[Visuals::itCharacterSet].Step.cy));
             Pop();
         Pop();
     Pop();

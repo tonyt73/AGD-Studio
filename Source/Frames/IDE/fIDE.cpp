@@ -1,9 +1,12 @@
+#pragma link "fAppFrame"
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
+//---------------------------------------------------------------------------
 #include "Forms/fAbout.h"
-#include "Forms/fNewImage.h"
+#include "Forms/fNewTileImage.h"
 #include "Forms/fSettings.h"
 #include "Frames/IDE/fIDE.h"
+#include "Frames/Editors/fEditor.h"
 #include "Frames/Editors/Code/fEditorCode.h"
 #include "Frames/Editors/Controls/fEditorControls.h"
 #include "Frames/Editors/Images/fEditorImage.h"
@@ -19,17 +22,18 @@
 #pragma link "LMDDckSite"
 #pragma link "LMDInsPropInsp"
 #pragma link "LMDInsPropPage"
+#pragma link "ElXPThemedControl"
 #pragma link "ElTreeInplaceEditors"
 #pragma link "ElXTree"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 __fastcall TfrmIDE::TfrmIDE(TComponent* Owner)
-: TFrame(Owner)
+: TfrmAppFrame(Owner)
 {
     RegisterDocumentEditors();
-    m_Registrar.Subscribe<MessageEvent>(OnMessageEvent);
-    m_Registrar.Subscribe<UpdateProperties>(OnUpdateProperties);
-    m_Registrar.Subscribe<OpenDocument>(OnOpenDocument);
+    m_Registrar.Subscribe<MessageEvent>(_FnBind(TfrmIDE::OnMessageEvent));
+    m_Registrar.Subscribe<UpdateProperties>(_FnBind(TfrmIDE::OnUpdateProperties));
+    m_Registrar.Subscribe<OpenDocument>(_FnBind(TfrmIDE::OnOpenDocument));
     tvBuild->Items->Clear();
 }
 //---------------------------------------------------------------------------
@@ -39,8 +43,7 @@ __fastcall TfrmIDE::~TfrmIDE()
 
     m_Registrar.Unsubscribe();
 
-    if (Application && Application->MainForm)
-    {
+    if (Application && Application->MainForm) {
         Application->MainForm->Menu = nullptr;
     }
 }
@@ -49,23 +52,21 @@ void __fastcall TfrmIDE::RegisterDocumentEditors()
 {
     m_EraseHandlers.push_back(std::make_unique<TWinControlHandler>(Panel2));
     // map document type (and sub type if required) to an editor
-    m_DocumentEditorFactory.Register("Controls"     , &TfrmEditorControls::Create);
-    m_DocumentEditorFactory.Register("Jump"         , &TfrmEditorJumpTable::Create);
-    m_DocumentEditorFactory.Register("Window"       , &TfrmEditorWindow::Create);
-    m_DocumentEditorFactory.Register("Map"          , &TfrmEditorMap::Create);
-    m_DocumentEditorFactory.Register("Image"        , &TfrmEditorImage::Create);
-    m_DocumentEditorFactory.Register("Text.Messages", &TfrmEditorMessages::Create);
-    m_DocumentEditorFactory.Register("Text"         , &TfrmEditorCode::Create);
+    m_DocumentEditorFactory.Register("Controls"     , &TfrmEditor::Create<TfrmEditorControls>);
+    m_DocumentEditorFactory.Register("Jump"         , &TfrmEditor::Create<TfrmEditorJumpTable>);
+    m_DocumentEditorFactory.Register("Window"       , &TfrmEditor::Create<TfrmEditorWindow>);
+    m_DocumentEditorFactory.Register("Map"          , &TfrmEditor::Create<TfrmEditorMap>);
+    m_DocumentEditorFactory.Register("Image"        , &TfrmEditor::Create<TfrmEditorImage>);
+    m_DocumentEditorFactory.Register("Text.Messages", &TfrmEditor::Create<TfrmEditorMessages>);
+    m_DocumentEditorFactory.Register("Text"         , &TfrmEditor::Create<TfrmEditorCode>);
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::OnActivate(TWinControl* parent)
 {
-    if (parent != nullptr)
-    {
+    if (parent != nullptr) {
         Parent = parent;
         Visible = true;
-        if (Application && Application->MainForm)
-        {
+        if (Application && Application->MainForm) {
             Application->MainForm->Menu = mnuMain;
             Application->MainForm->Caption = ApplicationName;
         }
@@ -77,29 +78,28 @@ void __fastcall TfrmIDE::OnActivate(TWinControl* parent)
         dsIDE->Invalidate();
         RefreshMruList();
         actActions->State = asNormal;
-    }
-    else
-    {
+    } else {
         actActions->State = asSuspended;
         Visible = false;
         Parent = nullptr;
     }
+    theProjectManager.Initialise(tvProject);
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::OnCreate()
+{
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::OnMessageEvent(const MessageEvent& message)
 {
-    if (message.Type < etHelpKeys)
-    {
-        if (message.Type == etClear)
-        {
+    if (message.Type < etHelpKeys) {
+        if (message.Type == etClear) {
             memMessages->Lines->Clear();
         }
         auto timeStamp = TDateTime::CurrentTime().TimeString();
         const String Types[] = { "Info : ", "Warn : ", "Error: ", "Debug: ", "Info : " };
         memMessages->Lines->Add(timeStamp + " : " + Types[message.Type] + message.Message);
-    }
-    else if (message.Type == etHelpKeys)
-    {
+    } else if (message.Type == etHelpKeys) {
         dpEditorKeys->Caption = "HELP FOR " + message.Extra.UpperCase();
         mbKeys->Lines->Clear();
         mbKeys->Lines->Add(message.Message);
@@ -112,9 +112,8 @@ void __fastcall TfrmIDE::OnMessageEvent(const MessageEvent& message)
 void __fastcall TfrmIDE::OnUpdateProperties(const UpdateProperties& event)
 {
     assert(event.Id == "update.properties");
-    if (tvProject && tvProject && tvProject->Selected)
-    {
-        auto doc = (Project::Document*)((NativeInt)tvProject->Selected->Tag);
+    if (tvProject && tvProject && tvProject->Selected) {
+        auto doc = reinterpret_cast<Project::Document*>(tvProject->Selected->Tag);
         UpdateDocumentProperties(doc);
     }
 }
@@ -124,93 +123,93 @@ void __fastcall TfrmIDE::OnOpenDocument(const OpenDocument& event)
     DoOpenDocument(event.Document);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actEditCopyExecute(TObject *Sender)
+void __fastcall TfrmIDE::actEditCopyExecute(TObject* /*Sender*/)
 {
     Bus::Publish<Event>(Event("edit.copy"));
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actEditCutExecute(TObject *Sender)
+void __fastcall TfrmIDE::actEditCutExecute(TObject* /*Sender*/)
 {
     Bus::Publish<Event>(Event("edit.cut"));
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actEditPasteExecute(TObject *Sender)
+void __fastcall TfrmIDE::actEditPasteExecute(TObject* /*Sender*/)
 {
     Bus::Publish<Event>(Event("edit.paste"));
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actEditFindExecute(TObject *Sender)
+void __fastcall TfrmIDE::actEditFindExecute(TObject* /*Sender*/)
 {
     Bus::Publish<Event>(Event("edit.find"));
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actEditFindNextExecute(TObject *Sender)
+void __fastcall TfrmIDE::actEditFindNextExecute(TObject* /*Sender*/)
 {
     Bus::Publish<Event>(Event("edit.find.next"));
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actEditFindPreviousExecute(TObject *Sender)
+void __fastcall TfrmIDE::actEditFindPreviousExecute(TObject* /*Sender*/)
 {
     Bus::Publish<Event>(Event("edit.find.prev"));
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actEditReplaceExecute(TObject *Sender)
+void __fastcall TfrmIDE::actEditReplaceExecute(TObject* /*Sender*/)
 {
     Bus::Publish<Event>(Event("edit.replace"));
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actFileProjectSaveExecute(TObject *Sender)
+void __fastcall TfrmIDE::actFileProjectSaveExecute(TObject* /*Sender*/)
 {
     theProjectManager.Save();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actFileProjectCloseExecute(TObject *Sender)
+void __fastcall TfrmIDE::actFileProjectCloseExecute(TObject* /*Sender*/)
 {
     theProjectManager.Close();
     FOnFormClose(this);
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actHelpAboutExecute(TObject *Sender)
+void __fastcall TfrmIDE::actHelpAboutExecute(TObject* /*Sender*/)
 {
     (new TfrmAbout(this))->Show();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actEditUndoExecute(TObject *Sender)
+void __fastcall TfrmIDE::actEditUndoExecute(TObject* /*Sender*/)
 {
     Bus::Publish<Event>(Event("edit.undo"));
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actEditRedoExecute(TObject *Sender)
+void __fastcall TfrmIDE::actEditRedoExecute(TObject* /*Sender*/)
 {
     Bus::Publish<Event>(Event("edit.redo"));
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actEditZoomInExecute(TObject *Sender)
+void __fastcall TfrmIDE::actEditZoomInExecute(TObject* /*Sender*/)
 {
     Bus::Publish<Event>(Event("zoom.in"));
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actEditZoomOutExecute(TObject *Sender)
+void __fastcall TfrmIDE::actEditZoomOutExecute(TObject* /*Sender*/)
 {
     Bus::Publish<Event>(Event("zoom.out"));
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actEditZoomResetExecute(TObject *Sender)
+void __fastcall TfrmIDE::actEditZoomResetExecute(TObject* /*Sender*/)
 {
     Bus::Publish<Event>(Event("zoom.reset"));
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::DoOpenDocument(Project::Document* document)
 {
-    if (document && document->DockPanel == nullptr)
-    {
+    if (document && document->DockPanel == nullptr) {
         InformationMessage("[IDE] Opening Document: " + document->Name);
         auto dp = new TLMDDockPanel(this);
-        if (m_DocumentEditorFactory.Create(document, dp))
-        {
+        auto editor = dynamic_cast<TfrmEditor*>(m_DocumentEditorFactory.Create(document, dp));
+        if (editor) {
             dp->Caption = document->Name.UpperCase();
-            dp->Tag = (NativeInt)document;
+            dp->Tag = reinterpret_cast<NativeInt>(document);
             document->DockPanel = dp;
+            editor->OnInitialise();
             UpdateDocumentProperties(document);
             dp->ClientKind = dkDocument;
             dsIDE->DockControl(dp, dsIDE->SpaceZone);
@@ -220,9 +219,7 @@ void __fastcall TfrmIDE::DoOpenDocument(Project::Document* document)
             dp->SetFocus();
             dp->Refresh();
             Bus::Publish<Event>(Event("editor.show"));
-        }
-        else
-        {
+        } else {
             ErrorMessage("[IDE] Failed to create editor for Document: " + document->Name);
             delete dp;
         }
@@ -231,80 +228,69 @@ void __fastcall TfrmIDE::DoOpenDocument(Project::Document* document)
 //---------------------------------------------------------------------------
 void __fastcall TfrmIDE::UpdateDocumentProperties(Project::Document* document)
 {
-    if (document != nullptr)
-    {
+    if (document != nullptr) {
         const auto properties = document->GetPropertyInfo();
-        for (auto it : properties)
-        {
+        for (auto it : properties) {
             auto category = it.second.category + "." + it.first;
-            if (m_RegisteredCategories.count(category) == 0)
-            {
+            if (m_RegisteredCategories.count(category) == 0) {
                 lmdProperties->RegisterPropCategory(it.second.category, it.first);
                 m_RegisteredCategories[category] = true;
             }
         }
         lmdProperties->Objects->SetOne(document);
         lmdProperties->ExpandAllCategories();
-    }
-    else
-    {
+    } else {
         lmdProperties->Objects->SetOne(nullptr);
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::tbnProjectExpandAllClick(TObject *Sender)
+void __fastcall TfrmIDE::tbnProjectExpandAllClick(TObject* /*Sender*/)
 {
     tvProject->FullExpand();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::tbnProjectCollapseAllClick(TObject *Sender)
+void __fastcall TfrmIDE::tbnProjectCollapseAllClick(TObject* /*Sender*/)
 {
     tvProject->FullCollapse();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::tbnProjectShowLinesClick(TObject *Sender)
+void __fastcall TfrmIDE::tbnProjectShowLinesClick(TObject* /*Sender*/)
 {
     tvProject->ShowLines = true;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::tbnProjectHideLinesClick(TObject *Sender)
+void __fastcall TfrmIDE::tbnProjectHideLinesClick(TObject* /*Sender*/)
 {
     tvProject->ShowLines = false;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::tbnProjectShowFoldersClick(TObject *Sender)
+void __fastcall TfrmIDE::tbnProjectShowFoldersClick(TObject* /*Sender*/)
 {
     tvProject->FullCollapse();
-    for (auto node : tvProject->Items)
-    {
-        if (node->Level < 2)
-        {
+    for (auto node : tvProject->Items) {
+        if (node->Level < 2) {
             node->Expand(false);
         }
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::lmdPropertiesClick(TObject *Sender)
+void __fastcall TfrmIDE::lmdPropertiesClick(TObject* /*Sender*/)
 {
-    if (lmdProperties->Objects->Count >= 1)
-    {
+    if (lmdProperties->Objects->Count >= 1) {
         auto doc = dynamic_cast<Project::Document*>(lmdProperties->Objects->Item[0]);
-        if (doc != nullptr && lmdProperties->ActiveItem != nullptr)
-        {
+        if (doc != nullptr && lmdProperties->ActiveItem != nullptr) {
             lblPropertyInfo->Caption = doc->GetPropertyInfo(lmdProperties->ActiveItem->PropName);
         }
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::tvProjectItemSelectedChange(TObject *Sender, TElXTreeItem *Item)
+void __fastcall TfrmIDE::tvProjectItemSelectedChange(TObject* /*Sender*/, TElXTreeItem *Item)
 {
-    auto doc = reinterpret_cast<Project::Document*>((TObject*)Item->Tag);
-    if (doc != nullptr)
-    {
+    auto doc = reinterpret_cast<Project::Document*>(Item->Tag);
+    if (doc != nullptr) {
         UpdateDocumentProperties(doc);
         auto dockPanel = static_cast<TLMDDockPanel*>(doc->DockPanel);
-        if (dockPanel)
-        {
+        if (dockPanel) {
             dockPanel->Activate();
             dockPanel->Show();
             dockPanel->SetFocus();
@@ -312,42 +298,28 @@ void __fastcall TfrmIDE::tvProjectItemSelectedChange(TObject *Sender, TElXTreeIt
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::OnDocumentClose(TObject *Sender, TLMDockPanelCloseAction& action)
+void __fastcall TfrmIDE::OnDocumentClose(TObject* Sender, TLMDockPanelCloseAction& /*action*/)
 {
     auto dockPanel = dynamic_cast<TLMDDockPanel*>(Sender);
-    if (dockPanel)
-    {
-        auto doc = (Project::Document*)dockPanel->Tag;
+    if (dockPanel) {
+        auto doc = reinterpret_cast<Project::Document*>(dockPanel->Tag);
         InformationMessage("[IDE] Closing Document: " + doc->Name);
         doc->Close();
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::tvProjectDblClick(TObject *Sender)
+void __fastcall TfrmIDE::tvProjectDblClick(TObject* /*Sender*/)
 {
-    if (tvProject->Selected)
-    {
-        auto doc = (Project::Document*)((NativeInt)tvProject->Selected->Tag);
+    if (tvProject->Selected) {
+        auto doc = reinterpret_cast<Project::Document*>(tvProject->Selected->Tag);
         DoOpenDocument(doc);
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actFileNewAssetExecute(TObject *Sender)
-{
-    auto dialog = std::unique_ptr<TfrmNewImage>(new TfrmNewImage(this));
-    if (dialog->ShowModal() == mrOk)
-    {
-        auto width = dialog->Width;
-        auto height = dialog->Height;
-        theProjectManager.Add("Image", dialog->Type, IntToStr(width) + "x" + IntToStr(height));
-    }
-}
-//---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actFileProjectOpenExecute(TObject *Sender)
+void __fastcall TfrmIDE::actFileProjectOpenExecute(TObject* /*Sender*/)
 {
     dlgOpen->InitialDir = Services::Folders::Projects;
-    if (dlgOpen->Execute())
-    {
+    if (dlgOpen->Execute()) {
         theProjectManager.Open(dlgOpen->FileName);
     }
 }
@@ -357,103 +329,123 @@ void __fastcall TfrmIDE::RefreshMruList()
     mnuFileMru->Clear();
     auto name = "mruItem";
     auto i = 831263;
-    for (const auto& item : theProjectManager.GetMostRecentlyUsedList())
-    {
+    for (const auto& item : theProjectManager.GetMostRecentlyUsedList()) {
         auto mi = NewItem(item.Path, 0, false, true, mruOnClick, 0, name+IntToStr(++i));
         mi->OnClick = mruOnClick;
         mnuFileMru->Add(mi);
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::mruOnClick(TObject *Sender)
+void __fastcall TfrmIDE::mruOnClick(TObject* Sender)
 {
     auto mi = dynamic_cast<TMenuItem*>(Sender);
-    if (mi)
-    {
+    if (mi) {
         auto caption = mi->Caption;
         auto pos = caption.Pos("&");
-        if (pos >= 0)
-        {
+        if (pos >= 0) {
             caption = caption.SubString(0, pos - 1) + caption.SubString(pos + 1, caption.Length());
         }
         theProjectManager.Open(caption);
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actNewAssetExecute(TObject *Sender)
+void __fastcall TfrmIDE::actFileNewImageDefaultExecute(TObject* /*Sender*/)
 {
-    if (tvProject->Selected)
-    {
+    if (tvProject->Selected) {
         // remove the ending 's' if it exists
         auto type = tvProject->Selected->Text;
         type = type[type.Length()] == 's' ? type.SubString(1, type.Length() - 1) : type;
-        theProjectManager.Add("Image", type, "");
+        DoOpenDocument(theProjectManager.Add("Image", type, ""));
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actDeleteAssetExecute(TObject *Sender)
+void __fastcall TfrmIDE::actFileNewTileCustomExecute(TObject* /*Sender*/)
 {
-    if (tvProject->Selected)
-    {
+    auto dialog = std::unique_ptr<TfrmNewTileImage>(new TfrmNewTileImage(this));
+    if (dialog->ShowModal() == mrOk) {
+        auto width = dialog->Width;
+        auto height = dialog->Height;
+        DoOpenDocument(theProjectManager.Add("Image", "Tile", IntToStr(width) + "x" + IntToStr(height)));
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actDeleteAssetExecute(TObject* /*Sender*/)
+{
+    if (tvProject->Selected) {
         auto selected = tvProject->Selected;
         tvProject->Selected = tvProject->Selected->Parent;
         tvProject->Refresh();
         UpdateDocumentProperties(nullptr);
-        if (theProjectManager.Remove("Image", selected->Text))
-        {
+        if (theProjectManager.Remove("Image", selected->Text)) {
             selected->Delete();
         }
      }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::popProjectPopup(TObject *Sender)
+void __fastcall TfrmIDE::popProjectPopup(TObject* /*Sender*/)
 {
     actDeleteAsset->Enabled = false;
-    actNewAsset->Enabled = false;
-    if (tvProject->Selected && tvProject->Selected->Parent)
-    {
+    actFileNewImageDefault->Enabled = false;
+    actEditDuplicateImage->Enabled = false;
+    actEditSplitIntoTiles->Enabled = false;
+    if (tvProject->Selected && tvProject->Selected->Parent) {
         actDeleteAsset->Enabled = !tvProject->Selected->HasChildren && tvProject->Selected->Parent->Parent->Text == "Images";
-        actNewAsset->Enabled = tvProject->Selected->Parent->Text == "Images";
-        btnNewImageCustom->Enabled = tvProject->Selected->Parent->Text == "Images" || tvProject->Selected->Text == "Images";
+        actEditDuplicateImage->Enabled = !tvProject->Selected->HasChildren && tvProject->Selected->Parent->Parent->Text == "Images";
+        actFileNewImageDefault->Enabled = tvProject->Selected->Parent->Text == "Images";
+
+        auto type = tvProject->Selected->Parent->Text;
+        if (type == "Tiles") {
+            type = type[type.Length()] == 's' ? type.SubString(1, type.Length() - 1) : type;
+            auto doc = dynamic_cast<Project::ImageDocument*>(theDocumentManager.Get("Image", type, tvProject->Selected->Text));
+            actEditSplitIntoTiles->Enabled = (doc != nullptr && doc->ImagesPerFrame > 1);
+        }
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actSettingsExecute(TObject *Sender)
+void __fastcall TfrmIDE::popProjectClose(TObject* /*Sender*/)
+{
+    actDeleteAsset->Enabled = true;
+    actFileNewImageDefault->Enabled = true;
+    actEditDuplicateImage->Enabled = true;
+    actEditSplitIntoTiles->Enabled = true;
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actSettingsExecute(TObject* /*Sender*/)
 {
     std::make_unique<TfrmSettings>(this)->ShowModal();
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actEditorHelpExecute(TObject *Sender)
+void __fastcall TfrmIDE::actEditorHelpExecute(TObject* /*Sender*/)
 {
     Bus::Publish<Event>(Event("editor.help"));
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actViewBuildResultsExecute(TObject *Sender)
+void __fastcall TfrmIDE::actViewBuildResultsExecute(TObject* /*Sender*/)
 {
     dpBuild->PanelVisible = actViewBuildResults->Checked;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actViewSearchResultsExecute(TObject *Sender)
+void __fastcall TfrmIDE::actViewSearchResultsExecute(TObject* /*Sender*/)
 {
     dpSearchResults->PanelVisible = actViewSearchResults->Checked;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actViewTodoExecute(TObject *Sender)
+void __fastcall TfrmIDE::actViewTodoExecute(TObject* /*Sender*/)
 {
     dpTodo->PanelVisible = actViewTodo->Checked;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actViewEditorKeysExecute(TObject *Sender)
+void __fastcall TfrmIDE::actViewEditorKeysExecute(TObject* /*Sender*/)
 {
     dpEditorKeys->PanelVisible = actViewEditorKeys->Checked;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actViewMessagesExecute(TObject *Sender)
+void __fastcall TfrmIDE::actViewMessagesExecute(TObject* /*Sender*/)
 {
     dpMessages->PanelVisible = actViewMessages->Checked;
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmIDE::actGameRunExecute(TObject *Sender)
+void __fastcall TfrmIDE::actGameRunExecute(TObject* /*Sender*/)
 {
     m_Builder.Execute();
     dpBuild->Show();
@@ -464,12 +456,60 @@ void __fastcall TfrmIDE::OnClose()
     theProjectManager.Close();
 }
 //---------------------------------------------------------------------------
-
-void __fastcall TfrmIDE::dsIDEChange(TObject *Sender)
+void __fastcall TfrmIDE::dsIDEChange(TObject* Sender)
 {
     auto ds = dynamic_cast<TLMDDockSite*>(Sender);
     if (ds) {
         Bus::Publish<Event>(Event("editor.help"));
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actFileNewTileExecute(TObject* /*Sender*/)
+{
+    auto doc = theProjectManager.Add("Image", "Tile", "");
+    DoOpenDocument(doc);
+    UpdateDocumentProperties(doc);
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actFileNewObjectExecute(TObject* /*Sender*/)
+{
+    auto doc = theProjectManager.Add("Image", "Object", "");
+    DoOpenDocument(doc);
+    UpdateDocumentProperties(doc);
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actFileNewSpriteExecute(TObject* /*Sender*/)
+{
+    auto doc = theProjectManager.Add("Image", "Sprite", "");
+    DoOpenDocument(doc);
+    UpdateDocumentProperties(doc);
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actEditDuplicateImageExecute(TObject* /*Sender*/)
+{
+    if (tvProject->Selected) {
+        auto type = tvProject->Selected->Parent->Text;
+        type = type[type.Length()] == 's' ? type.SubString(1, type.Length() - 1) : type;
+        auto newDoc = theProjectManager.Add("Image", type, "");
+        auto oldDoc = theDocumentManager.Get("Image", type, tvProject->Selected->Text);
+        InformationMessage("[IDE] Duplicating Document: " + oldDoc->Name + " into " + newDoc->Name);
+        newDoc->Copy(oldDoc);
+        DoOpenDocument(newDoc);
+        tvProject->Refresh();
+        UpdateDocumentProperties(newDoc);
+     }
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmIDE::actEditSplitIntoTilesExecute(TObject* /*Sender*/)
+{
+    if (tvProject->Selected) {
+        // close the document
+
+        // split it into singles
+
+        // update the map
+
+        // remove the original doc
     }
 }
 //---------------------------------------------------------------------------

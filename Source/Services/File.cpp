@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "File.h"
 #include "Folders.h"
@@ -85,7 +85,7 @@ String File::ReadText(const String& file)
     return System::Ioutils::TFile::ReadAllText(file);
 }
 //---------------------------------------------------------------------------
-void File::ReadBytes(const String& file, std::vector<unsigned char>& contents)
+void File::ReadBytes(const String& file, std::vector<wchar_t>& contents)
 {
     auto allBytes = System::Ioutils::TFile::ReadAllText(file);
     for (auto byte : allBytes)

@@ -74,7 +74,7 @@ public:
     Visuals::GraphicsMode*  __fastcall  GraphicsMode() const;
     static void             __fastcall  GetMachinesList(std::vector<String>& list);
 
-    bool                    __fastcall  Load(const String& name);
+    bool                    __fastcall  LoadFile(const String& name) override;
 
     String                  __property  Name      = { read = m_Name                            };
     String                  __property  Keyboard  = { read = m_Keyboard                        };
@@ -85,6 +85,7 @@ public:
     __property  const ToolInfo&         Engine    = { read = m_Engine   , write = SetEngine    };
     __property  const ToolInfoExt&      Assembler = { read = m_Assembler, write = SetAssembler };
     __property  const ToolInfo&         Emulator  = { read = m_Emulator , write = SetEmulator  };
+
  const Visuals::ImageSizing __property  ImageSizing[Visuals::ImageTypes type] = { read = GetImageSizing };
 };
 

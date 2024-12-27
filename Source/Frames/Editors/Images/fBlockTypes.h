@@ -29,12 +29,12 @@ __published:    // IDE-managed Components
     void __fastcall btnPlatformClick(TObject *Sender);
 
 private:    // User declarations
-    char        m_BlockType;
-    void    __fastcall  SetBlockType(char type);
+    wchar_t             m_BlockType;
+    void    __fastcall  SetBlockType(wchar_t type);
 public:        // User declarations
-            __fastcall  TfrmBlockTypes(TComponent* Owner);
+            __fastcall  TfrmBlockTypes(TComponent* Owner) override;
 
-    char    __property  BlockType = { read = m_BlockType, write = SetBlockType };
+    wchar_t __property  BlockType = { read = m_BlockType, write = SetBlockType };
 };
 //---------------------------------------------------------------------------
 #endif

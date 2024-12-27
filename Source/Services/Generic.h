@@ -17,7 +17,6 @@ private:
 public:
                 Generic();
                 Generic(const String& object);
-                Generic(const Generic& other);
 
     void        Add(const String& name, const String& value);
     void        Add(const String& name, const bool& value);

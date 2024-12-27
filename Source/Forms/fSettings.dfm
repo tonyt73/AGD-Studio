@@ -318,7 +318,7 @@ object frmSettings: TfrmSettings
     Top = 0
     Width = 553
     Height = 330
-    ActivePage = TabSheet1
+    ActivePage = tabProfile
     Align = alClient
     Images = ImageList1
     TabHeight = 38

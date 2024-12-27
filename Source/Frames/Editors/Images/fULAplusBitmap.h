@@ -43,11 +43,11 @@ __published:    // IDE-managed Components
     void __fastcall imgSystemColorsMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
 
 private:    // User declarations
-    int                         m_Ink;              // logical ink color
-    int                         m_Paper;            // logical paper color
-    int                         m_Index;            // logical palette index
-    int                         m_Cursor;           // mouse cursor on the ink/paper
-    int                         m_CursorIndex;      // mouse cursor on the palette index
+    unsigned char               m_Ink;              // logical ink color
+    unsigned char               m_Paper;            // logical paper color
+    unsigned char               m_Index;            // logical palette index
+    unsigned char               m_Cursor;           // mouse cursor on the ink/paper
+    unsigned char               m_CursorIndex;      // mouse cursor on the palette index
     int                         m_CursorPhysical;   // mouse cursor on the physical colour picker
     std::unique_ptr<TBitmap>    m_PalettePicker;    // the picker images double buffer
     std::unique_ptr<TBitmap>    m_PhysicalPicker;   // the picker images double buffer
@@ -57,12 +57,12 @@ private:    // User declarations
     void            __fastcall  DrawSelectionBox(TBitmap* bitmap, int xs, int ys, int xe, int ye) const;
     void            __fastcall  DrawPhysicalColors() const;
     void            __fastcall  DrawPalettesColors() const;
-    void            __fastcall  Update();
+    void            __fastcall  Update() override;
 
-    int             __fastcall  GetInk(int index = -1, int ink = -1) const;
-    int             __fastcall  GetPaper(int index = -1, int paper = -1) const;
+    unsigned char   __fastcall  GetInk(int index = -1, int ink = -1) const;
+    unsigned char   __fastcall  GetPaper(int index = -1, int paper = -1) const;
 public:        // User declarations
-                    __fastcall  TfrmULAplusBitmap(TComponent* Owner);
+                    __fastcall  TfrmULAplusBitmap(TComponent* Owner) override;
     void            __fastcall  Init();
     void            __fastcall  Set(Visuals::GraphicsBuffer& canvas);
 };

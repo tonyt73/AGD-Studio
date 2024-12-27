@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "MapPencilTool.h"
 //---------------------------------------------------------------------------
@@ -9,10 +9,6 @@ __fastcall MapPencilTool::MapPencilTool()
 : MapTool()
 {
     Flags = modifies;
-}
-//---------------------------------------------------------------------------
-__fastcall MapPencilTool::~MapPencilTool()
-{
 }
 //---------------------------------------------------------------------------
 void __fastcall MapPencilTool::Apply(Project::MapEntityList& list, Project::MapEntity entity)

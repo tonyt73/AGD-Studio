@@ -1,12 +1,12 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "BuildManager.h"
 #include "BuildMessages.h"
 #include "PreChecks.h"
 #include "Creation.h"
 #include "Compilation.h"
-#include "Assembly.h"
+#include "Assemble.h"
 #include "Emulation.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -30,11 +30,11 @@ bool __fastcall BuildManager::Execute()
 {
     if (m_BuildProcesses.size() == 0)
     {
-        m_BuildProcesses.push_back(std::move(std::make_unique<PreChecks>(m_BuildMessages)));
-        m_BuildProcesses.push_back(std::move(std::make_unique<Creation>(m_BuildMessages)));
-        m_BuildProcesses.push_back(std::move(std::make_unique<Compilation>(m_BuildMessages)));
-        m_BuildProcesses.push_back(std::move(std::make_unique<Assembly>(m_BuildMessages)));
-        m_BuildProcesses.push_back(std::move(std::make_unique<Emulation>(m_BuildMessages)));
+        m_BuildProcesses.push_back(std::make_unique<PreChecks>(m_BuildMessages));
+        m_BuildProcesses.push_back(std::make_unique<Creation>(m_BuildMessages));
+        m_BuildProcesses.push_back(std::make_unique<Compilation>(m_BuildMessages));
+        m_BuildProcesses.push_back(std::make_unique<Assemble>(m_BuildMessages));
+        m_BuildProcesses.push_back(std::make_unique<Emulation>(m_BuildMessages));
     }
 
     auto start = GetTickCount();

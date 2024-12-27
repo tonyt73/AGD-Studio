@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "MapTool.h"
 #include "Project/Documents/DocumentManager.h"
@@ -18,7 +18,7 @@ __fastcall MapTool::~MapTool()
 //---------------------------------------------------------------------------
 int __fastcall MapTool::Snap(int value, int range) const
 {
-    return ((int)(value / range)) * range;
+    return static_cast<int>(value / range) * range;
 }
 //---------------------------------------------------------------------------
 void __fastcall MapTool::SnapToTileGrid(TPoint& pt) const

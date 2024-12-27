@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------
-#include "AgdStudio.pch.h"
+#include "AGD Studio.pch.h"
 //---------------------------------------------------------------------------
 #include "WindowSection.h"
 #include "Project/Documents/DocumentManager.h"
@@ -20,10 +20,10 @@ __fastcall WindowSection::~WindowSection()
 //---------------------------------------------------------------------------
 void __fastcall WindowSection::Execute()
 {
-    const auto& Window = (Project::WindowDocument*)theDocumentManager.Get("Window", "Definition", "Window");
+    const auto& Window = dynamic_cast<Project::WindowDocument*>(theDocumentManager.Get("Window", "Definition", "Window"));
     if (Window)
     {
-        AddLine("DEFINEWindow " + IntToStr((int)Window->Rect.Top) + " " + IntToStr((int)Window->Rect.Left) + " " + IntToStr((int)Window->Rect.Height()) + " " + IntToStr((int)Window->Rect.Width()));
+        AddLine("DEFINEWindow " + IntToStr(static_cast<int>(Window->Rect.Top)) + " " + IntToStr(static_cast<int>(Window->Rect.Left)) + " " + IntToStr(static_cast<int>(Window->Rect.Height())) + " " + IntToStr(static_cast<int>(Window->Rect.Width())));
         LineBreak();
         Success();
     } 
