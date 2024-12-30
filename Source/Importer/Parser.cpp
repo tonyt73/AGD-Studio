@@ -97,6 +97,9 @@ bool Parser::Parse(const String& file, const String& machine)
         for (auto line : lines) {
             try {
                 auto lineTokens = ProcessLine(line);
+                if (line.Pos("definescreen") >= 1) {
+                    int a = 0;
+                }
                 // no, tokenise the current line tokens against the current section tokens
                 while (!lineTokens.empty()) {
                     // parse the current token
@@ -127,8 +130,10 @@ bool Parser::Parse(const String& file, const String& machine)
 //---------------------------------------------------------------------------
 bool Parser::ParseToken(const Token& token)
 {
-    if (token.isa(Token::ttSection) && ProcessSection(token)) return true;
-    if (ProcessValue(token)) return true;
+    if (token.isa(Token::ttSection) && ProcessSection(token))
+        return true;
+    if (ProcessValue(token))
+        return true;
     ParseError("Invalid token type found in import file.", token);
     return false;
 }
@@ -150,7 +155,7 @@ bool Parser::ProcessSection(const Token& token)
     if (m_MatchSections.count(name) == 1) {
         // get the tokens to match for the new section
         m_SectionTokens = m_MatchSections[name].Tokens;
-        // are the compatible?
+        // are they compatible?
         if (m_SectionTokens.front().isa(token.Type)) {
             auto varname = m_MatchSections[name].Variable;
             m_CurrentMatcher = m_MatchSections[name];
@@ -200,7 +205,12 @@ bool Parser::ProcessValue(const Token& token)
                 auto br = sectionToken.Value.Pos(']');
                 if (br > bl) {
                     auto sizes = SplitString(sectionToken.Value.SubString(bl + 1, br - bl - 1), ",");
-                    for (auto s : sizes) count *= StrToInt(s);
+                    for (auto s : sizes) {
+                        count *= StrToInt(s);
+                    }
+                    if (sizes.size() > 1) {
+                        int a = 0;
+                    }
                 }
                 m_ArrayCounts[m_CurrentVariable][secVar] = count;
             }
@@ -237,7 +247,7 @@ Tokens Parser::ProcessLine(const String& line)
 {
     // tokenize the line
     Tokens tokens = Tokenize(line, " ");
-    // is the first token is not a section match and we are processing lines
+    // if the first token is not a section match and we are processing lines
     if (tokens.size() && m_MatchSections.count(tokens.front().Value) == 0 && m_SectionTokens.front().isa(Token::ttLine)) {
         // then add to the line array
         SetVariable(m_SectionTokens.front().Value, line);
@@ -251,25 +261,37 @@ Tokens Parser::ProcessLine(const String& line)
 Token Parser::ReplaceVariableReferencesWithValues(Token token)
 {
     // variable value substitution
-    bool replaced = true;
-    auto secVar = token.Value.LowerCase();
-    while (secVar.Pos("var=") > 0 && replaced) {
-        replaced = false;
-        // look for the variable name in the list of known variables so far
-        for (auto vars = m_Variables.begin(); vars != m_Variables.end(); vars++ ) {
-            for (auto var = vars->second.begin(); var != vars->second.end(); var++) {
-                // if our current section variable contains a known variable, then we can replace the reference with the variables actual value
-                if (secVar.Pos(var->first) > 0) {
-                    // replace "var=var.name", with the value "var.value"
-                    token.Value = StringReplace(token.Value, "var="+var->first, var->second.front(), TReplaceFlags());
-                    secVar = token.Value.LowerCase();
-                    replaced = true;
-                }
+    auto pos = token.Value.Pos("var=");
+    if (pos > 0) {
+        // find the variable name from within the token string
+        auto varName = token.Value.SubString(pos + 4, token.Value.Length() - pos - 4);
+        for (auto i = 0; i < varName.Length(); i++) {
+            if (varName.IsDelimiter(",]>", i)) {
+                // strip out from the delimiter to the end of the string
+                varName = varName.SubString(1, i - 1).LowerCase();
+                break;
             }
         }
-        if (!replaced) {
-            ParseError("Variable in Importer definition match pattern was not found or set. Is the section with the variable defined later in the file?", token);
-            break;
+        if (m_Variables[m_CurrentVariable].size() > 0 && m_Variables[m_CurrentVariable][varName].size() > 0) {
+            // ie. parameter "sprite.frames" in variable group "sprite.001"
+            auto varValue = m_Variables[m_CurrentVariable][name].front();
+            token.Value = StringReplace(token.Value.LowerCase(), "var="+name, varValue, TReplaceFlags());
+        } else {
+            // get the group name of the variable {group.parameter}
+            // ie. window.width is group=window, parameter=width
+            pos = varName.Pos(".");
+            if (pos > 0) {
+                auto group = varName.SubString(1, pos - 1);
+                if (m_Variables[group].size() > 0) {
+                    for (auto it = m_Variables[group].begin(); it != m_Variables[group].end(); it++) {
+                        auto name = it->first;
+                        if (m_Variables[group][name].size() > 0) {
+                            auto varValue = m_Variables[group][name].front();
+                            token.Value = StringReplace(token.Value.LowerCase(), "var="+name, varValue, TReplaceFlags());
+                        }
+                    }
+                }
+            }
         }
     }
     // substitute in the variable list counts {'var name'}
