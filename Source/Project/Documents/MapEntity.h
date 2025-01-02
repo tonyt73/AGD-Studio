@@ -25,6 +25,9 @@ protected:
                 int                 m_SpriteType;   // the type of sprite
                 bool                m_RoomLocked;   // the sprite is locked to the room
                 unsigned int        m_RoomIndex;    // the index of the room we are locked to
+                                                    // 255 is the blank room, so you can't assign an object to it
+                                                    // 254 is the inventory room, so objects unsigned a room go here
+                                                    // means room 253 is the last room possible
 
     void                __fastcall  SetPoint(const TPoint& pt);
     TPoint              __fastcall  GetPoint() const;

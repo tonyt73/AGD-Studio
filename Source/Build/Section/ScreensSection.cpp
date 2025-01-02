@@ -56,8 +56,7 @@ void __fastcall ScreensSection::Execute()
                                     // get the game index of the tile object
                                     auto index = dm.GetIndexFor(entity->Id, txo, tyo);
                                     if (index != -1) {
-                                        auto number = "   " + IntToStr(index);
-                                        line += number.SubString(number.Length() - 2, 3) + " ";
+                                        line += PadNum(IntToStr(index)) + " ";
                                     } else {
                                         // badly referenced tile
                                         Failure("Tile Id: " + UIntToStr(entity->Id) + ", in map was not found in the document manager.");

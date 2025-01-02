@@ -70,6 +70,7 @@ Tokens Parser::Tokenize(const String& line, const String& separator, bool incVar
     Tokens tokens;
     // section names must start on pos 1 and be an alpha character only
     bool couldBeSectionName = line.Length() > 1 && isalpha(line[1]);
+    // since we use space(' ') as a saparator, then we have to replace any quoted ' 's with their ascii equilivant value
     auto parts = SplitString(line.Trim(), separator);
     for (auto part : parts) {
         Token token;
@@ -97,9 +98,6 @@ bool Parser::Parse(const String& file, const String& machine)
         for (auto line : lines) {
             try {
                 auto lineTokens = ProcessLine(line);
-                if (line.Pos("definescreen") >= 1) {
-                    int a = 0;
-                }
                 // no, tokenise the current line tokens against the current section tokens
                 while (!lineTokens.empty()) {
                     // parse the current token
@@ -144,6 +142,10 @@ bool Parser::ProcessSection(const Token& token)
     if (m_SectionTokens.size() > 0 && m_SectionTokens.front().isa(Token::ttArray)) {
         // we stop processing arrays here.
         PopSectionToken();
+        // check if we can drop any ignore tokens
+        while (m_SectionTokens.front().isa(Token::ttIgnore)) {
+            m_SectionTokens.pop_front();
+        }
         // keep processing if more tokens exists
         if (m_SectionTokens.size() > 0) {
             // false means we'll fall through to processing value tokens
@@ -208,9 +210,6 @@ bool Parser::ProcessValue(const Token& token)
                     for (auto s : sizes) {
                         count *= StrToInt(s);
                     }
-                    if (sizes.size() > 1) {
-                        int a = 0;
-                    }
                 }
                 m_ArrayCounts[m_CurrentVariable][secVar] = count;
             }
@@ -246,7 +245,8 @@ bool Parser::ProcessValue(const Token& token)
 Tokens Parser::ProcessLine(const String& line)
 {
     // tokenize the line
-    Tokens tokens = Tokenize(line, " ");
+    auto nl = StringReplace(line, " ' ' ", " 32 ", TReplaceFlags()).Trim();
+    Tokens tokens = Tokenize(nl, " ");
     // if the first token is not a section match and we are processing lines
     if (tokens.size() && m_MatchSections.count(tokens.front().Value) == 0 && m_SectionTokens.front().isa(Token::ttLine)) {
         // then add to the line array
@@ -274,8 +274,8 @@ Token Parser::ReplaceVariableReferencesWithValues(Token token)
         }
         if (m_Variables[m_CurrentVariable].size() > 0 && m_Variables[m_CurrentVariable][varName].size() > 0) {
             // ie. parameter "sprite.frames" in variable group "sprite.001"
-            auto varValue = m_Variables[m_CurrentVariable][name].front();
-            token.Value = StringReplace(token.Value.LowerCase(), "var="+name, varValue, TReplaceFlags());
+            auto varValue = m_Variables[m_CurrentVariable][varName].front();
+            token.Value = StringReplace(token.Value.LowerCase(), "var="+varName, varValue, TReplaceFlags());
         } else {
             // get the group name of the variable {group.parameter}
             // ie. window.width is group=window, parameter=width
@@ -329,7 +329,7 @@ void Parser::PopSectionToken()
         auto secVar = SanitizeName(sectionToken.Value);
         auto curcount = m_Variables[m_CurrentVariable][secVar].size();
         if (curcount > 1) {
-            String type = m_SectionTokens.front().isa(Token::ttString|Token::ttLine) ? " lines" : " bytes";
+            String type = m_SectionTokens.front().isa(Token::ttLine) ? " lines" : " bytes";
             InformationMessage("[Import Parser] Array '" + secVar + "' is " + UIntToStr(curcount) + type);
         }
     }

@@ -26,7 +26,7 @@ bool __fastcall ShellProcess::ShellExecute(const String& path, const String& cmd
     shell->StartOperation = smOpen;
     shell->StartOption = soSW_HIDE;
     shell->Wait = wait;
-    shell->ExtStartOptions = TLMDStarterExtendedOptions() << soxRedirectOutput << soxUseCreateProcess;
+    shell->ExtStartOptions = TLMDStarterExtendedOptions() << soxRedirectOutput;
     shell->OnOutput = OnOutputEvent;
     shell->OnError = OnErrorEvent;
 
@@ -43,6 +43,7 @@ bool __fastcall ShellProcess::ShellExecute(const String& path, const String& cmd
     result = result && !m_Errored;
     BUILD_MSG(result ? bmOk : bmFailed);
     BUILD_MSG_POP(true);
+
     return result;
 }
 //---------------------------------------------------------------------------

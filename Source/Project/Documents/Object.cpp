@@ -38,8 +38,19 @@ int __fastcall ObjectDocument::GetPosition(int index)
 void __fastcall ObjectDocument::SetRoomIndex(int value)
 {
     if (0 <= value && value <= 255) {
+        State = Visuals::osRoom;
         m_RoomIndex = value;
+        if (value ==  254) {
+            State = Visuals::osDisabled;
+        } else if (value == 255) {
+            State = Visuals::osInventory;
+        }
     }
+}
+//---------------------------------------------------------------------------
+void __fastcall ObjectDocument::SetState(Visuals::ObjectState state)
+{
+    m_State = state;
 }
 //---------------------------------------------------------------------------
 void __fastcall ObjectDocument::DoSaveExtra()

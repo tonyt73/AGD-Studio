@@ -75,9 +75,9 @@ void __fastcall JumpTableDocument::SetStep(unsigned char index, int value)
     }
 }
 //---------------------------------------------------------------------------
-unsigned char __fastcall JumpTableDocument::GetStepCount() const
+int __fastcall JumpTableDocument::GetStepCount() const
 {
-    return static_cast<unsigned char>(m_Steps.size() - 1);
+    return m_Steps.size() - 1;
 }
 //---------------------------------------------------------------------------
 void __fastcall JumpTableDocument::DefaultJumpTable()
@@ -85,7 +85,7 @@ void __fastcall JumpTableDocument::DefaultJumpTable()
     if (m_Steps.size() == 0) {
         m_Steps.push_back(249);
         m_Steps.push_back(250);
-        m_Steps.push_back(251);
+        m_Steps.push_back(250);
         m_Steps.push_back(254);
         m_Steps.push_back(254);
         m_Steps.push_back(255);

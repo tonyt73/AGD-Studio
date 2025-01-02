@@ -143,7 +143,6 @@ void __fastcall TiledMapDocument::OnEndObject(const String& object)
             ErrorMessage("[TiledMap] Encountered an invalid map entity while loading scratch pad JSON object");
         }
     } else if (object == "Map.RoomMapping.Indexes[]") {
-
         m_RoomMapping[m_MappingIndexLoadCount % m_RoomMappingWidth][m_MappingIndexLoadCount / m_RoomMappingWidth] = m_RoomMappingIndex;
         m_MappingIndexLoadCount++;
     }
@@ -284,23 +283,25 @@ void __fastcall TiledMapDocument::UpdateEntityRooms()
     // update entity room indexes
     std::vector<unsigned int> objectsToRemove;
     for (auto entity : m_Map) {
-        auto roomPt = TPoint(static_cast<int>(entity.Pt.X / roomSize.cx), static_cast<int>(entity.Pt.Y / roomSize.cy));
-        // recalculate the entitys room based on its current position (currently only sprites/objects can be locked to rooms)
-        auto object = dynamic_cast<ObjectDocument*>(entity.Image);
-        entity.RoomIndex = GetRoomIndex(roomPt, true);
-        if (entity.Image->CanBeLocked && !entity.RoomLocked && object) {
-            object->RoomIndex = entity.RoomIndex;
-            object->State = Visuals::osRoom;
-        }
-        // update the location of the objects in the room (to screen space)
-        if (entity.Image->ImageType == Visuals::itObject) {
-            assert(object != nullptr);
+        // we ignore any object in room 254
+        if (entity.RoomIndex != g_MaxRooms) {
+            auto roomPt = TPoint(static_cast<int>(entity.Pt.X / roomSize.cx), static_cast<int>(entity.Pt.Y / roomSize.cy));
+            // recalculate the entitys room based on its current position (currently only sprites/objects can be locked to rooms)
+            auto object = dynamic_cast<ObjectDocument*>(entity.Image);
+            entity.RoomIndex = GetRoomIndex(roomPt, true);
+            if (entity.Image->CanBeLocked && !entity.RoomLocked && object && object->State == Visuals::osRoom) {
+                object->RoomIndex = entity.RoomIndex;
+            }
+            // update the location of the objects in the room (to screen space)
+            if (entity.Image->ImageType == Visuals::itObject) {
+                assert(object != nullptr);
 
-            if (object->State == Visuals::osRoom && object->RoomIndex <= g_MaxRooms) {
-                object->Position = TPoint(std::max(0, static_cast<int>(entity.Pt.X - (roomPt.X * roomSize.cx))), std::min(255, static_cast<int>(entity.Pt.Y - (roomPt.Y * roomSize.cy))));
-            } else {
-                // remove any objects from the map that are not assigned to a room
-                objectsToRemove.push_back(entity.Id);
+                if (object->State == Visuals::osRoom && object->RoomIndex < g_MaxRooms) {
+                    object->Position = TPoint(std::max(0, static_cast<int>(entity.Pt.X - (roomPt.X * roomSize.cx))), std::min(255, static_cast<int>(entity.Pt.Y - (roomPt.Y * roomSize.cy))));
+                } else {
+                    // remove any objects from the map that are not assigned to a room
+                    objectsToRemove.push_back(entity.Id);
+                }
             }
         }
     }
@@ -317,7 +318,7 @@ bool __fastcall TiledMapDocument::IsRoomEmpty(int x, int y) const
 //---------------------------------------------------------------------------
 bool __fastcall TiledMapDocument::IsRoomIndexUsed(const int roomIndex) const
 {
-    assert(0 <= roomIndex && roomIndex <= g_MaxRooms);
+    assert(0 <= roomIndex && roomIndex < g_MaxRooms);
     bool inUse = false;
     for (auto y = 0; y < g_MaxMapRoomsDown && !inUse; y++) {
         for (auto x = 0; x < g_MaxMapRoomsAcross && !inUse; x++) {
@@ -343,7 +344,7 @@ const TRect __fastcall TiledMapDocument::SetMinimalMapSize()
             }
         }
     }
-    rect.Inflate(1,0,1,1);
+    rect.Inflate(1,0,1,0);
     m_RoomMappingWidth  = rect.Right;
     m_RoomMappingHeight = rect.Bottom;
     return rect;
@@ -355,7 +356,7 @@ int __fastcall TiledMapDocument::GetRoomIndex(const TPoint& room, bool newIdForU
     auto ri = m_RoomMapping[room.X][room.Y];
     if (ri == g_EmptyRoom && newIdForUndefinedRoom) {
         // find the lowest unused room index
-        for (ri = 0; ri <= g_MaxRooms; ri++) {
+        for (ri = 0; ri < g_MaxRooms; ri++) {
             // does this ri exist in the list of rooms
             if (!IsRoomIndexUsed(ri)) {
                 // no, so assign it to the room
@@ -363,7 +364,7 @@ int __fastcall TiledMapDocument::GetRoomIndex(const TPoint& room, bool newIdForU
                 break;
             }
         }
-        if (ri == g_EmptyRoom) {
+        if (ri >= g_MaxRooms) {
             // no rooms left
             ErrorMessage("[TiledMap] There are no rooms available! All 254 rooms are assigned a location.");
         }

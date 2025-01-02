@@ -13,7 +13,7 @@ private:
                             //  importers store definitions/patterns here
                             //  the imported file contains values
 public:
-    enum        TokenType   { ttEmpty = 0, ttSection = 1, ttNumber = 2, ttAscii = 4, ttWord = 8, ttString = 16, ttLine = 32, ttVariable = 64, ttArray = 128, ttInvalid = 256 };
+    enum        TokenType   { ttEmpty = 0, ttSection = 1, ttNumber = 2, ttAscii = 4, ttWord = 8, ttLine = 16, ttVariable = 32, ttArray = 64, ttIgnore = 128, ttInvalid = 256 };
 
                 Token();
                 //Token(const Token& other);

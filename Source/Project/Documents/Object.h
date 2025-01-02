@@ -16,6 +16,7 @@ private:
 
             int         __fastcall  GetPosition(int index);
             void        __fastcall  SetRoomIndex(int value);
+            void        __fastcall  SetState(Visuals::ObjectState state);
 
 protected:
     virtual void        __fastcall  DoSaveExtra() override;
@@ -30,7 +31,7 @@ __published:
     __property                 int  RoomIndex   = { read = m_RoomIndex, write = SetRoomIndex};
     __property                 int  X           = { read = GetPosition, index = 0           };
     __property                 int  Y           = { read = GetPosition, index = 1           };
-    __property Visuals::ObjectState State       = { read = m_State    , write = m_State     };
+    __property Visuals::ObjectState State       = { read = m_State    , write = SetState    };
 };
 //---------------------------------------------------------------------------
 } // Project namespace

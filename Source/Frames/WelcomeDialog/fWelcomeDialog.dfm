@@ -21,8 +21,6 @@ inherited frmWelcomeDialog: TfrmWelcomeDialog
     BevelOuter = bvNone
     TabOrder = 0
     StyleElements = [seFont, seBorder]
-    ExplicitLeft = 338
-    ExplicitHeight = 506
     object imgLogo: TImage
       Left = 0
       Top = 0
@@ -6236,7 +6234,6 @@ inherited frmWelcomeDialog: TfrmWelcomeDialog
       ParentFont = False
       ShowCaption = False
       TabOrder = 0
-      ExplicitHeight = 256
       DesignSize = (
         500
         255)
@@ -6365,7 +6362,6 @@ inherited frmWelcomeDialog: TfrmWelcomeDialog
         BevelOuter = bvNone
         ParentColor = True
         TabOrder = 0
-        ExplicitHeight = 191
         object lblOpenExistingProject: TLabel
           Left = 0
           Top = 1
@@ -6926,8 +6922,6 @@ inherited frmWelcomeDialog: TfrmWelcomeDialog
     ParentBackground = False
     TabOrder = 1
     StyleElements = [seFont, seBorder]
-    ExplicitWidth = 338
-    ExplicitHeight = 506
   end
   object dlgOpenAGDS: TOpenTextFileDialog
     DefaultExt = 'agds'

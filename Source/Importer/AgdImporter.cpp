@@ -73,7 +73,7 @@ bool AgdImporter::Convert(const String& file)
     if (result) {
         InformationMessage("[AGD Importer] Import processed completed.");
     } else {
-        ErrorMessage("[AGD Importer] Import processed failed.");
+        ErrorMessage("[AGD Importer] Import processing failed.");
     }
     return result;
  }
@@ -86,10 +86,8 @@ bool AgdImporter::UpdateWindow()
         auto y = GetNum("window", "window.y");
         auto w = GetNum("window", "window.width");
         auto h = GetNum("window", "window.height");
-        TRect rect(x, y, x + w, y + h);
-        m_Window.cx = rect.Width();
-        m_Window.cy = rect.Height();
-        doc->SetRect(rect);
+        m_Window = TRect(x, y, x + w, y + h);
+        doc->SetRect(m_Window);
     }
     return true;
 }
@@ -157,7 +155,8 @@ bool AgdImporter::AddImages(const String& name, const String& imgType)
 {
     int vars = m_Parser.GetVarCount(name);
     if (vars > 0) {
-        auto gm = theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode();
+        auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
+        auto gm = mc.GraphicsMode();
         int bpp = gm->BitsPerPixel;
         for (auto obj = 1; obj <= vars; obj++) {
             auto objName = imgType + " " + IntToStr(obj);
@@ -187,7 +186,7 @@ bool AgdImporter::AddImages(const String& name, const String& imgType)
                 // process room info
                 auto objDoc = dynamic_cast<Project::ObjectDocument*>(doc);
                 objDoc->RoomIndex = StrToInt(m_Parser.Variables[varName]["room"].front());
-                objDoc->Position = TPoint(StrToInt(m_Parser.Variables[varName]["x"].front()), StrToInt(m_Parser.Variables[varName]["y"].front()));
+                objDoc->Position = TPoint(StrToInt(m_Parser.Variables[varName]["x"].front() - (m_Window.Left * mc.ImageSizing[Visuals::itTile].Minimum.Width)), StrToInt(m_Parser.Variables[varName]["y"].front() - (m_Window.Top * mc.ImageSizing[Visuals::itTile].Minimum.Height)));
                 if (m_Parser.Variables[varName].count("colour") == 1) {
                     // change the colour of the object
                     if (gm->TypeOfBuffer == Visuals::BufferType::btAttribute) {
@@ -212,14 +211,12 @@ bool AgdImporter::AddImages(const String& name, const String& imgType)
 //---------------------------------------------------------------------------
 bool AgdImporter::AddMessages()
 {
-    int vars = m_Parser.GetVarCount("messagelist");
-    if (vars > 0) {
-        auto doc = dynamic_cast<Project::TextDocument*>(theDocumentManager.Add("Text", "Messages", "Messages"));
-        for (auto msg : m_Parser.Variables["messagelist"]["message"]) {
-            auto line = StringReplace(msg, "\"", "", TReplaceFlags() << rfReplaceAll).Trim();
-            if (line != "") {
-                doc->Add(line+"\r\n");
-            }
+    auto doc = dynamic_cast<Project::TextDocument*>(theDocumentManager.Add("Text", "Messages", "Messages"));
+    doc->Add("\r\n");
+    for (auto msg : m_Parser.Variables["messagelist"]["lines"]) {
+        auto line = msg.Trim();
+        if (line != "") {
+            doc->Add(line+"\r\n");
         }
     }
     return true;
@@ -260,17 +257,18 @@ bool AgdImporter::AddEvents()
 //---------------------------------------------------------------------------
 bool AgdImporter::AddMap()
 {
-    // upset an empty map
+    // unset an empty map
     std::map<int, TPoint> mapIndexToPt;
     // read in the map indexes
     auto mapWidth = StrToIntDef(m_Parser.Variables["map"]["width"].front(), -1);
     auto mapSize = m_Parser.Variables["map"]["table"].size();
     auto mapHeight = mapSize / mapWidth;
+    auto numSprites = static_cast<int>(m_Parser.VarCounts["sprites"]);
     TPoint scrPos;
     auto ssi = StrToIntDef(m_Parser.Variables["map"]["startscreen"].front(), -1);
     auto numScreens = 0;
     bool result = false;
-    if (0 < mapSize && mapSize <= Project::g_MaxRooms) {
+    if (0 < mapSize && mapSize < Project::g_MaxRooms) {
         result = true;
         // set up the map indexes
         int mi = 0;
@@ -303,12 +301,12 @@ bool AgdImporter::AddMap()
             }
             // get the screens map.x and map.y positions
             auto scrCoords = mapIndexToPt[i];
-            scrCoords.x *= m_Window.Width  * tx;
-            scrCoords.y *= m_Window.Height * ty;
-            for (auto sy = 0; sy < m_Window.Height; sy++) {
-                for (auto sx = 0; sx < m_Window.Width; sx++) {
+            scrCoords.x *= m_Window.Width()  * static_cast<LONG>(tx);
+            scrCoords.y *= m_Window.Height() * static_cast<LONG>(ty);
+            for (auto sy = 0; sy < m_Window.Height(); sy++) {
+                for (auto sx = 0; sx < m_Window.Width(); sx++) {
                     Project::MapEntity me;
-                    auto ti = screenTiles[sy * m_Window.Width + sx];
+                    auto ti = screenTiles[sy * m_Window.Width() + sx];
                     // get the tile document
                     auto tileDoc = dynamic_cast<Project::TileDocument*>(theDocumentManager.Get("Image", "Tile", "Tile " + IntToStr(ti+1)));
                     if (tileDoc) {
@@ -323,12 +321,15 @@ bool AgdImporter::AddMap()
             }
             // get the spritepositions for the screen(room)
             auto screenName = "screen" + m_Parser.PadNum(i+1);
-            auto spc = m_Parser.Variables["spriteposition"][screenName + ".type"].size();
+            auto spc = m_Parser.Variables["spriteposition"][screenName + ".sprite.type"].size();
             for (auto sp = 0; sp < spc; sp++) {
-                auto spt = StrToInt(m_Parser.Variables["spriteposition"][screenName + ".type"].front());
-                auto spi = StrToInt(m_Parser.Variables["spriteposition"][screenName + ".index"].front());
-                auto spx = StrToInt(m_Parser.Variables["spriteposition"][screenName + ".x"].front());
-                auto spy = StrToInt(m_Parser.Variables["spriteposition"][screenName + ".y"].front());
+                auto spt = StrToInt(m_Parser.Variables["spriteposition"][screenName + ".sprite.type"].front());
+                auto spi = StrToIntDef(m_Parser.Variables["spriteposition"][screenName + ".sprite.index"].front(), 0);
+                if (spi > numSprites) {
+                    spi = 0;
+                }
+                auto spx = StrToInt(m_Parser.Variables["spriteposition"][screenName + ".sprite.x"].front()) - (m_Window.Left * is.Minimum.Width );
+                auto spy = StrToInt(m_Parser.Variables["spriteposition"][screenName + ".sprite.y"].front()) - (m_Window.Top  * is.Minimum.Height);
                 Project::MapEntity me;
                 auto spriteDoc = dynamic_cast<Project::SpriteDocument*>(theDocumentManager.Get("Image", "Sprite", "Sprite " + IntToStr(spi+1)));
                 if (spriteDoc) {
@@ -340,10 +341,10 @@ bool AgdImporter::AddMap()
                 } else {
                     WarningMessage("[AGD Importer] Sprite document for index[" + IntToStr(spi) + "] not found during SpritePositions import process for Room: " + IntToStr(i) + ", Spriteposition: " + IntToStr(sp) + ".");
                 }
-                m_Parser.Variables["spriteposition"][screenName + ".type"].pop_front();
-                m_Parser.Variables["spriteposition"][screenName + ".index"].pop_front();
-                m_Parser.Variables["spriteposition"][screenName + ".x"].pop_front();
-                m_Parser.Variables["spriteposition"][screenName + ".y"].pop_front();
+                m_Parser.Variables["spriteposition"][screenName + ".sprite.type"].pop_front();
+                m_Parser.Variables["spriteposition"][screenName + ".sprite.index"].pop_front();
+                m_Parser.Variables["spriteposition"][screenName + ".sprite.x"].pop_front();
+                m_Parser.Variables["spriteposition"][screenName + ".sprite.y"].pop_front();
             }
         }
         // add objects to the map entities list
@@ -353,8 +354,8 @@ bool AgdImporter::AddMap()
             auto objDoc = dynamic_cast<Project::ObjectDocument*>(imgDoc);
             if (objDoc != nullptr) {
                 auto scrCoords = mapIndexToPt[objDoc->RoomIndex];
-                scrCoords.x *= m_Window.Width  * tx;
-                scrCoords.y *= m_Window.Height * ty;
+                scrCoords.x *= m_Window.Width()  * tx;
+                scrCoords.y *= m_Window.Height() * ty;
 
                 Project::MapEntity me;
                 me.Id = objDoc->Id;

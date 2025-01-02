@@ -18,7 +18,7 @@ __fastcall MapEntity::MapEntity()
 , m_Selected(false)
 , m_SpriteType(-1)
 , m_RoomLocked(false)
-, m_RoomIndex(255)
+, m_RoomIndex(254)
 {
 }
 //---------------------------------------------------------------------------

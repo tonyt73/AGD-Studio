@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<SchemeList root='Main'>
+
+  <Scheme name='Text' inherit='Numbers'>
+        <Regex token0='email'>
+            [_a-zA-Z\d\-\.]{1,40}
+            @ 
+            ([_ a-z A-Z \d \-]+ 
+            (\. [_ a-z A-Z \d \-]+ )+ )
+        </Regex>
+  </Scheme>
+
+  <Scheme name='Numbers'>
+    <Regex token0='number'>\b (0x \d+ [lL]? | \d+ (e \d*)? [lLdDfF]? ) \b</Regex>
+    <Regex token0='number'>\b [+\-]? \d+ (\. \d+)? ([eE] [+\-]? \d+) \b</Regex>
+  </Scheme>
+
+  <Scheme name='Comment' inherit='Text' defaultToken='comment'>
+    <Regex token0='st' regex=';.*$' />
+  </Scheme>
+
+  <Scheme name='String' inherit='Text' defaultToken='string'>
+  </Scheme>
+
+  <Scheme name='BadString' inherit='String' defaultToken='badString'>
+  </Scheme>
+
+  <Scheme name='StringFind'>
+    <Regex innerScheme='BadString' > 
+        &quot; (.*?\\ &quot; )*? .* $ 
+    </Regex>
+
+    <Regex innerScheme='String' priority='10'> 
+        &quot; (.*?\\ &quot; )*? &quot; c?
+    </Regex>
+
+    <Regex innerScheme='String' priority='20'> 
+        &quot; (.*?\\ &quot; )*? .*? [^\\] &quot; c?
+    </Regex>  
+
+    <Regex innerScheme='String' priority='30'> 
+        &quot;  &quot; c?
+    </Regex>    
+  </Scheme>
+
+
+
+  <Scheme name='Main' inherit='Numbers' inherit0='StringFind'
+          defaultToken='default'
+          allIgnoreCase='true'>
+
+    <Regex innerScheme='Comment' regex=';.*$' />
+    
+    <Regex token0='symbol' regex='[    \]    \[  \( \) &gt; &lt;  &amp; ]' />
+    <Regex token0='symbol' regex='[-=+^;,]' />
+    
+    <KeywordRegex moreWordChars='.'>\b[a-zA-Z_][\w_]*\b</KeywordRegex>
+
+    <Keywords>
+        ADC
+        ADD
+        AND
+        BIT
+        CALL
+        CCF
+        CP
+        CPD
+        CPDR
+        CPI
+        CPIR
+        CPL
+        DAA
+        DEC
+        DI
+        DJNZ
+        EI
+        EX
+        EXX
+        HALT
+        IM
+        IN
+        INC
+        IND
+        INDR
+        INI
+        INIR
+        JP
+        JR
+        LD
+        LDD
+        LDDR
+        LDI
+        LDIR
+        NEG
+        NOP
+        OR
+        OTDR
+        OTIR
+        OUT
+        OUTD
+        OUTI
+        POP
+        PUSH
+        RES
+        RET
+        RETI
+        RETN
+        RL
+        RLA
+        RLC
+        RLCA
+        RLD
+        RR
+        RRA
+        RRC
+        RRCA
+        RRD
+        RST
+        SBC
+        SCF
+        SET
+        SLA
+        SLL/SL1
+        SRA
+        SRL
+        SUB
+        XOR
+    </Keywords>
+
+    <SkipSyntaxToken token='comment' />
+
+  </Scheme>
+</SchemeList>

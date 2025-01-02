@@ -25,10 +25,10 @@ void __fastcall JumpTableSection::Execute()
 
     String def = "DEFINEJUMP ";
     for (unsigned char i = 0; i < JumpTable->Count; i++) {
-        def += IntToStr(JumpTable->RawStep(i));
+        def += PadNum(IntToStr(JumpTable->RawStep(i)));
         def += " ";
     }
-    def += "99";
+    def += PadNum("99");
 
     AddLine(def);
     LineBreak();
