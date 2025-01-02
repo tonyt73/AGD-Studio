@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Attributes>
+    <CustomAttributes>
+      <SomeCustomName>Value</SomeCustomName>
+      <font-name>Arial</font-name>
+      <font-size>12</font-size>
+      <border-width>1</border-width>
+      <border-color>red</border-color>
+    </CustomAttributes>
+ 
+    <Token name="default" textColor="#0" />
+    <Token name="defaultEmbed" backgroundColor="#ECE9D8"  />
+    <Token name="comment" textColor="#008000" />
+    <Token name="commentStart" textColor="#008000" />
+    <Token name="commentEnd" textColor="#008000" />
+    <Token name="keyword" fontStyle="bold" />
+    <Token name="email" fontStyle="bold" />
+    <Token name="number" textColor="Blue"  />
+    <Token name="symbol" textColor="Blue" />
+    <Token name="string" textColor="Blue" />
+    <Token name="badString" textColor="Red" />    
+    <Token name="preprocessor" textColor="#008080" />
+    <Token name="badPreprocessor" textColor="red" />
+</Attributes>

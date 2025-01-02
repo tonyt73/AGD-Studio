@@ -19,14 +19,14 @@
 #pragma link "LMDSedView"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
-const int SCHEMES_EXTS_COUNT = 5;
+const int SCHEMES_EXTS_COUNT = 6;
 [[clang::no_destroy]] const String SCHEMES_EXTS[SCHEMES_EXTS_COUNT] =
 {
-    "txt", "log", "event", "agd", "sfx"
+    "txt", "log", "event", "agd", "sfx", "asm"
 };
 [[clang::no_destroy]] const String SCHEMES_SYN[SCHEMES_EXTS_COUNT] =
 {
-    "AGD", "AGD", "AGD", "AGD", "AGD"
+    "TXT", "TXT", "AGD", "TXT", "TXT", "Z80"
 };
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorCode::TfrmEditorCode(TComponent* Owner)
@@ -91,6 +91,7 @@ void __fastcall TfrmEditorCode::OnDocumentSet()
 
     theEditorManager.SetActive(this);
     lmdDocument->ClearNoUndo();
+    Color = ThemeManager::Background;
     if (Services::File::Exists(Document->Path)) {
         lmdDocument->LoadFromFile(Document->Path, CP_ACP, true);
         auto extension = Services::File::Extension(Document->Path).SubString(2, 32);
@@ -98,7 +99,6 @@ void __fastcall TfrmEditorCode::OnDocumentSet()
         lmdDocument->ActiveSyntaxScheme = sc;
         lmdDocument->ReadOnly = Document->IsReadOnly;
     }
-    Color = ThemeManager::Background;
     evEditor->ViewSettings = evEditor->ViewSettings << vsAutoIndent;
     if (theAppSettings.CodeEditorFontName.Trim() != "") {
         evEditor->Font->Name = theAppSettings.CodeEditorFontName;
@@ -109,11 +109,11 @@ void __fastcall TfrmEditorCode::OnDocumentSet()
 String __fastcall TfrmEditorCode::GetSyntaxScByExt(const String& extension)
 {
     for (auto i = 0; i < SCHEMES_EXTS_COUNT; i++) {
-        if (LMDLowerCase(extension) == LMDLowerCase(SCHEMES_EXTS[i])) {
+        if (LMDLowerCase(extension) == SCHEMES_EXTS[i]) {
             return SCHEMES_SYN[i];
         }
     }
-    return "";
+    return "TXT";
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorCode::actUndoExecute(TObject* /*Sender*/)
@@ -436,7 +436,7 @@ void __fastcall TfrmEditorCode::evEditorKeyUp(TObject* /*Sender*/, WORD &Key, TS
     if (Key == vkReturn) {
         auto cp = evEditor->CursorPos;
         auto tl = evEditor->TopLinePhysical;
-        actFormatExecute(nullptr);
+        //actFormatExecute(nullptr);
         evEditor->CursorPos = cp;
         evEditor->TopLinePhysical = tl;
     }

@@ -24,9 +24,19 @@ inherited frmEditorCode: TfrmEditorCode
     ViewSettings = [vsShowWrapRuler, vsHideShowScrollbars, vsHighlightSelectedLine, vsAutoIndent, vsRightClickMovesCursor, vsBackspaceUnindents, vsDragDropEditing]
     TabWidth = 4
     WrapRulerWidth = 64
-    Color = clBlack
-    SelectedLineBg = 2105376
-    DebugFrameLineBg = clMedGray
+    Color = 1973790
+    ReadOnlyBgColor = 1973790
+    WrapRulerColor = 4210752
+    SelectedLineBg = 2697513
+    BreakpointLineColor = clWhite
+    BreakpointLineBg = 2237022
+    DebugFrameLineColor = clWhite
+    DebugFrameLineBg = 3223857
+    DebugFrameActiveLineColor = clWhite
+    DebugFrameActiveLineBg = 3689528
+    DebugFrameTopLineColor = clWhite
+    DebugFrameTopLineBg = 1592139
+    SelectionBg = 7884582
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
@@ -182,7 +192,6 @@ inherited frmEditorCode: TfrmEditorCode
         Name = 'AGD'
         Scheme.Strings = (
           '<?xml version="1.0" encoding="UTF-8"?>'
-          ''
           '<SchemeList root='#39'Main'#39'>'
           ''
           '  <Scheme name='#39'Text'#39' inherit='#39'Numbers'#39'>'
@@ -203,9 +212,9 @@ inherited frmEditorCode: TfrmEditorCode
             '\d+) \b</Regex>'
           '  </Scheme>'
           ''
-          
-            '  <Scheme name='#39'Comment'#39' inherit='#39'Text'#39' defaultToken='#39'comment'#39'  ' +
-            '/>'
+          '  <Scheme name='#39'Comment'#39' inherit='#39'Text'#39' defaultToken='#39'comment'#39'>'
+          '    <Regex token0='#39'st'#39' regex='#39';.*$'#39' />'
+          '  </Scheme>'
           ''
           '  <Scheme name='#39'String'#39' inherit='#39'Text'#39' defaultToken='#39'string'#39'>'
           '  </Scheme>'
@@ -241,7 +250,26 @@ inherited frmEditorCode: TfrmEditorCode
           
             '    <KeywordRegex moreWordChars='#39'.'#39'>\b[a-zA-Z_][\w_]*\b</Keyword' +
             'Regex>'
-          ''
+          
+            '    <Regex token0='#39'symbol'#39' regex='#39'[    \]    \[  \( \) &gt; &lt;' +
+            '  &amp; ]'#39' />'
+          '    <Regex token0='#39'symbol'#39' regex='#39'[=]'#39' />'
+          
+            '    <Regex token0="constant">(?:LEFT|RIGHT|UP|DOWN|EDGE|FIRE[1-3' +
+            ']?|OPTION[1-4]|BULLET|KEYBOARD|KEMPSTON|SINCLAIR|JOYSTICK[1-2]|(' +
+            'EMPTY|PLATFORM|WALL|LADDER|FODDER|DEADLY|CUSTOM)?BLOCK)</Regex>'
+          
+            '    <Regex token0="variable">\b(?:AIRBORNE|BLOCK|CLOCK|COLUMN|DI' +
+            'RECTION|LINE|CONTROL|FRAME|IMAGE|JUMPSPEED|LIVES|RND|SCREEN|TYPE' +
+            '|OBJ|SETTING[A-B]?)\b|(\b[A-Z]\b)</Regex>'
+          
+            '    <Regex token0="function">\b((CANGO(?:DOWN|LEFT|RIGHT|UP))|(L' +
+            'ADDER(?:ABOVE|BELOW))|(CHR|COLLISION|CUSTOM|DATA|DEADLY|DIG|GOT|' +
+            'KEY)\b)</Regex>'
+          
+            '    <Regex token0="codeword">\b((END(?:IF|WHILE|REPEAT))|(IF|ELS' +
+            'E|WHILE|REPEAT)\b)</Regex>'
+          '    '
           '    <Keywords>'
           '        ADD'
           '        ADDBONUS'
@@ -261,23 +289,21 @@ inherited frmEditorCode: TfrmEditorCode
           '        DEFINEPARTICLE'
           '        DELAY'
           '        DETECTOBJECT'
+          '        DETECTOBJ'
           '        DISPLAY'
           '        DIVIDE'
           '        DIG'
-          '        ELSE'
           '        ENDGAME'
-          '        ENDREPEAT'
           '        ENDSPRITE'
-          '        ENDIF'
-          '        ENDWHILE'
           '        EXIT'
           '        EXPLODE'
           '        FALL'
           '        GET'
           '        GETBLOCK'
+          '        GETBLOCKS'
           '        GETRANDOM'
-          '        IF'
           '        INK'
+          '        INV'
           '        JUMP'
           '        KILL'
           '        LASER'
@@ -290,6 +316,7 @@ inherited frmEditorCode: TfrmEditorCode
           '        OTHER'
           '        PALETTE'
           '        PAPER'
+          '        PARTICLEDECAY'
           '        PARTICLEDOWN'
           '        PARTICLELEFT'
           '        PARTICLERIGHT'
@@ -304,10 +331,10 @@ inherited frmEditorCode: TfrmEditorCode
           '        REDRAW'
           '        REMOVE'
           '        REMOVEOBJ'
-          '        REPEAT'
           '        RESTART'
           '        RESTORE'
           '        SCORE'
+          '        SCREEN'
           '        SCREENDOWN'
           '        SCREENLEFT'
           '        SCREENRIGHT'
@@ -326,21 +353,18 @@ inherited frmEditorCode: TfrmEditorCode
           '        SPRITEUP'
           '        STAR'
           '        SUBTRACT'
+          '        TABLEFALL'
+          '        TABLEJUMP'
+          '        TO'
+          '        TICKER'
           '        TRAIL'
           '        UNDOSPRITEMOVE'
           '        WAITKEY'
-          '        WHILE'
           '        ZEROBONUS'
-          '            '
           '    </Keywords>'
           ''
           '    <!--Regex innerScheme='#39'Comment'#39' regex='#39'Rem.*$'#39' /-->'
-          '    <Regex innerScheme='#39'Comment'#39' regex=" ;.*$ " />'
-          ''
-          
-            '    <Regex token0='#39'symbol'#39' regex='#39'[    \]    \[  \( \) &gt; &lt;' +
-            '  &amp; ]'#39' />'
-          '    <Regex token0='#39'symbol'#39' regex='#39'[-=+^;,]'#39' />'
+          '    <Regex innerScheme='#39'Comment'#39' regex='#39';.*$'#39' />'
           ''
           '    <SkipSyntaxToken token='#39'comment'#39' />'
           ''
@@ -369,209 +393,332 @@ inherited frmEditorCode: TfrmEditorCode
           '        <End> kw:ENDSPRITE  </End>'
           '    </SyntaxBlock>'
           '  </Scheme>'
+          '</SchemeList>'
+          '')
+      end
+      item
+        Name = 'Z80'
+        Scheme.Strings = (
+          '<?xml version="1.0" encoding="UTF-8"?>'
+          ''
+          '<SchemeList root='#39'Main'#39'>'
+          ''
+          '  <Scheme name='#39'Text'#39' inherit='#39'Numbers'#39'>'
+          '        <Regex token0='#39'email'#39'>'
+          '            [_a-zA-Z\d\-\.]{1,40}'
+          '            @ '
+          '            ([_ a-z A-Z \d \-]+ '
+          '            (\. [_ a-z A-Z \d \-]+ )+ )'
+          '        </Regex>'
+          '  </Scheme>'
+          ''
+          '  <Scheme name='#39'Numbers'#39'>'
+          
+            '    <Regex token0='#39'number'#39'>\b (0x \d+ [lL]? | \d+ (e \d*)? [lLdD' +
+            'fF]? ) \b</Regex>'
+          
+            '    <Regex token0='#39'number'#39'>\b [+\-]? \d+ (\. \d+)? ([eE] [+\-]? ' +
+            '\d+) \b</Regex>'
+          '  </Scheme>'
+          ''
+          '  <Scheme name='#39'Comment'#39' inherit='#39'Text'#39' defaultToken='#39'comment'#39'>'
+          '    <Regex token0='#39'st'#39' regex='#39';.*$'#39' />'
+          '  </Scheme>'
+          ''
+          ''
+          '  <Scheme name='#39'String'#39' inherit='#39'Text'#39' defaultToken='#39'string'#39'>'
+          '  </Scheme>'
+          ''
+          
+            '  <Scheme name='#39'BadString'#39' inherit='#39'String'#39' defaultToken='#39'badStr' +
+            'ing'#39'>'
+          '  </Scheme>'
+          ''
+          '  <Scheme name='#39'StringFind'#39'>'
+          '    <Regex innerScheme='#39'BadString'#39' > '
+          '        &quot; (.*?\\ &quot; )*? .* $ '
+          '    </Regex>'
+          ''
+          '    <Regex innerScheme='#39'String'#39' priority='#39'10'#39'> '
+          '        &quot; (.*?\\ &quot; )*? &quot; c?'
+          '    </Regex>'
+          ''
+          '    <Regex innerScheme='#39'String'#39' priority='#39'20'#39'> '
+          '        &quot; (.*?\\ &quot; )*? .*? [^\\] &quot; c?'
+          '    </Regex>  '
+          ''
+          '    <Regex innerScheme='#39'String'#39' priority='#39'30'#39'> '
+          '        &quot;  &quot; c?'
+          '    </Regex>    '
+          '  </Scheme>'
+          ''
+          ''
+          ''
+          '  <Scheme name='#39'Main'#39' inherit='#39'Numbers'#39' inherit0='#39'StringFind'#39
+          '          defaultToken='#39'default'#39
+          '          allIgnoreCase='#39'true'#39'>'
+          ''
+          '    <Regex innerScheme='#39'Comment'#39' regex='#39';.*$'#39' />'
+          '    '
+          
+            '    <Regex token0='#39'symbol'#39' regex='#39'[    \]    \[  \( \) &gt; &lt;' +
+            '  &amp; ]'#39' />'
+          '    <Regex token0='#39'symbol'#39' regex='#39'[-=+^;,]'#39' />'
+          '    '
+          
+            '    <KeywordRegex moreWordChars='#39'.'#39'>\b[a-zA-Z_][\w_]*\b</Keyword' +
+            'Regex>'
+          ''
+          '    <Keywords>'
+          '        ADC'
+          '        ADD'
+          '        AND'
+          '        BIT'
+          '        CALL'
+          '        CCF'
+          '        CP'
+          '        CPD'
+          '        CPDR'
+          '        CPI'
+          '        CPIR'
+          '        CPL'
+          '        DAA'
+          '        DEC'
+          '        DI'
+          '        DJNZ'
+          '        EI'
+          '        EX'
+          '        EXX'
+          '        HALT'
+          '        IM'
+          '        IN'
+          '        INC'
+          '        IND'
+          '        INDR'
+          '        INI'
+          '        INIR'
+          '        JP'
+          '        JR'
+          '        LD'
+          '        LDD'
+          '        LDDR'
+          '        LDI'
+          '        LDIR'
+          '        NEG'
+          '        NOP'
+          '        OR'
+          '        OTDR'
+          '        OTIR'
+          '        OUT'
+          '        OUTD'
+          '        OUTI'
+          '        POP'
+          '        PUSH'
+          '        RES'
+          '        RET'
+          '        RETI'
+          '        RETN'
+          '        RL'
+          '        RLA'
+          '        RLC'
+          '        RLCA'
+          '        RLD'
+          '        RR'
+          '        RRA'
+          '        RRC'
+          '        RRCA'
+          '        RRD'
+          '        RST'
+          '        SBC'
+          '        SCF'
+          '        SET'
+          '        SLA'
+          '        SLL/SL1'
+          '        SRA'
+          '        SRL'
+          '        SUB'
+          '        XOR'
+          '    </Keywords>'
+          ''
+          '    <!--Regex innerScheme='#39'Comment'#39' regex='#39'Rem.*$'#39' /-->'
+          '    <Regex innerScheme='#39'Comment'#39' regex=";.*$" />'
+          ''
+          '    <SkipSyntaxToken token='#39'comment'#39' />'
+          ''
+          '  </Scheme>'
+          '</SchemeList>'
+          '')
+      end
+      item
+        Name = 'TXT'
+        Scheme.Strings = (
+          '<?xml version="1.0" encoding="UTF-8"?>'
+          ''
+          '<SchemeList root='#39'Main'#39'>'
+          ''
+          '  <TokenAlias name='#39'text'#39' baseToken='#39'default'#39' />'
+          '  '
+          '  <Scheme name='#39'Text'#39'>'
+          '        <Regex token0='#39'email'#39'>'
+          '            [_a-zA-Z\d\-\.]{1,40}'
+          '            @ '
+          '            ([_ a-z A-Z \d \-]+ '
+          '            (\. [_ a-z A-Z \d \-]+ )+ )'
+          '        </Regex>                '
+          '  </Scheme>'
+          ''
+          '  <Scheme name='#39'Main'#39' keywordsIgnoreCase='#39'false'#39' '
+          '          inherit='#39'Text'#39
+          '          defaultToken='#39'default'#39'>'
+          '  </Scheme>'
           '</SchemeList>')
       end>
     ColorSchemes = <
       item
-        Name = 'default'
+        Name = 'Light'
         Scheme.Strings = (
-          '<?xml version="1.0" encoding="UTF-8"?>'
+          '<?xml version="1.0"?>'
           '<Attributes>'
+          
+            #9'<ViewColors color="white" readOnlyBgColor="white" selectedLineB' +
+            'g="#FAFAFA" selectionBg="#ADD6FF" selectionColor="black" wrapRul' +
+            'erColor="#D3D3D3" breakpointLineColor="black" breakpointLineBg="' +
+            '#FFD1D1" debugFrameLineColor="black" debugFrameLineBg="#E9E9E9" ' +
+            'debugFrameActiveLineColor="black" debugFrameActiveLineBg="#DFE9D' +
+            'F" debugFrameTopLineColor="black" debugFrameTopLineBg="#FFFFBA"/' +
+            '>'
           #9'<Token name="default" textColor="#0"/>'
-          #9'<Token name="defaultEmbed" backgroundColor="#ECE9D8"/>'
-          #9'<Token name="docStart" fontStyle="bold"/>'
-          #9'<Token name="docEnd" fontStyle="bold"/>'
-          #9'<Token name="docBlockStart" fontStyle="bold"/>'
-          #9'<Token name="docBlockEnd" fontStyle="bold"/>'
-          #9'<Token name="docInstruction" fontStyle="bold"/>'
-          #9'<Token name="docDefault" backgroundColor="#ECE9D8"/>'
+          #9'<Token name="defaultEmbed" backgroundColor="#E9E9E9"/>'
           #9'<Token name="comment" textColor="#008000"/>'
           #9'<Token name="commentStart" textColor="#008000"/>'
           #9'<Token name="commentEnd" textColor="#008000"/>'
-          #9'<Token name="keyword" fontStyle="bold"/>'
-          #9'<Token name="privateSymbol" textColor="Navy"/>'
-          #9'<Token name="email" fontStyle="bold"/>'
+          #9'<Token name="keyword" textColor="#0000FF"/>'
+          #9'<Token name="email"/>'
+          #9'<Token name="number" textColor="#098658"/>'
+          #9'<Token name="symbol" textColor="#0080C0"/>'
+          #9'<Token name="string" textColor="#A31515"/>'
+          #9'<Token name="escaped" textColor="#A31515"/>'
+          #9'<Token name="badString" textColor="red"/>'
+          #9'<Token name="preprocessor" textColor="#0000FF"/>'
+          #9'<Token name="badPreprocessor" textColor="red"/>'
+          #9'<Token name="regexStart" textColor="#811F3F"/>'
+          #9'<Token name="regexEnd" textColor="#811F3F"/>'
           
             #9'<Token name="hairy" textColor="#000080" fontStyle="bold, italic' +
             ', underline, strikeOut"/>'
-          #9'<Token name="number" textColor="Blue"/>'
-          #9'<Token name="symbol" textColor="Blue"/>'
-          #9'<Token name="string" textColor="Blue"/>'
-          #9'<Token name="blockStart" fontStyle="bold"/>'
-          #9'<Token name="blockEnd" fontStyle="bold"/>'
-          #9'<Token name="badString" textColor="Red"/>'
-          #9'<Token name="preprocessor" textColor="#008080"/>'
-          #9'<Token name="badPreprocessor" textColor="red"/>'
-          #9'<Token name="escaped" textColor="Navy"/>'
+          #9'<!-- HTML/XML/CSS -->'
+          #9'<Token name="htmlText" textColor="#0"/>'
+          #9'<Token name="tagOpen" textColor="#800000"/>'
+          #9'<Token name="tagClose" textColor="#800000"/>'
+          #9'<Token name="entity"/>'
+          #9'<Token name="attributeName" textColor="#FF0000"/>'
+          #9'<Token name="attributeValue" textColor="#0000FF"/>'
+          #9'<Token name="badAttributeValue" textColor="red"/>'
+          #9'<Token name="url" textColor="#A31515"/>'
+          #9'<Token name="fpi" textColor="#A31515"/>'
+          #9'<Token name="dtdTagStartEnd" textColor="#800000"/>'
+          #9'<!-- CSS -->'
+          #9'<Token name="cssRule" textColor="#800000"/>'
+          #9'<Token name="cssRelSymbol"/>'
           
-            #9'<Token name="quotedVariable" textColor="Navy" fontStyle="bold"/' +
-            '>'
-          #9'<Token name="regexStart" textColor="Navy" fontStyle="bold"/>'
-          
-            #9'<Token name="regexEnd" textColor="Navy" fontStyle="bold"/><!--h' +
-            'tml/xml tokens-->'
-          #9'<Token name="tagOpen" textColor="Purple"/>'
-          #9'<Token name="tagClose" textColor="Purple"/>'
-          
-            #9'<Token name="dtdTagStartEnd" textColor="Purple" fontStyle="bold' +
-            '"/>'
-          #9'<Token name="url" textColor="Red"/>'
-          #9'<Token name="fpi" textColor="Red" fontStyle="bold"/>'
-          #9'<Token name="entity" textColor="#FF4500"/>'
-          
-            #9'<Token name="attributeName" backgroundColor="Black" textColor="' +
-            '#583485"/>'
-          #9'<Token name="attributeValue" textColor="Blue"/>'
-          #9'<Token name="badAttributeValue" textColor="Red"/>'
-          #9'<Token name="cssRule" textColor="#583485" fontStyle="bold"/>'
-          #9'<Token name="cssRelSymbol" fontStyle="bold"/>'
-          #9'<Token name="cssUrlHref" fontStyle="underline"/>'
+            #9'<Token name="cssUrlHref" textColor="#A31515" fontStyle="underli' +
+            'ne"/>'
           #9'<Token name="cssUrlAttr"/>'
-          #9'<Token name="cssAttrListBG" textColor="Blue"/>'
-          
-            #9'<Token name="cdataTagStart" textColor="Purple" fontStyle="bold"' +
-            '/>'
-          #9'<Token name="cdataTagEnd" textColor="Purple" fontStyle="bold"/>'
-          
-            #9'<Token name="xmlDeclStart" textColor="Purple" fontStyle="bold"/' +
-            '>'
-          #9'<Token name="xmlDeclEnd" textColor="Purple" fontStyle="bold"/>'
+          #9'<Token name="cssAttrListBG"/>'
+          #9'<!-- XML -->'
+          #9'<Token name="cdataTagStart"/>'
+          #9'<Token name="cdataTagEnd"/>'
+          #9'<Token name="xmlDeclStart" textColor="#800000"/>'
+          #9'<Token name="xmlDeclEnd" textColor="#800000"/>'
+          #9'<!-- Python -->'
+          #9'<Token name="privateSymbol"/>'
+          #9'<!-- Perl/PHP -->'
+          #9'<Token name="docDefault"/>'
+          #9'<Token name="docStart" textColor="#0000FF"/>'
+          #9'<Token name="docEnd" textColor="#0000FF"/>'
+          #9'<Token name="docBlockStart"/>'
+          #9'<Token name="docBlockEnd"/>'
+          #9'<Token name="docInstruction"/>'
+          #9'<Token name="blockStart"/>'
+          #9'<Token name="blockEnd"/>'
+          #9'<!-- TCL -->'
+          #9'<Token name="quotedVariable" textColor="gray"/>'
           '</Attributes>')
       end
       item
         Name = 'Dark'
         Scheme.Strings = (
-          '<?xml version="1.0" encoding="UTF-8"?>'
+          '<?xml version="1.0"?>'
           '<Attributes>'
+          #9'<ViewColors color="#1E1E1E" readOnlyBgColor="#1E1E1E"/>'
+          #9'<!--html/xml tokens-->'
+          #9'<Token backgroundColor="#ECE9D8" name="defaultEmbed"/>'
+          #9'<Token fontStyle="bold" name="blockEnd"/>'
+          #9'<Token fontStyle="bold" name="blockStart"/>'
+          #9'<Token fontStyle="bold" name="cdataTagEnd" textColor="Purple"/>'
           
-            #9'<Token name="default" backgroundColor="Black" textColor="White"' +
+            #9'<Token fontStyle="bold" name="cdataTagStart" textColor="Purple"' +
             '/>'
-          #9'<Token name="defaultEmbed" backgroundColor="#ECE9D8"/>'
+          #9'<Token fontStyle="bold" name="cssRelSymbol"/>'
+          #9'<Token fontStyle="bold" name="cssRule" textColor="#583485"/>'
+          #9'<Token fontStyle="bold" name="docBlockEnd"/>'
+          #9'<Token fontStyle="bold" name="docBlockStart"/>'
+          #9'<Token fontStyle="bold" name="docEnd"/>'
+          #9'<Token fontStyle="bold" name="docInstruction"/>'
+          #9'<Token fontStyle="bold" name="docStart"/>'
           
-            #9'<Token name="docStart" backgroundColor="Black" fontStyle="bold"' +
-            '/>'
-          #9'<Token name="docEnd" backgroundColor="Black" fontStyle="bold"/>'
+            #9'<Token fontStyle="bold" name="dtdTagStartEnd" textColor="Purple' +
+            '"/>'
+          #9'<Token fontStyle="bold" name="email" textColor="Olive"/>'
+          #9'<Token fontStyle="bold" name="fpi" textColor="Red"/>'
           
-            #9'<Token name="docBlockStart" backgroundColor="Black" fontStyle="' +
-            'bold"/>'
+            #9'<Token fontStyle="bold" name="quotedVariable" textColor="Navy"/' +
+            '>'
+          #9'<Token fontStyle="bold" name="regexEnd" textColor="Navy"/>'
+          #9'<Token fontStyle="bold" name="regexStart" textColor="Navy"/>'
+          #9'<Token fontStyle="bold" name="xmlDeclEnd" textColor="Purple"/>'
           
-            #9'<Token name="docBlockEnd" backgroundColor="Black" fontStyle="bo' +
-            'ld"/>'
-          
-            #9'<Token name="docInstruction" backgroundColor="Black" fontStyle=' +
-            '"bold"/>'
-          #9'<Token name="docDefault" backgroundColor="Black"/>'
-          
-            #9'<Token name="comment" backgroundColor="Black" textColor="Green"' +
-            '/>'
-          
-            #9'<Token name="commentStart" backgroundColor="Black" textColor="G' +
-            'reen"/>'
-          
-            #9'<Token name="commentEnd" backgroundColor="Black" textColor="Gre' +
-            'en"/>'
-          
-            #9'<Token name="keyword" backgroundColor="Black" textColor="Aqua" ' +
-            'fontStyle="bold"/>'
-          
-            #9'<Token name="privateSymbol" backgroundColor="Black" textColor="' +
-            'Fuchsia"/>'
-          
-            #9'<Token name="email" backgroundColor="Black" textColor="Olive" f' +
-            'ontStyle="bold"/>'
-          
-            #9'<Token name="hairy" backgroundColor="Black" textColor="Navy" fo' +
-            'ntStyle="italic bold underline strikeOut"/>'
-          
-            #9'<Token name="number" backgroundColor="Black" textColor="Yellow"' +
-            '/>'
-          
-            #9'<Token name="symbol" backgroundColor="Black" textColor="Yellow"' +
-            '/>'
-          #9'<Token name="string" backgroundColor="Black" textColor="Blue"/>'
-          
-            #9'<Token name="blockStart" backgroundColor="Black" fontStyle="bol' +
-            'd"/>'
-          
-            #9'<Token name="blockEnd" backgroundColor="Black" fontStyle="bold"' +
-            '/>'
-          
-            #9'<Token name="badString" backgroundColor="Black" textColor="Red"' +
-            '/>'
-          
-            #9'<Token name="preprocessor" backgroundColor="Black" textColor="T' +
-            'eal"/>'
-          
-            #9'<Token name="badPreprocessor" backgroundColor="Maroon" textColo' +
-            'r="Red"/>'
-          
-            #9'<Token name="escaped" backgroundColor="Black" textColor="Navy"/' +
+            #9'<Token fontStyle="bold" name="xmlDeclStart" textColor="Purple"/' +
             '>'
           
-            #9'<Token name="quotedVariable" backgroundColor="Black" textColor=' +
-            '"Navy" fontStyle="bold"/>'
+            #9'<Token fontStyle="italic bold underline strikeOut" name="hairy"' +
+            ' textColor="Navy"/>'
+          #9'<Token fontStyle="underline" name="cssUrlHref"/>'
+          #9'<Token name="attributeName" textColor="#583485"/>'
+          #9'<Token name="attributeValue" textColor="Blue"/>'
+          #9'<Token name="badAttributeValue" textColor="Red"/>'
+          #9'<Token name="badString" textColor="Red"/>'
+          #9'<Token name="commentEnd" textColor="Green"/>'
+          #9'<Token name="commentStart" textColor="Green"/>'
+          #9'<Token name="cssAttrListBG" textColor="Blue"/>'
+          #9'<Token name="cssUrlAttr"/>'
+          #9'<Token name="docDefault"/>'
+          #9'<Token name="entity" textColor="#FF4500"/>'
+          #9'<Token name="escaped" textColor="Navy"/>'
+          #9'<Token name="preprocessor" textColor="Teal"/>'
+          #9'<Token name="privateSymbol" textColor="Fuchsia"/>'
+          #9'<Token name="tagOpen" textColor="Purple"/>'
+          #9'<Token name="url" textColor="Red"/>'
+          #9'<Token name="badPreprocessor" textColor="Red"/>'
           
-            #9'<Token name="regexStart" backgroundColor="Black" textColor="Nav' +
-            'y" fontStyle="bold"/>'
-          
-            #9'<Token name="regexEnd" backgroundColor="Black" textColor="Navy"' +
-            ' fontStyle="bold"/><!--html/xml tokens-->'
-          
-            #9'<Token name="tagOpen" backgroundColor="Black" textColor="Purple' +
-            '"/>'
-          
-            #9'<Token name="tagClose" backgroundColor="Maroon" textColor="Purp' +
+            #9'<Token backgroundColor="Maroon" name="tagClose" textColor="Purp' +
             'le"/>'
-          
-            #9'<Token name="dtdTagStartEnd" backgroundColor="Black" textColor=' +
-            '"Purple" fontStyle="bold"/>'
-          #9'<Token name="url" backgroundColor="Black" textColor="Red"/>'
-          
-            #9'<Token name="fpi" backgroundColor="Black" textColor="Red" fontS' +
-            'tyle="bold"/>'
-          
-            #9'<Token name="entity" backgroundColor="Black" textColor="#FF4500' +
-            '"/>'
-          
-            #9'<Token name="attributeName" backgroundColor="Black" textColor="' +
-            '#583485"/>'
-          
-            #9'<Token name="attributeValue" backgroundColor="Black" textColor=' +
-            '"Blue"/>'
-          
-            #9'<Token name="badAttributeValue" backgroundColor="Black" textCol' +
-            'or="Red"/>'
-          
-            #9'<Token name="cssRule" backgroundColor="Black" textColor="#58348' +
-            '5" fontStyle="bold"/>'
-          
-            #9'<Token name="cssRelSymbol" backgroundColor="Black" fontStyle="b' +
-            'old"/>'
-          
-            #9'<Token name="cssUrlHref" backgroundColor="Black" fontStyle="und' +
-            'erline"/>'
-          #9'<Token name="cssUrlAttr" backgroundColor="Black"/>'
-          
-            #9'<Token name="cssAttrListBG" backgroundColor="Black" textColor="' +
-            'Blue"/>'
-          
-            #9'<Token name="cdataTagStart" backgroundColor="Black" textColor="' +
-            'Purple" fontStyle="bold"/>'
-          
-            #9'<Token name="cdataTagEnd" backgroundColor="Black" textColor="Pu' +
-            'rple" fontStyle="bold"/>'
-          
-            #9'<Token name="xmlDeclStart" backgroundColor="Black" textColor="P' +
-            'urple" fontStyle="bold"/>'
-          
-            #9'<Token name="xmlDeclEnd" backgroundColor="Black" textColor="Pur' +
-            'ple" fontStyle="bold"/>'
+          #9'<Token name="default" textColor="White"/>'
+          #9'<Token name="comment" textColor="#6A9955"/>'
+          #9'<Token name="string" textColor="#CE9178"/>'
+          #9'<Token fontStyle="bold" name="symbol" textColor="#FFD800"/>'
+          #9'<Token fontStyle="bold" name="number" textColor="Fuchsia"/>'
+          #9'<Token name="constant" textColor="Lime"/>'
+          #9'<Token name="variable" textColor="#00CCCC"/>'
+          #9'<Token fontStyle="bold" name="keyword" textColor="#569CD6"/>'
+          #9'<Token fontStyle="bold" name="function" textColor="#0094FF"/>'
+          #9'<Token fontStyle="bold" name="codeword" textColor="White"/>'
           '</Attributes>')
       end>
     ActiveSyntaxScheme = 'AGD'
     ActiveColorScheme = 'Dark'
-    Left = 64
-    Top = 48
+    Left = 168
+    Top = 152
   end
   object Actions: TActionList
     Images = vilToolbar

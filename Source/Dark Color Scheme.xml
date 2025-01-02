@@ -1,49 +1,55 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Attributes>
+    <ViewColors color="#1E1E1E"
+                readOnlyBgColor="#1E1E1E"/>
   <!--html/xml tokens-->
   <Token backgroundColor="#ECE9D8" name="defaultEmbed" />
-  <Token backgroundColor="Black" fontStyle="bold" name="blockEnd" />
-  <Token backgroundColor="Black" fontStyle="bold" name="blockStart" />
-  <Token backgroundColor="Black" fontStyle="bold" name="cdataTagEnd" textColor="Purple" />
-  <Token backgroundColor="Black" fontStyle="bold" name="cdataTagStart" textColor="Purple" />
-  <Token backgroundColor="Black" fontStyle="bold" name="cssRelSymbol" />
-  <Token backgroundColor="Black" fontStyle="bold" name="cssRule" textColor="#583485" />
-  <Token backgroundColor="Black" fontStyle="bold" name="docBlockEnd" />
-  <Token backgroundColor="Black" fontStyle="bold" name="docBlockStart" />
-  <Token backgroundColor="Black" fontStyle="bold" name="docEnd" />
-  <Token backgroundColor="Black" fontStyle="bold" name="docInstruction" />
-  <Token backgroundColor="Black" fontStyle="bold" name="docStart" />
-  <Token backgroundColor="Black" fontStyle="bold" name="dtdTagStartEnd" textColor="Purple" />
-  <Token backgroundColor="Black" fontStyle="bold" name="email" textColor="Olive" />
-  <Token backgroundColor="Black" fontStyle="bold" name="fpi" textColor="Red" />
-  <Token backgroundColor="Black" fontStyle="bold" name="keyword" textColor="Aqua" />
-  <Token backgroundColor="Black" fontStyle="bold" name="quotedVariable" textColor="Navy" />
-  <Token backgroundColor="Black" fontStyle="bold" name="regexEnd" textColor="Navy" />
-  <Token backgroundColor="Black" fontStyle="bold" name="regexStart" textColor="Navy" />
-  <Token backgroundColor="Black" fontStyle="bold" name="xmlDeclEnd" textColor="Purple" />
-  <Token backgroundColor="Black" fontStyle="bold" name="xmlDeclStart" textColor="Purple" />
-  <Token backgroundColor="Black" fontStyle="italic bold underline strikeOut" name="hairy" textColor="Navy" />
-  <Token backgroundColor="Black" fontStyle="underline" name="cssUrlHref" />
-  <Token backgroundColor="Black" name="attributeName" textColor="#583485" />
-  <Token backgroundColor="Black" name="attributeValue" textColor="Blue" />
-  <Token backgroundColor="Black" name="badAttributeValue" textColor="Red" />
-  <Token backgroundColor="Black" name="badString" textColor="Red" />
-  <Token backgroundColor="Black" name="comment" textColor="Green" />
-  <Token backgroundColor="Black" name="commentEnd" textColor="Green" />
-  <Token backgroundColor="Black" name="commentStart" textColor="Green" />
-  <Token backgroundColor="Black" name="cssAttrListBG" textColor="Blue" />
-  <Token backgroundColor="Black" name="cssUrlAttr" />
-  <Token backgroundColor="Black" name="default" textColor="White" />
-  <Token backgroundColor="Black" name="docDefault" />
-  <Token backgroundColor="Black" name="entity" textColor="#FF4500" />
-  <Token backgroundColor="Black" name="escaped" textColor="Navy" />
-  <Token backgroundColor="Black" name="number" textColor="Yellow" />
-  <Token backgroundColor="Black" name="preprocessor" textColor="Teal" />
-  <Token backgroundColor="Black" name="privateSymbol" textColor="Fuchsia" />
-  <Token backgroundColor="Black" name="string" textColor="Blue" />
-  <Token backgroundColor="Black" name="symbol" textColor="Yellow" />
-  <Token backgroundColor="Black" name="tagOpen" textColor="Purple" />
-  <Token backgroundColor="Black" name="url" textColor="Red" />
-  <Token backgroundColor="Maroon" name="badPreprocessor" textColor="Red" />
+  <Token fontStyle="bold" name="blockEnd" />
+  <Token fontStyle="bold" name="blockStart" />
+  <Token fontStyle="bold" name="cdataTagEnd" textColor="Purple" />
+  <Token fontStyle="bold" name="cdataTagStart" textColor="Purple" />
+  <Token fontStyle="bold" name="cssRelSymbol" />
+  <Token fontStyle="bold" name="cssRule" textColor="#583485" />
+  <Token fontStyle="bold" name="docBlockEnd" />
+  <Token fontStyle="bold" name="docBlockStart" />
+  <Token fontStyle="bold" name="docEnd" />
+  <Token fontStyle="bold" name="docInstruction" />
+  <Token fontStyle="bold" name="docStart" />
+  <Token fontStyle="bold" name="dtdTagStartEnd" textColor="Purple" />
+  <Token fontStyle="bold" name="email" textColor="Olive" />
+  <Token fontStyle="bold" name="fpi" textColor="Red" />
+  <Token fontStyle="bold" name="quotedVariable" textColor="Navy" />
+  <Token fontStyle="bold" name="regexEnd" textColor="Navy" />
+  <Token fontStyle="bold" name="regexStart" textColor="Navy" />
+  <Token fontStyle="bold" name="xmlDeclEnd" textColor="Purple" />
+  <Token fontStyle="bold" name="xmlDeclStart" textColor="Purple" />
+  <Token fontStyle="italic bold underline strikeOut" name="hairy" textColor="Navy" />
+  <Token fontStyle="underline" name="cssUrlHref" />
+  <Token name="attributeName" textColor="#583485" />
+  <Token name="attributeValue" textColor="Blue" />
+  <Token name="badAttributeValue" textColor="Red" />
+  <Token name="badString" textColor="Red" />
+  <Token name="commentEnd" textColor="Green" />
+  <Token name="commentStart" textColor="Green" />
+  <Token name="cssAttrListBG" textColor="Blue" />
+  <Token name="cssUrlAttr" />
+  <Token name="docDefault" />
+  <Token name="entity" textColor="#FF4500" />
+  <Token name="escaped" textColor="Navy" />
+  <Token name="preprocessor" textColor="Teal" />
+  <Token name="privateSymbol" textColor="Fuchsia" />
+  <Token name="tagOpen" textColor="Purple" />
+  <Token name="url" textColor="Red" />
+  <Token name="badPreprocessor" textColor="Red" />
   <Token backgroundColor="Maroon" name="tagClose" textColor="Purple" />
+  <Token name="default" textColor="White" />
+  <Token name="comment" textColor="#6A9955" />
+  <Token name="string" textColor="#CE9178" />
+  <Token fontStyle="bold" name="symbol" textColor="#FFD800" />
+  <Token fontStyle="bold" name="number" textColor="Fuchsia" />
+  <Token name="constant" textColor="Lime" />
+  <Token name="variable" textColor="#00CCCC" />
+  <Token fontStyle="bold" name="keyword" textColor="#569CD6" />
+  <Token fontStyle="bold" name="function" textColor="#0094FF" />
+  <Token fontStyle="bold" name="codeword" textColor="White" />
 </Attributes>

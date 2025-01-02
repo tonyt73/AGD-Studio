@@ -118,6 +118,7 @@ inherited frmEditorMessages: TfrmEditorMessages
         inherited evEditor: TLMDEditView
           Width = 521
           Height = 704
+          CompletionSettings.ItemHeight = 14
           OnStatusChanged = OnStatusChanged
           ExplicitWidth = 521
           ExplicitHeight = 704
@@ -132,6 +133,9 @@ inherited frmEditorMessages: TfrmEditorMessages
         inherited ToolBar1: TToolBar
           Width = 521
           ExplicitWidth = 521
+        end
+        inherited lmdDocument: TLMDEditDocument
+          ActiveSyntaxScheme = 'TXT'
         end
         inherited vilToolbar: TVirtualImageList
           Width = 30
