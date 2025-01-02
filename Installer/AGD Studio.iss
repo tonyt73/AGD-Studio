@@ -77,7 +77,7 @@ Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64\vclimg290.bpl"; De
 Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64\vclsmp290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64\vclwinx290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64\vclx290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
-Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64\xmlrtl290.bpl"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64\xmlrtl290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\win64x\lmdrtcore290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\win64x\lmdrtdocking290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\win64x\lmdrtelcore290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
