@@ -26,6 +26,7 @@ __fastcall TfrmEditorMessages::TfrmEditorMessages(TComponent* Owner)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMessages::OnDocumentSet()
 {
+    ecMessageEditor->AutoFormat = false;
     fFramesView->Timer1->Enabled = false;
     Color = ThemeManager::Background;
     ecMessageEditor->Document = Document;

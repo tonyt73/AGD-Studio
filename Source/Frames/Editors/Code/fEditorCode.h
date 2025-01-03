@@ -92,6 +92,8 @@ __published:    // IDE-managed Components
     TToolButton *ToolButton1;
     TToolButton *btnChangeFont;
     TToolButton *ToolButton5;
+    TAction *actFontSizeIncrease;
+    TAction *actFontSizeDecrease;
     void __fastcall actCopyExecute(TObject *Sender);
     void __fastcall actCutExecute(TObject *Sender);
     void __fastcall actFontExecute(TObject *Sender);
@@ -114,16 +116,20 @@ __published:    // IDE-managed Components
     void __fastcall evEditorKeyUp(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall FontDialogApply(TObject *Sender, HWND Wnd);
     void __fastcall evEditorNotFound(TObject *Sender, TLMDEditNotFoundAction &Action);
+    void __fastcall actFontSizeIncreaseExecute(TObject *Sender);
+    void __fastcall actFontSizeDecreaseExecute(TObject *Sender);
 
 private:    // User declarations
     TLMDEditView*               m_ActiveEdit;
     TLMDEditSearchDlgOptions    m_SearchOptions;
     std::map<String, TAction*>  m_ActionMap;
+    bool                        m_AutoFormat;
 
     void            __fastcall  OnChangeString(const OnChange<String>& event);
     String          __fastcall  GetSyntaxScByExt(const String& extension);
     virtual void    __fastcall  OnEvent(const Event& event) override;
     void            __fastcall  OnDocumentSet() override;
+    int             __fastcall  GetFontSizeIndex();
 
     __property TLMDEditView*    ActiveEdit = { read = m_ActiveEdit };
 
@@ -132,6 +138,7 @@ public:     // User declarations
 
 //    void            __fastcall  SetDocument(Project::Document* document);
     void            __fastcall  UpdateStatus();
+    __property  bool            AutoFormat = { read = m_AutoFormat, write = m_AutoFormat };
 };
 //---------------------------------------------------------------------------
 #endif
