@@ -30,6 +30,7 @@ __fastcall ImageDocument::ImageDocument(const String& name)
         RegisterProperty("Height", "Dimensions", "The height in pixels of the image");
         RegisterProperty("Frames", "Dimensions", "The number of frames in the image");
         RegisterProperty("ImagesPerFrame", "Dimensions", "The number of separate AGD images used in a frame");
+        RegisterProperty("Index", "Details", "The AGD (0-based) index of the image.");
         // json loading properties
         m_PropertyMap["Image.Width"] = &m_Width;
         m_PropertyMap["Image.Height"] = &m_Height;

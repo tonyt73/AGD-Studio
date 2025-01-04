@@ -257,7 +257,7 @@ bool AgdImporter::AddEvents()
 //---------------------------------------------------------------------------
 bool AgdImporter::AddMap()
 {
-    // unset an empty map
+    // AGD screen index to map grid coordinate
     std::map<int, TPoint> mapIndexToPt;
     // read in the map indexes
     auto mapWidth = StrToIntDef(m_Parser.Variables["map"]["width"].front(), -1);
@@ -274,14 +274,16 @@ bool AgdImporter::AddMap()
         int mi = 0;
         for (auto value : m_Parser.Variables["map"]["table"]) {
             auto si = StrToIntDef(value, -1);
-            if (si != -1 && si != Project::g_EmptyRoom) {
+            if (si != -1 && si != Project::g_RoomIndexEmpty) {
                 auto sx = mi % mapWidth;
                 auto sy = mi / mapWidth;
                 mapIndexToPt[si] = TPoint(sx,sy);
                 if (si == ssi) {
+                    // set the start screen grid location
                     scrPos.x = sx;
                     scrPos.y = sy;
                 }
+                // count the screens/rooms
                 numScreens++;
             }
             mi++;
@@ -291,16 +293,16 @@ bool AgdImporter::AddMap()
         auto is = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile];
         auto tx = is.Step.cx;
         auto ty = is.Step.cy;
-        for (auto i = 0; i < numScreens; i++) {
-            // add screen (si) tile entities to the map
-            auto varName = "screens" + m_Parser.PadNum(i+1);
+        for (auto ri = 0; ri < numScreens; ri++) {
+            // add screen/room (ri) tile entities to the map
+            auto varName = "screens" + m_Parser.PadNum(ri+1);
             auto screen = m_Parser.Variables[varName]["screen"];
             std::vector<int> screenTiles;
             for (auto tidx : screen) {
                 screenTiles.push_back(StrToInt(tidx));
             }
-            // get the screens map.x and map.y positions
-            auto scrCoords = mapIndexToPt[i];
+            // get the screen/room map.x and map.y positions
+            auto scrCoords = mapIndexToPt[ri];
             scrCoords.x *= m_Window.Width()  * static_cast<LONG>(tx);
             scrCoords.y *= m_Window.Height() * static_cast<LONG>(ty);
             for (auto sy = 0; sy < m_Window.Height(); sy++) {
@@ -311,7 +313,8 @@ bool AgdImporter::AddMap()
                     auto tileDoc = dynamic_cast<Project::TileDocument*>(theDocumentManager.Get("Image", "Tile", "Tile " + IntToStr(ti+1)));
                     if (tileDoc) {
                         me.Id = tileDoc->Id;
-                        me.RoomIndex = i;
+                        me.RoomIndex = ri;
+                        // map tile into global map pixel coords: screen.x position + (tile x position * tile width), screen.y position + (tile y position * tile height)
                         me.Pt = TPoint(scrCoords.x + (sx * tx), scrCoords.y + (sy * ty));
                         entities.push_back(me);
                     } else {
@@ -320,7 +323,7 @@ bool AgdImporter::AddMap()
                 }
             }
             // get the spritepositions for the screen(room)
-            auto screenName = "screen" + m_Parser.PadNum(i+1);
+            auto screenName = "screen" + m_Parser.PadNum(ri+1);
             auto spc = m_Parser.Variables["spriteposition"][screenName + ".sprite.type"].size();
             for (auto sp = 0; sp < spc; sp++) {
                 auto spt = StrToInt(m_Parser.Variables["spriteposition"][screenName + ".sprite.type"].front());
@@ -334,12 +337,12 @@ bool AgdImporter::AddMap()
                 auto spriteDoc = dynamic_cast<Project::SpriteDocument*>(theDocumentManager.Get("Image", "Sprite", "Sprite " + IntToStr(spi+1)));
                 if (spriteDoc) {
                     me.Id = spriteDoc->Id;
-                    me.RoomIndex = i;
+                    me.RoomIndex = ri;
                     me.SpriteType = spt;
                     me.Pt = TPoint(scrCoords.x +spx, scrCoords.y + spy);
                     entities.push_back(me);
                 } else {
-                    WarningMessage("[AGD Importer] Sprite document for index[" + IntToStr(spi) + "] not found during SpritePositions import process for Room: " + IntToStr(i) + ", Spriteposition: " + IntToStr(sp) + ".");
+                    WarningMessage("[AGD Importer] Sprite document for index[" + IntToStr(spi) + "] not found during SpritePositions import process for Room: " + IntToStr(ri) + ", Spriteposition: " + IntToStr(sp) + ".");
                 }
                 m_Parser.Variables["spriteposition"][screenName + ".sprite.type"].pop_front();
                 m_Parser.Variables["spriteposition"][screenName + ".sprite.index"].pop_front();
@@ -367,10 +370,11 @@ bool AgdImporter::AddMap()
 
         // get the map document
         auto doc = dynamic_cast<Project::TiledMapDocument*>(theDocumentManager.Get("Map", "Tiled", "Tile Map"));
+        doc->SetRoomMapping(mapIndexToPt);
         // set all the tile entities
         doc->SetEntities(Project::meMap, entities);
         // set the start screen
-        Bus::Publish<SetStartRoom>(SetStartRoom(scrPos));
+        Bus::Publish<SetSpecialRoom>(SetSpecialRoom(scrPos, 0));
         // loop over the objects/spritepositions and add them to each room's entity list
     } else {
         ErrorMessage("Map size is invalid: " + IntToStr(mapWidth) + "x" + UIntToStr(mapHeight) + " (" + UIntToStr(mapSize) + ", is not >= 1 and < 255.");

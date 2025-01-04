@@ -54,17 +54,17 @@ public:
     void                __fastcall  Clear();
     void                __fastcall  Clean();
 
-    __property  unsigned int        Id          = { read = GetId, write = SetId                 };
+    __property  unsigned int        Id          = { read = GetId        , write = SetId         };
     __property  ImageDocument*      Image       = { read = GetDocument                          };
-    __property  TPoint              Pt          = { read = GetPoint, write = SetPoint           };
-    __property  TPoint              DragPt      = { read = GetDragPoint, write = SetDragPoint   };
-    __property  bool                Dirty       = { read = m_Dirty, write = SetDirty            };
-    __property  bool                Selected    = { read = m_Selected, write = SetSelected      };
+    __property  TPoint              Pt          = { read = GetPoint     , write = SetPoint      };
+    __property  TPoint              DragPt      = { read = GetDragPoint , write = SetDragPoint  };
+    __property  bool                Dirty       = { read = m_Dirty      , write = SetDirty      };
+    __property  bool                Selected    = { read = m_Selected   , write = SetSelected   };
     __property  bool                IsSprite    = { read = GetIsSprite                          };
-    __property  int                 SpriteType  = { read = m_SpriteType, write = SetSpriteType  };
+    __property  int                 SpriteType  = { read = m_SpriteType , write = SetSpriteType };
     __property  Visuals::ImageTypes Type        = { read = m_ImageType                          };
-    __property  bool                RoomLocked  = { read = m_RoomLocked, write = SetRoomLocked  };
-    __property  unsigned int        RoomIndex   = { read = m_RoomIndex, write = SetRoomIndex    };
+    __property  bool                RoomLocked  = { read = m_RoomLocked , write = SetRoomLocked };
+    __property  unsigned int        RoomIndex   = { read = m_RoomIndex  , write = SetRoomIndex  };
 };
 //---------------------------------------------------------------------------
 typedef std::vector<MapEntity>      MapEntityList;

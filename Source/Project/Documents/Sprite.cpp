@@ -19,7 +19,7 @@ __fastcall SpriteDocument::SpriteDocument(const String& name, const String& extr
     m_Folder = "Images\\Sprites";
     if (IsValid(name))
     {
-        RegisterProperty("Name", "Details", "The name of the sprite");
+        //RegisterProperty("Name", "Details", "The name of the sprite");
         ExtractSize(extra);
         AddFrame();
     }

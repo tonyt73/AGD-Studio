@@ -24,7 +24,10 @@ __fastcall ObjectDocument::ObjectDocument(const String& name, const String& extr
     RegisterProperty("Name", "Details", "The name of the object");
     RegisterProperty("Room", "Details", "The Location of the room the Object is in. In Across (X) and Down (Y) coordinates");
     RegisterProperty("Position", "Details", "The pixel position of the object in the room");
-    RegisterProperty("State", "Details", "The state the Object is in (Unassigned, Inventory or Room)");
+    RegisterProperty("State", "Details", "The state the Object is in (Assigned to a Room, the Inventory or Disabled)");
+    RegisterProperty("X", "Room", "The X position of the image in screen space relative to the game Window.");
+    RegisterProperty("Y", "Room", "The Y position of the image in screen space relative to the game Window.");
+    RegisterProperty("RoomIndex", "Room", "The AGD SCREEN number");
     m_File = GetFile();
     ExtractSize(extra);
     AddFrame();
@@ -51,6 +54,11 @@ void __fastcall ObjectDocument::SetRoomIndex(int value)
 void __fastcall ObjectDocument::SetState(Visuals::ObjectState state)
 {
     m_State = state;
+    if (state == Visuals::osDisabled) {
+        m_RoomIndex = 254;
+    } else if (state == Visuals::osInventory) {
+        m_RoomIndex = 255;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall ObjectDocument::DoSaveExtra()

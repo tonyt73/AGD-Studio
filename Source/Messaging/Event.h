@@ -106,43 +106,49 @@ public:
 class RoomSelected : public Event
 {
 private:
-    TSize                   m_Room;
+    TPoint                  m_Room;
 public:
-    __fastcall              RoomSelected(TSize room)
+    __fastcall              RoomSelected(TPoint room)
                             : Event("room.selected")
                             , m_Room(room)
                             {
                             }
 
-    __property  TSize       Room = { read = m_Room };
-};
-//---------------------------------------------------------------------------
-class SetStartRoom : public Event
-{
-private:
-    TPoint                  m_Room;
-public:
-    __fastcall              SetStartRoom(const TPoint& room)
-                            : Event("set.start.room")
-                            , m_Room(room)
-                            {
-                            }
-
     __property  TPoint      Room = { read = m_Room };
 };
 //---------------------------------------------------------------------------
-class StartRoomChanged : public Event
+class SetSpecialRoom : public Event
 {
 private:
-    TPoint                  m_Room;
+    TPoint                  m_RoomPt;
+    int                     m_RoomIndex;
 public:
-    __fastcall              StartRoomChanged(const TPoint& room)
-                            : Event("start.room.changed")
-                            , m_Room(room)
+    __fastcall              SetSpecialRoom(const TPoint& roomPt, int roomIndex)
+                            : Event("set.special.room")
+                            , m_RoomPt(roomPt)
+                            , m_RoomIndex(roomIndex)
                             {
                             }
 
-    __property  TPoint      Room = { read = m_Room };
+    __property  TPoint      Room  = { read = m_RoomPt    };
+    __property  TPoint      Index = { read = m_RoomIndex };
+};
+//---------------------------------------------------------------------------
+class SpecialRoomChanged : public Event
+{
+private:
+    TPoint                  m_RoomPt;
+    int                     m_RoomIndex;
+public:
+    __fastcall              SpecialRoomChanged(const TPoint& roomPt, int roomIndex)
+                            : Event("special.room.changed")
+                            , m_RoomPt(roomPt)
+                            , m_RoomIndex(roomIndex)
+                            {
+                            }
+
+    __property  TPoint      Room  = { read = m_RoomPt    };
+    __property  TPoint      Index = { read = m_RoomIndex };
 };
 //---------------------------------------------------------------------------
 class UpdateProperties : public Event
