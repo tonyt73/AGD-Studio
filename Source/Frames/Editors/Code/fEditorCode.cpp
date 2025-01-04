@@ -460,7 +460,7 @@ int __fastcall TfrmEditorCode::GetFontSizeIndex()
     return 2;   // size = 10
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::actFontSizeIncreaseExecute(TObject *Sender)
+void __fastcall TfrmEditorCode::actFontSizeIncreaseExecute(TObject* /*Sender*/)
 {
     auto index = std::min(GetFontSizeIndex() + 1, 16);
     auto font = evEditor->Font;
@@ -471,7 +471,7 @@ void __fastcall TfrmEditorCode::actFontSizeIncreaseExecute(TObject *Sender)
     Bus::Publish<OnChange<String>>(OnChange<String>("code.editor.font", theAppSettings.CodeEditorFontName + ":" + theAppSettings.CodeEditorFontHeight));
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorCode::actFontSizeDecreaseExecute(TObject *Sender)
+void __fastcall TfrmEditorCode::actFontSizeDecreaseExecute(TObject* /*Sender*/)
 {
     auto index = std::max(GetFontSizeIndex() - 1, 0);
     auto font = evEditor->Font;
