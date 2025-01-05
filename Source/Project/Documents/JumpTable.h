@@ -17,8 +17,8 @@ private:
     void                __fastcall  OnEndObject(const String& object) override;
     void                __fastcall  OnLoading() override;
     void                __fastcall  OnLoaded() override;
-    unsigned char       __fastcall  GetStepCount() const;
-            void        __fastcall  DefaultJumpTable();
+    int                 __fastcall  GetStepCount() const;
+    void                __fastcall  DefaultJumpTable();
 
 public:
                         __fastcall  JumpTableDocument(const String& name);
@@ -28,7 +28,7 @@ public:
     int                 __fastcall  GetStep(unsigned char index) const;
     void                __fastcall  SetStep(unsigned char index, int value);
 
-    unsigned char       __property  Count = { read = GetStepCount };
+    int                 __property  Count = { read = GetStepCount };
 };
 //---------------------------------------------------------------------------
 } // Project namespace

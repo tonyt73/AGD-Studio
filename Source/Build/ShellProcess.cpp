@@ -43,22 +43,18 @@ bool __fastcall ShellProcess::ShellExecute(const String& path, const String& cmd
     result = result && !m_Errored;
     BUILD_MSG(result ? bmOk : bmFailed);
     BUILD_MSG_POP(true);
+
     return result;
 }
 //---------------------------------------------------------------------------
 void __fastcall ShellProcess::OnOutputEvent(System::TObject* /*Sender*/, const System::UnicodeString ANewLine)
 {
-    if (ANewLine.LowerCase().Pos("error"))
-    {
+    if (ANewLine.LowerCase().Pos("error")) {
         m_Errored = true;
         BUILD_LINE(bmFailed, "» " + ANewLine);
-    }
-    else if (ANewLine.LowerCase().Pos("warn"))
-    {
+    } else if (ANewLine.LowerCase().Pos("warn")) {
         BUILD_LINE(bmWarning, "» " + ANewLine);
-    }
-    else
-    {
+    } else {
         BUILD_LINE(bmOutput, ANewLine);
     }
 }

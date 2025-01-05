@@ -24,9 +24,19 @@ inherited frmEditorCode: TfrmEditorCode
     ViewSettings = [vsShowWrapRuler, vsHideShowScrollbars, vsHighlightSelectedLine, vsAutoIndent, vsRightClickMovesCursor, vsBackspaceUnindents, vsDragDropEditing]
     TabWidth = 4
     WrapRulerWidth = 64
-    Color = clBlack
-    SelectedLineBg = 2105376
-    DebugFrameLineBg = clMedGray
+    Color = 1973790
+    ReadOnlyBgColor = 1973790
+    WrapRulerColor = 4210752
+    SelectedLineBg = 2697513
+    BreakpointLineColor = clWhite
+    BreakpointLineBg = 2237022
+    DebugFrameLineColor = clWhite
+    DebugFrameLineBg = 3223857
+    DebugFrameActiveLineColor = clWhite
+    DebugFrameActiveLineBg = 3689528
+    DebugFrameTopLineColor = clWhite
+    DebugFrameTopLineBg = 1592139
+    SelectionBg = 7884582
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
@@ -169,6 +179,7 @@ inherited frmEditorCode: TfrmEditorCode
       Margins.Bottom = 4
       Caption = 'ToolButton5'
       ImageIndex = 30
+      ImageName = 'font_delete'
       Style = tbsSeparator
     end
   end
@@ -182,7 +193,6 @@ inherited frmEditorCode: TfrmEditorCode
         Name = 'AGD'
         Scheme.Strings = (
           '<?xml version="1.0" encoding="UTF-8"?>'
-          ''
           '<SchemeList root='#39'Main'#39'>'
           ''
           '  <Scheme name='#39'Text'#39' inherit='#39'Numbers'#39'>'
@@ -203,9 +213,9 @@ inherited frmEditorCode: TfrmEditorCode
             '\d+) \b</Regex>'
           '  </Scheme>'
           ''
-          
-            '  <Scheme name='#39'Comment'#39' inherit='#39'Text'#39' defaultToken='#39'comment'#39'  ' +
-            '/>'
+          '  <Scheme name='#39'Comment'#39' inherit='#39'Text'#39' defaultToken='#39'comment'#39'>'
+          '    <Regex token0='#39'st'#39' regex='#39';.*$'#39' />'
+          '  </Scheme>'
           ''
           '  <Scheme name='#39'String'#39' inherit='#39'Text'#39' defaultToken='#39'string'#39'>'
           '  </Scheme>'
@@ -241,7 +251,26 @@ inherited frmEditorCode: TfrmEditorCode
           
             '    <KeywordRegex moreWordChars='#39'.'#39'>\b[a-zA-Z_][\w_]*\b</Keyword' +
             'Regex>'
-          ''
+          
+            '    <Regex token0='#39'symbol'#39' regex='#39'[    \]    \[  \( \) &gt; &lt;' +
+            '  &amp; ]'#39' />'
+          '    <Regex token0='#39'symbol'#39' regex='#39'[=]'#39' />'
+          
+            '    <Regex token0="constant">(?:LEFT|RIGHT|UP|DOWN|EDGE|FIRE[1-3' +
+            ']?|OPTION[1-4]|BULLET|KEYBOARD|KEMPSTON|SINCLAIR|JOYSTICK[1-2]|(' +
+            'EMPTY|PLATFORM|WALL|LADDER|FODDER|DEADLY|CUSTOM)?BLOCK)</Regex>'
+          
+            '    <Regex token0="variable">\b(?:AIRBORNE|BLOCK|CLOCK|COLUMN|DI' +
+            'RECTION|LINE|CONTROL|FRAME|IMAGE|JUMPSPEED|LIVES|RND|SCREEN|TYPE' +
+            '|OBJ|SETTING[A-B]?)\b|(\b[A-Z]\b)</Regex>'
+          
+            '    <Regex token0="function">\b((CANGO(?:DOWN|LEFT|RIGHT|UP))|(L' +
+            'ADDER(?:ABOVE|BELOW))|(CHR|COLLISION|CUSTOM|DATA|DEADLY|DIG|GOT|' +
+            'KEY)\b)</Regex>'
+          
+            '    <Regex token0="codeword">\b((END(?:IF|WHILE|REPEAT))|(IF|ELS' +
+            'E|WHILE|REPEAT)\b)</Regex>'
+          '    '
           '    <Keywords>'
           '        ADD'
           '        ADDBONUS'
@@ -261,23 +290,21 @@ inherited frmEditorCode: TfrmEditorCode
           '        DEFINEPARTICLE'
           '        DELAY'
           '        DETECTOBJECT'
+          '        DETECTOBJ'
           '        DISPLAY'
           '        DIVIDE'
           '        DIG'
-          '        ELSE'
           '        ENDGAME'
-          '        ENDREPEAT'
           '        ENDSPRITE'
-          '        ENDIF'
-          '        ENDWHILE'
           '        EXIT'
           '        EXPLODE'
           '        FALL'
           '        GET'
           '        GETBLOCK'
+          '        GETBLOCKS'
           '        GETRANDOM'
-          '        IF'
           '        INK'
+          '        INV'
           '        JUMP'
           '        KILL'
           '        LASER'
@@ -290,6 +317,7 @@ inherited frmEditorCode: TfrmEditorCode
           '        OTHER'
           '        PALETTE'
           '        PAPER'
+          '        PARTICLEDECAY'
           '        PARTICLEDOWN'
           '        PARTICLELEFT'
           '        PARTICLERIGHT'
@@ -304,10 +332,10 @@ inherited frmEditorCode: TfrmEditorCode
           '        REDRAW'
           '        REMOVE'
           '        REMOVEOBJ'
-          '        REPEAT'
           '        RESTART'
           '        RESTORE'
           '        SCORE'
+          '        SCREEN'
           '        SCREENDOWN'
           '        SCREENLEFT'
           '        SCREENRIGHT'
@@ -326,21 +354,18 @@ inherited frmEditorCode: TfrmEditorCode
           '        SPRITEUP'
           '        STAR'
           '        SUBTRACT'
+          '        TABLEFALL'
+          '        TABLEJUMP'
+          '        TO'
+          '        TICKER'
           '        TRAIL'
           '        UNDOSPRITEMOVE'
           '        WAITKEY'
-          '        WHILE'
           '        ZEROBONUS'
-          '            '
           '    </Keywords>'
           ''
           '    <!--Regex innerScheme='#39'Comment'#39' regex='#39'Rem.*$'#39' /-->'
-          '    <Regex innerScheme='#39'Comment'#39' regex=" ;.*$ " />'
-          ''
-          
-            '    <Regex token0='#39'symbol'#39' regex='#39'[    \]    \[  \( \) &gt; &lt;' +
-            '  &amp; ]'#39' />'
-          '    <Regex token0='#39'symbol'#39' regex='#39'[-=+^;,]'#39' />'
+          '    <Regex innerScheme='#39'Comment'#39' regex='#39';.*$'#39' />'
           ''
           '    <SkipSyntaxToken token='#39'comment'#39' />'
           ''
@@ -369,209 +394,332 @@ inherited frmEditorCode: TfrmEditorCode
           '        <End> kw:ENDSPRITE  </End>'
           '    </SyntaxBlock>'
           '  </Scheme>'
+          '</SchemeList>'
+          '')
+      end
+      item
+        Name = 'Z80'
+        Scheme.Strings = (
+          '<?xml version="1.0" encoding="UTF-8"?>'
+          ''
+          '<SchemeList root='#39'Main'#39'>'
+          ''
+          '  <Scheme name='#39'Text'#39' inherit='#39'Numbers'#39'>'
+          '        <Regex token0='#39'email'#39'>'
+          '            [_a-zA-Z\d\-\.]{1,40}'
+          '            @ '
+          '            ([_ a-z A-Z \d \-]+ '
+          '            (\. [_ a-z A-Z \d \-]+ )+ )'
+          '        </Regex>'
+          '  </Scheme>'
+          ''
+          '  <Scheme name='#39'Numbers'#39'>'
+          
+            '    <Regex token0='#39'number'#39'>\b (0x \d+ [lL]? | \d+ (e \d*)? [lLdD' +
+            'fF]? ) \b</Regex>'
+          
+            '    <Regex token0='#39'number'#39'>\b [+\-]? \d+ (\. \d+)? ([eE] [+\-]? ' +
+            '\d+) \b</Regex>'
+          '  </Scheme>'
+          ''
+          '  <Scheme name='#39'Comment'#39' inherit='#39'Text'#39' defaultToken='#39'comment'#39'>'
+          '    <Regex token0='#39'st'#39' regex='#39';.*$'#39' />'
+          '  </Scheme>'
+          ''
+          ''
+          '  <Scheme name='#39'String'#39' inherit='#39'Text'#39' defaultToken='#39'string'#39'>'
+          '  </Scheme>'
+          ''
+          
+            '  <Scheme name='#39'BadString'#39' inherit='#39'String'#39' defaultToken='#39'badStr' +
+            'ing'#39'>'
+          '  </Scheme>'
+          ''
+          '  <Scheme name='#39'StringFind'#39'>'
+          '    <Regex innerScheme='#39'BadString'#39' > '
+          '        &quot; (.*?\\ &quot; )*? .* $ '
+          '    </Regex>'
+          ''
+          '    <Regex innerScheme='#39'String'#39' priority='#39'10'#39'> '
+          '        &quot; (.*?\\ &quot; )*? &quot; c?'
+          '    </Regex>'
+          ''
+          '    <Regex innerScheme='#39'String'#39' priority='#39'20'#39'> '
+          '        &quot; (.*?\\ &quot; )*? .*? [^\\] &quot; c?'
+          '    </Regex>  '
+          ''
+          '    <Regex innerScheme='#39'String'#39' priority='#39'30'#39'> '
+          '        &quot;  &quot; c?'
+          '    </Regex>    '
+          '  </Scheme>'
+          ''
+          ''
+          ''
+          '  <Scheme name='#39'Main'#39' inherit='#39'Numbers'#39' inherit0='#39'StringFind'#39
+          '          defaultToken='#39'default'#39
+          '          allIgnoreCase='#39'true'#39'>'
+          ''
+          '    <Regex innerScheme='#39'Comment'#39' regex='#39';.*$'#39' />'
+          '    '
+          
+            '    <Regex token0='#39'symbol'#39' regex='#39'[    \]    \[  \( \) &gt; &lt;' +
+            '  &amp; ]'#39' />'
+          '    <Regex token0='#39'symbol'#39' regex='#39'[-=+^;,]'#39' />'
+          '    '
+          
+            '    <KeywordRegex moreWordChars='#39'.'#39'>\b[a-zA-Z_][\w_]*\b</Keyword' +
+            'Regex>'
+          ''
+          '    <Keywords>'
+          '        ADC'
+          '        ADD'
+          '        AND'
+          '        BIT'
+          '        CALL'
+          '        CCF'
+          '        CP'
+          '        CPD'
+          '        CPDR'
+          '        CPI'
+          '        CPIR'
+          '        CPL'
+          '        DAA'
+          '        DEC'
+          '        DI'
+          '        DJNZ'
+          '        EI'
+          '        EX'
+          '        EXX'
+          '        HALT'
+          '        IM'
+          '        IN'
+          '        INC'
+          '        IND'
+          '        INDR'
+          '        INI'
+          '        INIR'
+          '        JP'
+          '        JR'
+          '        LD'
+          '        LDD'
+          '        LDDR'
+          '        LDI'
+          '        LDIR'
+          '        NEG'
+          '        NOP'
+          '        OR'
+          '        OTDR'
+          '        OTIR'
+          '        OUT'
+          '        OUTD'
+          '        OUTI'
+          '        POP'
+          '        PUSH'
+          '        RES'
+          '        RET'
+          '        RETI'
+          '        RETN'
+          '        RL'
+          '        RLA'
+          '        RLC'
+          '        RLCA'
+          '        RLD'
+          '        RR'
+          '        RRA'
+          '        RRC'
+          '        RRCA'
+          '        RRD'
+          '        RST'
+          '        SBC'
+          '        SCF'
+          '        SET'
+          '        SLA'
+          '        SLL/SL1'
+          '        SRA'
+          '        SRL'
+          '        SUB'
+          '        XOR'
+          '    </Keywords>'
+          ''
+          '    <!--Regex innerScheme='#39'Comment'#39' regex='#39'Rem.*$'#39' /-->'
+          '    <Regex innerScheme='#39'Comment'#39' regex=";.*$" />'
+          ''
+          '    <SkipSyntaxToken token='#39'comment'#39' />'
+          ''
+          '  </Scheme>'
+          '</SchemeList>'
+          '')
+      end
+      item
+        Name = 'TXT'
+        Scheme.Strings = (
+          '<?xml version="1.0" encoding="UTF-8"?>'
+          ''
+          '<SchemeList root='#39'Main'#39'>'
+          ''
+          '  <TokenAlias name='#39'text'#39' baseToken='#39'default'#39' />'
+          '  '
+          '  <Scheme name='#39'Text'#39'>'
+          '        <Regex token0='#39'email'#39'>'
+          '            [_a-zA-Z\d\-\.]{1,40}'
+          '            @ '
+          '            ([_ a-z A-Z \d \-]+ '
+          '            (\. [_ a-z A-Z \d \-]+ )+ )'
+          '        </Regex>                '
+          '  </Scheme>'
+          ''
+          '  <Scheme name='#39'Main'#39' keywordsIgnoreCase='#39'false'#39' '
+          '          inherit='#39'Text'#39
+          '          defaultToken='#39'default'#39'>'
+          '  </Scheme>'
           '</SchemeList>')
       end>
     ColorSchemes = <
       item
-        Name = 'default'
+        Name = 'Light'
         Scheme.Strings = (
-          '<?xml version="1.0" encoding="UTF-8"?>'
+          '<?xml version="1.0"?>'
           '<Attributes>'
+          
+            #9'<ViewColors color="white" readOnlyBgColor="white" selectedLineB' +
+            'g="#FAFAFA" selectionBg="#ADD6FF" selectionColor="black" wrapRul' +
+            'erColor="#D3D3D3" breakpointLineColor="black" breakpointLineBg="' +
+            '#FFD1D1" debugFrameLineColor="black" debugFrameLineBg="#E9E9E9" ' +
+            'debugFrameActiveLineColor="black" debugFrameActiveLineBg="#DFE9D' +
+            'F" debugFrameTopLineColor="black" debugFrameTopLineBg="#FFFFBA"/' +
+            '>'
           #9'<Token name="default" textColor="#0"/>'
-          #9'<Token name="defaultEmbed" backgroundColor="#ECE9D8"/>'
-          #9'<Token name="docStart" fontStyle="bold"/>'
-          #9'<Token name="docEnd" fontStyle="bold"/>'
-          #9'<Token name="docBlockStart" fontStyle="bold"/>'
-          #9'<Token name="docBlockEnd" fontStyle="bold"/>'
-          #9'<Token name="docInstruction" fontStyle="bold"/>'
-          #9'<Token name="docDefault" backgroundColor="#ECE9D8"/>'
+          #9'<Token name="defaultEmbed" backgroundColor="#E9E9E9"/>'
           #9'<Token name="comment" textColor="#008000"/>'
           #9'<Token name="commentStart" textColor="#008000"/>'
           #9'<Token name="commentEnd" textColor="#008000"/>'
-          #9'<Token name="keyword" fontStyle="bold"/>'
-          #9'<Token name="privateSymbol" textColor="Navy"/>'
-          #9'<Token name="email" fontStyle="bold"/>'
+          #9'<Token name="keyword" textColor="#0000FF"/>'
+          #9'<Token name="email"/>'
+          #9'<Token name="number" textColor="#098658"/>'
+          #9'<Token name="symbol" textColor="#0080C0"/>'
+          #9'<Token name="string" textColor="#A31515"/>'
+          #9'<Token name="escaped" textColor="#A31515"/>'
+          #9'<Token name="badString" textColor="red"/>'
+          #9'<Token name="preprocessor" textColor="#0000FF"/>'
+          #9'<Token name="badPreprocessor" textColor="red"/>'
+          #9'<Token name="regexStart" textColor="#811F3F"/>'
+          #9'<Token name="regexEnd" textColor="#811F3F"/>'
           
             #9'<Token name="hairy" textColor="#000080" fontStyle="bold, italic' +
             ', underline, strikeOut"/>'
-          #9'<Token name="number" textColor="Blue"/>'
-          #9'<Token name="symbol" textColor="Blue"/>'
-          #9'<Token name="string" textColor="Blue"/>'
-          #9'<Token name="blockStart" fontStyle="bold"/>'
-          #9'<Token name="blockEnd" fontStyle="bold"/>'
-          #9'<Token name="badString" textColor="Red"/>'
-          #9'<Token name="preprocessor" textColor="#008080"/>'
-          #9'<Token name="badPreprocessor" textColor="red"/>'
-          #9'<Token name="escaped" textColor="Navy"/>'
+          #9'<!-- HTML/XML/CSS -->'
+          #9'<Token name="htmlText" textColor="#0"/>'
+          #9'<Token name="tagOpen" textColor="#800000"/>'
+          #9'<Token name="tagClose" textColor="#800000"/>'
+          #9'<Token name="entity"/>'
+          #9'<Token name="attributeName" textColor="#FF0000"/>'
+          #9'<Token name="attributeValue" textColor="#0000FF"/>'
+          #9'<Token name="badAttributeValue" textColor="red"/>'
+          #9'<Token name="url" textColor="#A31515"/>'
+          #9'<Token name="fpi" textColor="#A31515"/>'
+          #9'<Token name="dtdTagStartEnd" textColor="#800000"/>'
+          #9'<!-- CSS -->'
+          #9'<Token name="cssRule" textColor="#800000"/>'
+          #9'<Token name="cssRelSymbol"/>'
           
-            #9'<Token name="quotedVariable" textColor="Navy" fontStyle="bold"/' +
-            '>'
-          #9'<Token name="regexStart" textColor="Navy" fontStyle="bold"/>'
-          
-            #9'<Token name="regexEnd" textColor="Navy" fontStyle="bold"/><!--h' +
-            'tml/xml tokens-->'
-          #9'<Token name="tagOpen" textColor="Purple"/>'
-          #9'<Token name="tagClose" textColor="Purple"/>'
-          
-            #9'<Token name="dtdTagStartEnd" textColor="Purple" fontStyle="bold' +
-            '"/>'
-          #9'<Token name="url" textColor="Red"/>'
-          #9'<Token name="fpi" textColor="Red" fontStyle="bold"/>'
-          #9'<Token name="entity" textColor="#FF4500"/>'
-          
-            #9'<Token name="attributeName" backgroundColor="Black" textColor="' +
-            '#583485"/>'
-          #9'<Token name="attributeValue" textColor="Blue"/>'
-          #9'<Token name="badAttributeValue" textColor="Red"/>'
-          #9'<Token name="cssRule" textColor="#583485" fontStyle="bold"/>'
-          #9'<Token name="cssRelSymbol" fontStyle="bold"/>'
-          #9'<Token name="cssUrlHref" fontStyle="underline"/>'
+            #9'<Token name="cssUrlHref" textColor="#A31515" fontStyle="underli' +
+            'ne"/>'
           #9'<Token name="cssUrlAttr"/>'
-          #9'<Token name="cssAttrListBG" textColor="Blue"/>'
-          
-            #9'<Token name="cdataTagStart" textColor="Purple" fontStyle="bold"' +
-            '/>'
-          #9'<Token name="cdataTagEnd" textColor="Purple" fontStyle="bold"/>'
-          
-            #9'<Token name="xmlDeclStart" textColor="Purple" fontStyle="bold"/' +
-            '>'
-          #9'<Token name="xmlDeclEnd" textColor="Purple" fontStyle="bold"/>'
+          #9'<Token name="cssAttrListBG"/>'
+          #9'<!-- XML -->'
+          #9'<Token name="cdataTagStart"/>'
+          #9'<Token name="cdataTagEnd"/>'
+          #9'<Token name="xmlDeclStart" textColor="#800000"/>'
+          #9'<Token name="xmlDeclEnd" textColor="#800000"/>'
+          #9'<!-- Python -->'
+          #9'<Token name="privateSymbol"/>'
+          #9'<!-- Perl/PHP -->'
+          #9'<Token name="docDefault"/>'
+          #9'<Token name="docStart" textColor="#0000FF"/>'
+          #9'<Token name="docEnd" textColor="#0000FF"/>'
+          #9'<Token name="docBlockStart"/>'
+          #9'<Token name="docBlockEnd"/>'
+          #9'<Token name="docInstruction"/>'
+          #9'<Token name="blockStart"/>'
+          #9'<Token name="blockEnd"/>'
+          #9'<!-- TCL -->'
+          #9'<Token name="quotedVariable" textColor="gray"/>'
           '</Attributes>')
       end
       item
         Name = 'Dark'
         Scheme.Strings = (
-          '<?xml version="1.0" encoding="UTF-8"?>'
+          '<?xml version="1.0"?>'
           '<Attributes>'
+          #9'<ViewColors color="#1E1E1E" readOnlyBgColor="#1E1E1E"/>'
+          #9'<!--html/xml tokens-->'
+          #9'<Token backgroundColor="#ECE9D8" name="defaultEmbed"/>'
+          #9'<Token fontStyle="bold" name="blockEnd"/>'
+          #9'<Token fontStyle="bold" name="blockStart"/>'
+          #9'<Token fontStyle="bold" name="cdataTagEnd" textColor="Purple"/>'
           
-            #9'<Token name="default" backgroundColor="Black" textColor="White"' +
+            #9'<Token fontStyle="bold" name="cdataTagStart" textColor="Purple"' +
             '/>'
-          #9'<Token name="defaultEmbed" backgroundColor="#ECE9D8"/>'
+          #9'<Token fontStyle="bold" name="cssRelSymbol"/>'
+          #9'<Token fontStyle="bold" name="cssRule" textColor="#583485"/>'
+          #9'<Token fontStyle="bold" name="docBlockEnd"/>'
+          #9'<Token fontStyle="bold" name="docBlockStart"/>'
+          #9'<Token fontStyle="bold" name="docEnd"/>'
+          #9'<Token fontStyle="bold" name="docInstruction"/>'
+          #9'<Token fontStyle="bold" name="docStart"/>'
           
-            #9'<Token name="docStart" backgroundColor="Black" fontStyle="bold"' +
-            '/>'
-          #9'<Token name="docEnd" backgroundColor="Black" fontStyle="bold"/>'
+            #9'<Token fontStyle="bold" name="dtdTagStartEnd" textColor="Purple' +
+            '"/>'
+          #9'<Token fontStyle="bold" name="email" textColor="Olive"/>'
+          #9'<Token fontStyle="bold" name="fpi" textColor="Red"/>'
           
-            #9'<Token name="docBlockStart" backgroundColor="Black" fontStyle="' +
-            'bold"/>'
+            #9'<Token fontStyle="bold" name="quotedVariable" textColor="Navy"/' +
+            '>'
+          #9'<Token fontStyle="bold" name="regexEnd" textColor="Navy"/>'
+          #9'<Token fontStyle="bold" name="regexStart" textColor="Navy"/>'
+          #9'<Token fontStyle="bold" name="xmlDeclEnd" textColor="Purple"/>'
           
-            #9'<Token name="docBlockEnd" backgroundColor="Black" fontStyle="bo' +
-            'ld"/>'
-          
-            #9'<Token name="docInstruction" backgroundColor="Black" fontStyle=' +
-            '"bold"/>'
-          #9'<Token name="docDefault" backgroundColor="Black"/>'
-          
-            #9'<Token name="comment" backgroundColor="Black" textColor="Green"' +
-            '/>'
-          
-            #9'<Token name="commentStart" backgroundColor="Black" textColor="G' +
-            'reen"/>'
-          
-            #9'<Token name="commentEnd" backgroundColor="Black" textColor="Gre' +
-            'en"/>'
-          
-            #9'<Token name="keyword" backgroundColor="Black" textColor="Aqua" ' +
-            'fontStyle="bold"/>'
-          
-            #9'<Token name="privateSymbol" backgroundColor="Black" textColor="' +
-            'Fuchsia"/>'
-          
-            #9'<Token name="email" backgroundColor="Black" textColor="Olive" f' +
-            'ontStyle="bold"/>'
-          
-            #9'<Token name="hairy" backgroundColor="Black" textColor="Navy" fo' +
-            'ntStyle="italic bold underline strikeOut"/>'
-          
-            #9'<Token name="number" backgroundColor="Black" textColor="Yellow"' +
-            '/>'
-          
-            #9'<Token name="symbol" backgroundColor="Black" textColor="Yellow"' +
-            '/>'
-          #9'<Token name="string" backgroundColor="Black" textColor="Blue"/>'
-          
-            #9'<Token name="blockStart" backgroundColor="Black" fontStyle="bol' +
-            'd"/>'
-          
-            #9'<Token name="blockEnd" backgroundColor="Black" fontStyle="bold"' +
-            '/>'
-          
-            #9'<Token name="badString" backgroundColor="Black" textColor="Red"' +
-            '/>'
-          
-            #9'<Token name="preprocessor" backgroundColor="Black" textColor="T' +
-            'eal"/>'
-          
-            #9'<Token name="badPreprocessor" backgroundColor="Maroon" textColo' +
-            'r="Red"/>'
-          
-            #9'<Token name="escaped" backgroundColor="Black" textColor="Navy"/' +
+            #9'<Token fontStyle="bold" name="xmlDeclStart" textColor="Purple"/' +
             '>'
           
-            #9'<Token name="quotedVariable" backgroundColor="Black" textColor=' +
-            '"Navy" fontStyle="bold"/>'
+            #9'<Token fontStyle="italic bold underline strikeOut" name="hairy"' +
+            ' textColor="Navy"/>'
+          #9'<Token fontStyle="underline" name="cssUrlHref"/>'
+          #9'<Token name="attributeName" textColor="#583485"/>'
+          #9'<Token name="attributeValue" textColor="Blue"/>'
+          #9'<Token name="badAttributeValue" textColor="Red"/>'
+          #9'<Token name="badString" textColor="Red"/>'
+          #9'<Token name="commentEnd" textColor="Green"/>'
+          #9'<Token name="commentStart" textColor="Green"/>'
+          #9'<Token name="cssAttrListBG" textColor="Blue"/>'
+          #9'<Token name="cssUrlAttr"/>'
+          #9'<Token name="docDefault"/>'
+          #9'<Token name="entity" textColor="#FF4500"/>'
+          #9'<Token name="escaped" textColor="Navy"/>'
+          #9'<Token name="preprocessor" textColor="Teal"/>'
+          #9'<Token name="privateSymbol" textColor="Fuchsia"/>'
+          #9'<Token name="tagOpen" textColor="Purple"/>'
+          #9'<Token name="url" textColor="Red"/>'
+          #9'<Token name="badPreprocessor" textColor="Red"/>'
           
-            #9'<Token name="regexStart" backgroundColor="Black" textColor="Nav' +
-            'y" fontStyle="bold"/>'
-          
-            #9'<Token name="regexEnd" backgroundColor="Black" textColor="Navy"' +
-            ' fontStyle="bold"/><!--html/xml tokens-->'
-          
-            #9'<Token name="tagOpen" backgroundColor="Black" textColor="Purple' +
-            '"/>'
-          
-            #9'<Token name="tagClose" backgroundColor="Maroon" textColor="Purp' +
+            #9'<Token backgroundColor="Maroon" name="tagClose" textColor="Purp' +
             'le"/>'
-          
-            #9'<Token name="dtdTagStartEnd" backgroundColor="Black" textColor=' +
-            '"Purple" fontStyle="bold"/>'
-          #9'<Token name="url" backgroundColor="Black" textColor="Red"/>'
-          
-            #9'<Token name="fpi" backgroundColor="Black" textColor="Red" fontS' +
-            'tyle="bold"/>'
-          
-            #9'<Token name="entity" backgroundColor="Black" textColor="#FF4500' +
-            '"/>'
-          
-            #9'<Token name="attributeName" backgroundColor="Black" textColor="' +
-            '#583485"/>'
-          
-            #9'<Token name="attributeValue" backgroundColor="Black" textColor=' +
-            '"Blue"/>'
-          
-            #9'<Token name="badAttributeValue" backgroundColor="Black" textCol' +
-            'or="Red"/>'
-          
-            #9'<Token name="cssRule" backgroundColor="Black" textColor="#58348' +
-            '5" fontStyle="bold"/>'
-          
-            #9'<Token name="cssRelSymbol" backgroundColor="Black" fontStyle="b' +
-            'old"/>'
-          
-            #9'<Token name="cssUrlHref" backgroundColor="Black" fontStyle="und' +
-            'erline"/>'
-          #9'<Token name="cssUrlAttr" backgroundColor="Black"/>'
-          
-            #9'<Token name="cssAttrListBG" backgroundColor="Black" textColor="' +
-            'Blue"/>'
-          
-            #9'<Token name="cdataTagStart" backgroundColor="Black" textColor="' +
-            'Purple" fontStyle="bold"/>'
-          
-            #9'<Token name="cdataTagEnd" backgroundColor="Black" textColor="Pu' +
-            'rple" fontStyle="bold"/>'
-          
-            #9'<Token name="xmlDeclStart" backgroundColor="Black" textColor="P' +
-            'urple" fontStyle="bold"/>'
-          
-            #9'<Token name="xmlDeclEnd" backgroundColor="Black" textColor="Pur' +
-            'ple" fontStyle="bold"/>'
+          #9'<Token name="default" textColor="White"/>'
+          #9'<Token name="comment" textColor="#6A9955"/>'
+          #9'<Token name="string" textColor="#CE9178"/>'
+          #9'<Token fontStyle="bold" name="symbol" textColor="#FFD800"/>'
+          #9'<Token fontStyle="bold" name="number" textColor="Fuchsia"/>'
+          #9'<Token name="constant" textColor="Lime"/>'
+          #9'<Token name="variable" textColor="#00CCCC"/>'
+          #9'<Token fontStyle="bold" name="keyword" textColor="#569CD6"/>'
+          #9'<Token fontStyle="bold" name="function" textColor="#0094FF"/>'
+          #9'<Token fontStyle="bold" name="codeword" textColor="White"/>'
           '</Attributes>')
       end>
     ActiveSyntaxScheme = 'AGD'
     ActiveColorScheme = 'Dark'
-    Left = 64
-    Top = 48
+    Left = 168
+    Top = 152
   end
   object Actions: TActionList
     Images = vilToolbar
@@ -890,6 +1038,22 @@ inherited frmEditorCode: TfrmEditorCode
       ShortCut = 16432
       OnExecute = actZoomResetExecute
     end
+    object actFontSizeIncrease: TAction
+      Category = 'Settings'
+      Caption = 'Increase Font Size'
+      ImageIndex = 31
+      ImageName = 'font_add'
+      ShortCut = 16491
+      OnExecute = actFontSizeIncreaseExecute
+    end
+    object actFontSizeDecrease: TAction
+      Category = 'Settings'
+      Caption = 'Font Size Decrease'
+      ImageIndex = 30
+      ImageName = 'font_delete'
+      ShortCut = 16493
+      OnExecute = actFontSizeDecreaseExecute
+    end
   end
   object FontDialog: TFontDialog
     Font.Charset = DEFAULT_CHARSET
@@ -1055,6 +1219,16 @@ inherited frmEditorCode: TfrmEditorCode
         CollectionIndex = 29
         CollectionName = 'font'
         Name = 'font'
+      end
+      item
+        CollectionIndex = 30
+        CollectionName = 'font_delete'
+        Name = 'font_delete'
+      end
+      item
+        CollectionIndex = 31
+        CollectionName = 'font_add'
+        Name = 'font_add'
       end>
     ImageCollection = icToolbar
     Width = 24
@@ -2647,6 +2821,134 @@ inherited frmEditorCode: TfrmEditorCode
               1793BD29A37B3F8C07CDC39FB7E407CC9A60FE6D73DCE4C0704B2C134866CC50
               59FB46AB6612F9B7CDF19F00030013CF30311CB114EF0000000049454E44AE42
               6082}
+          end>
+      end
+      item
+        Name = 'font_delete'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+              F40000001974455874536F6674776172650041646F626520496D616765526561
+              647971C9653C000006BA4944415478DABC576D6C54551A7EEED7CC9D1967A69D
+              4E5BA740BF2CD6020581AAD04E01515111695689595935446344E38655E307F8
+              111345E21FA31195A8A8B02E0616CCC6956C4358508B7109B5BBABD5D25AE807
+              2D75A633D33B6D67A63373EF5CDF737B2115B1ADA47893379399F39E739EFBBC
+              CFFB9C331CA6E6E1973CF3F1BD19417EC76E15E0B25970B2B9D1D7B4FDF11FF1
+              3B3DF6159B0FE85D839ADE9FD2F5F78E74EA573DBCED0E066C42E453B0B950B3
+              71DFAEDBFC33D133A4E2BD630AA67B5D8068ADA131F16203E0AE7A706BF50C5F
+              6EDDCA85C5F8B049C191EE38BC2E1992DD7D038D5B2E36008BC55BB8FBAEEB66
+              E3D0896184121A648143121278C95A41E3D2C50420D43CB567F3755796FABCD9
+              2E7CD611872C0AB052B4875514E5B9903F7799FBA20128F4AFC9B13BDD8FDD5A
+              3D13F53FC490D139883C05C721184F2387CA30A3FA0F8B27DAE34201483396AC
+              DD7B7BED2C744575742A2AA92D0389E81729FA63194CCB714372642F9A488817
+              02805BB461FBAAB2425F6D65990F47BA12480D46A02513C48060B01089677029
+              758260B1574DA4830B016095B2F2FF56E7AF40634F122908E8EFEE4072780882
+              C84320003CAD3AA24B10ACB6F9530D40A8DDB4F78D9A392536586C688BA88885
+              FBA1A69223090220D2CE0269400407D9EE0074D8A6B204DCBCBB5FB8DCE9CABA
+              77D9C2CBD0D4978244B34F77B4E3D497FB360F451588D401BCC0530003091D25
+              051ECC5FF71263819B0A0092AB78EE9E55FED938A9E848A43984FA7A110FF7FE
+              BBFDE08E434026168B4609146F7402F384FC1C17ECB985ABC66361B20078FF93
+              1F3D5A549037677A7E2EBA950C510D047A7AF0DF1DCF3E4DE38144A4AF7E241E
+              A32EE08D52A4549D5AD1498624578DE788930520F3B26BCBADB5F3F06D304D22
+              E3D0D9DE06E554CBFBC4400F8D4786FA3A0E44072244BF6004AB83D3E3816EBD
+              645C214E0680B0E4E98F77D5CC2B33943D9CD6A1A69338DDD5113EB66DC32B34
+              1EA58835EFD972303CA064388B8C8CCD0ECD61432ACB818CCB33AE10B9898477
+              F5435B6BF24A6635AC5DE9C7F1B0467603847BBB30100E81E37812FAE832197A
+              6B55B460B19C4459FD561434FE133AB1C08B2274FA7D44920F2B1036D51D3D7E
+              1430A74D028075E9F3FB95352B16C9B03A118A69469F5778456298A6729CB939
+              A05A819CB75E80F7D04EF86E5C8DACCA2B21381CC6B89A4820D2F23D4E1D3E88
+              A1C1C177577CD5B29E06B4890008B51BF7BC7C5969C963CB6B16A28BEC76D464
+              46ABA69B533304224912AB7C7303CA4E7E818A3F3F8E64FBF71839DA00B5BFCF
+              C811737D90AF590AA9BC12CD6FBF012510DCBEE23F2D0F3010BF0AA0A8764D5E
+              F9CDF707FEB8B21603290BC1E571EC582382C180413DDB9F81480916CC089FC0
+              C6AF5F45C5234F21FEE9DF91A612912D02265864A8709A0A697A31E4D577E2FF
+              6FBE8ED66068E9BAA61F1A7E4D1C52D1B23FEDAB2C2F85CADBA8963ABA3BBB10
+              A6BA376CBE6D65464DA7C6E48A9B66E53D5770DF83D5C9CFEBA1054F8397E5B3
+              E581C91709015AA017A9C39FA2E8C65B30B8FBC3976860B9785EE1AD7F6D91CB
+              E5F62F985386C030A00C0CA0B9F93BB4EC7DF976DABC957286C7E43B3D4E67B5
+              DB9B83D8E76DE0340D7A2A35566767E5C69150B513ADC89EBF18569E675736DB
+              F90058ECF9A51F5DBB780106E2440509ACE5781B82DF1E7E36D0DCD044E3ACB0
+              C931F999349501A74ED2B104B8F7FF6F5C5547EBAAC0759F3803CF32D60738FF
+              13BBAA963CF38FFDF366CF9CE6CE7653E9744495210482FDB44BAAADFA2FEF94
+              525EFA5C2FD13981D1C45C6F624B6539940BCED89A630C58AE7FB13E7969AE17
+              1AD1575E5684E2E9F988A760385EB6D381B91533112DF0ED0E84C36C12339691
+              9FB34BADA85097BBDC185EBB1CBAAA5205CE2901E570E4092C87E58E6A64D4A1
+              1C3A25D7DDB4106C9E4ADD99A6904DF7666DE7BFFA0A4864A6DB76D61BFF01CE
+              01A00FAA5A93921859E0CDA2C5AD32D87AE79100ED496D4CDD1152A260736048
+              13EC00E3F1D68E7F1994EB6766EA63AD8A333C40601EFF4B5B4D1D082AAFE6D9
+              E59D795E2F399F44F7C3CCF908003F4A3BBAFAFAC1E6B0B96CF96C8A12F373A2
+              878A870EF3F3AC68290AFE5A55FE5AB9C7B5BA6ACE6CB693C1826EA2606FCE82
+              90A191BAA93532F8C9DD8DAD1B68E834672EE098CC1DDE14608C213FE73C7132
+              EFFA60C1E55BCA3DCE5BCA8A0BE12536E886329A41B50D854268EFECA6CD87F6
+              AF6B6ADBC888A018E230358FD18114D3EE29CCF3AFF679D6E788C2DCB1550CAB
+              DA379FF445B6EDEC0E1EA1AFBDE629AA4D1580332018931E0A7A7D5C62FE06F3
+              E061E61562770793456D32A7E16FBEB29BA5B499A51DE3C546D9126619CF4AF4
+              2701060072D978526105F8DC0000000049454E44AE426082}
+          end>
+      end
+      item
+        Name = 'font_add'
+        SourceImages = <
+          item
+            Image.Data = {
+              89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+              F40000001974455874536F6674776172650041646F626520496D616765526561
+              647971C9653C000006AF4944415478DABC570B6C535518FEEEBDBD7D8DB56C6C
+              2B05B6B1B18193973240583BC007A0CB060A448D8FC490A8688CA046E5E9230A
+              A84403068504878128C405D01051400415D4E8E640188238EDB66E8CAEEBDA6E
+              6BBBBEEEF53FB71D14044AC8F0267FDA9CFF9CFF7CE7FFBFFF3BF772E89B879F
+              B27CD77C49D06ED26B0418746AFC535763AEAD7CF11CFEA7473F63E57EB9B133
+              2A3B43B2BCF948833CE1998DF733604991F7C1E68265C9CE6D73AC8568EE8A60
+              73B50743320C804A63219FEA4603E0263CB5BE24DB9C39BBAC78283EA9F5E048
+              931F19062D44BD713AF9D5371A805A9D91F3D923778EC4C1BFBBD11E88422B70
+              0842042F6A8AC82FDE4800826571D5CA3B6FC93767A419F09DCD0FAD4A8086AC
+              DE15416E9601A631D38C370C408E75DE007DAAF1858A9242ECFDCB0749E6A0E2
+              C9380E6DFE30065019B24BEE9B9C6C8FEB0520664F7968C7DCD29BD1E895D1E0
+              8910DB2488947E1599D32761F00023C494B449C988783D00B8490B2BCB0B72CC
+              A5A30BCC38D21840A8B303D1608032202859E8F04B18489D20A8F5E393F1E07A
+              0068C4FEA64F675B8B50D31C4408029C4D3604BBBB20A878080480A7A83DB208
+              41A3BBB5AF0108A54B777C601995A7835A87331D11F85C4E4442C19E000150D1
+              CE027140050E5A7D0A2043D79725E0C63EFAC6F05443FFF9D38A87A1B6350491
+              569FB5D5C3FEE3CE955D5E0F54D401BCC09301EE808CBC41E9B8F5B1552C0B5C
+              5F00100D43C754955B47E21F8F8C4098437B6B0BFCAE966FEB0F6C3908483E9F
+              D74BA078A5139826980618A0CFCC29BF5A16AE15006F7D79FBF3B983B2460D31
+              65A2C92351AA014773338E6E59B18CFC8E4047EBDE1EBF8FBA80574A118AC8D4
+              8AA92448DAF15753C46B05A0E5B586D515A56371A22D4C24E3D0507F061EFBA9
+              8F2903CDE4EFE86AB5EDF7BA3B888482623CA782312D9D00A45E9588D7024098
+              B26CD736CBD80285D9DD6119917010671B6DAEEA8D0BDF23BF97CC5757B5FA80
+              DBE5954415DD03A29E4C0B419702ADD674552272C98837F1E9F596ACBC9B0F3F
+              5466C5695794E40670B534C2ED6A07C7F144F458188E1319F761CA75C26E5F8A
+              F6B69F416E8590541570120E493D58FACDEBF805882FBB06009AA9AFEDF1CC9B
+              31490B4D2ADA7D51A5CF8B3254149896729C1282A5916DF443CD13B0B56CC2CC
+              7173303AA7145A4D8AE20F867B70B2A91AFB8FED80B7D3FFD1BEA558408E6832
+              0042E992AAB787E5E7BD7087A5188D24B7319189554D3EBF9453FE1DAF9B0539
+              F0251656AC85BDF357D49DFB1C8E6EBF32C3D42F05A307CE41767F0B3EFC6A39
+              CE39DB2BF72DC3930CC41501E496CECB1A71CFE38E07CB4AE10EA9092E8FEAEA
+              1AB4B53994D4F76E1ED39A63C84C7B0ECFDDFB167EB2AF87A3AB19C108F07E79
+              2CD3CF7EC9D12D494052B361C9598475BB5FC5395BF7D4EFDFC5E12B9143CC9D
+              F6F0CED123F211E1759079194D0D8D7051DD0FAF9C532645C2A184B9AAA92FE3
+              95F2998F941C6BDD0297BF99DA1008251C8D558A8DB9FC761C3D5B897B8A1FC0
+              366FE52A72DDC15F96780BD64D32188CD671A30A88F580C7ED465DDD499CAC5A
+              3D9736FF93E69C48B07A6D3A4ACC9969B0779D02B53F82C4D490742120FBCFC6
+              98CFDEF507CC9929A02E65AF6CBACB6540AD37E56FBF7DF238B8A9842291EBD4
+              E933683B716885A3EE702DF95BC98209F3254E51A21A85DA6B66C8FF09B8A1E2
+              C2D8E2031CCDADEE65903A31039CF5A56DE3A72CFF62CFD89185838D69464892
+              0CAFA70B8E3627A470E84CC9A24DF9342F7CA996B060DDA126A5DD928A0A1F9B
+              1B07C0B10CA8EF7A736F70606606A2D1284614E462E81013FC5465A67869A929
+              18535408EF20F3670E978B2D62ACEBB9A86614CDDBD302FA1CC08A431CC294EE
+              1E22E1DA99B1932FDA470A413BB1CB8BCD6173B938020620459665CCBEBB1811
+              5A14A1EE0C9369E3EACDDACE3AF126523660E3D6BDCA37C02500E4B01FB5AE0E
+              8CCBCA8C9D302A017C4236F4144B2FC67C746182120AB686AD650044B6C9862D
+              5F2B29977B454A4E942A4ED10041107019590DB5FC86B5FDD2B1D59C451B8BB1
+              43682E7A83A14D54B1CD398AFBB70D606B106F9634B2BCF86FB2C74D668BFF9E
+              272DD9A0692F615DD650CC9A3C2176C38423B14C2A3D2DC400301DFFB99A32D0
+              80DDDFBD8385347256880DC347D64ED696C45CF1B9D1C42E60D6F0236A338A90
+              E3ECC4701D1DDF481F477A6DAC94EC94A45FA8FD1D703662CFF76BC0AE70F6DD
+              18E0D0370F3B08FB06185C381DD69CDBB0406DC098C432863A71BCE9176CFCEB
+              1B1CA19196F82D1AED2B00BD20D8ED934E9641D62F3E8678C6BAE359EE48CC62
+              5F02E88D27C65B559D109FE582C97720AE23E795E95F01060001B06C47CD9DEA
+              680000000049454E44AE426082}
           end>
       end>
     Left = 360

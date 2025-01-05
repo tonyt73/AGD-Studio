@@ -23,6 +23,7 @@ bool __fastcall Assemble::Execute()
     auto path = Services::Folders::Project;
     auto asmFile = Services::Folders::CleanseSeparators(Services::File::Combine(Services::Folders::Project, Services::Folders::ProjectName + ".asm"));
     auto assemblerSrc = Services::Folders::CleanseSeparators(Services::File::Resolve(Services::Folders::Application, mc.Assembler.Path));
+    Services::File::Delete(Services::Folders::ProjectName + ".tap");
     auto result = true;
     BUILD_MSG("Assembling " + asmFile);
     if (Services::File::Exists(assemblerSrc)) {

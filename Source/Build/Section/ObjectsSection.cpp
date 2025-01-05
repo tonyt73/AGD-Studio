@@ -36,11 +36,9 @@ void __fastcall ObjectsSection::Execute()
     // get the list of object images
     Project::DocumentList images;
     dm.GetAllOfType("Image", images);
-    for (auto image : images)
-    {
+    for (auto image : images) {
         auto object = dynamic_cast<Project::ObjectDocument*>(image);
-        if (object != nullptr)
-        {
+        if (object != nullptr) {
             String line = "DEFINEOBJECT ";
             const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
             const auto& gm = (*(mc.GraphicsMode()));
@@ -50,8 +48,7 @@ void __fastcall ObjectsSection::Execute()
             auto data = gfx->GetExportNativeFormat();
             // TODO -cImprovement: Use the importer definition of the machine to determine if an object.colour parameter is needed
             //                   : This is a bug for Sam Coupe etc, because of the assumption that there are only 4 attributes to an object
-            if (gm.TypeOfBuffer == Visuals::BufferType::btAttribute) // && importer.contains("Objects", "object.colour")
-            {
+            if (gm.TypeOfBuffer == Visuals::BufferType::btAttribute) {
                 // extract the image colour and remove the last 4 bytes (attributes) from the data
                 line += IntToStr(data.back()) + " ";
                 // remove the attributes
@@ -61,17 +58,16 @@ void __fastcall ObjectsSection::Execute()
                 data.pop_back();
             }
             // add the room
-            auto roomIndex = object->State == Visuals::osRoom ? static_cast<Project::ObjectDocument*>(object)->RoomIndex : (object->State == Visuals::osDisabled ? 254 : 255);
-            line += IntToStr(static_cast<int>(roomIndex)) + " ";
-            line += IntToStr(static_cast<int>(wPt.Y + object->Y)) + " " + IntToStr(static_cast<int>(wPt.X + object->X)) + " ";
+            auto roomIndex = std::min(Project::g_RoomIndexEmpty, static_cast<Project::ObjectDocument*>(object)->RoomIndex);
+            // convert local window position to machine screen space
+            line += PadNum(IntToStr(static_cast<int>(roomIndex)))+ " ";
+            line += PadNum(IntToStr(static_cast<int>(wPt.Y + object->Y))) + " " + PadNum(IntToStr(static_cast<int>(wPt.X + object->X)));
             AddLine(line);
             // export the machine graphics data
             line = "             ";
-            for (auto byte : enumerate(data))
-            {
-                line += IntToStr(byte.item) + " ";
-                if (static_cast<LONG>(byte.index + 1) % imgSize.Width == 0)
-                {
+            for (auto byte : enumerate(data)) {
+                line += PadNum(IntToStr(byte.item)) + " ";
+                if (static_cast<LONG>(byte.index + 1) % imgSize.Width == 0) {
                     AddLine(line);
                     line = "             ";
                 }

@@ -60,7 +60,7 @@ __published:    // IDE-managed Components
     TAction *actToggleRoomNumbers;
     TAction *actToggleShowLocks;
     TAction *actToggleSpriteLocks;
-    TAction *actToggleStartRoom;
+    TAction *actToggleSpecialRooms;
     TAction *actToggleTileTypes;
     TAction *actUndo;
     TAction *actZoomIn;
@@ -186,7 +186,7 @@ __published:    // IDE-managed Components
     void __fastcall actSpriteType0Execute(TObject *Sender);
     void __fastcall actToggleRoomNumbersExecute(TObject *Sender);
     void __fastcall actToggleShowLocksExecute(TObject *Sender);
-    void __fastcall actToggleStartRoomExecute(TObject *Sender);
+    void __fastcall actToggleSpecialRoomsExecute(TObject *Sender);
     void __fastcall actToggleTileTypesExecute(TObject *Sender);
     void __fastcall actUndoExecute(TObject *Sender);
     void __fastcall actZoomInExecute(TObject *Sender);
@@ -231,7 +231,7 @@ private:    // User declarations
             void    __fastcall  OnInitialise() override;
             void    __fastcall  OnEvent(const Event& event) override;
             void    __fastcall  OnRoomSelected(const RoomSelected& event);
-            void    __fastcall  OnStartRoomChanged(const StartRoomChanged& event);
+            void    __fastcall  OnSpecialRoomChanged(const SpecialRoomChanged& event);
             void    __fastcall  OnDocumentChanged(const DocumentChange<String>& message);
             void    __fastcall  OnEntityClick(Project::ImageDocument* document);
             void    __fastcall  OnWorkspaceEntitySelected(const Project::MapEntity& entity);

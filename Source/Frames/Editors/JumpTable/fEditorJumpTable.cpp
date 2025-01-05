@@ -60,7 +60,7 @@ void __fastcall TfrmEditorJumpTable::DrawView()
         auto y = 80;
         m_View->Canvas->Pen->Color = ThemeManager::Foreground;
         m_View->Canvas->Brush->Color = ThemeManager::Highlight;
-        for (unsigned char i = -1; i < doc->Count; i++) {
+        for (auto i = -1; i < doc->Count; i++) {
             y += doc->GetStep(i);
             if (i == m_ActiveStep) {
                 m_View->Canvas->FillRect(TRect(x, 0, x + 8, 192));

@@ -28,6 +28,11 @@ void __fastcall Section::AddLine(String line)
     m_Result.Content += line + "\r\n";
 }
 //---------------------------------------------------------------------------
+void __fastcall Section::AppendLine(String line)
+{
+    m_Result.Content += line;
+}
+//---------------------------------------------------------------------------
 void __fastcall Section::LineBreak()
 {
     m_Result.Content += "\r\n";
@@ -50,5 +55,11 @@ const Result& __fastcall Section::Build()
     Clear();
     Execute();
     return m_Result;
+}
+//---------------------------------------------------------------------------
+String __fastcall Section::PadNum(const String& string) const
+{
+    auto padded = "   " + string;
+    return padded.SubString(padded.Length() - 2, 3);
 }
 //---------------------------------------------------------------------------

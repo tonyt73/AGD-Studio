@@ -172,6 +172,7 @@ void __fastcall TfrmWelcomeDialog::NewMostRecentlyUsedItem(const String& name, c
     auto spf = std::shared_ptr<TSelectionPanelFrame>(new TSelectionPanelFrame(this));
     m_MostRecentlyUsedItems.push_back(spf);
     spf->Parent = panRecentProjects;
+    spf->Theme = "Dinosaur Pie";
     spf->Name = name;
     spf->Path = path;
     spf->Machine = machine;
@@ -273,7 +274,7 @@ void __fastcall TfrmWelcomeDialog::UpdateUI(bool updateMachine)
         imgMachineTick->Visible = importerExists;
         imgMachineCross->Visible = !imgMachineTick->Visible;
         btnCreate->Enabled = !isProjectEmpty && !projectExists && importerExists;
-        if (btnCreate->Enabled) btnCreate->SetFocus();
+        if (btnCreate->Enabled && !edtName->Focused()) btnCreate->SetFocus();
     }
     imgProjectNameTick->Visible = !isProjectEmpty && btnCreate->Enabled;
     imgProjectNameCross->Visible = !isProjectEmpty && !btnCreate->Enabled;

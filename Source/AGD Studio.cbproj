@@ -6,9 +6,9 @@
     <AppType>Application</AppType>
     <MainSource>AGD Studio.cpp</MainSource>
     <Base>True</Base>
-    <Config Condition="'$(Config)'==''">Debug</Config>
+    <Config Condition="'$(Config)'==''">Release</Config>
     <Platform Condition="'$(Platform)'==''">Win64x</Platform>
-    <TargetedPlatforms>1048579</TargetedPlatforms>
+    <TargetedPlatforms>1048578</TargetedPlatforms>
     <ProjectName Condition="'$(ProjectName)'==''">AGD Studio</ProjectName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
@@ -34,12 +34,6 @@
     <CfgParent>Base</CfgParent>
     <Base>true</Base>
   </PropertyGroup>
-  <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
-    <Cfg_1_Win32>true</Cfg_1_Win32>
-    <CfgParent>Cfg_1</CfgParent>
-    <Cfg_1>true</Cfg_1>
-    <Base>true</Base>
-  </PropertyGroup>
   <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win64)'!=''">
     <Cfg_1_Win64>true</Cfg_1_Win64>
     <CfgParent>Cfg_1</CfgParent>
@@ -55,18 +49,6 @@
   <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
     <Cfg_2>true</Cfg_2>
     <CfgParent>Base</CfgParent>
-    <Base>true</Base>
-  </PropertyGroup>
-  <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
-    <Cfg_2_Win32>true</Cfg_2_Win32>
-    <CfgParent>Cfg_2</CfgParent>
-    <Cfg_2>true</Cfg_2>
-    <Base>true</Base>
-  </PropertyGroup>
-  <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win64)'!=''">
-    <Cfg_2_Win64>true</Cfg_2_Win64>
-    <CfgParent>Cfg_2</CfgParent>
-    <Cfg_2>true</Cfg_2>
     <Base>true</Base>
   </PropertyGroup>
   <PropertyGroup Condition="('$(Platform)'=='Win64x' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win64x)'!=''">
@@ -121,13 +103,11 @@
     <UWP_CppLogo44>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_44.png</UWP_CppLogo44>
     <VerInfo_Build>11738</VerInfo_Build>
     <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-    <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=0.16.0.11738;InternalName=AGD Studio;LegalCopyright=2022-2024 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=0.16.0;Comments=Programmed by Tony Thompson;SpecialBuild=BETA</VerInfo_Keys>
+    <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=0.17.0.11738;InternalName=AGD Studio;LegalCopyright=2022-2024 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=0.17.0.11738;Comments=Programmed by Tony Thompson</VerInfo_Keys>
     <VerInfo_Locale>3081</VerInfo_Locale>
     <VerInfo_MajorVer>0</VerInfo_MajorVer>
-    <VerInfo_MinorVer>15</VerInfo_MinorVer>
+    <VerInfo_MinorVer>16</VerInfo_MinorVer>
     <VerInfo_PreRelease>true</VerInfo_PreRelease>
-    <VerInfo_Release>1</VerInfo_Release>
-    <VerInfo_Special>true</VerInfo_Special>
     <SubProcessesNumber>-1</SubProcessesNumber>
     <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
     <BCC_EnableBatchCompilation>true</BCC_EnableBatchCompilation>
@@ -143,22 +123,25 @@
     <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
     <BCC_DisableOptimizations>true</BCC_DisableOptimizations>
     <BCC_PCHName_Clang>AGD Studio.pch.h</BCC_PCHName_Clang>
+    <DCC_Namespace>Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+    <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.1.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.1.0.0;Comments=</VerInfo_Keys>
+    <VerInfo_Locale>1033</VerInfo_Locale>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Base_Win64)'!=''">
     <BT_BuildType>Debug</BT_BuildType>
     <PackageImports>lmdrtcore;lmdrtdocking;lmdrtelcore;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtrtlx;lmdrtshell;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;rtl;vcl;vclactnband;vclimg;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
     <Icon_MainIcon>icon.ico</Icon_MainIcon>
     <BCC_PCHName_Clang>AGD Studio.pch.h</BCC_PCHName_Clang>
+    <DCC_Namespace>Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
+    <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.1.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.1.0.0;Comments=</VerInfo_Keys>
+    <VerInfo_Locale>1033</VerInfo_Locale>
+    <VerInfo_MajorVer>1</VerInfo_MajorVer>
+    <VerInfo_MinorVer>0</VerInfo_MinorVer>
+    <VerInfo_Build>0</VerInfo_Build>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Base_Win64x)'!=''">
     <DCC_Namespace>Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
     <BT_BuildType>Debug</BT_BuildType>
-    <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=0.16.0.11738;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=0.16.0;Comments=</VerInfo_Keys>
-    <VerInfo_Locale>1033</VerInfo_Locale>
-    <VerInfo_MajorVer>1</VerInfo_MajorVer>
-    <VerInfo_MinorVer>1</VerInfo_MinorVer>
-    <VerInfo_Release>0</VerInfo_Release>
-    <VerInfo_Build>0</VerInfo_Build>
     <PackageImports>lmdrtcore;lmdrtdocking;lmdrtelcore;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtrtlx;lmdrtshell;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;rtl;vcl;vclactnband;vclimg;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
     <Icon_MainIcon>icon.ico</Icon_MainIcon>
     <BCC_PCHName_Clang>AGD Studio.pch.h</BCC_PCHName_Clang>
@@ -184,68 +167,34 @@
     <TASM_Debugging>Full</TASM_Debugging>
     <TASM_DisplaySourceLines>true</TASM_DisplaySourceLines>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-    <AppEnableHighDPI>true</AppEnableHighDPI>
-    <Icon_MainIcon>icon.ico</Icon_MainIcon>
-    <ILINK_DisableIncrementalLinking>true</ILINK_DisableIncrementalLinking>
-    <ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)$(CC_SUFFIX)\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-    <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;xmlrtl.bpi;lmdrtshell.bpi</LinkPackageImports>
-    <LinkPackageStatics>DbxCommonDriver.lib;dbrtl.lib;bindengine.lib;lmdrtprint.lib</LinkPackageStatics>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
-    <AppEnableHighDPI>true</AppEnableHighDPI>
-    <ILINK_DisableIncrementalLinking>true</ILINK_DisableIncrementalLinking>
+    <VerInfo_MajorVer>1</VerInfo_MajorVer>
+    <VerInfo_MinorVer>0</VerInfo_MinorVer>
+    <VerInfo_Build>0</VerInfo_Build>
+    <VerInfo_Locale>1033</VerInfo_Locale>
+    <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.1.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.1.0.0;Comments=</VerInfo_Keys>
     <Icon_MainIcon>icon.ico</Icon_MainIcon>
     <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;xmlrtl.bpi;lmdrtshell.bpi;DbxCommonDriver.bpi;dbrtl.bpi;bindengine.bpi;lmdrtprint.bpi</LinkPackageImports>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Cfg_1_Win64x)'!=''">
     <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;xmlrtl.bpi;lmdrtshell.bpi;DbxCommonDriver.bpi;dbrtl.bpi;bindengine.bpi;lmdrtprint.bpi</LinkPackageImports>
-    <VerInfo_Build>74</VerInfo_Build>
-    <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=0.16.0.11738;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=0.16.0;Comments=</VerInfo_Keys>
     <BCC_EnableLSPIndexingOnChange>false</BCC_EnableLSPIndexingOnChange>
     <BCC_AllWarnings>true</BCC_AllWarnings>
     <BCC_DisableWarnings>false</BCC_DisableWarnings>
-    <VerInfo_MajorVer>1</VerInfo_MajorVer>
-    <VerInfo_MinorVer>1</VerInfo_MinorVer>
-    <VerInfo_Release>0</VerInfo_Release>
-    <VerInfo_Locale>1033</VerInfo_Locale>
     <Icon_MainIcon>icon.ico</Icon_MainIcon>
     <Debugger_DebugSourcePath>D:\Projects\GitHub\AGD-Studio\Source\Messaging\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
+    <VerInfo_Build>11741</VerInfo_Build>
+    <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=0.17.0.11741;InternalName=AGD Studio;LegalCopyright=2022-2024 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=0.17.0.11738;Comments=Programmed by Tony Thompson;SpecialBuild=BETA</VerInfo_Keys>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Cfg_2)'!=''">
     <Defines>NDEBUG;$(Defines)</Defines>
     <TASM_Debugging>None</TASM_Debugging>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-    <AppEnableHighDPI>true</AppEnableHighDPI>
-    <BCC_OptimizeMaximum>true</BCC_OptimizeMaximum>
-    <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
-    <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;xmlrtl.bpi;lmdrtshell.bpi</LinkPackageImports>
-    <LinkPackageStatics>VclSmp.lib;lmdrtprint.lib;bindengine.lib;DbxCommonDriver.lib;dbrtl.lib</LinkPackageStatics>
-    <Icon_MainIcon>icon.ico</Icon_MainIcon>
-    <VerInfo_Build>8</VerInfo_Build>
-    <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=AGD Studio;FileVersion=0.16.0.11738;InternalName=AGD Studio;LegalCopyright=2022-2024 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.AGD Studio;ProductName=AGD Studio;ProductVersion=0.16.0;Comments=Programmed by Tony Thompson;SpecialBuild=BETA</VerInfo_Keys>
-    <VerInfo_Release>0</VerInfo_Release>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
-    <AppEnableHighDPI>true</AppEnableHighDPI>
-    <BCC_OptimizeMaximum>true</BCC_OptimizeMaximum>
-    <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
-    <BCC_EnableLSPIndexing>false</BCC_EnableLSPIndexing>
-    <VerInfo_Build>8</VerInfo_Build>
-    <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=AGD Studio;FileVersion=0.16.0.11738;InternalName=AGD Studio;LegalCopyright=2022-2024 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.AGD Studio;ProductName=AGD Studio;ProductVersion=0.16.0;Comments=Programmed by Tony Thompson;SpecialBuild=BETA</VerInfo_Keys>
-    <VerInfo_Release>0</VerInfo_Release>
-    <Icon_MainIcon>icon.ico</Icon_MainIcon>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Cfg_2_Win64x)'!=''">
-    <VerInfo_MajorVer>1</VerInfo_MajorVer>
-    <VerInfo_MinorVer>1</VerInfo_MinorVer>
-    <VerInfo_Release>0</VerInfo_Release>
-    <VerInfo_Build>2</VerInfo_Build>
-    <VerInfo_Locale>1033</VerInfo_Locale>
-    <VerInfo_Keys>CompanyName=;FileDescription=AGD Studio;FileVersion=0.16.0.2;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.AGD Studio;ProductName=AGD Studio;ProductVersion=0.16.0;Comments=</VerInfo_Keys>
     <Icon_MainIcon>icon.ico</Icon_MainIcon>
     <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;xmlrtl.bpi;lmdrtshell.bpi;DbxCommonDriver.bpi;dbrtl.bpi;bindengine.bpi;lmdrtprint.bpi</LinkPackageImports>
+    <VerInfo_Build>11742</VerInfo_Build>
+    <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=AGD Studio;FileVersion=0.17.0.11742;InternalName=AGD Studio;LegalCopyright=2022-2024 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.AGD Studio;ProductName=AGD Studio;ProductVersion=0.17.0.11738;Comments=Programmed by Tony Thompson;SpecialBuild=BETA</VerInfo_Keys>
   </PropertyGroup>
   <ItemGroup>
     <CppCompile Include="AGD Studio.cpp">
@@ -636,6 +585,9 @@
       <DependentOn>Messaging\Messaging.h</DependentOn>
       <BuildOrder>75</BuildOrder>
     </CppCompile>
+    <None Include="Project\Constants.h">
+      <BuildOrder>113</BuildOrder>
+    </None>
     <CppCompile Include="Project\Documents\BaseImage.cpp">
       <DependentOn>Project\Documents\BaseImage.h</DependentOn>
       <BuildOrder>94</BuildOrder>
@@ -788,27 +740,27 @@
     <FormResources Include="Frames\IDE\fIDE.dfm" />
     <FormResources Include="Forms\fAbout.dfm" />
     <FormResources Include="Forms\fAdvancedSettings.dfm" />
-    <FormResources Include="Frames\Editors\Images\fPaletteMonoAttribute.dfm" />
+    <FormResources Include="Forms\fMain.dfm" />
     <FormResources Include="Frames\Editors\Images\fSelectionImage.dfm" />
     <FormResources Include="Frames\Editors\Images\fToolbar.dfm" />
-    <FormResources Include="Frames\Editors\Images\fPaletteBitmap.dfm" />
-    <FormResources Include="Frames\Editors\Images\fEditorImage.dfm" />
+    <FormResources Include="Frames\Editors\Images\fToolbarShape.dfm" />
+    <FormResources Include="Frames\Editors\Images\fPaletteMonoAttribute.dfm" />
     <FormResources Include="Frames\Editors\Images\fMultiImageView.dfm" />
     <FormResources Include="Frames\Editors\Images\fPaletteAttribute.dfm" />
-    <FormResources Include="Frames\Editors\Map\fEditorMap.dfm" />
+    <FormResources Include="Frames\Editors\Images\fPaletteBitmap.dfm" />
     <FormResources Include="Frames\Editors\Map\fLabelledImage.dfm" />
-    <FormResources Include="Frames\Editors\Map\fAssetSelection.dfm" />
-    <FormResources Include="Frames\Editors\Images\fToolbarShape.dfm" />
+    <FormResources Include="Frames\Editors\Map\fEditorMap.dfm" />
     <FormResources Include="Frames\Editors\Images\fULAplusBitmap.dfm" />
     <FormResources Include="Frames\Editors\JumpTable\fEditorJumpTable.dfm" />
-    <FormResources Include="Frames\Editors\Controls\fEditorControls.dfm" />
+    <FormResources Include="Frames\Editors\Map\fAssetSelection.dfm" />
     <FormResources Include="Frames\Editors\Controls\fKeyCapture.dfm" />
-    <FormResources Include="Frames\Editors\Code\fEditorCode.dfm" />
-    <FormResources Include="Forms\fMain.dfm" />
+    <FormResources Include="Frames\Editors\fEditor.dfm" />
+    <FormResources Include="Frames\Editors\Controls\fEditorControls.dfm" />
     <FormResources Include="Forms\fNewTileImage.dfm" />
     <FormResources Include="Forms\fSettings.dfm" />
+    <FormResources Include="Frames\Editors\Code\fEditorCode.dfm" />
     <FormResources Include="Frames\Editors\Images\fBlockTypes.dfm" />
-    <FormResources Include="Frames\Editors\fEditor.dfm" />
+    <FormResources Include="Frames\Editors\Images\fEditorImage.dfm" />
     <BuildConfiguration Include="Base">
       <Key>Base</Key>
     </BuildConfiguration>
@@ -860,8 +812,6 @@
             <Overwrite>true</Overwrite>
           </Platform>
         </DeployFile>
-        <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin64\cc64280.dll" Class="DependencyModule" />
-        <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin64\cc64280mt.dll" Class="DependencyModule" />
         <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin64\cc64290.dll" Class="DependencyModule" />
         <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin64\cc64290.dll" Class="DependencyModule">
           <Platform Name="Win64">
@@ -879,8 +829,6 @@
             <Overwrite>true</Overwrite>
           </Platform>
         </DeployFile>
-        <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32280.dll" Class="DependencyModule" />
-        <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32280mt.dll" Class="DependencyModule" />
         <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32290.dll" Class="DependencyModule" />
         <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32290.dll" Class="DependencyModule">
           <Platform Name="Win32">
@@ -893,8 +841,6 @@
             <Overwrite>true</Overwrite>
           </Platform>
         </DeployFile>
-        <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32c280.dll" Class="DependencyModule" />
-        <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32c280mt.dll" Class="DependencyModule" />
         <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32c290.dll" Class="DependencyModule" />
         <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32c290.dll" Class="DependencyModule">
           <Platform Name="Win32">
@@ -907,36 +853,15 @@
             <Overwrite>true</Overwrite>
           </Platform>
         </DeployFile>
-        <DeployFile LocalName=".\Binaries\Win32\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput" />
-        <DeployFile LocalName=".\Binaries\Win32\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput">
-          <Platform Name="Win32">
-            <RemoteName>AGD Studio.exe</RemoteName>
-            <Overwrite>true</Overwrite>
-          </Platform>
-        </DeployFile>
-        <DeployFile LocalName=".\Binaries\Win32\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput" />
-        <DeployFile LocalName=".\Binaries\Win64\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput" />
         <DeployFile LocalName=".\Binaries\Win64\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput">
           <Platform Name="Win64">
             <RemoteName>AGD Studio.exe</RemoteName>
             <Overwrite>true</Overwrite>
           </Platform>
         </DeployFile>
-        <DeployFile LocalName=".\Binaries\Win64\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput" />
         <DeployFile LocalName=".\Binaries\Win64x\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput">
           <Platform Name="Win64x">
             <RemoteName>AGD Studio.exe</RemoteName>
-            <Overwrite>true</Overwrite>
-          </Platform>
-        </DeployFile>
-        <DeployFile LocalName=".\Win32\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput" />
-        <DeployFile LocalName=".\Win32\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput" />
-        <DeployFile LocalName=".\Win64\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput" />
-        <DeployFile LocalName=".\Win64\Release\AGD_Studio.exe" Configuration="Release" Class="ProjectOutput" />
-        <DeployFile LocalName="Project\README.md" Configuration="Debug" Class="ProjectFile" />
-        <DeployFile LocalName="Project\README.md" Configuration="Debug" Class="ProjectFile">
-          <Platform Name="Win32">
-            <RemoteDir>.\</RemoteDir>
             <Overwrite>true</Overwrite>
           </Platform>
         </DeployFile>
@@ -1904,7 +1829,7 @@
         <ProjectRoot Platform="Win64x" Name="$(PROJECTNAME)" />
       </Deployment>
       <Platforms>
-        <Platform value="Win32">True</Platform>
+        <Platform value="Win32">False</Platform>
         <Platform value="Win64">True</Platform>
         <Platform value="Win64x">True</Platform>
       </Platforms>

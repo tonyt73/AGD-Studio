@@ -47,9 +47,9 @@ void __fastcall TSelectionPanelFrame::SetPath(String path)
     m_Path = path;
     lblProjectPath->Caption = Services::File::PathOf(path);
 
+    // check for a custom project image in the project folder, else we'll use the machines default image
     auto file = Services::File::Combine(Services::File::Combine(Services::Folders::Projects, m_Name), m_Name + ".png");
-    if (Services::File::Exists(file))
-    {
+    if (Services::File::Exists(file)) {
         auto image = std::make_unique<TPngImage>();
         image->LoadFromFile(file);
         imgLogo->Picture->Assign(image.get());
@@ -62,17 +62,18 @@ void __fastcall TSelectionPanelFrame::SetMachine(String machine)
     m_Machine = machine;
     lblMachine->Caption = machine;
 
-    if (!imgLogo->Visible)
-    {
+    if (!imgLogo->Visible) {
+        // a png file with an image of the machine 120x56
         auto mc = std::make_unique<Project::MachineConfig>(machine);
         mc->LoadFile(machine);
-        if (mc->Image.Trim() != "")
-        {
-            auto file = Services::File::Combine(Services::Folders::Application, mc->Image);
-            if (Services::File::Exists(file))
-            {
+        auto imgFile = Services::File::Combine(Services::Folders::Application + Services::Folders::Separator + "Images" + Services::Folders::Separator + m_Theme, mc->Name + ".png");
+        if (!Services::File::Exists(imgFile)) {
+            imgFile = Services::File::Combine(Services::Folders::Application + Services::Folders::Separator + "Images" + Services::Folders::Separator + "Logos", mc->Name + ".png");
+        }
+        if (Services::File::Exists(imgFile)) {
+            if (Services::File::Exists(imgFile)) {
                 auto image = std::make_unique<TPngImage>();
-                image->LoadFromFile(file);
+                image->LoadFromFile(imgFile);
                 imgLogo->Picture->Assign(image.get());
                 imgLogo->Visible = true;
             }
@@ -80,18 +81,25 @@ void __fastcall TSelectionPanelFrame::SetMachine(String machine)
     }
 }
 //---------------------------------------------------------------------------
+void __fastcall TSelectionPanelFrame::SetTheme(String folder)
+{
+    // a png file with an image of the machine 120x56
+    m_Theme = "Logos";
+    auto path = Services::Folders::Application + Services::Folders::Separator + "Images" + Services::Folders::Separator + m_Theme;
+    if (Services::Folders::Exists(path)) {
+        m_Theme = folder;
+    }
+}
+//---------------------------------------------------------------------------
 void __fastcall TSelectionPanelFrame::SetSelected(bool state)
 {
     m_Selected = state;
     UpdateControl();
-    if (state)
-    {
+    if (state) {
         // change all other TSelectionPanelFrames
-        for (int i = 0; i < Parent->ControlCount; i++)
-        {
+        for (int i = 0; i < Parent->ControlCount; i++) {
             TSelectionPanelFrame* frame = dynamic_cast<TSelectionPanelFrame*>(Parent->Controls[i]);
-            if (frame != nullptr && frame != this)
-            {
+            if (frame != nullptr && frame != this) {
                 frame->Selected = false;
             }
         }
@@ -102,14 +110,11 @@ void __fastcall TSelectionPanelFrame::SetHighlighted(bool state)
 {
     m_Highlighted = state;
     UpdateControl();
-    if (state)
-    {
+    if (state) {
         // change all other TSelectionPanelFrames
-        for (int i = 0; i < Parent->ControlCount; i++)
-        {
+        for (int i = 0; i < Parent->ControlCount; i++) {
             TSelectionPanelFrame* frame = dynamic_cast<TSelectionPanelFrame*>(Parent->Controls[i]);
-            if (frame != nullptr && frame != this)
-            {
+            if (frame != nullptr && frame != this) {
                 frame->Highlighted = false;
             }
         }

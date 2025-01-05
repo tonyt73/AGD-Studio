@@ -32,9 +32,9 @@ __fastcall Creation::Creation(BuildMessages& buildMessages)
     m_AgdSections.push_back(std::make_unique<FontSection>());
     m_AgdSections.push_back(std::make_unique<JumpTableSection>());
     m_AgdSections.push_back(std::make_unique<TilesSection>());
-    m_AgdSections.push_back(std::make_unique<ObjectsSection>());
     m_AgdSections.push_back(std::make_unique<SpritesSection>());
     m_AgdSections.push_back(std::make_unique<ScreensSection>());
+    m_AgdSections.push_back(std::make_unique<ObjectsSection>());
     m_AgdSections.push_back(std::make_unique<MapSection>());
     m_AgdSections.push_back(std::make_unique<EventsSection>());
 }
@@ -46,6 +46,7 @@ __fastcall Creation::~Creation()
 bool __fastcall Creation::Execute()
 {
     auto agdFile = Services::File::Combine(Services::Folders::Project, Services::Folders::ProjectName + ".agd");
+    Services::File::Delete(agdFile);
     theDocumentManager.Add("Text", "AGD", Services::Folders::ProjectName + ".agd");
     String agdContent;
     BUILD_MSG("Building " + agdFile);

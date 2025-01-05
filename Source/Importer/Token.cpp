@@ -20,20 +20,21 @@ Token::Token()
 //---------------------------------------------------------------------------
 bool Token::ize(const String& part, bool first, bool incVars)
 {
+    m_Type = ttEmpty;
     if (part.Trim() != "") {
         Value = part;
-        m_Type = ttInvalid;
+        m_Type = ttLine;
         auto number = StrToIntDef(part, -1);
         if (number != -1) {
             m_Type = ttNumber;
         } else if (part.Length() == 3 && part[1] == '\'' && part[3] == '\'') {
             m_Type = ttAscii;
-        } else if (part[1] == '"') {
-            m_Type = ttString;
         } else {
             bool isAlpha = true;
             // check all characters are alphanumeric
-            for (auto chr : part) isAlpha = isAlpha && (isalpha(chr) || isdigit(chr));
+            for (auto chr : part) {
+                isAlpha = isAlpha && (isalpha(chr) || isdigit(chr));
+            }
             if (isAlpha) {
                 m_Type = ttWord;
                 m_Type |= first ? ttSection : 0;
@@ -48,12 +49,12 @@ bool Token::ize(const String& part, bool first, bool incVars)
                         m_Type |= ttAscii;
                     } else if (vartype == "number") {
                         m_Type |= ttNumber;
-                    } else if (vartype == "string") {
-                        m_Type |= ttString;
                     } else if (vartype == "line") {
                         m_Type |= ttLine;
                     } else if (vartype == "word") {
                         m_Type |= ttWord;
+                    } else if (vartype == "ignore") {
+                        m_Type |= ttIgnore;
                     }
                 }
                 // set variable name
@@ -81,9 +82,9 @@ String Token::toStr() const
     if (m_Type & ttNumber ) type += "ttNumber ";  // decimal or hexidecimal number
     if (m_Type & ttAscii  ) type += "ttAscii ";   // An ascii character within single quotes '<code>'
     if (m_Type & ttWord   ) type += "ttWord ";    // an alphanumeric single word
-    if (m_Type & ttString ) type += "ttString ";  // text within double quotes "this is a string"
     if (m_Type & ttLine   ) type += "ttLine ";    // an entire line of text
     if (m_Type & ttArray  ) type += "ttArray ";   // array of the above types
+    if (m_Type & ttArray  ) type += "ttIgnore ";  // token can be ignored
     if (m_Type & ttInvalid) type += "ttInvalid "; // invalid token type
 
     type = StringReplace(type.Trim(), " ", "|", TReplaceFlags() << rfReplaceAll);

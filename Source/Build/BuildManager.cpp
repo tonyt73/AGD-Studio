@@ -28,8 +28,7 @@ void __fastcall BuildManager::SetTreeView(TElXTree* treeView)
 //---------------------------------------------------------------------------
 bool __fastcall BuildManager::Execute()
 {
-    if (m_BuildProcesses.size() == 0)
-    {
+    if (m_BuildProcesses.size() == 0) {
         m_BuildProcesses.push_back(std::make_unique<PreChecks>(m_BuildMessages));
         m_BuildProcesses.push_back(std::make_unique<Creation>(m_BuildMessages));
         m_BuildProcesses.push_back(std::make_unique<Compilation>(m_BuildMessages));
@@ -39,12 +38,10 @@ bool __fastcall BuildManager::Execute()
 
     auto start = GetTickCount();
     BUILD_MSG_CLEAR;
-    for (auto& process : m_BuildProcesses)
-    {
+    for (auto& process : m_BuildProcesses) {
         auto bs = GetTickCount();
         BUILD_MSG_PUSH(process->Type, process->Description);
-        if (!process->Execute())
-        {
+        if (!process->Execute()) {
             // failed to execute a build process
             BUILD_LINE(bmFailed, "Build step FAILED");
             auto be = GetTickCount();

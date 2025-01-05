@@ -40,6 +40,7 @@ __fastcall ProjectDocument::ProjectDocument(const String& name, const String& ma
     m_PropertyMap["Project.Author"] = &m_Author;
     m_PropertyMap["Project.Description"] = &m_Description;
     m_PropertyMap["Project.Machine"] = &m_MachineName;
+    m_PropertyMap["Project.MachineId"] = &m_MachineId;
     m_PropertyMap["Files[].Name"] = &m_FileInfo.Name;
     m_PropertyMap["Files[].Type"] = &m_FileInfo.Type;
     m_PropertyMap["Files[].SubType"] = &m_FileInfo.SubType;
@@ -93,6 +94,7 @@ void __fastcall ProjectDocument::DoSave()
         Write("Author", m_Author);
         Write("Description", m_Description);
         Write("Machine", m_MachineConfig->Name);
+        Write("MachineId", m_MachineConfig->Id);
     Pop();  // Project
     ArrayStart("Files");
     for (const auto& fi : m_Files)

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SchemeList root='Main'>
+
+  <Scheme name='Text' inherit='Numbers'>
+        <Regex token0='email'>
+            [_a-zA-Z\d\-\.]{1,40}
+            @ 
+            ([_ a-z A-Z \d \-]+ 
+            (\. [_ a-z A-Z \d \-]+ )+ )
+        </Regex>
+  </Scheme>
+
+  <Scheme name='Numbers'>
+    <Regex token0='number'>\b (0x \d+ [lL]? | \d+ (e \d*)? [lLdDfF]? ) \b</Regex>
+    <Regex token0='number'>\b [+\-]? \d+ (\. \d+)? ([eE] [+\-]? \d+) \b</Regex>
+  </Scheme>
+
+  <Scheme name='Comment' inherit='Text' defaultToken='comment'>
+    <Regex token0='st' regex=';.*$' />
+  </Scheme>
+
+  <Scheme name='String' inherit='Text' defaultToken='string'>
+  </Scheme>
+
+  <Scheme name='BadString' inherit='String' defaultToken='badString'>
+  </Scheme>
+
+  <Scheme name='StringFind'>
+    <Regex innerScheme='BadString' > 
+        &quot; (.*?\\ &quot; )*? .* $ 
+    </Regex>
+
+    <Regex innerScheme='String' priority='10'> 
+        &quot; (.*?\\ &quot; )*? &quot; c?
+    </Regex>
+
+    <Regex innerScheme='String' priority='20'> 
+        &quot; (.*?\\ &quot; )*? .*? [^\\] &quot; c?
+    </Regex>  
+
+    <Regex innerScheme='String' priority='30'> 
+        &quot;  &quot; c?
+    </Regex>    
+  </Scheme>
+
+
+
+  <Scheme name='Main' inherit='Numbers' inherit0='StringFind'
+          defaultToken='default'
+          allIgnoreCase='true'>
+    <KeywordRegex moreWordChars='.'>\b[a-zA-Z_][\w_]*\b</KeywordRegex>
+    <Regex token0='symbol' regex='[    \]    \[  \( \) &gt; &lt;  &amp; ]' />
+    <Regex token0='symbol' regex='[=]' />
+    <Regex token0="constant">(?:LEFT|RIGHT|UP|DOWN|EDGE|FIRE[1-3]?|OPTION[1-4]|BULLET|KEYBOARD|KEMPSTON|SINCLAIR|JOYSTICK[1-2]|(EMPTY|PLATFORM|WALL|LADDER|FODDER|DEADLY|CUSTOM)?BLOCK)</Regex>
+    <Regex token0="variable">\b(?:AIRBORNE|BLOCK|CLOCK|COLUMN|DIRECTION|LINE|CONTROL|FRAME|IMAGE|JUMPSPEED|LIVES|RND|SCREEN|TYPE|OBJ|SETTING[A-B]?)\b|(\b[A-Z]\b)</Regex>
+    <Regex token0="function">\b((CANGO(?:DOWN|LEFT|RIGHT|UP))|(LADDER(?:ABOVE|BELOW))|(CHR|COLLISION|CUSTOM|DATA|DEADLY|DIG|GOT|KEY)\b)</Regex>
+    <Regex token0="codeword">\b((END(?:IF|WHILE|REPEAT))|(IF|ELSE|WHILE|REPEAT)\b)</Regex>
+    
+    <Keywords>
+        ADD
+        ADDBONUS
+        ANIMATE
+        ANIMBACK
+        AT
+        BEEP
+        BONUS
+        BORDER
+        CLS
+        CLUT
+        CLW
+        COLOUR
+        CRASH
+        DECAYPARTICLE
+        DEFINEKEY
+        DEFINEPARTICLE
+        DELAY
+        DETECTOBJECT
+        DETECTOBJ
+        DISPLAY
+        DIVIDE
+        DIG
+        ENDGAME
+        ENDSPRITE
+        EXIT
+        EXPLODE
+        FALL
+        GET
+        GETBLOCK
+        GETBLOCKS
+        GETRANDOM
+        INK
+        INV
+        JUMP
+        KILL
+        LASER
+        LET
+        MENU
+        MESSAGE
+        MULTIPLY
+        NEXTLEVEL
+        NEWPARTICLE
+        OTHER
+        PALETTE
+        PAPER
+        PARTICLEDECAY
+        PARTICLEDOWN
+        PARTICLELEFT
+        PARTICLERIGHT
+        PARTICLEUP
+        PLOT
+        PRINT
+        PRINTMODE
+        PUT
+        PUTBLOCK
+        RANOMIZE
+        READ
+        REDRAW
+        REMOVE
+        REMOVEOBJ
+        RESTART
+        RESTORE
+        SCORE
+        SCREEN
+        SCREENDOWN
+        SCREENLEFT
+        SCREENRIGHT
+        SCREENUP
+        SHOWBONUS
+        SHOWSCORE
+        SHOWHIGH
+        SILENCE
+        SOUND
+        SPAWN
+        SPAWNED
+        SPRITEDOWN
+        SPRITEINK
+        SPRITELEFT
+        SPRITERIGHT
+        SPRITEUP
+        STAR
+        SUBTRACT
+        TABLEFALL
+        TABLEJUMP
+        TO
+        TICKER
+        TRAIL
+        UNDOSPRITEMOVE
+        WAITKEY
+        ZEROBONUS
+    </Keywords>
+
+    <!--Regex innerScheme='Comment' regex='Rem.*$' /-->
+    <Regex innerScheme='Comment' regex=';.*$' />
+
+    <SkipSyntaxToken token='comment' />
+
+    <SyntaxBlock capture="true">
+        <Start> 
+            [ kw:IF ]  
+        </Start>      
+        <End> kw:ENDIF</End>
+    </SyntaxBlock>
+        
+    <SyntaxBlock capture="true">
+        <Start>   [ kw:WHILE ]    </Start>
+
+        <End> kw:ENDWHILE</End>
+    </SyntaxBlock>
+
+    <SyntaxBlock capture="true">
+        <Start>   [ kw:REPEAT ]    </Start>
+
+        <End> kw:ENDREPEAT  </End>
+    </SyntaxBlock>
+
+    <SyntaxBlock capture="true">
+        <Start>   [ kw:SPAWNED ]    </Start>
+
+        <End> kw:ENDSPRITE  </End>
+    </SyntaxBlock>
+  </Scheme>
+</SchemeList>

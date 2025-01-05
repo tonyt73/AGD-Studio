@@ -50,7 +50,8 @@ public:
     int                         GetArrayCount(const String& variable, const String& array);
     String                      PadNum(const String& string) const;
 
-    __property   VariablesList& Variables = { read = m_Variables };
+    __property  VariablesList&  Variables = { read = m_Variables      };
+    __property  VariableCounts& VarCounts = { read = m_VariableCounts };
 };
 //---------------------------------------------------------------------------
 } // namespace Importer

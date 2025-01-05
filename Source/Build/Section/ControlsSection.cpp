@@ -28,9 +28,6 @@ void __fastcall ControlsSection::Execute()
         if (32 <= keyCode && keyCode <= 126) {
             line += "'" + UnicodeString::StringOfChar(keyCode, 1) + "' ";
         }
-        else if (keyCode) {
-            line += IntToStr(keyCode) + " ";
-        }
     }
     AddLine(line);
     LineBreak();

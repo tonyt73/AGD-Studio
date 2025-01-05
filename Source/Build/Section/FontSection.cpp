@@ -24,31 +24,25 @@ void __fastcall FontSection::Execute()
 {
     const auto& dm = theDocumentManager;
     auto Font = dynamic_cast<Project::CharacterSetDocument*>(dm.Get("Image", "Character Set", "Game Font"));
-    if (Font != nullptr)
-    {
-        if (Font->Frames == 96)
-        {
+    if (Font != nullptr) {
+        if (Font->Frames == 96) {
             const auto& gm = (*(theDocumentManager.ProjectConfig()->MachineConfiguration().GraphicsMode()));
             // make an image canvas
             auto image = std::make_unique<Visuals::Image>(Font, gm);
             String line = "DEFINEFONT ";
-            for (auto i = 0; i < Font->Frames; i++)
-            {
+            for (auto i = 0; i < Font->Frames; i++) {
                 // get the frame data in machine specific format
                 image->ChangeFrame(i);
                 auto data = image->GetExportNativeFormat();
                 // export the machine graphics data
-                for (auto byte : data)
-                {
-                    line += IntToStr(byte) + " ";
+                for (auto byte : data) {
+                    line += PadNum(IntToStr(byte)) + " ";
                 }
                 AddLine(line);
                 line = "           ";
             }
             LineBreak();
-        }
-        else
-        {
+        } else {
             Failure("Character set does not have the correct number of characters (frames). It has " + UIntToStr(Font->Frames) + " when it needs 96");
             return;
         }

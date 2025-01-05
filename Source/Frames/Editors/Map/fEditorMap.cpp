@@ -9,11 +9,10 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "fAssetSelection"
-#pragma link "fAssetSelection"
 #pragma link "LMDDckSite"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
-const float g_Scales[] = { 0.33f, 0.5f, 1.0f, 2.0f, 3.0f, 4.0f, 6.0f, 8.0f, 16.f };
+const float g_Scales[] = { 0.25f, 0.5f, 1.0f, 2.0f, 3.0f, 4.0f, 6.0f, 8.0f, 16.f };
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorMap::TfrmEditorMap(TComponent* Owner)
 : TfrmEditor(Owner, "Map Editor")
@@ -50,13 +49,14 @@ __fastcall TfrmEditorMap::TfrmEditorMap(TComponent* Owner)
         "Sprite Types\r\n"
         "0                     : Set selected sprite(s) as Player sprite\r\n"
         "Shift + (1 - 8)       : Set selected sprite(s) as Sprite Type {no.}\r\n\r\n"
-        "Change Start Room     : o Use Single Room Edit Mode\r\n"
-        "                        o Select the room, using left click\r\n"
-        "                        o Right click the select room to make it the Start room\r\n";
+        "Show Special Rooms\r\n"
+        "Alt + Left MB         : Sets the Player Start room (Room cannot be Empty)\r\n\r\n"
+        "Ctrl + Alt + Left MB  : Sets the Disabled room\r\n"
+        "                      : Disabled room is used to place objects only for use in game.";
 
     m_Registrar.Subscribe<Event>(_FnBind(TfrmEditorMap::OnEvent));
     m_Registrar.Subscribe<RoomSelected>(_FnBind(TfrmEditorMap::OnRoomSelected));
-    m_Registrar.Subscribe<StartRoomChanged>(_FnBind(TfrmEditorMap::OnStartRoomChanged));
+    m_Registrar.Subscribe<SpecialRoomChanged>(_FnBind(TfrmEditorMap::OnSpecialRoomChanged));
     m_Registrar.Subscribe<DocumentChange<String>>(_FnBind(TfrmEditorMap::OnDocumentChanged));
 }
 //---------------------------------------------------------------------------
@@ -77,6 +77,8 @@ void __fastcall TfrmEditorMap::OnInitialise()
     m_Workspace = std::make_unique<TileEditor>(imgWorkspace, m_ImageMap, TSize(Project::g_MaxMapRoomsAcross, Project::g_MaxMapRoomsDown), true, true, 144, false);
     m_Workspace->Mode = TileEditor::temSelect;
     m_Workspace->StartRoom = TPoint(m_TiledDocument->StartRoomX, m_TiledDocument->StartRoomY);
+    m_Workspace->DisabledRoom = TPoint(m_TiledDocument->DisabledRoomX, m_TiledDocument->DisabledRoomY);
+    m_Workspace->InventoryRoom = TPoint(m_TiledDocument->InventoryRoomX, m_TiledDocument->InventoryRoomY);
     m_Workspace->LockIcon = imgLock;
     m_Workspace->RetrieveRoomIndex = OnRetrieveRoomIndex;
 
@@ -89,7 +91,7 @@ void __fastcall TfrmEditorMap::OnInitialise()
     m_RoomSelector = std::make_unique<TileEditor>(imgRoomSelector, m_ImageMap, TSize(Project::g_MaxMapRoomsAcross, Project::g_MaxMapRoomsDown), false, true, 8, true);
     m_RoomSelector->Mode = TileEditor::temSelect;
     m_RoomSelector->GridRoom = true;
-    m_RoomSelector->ShowStartRoom = true;
+    m_RoomSelector->ShowSpecialRooms = false;
     m_RoomSelector->ShowSelectedRoom = true;
     m_RoomSelector->StartRoom = TPoint(m_TiledDocument->StartRoomX, m_TiledDocument->StartRoomY);
     m_RoomSelector->Scale = 0.5f;
@@ -210,9 +212,9 @@ void __fastcall TfrmEditorMap::imgWorkspaceMouseUp(TObject* /*Sender*/, TMouseBu
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::imgRoomSelectorMouseDown(TObject* /*Sender*/, TMouseButton Button, TShiftState Shift, int X, int Y)
 {
-    if (Button == mbRight && actEditModeSingleScreen->Checked) {
+    if (actEditModeSingleScreen->Checked) {
         // select screen as start screen
-        Bus::Publish<SetStartRoom>(SetStartRoom(TPoint(m_RoomSelector->SelectedRoom.cx, m_RoomSelector->SelectedRoom.cy)));
+        Bus::Publish<SetSpecialRoom>(SetSpecialRoom(TPoint(m_RoomSelector->SelectedRoom.x, m_RoomSelector->SelectedRoom.y), Button == mbRight ? 0 : Project::g_RoomIndexDisabled));
     }
     m_RoomSelector->OnMouseDown(Button, Shift, X, Y);
 }
@@ -317,11 +319,19 @@ void __fastcall TfrmEditorMap::OnRoomSelected(const RoomSelected& event)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::OnStartRoomChanged(const StartRoomChanged& event)
+void __fastcall TfrmEditorMap::OnSpecialRoomChanged(const SpecialRoomChanged& event)
 {
-    if (event.Id == "start.room.changed") {
-        m_Workspace->StartRoom = event.Room;
-        m_RoomSelector->StartRoom = event.Room;
+    if (event.Id == "special.room.changed") {
+        if (event.Index < Project::g_MaxRooms) {
+            m_Workspace->StartRoom = event.Room;
+            m_RoomSelector->StartRoom = event.Room;
+        } else if (event.Index == Project::g_RoomIndexDisabled) {
+            m_Workspace->DisabledRoom = event.Room;
+            m_RoomSelector->DisabledRoom = event.Room;
+        } else if (event.Index == Project::g_RoomIndexInventory) {
+            m_Workspace->InventoryRoom = event.Room;
+            m_RoomSelector->InventoryRoom = event.Room;
+        }
         Bus::Publish<Event>(Event("update.properties"));
     }
 }
@@ -415,14 +425,14 @@ void __fastcall TfrmEditorMap::imgWorkspaceMouseEnter(TObject* Sender)
 void __fastcall TfrmEditorMap::actCopyToScratchPadExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
-        m_ScratchPad->Add(m_Workspace->GetSelection(true));
+        m_ScratchPad->Add(m_Workspace->GetSelection(Visuals::itTile, true));
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorMap::actMoveToScratchPadExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
-        m_ScratchPad->Add(m_Workspace->GetSelection(true));
+        m_ScratchPad->Add(m_Workspace->GetSelection(Visuals::itTile, true));
         m_Workspace->DeleteSelection();
     }
 }
@@ -438,7 +448,7 @@ void __fastcall TfrmEditorMap::actDuplicateExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
         if (dpWorkspace == m_ActivePanel) {
-            auto list = m_Workspace->GetSelection();
+            auto list = m_Workspace->GetSelection(Visuals::itTile);
             m_Workspace->UnselectAll();
             m_Workspace->Add(list);
         } else if (dpScratchPad == m_ActivePanel) {
@@ -559,21 +569,21 @@ void __fastcall TfrmEditorMap::actEditModeFullMapExecute(TObject* /*Sender*/)
             actEditModeSingleScreen->Checked = false;
             actEditModeFullMap->Checked = true;
         }
-        //actStartRoomTool->Enabled = !actEditModeSingleScreen->Checked;
         dpRoomSelector->PanelVisible = actEditModeSingleScreen->Checked;
+        // TODO: Should this (256) be the screen height?
         dpRoomSelector->Zone->Height = std::max(dpRoomSelector->Zone->Height, 256);
         m_Workspace->Rooms = actEditModeSingleScreen->Checked ? TSize(1, 1) : TSize(Project::g_MaxMapRoomsAcross, Project::g_MaxMapRoomsDown);
         m_Workspace->SetEntities(m_TiledDocument->GetEntities(actEditModeSingleScreen->Checked ? Project::meRoom : Project::meMap, m_RoomSelector->SelectedRoom));
-        m_Workspace->ShowStartRoom = !actEditModeSingleScreen->Checked && actToggleStartRoom->Checked;
+        m_Workspace->ShowSpecialRooms = !actEditModeSingleScreen->Checked && actToggleSpecialRooms->Checked;
         m_Workspace->UpdateMap();
         m_RoomSelector->UpdateMap();
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmEditorMap::actToggleStartRoomExecute(TObject* /*Sender*/)
+void __fastcall TfrmEditorMap::actToggleSpecialRoomsExecute(TObject* /*Sender*/)
 {
     if (IsActive()) {
-        m_Workspace->ShowStartRoom = actToggleStartRoom->Checked;
+        m_Workspace->ShowSpecialRooms = actToggleSpecialRooms->Checked;
     }
 }
 //---------------------------------------------------------------------------

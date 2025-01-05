@@ -19,18 +19,20 @@
 #pragma link "LMDSedView"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
-const int SCHEMES_EXTS_COUNT = 5;
+const int FONT_SIZES[] = { 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72 };
+const int SCHEMES_EXTS_COUNT = 6;
 [[clang::no_destroy]] const String SCHEMES_EXTS[SCHEMES_EXTS_COUNT] =
 {
-    "txt", "log", "event", "agd", "sfx"
+    "txt", "log", "event", "agd", "sfx", "asm"
 };
 [[clang::no_destroy]] const String SCHEMES_SYN[SCHEMES_EXTS_COUNT] =
 {
-    "AGD", "AGD", "AGD", "AGD", "AGD"
+    "TXT", "TXT", "AGD", "TXT", "TXT", "Z80"
 };
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorCode::TfrmEditorCode(TComponent* Owner)
 : TfrmEditor(Owner, "Code Editor")
+, m_AutoFormat(true)
 {
     m_KeysHelp =
     "Edit\r\n"
@@ -91,6 +93,7 @@ void __fastcall TfrmEditorCode::OnDocumentSet()
 
     theEditorManager.SetActive(this);
     lmdDocument->ClearNoUndo();
+    Color = ThemeManager::Background;
     if (Services::File::Exists(Document->Path)) {
         lmdDocument->LoadFromFile(Document->Path, CP_ACP, true);
         auto extension = Services::File::Extension(Document->Path).SubString(2, 32);
@@ -98,7 +101,6 @@ void __fastcall TfrmEditorCode::OnDocumentSet()
         lmdDocument->ActiveSyntaxScheme = sc;
         lmdDocument->ReadOnly = Document->IsReadOnly;
     }
-    Color = ThemeManager::Background;
     evEditor->ViewSettings = evEditor->ViewSettings << vsAutoIndent;
     if (theAppSettings.CodeEditorFontName.Trim() != "") {
         evEditor->Font->Name = theAppSettings.CodeEditorFontName;
@@ -109,11 +111,11 @@ void __fastcall TfrmEditorCode::OnDocumentSet()
 String __fastcall TfrmEditorCode::GetSyntaxScByExt(const String& extension)
 {
     for (auto i = 0; i < SCHEMES_EXTS_COUNT; i++) {
-        if (LMDLowerCase(extension) == LMDLowerCase(SCHEMES_EXTS[i])) {
+        if (LMDLowerCase(extension) == SCHEMES_EXTS[i]) {
             return SCHEMES_SYN[i];
         }
     }
-    return "";
+    return "TXT";
 }
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorCode::actUndoExecute(TObject* /*Sender*/)
@@ -218,9 +220,9 @@ void __fastcall TfrmEditorCode::actSearchNextExecute(TObject* Sender)
                 evEditor->SearchFirst(evEditor->SearchLastArgs);
             }
             switch (evEditor->SearchState) {
-            case stInSearch: evEditor->SearchNext(); break;
-            case stInReplace: evEditor->ReplaceNext(); break;
-            case stNothing: Beep();
+                case stInSearch: evEditor->SearchNext(); break;
+                case stInReplace: evEditor->ReplaceNext(); break;
+                case stNothing: Beep();
             }
         }
     }
@@ -239,9 +241,9 @@ void __fastcall TfrmEditorCode::actSearchPreviousExecute(TObject* Sender)
                 evEditor->SearchFirst(evEditor->SearchLastArgs);
             }
             switch (evEditor->SearchState) {
-            case stInSearch: evEditor->SearchNext(); break;
-            case stInReplace: evEditor->ReplaceNext(); break;
-            case stNothing: Beep();
+                case stInSearch: evEditor->SearchNext(); break;
+                case stInReplace: evEditor->ReplaceNext(); break;
+                case stNothing: Beep();
             }
         }
     }
@@ -433,7 +435,7 @@ void __fastcall TfrmEditorCode::actFormatExecute(TObject* /*Sender*/)
 //---------------------------------------------------------------------------
 void __fastcall TfrmEditorCode::evEditorKeyUp(TObject* /*Sender*/, WORD &Key, TShiftState /*Shift*/)
 {
-    if (Key == vkReturn) {
+    if (Key == vkReturn && m_AutoFormat) {
         auto cp = evEditor->CursorPos;
         auto tl = evEditor->TopLinePhysical;
         actFormatExecute(nullptr);
@@ -447,5 +449,37 @@ void __fastcall TfrmEditorCode::evEditorNotFound(TObject* /*Sender*/, TLMDEditNo
     Action = saGoStartEnd;
 }
 //---------------------------------------------------------------------------
-
+int __fastcall TfrmEditorCode::GetFontSizeIndex()
+{
+    auto size = evEditor->Font->Size;
+    for (auto i = 0; i < 16; i++) {
+        if (size == FONT_SIZES[i]) {
+            return i;
+        }
+    }
+    return 2;   // size = 10
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorCode::actFontSizeIncreaseExecute(TObject* /*Sender*/)
+{
+    auto index = std::min(GetFontSizeIndex() + 1, 16);
+    auto font = evEditor->Font;
+    font->Size = FONT_SIZES[index];
+    evEditor->Font->Assign(font);
+    theAppSettings.CodeEditorFontName = evEditor->Font->Name;
+    theAppSettings.CodeEditorFontHeight = evEditor->Font->Height;
+    Bus::Publish<OnChange<String>>(OnChange<String>("code.editor.font", theAppSettings.CodeEditorFontName + ":" + theAppSettings.CodeEditorFontHeight));
+}
+//---------------------------------------------------------------------------
+void __fastcall TfrmEditorCode::actFontSizeDecreaseExecute(TObject* /*Sender*/)
+{
+    auto index = std::max(GetFontSizeIndex() - 1, 0);
+    auto font = evEditor->Font;
+    font->Size = FONT_SIZES[index];
+    evEditor->Font->Assign(font);
+    theAppSettings.CodeEditorFontName = evEditor->Font->Name;
+    theAppSettings.CodeEditorFontHeight = evEditor->Font->Height;
+    Bus::Publish<OnChange<String>>(OnChange<String>("code.editor.font", theAppSettings.CodeEditorFontName + ":" + theAppSettings.CodeEditorFontHeight));
+}
+//---------------------------------------------------------------------------
 

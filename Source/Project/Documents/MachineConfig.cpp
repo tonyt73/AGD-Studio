@@ -14,8 +14,8 @@ __fastcall MachineConfig::MachineConfig(const String& name)
 , m_Name(name)
 {
     m_PropertyMap["Name"] = &m_Name;
+    m_PropertyMap["MachineId"] = &m_Id;
     m_PropertyMap["Keyboard"] = &m_Keyboard;
-    m_PropertyMap["Image"] = &m_Image;
     m_PropertyMap["GraphicsMode"] = &m_GraphicsModeName;
     m_PropertyMap["Window.Width"] = &m_Window.Width;
     m_PropertyMap["Window.Height"] = &m_Window.Height;
@@ -132,7 +132,6 @@ void __fastcall MachineConfig::Save()
     Open(Services::File::Combine(Services::Folders::Application, "Machines" + Services::Folders::Separator + m_Name + ".json"));
     Write("Name", m_Name);
     Write("Keyboard", m_Keyboard);
-    Write("Image", m_Image);
     Write("GraphicsMode", m_GraphicsModeName);
     Push("Tools");
         Push("Compiler");

@@ -1,4 +1,10 @@
-;EVENT MAINLOOP1
+;
+; Foggy-61
+; An AGD game
+; Created: 4/01/2025 7:22:41 PM
+; Event: Main loop 1
+;
+
 ADD 1 TO A
 IF A > 2
     LET A = 0

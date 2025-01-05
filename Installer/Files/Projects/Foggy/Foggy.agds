@@ -1,9 +1,10 @@
 {
     "Project": {
-        "Version": "1.0",
-        "Author": "John Bythe",
+        "Version": "0.1",
+        "Author": "Anonymous",
         "Description": "",
-        "Machine": "ZX Spectrum 256x192 16 Colour"
+        "Machine": "ZX Spectrum 256x192 16 Colour",
+        "MachineId": ""
     },
     "Files": [
         {
@@ -15,161 +16,6 @@
             "Name": "Game Font.json",
             "Type": "Image",
             "SubType": "Character Set"
-        },
-        {
-            "Name": "Object 1.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 2.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 3.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 4.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 5.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 6.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 7.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 8.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 9.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 10.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 11.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 12.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 13.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 14.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 15.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 16.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 17.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 18.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 19.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Object 20.json",
-            "Type": "Image",
-            "SubType": "Object"
-        },
-        {
-            "Name": "Sprite 1.json",
-            "Type": "Image",
-            "SubType": "Sprite"
-        },
-        {
-            "Name": "Sprite 2.json",
-            "Type": "Image",
-            "SubType": "Sprite"
-        },
-        {
-            "Name": "Sprite 3.json",
-            "Type": "Image",
-            "SubType": "Sprite"
-        },
-        {
-            "Name": "Sprite 4.json",
-            "Type": "Image",
-            "SubType": "Sprite"
-        },
-        {
-            "Name": "Sprite 5.json",
-            "Type": "Image",
-            "SubType": "Sprite"
-        },
-        {
-            "Name": "Sprite 6.json",
-            "Type": "Image",
-            "SubType": "Sprite"
-        },
-        {
-            "Name": "Sprite 7.json",
-            "Type": "Image",
-            "SubType": "Sprite"
-        },
-        {
-            "Name": "Sprite 8.json",
-            "Type": "Image",
-            "SubType": "Sprite"
-        },
-        {
-            "Name": "Sprite 9.json",
-            "Type": "Image",
-            "SubType": "Sprite"
-        },
-        {
-            "Name": "Sprite 10.json",
-            "Type": "Image",
-            "SubType": "Sprite"
-        },
-        {
-            "Name": "Sprite 11.json",
-            "Type": "Image",
-            "SubType": "Sprite"
         },
         {
             "Name": "Tile 1.json",
@@ -567,6 +413,161 @@
             "SubType": "Tile"
         },
         {
+            "Name": "Object 1.json",
+            "Type": "Image",
+            "SubType": "Object"
+        },
+        {
+            "Name": "Object 2.json",
+            "Type": "Image",
+            "SubType": "Object"
+        },
+        {
+            "Name": "Object 3.json",
+            "Type": "Image",
+            "SubType": "Object"
+        },
+        {
+            "Name": "Object 4.json",
+            "Type": "Image",
+            "SubType": "Object"
+        },
+        {
+            "Name": "Object 5.json",
+            "Type": "Image",
+            "SubType": "Object"
+        },
+        {
+            "Name": "Object 6.json",
+            "Type": "Image",
+            "SubType": "Object"
+        },
+        {
+            "Name": "Object 7.json",
+            "Type": "Image",
+            "SubType": "Object"
+        },
+        {
+            "Name": "Object 8.json",
+            "Type": "Image",
+            "SubType": "Object"
+        },
+        {
+            "Name": "Object 9.json",
+            "Type": "Image",
+            "SubType": "Object"
+        },
+        {
+            "Name": "Object 10.json",
+            "Type": "Image",
+            "SubType": "Object"
+        },
+        {
+            "Name": "Object 11.json",
+            "Type": "Image",
+            "SubType": "Object"
+        },
+        {
+            "Name": "Object 12.json",
+            "Type": "Image",
+            "SubType": "Object"
+        },
+        {
+            "Name": "Object 13.json",
+            "Type": "Image",
+            "SubType": "Object"
+        },
+        {
+            "Name": "Object 14.json",
+            "Type": "Image",
+            "SubType": "Object"
+        },
+        {
+            "Name": "Object 15.json",
+            "Type": "Image",
+            "SubType": "Object"
+        },
+        {
+            "Name": "Object 16.json",
+            "Type": "Image",
+            "SubType": "Object"
+        },
+        {
+            "Name": "Object 17.json",
+            "Type": "Image",
+            "SubType": "Object"
+        },
+        {
+            "Name": "Object 18.json",
+            "Type": "Image",
+            "SubType": "Object"
+        },
+        {
+            "Name": "Object 19.json",
+            "Type": "Image",
+            "SubType": "Object"
+        },
+        {
+            "Name": "Object 20.json",
+            "Type": "Image",
+            "SubType": "Object"
+        },
+        {
+            "Name": "Sprite 1.json",
+            "Type": "Image",
+            "SubType": "Sprite"
+        },
+        {
+            "Name": "Sprite 2.json",
+            "Type": "Image",
+            "SubType": "Sprite"
+        },
+        {
+            "Name": "Sprite 3.json",
+            "Type": "Image",
+            "SubType": "Sprite"
+        },
+        {
+            "Name": "Sprite 4.json",
+            "Type": "Image",
+            "SubType": "Sprite"
+        },
+        {
+            "Name": "Sprite 5.json",
+            "Type": "Image",
+            "SubType": "Sprite"
+        },
+        {
+            "Name": "Sprite 6.json",
+            "Type": "Image",
+            "SubType": "Sprite"
+        },
+        {
+            "Name": "Sprite 7.json",
+            "Type": "Image",
+            "SubType": "Sprite"
+        },
+        {
+            "Name": "Sprite 8.json",
+            "Type": "Image",
+            "SubType": "Sprite"
+        },
+        {
+            "Name": "Sprite 9.json",
+            "Type": "Image",
+            "SubType": "Sprite"
+        },
+        {
+            "Name": "Sprite 10.json",
+            "Type": "Image",
+            "SubType": "Sprite"
+        },
+        {
+            "Name": "Sprite 11.json",
+            "Type": "Image",
+            "SubType": "Sprite"
+        },
+        {
             "Name": "JumpTable.json",
             "Type": "Jump",
             "SubType": "Table"
@@ -632,22 +633,7 @@
             "SubType": "Event"
         },
         {
-            "Name": "Game initialisation.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
             "Name": "Initialise sprite.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Kill player.event",
-            "Type": "Text",
-            "SubType": "Event"
-        },
-        {
-            "Name": "Introduction menu.event",
             "Type": "Text",
             "SubType": "Event"
         },
@@ -662,12 +648,27 @@
             "SubType": "Event"
         },
         {
+            "Name": "Introduction menu.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Game initialisation.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
             "Name": "Restart screen.event",
             "Type": "Text",
             "SubType": "Event"
         },
         {
             "Name": "Fell too far.event",
+            "Type": "Text",
+            "SubType": "Event"
+        },
+        {
+            "Name": "Kill player.event",
             "Type": "Text",
             "SubType": "Event"
         },

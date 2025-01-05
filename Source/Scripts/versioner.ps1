@@ -1,5 +1,5 @@
 param (
-    [String]$File,
+    [String]$File = "..\\AGD Studio.cbproj",
     [Switch]$Major,
     [Switch]$Minor,
     [Switch]$Patch

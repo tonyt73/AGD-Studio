@@ -31,11 +31,11 @@ void __fastcall ScreensSection::Execute()
     if (wi) {
         auto tileSize = dm.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itTile].Minimum;
         auto wPt = TPoint(wi->Rect.Left * tileSize.cx, wi->Rect.Top * tileSize.cy);
-        for (auto ri = 0; ri < 255; ri++) {
+        for (auto ri = 0; ri < Project::g_MaxRooms; ri++) {
             for (auto ry = 0; ry < Project::g_MaxMapRoomsDown; ry++ ) {
                 for (auto rx = 0; rx < Project::g_MaxMapRoomsAcross; rx++) {
                     if (mapDoc->GetRoomIndex(TPoint(rx, ry)) == ri) {
-                        auto roomEntities = mapDoc->GetEntities(Project::meRoom, TSize(rx, ry));
+                        auto roomEntities = mapDoc->GetEntities(Project::meRoom, TPoint(rx, ry));
                         // resolve big tiles and expand roomEntities
                         auto roomPt = TPoint(rx * tileSize.cx * wi->Rect.Width(), ry * tileSize.cy * wi->Rect.Height());
                         String line = "DEFINESCREEN ";
@@ -56,8 +56,7 @@ void __fastcall ScreensSection::Execute()
                                     // get the game index of the tile object
                                     auto index = dm.GetIndexFor(entity->Id, txo, tyo);
                                     if (index != -1) {
-                                        auto number = "   " + IntToStr(index);
-                                        line += number.SubString(number.Length() - 2, 3) + " ";
+                                        line += PadNum(IntToStr(index)) + " ";
                                     } else {
                                         // badly referenced tile
                                         Failure("Tile Id: " + UIntToStr(entity->Id) + ", in map was not found in the document manager.");

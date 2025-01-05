@@ -29,9 +29,11 @@ private:
 
 protected:
     void            __fastcall  AddLine(String line);
+    void            __fastcall  AppendLine(String line);
     void            __fastcall  LineBreak();
     void            __fastcall  Success();
     void            __fastcall  Failure(String reason);
+    String          __fastcall  PadNum(const String& string) const;
 
     virtual void    __fastcall  Execute() = 0;
 

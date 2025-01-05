@@ -3,6 +3,7 @@
 //---------------------------------------------------------------------------
 #include "MapEntity.h"
 #include "Project/Documents/DocumentManager.h"
+#include "Project/Documents/Object.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -124,6 +125,10 @@ void __fastcall MapEntity::SetId(unsigned int id)
             // initialise the sprite type
             m_SpriteType = 0;
         }
+        if (m_ImageType == Visuals::itObject) {
+            auto object = static_cast<Project::ObjectDocument*>(m_Document);
+            m_RoomIndex = object->RoomIndex;
+        }
     }
     m_Dirty = true;
 }
@@ -152,6 +157,10 @@ void __fastcall MapEntity::SetSpriteType(int type)
 void __fastcall MapEntity::SetRoomIndex(unsigned int index)
 {
     if (m_Document->CanBeLocked && !m_RoomLocked && m_RoomIndex != index) {
+        if (m_ImageType == Visuals::itObject) {
+            auto object = static_cast<Project::ObjectDocument*>(m_Document);
+            object->RoomIndex = index;
+        }
         m_RoomIndex = index;
         m_Dirty = true;
     }
