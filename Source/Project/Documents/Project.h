@@ -24,6 +24,7 @@ private:
                 String              m_Author;       // the game author
                 String              m_Description;  // a description of their game
                 String              m_MachineName;  // json loader
+                String              m_MachineId;    // json loader
      std::unique_ptr<MachineConfig> m_MachineConfig;// the machine this project uses
                 FileInfo            m_FileInfo;     // used by the json loader
                 FileList            m_Files;        // a list of files the project uses
@@ -56,6 +57,7 @@ __published:
     __property  String       Author = { read = m_Author     , write = m_Author      };
     __property  String  Description = { read = m_Description, write = m_Description };
     __property  String      Machine = { read = m_MachineName                        };
+    __property  String    MachineId = { read = m_MachineId                          };
     __property  String GraphicsMode = { read = GetGraphicsMode                      };
     __property  int     ScreenWidth = { read = GetScreenSize, index = 0             };
     __property  int    ScreenHeight = { read = GetScreenSize, index = 1             };

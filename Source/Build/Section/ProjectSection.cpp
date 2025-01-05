@@ -28,10 +28,11 @@ void __fastcall ProjectSection::Execute()
     AddLine("; AUTHOR     : " + project->Author);
     AddLine("; BUILD DATE : " + DateTimeToStr(Now()));
     AddLine(";");
-    AddLine("; This file is read-only and periodically auto generated.");
+    AddLine("; This file is read-only.");
     AddLine(";");
-    AddLine(";DEFINEMACHINE \"" + project->Machine + "\"");
+    AddLine("; MACHINE \"" + project->Machine + "\"");
     AddLine(";");
+    AddLine("MACHINE " + project->MachineId);
     LineBreak();
     Success();
 }

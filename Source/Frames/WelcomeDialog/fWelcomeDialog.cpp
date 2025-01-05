@@ -172,6 +172,7 @@ void __fastcall TfrmWelcomeDialog::NewMostRecentlyUsedItem(const String& name, c
     auto spf = std::shared_ptr<TSelectionPanelFrame>(new TSelectionPanelFrame(this));
     m_MostRecentlyUsedItems.push_back(spf);
     spf->Parent = panRecentProjects;
+    spf->Theme = "Dinosaur Pie";
     spf->Name = name;
     spf->Path = path;
     spf->Machine = machine;

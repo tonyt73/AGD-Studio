@@ -45,9 +45,9 @@ public:
     };
 
 protected:
-                String                  m_Name;
+                String                  m_Name;                         // the name of the machine
+                String                  m_Id;                           // the AGD id for the machine
                 String                  m_Keyboard;                     // the Keyboard layout name
-                String                  m_Image;                        // a png file with an image of the machine 120x56
                 String                  m_GraphicsModeName;             // json loader
 std::unique_ptr<Visuals::GraphicsMode>  m_GraphicsMode;
                 Visuals::ImageSizing    m_ImageSizing[Visuals::itEnd];  // of each image type
@@ -77,8 +77,8 @@ public:
     bool                    __fastcall  LoadFile(const String& name) override;
 
     String                  __property  Name      = { read = m_Name                            };
+    String                  __property  Id        = { read = m_Id                              };
     String                  __property  Keyboard  = { read = m_Keyboard                        };
-    String                  __property  Image     = { read = m_Image                           };
     TSize                   __property  Window    = { read = m_Window                          };
     __property  const AgdControls&      Controls  = { read = m_Controls , write = SetControls  };
     __property  const ToolInfo&         Compiler  = { read = m_Compiler , write = SetCompiler  };

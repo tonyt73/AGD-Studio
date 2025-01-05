@@ -32,12 +32,14 @@ private:    // User declarations
     String              m_Name;
     String              m_Path;
     String              m_Machine;
+    String              m_Theme;
     bool                m_Selected;
     bool                m_Highlighted;
 
     void    __fastcall  SetName(String name) override;
     void    __fastcall  SetPath(String path);
     void    __fastcall  SetMachine(String machine);
+    void    __fastcall  SetTheme(String folder);
     void    __fastcall  SetSelected(bool state);
     void    __fastcall  SetHighlighted(bool state);
     void    __fastcall  SetLoading(bool state);
@@ -53,12 +55,13 @@ public:        // User declarations
     void     __fastcall UpdateControl();
     void     __fastcall Tick();
 
-    String  __property  Name = { read = m_Name, write = SetName };
-    String  __property  Path = { read = m_Path, write = SetPath };
-    String  __property  Machine = { read = m_Machine, write = SetMachine };
-    bool    __property  Selected = { read = m_Selected, write = SetSelected };
-    bool    __property  Highlighted = { read = m_Highlighted, write = SetHighlighted };
-    bool    __property  Loading = { write = SetLoading };
+    String  __property  Name        = { read  = m_Name       , write = SetName        };
+    String  __property  Path        = { read  = m_Path       , write = SetPath        };
+    String  __property  Machine     = { read  = m_Machine    , write = SetMachine     };
+    String  __property  Theme       = { read  = m_Theme      , write = SetTheme       };
+    bool    __property  Selected    = { read  = m_Selected   , write = SetSelected    };
+    bool    __property  Highlighted = { read  = m_Highlighted, write = SetHighlighted };
+    bool    __property  Loading     = { write = SetLoading                            };
 
             // click events
             __property  TNotifyEvent OnSelectedClick = { read = FOnClick, write = FOnClick };
