@@ -9,6 +9,8 @@ using namespace Project;
 //---------------------------------------------------------------------------
 __fastcall ObjectDocument::ObjectDocument(const String& name, const String& extra)
 : ImageDocument(name)
+, m_RoomIndex(g_RoomIndexDisabled)
+, m_Position(0,0)
 , m_State(Visuals::osDisabled)
 {
     m_ImageType = Visuals::itObject;
