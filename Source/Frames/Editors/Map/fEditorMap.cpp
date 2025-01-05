@@ -12,7 +12,7 @@
 #pragma link "LMDDckSite"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
-const float g_Scales[] = { 0.33f, 0.5f, 1.0f, 2.0f, 3.0f, 4.0f, 6.0f, 8.0f, 16.f };
+const float g_Scales[] = { 0.25f, 0.5f, 1.0f, 2.0f, 3.0f, 4.0f, 6.0f, 8.0f, 16.f };
 //---------------------------------------------------------------------------
 __fastcall TfrmEditorMap::TfrmEditorMap(TComponent* Owner)
 : TfrmEditor(Owner, "Map Editor")
@@ -78,6 +78,7 @@ void __fastcall TfrmEditorMap::OnInitialise()
     m_Workspace->Mode = TileEditor::temSelect;
     m_Workspace->StartRoom = TPoint(m_TiledDocument->StartRoomX, m_TiledDocument->StartRoomY);
     m_Workspace->DisabledRoom = TPoint(m_TiledDocument->DisabledRoomX, m_TiledDocument->DisabledRoomY);
+    m_Workspace->InventoryRoom = TPoint(m_TiledDocument->InventoryRoomX, m_TiledDocument->InventoryRoomY);
     m_Workspace->LockIcon = imgLock;
     m_Workspace->RetrieveRoomIndex = OnRetrieveRoomIndex;
 
@@ -327,6 +328,9 @@ void __fastcall TfrmEditorMap::OnSpecialRoomChanged(const SpecialRoomChanged& ev
         } else if (event.Index == Project::g_RoomIndexDisabled) {
             m_Workspace->DisabledRoom = event.Room;
             m_RoomSelector->DisabledRoom = event.Room;
+        } else if (event.Index == Project::g_RoomIndexInventory) {
+            m_Workspace->InventoryRoom = event.Room;
+            m_RoomSelector->InventoryRoom = event.Room;
         }
         Bus::Publish<Event>(Event("update.properties"));
     }

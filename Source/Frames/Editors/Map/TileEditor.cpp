@@ -12,9 +12,10 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-const TColor c_ColorRoomSelected    = static_cast<TColor>(0x7F00FF00);   // 127 alpha - green
-const TColor c_ColorStartRoom       = static_cast<TColor>(0x7FFFFF00);   // 127 alpha - yellow
-const TColor c_ColorDisabledRoom    = static_cast<TColor>(0x7FFF00FF);   // 127 alpha - purple
+const TColor c_ColorRoomSelected    = static_cast<TColor>(0x7FFFFF00);   // 127 alpha - yellow
+const TColor c_ColorStartRoom       = static_cast<TColor>(0x7F00FF00);   // 127 alpha - green
+const TColor c_ColorDisabledRoom    = static_cast<TColor>(0x7FFF0000);   // 127 alpha - red
+const TColor c_ColorInventoryRoom   = static_cast<TColor>(0x7F0094FF);   // 127 alpha - light blue
 const TColor c_ColorTileGrid        = static_cast<TColor>(0x00004080);   // a kind of light brown/yellow
 const TColor c_ColorRoomGrid        = static_cast<TColor>(0x0048BAF7);   // a kind of dark brown/yellow
 const TColor c_ColorEntitySelected  = static_cast<TColor>(0x7F00FF00);   // 127 alpha - green
@@ -74,7 +75,7 @@ void __fastcall TileEditor::OnSpecialRoomChanged(const SpecialRoomChanged& event
 {
     if (event.Index < Project::g_MaxRooms) {
         m_StartRoom = event.Room;
-    } else {
+    } else if (event.Index == Project::g_RoomIndexDisabled) {
         m_DisabledRoom = event.Room;
         // update the objects in the disabled room
         auto roomSize = TSize(m_Window.Width() * m_TileSize.cx, m_Window.Height() * m_TileSize.cy);
@@ -89,7 +90,21 @@ void __fastcall TileEditor::OnSpecialRoomChanged(const SpecialRoomChanged& event
                 entity.Dirty = true;
             }
         }
-
+    } else if (event.Index == Project::g_RoomIndexInventory) {
+        m_InventoryRoom = event.Room;
+        // update the objects in the inventory room
+        auto roomSize = TSize(m_Window.Width() * m_TileSize.cx, m_Window.Height() * m_TileSize.cy);
+        for (auto& entity : m_Entities) {
+            if (entity.RoomIndex == Project::g_RoomIndexInventory) {
+                auto roomPt = TPoint(static_cast<int>(entity.Pt.X / roomSize.cx), static_cast<int>(entity.Pt.Y / roomSize.cy));
+                // move the entity to the new location
+                roomPt.X *= roomSize.cx;
+                roomPt.Y *= roomSize.cy;
+                entity.Pt -= roomPt;
+                entity.Pt += TPoint(InventoryRoom.X * roomSize.cx, InventoryRoom.Y * roomSize.cy);
+                entity.Dirty = true;
+            }
+        }
     }
     UpdateMap();
 }
@@ -202,18 +217,18 @@ void __fastcall TileEditor::OnMouseDownSelectMode(TMouseButton Button, TShiftSta
             m_GroupSelectSrtMS.Y = Snap(m_GroupSelectSrtMS.Y, m_TileSize.cy);
             m_GroupSelectEndMS.X = Snap(m_GroupSelectEndMS.X, m_TileSize.cx);
             m_GroupSelectEndMS.Y = Snap(m_GroupSelectEndMS.Y, m_TileSize.cy);
-        } else if (ShowSpecialRooms && ms.Alt) {
-            // try to change the selected room on the map
-            auto pt = ViewToMap(X, Y);
-            pt.x /= m_TileSize.cx * m_Window.Width();
-            pt.y /= m_TileSize.cy * m_Window.Height();
-            Bus::Publish<SetSpecialRoom>(SetSpecialRoom(pt, 0));
-        } else if (ShowSpecialRooms && ms.AltShift) {
-            auto pt = ViewToMap(X, Y);
-            pt.x /= m_TileSize.cx * m_Window.Width();
-            pt.y /= m_TileSize.cy * m_Window.Height();
-            // change the current edited room
-            Bus::Publish<SetSpecialRoom>(SetSpecialRoom(pt, Project::g_RoomIndexDisabled));
+        } else if (ShowSpecialRooms) {
+            // try to change the start room on the map
+            auto roomIndex = -1;
+                 if (ms.Alt)      roomIndex = 0;
+            else if (ms.AltShift) roomIndex = Project::g_RoomIndexDisabled;
+            else if (ms.AltCtrl)  roomIndex = Project::g_RoomIndexInventory;
+            if (roomIndex != -1) {
+                auto pt = ViewToMap(X, Y);
+                pt.x /= m_TileSize.cx * m_Window.Width();
+                pt.y /= m_TileSize.cy * m_Window.Height();
+                Bus::Publish<SetSpecialRoom>(SetSpecialRoom(pt, Project::g_RoomIndexDisabled));
+            }
         }
     }
 }
@@ -568,18 +583,26 @@ void __fastcall TileEditor::SetShowSpecialRooms(bool state)
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::SetStartRoomCoords(TPoint location)
 {
-    if ((location.x != m_StartRoom.x || location.y != m_StartRoom.y) && 0 <= location.x && location.y < m_Rooms.cx && 0 <= location.y && location.y < m_Rooms.cy) {
+    if ((location.x != m_DisabledRoom.x || location.y != m_DisabledRoom.y) && (location.x != m_InventoryRoom.x || location.y != m_InventoryRoom.y) && 0 <= location.x && location.y < m_Rooms.cx && 0 <= location.y && location.y < m_Rooms.cy) {
         m_StartRoom = location;
+        UpdateMap();
     }
-    UpdateMap();
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::SetDisabledRoomCoords(TPoint location)
 {
-    if ((location.x != m_StartRoom.x || location.y != m_StartRoom.y) && 0 <= location.x && location.y < Project::g_MaxMapRoomsAcross && 0 <= location.y && location.y < Project::g_MaxMapRoomsDown) {
+    if ((location.x != m_StartRoom.x || location.y != m_StartRoom.y) && (location.x != m_InventoryRoom.x || location.y != m_InventoryRoom.y) && 0 <= location.x && location.y < Project::g_MaxMapRoomsAcross && 0 <= location.y && location.y < Project::g_MaxMapRoomsDown) {
         m_DisabledRoom = location;
+        UpdateMap();
     }
-    UpdateMap();
+}
+//---------------------------------------------------------------------------
+void __fastcall TileEditor::SetInventoryRoomCoords(TPoint location)
+{
+    if ((location.x != m_StartRoom.x || location.y != m_StartRoom.y) && (location.x != m_DisabledRoom.x || location.y != m_DisabledRoom.y) && 0 <= location.x && location.y < Project::g_MaxMapRoomsAcross && 0 <= location.y && location.y < Project::g_MaxMapRoomsDown) {
+        m_InventoryRoom = location;
+        UpdateMap();
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::SetLockIcon(TImage* icon)
@@ -694,9 +717,14 @@ void __fastcall TileEditor::DrawRoomNumbers() const
             auto tx = xs;
             for (auto x = 0; x < Project::g_MaxMapRoomsAcross; x++) {
                 auto ri = FRetrieveRoomIndex(TPoint(x, y), false);
-                if (ri <= Project::g_RoomIndexDisabled) {
+                if (ri != Project::g_RoomIndexEmpty) {
                     // draw number/named room
-                    auto room = ri != Project::g_RoomIndexDisabled ? IntToStr(ri) : "DISABLED";
+                    auto room = IntToStr(ri);
+                    if (ri == Project::g_RoomIndexDisabled) {
+                        room = "DISABLED";
+                    } else if (ri == Project::g_RoomIndexInventory) {
+                        room = "INVENTORY";
+                    }
                     auto ts = Canvas->TextExtent(room);
                     Canvas->Pen->Color = ThemeManager::Background;
                     Canvas->Brush->Color = ThemeManager::Background;
@@ -770,12 +798,21 @@ void __fastcall TileEditor::DrawGroupSelect() const
 //---------------------------------------------------------------------------
 void __fastcall TileEditor::DrawEntities(int filters, Visuals::ImageTypes type)
 {
+    // this function can draw map entities under different conditions
+    //
     for (auto& entity : m_Entities) {
+             // draw if forced
         bool draw  = (filters & edfForce) == edfForce;
+             // draw if entity is dirty and the filter is dirty
              draw |= ((filters & edfDirty) == edfDirty) && entity.Dirty;
-             draw &= type == Visuals::itInvalid ? true : entity.Type == type;
+             // draw if type is all or entity type matches type
+             draw &= type == Visuals::itAll ? true : entity.Type == type;
+             // draw if filter selected and entity is selected or visa versa
              draw &= (((filters & edfSelected ) == edfSelected ) && entity.Selected) || (((filters & edfSelected ) == 0) && !entity.Selected);
+             // draw tile 0, the blank screen tile (or if not first tile and not a tile, then draw a sprite or object
              draw &= (((filters & edfFirstTile) == edfFirstTile) && (entity.Image->ImageType == Visuals::itTile && entity.Image->IsFirstOfType())) || (((filters & edfFirstTile) == 0) && !(entity.Image->ImageType == Visuals::itTile && entity.Image->IsFirstOfType()));
+             // draw the objects in specials rooms when the show special rooms flag is on
+             draw &= entity.RoomIndex == Project::g_RoomIndexDisabled || entity.RoomIndex == Project::g_RoomIndexInventory ? m_ShowSpecialRooms || m_ShowRoomNumbers : true;
         if (draw) {
             auto pt = entity.Pt;
             pt.x = Snap(pt.x, m_TileSize.cx);
@@ -867,6 +904,12 @@ void __fastcall TileEditor::DrawSpecialRooms() const
         // set the color (disabled room)
         static_cast<TColor*>(shade->ScanLine[0])[0] = c_ColorDisabledRoom;
         pt = MapToView(TPoint(m_DisabledRoom.X * ww, m_DisabledRoom.Y * wh));
+        // draw the disabled/inventory room
+        AlphaBlend(m_View->Picture->Bitmap->Canvas->Handle, pt.x, pt.y, static_cast<int>(static_cast<float>(ww) * m_Scale.x) + 1, static_cast<int>(static_cast<float>(wh) * m_Scale.y) + 1, shade->Canvas->Handle, 0, 0, 1, 1, bfn);
+
+        // set the color (inventory room)
+        static_cast<TColor*>(shade->ScanLine[0])[0] = c_ColorInventoryRoom;
+        pt = MapToView(TPoint(m_InventoryRoom.X * ww, m_InventoryRoom.Y * wh));
         // draw the disabled/inventory room
         AlphaBlend(m_View->Picture->Bitmap->Canvas->Handle, pt.x, pt.y, static_cast<int>(static_cast<float>(ww) * m_Scale.x) + 1, static_cast<int>(static_cast<float>(wh) * m_Scale.y) + 1, shade->Canvas->Handle, 0, 0, 1, 1, bfn);
     }

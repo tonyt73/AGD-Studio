@@ -17,7 +17,8 @@ _fastcall TiledMapDocument::TiledMapDocument(const String& name)
 , m_MappingIndexLoadCount(0)
 , m_RoomMappingWidth(g_MaxMapRoomsAcross)
 , m_RoomMappingHeight(g_MaxMapRoomsDown)
-, m_RoomDisabled(0,0)
+, m_RoomDisabled(1,0)
+, m_RoomInventory(0,0)
 {
     m_Type = "Map";
     m_SubType = "Tiled";
@@ -30,6 +31,8 @@ _fastcall TiledMapDocument::TiledMapDocument(const String& name)
         RegisterProperty("DisabledRoomIndex", "Disabled Room Details", "The AGD room index of the Disabled room location");
         RegisterProperty("DisabledRoomX", "Disabled Room Details", "The rooms across to the Disabled room location");
         RegisterProperty("DisabledRoomY", "Disabled Room Details", "The rooms down to the Disabled room location");
+        RegisterProperty("InventoryRoomX", "Disabled Room Details", "The rooms across to the Disabled room location");
+        RegisterProperty("InventoryRoomY", "Disabled Room Details", "The rooms down to the Disabled room location");
         RegisterProperty("NumberOfRooms", "Map Details", "The number of rooms/screens defined");
         RegisterProperty("MaxRoomsAcross", "Map Details", "The maximum number of rooms across that you can define");
         RegisterProperty("MaxRoomsDown", "Map Details", "The maximum number of rooms down that you can define");
@@ -38,6 +41,8 @@ _fastcall TiledMapDocument::TiledMapDocument(const String& name)
 
         // json loading properties
         m_PropertyMap["Map.StartLocation"] = &StartRoomIndex;
+        m_PropertyMap["Map.Inventory.X"] = &m_RoomInventory.X;
+        m_PropertyMap["Map.Inventory.Y"] = &m_RoomInventory.Y;
         m_PropertyMap["Map.Entities[].X"] = &m_EntityLoader.m_Pt.x;
         m_PropertyMap["Map.Entities[].Y"] = &m_EntityLoader.m_Pt.y;
         m_PropertyMap["Map.Entities[].RefId"] = &m_EntityLoader.m_LoadId;
@@ -48,8 +53,8 @@ _fastcall TiledMapDocument::TiledMapDocument(const String& name)
         m_PropertyMap["Map.ScratchPad[].Y"] = &m_EntityLoader.m_Pt.y;
         m_PropertyMap["Map.ScratchPad[].RefId"] = &m_EntityLoader.m_LoadId;
         m_PropertyMap["Map.ScratchPad[].SpriteType"] = &m_EntityLoader.m_SpriteType;
-        //m_PropertyMap["Map.RoomMapping.Width"] = &m_RoomMappingWidth;               // the size of the map we are loading
-        //m_PropertyMap["Map.RoomMapping.Height"] = &m_RoomMappingHeight;
+        m_PropertyMap["Map.RoomMapping.Width"] = &m_RoomMappingWidth;               // the size of the map we are loading
+        m_PropertyMap["Map.RoomMapping.Height"] = &m_RoomMappingHeight;
         m_PropertyMap["Map.RoomMapping.Indexes[]"] = &m_RoomMappingIndex;
         m_File = GetFile();
 
@@ -65,6 +70,8 @@ _fastcall TiledMapDocument::TiledMapDocument(const String& name)
         }
         // set the disabled room index
         m_RoomMapping[m_RoomDisabled.X][m_RoomDisabled.Y] = g_RoomIndexDisabled;
+        // set the inventory room index
+        m_RoomMapping[m_RoomInventory.X][m_RoomInventory.Y] = g_RoomIndexInventory;
     }
 }
 //---------------------------------------------------------------------------
@@ -76,44 +83,48 @@ __fastcall TiledMapDocument::~TiledMapDocument()
 void __fastcall TiledMapDocument::DoSave()
 {
     Push("Map");
-    Write("StartLocation", StartRoomIndex);
-    Push("RoomMapping");
-    Write("Width", m_RoomMappingWidth);
-    Write("Height", m_RoomMappingHeight);
-    ArrayStart("Indexes");
-    for (auto y = 0; y < m_RoomMappingHeight; y++) {
-        for (auto x = 0; x < m_RoomMappingWidth; x++) {
-            Write(m_RoomMapping[x][y]);
+        Write("StartLocation", StartRoomIndex);
+//        Push("Inventory");
+//            Write("X", m_RoomInventory.X);
+//            Write("Y", m_RoomInventory.Y);
+//        Pop();
+        Push("RoomMapping");
+            Write("Width", m_RoomMappingWidth);
+            Write("Height", m_RoomMappingHeight);
+            ArrayStart("Indexes");
+            for (auto y = 0; y < m_RoomMappingHeight; y++) {
+                for (auto x = 0; x < m_RoomMappingWidth; x++) {
+                    Write(m_RoomMapping[x][y]);
+                }
+            }
+            ArrayEnd(); // Indexes
+        Pop(); // RoomMapping
+        ArrayStart("Entities");
+        for (const auto& entity : m_Map) {
+            StartObject();
+            Write("X", entity.m_Pt.x);
+            Write("Y", entity.m_Pt.y);
+            Write("RefId", entity.Id);
+            if (entity.IsSprite && entity.SpriteType >= 0) {
+                Write("SpriteType", entity.SpriteType);
+                Push("Room");
+                Write("Locked", entity.RoomLocked);
+                Write("Index", entity.RoomIndex);
+                Pop();
+            }
+            EndObject();
         }
-    }
-    ArrayEnd(); // indexes
-    Pop();
-    ArrayStart("Entities");
-    for (const auto& entity : m_Map) {
-        StartObject();
-        Write("X", entity.m_Pt.x);
-        Write("Y", entity.m_Pt.y);
-        Write("RefId", entity.Id);
-        if (entity.IsSprite && entity.SpriteType >= 0) {
-            Write("SpriteType", entity.SpriteType);
-            Push("Room");
-            Write("Locked", entity.RoomLocked);
-            Write("Index", entity.RoomIndex);
-            Pop();
+        ArrayEnd(); // Entities
+        ArrayStart("ScratchPad");
+        for (const auto& entity : m_ScratchPad) {
+            StartObject();
+            Write("X", entity.m_Pt.x);
+            Write("Y", entity.m_Pt.y);
+            Write("RefId", entity.Id);
+            EndObject();
         }
-        EndObject();
-    }
-    ArrayEnd(); // workspace
-    ArrayStart("ScratchPad");
-    for (const auto& entity : m_ScratchPad) {
-        StartObject();
-        Write("X", entity.m_Pt.x);
-        Write("Y", entity.m_Pt.y);
-        Write("RefId", entity.Id);
-        EndObject();
-    }
-    ArrayEnd(); // scratchpad
-    Pop(); // map
+        ArrayEnd(); // ScratchPad
+    Pop(); // Map
 }
 //---------------------------------------------------------------------------
 void __fastcall TiledMapDocument::OnEndObject(const String& object)
@@ -151,6 +162,10 @@ void __fastcall TiledMapDocument::OnEndObject(const String& object)
         if (m_RoomMappingIndex == g_RoomIndexDisabled) {
             m_RoomDisabled.X = x;
             m_RoomDisabled.Y = y;
+        }
+        if (m_RoomMappingIndex == g_RoomIndexInventory) {
+            m_RoomInventory.X = x;
+            m_RoomInventory.Y = y;
         }
     }
 }
@@ -261,7 +276,6 @@ void __fastcall TiledMapDocument::OnSetSpecialRoom(const SetSpecialRoom& event)
     } else if (event.Index == g_RoomIndexDisabled) {
         // Set disabled room
         if (ri == g_RoomIndexEmpty) {
-            // update the position of any objects in the current disabled room
             m_RoomMapping[m_RoomDisabled.X][m_RoomDisabled.Y] = g_RoomIndexEmpty;
             m_RoomDisabled = event.Room;
             m_RoomMapping[m_RoomDisabled.X][m_RoomDisabled.Y] = g_RoomIndexDisabled;
@@ -271,9 +285,21 @@ void __fastcall TiledMapDocument::OnSetSpecialRoom(const SetSpecialRoom& event)
             // post an error to the message list
             ErrorMessage("[TiledMap] Cannot set Disabled room location as the room must be empty.");
         }
+    } else if (event.Index == g_RoomIndexInventory) {
+        // Set inventory room
+        if (ri == g_RoomIndexEmpty) {
+            m_RoomMapping[m_RoomInventory.X][m_RoomInventory.Y] = g_RoomIndexEmpty;
+            m_RoomDisabled = event.Room;
+            m_RoomMapping[m_RoomInventory.X][m_RoomInventory.Y] = g_RoomIndexInventory;
+            Bus::Publish<SpecialRoomChanged>(SpecialRoomChanged(event.Room, event.Index));
+            Bus::Publish<UpdateProperties>(UpdateProperties());
+        } else {
+            // post an error to the message list
+            ErrorMessage("[TiledMap] Cannot set Inventory room location as the room must be empty.");
+        }
     } else {
         // post an error to the message list
-        ErrorMessage("[TiledMap] Cannot set Start location to room 254 (Disabled) or 255 (Empty)");
+        ErrorMessage("[TiledMap] Cannot set Start location to room 254 (Disabled) or 255 (Empty) or 256 (Inventory)");
     }
 }
 //---------------------------------------------------------------------------

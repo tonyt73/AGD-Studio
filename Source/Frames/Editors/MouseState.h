@@ -9,6 +9,8 @@ private:
     // shift keys
     bool        m_Alt;
     bool        m_AltShift;
+    bool        m_AltCtrl;
+    bool        m_CtrlShift;
     bool        m_Ctrl;
     bool        m_Shift;
     bool        m_NoModifiers;
@@ -27,6 +29,8 @@ public:
     __property  bool    Ctrl        = { read = m_Ctrl        };
     __property  bool    Alt         = { read = m_Alt         };
     __property  bool    AltShift    = { read = m_AltShift    };
+    __property  bool    AltCtrl     = { read = m_AltCtrl     };
+    __property  bool    CtrlShift   = { read = m_CtrlShift   };
     __property  bool    Left        = { read = m_Left        };
     __property  bool    Middle      = { read = m_Middle      };
     __property  bool    Right       = { read = m_Right       };

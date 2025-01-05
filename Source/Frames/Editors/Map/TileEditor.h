@@ -74,6 +74,7 @@ private:
     bool                        m_ShowSpriteTypes;  // show the sprite type
     TPoint                      m_StartRoom;        // the location of the start room
     TPoint                      m_DisabledRoom;     // the location of the disabled room
+    TPoint                      m_InventoryRoom;    // the location of the inventory room
     MapPencilTool               m_MapPencilTool;    // pencil tool - plot single entites
     MapRectTool                 m_MapRectTool;      // rect tool - draw tiles (only) in a rectangle
     MapLineTool                 m_MapLineTool;      // line tool - draw tiles (only) in a line
@@ -104,10 +105,11 @@ private:
     void            __fastcall  SetShowSpriteTypes(bool state);
     void            __fastcall  SetStartRoomCoords(TPoint location);
     void            __fastcall  SetDisabledRoomCoords(TPoint location);
+    void            __fastcall  SetInventoryRoomCoords(TPoint location);
     void            __fastcall  SetScale(float scale);
     void            __fastcall  SetMode(TEMode mode);
     void            __fastcall  SetLockIcon(TImage* icon);
-    void            __fastcall  DrawEntities(int filters, Visuals::ImageTypes type = Visuals::itInvalid);
+    void            __fastcall  DrawEntities(int filters, Visuals::ImageTypes type = Visuals::itAll);
     void            __fastcall  DrawToolEntities();
     void            __fastcall  DrawHoverEntity();
     void            __fastcall  DrawMap();
@@ -167,27 +169,28 @@ public:
     void            __fastcall  Paste();
 
     // properties
-    __property  TEMode          Mode                = { read = m_Mode            , write = SetMode              };
-    __property  TSize           Rooms               = { write = SetRooms                                        };
-    __property  float           Scale               = { read = m_ScaleFactor     , write = SetScale             };
-    __property  bool            GridTile            = { read = m_ShowGridTile    , write = SetGridTile          };
-    __property  bool            GridRoom            = { read = m_ShowGridRoom    , write = SetGridRoom          };
-    __property  unsigned int    Tile0Id             = { read = m_Tile0Id         , write = SetTile0Id           };
-    __property  unsigned int    ToolEntity          = { read = GetToolEntity     , write = SetToolEntity        };
-    __property  bool            ReadOnly            = { read = m_ReadOnly        , write = SetReadOnly          };
-    __property  TPoint          SelectedRoom        = { read = m_SelectedRoom                                   };
-    __property  TPoint          StartRoom           = { read = m_StartRoom       , write = SetStartRoomCoords   };
-    __property  TPoint          DisabledRoom        = { read = m_DisabledRoom    , write = SetDisabledRoomCoords};
-    __property  bool            ShowSelectedRoom    = { read = m_ShowSelectedRoom, write = SetShowSelectedRoom  };
-    __property  bool            ShowSpecialRooms    = { read = m_ShowSpecialRooms, write = SetShowSpecialRooms  };
-    __property  bool            ShowRoomNumbers     = { read = m_ShowRoomNumbers , write = SetShowRoomNumbers   };
-    __property  bool            ShowTileTypes       = { read = m_ShowTileTypes   , write = SetShowTileTypes     };
-    __property  bool            ShowSpriteTypes     = { read = m_ShowSpriteTypes , write = SetShowSpriteTypes   };
-    __property  TImage*         LockIcon            = { write = SetLockIcon                                     };
+    __property  TEMode          Mode                = { read = m_Mode            , write = SetMode                };
+    __property  TSize           Rooms               = { write = SetRooms                                          };
+    __property  float           Scale               = { read = m_ScaleFactor     , write = SetScale               };
+    __property  bool            GridTile            = { read = m_ShowGridTile    , write = SetGridTile            };
+    __property  bool            GridRoom            = { read = m_ShowGridRoom    , write = SetGridRoom            };
+    __property  unsigned int    Tile0Id             = { read = m_Tile0Id         , write = SetTile0Id             };
+    __property  unsigned int    ToolEntity          = { read = GetToolEntity     , write = SetToolEntity          };
+    __property  bool            ReadOnly            = { read = m_ReadOnly        , write = SetReadOnly            };
+    __property  TPoint          SelectedRoom        = { read = m_SelectedRoom                                     };
+    __property  TPoint          StartRoom           = { read = m_StartRoom       , write = SetStartRoomCoords     };
+    __property  TPoint          DisabledRoom        = { read = m_DisabledRoom    , write = SetDisabledRoomCoords  };
+    __property  TPoint          InventoryRoom       = { read = m_InventoryRoom   , write = SetInventoryRoomCoords };
+    __property  bool            ShowSelectedRoom    = { read = m_ShowSelectedRoom, write = SetShowSelectedRoom    };
+    __property  bool            ShowSpecialRooms    = { read = m_ShowSpecialRooms, write = SetShowSpecialRooms    };
+    __property  bool            ShowRoomNumbers     = { read = m_ShowRoomNumbers , write = SetShowRoomNumbers     };
+    __property  bool            ShowTileTypes       = { read = m_ShowTileTypes   , write = SetShowTileTypes       };
+    __property  bool            ShowSpriteTypes     = { read = m_ShowSpriteTypes , write = SetShowSpriteTypes     };
+    __property  TImage*         LockIcon            = { write = SetLockIcon                                       };
 
     // event handlers
-__property TNotifyOnEntityClick OnEntitySelected    = { read = FOnEntitySelected , write = FOnEntitySelected    };
-__property TRetrieveRoomIndex   RetrieveRoomIndex   = { read = FRetrieveRoomIndex, write = FRetrieveRoomIndex   };
+__property TNotifyOnEntityClick OnEntitySelected    = { read = FOnEntitySelected , write = FOnEntitySelected      };
+__property TRetrieveRoomIndex   RetrieveRoomIndex   = { read = FRetrieveRoomIndex, write = FRetrieveRoomIndex     };
 };
 //---------------------------------------------------------------------------
 #endif

@@ -11,11 +11,12 @@ namespace Project
 {
 //---------------------------------------------------------------------------
 enum MapEntityType { meMap, meRoom, meScratchPad };
-const int g_MaxMapRoomsAcross = 24;
-const int g_MaxMapRoomsDown   = 16;
-const int g_MaxRooms          = 254;
-const int g_RoomIndexDisabled = 254;
-const int g_RoomIndexEmpty    = 255;
+const int g_MaxMapRoomsAcross  = 24;
+const int g_MaxMapRoomsDown    = 16;
+const int g_MaxRooms           = 254;
+const int g_RoomIndexDisabled  = 254;
+const int g_RoomIndexEmpty     = 255;
+const int g_RoomIndexInventory = 256;
 //---------------------------------------------------------------------------
 class TiledMapDocument : public Document
 {
@@ -24,6 +25,9 @@ protected:
     mutable MapEntityList           m_RoomEntityList;
     MapEntityList                   m_ScratchPad;
     int                             m_DisabledRoomIndex;
+    TPoint                          m_RoomDisabled;
+    int                             m_InventoryRoomIndex;
+    TPoint                          m_RoomInventory;
     int                             m_StartRoomIndex;
     TPoint                          m_StartRoomCoords;
     int                             m_ScreenCount;
@@ -34,7 +38,6 @@ protected:
     int                             m_MappingIndexLoadCount;
     int                             m_RoomMappingWidth;
     int                             m_RoomMappingHeight;
-    TPoint                          m_RoomDisabled;
 
     void                __fastcall  OnEndObject(const String& object) override;
     void                __fastcall  OnDocumentChanged(const DocumentChange<String>& message);
@@ -66,21 +69,25 @@ public:
     bool                __fastcall  IsRoomEmpty(int x, int y) const;
     bool                __fastcall  IsRoomIndexUsed(const int roomIndex) const;
 
-    int                 __property  ScreenCount     = { read = m_ScreenCount                    };
+    int                 __property  ScreenCount         = { read = m_ScreenCount                    };
 
 __published:
-    int                 __property  DisabledRoomIndex={ read = m_DisabledRoomIndex              };
-    int                 __property  DisabledRoomX   = { read = GetSpecialRoomCoords, index = 2    };
-    int                 __property  DisabledRoomY   = { read = GetSpecialRoomCoords, index = 3    };
-    int                 __property  StartRoomIndex  = { read = m_StartRoomIndex                 };
-    int                 __property  StartRoomX      = { read = GetSpecialRoomCoords, index = 0    };
-    int                 __property  StartRoomY      = { read = GetSpecialRoomCoords, index = 1    };
-    int                 __property  NumberOfRooms   = { read = GetNumberOfRooms                 };
-    int                 __property  MaxRoomsAcross  = { read = GetMaxRooms, index = 0           };
-    int                 __property  MaxRoomsDown    = { read = GetMaxRooms, index = 1           };
-    int                 __property  Width           = { read = m_RoomMappingWidth               };
-    int                 __property  Height          = { read = m_RoomMappingHeight              };
-    TPoint              __property  DisabledRoom    = { read = m_RoomDisabled                   };
+    int                 __property  DisabledRoomIndex   = { read = m_DisabledRoomIndex              };
+    int                 __property  DisabledRoomX       = { read = GetSpecialRoomCoords, index = 2  };
+    int                 __property  DisabledRoomY       = { read = GetSpecialRoomCoords, index = 3  };
+    int                 __property  InventoryRoomIndex  = { read = m_InventoryRoomIndex             };
+    int                 __property  InventoryRoomX      = { read = GetSpecialRoomCoords, index = 4  };
+    int                 __property  InventoryRoomY      = { read = GetSpecialRoomCoords, index = 5  };
+    int                 __property  StartRoomIndex      = { read = m_StartRoomIndex                 };
+    int                 __property  StartRoomX          = { read = GetSpecialRoomCoords, index = 0  };
+    int                 __property  StartRoomY          = { read = GetSpecialRoomCoords, index = 1  };
+    int                 __property  NumberOfRooms       = { read = GetNumberOfRooms                 };
+    int                 __property  MaxRoomsAcross      = { read = GetMaxRooms, index = 0           };
+    int                 __property  MaxRoomsDown        = { read = GetMaxRooms, index = 1           };
+    int                 __property  Width               = { read = m_RoomMappingWidth               };
+    int                 __property  Height              = { read = m_RoomMappingHeight              };
+    TPoint              __property  DisabledRoom        = { read = m_RoomDisabled                   };
+    TPoint              __property  InventoryRoom       = { read = m_RoomInventory                  };
 };
 //---------------------------------------------------------------------------
 } // Project namespace

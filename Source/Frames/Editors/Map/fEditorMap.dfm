@@ -850,9 +850,7 @@ inherited frmEditorMap: TfrmEditorMap
             OnMouseEnter = imgWorkspaceMouseEnter
             OnMouseMove = imgWorkspaceMouseMove
             OnMouseUp = imgWorkspaceMouseUp
-            ExplicitTop = 19
-            ExplicitWidth = 904
-            ExplicitHeight = 417
+            ExplicitTop = 26
           end
           object tbrWorkspace: TToolBar
             Left = 0

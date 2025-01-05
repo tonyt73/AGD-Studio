@@ -58,7 +58,7 @@ void __fastcall ObjectsSection::Execute()
                 data.pop_back();
             }
             // add the room
-            auto roomIndex = static_cast<Project::ObjectDocument*>(object)->RoomIndex;
+            auto roomIndex = std::min(Project::g_RoomIndexEmpty, static_cast<Project::ObjectDocument*>(object)->RoomIndex);
             // convert local window position to machine screen space
             line += PadNum(IntToStr(static_cast<int>(roomIndex)))+ " ";
             line += PadNum(IntToStr(static_cast<int>(wPt.Y + object->Y))) + " " + PadNum(IntToStr(static_cast<int>(wPt.X + object->X)));
