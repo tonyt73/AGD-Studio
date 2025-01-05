@@ -42,12 +42,12 @@ int __fastcall ObjectDocument::GetPosition(int index)
 //---------------------------------------------------------------------------
 void __fastcall ObjectDocument::SetRoomIndex(int value)
 {
-    if (0 <= value && value <= 255) {
+    if (value != g_RoomIndexEmpty && 0 <= value && value <= g_RoomIndexMax) {
         State = Visuals::osRoom;
         m_RoomIndex = value;
-        if (value ==  254) {
+        if (value ==  g_RoomIndexDisabled) {
             State = Visuals::osDisabled;
-        } else if (value == 255) {
+        } else if (value == g_RoomIndexInventory) {
             State = Visuals::osInventory;
         }
     }
@@ -57,9 +57,9 @@ void __fastcall ObjectDocument::SetState(Visuals::ObjectState state)
 {
     m_State = state;
     if (state == Visuals::osDisabled) {
-        m_RoomIndex = 254;
+        m_RoomIndex = g_RoomIndexDisabled;
     } else if (state == Visuals::osInventory) {
-        m_RoomIndex = 255;
+        m_RoomIndex = g_RoomIndexInventory;
     }
 }
 //---------------------------------------------------------------------------

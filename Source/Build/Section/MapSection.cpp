@@ -33,7 +33,7 @@ void __fastcall MapSection::Execute()
         for (auto x = mapSize.Left; x <= mapSize.Right; x++) {
             auto ri = mapDoc->GetRoomIndex(TPoint(x, y));
             // don't export the disabled room (254)
-            ri = (ri == Project::g_RoomIndexDisabled) ? Project::g_RoomIndexEmpty : ri;
+            ri = (ri >= Project::g_RoomIndexDisabled) ? Project::g_RoomIndexEmpty : ri;
             line += PadNum(IntToStr(ri)) + " ";
         }
         AddLine(line);

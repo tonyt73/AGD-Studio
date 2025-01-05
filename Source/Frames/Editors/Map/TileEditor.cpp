@@ -406,7 +406,16 @@ void __fastcall TileEditor::OnMouseUpSelectMode(TMouseButton Button, TShiftState
                 //       Should add this to the machine config and only apply if needed
                 e.Pt = TPoint(Snap(e.Pt.X, m_TileSize.cx), Snap(e.Pt.Y, m_TileSize.cy));
                 e.DragPt = TPoint();
-                if (e.RoomLocked && e.RoomIndex <= Project::g_RoomIndexDisabled) {
+                // if the entity is an object in either the Disabled or Inventory rooms, then set its position based on its AGD index
+                if (e.RoomIndex == Project::g_RoomIndexDisabled || e.RoomIndex == Project::g_RoomIndexInventory) {
+                    auto objectSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itObject].Minimum;
+                    auto windowSize = TSize(m_Window.Width() * m_TileSize.cx, m_Window.Height() * m_TileSize.cy);
+                    auto roomSize = TSize(windowSize.cx / objectSize.cx, windowSize.cy / objectSize.cy);
+                    auto idx = e.Image->Index;
+                    auto room = e.RoomIndex == Project::g_RoomIndexDisabled ? DisabledRoom : InventoryRoom;
+                    e.Pt = TPoint((e.Image->Index % roomSize.cx) * objectSize.cx + (room.X * windowSize.cx), (e.Image->Index / roomSize.cy) * objectSize.cy + (room.Y * windowSize.cy));
+                }
+                if (e.RoomLocked && e.RoomIndex <= Project::g_RoomIndexMax) {
                     // get the rooms coords
                     TRect rmPt;
                     for (auto i = 0; i < Project::g_MaxMapRoomsDown * Project::g_MaxMapRoomsAcross; i++) {
@@ -1064,6 +1073,16 @@ void __fastcall TileEditor::ReplaceEntities()
         // remove the existing entity at the location
         m_Entities.erase(std::remove_if(m_Entities.begin(),m_Entities.end(),
             [&](const Project::MapEntity& entity) { return entity.Type == e.Type && entity.Pt.x == e.Pt.x && entity.Pt.y == e.Pt.y; }), m_Entities.end());
+        // remove any objects that are the same as the tool entity
+        m_Entities.erase(std::remove_if(m_Entities.begin(),m_Entities.end(),
+            [&](const Project::MapEntity& entity) { return entity.Image == e.Image; }), m_Entities.end());
+        // if the entity is an object in either the Disabled or Inventory rooms, then set its position based on its AGD index
+        if (e.RoomIndex == Project::g_RoomIndexDisabled || e.RoomIndex == Project::g_RoomIndexInventory) {
+            auto objectSize = theDocumentManager.ProjectConfig()->MachineConfiguration().ImageSizing[Visuals::itObject].Minimum;
+            auto roomSize = TSize((m_Window.Width() * m_TileSize.cx) / objectSize.cx, (m_Window.Height() * m_TileSize.cy) / objectSize.cy);
+            auto idx = e.Image->Index * objectSize.cx;
+            e.Pt = TPoint(e.Image->Index % roomSize.cx, e.Image->Index / roomSize.cy);
+        }
         // add the new entity at the location
         m_Entities.push_back(e);
     }
@@ -1094,7 +1113,7 @@ void __fastcall TileEditor::AssignRoomIndexes(Project::MapEntityList& entities)
     for (auto& e : entities) {
         if (!e.RoomLocked && e.Image->CanBeLocked) {
             auto roomPt = TPoint(static_cast<int>(e.Pt.X / roomSize.cx), static_cast<int>(e.Pt.Y / roomSize.cy));
-            e.RoomIndex = FRetrieveRoomIndex(roomPt, e.RoomIndex != Project::g_RoomIndexDisabled);
+            e.RoomIndex = FRetrieveRoomIndex(roomPt, e.RoomIndex != Project::g_RoomIndexDisabled && e.RoomIndex != Project::g_RoomIndexInventory);
         }
     }
 }

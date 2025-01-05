@@ -450,6 +450,8 @@ void __fastcall TiledMapDocument::OnLoading()
     }
     // set the disabled room index
     m_RoomMapping[m_RoomDisabled.X][m_RoomDisabled.Y] = g_RoomIndexDisabled;
+    // set the inventory room index
+    m_RoomMapping[m_RoomInventory.X][m_RoomInventory.Y] = g_RoomIndexInventory;
 }
 //---------------------------------------------------------------------------
 void __fastcall TiledMapDocument::OnLoaded()

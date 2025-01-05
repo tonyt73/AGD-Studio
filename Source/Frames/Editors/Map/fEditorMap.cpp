@@ -570,6 +570,7 @@ void __fastcall TfrmEditorMap::actEditModeFullMapExecute(TObject* /*Sender*/)
             actEditModeFullMap->Checked = true;
         }
         dpRoomSelector->PanelVisible = actEditModeSingleScreen->Checked;
+        // TODO: Should this (256) be the screen height?
         dpRoomSelector->Zone->Height = std::max(dpRoomSelector->Zone->Height, 256);
         m_Workspace->Rooms = actEditModeSingleScreen->Checked ? TSize(1, 1) : TSize(Project::g_MaxMapRoomsAcross, Project::g_MaxMapRoomsDown);
         m_Workspace->SetEntities(m_TiledDocument->GetEntities(actEditModeSingleScreen->Checked ? Project::meRoom : Project::meMap, m_RoomSelector->SelectedRoom));
