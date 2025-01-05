@@ -1,4 +1,10 @@
-;EVENT SPRITETYPE3
+;
+; Foggy-61
+; An AGD game
+; Created: 4/01/2025 7:22:41 PM
+; Event: Sprite type 3
+;
+
 IF C = 0
     IF SETTINGA = 0
         IF CANGOLEFT

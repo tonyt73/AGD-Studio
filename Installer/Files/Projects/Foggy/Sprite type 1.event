@@ -1,4 +1,10 @@
-;EVENT SPRITETYPE1
+;
+; Foggy-61
+; An AGD game
+; Created: 4/01/2025 7:22:41 PM
+; Event: Sprite type 1
+;
+
 IF A 0
     ANIMATE
 ENDIF

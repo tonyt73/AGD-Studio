@@ -1,12 +1,12 @@
 {
     "Document": {
-        "RefId": 9
+        "RefId": 87
     },
     "Image": {
         "Width": 16,
         "Height": 16,
         "Frames": [
-            "0F001180000002C002C007E01BF827FC587E793E787A7936792A38541EB807E047474747"
+            "0F001180000002C002C007E01BF827FC587E793E787A7936792A38541EB807E001010101"
         ],
         "RoomIndex": 6,
         "State": 0,

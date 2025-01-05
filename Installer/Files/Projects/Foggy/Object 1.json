@@ -1,15 +1,15 @@
 {
     "Document": {
-        "RefId": 2
+        "RefId": 80
     },
     "Image": {
         "Width": 16,
         "Height": 16,
         "Frames": [
-            "3FC040205FD05FE85FF451F4541451945FF45FF440047FFC2AA87FFC7FFC000047474747"
+            "3FC040205FD05FE85FF451F4541451945FF45FF440047FFC2AA87FFC7FFC000045454545"
         ],
-        "RoomIndex": 0,
-        "State": 0,
+        "RoomIndex": 256,
+        "State": 2,
         "Position": {
             "X": 192,
             "Y": 128

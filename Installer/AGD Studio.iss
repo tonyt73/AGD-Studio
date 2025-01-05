@@ -4,7 +4,7 @@
 
 [Setup]
 AppName=AGD Studio
-AppVersion=0.16.0
+AppVersion=0.17.0
 DefaultDirName={commonpf}\AGD Studio
 DefaultGroupName=AGD Studio
 UninstallDisplayIcon={app}\AGD Studio.exe
@@ -50,6 +50,8 @@ Name: "{commondocs}\AGD Studio\Compilers\ZX Spectrum\Pasmo"
 Name: "{commondocs}\AGD Studio\Compilers\ZX Spectrum\Spin"
 Name: "{commondocs}\AGD Studio\Graphics Modes"
 Name: "{commondocs}\AGD Studio\Images"
+Name: "{commondocs}\AGD Studio\Images\Logos"
+Name: "{commondocs}\AGD Studio\Images\Dinosaur Pie"
 Name: "{commondocs}\AGD Studio\Keyboards"
 Name: "{commondocs}\AGD Studio\Machines"
 Name: "{commondocs}\AGD Studio\Palettes"
@@ -102,7 +104,8 @@ Source: "Files\Compilers\ZX Spectrum\Pasmo\*.*"; DestDir: "{commondocs}\AGD Stud
 Source: "Files\Compilers\ZX Spectrum\Spin\*.*"; DestDir: "{commondocs}\AGD Studio\Compilers\ZX Spectrum\Spin" 
 Source: "Files\Fonts\*.TTF"; DestDir: "{commonfonts}"; FontInstall: "Comfortaa (Open Type)"; Flags: onlyifdoesntexist uninsneveruninstall fontisnttruetype
 Source: "Files\Graphics Modes\*.json"; DestDir: "{commondocs}\AGD Studio\Graphics Modes" 
-Source: "Files\Images\*.png"; DestDir: "{commondocs}\AGD Studio\Images" 
+Source: "Files\Images\Logos\*.png"; DestDir: "{commondocs}\AGD Studio\Images\Logos" 
+Source: "Files\Images\Dinosaur Pie\*.png"; DestDir: "{commondocs}\AGD Studio\Images\Dinosaur Pie" 
 Source: "Files\Importers\*.*"; DestDir: "{commondocs}\AGD Studio\Importers" 
 Source: "Files\Keyboards\*.png"; DestDir: "{commondocs}\AGD Studio\Keyboards" 
 Source: "Files\Machines\*.json"; DestDir: "{commondocs}\AGD Studio\Machines" 
