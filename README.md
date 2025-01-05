@@ -40,6 +40,23 @@ Themes:
   * Future improvements:
     * Save layout per project
 
+Coming Soon! (In no particular order)
+* Build system improvements with lessons from MPAGD build (Kees Van Oss)
+* Better Machine support
+  * More machines (with testing once the above build process is finished)
+  * Possibly a Machine configuration UI feature
+    * Allow you to define your own new machines
+    * Graphics
+    * Build process
+    * etc     
+* Finish the Image editor toolset
+* Custom sounds support
+* Nameable Objects/Sprites
+  * Names can be used in source code
+* MPAGD Generate code feature
+
+**Getting very close to a v1.0 release.**
+
 ## Releases
 https://github.com/tonyt73/AGD-Studio/releases
 
