@@ -4,7 +4,7 @@
 
 [Setup]
 AppName=AGD Studio
-AppVersion=0.17.0
+AppVersion=0.17.2
 DefaultDirName={commonpf}\AGD Studio
 DefaultGroupName=AGD Studio
 UninstallDisplayIcon={app}\AGD Studio.exe
@@ -72,6 +72,9 @@ Source: "Binaries\Win64x\Launcher.exe"; DestDir: "{app}"; Check: Is64BitInstallM
 Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64\borlndmm.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64\cc64290.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64\cc64290mt.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64\bindengine290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64\libc++.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64\libunwind.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64\rtl290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64\vcl290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Program Files (x86)\Embarcadero\Studio\23.0\bin64\vclactnband290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
@@ -88,6 +91,7 @@ Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\win64x\lmdrtinspe
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\win64x\lmdrtl290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\win64x\lmdrtlog290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\win64x\lmdrtrtlx290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\win64x\lmdrtprint290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\win64x\lmdrtsyntax290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "C:\Users\Public\Documents\Embarcadero\Studio\23.0\BPL\win64x\lmdrtshell290.bpl"; DestDir: "{app}"; Check: Is64BitInstallMode
 ; DOCUMENTS
