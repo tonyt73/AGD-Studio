@@ -38,9 +38,6 @@ bool __fastcall ShellProcess::ShellExecute(const String& path, const String& cmd
     BUILD_LINE(bmShell, cmdline + " " + parameters);
     shell->Execute();
     Sleep(100);
-    if (!wait) {
-        Sleep(500);
-    }
 
     BUILD_MSG(!m_Errored ? bmOk : bmFailed);
     BUILD_MSG_POP(!m_Errored);
