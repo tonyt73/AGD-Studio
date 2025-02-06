@@ -1,1842 +1,1872 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <ProjectGuid>{D0C2ACDB-659A-4891-B603-0D187CA01644}</ProjectGuid>
-    <ProjectVersion>20.2</ProjectVersion>
-    <FrameworkType>VCL</FrameworkType>
-    <AppType>Application</AppType>
-    <MainSource>AGD Studio.cpp</MainSource>
-    <Base>True</Base>
-    <Config Condition="'$(Config)'==''">Release</Config>
-    <Platform Condition="'$(Platform)'==''">Win64x</Platform>
-    <TargetedPlatforms>1048578</TargetedPlatforms>
-    <ProjectName Condition="'$(ProjectName)'==''">AGD Studio</ProjectName>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
-    <Base>true</Base>
-  </PropertyGroup>
-  <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
-    <Base_Win32>true</Base_Win32>
-    <CfgParent>Base</CfgParent>
-    <Base>true</Base>
-  </PropertyGroup>
-  <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
-    <Base_Win64>true</Base_Win64>
-    <CfgParent>Base</CfgParent>
-    <Base>true</Base>
-  </PropertyGroup>
-  <PropertyGroup Condition="('$(Platform)'=='Win64x' and '$(Base)'=='true') or '$(Base_Win64x)'!=''">
-    <Base_Win64x>true</Base_Win64x>
-    <CfgParent>Base</CfgParent>
-    <Base>true</Base>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
-    <Cfg_1>true</Cfg_1>
-    <CfgParent>Base</CfgParent>
-    <Base>true</Base>
-  </PropertyGroup>
-  <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win64)'!=''">
-    <Cfg_1_Win64>true</Cfg_1_Win64>
-    <CfgParent>Cfg_1</CfgParent>
-    <Cfg_1>true</Cfg_1>
-    <Base>true</Base>
-  </PropertyGroup>
-  <PropertyGroup Condition="('$(Platform)'=='Win64x' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win64x)'!=''">
-    <Cfg_1_Win64x>true</Cfg_1_Win64x>
-    <CfgParent>Cfg_1</CfgParent>
-    <Cfg_1>true</Cfg_1>
-    <Base>true</Base>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
-    <Cfg_2>true</Cfg_2>
-    <CfgParent>Base</CfgParent>
-    <Base>true</Base>
-  </PropertyGroup>
-  <PropertyGroup Condition="('$(Platform)'=='Win64x' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win64x)'!=''">
-    <Cfg_2_Win64x>true</Cfg_2_Win64x>
-    <CfgParent>Cfg_2</CfgParent>
-    <Cfg_2>true</Cfg_2>
-    <Base>true</Base>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Base)'!=''">
-    <_TCHARMapping>wchar_t</_TCHARMapping>
-    <AppEnableHighDPI>true</AppEnableHighDPI>
-    <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
-    <AllPackageLibs>rtl.lib;vcl.lib;vclimg.lib;vclactnband.lib;vclx.lib;lmdrtrtlx.lib;lmdrtl.lib;lmdrtinspector.lib;lmdrtdocking.lib;lmdrtelcore.lib;lmdrtsyntax.lib;lmdrtcore.lib;vclwinx.lib;lmdrtelpro.lib;xmlrtl.lib;lmdrtshell.lib;DbxCommonDriver.lib;dbrtl.lib;bindengine.lib;lmdrtprint.lib</AllPackageLibs>
-    <BCC_CallingConvention>fastcall</BCC_CallingConvention>
-    <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
-    <BCC_DisableWarnings>true</BCC_DisableWarnings>
-    <BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
-    <BCC_InstructionSet>6</BCC_InstructionSet>
-    <DCC_Namespace>System;Vcl;Vcl.Imaging;Vcl.Shell;Winapi;System.Win;$(DCC_Namespace)</DCC_Namespace>
-    <BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
-    <BCC_PCHName_Clang>AgdStudio.pch.h</BCC_PCHName_Clang>
-    <BCC_PCHInject>AGD Studio.pch.h</BCC_PCHInject>
-    <BCC_SelectedWarnings>false</BCC_SelectedWarnings>
-    <BCC_StopPCHAfter>AgdStudio.pch.h</BCC_StopPCHAfter>
-    <BCC_UseClassicCompiler>false</BCC_UseClassicCompiler>
-    <BCC_wpar>false</BCC_wpar>
-    <BCC_PCHCache>true</BCC_PCHCache>
-    <DynamicRTL>true</DynamicRTL>
-    <Icon_MainIcon>$(BDS)\bin\cbuilder_PROJECTICON.ico</Icon_MainIcon>
-    <ILINK_DisplayTime>true</ILINK_DisplayTime>
-    <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\release\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
-    <ILINK_LibraryPath>Frames\;Frames\Editors\;Frames\Editors\Map\;Frames\Editors\Images\;Frames\ImageEditor\;Frames\CodeEditor\;.\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-    <ILINK_LinkwithSQL>false</ILINK_LinkwithSQL>
-    <ILINK_TSAware_lld>false</ILINK_TSAware_lld>
-    <ILINK_LinkwithIndy>false</ILINK_LinkwithIndy>
-    <ILINK_LinkwithIntebaseTogo>false</ILINK_LinkwithIntebaseTogo>
-    <ILINK_LinkwithMidas>false</ILINK_LinkwithMidas>
-    <ILINK_LinkwithPThread>false</ILINK_LinkwithPThread>
-    <ILINK_LinkwithRegEx>false</ILINK_LinkwithRegEx>
-    <ILINK_LinkwithSQLite>false</ILINK_LinkwithSQLite>
-    <ILINK_LinkwithZLib>false</ILINK_LinkwithZLib>
-    <IncludePath>.\;Frames\;Frames\Editors\;Frames\Editors\Map\;Frames\Editors\Images\;Frames\Editors\Code\;$(IncludePath)</IncludePath>
-    <IntermediateOutputDir>.\Binaries\$(Platform)\$(Config)</IntermediateOutputDir>
-    <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;VclSmp.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtprint.bpi;lmdrtelpro.bpi;xmlrtl.bpi;bindengine.bpi;DbxCommonDriver.bpi;dbrtl.bpi;lmdrtshell.bpi</LinkPackageImports>
-    <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-    <Multithreaded>true</Multithreaded>
-    <ProjectType>CppVCLApplication</ProjectType>
-    <RunBCCOutOfProcess>true</RunBCCOutOfProcess>
-    <SanitizedProjectName>AGD_Studio</SanitizedProjectName>
-    <UsePackages>true</UsePackages>
-    <UWP_CppLogo150>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_150.png</UWP_CppLogo150>
-    <UWP_CppLogo44>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_44.png</UWP_CppLogo44>
-    <VerInfo_Build>11738</VerInfo_Build>
-    <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-    <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=0.17.0.11738;InternalName=AGD Studio;LegalCopyright=2022-2024 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=0.17.0.11738;Comments=Programmed by Tony Thompson</VerInfo_Keys>
-    <VerInfo_Locale>3081</VerInfo_Locale>
-    <VerInfo_MajorVer>0</VerInfo_MajorVer>
-    <VerInfo_MinorVer>16</VerInfo_MinorVer>
-    <VerInfo_PreRelease>true</VerInfo_PreRelease>
-    <SubProcessesNumber>-1</SubProcessesNumber>
-    <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
-    <BCC_EnableBatchCompilation>true</BCC_EnableBatchCompilation>
-    <BCC_EnableLSPIndexingOnChange>true</BCC_EnableLSPIndexingOnChange>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Base_Win32)'!=''">
-    <BCC_CallingConvention>fastcall</BCC_CallingConvention>
-    <BCC_InstructionSet>6</BCC_InstructionSet>
-    <BCC_IntegerTypeEnums>true</BCC_IntegerTypeEnums>
-    <BT_BuildType>Debug</BT_BuildType>
-    <Icon_MainIcon>icon.ico</Icon_MainIcon>
-    <PackageImports>lmdrtcore;lmdrtdocking;lmdrtelcore;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtrtlx;lmdrtshell;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;rtl;vcl;vclactnband;vclimg;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
-    <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
-    <BCC_DisableOptimizations>true</BCC_DisableOptimizations>
-    <BCC_PCHName_Clang>AGD Studio.pch.h</BCC_PCHName_Clang>
-    <DCC_Namespace>Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
-    <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.1.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.1.0.0;Comments=</VerInfo_Keys>
-    <VerInfo_Locale>1033</VerInfo_Locale>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Base_Win64)'!=''">
-    <BT_BuildType>Debug</BT_BuildType>
-    <PackageImports>lmdrtcore;lmdrtdocking;lmdrtelcore;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtrtlx;lmdrtshell;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;rtl;vcl;vclactnband;vclimg;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
-    <Icon_MainIcon>icon.ico</Icon_MainIcon>
-    <BCC_PCHName_Clang>AGD Studio.pch.h</BCC_PCHName_Clang>
-    <DCC_Namespace>Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
-    <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.1.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.1.0.0;Comments=</VerInfo_Keys>
-    <VerInfo_Locale>1033</VerInfo_Locale>
-    <VerInfo_MajorVer>1</VerInfo_MajorVer>
-    <VerInfo_MinorVer>0</VerInfo_MinorVer>
-    <VerInfo_Build>0</VerInfo_Build>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Base_Win64x)'!=''">
-    <DCC_Namespace>Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
-    <BT_BuildType>Debug</BT_BuildType>
-    <PackageImports>lmdrtcore;lmdrtdocking;lmdrtelcore;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtrtlx;lmdrtshell;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;rtl;vcl;vclactnband;vclimg;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
-    <Icon_MainIcon>icon.ico</Icon_MainIcon>
-    <BCC_PCHName_Clang>AGD Studio.pch.h</BCC_PCHName_Clang>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Cfg_1)'!=''">
-    <BCC_DebugLineNumbers>true</BCC_DebugLineNumbers>
-    <BCC_DisableFramePtrElimOpt>true</BCC_DisableFramePtrElimOpt>
-    <BCC_DisableOptimizations>true</BCC_DisableOptimizations>
-    <BCC_DisableSpellChecking>true</BCC_DisableSpellChecking>
-    <BCC_EnableCPPExceptions>true</BCC_EnableCPPExceptions>
-    <BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
-    <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
-    <BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
-    <BCC_StackFrames>true</BCC_StackFrames>
-    <BCC_UseRegisterVariables>None</BCC_UseRegisterVariables>
-    <CLANG_UnwindTables>true</CLANG_UnwindTables>
-    <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
-    <DCC_Define>DEBUG</DCC_Define>
-    <DCC_Optimize>false</DCC_Optimize>
-    <Defines>_DEBUG;$(Defines)</Defines>
-    <ILINK_FullDebugInfo>true</ILINK_FullDebugInfo>
-    <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
-    <TASM_Debugging>Full</TASM_Debugging>
-    <TASM_DisplaySourceLines>true</TASM_DisplaySourceLines>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
-    <VerInfo_MajorVer>1</VerInfo_MajorVer>
-    <VerInfo_MinorVer>0</VerInfo_MinorVer>
-    <VerInfo_Build>0</VerInfo_Build>
-    <VerInfo_Locale>1033</VerInfo_Locale>
-    <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.1.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.1.0.0;Comments=</VerInfo_Keys>
-    <Icon_MainIcon>icon.ico</Icon_MainIcon>
-    <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;xmlrtl.bpi;lmdrtshell.bpi;DbxCommonDriver.bpi;dbrtl.bpi;bindengine.bpi;lmdrtprint.bpi</LinkPackageImports>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Cfg_1_Win64x)'!=''">
-    <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;xmlrtl.bpi;lmdrtshell.bpi;DbxCommonDriver.bpi;dbrtl.bpi;bindengine.bpi;lmdrtprint.bpi</LinkPackageImports>
-    <BCC_EnableLSPIndexingOnChange>false</BCC_EnableLSPIndexingOnChange>
-    <BCC_AllWarnings>true</BCC_AllWarnings>
-    <BCC_DisableWarnings>false</BCC_DisableWarnings>
-    <Icon_MainIcon>icon.ico</Icon_MainIcon>
-    <Debugger_DebugSourcePath>D:\Projects\GitHub\AGD-Studio\Source\Messaging\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
-    <VerInfo_Build>11741</VerInfo_Build>
-    <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=0.17.0.11741;InternalName=AGD Studio;LegalCopyright=2022-2024 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=0.17.0.11738;Comments=Programmed by Tony Thompson;SpecialBuild=BETA</VerInfo_Keys>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Cfg_2)'!=''">
-    <Defines>NDEBUG;$(Defines)</Defines>
-    <TASM_Debugging>None</TASM_Debugging>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Cfg_2_Win64x)'!=''">
-    <Icon_MainIcon>icon.ico</Icon_MainIcon>
-    <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;xmlrtl.bpi;lmdrtshell.bpi;DbxCommonDriver.bpi;dbrtl.bpi;bindengine.bpi;lmdrtprint.bpi</LinkPackageImports>
-    <VerInfo_Build>11742</VerInfo_Build>
-    <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=AGD Studio;FileVersion=0.17.0.11742;InternalName=AGD Studio;LegalCopyright=2022-2024 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.AGD Studio;ProductName=AGD Studio;ProductVersion=0.17.0.11738;Comments=Programmed by Tony Thompson;SpecialBuild=BETA</VerInfo_Keys>
-  </PropertyGroup>
-  <ItemGroup>
-    <CppCompile Include="AGD Studio.cpp">
-      <BuildOrder>0</BuildOrder>
-    </CppCompile>
-    <PCHCompile Include="AGD Studio.pch.h">
-      <BuildOrder>14</BuildOrder>
-      <PCH>true</PCH>
-    </PCHCompile>
-    <CppCompile Include="Build\Assemble.cpp">
-      <DependentOn>Build\Assemble.h</DependentOn>
-      <BuildOrder>5</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Build\BuildManager.cpp">
-      <DependentOn>Build\BuildManager.h</DependentOn>
-      <BuildOrder>1</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Build\BuildMessages.cpp">
-      <DependentOn>Build\BuildMessages.h</DependentOn>
-      <BuildOrder>2</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Build\BuildProcess.cpp">
-      <DependentOn>Build\BuildProcess.h</DependentOn>
-      <BuildOrder>3</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Build\Compilation.cpp">
-      <DependentOn>Build\Compilation.h</DependentOn>
-      <BuildOrder>8</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Build\Creation.cpp">
-      <DependentOn>Build\Creation.h</DependentOn>
-      <BuildOrder>4</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Build\Emulation.cpp">
-      <DependentOn>Build\Emulation.h</DependentOn>
-      <BuildOrder>6</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Build\Parameterizer.cpp">
-      <DependentOn>Build\Parameterizer.h</DependentOn>
-      <BuildOrder>10</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Build\PreChecks.cpp">
-      <DependentOn>Build\PreChecks.h</DependentOn>
-      <BuildOrder>7</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Build\Section\ControlsSection.cpp">
-      <DependentOn>Build\Section\ControlsSection.h</DependentOn>
-      <BuildOrder>93</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Build\Section\EventsSection.cpp">
-      <DependentOn>Build\Section\EventsSection.h</DependentOn>
-      <BuildOrder>94</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Build\Section\FontSection.cpp">
-      <DependentOn>Build\Section\FontSection.h</DependentOn>
-      <BuildOrder>95</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Build\Section\JumpTableSection.cpp">
-      <DependentOn>Build\Section\JumpTableSection.h</DependentOn>
-      <BuildOrder>96</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Build\Section\MapSection.cpp">
-      <DependentOn>Build\Section\MapSection.h</DependentOn>
-      <BuildOrder>97</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Build\Section\MessagesSection.cpp">
-      <DependentOn>Build\Section\MessagesSection.h</DependentOn>
-      <BuildOrder>98</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Build\Section\ObjectsSection.cpp">
-      <DependentOn>Build\Section\ObjectsSection.h</DependentOn>
-      <BuildOrder>99</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Build\Section\ProjectSection.cpp">
-      <DependentOn>Build\Section\ProjectSection.h</DependentOn>
-      <BuildOrder>100</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Build\Section\ScreensSection.cpp">
-      <DependentOn>Build\Section\ScreensSection.h</DependentOn>
-      <BuildOrder>101</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Build\Section\Section.cpp">
-      <DependentOn>Build\Section\Section.h</DependentOn>
-      <BuildOrder>102</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Build\Section\SpritesSection.cpp">
-      <DependentOn>Build\Section\SpritesSection.h</DependentOn>
-      <BuildOrder>103</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Build\Section\TilesSection.cpp">
-      <DependentOn>Build\Section\TilesSection.h</DependentOn>
-      <BuildOrder>104</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Build\Section\WindowSection.cpp">
-      <DependentOn>Build\Section\WindowSection.h</DependentOn>
-      <BuildOrder>105</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Build\ShellProcess.cpp">
-      <DependentOn>Build\ShellProcess.h</DependentOn>
-      <BuildOrder>9</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Factories\DocumentEditorFactory.cpp">
-      <DependentOn>Factories\DocumentEditorFactory.h</DependentOn>
-      <BuildOrder>24</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Forms\fAbout.cpp">
-      <Form>frmAbout</Form>
-      <FormType>dfm</FormType>
-      <DependentOn>Forms\fAbout.h</DependentOn>
-      <BuildOrder>25</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Forms\fAdvancedSettings.cpp">
-      <Form>frmAdvancedSettings</Form>
-      <FormType>dfm</FormType>
-      <DependentOn>Forms\fAdvancedSettings.h</DependentOn>
-      <BuildOrder>29</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Forms\fMain.cpp">
-      <Form>frmMain</Form>
-      <FormType>dfm</FormType>
-      <DependentOn>Forms\fMain.h</DependentOn>
-      <BuildOrder>26</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Forms\fNewTileImage.cpp">
-      <Form>frmNewTileImage</Form>
-      <FormType>dfm</FormType>
-      <DependentOn>Forms\fNewTileImage.h</DependentOn>
-      <BuildOrder>27</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Forms\fSettings.cpp">
-      <Form>frmSettings</Form>
-      <FormType>dfm</FormType>
-      <DependentOn>Forms\fSettings.h</DependentOn>
-      <BuildOrder>28</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Code\fEditorCode.cpp">
-      <Form>frmEditorCode</Form>
-      <FormType>dfm</FormType>
-      <DesignClass>TFrame</DesignClass>
-      <DependentOn>Frames\Editors\Code\fEditorCode.h</DependentOn>
-      <BuildOrder>74</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Controls\fEditorControls.cpp">
-      <Form>frmEditorControls</Form>
-      <FormType>dfm</FormType>
-      <DesignClass>TFrame</DesignClass>
-      <DependentOn>Frames\Editors\Controls\fEditorControls.h</DependentOn>
-      <BuildOrder>75</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Controls\fKeyCapture.cpp">
-      <Form>frmKeyCode</Form>
-      <FormType>dfm</FormType>
-      <DesignClass>TFrame</DesignClass>
-      <DependentOn>Frames\Editors\Controls\fKeyCapture.h</DependentOn>
-      <BuildOrder>76</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\EditorManager.cpp">
-      <DependentOn>Frames\Editors\EditorManager.h</DependentOn>
-      <BuildOrder>30</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\fEditor.cpp">
-      <Form>frmEditor</Form>
-      <FormType>dfm</FormType>
-      <DesignClass>TFrame</DesignClass>
-      <DependentOn>Frames\Editors\fEditor.h</DependentOn>
-      <BuildOrder>104</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Images\BlockTypeTool.cpp">
-      <DependentOn>Frames\Editors\Images\BlockTypeTool.h</DependentOn>
-      <BuildOrder>77</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Images\CanvasLineTool.cpp">
-      <DependentOn>Frames\Editors\Images\CanvasLineTool.h</DependentOn>
-      <BuildOrder>78</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Images\CanvasPencilTool.cpp">
-      <DependentOn>Frames\Editors\Images\CanvasPencilTool.h</DependentOn>
-      <BuildOrder>79</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Images\CanvasShapeTool.cpp">
-      <DependentOn>Frames\Editors\Images\CanvasShapeTool.h</DependentOn>
-      <BuildOrder>80</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Images\CanvasTool.cpp">
-      <DependentOn>Frames\Editors\Images\CanvasTool.h</DependentOn>
-      <BuildOrder>81</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Images\fBlockTypes.cpp">
-      <Form>frmBlockTypes</Form>
-      <FormType>dfm</FormType>
-      <DesignClass>TFrame</DesignClass>
-      <DependentOn>Frames\Editors\Images\fBlockTypes.h</DependentOn>
-      <BuildOrder>82</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Images\fEditorImage.cpp">
-      <Form>frmEditorImage</Form>
-      <FormType>dfm</FormType>
-      <DesignClass>TFrame</DesignClass>
-      <DependentOn>Frames\Editors\Images\fEditorImage.h</DependentOn>
-      <BuildOrder>83</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Images\fMultiImageView.cpp">
-      <Form>MultiImageViewFrame</Form>
-      <FormType>dfm</FormType>
-      <DesignClass>TFrame</DesignClass>
-      <DependentOn>Frames\Editors\Images\fMultiImageView.h</DependentOn>
-      <BuildOrder>84</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Images\fPaletteAttribute.cpp">
-      <Form>frmPaletteAttribute</Form>
-      <FormType>dfm</FormType>
-      <DesignClass>TFrame</DesignClass>
-      <DependentOn>Frames\Editors\Images\fPaletteAttribute.h</DependentOn>
-      <BuildOrder>85</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Images\fPaletteBitmap.cpp">
-      <Form>frmPaletteBitmap</Form>
-      <FormType>dfm</FormType>
-      <DesignClass>TFrame</DesignClass>
-      <DependentOn>Frames\Editors\Images\fPaletteBitmap.h</DependentOn>
-      <BuildOrder>86</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Images\fPaletteMonoAttribute.cpp">
-      <Form>frmPaletteMonoAttribute</Form>
-      <FormType>dfm</FormType>
-      <DesignClass>TFrame</DesignClass>
-      <DependentOn>Frames\Editors\Images\fPaletteMonoAttribute.h</DependentOn>
-      <BuildOrder>87</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Images\fSelectionImage.cpp">
-      <Form>SelectionImageFrame</Form>
-      <FormType>dfm</FormType>
-      <DesignClass>TFrame</DesignClass>
-      <DependentOn>Frames\Editors\Images\fSelectionImage.h</DependentOn>
-      <BuildOrder>88</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Images\fToolbar.cpp">
-      <Form>frmToolbar</Form>
-      <FormType>dfm</FormType>
-      <DesignClass>TFrame</DesignClass>
-      <DependentOn>Frames\Editors\Images\fToolbar.h</DependentOn>
-      <BuildOrder>89</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Images\fToolbarShape.cpp">
-      <Form>frmToolbarShape</Form>
-      <FormType>dfm</FormType>
-      <DesignClass>TFrame</DesignClass>
-      <DependentOn>Frames\Editors\Images\fToolbarShape.h</DependentOn>
-      <BuildOrder>90</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Images\fULAplusBitmap.cpp">
-      <Form>frmULAplusBitmap</Form>
-      <FormType>dfm</FormType>
-      <DesignClass>TFrame</DesignClass>
-      <DependentOn>Frames\Editors\Images\fULAplusBitmap.h</DependentOn>
-      <BuildOrder>91</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\JumpTable\fEditorJumpTable.cpp">
-      <Form>frmEditorJumpTable</Form>
-      <FormType>dfm</FormType>
-      <DesignClass>TFrame</DesignClass>
-      <DependentOn>Frames\Editors\JumpTable\fEditorJumpTable.h</DependentOn>
-      <BuildOrder>92</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Map\fAssetSelection.cpp">
-      <Form>frmAssetSelection</Form>
-      <FormType>dfm</FormType>
-      <DesignClass>TFrame</DesignClass>
-      <DependentOn>Frames\Editors\Map\fAssetSelection.h</DependentOn>
-      <BuildOrder>93</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Map\fEditorMap.cpp">
-      <Form>frmEditorMap</Form>
-      <FormType>dfm</FormType>
-      <DesignClass>TFrame</DesignClass>
-      <DependentOn>Frames\Editors\Map\fEditorMap.h</DependentOn>
-      <BuildOrder>94</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Map\fLabelledImage.cpp">
-      <Form>frmLabelledImage</Form>
-      <FormType>dfm</FormType>
-      <DesignClass>TFrame</DesignClass>
-      <DependentOn>Frames\Editors\Map\fLabelledImage.h</DependentOn>
-      <BuildOrder>95</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Map\MapLineTool.cpp">
-      <DependentOn>Frames\Editors\Map\MapLineTool.h</DependentOn>
-      <BuildOrder>96</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Map\MapPencilTool.cpp">
-      <DependentOn>Frames\Editors\Map\MapPencilTool.h</DependentOn>
-      <BuildOrder>97</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Map\MapRectTool.cpp">
-      <DependentOn>Frames\Editors\Map\MapRectTool.h</DependentOn>
-      <BuildOrder>98</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Map\MapTool.cpp">
-      <DependentOn>Frames\Editors\Map\MapTool.h</DependentOn>
-      <BuildOrder>99</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Map\TileEditor.cpp">
-      <DependentOn>Frames\Editors\Map\TileEditor.h</DependentOn>
-      <BuildOrder>100</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Messages\fEditorMessages.cpp">
-      <Form>frmEditorMessages</Form>
-      <FormType>dfm</FormType>
-      <DesignClass>TFrame</DesignClass>
-      <DependentOn>Frames\Editors\Messages\fEditorMessages.h</DependentOn>
-      <BuildOrder>101</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\MouseState.cpp">
-      <DependentOn>Frames\Editors\MouseState.h</DependentOn>
-      <BuildOrder>103</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Music\fEditorMusic.cpp">
-      <Form>frmEditorMusic</Form>
-      <FormType>dfm</FormType>
-      <DesignClass>TFrame</DesignClass>
-      <DependentOn>Frames\Editors\Music\fEditorMusic.h</DependentOn>
-      <BuildOrder>102</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Tool.cpp">
-      <DependentOn>Frames\Editors\Tool.h</DependentOn>
-      <BuildOrder>32</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\Editors\Window\fEditorWindow.cpp">
-      <Form>frmEditorWindow</Form>
-      <FormType>dfm</FormType>
-      <DesignClass>TFrame</DesignClass>
-      <DependentOn>Frames\Editors\Window\fEditorWindow.h</DependentOn>
-      <BuildOrder>103</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\fAppFrame.cpp">
-      <Form>frmAppFrame</Form>
-      <FormType>dfm</FormType>
-      <DesignClass>TFrame</DesignClass>
-      <DependentOn>Frames\fAppFrame.h</DependentOn>
-      <BuildOrder>113</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\IDE\fIDE.cpp">
-      <Form>frmIDE</Form>
-      <FormType>dfm</FormType>
-      <DesignClass>TFrame</DesignClass>
-      <DependentOn>Frames\IDE\fIDE.h</DependentOn>
-      <BuildOrder>37</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\WelcomeDialog\fSelectionPanel.cpp">
-      <Form>SelectionPanelFrame</Form>
-      <FormType>dfm</FormType>
-      <DesignClass>TFrame</DesignClass>
-      <DependentOn>Frames\WelcomeDialog\fSelectionPanel.h</DependentOn>
-      <BuildOrder>64</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\WelcomeDialog\fWelcomeDialog.cpp">
-      <Form>frmWelcomeDialog</Form>
-      <FormType>dfm</FormType>
-      <DesignClass>TFrame</DesignClass>
-      <DependentOn>Frames\WelcomeDialog\fWelcomeDialog.h</DependentOn>
-      <BuildOrder>65</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Frames\WndProcHandlers.cpp">
-      <DependentOn>Frames\WndProcHandlers.h</DependentOn>
-      <BuildOrder>33</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Importer\AgdImporter.cpp">
-      <DependentOn>Importer\AgdImporter.h</DependentOn>
-      <BuildOrder>112</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Importer\ImportDefinition.cpp">
-      <DependentOn>Importer\ImportDefinition.h</DependentOn>
-      <BuildOrder>109</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Importer\Parser.cpp">
-      <DependentOn>Importer\Parser.h</DependentOn>
-      <BuildOrder>109</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Importer\Token.cpp">
-      <DependentOn>Importer\Token.h</DependentOn>
-      <BuildOrder>111</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Messaging\Event.cpp">
-      <DependentOn>Messaging\Event.h</DependentOn>
-      <BuildOrder>74</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Messaging\Messaging.cpp">
-      <DependentOn>Messaging\Messaging.h</DependentOn>
-      <BuildOrder>75</BuildOrder>
-    </CppCompile>
-    <None Include="Project\Constants.h">
-      <BuildOrder>113</BuildOrder>
-    </None>
-    <CppCompile Include="Project\Documents\BaseImage.cpp">
-      <DependentOn>Project\Documents\BaseImage.h</DependentOn>
-      <BuildOrder>94</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Project\Documents\CharacterSet.cpp">
-      <DependentOn>Project\Documents\CharacterSet.h</DependentOn>
-      <BuildOrder>90</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Project\Documents\Controls.cpp">
-      <DependentOn>Project\Documents\Controls.h</DependentOn>
-      <BuildOrder>91</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Project\Documents\Document.cpp">
-      <DependentOn>Project\Documents\Document.h</DependentOn>
-      <BuildOrder>105</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Project\Documents\DocumentManager.cpp">
-      <DependentOn>Project\Documents\DocumentManager.h</DependentOn>
-      <BuildOrder>77</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Project\Documents\FileDefinitions.cpp">
-      <DependentOn>Project\Documents\FileDefinitions.h</DependentOn>
-      <BuildOrder>93</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Project\Documents\JumpTable.cpp">
-      <DependentOn>Project\Documents\JumpTable.h</DependentOn>
-      <BuildOrder>95</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Project\Documents\MachineConfig.cpp">
-      <DependentOn>Project\Documents\MachineConfig.h</DependentOn>
-      <BuildOrder>96</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Project\Documents\MapEntity.cpp">
-      <DependentOn>Project\Documents\MapEntity.h</DependentOn>
-      <BuildOrder>97</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Project\Documents\MostRecentlyUsedList.cpp">
-      <DependentOn>Project\Documents\MostRecentlyUsedList.h</DependentOn>
-      <BuildOrder>82</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Project\Documents\Object.cpp">
-      <DependentOn>Project\Documents\Object.h</DependentOn>
-      <BuildOrder>98</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Project\Documents\Project.cpp">
-      <DependentOn>Project\Documents\Project.h</DependentOn>
-      <BuildOrder>99</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Project\Documents\Settings.cpp">
-      <DependentOn>Project\Documents\Settings.h</DependentOn>
-      <BuildOrder>100</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Project\Documents\Sprite.cpp">
-      <DependentOn>Project\Documents\Sprite.h</DependentOn>
-      <BuildOrder>101</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Project\Documents\Text.cpp">
-      <DependentOn>Project\Documents\Text.h</DependentOn>
-      <BuildOrder>102</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Project\Documents\Tile.cpp">
-      <DependentOn>Project\Documents\Tile.h</DependentOn>
-      <BuildOrder>103</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Project\Documents\TiledMap.cpp">
-      <DependentOn>Project\Documents\TiledMap.h</DependentOn>
-      <BuildOrder>104</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Project\Documents\Window.cpp">
-      <DependentOn>Project\Documents\Window.h</DependentOn>
-      <BuildOrder>105</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Project\ProjectManager.cpp">
-      <DependentOn>Project\ProjectManager.h</DependentOn>
-      <BuildOrder>83</BuildOrder>
-    </CppCompile>
-    <None Include="Project\README.md" />
-    <CppCompile Include="Services\File.cpp">
-      <DependentOn>Services\File.h</DependentOn>
-      <BuildOrder>99</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Services\Folders.cpp">
-      <DependentOn>Services\Folders.h</DependentOn>
-      <BuildOrder>100</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Services\Generic.cpp">
-      <DependentOn>Services\Generic.h</DependentOn>
-      <BuildOrder>101</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Services\Guard.cpp">
-      <DependentOn>Services\Guard.h</DependentOn>
-      <BuildOrder>102</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Services\JsonFile.cpp">
-      <DependentOn>Services\JsonFile.h</DependentOn>
-      <BuildOrder>103</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Settings\ThemeManager.cpp">
-      <DependentOn>Settings\ThemeManager.h</DependentOn>
-      <BuildOrder>95</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Templates\crc32c.cpp">
-      <DependentOn>Templates\crc32c.h</DependentOn>
-      <BuildOrder>111</BuildOrder>
-    </CppCompile>
-    <None Include="Templates\enumerate.h">
-      <BuildOrder>110</BuildOrder>
-    </None>
-    <CppCompile Include="Visuals\AttributeGraphicsBuffer.cpp">
-      <DependentOn>Visuals\AttributeGraphicsBuffer.h</DependentOn>
-      <BuildOrder>104</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Visuals\BitmapGraphicsBuffer.cpp">
-      <DependentOn>Visuals\BitmapGraphicsBuffer.h</DependentOn>
-      <BuildOrder>105</BuildOrder>
-    </CppCompile>
-    <None Include="Visuals\BlockTypes.h">
-      <BuildOrder>105</BuildOrder>
-    </None>
-    <CppCompile Include="Visuals\GraphicsBuffer.cpp">
-      <DependentOn>Visuals\GraphicsBuffer.h</DependentOn>
-      <BuildOrder>106</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Visuals\GraphicsMode.cpp">
-      <DependentOn>Visuals\GraphicsMode.h</DependentOn>
-      <BuildOrder>107</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Visuals\GraphicsTypes.cpp">
-      <DependentOn>Visuals\GraphicsTypes.h</DependentOn>
-      <BuildOrder>109</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Visuals\Image.cpp">
-      <DependentOn>Visuals\Image.h</DependentOn>
-      <BuildOrder>108</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Visuals\Palette.cpp">
-      <DependentOn>Visuals\Palette.h</DependentOn>
-      <BuildOrder>109</BuildOrder>
-    </CppCompile>
-    <CppCompile Include="Visuals\ULAPlusGraphicsBuffer.cpp">
-      <DependentOn>Visuals\ULAPlusGraphicsBuffer.h</DependentOn>
-      <BuildOrder>110</BuildOrder>
-    </CppCompile>
-    <FormResources Include="Frames\Editors\Music\fEditorMusic.dfm" />
-    <FormResources Include="Frames\Editors\Messages\fEditorMessages.dfm" />
-    <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm" />
-    <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm" />
-    <FormResources Include="Frames\Editors\Window\fEditorWindow.dfm" />
-    <FormResources Include="Frames\fAppFrame.dfm" />
-    <FormResources Include="Frames\IDE\fIDE.dfm" />
-    <FormResources Include="Forms\fAbout.dfm" />
-    <FormResources Include="Forms\fAdvancedSettings.dfm" />
-    <FormResources Include="Forms\fMain.dfm" />
-    <FormResources Include="Frames\Editors\Images\fSelectionImage.dfm" />
-    <FormResources Include="Frames\Editors\Images\fToolbar.dfm" />
-    <FormResources Include="Frames\Editors\Images\fToolbarShape.dfm" />
-    <FormResources Include="Frames\Editors\Images\fPaletteMonoAttribute.dfm" />
-    <FormResources Include="Frames\Editors\Images\fMultiImageView.dfm" />
-    <FormResources Include="Frames\Editors\Images\fPaletteAttribute.dfm" />
-    <FormResources Include="Frames\Editors\Images\fPaletteBitmap.dfm" />
-    <FormResources Include="Frames\Editors\Map\fLabelledImage.dfm" />
-    <FormResources Include="Frames\Editors\Map\fEditorMap.dfm" />
-    <FormResources Include="Frames\Editors\Images\fULAplusBitmap.dfm" />
-    <FormResources Include="Frames\Editors\JumpTable\fEditorJumpTable.dfm" />
-    <FormResources Include="Frames\Editors\Map\fAssetSelection.dfm" />
-    <FormResources Include="Frames\Editors\Controls\fKeyCapture.dfm" />
-    <FormResources Include="Frames\Editors\fEditor.dfm" />
-    <FormResources Include="Frames\Editors\Controls\fEditorControls.dfm" />
-    <FormResources Include="Forms\fNewTileImage.dfm" />
-    <FormResources Include="Forms\fSettings.dfm" />
-    <FormResources Include="Frames\Editors\Code\fEditorCode.dfm" />
-    <FormResources Include="Frames\Editors\Images\fBlockTypes.dfm" />
-    <FormResources Include="Frames\Editors\Images\fEditorImage.dfm" />
-    <BuildConfiguration Include="Base">
-      <Key>Base</Key>
-    </BuildConfiguration>
-    <BuildConfiguration Include="Debug">
-      <Key>Cfg_1</Key>
-      <CfgParent>Base</CfgParent>
-    </BuildConfiguration>
-    <BuildConfiguration Include="Release">
-      <Key>Cfg_2</Key>
-      <CfgParent>Base</CfgParent>
-    </BuildConfiguration>
-  </ItemGroup>
-  <ProjectExtensions>
-    <Borland.Personality>CPlusPlusBuilder.Personality.12</Borland.Personality>
-    <Borland.ProjectType>CppVCLApplication</Borland.ProjectType>
-    <BorlandProject>
-      <CPlusPlusBuilder.Personality>
-        <Excluded_Packages>
-          <Excluded_Packages Name="$(BDSBIN)\dclvcldb290.bpl">Embarcadero VCL Database Components</Excluded_Packages>
-          <Excluded_Packages Name="$(BDSBIN)\dclsmp290.bpl">Embarcadero Sample Components</Excluded_Packages>
-          <Excluded_Packages Name="$(BDSBIN)\dclbcbsmp290.bpl">C++Builder Sample Components Package</Excluded_Packages>
-          <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\23.0\Bpl\dcllmdtoolsdb290.bpl">LMD 2024 - LMD-Tools Main Database Components</Excluded_Packages>
-        </Excluded_Packages>
-        <ProjectProperties>
-          <ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
-          <ProjectProperties Name="IndexFiles">True</ProjectProperties>
-          <ProjectProperties Name="ManagePaths">False</ProjectProperties>
-          <ProjectProperties Name="VerifyPackages">True</ProjectProperties>
-        </ProjectProperties>
-        <Source>
-          <Source Name="MainSource">AGD Studio.cpp</Source>
-        </Source>
-      </CPlusPlusBuilder.Personality>
-      <Deployment Version="5">
-        <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx32\libcgcrtl.dylib" Class="DependencyModule">
-          <Platform Name="OSX32">
-            <Overwrite>true</Overwrite>
-          </Platform>
-        </DeployFile>
-        <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx32\libcgstl.dylib" Class="DependencyModule">
-          <Platform Name="OSX32">
-            <Overwrite>true</Overwrite>
-          </Platform>
-        </DeployFile>
-        <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx64\libcgcrtl.dylib" Class="DependencyModule" />
-        <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx64\libcgstl.dylib" Class="DependencyModule" />
-        <DeployFile Condition="'$(UsingDelphiRTL)'=='true'" LocalName="$(BDS)\bin64\borlndmm.dll" Class="DependencyModule">
-          <Platform Name="Win64">
-            <Overwrite>true</Overwrite>
-          </Platform>
-        </DeployFile>
-        <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin64\cc64290.dll" Class="DependencyModule" />
-        <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin64\cc64290.dll" Class="DependencyModule">
-          <Platform Name="Win64">
-            <Overwrite>true</Overwrite>
-          </Platform>
-        </DeployFile>
-        <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin64\cc64290mt.dll" Class="DependencyModule" />
-        <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin64\cc64290mt.dll" Class="DependencyModule">
-          <Platform Name="Win64">
-            <Overwrite>true</Overwrite>
-          </Platform>
-        </DeployFile>
-        <DeployFile Condition="'$(UsingDelphiRTL)'=='true'" LocalName="$(BDS)\bin\borlndmm.dll" Class="DependencyModule">
-          <Platform Name="Win32">
-            <Overwrite>true</Overwrite>
-          </Platform>
-        </DeployFile>
-        <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32290.dll" Class="DependencyModule" />
-        <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32290.dll" Class="DependencyModule">
-          <Platform Name="Win32">
-            <Overwrite>true</Overwrite>
-          </Platform>
-        </DeployFile>
-        <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32290mt.dll" Class="DependencyModule" />
-        <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32290mt.dll" Class="DependencyModule">
-          <Platform Name="Win32">
-            <Overwrite>true</Overwrite>
-          </Platform>
-        </DeployFile>
-        <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32c290.dll" Class="DependencyModule" />
-        <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32c290.dll" Class="DependencyModule">
-          <Platform Name="Win32">
-            <Overwrite>true</Overwrite>
-          </Platform>
-        </DeployFile>
-        <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32c290mt.dll" Class="DependencyModule" />
-        <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32c290mt.dll" Class="DependencyModule">
-          <Platform Name="Win32">
-            <Overwrite>true</Overwrite>
-          </Platform>
-        </DeployFile>
-        <DeployFile LocalName=".\Binaries\Win64\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput">
-          <Platform Name="Win64">
-            <RemoteName>AGD Studio.exe</RemoteName>
-            <Overwrite>true</Overwrite>
-          </Platform>
-        </DeployFile>
-        <DeployFile LocalName=".\Binaries\Win64x\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput">
-          <Platform Name="Win64x">
-            <RemoteName>AGD Studio.exe</RemoteName>
-            <Overwrite>true</Overwrite>
-          </Platform>
-        </DeployFile>
-        <DeployFile LocalName="Project\README.md" Configuration="Debug" Class="ProjectFile">
-          <Platform Name="Win64">
-            <RemoteDir>.\</RemoteDir>
-            <Overwrite>true</Overwrite>
-          </Platform>
-        </DeployFile>
-        <DeployFile LocalName="Project\README.md" Configuration="Debug" Class="ProjectFile">
-          <Platform Name="Win64x">
-            <RemoteDir>.\</RemoteDir>
-            <Overwrite>true</Overwrite>
-          </Platform>
-        </DeployFile>
-        <DeployFile LocalName="Project\README.md" Configuration="Release" Class="ProjectFile" />
-        <DeployFile LocalName="README.md" Configuration="Debug" Class="ProjectFile" />
-        <DeployClass Name="AdditionalDebugSymbols">
-          <Platform Name="iOSSimulator">
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="OSX32">
-            <RemoteDir>Contents\MacOS</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Win32">
-            <Operation>0</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="AndroidFileProvider">
-          <Platform Name="Android">
-            <RemoteDir>res\xml</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\xml</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="AndroidLibnativeArmeabiFile">
-          <Platform Name="Android">
-            <RemoteDir>library\lib\armeabi</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>library\lib\armeabi</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="AndroidLibnativeArmeabiv7aFile">
-          <Platform Name="Android64">
-            <RemoteDir>library\lib\armeabi-v7a</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="AndroidLibnativeMipsFile">
-          <Platform Name="Android">
-            <RemoteDir>library\lib\mips</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>library\lib\mips</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="AndroidServiceOutput">
-          <Platform Name="Android">
-            <RemoteDir>library\lib\armeabi-v7a</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>library\lib\arm64-v8a</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="AndroidServiceOutput_Android32">
-          <Platform Name="Android64">
-            <RemoteDir>library\lib\armeabi-v7a</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="AndroidSplashImageDef">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="AndroidSplashImageDefV21">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable-anydpi-v21</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable-anydpi-v21</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="AndroidSplashStyles">
-          <Platform Name="Android">
-            <RemoteDir>res\values</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\values</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="AndroidSplashStylesV21">
-          <Platform Name="Android">
-            <RemoteDir>res\values-v21</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\values-v21</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="AndroidSplashStylesV31">
-          <Platform Name="Android">
-            <RemoteDir>res\values-v31</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\values-v31</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_AdaptiveIcon">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable-anydpi-v26</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable-anydpi-v26</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_AdaptiveIconBackground">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_AdaptiveIconForeground">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_AdaptiveIconMonochrome">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_AdaptiveIconV33">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable-anydpi-v33</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable-anydpi-v33</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_Colors">
-          <Platform Name="Android">
-            <RemoteDir>res\values</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\values</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_ColorsDark">
-          <Platform Name="Android">
-            <RemoteDir>res\values-night-v21</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\values-night-v21</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_DefaultAppIcon">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_LauncherIcon144">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable-xxhdpi</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable-xxhdpi</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_LauncherIcon192">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable-xxxhdpi</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable-xxxhdpi</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_LauncherIcon36">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable-ldpi</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable-ldpi</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_LauncherIcon48">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable-mdpi</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable-mdpi</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_LauncherIcon72">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable-hdpi</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable-hdpi</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_LauncherIcon96">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable-xhdpi</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable-xhdpi</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_NotificationIcon24">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable-mdpi</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable-mdpi</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_NotificationIcon36">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable-hdpi</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable-hdpi</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_NotificationIcon48">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable-xhdpi</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable-xhdpi</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_NotificationIcon72">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable-xxhdpi</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable-xxhdpi</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_NotificationIcon96">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable-xxxhdpi</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable-xxxhdpi</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_SplashImage426">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable-small</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable-small</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_SplashImage470">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable-normal</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable-normal</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_SplashImage640">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable-large</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable-large</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_SplashImage960">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable-xlarge</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable-xlarge</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_Strings">
-          <Platform Name="Android">
-            <RemoteDir>res\values</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\values</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_VectorizedNotificationIcon">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable-anydpi-v24</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable-anydpi-v24</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_VectorizedSplash">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_VectorizedSplashDark">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable-night-anydpi-v21</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable-night-anydpi-v21</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_VectorizedSplashV31">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable-anydpi-v31</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable-anydpi-v31</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="Android_VectorizedSplashV31Dark">
-          <Platform Name="Android">
-            <RemoteDir>res\drawable-night-anydpi-v31</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>res\drawable-night-anydpi-v31</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="DebugSymbols">
-          <Platform Name="iOSSimulator">
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="OSX32">
-            <RemoteDir>Contents\MacOS</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Win32">
-            <Operation>0</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="DependencyFramework">
-          <Platform Name="OSX32">
-            <RemoteDir>Contents\MacOS</RemoteDir>
-            <Operation>1</Operation>
-            <Extensions>.framework</Extensions>
-          </Platform>
-          <Platform Name="OSX64">
-            <RemoteDir>Contents\MacOS</RemoteDir>
-            <Operation>1</Operation>
-            <Extensions>.framework</Extensions>
-          </Platform>
-          <Platform Name="OSXARM64">
-            <RemoteDir>Contents\MacOS</RemoteDir>
-            <Operation>1</Operation>
-            <Extensions>.framework</Extensions>
-          </Platform>
-          <Platform Name="Win32">
-            <Operation>0</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="DependencyModule">
-          <Platform Name="iOSDevice32">
-            <Operation>1</Operation>
-            <Extensions>.dylib</Extensions>
-          </Platform>
-          <Platform Name="iOSDevice64">
-            <Operation>1</Operation>
-            <Extensions>.dylib</Extensions>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <Operation>1</Operation>
-            <Extensions>.dylib</Extensions>
-          </Platform>
-          <Platform Name="OSX32">
-            <RemoteDir>Contents\MacOS</RemoteDir>
-            <Operation>1</Operation>
-            <Extensions>.dylib</Extensions>
-          </Platform>
-          <Platform Name="OSX64">
-            <RemoteDir>Contents\MacOS</RemoteDir>
-            <Operation>1</Operation>
-            <Extensions>.dylib</Extensions>
-          </Platform>
-          <Platform Name="OSXARM64">
-            <RemoteDir>Contents\MacOS</RemoteDir>
-            <Operation>1</Operation>
-            <Extensions>.dylib</Extensions>
-          </Platform>
-          <Platform Name="Win32">
-            <Operation>0</Operation>
-            <Extensions>.dll;.bpl</Extensions>
-          </Platform>
-        </DeployClass>
-        <DeployClass Required="true" Name="DependencyPackage">
-          <Platform Name="iOSDevice32">
-            <Operation>1</Operation>
-            <Extensions>.dylib</Extensions>
-          </Platform>
-          <Platform Name="iOSDevice64">
-            <Operation>1</Operation>
-            <Extensions>.dylib</Extensions>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <Operation>1</Operation>
-            <Extensions>.dylib</Extensions>
-          </Platform>
-          <Platform Name="OSX32">
-            <RemoteDir>Contents\MacOS</RemoteDir>
-            <Operation>1</Operation>
-            <Extensions>.dylib</Extensions>
-          </Platform>
-          <Platform Name="OSX64">
-            <RemoteDir>Contents\MacOS</RemoteDir>
-            <Operation>1</Operation>
-            <Extensions>.dylib</Extensions>
-          </Platform>
-          <Platform Name="OSXARM64">
-            <RemoteDir>Contents\MacOS</RemoteDir>
-            <Operation>1</Operation>
-            <Extensions>.dylib</Extensions>
-          </Platform>
-          <Platform Name="Win32">
-            <Operation>0</Operation>
-            <Extensions>.bpl</Extensions>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="File">
-          <Platform Name="Android">
-            <Operation>0</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <Operation>0</Operation>
-          </Platform>
-          <Platform Name="iOSDevice32">
-            <Operation>0</Operation>
-          </Platform>
-          <Platform Name="iOSDevice64">
-            <Operation>0</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <Operation>0</Operation>
-          </Platform>
-          <Platform Name="OSX32">
-            <RemoteDir>Contents\Resources\StartUp\</RemoteDir>
-            <Operation>0</Operation>
-          </Platform>
-          <Platform Name="OSX64">
-            <RemoteDir>Contents\Resources\StartUp\</RemoteDir>
-            <Operation>0</Operation>
-          </Platform>
-          <Platform Name="OSXARM64">
-            <RemoteDir>Contents\Resources\StartUp\</RemoteDir>
-            <Operation>0</Operation>
-          </Platform>
-          <Platform Name="Win32">
-            <Operation>0</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="ProjectAndroidManifest">
-          <Platform Name="Android">
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="ProjectOSXDebug">
-          <Platform Name="OSX64">
-            <RemoteDir>..\$(PROJECTNAME).app.dSYM\Contents\Resources\DWARF</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="OSXARM64">
-            <RemoteDir>..\$(PROJECTNAME).app.dSYM\Contents\Resources\DWARF</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="ProjectOSXEntitlements">
-          <Platform Name="OSX32">
-            <RemoteDir>..\</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="OSX64">
-            <RemoteDir>..\</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="OSXARM64">
-            <RemoteDir>..\</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="ProjectOSXInfoPList">
-          <Platform Name="OSX32">
-            <RemoteDir>Contents</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="OSX64">
-            <RemoteDir>Contents</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="OSXARM64">
-            <RemoteDir>Contents</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="ProjectOSXResource">
-          <Platform Name="OSX32">
-            <RemoteDir>Contents\Resources</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="OSX64">
-            <RemoteDir>Contents\Resources</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="OSXARM64">
-            <RemoteDir>Contents\Resources</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Required="true" Name="ProjectOutput">
-          <Platform Name="Android">
-            <RemoteDir>library\lib\armeabi-v7a</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Android64">
-            <RemoteDir>library\lib\arm64-v8a</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSDevice32">
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSDevice64">
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Linux64">
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="OSX32">
-            <RemoteDir>Contents\MacOS</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="OSX64">
-            <RemoteDir>Contents\MacOS</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="OSXARM64">
-            <RemoteDir>Contents\MacOS</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Win32">
-            <Operation>0</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="ProjectOutput_Android32">
-          <Platform Name="Android64">
-            <RemoteDir>library\lib\armeabi-v7a</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="ProjectUWPManifest">
-          <Platform Name="Win32">
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Win64">
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Win64x">
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="ProjectiOSDeviceDebug">
-          <Platform Name="iOSDevice32">
-            <RemoteDir>..\$(PROJECTNAME).app.dSYM\Contents\Resources\DWARF</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSDevice64">
-            <RemoteDir>..\$(PROJECTNAME).app.dSYM\Contents\Resources\DWARF</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <RemoteDir>..\$(PROJECTNAME).app.dSYM\Contents\Resources\DWARF</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="ProjectiOSEntitlements">
-          <Platform Name="iOSDevice32">
-            <RemoteDir>..\</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSDevice64">
-            <RemoteDir>..\</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <RemoteDir>..\</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="ProjectiOSInfoPList">
-          <Platform Name="iOSDevice32">
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSDevice64">
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="ProjectiOSLaunchScreen">
-          <Platform Name="iOSDevice64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen</RemoteDir>
-            <Operation>64</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen</RemoteDir>
-            <Operation>64</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="ProjectiOSResource">
-          <Platform Name="iOSDevice32">
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSDevice64">
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="UWP_CppLogo150">
-          <Platform Name="Win32">
-            <RemoteDir>Assets</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Win64">
-            <RemoteDir>Assets</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Win64x">
-            <RemoteDir>Assets</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="UWP_CppLogo44">
-          <Platform Name="Win32">
-            <RemoteDir>Assets</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Win64">
-            <RemoteDir>Assets</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="Win64x">
-            <RemoteDir>Assets</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="iOS_AppStore1024">
-          <Platform Name="iOSDevice64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="iPad_AppIcon152">
-          <Platform Name="iOSDevice64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="iPad_AppIcon167">
-          <Platform Name="iOSDevice64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="iPad_Launch2x">
-          <Platform Name="iOSDevice64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="iPad_LaunchDark2x">
-          <Platform Name="iOSDevice64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="iPad_Notification40">
-          <Platform Name="iOSDevice64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="iPad_Setting58">
-          <Platform Name="iOSDevice64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="iPad_SpotLight80">
-          <Platform Name="iOSDevice64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="iPhone_AppIcon120">
-          <Platform Name="iOSDevice64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="iPhone_AppIcon180">
-          <Platform Name="iOSDevice64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="iPhone_Launch2x">
-          <Platform Name="iOSDevice64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="iPhone_Launch3x">
-          <Platform Name="iOSDevice64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="iPhone_LaunchDark2x">
-          <Platform Name="iOSDevice64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="iPhone_LaunchDark3x">
-          <Platform Name="iOSDevice64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="iPhone_Notification40">
-          <Platform Name="iOSDevice64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="iPhone_Notification60">
-          <Platform Name="iOSDevice64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="iPhone_Setting58">
-          <Platform Name="iOSDevice64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="iPhone_Setting87">
-          <Platform Name="iOSDevice64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="iPhone_Spotlight120">
-          <Platform Name="iOSDevice64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <DeployClass Name="iPhone_Spotlight80">
-          <Platform Name="iOSDevice64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-          <Platform Name="iOSSimARM64">
-            <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
-            <Operation>1</Operation>
-          </Platform>
-        </DeployClass>
-        <ProjectRoot Platform="Android" Name="$(PROJECTNAME)" />
-        <ProjectRoot Platform="Android64" Name="$(PROJECTNAME)" />
-        <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app" />
-        <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app" />
-        <ProjectRoot Platform="iOSSimARM64" Name="$(PROJECTNAME).app" />
-        <ProjectRoot Platform="Linux64" Name="$(PROJECTNAME)" />
-        <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app" />
-        <ProjectRoot Platform="OSX64" Name="$(PROJECTNAME).app" />
-        <ProjectRoot Platform="OSXARM64" Name="$(PROJECTNAME).app" />
-        <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)" />
-        <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)" />
-        <ProjectRoot Platform="Win64x" Name="$(PROJECTNAME)" />
-      </Deployment>
-      <Platforms>
-        <Platform value="Win32">False</Platform>
-        <Platform value="Win64">True</Platform>
-        <Platform value="Win64x">True</Platform>
-      </Platforms>
-    </BorlandProject>
-    <ProjectFileVersion>12</ProjectFileVersion>
-  </ProjectExtensions>
-  <Import Project="$(BDS)\Bin\CodeGear.Cpp.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')" />
-  <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" />
-  <Import Project="$(MSBuildProjectName).deployproj" Condition="Exists('$(MSBuildProjectName).deployproj')" />
+    <PropertyGroup>
+        <ProjectGuid>{D0C2ACDB-659A-4891-B603-0D187CA01644}</ProjectGuid>
+        <ProjectVersion>20.2</ProjectVersion>
+        <FrameworkType>VCL</FrameworkType>
+        <AppType>Application</AppType>
+        <MainSource>AGD Studio.cpp</MainSource>
+        <Base>True</Base>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Platform Condition="'$(Platform)'==''">Win64</Platform>
+        <TargetedPlatforms>1048578</TargetedPlatforms>
+        <ProjectName Condition="'$(ProjectName)'==''">AGD Studio</ProjectName>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+        <Base_Win32>true</Base_Win32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
+        <Base_Win64>true</Base_Win64>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64x' and '$(Base)'=='true') or '$(Base_Win64x)'!=''">
+        <Base_Win64x>true</Base_Win64x>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
+        <Cfg_1>true</Cfg_1>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win64)'!=''">
+        <Cfg_1_Win64>true</Cfg_1_Win64>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64x' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win64x)'!=''">
+        <Cfg_1_Win64x>true</Cfg_1_Win64x>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
+        <Cfg_2>true</Cfg_2>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win64)'!=''">
+        <Cfg_2_Win64>true</Cfg_2_Win64>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64x' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win64x)'!=''">
+        <Cfg_2_Win64x>true</Cfg_2_Win64x>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <_TCHARMapping>wchar_t</_TCHARMapping>
+        <AppEnableHighDPI>true</AppEnableHighDPI>
+        <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
+        <AllPackageLibs>rtl.lib;vcl.lib;vclimg.lib;vclactnband.lib;vclx.lib;lmdrtrtlx.lib;lmdrtl.lib;lmdrtinspector.lib;lmdrtdocking.lib;lmdrtelcore.lib;lmdrtsyntax.lib;lmdrtcore.lib;vclwinx.lib;lmdrtelpro.lib;xmlrtl.lib;lmdrtshell.lib;DbxCommonDriver.lib;dbrtl.lib;bindengine.lib;lmdrtprint.lib</AllPackageLibs>
+        <BCC_CallingConvention>fastcall</BCC_CallingConvention>
+        <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
+        <BCC_DisableWarnings>true</BCC_DisableWarnings>
+        <BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
+        <BCC_InstructionSet>6</BCC_InstructionSet>
+        <DCC_Namespace>System;Vcl;Vcl.Imaging;Vcl.Shell;Winapi;System.Win;$(DCC_Namespace)</DCC_Namespace>
+        <BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
+        <BCC_PCHName_Clang>AgdStudio.pch.h</BCC_PCHName_Clang>
+        <BCC_PCHInject>AGD Studio.pch.h</BCC_PCHInject>
+        <BCC_SelectedWarnings>false</BCC_SelectedWarnings>
+        <BCC_StopPCHAfter>AgdStudio.pch.h</BCC_StopPCHAfter>
+        <BCC_UseClassicCompiler>false</BCC_UseClassicCompiler>
+        <BCC_wpar>false</BCC_wpar>
+        <BCC_PCHCache>true</BCC_PCHCache>
+        <DynamicRTL>true</DynamicRTL>
+        <Icon_MainIcon>$(BDS)\bin\cbuilder_PROJECTICON.ico</Icon_MainIcon>
+        <ILINK_DisplayTime>true</ILINK_DisplayTime>
+        <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\release\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
+        <ILINK_LibraryPath>Frames\;Frames\Editors\;Frames\Editors\Map\;Frames\Editors\Images\;Frames\ImageEditor\;Frames\CodeEditor\;.\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <ILINK_LinkwithSQL>false</ILINK_LinkwithSQL>
+        <ILINK_TSAware_lld>false</ILINK_TSAware_lld>
+        <ILINK_LinkwithIndy>false</ILINK_LinkwithIndy>
+        <ILINK_LinkwithIntebaseTogo>false</ILINK_LinkwithIntebaseTogo>
+        <ILINK_LinkwithMidas>false</ILINK_LinkwithMidas>
+        <ILINK_LinkwithPThread>false</ILINK_LinkwithPThread>
+        <ILINK_LinkwithRegEx>false</ILINK_LinkwithRegEx>
+        <ILINK_LinkwithSQLite>false</ILINK_LinkwithSQLite>
+        <ILINK_LinkwithZLib>false</ILINK_LinkwithZLib>
+        <IncludePath>.\;Frames\;Frames\Editors\;Frames\Editors\Map\;Frames\Editors\Images\;Frames\Editors\Code\;$(IncludePath)</IncludePath>
+        <IntermediateOutputDir>.\Binaries\$(Platform)\$(Config)</IntermediateOutputDir>
+        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;VclSmp.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtprint.bpi;lmdrtelpro.bpi;xmlrtl.bpi;bindengine.bpi;DbxCommonDriver.bpi;dbrtl.bpi;lmdrtshell.bpi</LinkPackageImports>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <Multithreaded>true</Multithreaded>
+        <ProjectType>CppVCLApplication</ProjectType>
+        <RunBCCOutOfProcess>true</RunBCCOutOfProcess>
+        <SanitizedProjectName>AGD_Studio</SanitizedProjectName>
+        <UsePackages>true</UsePackages>
+        <UWP_CppLogo150>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_150.png</UWP_CppLogo150>
+        <UWP_CppLogo44>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_44.png</UWP_CppLogo44>
+        <VerInfo_Build>11738</VerInfo_Build>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=0.18.0.11738;InternalName=AGD Studio;LegalCopyright=2022-2024 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=0.18.0.11738;Comments=Programmed by Tony Thompson</VerInfo_Keys>
+        <VerInfo_Locale>3081</VerInfo_Locale>
+        <VerInfo_MajorVer>0</VerInfo_MajorVer>
+        <VerInfo_MinorVer>18</VerInfo_MinorVer>
+        <VerInfo_PreRelease>true</VerInfo_PreRelease>
+        <SubProcessesNumber>-1</SubProcessesNumber>
+        <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
+        <BCC_EnableBatchCompilation>true</BCC_EnableBatchCompilation>
+        <BCC_EnableLSPIndexingOnChange>true</BCC_EnableLSPIndexingOnChange>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <BCC_CallingConvention>fastcall</BCC_CallingConvention>
+        <BCC_InstructionSet>6</BCC_InstructionSet>
+        <BCC_IntegerTypeEnums>true</BCC_IntegerTypeEnums>
+        <BT_BuildType>Debug</BT_BuildType>
+        <Icon_MainIcon>icon.ico</Icon_MainIcon>
+        <PackageImports>lmdrtcore;lmdrtdocking;lmdrtelcore;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtrtlx;lmdrtshell;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;rtl;vcl;vclactnband;vclimg;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
+        <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
+        <BCC_DisableOptimizations>true</BCC_DisableOptimizations>
+        <BCC_PCHName_Clang>AGD Studio.pch.h</BCC_PCHName_Clang>
+        <DCC_Namespace>Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.2.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.2.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win64)'!=''">
+        <BT_BuildType>Debug</BT_BuildType>
+        <PackageImports>lmdrtcore;lmdrtdocking;lmdrtelcore;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtrtlx;lmdrtshell;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;rtl;vcl;vclactnband;vclimg;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
+        <Icon_MainIcon>icon.ico</Icon_MainIcon>
+        <BCC_PCHName_Clang>AGD Studio.pch.h</BCC_PCHName_Clang>
+        <DCC_Namespace>Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.2.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.2.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_MajorVer>1</VerInfo_MajorVer>
+        <VerInfo_MinorVer>0</VerInfo_MinorVer>
+        <VerInfo_Build>0</VerInfo_Build>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win64x)'!=''">
+        <DCC_Namespace>Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
+        <BT_BuildType>Debug</BT_BuildType>
+        <PackageImports>lmdrtcore;lmdrtdocking;lmdrtelcore;lmdrtelpro;lmdrtfx;lmdrtide;lmdrtinspector;lmdrtl;lmdrtrtlx;lmdrtshell;lmdrtsyntax;lmdrtsys;lmdrtthemes;lmdrttools;lmdrttxt;rtl;vcl;vclactnband;vclimg;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
+        <Icon_MainIcon>icon.ico</Icon_MainIcon>
+        <BCC_PCHName_Clang>AGD Studio.pch.h</BCC_PCHName_Clang>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1)'!=''">
+        <BCC_DebugLineNumbers>true</BCC_DebugLineNumbers>
+        <BCC_DisableFramePtrElimOpt>true</BCC_DisableFramePtrElimOpt>
+        <BCC_DisableOptimizations>true</BCC_DisableOptimizations>
+        <BCC_DisableSpellChecking>true</BCC_DisableSpellChecking>
+        <BCC_EnableCPPExceptions>true</BCC_EnableCPPExceptions>
+        <BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
+        <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
+        <BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
+        <BCC_StackFrames>true</BCC_StackFrames>
+        <BCC_UseRegisterVariables>None</BCC_UseRegisterVariables>
+        <CLANG_UnwindTables>true</CLANG_UnwindTables>
+        <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+        <DCC_Define>DEBUG</DCC_Define>
+        <DCC_Optimize>false</DCC_Optimize>
+        <Defines>_DEBUG;$(Defines)</Defines>
+        <ILINK_FullDebugInfo>true</ILINK_FullDebugInfo>
+        <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
+        <TASM_Debugging>Full</TASM_Debugging>
+        <TASM_DisplaySourceLines>true</TASM_DisplaySourceLines>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
+        <VerInfo_MajorVer>1</VerInfo_MajorVer>
+        <VerInfo_MinorVer>0</VerInfo_MinorVer>
+        <VerInfo_Build>0</VerInfo_Build>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.2.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.2.0.0;Comments=</VerInfo_Keys>
+        <Icon_MainIcon>icon.ico</Icon_MainIcon>
+        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;xmlrtl.bpi;lmdrtshell.bpi;DbxCommonDriver.bpi;dbrtl.bpi;bindengine.bpi;lmdrtprint.bpi</LinkPackageImports>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win64x)'!=''">
+        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;xmlrtl.bpi;lmdrtshell.bpi;DbxCommonDriver.bpi;dbrtl.bpi;bindengine.bpi;lmdrtprint.bpi</LinkPackageImports>
+        <BCC_EnableLSPIndexingOnChange>false</BCC_EnableLSPIndexingOnChange>
+        <BCC_AllWarnings>true</BCC_AllWarnings>
+        <BCC_DisableWarnings>false</BCC_DisableWarnings>
+        <Icon_MainIcon>icon.ico</Icon_MainIcon>
+        <Debugger_DebugSourcePath>D:\Projects\GitHub\AGD-Studio\Source\Messaging\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
+        <VerInfo_Build>11741</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=$(MSBuildProjectName);FileVersion=0.18.0.11741;InternalName=AGD Studio;LegalCopyright=2022-2024 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=0.18.0.11738;Comments=Programmed by Tony Thompson;SpecialBuild=BETA</VerInfo_Keys>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <Defines>NDEBUG;$(Defines)</Defines>
+        <TASM_Debugging>None</TASM_Debugging>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
+        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;xmlrtl.bpi;lmdrtshell.bpi;DbxCommonDriver.bpi;dbrtl.bpi;bindengine.bpi;lmdrtprint.bpi</LinkPackageImports>
+        <VerInfo_Build>2</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.2.0.2;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.2.0.0;Comments=</VerInfo_Keys>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win64x)'!=''">
+        <Icon_MainIcon>icon.ico</Icon_MainIcon>
+        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclactnband.bpi;vclx.bpi;lmdrtrtlx.bpi;lmdrtl.bpi;lmdrtinspector.bpi;lmdrtdocking.bpi;lmdrtelcore.bpi;lmdrtsyntax.bpi;lmdrtcore.bpi;vclwinx.bpi;lmdrtelpro.bpi;xmlrtl.bpi;lmdrtshell.bpi;DbxCommonDriver.bpi;dbrtl.bpi;bindengine.bpi;lmdrtprint.bpi</LinkPackageImports>
+        <VerInfo_Build>11743</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=Scorpio Designs;FileDescription=AGD Studio;FileVersion=0.18.0.11743;InternalName=AGD Studio;LegalCopyright=2022-2024 Tony Thompson;LegalTrademarks=AGD is a trademark of Jonathan Cauldwell;OriginalFilename=;ProgramID=com.embarcadero.AGD Studio;ProductName=AGD Studio;ProductVersion=0.18.0.11738;Comments=Programmed by Tony Thompson;SpecialBuild=BETA</VerInfo_Keys>
+    </PropertyGroup>
+    <ItemGroup>
+        <CppCompile Include="AGD Studio.cpp">
+            <BuildOrder>0</BuildOrder>
+        </CppCompile>
+        <PCHCompile Include="AGD Studio.pch.h">
+            <BuildOrder>14</BuildOrder>
+            <PCH>true</PCH>
+        </PCHCompile>
+        <CppCompile Include="Build\Assemble.cpp">
+            <DependentOn>Build\Assemble.h</DependentOn>
+            <BuildOrder>5</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\BuildManager.cpp">
+            <DependentOn>Build\BuildManager.h</DependentOn>
+            <BuildOrder>1</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\BuildMessages.cpp">
+            <DependentOn>Build\BuildMessages.h</DependentOn>
+            <BuildOrder>2</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\BuildProcess.cpp">
+            <DependentOn>Build\BuildProcess.h</DependentOn>
+            <BuildOrder>3</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Compilation.cpp">
+            <DependentOn>Build\Compilation.h</DependentOn>
+            <BuildOrder>8</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Creation.cpp">
+            <DependentOn>Build\Creation.h</DependentOn>
+            <BuildOrder>4</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Emulation.cpp">
+            <DependentOn>Build\Emulation.h</DependentOn>
+            <BuildOrder>6</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Parameterizer.cpp">
+            <DependentOn>Build\Parameterizer.h</DependentOn>
+            <BuildOrder>10</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\PreChecks.cpp">
+            <DependentOn>Build\PreChecks.h</DependentOn>
+            <BuildOrder>7</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\ControlsSection.cpp">
+            <DependentOn>Build\Section\ControlsSection.h</DependentOn>
+            <BuildOrder>93</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\EventsSection.cpp">
+            <DependentOn>Build\Section\EventsSection.h</DependentOn>
+            <BuildOrder>94</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\FontSection.cpp">
+            <DependentOn>Build\Section\FontSection.h</DependentOn>
+            <BuildOrder>95</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\JumpTableSection.cpp">
+            <DependentOn>Build\Section\JumpTableSection.h</DependentOn>
+            <BuildOrder>96</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\MapSection.cpp">
+            <DependentOn>Build\Section\MapSection.h</DependentOn>
+            <BuildOrder>97</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\MessagesSection.cpp">
+            <DependentOn>Build\Section\MessagesSection.h</DependentOn>
+            <BuildOrder>98</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\ObjectsSection.cpp">
+            <DependentOn>Build\Section\ObjectsSection.h</DependentOn>
+            <BuildOrder>99</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\ProjectSection.cpp">
+            <DependentOn>Build\Section\ProjectSection.h</DependentOn>
+            <BuildOrder>100</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\ScreensSection.cpp">
+            <DependentOn>Build\Section\ScreensSection.h</DependentOn>
+            <BuildOrder>101</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\Section.cpp">
+            <DependentOn>Build\Section\Section.h</DependentOn>
+            <BuildOrder>102</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\SpritesSection.cpp">
+            <DependentOn>Build\Section\SpritesSection.h</DependentOn>
+            <BuildOrder>103</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\TilesSection.cpp">
+            <DependentOn>Build\Section\TilesSection.h</DependentOn>
+            <BuildOrder>104</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\Section\WindowSection.cpp">
+            <DependentOn>Build\Section\WindowSection.h</DependentOn>
+            <BuildOrder>105</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Build\ShellProcess.cpp">
+            <DependentOn>Build\ShellProcess.h</DependentOn>
+            <BuildOrder>9</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Factories\DocumentEditorFactory.cpp">
+            <DependentOn>Factories\DocumentEditorFactory.h</DependentOn>
+            <BuildOrder>24</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Forms\fAbout.cpp">
+            <Form>frmAbout</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>Forms\fAbout.h</DependentOn>
+            <BuildOrder>25</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Forms\fAdvancedSettings.cpp">
+            <Form>frmAdvancedSettings</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>Forms\fAdvancedSettings.h</DependentOn>
+            <BuildOrder>29</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Forms\fMain.cpp">
+            <Form>frmMain</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>Forms\fMain.h</DependentOn>
+            <BuildOrder>26</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Forms\fNewTileImage.cpp">
+            <Form>frmNewTileImage</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>Forms\fNewTileImage.h</DependentOn>
+            <BuildOrder>27</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Forms\fSettings.cpp">
+            <Form>frmSettings</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>Forms\fSettings.h</DependentOn>
+            <BuildOrder>28</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Forms\fTutorial.cpp">
+            <Form>frmTutorial</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>Forms\fTutorial.h</DependentOn>
+            <BuildOrder>114</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Code\fEditorCode.cpp">
+            <Form>frmEditorCode</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Code\fEditorCode.h</DependentOn>
+            <BuildOrder>74</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Controls\fEditorControls.cpp">
+            <Form>frmEditorControls</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Controls\fEditorControls.h</DependentOn>
+            <BuildOrder>75</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Controls\fKeyCapture.cpp">
+            <Form>frmKeyCode</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Controls\fKeyCapture.h</DependentOn>
+            <BuildOrder>76</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\EditorManager.cpp">
+            <DependentOn>Frames\Editors\EditorManager.h</DependentOn>
+            <BuildOrder>30</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\fEditor.cpp">
+            <Form>frmEditor</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\fEditor.h</DependentOn>
+            <BuildOrder>104</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\BlockTypeTool.cpp">
+            <DependentOn>Frames\Editors\Images\BlockTypeTool.h</DependentOn>
+            <BuildOrder>77</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\CanvasLineTool.cpp">
+            <DependentOn>Frames\Editors\Images\CanvasLineTool.h</DependentOn>
+            <BuildOrder>78</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\CanvasPencilTool.cpp">
+            <DependentOn>Frames\Editors\Images\CanvasPencilTool.h</DependentOn>
+            <BuildOrder>79</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\CanvasShapeTool.cpp">
+            <DependentOn>Frames\Editors\Images\CanvasShapeTool.h</DependentOn>
+            <BuildOrder>80</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\CanvasTool.cpp">
+            <DependentOn>Frames\Editors\Images\CanvasTool.h</DependentOn>
+            <BuildOrder>81</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\fBlockTypes.cpp">
+            <Form>frmBlockTypes</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Images\fBlockTypes.h</DependentOn>
+            <BuildOrder>82</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\fEditorImage.cpp">
+            <Form>frmEditorImage</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Images\fEditorImage.h</DependentOn>
+            <BuildOrder>83</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\fMultiImageView.cpp">
+            <Form>MultiImageViewFrame</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Images\fMultiImageView.h</DependentOn>
+            <BuildOrder>84</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\fPaletteAttribute.cpp">
+            <Form>frmPaletteAttribute</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Images\fPaletteAttribute.h</DependentOn>
+            <BuildOrder>85</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\fPaletteBitmap.cpp">
+            <Form>frmPaletteBitmap</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Images\fPaletteBitmap.h</DependentOn>
+            <BuildOrder>86</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\fPaletteMonoAttribute.cpp">
+            <Form>frmPaletteMonoAttribute</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Images\fPaletteMonoAttribute.h</DependentOn>
+            <BuildOrder>87</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\fSelectionImage.cpp">
+            <Form>SelectionImageFrame</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Images\fSelectionImage.h</DependentOn>
+            <BuildOrder>88</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\fToolbar.cpp">
+            <Form>frmToolbar</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Images\fToolbar.h</DependentOn>
+            <BuildOrder>89</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\fToolbarShape.cpp">
+            <Form>frmToolbarShape</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Images\fToolbarShape.h</DependentOn>
+            <BuildOrder>90</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Images\fULAplusBitmap.cpp">
+            <Form>frmULAplusBitmap</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Images\fULAplusBitmap.h</DependentOn>
+            <BuildOrder>91</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\JumpTable\fEditorJumpTable.cpp">
+            <Form>frmEditorJumpTable</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\JumpTable\fEditorJumpTable.h</DependentOn>
+            <BuildOrder>92</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Map\fAssetSelection.cpp">
+            <Form>frmAssetSelection</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Map\fAssetSelection.h</DependentOn>
+            <BuildOrder>93</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Map\fEditorMap.cpp">
+            <Form>frmEditorMap</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Map\fEditorMap.h</DependentOn>
+            <BuildOrder>94</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Map\fLabelledImage.cpp">
+            <Form>frmLabelledImage</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Map\fLabelledImage.h</DependentOn>
+            <BuildOrder>95</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Map\MapLineTool.cpp">
+            <DependentOn>Frames\Editors\Map\MapLineTool.h</DependentOn>
+            <BuildOrder>96</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Map\MapPencilTool.cpp">
+            <DependentOn>Frames\Editors\Map\MapPencilTool.h</DependentOn>
+            <BuildOrder>97</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Map\MapRectTool.cpp">
+            <DependentOn>Frames\Editors\Map\MapRectTool.h</DependentOn>
+            <BuildOrder>98</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Map\MapTool.cpp">
+            <DependentOn>Frames\Editors\Map\MapTool.h</DependentOn>
+            <BuildOrder>99</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Map\TileEditor.cpp">
+            <DependentOn>Frames\Editors\Map\TileEditor.h</DependentOn>
+            <BuildOrder>100</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Messages\fEditorMessages.cpp">
+            <Form>frmEditorMessages</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Messages\fEditorMessages.h</DependentOn>
+            <BuildOrder>101</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\MouseState.cpp">
+            <DependentOn>Frames\Editors\MouseState.h</DependentOn>
+            <BuildOrder>103</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Music\fEditorMusic.cpp">
+            <Form>frmEditorMusic</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Music\fEditorMusic.h</DependentOn>
+            <BuildOrder>102</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Tool.cpp">
+            <DependentOn>Frames\Editors\Tool.h</DependentOn>
+            <BuildOrder>32</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\Editors\Window\fEditorWindow.cpp">
+            <Form>frmEditorWindow</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\Editors\Window\fEditorWindow.h</DependentOn>
+            <BuildOrder>103</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\fAppFrame.cpp">
+            <Form>frmAppFrame</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\fAppFrame.h</DependentOn>
+            <BuildOrder>113</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\IDE\fIDE.cpp">
+            <Form>frmIDE</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\IDE\fIDE.h</DependentOn>
+            <BuildOrder>37</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\WelcomeDialog\fSelectionPanel.cpp">
+            <Form>SelectionPanelFrame</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\WelcomeDialog\fSelectionPanel.h</DependentOn>
+            <BuildOrder>64</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\WelcomeDialog\fWelcomeDialog.cpp">
+            <Form>frmWelcomeDialog</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+            <DependentOn>Frames\WelcomeDialog\fWelcomeDialog.h</DependentOn>
+            <BuildOrder>65</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Frames\WndProcHandlers.cpp">
+            <DependentOn>Frames\WndProcHandlers.h</DependentOn>
+            <BuildOrder>33</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Importer\AgdImporter.cpp">
+            <DependentOn>Importer\AgdImporter.h</DependentOn>
+            <BuildOrder>112</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Importer\ImportDefinition.cpp">
+            <DependentOn>Importer\ImportDefinition.h</DependentOn>
+            <BuildOrder>109</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Importer\Parser.cpp">
+            <DependentOn>Importer\Parser.h</DependentOn>
+            <BuildOrder>109</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Importer\Token.cpp">
+            <DependentOn>Importer\Token.h</DependentOn>
+            <BuildOrder>111</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Messaging\Event.cpp">
+            <DependentOn>Messaging\Event.h</DependentOn>
+            <BuildOrder>74</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Messaging\Messaging.cpp">
+            <DependentOn>Messaging\Messaging.h</DependentOn>
+            <BuildOrder>75</BuildOrder>
+        </CppCompile>
+        <None Include="Project\Constants.h">
+            <BuildOrder>113</BuildOrder>
+        </None>
+        <CppCompile Include="Project\Documents\BaseImage.cpp">
+            <DependentOn>Project\Documents\BaseImage.h</DependentOn>
+            <BuildOrder>94</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\CharacterSet.cpp">
+            <DependentOn>Project\Documents\CharacterSet.h</DependentOn>
+            <BuildOrder>90</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\Controls.cpp">
+            <DependentOn>Project\Documents\Controls.h</DependentOn>
+            <BuildOrder>91</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\Document.cpp">
+            <DependentOn>Project\Documents\Document.h</DependentOn>
+            <BuildOrder>105</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\DocumentManager.cpp">
+            <DependentOn>Project\Documents\DocumentManager.h</DependentOn>
+            <BuildOrder>77</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\FileDefinitions.cpp">
+            <DependentOn>Project\Documents\FileDefinitions.h</DependentOn>
+            <BuildOrder>93</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\JumpTable.cpp">
+            <DependentOn>Project\Documents\JumpTable.h</DependentOn>
+            <BuildOrder>95</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\MachineConfig.cpp">
+            <DependentOn>Project\Documents\MachineConfig.h</DependentOn>
+            <BuildOrder>96</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\MapEntity.cpp">
+            <DependentOn>Project\Documents\MapEntity.h</DependentOn>
+            <BuildOrder>97</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\MostRecentlyUsedList.cpp">
+            <DependentOn>Project\Documents\MostRecentlyUsedList.h</DependentOn>
+            <BuildOrder>82</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\Object.cpp">
+            <DependentOn>Project\Documents\Object.h</DependentOn>
+            <BuildOrder>98</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\Project.cpp">
+            <DependentOn>Project\Documents\Project.h</DependentOn>
+            <BuildOrder>99</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\Settings.cpp">
+            <DependentOn>Project\Documents\Settings.h</DependentOn>
+            <BuildOrder>100</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\Sprite.cpp">
+            <DependentOn>Project\Documents\Sprite.h</DependentOn>
+            <BuildOrder>101</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\Text.cpp">
+            <DependentOn>Project\Documents\Text.h</DependentOn>
+            <BuildOrder>102</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\Tile.cpp">
+            <DependentOn>Project\Documents\Tile.h</DependentOn>
+            <BuildOrder>103</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\TiledMap.cpp">
+            <DependentOn>Project\Documents\TiledMap.h</DependentOn>
+            <BuildOrder>104</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\Documents\Window.cpp">
+            <DependentOn>Project\Documents\Window.h</DependentOn>
+            <BuildOrder>105</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Project\ProjectManager.cpp">
+            <DependentOn>Project\ProjectManager.h</DependentOn>
+            <BuildOrder>83</BuildOrder>
+        </CppCompile>
+        <None Include="Project\README.md"/>
+        <CppCompile Include="Services\File.cpp">
+            <DependentOn>Services\File.h</DependentOn>
+            <BuildOrder>99</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Services\Folders.cpp">
+            <DependentOn>Services\Folders.h</DependentOn>
+            <BuildOrder>100</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Services\Generic.cpp">
+            <DependentOn>Services\Generic.h</DependentOn>
+            <BuildOrder>101</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Services\Guard.cpp">
+            <DependentOn>Services\Guard.h</DependentOn>
+            <BuildOrder>102</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Services\JsonFile.cpp">
+            <DependentOn>Services\JsonFile.h</DependentOn>
+            <BuildOrder>103</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Settings\ThemeManager.cpp">
+            <DependentOn>Settings\ThemeManager.h</DependentOn>
+            <BuildOrder>95</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Templates\crc32c.cpp">
+            <DependentOn>Templates\crc32c.h</DependentOn>
+            <BuildOrder>111</BuildOrder>
+        </CppCompile>
+        <None Include="Templates\enumerate.h">
+            <BuildOrder>110</BuildOrder>
+        </None>
+        <CppCompile Include="Visuals\AttributeGraphicsBuffer.cpp">
+            <DependentOn>Visuals\AttributeGraphicsBuffer.h</DependentOn>
+            <BuildOrder>104</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Visuals\BitmapGraphicsBuffer.cpp">
+            <DependentOn>Visuals\BitmapGraphicsBuffer.h</DependentOn>
+            <BuildOrder>105</BuildOrder>
+        </CppCompile>
+        <None Include="Visuals\BlockTypes.h">
+            <BuildOrder>105</BuildOrder>
+        </None>
+        <CppCompile Include="Visuals\GraphicsBuffer.cpp">
+            <DependentOn>Visuals\GraphicsBuffer.h</DependentOn>
+            <BuildOrder>106</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Visuals\GraphicsMode.cpp">
+            <DependentOn>Visuals\GraphicsMode.h</DependentOn>
+            <BuildOrder>107</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Visuals\GraphicsTypes.cpp">
+            <DependentOn>Visuals\GraphicsTypes.h</DependentOn>
+            <BuildOrder>109</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Visuals\Image.cpp">
+            <DependentOn>Visuals\Image.h</DependentOn>
+            <BuildOrder>108</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Visuals\Palette.cpp">
+            <DependentOn>Visuals\Palette.h</DependentOn>
+            <BuildOrder>109</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Visuals\ULAPlusGraphicsBuffer.cpp">
+            <DependentOn>Visuals\ULAPlusGraphicsBuffer.h</DependentOn>
+            <BuildOrder>110</BuildOrder>
+        </CppCompile>
+        <FormResources Include="Frames\Editors\Music\fEditorMusic.dfm"/>
+        <FormResources Include="Frames\Editors\Messages\fEditorMessages.dfm"/>
+        <FormResources Include="Frames\WelcomeDialog\fWelcomeDialog.dfm"/>
+        <FormResources Include="Frames\WelcomeDialog\fSelectionPanel.dfm"/>
+        <FormResources Include="Frames\Editors\Window\fEditorWindow.dfm"/>
+        <FormResources Include="Frames\fAppFrame.dfm"/>
+        <FormResources Include="Frames\IDE\fIDE.dfm"/>
+        <FormResources Include="Forms\fAbout.dfm"/>
+        <FormResources Include="Forms\fAdvancedSettings.dfm"/>
+        <FormResources Include="Forms\fMain.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fPaletteMonoAttribute.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fSelectionImage.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fToolbar.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fPaletteBitmap.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fEditorImage.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fMultiImageView.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fPaletteAttribute.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fEditorMap.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fLabelledImage.dfm"/>
+        <FormResources Include="Frames\Editors\Map\fAssetSelection.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fToolbarShape.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fULAplusBitmap.dfm"/>
+        <FormResources Include="Frames\Editors\JumpTable\fEditorJumpTable.dfm"/>
+        <FormResources Include="Frames\Editors\Controls\fEditorControls.dfm"/>
+        <FormResources Include="Frames\Editors\Controls\fKeyCapture.dfm"/>
+        <FormResources Include="Frames\Editors\Code\fEditorCode.dfm"/>
+        <FormResources Include="Forms\fNewTileImage.dfm"/>
+        <FormResources Include="Forms\fSettings.dfm"/>
+        <FormResources Include="Forms\fTutorial.dfm"/>
+        <FormResources Include="Frames\Editors\Images\fBlockTypes.dfm"/>
+        <FormResources Include="Frames\Editors\fEditor.dfm"/>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_2</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>CPlusPlusBuilder.Personality.12</Borland.Personality>
+        <Borland.ProjectType>CppVCLApplication</Borland.ProjectType>
+        <BorlandProject>
+            <CPlusPlusBuilder.Personality>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclvcldb290.bpl">Embarcadero VCL Database Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclsmp290.bpl">Embarcadero Sample Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclbcbsmp290.bpl">C++Builder Sample Components Package</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\23.0\Bpl\dcllmdtoolsdb290.bpl">LMD 2024 - LMD-Tools Main Database Components</Excluded_Packages>
+                </Excluded_Packages>
+                <ProjectProperties>
+                    <ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
+                    <ProjectProperties Name="IndexFiles">True</ProjectProperties>
+                    <ProjectProperties Name="ManagePaths">False</ProjectProperties>
+                    <ProjectProperties Name="VerifyPackages">True</ProjectProperties>
+                </ProjectProperties>
+                <Source>
+                    <Source Name="MainSource">AGD Studio.cpp</Source>
+                </Source>
+            </CPlusPlusBuilder.Personality>
+            <Deployment Version="5">
+                <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx32\libcgcrtl.dylib" Class="DependencyModule">
+                    <Platform Name="OSX32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx32\libcgstl.dylib" Class="DependencyModule">
+                    <Platform Name="OSX32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx64\libcgcrtl.dylib" Class="DependencyModule"/>
+                <DeployFile Condition="'$(DynamicRTL)'=='true'" LocalName="$(BDS)\Redist\osx64\libcgstl.dylib" Class="DependencyModule"/>
+                <DeployFile Condition="'$(UsingDelphiRTL)'=='true'" LocalName="$(BDS)\bin64\borlndmm.dll" Class="DependencyModule">
+                    <Platform Name="Win64">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin64\cc64290.dll" Class="DependencyModule"/>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin64\cc64290.dll" Class="DependencyModule">
+                    <Platform Name="Win64">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin64\cc64290mt.dll" Class="DependencyModule"/>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin64\cc64290mt.dll" Class="DependencyModule">
+                    <Platform Name="Win64">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(UsingDelphiRTL)'=='true'" LocalName="$(BDS)\bin\borlndmm.dll" Class="DependencyModule">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32290.dll" Class="DependencyModule"/>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32290.dll" Class="DependencyModule">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32290mt.dll" Class="DependencyModule"/>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32290mt.dll" Class="DependencyModule">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32c290.dll" Class="DependencyModule"/>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32c290.dll" Class="DependencyModule">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32c290mt.dll" Class="DependencyModule"/>
+                <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin\cc32c290mt.dll" Class="DependencyModule">
+                    <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName=".\Binaries\Win64\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win64">
+                        <RemoteName>AGD Studio.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName=".\Binaries\Win64\Release\AGD Studio.exe" Configuration="Release" Class="ProjectOutput">
+                    <Platform Name="Win64">
+                        <RemoteName>AGD Studio.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName=".\Binaries\Win64x\Debug\AGD Studio.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win64x">
+                        <RemoteName>AGD Studio.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Project\README.md" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win64">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Project\README.md" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win64x">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Project\README.md" Configuration="Release" Class="ProjectFile"/>
+                <DeployFile LocalName="Project\README.md" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Win64">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="README.md" Configuration="Debug" Class="ProjectFile"/>
+                <DeployClass Name="AdditionalDebugSymbols">
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidFileProvider">
+                    <Platform Name="Android">
+                        <RemoteDir>res\xml</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\xml</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidLibnativeArmeabiFile">
+                    <Platform Name="Android">
+                        <RemoteDir>library\lib\armeabi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>library\lib\armeabi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidLibnativeArmeabiv7aFile">
+                    <Platform Name="Android64">
+                        <RemoteDir>library\lib\armeabi-v7a</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidLibnativeMipsFile">
+                    <Platform Name="Android">
+                        <RemoteDir>library\lib\mips</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>library\lib\mips</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidServiceOutput">
+                    <Platform Name="Android">
+                        <RemoteDir>library\lib\armeabi-v7a</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>library\lib\arm64-v8a</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidServiceOutput_Android32">
+                    <Platform Name="Android64">
+                        <RemoteDir>library\lib\armeabi-v7a</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidSplashImageDef">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidSplashImageDefV21">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-anydpi-v21</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable-anydpi-v21</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidSplashStyles">
+                    <Platform Name="Android">
+                        <RemoteDir>res\values</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\values</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidSplashStylesV21">
+                    <Platform Name="Android">
+                        <RemoteDir>res\values-v21</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\values-v21</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidSplashStylesV31">
+                    <Platform Name="Android">
+                        <RemoteDir>res\values-v31</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\values-v31</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_AdaptiveIcon">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-anydpi-v26</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable-anydpi-v26</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_AdaptiveIconBackground">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_AdaptiveIconForeground">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_AdaptiveIconMonochrome">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_AdaptiveIconV33">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-anydpi-v33</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable-anydpi-v33</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_Colors">
+                    <Platform Name="Android">
+                        <RemoteDir>res\values</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\values</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_ColorsDark">
+                    <Platform Name="Android">
+                        <RemoteDir>res\values-night-v21</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\values-night-v21</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_DefaultAppIcon">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_LauncherIcon144">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-xxhdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable-xxhdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_LauncherIcon192">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-xxxhdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable-xxxhdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_LauncherIcon36">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-ldpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable-ldpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_LauncherIcon48">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-mdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable-mdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_LauncherIcon72">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-hdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable-hdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_LauncherIcon96">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-xhdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable-xhdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_NotificationIcon24">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-mdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable-mdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_NotificationIcon36">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-hdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable-hdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_NotificationIcon48">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-xhdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable-xhdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_NotificationIcon72">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-xxhdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable-xxhdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_NotificationIcon96">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-xxxhdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable-xxxhdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_SplashImage426">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-small</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable-small</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_SplashImage470">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-normal</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable-normal</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_SplashImage640">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-large</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable-large</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_SplashImage960">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-xlarge</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable-xlarge</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_Strings">
+                    <Platform Name="Android">
+                        <RemoteDir>res\values</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\values</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_VectorizedNotificationIcon">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-anydpi-v24</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable-anydpi-v24</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_VectorizedSplash">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_VectorizedSplashDark">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-night-anydpi-v21</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable-night-anydpi-v21</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_VectorizedSplashV31">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-anydpi-v31</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable-anydpi-v31</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_VectorizedSplashV31Dark">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-night-anydpi-v31</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\drawable-night-anydpi-v31</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="DebugSymbols">
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="DependencyFramework">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.framework</Extensions>
+                    </Platform>
+                    <Platform Name="OSX64">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.framework</Extensions>
+                    </Platform>
+                    <Platform Name="OSXARM64">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.framework</Extensions>
+                    </Platform>
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="DependencyModule">
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="OSX64">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="OSXARM64">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                        <Extensions>.dll;.bpl</Extensions>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Required="true" Name="DependencyPackage">
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="OSX64">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="OSXARM64">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                        <Extensions>.bpl</Extensions>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="File">
+                    <Platform Name="Android">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\Resources\StartUp\</RemoteDir>
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="OSX64">
+                        <RemoteDir>Contents\Resources\StartUp\</RemoteDir>
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="OSXARM64">
+                        <RemoteDir>Contents\Resources\StartUp\</RemoteDir>
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectAndroidManifest">
+                    <Platform Name="Android">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectOSXDebug">
+                    <Platform Name="OSX64">
+                        <RemoteDir>..\$(PROJECTNAME).app.dSYM\Contents\Resources\DWARF</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="OSXARM64">
+                        <RemoteDir>..\$(PROJECTNAME).app.dSYM\Contents\Resources\DWARF</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectOSXEntitlements">
+                    <Platform Name="OSX32">
+                        <RemoteDir>..\</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="OSX64">
+                        <RemoteDir>..\</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="OSXARM64">
+                        <RemoteDir>..\</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectOSXInfoPList">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="OSX64">
+                        <RemoteDir>Contents</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="OSXARM64">
+                        <RemoteDir>Contents</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectOSXResource">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\Resources</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="OSX64">
+                        <RemoteDir>Contents\Resources</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="OSXARM64">
+                        <RemoteDir>Contents\Resources</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Required="true" Name="ProjectOutput">
+                    <Platform Name="Android">
+                        <RemoteDir>library\lib\armeabi-v7a</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>library\lib\arm64-v8a</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Linux64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="OSX64">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="OSXARM64">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectOutput_Android32">
+                    <Platform Name="Android64">
+                        <RemoteDir>library\lib\armeabi-v7a</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectUWPManifest">
+                    <Platform Name="Win32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Win64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Win64x">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectiOSDeviceDebug">
+                    <Platform Name="iOSDevice32">
+                        <RemoteDir>..\$(PROJECTNAME).app.dSYM\Contents\Resources\DWARF</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).app.dSYM\Contents\Resources\DWARF</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <RemoteDir>..\$(PROJECTNAME).app.dSYM\Contents\Resources\DWARF</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectiOSEntitlements">
+                    <Platform Name="iOSDevice32">
+                        <RemoteDir>..\</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <RemoteDir>..\</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectiOSInfoPList">
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectiOSLaunchScreen">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen</RemoteDir>
+                        <Operation>64</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen</RemoteDir>
+                        <Operation>64</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectiOSResource">
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="UWP_CppLogo150">
+                    <Platform Name="Win32">
+                        <RemoteDir>Assets</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Win64">
+                        <RemoteDir>Assets</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Win64x">
+                        <RemoteDir>Assets</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="UWP_CppLogo44">
+                    <Platform Name="Win32">
+                        <RemoteDir>Assets</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Win64">
+                        <RemoteDir>Assets</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Win64x">
+                        <RemoteDir>Assets</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iOS_AppStore1024">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_AppIcon152">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_AppIcon167">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_Launch2x">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_LaunchDark2x">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_Notification40">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_Setting58">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_SpotLight80">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPhone_AppIcon120">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPhone_AppIcon180">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPhone_Launch2x">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPhone_Launch3x">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPhone_LaunchDark2x">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPhone_LaunchDark3x">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\LaunchScreenImage.imageset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPhone_Notification40">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPhone_Notification60">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPhone_Setting58">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPhone_Setting87">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPhone_Spotlight120">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPhone_Spotlight80">
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimARM64">
+                        <RemoteDir>..\$(PROJECTNAME).launchscreen\Assets\AppIcon.appiconset</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="Android64" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSSimARM64" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="Linux64" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="OSX64" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="OSXARM64" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="Win64x" Name="$(PROJECTNAME)"/>
+            </Deployment>
+            <Platforms>
+                <Platform value="Win32">False</Platform>
+                <Platform value="Win64">True</Platform>
+                <Platform value="Win64x">True</Platform>
+            </Platforms>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <Import Project="$(BDS)\Bin\CodeGear.Cpp.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')"/>
+    <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
+    <Import Project="$(MSBuildProjectName).deployproj" Condition="Exists('$(MSBuildProjectName).deployproj')"/>
 </Project>

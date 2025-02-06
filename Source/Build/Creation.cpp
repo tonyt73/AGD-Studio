@@ -23,7 +23,7 @@
 using namespace Build;
 //---------------------------------------------------------------------------
 __fastcall Creation::Creation(BuildMessages& buildMessages)
-: BuildProcess(buildMessages, bmBuild, "Generate Game File (Project to AGD File)")
+: BuildProcess(buildMessages, bmGenerate, "Generate Game File (Project to AGD File)")
 {
     m_AgdSections.push_back(std::make_unique<ProjectSection>());
     m_AgdSections.push_back(std::make_unique<WindowSection>());

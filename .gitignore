@@ -165,3 +165,4 @@ backup/*
 images/*
 *.bak
 *.tdl
+/Source/Forms

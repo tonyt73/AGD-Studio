@@ -31,7 +31,6 @@
 #include "LMDInsPropInsp.hpp"
 #include "LMDInsPropPage.hpp"
 //---------------------------------------------------------------------------
-#include "../fAppFrame.h"
 #include "Build/BuildManager.h"
 #include "Factories/DocumentEditorFactory.h"
 #include "Frames/WndProcHandlers.h"

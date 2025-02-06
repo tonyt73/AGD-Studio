@@ -18,33 +18,34 @@ __fastcall ShellProcess::~ShellProcess()
 //---------------------------------------------------------------------------
 bool __fastcall ShellProcess::ShellExecute(const String& path, const String& cmdline, const String& parameters, bool wait)
 {
-    auto shell = std::make_unique<TLMDStarterExt>(nullptr);
+    auto shell = std::make_unique<TLMDStarterExt>(Application);
     shell->Command = cmdline;
     shell->Parameters = parameters;
     shell->AutoStart = false;
     shell->DefaultDir = path;
     shell->StartOperation = smOpen;
     shell->StartOption = soSW_HIDE;
+    shell->ExtStartOptions = TLMDStarterExtendedOptions() << soxUseCreateProcess;
     shell->Wait = wait;
-    shell->ExtStartOptions = TLMDStarterExtendedOptions() << soxRedirectOutput;
     shell->OnOutput = OnOutputEvent;
+    shell->OnFinished = OnFinishedEvent;
     shell->OnError = OnErrorEvent;
 
     m_Errored = false;
-    bool result = true;
 
     ChDir(path);
-    BUILD_MSG_PUSH(bmRun, "Shell");
-    BUILD_LINE(bmRun, cmdline + " " + parameters);
+    BUILD_MSG_PUSH(bmShell, "Shell");
+    BUILD_LINE(bmShell, cmdline + " " + parameters);
     shell->Execute();
-    // need a small delay to help the process starter
     Sleep(100);
+    if (!wait) {
+        Sleep(500);
+    }
 
-    result = result && !m_Errored;
-    BUILD_MSG(result ? bmOk : bmFailed);
-    BUILD_MSG_POP(true);
+    BUILD_MSG(!m_Errored ? bmOk : bmFailed);
+    BUILD_MSG_POP(!m_Errored);
 
-    return result;
+    return !m_Errored;
 }
 //---------------------------------------------------------------------------
 void __fastcall ShellProcess::OnOutputEvent(System::TObject* /*Sender*/, const System::UnicodeString ANewLine)
@@ -64,6 +65,11 @@ void __fastcall ShellProcess::OnErrorEvent(System::TObject* ASender)
     m_Errored = true;
     auto shell = dynamic_cast<TLMDStarterExt*>(ASender);
     BUILD_LINE(bmFailed, "SHELL ERROR: 0x" + IntToHex(shell->LastError, 8));
+}
+//---------------------------------------------------------------------------
+void __fastcall ShellProcess::OnFinishedEvent(System::TObject* ASender)
+{
+    BUILD_LINE(bmOk, "Shell finished");
 }
 //---------------------------------------------------------------------------
 

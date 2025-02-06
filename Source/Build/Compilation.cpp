@@ -9,7 +9,7 @@
 using namespace Build;
 //---------------------------------------------------------------------------
 __fastcall Compilation::Compilation(BuildMessages& buildMessages)
-: ShellProcess(buildMessages, bmBuild, "Compile Game File (AGD File to Assembly File)")
+: ShellProcess(buildMessages, bmCompile, "Compile Game File (AGD File to Assembly File)")
 {
 }
 //---------------------------------------------------------------------------
@@ -38,7 +38,7 @@ bool __fastcall Compilation::Execute()
             Services::File::Copy(engineSrc, engineDst, true);
             auto parameters = Parameter::ization(mc.Compiler.Parameters);
             auto cmdLine = Services::File::NameWithExtension(compilerDst);
-            BUILD_LINE(bmBuild, "Execute AGD Compiler");
+            BUILD_LINE(bmCompile, "Execute AGD Compiler");
             auto result = ShellExecute(path, cmdLine, parameters);
             BUILD_LINE(bmCopy, "Removing compiler from project folder");
             Services::File::Delete(compilerDst);

@@ -9,7 +9,7 @@
 using namespace Build;
 //---------------------------------------------------------------------------
 __fastcall Assemble::Assemble(BuildMessages& buildMessages)
-: ShellProcess(buildMessages, bmBuild, "Assemble Game+Engine (Assembly File to Emulator File)")
+: ShellProcess(buildMessages, bmAssemble, "Assemble Game+Engine (Assembly File to Emulator File)")
 {
 }
 //---------------------------------------------------------------------------
@@ -33,13 +33,13 @@ bool __fastcall Assemble::Execute()
         Services::File::AppendText(asmFile, mc.Assembler.Append);
         BUILD_LINE(bmCopy, "Copying Assembler to project folder");
         Services::File::Copy(assemblerSrc, assemblerDst, true);
-        BUILD_LINE(bmBuild, "Execute Assembler");
+        BUILD_LINE(bmAssemble, "Execute Assembler");
         ShellExecute(path, Services::File::NameWithExtension(assemblerDst), parameters);
         BUILD_LINE(bmCopy, "Removing Assembler from project folder");
         Services::File::Delete(assemblerDst);
     } else {
         result = false;
-        BUILD_LINE(bmBuild, "Assembler executable is missing: " + assemblerSrc);
+        BUILD_LINE(bmAssemble, "Assembler executable is missing: " + assemblerSrc);
     }
     return result;
 }

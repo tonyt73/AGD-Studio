@@ -9,9 +9,10 @@ using namespace Build;
 //---------------------------------------------------------------------------
 __fastcall BuildMessages::BuildMessages()
 : m_TreeView(nullptr)
-, m_GroupNode(nullptr)
 , m_MsgNode(nullptr)
 {
+    m_GroupNodes.push_back(nullptr);
+    m_GroupTypes.push_back(bmProgress);
 }
 //---------------------------------------------------------------------------
 __fastcall BuildMessages::~BuildMessages()
@@ -26,27 +27,32 @@ void __fastcall BuildMessages::Clear()
 //---------------------------------------------------------------------------
 void __fastcall BuildMessages::Push(BuildMessageType type, const String& group)
 {
-    m_GroupType = type;
-    m_GroupNode = m_TreeView->Items->AddChild(m_GroupNode, group);
-    m_GroupNode->ImageIndex = bmProgress;
+    m_GroupTypes.push_back(type);
+    auto parentNode = m_GroupNodes.back();
+    auto newNode = m_TreeView->Items->AddChild(parentNode, group);
+    newNode->ImageIndex = bmProgress;
+    m_GroupNodes.push_back(newNode);
     m_TreeView->Update();
 }
 //---------------------------------------------------------------------------
 void __fastcall BuildMessages::Pop(bool result)
 {
-    m_GroupNode->ImageIndex = result ? m_GroupType : bmFailed;
+    auto node = m_GroupNodes.back();
+    node->ImageIndex = result ? m_GroupTypes.back() : bmFailed;
     if (!result) {
-        m_GroupNode->Expand(false);
+        node->Expand(false);
     }
     m_TreeView->Update();
-    m_GroupNode = m_GroupNode->Parent;
+    m_GroupTypes.pop_back();
+    m_GroupNodes.pop_back();
 }
 //---------------------------------------------------------------------------
 void __fastcall BuildMessages::Message(BuildMessageType type, const String& message)
 {
+    auto parentNode = m_GroupNodes.back();
     auto lines = SplitString(message, "\n");
     for (auto line : lines) {
-        auto node = m_TreeView->Items->AddChild(m_GroupNode, line);
+        auto node = m_TreeView->Items->AddChild(parentNode, line);
         node->ImageIndex = type;
     }
     m_TreeView->Update();
@@ -54,7 +60,8 @@ void __fastcall BuildMessages::Message(BuildMessageType type, const String& mess
 //---------------------------------------------------------------------------
 void __fastcall BuildMessages::Message(const String& message)
 {
-    m_MsgNode = m_TreeView->Items->AddChild(m_GroupNode, message);
+    auto parentNode = m_GroupNodes.back();
+    m_MsgNode = m_TreeView->Items->AddChild(parentNode, message);
     m_MsgNode->ImageIndex = bmProgress;
     m_TreeView->Update();
 }

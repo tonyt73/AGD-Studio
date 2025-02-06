@@ -7,15 +7,15 @@
 namespace Build
 {
 //---------------------------------------------------------------------------
-enum BuildMessageType { bmOk = 0, bmFailed, bmChecking, bmBuild, bmRun, bmProgress, bmTiming, bmCopy, bmInfo, bmOutput, bmWarning };
+enum BuildMessageType { bmOk = 0, bmFailed, bmChecking, bmGenerate, bmCompile, bmAssemble, bmShell, bmRun, bmProgress, bmTiming, bmCopy, bmInfo, bmOutput, bmWarning };
 //---------------------------------------------------------------------------
 class BuildMessages
 {
 private:
     TElXTree*                   m_TreeView;
-    TElXTreeItem*               m_GroupNode;
     TElXTreeItem*               m_MsgNode;
-    BuildMessageType            m_GroupType;
+    std::list<TElXTreeItem*>    m_GroupNodes;
+    std::list<BuildMessageType> m_GroupTypes;
 
 public:
                     __fastcall  BuildMessages();
