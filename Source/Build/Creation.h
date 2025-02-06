@@ -20,7 +20,7 @@ public:
             __fastcall  Creation(BuildMessages& buildMessages);
             __fastcall ~Creation() final;
 
-    bool    __fastcall  Execute() final;
+    int     __fastcall  Execute() final;
 };
 //---------------------------------------------------------------------------
 } // Build namespace

@@ -14,7 +14,7 @@ public:
                     __fastcall  PreChecks(BuildMessages& buildMessages);
     virtual         __fastcall ~PreChecks() final;
 
-            bool    __fastcall  Execute() final;
+            int     __fastcall  Execute() final;
 };
 //---------------------------------------------------------------------------
 } // Build namespace

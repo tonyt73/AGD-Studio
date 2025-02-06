@@ -35,12 +35,12 @@ void __fastcall BuildMessages::Push(BuildMessageType type, const String& group)
     m_TreeView->Update();
 }
 //---------------------------------------------------------------------------
-void __fastcall BuildMessages::Pop(bool result)
+void __fastcall BuildMessages::Pop(bool expand)
 {
     auto node = m_GroupNodes.back();
-    node->ImageIndex = result ? m_GroupTypes.back() : bmFailed;
-    if (!result) {
-        node->Expand(false);
+    node->ImageIndex = m_GroupTypes.back();
+    if (expand) {
+        node->Expand(true);
     }
     m_TreeView->Update();
     m_GroupTypes.pop_back();

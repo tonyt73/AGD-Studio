@@ -17,7 +17,7 @@ __fastcall PreChecks::~PreChecks()
 {
 }
 //---------------------------------------------------------------------------
-bool __fastcall PreChecks::Execute()
+int __fastcall PreChecks::Execute()
 {
     const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
     auto cp = Services::File::Exists(mc.Compiler.Path) || Services::File::Exists(Services::File::Combine(Services::Folders::Application, mc.Compiler.Path));
@@ -28,6 +28,6 @@ bool __fastcall PreChecks::Execute()
     BUILD_LINE(ep ? bmOk : bmFailed, "Checking for AGD Engine: " + mc.Engine.Path);
     BUILD_LINE(ap ? bmOk : bmFailed, "Checking for Assembler: " + mc.Assembler.Path);
     BUILD_LINE(mp ? bmOk : bmFailed, "Checking for Emulator: " + mc.Emulator.Path);
-    return cp && ap && ep;
+    return cp && ap && ep ? brOk : brError;
 }
 //---------------------------------------------------------------------------

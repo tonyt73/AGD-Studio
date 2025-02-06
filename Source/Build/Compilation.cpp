@@ -17,7 +17,7 @@ __fastcall Compilation::~Compilation()
 {
 }
 //---------------------------------------------------------------------------
-bool __fastcall Compilation::Execute()
+int __fastcall Compilation::Execute()
 {
     const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
     auto agdFile = Services::File::Combine(Services::Folders::Project, Services::Folders::ProjectName + ".agd");
@@ -44,10 +44,10 @@ bool __fastcall Compilation::Execute()
             Services::File::Delete(compilerDst);
             BUILD_LINE(bmCopy, "Removing AGD Engine file from project folder");
             Services::File::Delete(engineDst);
-            if (result && Services::File::Exists(Services::Folders::ProjectName + ".asm")) {
+            if ((result & brError) == 0 && Services::File::Exists(Services::Folders::ProjectName + ".asm")) {
                 BUILD_LINE(bmChecking, "Assembling file found");
                 theDocumentManager.Add("Text", "Assembly", Services::Folders::ProjectName + ".asm");
-                return true;
+                return result;
             } else {
                 BUILD_LINE(bmFailed, "AGD Compiler failed to create the .asm file. ");
             }
@@ -57,7 +57,7 @@ bool __fastcall Compilation::Execute()
     } else {
         BUILD_LINE(bmFailed, "AGD Compiler executable was not found. " + compilerSrc);
     }
-    return false;
+    return brError;
 }
 //---------------------------------------------------------------------------
 

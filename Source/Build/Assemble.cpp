@@ -17,14 +17,14 @@ __fastcall Assemble::~Assemble()
 {
 }
 //---------------------------------------------------------------------------
-bool __fastcall Assemble::Execute()
+int __fastcall Assemble::Execute()
 {
     const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
     auto path = Services::Folders::Project;
     auto asmFile = Services::Folders::CleanseSeparators(Services::File::Combine(Services::Folders::Project, Services::Folders::ProjectName + ".asm"));
     auto assemblerSrc = Services::Folders::CleanseSeparators(Services::File::Resolve(Services::Folders::Application, mc.Assembler.Path));
     Services::File::Delete(Services::Folders::ProjectName + ".tap");
-    auto result = true;
+    auto result = brOk;
     BUILD_MSG("Assembling " + asmFile);
     if (Services::File::Exists(assemblerSrc)) {
         auto assemblerDst = Services::Folders::CleanseSeparators(Services::File::Combine(path, Services::File::NameWithExtension(assemblerSrc)));
@@ -38,7 +38,7 @@ bool __fastcall Assemble::Execute()
         BUILD_LINE(bmCopy, "Removing Assembler from project folder");
         Services::File::Delete(assemblerDst);
     } else {
-        result = false;
+        result = brError;
         BUILD_LINE(bmAssemble, "Assembler executable is missing: " + assemblerSrc);
     }
     return result;

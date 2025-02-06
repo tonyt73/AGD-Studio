@@ -17,7 +17,7 @@ __fastcall Emulation::~Emulation()
 {
 }
 //---------------------------------------------------------------------------
-bool __fastcall Emulation::Execute()
+int __fastcall Emulation::Execute()
 {
     const auto& mc = theDocumentManager.ProjectConfig()->MachineConfiguration();
     auto game = Services::Folders::Project;
@@ -32,7 +32,7 @@ bool __fastcall Emulation::Execute()
         return ShellExecute(path, exe, parameters, false);
     }
     BUILD_LINE(bmFailed, "Failed to find the emulation file to run game: " + parameters);
-    return false;
+    return brError;
 }
 //---------------------------------------------------------------------------
 

@@ -15,14 +15,14 @@ namespace Build
 class ShellProcess : public BuildProcess
 {
 private:
-            bool                m_Errored;
+            int                 m_BuildResult;
 
             void    __fastcall  OnOutputEvent(System::TObject* ASender, const System::UnicodeString ANewLine);
             void    __fastcall  OnErrorEvent(System::TObject* ASender);
             void    __fastcall  OnFinishedEvent(System::TObject* ASender);
 
 protected:
-            bool    __fastcall  ShellExecute(const String& path, const String& cmdline, const String& parameters, bool wait = true);
+            int     __fastcall  ShellExecute(const String& path, const String& cmdline, const String& parameters, bool wait = true);
 
 public:
                     __fastcall  ShellProcess(BuildMessages& buildMessages, BuildMessageType type, const String& description);

@@ -43,7 +43,7 @@ __fastcall Creation::~Creation()
 {
 }
 //---------------------------------------------------------------------------
-bool __fastcall Creation::Execute()
+int __fastcall Creation::Execute()
 {
     auto agdFile = Services::File::Combine(Services::Folders::Project, Services::Folders::ProjectName + ".agd");
     Services::File::Delete(agdFile);
@@ -60,7 +60,7 @@ bool __fastcall Creation::Execute()
             BUILD_LINE(bmFailed, "Failed to add AGD Section: " + builder->Description);
             BUILD_LINE(bmFailed, reason);
             BUILD_MSG(bmFailed);
-            return false;
+            return brError;
         }
     }
 
@@ -70,11 +70,11 @@ bool __fastcall Creation::Execute()
     } catch(...) {
         BUILD_LINE(bmFailed, "Failed to write AGD file: " + agdFile);
         BUILD_MSG(bmFailed);
-        return false;
+        return brError;
     }
 
     BUILD_MSG(bmOk);
-    return true;
+    return brOk;
 }
 //---------------------------------------------------------------------------
 

@@ -16,7 +16,7 @@ __fastcall ShellProcess::~ShellProcess()
 {
 }
 //---------------------------------------------------------------------------
-bool __fastcall ShellProcess::ShellExecute(const String& path, const String& cmdline, const String& parameters, bool wait)
+int __fastcall ShellProcess::ShellExecute(const String& path, const String& cmdline, const String& parameters, bool wait)
 {
     auto shell = std::make_unique<TLMDStarterExt>(Application);
     shell->Command = cmdline;
@@ -25,13 +25,13 @@ bool __fastcall ShellProcess::ShellExecute(const String& path, const String& cmd
     shell->DefaultDir = path;
     shell->StartOperation = smOpen;
     shell->StartOption = soSW_HIDE;
-    shell->ExtStartOptions = TLMDStarterExtendedOptions() << soxUseCreateProcess;
+    shell->ExtStartOptions = TLMDStarterExtendedOptions() << soxUseCreateProcess << soxRedirectOutput << soxRedirectError << soxRedirectInput;
     shell->Wait = wait;
     shell->OnOutput = OnOutputEvent;
     shell->OnFinished = OnFinishedEvent;
     shell->OnError = OnErrorEvent;
 
-    m_Errored = false;
+    m_BuildResult = brOk;
 
     ChDir(path);
     BUILD_MSG_PUSH(bmShell, "Shell");
@@ -39,27 +39,31 @@ bool __fastcall ShellProcess::ShellExecute(const String& path, const String& cmd
     shell->Execute();
     Sleep(100);
 
-    BUILD_MSG(!m_Errored ? bmOk : bmFailed);
-    BUILD_MSG_POP(!m_Errored);
+    BUILD_MSG(m_BuildResult);
+    BUILD_MSG_POP(m_BuildResult != brOk);
 
-    return !m_Errored;
+    return m_BuildResult;
 }
 //---------------------------------------------------------------------------
 void __fastcall ShellProcess::OnOutputEvent(System::TObject* /*Sender*/, const System::UnicodeString ANewLine)
 {
-    if (ANewLine.LowerCase().Pos("error")) {
-        m_Errored = true;
-        BUILD_LINE(bmFailed, "» " + ANewLine);
-    } else if (ANewLine.LowerCase().Pos("warn")) {
-        BUILD_LINE(bmWarning, "» " + ANewLine);
-    } else {
-        BUILD_LINE(bmOutput, ANewLine);
+    auto lines = SplitString(ANewLine, "\n");
+    for (auto line : lines) {
+        if (line.LowerCase().Pos("error")) {
+            m_BuildResult = m_BuildResult | brError;
+            BUILD_LINE(bmFailed, line);
+        } else if (line.LowerCase().Pos("warn") || line.LowerCase().Pos(" on line ")) {
+            m_BuildResult |= brWarning;
+            BUILD_LINE(bmWarning, line);
+        } else {
+            BUILD_LINE(bmOutput, line);
+        }
     }
 }
 //---------------------------------------------------------------------------
 void __fastcall ShellProcess::OnErrorEvent(System::TObject* ASender)
 {
-    m_Errored = true;
+    m_BuildResult |= brError;
     auto shell = dynamic_cast<TLMDStarterExt*>(ASender);
     BUILD_LINE(bmFailed, "SHELL ERROR: 0x" + IntToHex(shell->LastError, 8));
 }

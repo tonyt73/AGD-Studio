@@ -23,7 +23,7 @@ public:
                     __fastcall  BuildProcess(BuildMessages& buildMessages, BuildMessageType type, const String& description);
     virtual         __fastcall ~BuildProcess();
 
-    virtual bool    __fastcall  Execute() = 0;
+    virtual     int __fastcall  Execute() = 0;
 
     __property String           Description = { read = m_Description };
     __property BuildMessageType Type        = { read = m_Type        };

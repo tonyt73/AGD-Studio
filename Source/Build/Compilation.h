@@ -13,7 +13,7 @@ public:
                     __fastcall  Compilation(BuildMessages& buildMessages);
                     __fastcall ~Compilation() final;
 
-            bool    __fastcall  Execute() final;
+                int __fastcall  Execute() final;
 };
 //---------------------------------------------------------------------------
 } // Build namespace

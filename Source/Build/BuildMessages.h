@@ -8,6 +8,7 @@ namespace Build
 {
 //---------------------------------------------------------------------------
 enum BuildMessageType { bmOk = 0, bmFailed, bmChecking, bmGenerate, bmCompile, bmAssemble, bmShell, bmRun, bmProgress, bmTiming, bmCopy, bmInfo, bmOutput, bmWarning };
+enum BuildResult { brOk = 0, brError = 1, brWarning = 2 };
 //---------------------------------------------------------------------------
 class BuildMessages
 {
@@ -26,7 +27,7 @@ public:
                                 // push a new group/folder node
         void        __fastcall  Push(BuildMessageType type, const String& group);
                                 // pop the last node
-        void        __fastcall  Pop(bool result);
+        void        __fastcall  Pop(bool expand);
                                 // post a message in the current group node
         void        __fastcall  Message(BuildMessageType type, const String& message);
                                 // post a message in the current group node
